@@ -97,14 +97,14 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                           width: 50,
                           child: TextButton(
                               style: TextButton.styleFrom(
-                                primary: StateContainer.of(context).curTheme.text15,
+                                foregroundColor: StateContainer.of(context).curTheme.text15,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                                 padding: EdgeInsets.zero,
                                 // highlightColor: StateContainer.of(context).curTheme.text15,
                                 // splashColor: StateContainer.of(context).curTheme.text15,
                               ),
                               onPressed: () {
-                                Navigator.of(context).popUntil((Route route) => route.isFirst);
+                                Navigator.of(context).popUntil((Route<dynamic> route) => route.isFirst);
                               },
                               child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                         ),

@@ -130,6 +130,11 @@
     "type": "text",
     "description": "prompt_skip_setup"
   },
+  "askTracking": "हम \"ट्रैकिंग\" अनुमति के लिए पूछने वाले हैं, इसका उपयोग लिंक / रेफ़रल, और मामूली विश्लेषण (इंस्टॉल की संख्या, कौन सा ऐप संस्करण इत्यादि जैसी चीजें) के लिए *सख्ती से* किया जाता है। हमें विश्वास है कि आप अपनी गोपनीयता के हकदार हैं और आपके किसी भी व्यक्तिगत डेटा में रुचि नहीं रखते हैं, लिंक एट्रिब्यूशन सही ढंग से काम करने के लिए हमें केवल अनुमति की आवश्यकता है।",
+  "@askTracking": {
+    "type": "text",
+    "description": "prompt_ask_tracking"
+  },
   "authConfirm": "प्रमाणित कर रहा है",
   "@authConfirm": {
     "type": "text",
@@ -605,6 +610,11 @@
     "type": "text",
     "description": "notification_warning_enable_button"
   },
+  "enableTracking": "ट्रैकिंग सक्षम करें",
+  "@enableTracking": {
+    "type": "text",
+    "description": "tracking_warning_enable_button"
+  },
   "encryptionFailedError": "वॉलेट पासवर्ड सेट करने में विफल",
   "@encryptionFailedError": {
     "type": "text",
@@ -624,6 +634,11 @@
   "@enterGiftMemo": {
     "type": "text",
     "description": "gift_note"
+  },
+  "enterHeight": "ऊंचाई दर्ज करें",
+  "@enterHeight": {
+    "type": "text",
+    "description": "enter_height_hint"
   },
   "enterMemo": "संदेश दाखिल करें",
   "@enterMemo": {
@@ -1069,6 +1084,11 @@
   "@invalidAddress": {
     "type": "text",
     "description": "send_invalid_address"
+  },
+  "invalidHeight": "अमान्य ऊंचाई",
+  "@invalidHeight": {
+    "type": "text",
+    "description": "height_invalid"
   },
   "invalidPassword": "अवैध पासवर्ड",
   "@invalidPassword": {
@@ -1950,6 +1970,11 @@
     "type": "text",
     "description": "sent_to"
   },
+  "set": "समूह",
+  "@set": {
+    "type": "text",
+    "description": "dialog_set"
+  },
   "setPassword": "पासवर्ड सेट करें",
   "@setPassword": {
     "type": "text",
@@ -1975,6 +2000,11 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
+  "setRestoreHeight": "पुनर्स्थापना ऊँचाई सेट करें",
+  "@setRestoreHeight": {
+    "type": "text",
+    "description": "set_restore_height"
+  },
   "settingsHeader": "सेटिंग्स",
   "@settingsHeader": {
     "type": "text",
@@ -1999,6 +2029,11 @@
   "@setWalletPlausiblePin": {
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
+  },
+  "setXMRRestoreHeight": "एक्सएमआर पुनर्स्थापना ऊंचाई सेट करें",
+  "@setXMRRestoreHeight": {
+    "type": "text",
+    "description": "set_xmr_restore_height"
   },
   "share": "शेयर करना",
   "@share": {
@@ -2065,12 +2100,12 @@
     "type": "text",
     "description": "show_link_qr"
   },
-  "showMoneroHeader": "",
+  "showMoneroHeader": "मोनेरो दिखाएं",
   "@showMoneroHeader": {
     "type": "text",
     "description": "show_monero_header"
   },
-  "showMoneroInfo": "",
+  "showMoneroInfo": "मोनेरो अनुभाग सक्षम करें",
   "@showMoneroInfo": {
     "type": "text",
     "description": "show_monero_info"
@@ -2204,6 +2239,26 @@
   "@tooManyFailedAttempts": {
     "type": "text",
     "description": "fail_toomany_attempts"
+  },
+  "trackingHeader": "ट्रैकिंग प्राधिकरण",
+  "@trackingHeader": {
+    "type": "text",
+    "description": "prompt_ask_tracking_header"
+  },
+  "trackingWarning": "ट्रैकिंग अक्षम",
+  "@trackingWarning": {
+    "type": "text",
+    "description": "home_tracking_warning"
+  },
+  "trackingWarningBodyLong": "यदि ट्रैकिंग अक्षम है तो गिफ़्ट कार्ड की कार्यक्षमता कम हो सकती है या बिल्कुल भी काम नहीं कर सकती है। हम इस सुविधा के लिए विशेष रूप से इस अनुमति का उपयोग करते हैं, आपका कोई भी डेटा कार्यक्षमता के अलावा किसी अन्य उद्देश्य के लिए बेचा, एकत्र या ट्रैक नहीं किया जाता है, न ही हम करना चाहेंगे :)",
+  "@trackingWarningBodyLong": {
+    "type": "text",
+    "description": "tracking_warning_body_long"
+  },
+  "trackingWarningBodyShort": "गिफ़्ट कार्ड लिंक ठीक से काम नहीं करेंगे",
+  "@trackingWarningBodyShort": {
+    "type": "text",
+    "description": "tracking_warning_body_short"
   },
   "transactions": "लेनदेन",
   "@transactions": {
@@ -2464,6 +2519,11 @@
   "@withAddress": {
     "type": "text",
     "description": "with_address"
+  },
+  "withFee": "शुल्क के साथ",
+  "@withFee": {
+    "type": "text",
+    "description": "with_fee"
   },
   "withMessage": "मैसेज के साथ",
   "@withMessage": {

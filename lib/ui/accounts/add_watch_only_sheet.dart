@@ -616,7 +616,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
                                       fontWeight: FontWeight.w600,
                                       fontSize: 16.0,
                                       color: StateContainer.of(context).curTheme.text,
-                                      fontFamily: 'NunitoSans',
+                                      fontFamily: "NunitoSans",
                                     ),
                                     inputFormatters: [LengthLimitingTextInputFormatter(20)],
                                     onSubmitted: (text) {
@@ -640,7 +640,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
                                         style: TextStyle(
                                           fontSize: 14.0,
                                           color: StateContainer.of(context).curTheme.primary,
-                                          fontFamily: 'NunitoSans',
+                                          fontFamily: "NunitoSans",
                                           fontWeight: FontWeight.w600,
                                         )),
                                   ),
@@ -703,7 +703,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
                                         style: TextStyle(
                                           fontSize: 14.0,
                                           color: StateContainer.of(context).curTheme.primary,
-                                          fontFamily: 'NunitoSans',
+                                          fontFamily: "NunitoSans",
                                           fontWeight: FontWeight.w600,
                                         )),
                                   ),

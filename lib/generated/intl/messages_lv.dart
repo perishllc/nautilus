@@ -63,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lūdzu ievadiet daudzumu"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Mēs pamanījām, ka esat noklikšķinājis uz saites, kurā ir ietverts nanoelements. Vai vēlaties izlaist iestatīšanas procesu? Jūs vienmēr varat mainīt lietas vēlāk.\n\n Tomēr, ja jums ir kāda sēkla, kuru vēlaties importēt, atlasiet nē."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "Mēs gatavojamies lūgt \"izsekošanas\" atļauju. Šī atļauja tiek izmantota *stingri*, lai piešķirtu saites / novirzīšanas un nelielas analīzes datus (piemēram, instalēšanas reižu skaits, lietotnes versija utt.). Mēs uzskatām, ka jums ir tiesības uz savu privātumu. un mūs neinteresē nekādi jūsu personas dati, mums ir nepieciešama tikai atļauja, lai saišu attiecinājumi darbotos pareizi."),
         "asked": MessageLookupByLibrary.simpleMessage("Asked"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Autentifikācija"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -224,6 +226,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Iespējot paziņojumus"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("Iespējot izsekošanu"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Ievadiet adresi"),
@@ -231,6 +235,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ievadiet daudzumu"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
+        "enterHeight":
+            MessageLookupByLibrary.simpleMessage("Ievadiet augstumu"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Enter Message"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Ievadiet XMR adresi"),
@@ -375,6 +381,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Dublējiet savu sēklu!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Ievadītā adrese nav derīga"),
+        "invalidHeight":
+            MessageLookupByLibrary.simpleMessage("Nederīgs augstums"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Invalid Password"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("Nederīga Pin"),
@@ -649,6 +657,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Sūta"),
         "sent": MessageLookupByLibrary.simpleMessage("Nosūtītie"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Nosūtīts"),
+        "set": MessageLookupByLibrary.simpleMessage("Iestatīt"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Password has been set successfully"),
@@ -657,11 +666,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pin ir veiksmīgi iestatīts"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("Iestatiet ticamu tapu"),
+        "setRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Iestatiet atjaunošanas augstumu"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Set Wallet Password"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Iestatiet XMR atjaunošanas augstumu"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Iestatījumi"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Ielādēt no papīra maka"),
@@ -684,8 +697,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "showLinkOptions":
             MessageLookupByLibrary.simpleMessage("Rādīt saites opcijas"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("Rādīt saites QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("Parādiet Monero"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Iespējot Monero sadaļu"),
         "showQR": MessageLookupByLibrary.simpleMessage("Rādīt QR kodu"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Neatvērts brīdinājums"),
@@ -726,6 +741,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("Adresāts"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Pārāk daudz atslēgšanas mēģinājumi."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Izsekošanas autorizācija"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("Izsekošana ir atspējota"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Ja izsekošana ir atspējota, dāvanu kartes funkcionalitāte var tikt samazināta vai nedarboties vispār. Mēs izmantojam šo atļauju TIKAI šai funkcijai, absolūti neviens no jūsu datiem netiek pārdots, vākts vai izsekots citiem mērķiem, izņemot funkcionalitāti, un mēs to arī negribētu :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Dāvanu karšu saites nedarbosies pareizi"),
         "transactions": MessageLookupByLibrary.simpleMessage("Darījumi"),
         "transfer": MessageLookupByLibrary.simpleMessage("Pārsūtīt"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -812,6 +835,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Laipni lūdzam Nautilus. Lai sāktu, izveidojiet jaunu maku vai importējiet esošu."),
         "withAddress": MessageLookupByLibrary.simpleMessage("With Address"),
+        "withFee": MessageLookupByLibrary.simpleMessage("Ar maksu"),
         "withMessage": MessageLookupByLibrary.simpleMessage("With Message"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Pēc %1 minūtes"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Pēc %1 minūtēm"),

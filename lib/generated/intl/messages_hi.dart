@@ -60,6 +60,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("कृपया राशि दर्ज करें"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "हमने देखा है कि आपने एक लिंक पर क्लिक किया है जिसमें कुछ नैनो है, क्या आप सेटअप प्रक्रिया को छोड़ना चाहेंगे? आप बाद में कभी भी चीजें बदल सकते हैं।\n\n यदि आपके पास एक मौजूदा बीज है जिसे आप आयात करना चाहते हैं, तो आपको नहीं का चयन करना चाहिए।"),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "हम \"ट्रैकिंग\" अनुमति के लिए पूछने वाले हैं, इसका उपयोग लिंक / रेफ़रल, और मामूली विश्लेषण (इंस्टॉल की संख्या, कौन सा ऐप संस्करण इत्यादि जैसी चीजें) के लिए *सख्ती से* किया जाता है। हमें विश्वास है कि आप अपनी गोपनीयता के हकदार हैं और आपके किसी भी व्यक्तिगत डेटा में रुचि नहीं रखते हैं, लिंक एट्रिब्यूशन सही ढंग से काम करने के लिए हमें केवल अनुमति की आवश्यकता है।"),
         "asked": MessageLookupByLibrary.simpleMessage("पूछे जाने पर"),
         "authConfirm":
             MessageLookupByLibrary.simpleMessage("प्रमाणित कर रहा है"),
@@ -222,12 +224,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("संपादित करें"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("सूचनाएं सक्षम करें"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("ट्रैकिंग सक्षम करें"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "वॉलेट पासवर्ड सेट करने में विफल"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("पता दर्ज करें"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("राशि दर्ज करें"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("गिफ़्ट नोट दर्ज करें"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("ऊंचाई दर्ज करें"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("संदेश दाखिल करें"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("एक्सएमआर पता दर्ज करें"),
@@ -372,6 +377,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("अपने बीज का बैकअप लें!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("गलत गंतव्य पता"),
+        "invalidHeight": MessageLookupByLibrary.simpleMessage("अमान्य ऊंचाई"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("अवैध पासवर्ड"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("अमान्य पिन"),
         "iosFundingMessage": MessageLookupByLibrary.simpleMessage(
@@ -650,6 +656,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("भेजा जा रहा है -"),
         "sent": MessageLookupByLibrary.simpleMessage("भेजे -"),
         "sentTo": MessageLookupByLibrary.simpleMessage("इसको भेजा गया -"),
+        "set": MessageLookupByLibrary.simpleMessage("समूह"),
         "setPassword": MessageLookupByLibrary.simpleMessage("पासवर्ड सेट करें"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "पासवर्ड सफलतापूर्वक सेट कर दिया गया है"),
@@ -658,11 +665,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "पिन सफलतापूर्वक सेट कर दिया गया है"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("प्रशंसनीय पिन सेट करें"),
+        "setRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("पुनर्स्थापना ऊँचाई सेट करें"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("वॉलेट पासवर्ड सेट करें"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "एक्सएमआर पुनर्स्थापना ऊंचाई सेट करें"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("सेटिंग्स"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("पेपर वॉलेट से लोड करें"),
@@ -684,8 +695,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("लिंक विकल्प दिखाएं"),
         "showLinkQR":
             MessageLookupByLibrary.simpleMessage("लिंक क्यूआर दिखाएँ"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("मोनेरो दिखाएं"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("मोनेरो अनुभाग सक्षम करें"),
         "showQR": MessageLookupByLibrary.simpleMessage("क्यूआर कोड दिखाएं"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("बंद चेतावनी"),
@@ -724,6 +737,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("इसको -"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "खोलने के बहुत से असफल प्रयास।"),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("ट्रैकिंग प्राधिकरण"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("ट्रैकिंग अक्षम"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "यदि ट्रैकिंग अक्षम है तो गिफ़्ट कार्ड की कार्यक्षमता कम हो सकती है या बिल्कुल भी काम नहीं कर सकती है। हम इस सुविधा के लिए विशेष रूप से इस अनुमति का उपयोग करते हैं, आपका कोई भी डेटा कार्यक्षमता के अलावा किसी अन्य उद्देश्य के लिए बेचा, एकत्र या ट्रैक नहीं किया जाता है, न ही हम करना चाहेंगे :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "गिफ़्ट कार्ड लिंक ठीक से काम नहीं करेंगे"),
         "transactions": MessageLookupByLibrary.simpleMessage("लेनदेन"),
         "transfer": MessageLookupByLibrary.simpleMessage("ट्रांसफर"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -813,6 +834,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "नॉटिलस में आपका स्वागत है। शुरू करने के लिए, एक नया वॉलेट बनाएं या किसी मौजूदा को आयात करें।"),
         "withAddress": MessageLookupByLibrary.simpleMessage("पते के साथ"),
+        "withFee": MessageLookupByLibrary.simpleMessage("शुल्क के साथ"),
         "withMessage": MessageLookupByLibrary.simpleMessage("मैसेज के साथ"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 मिनट के बाद"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("%1 मिनट के बाद"),

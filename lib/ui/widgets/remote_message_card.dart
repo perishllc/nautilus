@@ -35,8 +35,7 @@ class RemoteMessageCardState extends State<RemoteMessageCard> {
       ),
       child: TextButton(
         style: TextButton.styleFrom(
-          primary: StateContainer.of(context).curTheme.success!.withOpacity(0.15),
-          padding: EdgeInsets.zero,
+          foregroundColor: StateContainer.of(context).curTheme.success!.withOpacity(0.15), padding: EdgeInsets.zero,
           // highlightColor: StateContainer.of(context).curTheme.success!.withOpacity(0.15),
           // splashColor: StateContainer.of(context).curTheme.success!.withOpacity(0.15),
         ),
@@ -50,7 +49,9 @@ class RemoteMessageCardState extends State<RemoteMessageCard> {
               if (widget.alert!.title != null)
                 Container(
                   margin: EdgeInsetsDirectional.only(
-                    bottom: widget.alert!.shortDescription != null && (widget.showDesc || widget.alert!.title == null) ? 4 : 0,
+                    bottom: widget.alert!.shortDescription != null && (widget.showDesc || widget.alert!.title == null)
+                        ? 4
+                        : 0,
                   ),
                   child: Text(
                     widget.alert!.title!,

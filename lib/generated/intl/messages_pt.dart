@@ -64,6 +64,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Por favor insira uma quantia"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Percebemos que você clicou em um link que contém alguns nano. Você gostaria de pular o processo de configuração? Você sempre pode mudar as coisas mais tarde.\n\n No entanto, se você tiver uma semente existente que deseja importar, selecione não."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "Estamos prestes a solicitar a permissão de \"rastreamento\", que é usada *estritamente* para atribuir links / referências e análises menores (coisas como número de instalações, qual versão do aplicativo etc.) Acreditamos que você tem direito à sua privacidade e não estiver interessado em nenhum de seus dados pessoais, só precisamos da permissão para que as atribuições de link funcionem corretamente."),
         "asked": MessageLookupByLibrary.simpleMessage("Perguntado"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Autenticação"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -226,6 +228,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Editar"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Ativar notificações"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("Ativar rastreamento"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Falha ao definir a senha da carteira"),
         "enterAddress":
@@ -233,6 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAmount": MessageLookupByLibrary.simpleMessage("Digite o valor"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Insira a nota de presente"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("Insira a Altura"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Digitar mensagem"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Digite o endereço XMR"),
@@ -380,6 +385,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Faça backup de sua semente!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Endereço de Destino Inválido"),
+        "invalidHeight":
+            MessageLookupByLibrary.simpleMessage("Altura inválida"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Senha Inválida"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("Pin inválido"),
@@ -662,6 +669,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Enviando"),
         "sent": MessageLookupByLibrary.simpleMessage("Enviado"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Enviado para"),
+        "set": MessageLookupByLibrary.simpleMessage("Definir"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Definir senha"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "A senha foi definida com sucesso"),
@@ -670,11 +678,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "O PIN foi definido com sucesso"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("Definir pino plausível"),
+        "setRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Definir altura de restauração"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Definir senha da carteira"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Definir altura de restauração XMR"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Configurações"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Carteira de Papel"),
@@ -699,8 +711,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "showLinkOptions":
             MessageLookupByLibrary.simpleMessage("Mostrar opções de links"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("Mostrar link QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("Mostrar Monero"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Ativar seção Monero"),
         "showQR": MessageLookupByLibrary.simpleMessage("Mostrar código QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Aviso fechado"),
@@ -738,6 +752,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("Para"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Muitas tentativas de desbloqueio falharam."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Autorização de rastreamento"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("Rastreamento desativado"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "A funcionalidade do cartão-presente pode ser reduzida ou não funcionar se o rastreamento estiver desativado. Usamos essa permissão EXCLUSIVAMENTE para esse recurso, absolutamente nenhum dos seus dados é vendido, coletado ou rastreado para qualquer outra finalidade que não seja a funcionalidade, nem queremos :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Os links do cartão-presente não funcionarão corretamente"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transações"),
         "transfer": MessageLookupByLibrary.simpleMessage("Transferir"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -826,6 +848,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Bem-vindo ao Nautilus. Para começar, crie uma nova carteira ou importe uma existente."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Com endereço"),
+        "withFee": MessageLookupByLibrary.simpleMessage("Com Taxa"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Com mensagem"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Após %1 minuto"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Após %1 minutos"),

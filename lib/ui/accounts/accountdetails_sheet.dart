@@ -79,7 +79,7 @@ class AccountDetailsSheet {
                                         ? const SizedBox()
                                         : TextButton(
                                             style: TextButton.styleFrom(
-                                              primary: StateContainer.of(context).curTheme.text15,
+                                              foregroundColor: StateContainer.of(context).curTheme.text15,
                                               padding: const EdgeInsets.all(13.0),
                                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                                               tapTargetSize: MaterialTapTargetSize.padded,
@@ -147,7 +147,7 @@ class AccountDetailsSheet {
                                           color: StateContainer.of(context).curTheme.primary60,
                                           fontSize: 14.0,
                                           fontWeight: FontWeight.w100,
-                                          fontFamily: 'NunitoSans',
+                                          fontFamily: "NunitoSans",
                                         ),
                                       ),
                                       TextSpan(
@@ -157,7 +157,7 @@ class AccountDetailsSheet {
                                           color: StateContainer.of(context).curTheme.primary60,
                                           fontSize: 14.0,
                                           fontWeight: FontWeight.w700,
-                                          fontFamily: 'NunitoSans',
+                                          fontFamily: "NunitoSans",
                                         ),
                                       ),
                                       TextSpan(
@@ -166,7 +166,7 @@ class AccountDetailsSheet {
                                           color: StateContainer.of(context).curTheme.primary60,
                                           fontSize: 14.0,
                                           fontWeight: FontWeight.w100,
-                                          fontFamily: 'NunitoSans',
+                                          fontFamily: "NunitoSans",
                                         ),
                                       ),
                                     ],
@@ -196,7 +196,7 @@ class AccountDetailsSheet {
                                         fontWeight: FontWeight.w600,
                                         fontSize: 16.0,
                                         color: StateContainer.of(context).curTheme.primary,
-                                        fontFamily: 'NunitoSans',
+                                        fontFamily: "NunitoSans",
                                       ),
                                     ),
                                   ])),

@@ -62,6 +62,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Будь ласка вкажіть суму"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Ми помітили, що ви натиснули на посилання, яке містить нано, чи бажаєте ви пропустити процес налаштування? Ви завжди можете щось змінити пізніше.\n\n Однак, якщо у вас є початковий код, який ви хочете імпортувати, вам слід вибрати «ні»."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "Ми збираємося попросити дозвіл на «відстеження». Він використовується *виключно* для атрибуції посилань/рефералів і другорядної аналітики (наприклад, кількість встановлень, версія програми тощо). Ми вважаємо, що ви маєте право на свою конфіденційність і не зацікавлені у ваших особистих даних, нам лише потрібен дозвіл, щоб атрибуція посилань працювала правильно."),
         "asked": MessageLookupByLibrary.simpleMessage("Запитав"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Автентифікація"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -228,12 +230,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Редагувати"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Увімкнути сповіщення"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("Увімкнути відстеження"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Не вдалося встановити пароль гаманця"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Введіть адресу"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Введіть суму"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Введіть подарункову записку"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("Введіть висоту"),
         "enterMemo":
             MessageLookupByLibrary.simpleMessage("Введіть повідомлення"),
         "enterMoneroAddress":
@@ -382,6 +387,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Зробіть резервну копію свого насіння!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Введено невірну адресу"),
+        "invalidHeight":
+            MessageLookupByLibrary.simpleMessage("Недійсна висота"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Невірний пароль"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("Недійсний PIN-код"),
@@ -667,6 +674,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Надсилання"),
         "sent": MessageLookupByLibrary.simpleMessage("Надіслано"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Надіслано для"),
+        "set": MessageLookupByLibrary.simpleMessage("встановити"),
         "setPassword":
             MessageLookupByLibrary.simpleMessage("Установити пароль"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
@@ -676,11 +684,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("PIN-код встановлено успішно"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("Встановіть вірогідний пін"),
+        "setRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Встановити висоту відновлення"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Установити пароль гаманця"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Встановіть висоту відновлення XMR"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Установки"),
         "settingsTransfer": MessageLookupByLibrary.simpleMessage(
             "Завантажити з паперового гаманця"),
@@ -707,8 +719,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Показати параметри посилання"),
         "showLinkQR":
             MessageLookupByLibrary.simpleMessage("Показати посилання QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("Показати Monero"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Увімкніть розділ Monero"),
         "showQR": MessageLookupByLibrary.simpleMessage("Показати QR-код"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Невідкрите попередження"),
@@ -749,6 +763,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("Для"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Надто багато невірних спроб розблокувати."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Авторизація відстеження"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("Відстеження вимкнено"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Функціональність подарункової картки може бути обмежена або не працювати взагалі, якщо відстеження вимкнено. Ми використовуємо цей дозвіл ВИКЛЮЧНО для цієї функції, жодні ваші дані не продаються, не збираються та не відстежуються з будь-якою іншою метою, окрім функціональності, і ми цього не хочемо :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Посилання на подарункові картки не працюватимуть належним чином"),
         "transactions": MessageLookupByLibrary.simpleMessage("Трансакції"),
         "transfer": MessageLookupByLibrary.simpleMessage("Переказати"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -839,6 +861,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Ласкаво просимо до Наутілуса. Для початку створіть новий гаманець або імпортуйте наявний."),
         "withAddress": MessageLookupByLibrary.simpleMessage("З адресою"),
+        "withFee": MessageLookupByLibrary.simpleMessage("З платою"),
         "withMessage": MessageLookupByLibrary.simpleMessage("З повідомленням"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Після %1 хвилини"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Після %1 хвилин"),

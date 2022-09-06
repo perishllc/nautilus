@@ -50,7 +50,8 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
         body: TapOutsideUnfocus(
             child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
-            minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
+            minimum: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
             child: Column(
               children: <Widget>[
                 Expanded(
@@ -67,7 +68,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                             width: 50,
                             child: TextButton(
                                 style: TextButton.styleFrom(
-                                  primary: StateContainer.of(context).curTheme.text15,
+                                  foregroundColor: StateContainer.of(context).curTheme.text15,
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                                   padding: EdgeInsets.zero,
                                   // highlightColor: StateContainer.of(context).curTheme.text15,
@@ -83,7 +84,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                             margin: EdgeInsetsDirectional.only(end: smallScreen(context) ? 15 : 20),
                             child: TextButton(
                               style: TextButton.styleFrom(
-                                primary: StateContainer.of(context).curTheme.text15,
+                                foregroundColor: StateContainer.of(context).curTheme.text15,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50.0),
                                 ),
@@ -101,16 +102,19 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                   Container(
                                     margin: const EdgeInsetsDirectional.only(end: 8),
                                     child: Text(
-                                      _seedMode ? AppLocalization.of(context).secretPhrase : AppLocalization.of(context).seed,
+                                      _seedMode
+                                          ? AppLocalization.of(context).secretPhrase
+                                          : AppLocalization.of(context).seed,
                                       style: TextStyle(
                                         color: StateContainer.of(context).curTheme.text,
                                         fontSize: 20.0,
                                         fontWeight: FontWeight.w700,
-                                        fontFamily: 'NunitoSans',
+                                        fontFamily: "NunitoSans",
                                       ),
                                     ),
                                   ),
-                                  Icon(_seedMode ? Icons.vpn_key : AppIcons.seed, color: StateContainer.of(context).curTheme.text, size: 18),
+                                  Icon(_seedMode ? Icons.vpn_key : AppIcons.seed,
+                                      color: StateContainer.of(context).curTheme.text, size: 18),
                                 ],
                               ),
                             ),
@@ -126,7 +130,9 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                         ),
                         alignment: AlignmentDirectional.centerStart,
                         child: AutoSizeText(
-                          _seedMode ? AppLocalization.of(context).importSeed : AppLocalization.of(context).importSecretPhrase,
+                          _seedMode
+                              ? AppLocalization.of(context).importSeed
+                              : AppLocalization.of(context).importSecretPhrase,
                           style: AppStyles.textStyleHeaderColored(context),
                           maxLines: 1,
                           minFontSize: 12,
@@ -135,10 +141,13 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                       ),
                       // The paragraph
                       Container(
-                        margin: EdgeInsets.only(left: smallScreen(context) ? 30 : 40, right: smallScreen(context) ? 30 : 40, top: 15.0),
+                        margin: EdgeInsets.only(
+                            left: smallScreen(context) ? 30 : 40, right: smallScreen(context) ? 30 : 40, top: 15.0),
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          _seedMode ? AppLocalization.of(context).importSeedHint : AppLocalization.of(context).importSecretPhraseHint,
+                          _seedMode
+                              ? AppLocalization.of(context).importSeedHint
+                              : AppLocalization.of(context).importSecretPhraseHint,
                           style: AppStyles.textStyleParagraph(context),
                           textAlign: TextAlign.start,
                         ),
@@ -169,7 +178,8 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                           }
                                           // Scan QR for seed
                                           UIUtil.cancelLockEvent();
-                                          BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme TODO:*/).then((ScanResult res) {
+                                          BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme TODO:*/)
+                                              .then((ScanResult res) {
                                             final String result = res.rawContent;
                                             if (NanoSeeds.isValidSeed(result)) {
                                               _seedInputController.text = result;
@@ -223,7 +233,9 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                       fadeSuffixOnCondition: true,
                                       suffixShowFirstCondition: !NanoSeeds.isValidSeed(_seedInputController.text),
                                       keyboardType: TextInputType.text,
-                                      style: _seedIsValid ? AppStyles.textStyleSeed(context) : AppStyles.textStyleSeedGray(context),
+                                      style: _seedIsValid
+                                          ? AppStyles.textStyleSeed(context)
+                                          : AppStyles.textStyleSeedGray(context),
                                       onChanged: (String text) {
                                         // Always reset the error message to be less annoying
                                         setState(() {
@@ -251,7 +263,8 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                     inputFormatters: [
                                       SingleSpaceInputFormatter(),
                                       LowerCaseTextFormatter(),
-                                      FilteringTextInputFormatter(RegExp("[a-zA-Z ]"), allow: true), // bug fix for debug mode when importing a seed
+                                      FilteringTextInputFormatter(RegExp("[a-zA-Z ]"),
+                                          allow: true), // bug fix for debug mode when importing a seed
                                     ],
                                     textInputAction: TextInputAction.done,
                                     maxLines: null,
@@ -264,7 +277,8 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                         }
                                         // Scan QR for mnemonic
                                         UIUtil.cancelLockEvent();
-                                        BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/).then((ScanResult res) {
+                                        BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/)
+                                            .then((ScanResult res) {
                                           final String result = res.rawContent;
                                           if (NanoMnemomics.validateMnemonic(result.split(' '))) {
                                             _mnemonicController.text = result;
@@ -287,7 +301,8 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                       },
                                     ),
                                     fadePrefixOnCondition: true,
-                                    prefixShowFirstCondition: !NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' ')),
+                                    prefixShowFirstCondition:
+                                        !NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' ')),
                                     suffixButton: TextFieldButton(
                                       icon: AppIcons.paste,
                                       onPressed: () {
@@ -316,9 +331,12 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                       },
                                     ),
                                     fadeSuffixOnCondition: true,
-                                    suffixShowFirstCondition: !NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' ')),
+                                    suffixShowFirstCondition:
+                                        !NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' ')),
                                     keyboardType: TextInputType.text,
-                                    style: _mnemonicIsValid ? AppStyles.textStyleParagraphPrimary(context) : AppStyles.textStyleParagraph(context),
+                                    style: _mnemonicIsValid
+                                        ? AppStyles.textStyleParagraphPrimary(context)
+                                        : AppStyles.textStyleParagraph(context),
                                     onChanged: (String text) {
                                       if (text.length < 3) {
                                         setState(() {
@@ -355,7 +373,9 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                             setState(() {
                                               _mnemonicIsValid = false;
                                               setState(() {
-                                                _mnemonicError = AppLocalization.of(context).mnemonicInvalidWord.replaceAll("%1", lastWord);
+                                                _mnemonicError = AppLocalization.of(context)
+                                                    .mnemonicInvalidWord
+                                                    .replaceAll("%1", lastWord);
                                               });
                                             });
                                           }
@@ -383,7 +403,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                             : _mnemonicError != null
                                                 ? StateContainer.of(context).curTheme.primary
                                                 : Colors.transparent,
-                                        fontFamily: 'NunitoSans',
+                                        fontFamily: "NunitoSans",
                                         fontWeight: FontWeight.w600,
                                       )),
                                 ),
@@ -401,7 +421,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                       width: 50,
                       child: TextButton(
                           style: TextButton.styleFrom(
-                            primary: StateContainer.of(context).curTheme.primary30,
+                            foregroundColor: StateContainer.of(context).curTheme.primary30,
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                             padding: EdgeInsets.zero,
                             // highlightColor: StateContainer.of(context).curTheme.primary15,
@@ -419,7 +439,8 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                   if (!mounted) return;
                                   await NanoUtil().loginAccount(_seedInputController.text, context);
                                   if (!mounted) return;
-                                  final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                                  final String? pin = await Navigator.of(context)
+                                      .push(MaterialPageRoute(builder: (BuildContext context) {
                                     return PinScreen(
                                       PinOverlayType.NEW_PIN,
                                     );
@@ -441,13 +462,15 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                 sl.get<SharedPrefsUtil>().setSeedBackedUp(true).then((result) async {
                                   // Navigator.pushNamed(context, '/intro_password_on_launch',
                                   //     arguments: NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' ')));
-                                  final String seed = NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' '));
+                                  final String seed =
+                                      NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' '));
                                   await sl.get<Vault>().setSeed(seed);
                                   await sl.get<DBHelper>().dropAccounts();
                                   if (!mounted) return;
                                   await NanoUtil().loginAccount(seed, context);
                                   if (!mounted) return;
-                                  final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                                  final String? pin = await Navigator.of(context)
+                                      .push(MaterialPageRoute(builder: (BuildContext context) {
                                     return PinScreen(
                                       PinOverlayType.NEW_PIN,
                                     );
@@ -468,7 +491,8 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                     if (!NanoMnemomics.isValidWord(word)) {
                                       setState(() {
                                         _mnemonicIsValid = false;
-                                        _mnemonicError = AppLocalization.of(context).mnemonicInvalidWord.replaceAll("%1", word);
+                                        _mnemonicError =
+                                            AppLocalization.of(context).mnemonicInvalidWord.replaceAll("%1", word);
                                       });
                                     }
                                   });

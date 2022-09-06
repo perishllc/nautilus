@@ -512,7 +512,7 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: StateContainer.of(context).curTheme.primary,
-                                      fontFamily: 'NunitoSans',
+                                      fontFamily: "NunitoSans",
                                       fontWeight: FontWeight.w600,
                                     )),
                               ),

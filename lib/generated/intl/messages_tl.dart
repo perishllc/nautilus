@@ -64,6 +64,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mangyaring magpasok ng isang halaga"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Napansin naming nag-click ka sa isang link na naglalaman ng ilang nano, gusto mo bang laktawan ang proseso ng pag-setup? Maaari mong palaging baguhin ang mga bagay sa ibang pagkakataon.\n\n Kung mayroon kang umiiral na binhi na gusto mong i-import gayunpaman, dapat mong piliin ang hindi."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "Hihingi na kami ng pahintulot sa \"pagsubaybay\", ginagamit ito *mahigpit* para sa pag-attribute ng mga link / referral, at minor analytics (mga bagay tulad ng bilang ng mga pag-install, anong bersyon ng app, atbp.) Naniniwala kaming may karapatan ka sa iyong privacy at hindi interesado sa alinman sa iyong personal na data, kailangan lang namin ng pahintulot upang gumana nang tama ang mga link attribution."),
         "asked": MessageLookupByLibrary.simpleMessage("Asked"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Nagpapatotoo"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -227,6 +229,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("I-edit"),
         "enableNotifications": MessageLookupByLibrary.simpleMessage(
             "Paganahin ang mga notification"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("Paganahin ang Pagsubaybay"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Nabigo sa paglagay ng wallet password"),
         "enterAddress":
@@ -235,6 +239,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ilagay ang Amount"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Ipasok ang Tala ng Regalo"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("Ipasok ang Taas"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Ipasok ang Mensahe"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Ipasok ang XMR Address"),
@@ -384,6 +389,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I-backup ang iyong binhi!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Hindi wasto ang Destination Address"),
+        "invalidHeight":
+            MessageLookupByLibrary.simpleMessage("Di-wastong Taas"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Maling Password"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("Di-wastong Pin"),
@@ -673,6 +680,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Pinapadala"),
         "sent": MessageLookupByLibrary.simpleMessage("Naipadala"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Pinadala sa"),
+        "set": MessageLookupByLibrary.simpleMessage("Itakda"),
         "setPassword":
             MessageLookupByLibrary.simpleMessage("Maglagay ng Password"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
@@ -682,11 +690,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Matagumpay na naitakda ang pin"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("Itakda ang Plausible Pin"),
+        "setRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("Itakda ang Ibalik na Taas"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Maglagay ng Wallet Password"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Itakda ang XMR Restore Height"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Mga setting"),
         "settingsTransfer": MessageLookupByLibrary.simpleMessage(
             "Ilipat galing sa Paper Wallet"),
@@ -712,8 +724,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ipakita ang Mga Opsyon sa Link"),
         "showLinkQR":
             MessageLookupByLibrary.simpleMessage("Ipakita ang Link QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("Ipakita ang Monero"),
+        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(
+            "Paganahin ang Seksyon ng Monero"),
         "showQR": MessageLookupByLibrary.simpleMessage("Ipakita ang QR Code"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Hindi Nabuksang Babala"),
@@ -752,6 +766,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("Sa"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Masyadong madaming maling unlock attempts."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Awtorisasyon sa Pagsubaybay"),
+        "trackingWarning": MessageLookupByLibrary.simpleMessage(
+            "Hindi Pinagana ang Pagsubaybay"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Maaaring mabawasan o hindi gumana ang paggana ng Gift Card kung hindi pinagana ang pagsubaybay. EKSKLUSIBONG ginagamit namin ang pahintulot na ito para sa feature na ito, talagang wala sa iyong data ang ibinebenta, kinokolekta o sinusubaybayan para sa anumang iba pang layunin maliban sa functionality, at hindi rin namin gugustuhin :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Ang Mga Link ng Gift Card ay hindi gagana nang maayos"),
         "transactions": MessageLookupByLibrary.simpleMessage("Mga transaksyon"),
         "transfer": MessageLookupByLibrary.simpleMessage("Ilipat"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -843,6 +865,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Maligayang pagdating sa Nautilus. Para magsimula, gumawa ng bagong wallet o mag-import ng dati."),
         "withAddress":
             MessageLookupByLibrary.simpleMessage("Gamit ang Address"),
+        "withFee": MessageLookupByLibrary.simpleMessage("May Bayad"),
         "withMessage":
             MessageLookupByLibrary.simpleMessage("Gamit ang Mensahe"),
         "xMinute":

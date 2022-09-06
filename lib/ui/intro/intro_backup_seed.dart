@@ -73,7 +73,7 @@ class IntroBackupSeedState extends State<IntroBackupSeedPage> {
                           width: 50,
                           child: TextButton(
                               style: TextButton.styleFrom(
-                                primary: StateContainer.of(context).curTheme.text15,
+                                foregroundColor: StateContainer.of(context).curTheme.text15,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                                 padding: EdgeInsets.zero,
                                 // highlightColor: StateContainer.of(context).curTheme.text15,
@@ -89,7 +89,7 @@ class IntroBackupSeedState extends State<IntroBackupSeedPage> {
                           margin: EdgeInsetsDirectional.only(end: smallScreen(context) ? 15 : 20),
                           child: TextButton(
                             style: TextButton.styleFrom(
-                              primary: StateContainer.of(context).curTheme.text15,
+                              foregroundColor: StateContainer.of(context).curTheme.text15,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                               padding: const EdgeInsetsDirectional.only(top: 6, bottom: 6, start: 12, end: 12),
                               // highlightColor: StateContainer.of(context).curTheme.text15,
@@ -110,7 +110,7 @@ class IntroBackupSeedState extends State<IntroBackupSeedPage> {
                                       color: StateContainer.of(context).curTheme.text,
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.w700,
-                                      fontFamily: 'NunitoSans',
+                                      fontFamily: "NunitoSans",
                                     ),
                                   ),
                                 ),

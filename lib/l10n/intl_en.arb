@@ -130,12 +130,7 @@
     "type": "text",
     "description": "prompt_skip_setup"
   },
-  "trackingHeader": "Tracking Authorization",
-  "@trackingHeader": {
-    "type": "text",
-    "description": "prompt_ask_tracking_header"
-  },
-  "askTracking": "We're about to ask for the 'tracking' permission, this is used *strictly* for attributing links / referals, and minor analytics (things like number of installs, what app version, etc.) We believe you are entitled to your privacy and are not interested in any of your personal data, we just need the permission in order for link attributions to work correctly.",
+  "askTracking": "We're about to ask for the \"tracking\" permission, this is used *strictly* for attributing links / referrals, and minor analytics (things like number of installs, what app version, etc.) We believe you are entitled to your privacy and are not interested in any of your personal data, we just need the permission in order for link attributions to work correctly.",
   "@askTracking": {
     "type": "text",
     "description": "prompt_ask_tracking"
@@ -640,6 +635,11 @@
     "type": "text",
     "description": "gift_note"
   },
+  "enterHeight": "Enter Height",
+  "@enterHeight": {
+    "type": "text",
+    "description": "enter_height_hint"
+  },
   "enterMemo": "Enter Message",
   "@enterMemo": {
     "type": "text",
@@ -1085,6 +1085,11 @@
     "type": "text",
     "description": "send_invalid_address"
   },
+  "invalidHeight": "Invalid Height",
+  "@invalidHeight": {
+    "type": "text",
+    "description": "height_invalid"
+  },
   "invalidPassword": "Invalid Password",
   "@invalidPassword": {
     "type": "text",
@@ -1354,21 +1359,6 @@
   "@notificationWarningBodyShort": {
     "type": "text",
     "description": "notification_warning_body_short"
-  },
-  "trackingWarning": "Tracking Disabled",
-  "@trackingWarning": {
-    "type": "text",
-    "description": "home_tracking_warning"
-  },
-  "trackingWarningBodyLong": "Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature, absolutely none of your data is sold, collected or tracked for any other purpose other than functionality, nor would we want to :)",
-  "@trackingWarningBodyLong": {
-    "type": "text",
-    "description": "tracking_warning_body_long"
-  },
-  "trackingWarningBodyShort": "Payment Requests, Memos, and Messages will not function properly.",
-  "@trackingWarningBodyShort": {
-    "type": "text",
-    "description": "tracking_warning_body_short"
   },
   "notSent": "not sent",
   "@notSent": {
@@ -1980,6 +1970,11 @@
     "type": "text",
     "description": "sent_to"
   },
+  "set": "Set",
+  "@set": {
+    "type": "text",
+    "description": "dialog_set"
+  },
   "setPassword": "Set Password",
   "@setPassword": {
     "type": "text",
@@ -2005,6 +2000,11 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
+  "setRestoreHeight": "Set Restore Height",
+  "@setRestoreHeight": {
+    "type": "text",
+    "description": "set_restore_height"
+  },
   "settingsHeader": "Settings",
   "@settingsHeader": {
     "type": "text",
@@ -2029,6 +2029,11 @@
   "@setWalletPlausiblePin": {
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
+  },
+  "setXMRRestoreHeight": "Set XMR Restore Height",
+  "@setXMRRestoreHeight": {
+    "type": "text",
+    "description": "set_xmr_restore_height"
   },
   "share": "Share",
   "@share": {
@@ -2234,6 +2239,26 @@
   "@tooManyFailedAttempts": {
     "type": "text",
     "description": "fail_toomany_attempts"
+  },
+  "trackingHeader": "Tracking Authorization",
+  "@trackingHeader": {
+    "type": "text",
+    "description": "prompt_ask_tracking_header"
+  },
+  "trackingWarning": "Tracking Disabled",
+  "@trackingWarning": {
+    "type": "text",
+    "description": "home_tracking_warning"
+  },
+  "trackingWarningBodyLong": "Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature, absolutely none of your data is sold, collected or tracked for any other purpose other than functionality, nor would we want to :)",
+  "@trackingWarningBodyLong": {
+    "type": "text",
+    "description": "tracking_warning_body_long"
+  },
+  "trackingWarningBodyShort": "Gift Card Links will not function properly",
+  "@trackingWarningBodyShort": {
+    "type": "text",
+    "description": "tracking_warning_body_short"
   },
   "transactions": "Transactions",
   "@transactions": {
@@ -2495,15 +2520,15 @@
     "type": "text",
     "description": "with_address"
   },
-  "withMessage": "With Message",
-  "@withMessage": {
-    "type": "text",
-    "description": "with_message"
-  },
   "withFee": "With Fee",
   "@withFee": {
     "type": "text",
     "description": "with_fee"
+  },
+  "withMessage": "With Message",
+  "@withMessage": {
+    "type": "text",
+    "description": "with_message"
   },
   "xMinute": "After %1 minute",
   "@xMinute": {

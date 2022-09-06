@@ -230,7 +230,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
                         children: <Widget>[
                           TextButton(
                             style: TextButton.styleFrom(
-                              primary: StateContainer.of(context).curTheme.text15,
+                              foregroundColor: StateContainer.of(context).curTheme.text15,
                               padding: const EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                               // highlightColor: StateContainer.of(context).curTheme.text15,

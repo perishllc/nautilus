@@ -53,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "amountMissing": MessageLookupByLibrary.simpleMessage("请输入金额"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "我们注意到您单击了包含一些 nano 的链接，您想跳过设置过程吗？你以后总是可以改变的。\n\n 但是，如果您有要导入的现有种子，则应选择否。"),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "我们即将请求“跟踪”权限，这*严格*用于归因链接/推荐和次要分析（例如安装数量、应用版本等）我们相信您有权享有您的隐私并且对您的任何个人数据不感兴趣，我们只需要获得许可，链接属性才能正常工作。"),
         "asked": MessageLookupByLibrary.simpleMessage("问"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("认证"),
         "authError": MessageLookupByLibrary.simpleMessage("验证时出错。稍后再试。"),
@@ -168,11 +170,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport": MessageLookupByLibrary.simpleMessage("支持项目"),
         "edit": MessageLookupByLibrary.simpleMessage("编辑"),
         "enableNotifications": MessageLookupByLibrary.simpleMessage("启用通知"),
+        "enableTracking": MessageLookupByLibrary.simpleMessage("启用跟踪"),
         "encryptionFailedError":
             MessageLookupByLibrary.simpleMessage("钱包密码设置失败"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("输入地址"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("输入金额"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("输入礼品备注"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("输入高度"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("输入消息"),
         "enterMoneroAddress": MessageLookupByLibrary.simpleMessage("输入 XMR 地址"),
         "enterPasswordHint": MessageLookupByLibrary.simpleMessage("输入您的密码"),
@@ -291,6 +295,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "introSkippedWarningHeader":
             MessageLookupByLibrary.simpleMessage("备份你的种子！"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage("无效的目标地址"),
+        "invalidHeight": MessageLookupByLibrary.simpleMessage("无效高度"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("无效密码"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("无效引脚"),
         "iosFundingMessage": MessageLookupByLibrary.simpleMessage(
@@ -513,16 +518,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("发出"),
         "sent": MessageLookupByLibrary.simpleMessage("发送"),
         "sentTo": MessageLookupByLibrary.simpleMessage("发给"),
+        "set": MessageLookupByLibrary.simpleMessage("放"),
         "setPassword": MessageLookupByLibrary.simpleMessage("设置密码"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage("密码设置成功"),
         "setPin": MessageLookupByLibrary.simpleMessage("设置引脚"),
         "setPinSuccess": MessageLookupByLibrary.simpleMessage("已成功设置引脚"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("设置合理的引脚"),
+        "setRestoreHeight": MessageLookupByLibrary.simpleMessage("设置恢复高度"),
         "setWalletPassword": MessageLookupByLibrary.simpleMessage("设置钱包密码"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("设置 XMR 恢复高度"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("设置"),
         "settingsTransfer": MessageLookupByLibrary.simpleMessage("用纸钱包充值"),
         "share": MessageLookupByLibrary.simpleMessage("分享"),
@@ -539,8 +548,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "showFunding": MessageLookupByLibrary.simpleMessage("显示资金横幅"),
         "showLinkOptions": MessageLookupByLibrary.simpleMessage("显示链接选项"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("显示链接二维码"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage("显示门罗币"),
+        "showMoneroInfo": MessageLookupByLibrary.simpleMessage("启用门罗币部分"),
         "showQR": MessageLookupByLibrary.simpleMessage("显示二维码"),
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage("未开封警告"),
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
@@ -570,6 +579,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("至"),
         "tooManyFailedAttempts":
             MessageLookupByLibrary.simpleMessage("解锁失败太多次。"),
+        "trackingHeader": MessageLookupByLibrary.simpleMessage("追踪授权"),
+        "trackingWarning": MessageLookupByLibrary.simpleMessage("跟踪已禁用"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "如果禁用跟踪，礼品卡功能可能会减少或根本无法使用。我们仅将此权限用于此功能，绝对不会出于功能以外的任何其他目的出售、收集或跟踪您的数据，我们也不想:)"),
+        "trackingWarningBodyShort":
+            MessageLookupByLibrary.simpleMessage("礼品卡链接无法正常工作"),
         "transactions": MessageLookupByLibrary.simpleMessage("交易"),
         "transfer": MessageLookupByLibrary.simpleMessage("传送"),
         "transferClose": MessageLookupByLibrary.simpleMessage("点击任意位置关闭窗口。"),
@@ -644,6 +659,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated":
             MessageLookupByLibrary.simpleMessage("欢迎来到鹦鹉螺。首先，创建一个新钱包或导入现有钱包。"),
         "withAddress": MessageLookupByLibrary.simpleMessage("有地址"),
+        "withFee": MessageLookupByLibrary.simpleMessage("有费用"),
         "withMessage": MessageLookupByLibrary.simpleMessage("带消息"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 分钟后"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("%1 分钟后"),

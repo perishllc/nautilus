@@ -130,6 +130,11 @@
     "type": "text",
     "description": "prompt_skip_setup"
   },
+  "askTracking": "আমরা \"ট্র্যাকিং\" অনুমতির জন্য জিজ্ঞাসা করতে চলেছি, এটি লিঙ্ক / রেফারেল এবং ছোট বিশ্লেষণের জন্য *কঠোরভাবে* ব্যবহার করা হয় (যেমন ইনস্টলের সংখ্যা, কী অ্যাপ সংস্করণ ইত্যাদি) আমরা বিশ্বাস করি আপনি আপনার গোপনীয়তার অধিকারী এবং আপনার কোনো ব্যক্তিগত ডেটাতে আগ্রহী নন, লিঙ্ক অ্যাট্রিবিউশনগুলি সঠিকভাবে কাজ করার জন্য আমাদের কেবল অনুমতি প্রয়োজন৷",
+  "@askTracking": {
+    "type": "text",
+    "description": "prompt_ask_tracking"
+  },
   "authConfirm": "প্রমাণীকরণ",
   "@authConfirm": {
     "type": "text",
@@ -605,6 +610,11 @@
     "type": "text",
     "description": "notification_warning_enable_button"
   },
+  "enableTracking": "ট্র্যাকিং সক্ষম করুন",
+  "@enableTracking": {
+    "type": "text",
+    "description": "tracking_warning_enable_button"
+  },
   "encryptionFailedError": "ওয়ালেটের পাসওয়ার্ড সেট করতে ব্যর্থ",
   "@encryptionFailedError": {
     "type": "text",
@@ -624,6 +634,11 @@
   "@enterGiftMemo": {
     "type": "text",
     "description": "gift_note"
+  },
+  "enterHeight": "উচ্চতা লিখুন",
+  "@enterHeight": {
+    "type": "text",
+    "description": "enter_height_hint"
   },
   "enterMemo": "বার্তা লিখুন",
   "@enterMemo": {
@@ -1069,6 +1084,11 @@
   "@invalidAddress": {
     "type": "text",
     "description": "send_invalid_address"
+  },
+  "invalidHeight": "অবৈধ উচ্চতা",
+  "@invalidHeight": {
+    "type": "text",
+    "description": "height_invalid"
   },
   "invalidPassword": "ভুল পাসওয়ার্ড",
   "@invalidPassword": {
@@ -1950,6 +1970,11 @@
     "type": "text",
     "description": "sent_to"
   },
+  "set": "সেট",
+  "@set": {
+    "type": "text",
+    "description": "dialog_set"
+  },
   "setPassword": "পাসওয়ার্ড সেট করুন",
   "@setPassword": {
     "type": "text",
@@ -1975,6 +2000,11 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
+  "setRestoreHeight": "পুনরুদ্ধার উচ্চতা সেট করুন",
+  "@setRestoreHeight": {
+    "type": "text",
+    "description": "set_restore_height"
+  },
   "settingsHeader": "সেটিংস",
   "@settingsHeader": {
     "type": "text",
@@ -1999,6 +2029,11 @@
   "@setWalletPlausiblePin": {
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
+  },
+  "setXMRRestoreHeight": "XMR পুনরুদ্ধার উচ্চতা সেট করুন",
+  "@setXMRRestoreHeight": {
+    "type": "text",
+    "description": "set_xmr_restore_height"
   },
   "share": "শেয়ার করুন",
   "@share": {
@@ -2065,12 +2100,12 @@
     "type": "text",
     "description": "show_link_qr"
   },
-  "showMoneroHeader": "",
+  "showMoneroHeader": "মনেরো দেখান",
   "@showMoneroHeader": {
     "type": "text",
     "description": "show_monero_header"
   },
-  "showMoneroInfo": "",
+  "showMoneroInfo": "Monero বিভাগ সক্রিয় করুন",
   "@showMoneroInfo": {
     "type": "text",
     "description": "show_monero_info"
@@ -2204,6 +2239,26 @@
   "@tooManyFailedAttempts": {
     "type": "text",
     "description": "fail_toomany_attempts"
+  },
+  "trackingHeader": "ট্র্যাকিং অনুমোদন",
+  "@trackingHeader": {
+    "type": "text",
+    "description": "prompt_ask_tracking_header"
+  },
+  "trackingWarning": "ট্র্যাকিং অক্ষম",
+  "@trackingWarning": {
+    "type": "text",
+    "description": "home_tracking_warning"
+  },
+  "trackingWarningBodyLong": "ট্র্যাকিং অক্ষম থাকলে উপহার কার্ডের কার্যকারিতা হ্রাস পেতে পারে বা একেবারেই কাজ করতে পারে না। আমরা এই বৈশিষ্ট্যটির জন্য বিশেষভাবে এই অনুমতিটি ব্যবহার করি, কার্যকারিতা ছাড়া অন্য কোনও উদ্দেশ্যে আপনার কোনও ডেটা বিক্রি, সংগৃহীত বা ট্র্যাক করা হয় না এবং আমরা চাই না :)",
+  "@trackingWarningBodyLong": {
+    "type": "text",
+    "description": "tracking_warning_body_long"
+  },
+  "trackingWarningBodyShort": "উপহার কার্ডের লিঙ্কগুলি সঠিকভাবে কাজ করবে না",
+  "@trackingWarningBodyShort": {
+    "type": "text",
+    "description": "tracking_warning_body_short"
   },
   "transactions": "লেনদেন",
   "@transactions": {
@@ -2464,6 +2519,11 @@
   "@withAddress": {
     "type": "text",
     "description": "with_address"
+  },
+  "withFee": "ফি সহ",
+  "@withFee": {
+    "type": "text",
+    "description": "with_fee"
   },
   "withMessage": "বার্তা সহ",
   "@withMessage": {

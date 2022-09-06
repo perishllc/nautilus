@@ -130,6 +130,11 @@
     "type": "text",
     "description": "prompt_skip_setup"
   },
+  "askTracking": "Stiamo per chiedere il permesso di \"tracciamento\", questo viene utilizzato *rigorosamente* per attribuire link/referenze e analisi minori (cose come il numero di installazioni, quale versione dell'app, ecc.) Riteniamo che tu abbia diritto alla tua privacy e non siamo interessati a nessuno dei tuoi dati personali, abbiamo solo bisogno dell'autorizzazione affinché le attribuzioni dei link funzionino correttamente.",
+  "@askTracking": {
+    "type": "text",
+    "description": "prompt_ask_tracking"
+  },
   "authConfirm": "Autenticazione",
   "@authConfirm": {
     "type": "text",
@@ -605,6 +610,11 @@
     "type": "text",
     "description": "notification_warning_enable_button"
   },
+  "enableTracking": "Abilita il monitoraggio",
+  "@enableTracking": {
+    "type": "text",
+    "description": "tracking_warning_enable_button"
+  },
   "encryptionFailedError": "Errore nell’impostazione della password",
   "@encryptionFailedError": {
     "type": "text",
@@ -624,6 +634,11 @@
   "@enterGiftMemo": {
     "type": "text",
     "description": "gift_note"
+  },
+  "enterHeight": "Inserisci Altezza",
+  "@enterHeight": {
+    "type": "text",
+    "description": "enter_height_hint"
   },
   "enterMemo": "Inserisci messaggio",
   "@enterMemo": {
@@ -1069,6 +1084,11 @@
   "@invalidAddress": {
     "type": "text",
     "description": "send_invalid_address"
+  },
+  "invalidHeight": "Altezza non valida",
+  "@invalidHeight": {
+    "type": "text",
+    "description": "height_invalid"
   },
   "invalidPassword": "Password Invalida",
   "@invalidPassword": {
@@ -1950,6 +1970,11 @@
     "type": "text",
     "description": "sent_to"
   },
+  "set": "Impostare",
+  "@set": {
+    "type": "text",
+    "description": "dialog_set"
+  },
   "setPassword": "Imposta Password",
   "@setPassword": {
     "type": "text",
@@ -1975,6 +2000,11 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
+  "setRestoreHeight": "Imposta l'altezza di ripristino",
+  "@setRestoreHeight": {
+    "type": "text",
+    "description": "set_restore_height"
+  },
   "settingsHeader": "Impostazioni",
   "@settingsHeader": {
     "type": "text",
@@ -1999,6 +2029,11 @@
   "@setWalletPlausiblePin": {
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
+  },
+  "setXMRRestoreHeight": "Imposta l'altezza di ripristino XMR",
+  "@setXMRRestoreHeight": {
+    "type": "text",
+    "description": "set_xmr_restore_height"
   },
   "share": "Condividere",
   "@share": {
@@ -2065,12 +2100,12 @@
     "type": "text",
     "description": "show_link_qr"
   },
-  "showMoneroHeader": "",
+  "showMoneroHeader": "Mostra Monero",
   "@showMoneroHeader": {
     "type": "text",
     "description": "show_monero_header"
   },
-  "showMoneroInfo": "",
+  "showMoneroInfo": "Abilita sezione Monero",
   "@showMoneroInfo": {
     "type": "text",
     "description": "show_monero_info"
@@ -2204,6 +2239,26 @@
   "@tooManyFailedAttempts": {
     "type": "text",
     "description": "fail_toomany_attempts"
+  },
+  "trackingHeader": "Autorizzazione al monitoraggio",
+  "@trackingHeader": {
+    "type": "text",
+    "description": "prompt_ask_tracking_header"
+  },
+  "trackingWarning": "Tracciamento disabilitato",
+  "@trackingWarning": {
+    "type": "text",
+    "description": "home_tracking_warning"
+  },
+  "trackingWarningBodyLong": "La funzionalità della carta regalo potrebbe essere ridotta o non funzionare affatto se il monitoraggio è disabilitato. Utilizziamo questa autorizzazione ESCLUSIVAMENTE per questa funzione, assolutamente nessuno dei tuoi dati viene venduto, raccolto o tracciato per scopi diversi dalla funzionalità, né vorremmo farlo :)",
+  "@trackingWarningBodyLong": {
+    "type": "text",
+    "description": "tracking_warning_body_long"
+  },
+  "trackingWarningBodyShort": "I collegamenti alle carte regalo non funzioneranno correttamente",
+  "@trackingWarningBodyShort": {
+    "type": "text",
+    "description": "tracking_warning_body_short"
   },
   "transactions": "Transazioni",
   "@transactions": {
@@ -2464,6 +2519,11 @@
   "@withAddress": {
     "type": "text",
     "description": "with_address"
+  },
+  "withFee": "Con Tariffa",
+  "@withFee": {
+    "type": "text",
+    "description": "with_fee"
   },
   "withMessage": "Con messaggio",
   "@withMessage": {

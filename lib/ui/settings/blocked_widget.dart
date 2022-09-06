@@ -72,7 +72,8 @@ class BlockedListState extends State<BlockedList> {
       _updateContacts();
     });
     // Contact removed bus event
-    _blockedRemovedSub = EventTaxiImpl.singleton().registerTo<BlockedRemovedEvent>().listen((BlockedRemovedEvent event) {
+    _blockedRemovedSub =
+        EventTaxiImpl.singleton().registerTo<BlockedRemovedEvent>().listen((BlockedRemovedEvent event) {
       // Full update:
       _updateContacts();
     });
@@ -156,7 +157,8 @@ class BlockedListState extends State<BlockedList> {
         if (nickNameIndex != null) {
           aliases.removeAt(nickNameIndex);
           aliases.removeAt(nickNameIndex);
-          multiUsers.add(User(address: address, nickname: nickname, username: aliases[0], type: aliases[1], aliases: aliases));
+          multiUsers.add(
+              User(address: address, nickname: nickname, username: aliases[0], type: aliases[1], aliases: aliases));
         } else {
           multiUsers.add(User(address: address, username: aliases[0], type: aliases[1], aliases: aliases));
         }
@@ -256,7 +258,10 @@ class BlockedListState extends State<BlockedList> {
         decoration: BoxDecoration(
           color: StateContainer.of(context).curTheme.backgroundDark,
           boxShadow: [
-            BoxShadow(color: StateContainer.of(context).curTheme.barrierWeakest!, offset: const Offset(-5, 0), blurRadius: 20),
+            BoxShadow(
+                color: StateContainer.of(context).curTheme.barrierWeakest!,
+                offset: const Offset(-5, 0),
+                blurRadius: 20),
           ],
         ),
         child: SafeArea(
@@ -281,7 +286,7 @@ class BlockedListState extends State<BlockedList> {
                           margin: const EdgeInsets.only(right: 10, left: 10),
                           child: TextButton(
                               style: TextButton.styleFrom(
-                                primary: StateContainer.of(context).curTheme.text15,
+                                foregroundColor: StateContainer.of(context).curTheme.text15,
                                 backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                                 padding: const EdgeInsets.all(8.0),
@@ -306,7 +311,8 @@ class BlockedListState extends State<BlockedList> {
                     Container(
                       margin: const EdgeInsets.only(right: 25),
                       child: AppDialogs.infoButton(context, () {
-                        AppDialogs.showInfoDialog(context, AppLocalization.of(context).blockedInfoHeader, AppLocalization.of(context).blockedInfo);
+                        AppDialogs.showInfoDialog(context, AppLocalization.of(context).blockedInfoHeader,
+                            AppLocalization.of(context).blockedInfo);
                       }),
                     ),
                   ],
@@ -334,7 +340,10 @@ class BlockedListState extends State<BlockedList> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [StateContainer.of(context).curTheme.backgroundDark!, StateContainer.of(context).curTheme.backgroundDark00!],
+                            colors: [
+                              StateContainer.of(context).curTheme.backgroundDark!,
+                              StateContainer.of(context).curTheme.backgroundDark00!
+                            ],
                             begin: const AlignmentDirectional(0.5, -1.0),
                             end: const AlignmentDirectional(0.5, 1.0),
                           ),
@@ -366,8 +375,8 @@ class BlockedListState extends State<BlockedList> {
                 margin: const EdgeInsets.only(top: 10),
                 child: Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE, AppLocalization.of(context).addBlocked, Dimens.BUTTON_BOTTOM_DIMENS,
-                        onPressed: () {
+                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE,
+                        AppLocalization.of(context).addBlocked, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Sheets.showAppHeightEightSheet(context: context, widget: AddBlockedSheet());
                     }),
                   ],
@@ -382,12 +391,15 @@ class BlockedListState extends State<BlockedList> {
     if (user.aliases == null) {
       return [
         // Blocked name
-        if (user.nickname != null && user.nickname!.isNotEmpty) Text("★${user.nickname!}", style: AppStyles.textStyleSettingItemHeader(context)),
+        if (user.nickname != null && user.nickname!.isNotEmpty)
+          Text("★${user.nickname!}", style: AppStyles.textStyleSettingItemHeader(context)),
 
         if (user.username != null)
           Text(
             user.getDisplayName(ignoreNickname: true)!,
-            style: user.nickname != null ? AppStyles.textStyleTransactionAddress(context) : AppStyles.textStyleSettingItemHeader(context),
+            style: user.nickname != null
+                ? AppStyles.textStyleTransactionAddress(context)
+                : AppStyles.textStyleSettingItemHeader(context),
           ),
 
         // Blocked address
@@ -401,7 +413,9 @@ class BlockedListState extends State<BlockedList> {
       final List<Widget> entries = [
         Text(
           Address(user.address).getShortString()!,
-          style: user.nickname != null ? AppStyles.textStyleTransactionAddress(context) : AppStyles.textStyleSettingItemHeader(context),
+          style: user.nickname != null
+              ? AppStyles.textStyleTransactionAddress(context)
+              : AppStyles.textStyleSettingItemHeader(context),
         )
       ];
 

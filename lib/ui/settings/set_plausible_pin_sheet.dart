@@ -154,7 +154,7 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16.0,
                                 color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
-                                fontFamily: 'NunitoSans',
+                                fontFamily: "NunitoSans",
                               ),
                               onSubmitted: (text) {
                                 confirmPasswordFocusNode!.requestFocus();
@@ -198,7 +198,7 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16.0,
                                 color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
-                                fontFamily: 'NunitoSans',
+                                fontFamily: "NunitoSans",
                               ),
                             ),
                             // Error Text
@@ -209,7 +209,7 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                                   style: TextStyle(
                                     fontSize: 14.0,
                                     color: StateContainer.of(context).curTheme.primary,
-                                    fontFamily: 'NunitoSans',
+                                    fontFamily: "NunitoSans",
                                     fontWeight: FontWeight.w600,
                                   )),
                             ),

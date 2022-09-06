@@ -61,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Introduceți o sumă"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Am observat că ați dat clic pe un link care conține niște nano, doriți să săriți peste procesul de configurare? Poți oricând să schimbi lucrurile mai târziu.\n\n Dacă aveți o sămânță existentă pe care doriți să o importați, ar trebui să selectați nu."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "Suntem pe cale să cerem permisiunea de „urmărire”, aceasta este folosită *strict* pentru atribuirea de link-uri/recomandări și analize minore (lucruri precum numărul de instalări, ce versiune a aplicației etc.) Credem că aveți dreptul la confidențialitatea dvs. și nu sunteți interesați de niciuna dintre datele dumneavoastră personale, avem nevoie doar de permisiunea pentru ca atribuțiile de link să funcționeze corect."),
         "asked": MessageLookupByLibrary.simpleMessage("Întrebat"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Autentificare"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -221,12 +223,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Editează"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Activați notificările"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("Activați urmărirea"),
         "encryptionFailedError":
             MessageLookupByLibrary.simpleMessage("Setarea parolei a eșuat"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Introdu adresa"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Introdu suma"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Introduceți nota cadou"),
+        "enterHeight":
+            MessageLookupByLibrary.simpleMessage("Introduceți înălțimea"),
         "enterMemo":
             MessageLookupByLibrary.simpleMessage("Introduceţi mesajul"),
         "enterMoneroAddress":
@@ -375,6 +381,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fă-ți o rezervă de semințe!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Adresa introdusă este invalidă"),
+        "invalidHeight":
+            MessageLookupByLibrary.simpleMessage("Înălțime nevalidă"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Parolă incorectă"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("PIN nevalid"),
@@ -654,6 +662,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Trimitere..."),
         "sent": MessageLookupByLibrary.simpleMessage("Ai trimis"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Trimis către"),
+        "set": MessageLookupByLibrary.simpleMessage("A stabilit"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Setează parola"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Parola a fost setată cu succes"),
@@ -662,11 +671,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pinul a fost setat cu succes"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("Setați PIN plauzibil"),
+        "setRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Setați înălțimea de restaurare"),
         "setWalletPassword": MessageLookupByLibrary.simpleMessage(
             "Setați o parolă portofelului"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Setați înălțimea de restaurare XMR"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Setări"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Încarcă din Paper Wallet"),
@@ -690,8 +703,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "showLinkOptions": MessageLookupByLibrary.simpleMessage(
             "Afișați opțiunile de legătură"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("Afișați linkul QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("Arată Monero"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Activați secțiunea Monero"),
         "showQR": MessageLookupByLibrary.simpleMessage("Afișați codul QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Avertisment nedeschis"),
@@ -732,6 +747,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("Către"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Prea multe încercări de deblocare eșuate."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Autorizație de urmărire"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("Urmărire dezactivată"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Funcționalitatea cardului cadou poate fi redusă sau să nu funcționeze deloc dacă urmărirea este dezactivată. Folosim această permisiune EXCLUSIV pentru această caracteristică, absolut niciuna dintre datele dumneavoastră nu este vândută, colectată sau urmărită în alt scop decât funcționalitatea și nici nu am dori să facem acest lucru :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Link-urile cardurilor cadou nu vor funcționa corect"),
         "transactions": MessageLookupByLibrary.simpleMessage("Tranzacții"),
         "transfer": MessageLookupByLibrary.simpleMessage("Transferă"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -821,6 +844,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Bun venit la Nautilus. Pentru a începe, creați un portofel nou sau importați unul existent."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Cu adresa"),
+        "withFee": MessageLookupByLibrary.simpleMessage("Cu Taxa"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Cu mesaj"),
         "xMinute": MessageLookupByLibrary.simpleMessage("După %1 minut"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("După %1 minute"),

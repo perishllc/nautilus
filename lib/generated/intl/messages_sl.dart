@@ -60,6 +60,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Prosim vnesite znesek"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Opazili smo, da ste kliknili povezavo, ki vsebuje nano, ali želite preskočiti postopek namestitve? Pozneje lahko vedno spremenite stvari.\n\n Če pa imate obstoječe seme, ki ga želite uvoziti, izberite ne."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "Zaprosili bomo za dovoljenje za \"sledenje\", to se uporablja *strogo* za dodeljevanje povezav/napotitev in manjše analitike (stvari, kot so število namestitev, katera različica aplikacije itd.) Menimo, da ste upravičeni do svoje zasebnosti in nas ne zanimajo nobeni vaši osebni podatki, potrebujemo le dovoljenje, da lahko pripisovanje povezav deluje pravilno."),
         "asked": MessageLookupByLibrary.simpleMessage("Na vprašanje"),
         "authConfirm":
             MessageLookupByLibrary.simpleMessage("Preverjanje pristnosti"),
@@ -224,12 +226,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Uredi"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Omogoči obvestila"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("Omogoči sledenje"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Vnesite naslov"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Vnesite znesek"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Vnesite darilno opombo"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("Vnesite višino"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Vnesite sporočilo"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Vnesite naslov XMR"),
@@ -375,6 +380,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Varnostno kopirajte svoje seme!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Naslov je neveljaven"),
+        "invalidHeight":
+            MessageLookupByLibrary.simpleMessage("Neveljavna višina"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Invalid Password"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("Neveljaven PIN"),
@@ -653,6 +660,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Pošiljam"),
         "sent": MessageLookupByLibrary.simpleMessage("Poslano"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Poslano"),
+        "set": MessageLookupByLibrary.simpleMessage("Set"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Password has been set successfully"),
@@ -661,11 +669,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pin je bil uspešno nastavljen"),
         "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(
             "Nastavite verjeten žebljiček"),
+        "setRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("Nastavite višino obnovitve"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Set Wallet Password"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Nastavite višino obnovitve XMR"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Nastavitve"),
         "settingsTransfer": MessageLookupByLibrary.simpleMessage(
             "Naloži iz papirnate denarnice"),
@@ -688,8 +700,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Prikaži možnosti povezave"),
         "showLinkQR":
             MessageLookupByLibrary.simpleMessage("Prikaži povezavo QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("Prikaži Monero"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Omogoči razdelek Monero"),
         "showQR": MessageLookupByLibrary.simpleMessage("Prikaži kodo QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Neodprto opozorilo"),
@@ -729,6 +743,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("Na"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Preveč neuspešnih poizkusov."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Pooblastilo za sledenje"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("Sledenje onemogočeno"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Funkcionalnost darilne kartice je lahko zmanjšana ali pa sploh ne deluje, če je sledenje onemogočeno. To dovoljenje uporabljamo IZKLJUČNO za to funkcijo, prav nobeni vaši podatki se ne prodajajo, zbirajo ali sledijo za noben drug namen kot za funkcionalnost, niti ne želimo :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Povezave do darilnih kartic ne bodo pravilno delovale"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transakcije"),
         "transfer": MessageLookupByLibrary.simpleMessage("Prenesi"),
         "transferClose":
@@ -816,6 +838,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Dobrodošli v Nautilusu. Za začetek ustvarite novo denarnico ali uvozite obstoječo."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Z naslovom"),
+        "withFee": MessageLookupByLibrary.simpleMessage("S honorarjem"),
         "withMessage": MessageLookupByLibrary.simpleMessage("S sporočilom"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Po %1 minuti"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Po %1 minutah"),

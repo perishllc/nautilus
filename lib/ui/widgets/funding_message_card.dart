@@ -86,8 +86,7 @@ class _FundingMessageCardState extends State<FundingMessageCard> {
       ),
       child: TextButton(
         style: TextButton.styleFrom(
-          padding: EdgeInsets.zero,
-          primary: StateContainer.of(context).curTheme.success!.withOpacity(0.15),
+          foregroundColor: StateContainer.of(context).curTheme.success!.withOpacity(0.15), padding: EdgeInsets.zero,
           // highlightColor: StateContainer.of(context).curTheme.success!.withOpacity(0.15),
           // splashColor: StateContainer.of(context).curTheme.success!.withOpacity(0.15),
         ),

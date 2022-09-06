@@ -8,14 +8,14 @@ import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 
 class AppSettings {
   // Settings item with a dropdown option
-  static Widget buildSettingsListItemDoubleLine(BuildContext context, String heading, SettingSelectionItem defaultMethod, IconData icon, Function onPressed,
-      {bool disabled = false}) {
+  static Widget buildSettingsListItemDoubleLine(
+      BuildContext context, String heading, SettingSelectionItem? defaultMethod, IconData icon, Function onPressed,
+      {bool disabled = false, String? overrideSubtitle}) {
     return IgnorePointer(
       ignoring: disabled,
       child: TextButton(
         style: TextButton.styleFrom(
-          padding: EdgeInsets.zero,
-          primary: StateContainer.of(context).curTheme.text15,
+          foregroundColor: StateContainer.of(context).curTheme.text15, padding: EdgeInsets.zero,
           // highlightColor: StateContainer.of(context).curTheme.text15,
           // splashColor: StateContainer.of(context).curTheme.text15,
         ),
@@ -33,7 +33,11 @@ class AppSettings {
                 margin: const EdgeInsetsDirectional.only(end: 13.0),
                 child: Container(
                   margin: const EdgeInsets.only(top: 3, left: 3, bottom: 3, right: 3),
-                  child: Icon(icon, color: disabled ? StateContainer.of(context).curTheme.primary45 : StateContainer.of(context).curTheme.primary, size: 24),
+                  child: Icon(icon,
+                      color: disabled
+                          ? StateContainer.of(context).curTheme.primary45
+                          : StateContainer.of(context).curTheme.primary,
+                      size: 24),
                 ),
               ),
               Column(
@@ -44,7 +48,9 @@ class AppSettings {
                     width: UIUtil.drawerWidth(context) - 100,
                     child: AutoSizeText(
                       heading,
-                      style: disabled ? AppStyles.textStyleSettingItemHeader45(context) : AppStyles.textStyleSettingItemHeader(context),
+                      style: disabled
+                          ? AppStyles.textStyleSettingItemHeader45(context)
+                          : AppStyles.textStyleSettingItemHeader(context),
                       maxLines: 1,
                       stepGranularity: 0.1,
                       minFontSize: 8,
@@ -53,8 +59,10 @@ class AppSettings {
                   SizedBox(
                     width: UIUtil.drawerWidth(context) - 100,
                     child: AutoSizeText(
-                      defaultMethod.getDisplayName(context),
-                      style: disabled ? AppStyles.textStyleSettingItemSubheader30(context) : AppStyles.textStyleSettingItemSubheader(context),
+                      overrideSubtitle ?? defaultMethod!.getDisplayName(context),
+                      style: disabled
+                          ? AppStyles.textStyleSettingItemSubheader30(context)
+                          : AppStyles.textStyleSettingItemSubheader(context),
                       maxLines: 1,
                       stepGranularity: 0.1,
                       minFontSize: 8,
@@ -70,14 +78,14 @@ class AppSettings {
   }
 
   //Settings item with direct functionality and two lines
-  static Widget buildSettingsListItemDoubleLineTwo(BuildContext context, String heading, String text, IconData icon, Function onPressed,
+  static Widget buildSettingsListItemDoubleLineTwo(
+      BuildContext context, String heading, String text, IconData icon, Function onPressed,
       {bool disabled = false}) {
     return IgnorePointer(
       ignoring: disabled,
       child: TextButton(
         style: TextButton.styleFrom(
-          padding: EdgeInsets.zero,
-          primary: StateContainer.of(context).curTheme.text15,
+          foregroundColor: StateContainer.of(context).curTheme.text15, padding: EdgeInsets.zero,
           // highlightColor: StateContainer.of(context).curTheme.text15,
           // splashColor: StateContainer.of(context).curTheme.text15,
         ),
@@ -95,7 +103,11 @@ class AppSettings {
                 margin: const EdgeInsetsDirectional.only(end: 13.0),
                 child: Container(
                   margin: const EdgeInsets.only(top: 3, left: 3, bottom: 3, right: 3),
-                  child: Icon(icon, color: disabled ? StateContainer.of(context).curTheme.primary45 : StateContainer.of(context).curTheme.primary, size: 24),
+                  child: Icon(icon,
+                      color: disabled
+                          ? StateContainer.of(context).curTheme.primary45
+                          : StateContainer.of(context).curTheme.primary,
+                      size: 24),
                 ),
               ),
               Column(
@@ -106,7 +118,9 @@ class AppSettings {
                     width: UIUtil.drawerWidth(context) - 100,
                     child: AutoSizeText(
                       heading,
-                      style: disabled ? AppStyles.textStyleSettingItemHeader45(context) : AppStyles.textStyleSettingItemHeader(context),
+                      style: disabled
+                          ? AppStyles.textStyleSettingItemHeader45(context)
+                          : AppStyles.textStyleSettingItemHeader(context),
                       maxLines: 1,
                       stepGranularity: 0.1,
                       minFontSize: 8,
@@ -116,7 +130,9 @@ class AppSettings {
                     width: UIUtil.drawerWidth(context) - 100,
                     child: AutoSizeText(
                       text,
-                      style: disabled ? AppStyles.textStyleSettingItemSubheader30(context) : AppStyles.textStyleSettingItemSubheader(context),
+                      style: disabled
+                          ? AppStyles.textStyleSettingItemSubheader30(context)
+                          : AppStyles.textStyleSettingItemSubheader(context),
                       maxLines: 1,
                       stepGranularity: 0.1,
                       minFontSize: 8,
@@ -132,13 +148,13 @@ class AppSettings {
   }
 
   //Settings item without any dropdown option but rather a direct functionality
-  static Widget buildSettingsListItemSingleLine(BuildContext context, String heading, IconData settingIcon, {Function? onPressed, bool disabled = false, Widget? iconOverride}) {
+  static Widget buildSettingsListItemSingleLine(BuildContext context, String heading, IconData settingIcon,
+      {Function? onPressed, bool disabled = false, Widget? iconOverride}) {
     return IgnorePointer(
       ignoring: disabled,
       child: TextButton(
         style: TextButton.styleFrom(
-          padding: EdgeInsets.zero,
-          primary: StateContainer.of(context).curTheme.text15,
+          foregroundColor: StateContainer.of(context).curTheme.text15, padding: EdgeInsets.zero,
           // highlightColor: StateContainer.of(context).curTheme.text15,
           // splashColor: StateContainer.of(context).curTheme.text15,
         ),
@@ -180,18 +196,23 @@ class AppSettings {
                                     ? 4
                                     : 3,
                   ),
-                  child: iconOverride ?? Icon(
-                    settingIcon,
-                    color: disabled ? StateContainer.of(context).curTheme.primary45 : StateContainer.of(context).curTheme.primary,
-                    size: 24,
-                  ),
+                  child: iconOverride ??
+                      Icon(
+                        settingIcon,
+                        color: disabled
+                            ? StateContainer.of(context).curTheme.primary45
+                            : StateContainer.of(context).curTheme.primary,
+                        size: 24,
+                      ),
                 ),
               ),
               SizedBox(
                 width: UIUtil.drawerWidth(context) - 100,
                 child: Text(
                   heading,
-                  style: disabled ? AppStyles.textStyleSettingItemHeader45(context) : AppStyles.textStyleSettingItemHeader(context),
+                  style: disabled
+                      ? AppStyles.textStyleSettingItemHeader45(context)
+                      : AppStyles.textStyleSettingItemHeader(context),
                 ),
               ),
             ],

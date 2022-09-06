@@ -59,7 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "We noticed you clicked on a link that contains some nano, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no."),
         "askTracking": MessageLookupByLibrary.simpleMessage(
-            "We\'re about to ask for the \'tracking\' permission, this is used *strictly* for attributing links / referals, and minor analytics (things like number of installs, what app version, etc.) We believe you are entitled to your privacy and are not interested in any of your personal data, we just need the permission in order for link attributions to work correctly."),
+            "We\'re about to ask for the \"tracking\" permission, this is used *strictly* for attributing links / referrals, and minor analytics (things like number of installs, what app version, etc.) We believe you are entitled to your privacy and are not interested in any of your personal data, we just need the permission in order for link attributions to work correctly."),
         "asked": MessageLookupByLibrary.simpleMessage("Asked"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Authenticating"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -228,6 +228,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAmount": MessageLookupByLibrary.simpleMessage("Enter Amount"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("Enter Height"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Enter Message"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Enter XMR Address"),
@@ -371,6 +372,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Backup your seed!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Address entered was invalid"),
+        "invalidHeight": MessageLookupByLibrary.simpleMessage("Invalid Height"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Invalid Password"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("Invalid Pin"),
@@ -640,6 +642,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Sending"),
         "sent": MessageLookupByLibrary.simpleMessage("Sent"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Sent To"),
+        "set": MessageLookupByLibrary.simpleMessage("Set"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Password has been set successfully"),
@@ -648,10 +651,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pin has been set successfully"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("Set Plausible Pin"),
+        "setRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("Set Restore Height"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Set Wallet Password"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin": MessageLookupByLibrary.simpleMessage(""),
+        "setXMRRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("Set XMR Restore Height"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Settings"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Load from Paper Wallet"),
@@ -716,7 +723,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
             "Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature, absolutely none of your data is sold, collected or tracked for any other purpose other than functionality, nor would we want to :)"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
-            "Payment Requests, Memos, and Messages will not function properly."),
+            "Gift Card Links will not function properly"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transactions"),
         "transfer": MessageLookupByLibrary.simpleMessage("Transfer"),
         "transferClose": MessageLookupByLibrary.simpleMessage(

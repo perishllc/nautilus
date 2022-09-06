@@ -130,6 +130,11 @@
     "type": "text",
     "description": "prompt_skip_setup"
   },
+  "askTracking": "نحن على وشك طلب إذن \"التتبع\" ، ويتم استخدامه * بشكل صارم * لإسناد الروابط / الإحالات ، والتحليلات الطفيفة (أشياء مثل عدد عمليات التثبيت ، وإصدار التطبيق ، وما إلى ذلك) نعتقد أنه يحق لك الحصول على خصوصيتك ولسنا مهتمين بأي من بياناتك الشخصية ، فنحن نحتاج فقط إلى الإذن حتى تعمل إحالات الروابط بشكل صحيح.",
+  "@askTracking": {
+    "type": "text",
+    "description": "prompt_ask_tracking"
+  },
   "authConfirm": "المصادقة",
   "@authConfirm": {
     "type": "text",
@@ -605,6 +610,11 @@
     "type": "text",
     "description": "notification_warning_enable_button"
   },
+  "enableTracking": "تمكين التتبع",
+  "@enableTracking": {
+    "type": "text",
+    "description": "tracking_warning_enable_button"
+  },
   "encryptionFailedError": "أخفق إنشاء كلمة مرور المحفظة\n",
   "@encryptionFailedError": {
     "type": "text",
@@ -624,6 +634,11 @@
   "@enterGiftMemo": {
     "type": "text",
     "description": "gift_note"
+  },
+  "enterHeight": "أدخل الارتفاع",
+  "@enterHeight": {
+    "type": "text",
+    "description": "enter_height_hint"
   },
   "enterMemo": "أدخل رسالة",
   "@enterMemo": {
@@ -1069,6 +1084,11 @@
   "@invalidAddress": {
     "type": "text",
     "description": "send_invalid_address"
+  },
+  "invalidHeight": "ارتفاع غير صالح",
+  "@invalidHeight": {
+    "type": "text",
+    "description": "height_invalid"
   },
   "invalidPassword": "كلمة المرور خاطئ\n",
   "@invalidPassword": {
@@ -1950,6 +1970,11 @@
     "type": "text",
     "description": "sent_to"
   },
+  "set": "تعيين",
+  "@set": {
+    "type": "text",
+    "description": "dialog_set"
+  },
   "setPassword": "إنشاء كلمة مرور\n",
   "@setPassword": {
     "type": "text",
@@ -1975,6 +2000,11 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
+  "setRestoreHeight": "تعيين استعادة الارتفاع",
+  "@setRestoreHeight": {
+    "type": "text",
+    "description": "set_restore_height"
+  },
   "settingsHeader": "الإعدادات",
   "@settingsHeader": {
     "type": "text",
@@ -1999,6 +2029,11 @@
   "@setWalletPlausiblePin": {
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
+  },
+  "setXMRRestoreHeight": "قم بتعيين ارتفاع استعادة XMR",
+  "@setXMRRestoreHeight": {
+    "type": "text",
+    "description": "set_xmr_restore_height"
   },
   "share": "يشارك",
   "@share": {
@@ -2065,12 +2100,12 @@
     "type": "text",
     "description": "show_link_qr"
   },
-  "showMoneroHeader": "",
+  "showMoneroHeader": "عرض مونيرو",
   "@showMoneroHeader": {
     "type": "text",
     "description": "show_monero_header"
   },
-  "showMoneroInfo": "",
+  "showMoneroInfo": "تمكين قسم Monero",
   "@showMoneroInfo": {
     "type": "text",
     "description": "show_monero_info"
@@ -2204,6 +2239,26 @@
   "@tooManyFailedAttempts": {
     "type": "text",
     "description": "fail_toomany_attempts"
+  },
+  "trackingHeader": "إذن التتبع",
+  "@trackingHeader": {
+    "type": "text",
+    "description": "prompt_ask_tracking_header"
+  },
+  "trackingWarning": "تتبع معطل",
+  "@trackingWarning": {
+    "type": "text",
+    "description": "home_tracking_warning"
+  },
+  "trackingWarningBodyLong": "قد يتم تقليل وظائف بطاقة الهدايا أو لا تعمل على الإطلاق إذا تم تعطيل التتبع. نحن نستخدم هذا الإذن حصريًا لهذه الميزة ، ولا يتم بيع أي من بياناتك أو جمعها أو تعقبها لأي غرض آخر بخلاف الوظيفة ، ولا نريد :)",
+  "@trackingWarningBodyLong": {
+    "type": "text",
+    "description": "tracking_warning_body_long"
+  },
+  "trackingWarningBodyShort": "لن تعمل روابط بطاقات الهدايا بشكل صحيح",
+  "@trackingWarningBodyShort": {
+    "type": "text",
+    "description": "tracking_warning_body_short"
   },
   "transactions": "معاملات",
   "@transactions": {
@@ -2464,6 +2519,11 @@
   "@withAddress": {
     "type": "text",
     "description": "with_address"
+  },
+  "withFee": "مع رسوم",
+  "@withFee": {
+    "type": "text",
+    "description": "with_fee"
   },
   "withMessage": "مع رسالة",
   "@withMessage": {

@@ -55,7 +55,7 @@ class BlockedDetailsSheet {
                 fontWeight: FontWeight.w600,
                 fontSize: 16.0,
                 color: StateContainer.of(context).curTheme.text,
-                fontFamily: 'NunitoSans',
+                fontFamily: "NunitoSans",
               ),
             ),
           ),
@@ -79,7 +79,7 @@ class BlockedDetailsSheet {
                 fontWeight: FontWeight.w600,
                 fontSize: 16.0,
                 color: StateContainer.of(context).curTheme.primary,
-                fontFamily: 'NunitoSans',
+                fontFamily: "NunitoSans",
               ),
             ),
           ),
@@ -108,7 +108,7 @@ class BlockedDetailsSheet {
               fontWeight: FontWeight.w600,
               fontSize: 16.0,
               color: StateContainer.of(context).curTheme.primary,
-              fontFamily: 'NunitoSans',
+              fontFamily: "NunitoSans",
             ),
           ),
         ));
@@ -166,7 +166,7 @@ class BlockedDetailsSheet {
                           margin: const EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
                           child: TextButton(
                             style: TextButton.styleFrom(
-                              primary: StateContainer.of(context).curTheme.text15,
+                              foregroundColor: StateContainer.of(context).curTheme.text15,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                               padding: const EdgeInsets.all(13.0),
                               tapTargetSize: MaterialTapTargetSize.padded,
@@ -177,14 +177,20 @@ class BlockedDetailsSheet {
                               AppDialogs.showConfirmDialog(
                                   context,
                                   AppLocalization.of(context).removeBlocked,
-                                  AppLocalization.of(context).removeBlockedConfirmation.replaceAll('%1', blocked.getDisplayName()!),
+                                  AppLocalization.of(context)
+                                      .removeBlockedConfirmation
+                                      .replaceAll('%1', blocked.getDisplayName()!),
                                   CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
                                 sl.get<DBHelper>().unblockUser(blocked).then((bool deleted) {
                                   if (deleted) {
                                     // Delete image if exists
                                     EventTaxiImpl.singleton().fire(BlockedRemovedEvent(user: blocked));
                                     EventTaxiImpl.singleton().fire(BlockedModifiedEvent(user: blocked));
-                                    UIUtil.showSnackbar(AppLocalization.of(context).blockedRemoved.replaceAll("%1", blocked.getDisplayName()!), context);
+                                    UIUtil.showSnackbar(
+                                        AppLocalization.of(context)
+                                            .blockedRemoved
+                                            .replaceAll("%1", blocked.getDisplayName()!),
+                                        context);
                                     Navigator.of(context).pop();
                                   } else {
                                     // TODO: - error for failing to delete contact
@@ -218,7 +224,7 @@ class BlockedDetailsSheet {
                           margin: const EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
                           child: TextButton(
                             style: TextButton.styleFrom(
-                              primary: StateContainer.of(context).curTheme.text15,
+                              foregroundColor: StateContainer.of(context).curTheme.text15,
                               padding: const EdgeInsets.all(13.0),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                               tapTargetSize: MaterialTapTargetSize.padded,
@@ -263,7 +269,7 @@ class BlockedDetailsSheet {
                                       fontWeight: FontWeight.w600,
                                       fontSize: 16.0,
                                       color: StateContainer.of(context).curTheme.primary,
-                                      fontFamily: 'NunitoSans',
+                                      fontFamily: "NunitoSans",
                                     ),
                                   ),
                                 ),
@@ -286,14 +292,18 @@ class BlockedDetailsSheet {
                                 child: Container(
                                   width: double.infinity,
                                   margin: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105, top: 15),
+                                      left: MediaQuery.of(context).size.width * 0.105,
+                                      right: MediaQuery.of(context).size.width * 0.105,
+                                      top: 15),
                                   padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                                   decoration: BoxDecoration(
                                     color: StateContainer.of(context).curTheme.backgroundDarkest,
                                     borderRadius: BorderRadius.circular(25),
                                   ),
                                   child: UIUtil.threeLineAddressText(context, blocked.address!,
-                                      type: _addressCopied ? ThreeLineAddressTextType.SUCCESS_FULL : ThreeLineAddressTextType.PRIMARY),
+                                      type: _addressCopied
+                                          ? ThreeLineAddressTextType.SUCCESS_FULL
+                                          : ThreeLineAddressTextType.PRIMARY),
                                 ),
                               ),
                               // Address Copied text container
@@ -303,7 +313,7 @@ class BlockedDetailsSheet {
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: StateContainer.of(context).curTheme.success,
-                                      fontFamily: 'NunitoSans',
+                                      fontFamily: "NunitoSans",
                                       fontWeight: FontWeight.w600,
                                     )),
                               ),
@@ -342,8 +352,8 @@ class BlockedDetailsSheet {
                         Row(
                           children: <Widget>[
                             // Close Button
-                            AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
-                                onPressed: () {
+                            AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
+                                AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                               Navigator.pop(context);
                             }),
                           ],

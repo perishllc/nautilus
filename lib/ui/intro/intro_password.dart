@@ -52,7 +52,8 @@ class _IntroPasswordState extends State<IntroPassword> {
         body: TapOutsideUnfocus(
             child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
-            minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
+            minimum: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
             child: Column(
               children: <Widget>[
                 //A widget that holds the header, the paragraph and Back Button
@@ -69,7 +70,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                             width: 50,
                             child: TextButton(
                                 style: TextButton.styleFrom(
-                                  primary: StateContainer.of(context).curTheme.text15,
+                                  foregroundColor: StateContainer.of(context).curTheme.text15,
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                                   padding: EdgeInsets.zero,
                                   // highlightColor: StateContainer.of(context).curTheme.text15,
@@ -99,7 +100,8 @@ class _IntroPasswordState extends State<IntroPassword> {
                       ),
                       // The paragraph
                       Container(
-                        margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
+                        margin: EdgeInsetsDirectional.only(
+                            start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                         child: AutoSizeText(
                           AppLocalization.of(context).passwordWillBeRequiredToOpenParagraph,
                           style: AppStyles.textStyleParagraph(context),
@@ -149,8 +151,10 @@ class _IntroPasswordState extends State<IntroPassword> {
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16.0,
-                                    color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
-                                    fontFamily: 'NunitoSans',
+                                    color: passwordsMatch
+                                        ? StateContainer.of(context).curTheme.primary
+                                        : StateContainer.of(context).curTheme.text,
+                                    fontFamily: "NunitoSans",
                                   ),
                                   onSubmitted: (String text) {
                                     confirmPasswordFocusNode!.requestFocus();
@@ -192,8 +196,10 @@ class _IntroPasswordState extends State<IntroPassword> {
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16.0,
-                                    color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
-                                    fontFamily: 'NunitoSans',
+                                    color: passwordsMatch
+                                        ? StateContainer.of(context).curTheme.primary
+                                        : StateContainer.of(context).curTheme.text,
+                                    fontFamily: "NunitoSans",
                                   ),
                                 ),
                                 // Error Text
@@ -204,7 +210,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                                       style: TextStyle(
                                         fontSize: 14.0,
                                         color: StateContainer.of(context).curTheme.primary,
-                                        fontFamily: 'NunitoSans',
+                                        fontFamily: "NunitoSans",
                                         fontWeight: FontWeight.w600,
                                       )),
                                 ),
@@ -219,8 +225,8 @@ class _IntroPasswordState extends State<IntroPassword> {
                     Row(
                       children: <Widget>[
                         // Next Button
-                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).nextButton, Dimens.BUTTON_TOP_DIMENS,
-                            onPressed: () async {
+                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).nextButton,
+                            Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                           await submitAndEncrypt();
                         }),
                       ],
@@ -228,8 +234,8 @@ class _IntroPasswordState extends State<IntroPassword> {
                     Row(
                       children: <Widget>[
                         // Go Back Button
-                        AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS,
-                            onPressed: () {
+                        AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
+                            AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                           Navigator.of(context).pop();
                         }),
                       ],
@@ -258,7 +264,8 @@ class _IntroPasswordState extends State<IntroPassword> {
     } else if (widget.seed != null) {
       String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
       await sl.get<Vault>().setSeed(encryptedSeed);
-      StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, await sl.get<Vault>().getSessionKey())));
+      StateContainer.of(context).setEncryptedSecret(
+          NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, await sl.get<Vault>().getSessionKey())));
       await sl.get<DBHelper>().dropAccounts();
       await NanoUtil().loginAccount(widget.seed, context);
       // StateContainer.of(context).requestUpdate();// todo: is this necessary?
@@ -274,7 +281,8 @@ class _IntroPasswordState extends State<IntroPassword> {
       String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController!.text));
       await sl.get<Vault>().setSeed(encryptedSeed);
       // Also encrypt it with the session key, so user doesnt need password to sign blocks within the app
-      StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, await sl.get<Vault>().getSessionKey())));
+      StateContainer.of(context)
+          .setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, await sl.get<Vault>().getSessionKey())));
       // Update wallet
       NanoUtil().loginAccount(await StateContainer.of(context).getSeed(), context).then((_) {
         // StateContainer.of(context).requestUpdate();// todo: is this necessary?

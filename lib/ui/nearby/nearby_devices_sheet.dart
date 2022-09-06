@@ -150,7 +150,7 @@ class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
                                 color: StateContainer.of(context).curTheme.primary60,
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.w100,
-                                fontFamily: 'NunitoSans',
+                                fontFamily: "NunitoSans",
                               ),
                             ),
                             TextSpan(
@@ -159,7 +159,7 @@ class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
                                 color: StateContainer.of(context).curTheme.primary60,
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.w700,
-                                fontFamily: 'NunitoSans',
+                                fontFamily: "NunitoSans",
                               ),
                             ),
                             TextSpan(
@@ -168,7 +168,7 @@ class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
                                 color: StateContainer.of(context).curTheme.primary60,
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.w100,
-                                fontFamily: 'NunitoSans',
+                                fontFamily: "NunitoSans",
                               ),
                             ),
                           ],

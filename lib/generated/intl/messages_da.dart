@@ -60,6 +60,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Prosím zadejte částku"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Vi har bemærket, at du klikkede på et link, der indeholder noget nano. Vil du springe opsætningsprocessen over? Du kan altid ændre tingene senere.\n\n Hvis du har et eksisterende frø, som du vil importere, skal du dog vælge nej."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "Vi er ved at bede om \"sporing\"-tilladelsen, denne bruges *strengt* til at tilskrive links/henvisninger og mindre analyser (ting som antal installationer, hvilken appversion osv.) Vi mener, at du har ret til dit privatliv og ikke er interesseret i nogen af dine personlige data, skal vi blot have tilladelsen for at linktilskrivninger fungerer korrekt."),
         "asked": MessageLookupByLibrary.simpleMessage("spurgte"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Godkender"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -219,12 +221,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Rediger"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Aktiver meddelelser"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("Aktiver sporing"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Nastavení hesla k peněžence se nezdařilo"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Zadejte adresu"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Zadejte částku"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Indtast gave note"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("Indtast Højde"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Indtast Besked"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Indtast XMR-adresse"),
@@ -370,6 +375,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sikkerhedskopier dit frø!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Zadaná adresa není platná"),
+        "invalidHeight": MessageLookupByLibrary.simpleMessage("Ugyldig højde"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Neplatné heslo"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("Ugyldig pinkode"),
@@ -650,6 +656,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Odesílání"),
         "sent": MessageLookupByLibrary.simpleMessage("Odesláno"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Odeslat"),
+        "set": MessageLookupByLibrary.simpleMessage("Sæt"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Nastavit heslo"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Heslo bylo úspěšně nastaveno"),
@@ -658,11 +665,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pin er blevet sat"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("Sæt Plausible Pin"),
+        "setRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("Indstil gendannelseshøjde"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Nastavit heslo peněženky"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Indstil XMR-gendannelseshøjde"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Nastavení"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Načíst z papírové penězenky"),
@@ -685,8 +696,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "showLinkOptions":
             MessageLookupByLibrary.simpleMessage("Vis linkindstillinger"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("Vis Link QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage("Vis Monero"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Aktiver Monero-sektionen"),
         "showQR": MessageLookupByLibrary.simpleMessage("Vis QR-kode"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Uåbnet advarsel"),
@@ -725,6 +737,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("Pro"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Příliš mnoho neúspěšných pokusů o odemknutí."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Sporingsautorisation"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("Sporing deaktiveret"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Gavekortfunktionaliteten kan være reduceret eller slet ikke fungere, hvis sporing er deaktiveret. Vi bruger denne tilladelse EKSKLUSIVT til denne funktion, absolut ingen af dine data sælges, indsamles eller spores til andre formål end funktionalitet, og det vil vi heller ikke :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Gavekortlinks vil ikke fungere korrekt"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transakce"),
         "transfer": MessageLookupByLibrary.simpleMessage("Převod"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -812,6 +832,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Velkommen til Nautilus. For at starte skal du oprette en ny tegnebog eller importere en eksisterende."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Med adresse"),
+        "withFee": MessageLookupByLibrary.simpleMessage("Med gebyr"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Med besked"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Po %1 minutě"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Po %1 minutách"),

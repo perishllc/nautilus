@@ -60,7 +60,7 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
                     children: <Widget>[
                       TextButton(
                         style: TextButton.styleFrom(
-                          primary: StateContainer.of(context).curTheme.text15,
+                          foregroundColor: StateContainer.of(context).curTheme.text15,
                           padding: const EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                           // highlightColor: StateContainer.of(context).curTheme.text15,
@@ -152,7 +152,7 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
                                   fontWeight: FontWeight.w700,
                                   fontSize: 16.0,
                                   color: StateContainer.of(context).curTheme.primary,
-                                  fontFamily: 'NunitoSans',
+                                  fontFamily: "NunitoSans",
                                 ),
                               ),
                               // Error Container
@@ -163,7 +163,7 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: StateContainer.of(context).curTheme.primary,
-                                      fontFamily: 'NunitoSans',
+                                      fontFamily: "NunitoSans",
                                       fontWeight: FontWeight.w600,
                                     )),
                               ),

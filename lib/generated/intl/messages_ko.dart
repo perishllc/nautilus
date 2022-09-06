@@ -54,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "amountMissing": MessageLookupByLibrary.simpleMessage("금액을 입력하세요"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "나노가 포함된 링크를 클릭한 것을 확인했습니다. 설정 프로세스를 건너뛰시겠습니까? 나중에 언제든지 변경할 수 있습니다.\n\n 그러나 가져오려는 기존 시드가 있는 경우 아니오를 선택해야 합니다."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "\"추적\" 권한을 요청하려고 합니다. 이 권한은 속성 링크/추천 및 사소한 분석(설치 횟수, 앱 버전 등)에 *엄격히* 사용됩니다. 귀하의 개인 데이터에 관심이 없으며 링크 속성이 올바르게 작동하려면 권한이 필요합니다."),
         "asked": MessageLookupByLibrary.simpleMessage("질문"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("인증 중"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -191,11 +193,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport": MessageLookupByLibrary.simpleMessage("프로젝트 지원"),
         "edit": MessageLookupByLibrary.simpleMessage("편집"),
         "enableNotifications": MessageLookupByLibrary.simpleMessage("알림 활성화"),
+        "enableTracking": MessageLookupByLibrary.simpleMessage("추적 활성화"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("주소 입력"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("금액을 입력하세요"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("기프트 노트 입력"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("키 입력"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("메시지 입력"),
         "enterMoneroAddress": MessageLookupByLibrary.simpleMessage("XMR 주소 입력"),
         "enterPasswordHint":
@@ -327,6 +331,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("당신의 씨앗을 백업하십시오!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("목적지 주소가 잘못되었습니다"),
+        "invalidHeight": MessageLookupByLibrary.simpleMessage("잘못된 높이"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Invalid Password"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("잘못된 핀"),
@@ -580,6 +585,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("전송중"),
         "sent": MessageLookupByLibrary.simpleMessage("전송 완료"),
         "sentTo": MessageLookupByLibrary.simpleMessage("받는 사람"),
+        "set": MessageLookupByLibrary.simpleMessage("세트"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Password has been set successfully"),
@@ -588,11 +594,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("핀이 성공적으로 설정되었습니다."),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("그럴듯한 핀 설정"),
+        "setRestoreHeight": MessageLookupByLibrary.simpleMessage("복원 높이 설정"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Set Wallet Password"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("XMR 복원 높이 설정"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("설정"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Load from Paper Wallet"),
@@ -610,8 +619,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "showFunding": MessageLookupByLibrary.simpleMessage("펀딩 배너 표시"),
         "showLinkOptions": MessageLookupByLibrary.simpleMessage("링크 옵션 표시"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("링크 QR 표시"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage("모네로 보기"),
+        "showMoneroInfo": MessageLookupByLibrary.simpleMessage("모네로 섹션 활성화"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR 코드 표시"),
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage("미개봉 경고"),
         "simplex": MessageLookupByLibrary.simpleMessage("심플렉스"),
@@ -643,6 +652,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("받는 사람"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Too many failed unlock attempts."),
+        "trackingHeader": MessageLookupByLibrary.simpleMessage("추적 승인"),
+        "trackingWarning": MessageLookupByLibrary.simpleMessage("추적 비활성화됨"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "추적이 비활성화되면 기프트 카드 기능이 줄어들거나 전혀 작동하지 않을 수 있습니다. 우리는 이 권한을 이 기능에 대해 독점적으로 사용하며, 기능 이외의 다른 목적으로 귀하의 데이터를 판매, 수집 또는 추적하지 않으며 그렇게 하고 싶지도 않습니다. :)"),
+        "trackingWarningBodyShort":
+            MessageLookupByLibrary.simpleMessage("기프트 카드 링크가 제대로 작동하지 않습니다."),
         "transactions": MessageLookupByLibrary.simpleMessage("거래"),
         "transfer": MessageLookupByLibrary.simpleMessage("Transfer"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -725,6 +740,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "노틸러스에 오신 것을 환영합니다. 시작하려면 새 지갑을 만들거나 기존 지갑을 가져오세요."),
         "withAddress": MessageLookupByLibrary.simpleMessage("주소 포함"),
+        "withFee": MessageLookupByLibrary.simpleMessage("수수료 포함"),
         "withMessage": MessageLookupByLibrary.simpleMessage("메시지 포함"),
         "xMinute": MessageLookupByLibrary.simpleMessage("After %1 minute"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("After %1 minutes"),

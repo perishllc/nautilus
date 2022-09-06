@@ -119,7 +119,7 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                             fontSize: 28.0,
                             fontWeight: FontWeight.w700,
                             color: StateContainer.of(context).curTheme.success,
-                            fontFamily: 'NunitoSans',
+                            fontFamily: "NunitoSans",
                           ),
                         ),
                       ],

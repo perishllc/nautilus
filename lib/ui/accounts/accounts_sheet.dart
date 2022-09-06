@@ -221,7 +221,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                                 color: StateContainer.of(context).curTheme.primary60,
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.w100,
-                                fontFamily: 'NunitoSans',
+                                fontFamily: "NunitoSans",
                               ),
                             ),
                             TextSpan(
@@ -230,7 +230,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                                 color: StateContainer.of(context).curTheme.primary60,
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.w700,
-                                fontFamily: 'NunitoSans',
+                                fontFamily: "NunitoSans",
                               ),
                             ),
                             TextSpan(
@@ -239,7 +239,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                                 color: StateContainer.of(context).curTheme.primary60,
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.w100,
-                                fontFamily: 'NunitoSans',
+                                fontFamily: "NunitoSans",
                               ),
                             ),
                           ],
@@ -446,7 +446,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
             endActionPane: _getSlideActionsForAccount(context, account, setState),
             child: TextButton(
               style: TextButton.styleFrom(
-                primary: StateContainer.of(context).curTheme.text15,
+                foregroundColor: StateContainer.of(context).curTheme.text15,
                 backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
                 padding: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),

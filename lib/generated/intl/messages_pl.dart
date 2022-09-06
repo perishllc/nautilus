@@ -58,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "amountMissing": MessageLookupByLibrary.simpleMessage("Wpisz ilość"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Zauważyliśmy, że kliknąłeś link, który zawiera nano, czy chcesz pominąć proces konfiguracji? Zawsze możesz coś zmienić później.\n\n Jeśli jednak masz istniejący materiał siewny, który chcesz zaimportować, wybierz opcję nie."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "Zaraz poprosimy o pozwolenie na „śledzenie”, jest ono używane *ściśle* do przypisywania linków / odesłań i drobnych analiz (takich jak liczba instalacji, wersja aplikacji itp.) Uważamy, że masz prawo do prywatności i nie interesują Cię żadne Twoje dane osobowe, potrzebujemy tylko zgody, aby atrybucje linków działały poprawnie."),
         "asked": MessageLookupByLibrary.simpleMessage("Zapytany"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Uwierzytelnianie"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -219,11 +221,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Edytuj"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Włącz powiadomienia"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("Włącz śledzenie"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Nie udało się ustawić hasło portfelu"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Wpisz Adres"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Wpisz Ilość"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("Wpisz upominek"),
+        "enterHeight":
+            MessageLookupByLibrary.simpleMessage("Wprowadź wysokość"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Wprowadź wiadomość"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Wprowadź adres XMR"),
@@ -370,6 +376,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Utwórz kopię zapasową swojego materiału siewnego!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Wpisany Addres jest nieważny"),
+        "invalidHeight":
+            MessageLookupByLibrary.simpleMessage("Nieprawidłowa wysokość"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("Błędne Hasło"),
         "invalidPin":
             MessageLookupByLibrary.simpleMessage("Nieprawidłowy kod PIN"),
@@ -652,6 +660,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Wysyłanie"),
         "sent": MessageLookupByLibrary.simpleMessage("Wysłane"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Wysłane Do"),
+        "set": MessageLookupByLibrary.simpleMessage("Ustawić"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Ustaw hasło"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Hasło zostało zapisane pomyślnie"),
@@ -660,11 +669,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kod PIN został pomyślnie ustawiony"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("Ustaw wiarygodną szpilkę"),
+        "setRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("Ustaw wysokość przywracania"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Ustaw hasło portfela"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Ustaw wysokość przywracania XMR"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Ustawienia"),
         "settingsTransfer": MessageLookupByLibrary.simpleMessage(
             "Załaduj z Papierowego Portfela"),
@@ -688,8 +701,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "showLinkOptions":
             MessageLookupByLibrary.simpleMessage("Pokaż opcje łącza"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("Pokaż link QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("Pokaż Monero"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Włącz sekcję Monero"),
         "showQR": MessageLookupByLibrary.simpleMessage("Pokaż kod QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Nieotwarte ostrzeżenie"),
@@ -729,6 +744,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("Do"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Za dużo nieudanych prób odblokowania."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Autoryzacja śledzenia"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("Śledzenie wyłączone"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Funkcjonalność kart podarunkowych może być ograniczona lub w ogóle nie działać, jeśli śledzenie jest wyłączone. Używamy tego pozwolenia WYŁĄCZNIE dla tej funkcji, absolutnie żadne z twoich danych nie są sprzedawane, gromadzone ani śledzone w żadnym innym celu niż funkcjonalność, ani nie chcemy :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Linki do kart podarunkowych nie będą działać poprawnie"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transakcje"),
         "transfer": MessageLookupByLibrary.simpleMessage("Transferuj"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -817,6 +840,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Witamy w Nautilusie. Aby rozpocząć, utwórz nowy portfel lub zaimportuj istniejący."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Z adresem"),
+        "withFee": MessageLookupByLibrary.simpleMessage("Z opłatą"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Z wiadomością"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Po 1% minucie"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Po %1 minutach"),

@@ -65,6 +65,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("অনুগ্রহ করে পরিমাণ লিখুন"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "আমরা লক্ষ্য করেছি যে আপনি একটি লিঙ্কে ক্লিক করেছেন যাতে কিছু ন্যানো রয়েছে, আপনি কি সেটআপ প্রক্রিয়াটি এড়িয়ে যেতে চান? আপনি সবসময় পরে জিনিস পরিবর্তন করতে পারেন.\n\n যদি আপনার কাছে একটি বিদ্যমান বীজ থাকে যা আপনি আমদানি করতে চান তবে আপনাকে না নির্বাচন করা উচিত।"),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "আমরা \"ট্র্যাকিং\" অনুমতির জন্য জিজ্ঞাসা করতে চলেছি, এটি লিঙ্ক / রেফারেল এবং ছোট বিশ্লেষণের জন্য *কঠোরভাবে* ব্যবহার করা হয় (যেমন ইনস্টলের সংখ্যা, কী অ্যাপ সংস্করণ ইত্যাদি) আমরা বিশ্বাস করি আপনি আপনার গোপনীয়তার অধিকারী এবং আপনার কোনো ব্যক্তিগত ডেটাতে আগ্রহী নন, লিঙ্ক অ্যাট্রিবিউশনগুলি সঠিকভাবে কাজ করার জন্য আমাদের কেবল অনুমতি প্রয়োজন৷"),
         "asked": MessageLookupByLibrary.simpleMessage("জিজ্ঞাসিত"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("প্রমাণীকরণ"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -227,12 +229,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("সম্পাদনা"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("বিজ্ঞপ্তি সক্রিয় করুন"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("ট্র্যাকিং সক্ষম করুন"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "ওয়ালেটের পাসওয়ার্ড সেট করতে ব্যর্থ"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("ঠিকানা লিখুন"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("পরিমান লিখুন"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("উপহার নোট লিখুন"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("উচ্চতা লিখুন"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("বার্তা লিখুন"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("XMR ঠিকানা লিখুন"),
@@ -379,6 +384,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("আপনার বীজ ব্যাকআপ!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("এই ঠিকানাটি অবৈধ"),
+        "invalidHeight": MessageLookupByLibrary.simpleMessage("অবৈধ উচ্চতা"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("ভুল পাসওয়ার্ড"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("অবৈধ পিন"),
@@ -662,6 +668,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("পাঠানো হচ্ছে"),
         "sent": MessageLookupByLibrary.simpleMessage("পাঠানো হয়েছে"),
         "sentTo": MessageLookupByLibrary.simpleMessage("পাঠানো হয়েছে"),
+        "set": MessageLookupByLibrary.simpleMessage("সেট"),
         "setPassword":
             MessageLookupByLibrary.simpleMessage("পাসওয়ার্ড সেট করুন"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
@@ -671,11 +678,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("পিন সফলভাবে সেট করা হয়েছে৷"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("যুক্তিযুক্ত পিন সেট করুন"),
+        "setRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("পুনরুদ্ধার উচ্চতা সেট করুন"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("ওয়ালেট পাসওয়ার্ড সেট করুন"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "XMR পুনরুদ্ধার উচ্চতা সেট করুন"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("সেটিংস"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("পেপার ওয়ালেট থেকে লোড করুন"),
@@ -698,8 +709,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "showLinkOptions":
             MessageLookupByLibrary.simpleMessage("লিঙ্ক অপশন দেখান"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("লিঙ্ক QR দেখান"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage("মনেরো দেখান"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Monero বিভাগ সক্রিয় করুন"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR কোড দেখান"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("উন্মুক্ত সতর্কতা"),
@@ -738,6 +750,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("প্রতি"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "আনলক করার অনেক চেষ্টা ব্যর্থ হয়েছে।"),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("ট্র্যাকিং অনুমোদন"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("ট্র্যাকিং অক্ষম"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "ট্র্যাকিং অক্ষম থাকলে উপহার কার্ডের কার্যকারিতা হ্রাস পেতে পারে বা একেবারেই কাজ করতে পারে না। আমরা এই বৈশিষ্ট্যটির জন্য বিশেষভাবে এই অনুমতিটি ব্যবহার করি, কার্যকারিতা ছাড়া অন্য কোনও উদ্দেশ্যে আপনার কোনও ডেটা বিক্রি, সংগৃহীত বা ট্র্যাক করা হয় না এবং আমরা চাই না :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "উপহার কার্ডের লিঙ্কগুলি সঠিকভাবে কাজ করবে না"),
         "transactions": MessageLookupByLibrary.simpleMessage("লেনদেন"),
         "transfer": MessageLookupByLibrary.simpleMessage("স্থানান্তর"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -826,6 +846,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "নটিলাসে স্বাগতম। শুরু করতে, একটি নতুন ওয়ালেট তৈরি করুন বা বিদ্যমান একটি আমদানি করুন৷"),
         "withAddress": MessageLookupByLibrary.simpleMessage("ঠিকানা সহ"),
+        "withFee": MessageLookupByLibrary.simpleMessage("ফি সহ"),
         "withMessage": MessageLookupByLibrary.simpleMessage("বার্তা সহ"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 মিনিট পরে"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("%1 মিনিট এর পরে"),

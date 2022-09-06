@@ -61,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Prosím zadejte částku"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Hem observat que heu fet clic en un enllaç que conté una mica de nano, voleu ometre el procés de configuració? Sempre pots canviar les coses després.\n\n Tanmateix, si teniu una llavor existent que voleu importar, haureu de seleccionar no."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "Estem a punt de demanar el permís de \"seguiment\", s\'utilitza *estrictament* per atribuir enllaços/referències i analítiques menors (coses com el nombre d\'instal·lacions, quina versió de l\'aplicació, etc.) Creiem que tens dret a la teva privadesa i no esteu interessats en cap de les vostres dades personals, només necessitem el permís perquè les atribucions d\'enllaç funcionin correctament."),
         "asked": MessageLookupByLibrary.simpleMessage("Asked"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Autenticació"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -220,12 +222,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Activa les notificacions"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("Activa el seguiment"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Nastavení hesla k peněžence se nezdařilo"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Zadejte adresu"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Zadejte částku"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
+        "enterHeight":
+            MessageLookupByLibrary.simpleMessage("Introduïu l\'alçada"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Enter Message"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Introduïu l\'adreça XMR"),
@@ -370,6 +376,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Fes una còpia de seguretat de la teva llavor!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Zadaná adresa není platná"),
+        "invalidHeight":
+            MessageLookupByLibrary.simpleMessage("Alçada no vàlida"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Neplatné heslo"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("Pin no vàlid"),
@@ -649,6 +657,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Odesílání"),
         "sent": MessageLookupByLibrary.simpleMessage("Odesláno"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Odeslat"),
+        "set": MessageLookupByLibrary.simpleMessage("Conjunt"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Nastavit heslo"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Heslo bylo úspěšně nastaveno"),
@@ -657,11 +666,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "El pin s\'ha establert correctament"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("Estableix un pin plausible"),
+        "setRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Estableix l\'alçada de restauració"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Nastavit heslo peněženky"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Estableix l\'alçada de restauració XMR"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Nastavení"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Načíst z papírové penězenky"),
@@ -686,8 +699,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mostra les opcions d\'enllaç"),
         "showLinkQR":
             MessageLookupByLibrary.simpleMessage("Mostra l\'enllaç QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("Mostra Monero"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Activa la secció Monero"),
         "showQR": MessageLookupByLibrary.simpleMessage("Mostra el codi QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Avís sense obrir"),
@@ -726,6 +741,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("Pro"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Příliš mnoho neúspěšných pokusů o odemknutí."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Autorització de seguiment"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("Seguiment desactivat"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "La funcionalitat de la targeta regal pot reduir-se o no funcionar en absolut si el seguiment està desactivat. Utilitzem aquest permís EXCLUSIVAMENT per a aquesta funció, absolutament cap de les vostres dades es ven, es recull o es fa un seguiment per a cap altre propòsit que no sigui la funcionalitat, ni voldríem :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Els enllaços de targetes regal no funcionaran correctament"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transakce"),
         "transfer": MessageLookupByLibrary.simpleMessage("Převod"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -813,6 +836,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Benvingut a Nautilus. Per començar, creeu una cartera nova o importeu-ne una existent."),
         "withAddress": MessageLookupByLibrary.simpleMessage("With Address"),
+        "withFee": MessageLookupByLibrary.simpleMessage("Amb Quota"),
         "withMessage": MessageLookupByLibrary.simpleMessage("With Message"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Po %1 minutě"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Po %1 minutách"),

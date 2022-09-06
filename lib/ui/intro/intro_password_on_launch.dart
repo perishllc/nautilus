@@ -49,7 +49,7 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                           width: 50,
                           child: TextButton(
                               style: TextButton.styleFrom(
-                                primary: StateContainer.of(context).curTheme.text15,
+                                foregroundColor: StateContainer.of(context).curTheme.text15,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                                 padding: EdgeInsets.zero,
                                 // highlightColor: StateContainer.of(context).curTheme.text15,

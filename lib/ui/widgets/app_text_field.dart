@@ -4,7 +4,6 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 
 /// TextField button
 class TextFieldButton extends StatelessWidget {
-
   const TextFieldButton({this.icon, this.onPressed, this.widget, this.padding});
 
   final IconData? icon;
@@ -19,7 +18,7 @@ class TextFieldButton extends StatelessWidget {
         width: 48,
         child: TextButton(
           style: TextButton.styleFrom(
-            primary: StateContainer.of(context).curTheme.text30,
+            foregroundColor: StateContainer.of(context).curTheme.text30,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(200.0)),
             padding: padding ?? const EdgeInsets.all(14.0),
             // highlightColor: StateContainer.of(context).curTheme.text15,
@@ -35,7 +34,6 @@ class TextFieldButton extends StatelessWidget {
 
 /// A widget for our custom textfields
 class AppTextField extends StatefulWidget {
-
   const AppTextField(
       {this.focusNode,
       this.controller,
@@ -148,12 +146,16 @@ class _AppTextFieldState extends State<AppTextField> {
                       hintStyle: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w100,
-                        fontFamily: 'NunitoSans',
+                        fontFamily: "NunitoSans",
                         color: StateContainer.of(context).curTheme.text60,
                       ),
                       // First button
-                      prefixIcon: widget.prefixButton == null ? const SizedBox(width: 0, height: 0) : const SizedBox(width: 48, height: 48),
-                      suffixIcon: widget.suffixButton == null ? const SizedBox(width: 0, height: 0) : const SizedBox(width: 48, height: 48))),
+                      prefixIcon: widget.prefixButton == null
+                          ? const SizedBox(width: 0, height: 0)
+                          : const SizedBox(width: 48, height: 48),
+                      suffixIcon: widget.suffixButton == null
+                          ? const SizedBox(width: 0, height: 0)
+                          : const SizedBox(width: 48, height: 48))),
               // Buttons
               Column(
                 mainAxisSize: MainAxisSize.max,
@@ -164,7 +166,8 @@ class _AppTextFieldState extends State<AppTextField> {
                         duration: Duration(milliseconds: widget.buttonFadeDurationMs),
                         firstChild: widget.prefixButton!,
                         secondChild: const SizedBox(height: 48, width: 48),
-                        crossFadeState: widget.prefixShowFirstCondition! ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                        crossFadeState:
+                            widget.prefixShowFirstCondition! ? CrossFadeState.showFirst : CrossFadeState.showSecond,
                       )
                     else
                       widget.prefixButton != null ? widget.prefixButton! : const SizedBox(),
@@ -174,7 +177,8 @@ class _AppTextFieldState extends State<AppTextField> {
                         duration: Duration(milliseconds: widget.buttonFadeDurationMs),
                         firstChild: widget.suffixButton!,
                         secondChild: const SizedBox(height: 48, width: 48),
-                        crossFadeState: widget.suffixShowFirstCondition! ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                        crossFadeState:
+                            widget.suffixShowFirstCondition! ? CrossFadeState.showFirst : CrossFadeState.showSecond,
                       )
                     else
                       widget.suffixButton != null ? widget.suffixButton! : const SizedBox()

@@ -116,7 +116,7 @@ class _AddMemoSheetState extends State<AddMemoSheet> {
                                       fontWeight: FontWeight.w600,
                                       fontSize: 16.0,
                                       color: StateContainer.of(context).curTheme.text,
-                                      fontFamily: 'NunitoSans',
+                                      fontFamily: "NunitoSans",
                                     ),
                                     inputFormatters: [LengthLimitingTextInputFormatter(20)],
                                     onSubmitted: (String text) {
@@ -136,7 +136,7 @@ class _AddMemoSheetState extends State<AddMemoSheet> {
                                         style: TextStyle(
                                           fontSize: 14.0,
                                           color: StateContainer.of(context).curTheme.primary,
-                                          fontFamily: 'NunitoSans',
+                                          fontFamily: "NunitoSans",
                                           fontWeight: FontWeight.w600,
                                         )),
                                   ),

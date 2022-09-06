@@ -130,6 +130,11 @@
     "type": "text",
     "description": "prompt_skip_setup"
   },
+  "askTracking": "Vi er i ferd med å be om \"sporing\"-tillatelsen, denne brukes *strengt* for å tilskrive lenker/henvisninger, og mindre analyser (ting som antall installasjoner, hvilken appversjon osv.) Vi mener at du har rett til personvernet ditt og ikke er interessert i noen av dine personlige data, trenger vi bare tillatelsen for at lenketilordninger skal fungere korrekt.",
+  "@askTracking": {
+    "type": "text",
+    "description": "prompt_ask_tracking"
+  },
   "authConfirm": "Autentiserer",
   "@authConfirm": {
     "type": "text",
@@ -605,6 +610,11 @@
     "type": "text",
     "description": "notification_warning_enable_button"
   },
+  "enableTracking": "Aktiver sporing",
+  "@enableTracking": {
+    "type": "text",
+    "description": "tracking_warning_enable_button"
+  },
   "encryptionFailedError": "Kunne ikke velge lommebokens passord",
   "@encryptionFailedError": {
     "type": "text",
@@ -624,6 +634,11 @@
   "@enterGiftMemo": {
     "type": "text",
     "description": "gift_note"
+  },
+  "enterHeight": "Skriv inn Høyde",
+  "@enterHeight": {
+    "type": "text",
+    "description": "enter_height_hint"
   },
   "enterMemo": "Skriv inn melding",
   "@enterMemo": {
@@ -1069,6 +1084,11 @@
   "@invalidAddress": {
     "type": "text",
     "description": "send_invalid_address"
+  },
+  "invalidHeight": "Ugyldig høyde",
+  "@invalidHeight": {
+    "type": "text",
+    "description": "height_invalid"
   },
   "invalidPassword": "Ugyldig passord",
   "@invalidPassword": {
@@ -1950,6 +1970,11 @@
     "type": "text",
     "description": "sent_to"
   },
+  "set": "Sett",
+  "@set": {
+    "type": "text",
+    "description": "dialog_set"
+  },
   "setPassword": "Velg passord",
   "@setPassword": {
     "type": "text",
@@ -1975,6 +2000,11 @@
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
   },
+  "setRestoreHeight": "Angi gjenopprettingshøyde",
+  "@setRestoreHeight": {
+    "type": "text",
+    "description": "set_restore_height"
+  },
   "settingsHeader": "Instillinger",
   "@settingsHeader": {
     "type": "text",
@@ -1999,6 +2029,11 @@
   "@setWalletPlausiblePin": {
     "type": "text",
     "description": "Allows user to setup a plausible deniability pin"
+  },
+  "setXMRRestoreHeight": "Still inn XMR-gjenopprettingshøyde",
+  "@setXMRRestoreHeight": {
+    "type": "text",
+    "description": "set_xmr_restore_height"
   },
   "share": "Dele",
   "@share": {
@@ -2065,12 +2100,12 @@
     "type": "text",
     "description": "show_link_qr"
   },
-  "showMoneroHeader": "",
+  "showMoneroHeader": "Vis Monero",
   "@showMoneroHeader": {
     "type": "text",
     "description": "show_monero_header"
   },
-  "showMoneroInfo": "",
+  "showMoneroInfo": "Aktiver Monero-seksjonen",
   "@showMoneroInfo": {
     "type": "text",
     "description": "show_monero_info"
@@ -2204,6 +2239,26 @@
   "@tooManyFailedAttempts": {
     "type": "text",
     "description": "fail_toomany_attempts"
+  },
+  "trackingHeader": "Sporingsautorisasjon",
+  "@trackingHeader": {
+    "type": "text",
+    "description": "prompt_ask_tracking_header"
+  },
+  "trackingWarning": "Sporing deaktivert",
+  "@trackingWarning": {
+    "type": "text",
+    "description": "home_tracking_warning"
+  },
+  "trackingWarningBodyLong": "Gavekortfunksjonaliteten kan være redusert eller ikke fungere i det hele tatt hvis sporing er deaktivert. Vi bruker denne tillatelsen EKSKLUSIVT for denne funksjonen, absolutt ingen av dataene dine selges, samles inn eller spores for andre formål enn funksjonalitet, og det vil vi heller ikke :)",
+  "@trackingWarningBodyLong": {
+    "type": "text",
+    "description": "tracking_warning_body_long"
+  },
+  "trackingWarningBodyShort": "Gavekortlenker vil ikke fungere skikkelig",
+  "@trackingWarningBodyShort": {
+    "type": "text",
+    "description": "tracking_warning_body_short"
   },
   "transactions": "Transaksjoner",
   "@transactions": {
@@ -2464,6 +2519,11 @@
   "@withAddress": {
     "type": "text",
     "description": "with_address"
+  },
+  "withFee": "Med gebyr",
+  "@withFee": {
+    "type": "text",
+    "description": "with_fee"
   },
   "withMessage": "Med melding",
   "@withMessage": {

@@ -55,6 +55,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "amountMissing": MessageLookupByLibrary.simpleMessage("金額を入力してください"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "nano を含むリンクをクリックしたことがわかりました。セットアップ プロセスをスキップしますか?後でいつでも変更できます。\n\n ただし、インポートしたい既存のシードがある場合は、いいえを選択する必要があります。"),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "「追跡」許可を求めようとしています。これは、リンク/紹介の帰属、およびマイナーな分析 (インストール数、アプリのバージョンなど) のために *厳密に* 使用されます。あなたにはプライバシーの権利があると信じています。はあなたの個人データには関心がありません。リンクの帰属が正しく機能するためには、許可が必要です。"),
         "asked": MessageLookupByLibrary.simpleMessage("尋ねた"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("認証中"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -189,11 +191,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("編集"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("通知を有効にします"),
+        "enableTracking": MessageLookupByLibrary.simpleMessage("トラッキングを有効にする"),
         "encryptionFailedError":
             MessageLookupByLibrary.simpleMessage("ウォレットパスワードの作成に失敗しました。"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("アドレスを入力する"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("金額を入力する"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("ギフトメモを入力"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("高さを入力してください"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("メッセージを入力してください"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("XMR アドレスを入力してください"),
@@ -325,6 +329,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "introSkippedWarningHeader":
             MessageLookupByLibrary.simpleMessage("シードをバックアップしてください！"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage("入力したアドレスが無効です"),
+        "invalidHeight": MessageLookupByLibrary.simpleMessage("無効な高さ"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("パスワードが無効です"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("無効なピン"),
         "iosFundingMessage": MessageLookupByLibrary.simpleMessage(
@@ -569,6 +574,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("送金金額"),
         "sent": MessageLookupByLibrary.simpleMessage("送金した"),
         "sentTo": MessageLookupByLibrary.simpleMessage("送金先"),
+        "set": MessageLookupByLibrary.simpleMessage("設定"),
         "setPassword": MessageLookupByLibrary.simpleMessage("ウォレットのパスワードを作成する"),
         "setPasswordSuccess":
             MessageLookupByLibrary.simpleMessage("パスワードの設定に成功しました。"),
@@ -576,11 +582,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPinSuccess": MessageLookupByLibrary.simpleMessage("ピンが正常に設定されました"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("もっともらしいピンを設定する"),
+        "setRestoreHeight": MessageLookupByLibrary.simpleMessage("復元高さの設定"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("ウォレットのパスワードを作成する"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("XMR 復元の高さを設定する"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("設定"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("ペーパーウォレットから読み込む"),
@@ -599,8 +608,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "showFunding": MessageLookupByLibrary.simpleMessage("ファンディング バナーを表示"),
         "showLinkOptions": MessageLookupByLibrary.simpleMessage("リンク オプションを表示"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("リンクの QR を表示"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage("モネロを表示"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Monero セクションを有効にする"),
         "showQR": MessageLookupByLibrary.simpleMessage("QRコードを表示"),
         "showUnopenedWarning": MessageLookupByLibrary.simpleMessage("未開封注意"),
         "simplex": MessageLookupByLibrary.simpleMessage("シンプレックス"),
@@ -632,6 +642,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("送金先"),
         "tooManyFailedAttempts":
             MessageLookupByLibrary.simpleMessage("既定のロック解除の失敗回数を超えています。"),
+        "trackingHeader": MessageLookupByLibrary.simpleMessage("追跡承認"),
+        "trackingWarning": MessageLookupByLibrary.simpleMessage("追跡無効"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "追跡が無効になっている場合、ギフト カードの機能が低下するか、まったく機能しない場合があります。私たちはこの許可をこの機能にのみ使用します。機能以外の目的であなたのデータを販売、収集、または追跡することは絶対にありません。"),
+        "trackingWarningBodyShort":
+            MessageLookupByLibrary.simpleMessage("ギフトカードのリンクが正しく機能しません"),
         "transactions": MessageLookupByLibrary.simpleMessage("トランザクション履歴"),
         "transfer": MessageLookupByLibrary.simpleMessage("転送"),
         "transferClose":
@@ -714,6 +730,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "ノーチラスへようこそ。まず、新しいウォレットを作成するか、既存のウォレットをインポートします。"),
         "withAddress": MessageLookupByLibrary.simpleMessage("住所付き"),
+        "withFee": MessageLookupByLibrary.simpleMessage("有料"),
         "withMessage": MessageLookupByLibrary.simpleMessage("メッセージ付き"),
         "xMinute": MessageLookupByLibrary.simpleMessage("％1分後"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("％1分後"),

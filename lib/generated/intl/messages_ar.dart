@@ -58,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("يرجى إدخال المبلغ"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "لاحظنا أنك نقرت على رابط يحتوي على بعض النانو ، هل ترغب في تخطي عملية الإعداد؟ يمكنك دائمًا تغيير الأشياء لاحقًا.\n\n ومع ذلك ، إذا كان لديك بذرة موجودة تريد استيرادها ، فيجب عليك تحديد لا."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "نحن على وشك طلب إذن \"التتبع\" ، ويتم استخدامه * بشكل صارم * لإسناد الروابط / الإحالات ، والتحليلات الطفيفة (أشياء مثل عدد عمليات التثبيت ، وإصدار التطبيق ، وما إلى ذلك) نعتقد أنه يحق لك الحصول على خصوصيتك ولسنا مهتمين بأي من بياناتك الشخصية ، فنحن نحتاج فقط إلى الإذن حتى تعمل إحالات الروابط بشكل صحيح."),
         "asked": MessageLookupByLibrary.simpleMessage("طلب"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("المصادقة"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -215,12 +217,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("تحرير"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("تمكين الإخطارات"),
+        "enableTracking": MessageLookupByLibrary.simpleMessage("تمكين التتبع"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "أخفق إنشاء كلمة مرور المحفظة\n"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("أدخل العنوان"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("أدخل المبلغ"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("أدخل ملاحظة الهدية"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("أدخل الارتفاع"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("أدخل رسالة"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("أدخل عنوان XMR"),
@@ -363,6 +367,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "قم بعمل نسخة احتياطية من بذورك!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("العنوان المدخل غير صحيح"),
+        "invalidHeight":
+            MessageLookupByLibrary.simpleMessage("ارتفاع غير صالح"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("كلمة المرور خاطئ\n"),
         "invalidPin":
@@ -636,6 +642,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("إرسال"),
         "sent": MessageLookupByLibrary.simpleMessage("تم الارسال"),
         "sentTo": MessageLookupByLibrary.simpleMessage("تم الإرسال إلى"),
+        "set": MessageLookupByLibrary.simpleMessage("تعيين"),
         "setPassword":
             MessageLookupByLibrary.simpleMessage("إنشاء كلمة مرور\n"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
@@ -645,11 +652,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "تم تعيين رقم التعريف الشخصي بنجاح"),
         "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(
             "تعيين رقم التعريف الشخصي المعقول"),
+        "setRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("تعيين استعادة الارتفاع"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("إنشاء كلمة مرور المحفظة\n"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "قم بتعيين ارتفاع استعادة XMR"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("الإعدادات"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("تحميل من المحفظة الورقية"),
@@ -672,8 +683,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "showLinkOptions":
             MessageLookupByLibrary.simpleMessage("إظهار خيارات الارتباط"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("إظهار ارتباط QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage("عرض مونيرو"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("تمكين قسم Monero"),
         "showQR":
             MessageLookupByLibrary.simpleMessage("إظهار رمز الاستجابة السريعة"),
         "showUnopenedWarning":
@@ -712,6 +724,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("إلى"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "العديد من محاولات الفتح الفاشلة."),
+        "trackingHeader": MessageLookupByLibrary.simpleMessage("إذن التتبع"),
+        "trackingWarning": MessageLookupByLibrary.simpleMessage("تتبع معطل"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "قد يتم تقليل وظائف بطاقة الهدايا أو لا تعمل على الإطلاق إذا تم تعطيل التتبع. نحن نستخدم هذا الإذن حصريًا لهذه الميزة ، ولا يتم بيع أي من بياناتك أو جمعها أو تعقبها لأي غرض آخر بخلاف الوظيفة ، ولا نريد :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "لن تعمل روابط بطاقات الهدايا بشكل صحيح"),
         "transactions": MessageLookupByLibrary.simpleMessage("معاملات"),
         "transfer": MessageLookupByLibrary.simpleMessage("تحويل"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -798,6 +816,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "مرحبًا بكم في نوتيلوس. للبدء ، أنشئ محفظة جديدة أو استورد محفظة حالية."),
         "withAddress": MessageLookupByLibrary.simpleMessage("مع العنوان"),
+        "withFee": MessageLookupByLibrary.simpleMessage("مع رسوم"),
         "withMessage": MessageLookupByLibrary.simpleMessage("مع رسالة"),
         "xMinute": MessageLookupByLibrary.simpleMessage("بعد %1 دقيقة"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("بعد %1 دقائق"),

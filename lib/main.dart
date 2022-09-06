@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
@@ -108,14 +107,14 @@ class AppState extends State<App> {
         //   primaryColor: StateContainer.of(context).curTheme.primary,
         //   accentColor: StateContainer.of(context).curTheme.primary10,
         //   backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-        //   fontFamily: 'NunitoSans',
+        //   fontFamily: "NunitoSans",
         //   brightness: Brightness.dark,
         // ),
         theme: ThemeData(
           dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           primaryColor: StateContainer.of(context).curTheme.primary,
           backgroundColor: StateContainer.of(context).curTheme.background,
-          fontFamily: 'NunitoSans',
+          fontFamily: "NunitoSans",
           brightness: Brightness.dark,
           useMaterial3: true,
           colorScheme: ColorScheme.fromSwatch().copyWith(

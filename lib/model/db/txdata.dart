@@ -125,14 +125,6 @@ class TXData {
     }
   }
 
-  String? getShortestString(bool isRecipient) {
-    if (isRecipient) {
-      return Address(from_address).getShortestString();
-    } else {
-      return Address(to_address).getShortestString();
-    }
-  }
-
   bool isRecipient(String? address) {
     return to_address == address;
   }

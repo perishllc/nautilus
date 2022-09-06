@@ -1,10 +1,12 @@
 ## v0.6.3 - [2022-09-05]
 #### Added
-- (EXPERIMENTAL) XMR Support
+- (EXPERIMENTAL) Bare-Bones XMR Support
   - Option to disable XMR Section
+  - Option to set XMR restore height
 - Tracking Permission dialogs and warnings
 #### Changed
 - Minor global UI updates
+- Defer Notification Permission and Changelog popups until after first install
 #### Fixed
 - Android 13 Notification fixes and support
 - Rendering bugs in the intro screen
@@ -12,8 +14,6 @@
 #### Added
 - Major improvements to NFC handling, NFC scans within the app no longer re-load the entire app
 - Scan NFC button on relevant iOS platforms / send screen (on android scanning is automatic)
-- Integrated Monero wallet support (WIP)
-- ~~Integrated XMR Wallet and swapping~~ (WIP)
 - Reworked Nautilus theme to be more inviting and easier on the eyes
 #### Changed
 - Old Nautilus theme is now a new theme "Midnight" for those that want to keep it

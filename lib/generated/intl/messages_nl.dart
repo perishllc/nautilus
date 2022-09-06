@@ -64,6 +64,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Voer a.u.b. een bedrag in"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "We hebben gemerkt dat je op een link hebt geklikt die wat nano bevat, wil je het installatieproces overslaan? Je kunt later altijd nog dingen veranderen.\n\n Als je echter een bestaande seed hebt die je wilt importeren, moet je nee selecteren."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "We staan op het punt om de \"tracking\"-toestemming te vragen, deze wordt *strikt* gebruikt voor het toekennen van links/verwijzingen en kleine analyses (zoals het aantal installaties, welke app-versie, enz.) We zijn van mening dat u recht heeft op uw privacy en zijn niet geïnteresseerd in uw persoonlijke gegevens, we hebben alleen de toestemming nodig om linkattributies correct te laten werken."),
         "asked": MessageLookupByLibrary.simpleMessage("Vroeg"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Authenticatie"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -225,12 +227,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Bewerken"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Notificaties aanzetten"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("Volgen inschakelen"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Kan geen Wallet-wachtwoord instellen"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Vul adres in"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Vul bedrag in"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Cadeaubon invoeren"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("Voer Hoogte in"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Bericht invoeren"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Voer XMR-adres in"),
@@ -377,6 +382,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Maak een back-up van je zaad!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Ongeldige ontvanger"),
+        "invalidHeight":
+            MessageLookupByLibrary.simpleMessage("Ongeldige hoogte"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Wachtwoord ongeldig"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("Ongeldige pin"),
@@ -658,6 +665,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Versturen"),
         "sent": MessageLookupByLibrary.simpleMessage("Verstuurd"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Verstuurd naar"),
+        "set": MessageLookupByLibrary.simpleMessage("Set"),
         "setPassword":
             MessageLookupByLibrary.simpleMessage("Wachtwoord aanmaken"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
@@ -667,11 +675,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pin is succesvol ingesteld"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("Plausibele pin instellen"),
+        "setRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("Herstelhoogte instellen"),
         "setWalletPassword": MessageLookupByLibrary.simpleMessage(
             "Stel een Wallet-wachtwoord in"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("XMR-herstelhoogte instellen"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Instellingen"),
         "settingsTransfer": MessageLookupByLibrary.simpleMessage(
             "Van papieren wallet importeren"),
@@ -693,8 +705,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "showLinkOptions":
             MessageLookupByLibrary.simpleMessage("Koppelingsopties weergeven"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("Toon link QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage("Toon Monero"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Monero-sectie inschakelen"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR-code weergeven"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Ongeopende waarschuwing"),
@@ -735,6 +748,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("Naar"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Te veel mislukte ontgrendelpogingen."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Volgautorisatie"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("Volgen uitgeschakeld"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "De functionaliteit van de cadeaukaart kan worden verminderd of helemaal niet werken als tracking is uitgeschakeld. We gebruiken deze toestemming UITSLUITEND voor deze functie, absoluut geen van uw gegevens wordt verkocht, verzameld of gevolgd voor enig ander doel dan functionaliteit, en dat zouden we ook niet willen :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Cadeaubonlinks werken niet goed"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transacties"),
         "transfer": MessageLookupByLibrary.simpleMessage("Overzetten"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -822,6 +843,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Welkom bij Nautilus. Maak om te beginnen een nieuwe portemonnee of importeer een bestaande."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Met adres"),
+        "withFee": MessageLookupByLibrary.simpleMessage("Tegen vergoeding"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Met boodschap"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Na %1 minuten"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Na %1 minuut"),

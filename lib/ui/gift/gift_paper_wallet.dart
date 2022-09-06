@@ -231,7 +231,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                     width: 50,
                     child: TextButton(
                         style: TextButton.styleFrom(
-                          primary: StateContainer.of(context).curTheme.text15,
+                          foregroundColor: StateContainer.of(context).curTheme.text15,
                           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                           padding: EdgeInsets.zero,
@@ -326,7 +326,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                             style: TextStyle(
                               fontSize: 14.0,
                               color: StateContainer.of(context).curTheme.primary,
-                              fontFamily: 'NunitoSans',
+                              fontFamily: "NunitoSans",
                               fontWeight: FontWeight.w600,
                             )),
                       ),
@@ -343,7 +343,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                             style: TextStyle(
                               fontSize: 14.0,
                               color: StateContainer.of(context).curTheme.primary,
-                              fontFamily: 'NunitoSans',
+                              fontFamily: "NunitoSans",
                               fontWeight: FontWeight.w600,
                             )),
                       ),
@@ -378,7 +378,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                                 style: TextStyle(
                                   fontSize: 14.0,
                                   color: StateContainer.of(context).curTheme.primary,
-                                  fontFamily: 'NunitoSans',
+                                  fontFamily: "NunitoSans",
                                   fontWeight: FontWeight.w600,
                                 )),
                           )
@@ -408,7 +408,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                           style: TextStyle(
                             fontSize: 14.0,
                             color: StateContainer.of(context).curTheme.text,
-                            fontFamily: 'NunitoSans',
+                            fontFamily: "NunitoSans",
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -587,7 +587,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         fontWeight: FontWeight.w700,
         fontSize: 16.0,
         color: StateContainer.of(context).curTheme.primary,
-        fontFamily: 'NunitoSans',
+        fontFamily: "NunitoSans",
       ),
       inputFormatters: [
         CurrencyFormatter2(
@@ -620,7 +620,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                   color: StateContainer.of(context).curTheme.primary,
                   fontSize: _localCurrencyMode ? 12 : 20,
                   fontWeight: _localCurrencyMode ? FontWeight.w400 : FontWeight.w800,
-                  fontFamily: 'NunitoSans',
+                  fontFamily: "NunitoSans",
                 ),
               ),
             ),
@@ -631,7 +631,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                   fontSize: _localCurrencyMode ? 20 : 12,
                   fontWeight: _localCurrencyMode ? FontWeight.w800 : FontWeight.w400,
                   color: StateContainer.of(context).curTheme.primary,
-                  fontFamily: 'NunitoSans',
+                  fontFamily: "NunitoSans",
                 )),
           ],
         ),
@@ -689,7 +689,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         fontWeight: FontWeight.w700,
         fontSize: 16.0,
         color: StateContainer.of(context).curTheme.primary,
-        fontFamily: 'NunitoSans',
+        fontFamily: "NunitoSans",
       ),
       inputFormatters: [
         CurrencyFormatter2(
@@ -741,7 +741,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
         // fontWeight: FontWeight.w700,
         // fontSize: 16.0,
         // color: StateContainer.of(context).curTheme.primary,
-        // fontFamily: 'NunitoSans',
+        // fontFamily: "NunitoSans",
         color: StateContainer.of(context).curTheme.text60,
         fontSize: AppFontSizes.small,
         height: 1.5,

@@ -60,6 +60,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Моля въведете Сума"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Забелязахме, че сте кликнали върху връзка, която съдържа някои nano, искате ли да пропуснете процеса на настройка? Винаги можете да промените нещата по-късно.\n\n Ако обаче имате съществуващо семе, което искате да импортирате, трябва да изберете не."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "На път сме да поискаме разрешение за „проследяване“, това се използва *стриктно* за приписване на връзки/реферали и незначителни анализи (неща като брой инсталации, коя версия на приложението и т.н.) Вярваме, че имате право на вашата поверителност и не се интересуваме от каквито и да е ваши лични данни, ние просто се нуждаем от разрешение, за да може приписването на връзки да работи правилно."),
         "asked": MessageLookupByLibrary.simpleMessage("Попитан"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Удостоверява се"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -221,12 +223,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Редактиране"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Активиране на известията"),
+        "enableTracking": MessageLookupByLibrary.simpleMessage(
+            "Активиране на проследяването"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Задаването на парола е невалидно"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Въведи Адрес"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Въведи Сума"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Въведете бележка за подарък"),
+        "enterHeight":
+            MessageLookupByLibrary.simpleMessage("Въведете височина"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Въведете съобщение"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Въведете XMR адрес"),
@@ -374,6 +380,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Архивирайте вашето семе!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Въведеният Адрес е невалиден"),
+        "invalidHeight":
+            MessageLookupByLibrary.simpleMessage("Невалидна височина"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Грешна парола "),
         "invalidPin": MessageLookupByLibrary.simpleMessage("Невалиден ПИН"),
@@ -654,6 +662,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Изпращам"),
         "sent": MessageLookupByLibrary.simpleMessage("Изпратено"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Изпратено до"),
+        "set": MessageLookupByLibrary.simpleMessage("Комплект"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Задай парола"),
         "setPasswordSuccess":
             MessageLookupByLibrary.simpleMessage("Паролата е зададена успешно"),
@@ -662,11 +671,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ПИН кодът е зададен успешно"),
         "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(
             "Задаване на правдоподобен щифт"),
+        "setRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Задаване на височина за възстановяване"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Задай парола на Портфейла"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Задайте височина за възстановяване на XMR"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Настройки"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Зареди от Хартиен Портфейл"),
@@ -693,8 +706,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Показване на опциите за връзка"),
         "showLinkQR":
             MessageLookupByLibrary.simpleMessage("Показване на връзка QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("Покажи Monero"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Активирайте секцията Monero"),
         "showQR": MessageLookupByLibrary.simpleMessage("Показване на QR код"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Неотворено предупреждение"),
@@ -735,6 +750,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("До"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Твърде много неуспешни опити за отключване."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Разрешение за проследяване"),
+        "trackingWarning": MessageLookupByLibrary.simpleMessage(
+            "Проследяването е деактивирано"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Функционалността на картата за подарък може да бъде намалена или изобщо да не работи, ако проследяването е деактивирано. Ние използваме това разрешение ИЗКЛЮЧИТЕЛНО за тази функция, абсолютно никакви ваши данни не се продават, събират или проследяват за друга цел, различна от функционалност, нито бихме искали :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Връзките към картата за подарък няма да функционират правилно"),
         "transactions": MessageLookupByLibrary.simpleMessage("Транзакции"),
         "transfer": MessageLookupByLibrary.simpleMessage("Прехвърли"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -823,6 +846,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Добре дошли в Наутилус. За да започнете, създайте нов портфейл или импортирайте съществуващ."),
         "withAddress": MessageLookupByLibrary.simpleMessage("С адрес"),
+        "withFee": MessageLookupByLibrary.simpleMessage("С такса"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Със Съобщение"),
         "xMinute": MessageLookupByLibrary.simpleMessage("След %1 минута"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("След %1 минути"),

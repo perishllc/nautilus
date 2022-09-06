@@ -862,6 +862,7 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       xmrRestoreHeight = height;
     });
+    EventTaxiImpl.singleton().fire(XMREvent(type: "set_restore_height", message: height.toString()));
   }
 
   // Change currency mode setting

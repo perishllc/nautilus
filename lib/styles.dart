@@ -212,7 +212,7 @@ class AppStyles {
       fontSize: AppFontSizes.small,
       fontWeight: FontWeight.w200,
       color: StateContainer.of(context).curTheme.text,
-      fontFamily: 'NunitoSans',
+      fontFamily: "NunitoSans",
     );
   }
 
@@ -222,7 +222,7 @@ class AppStyles {
       fontSize: AppFontSizes.small,
       fontWeight: FontWeight.w200,
       color: StateContainer.of(context).curTheme.primary,
-      fontFamily: 'NunitoSans',
+      fontFamily: "NunitoSans",
     );
   }
 
@@ -437,7 +437,7 @@ class AppStyles {
     return TextStyle(
       fontSize: AppFontSizes.small,
       color: StateContainer.of(context).curTheme.primary,
-      fontFamily: 'NunitoSans',
+      fontFamily: "NunitoSans",
       fontWeight: FontWeight.w600,
     );
   }
@@ -477,7 +477,7 @@ class AppStyles {
     return TextStyle(
       fontSize: 16,
       color: StateContainer.of(context).curTheme.primary,
-      fontFamily: 'NunitoSans',
+      fontFamily: "NunitoSans",
       fontWeight: FontWeight.w700,
     );
   }
@@ -486,7 +486,7 @@ class AppStyles {
     return TextStyle(
       fontSize: 16,
       color: StateContainer.of(context).curTheme.success,
-      fontFamily: 'NunitoSans',
+      fontFamily: "NunitoSans",
       fontWeight: FontWeight.w700,
     );
   }
@@ -495,7 +495,7 @@ class AppStyles {
     return TextStyle(
       fontSize: 12,
       color: StateContainer.of(context).curTheme.text,
-      fontFamily: 'NunitoSans',
+      fontFamily: "NunitoSans",
       fontWeight: FontWeight.w400,
     );
   }
@@ -504,7 +504,7 @@ class AppStyles {
     return TextStyle(
       fontSize: 12,
       color: StateContainer.of(context).curTheme.text60,
-      fontFamily: 'NunitoSans',
+      fontFamily: "NunitoSans",
       fontWeight: FontWeight.w400,
     );
   }
@@ -513,7 +513,7 @@ class AppStyles {
     return TextStyle(
       fontSize: 20,
       color: StateContainer.of(context).curTheme.success,
-      fontFamily: 'NunitoSans',
+      fontFamily: "NunitoSans",
       fontWeight: FontWeight.w800,
     );
   }
@@ -522,7 +522,7 @@ class AppStyles {
     return TextStyle(
       fontSize: 14,
       color: StateContainer.of(context).curTheme.text,
-      fontFamily: 'NunitoSans',
+      fontFamily: "NunitoSans",
       fontWeight: FontWeight.w400,
     );
   }
@@ -531,7 +531,7 @@ class AppStyles {
     return TextStyle(
       fontSize: 12,
       color: StateContainer.of(context).curTheme.text60,
-      fontFamily: 'NunitoSans',
+      fontFamily: "NunitoSans",
       fontWeight: FontWeight.w400,
     );
   }
@@ -540,7 +540,7 @@ class AppStyles {
     return TextStyle(
       fontSize: 18,
       color: StateContainer.of(context).curTheme.background,
-      fontFamily: 'NunitoSans',
+      fontFamily: "NunitoSans",
       fontWeight: FontWeight.w700,
     );
   }

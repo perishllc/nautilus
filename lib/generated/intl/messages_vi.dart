@@ -59,6 +59,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hãy nhập lượng tiền"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Chúng tôi nhận thấy bạn đã nhấp vào một liên kết có chứa một số nano, bạn có muốn bỏ qua quá trình thiết lập không? Bạn luôn có thể thay đổi mọi thứ sau này.\n\n Tuy nhiên, nếu bạn có một hạt giống hiện có mà bạn muốn nhập, bạn nên chọn không."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi sắp yêu cầu quyền \"theo dõi\", quyền này được sử dụng * nghiêm ngặt * để phân bổ các liên kết / giới thiệu và phân tích nhỏ (những thứ như số lượt cài đặt, phiên bản ứng dụng nào, v.v.) Chúng tôi tin rằng bạn có quyền riêng tư của mình và không quan tâm đến bất kỳ dữ liệu cá nhân nào của bạn, chúng tôi chỉ cần sự cho phép để các thuộc tính liên kết hoạt động chính xác."),
         "asked": MessageLookupByLibrary.simpleMessage("Đã hỏi"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Xác thực"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -221,12 +223,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Bật thông báo"),
+        "enableTracking": MessageLookupByLibrary.simpleMessage("Bật theo dõi"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Đặt mật khẩu ví không thành công"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Nhập địa chỉ"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Nhập số lượng"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Nhập Ghi Chú Quà Tặng"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("Nhập chiều cao"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Nhập tin nhắn"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Nhập địa chỉ XMR"),
@@ -374,6 +378,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sao lưu hạt giống của bạn!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Địa chỉ đã nhập không hợp lệ"),
+        "invalidHeight":
+            MessageLookupByLibrary.simpleMessage("Chiều cao không hợp lệ"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Mật khẩu không hợp lệ"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("Ghim không hợp lệ"),
@@ -652,6 +658,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Đang gửi"),
         "sent": MessageLookupByLibrary.simpleMessage("Đã gửi"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Đã gửi tới"),
+        "set": MessageLookupByLibrary.simpleMessage("Bộ"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Đặt mật khẩu"),
         "setPasswordSuccess":
             MessageLookupByLibrary.simpleMessage("Đã đặt mật khẩu thành công"),
@@ -660,11 +667,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mã pin đã được đặt thành công"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("Đặt ghim hợp lý"),
+        "setRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("Đặt Chiều cao Khôi phục"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Đặt mật khẩu ví"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("Đặt chiều cao khôi phục XMR"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Cài đặt"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Nhập từ ví giấy"),
@@ -690,8 +701,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hiển thị các tùy chọn liên kết"),
         "showLinkQR":
             MessageLookupByLibrary.simpleMessage("Hiển thị liên kết QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("Hiển thị Monero"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Bật phần Monero"),
         "showQR": MessageLookupByLibrary.simpleMessage("Hiển thị mã QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Cảnh báo chưa mở"),
@@ -730,6 +743,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("tới"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Quá nhiều lần mở khoá thất bại."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Ủy quyền theo dõi"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("Theo dõi bị vô hiệu hóa"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Chức năng Thẻ quà tặng có thể bị giảm hoặc hoàn toàn không hoạt động nếu tính năng theo dõi bị tắt. Chúng tôi sử dụng quyền này ĐỘC QUYỀN cho tính năng này, tuyệt đối không có dữ liệu nào của bạn được bán, thu thập hoặc theo dõi cho bất kỳ mục đích nào khác ngoài chức năng, chúng tôi cũng không muốn :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Liên kết Thẻ quà tặng sẽ không hoạt động bình thường"),
         "transactions": MessageLookupByLibrary.simpleMessage("Các giao dịch"),
         "transfer": MessageLookupByLibrary.simpleMessage("Chuyển giao"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -818,6 +839,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Chào mừng đến với Nautilus. Để bắt đầu, hãy tạo một ví mới hoặc nhập một ví hiện có."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Với địa chỉ"),
+        "withFee": MessageLookupByLibrary.simpleMessage("Có phí"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Với tin nhắn"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Sau %1 phút"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Sau %1 phút"),

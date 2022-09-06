@@ -59,6 +59,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lütfen bir miktar girin"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Biraz nano içeren bir bağlantıya tıkladığınızı fark ettik, kurulum sürecini atlamak ister misiniz? İşleri daha sonra her zaman değiştirebilirsiniz.\n\n Ancak içe aktarmak istediğiniz mevcut bir tohumunuz varsa, hayır\'ı seçmelisiniz."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "\"İzleme\" iznini istemek üzereyiz, bu *kesinlikle* bağlantılar / yönlendirmeler ve küçük analizler (yükleme sayısı, hangi uygulama sürümü gibi şeyler) için kullanılır. Gizliliğinizin hakkınız olduğuna inanıyoruz. ve herhangi bir kişisel verinizle ilgilenmiyoruz, bağlantı niteliklerinin doğru çalışması için sadece izne ihtiyacımız var."),
         "asked": MessageLookupByLibrary.simpleMessage("Sordu"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("kimlik doğrulama"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -218,12 +220,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Düzenle"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Bildirimleri Etkinleştir"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("İzlemeyi Etkinleştir"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Şifre oluşturma işlemi başarısız"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Adres Gir"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Miktar Gir"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Hediye Notunu Girin"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("Yüksekliği Girin"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Mesaj Girin"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("XMR Adresini Girin"),
@@ -367,6 +372,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tohumunu yedekle!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Geçersiz bir adres girdiniz"),
+        "invalidHeight":
+            MessageLookupByLibrary.simpleMessage("Geçersiz Yükseklik"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Geçersiz Şifre"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("Geçersiz Pin"),
@@ -643,6 +650,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Miktar"),
         "sent": MessageLookupByLibrary.simpleMessage("Gönderildi"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Alıcı"),
+        "set": MessageLookupByLibrary.simpleMessage("Ayarlamak"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Şifre Oluştur"),
         "setPasswordSuccess":
             MessageLookupByLibrary.simpleMessage("Şifre başarıyla oluşturuldu"),
@@ -651,11 +659,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pin başarıyla ayarlandı"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("Makul Pimi Ayarla"),
+        "setRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Geri Yükleme Yüksekliğini Ayarla"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Cüzdan Şifresi Oluştur"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "XMR Geri Yükleme Yüksekliğini Ayarla"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Ayarlar"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Bakiye Transferi"),
@@ -679,8 +691,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bağlantı Seçeneklerini Göster"),
         "showLinkQR":
             MessageLookupByLibrary.simpleMessage("Bağlantı QR\'sini göster"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("Monero\'yu göster"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Monero Bölümünü Etkinleştir"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR Kodunu Göster"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Açılmamış Uyarı"),
@@ -718,6 +732,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("Adres"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Çok fazla kilit açma denemesi başarız oldu."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("İzleme Yetkilendirmesi"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("İzleme Devre Dışı"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Takip devre dışı bırakılırsa Hediye Kartı işlevi azalabilir veya hiç çalışmayabilir. Bu izni ÖZEL OLARAK bu özellik için kullanıyoruz, kesinlikle hiçbir veriniz işlevsellik dışında başka bir amaç için satılmıyor, toplanmıyor veya takip edilmiyor ve bunu da istemeyiz :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Hediye Kartı Bağlantıları düzgün çalışmayacak"),
         "transactions": MessageLookupByLibrary.simpleMessage("İşlemler"),
         "transfer": MessageLookupByLibrary.simpleMessage("Aktar"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -806,6 +828,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Nautilus\'a hoş geldiniz. Başlamak için yeni bir cüzdan oluşturun veya mevcut bir cüzdanı içe aktarın."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Adres ile"),
+        "withFee": MessageLookupByLibrary.simpleMessage("Ücretli"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Mesaj ile"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 dakika sonra"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("%1 dakika sonra"),

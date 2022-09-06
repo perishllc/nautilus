@@ -63,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vennligst tast inn et beløp"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Vi la merke til at du klikket på en lenke som inneholder noe nano, vil du hoppe over konfigurasjonsprosessen? Du kan alltid endre ting senere.\n\n Hvis du imidlertid har et eksisterende frø som du vil importere, bør du velge nei."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "Vi er i ferd med å be om \"sporing\"-tillatelsen, denne brukes *strengt* for å tilskrive lenker/henvisninger, og mindre analyser (ting som antall installasjoner, hvilken appversjon osv.) Vi mener at du har rett til personvernet ditt og ikke er interessert i noen av dine personlige data, trenger vi bare tillatelsen for at lenketilordninger skal fungere korrekt."),
         "asked": MessageLookupByLibrary.simpleMessage("spurte"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Autentiserer"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -221,12 +223,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Aktiver varsler"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("Aktiver sporing"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Kunne ikke velge lommebokens passord"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Angi adresse"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Tast inn beløp"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Skriv inn gavebrev"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("Skriv inn Høyde"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Skriv inn melding"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Skriv inn XMR-adresse"),
@@ -373,6 +378,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ta sikkerhetskopi av frøet ditt!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Den angitte adressen er ugyldig"),
+        "invalidHeight": MessageLookupByLibrary.simpleMessage("Ugyldig høyde"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Ugyldig passord"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("Ugyldig PIN-kode"),
@@ -655,6 +661,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Sender"),
         "sent": MessageLookupByLibrary.simpleMessage("Sendt"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Sendt til"),
+        "set": MessageLookupByLibrary.simpleMessage("Sett"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Velg passord"),
         "setPasswordSuccess":
             MessageLookupByLibrary.simpleMessage("Passordet er valgt"),
@@ -663,11 +670,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pin har blitt satt"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("Sett Plausible Pin"),
+        "setRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("Angi gjenopprettingshøyde"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Velg lommebokens passord"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Still inn XMR-gjenopprettingshøyde"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Instillinger"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Last fra papirlommebok"),
@@ -689,8 +700,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "showLinkOptions":
             MessageLookupByLibrary.simpleMessage("Vis koblingsalternativer"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("Vis lenke QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader": MessageLookupByLibrary.simpleMessage("Vis Monero"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Aktiver Monero-seksjonen"),
         "showQR": MessageLookupByLibrary.simpleMessage("Vis QR-kode"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Uåpnet advarsel"),
@@ -726,6 +738,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("Til"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "For mange forsøk på å låse opp mislyktes."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Sporingsautorisasjon"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("Sporing deaktivert"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Gavekortfunksjonaliteten kan være redusert eller ikke fungere i det hele tatt hvis sporing er deaktivert. Vi bruker denne tillatelsen EKSKLUSIVT for denne funksjonen, absolutt ingen av dataene dine selges, samles inn eller spores for andre formål enn funksjonalitet, og det vil vi heller ikke :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Gavekortlenker vil ikke fungere skikkelig"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transaksjoner"),
         "transfer": MessageLookupByLibrary.simpleMessage("Overføre"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -813,6 +833,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Velkommen til Nautilus. For å starte, lag en ny lommebok eller importer en eksisterende."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Med adresse"),
+        "withFee": MessageLookupByLibrary.simpleMessage("Med gebyr"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Med melding"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Etter %1 minutt"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Etter %1 minutter"),

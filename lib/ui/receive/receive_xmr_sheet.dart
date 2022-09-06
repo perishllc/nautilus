@@ -162,7 +162,7 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
                 //           style: TextStyle(
                 //             fontSize: 14.0,
                 //             color: StateContainer.of(context).curTheme.primary,
-                //             fontFamily: 'NunitoSans',
+                //             fontFamily: "NunitoSans",
                 //             fontWeight: FontWeight.w600,
                 //           )),
                 //     ),
@@ -447,7 +447,7 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
         fontWeight: FontWeight.w700,
         fontSize: 16.0,
         color: StateContainer.of(context).curTheme.primary,
-        fontFamily: 'NunitoSans',
+        fontFamily: "NunitoSans",
       ),
       inputFormatters: [
         CurrencyFormatter2(
@@ -497,7 +497,7 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
                         color: StateContainer.of(context).curTheme.primary,
                         fontSize: _localCurrencyMode ? 12 : 20,
                         fontWeight: _localCurrencyMode ? FontWeight.w400 : FontWeight.w800,
-                        fontFamily: 'NunitoSans',
+                        fontFamily: "NunitoSans",
                       ),
                     ),
                   ),
@@ -508,7 +508,7 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
                         fontSize: _localCurrencyMode ? 20 : 12,
                         fontWeight: _localCurrencyMode ? FontWeight.w800 : FontWeight.w400,
                         color: StateContainer.of(context).curTheme.primary,
-                        fontFamily: 'NunitoSans',
+                        fontFamily: "NunitoSans",
                       )),
                 ],
               ),

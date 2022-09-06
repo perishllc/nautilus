@@ -271,7 +271,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
             style: TextStyle(
               fontSize: 20.0,
               color: StateContainer.of(context).curTheme.primary,
-              fontFamily: 'NunitoSans',
+              fontFamily: "NunitoSans",
               fontWeight: FontWeight.w700,
             ),
           ),

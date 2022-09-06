@@ -133,7 +133,7 @@ class AppDialogs {
       // margin: EdgeInsetsDirectional.only(),
       child: TextButton(
         style: TextButton.styleFrom(
-          primary: StateContainer.of(context).curTheme.text15,
+          foregroundColor: StateContainer.of(context).curTheme.text15,
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           padding: const EdgeInsets.all(10.0),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),

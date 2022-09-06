@@ -310,20 +310,10 @@ class AppLocalization {
     );
   }
 
-  /// `Tracking Authorization`
-  String get trackingHeader {
-    return Intl.message(
-      'Tracking Authorization',
-      name: 'trackingHeader',
-      desc: 'prompt_ask_tracking_header',
-      args: [],
-    );
-  }
-
-  /// `We're about to ask for the 'tracking' permission, this is used *strictly* for attributing links / referals, and minor analytics (things like number of installs, what app version, etc.) We believe you are entitled to your privacy and are not interested in any of your personal data, we just need the permission in order for link attributions to work correctly.`
+  /// `We're about to ask for the "tracking" permission, this is used *strictly* for attributing links / referrals, and minor analytics (things like number of installs, what app version, etc.) We believe you are entitled to your privacy and are not interested in any of your personal data, we just need the permission in order for link attributions to work correctly.`
   String get askTracking {
     return Intl.message(
-      'We\'re about to ask for the \'tracking\' permission, this is used *strictly* for attributing links / referals, and minor analytics (things like number of installs, what app version, etc.) We believe you are entitled to your privacy and are not interested in any of your personal data, we just need the permission in order for link attributions to work correctly.',
+      'We\'re about to ask for the "tracking" permission, this is used *strictly* for attributing links / referrals, and minor analytics (things like number of installs, what app version, etc.) We believe you are entitled to your privacy and are not interested in any of your personal data, we just need the permission in order for link attributions to work correctly.',
       name: 'askTracking',
       desc: 'prompt_ask_tracking',
       args: [],
@@ -1333,6 +1323,16 @@ class AppLocalization {
     );
   }
 
+  /// `Enter Height`
+  String get enterHeight {
+    return Intl.message(
+      'Enter Height',
+      name: 'enterHeight',
+      desc: 'enter_height_hint',
+      args: [],
+    );
+  }
+
   /// `Enter Message`
   String get enterMemo {
     return Intl.message(
@@ -2223,6 +2223,16 @@ class AppLocalization {
     );
   }
 
+  /// `Invalid Height`
+  String get invalidHeight {
+    return Intl.message(
+      'Invalid Height',
+      name: 'invalidHeight',
+      desc: 'height_invalid',
+      args: [],
+    );
+  }
+
   /// `Invalid Password`
   String get invalidPassword {
     return Intl.message(
@@ -2761,36 +2771,6 @@ class AppLocalization {
       'Payment Requests, Memos, and Messages will not function properly.',
       name: 'notificationWarningBodyShort',
       desc: 'notification_warning_body_short',
-      args: [],
-    );
-  }
-
-  /// `Tracking Disabled`
-  String get trackingWarning {
-    return Intl.message(
-      'Tracking Disabled',
-      name: 'trackingWarning',
-      desc: 'home_tracking_warning',
-      args: [],
-    );
-  }
-
-  /// `Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature, absolutely none of your data is sold, collected or tracked for any other purpose other than functionality, nor would we want to :)`
-  String get trackingWarningBodyLong {
-    return Intl.message(
-      'Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature, absolutely none of your data is sold, collected or tracked for any other purpose other than functionality, nor would we want to :)',
-      name: 'trackingWarningBodyLong',
-      desc: 'tracking_warning_body_long',
-      args: [],
-    );
-  }
-
-  /// `Payment Requests, Memos, and Messages will not function properly.`
-  String get trackingWarningBodyShort {
-    return Intl.message(
-      'Payment Requests, Memos, and Messages will not function properly.',
-      name: 'trackingWarningBodyShort',
-      desc: 'tracking_warning_body_short',
       args: [],
     );
   }
@@ -4020,6 +4000,16 @@ class AppLocalization {
     );
   }
 
+  /// `Set`
+  String get set {
+    return Intl.message(
+      'Set',
+      name: 'set',
+      desc: 'dialog_set',
+      args: [],
+    );
+  }
+
   /// `Set Password`
   String get setPassword {
     return Intl.message(
@@ -4070,6 +4060,16 @@ class AppLocalization {
     );
   }
 
+  /// `Set Restore Height`
+  String get setRestoreHeight {
+    return Intl.message(
+      'Set Restore Height',
+      name: 'setRestoreHeight',
+      desc: 'set_restore_height',
+      args: [],
+    );
+  }
+
   /// `Settings`
   String get settingsHeader {
     return Intl.message(
@@ -4116,6 +4116,16 @@ class AppLocalization {
       '',
       name: 'setWalletPlausiblePin',
       desc: 'Allows user to setup a plausible deniability pin',
+      args: [],
+    );
+  }
+
+  /// `Set XMR Restore Height`
+  String get setXMRRestoreHeight {
+    return Intl.message(
+      'Set XMR Restore Height',
+      name: 'setXMRRestoreHeight',
+      desc: 'set_xmr_restore_height',
       args: [],
     );
   }
@@ -4526,6 +4536,46 @@ class AppLocalization {
       'Too many failed unlock attempts.',
       name: 'tooManyFailedAttempts',
       desc: 'fail_toomany_attempts',
+      args: [],
+    );
+  }
+
+  /// `Tracking Authorization`
+  String get trackingHeader {
+    return Intl.message(
+      'Tracking Authorization',
+      name: 'trackingHeader',
+      desc: 'prompt_ask_tracking_header',
+      args: [],
+    );
+  }
+
+  /// `Tracking Disabled`
+  String get trackingWarning {
+    return Intl.message(
+      'Tracking Disabled',
+      name: 'trackingWarning',
+      desc: 'home_tracking_warning',
+      args: [],
+    );
+  }
+
+  /// `Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature, absolutely none of your data is sold, collected or tracked for any other purpose other than functionality, nor would we want to :)`
+  String get trackingWarningBodyLong {
+    return Intl.message(
+      'Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature, absolutely none of your data is sold, collected or tracked for any other purpose other than functionality, nor would we want to :)',
+      name: 'trackingWarningBodyLong',
+      desc: 'tracking_warning_body_long',
+      args: [],
+    );
+  }
+
+  /// `Gift Card Links will not function properly`
+  String get trackingWarningBodyShort {
+    return Intl.message(
+      'Gift Card Links will not function properly',
+      name: 'trackingWarningBodyShort',
+      desc: 'tracking_warning_body_short',
       args: [],
     );
   }
@@ -5050,22 +5100,22 @@ class AppLocalization {
     );
   }
 
-  /// `With Message`
-  String get withMessage {
-    return Intl.message(
-      'With Message',
-      name: 'withMessage',
-      desc: 'with_message',
-      args: [],
-    );
-  }
-
   /// `With Fee`
   String get withFee {
     return Intl.message(
       'With Fee',
       name: 'withFee',
       desc: 'with_fee',
+      args: [],
+    );
+  }
+
+  /// `With Message`
+  String get withMessage {
+    return Intl.message(
+      'With Message',
+      name: 'withMessage',
+      desc: 'with_message',
       args: [],
     );
   }

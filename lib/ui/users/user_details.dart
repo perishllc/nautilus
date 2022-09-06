@@ -49,7 +49,7 @@ class UserDetailsSheet {
                           margin: const EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
                           child: TextButton(
                             style: TextButton.styleFrom(
-                              primary: StateContainer.of(context).curTheme.text15,
+                              foregroundColor: StateContainer.of(context).curTheme.text15,
                               padding: const EdgeInsets.all(13.0),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                               tapTargetSize: MaterialTapTargetSize.padded,
@@ -60,7 +60,9 @@ class UserDetailsSheet {
                               AppDialogs.showConfirmDialog(
                                   context,
                                   AppLocalization.of(context).removeContact,
-                                  AppLocalization.of(context).removeContactConfirmation.replaceAll('%1', user.username!),
+                                  AppLocalization.of(context)
+                                      .removeContactConfirmation
+                                      .replaceAll('%1', user.username!),
                                   CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
                                 // sl.get<DBHelper>().deleteContact(user).then((deleted) {
                                 //   if (deleted) {
@@ -101,15 +103,15 @@ class UserDetailsSheet {
                           margin: const EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
                           child: TextButton(
                             style: TextButton.styleFrom(
+                              foregroundColor: StateContainer.of(context).curTheme.text15,
                               padding: const EdgeInsets.all(13.0),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                              primary: StateContainer.of(context).curTheme.text15,
                               tapTargetSize: MaterialTapTargetSize.padded,
                               // highlightColor: StateContainer.of(context).curTheme.text15,
                               // splashColor: StateContainer.of(context).curTheme.text15,
                             ),
                             onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                              Navigator.of(context).push(MaterialPageRoute<dynamic>(builder: (BuildContext context) {
                                 UIUtil.showAccountWebview(context, user.address);
                                 return const SizedBox();
                               }));
@@ -146,7 +148,7 @@ class UserDetailsSheet {
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16.0,
                                   color: StateContainer.of(context).curTheme.primary,
-                                  fontFamily: 'NunitoSans',
+                                  fontFamily: "NunitoSans",
                                 ),
                               ),
                             ),
@@ -168,15 +170,19 @@ class UserDetailsSheet {
                               },
                               child: Container(
                                 width: double.infinity,
-                                margin:
-                                    EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105, top: 15),
+                                margin: EdgeInsets.only(
+                                    left: MediaQuery.of(context).size.width * 0.105,
+                                    right: MediaQuery.of(context).size.width * 0.105,
+                                    top: 15),
                                 padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                                 decoration: BoxDecoration(
                                   color: StateContainer.of(context).curTheme.backgroundDarkest,
                                   borderRadius: BorderRadius.circular(25),
                                 ),
                                 child: UIUtil.threeLineAddressText(context, user.address!,
-                                    type: _addressCopied ? ThreeLineAddressTextType.SUCCESS_FULL : ThreeLineAddressTextType.PRIMARY),
+                                    type: _addressCopied
+                                        ? ThreeLineAddressTextType.SUCCESS_FULL
+                                        : ThreeLineAddressTextType.PRIMARY),
                               ),
                             ),
                             // Address Copied text container
@@ -186,7 +192,7 @@ class UserDetailsSheet {
                                   style: TextStyle(
                                     fontSize: 14.0,
                                     color: StateContainer.of(context).curTheme.success,
-                                    fontFamily: 'NunitoSans',
+                                    fontFamily: "NunitoSans",
                                     fontWeight: FontWeight.w600,
                                   )),
                             ),
@@ -201,19 +207,22 @@ class UserDetailsSheet {
                         Row(
                           children: <Widget>[
                             // Send Button
-                            AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS,
-                                disabled: StateContainer.of(context).wallet!.accountBalance == BigInt.zero, onPressed: () {
+                            AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send,
+                                Dimens.BUTTON_TOP_DIMENS,
+                                disabled: StateContainer.of(context).wallet!.accountBalance == BigInt.zero,
+                                onPressed: () {
                               Navigator.of(context).pop();
                               Sheets.showAppHeightNineSheet(
-                                  context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, user: user));
+                                  context: context,
+                                  widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, user: user));
                             }),
                           ],
                         ),
                         Row(
                           children: <Widget>[
                             // Close Button
-                            AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
-                                onPressed: () {
+                            AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
+                                AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                               Navigator.pop(context);
                             }),
                           ],

@@ -254,7 +254,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
                         ? StateContainer.of(context).curTheme.primary
                         : StateContainer.of(context).curTheme.success
                     : StateContainer.of(context).curTheme.primary60,
-                primary: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
+                foregroundColor: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
                     ? StateContainer.of(context).curTheme.background40
                     : Colors.transparent,
                 // highlightColor: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/

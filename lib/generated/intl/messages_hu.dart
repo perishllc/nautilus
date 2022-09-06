@@ -64,6 +64,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Adjon meg egy összeget"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Észrevettük, hogy egy nanoelemet tartalmazó linkre kattintott. Szeretné kihagyni a beállítási folyamatot? Később mindig változtathatsz a dolgokon.\n\n Ha azonban van egy meglévő vetőmagja, amelyet importálni szeretne, válassza a nem lehetőséget."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "\"Nyomon követési\" engedélyt készülünk kérni, ezt *szigorúan* linkek/hivatkozások hozzárendelésére és kisebb elemzésekre (például telepítések száma, alkalmazás verziószáma stb.) használjuk. és nem érdekelnek minket az Ön személyes adatai, csak az engedélyre van szükségünk ahhoz, hogy a link-hozzárendelések megfelelően működjenek."),
         "asked": MessageLookupByLibrary.simpleMessage("Kérdezte"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Hitelesítés"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -224,6 +226,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("szerkesztése"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Értesítések engedélyezése"),
+        "enableTracking": MessageLookupByLibrary.simpleMessage(
+            "Nyomon követés engedélyezése"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Failed to set a wallet password"),
         "enterAddress":
@@ -232,6 +236,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Küldött Mennyiség"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Adja meg az ajándékjegyet"),
+        "enterHeight":
+            MessageLookupByLibrary.simpleMessage("Írja be a magasságot"),
         "enterMemo":
             MessageLookupByLibrary.simpleMessage("Írja be az üzenetet"),
         "enterMoneroAddress":
@@ -376,6 +382,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(
             "Készítsen biztonsági másolatot a magról!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage("Helytelen Cím"),
+        "invalidHeight":
+            MessageLookupByLibrary.simpleMessage("Érvénytelen magasság"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Invalid Password"),
         "invalidPin":
@@ -660,6 +668,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Küldés folyamatban"),
         "sent": MessageLookupByLibrary.simpleMessage("Küldött"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Elküldve ide"),
+        "set": MessageLookupByLibrary.simpleMessage("Készlet"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Password has been set successfully"),
@@ -668,11 +677,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "A PIN-kód beállítása sikeresen megtörtént"),
         "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(
             "Állítsa be a valószínű PIN-kódot"),
+        "setRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Állítsa be a visszaállítási magasságot"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Set Wallet Password"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Állítsa be az XMR visszaállítási magasságot"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Beállítások"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Load from Paper Wallet"),
@@ -698,8 +711,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hivatkozási beállítások megjelenítése"),
         "showLinkQR":
             MessageLookupByLibrary.simpleMessage("Link QR megjelenítése"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("Mutasd Monerót"),
+        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(
+            "Engedélyezze a Monero szakaszt"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR-kód megjelenítése"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Bontatlan Figyelmeztetés"),
@@ -736,6 +751,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("Küldés ide"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Túl sok hibás feloldási kísérlet."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Nyomon követési engedély"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("Követés letiltva"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Ha a nyomon követés le van tiltva, az ajándékkártya funkcionalitása csökkenhet vagy egyáltalán nem működik. Ezt az engedélyt KIZÁRÓLAG ehhez a funkcióhoz használjuk, semmilyen adatát nem értékesítjük, gyűjtjük vagy nyomon követjük a funkcionalitáson kívül más célból, és nem is szeretnénk :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Az ajándékkártya linkek nem működnek megfelelően"),
         "transactions": MessageLookupByLibrary.simpleMessage("Tranzakciók"),
         "transfer": MessageLookupByLibrary.simpleMessage("Küldés"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -826,6 +849,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Üdvözöljük a Nautilusban. A kezdéshez hozzon létre egy új pénztárcát, vagy importáljon egy meglévőt."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Címmel"),
+        "withFee": MessageLookupByLibrary.simpleMessage("Díjjal"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Üzenettel"),
         "xMinute": MessageLookupByLibrary.simpleMessage("%1 perc után"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("%1 perc után"),

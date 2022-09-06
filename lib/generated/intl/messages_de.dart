@@ -64,6 +64,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bitte Betrag eingeben"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Wir haben festgestellt, dass Sie auf einen Link geklickt haben, der Nano enthält. Möchten Sie den Einrichtungsvorgang überspringen? Sie können die Dinge später immer noch ändern.\n\n Wenn Sie jedoch einen vorhandenen Seed haben, den Sie importieren möchten, sollten Sie Nein auswählen."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "Wir werden gleich um die „Tracking“-Erlaubnis bitten, diese wird *ausschließlich* für die Zuordnung von Links/Verweise und kleinere Analysen (Dinge wie Anzahl der Installationen, welche App-Version usw.) verwendet. Wir glauben, dass Sie ein Recht auf Ihre Privatsphäre haben und an Ihren personenbezogenen Daten nicht interessiert sind, benötigen wir lediglich die Erlaubnis, damit die Linkzuordnungen korrekt funktionieren."),
         "asked": MessageLookupByLibrary.simpleMessage("Fragte"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Authentifizieren"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -228,6 +230,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "enableNotifications": MessageLookupByLibrary.simpleMessage(
             "Benachrichtigungen aktivieren"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("Tracking aktivieren"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Wallet-Passwort konnte nicht festgelegt werden"),
         "enterAddress":
@@ -235,6 +239,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAmount": MessageLookupByLibrary.simpleMessage("Betrag eingeben"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Geschenknotiz eingeben"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("Höhe eingeben"),
         "enterMemo":
             MessageLookupByLibrary.simpleMessage("Nachricht eintragen"),
         "enterMoneroAddress": MessageLookupByLibrary.simpleMessage(
@@ -386,6 +391,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sichern Sie Ihren Seed!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Ungültige Empfänger-Adresse"),
+        "invalidHeight": MessageLookupByLibrary.simpleMessage("Ungültige Höhe"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Ungültiges Passwort"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("Ungültige PIN"),
@@ -670,6 +676,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Sende"),
         "sent": MessageLookupByLibrary.simpleMessage("Gesendet"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Gesendet an"),
+        "set": MessageLookupByLibrary.simpleMessage("Satz"),
         "setPassword":
             MessageLookupByLibrary.simpleMessage("Passwort festlegen"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
@@ -679,11 +686,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pin wurde erfolgreich gesetzt"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("Plausiblen Pin setzen"),
+        "setRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Stellen Sie die Wiederherstellungshöhe ein"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Wallet-Passwort festlegen"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Stellen Sie die XMR-Wiederherstellungshöhe ein"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Einstellungen"),
         "settingsTransfer": MessageLookupByLibrary.simpleMessage(
             "Von Paper Wallet importieren"),
@@ -708,8 +719,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "showLinkOptions":
             MessageLookupByLibrary.simpleMessage("Linkoptionen anzeigen"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("Link-QR anzeigen"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("Monero anzeigen"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Monero-Bereich aktivieren"),
         "showQR": MessageLookupByLibrary.simpleMessage("QR-Code anzeigen"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Ungeöffnete Warnung"),
@@ -749,6 +762,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("An"),
         "tooManyFailedAttempts":
             MessageLookupByLibrary.simpleMessage("Zu viele Fehlversuche."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Tracking-Autorisierung"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("Tracking deaktiviert"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Die Funktionalität der Geschenkkarte kann eingeschränkt sein oder überhaupt nicht funktionieren, wenn die Nachverfolgung deaktiviert ist. Wir verwenden diese Erlaubnis AUSSCHLIESSLICH für diese Funktion, absolut keine Ihrer Daten werden verkauft, gesammelt oder für andere Zwecke als die Funktionalität verfolgt, und wir würden das auch nicht wollen :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Geschenkkarten-Links funktionieren nicht richtig"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transaktionen"),
         "transfer": MessageLookupByLibrary.simpleMessage("Transferieren"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -837,6 +858,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Willkommen bei Nautilus. Erstellen Sie zunächst eine neue Brieftasche oder importieren Sie eine vorhandene."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Mit Adresse"),
+        "withFee": MessageLookupByLibrary.simpleMessage("Mit Gebühr"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Mit Nachricht"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Nach %1 Minute"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Nach %1 Minute"),

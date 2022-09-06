@@ -248,10 +248,9 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                               width: 50,
                               child: TextButton(
                                   style: TextButton.styleFrom(
-                                    primary: StateContainer.of(context).curTheme.text15,
-                                    backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                                    foregroundColor: StateContainer.of(context).curTheme.text15, backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                                    padding: const EdgeInsets.all(0.0),
+                                    padding: EdgeInsets.zero,
                                   ),
                                   onPressed: () {
                                     Navigator.pop(context);
@@ -362,7 +361,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                                   style: TextStyle(
                                     fontSize: 14.0,
                                     color: StateContainer.of(context).curTheme.primary,
-                                    fontFamily: 'NunitoSans',
+                                    fontFamily: "NunitoSans",
                                     fontWeight: FontWeight.w600,
                                   )),
                             ),

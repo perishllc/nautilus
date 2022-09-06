@@ -86,7 +86,6 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
                 url = "http://142.93.244.88:8080/#s=$hashedSeed&h=${StateContainer.of(context).xmrRestoreHeight}";
               }
               return WebView(
-                // TODO: store block height:
                 initialUrl: url,
                 javascriptMode: JavascriptMode.unrestricted,
                 debuggingEnabled: !kReleaseMode,

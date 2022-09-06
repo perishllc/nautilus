@@ -62,6 +62,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Пожалуйста введите сумму"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Мы заметили, что вы нажали на ссылку, содержащую нано. Хотите пропустить процесс установки? Вы всегда можете изменить ситуацию позже.\n\n Однако, если у вас есть семя, которое вы хотите импортировать, вам следует выбрать нет."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "Мы собираемся запросить разрешение на «отслеживание», оно используется *строго* для атрибуции ссылок / рефералов и незначительной аналитики (например, количество установок, версия приложения и т. д.). Мы считаем, что вы имеете право на вашу конфиденциальность и не заинтересованы в каких-либо ваших личных данных, нам просто нужно разрешение, чтобы атрибуция ссылок работала правильно."),
         "asked": MessageLookupByLibrary.simpleMessage("Спросил"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("Аутентификация"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -227,12 +229,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("Редактировать"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Включить уведомления"),
+        "enableTracking":
+            MessageLookupByLibrary.simpleMessage("Включить отслеживание"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Не удалось установить пароль"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Введите Адрес"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Введите Сумму"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage(
             "Введите примечание к подарку"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("Введите рост"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Введите сообщение"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Введите XMR-адрес"),
@@ -381,6 +386,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Сделайте резервную копию вашего семени!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Введен неверный адрес"),
+        "invalidHeight": MessageLookupByLibrary.simpleMessage("Неверный рост"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Неправильный пароль"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("Неверный PIN-код"),
@@ -666,6 +672,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("Отправить"),
         "sent": MessageLookupByLibrary.simpleMessage("Отправлено"),
         "sentTo": MessageLookupByLibrary.simpleMessage("Отправлено на"),
+        "set": MessageLookupByLibrary.simpleMessage("Установлен"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Установка пароля"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Пароль был успешно установлен"),
@@ -674,11 +681,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Пин-код успешно установлен"),
         "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(
             "Установить правдоподобный PIN-код"),
+        "setRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Установить высоту восстановления"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Установить пароль"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight": MessageLookupByLibrary.simpleMessage(
+            "Установить высоту восстановления XMR"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("Настройки"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Загрузить с Paper кошелька"),
@@ -704,8 +715,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Показать параметры ссылки"),
         "showLinkQR":
             MessageLookupByLibrary.simpleMessage("Показать ссылку QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("Показать Монеро"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("Включить раздел Monero"),
         "showQR": MessageLookupByLibrary.simpleMessage("Показать QR-код"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("Неоткрытое предупреждение"),
@@ -744,6 +757,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("на"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Много неудачных попыток разблокировки."),
+        "trackingHeader":
+            MessageLookupByLibrary.simpleMessage("Отслеживание авторизации"),
+        "trackingWarning":
+            MessageLookupByLibrary.simpleMessage("Отслеживание отключено"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "Функционал подарочной карты может быть ограничен или вообще не работать, если отслеживание отключено. Мы используем это разрешение ИСКЛЮЧИТЕЛЬНО для этой функции, абсолютно никакие ваши данные не продаются, не собираются и не отслеживаются для каких-либо других целей, кроме функциональности, и мы бы этого не хотели :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "Ссылки на подарочные карты не будут работать должным образом"),
         "transactions": MessageLookupByLibrary.simpleMessage("Транзакции"),
         "transfer": MessageLookupByLibrary.simpleMessage("Отправить"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -832,6 +853,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Добро пожаловать в Наутилус. Для начала создайте новый кошелек или импортируйте существующий."),
         "withAddress": MessageLookupByLibrary.simpleMessage("С адресом"),
+        "withFee": MessageLookupByLibrary.simpleMessage("Платно"),
         "withMessage": MessageLookupByLibrary.simpleMessage("С сообщением"),
         "xMinute": MessageLookupByLibrary.simpleMessage("Через %1 мин."),
         "xMinutes": MessageLookupByLibrary.simpleMessage("Через %1 мин."),

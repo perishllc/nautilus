@@ -83,7 +83,11 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                             child: Column(
                               children: <Widget>[
                                 AutoSizeText(
-                                  CaseChange.toUpperCase(showMnemonic ? AppLocalization.of(context).secretPhrase : AppLocalization.of(context).seed, context),
+                                  CaseChange.toUpperCase(
+                                      showMnemonic
+                                          ? AppLocalization.of(context).secretPhrase
+                                          : AppLocalization.of(context).seed,
+                                      context),
                                   style: AppStyles.textStyleHeader(context),
                                   maxLines: 1,
                                   stepGranularity: 0.1,
@@ -100,7 +104,7 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                         margin: const EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
                         child: TextButton(
                           style: TextButton.styleFrom(
-                            primary: StateContainer.of(context).curTheme.text15,
+                            foregroundColor: StateContainer.of(context).curTheme.text15,
                             padding: const EdgeInsets.all(13.0),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                             tapTargetSize: MaterialTapTargetSize.padded,
@@ -112,7 +116,8 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                               showMnemonic = !showMnemonic;
                             });
                           },
-                          child: Icon(showMnemonic ? AppIcons.seed : Icons.vpn_key, size: 24, color: StateContainer.of(context).curTheme.text),
+                          child: Icon(showMnemonic ? AppIcons.seed : Icons.vpn_key,
+                              size: 24, color: StateContainer.of(context).curTheme.text),
                         ),
                       ),
                     ],
@@ -147,7 +152,9 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                         context,
                         // Copy Mnemonic Button
                         _mnemonicCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _mnemonicCopied ? AppLocalization.of(context).secretPhraseCopied : AppLocalization.of(context).secretPhraseCopy,
+                        _mnemonicCopied
+                            ? AppLocalization.of(context).secretPhraseCopied
+                            : AppLocalization.of(context).secretPhraseCopy,
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       UserDataUtil.setSecureClipboardItem(_mnemonic!.join(" "));
                       setState(() {
@@ -174,7 +181,9 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                         context,
                         // Copy Seed Button
                         _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _seedCopied ? AppLocalization.of(context).seedCopiedShort : AppLocalization.of(context).copySeed,
+                        _seedCopied
+                            ? AppLocalization.of(context).seedCopiedShort
+                            : AppLocalization.of(context).copySeed,
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       UserDataUtil.setSecureClipboardItem(_seed);
                       setState(() {
@@ -200,7 +209,8 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                       AppButtonType.PRIMARY_OUTLINE,
                       AppLocalization.of(context).showQR,
                       Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
-                    final Widget qrWidget = SizedBox(width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, _seed!));
+                    final Widget qrWidget = SizedBox(
+                        width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, _seed!));
                     Sheets.showAppHeightEightSheet(
                         context: context,
                         widget: BackupSeedQRSheet(

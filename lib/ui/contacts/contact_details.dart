@@ -57,7 +57,7 @@ class ContactDetailsSheet {
                 fontWeight: FontWeight.w600,
                 fontSize: 16.0,
                 color: StateContainer.of(context).curTheme.primary,
-                fontFamily: 'NunitoSans',
+                fontFamily: "NunitoSans",
               ),
             ),
           ),
@@ -86,7 +86,7 @@ class ContactDetailsSheet {
               fontWeight: FontWeight.w600,
               fontSize: 16.0,
               color: StateContainer.of(context).curTheme.primary,
-              fontFamily: 'NunitoSans',
+              fontFamily: "NunitoSans",
             ),
           ),
         ));
@@ -144,7 +144,7 @@ class ContactDetailsSheet {
                           margin: const EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
                           child: TextButton(
                             style: TextButton.styleFrom(
-                              primary: StateContainer.of(context).curTheme.text15,
+                              foregroundColor: StateContainer.of(context).curTheme.text15,
                               padding: const EdgeInsets.all(13.0),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                               tapTargetSize: MaterialTapTargetSize.padded,
@@ -195,7 +195,7 @@ class ContactDetailsSheet {
                           margin: const EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
                           child: TextButton(
                             style: TextButton.styleFrom(
-                              primary: StateContainer.of(context).curTheme.text15,
+                              foregroundColor: StateContainer.of(context).curTheme.text15,
                               padding: const EdgeInsets.all(13.0),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                               tapTargetSize: MaterialTapTargetSize.padded,
@@ -239,7 +239,7 @@ class ContactDetailsSheet {
                                     fontWeight: FontWeight.w600,
                                     fontSize: 16.0,
                                     color: StateContainer.of(context).curTheme.primary,
-                                    fontFamily: 'NunitoSans',
+                                    fontFamily: "NunitoSans",
                                   ),
                                 ),
                               ),
@@ -280,7 +280,7 @@ class ContactDetailsSheet {
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: StateContainer.of(context).curTheme.success,
-                                      fontFamily: 'NunitoSans',
+                                      fontFamily: "NunitoSans",
                                       fontWeight: FontWeight.w600,
                                     )),
                               ),

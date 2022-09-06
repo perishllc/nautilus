@@ -118,7 +118,7 @@ class _HandoffCompleteSheetState extends State<HandoffCompleteSheet> {
                             fontSize: 28.0,
                             fontWeight: FontWeight.w700,
                             color: StateContainer.of(context).curTheme.success,
-                            fontFamily: 'NunitoSans',
+                            fontFamily: "NunitoSans",
                           ),
                         ),
                       ],

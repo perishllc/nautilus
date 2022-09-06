@@ -138,7 +138,7 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                                 fontSize: 28.0,
                                 fontWeight: FontWeight.w700,
                                 color: StateContainer.of(context).curTheme.success,
-                                fontFamily: 'NunitoSans',
+                                fontFamily: "NunitoSans",
                               ),
                             ),
                           ],
@@ -189,7 +189,7 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                             style: TextStyle(
                               fontSize: 14.0,
                               color: StateContainer.of(context).curTheme.primary,
-                              fontFamily: 'NunitoSans',
+                              fontFamily: "NunitoSans",
                               fontWeight: FontWeight.w600,
                             )),
                       ),

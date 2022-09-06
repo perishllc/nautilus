@@ -56,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "amountMissing": MessageLookupByLibrary.simpleMessage("הזן סכום"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "שמנו לב שלחצת על קישור שמכיל קצת ננו, האם תרצה לדלג על תהליך ההגדרה? תמיד תוכל לשנות דברים מאוחר יותר.\n\n אם יש לך זרע קיים שברצונך לייבא עם זאת, עליך לבחור לא."),
+        "askTracking": MessageLookupByLibrary.simpleMessage(
+            "אנו עומדים לבקש את הרשאת ה\"מעקב\", זה משמש *בהקפדה* לייחוס קישורים/הפניות וניתוחים קטנים (דברים כמו מספר התקנות, איזו גרסת אפליקציה וכו\') אנו מאמינים שאתה זכאי לפרטיות שלך ואינם מעוניינים באף אחד מהנתונים האישיים שלך, אנו רק צריכים את ההרשאה על מנת שייחוס קישורים יפעלו כהלכה."),
         "asked": MessageLookupByLibrary.simpleMessage("נשאל"),
         "authConfirm": MessageLookupByLibrary.simpleMessage("מאמת"),
         "authError": MessageLookupByLibrary.simpleMessage(
@@ -208,11 +210,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "edit": MessageLookupByLibrary.simpleMessage("ערוך"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("הפעל התראות"),
+        "enableTracking": MessageLookupByLibrary.simpleMessage("אפשר מעקב"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("הכנס כתובת"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("הכנס כמות"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("הזן הערת מתנה"),
+        "enterHeight": MessageLookupByLibrary.simpleMessage("הזן גובה"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("הזן הודעה"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("הזן כתובת XMR"),
@@ -353,6 +357,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("גבה את הזרע שלך!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("כתובת יעד אינה תקינה"),
+        "invalidHeight": MessageLookupByLibrary.simpleMessage("גובה לא חוקי"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Invalid Password"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("סיכה לא חוקית"),
@@ -611,6 +616,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sending": MessageLookupByLibrary.simpleMessage("נשלח"),
         "sent": MessageLookupByLibrary.simpleMessage("נשלח"),
         "sentTo": MessageLookupByLibrary.simpleMessage("נשלח ל"),
+        "set": MessageLookupByLibrary.simpleMessage("מַעֲרֶכֶת"),
         "setPassword": MessageLookupByLibrary.simpleMessage("Set Password"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Password has been set successfully"),
@@ -619,11 +625,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("סיכה הוגדרה בהצלחה"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("הגדר סיכה סבירה"),
+        "setRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("הגדר גובה שחזור"),
         "setWalletPassword":
             MessageLookupByLibrary.simpleMessage("Set Wallet Password"),
         "setWalletPin": MessageLookupByLibrary.simpleMessage("Set Wallet Pin"),
         "setWalletPlausiblePin":
             MessageLookupByLibrary.simpleMessage("Set Wallet Plausible Pin"),
+        "setXMRRestoreHeight":
+            MessageLookupByLibrary.simpleMessage("הגדר XMR שחזור גובה"),
         "settingsHeader": MessageLookupByLibrary.simpleMessage("הגדרות"),
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("טען מארנק נייר"),
@@ -643,8 +653,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "showLinkOptions":
             MessageLookupByLibrary.simpleMessage("הצג אפשרויות קישור"),
         "showLinkQR": MessageLookupByLibrary.simpleMessage("הצג קישור QR"),
-        "showMoneroHeader": MessageLookupByLibrary.simpleMessage(""),
-        "showMoneroInfo": MessageLookupByLibrary.simpleMessage(""),
+        "showMoneroHeader":
+            MessageLookupByLibrary.simpleMessage("הצג את מונרו"),
+        "showMoneroInfo":
+            MessageLookupByLibrary.simpleMessage("הפעל את מדור Monero"),
         "showQR": MessageLookupByLibrary.simpleMessage("הצג קוד QR"),
         "showUnopenedWarning":
             MessageLookupByLibrary.simpleMessage("אזהרה לא נפתחה"),
@@ -680,6 +692,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "to": MessageLookupByLibrary.simpleMessage("מ"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "יותר מדי נסיונות כושלים לשחרור הנעילה."),
+        "trackingHeader": MessageLookupByLibrary.simpleMessage("אישור מעקב"),
+        "trackingWarning": MessageLookupByLibrary.simpleMessage("המעקב מושבת"),
+        "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
+            "הפונקציונליות של כרטיס המתנה עשויה להיות מופחתת או לא לעבוד בכלל אם המעקב מושבת. אנו משתמשים בהרשאה זו באופן בלעדי לתכונה זו, אף אחד מהנתונים שלך לא נמכר, נאסף או עוקב אחר לשום מטרה אחרת מלבד פונקציונליות, וגם לא נרצה :)"),
+        "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
+            "קישורי כרטיסי מתנה לא יפעלו כראוי"),
         "transactions": MessageLookupByLibrary.simpleMessage("טרנסקציות"),
         "transfer": MessageLookupByLibrary.simpleMessage("העבר"),
         "transferClose": MessageLookupByLibrary.simpleMessage(
@@ -764,6 +782,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "ברוכים הבאים לנאוטילוס. כדי להתחיל, צור ארנק חדש או ייבא ארנק קיים."),
         "withAddress": MessageLookupByLibrary.simpleMessage("עם כתובת"),
+        "withFee": MessageLookupByLibrary.simpleMessage("עם עמלה"),
         "withMessage": MessageLookupByLibrary.simpleMessage("עם הודעה"),
         "xMinute": MessageLookupByLibrary.simpleMessage("אחרי דקה %1"),
         "xMinutes": MessageLookupByLibrary.simpleMessage("אחרי %1 דקות"),

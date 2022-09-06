@@ -154,7 +154,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                                   style: TextStyle(
                                     fontSize: 14.0,
                                     color: hasError ? StateContainer.of(context).curTheme.primary : Colors.transparent,
-                                    fontFamily: 'NunitoSans',
+                                    fontFamily: "NunitoSans",
                                     fontWeight: FontWeight.w600,
                                   )),
                             ),
