@@ -195,9 +195,6 @@ dependencies:
   # async / general programming utilities
   quiver: ^3.1.0
 
-  # devicelocale: ^0.5.1
-  # 0.5.2+ requires sdk 33 and a wierd java1.8 error on android:
-  # devicelocale: 0.5.1
   devicelocale: ^0.5.5
 
 

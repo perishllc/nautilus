@@ -350,7 +350,11 @@ class SharedPrefsUtil {
   }
 
   Future<bool> getTrackingEnabled() async {
-    return await get(tracking_enabled, defaultValue: false) as bool;
+    bool defaultValue = false;
+    if (Platform.isAndroid) {
+      defaultValue = true;
+    }
+    return await get(tracking_enabled, defaultValue: defaultValue) as bool;
   }
 
   Future<void> setTrackingEnabled(bool value) async {
