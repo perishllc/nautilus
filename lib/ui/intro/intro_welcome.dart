@@ -41,29 +41,29 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
       bool openedDialog = false;
 
       // If the system can show an authorization request dialog
-      if (await sl.get<SharedPrefsUtil>().getTrackingEnabled() == false ||
-          await AppTrackingTransparency.trackingAuthorizationStatus == TrackingStatus.notDetermined) {
-        // Show a custom explainer dialog before the system dialog
-        // await showCustomTrackingDialog(context);
-
-        await AppDialogs.showInfoDialog(
-          context,
-          AppLocalization.of(context).trackingHeader,
-          AppLocalization.of(context).askTracking,
-          closeText: AppLocalization.of(context).ok,
-          barrierDismissible: false,
-          onPressed: () async {
-            bool trackingEnabled = false;
-            if (Platform.isIOS) {
-              trackingEnabled =
-                  await AppTrackingTransparency.requestTrackingAuthorization() == TrackingStatus.authorized;
-            } else {
-              trackingEnabled = await AppDialogs.showTrackingDialog(context);
-            }
-            await sl.get<SharedPrefsUtil>().setTrackingEnabled(trackingEnabled);
-            FlutterBranchSdk.disableTracking(!trackingEnabled);
-          },
-        );
+      if (Platform.isIOS) {
+        if (await sl.get<SharedPrefsUtil>().getTrackingEnabled() == false ||
+            await AppTrackingTransparency.trackingAuthorizationStatus == TrackingStatus.notDetermined) {
+          // Show a custom explainer dialog before the system dialog
+          await AppDialogs.showInfoDialog(
+            context,
+            AppLocalization.of(context).trackingHeader,
+            AppLocalization.of(context).askTracking,
+            closeText: AppLocalization.of(context).ok,
+            barrierDismissible: false,
+            onPressed: () async {
+              bool trackingEnabled = false;
+              if (Platform.isIOS) {
+                trackingEnabled =
+                    await AppTrackingTransparency.requestTrackingAuthorization() == TrackingStatus.authorized;
+              } else {
+                trackingEnabled = (await AppDialogs.showTrackingDialog(context))!;
+              }
+              await sl.get<SharedPrefsUtil>().setTrackingEnabled(trackingEnabled);
+              FlutterBranchSdk.disableTracking(!trackingEnabled);
+            },
+          );
+        }
       }
 
       // check every 500ms if there's a giftcard:

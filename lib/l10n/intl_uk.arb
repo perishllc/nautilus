@@ -535,6 +535,11 @@
     "type": "text",
     "description": "change_representative_current_header"
   },
+  "dayAgo": "День тому",
+  "@dayAgo": {
+    "type": "text",
+    "description": "history_day_ago"
+  },
   "decryptionError": "Помилка розшифровки!",
   "@decryptionError": {
     "type": "text",
@@ -845,6 +850,26 @@
     "type": "text",
     "description": "featured"
   },
+  "fewDaysAgo": "Декілька днів тому",
+  "@fewDaysAgo": {
+    "type": "text",
+    "description": "history_few_days_ago"
+  },
+  "fewHoursAgo": "Кілька годин тому",
+  "@fewHoursAgo": {
+    "type": "text",
+    "description": "history_few_hours_ago"
+  },
+  "fewMinutesAgo": "Кілька хвилин тому",
+  "@fewMinutesAgo": {
+    "type": "text",
+    "description": "history_few_minutes_ago"
+  },
+  "fewSecondsAgo": "Кілька секунд тому",
+  "@fewSecondsAgo": {
+    "type": "text",
+    "description": "history_few_seconds_ago"
+  },
   "fingerprintSeedBackup": "Введіть пароль для створення резервної копії.",
   "@fingerprintSeedBackup": {
     "type": "text",
@@ -994,6 +1019,11 @@
   "@home": {
     "type": "text",
     "description": "home"
+  },
+  "hourAgo": "Годину тому",
+  "@hourAgo": {
+    "type": "text",
+    "description": "history_hour_ago"
   },
   "ignore": "Ігнорувати",
   "@ignore": {
@@ -1214,6 +1244,11 @@
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
+  },
+  "minuteAgo": "Хвилину тому",
+  "@minuteAgo": {
+    "type": "text",
+    "description": "history_minute_ago"
   },
   "mnemonicInvalidWord": "%1 неправильне слово",
   "@mnemonicInvalidWord": {
@@ -1915,6 +1950,11 @@
     "type": "text",
     "description": "send_amount_confirm"
   },
+  "sendAmounts": "Відправити суми",
+  "@sendAmounts": {
+    "type": "text",
+    "description": "split_bill_send_amounts"
+  },
   "sendError": "Сталася помилка. Спробуйте ще раз пізніше.",
   "@sendError": {
     "type": "text",
@@ -2250,7 +2290,7 @@
     "type": "text",
     "description": "home_tracking_warning"
   },
-  "trackingWarningBodyLong": "Функціональність подарункової картки може бути обмежена або не працювати взагалі, якщо відстеження вимкнено. Ми використовуємо цей дозвіл ВИКЛЮЧНО для цієї функції, жодні ваші дані не продаються, не збираються та не відстежуються з будь-якою іншою метою, окрім функціональності, і ми цього не хочемо :)",
+  "trackingWarningBodyLong": "Функціональність подарункової картки може бути обмежена або не працювати взагалі, якщо відстеження вимкнено. Ми використовуємо цей дозвіл ВИКЛЮЧНО для цієї функції. Абсолютно жодні ваші дані не продаються, не збираються та не відстежуються на сервері з будь-якою іншою метою",
   "@trackingWarningBodyLong": {
     "type": "text",
     "description": "tracking_warning_body_long"
@@ -2504,6 +2544,11 @@
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
+  },
+  "weekAgo": "Тиждень тому",
+  "@weekAgo": {
+    "type": "text",
+    "description": "history_week_ago"
   },
   "welcomeText": "Ласкаво просимо до Nautilus. Щоб продовжити ви можете створити новий гаманець або імпортувати існуючий.",
   "@welcomeText": {

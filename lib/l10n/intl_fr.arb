@@ -535,6 +535,11 @@
     "type": "text",
     "description": "change_representative_current_header"
   },
+  "dayAgo": "Il y a un jour",
+  "@dayAgo": {
+    "type": "text",
+    "description": "history_day_ago"
+  },
   "decryptionError": "Erreur de déchiffrement !",
   "@decryptionError": {
     "type": "text",
@@ -845,6 +850,26 @@
     "type": "text",
     "description": "featured"
   },
+  "fewDaysAgo": "Il y a quelques jours",
+  "@fewDaysAgo": {
+    "type": "text",
+    "description": "history_few_days_ago"
+  },
+  "fewHoursAgo": "Quelques heures plus tôt",
+  "@fewHoursAgo": {
+    "type": "text",
+    "description": "history_few_hours_ago"
+  },
+  "fewMinutesAgo": "Il y a quelques minutes",
+  "@fewMinutesAgo": {
+    "type": "text",
+    "description": "history_few_minutes_ago"
+  },
+  "fewSecondsAgo": "Il ya quelques secondes",
+  "@fewSecondsAgo": {
+    "type": "text",
+    "description": "history_few_seconds_ago"
+  },
   "fingerprintSeedBackup": "Confirmer l’empreinte digitale pour sauvegarder la clé privée.",
   "@fingerprintSeedBackup": {
     "type": "text",
@@ -994,6 +1019,11 @@
   "@home": {
     "type": "text",
     "description": "home"
+  },
+  "hourAgo": "Il y a une heure",
+  "@hourAgo": {
+    "type": "text",
+    "description": "history_hour_ago"
   },
   "ignore": "Ignorer",
   "@ignore": {
@@ -1214,6 +1244,11 @@
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
+  },
+  "minuteAgo": "Il y'a une minute",
+  "@minuteAgo": {
+    "type": "text",
+    "description": "history_minute_ago"
   },
   "mnemonicInvalidWord": "%1 n'est pas un mot valide",
   "@mnemonicInvalidWord": {
@@ -1915,6 +1950,11 @@
     "type": "text",
     "description": "send_amount_confirm"
   },
+  "sendAmounts": "Envoyer des montants",
+  "@sendAmounts": {
+    "type": "text",
+    "description": "split_bill_send_amounts"
+  },
   "sendError": "Une erreur s'est produite. Veuillez réessayer plus tard.",
   "@sendError": {
     "type": "text",
@@ -2250,7 +2290,7 @@
     "type": "text",
     "description": "home_tracking_warning"
   },
-  "trackingWarningBodyLong": "La fonctionnalité de la carte-cadeau peut être réduite ou ne pas fonctionner du tout si le suivi est désactivé. Nous utilisons cette autorisation EXCLUSIVEMENT pour cette fonctionnalité, absolument aucune de vos données n'est vendue, collectée ou suivie à d'autres fins que la fonctionnalité, et nous ne voudrions pas non plus :)",
+  "trackingWarningBodyLong": "La fonctionnalité de la carte-cadeau peut être réduite ou ne pas fonctionner du tout si le suivi est désactivé. Nous utilisons cette autorisation EXCLUSIVEMENT pour cette fonctionnalité. Absolument aucune de vos données n'est vendue, collectée ou suivie sur le backend à des fins autres que nécessaires",
   "@trackingWarningBodyLong": {
     "type": "text",
     "description": "tracking_warning_body_long"
@@ -2504,6 +2544,11 @@
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
+  },
+  "weekAgo": "Il y a une semaine",
+  "@weekAgo": {
+    "type": "text",
+    "description": "history_week_ago"
   },
   "welcomeText": "Bienvenue dans Nautilus. Avant de continuer, veuillez créer un nouveau portefeuille ou en importer un existant.",
   "@welcomeText": {

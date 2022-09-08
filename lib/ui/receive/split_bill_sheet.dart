@@ -12,14 +12,13 @@ import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
+import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/home_page.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/split_bill_add_user_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/request/request_confirm_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
@@ -134,7 +133,8 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                     child: AppDialogs.infoButton(
                       context,
                       () {
-                        AppDialogs.showInfoDialog(context, AppLocalization.of(context).splitBillInfoHeader, AppLocalization.of(context).splitBillInfo);
+                        AppDialogs.showInfoDialog(context, AppLocalization.of(context).splitBillInfoHeader,
+                            AppLocalization.of(context).splitBillInfo);
                       },
                     ),
                   ),
@@ -196,7 +196,10 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
-                              colors: [StateContainer.of(context).curTheme.backgroundDark!, StateContainer.of(context).curTheme.backgroundDark00!],
+                              colors: [
+                                StateContainer.of(context).curTheme.backgroundDark!,
+                                StateContainer.of(context).curTheme.backgroundDark00!
+                              ],
                               begin: const AlignmentDirectional(0.5, 1.0),
                               end: const AlignmentDirectional(0.5, -1.0),
                             ),
@@ -215,6 +218,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                   margin: const EdgeInsets.only(right: 28, bottom: 10),
                   child: FloatingActionButton(
                     backgroundColor: StateContainer.of(context).curTheme.primary,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
                     onPressed: !_addingAccount
                         ? () async {
                             if (_addingAccount) {
@@ -224,15 +228,18 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                               _addingAccount = true;
                             });
 
-                            final User? user = await Sheets.showAppHeightEightSheet(context: context, widget: SplitBillAddUserSheet()) as User?;
+                            final User? user =
+                                await Sheets.showAppHeightEightSheet(context: context, widget: const SplitBillAddUserSheet())
+                                    as User?;
                             if (!mounted) return;
 
-                            if (user == null || user.getDisplayName() == null) {
-                              sl.get<Logger>().d("Error adding account: user or name was null");
+                            if (user == null || user.address == null) {
+                              sl.get<Logger>().d("Error adding account: user or address was null");
                             } else {
                               // make sure the user isn't already in the list:
-                              final String displayName = user.getDisplayName()!;
-                              if (userMap.keys.contains(displayName)) {
+                              final String? userOrAddress = user.displayNameOrShortestAddress();
+
+                              if (userMap.keys.contains(userOrAddress)) {
                                 sl.get<Logger>().v("Error adding account: user already in list!");
                                 UIUtil.showSnackbar(AppLocalization.of(context).userAlreadyAddedError, context);
                                 setState(() {
@@ -274,61 +281,40 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                     context,
                     AppButtonType.PRIMARY,
                     AppLocalization.of(context).sendRequests,
-                    Dimens.BUTTON_BOTTOM_DIMENS,
+                    Dimens.BUTTON_COMPACT_LEFT_DIMENS,
                     disabled: users.isEmpty,
                     onPressed: () async {
-                      List<dynamic> requestsToSend = [];
+                      final List<dynamic> requestsToSend = [];
 
-                      for (User user in users) {
-                        final String displayName = user.getDisplayName()!;
+                      for (final User user in users) {
+                        final String displayName = user.displayNameOrShortestAddress()!;
 
-                        var _amountController = userMap[displayName]["_amountController"] as TextEditingController;
-                        var _memoController = userMap[displayName]["_memoController"] as TextEditingController;
+                        final TextEditingController _amountController =
+                            userMap[displayName]["_amountController"] as TextEditingController;
+                        final TextEditingController _memoController =
+                            userMap[displayName]["_memoController"] as TextEditingController;
 
-                        String? localCurrency;
-                        if (_localCurrencyMode) {
-                          localCurrency = _amountController.text;
-                        }
                         // final String amountRaw = userMap[displayName]["_amountController"].text as String;
 
                         // final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
 
-                        final String formattedAmount = sanitizedAmount(widget.localCurrencyFormat, _amountController.text);
+                        final String formattedAmount =
+                            sanitizedAmount(widget.localCurrencyFormat, _amountController.text);
 
                         String amountRaw;
                         if (_amountController.text.isEmpty || _amountController.text == "0") {
                           amountRaw = "0";
                         } else {
                           if (_localCurrencyMode) {
-                            amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(widget.localCurrencyFormat,
-                                convertLocalCurrencyToLocalizedCrypto(context, widget.localCurrencyFormat, _amountController.text)));
+                            amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
+                                widget.localCurrencyFormat,
+                                convertLocalCurrencyToLocalizedCrypto(
+                                    context, widget.localCurrencyFormat, _amountController.text)));
                           } else {
                             if (!mounted) return;
                             amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
                           }
                         }
-
-                        // requestsToSend.add({
-                        //   "address": _addressController.text,
-                        //   "amount": amountRaw,
-                        //   "localCurrency": localCurrency,
-                        //   "displayName": displayName,
-                        //   "memo": _memoController.text,
-                        // });
-
-                        // print(x);
-                        // TXData txData = TXData(
-                        //   amount: userMap[x],
-                        //   toAddress: x,
-                        //   currency: Currency.fromInt(currency),
-                        //   fee: fee,
-                        //   fromAddress: fromAddress,
-                        //   memo: memo,
-                        //   mnemonic: mnemonic,
-                        //   seed: seed,
-                        //   seedOffset: seedOffset,
-                        //   txType: TXType.SPLIT,
-                        // );
 
                         await Sheets.showAppHeightNineSheet(
                             context: context,
@@ -340,24 +326,59 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                               memo: _memoController.text,
                             ));
                       }
+                    },
+                  ),
+                  AppButton.buildAppButton(
+                    context,
+                    AppButtonType.PRIMARY,
+                    AppLocalization.of(context).sendAmounts,
+                    Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
+                    disabled: users.isEmpty,
+                    onPressed: () async {
+                      for (final User user in users) {
+                        final String displayName = user.displayNameOrShortestAddress()!;
 
-                      // for (final TXData txData in requestsToSend) {
-                      //   // AppHomePageState.resendRequest(context, txData);
-                      //   await Sheets.showAppHeightNineSheet(
-                      //       context: context,
-                      //       widget: RequestConfirmSheet(
-                      //         amountRaw: amountRaw,
-                      //         destination: user.address!,
-                      //         contactName: user.getDisplayName(),
-                      //         localCurrency: _localCurrencyMode ? _amountController!.text : null,
-                      //         memo: _memoController!.text,
-                      //       ));
-                      // }
+                        final TextEditingController _amountController =
+                            userMap[displayName]["_amountController"] as TextEditingController;
+                        final TextEditingController _memoController =
+                            userMap[displayName]["_memoController"] as TextEditingController;
+
+                        // final String amountRaw = userMap[displayName]["_amountController"].text as String;
+
+                        // final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
+
+                        final String formattedAmount =
+                            sanitizedAmount(widget.localCurrencyFormat, _amountController.text);
+
+                        String amountRaw;
+                        if (_amountController.text.isEmpty || _amountController.text == "0") {
+                          amountRaw = "0";
+                        } else {
+                          if (_localCurrencyMode) {
+                            amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
+                                widget.localCurrencyFormat,
+                                convertLocalCurrencyToLocalizedCrypto(
+                                    context, widget.localCurrencyFormat, _amountController.text)));
+                          } else {
+                            if (!mounted) return;
+                            amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
+                          }
+                        }
+
+                        await Sheets.showAppHeightNineSheet(
+                            context: context,
+                            widget: SendConfirmSheet(
+                              amountRaw: amountRaw,
+                              destination: user.address!,
+                              contactName: user.getDisplayName(),
+                              localCurrency: _localCurrencyMode ? _amountController.text : null,
+                              memo: _memoController.text,
+                            ));
+                      }
                     },
                   ),
                 ],
               ),
-              //A row with Close button
               Row(
                 children: <Widget>[
                   AppButton.buildAppButton(
@@ -380,7 +401,9 @@ class SplitBillSheetState extends State<SplitBillSheet> {
 
   Widget _buildUserListItem(BuildContext context, User user, StateSetter setState) {
     // get username if it exists:
-    final String? userOrAddress = user.getDisplayName();
+    final String? userOrAddress = user.displayNameOrShortestAddress();
+
+    // userOrAddress ??= Address(user.address)
 
     if (userOrAddress == null) {
       return const SizedBox();
@@ -414,7 +437,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                     ),
                     SizedBox(
                       child: Text(
-                        user.getDisplayName()!,
+                        userOrAddress,
                         style: TextStyle(
                           color: StateContainer.of(context).curTheme.text,
                           fontSize: 14.0,
@@ -487,7 +510,8 @@ class SplitBillSheetState extends State<SplitBillSheet> {
             cryptoAmountStr = _lastCryptoAmount;
           } else {
             _lastLocalCurrencyAmount = _amountController.text;
-            _lastCryptoAmount = convertLocalCurrencyToLocalizedCrypto(context, widget.localCurrencyFormat, _amountController.text);
+            _lastCryptoAmount =
+                convertLocalCurrencyToLocalizedCrypto(context, widget.localCurrencyFormat, _amountController.text);
             cryptoAmountStr = _lastCryptoAmount;
           }
           // setState(() {
@@ -508,7 +532,8 @@ class SplitBillSheetState extends State<SplitBillSheet> {
             }
           } else {
             _lastCryptoAmount = _amountController.text;
-            _lastLocalCurrencyAmount = convertCryptoToLocalCurrency(context, widget.localCurrencyFormat, _amountController.text);
+            _lastLocalCurrencyAmount =
+                convertCryptoToLocalCurrency(context, widget.localCurrencyFormat, _amountController.text);
             localAmountStr = _lastLocalCurrencyAmount;
           }
           Future.delayed(const Duration(milliseconds: 50), () {
@@ -544,7 +569,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
           onPressed: (BuildContext context) {
             setState(() {
               users.remove(user);
-              userMap[user.getDisplayName()!] = null;
+              userMap[user.displayNameOrShortestAddress()!] = null;
             });
           }));
     }
@@ -596,7 +621,8 @@ class SplitBillSheetState extends State<SplitBillSheet> {
         CurrencyFormatter2(
           active: _localCurrencyMode,
           currencyFormat: widget.localCurrencyFormat,
-          maxDecimalDigits: _localCurrencyMode ? widget.localCurrencyFormat.decimalDigits ?? 2 : NumberUtil.maxDecimalDigits,
+          maxDecimalDigits:
+              _localCurrencyMode ? widget.localCurrencyFormat.decimalDigits ?? 2 : NumberUtil.maxDecimalDigits,
         ),
       ],
       onChanged: (String text) {
@@ -699,7 +725,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
       onSubmitted: (String text) {
         // FocusScope.of(context).nextFocus();
         bool foundSelf = false;
-        for (String x in userMap.keys) {
+        for (final String x in userMap.keys) {
           if (x == userAddress) {
             foundSelf = true;
             continue;

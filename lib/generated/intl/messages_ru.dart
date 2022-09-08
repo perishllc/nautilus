@@ -203,6 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Выберите единицу измерения для отображения сумм.\n1 ньяно = 0,000001 НАНО, или \n1 000 000 ньяно = 1 НАНО"),
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage(
             "В настоящее время представлен"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("День назад"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Ошибка дешифрования!"),
         "defaultAccountName":
@@ -305,6 +306,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("% 1 удален из избранного!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Избранное"),
         "featured": MessageLookupByLibrary.simpleMessage("Рекомендуемые"),
+        "fewDaysAgo":
+            MessageLookupByLibrary.simpleMessage("Несколько дней назад"),
+        "fewHoursAgo":
+            MessageLookupByLibrary.simpleMessage("Несколько часов назад"),
+        "fewMinutesAgo":
+            MessageLookupByLibrary.simpleMessage("Несколько минут назад"),
+        "fewSecondsAgo":
+            MessageLookupByLibrary.simpleMessage("Несколько секунд назад"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Аутентификация для резервного копирования Seed."),
         "from": MessageLookupByLibrary.simpleMessage("От"),
@@ -353,6 +362,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Скрыть пустые аккаунты"),
         "home": MessageLookupByLibrary.simpleMessage("Главная"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("Час назад"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Я понимаю риски"),
         "ignore": MessageLookupByLibrary.simpleMessage("Игнорировать"),
@@ -424,6 +434,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Сообщение"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Минимум сумма отправки % 1 NANO "),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("Минуту назад"),
         "mnemonicInvalidWord": MessageLookupByLibrary.simpleMessage(
             "%1 не является допустимым словом"),
         "mnemonicPhrase":
@@ -654,6 +665,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Отправить"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Отправить %1 Nano"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("Отправить суммы"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Произошла ошибка. Попробуйте позже."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Отправить из"),
@@ -762,7 +774,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("Отслеживание отключено"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "Функционал подарочной карты может быть ограничен или вообще не работать, если отслеживание отключено. Мы используем это разрешение ИСКЛЮЧИТЕЛЬНО для этой функции, абсолютно никакие ваши данные не продаются, не собираются и не отслеживаются для каких-либо других целей, кроме функциональности, и мы бы этого не хотели :)"),
+            "Функционал подарочной карты может быть ограничен или вообще не работать, если отслеживание отключено. Мы используем это разрешение ИСКЛЮЧИТЕЛЬНО для этой функции. Абсолютно никакие ваши данные не продаются, не собираются и не отслеживаются на серверной части для каких-либо целей, кроме необходимых."),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Ссылки на подарочные карты не будут работать должным образом"),
         "transactions": MessageLookupByLibrary.simpleMessage("Транзакции"),
@@ -848,6 +860,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Аккаунт только для просмотра"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Отправка отключена на адресах только для просмотра"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("Неделю назад"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Добро пожаловать в Nautilus. Вы можете создать новый кошелек или импортировать уже существующий."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

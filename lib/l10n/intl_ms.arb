@@ -535,6 +535,11 @@
     "type": "text",
     "description": "change_representative_current_header"
   },
+  "dayAgo": "Sehari yang lalu",
+  "@dayAgo": {
+    "type": "text",
+    "description": "history_day_ago"
+  },
   "decryptionError": "Ralat penyahsulitan!",
   "@decryptionError": {
     "type": "text",
@@ -845,6 +850,26 @@
     "type": "text",
     "description": "featured"
   },
+  "fewDaysAgo": "Beberapa hari yang lalu",
+  "@fewDaysAgo": {
+    "type": "text",
+    "description": "history_few_days_ago"
+  },
+  "fewHoursAgo": "Beberapa jam yang lalu",
+  "@fewHoursAgo": {
+    "type": "text",
+    "description": "history_few_hours_ago"
+  },
+  "fewMinutesAgo": "Beberapa minit yang lalu",
+  "@fewMinutesAgo": {
+    "type": "text",
+    "description": "history_few_minutes_ago"
+  },
+  "fewSecondsAgo": "Beberapa saat yang lalu",
+  "@fewSecondsAgo": {
+    "type": "text",
+    "description": "history_few_seconds_ago"
+  },
   "fingerprintSeedBackup": "Konfirm cap jari untuk menyandarkan benih dompet.",
   "@fingerprintSeedBackup": {
     "type": "text",
@@ -994,6 +1019,11 @@
   "@home": {
     "type": "text",
     "description": "home"
+  },
+  "hourAgo": "Satu jam yang lalu",
+  "@hourAgo": {
+    "type": "text",
+    "description": "history_hour_ago"
   },
   "ignore": "Abai",
   "@ignore": {
@@ -1214,6 +1244,11 @@
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
+  },
+  "minuteAgo": "seminit yang lalu",
+  "@minuteAgo": {
+    "type": "text",
+    "description": "history_minute_ago"
   },
   "mnemonicInvalidWord": "%1 bukan perkataan yang sah",
   "@mnemonicInvalidWord": {
@@ -1915,6 +1950,11 @@
     "type": "text",
     "description": "send_amount_confirm"
   },
+  "sendAmounts": "Hantar Jumlah",
+  "@sendAmounts": {
+    "type": "text",
+    "description": "split_bill_send_amounts"
+  },
   "sendError": "Berlaku ralat. Cuba lagi nanti.",
   "@sendError": {
     "type": "text",
@@ -2250,7 +2290,7 @@
     "type": "text",
     "description": "home_tracking_warning"
   },
-  "trackingWarningBodyLong": "Fungsi Kad Hadiah mungkin berkurangan atau tidak berfungsi sama sekali jika penjejakan dilumpuhkan. Kami menggunakan kebenaran ini SECARA EKSKLUSIF untuk ciri ini, sama sekali tiada data anda dijual, dikumpul atau dijejaki untuk tujuan lain selain daripada fungsi, dan kami tidak mahu :)",
+  "trackingWarningBodyLong": "Fungsi Kad Hadiah mungkin berkurangan atau tidak berfungsi sama sekali jika penjejakan dilumpuhkan. Kami menggunakan kebenaran ini EKSKLUSIF untuk ciri ini. Sama sekali tiada data anda dijual, dikumpul atau dijejaki pada bahagian belakang untuk sebarang tujuan yang melebihi keperluan",
   "@trackingWarningBodyLong": {
     "type": "text",
     "description": "tracking_warning_body_long"
@@ -2504,6 +2544,11 @@
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
+  },
+  "weekAgo": "Seminggu yang lalu",
+  "@weekAgo": {
+    "type": "text",
+    "description": "history_week_ago"
   },
   "welcomeText": "Selamat datang ke Nautilus. Untuk bersambung, anda boleh membuat dompet yang baru atau import dompet yang sedia ada.",
   "@welcomeText": {

@@ -535,6 +535,11 @@
     "type": "text",
     "description": "change_representative_current_header"
   },
+  "dayAgo": "לפני יום",
+  "@dayAgo": {
+    "type": "text",
+    "description": "history_day_ago"
+  },
   "decryptionError": "שגיאת פענוח!",
   "@decryptionError": {
     "type": "text",
@@ -845,6 +850,26 @@
     "type": "text",
     "description": "featured"
   },
+  "fewDaysAgo": "לפני מספר ימים",
+  "@fewDaysAgo": {
+    "type": "text",
+    "description": "history_few_days_ago"
+  },
+  "fewHoursAgo": "לפני כמה שעות",
+  "@fewHoursAgo": {
+    "type": "text",
+    "description": "history_few_hours_ago"
+  },
+  "fewMinutesAgo": "לפני כמה דקות",
+  "@fewMinutesAgo": {
+    "type": "text",
+    "description": "history_few_minutes_ago"
+  },
+  "fewSecondsAgo": "לפני כמה שניות",
+  "@fewSecondsAgo": {
+    "type": "text",
+    "description": "history_few_seconds_ago"
+  },
   "fingerprintSeedBackup": "אשר טביעות אצבע בכדי לגבות סיד.",
   "@fingerprintSeedBackup": {
     "type": "text",
@@ -994,6 +1019,11 @@
   "@home": {
     "type": "text",
     "description": "home"
+  },
+  "hourAgo": "לפני שעה",
+  "@hourAgo": {
+    "type": "text",
+    "description": "history_hour_ago"
   },
   "ignore": "התעלם",
   "@ignore": {
@@ -1214,6 +1244,11 @@
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
+  },
+  "minuteAgo": "לפני דקה",
+  "@minuteAgo": {
+    "type": "text",
+    "description": "history_minute_ago"
   },
   "mnemonicInvalidWord": "%1 is not a valid word",
   "@mnemonicInvalidWord": {
@@ -1915,6 +1950,11 @@
     "type": "text",
     "description": "send_amount_confirm"
   },
+  "sendAmounts": "שלח סכומים",
+  "@sendAmounts": {
+    "type": "text",
+    "description": "split_bill_send_amounts"
+  },
   "sendError": "קרתה תקלה. נסה שוב מאוחר יותר",
   "@sendError": {
     "type": "text",
@@ -2250,7 +2290,7 @@
     "type": "text",
     "description": "home_tracking_warning"
   },
-  "trackingWarningBodyLong": "הפונקציונליות של כרטיס המתנה עשויה להיות מופחתת או לא לעבוד בכלל אם המעקב מושבת. אנו משתמשים בהרשאה זו באופן בלעדי לתכונה זו, אף אחד מהנתונים שלך לא נמכר, נאסף או עוקב אחר לשום מטרה אחרת מלבד פונקציונליות, וגם לא נרצה :)",
+  "trackingWarningBodyLong": "הפונקציונליות של כרטיס המתנה עשויה להיות מופחתת או לא לעבוד בכלל אם המעקב מושבת. אנו משתמשים בהרשאה זו באופן בלעדי עבור תכונה זו. אף אחד מהנתונים שלך לא נמכר, נאסף או עוקב ב-backend לכל מטרה מעבר להכרחי",
   "@trackingWarningBodyLong": {
     "type": "text",
     "description": "tracking_warning_body_long"
@@ -2504,6 +2544,11 @@
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
+  },
+  "weekAgo": "לפני שבוע",
+  "@weekAgo": {
+    "type": "text",
+    "description": "history_week_ago"
   },
   "welcomeText": "ברוך הבא לנאטריום. בכדי להמשיך, אתה רשאי לייצר ארנק חדש או לייבא אחד קיים.",
   "@welcomeText": {

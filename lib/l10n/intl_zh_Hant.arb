@@ -535,6 +535,11 @@
     "type": "text",
     "description": "change_representative_current_header"
   },
+  "dayAgo": "一天前",
+  "@dayAgo": {
+    "type": "text",
+    "description": "history_day_ago"
+  },
   "decryptionError": "解密錯誤！",
   "@decryptionError": {
     "type": "text",
@@ -845,6 +850,26 @@
     "type": "text",
     "description": "featured"
   },
+  "fewDaysAgo": "幾天之前",
+  "@fewDaysAgo": {
+    "type": "text",
+    "description": "history_few_days_ago"
+  },
+  "fewHoursAgo": "幾個小時前",
+  "@fewHoursAgo": {
+    "type": "text",
+    "description": "history_few_hours_ago"
+  },
+  "fewMinutesAgo": "幾分鐘前",
+  "@fewMinutesAgo": {
+    "type": "text",
+    "description": "history_few_minutes_ago"
+  },
+  "fewSecondsAgo": "幾秒鐘前",
+  "@fewSecondsAgo": {
+    "type": "text",
+    "description": "history_few_seconds_ago"
+  },
   "fingerprintSeedBackup": "確認指紋或 Face ID，備份錢包種子。",
   "@fingerprintSeedBackup": {
     "type": "text",
@@ -994,6 +1019,11 @@
   "@home": {
     "type": "text",
     "description": "home"
+  },
+  "hourAgo": "一小時前",
+  "@hourAgo": {
+    "type": "text",
+    "description": "history_hour_ago"
   },
   "ignore": "忽略",
   "@ignore": {
@@ -1214,6 +1244,11 @@
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
+  },
+  "minuteAgo": "一分鐘前",
+  "@minuteAgo": {
+    "type": "text",
+    "description": "history_minute_ago"
   },
   "mnemonicInvalidWord": "%1 不是有效的詞語。",
   "@mnemonicInvalidWord": {
@@ -1915,6 +1950,11 @@
     "type": "text",
     "description": "send_amount_confirm"
   },
+  "sendAmounts": "發送金額",
+  "@sendAmounts": {
+    "type": "text",
+    "description": "split_bill_send_amounts"
+  },
   "sendError": "發生錯誤。稍後再試。",
   "@sendError": {
     "type": "text",
@@ -2250,7 +2290,7 @@
     "type": "text",
     "description": "home_tracking_warning"
   },
-  "trackingWarningBodyLong": "如果禁用跟踪，禮品卡功能可能會減少或根本無法使用。我們僅將此權限用於此功能，絕對不會出於功能以外的任何其他目的出售、收集或跟踪您的數據，我們也不想:)",
+  "trackingWarningBodyLong": "如果禁用跟踪，禮品卡功能可能會減少或根本無法使用。我們將此權限專門用於此功能。絕對不會出於任何不必要的目的在後端出售、收集或跟踪您的任何數據",
   "@trackingWarningBodyLong": {
     "type": "text",
     "description": "tracking_warning_body_long"
@@ -2504,6 +2544,11 @@
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
+  },
+  "weekAgo": "一星期前",
+  "@weekAgo": {
+    "type": "text",
+    "description": "history_week_ago"
   },
   "welcomeText": "歡迎來到 Nautilus。接著您可建立新錢包或匯入現有錢包",
   "@welcomeText": {

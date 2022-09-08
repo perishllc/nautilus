@@ -146,8 +146,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   // List<TXData> _txData = [];
   List<TXData> _txRecords = [];
 
-  // infinite scroll:
+  // "infinite scroll":
   late ScrollController _scrollController;
+  int _maxHistItems = 10;
+  bool _listExtended = false;
+  double _lastExtentPixels = 0;
+  int _trueMaxHistItems = 10000;
   late ScrollController _xmrScrollController;
   late TabController _tabController;
 
@@ -157,11 +161,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   // FCM instance
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-
-  // card time format:
-  // String CARD_TIME_FORMAT = "MMM d, h:mm a";
-  // ignore: non_constant_identifier_names
-  String CARD_TIME_FORMAT = "MMM dd, HH:mm";
 
   RateMyApp rateMyApp = RateMyApp(
     preferencesPrefix: 'rateMyApp_',
@@ -721,7 +720,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     _updateUsers();
     // _updateTXData();
     // infinite scroll:
-    _scrollController = ScrollController() /*..addListener(_scrollListener)*/;
+    _scrollController = ScrollController()..addListener(_scrollListener);
     _xmrScrollController = ScrollController() /*..addListener(_scrollListener)*/;
     _tabController = TabController(vsync: this, length: 2);
     _tabController.addListener(() {
@@ -896,6 +895,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     );
     // ignore the dismissal of the alert, since it's the highest priority:
     StateContainer.of(context).addActiveOrSettingsAlert(alert, null);
+    if (StateContainer.of(context).wallet!.loading) {
+      setState(() {
+        StateContainer.of(context).wallet!.loading = false;
+      });
+    }
     return;
   }
 
@@ -1187,6 +1191,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     // User changed account
     _switchAccountSub = EventTaxiImpl.singleton().registerTo<AccountChangedEvent>().listen((AccountChangedEvent event) {
       setState(() {
+        _maxHistItems = 20; // reset max history items
         _startAnimation();
         StateContainer.of(context).wallet!.loading = true;
         StateContainer.of(context).updateWallet(account: event.account!);
@@ -1243,7 +1248,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   void dispose() {
     _destroyBus();
     WidgetsBinding.instance.removeObserver(this);
-    // _scrollController.removeListener(_scrollListener);
+    _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
     _xmrScrollController.dispose();
     _tabController.dispose();
@@ -1290,25 +1295,30 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
   }
 
-  // void _scrollListener() {
-  // print(_scrollController.position.extentAfter);
-  // if (_scrollController.position.extentAfter < 500) {
-  //   // check if the oldest item is the initial block:
-  //   if (_historyListMap[StateContainer.of(context).wallet!.address] != null && _historyListMap[StateContainer.of(context).wallet!.address]!.isNotEmpty) {
-  //     final List<AccountHistoryResponseItem> histList = _historyListMap[StateContainer.of(context).wallet!.address]!;
-
-  //     // histList[0] is the most recent block with the highest height (120)
-  //     // histList[1] is the second most recent block with the next highest height (119)
-  //     // histList[120] is the oldest block with the lowest height (1)
-
-  //     if (histList[histList.length - 1].height! > 1) {
-  //       // we don't have all of the blocks yet, so we need to fetch more
-  //       // TODO: implement this
-  //       // StateContainer.of(context).requestUpdate(start: StateContainer.of(context).wallet.history.length, count: 50);
-  //     }
-  //   }
-  // }
-  // }
+  // TODO: this is honestly a terrible system, but it works really well:
+  void _scrollListener() {
+    // print("aaaa");
+    if ((_historyListMap[StateContainer.of(context).wallet!.address]?.isEmpty ?? true) ||
+        (StateContainer.of(context).wallet?.loading ?? true)) {
+      return;
+    }
+    if (!_listExtended && _scrollController.position.extentAfter < 5) {
+      if (_trueMaxHistItems >= _maxHistItems) {
+        setState(() {
+          _listExtended = true;
+          _lastExtentPixels = _scrollController.position.pixels;
+          _maxHistItems += 2;
+          generateUnifiedList(fastUpdate: true);
+        });
+      }
+    }
+    if (_listExtended && (_scrollController.position.extentAfter > 10 || _scrollController.position.extentAfter < 2)) {
+      setState(() {
+        _listExtended = false;
+        _lastExtentPixels = _scrollController.position.pixels;
+      });
+    }
+  }
 
   int currentConfHeight = -1;
 
@@ -1649,6 +1659,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       for (final dynamic dynamicItem in unifiedList) {
         bool shouldRemove = true;
 
+        if (dynamicItem is SizedBox) continue;
+
         final TXData txDetails = dynamicItem is TXData
             ? dynamicItem
             : convertHistItemToTXData(dynamicItem as AccountHistoryResponseItem,
@@ -1701,8 +1713,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         }
 
         if (localTimestamp != null) {
-          final String timeStr =
-              DateFormat(CARD_TIME_FORMAT).format(DateTime.fromMillisecondsSinceEpoch(localTimestamp * 1000));
+          final String timeStr = getTimeAgoString(context, localTimestamp);
           if (timeStr.toLowerCase().contains(lowerCaseSearch)) {
             shouldRemove = false;
           }
@@ -1809,9 +1820,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   Future<void> generateUnifiedList({bool fastUpdate = false}) async {
     ListModel<dynamic>? ULM = _unifiedListMap[StateContainer.of(context).wallet!.address];
-    // if (StateContainer.of(context).activeAlert != null) {
-    //   ULM = _unifiedListMap["${StateContainer.of(context).wallet!.address}alert"];
-    // }
+
     if (StateContainer.of(context).activeAlerts.isNotEmpty) {
       ULM = _unifiedListMap["${StateContainer.of(context).wallet!.address}alert"];
     }
@@ -1823,7 +1832,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
 
     if (ULM.length > 0) {
-      log.d("generating unified list! fastUpdate: $fastUpdate");
+      // log.d("generating unified list! fastUpdate: $fastUpdate");
     }
 
     // this isn't performant but w/e
@@ -1847,6 +1856,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     unifiedList = List<dynamic>.from(historyList
         .where((AccountHistoryResponseItem element) => ![BlockTypes.CHANGE, BlockTypes.OPEN].contains(element.subtype))
         .toList());
+    // only work with the first _maxHistItems:
+    _trueMaxHistItems = unifiedList.length;
+    unifiedList = unifiedList.sublist(0, min(unifiedList.length, _maxHistItems));
 
     final Set<String?> uuids = {};
     final List<int?> idsToRemove = [];
@@ -1985,8 +1997,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         }
 
         if (localTimestamp != null) {
-          final String timeStr =
-              DateFormat(CARD_TIME_FORMAT).format(DateTime.fromMillisecondsSinceEpoch(localTimestamp * 1000));
+          final String timeStr = getTimeAgoString(context, localTimestamp);
           if (timeStr.toLowerCase().contains(lowerCaseSearch)) {
             shouldRemove = false;
           }
@@ -2381,7 +2392,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 children: <Widget>[
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
+                      borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS),
                       boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
                     ),
                     height: 55,
@@ -2394,7 +2405,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                         backgroundColor: !_receiveDisabled
                             ? StateContainer.of(context).curTheme.primary
                             : StateContainer.of(context).curTheme.primary60,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
                         foregroundColor:
                             !_receiveDisabled ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
                         // highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
@@ -3843,8 +3854,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                                   caseSensitive: false,
                                   words: false,
                                   term: _searchController.text,
-                                  text: DateFormat(CARD_TIME_FORMAT)
-                                      .format(DateTime.fromMillisecondsSinceEpoch(txDetails.request_time! * 1000)),
+                                  text: getTimeAgoString(context, txDetails.request_time!),
                                   textAlign: TextAlign.start,
                                   textStyle: TextStyle(
                                       fontFamily: "OverpassMono",
@@ -4032,6 +4042,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
 
     final dynamic indexedItem = _unifiedListMap[ADR]![localIndex];
+    if (indexedItem is SizedBox) return indexedItem;
+
     final TXData txDetails = indexedItem is TXData
         ? indexedItem
         : convertHistItemToTXData(indexedItem as AccountHistoryResponseItem,

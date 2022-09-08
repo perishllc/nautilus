@@ -296,19 +296,31 @@ class AppDialogs {
             ));
   }
 
-  static Future<bool> showTrackingDialog(BuildContext context) async {
+  static Future<bool?> showTrackingDialog(BuildContext context, [bool dismissable = false]) async {
     final bool? option = await showDialog<bool>(
         context: context,
         barrierColor: StateContainer.of(context).curTheme.barrier,
-        barrierDismissible: false,
+        barrierDismissible: dismissable,
         builder: (BuildContext context) {
           return AppSimpleDialog(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
-            title: Text(
-              AppLocalization.of(context).trackingHeader,
-              style: AppStyles.textStyleDialogHeader(context),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  AppLocalization.of(context).trackingHeader,
+                  style: AppStyles.textStyleDialogHeader(context),
+                ),
+                AppDialogs.infoButton(
+                  context,
+                  () {
+                    AppDialogs.showInfoDialog(context, AppLocalization.of(context).trackingHeader,
+                        AppLocalization.of(context).trackingWarningBodyLong);
+                  },
+                )
+              ],
             ),
             children: <Widget>[
               AppSimpleDialogOption(
@@ -338,6 +350,6 @@ class AppDialogs {
             ],
           );
         });
-    return option ?? false;
+    return option;
   }
 }

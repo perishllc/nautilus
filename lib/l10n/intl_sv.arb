@@ -535,6 +535,11 @@
     "type": "text",
     "description": "change_representative_current_header"
   },
+  "dayAgo": "En dag sen",
+  "@dayAgo": {
+    "type": "text",
+    "description": "history_day_ago"
+  },
   "decryptionError": "Dekryptering Fel!",
   "@decryptionError": {
     "type": "text",
@@ -845,6 +850,26 @@
     "type": "text",
     "description": "featured"
   },
+  "fewDaysAgo": "För några dagar sedan",
+  "@fewDaysAgo": {
+    "type": "text",
+    "description": "history_few_days_ago"
+  },
+  "fewHoursAgo": "Några timmar sen",
+  "@fewHoursAgo": {
+    "type": "text",
+    "description": "history_few_hours_ago"
+  },
+  "fewMinutesAgo": "Några minuter sedan",
+  "@fewMinutesAgo": {
+    "type": "text",
+    "description": "history_few_minutes_ago"
+  },
+  "fewSecondsAgo": "Några sekunder sedan",
+  "@fewSecondsAgo": {
+    "type": "text",
+    "description": "history_few_seconds_ago"
+  },
   "fingerprintSeedBackup": "Bekräfta fingeravtryck för att säkerhetskopiera plånboks-seed.",
   "@fingerprintSeedBackup": {
     "type": "text",
@@ -994,6 +1019,11 @@
   "@home": {
     "type": "text",
     "description": "home"
+  },
+  "hourAgo": "En timme sedan",
+  "@hourAgo": {
+    "type": "text",
+    "description": "history_hour_ago"
   },
   "ignore": "Ignorera",
   "@ignore": {
@@ -1214,6 +1244,11 @@
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
+  },
+  "minuteAgo": "För en minut sedan",
+  "@minuteAgo": {
+    "type": "text",
+    "description": "history_minute_ago"
   },
   "mnemonicInvalidWord": "%1 är inget giltigt ord",
   "@mnemonicInvalidWord": {
@@ -1915,6 +1950,11 @@
     "type": "text",
     "description": "send_amount_confirm"
   },
+  "sendAmounts": "Skicka belopp",
+  "@sendAmounts": {
+    "type": "text",
+    "description": "split_bill_send_amounts"
+  },
   "sendError": "Ett fel inträffade. Försök igen senare.",
   "@sendError": {
     "type": "text",
@@ -2250,7 +2290,7 @@
     "type": "text",
     "description": "home_tracking_warning"
   },
-  "trackingWarningBodyLong": "Presentkortsfunktionaliteten kan vara reducerad eller inte fungera alls om spårning är inaktiverat. Vi använder denna behörighet EXKLUSIVT för denna funktion, absolut ingen av dina data säljs, samlas in eller spåras för något annat ändamål än funktionalitet, och det skulle vi inte heller vilja :)",
+  "trackingWarningBodyLong": "Presentkortsfunktionaliteten kan vara reducerad eller inte fungera alls om spårning är inaktiverat. Vi använder denna behörighet EXKLUSIVT för den här funktionen. Absolut ingen av dina uppgifter säljs, samlas in eller spåras på backend för något ändamål utöver nödvändigt",
   "@trackingWarningBodyLong": {
     "type": "text",
     "description": "tracking_warning_body_long"
@@ -2504,6 +2544,11 @@
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
+  },
+  "weekAgo": "En vecka sedan",
+  "@weekAgo": {
+    "type": "text",
+    "description": "history_week_ago"
   },
   "welcomeText": "Välkommen till Nautilus. För att fortsätta, behöver du skapa en ny plånbok eller importera en befintlig.",
   "@welcomeText": {

@@ -195,6 +195,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vælg, hvilken enhed der skal vises beløb i.\n1 nyano = 0.000001 NANO, eller \n1,000,000 Nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("V současné době zastupuje"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("For en dag siden"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Dekryptering Fejl!"),
         "defaultAccountName":
@@ -297,6 +298,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "% 1 er blevet fjernet fra favoritter!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("favoritter"),
         "featured": MessageLookupByLibrary.simpleMessage("Fremhævede"),
+        "fewDaysAgo": MessageLookupByLibrary.simpleMessage("For få dage siden"),
+        "fewHoursAgo":
+            MessageLookupByLibrary.simpleMessage("For et par timer siden"),
+        "fewMinutesAgo":
+            MessageLookupByLibrary.simpleMessage("Et par minutter siden"),
+        "fewSecondsAgo":
+            MessageLookupByLibrary.simpleMessage("For et par sekunder siden"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Ověřte se pro zálohu semínka."),
         "from": MessageLookupByLibrary.simpleMessage("Fra"),
@@ -341,6 +349,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Skjul tomme konti"),
         "home": MessageLookupByLibrary.simpleMessage("Hjem"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("En time siden"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Chápu rizika"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ignorovat"),
@@ -412,6 +421,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Zpráva"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Minimální částka pro odeslání je% 1 NANO"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("For et minut siden"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("% 1 není platné slovo"),
         "mnemonicPhrase":
@@ -638,6 +648,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Poslat"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Odeslat %1 NANO"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("Send beløb"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Došlo k chybě. Zkuste to později."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Odeslat z"),
@@ -742,7 +753,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("Sporing deaktiveret"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "Gavekortfunktionaliteten kan være reduceret eller slet ikke fungere, hvis sporing er deaktiveret. Vi bruger denne tilladelse EKSKLUSIVT til denne funktion, absolut ingen af dine data sælges, indsamles eller spores til andre formål end funktionalitet, og det vil vi heller ikke :)"),
+            "Gavekortfunktionaliteten kan være reduceret eller slet ikke fungere, hvis sporing er deaktiveret. Vi bruger denne tilladelse EKSKLUSIVT til denne funktion. Absolut ingen af dine data sælges, indsamles eller spores på backend til noget formål ud over nødvendigt"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Gavekortlinks vil ikke fungere korrekt"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transakce"),
@@ -827,6 +838,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Watch Only-konto"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Afsendelser er deaktiveret på vagtadresser"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("En uge siden"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Vítejte v Nautilus. Nejprve můžete vytvořit novou peněženku nebo importovat stávající."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

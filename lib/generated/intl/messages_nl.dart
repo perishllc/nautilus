@@ -201,6 +201,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kies in welke eenheid de bedragen moeten worden weergegeven.\n1 nyano = 0,000001 NANO, of \n1.000.000 nyano = 1 NANO"),
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage(
             "Jouw huidige vertegenwoordiger is"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("Een dag geleden"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Decryption-fout!"),
         "defaultAccountName":
@@ -303,6 +304,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "%1 is verwijderd uit favorieten!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Favorites"),
         "featured": MessageLookupByLibrary.simpleMessage("Uitgelicht"),
+        "fewDaysAgo":
+            MessageLookupByLibrary.simpleMessage("Een paar dagen geleden"),
+        "fewHoursAgo":
+            MessageLookupByLibrary.simpleMessage("Een paar uur geleden"),
+        "fewMinutesAgo":
+            MessageLookupByLibrary.simpleMessage("Een paar minuten geleden"),
+        "fewSecondsAgo":
+            MessageLookupByLibrary.simpleMessage("Een paar seconden geleden"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Bevestig je vingerafdruk om een back-up te maken."),
         "from": MessageLookupByLibrary.simpleMessage("Van"),
@@ -349,6 +358,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Lege accounts verbergen"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("Een uur geleden"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Ik begrijp de risico\'s"),
         "ignore": MessageLookupByLibrary.simpleMessage("Negeren"),
@@ -422,6 +432,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Bericht"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Het minimum te verzenden bedrag is %1 NANO"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("Een minuut geleden"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 is geen geldig woord"),
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("Woordvolgorde"),
@@ -647,6 +658,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Verstuur"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Verstuur %1 Nano"),
+        "sendAmounts":
+            MessageLookupByLibrary.simpleMessage("Bedragen verzenden"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Er is een fout opgetreden. Probeer het later nog eens."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Verstuur vanaf"),
@@ -753,7 +766,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("Volgen uitgeschakeld"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "De functionaliteit van de cadeaukaart kan worden verminderd of helemaal niet werken als tracking is uitgeschakeld. We gebruiken deze toestemming UITSLUITEND voor deze functie, absoluut geen van uw gegevens wordt verkocht, verzameld of gevolgd voor enig ander doel dan functionaliteit, en dat zouden we ook niet willen :)"),
+            "De functionaliteit van de cadeaukaart kan worden verminderd of helemaal niet werken als tracking is uitgeschakeld. We gebruiken deze toestemming UITSLUITEND voor deze functie. Absoluut geen van uw gegevens wordt verkocht, verzameld of gevolgd op de backend voor enig doel dat verder gaat dan nodig is"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Cadeaubonlinks werken niet goed"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transacties"),
@@ -838,6 +851,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bekijk alleen-account"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Verzenden is uitgeschakeld op alleen-kijken-adressen"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("Een week geleden"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Welkom bij Nautilus. Creëer een nieuwe wallet of importeer een bestaande wallet om verder te gaan."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

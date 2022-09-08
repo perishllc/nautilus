@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 
@@ -24,7 +25,8 @@ int findDifferentCharacterInString(String str1, String str2) {
 
 /// Input formatter for Crypto/Fiat amounts
 class CurrencyFormatter2 extends TextInputFormatter {
-  CurrencyFormatter2({required this.currencyFormat, this.maxDecimalDigits = NumberUtil.maxDecimalDigits, this.active = false});
+  CurrencyFormatter2(
+      {required this.currencyFormat, this.maxDecimalDigits = NumberUtil.maxDecimalDigits, this.active = false});
 
   NumberFormat currencyFormat;
   int maxDecimalDigits;
@@ -100,7 +102,9 @@ class CurrencyFormatter2 extends TextInputFormatter {
     }
 
     if (workingText.length == 1) {
-      if (workingText != decimalSeparator && workingText != currencySymbol && !["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].contains(workingText)) {
+      if (workingText != decimalSeparator &&
+          workingText != currencySymbol &&
+          !["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].contains(workingText)) {
         return same;
       }
     }
@@ -112,7 +116,8 @@ class CurrencyFormatter2 extends TextInputFormatter {
     }
 
     // make sure that the text follows the format of the local currency:
-    String localizedAmount = convertCryptoToLocalAmount(workingText.replaceAll(commaSeparator, "").replaceAll(currencySymbol, ""), currencyFormat);
+    String localizedAmount = convertCryptoToLocalAmount(
+        workingText.replaceAll(commaSeparator, "").replaceAll(currencySymbol, ""), currencyFormat);
     if (active) {
       localizedAmount = currencySymbol + localizedAmount.trim();
     } else {
@@ -224,11 +229,14 @@ String convertCryptoToLocalAmount(String localAmount, NumberFormat currencyForma
   // print("firstPart: " + firstPart);
   // print("secondPart: " + secondPart);
 
-  final NumberFormat formatCurrency =
-      NumberFormat.simpleCurrency(decimalDigits: currencyFormat.decimalDigits, locale: currencyFormat.locale, name: currencyFormat.currencyName);
+  final NumberFormat formatCurrency = NumberFormat.simpleCurrency(
+      decimalDigits: currencyFormat.decimalDigits, locale: currencyFormat.locale, name: currencyFormat.currencyName);
   String formattedCurrency = formatCurrency.format(int.parse(firstPart));
 
-  formattedCurrency = formattedCurrency.split(currencyFormat.symbols.DECIMAL_SEP)[0].replaceAll(currencyFormat.currencySymbol, "").replaceAll(" ", "");
+  formattedCurrency = formattedCurrency
+      .split(currencyFormat.symbols.DECIMAL_SEP)[0]
+      .replaceAll(currencyFormat.currencySymbol, "")
+      .replaceAll(" ", "");
   return formattedCurrency + secondPart;
 }
 
@@ -239,12 +247,15 @@ String convertLocalCurrencyToLocalizedCrypto(BuildContext context, NumberFormat 
   }
   final Decimal valueLocal = Decimal.parse(sanitizedAmt);
   final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-  final String nanoAmount = NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
+  final String nanoAmount =
+      NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
   return convertCryptoToLocalAmount(nanoAmount, localCurrencyFormat);
 }
 
 String convertCryptoToLocalCurrency(BuildContext context, NumberFormat localCurrencyFormat, String amount) {
-  String sanitizedAmt = amount.replaceAll(localCurrencyFormat.symbols.GROUP_SEP, "").replaceAll(localCurrencyFormat.symbols.DECIMAL_SEP, ".");
+  String sanitizedAmt = amount
+      .replaceAll(localCurrencyFormat.symbols.GROUP_SEP, "")
+      .replaceAll(localCurrencyFormat.symbols.DECIMAL_SEP, ".");
   sanitizedAmt = NumberUtil.sanitizeNumber(sanitizedAmt);
   if (sanitizedAmt.isEmpty) {
     return "";
@@ -253,7 +264,8 @@ String convertCryptoToLocalCurrency(BuildContext context, NumberFormat localCurr
   final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
   sanitizedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2);
 
-  return (localCurrencyFormat.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, localCurrencyFormat)).replaceAll(" ", "");
+  return (localCurrencyFormat.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, localCurrencyFormat))
+      .replaceAll(" ", "");
 }
 
 /// Input formatter that ensures text starts with @
@@ -430,7 +442,8 @@ String getRawAsThemeAwareFormattedAmount(BuildContext context, String? raw) {
   // }
 
   final NumberFormat currencyFormat = NumberFormat.currency(
-      locale: StateContainer.of(context).curCurrency.getLocale().toString(), symbol: StateContainer.of(context).curCurrency.getCurrencySymbol());
+      locale: StateContainer.of(context).curCurrency.getLocale().toString(),
+      symbol: StateContainer.of(context).curCurrency.getCurrencySymbol());
 
   //final String formattedAmount =
   //    currencyFormat.format(double.parse(amountStr)).replaceAll(StateContainer.of(context).curCurrency.getCurrencySymbol(), "").replaceAll(" ", "");
@@ -460,4 +473,51 @@ String getThemeCurrencyMode(BuildContext context) {
   } else {
     return "NANO";
   }
+}
+
+// card time format:
+// String CARD_TIME_FORMAT = "MMM d, h:mm a";
+// ignore: non_constant_identifier_names
+String CARD_TIME_FORMAT = "MMM dd, HH:mm";
+String getTimeAgoString(BuildContext context, int epochTime) {
+  String timeStr = DateFormat(CARD_TIME_FORMAT).format(DateTime.fromMillisecondsSinceEpoch(epochTime * 1000));
+
+  // current time in epoch seconds:
+  final int now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+
+  // time difference in seconds:
+  final int diff = now - epochTime;
+
+  // check if it's a few seconds ago, a minute ago, etc.
+
+  if (diff < 60) {
+    // a few seconds ago
+    timeStr = AppLocalization.of(context).fewSecondsAgo;
+  } else if (diff < 120) {
+    // a minute ago
+    timeStr = AppLocalization.of(context).minuteAgo;
+  } else if (diff < 3600) {
+    // 2-60 minutes ago
+    timeStr = AppLocalization.of(context).fewMinutesAgo;
+  } else if (diff < 7200) {
+    // 1-2 hours ago
+    timeStr = AppLocalization.of(context).hourAgo;
+  } else if (diff < 86400) {
+    // 2-24 hours ago
+    timeStr = AppLocalization.of(context).fewHoursAgo;
+  } else if (diff < 172800) {
+    // 24-48 hours ago
+    timeStr = AppLocalization.of(context).dayAgo;
+  } else if (diff < 604800) {
+    // 2-7 days ago
+    timeStr = AppLocalization.of(context).fewDaysAgo;
+  } else if (diff < 1209600) {
+    // 1-2 weeks ago
+    timeStr = AppLocalization.of(context).weekAgo;
+  }
+
+  return timeStr;
+
+  // final String timeAgo = timeago.format(date, locale: StateContainer.of(context).curLanguage.getLocale().toString());
+  // return timeAgo;
 }

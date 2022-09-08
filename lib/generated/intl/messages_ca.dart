@@ -196,6 +196,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Choose which unit to display amounts in.\n1 nyano = 0.000001 NANO, or \n1,000,000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("V současné době zastupuje"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("Fa un dia"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Decryption Error!"),
         "defaultAccountName":
@@ -298,6 +299,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "%1 has been removed from favorites!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Favorites"),
         "featured": MessageLookupByLibrary.simpleMessage("Featured"),
+        "fewDaysAgo": MessageLookupByLibrary.simpleMessage("Fa uns dies"),
+        "fewHoursAgo": MessageLookupByLibrary.simpleMessage("Fa unes hores"),
+        "fewMinutesAgo": MessageLookupByLibrary.simpleMessage("Fa uns minuts"),
+        "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("Fa uns segons"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Ověřte se pro zálohu semínka."),
         "from": MessageLookupByLibrary.simpleMessage("From"),
@@ -342,6 +347,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Amaga els comptes buits"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("Fa una hora"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Chápu rizika"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ignorovat"),
@@ -413,6 +419,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Zpráva"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Minimální částka pro odeslání je% 1 NANO"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("Fa un minut"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("% 1 není platné slovo"),
         "mnemonicPhrase":
@@ -639,6 +646,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Poslat"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Odeslat %1 NANO"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("Envia quantitats"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Došlo k chybě. Zkuste to později."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Odeslat z"),
@@ -746,7 +754,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("Seguiment desactivat"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "La funcionalitat de la targeta regal pot reduir-se o no funcionar en absolut si el seguiment està desactivat. Utilitzem aquest permís EXCLUSIVAMENT per a aquesta funció, absolutament cap de les vostres dades es ven, es recull o es fa un seguiment per a cap altre propòsit que no sigui la funcionalitat, ni voldríem :)"),
+            "La funcionalitat de la targeta regal pot reduir-se o no funcionar en absolut si el seguiment està desactivat. Utilitzem aquest permís EXCLUSIVAMENT per a aquesta funció. Absolutament cap de les vostres dades es ven, es recull o es fa un seguiment al backend per a cap propòsit més enllà del necessari"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Els enllaços de targetes regal no funcionaran correctament"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transakce"),
@@ -831,6 +839,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Compte de només visualització"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Els enviaments estan desactivats a les adreces només de rellotge"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("Fa una setmana"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Vítejte v Nautilus. Nejprve můžete vytvořit novou peněženku nebo importovat stávající."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

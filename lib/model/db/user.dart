@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:quiver/core.dart';
 
 part 'user.g.dart';
@@ -60,7 +61,7 @@ class User {
   int? last_updated;
   @JsonKey(name: 'aliases')
   List<String?>? aliases;
-  
+
   User(
       {this.username,
       this.address,
@@ -114,6 +115,12 @@ class User {
       // fall back to nickname if username is empty:
       return "★${nickname!}";
     }
+    return displayName;
+  }
+
+  String? displayNameOrShortestAddress({bool ignoreNickname = false}) {
+    String? displayName = getDisplayName(ignoreNickname: ignoreNickname);
+    displayName ??= Address(address).getShortestString();
     return displayName;
   }
 

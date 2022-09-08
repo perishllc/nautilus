@@ -194,6 +194,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Choose which unit to display amounts in.\n1 nyano = 0.000001 NANO, or \n1,000,000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Currently Represented By"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("A day ago"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Decryption Error!"),
         "defaultAccountName":
@@ -295,6 +296,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "%1 has been removed from favorites!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Favorites"),
         "featured": MessageLookupByLibrary.simpleMessage("Featured"),
+        "fewDaysAgo": MessageLookupByLibrary.simpleMessage("A few days ago"),
+        "fewHoursAgo": MessageLookupByLibrary.simpleMessage("A few hours ago"),
+        "fewMinutesAgo":
+            MessageLookupByLibrary.simpleMessage("A few minutes ago"),
+        "fewSecondsAgo":
+            MessageLookupByLibrary.simpleMessage("A few seconds ago"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Authenticate to backup seed."),
         "from": MessageLookupByLibrary.simpleMessage("From"),
@@ -340,6 +347,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Hide Empty Accounts"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("An hour ago"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ignore"),
@@ -407,6 +415,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Message"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Minimum send amount is %1 %2"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("A minute ago"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 is not a valid word"),
         "mnemonicPhrase":
@@ -625,6 +634,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Can\'t request from self"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "sendAmountConfirm": MessageLookupByLibrary.simpleMessage("Send %1 %2"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("Send Amounts"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "An error occurred. Try again later."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Send From"),
@@ -721,7 +731,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("Tracking Disabled"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature, absolutely none of your data is sold, collected or tracked for any other purpose other than functionality, nor would we want to :)"),
+            "Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature. Absolutely none of your data is sold, collected or tracked on the backend for any purpose beyond necessary"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Gift Card Links will not function properly"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transactions"),
@@ -805,6 +815,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Watch Only Account"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Sends are disabled on watch only addresses"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("A week ago"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(""),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Welcome to Nautilus. To start, create a new wallet or import an existing one."),

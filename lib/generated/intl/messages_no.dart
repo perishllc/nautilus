@@ -197,6 +197,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Velg hvilken enhet du vil vise beløp i.\n1 nyano = 0.000001 NANO, eller \n1 000,000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Aktuell representant"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("En dag siden"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Dekryptering Feil!"),
         "defaultAccountName":
@@ -299,6 +300,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "%1 er fjernet fra favoritter!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("favoritter"),
         "featured": MessageLookupByLibrary.simpleMessage("Utvalgte"),
+        "fewDaysAgo":
+            MessageLookupByLibrary.simpleMessage("For noen dager siden"),
+        "fewHoursAgo":
+            MessageLookupByLibrary.simpleMessage("For noen timer siden"),
+        "fewMinutesAgo":
+            MessageLookupByLibrary.simpleMessage("Noen minutter siden"),
+        "fewSecondsAgo":
+            MessageLookupByLibrary.simpleMessage("Noen få sekunder siden"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Verifiser for å sikkerhetskopiere Seed."),
         "from": MessageLookupByLibrary.simpleMessage("Fra"),
@@ -345,6 +354,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Skjul tomme kontoer"),
         "home": MessageLookupByLibrary.simpleMessage("Hjem"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("En time siden"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Jeg forstår risikoene"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ignorer"),
@@ -416,6 +426,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Melding"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Minste overførselsbeløp er %1 NANO"),
+        "minuteAgo":
+            MessageLookupByLibrary.simpleMessage("For et minutt siden"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 er ikke et gyldig ord"),
         "mnemonicPhrase":
@@ -643,6 +655,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Send %1 NANO"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("Send beløp"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Det oppsto en feil. Prøv igjen senere."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Send fra"),
@@ -743,7 +756,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("Sporing deaktivert"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "Gavekortfunksjonaliteten kan være redusert eller ikke fungere i det hele tatt hvis sporing er deaktivert. Vi bruker denne tillatelsen EKSKLUSIVT for denne funksjonen, absolutt ingen av dataene dine selges, samles inn eller spores for andre formål enn funksjonalitet, og det vil vi heller ikke :)"),
+            "Gavekortfunksjonaliteten kan være redusert eller ikke fungere i det hele tatt hvis sporing er deaktivert. Vi bruker denne tillatelsen EKSKLUSIVT for denne funksjonen. Absolutt ingen av dataene dine selges, samles inn eller spores på backend for noe formål utover nødvendig"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Gavekortlenker vil ikke fungere skikkelig"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transaksjoner"),
@@ -828,6 +841,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bare se konto"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Sending er deaktivert på adresser som kun er på vakt"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("En uke siden"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Velkommen til Nautilus. For å starte, kan du opprette en ny lommebok eller importere en eksisterende."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

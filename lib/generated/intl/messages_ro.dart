@@ -197,6 +197,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Alegeți în ce unitate să afișați sumele.\n1 nyano = 0.000001 NANO, sau \n1.000,000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Reprezentantul curent:"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("Acum o zi"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Eroare de decriptare!"),
         "defaultAccountName":
@@ -303,6 +304,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "% 1 a fost eliminat din favorite!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Favorite"),
         "featured": MessageLookupByLibrary.simpleMessage("Recomandate"),
+        "fewDaysAgo":
+            MessageLookupByLibrary.simpleMessage("Cu câteva zile în urmă"),
+        "fewHoursAgo": MessageLookupByLibrary.simpleMessage("Acum câteva ore"),
+        "fewMinutesAgo":
+            MessageLookupByLibrary.simpleMessage("Acum câteva minute"),
+        "fewSecondsAgo":
+            MessageLookupByLibrary.simpleMessage("Acum câteva secunde"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Confirmați cu amprenta pentru a copia seed-ul."),
         "from": MessageLookupByLibrary.simpleMessage("De la"),
@@ -348,6 +356,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Ascunde conturile goale"),
         "home": MessageLookupByLibrary.simpleMessage("Acasă"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("Acum o oră"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Înțeleg riscurile"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ignoră"),
@@ -419,6 +428,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Mesaj"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Suma minimă de trimitere este% 1% 2"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("Un minut în urmă"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 nu este un cuvânt valid"),
         "mnemonicPhrase":
@@ -645,6 +655,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Trimite"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Trimite %1 NANO"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("Trimiteți sume"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "A apărut o eroare. Încercați din nou mai târziu."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Trimite de la"),
@@ -752,7 +763,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("Urmărire dezactivată"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "Funcționalitatea cardului cadou poate fi redusă sau să nu funcționeze deloc dacă urmărirea este dezactivată. Folosim această permisiune EXCLUSIV pentru această caracteristică, absolut niciuna dintre datele dumneavoastră nu este vândută, colectată sau urmărită în alt scop decât funcționalitatea și nici nu am dori să facem acest lucru :)"),
+            "Funcționalitatea cardului cadou poate fi redusă sau să nu funcționeze deloc dacă urmărirea este dezactivată. Folosim această permisiune EXCLUSIV pentru această caracteristică. Absolut niciuna dintre datele dvs. nu este vândută, colectată sau urmărită pe backend pentru orice scop care nu este necesar"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Link-urile cardurilor cadou nu vor funcționa corect"),
         "transactions": MessageLookupByLibrary.simpleMessage("Tranzacții"),
@@ -839,6 +850,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cont numai pentru vizionare"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Trimiterile sunt dezactivate numai pe adresele de ceas"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("Acum o saptamana"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Bine ai venit! Pentru a continua, creează un portofel nou sau importă unul deja existent."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

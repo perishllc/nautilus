@@ -186,6 +186,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "בחר באיזו יחידה להציג כמויות.\n1 ניאנו = 0.000001 ננו, או \n1,000,000 ניאנו = 1 ננו"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("מיוצג על ידי"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("לפני יום"),
         "decryptionError": MessageLookupByLibrary.simpleMessage("שגיאת פענוח!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("חשבון ראשי"),
@@ -280,6 +281,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("% 1 הוסר מהמועדפים!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("מועדפים"),
         "featured": MessageLookupByLibrary.simpleMessage("מובלט"),
+        "fewDaysAgo": MessageLookupByLibrary.simpleMessage("לפני מספר ימים"),
+        "fewHoursAgo": MessageLookupByLibrary.simpleMessage("לפני כמה שעות"),
+        "fewMinutesAgo": MessageLookupByLibrary.simpleMessage("לפני כמה דקות"),
+        "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("לפני כמה שניות"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "אשר טביעות אצבע בכדי לגבות סיד."),
         "from": MessageLookupByLibrary.simpleMessage("מ"),
@@ -325,6 +330,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("הסתר חשבונות ריקים"),
         "home": MessageLookupByLibrary.simpleMessage("דף הבית"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("לפני שעה"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
         "ignore": MessageLookupByLibrary.simpleMessage("התעלם"),
@@ -390,6 +396,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("הודעה"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "כמות השליחה המינימלית היא% 1"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("לפני דקה"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 is not a valid word"),
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("פתגם זכרון"),
@@ -599,6 +606,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("שלח"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("שלח %1 נאנו?"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("שלח סכומים"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "קרתה תקלה. נסה שוב מאוחר יותר"),
         "sendFrom": MessageLookupByLibrary.simpleMessage("נשלח מ"),
@@ -695,7 +703,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingHeader": MessageLookupByLibrary.simpleMessage("אישור מעקב"),
         "trackingWarning": MessageLookupByLibrary.simpleMessage("המעקב מושבת"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "הפונקציונליות של כרטיס המתנה עשויה להיות מופחתת או לא לעבוד בכלל אם המעקב מושבת. אנו משתמשים בהרשאה זו באופן בלעדי לתכונה זו, אף אחד מהנתונים שלך לא נמכר, נאסף או עוקב אחר לשום מטרה אחרת מלבד פונקציונליות, וגם לא נרצה :)"),
+            "הפונקציונליות של כרטיס המתנה עשויה להיות מופחתת או לא לעבוד בכלל אם המעקב מושבת. אנו משתמשים בהרשאה זו באופן בלעדי עבור תכונה זו. אף אחד מהנתונים שלך לא נמכר, נאסף או עוקב ב-backend לכל מטרה מעבר להכרחי"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "קישורי כרטיסי מתנה לא יפעלו כראוי"),
         "transactions": MessageLookupByLibrary.simpleMessage("טרנסקציות"),
@@ -777,6 +785,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("חשבון צפייה בלבד"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "השליחה מושבתת בכתובות לשעון בלבד"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("לפני שבוע"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "ברוך הבא לנאטריום. בכדי להמשיך, אתה רשאי לייצר ארנק חדש או לייבא אחד קיים."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

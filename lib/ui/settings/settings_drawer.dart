@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 // import 'package:flutter_contacts/flutter_contacts.dart' as cont;
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
@@ -83,6 +85,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsSheet extends StatefulWidget {
+  @override
   SettingsSheetState createState() => SettingsSheetState();
 }
 
@@ -113,6 +116,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   ContactsSetting _curContactsSetting = ContactsSetting(ContactsOptions.OFF);
   ContactsSetting _curUnopenedWarningSetting = ContactsSetting(ContactsOptions.ON);
   ContactsSetting _curShowMoneroSetting = ContactsSetting(ContactsOptions.ON);
+  ContactsSetting _curTrackingSetting = ContactsSetting(ContactsOptions.ON);
   NatriconSetting _curNatriconSetting = NatriconSetting(NatriconOptions.ON);
   NyaniconSetting _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
   FundingSetting _curFundingSetting = FundingSetting(FundingOptions.SHOW);
@@ -231,6 +235,12 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     sl.get<SharedPrefsUtil>().getXMRRestoreHeight().then((int height) {
       setState(() {
         _curXMRRestoreHeight = StateContainer.of(context).xmrRestoreHeight ?? 0;
+      });
+    });
+    // Get tracking authorization:
+    sl.get<SharedPrefsUtil>().getTrackingEnabled().then((bool contactsOn) {
+      setState(() {
+        _curTrackingSetting = contactsOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
       });
     });
     // Get funding setting:
@@ -738,6 +748,29 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     StateContainer.of(context).setShowXMR(enabled);
     setState(() {
       _curShowMoneroSetting = ContactsSetting(picked);
+    });
+  }
+
+  Future<void> _showTrackingDialog() async {
+    bool? trackingEnabled;
+    if (Platform.isIOS) {
+      final TrackingStatus status = await AppTrackingTransparency.requestTrackingAuthorization();
+      if (status == TrackingStatus.authorized) {
+        trackingEnabled = true;
+      }
+    } else {
+      trackingEnabled = await AppDialogs.showTrackingDialog(context, true);
+    }
+    if (trackingEnabled == null) {
+      return;
+    }
+    await sl.get<SharedPrefsUtil>().setTrackingEnabled(trackingEnabled);
+    FlutterBranchSdk.disableTracking(!trackingEnabled);
+
+    if (!mounted) return;
+    setState(() {
+      _curTrackingSetting =
+          trackingEnabled! ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
     });
   }
 
@@ -1741,7 +1774,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                   () {
                     Clipboard.setData(ClipboardData(text: error.toString()));
                   },
-                  cancelText: "Close",
+                  cancelText: AppLocalization.of(context).close,
                   cancelAction: () {
                     Navigator.of(context).pop();
                   });
@@ -1793,7 +1826,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                 try {
                   // Delete all data
                   sl.get<Vault>().deleteAll().then((_) {
-                    sl.get<SharedPrefsUtil>().deleteAll().then((result) {
+                    sl.get<SharedPrefsUtil>().deleteAll().then((void result) {
                       StateContainer.of(context).logOut();
                       Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
                     });
@@ -2550,6 +2583,9 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context).receiveMinimum,
                         _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context).trackingHeader,
+                        _curTrackingSetting, AppIcons.security, _showTrackingDialog),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     Container(
                       margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),

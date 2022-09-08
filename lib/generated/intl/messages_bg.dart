@@ -197,6 +197,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Изберете в коя единица да се показват сумите.\n1 няно = 0.000001 НАНО, или \n1 000 000 нано = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Сегашният Представител е"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("Преди ден"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Грешка при декриптиране!"),
         "defaultAccountName":
@@ -300,6 +301,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("% 1 е премахнат от любими!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Любими"),
         "featured": MessageLookupByLibrary.simpleMessage("Препоръчани"),
+        "fewDaysAgo": MessageLookupByLibrary.simpleMessage("Преди няколко дни"),
+        "fewHoursAgo":
+            MessageLookupByLibrary.simpleMessage("Преди няколко часа"),
+        "fewMinutesAgo":
+            MessageLookupByLibrary.simpleMessage("Преди няколко минути"),
+        "fewSecondsAgo":
+            MessageLookupByLibrary.simpleMessage("Преди няколко секунди"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Удостовери за да съхраниш Seed."),
         "from": MessageLookupByLibrary.simpleMessage("От"),
@@ -347,6 +355,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(
             "Скриване на празните акаунти"),
         "home": MessageLookupByLibrary.simpleMessage("У дома"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("Преди час"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Разбирам рисковете"),
         "ignore": MessageLookupByLibrary.simpleMessage("Игнорирай"),
@@ -420,6 +429,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Съобщение"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Мин сума за изпращане %1 NANO"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("Преди минута"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 не е валидна дума"),
         "mnemonicPhrase":
@@ -645,6 +655,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Изпрати"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Изпрати %1 NANO"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("Изпратете суми"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Възникна грешка. Опитайте по-късно."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Изпрати от"),
@@ -755,7 +766,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning": MessageLookupByLibrary.simpleMessage(
             "Проследяването е деактивирано"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "Функционалността на картата за подарък може да бъде намалена или изобщо да не работи, ако проследяването е деактивирано. Ние използваме това разрешение ИЗКЛЮЧИТЕЛНО за тази функция, абсолютно никакви ваши данни не се продават, събират или проследяват за друга цел, различна от функционалност, нито бихме искали :)"),
+            "Функционалността на картата за подарък може да бъде намалена или изобщо да не работи, ако проследяването е деактивирано. Използваме това разрешение ИЗКЛЮЧИТЕЛНО за тази функция. Абсолютно никакви ваши данни не се продават, събират или проследяват в бекенда за каквато и да е цел извън необходимото"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Връзките към картата за подарък няма да функционират правилно"),
         "transactions": MessageLookupByLibrary.simpleMessage("Транзакции"),
@@ -841,6 +852,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Акаунт само за гледане"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Изпращанията са деактивирани на адреси само за гледане"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("Преди седмица"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Добре дошли в Nautilus. За да започнете, можете да създадете нов портфейл или да импортирате вече съществуващ."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

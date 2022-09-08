@@ -535,6 +535,11 @@
     "type": "text",
     "description": "change_representative_current_header"
   },
+  "dayAgo": "Egy napja",
+  "@dayAgo": {
+    "type": "text",
+    "description": "history_day_ago"
+  },
   "decryptionError": "Dekódolási hiba!",
   "@decryptionError": {
     "type": "text",
@@ -845,6 +850,26 @@
     "type": "text",
     "description": "featured"
   },
+  "fewDaysAgo": "Néhány nappal ezelőtt",
+  "@fewDaysAgo": {
+    "type": "text",
+    "description": "history_few_days_ago"
+  },
+  "fewHoursAgo": "Néhány órával ezelőtt",
+  "@fewHoursAgo": {
+    "type": "text",
+    "description": "history_few_hours_ago"
+  },
+  "fewMinutesAgo": "Pár perce",
+  "@fewMinutesAgo": {
+    "type": "text",
+    "description": "history_few_minutes_ago"
+  },
+  "fewSecondsAgo": "Pár másodperce",
+  "@fewSecondsAgo": {
+    "type": "text",
+    "description": "history_few_seconds_ago"
+  },
   "fingerprintSeedBackup": "Erősítsd meg az ujjlenyomatoddal, hogy szeretnéd elmenteni a seeded.",
   "@fingerprintSeedBackup": {
     "type": "text",
@@ -994,6 +1019,11 @@
   "@home": {
     "type": "text",
     "description": "home"
+  },
+  "hourAgo": "Egy órája",
+  "@hourAgo": {
+    "type": "text",
+    "description": "history_hour_ago"
   },
   "ignore": "figyelmen kívül",
   "@ignore": {
@@ -1214,6 +1244,11 @@
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
+  },
+  "minuteAgo": "Egy perccel ezelőtt",
+  "@minuteAgo": {
+    "type": "text",
+    "description": "history_minute_ago"
   },
   "mnemonicInvalidWord": "%1 is not a valid word",
   "@mnemonicInvalidWord": {
@@ -1915,6 +1950,11 @@
     "type": "text",
     "description": "send_amount_confirm"
   },
+  "sendAmounts": "Összegek küldése",
+  "@sendAmounts": {
+    "type": "text",
+    "description": "split_bill_send_amounts"
+  },
   "sendError": "Hiba történt. Próbálkozz később.",
   "@sendError": {
     "type": "text",
@@ -2250,7 +2290,7 @@
     "type": "text",
     "description": "home_tracking_warning"
   },
-  "trackingWarningBodyLong": "Ha a nyomon követés le van tiltva, az ajándékkártya funkcionalitása csökkenhet vagy egyáltalán nem működik. Ezt az engedélyt KIZÁRÓLAG ehhez a funkcióhoz használjuk, semmilyen adatát nem értékesítjük, gyűjtjük vagy nyomon követjük a funkcionalitáson kívül más célból, és nem is szeretnénk :)",
+  "trackingWarningBodyLong": "Ha a nyomon követés le van tiltva, az ajándékkártya funkcionalitása csökkenhet vagy egyáltalán nem működik. Ezt az engedélyt KIZÁRÓLAG ehhez a funkcióhoz használjuk. Egyáltalán egyetlen adatot sem értékesítenek, gyűjtenek vagy követnek nyomon a háttérben a szükségesen túl semmilyen célból",
   "@trackingWarningBodyLong": {
     "type": "text",
     "description": "tracking_warning_body_long"
@@ -2504,6 +2544,11 @@
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
+  },
+  "weekAgo": "Egy hete",
+  "@weekAgo": {
+    "type": "text",
+    "description": "history_week_ago"
   },
   "welcomeText": "Üdvözöllek a Nautilusban! Hozz létre egy új tárcát, vagy importálj egy létezőt.",
   "@welcomeText": {

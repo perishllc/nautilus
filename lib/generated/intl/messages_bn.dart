@@ -203,6 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "কোন ইউনিট পরিমাণ প্রদর্শন করতে হবে তা চয়ন করুন।\n1 নয়ানো = 0.000001 ন্যানো, বা \n১,০০,০০০ নয়ানো = ১ ন্যানো"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("বর্তমানের রিপ্রেজেন্টেটিভ"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("একদিন আগে"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("ডিক্রিপশন ত্রুটি!"),
         "defaultAccountName":
@@ -305,6 +306,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "% 1 ফেভারিট থেকে মুছে ফেলা হয়েছে!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("প্রিয়"),
         "featured": MessageLookupByLibrary.simpleMessage("বৈশিষ্ট্যযুক্ত"),
+        "fewDaysAgo": MessageLookupByLibrary.simpleMessage("কিছু দিন আগে"),
+        "fewHoursAgo": MessageLookupByLibrary.simpleMessage("কয়েক ঘন্টা আগে"),
+        "fewMinutesAgo": MessageLookupByLibrary.simpleMessage("কিছু মিনিট আগে"),
+        "fewSecondsAgo":
+            MessageLookupByLibrary.simpleMessage("কয়েক সেকেন্ড আগে"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "ব্যাকআপ সীড প্রমাণীকরণ করুন।"),
         "from": MessageLookupByLibrary.simpleMessage("থেকে"),
@@ -351,6 +357,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("খালি অ্যাকাউন্ট লুকান"),
         "home": MessageLookupByLibrary.simpleMessage("হোম"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("এক ঘন্টা আগে"),
         "iUnderstandTheRisks": MessageLookupByLibrary.simpleMessage(
             "আমি ঝুঁকির কারণগুলি বুঝতে পারছি"),
         "ignore": MessageLookupByLibrary.simpleMessage("অগ্রাহ্য করা"),
@@ -424,6 +431,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("বার্তা"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "ন্যূনতম পাঠানোর পরিমাণ %1 NANO"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("এক মিনিট আগে"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 একটি বৈধ শব্দ নয়"),
         "mnemonicPhrase":
@@ -651,6 +659,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("পাঠান"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("%1 NANO পাঠান"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("পরিমাণ পাঠান"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "একটি ত্রুটি ঘটেছে. পরে আবার চেষ্টা করুন।"),
         "sendFrom": MessageLookupByLibrary.simpleMessage("থেকে পাঠানো"),
@@ -755,7 +764,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("ট্র্যাকিং অক্ষম"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "ট্র্যাকিং অক্ষম থাকলে উপহার কার্ডের কার্যকারিতা হ্রাস পেতে পারে বা একেবারেই কাজ করতে পারে না। আমরা এই বৈশিষ্ট্যটির জন্য বিশেষভাবে এই অনুমতিটি ব্যবহার করি, কার্যকারিতা ছাড়া অন্য কোনও উদ্দেশ্যে আপনার কোনও ডেটা বিক্রি, সংগৃহীত বা ট্র্যাক করা হয় না এবং আমরা চাই না :)"),
+            "ট্র্যাকিং অক্ষম থাকলে উপহার কার্ডের কার্যকারিতা হ্রাস পেতে পারে বা একেবারেই কাজ করতে পারে না। আমরা এই বৈশিষ্ট্যের জন্য একচেটিয়াভাবে এই অনুমতি ব্যবহার করি। প্রয়োজনের বাইরে কোনো উদ্দেশ্যে ব্যাকএন্ডে আপনার কোনো ডেটা বিক্রি, সংগ্রহ বা ট্র্যাক করা হয় না"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "উপহার কার্ডের লিঙ্কগুলি সঠিকভাবে কাজ করবে না"),
         "transactions": MessageLookupByLibrary.simpleMessage("লেনদেন"),
@@ -841,6 +850,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("শুধু অ্যাকাউন্ট দেখুন"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "শুধুমাত্র ঘড়ির ঠিকানায় পাঠানো অক্ষম"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("এক সপ্তাহ আগে"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "নাট্রিয়ামে স্বাগতম। শুরু করার জন্য, আপনি একটি নতুন ওয়ালেট তৈরি করতে পারেন অথবা বিদ্যমান একটি ব্যবহার করতে পারেন।"),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

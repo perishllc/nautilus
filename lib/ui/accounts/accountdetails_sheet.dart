@@ -66,6 +66,16 @@ class AccountDetailsSheet {
                         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
                         child: Column(
                           children: <Widget>[
+                            // Sheet handle
+                            Container(
+                              margin: const EdgeInsets.only(top: 10, bottom: 0),
+                              height: 5,
+                              width: MediaQuery.of(context).size.width * 0.15,
+                              decoration: BoxDecoration(
+                                color: StateContainer.of(context).curTheme.text20,
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +84,7 @@ class AccountDetailsSheet {
                                 Container(
                                     width: 50,
                                     height: 50,
-                                    margin: const EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
+                                    margin: const EdgeInsetsDirectional.only(top: 18.0, start: 10.0),
                                     child: account.index == 0
                                         ? const SizedBox()
                                         : TextButton(
@@ -90,17 +100,23 @@ class AccountDetailsSheet {
                                               AppDialogs.showConfirmDialog(
                                                   context,
                                                   AppLocalization.of(context).hideAccountHeader,
-                                                  AppLocalization.of(context).removeAccountText.replaceAll("%1", AppLocalization.of(context).addAccount),
+                                                  AppLocalization.of(context)
+                                                      .removeAccountText
+                                                      .replaceAll("%1", AppLocalization.of(context).addAccount),
                                                   CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
                                                 // Remove account
                                                 deleted = true;
                                                 sl.get<DBHelper>().deleteAccount(account).then((int id) {
-                                                  EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: account, deleted: true));
+                                                  EventTaxiImpl.singleton()
+                                                      .fire(AccountModifiedEvent(account: account, deleted: true));
                                                   Navigator.of(context).pop();
                                                 });
-                                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
+                                              },
+                                                  cancelText:
+                                                      CaseChange.toUpperCase(AppLocalization.of(context).no, context));
                                             },
-                                            child: Icon(AppIcons.trashcan, size: 24, color: StateContainer.of(context).curTheme.text),
+                                            child: Icon(AppIcons.trashcan,
+                                                size: 24, color: StateContainer.of(context).curTheme.text),
                                           )),
                                 // The header of the sheet
                                 Container(
@@ -126,9 +142,11 @@ class AccountDetailsSheet {
                             Container(
                               margin: const EdgeInsets.only(top: 10.0),
                               child: account.address != null
-                                  ? UIUtil.threeLineAddressText(context, account.address!, type: ThreeLineAddressTextType.PRIMARY60)
+                                  ? UIUtil.threeLineAddressText(context, account.address!,
+                                      type: ThreeLineAddressTextType.PRIMARY60)
                                   : account.selected
-                                      ? UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.address!,
+                                      ? UIUtil.threeLineAddressText(
+                                          context, StateContainer.of(context).wallet!.address!,
                                           type: ThreeLineAddressTextType.PRIMARY60)
                                       : const SizedBox(),
                             ),
@@ -152,7 +170,9 @@ class AccountDetailsSheet {
                                       ),
                                       TextSpan(
                                         text: getRawAsThemeAwareFormattedAmount(
-                                            context, account.balance ?? StateContainer.of(context).wallet!.accountBalance.toString()),
+                                            context,
+                                            account.balance ??
+                                                StateContainer.of(context).wallet!.accountBalance.toString()),
                                         style: TextStyle(
                                           color: StateContainer.of(context).curTheme.primary60,
                                           fontSize: 14.0,
@@ -209,7 +229,9 @@ class AccountDetailsSheet {
                                         context,
                                         // Share Address Button
                                         _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                                        _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
+                                        _addressCopied
+                                            ? AppLocalization.of(context).addressCopied
+                                            : AppLocalization.of(context).copyAddress,
                                         Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                                       Clipboard.setData(ClipboardData(text: account.address));
                                       setState(() {
@@ -230,8 +252,8 @@ class AccountDetailsSheet {
                                 Row(
                                   children: <Widget>[
                                     // Close Button
-                                    AppButton.buildAppButton(
-                                        context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
+                                        AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                                       Navigator.pop(context);
                                     }),
                                   ],

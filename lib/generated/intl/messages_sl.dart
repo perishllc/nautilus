@@ -200,6 +200,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Izberite, v kateri enoti želite prikazati zneske.\n1 nyano = 0,000001 NANO, ali \n1.000.000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Trenutni predstavnik"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("Pred enim dnevom"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Napaka dešifriranja!"),
         "defaultAccountName":
@@ -302,6 +303,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "% 1 je bil odstranjen iz priljubljenih!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Priljubljene"),
         "featured": MessageLookupByLibrary.simpleMessage("Predstavljen"),
+        "fewDaysAgo": MessageLookupByLibrary.simpleMessage("Pred nekaj dnevi"),
+        "fewHoursAgo": MessageLookupByLibrary.simpleMessage("Pred nekaj urami"),
+        "fewMinutesAgo":
+            MessageLookupByLibrary.simpleMessage("Pred nekaj minutami"),
+        "fewSecondsAgo":
+            MessageLookupByLibrary.simpleMessage("Pred nekaj sekundami"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Avtenticiraj za shranitev ključa."),
         "from": MessageLookupByLibrary.simpleMessage("Od"),
@@ -348,6 +355,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Skrij prazne račune"),
         "home": MessageLookupByLibrary.simpleMessage("Domov"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("Pred uro"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ignoriraj"),
@@ -419,6 +427,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Sporočilo"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Minimalni znesek za pošiljanje je% 1% 2"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("Pred minuto"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 ni veljavna beseda"),
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("Besedna fraza"),
@@ -642,6 +651,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Pošlji"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Pošlji %1 NANO"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("Pošlji zneske"),
         "sendError":
             MessageLookupByLibrary.simpleMessage("Napaka. Poskusite kasneje."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Pošlji iz"),
@@ -748,7 +758,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("Sledenje onemogočeno"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "Funkcionalnost darilne kartice je lahko zmanjšana ali pa sploh ne deluje, če je sledenje onemogočeno. To dovoljenje uporabljamo IZKLJUČNO za to funkcijo, prav nobeni vaši podatki se ne prodajajo, zbirajo ali sledijo za noben drug namen kot za funkcionalnost, niti ne želimo :)"),
+            "Funkcionalnost darilne kartice je lahko zmanjšana ali pa sploh ne deluje, če je sledenje onemogočeno. To dovoljenje uporabljamo IZKLJUČNO za to funkcijo. Popolnoma nobeni vaši podatki se ne prodajajo, zbirajo ali spremljajo v ozadju za namene, ki niso potrebni"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Povezave do darilnih kartic ne bodo pravilno delovale"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transakcije"),
@@ -833,6 +843,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Račun samo za ogled"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Pošiljanje je onemogočeno na naslovih samo za gledanje"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("Pred enim tednom"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Dobrodošli v Nautilus. Za začetek ustvarite novo denarnico ali uvozite že obstoječo."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

@@ -366,7 +366,7 @@ class AppSimpleDialogOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onPressed,
-      borderRadius: BorderRadius.circular(25),
+      // borderRadius: BorderRadius.circular(25),
       child: Padding(padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0), child: child),
     );
   }

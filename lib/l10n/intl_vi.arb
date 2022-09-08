@@ -535,6 +535,11 @@
     "type": "text",
     "description": "change_representative_current_header"
   },
+  "dayAgo": "Một ngày trước",
+  "@dayAgo": {
+    "type": "text",
+    "description": "history_day_ago"
+  },
   "decryptionError": "Lỗi giải mã!",
   "@decryptionError": {
     "type": "text",
@@ -845,6 +850,26 @@
     "type": "text",
     "description": "featured"
   },
+  "fewDaysAgo": "Một vài ngày trước",
+  "@fewDaysAgo": {
+    "type": "text",
+    "description": "history_few_days_ago"
+  },
+  "fewHoursAgo": "Một vài giờ trước",
+  "@fewHoursAgo": {
+    "type": "text",
+    "description": "history_few_hours_ago"
+  },
+  "fewMinutesAgo": "Một vài phút trước",
+  "@fewMinutesAgo": {
+    "type": "text",
+    "description": "history_few_minutes_ago"
+  },
+  "fewSecondsAgo": "Vài giây trước",
+  "@fewSecondsAgo": {
+    "type": "text",
+    "description": "history_few_seconds_ago"
+  },
   "fingerprintSeedBackup": "Xác minh để xem hạt giống.",
   "@fingerprintSeedBackup": {
     "type": "text",
@@ -994,6 +1019,11 @@
   "@home": {
     "type": "text",
     "description": "home"
+  },
+  "hourAgo": "Một tiếng trước",
+  "@hourAgo": {
+    "type": "text",
+    "description": "history_hour_ago"
   },
   "ignore": "Bỏ qua",
   "@ignore": {
@@ -1214,6 +1244,11 @@
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
+  },
+  "minuteAgo": "Một phút trước",
+  "@minuteAgo": {
+    "type": "text",
+    "description": "history_minute_ago"
   },
   "mnemonicInvalidWord": "%1 không phải từ hợp lệ",
   "@mnemonicInvalidWord": {
@@ -1915,6 +1950,11 @@
     "type": "text",
     "description": "send_amount_confirm"
   },
+  "sendAmounts": "Gửi số tiền",
+  "@sendAmounts": {
+    "type": "text",
+    "description": "split_bill_send_amounts"
+  },
   "sendError": "Đã xảy ra lỗi, vui lòng thử lại sau.",
   "@sendError": {
     "type": "text",
@@ -2250,7 +2290,7 @@
     "type": "text",
     "description": "home_tracking_warning"
   },
-  "trackingWarningBodyLong": "Chức năng Thẻ quà tặng có thể bị giảm hoặc hoàn toàn không hoạt động nếu tính năng theo dõi bị tắt. Chúng tôi sử dụng quyền này ĐỘC QUYỀN cho tính năng này, tuyệt đối không có dữ liệu nào của bạn được bán, thu thập hoặc theo dõi cho bất kỳ mục đích nào khác ngoài chức năng, chúng tôi cũng không muốn :)",
+  "trackingWarningBodyLong": "Chức năng Thẻ quà tặng có thể bị giảm hoặc hoàn toàn không hoạt động nếu tính năng theo dõi bị tắt. Chúng tôi sử dụng quyền này ĐỘC QUYỀN cho tính năng này. Tuyệt đối không có dữ liệu nào của bạn được bán, thu thập hoặc theo dõi trên chương trình phụ trợ cho bất kỳ mục đích nào ngoài mức cần thiết",
   "@trackingWarningBodyLong": {
     "type": "text",
     "description": "tracking_warning_body_long"
@@ -2504,6 +2544,11 @@
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
+  },
+  "weekAgo": "Một tuần trước",
+  "@weekAgo": {
+    "type": "text",
+    "description": "history_week_ago"
   },
   "welcomeText": "Chào mừng đến với Nautilus. Để bắt đầu, bạn có thể tạo ví mới hoặc nhập ví hiện có.",
   "@welcomeText": {

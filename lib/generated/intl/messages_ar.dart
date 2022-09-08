@@ -192,6 +192,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "اختر الوحدة التي تريد عرض الكميات بها.\n1 نيانو = 0.000001 نانو، أو \n1,000,000 نيانو = 1 نانو"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("المندوب الحالي"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("قبل يوم"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("خطأ فك التشفير!"),
         "defaultAccountName":
@@ -290,6 +291,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تمت إزالة %1 من المفضلة!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("المفضلة"),
         "featured": MessageLookupByLibrary.simpleMessage("مميزة"),
+        "fewDaysAgo": MessageLookupByLibrary.simpleMessage("منذ بضعة أيام"),
+        "fewHoursAgo": MessageLookupByLibrary.simpleMessage("قبل ساعات قليلة"),
+        "fewMinutesAgo": MessageLookupByLibrary.simpleMessage("قبل عدة دقائق"),
+        "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("قبل ثوان"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "المصادقة على نسخ المفتاح الخاص."),
         "from": MessageLookupByLibrary.simpleMessage("من"),
@@ -335,6 +340,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("إخفاء الحسابات الفارغة"),
         "home": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("قبل ساعة"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("أنا أدرك المخاطر\n"),
         "ignore": MessageLookupByLibrary.simpleMessage("تجاهل"),
@@ -406,6 +412,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("رسالة"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "الحد الأدنى لمبلغ الإرسال هو %1 %2"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("قبل دقيقة"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 ليست كلمة صالحة"),
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("عبارة تذكيرية"),
@@ -625,6 +632,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("إرسال"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("أرسل %1 NANO"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("إرسال المبالغ"),
         "sendError":
             MessageLookupByLibrary.simpleMessage("يوجد خطأ. حاول لاحقاً."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("أرسل من"),
@@ -727,7 +735,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingHeader": MessageLookupByLibrary.simpleMessage("إذن التتبع"),
         "trackingWarning": MessageLookupByLibrary.simpleMessage("تتبع معطل"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "قد يتم تقليل وظائف بطاقة الهدايا أو لا تعمل على الإطلاق إذا تم تعطيل التتبع. نحن نستخدم هذا الإذن حصريًا لهذه الميزة ، ولا يتم بيع أي من بياناتك أو جمعها أو تعقبها لأي غرض آخر بخلاف الوظيفة ، ولا نريد :)"),
+            "قد يتم تقليل وظائف بطاقة الهدايا أو لا تعمل على الإطلاق إذا تم تعطيل التتبع. نحن نستخدم هذا الإذن حصريًا لهذه الميزة. بالتأكيد لا يتم بيع أي من بياناتك أو جمعها أو تتبعها على الواجهة الخلفية لأي غرض يتجاوز الضرورة"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "لن تعمل روابط بطاقات الهدايا بشكل صحيح"),
         "transactions": MessageLookupByLibrary.simpleMessage("معاملات"),
@@ -811,6 +819,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("مشاهدة الحساب فقط"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "يتم تعطيل عمليات الإرسال على عناوين المشاهدة فقط"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("منذ أسبوع"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "أهلا بك في نتريوم. لتبدأ، إحدث محفظة أو إجلب محفظة موجودة."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

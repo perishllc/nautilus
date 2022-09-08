@@ -18,6 +18,7 @@ import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_xmr_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
@@ -158,7 +159,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         Hero(
-          tag: 'scanButton',
+          tag: "scanButton",
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 100),
             curve: Curves.easeOut,
@@ -166,7 +167,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
             width: scanButtonSize,
             decoration: BoxDecoration(
               color: popupColor,
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS),
             ),
             child: Icon(
               AppIcons.scan,
@@ -239,7 +240,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 100),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.0),
+              borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS),
               boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
             ),
             height: 55,
@@ -248,7 +249,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
             child: TextButton(
               key: const Key("home_send_button"),
               style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
                 backgroundColor: StateContainer.of(context).wallet != null && !disableSend /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
                     ? isSendButtonColorPrimary
                         ? StateContainer.of(context).curTheme.primary

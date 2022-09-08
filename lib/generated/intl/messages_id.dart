@@ -198,6 +198,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pilih unit mana yang akan menampilkan jumlah.\n1 nyano = 0.000001 NANO, atau \n1,000,000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Saat ini diwakilkan oleh"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("Kemarin"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Kesalahan Dekripsi!"),
         "defaultAccountName":
@@ -302,6 +303,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "% 1 telah dihapus dari favorit!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Favorit"),
         "featured": MessageLookupByLibrary.simpleMessage("Unggulan"),
+        "fewDaysAgo":
+            MessageLookupByLibrary.simpleMessage("Beberapa hari yang lalu"),
+        "fewHoursAgo":
+            MessageLookupByLibrary.simpleMessage("Beberapa jam yang lalu"),
+        "fewMinutesAgo":
+            MessageLookupByLibrary.simpleMessage("Beberapa menit yang lalu"),
+        "fewSecondsAgo":
+            MessageLookupByLibrary.simpleMessage("Beberapa detik yang lalu"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Konfirmasi sidik jari untuk menyimpan benih."),
         "from": MessageLookupByLibrary.simpleMessage("Dari"),
@@ -347,6 +356,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Sembunyikan Akun Kosong"),
         "home": MessageLookupByLibrary.simpleMessage("Rumah"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("Satu jam yang lalu"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Saya memahami resiko"),
         "ignore": MessageLookupByLibrary.simpleMessage("Abaikan"),
@@ -416,6 +426,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Pesan"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Jumlah minimal pengiriman adalah %1 NANO"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("Semenit yang lalu"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 bukanlah kata yang valid"),
         "mnemonicPhrase":
@@ -641,6 +652,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Kirim"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Kirim %1 Nano?"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("Kirim Jumlah"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Terjadi kesalahan. Coba lagi nanti."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Kirim Dari"),
@@ -747,7 +759,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("Pelacakan Dinonaktifkan"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "Fungsi Kartu Hadiah mungkin berkurang atau tidak berfungsi sama sekali jika pelacakan dinonaktifkan. Kami menggunakan izin ini SECARA EKSKLUSIF untuk fitur ini, sama sekali tidak ada data Anda yang dijual, dikumpulkan, atau dilacak untuk tujuan lain selain fungsi, kami juga tidak menginginkannya :)"),
+            "Fungsi Kartu Hadiah mungkin berkurang atau tidak berfungsi sama sekali jika pelacakan dinonaktifkan. Kami menggunakan izin ini SECARA EKSKLUSIF untuk fitur ini. Sama sekali tidak ada data Anda yang dijual, dikumpulkan, atau dilacak di backend untuk tujuan apa pun di luar yang diperlukan"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Tautan Kartu Hadiah tidak akan berfungsi dengan baik"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transaksi"),
@@ -833,6 +845,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tonton Saja Akun"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Pengiriman dinonaktifkan di alamat khusus jam tangan"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("Seminggu yang lalu"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Selamat datang di Nautilus. Untuk melanjutkan, anda bisa membuat dompet baru atau mengimpor dompet lama anda."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

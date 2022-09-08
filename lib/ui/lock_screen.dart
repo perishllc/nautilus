@@ -232,7 +232,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
                             style: TextButton.styleFrom(
                               foregroundColor: StateContainer.of(context).curTheme.text15,
                               padding: const EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
                               // highlightColor: StateContainer.of(context).curTheme.text15,
                               // splashColor: StateContainer.of(context).curTheme.text30,
                             ),
@@ -244,11 +244,11 @@ class _AppLockScreenState extends State<AppLockScreen> {
                                     AppLocalization.of(context).logoutReassurance, CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
                                   // Unsubscribe from notifications
                                   sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((_) {
-                                    FirebaseMessaging.instance.getToken().then((fcmToken) {
+                                    FirebaseMessaging.instance.getToken().then((String? fcmToken) {
                                       EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
                                       // Delete all data
                                       sl.get<Vault>().deleteAll().then((_) {
-                                        sl.get<SharedPrefsUtil>().deleteAll().then((result) {
+                                        sl.get<SharedPrefsUtil>().deleteAll().then((void result) {
                                           StateContainer.of(context).logOut();
                                           Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
                                         });

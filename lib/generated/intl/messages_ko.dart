@@ -171,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(
             "금액을 표시할 단위를 선택합니다.\n1 냐노 = 0.000001 나노 또는 \n1,000,000 냐노 = 1 나노"),
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage("현재 대리인"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("하루 전"),
         "decryptionError": MessageLookupByLibrary.simpleMessage("암호 해독 오류!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Main Account"),
@@ -257,6 +258,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("% 1이 (가) 즐겨찾기에서 제거되었습니다!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("즐겨찾기"),
         "featured": MessageLookupByLibrary.simpleMessage("추천 상품"),
+        "fewDaysAgo": MessageLookupByLibrary.simpleMessage("며칠 전"),
+        "fewHoursAgo": MessageLookupByLibrary.simpleMessage("몇 시간 전"),
+        "fewMinutesAgo": MessageLookupByLibrary.simpleMessage("몇분 전에"),
+        "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("몇 초 전에"),
         "fingerprintSeedBackup":
             MessageLookupByLibrary.simpleMessage("지문을 확인하여 시드 지갑를 백업하세요"),
         "from": MessageLookupByLibrary.simpleMessage("보낸 사람"),
@@ -300,6 +305,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("계정을 숨기시겠습니까?"),
         "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage("빈 계정 숨기기"),
         "home": MessageLookupByLibrary.simpleMessage("홈"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("한 시간 전에"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
         "ignore": MessageLookupByLibrary.simpleMessage("무시"),
@@ -364,6 +370,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("메시지"),
         "minimumSend":
             MessageLookupByLibrary.simpleMessage("최소 전송 금액은 %1% 2입니다."),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("1분 전"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 is not a valid word"),
         "mnemonicPhrase":
@@ -570,6 +577,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("보내기"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("%1 Nano를 발송하시겠습니까?"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("송금액"),
         "sendError":
             MessageLookupByLibrary.simpleMessage("문제가 발생했습니다. 나중에 다시 시도하시오."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("보낸 사람 "),
@@ -655,7 +663,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingHeader": MessageLookupByLibrary.simpleMessage("추적 승인"),
         "trackingWarning": MessageLookupByLibrary.simpleMessage("추적 비활성화됨"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "추적이 비활성화되면 기프트 카드 기능이 줄어들거나 전혀 작동하지 않을 수 있습니다. 우리는 이 권한을 이 기능에 대해 독점적으로 사용하며, 기능 이외의 다른 목적으로 귀하의 데이터를 판매, 수집 또는 추적하지 않으며 그렇게 하고 싶지도 않습니다. :)"),
+            "추적이 비활성화되면 기프트 카드 기능이 줄어들거나 전혀 작동하지 않을 수 있습니다. 우리는 이 기능에 대해 독점적으로 이 권한을 사용합니다. 귀하의 데이터는 필요 이상으로 어떠한 목적으로도 백엔드에서 판매, 수집 또는 추적되지 않습니다."),
         "trackingWarningBodyShort":
             MessageLookupByLibrary.simpleMessage("기프트 카드 링크가 제대로 작동하지 않습니다."),
         "transactions": MessageLookupByLibrary.simpleMessage("거래"),
@@ -735,6 +743,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlyAccount": MessageLookupByLibrary.simpleMessage("보기 전용 계정"),
         "watchOnlySendDisabled":
             MessageLookupByLibrary.simpleMessage("보기 전용 주소에서는 보내기가 비활성화됩니다."),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("일주일 전"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Nautilus에 오신 것을 환영합니다. 계속하려면, 새 지갑을 만들거나 기존 지갑을 불러오세요."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

@@ -1,3 +1,14 @@
+## v0.6.4 - [2022-09-09]
+#### Added
+- Split bill menu now gives the option to send amounts instead of just requests
+- Transactions are now loaded in as you scroll
+- Tracking authorization setting in-app (under more-settings) rather than just on launch
+- Transaction timestamp relative names (ex: A few seconds/hour/day ago)
+#### Changed
+- Some global UI updates (slightly more rounded buttons)
+#### Fixed
+- Search fixes
+- Split bill menu fixes
 ## v0.6.3 - [2022-09-06]
 #### Added
 - (EXPERIMENTAL) Bare-Bones XMR Support

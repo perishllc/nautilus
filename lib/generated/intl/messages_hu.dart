@@ -200,6 +200,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Válassza ki, melyik egységben jelenítse meg az összegeket.\n1 nyano = 0,000001 NANO, vagy \n1 000 000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Jelenlegi Képviselő"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("Egy napja"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Dekódolási hiba!"),
         "defaultAccountName":
@@ -305,6 +306,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "% 1 el lett távolítva a kedvencek közül!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("kedvencek"),
         "featured": MessageLookupByLibrary.simpleMessage("Kiemelt"),
+        "fewDaysAgo":
+            MessageLookupByLibrary.simpleMessage("Néhány nappal ezelőtt"),
+        "fewHoursAgo":
+            MessageLookupByLibrary.simpleMessage("Néhány órával ezelőtt"),
+        "fewMinutesAgo": MessageLookupByLibrary.simpleMessage("Pár perce"),
+        "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("Pár másodperce"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Erősítsd meg az ujjlenyomatoddal, hogy szeretnéd elmenteni a seeded."),
         "from": MessageLookupByLibrary.simpleMessage("tól től"),
@@ -350,6 +357,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Üres fiókok elrejtése"),
         "home": MessageLookupByLibrary.simpleMessage("Otthon"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("Egy órája"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
         "ignore": MessageLookupByLibrary.simpleMessage("figyelmen kívül"),
@@ -421,6 +429,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Üzenet"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "A minimális küldési összeg:% 1% 2"),
+        "minuteAgo":
+            MessageLookupByLibrary.simpleMessage("Egy perccel ezelőtt"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 is not a valid word"),
         "mnemonicPhrase":
@@ -651,6 +661,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Küldés"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("%1 Nano küldése?"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("Összegek küldése"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Hiba történt. Próbálkozz később."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Küldés Innen"),
@@ -756,7 +767,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("Követés letiltva"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "Ha a nyomon követés le van tiltva, az ajándékkártya funkcionalitása csökkenhet vagy egyáltalán nem működik. Ezt az engedélyt KIZÁRÓLAG ehhez a funkcióhoz használjuk, semmilyen adatát nem értékesítjük, gyűjtjük vagy nyomon követjük a funkcionalitáson kívül más célból, és nem is szeretnénk :)"),
+            "Ha a nyomon követés le van tiltva, az ajándékkártya funkcionalitása csökkenhet vagy egyáltalán nem működik. Ezt az engedélyt KIZÁRÓLAG ehhez a funkcióhoz használjuk. Egyáltalán egyetlen adatot sem értékesítenek, gyűjtenek vagy követnek nyomon a háttérben a szükségesen túl semmilyen célból"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Az ajándékkártya linkek nem működnek megfelelően"),
         "transactions": MessageLookupByLibrary.simpleMessage("Tranzakciók"),
@@ -844,6 +855,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Csak megtekintési fiók"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "A küldések le vannak tiltva a csak figyelni kívánt címeken"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("Egy hete"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Üdvözöllek a Nautilusban! Hozz létre egy új tárcát, vagy importálj egy létezőt."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

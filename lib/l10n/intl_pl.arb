@@ -535,6 +535,11 @@
     "type": "text",
     "description": "change_representative_current_header"
   },
+  "dayAgo": "Dzień temu",
+  "@dayAgo": {
+    "type": "text",
+    "description": "history_day_ago"
+  },
   "decryptionError": "Błąd deszyfrowania!",
   "@decryptionError": {
     "type": "text",
@@ -845,6 +850,26 @@
     "type": "text",
     "description": "featured"
   },
+  "fewDaysAgo": "Kilka dni temu",
+  "@fewDaysAgo": {
+    "type": "text",
+    "description": "history_few_days_ago"
+  },
+  "fewHoursAgo": "Kilka godzin temu",
+  "@fewHoursAgo": {
+    "type": "text",
+    "description": "history_few_hours_ago"
+  },
+  "fewMinutesAgo": "Kilka minut temu",
+  "@fewMinutesAgo": {
+    "type": "text",
+    "description": "history_few_minutes_ago"
+  },
+  "fewSecondsAgo": "Kilka sekund temu",
+  "@fewSecondsAgo": {
+    "type": "text",
+    "description": "history_few_seconds_ago"
+  },
   "fingerprintSeedBackup": "Potwierdz odcisk palca żeby zapisać nasiono portfela.",
   "@fingerprintSeedBackup": {
     "type": "text",
@@ -994,6 +1019,11 @@
   "@home": {
     "type": "text",
     "description": "home"
+  },
+  "hourAgo": "Godzinę temu",
+  "@hourAgo": {
+    "type": "text",
+    "description": "history_hour_ago"
   },
   "ignore": "Ignoruj",
   "@ignore": {
@@ -1214,6 +1244,11 @@
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
+  },
+  "minuteAgo": "Minutę temu",
+  "@minuteAgo": {
+    "type": "text",
+    "description": "history_minute_ago"
   },
   "mnemonicInvalidWord": "%1 nie jest ważnym słowem",
   "@mnemonicInvalidWord": {
@@ -1915,6 +1950,11 @@
     "type": "text",
     "description": "send_amount_confirm"
   },
+  "sendAmounts": "Wyślij kwoty",
+  "@sendAmounts": {
+    "type": "text",
+    "description": "split_bill_send_amounts"
+  },
   "sendError": "Wystąpił błąd. Spróbuj póżniej",
   "@sendError": {
     "type": "text",
@@ -2250,7 +2290,7 @@
     "type": "text",
     "description": "home_tracking_warning"
   },
-  "trackingWarningBodyLong": "Funkcjonalność kart podarunkowych może być ograniczona lub w ogóle nie działać, jeśli śledzenie jest wyłączone. Używamy tego pozwolenia WYŁĄCZNIE dla tej funkcji, absolutnie żadne z twoich danych nie są sprzedawane, gromadzone ani śledzone w żadnym innym celu niż funkcjonalność, ani nie chcemy :)",
+  "trackingWarningBodyLong": "Funkcjonalność kart podarunkowych może być ograniczona lub w ogóle nie działać, jeśli śledzenie jest wyłączone. Używamy tego pozwolenia WYŁĄCZNIE dla tej funkcji. Absolutnie żadne z Twoich danych nie są sprzedawane, gromadzone ani śledzone na zapleczu w żadnym celu wykraczającym poza konieczny",
   "@trackingWarningBodyLong": {
     "type": "text",
     "description": "tracking_warning_body_long"
@@ -2504,6 +2544,11 @@
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
+  },
+  "weekAgo": "Tydzień temu",
+  "@weekAgo": {
+    "type": "text",
+    "description": "history_week_ago"
   },
   "welcomeText": "Witam w Nautilus. Żeby kontynuować, możesz stworzyć nowy portfel albo importować go.",
   "@welcomeText": {

@@ -20,10 +20,11 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 class SplitBillAddUserSheet extends StatefulWidget {
+  const SplitBillAddUserSheet({this.address}) : super();
+
   final String? address;
 
-  SplitBillAddUserSheet({this.address}) : super();
-
+  @override
   SplitBillAddUserSheetState createState() => SplitBillAddUserSheetState();
 }
 
@@ -49,6 +50,76 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
   // Set to true when a username is being entered
   bool _isUser = false;
 
+  // on on focus:
+  Future<void> onUnfocus() async {
+    setState(() {
+      _addressHint = null;
+      _users = <User>[];
+      if (Address(_addressController!.text).isValid()) {
+        _addressValidAndUnfocused = true;
+      }
+      if (_addressController!.text.isEmpty) {
+        _pasteButtonVisible = true;
+      }
+    });
+    if (_addressController!.text.isNotEmpty) {
+      final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
+      String? address;
+      String? type;
+      User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
+      user ??= await sl.get<DBHelper>().getUserOrContactWithAddress(formattedAddress);
+      if (user != null) {
+        type = user.type;
+        if (_addressController!.text != user.getDisplayName()) {
+          setState(() {
+            _addressStyle = AddressStyle.PRIMARY;
+            _addressValidAndUnfocused = false;
+            _addressController!.text = user!.getDisplayName()!;
+          });
+        }
+      } else {
+        // check if UD / ENS / opencap address
+        if (_addressController!.text.contains(r"$")) {
+          // check if opencap address:
+          address = await sl.get<AccountService>().checkOpencapDomain(formattedAddress);
+          if (address != null) {
+            type = UserTypes.OPENCAP;
+          }
+        } else if (_addressController!.text.contains(".")) {
+          // check if UD domain:
+          address = await sl.get<AccountService>().checkUnstoppableDomain(formattedAddress);
+          if (address != null) {
+            type = UserTypes.UD;
+          } else {
+            // check if ENS domain:
+            address = await sl.get<AccountService>().checkENSDomain(formattedAddress);
+            if (address != null) {
+              type = UserTypes.ENS;
+            }
+          }
+        }
+      }
+
+      if (type != null) {
+        setState(() {
+          _pasteButtonVisible = false;
+          _addressStyle = AddressStyle.PRIMARY;
+          _userType = type;
+        });
+
+        if (address != null && user == null) {
+          // add to the db if missing:
+          final User user = User(username: formattedAddress, address: address, type: type, is_blocked: false);
+          await sl.get<DBHelper>().addUser(user);
+        }
+      } else {
+        setState(() {
+          _addressStyle = AddressStyle.TEXT60;
+        });
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -62,7 +133,7 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
     _pasteButtonVisible = true;
     _addressValidAndUnfocused = false;
     _addressValidationText = "";
-    _users = [];
+    _users = <User>[];
     // Add focus listeners
     // On address focus change
     _addressFocusNode!.addListener(() async {
@@ -70,16 +141,17 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
         setState(() {
           _addressHint = "";
           _addressValidationText = "";
+          _addressStyle = AddressStyle.TEXT60;
           _addressValidAndUnfocused = false;
           _pasteButtonVisible = true;
-          _addressStyle = AddressStyle.TEXT60;
           if (_addressController!.text.isNotEmpty) {
             _clearButton = true;
           } else {
             _clearButton = false;
           }
         });
-        _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+        _addressController!.selection =
+            TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         if (_addressController!.text.isNotEmpty && !_addressController!.text.startsWith("nano_")) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           if (_addressController!.text != formattedAddress) {
@@ -95,73 +167,11 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
 
         if (_addressController!.text.isEmpty) {
           setState(() {
-            _users = [];
+            _users = <User>[];
           });
         }
       } else {
-        setState(() {
-          _addressHint = null;
-          _users = [];
-          if (Address(_addressController!.text).isValid()) {
-            _addressValidAndUnfocused = true;
-          }
-          if (_addressController!.text.isEmpty) {
-            _pasteButtonVisible = true;
-          }
-        });
-        if (_addressController!.text.isNotEmpty) {
-          final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
-          String? address;
-          String? type;
-          final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
-          if (user != null) {
-            type = user.type;
-            if (_addressController!.text != user.getDisplayName()) {
-              setState(() {
-                _addressController!.text = user.getDisplayName()!;
-              });
-            }
-          } else {
-            // check if UD / ENS / opencap address
-            if (_addressController!.text.contains(r"$")) {
-              // check if opencap address:
-              address = await sl.get<AccountService>().checkOpencapDomain(formattedAddress);
-              if (address != null) {
-                type = UserTypes.OPENCAP;
-              }
-            } else if (_addressController!.text.contains(".")) {
-              // check if UD domain:
-              address = await sl.get<AccountService>().checkUnstoppableDomain(formattedAddress);
-              if (address != null) {
-                type = UserTypes.UD;
-              } else {
-                // check if ENS domain:
-                address = await sl.get<AccountService>().checkENSDomain(formattedAddress);
-                if (address != null) {
-                  type = UserTypes.ENS;
-                }
-              }
-            }
-          }
-
-          if (type != null) {
-            setState(() {
-              _pasteButtonVisible = false;
-              _addressStyle = AddressStyle.PRIMARY;
-              _userType = type;
-            });
-
-            if (address != null && user == null) {
-              // add to the db if missing:
-              final User user = User(username: formattedAddress, address: address, type: type, is_blocked: false);
-              await sl.get<DBHelper>().addUser(user);
-            }
-          } else {
-            setState(() {
-              _addressStyle = AddressStyle.TEXT60;
-            });
-          }
-        }
+        await onUnfocus();
       }
     });
   }
@@ -181,7 +191,8 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
   Widget getEnterAddressContainer() {
     return AppTextField(
       topMargin: 124,
-      padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+      padding:
+          _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
       textAlign: TextAlign.center,
       focusNode: _addressFocusNode,
       controller: _addressController,
@@ -227,19 +238,41 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
             });
             return;
           }
+
           final String? data = await UserDataUtil.getClipboardText(DataType.ADDRESS);
-          if (data != null) {
-            setState(() {
-              _addressValid = true;
-              _pasteButtonVisible = false;
-              _addressController!.text = data;
-              _addressValidAndUnfocused = true;
-            });
-            _addressFocusNode!.unfocus();
-          } else {
-            setState(() {
-              _pasteButtonVisible = true;
-              _addressValid = false;
+          if (data == null) {
+            return;
+          }
+          final Address address = Address(data);
+          if (address.isValid()) {
+            sl.get<DBHelper>().getUserOrContactWithAddress(address.address!).then((User? user) {
+              if (user == null) {
+                setState(() {
+                  _isUser = false;
+                  _addressValid = true;
+                  _addressValidationText = "";
+                  _addressStyle = AddressStyle.TEXT90;
+                  _pasteButtonVisible = true;
+                  _clearButton = true;
+                  _addressController!.text = address.address!;
+                  _addressFocusNode!.unfocus();
+                  _addressValidAndUnfocused = true;
+                });
+              } else {
+                // Is a user
+                setState(() {
+                  _addressController!.text = user.getDisplayName()!;
+                  _addressFocusNode!.unfocus();
+                  _users = [];
+                  _isUser = true;
+                  _addressValid = true;
+                  _addressValidationText = "";
+                  _addressStyle = AddressStyle.PRIMARY;
+                  _pasteButtonVisible = true;
+                  _clearButton = true;
+                });
+              }
+              onUnfocus();
             });
           }
         },
@@ -261,7 +294,8 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
         if (text.contains(" ")) {
           text = text.replaceAll(" ", "");
           _addressController!.text = text;
-          _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+          _addressController!.selection =
+              TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         }
 
         if (text.isNotEmpty) {
@@ -296,12 +330,14 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
             _users = [];
           });
         } else if (isFavorite) {
-          final List<User> matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+          final List<User> matchedList =
+              await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
           setState(() {
             _users = matchedList;
           });
         } else if (isUser || isDomain) {
-          final List<User> matchedList = await sl.get<DBHelper>().getUserSuggestionsWithUsernameLike(SendSheetHelpers.stripPrefixes(text));
+          final List<User> matchedList =
+              await sl.get<DBHelper>().getUserSuggestionsWithUsernameLike(SendSheetHelpers.stripPrefixes(text));
           setState(() {
             _users = matchedList;
           });
@@ -349,7 +385,8 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
                   FocusScope.of(context).requestFocus(_addressFocusNode);
                 });
               },
-              child: UIUtil.threeLineAddressText(context, widget.address != null ? widget.address! : _addressController!.text))
+              child: UIUtil.threeLineAddressText(
+                  context, widget.address != null ? widget.address! : _addressController!.text))
           : null,
     );
   }
@@ -373,7 +410,8 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
                 _addressValidationText = "";
               });
             },
-            child: Text(user.getDisplayName(ignoreNickname: true)!, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
+            child: Text(user.getDisplayName(ignoreNickname: true)!,
+                textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
           ),
         ),
         Container(
@@ -465,8 +503,9 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
                                   alignment: Alignment.topCenter,
                                   children: <Widget>[
                                     Container(
-                                      margin:
-                                          EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                      margin: EdgeInsets.only(
+                                          left: MediaQuery.of(context).size.width * 0.105,
+                                          right: MediaQuery.of(context).size.width * 0.105),
                                       alignment: Alignment.bottomCenter,
                                       constraints: const BoxConstraints(maxHeight: 174, minHeight: 0),
                                       // ********************************************* //
@@ -533,7 +572,8 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
               Row(
                 children: <Widget>[
                   // Add Contact Button
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).addAccount, Dimens.BUTTON_TOP_DIMENS,
+                  AppButton.buildAppButton(
+                      context, AppButtonType.PRIMARY, AppLocalization.of(context).addAccount, Dimens.BUTTON_TOP_DIMENS,
                       onPressed: () async {
                     if (await validateForm()) {
                       User user;
@@ -562,6 +602,8 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
                         );
                       }
 
+                      print(user.type);
+
                       Navigator.of(context).pop(user);
                     }
                     // if (await validateForm()) {
@@ -582,8 +624,8 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
               Row(
                 children: <Widget>[
                   // Close Button
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
-                      onPressed: () {
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close,
+                      Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                     Navigator.pop(context);
                   }),
                 ],

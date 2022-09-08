@@ -169,6 +169,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(
             "金額を表示する単位を選択します。\n1 ニャノ = 0.000001 ナノ、または \n1,000,000 ニャノ = 1 ナノ"),
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage("現在の代理人"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("昨日"),
         "decryptionError": MessageLookupByLibrary.simpleMessage("復号化エラー！"),
         "defaultAccountName": MessageLookupByLibrary.simpleMessage("メインアカウント"),
         "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
@@ -255,6 +256,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("%1はお気に入りから削除されました！"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("お気に入り"),
         "featured": MessageLookupByLibrary.simpleMessage("特集"),
+        "fewDaysAgo": MessageLookupByLibrary.simpleMessage("数日前"),
+        "fewHoursAgo": MessageLookupByLibrary.simpleMessage("数時間前"),
+        "fewMinutesAgo": MessageLookupByLibrary.simpleMessage("数分前に"),
+        "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("数秒前"),
         "fingerprintSeedBackup":
             MessageLookupByLibrary.simpleMessage("シードをバックアップする認証を行います。"),
         "from": MessageLookupByLibrary.simpleMessage("から"),
@@ -300,6 +305,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("空のアカウントを非表示"),
         "home": MessageLookupByLibrary.simpleMessage("ホーム"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("1時間前"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("リスクを理解しました。"),
         "ignore": MessageLookupByLibrary.simpleMessage("無視"),
@@ -360,6 +366,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageCopied": MessageLookupByLibrary.simpleMessage("メッセージをコピーしました"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("メッセージ"),
         "minimumSend": MessageLookupByLibrary.simpleMessage("最小送信金額は %1 %2"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("1分前"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("％1は有効な単語ではありません"),
         "mnemonicPhrase":
@@ -559,6 +566,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "selfSendError": MessageLookupByLibrary.simpleMessage("自分からはリクエストできない"),
         "send": MessageLookupByLibrary.simpleMessage("送金"),
         "sendAmountConfirm": MessageLookupByLibrary.simpleMessage("％1 ナノを送金する"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("送金金額"),
         "sendError":
             MessageLookupByLibrary.simpleMessage("エラーが発生しました。後で再び実行してください。"),
         "sendFrom": MessageLookupByLibrary.simpleMessage("送金元"),
@@ -645,7 +653,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingHeader": MessageLookupByLibrary.simpleMessage("追跡承認"),
         "trackingWarning": MessageLookupByLibrary.simpleMessage("追跡無効"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "追跡が無効になっている場合、ギフト カードの機能が低下するか、まったく機能しない場合があります。私たちはこの許可をこの機能にのみ使用します。機能以外の目的であなたのデータを販売、収集、または追跡することは絶対にありません。"),
+            "追跡が無効になっている場合、ギフト カードの機能が低下するか、まったく機能しない場合があります。この許可は、この機能にのみ使用されます。必要以上の目的でバックエンドでデータが販売、収集、または追跡されることは絶対にありません"),
         "trackingWarningBodyShort":
             MessageLookupByLibrary.simpleMessage("ギフトカードのリンクが正しく機能しません"),
         "transactions": MessageLookupByLibrary.simpleMessage("トランザクション履歴"),
@@ -725,6 +733,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlyAccount": MessageLookupByLibrary.simpleMessage("視聴専用アカウント"),
         "watchOnlySendDisabled":
             MessageLookupByLibrary.simpleMessage("監視専用アドレスでは送信が無効になっています"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("1週間前"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "ナトリアムへようこそ。最初に、新しいウォレットを作成するか、既存のウォレットをインポートします。"),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

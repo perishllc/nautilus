@@ -8,10 +8,10 @@ publish_to: "none"
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.6.3+87
+version: 0.6.4+88
 
 environment:
-  sdk: '>=2.17.0 < 3.0.0'
+  sdk: '>=2.18.0 <3.0.0'
   # sdk: ">=2.14.0 <3.0.0"
   # sdk: ">=2.12.0 <3.0.0"
 
@@ -73,7 +73,7 @@ dependencies:
   # changelog:
   package_info_plus: ^1.4.2
   flutter_markdown: ^0.6.10+2
-  markdown: ^5.0.0
+  # markdown: ^6.0.0
 
   # Native webview plugin
   # flutter_webview_plugin: ^0.4.0
@@ -197,7 +197,9 @@ dependencies:
 
   # devicelocale: ^0.5.1
   # 0.5.2+ requires sdk 33 and a wierd java1.8 error on android:
-  devicelocale: 0.5.1
+  # devicelocale: 0.5.1
+  devicelocale: ^0.5.5
+
 
   # encryption helper:
   # flutter_sodium: ^0.2.0

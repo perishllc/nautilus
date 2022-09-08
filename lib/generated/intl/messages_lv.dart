@@ -200,6 +200,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Choose which unit to display amounts in.\n1 nyano = 0.000001 NANO, or \n1,000,000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Pašreizējais pārstāvis ir"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("Pirms dienas"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Decryption Error!"),
         "defaultAccountName":
@@ -304,6 +305,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "%1 has been removed from favorites!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Favorites"),
         "featured": MessageLookupByLibrary.simpleMessage("Featured"),
+        "fewDaysAgo":
+            MessageLookupByLibrary.simpleMessage("Pirms dažām dienām"),
+        "fewHoursAgo":
+            MessageLookupByLibrary.simpleMessage("Pirms dažām stundām"),
+        "fewMinutesAgo":
+            MessageLookupByLibrary.simpleMessage("Pirms dažām minūtēm"),
+        "fewSecondsAgo":
+            MessageLookupByLibrary.simpleMessage("Pirms dažām sekundēm"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Autorizējieties, lai kopētu sēklu."),
         "from": MessageLookupByLibrary.simpleMessage("From"),
@@ -349,6 +358,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Paslēpt tukšos kontus"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("Pirms stundas"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ignore"),
@@ -417,6 +427,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Message"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Minimum send amount is %1 %2"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("Pirms minūtes"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 nav derīgs vārds"),
         "mnemonicPhrase":
@@ -639,6 +650,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Sūtīt"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Sūtīt %1 NANO"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("Sūtīt summas"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Notika kļūda. Pēc laika mēģiniet atkal."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Sūtīt no"),
@@ -746,7 +758,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("Izsekošana ir atspējota"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "Ja izsekošana ir atspējota, dāvanu kartes funkcionalitāte var tikt samazināta vai nedarboties vispār. Mēs izmantojam šo atļauju TIKAI šai funkcijai, absolūti neviens no jūsu datiem netiek pārdots, vākts vai izsekots citiem mērķiem, izņemot funkcionalitāti, un mēs to arī negribētu :)"),
+            "Ja izsekošana ir atspējota, dāvanu kartes funkcionalitāte var tikt samazināta vai nedarboties vispār. Mēs izmantojam šo atļauju TIKAI šai funkcijai. Pilnīgi neviens no jūsu datiem netiek pārdots, vākts vai izsekots aizmugursistēmā jebkādiem nolūkiem, kas nav nepieciešami"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Dāvanu karšu saites nedarbosies pareizi"),
         "transactions": MessageLookupByLibrary.simpleMessage("Darījumi"),
@@ -830,6 +842,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tikai skatīšanās konts"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Sūtīšana ir atspējota tikai pulksteņa adresēm"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("Pirms nedēļas"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Sveicināti Nautilus. Izveidojiet jaunu maku vai importējiet eksistējošu"),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

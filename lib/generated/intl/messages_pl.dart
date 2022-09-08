@@ -195,6 +195,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Wybierz jednostkę, w której chcesz wyświetlić kwoty.\n1 nyano = 0.000001 NANO, lub \n1 000 000 nyano = 1 NANO"),
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage(
             "Obecnie Representowany Przez"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("Dzień temu"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Błąd deszyfrowania!"),
         "defaultAccountName":
@@ -297,6 +298,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "% 1 został usunięty z ulubionych!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Ulubione"),
         "featured": MessageLookupByLibrary.simpleMessage("Polecane"),
+        "fewDaysAgo": MessageLookupByLibrary.simpleMessage("Kilka dni temu"),
+        "fewHoursAgo":
+            MessageLookupByLibrary.simpleMessage("Kilka godzin temu"),
+        "fewMinutesAgo":
+            MessageLookupByLibrary.simpleMessage("Kilka minut temu"),
+        "fewSecondsAgo":
+            MessageLookupByLibrary.simpleMessage("Kilka sekund temu"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Potwierdz odcisk palca żeby zapisać nasiono portfela."),
         "from": MessageLookupByLibrary.simpleMessage("Od"),
@@ -343,6 +351,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Ukryj puste konta"),
         "home": MessageLookupByLibrary.simpleMessage("Strona główna"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("Godzinę temu"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Rozumiem ryzyka"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ignoruj"),
@@ -416,6 +425,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Wiadomość"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Minimalna kwota wysłania to% 1% 2"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("Minutę temu"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 nie jest ważnym słowem"),
         "mnemonicPhrase":
@@ -643,6 +653,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Wyślij"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Wyślij %1 Nano?"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("Wyślij kwoty"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Wystąpił błąd. Spróbuj póżniej"),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Wyślij Od"),
@@ -749,7 +760,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("Śledzenie wyłączone"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "Funkcjonalność kart podarunkowych może być ograniczona lub w ogóle nie działać, jeśli śledzenie jest wyłączone. Używamy tego pozwolenia WYŁĄCZNIE dla tej funkcji, absolutnie żadne z twoich danych nie są sprzedawane, gromadzone ani śledzone w żadnym innym celu niż funkcjonalność, ani nie chcemy :)"),
+            "Funkcjonalność kart podarunkowych może być ograniczona lub w ogóle nie działać, jeśli śledzenie jest wyłączone. Używamy tego pozwolenia WYŁĄCZNIE dla tej funkcji. Absolutnie żadne z Twoich danych nie są sprzedawane, gromadzone ani śledzone na zapleczu w żadnym celu wykraczającym poza konieczny"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Linki do kart podarunkowych nie będą działać poprawnie"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transakcje"),
@@ -835,6 +846,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Konto tylko do oglądania"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Wysyłanie jest wyłączone na adresach tylko na zegarku"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("Tydzień temu"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Witam w Nautilus. Żeby kontynuować, możesz stworzyć nowy portfel albo importować go."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

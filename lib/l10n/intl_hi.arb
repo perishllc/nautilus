@@ -535,6 +535,11 @@
     "type": "text",
     "description": "change_representative_current_header"
   },
+  "dayAgo": "एक दिन पहले",
+  "@dayAgo": {
+    "type": "text",
+    "description": "history_day_ago"
+  },
   "decryptionError": "डिक्रिप्शन त्रुटि!",
   "@decryptionError": {
     "type": "text",
@@ -845,6 +850,26 @@
     "type": "text",
     "description": "featured"
   },
+  "fewDaysAgo": "कुछ दिन पहले",
+  "@fewDaysAgo": {
+    "type": "text",
+    "description": "history_few_days_ago"
+  },
+  "fewHoursAgo": "कुछ ही घंटे पहले",
+  "@fewHoursAgo": {
+    "type": "text",
+    "description": "history_few_hours_ago"
+  },
+  "fewMinutesAgo": "कुछ क्षणों पहले",
+  "@fewMinutesAgo": {
+    "type": "text",
+    "description": "history_few_minutes_ago"
+  },
+  "fewSecondsAgo": "कुछ सेकंड पहले",
+  "@fewSecondsAgo": {
+    "type": "text",
+    "description": "history_few_seconds_ago"
+  },
   "fingerprintSeedBackup": "उंगली के निशान की सहायता से सीड बैकअप करें।",
   "@fingerprintSeedBackup": {
     "type": "text",
@@ -994,6 +1019,11 @@
   "@home": {
     "type": "text",
     "description": "home"
+  },
+  "hourAgo": "एक घंटे पहले",
+  "@hourAgo": {
+    "type": "text",
+    "description": "history_hour_ago"
   },
   "ignore": "नज़रअंदाज़ करना",
   "@ignore": {
@@ -1214,6 +1244,11 @@
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
+  },
+  "minuteAgo": "एक मिनट पहले",
+  "@minuteAgo": {
+    "type": "text",
+    "description": "history_minute_ago"
   },
   "mnemonicInvalidWord": "%1 मान्य शब्द नहीं है",
   "@mnemonicInvalidWord": {
@@ -1915,6 +1950,11 @@
     "type": "text",
     "description": "send_amount_confirm"
   },
+  "sendAmounts": "राशि भेजें",
+  "@sendAmounts": {
+    "type": "text",
+    "description": "split_bill_send_amounts"
+  },
   "sendError": "एक त्रुटि पाई गई। बाद में पुन: प्रयास करें।",
   "@sendError": {
     "type": "text",
@@ -2250,7 +2290,7 @@
     "type": "text",
     "description": "home_tracking_warning"
   },
-  "trackingWarningBodyLong": "यदि ट्रैकिंग अक्षम है तो गिफ़्ट कार्ड की कार्यक्षमता कम हो सकती है या बिल्कुल भी काम नहीं कर सकती है। हम इस सुविधा के लिए विशेष रूप से इस अनुमति का उपयोग करते हैं, आपका कोई भी डेटा कार्यक्षमता के अलावा किसी अन्य उद्देश्य के लिए बेचा, एकत्र या ट्रैक नहीं किया जाता है, न ही हम करना चाहेंगे :)",
+  "trackingWarningBodyLong": "यदि ट्रैकिंग अक्षम है तो गिफ़्ट कार्ड की कार्यक्षमता कम हो सकती है या बिल्कुल भी काम नहीं कर सकती है। हम इस सुविधा के लिए विशेष रूप से इस अनुमति का उपयोग करते हैं। आपका कोई भी डेटा आवश्यक से परे किसी भी उद्देश्य के लिए बैकएंड पर बेचा, एकत्र या ट्रैक नहीं किया जाता है",
   "@trackingWarningBodyLong": {
     "type": "text",
     "description": "tracking_warning_body_long"
@@ -2504,6 +2544,11 @@
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
+  },
+  "weekAgo": "एक हफ्ते पहले",
+  "@weekAgo": {
+    "type": "text",
+    "description": "history_week_ago"
   },
   "welcomeText": "नेट्रियम में आपका स्वागत है। आगे बढ़ने के लिए, आप एक नया वॉलेट बना सकते हैं या एक मौजूदा वॉलेट को आयात कर सकते हैं।",
   "@welcomeText": {

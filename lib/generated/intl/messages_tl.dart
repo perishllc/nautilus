@@ -203,6 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Piliin kung aling yunit ang magpapakita ng mga halaga.\n1 nyano = 0.000001 NANO, o \n1,000,000 nyano = 1 NANO"),
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage(
             "Kasalukuyang nirerepresenta ng"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("Kahapon"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Error sa pag-decryption!"),
         "defaultAccountName":
@@ -308,6 +309,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "%1 ay inalis mula sa mga paborito!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Mga Paborito"),
         "featured": MessageLookupByLibrary.simpleMessage("Itinatampok"),
+        "fewDaysAgo":
+            MessageLookupByLibrary.simpleMessage("Ilang araw na ang nakalipas"),
+        "fewHoursAgo":
+            MessageLookupByLibrary.simpleMessage("Ilang oras ang nakalipas"),
+        "fewMinutesAgo":
+            MessageLookupByLibrary.simpleMessage("Ilang minuto ang nakalipas"),
+        "fewSecondsAgo":
+            MessageLookupByLibrary.simpleMessage("Ilang segundo ang nakalipas"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Kumpirmahin ang fingerprint para i-back up ang wallet seed."),
         "from": MessageLookupByLibrary.simpleMessage("Mula"),
@@ -356,6 +365,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(
             "Itago ang Mga Walang Lamang Account"),
         "home": MessageLookupByLibrary.simpleMessage("Tahanan"),
+        "hourAgo":
+            MessageLookupByLibrary.simpleMessage("Isang oras ang nakaraan"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Naiintindihan ko ang risks"),
         "ignore": MessageLookupByLibrary.simpleMessage("Huwag pansinin"),
@@ -428,6 +439,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Mensahe"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Ang minimum na halaga ng pagpapadala ay %1 %2"),
+        "minuteAgo":
+            MessageLookupByLibrary.simpleMessage("Isang minuto ang nakalipas"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 ay hindi valid na salita"),
         "mnemonicPhrase":
@@ -662,6 +675,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Magpadala"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Magpadala ng %1 Nano?"),
+        "sendAmounts":
+            MessageLookupByLibrary.simpleMessage("Magpadala ng Mga Halaga"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Nagkaroon ng error. Subukan ulit mamaya."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Magpadala galing sa"),
@@ -771,7 +786,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning": MessageLookupByLibrary.simpleMessage(
             "Hindi Pinagana ang Pagsubaybay"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "Maaaring mabawasan o hindi gumana ang paggana ng Gift Card kung hindi pinagana ang pagsubaybay. EKSKLUSIBONG ginagamit namin ang pahintulot na ito para sa feature na ito, talagang wala sa iyong data ang ibinebenta, kinokolekta o sinusubaybayan para sa anumang iba pang layunin maliban sa functionality, at hindi rin namin gugustuhin :)"),
+            "Maaaring mabawasan o hindi gumana ang paggana ng Gift Card kung hindi pinagana ang pagsubaybay. EKSKLUSIBONG ginagamit namin ang pahintulot na ito para sa feature na ito. Talagang wala sa iyong data ang ibinebenta, kinokolekta o sinusubaybayan sa backend para sa anumang layuning higit sa kinakailangan"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Ang Mga Link ng Gift Card ay hindi gagana nang maayos"),
         "transactions": MessageLookupByLibrary.simpleMessage("Mga transaksyon"),
@@ -859,6 +874,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Watch Only Account"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Naka-disable ang mga pagpapadala sa mga address na relo lang"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage(
+            "Isang linggo na ang nakalipas"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Maligayang pagdating sa Nautilus. Para magpatuloy, gumawa ng bagong wallet o gamitin ang dating wallet."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

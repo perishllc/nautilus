@@ -1123,6 +1123,16 @@ class AppLocalization {
     );
   }
 
+  /// `A day ago`
+  String get dayAgo {
+    return Intl.message(
+      'A day ago',
+      name: 'dayAgo',
+      desc: 'history_day_ago',
+      args: [],
+    );
+  }
+
   /// `Decryption Error!`
   String get decryptionError {
     return Intl.message(
@@ -1743,6 +1753,46 @@ class AppLocalization {
     );
   }
 
+  /// `A few days ago`
+  String get fewDaysAgo {
+    return Intl.message(
+      'A few days ago',
+      name: 'fewDaysAgo',
+      desc: 'history_few_days_ago',
+      args: [],
+    );
+  }
+
+  /// `A few hours ago`
+  String get fewHoursAgo {
+    return Intl.message(
+      'A few hours ago',
+      name: 'fewHoursAgo',
+      desc: 'history_few_hours_ago',
+      args: [],
+    );
+  }
+
+  /// `A few minutes ago`
+  String get fewMinutesAgo {
+    return Intl.message(
+      'A few minutes ago',
+      name: 'fewMinutesAgo',
+      desc: 'history_few_minutes_ago',
+      args: [],
+    );
+  }
+
+  /// `A few seconds ago`
+  String get fewSecondsAgo {
+    return Intl.message(
+      'A few seconds ago',
+      name: 'fewSecondsAgo',
+      desc: 'history_few_seconds_ago',
+      args: [],
+    );
+  }
+
   /// `Authenticate to backup seed.`
   String get fingerprintSeedBackup {
     return Intl.message(
@@ -2039,6 +2089,16 @@ class AppLocalization {
       'Home',
       name: 'home',
       desc: 'home',
+      args: [],
+    );
+  }
+
+  /// `An hour ago`
+  String get hourAgo {
+    return Intl.message(
+      'An hour ago',
+      name: 'hourAgo',
+      desc: 'history_hour_ago',
       args: [],
     );
   }
@@ -2481,6 +2541,16 @@ class AppLocalization {
       'Minimum send amount is %1 %2',
       name: 'minimumSend',
       desc: 'send_minimum_error',
+      args: [],
+    );
+  }
+
+  /// `A minute ago`
+  String get minuteAgo {
+    return Intl.message(
+      'A minute ago',
+      name: 'minuteAgo',
+      desc: 'history_minute_ago',
       args: [],
     );
   }
@@ -3890,6 +3960,16 @@ class AppLocalization {
     );
   }
 
+  /// `Send Amounts`
+  String get sendAmounts {
+    return Intl.message(
+      'Send Amounts',
+      name: 'sendAmounts',
+      desc: 'split_bill_send_amounts',
+      args: [],
+    );
+  }
+
   /// `An error occurred. Try again later.`
   String get sendError {
     return Intl.message(
@@ -4560,10 +4640,10 @@ class AppLocalization {
     );
   }
 
-  /// `Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature, absolutely none of your data is sold, collected or tracked for any other purpose other than functionality, nor would we want to :)`
+  /// `Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature. Absolutely none of your data is sold, collected or tracked on the backend for any purpose beyond necessary`
   String get trackingWarningBodyLong {
     return Intl.message(
-      'Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature, absolutely none of your data is sold, collected or tracked for any other purpose other than functionality, nor would we want to :)',
+      'Gift Card functionality may be reduced or not work at all if tracking is disabled. We use this permission EXCLUSIVELY for this feature. Absolutely none of your data is sold, collected or tracked on the backend for any purpose beyond necessary',
       name: 'trackingWarningBodyLong',
       desc: 'tracking_warning_body_long',
       args: [],
@@ -5066,6 +5146,16 @@ class AppLocalization {
       'Sends are disabled on watch only addresses',
       name: 'watchOnlySendDisabled',
       desc: 'watch_only_send_disabled',
+      args: [],
+    );
+  }
+
+  /// `A week ago`
+  String get weekAgo {
+    return Intl.message(
+      'A week ago',
+      name: 'weekAgo',
+      desc: 'history_week_ago',
       args: [],
     );
   }

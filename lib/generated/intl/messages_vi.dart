@@ -199,6 +199,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Chọn đơn vị nào để hiển thị số tiền trong đó.\n1 nyano = 0.000001 NANO, hoặc \n1.000.000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Hiện đang được đại diện bởi"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("Một ngày trước"),
         "decryptionError": MessageLookupByLibrary.simpleMessage("Lỗi giải mã!"),
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Tài khoản chính"),
@@ -299,6 +300,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "favoritesHeader":
             MessageLookupByLibrary.simpleMessage("Mục yêu thích"),
         "featured": MessageLookupByLibrary.simpleMessage("Nổi bật"),
+        "fewDaysAgo":
+            MessageLookupByLibrary.simpleMessage("Một vài ngày trước"),
+        "fewHoursAgo":
+            MessageLookupByLibrary.simpleMessage("Một vài giờ trước"),
+        "fewMinutesAgo":
+            MessageLookupByLibrary.simpleMessage("Một vài phút trước"),
+        "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("Vài giây trước"),
         "fingerprintSeedBackup":
             MessageLookupByLibrary.simpleMessage("Xác minh để xem hạt giống."),
         "from": MessageLookupByLibrary.simpleMessage("Từ"),
@@ -346,6 +354,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Ẩn tài khoản trống"),
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("Một tiếng trước"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Tôi hiểu những rủi ro"),
         "ignore": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
@@ -418,6 +427,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Tin nhắn"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Khoản gửi tối thiểu là %1 Nano"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("Một phút trước"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 không phải từ hợp lệ"),
         "mnemonicPhrase":
@@ -641,6 +651,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Gửi"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Gửi %1 NANO"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("Gửi số tiền"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Đã xảy ra lỗi, vui lòng thử lại sau."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Gửi từ"),
@@ -748,7 +759,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("Theo dõi bị vô hiệu hóa"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "Chức năng Thẻ quà tặng có thể bị giảm hoặc hoàn toàn không hoạt động nếu tính năng theo dõi bị tắt. Chúng tôi sử dụng quyền này ĐỘC QUYỀN cho tính năng này, tuyệt đối không có dữ liệu nào của bạn được bán, thu thập hoặc theo dõi cho bất kỳ mục đích nào khác ngoài chức năng, chúng tôi cũng không muốn :)"),
+            "Chức năng Thẻ quà tặng có thể bị giảm hoặc hoàn toàn không hoạt động nếu tính năng theo dõi bị tắt. Chúng tôi sử dụng quyền này ĐỘC QUYỀN cho tính năng này. Tuyệt đối không có dữ liệu nào của bạn được bán, thu thập hoặc theo dõi trên chương trình phụ trợ cho bất kỳ mục đích nào ngoài mức cần thiết"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Liên kết Thẻ quà tặng sẽ không hoạt động bình thường"),
         "transactions": MessageLookupByLibrary.simpleMessage("Các giao dịch"),
@@ -834,6 +845,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tài khoản Chỉ Xem"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Tính năng gửi bị tắt trên các địa chỉ chỉ xem"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("Một tuần trước"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Chào mừng đến với Nautilus. Để bắt đầu, bạn có thể tạo ví mới hoặc nhập ví hiện có."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

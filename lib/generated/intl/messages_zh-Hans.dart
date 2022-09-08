@@ -151,6 +151,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(
             "选择要显示金额的单位。\n1 nyano = 0.000001 NANO，或者 \n1,000,000 nyano = 1 NANO"),
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage("当前代表"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("一天前"),
         "decryptionError": MessageLookupByLibrary.simpleMessage("解密错误！"),
         "defaultAccountName": MessageLookupByLibrary.simpleMessage("主要账户"),
         "defaultGiftMessage":
@@ -230,6 +231,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "favoriteRemoved": MessageLookupByLibrary.simpleMessage("%1 已从收藏夹中删除！"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("收藏夹"),
         "featured": MessageLookupByLibrary.simpleMessage("精选"),
+        "fewDaysAgo": MessageLookupByLibrary.simpleMessage("几天之前"),
+        "fewHoursAgo": MessageLookupByLibrary.simpleMessage("几个小时前"),
+        "fewMinutesAgo": MessageLookupByLibrary.simpleMessage("几分钟前"),
+        "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("几秒钟前"),
         "fingerprintSeedBackup":
             MessageLookupByLibrary.simpleMessage("确认指纹，备份钱包种子。"),
         "from": MessageLookupByLibrary.simpleMessage("来自"),
@@ -269,6 +274,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideAccountsHeader": MessageLookupByLibrary.simpleMessage("隐藏帐户？"),
         "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage("隐藏空账户"),
         "home": MessageLookupByLibrary.simpleMessage("家"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("一小时前"),
         "iUnderstandTheRisks": MessageLookupByLibrary.simpleMessage("我已明白风险"),
         "ignore": MessageLookupByLibrary.simpleMessage("忽略"),
         "imSure": MessageLookupByLibrary.simpleMessage("我确定"),
@@ -324,6 +330,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageCopied": MessageLookupByLibrary.simpleMessage("消息已复制"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("留言"),
         "minimumSend": MessageLookupByLibrary.simpleMessage("最小发送金额为 %1 %2"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("一分钟前"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 不是有效的词语"),
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("秘密短语"),
@@ -505,6 +512,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "selfSendError": MessageLookupByLibrary.simpleMessage("无法向自己申请"),
         "send": MessageLookupByLibrary.simpleMessage("发送"),
         "sendAmountConfirm": MessageLookupByLibrary.simpleMessage("发送 %1 NANO"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("发送金额"),
         "sendError": MessageLookupByLibrary.simpleMessage("发生错误。请稍后再试。"),
         "sendFrom": MessageLookupByLibrary.simpleMessage("发送自"),
         "sendMemoError": MessageLookupByLibrary.simpleMessage(
@@ -582,7 +590,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingHeader": MessageLookupByLibrary.simpleMessage("追踪授权"),
         "trackingWarning": MessageLookupByLibrary.simpleMessage("跟踪已禁用"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "如果禁用跟踪，礼品卡功能可能会减少或根本无法使用。我们仅将此权限用于此功能，绝对不会出于功能以外的任何其他目的出售、收集或跟踪您的数据，我们也不想:)"),
+            "如果禁用跟踪，礼品卡功能可能会减少或根本无法使用。我们将此权限专门用于此功能。绝对不会出于任何不必要的目的在后端出售、收集或跟踪您的任何数据"),
         "trackingWarningBodyShort":
             MessageLookupByLibrary.simpleMessage("礼品卡链接无法正常工作"),
         "transactions": MessageLookupByLibrary.simpleMessage("交易"),
@@ -654,6 +662,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlyAccount": MessageLookupByLibrary.simpleMessage("仅观看帐户"),
         "watchOnlySendDisabled":
             MessageLookupByLibrary.simpleMessage("仅监视地址上禁用发送"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("一星期前"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "欢迎来到Nautilus。下一步，您可以创建新钱包或导入已有钱包。"),
         "welcomeTextUpdated":

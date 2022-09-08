@@ -282,13 +282,17 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                     children: <Widget>[
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY,
                           AppLocalization.of(context).enableTracking, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
-                        bool trackingEnabled = false;
+                        bool? trackingEnabled;
                         if (Platform.isIOS) {
-                          trackingEnabled =
-                              await AppTrackingTransparency.requestTrackingAuthorization() == TrackingStatus.authorized;
+                          final TrackingStatus status = await AppTrackingTransparency.requestTrackingAuthorization();
+                          if (status == TrackingStatus.authorized) {
+                            trackingEnabled = true;
+                          }
                         } else {
-                          trackingEnabled = await AppDialogs.showTrackingDialog(context);
+                          trackingEnabled = await AppDialogs.showTrackingDialog(context, true);
                         }
+
+                        if (trackingEnabled == null) return;
 
                         if (!mounted) return;
 

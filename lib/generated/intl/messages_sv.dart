@@ -202,6 +202,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Välj vilken enhet som ska visas i.\n1 nyano = 0,000001 NANO, eller \n1,000,000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Aktiv representant"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("En dag sen"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Dekryptering Fel!"),
         "defaultAccountName":
@@ -303,6 +304,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "% 1 har tagits bort från favoriter!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("favoriter"),
         "featured": MessageLookupByLibrary.simpleMessage("Dagens"),
+        "fewDaysAgo":
+            MessageLookupByLibrary.simpleMessage("För några dagar sedan"),
+        "fewHoursAgo": MessageLookupByLibrary.simpleMessage("Några timmar sen"),
+        "fewMinutesAgo":
+            MessageLookupByLibrary.simpleMessage("Några minuter sedan"),
+        "fewSecondsAgo":
+            MessageLookupByLibrary.simpleMessage("Några sekunder sedan"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Bekräfta fingeravtryck för att säkerhetskopiera plånboks-seed."),
         "from": MessageLookupByLibrary.simpleMessage("Från"),
@@ -349,6 +357,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Dölj tomma konton"),
         "home": MessageLookupByLibrary.simpleMessage("Hem"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("En timme sedan"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Jag förstår riskerna"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ignorera"),
@@ -420,6 +429,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Meddelande"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Minsta möjliga belopp att skicka är %1 NANO"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("För en minut sedan"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 är inget giltigt ord"),
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("Hemlig fras"),
@@ -645,6 +655,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Skicka"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Skicka %1 Nano?"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("Skicka belopp"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Ett fel inträffade. Försök igen senare."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Skicka från"),
@@ -748,7 +759,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("Spårning inaktiverad"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "Presentkortsfunktionaliteten kan vara reducerad eller inte fungera alls om spårning är inaktiverat. Vi använder denna behörighet EXKLUSIVT för denna funktion, absolut ingen av dina data säljs, samlas in eller spåras för något annat ändamål än funktionalitet, och det skulle vi inte heller vilja :)"),
+            "Presentkortsfunktionaliteten kan vara reducerad eller inte fungera alls om spårning är inaktiverat. Vi använder denna behörighet EXKLUSIVT för den här funktionen. Absolut ingen av dina uppgifter säljs, samlas in eller spåras på backend för något ändamål utöver nödvändigt"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Presentkortlänkar kommer inte att fungera korrekt"),
         "transactions": MessageLookupByLibrary.simpleMessage("Transaktioner"),
@@ -833,6 +844,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Endast titta på konto"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Sändningar är inaktiverade på adresser med endast bevakning"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("En vecka sedan"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Välkommen till Nautilus. För att fortsätta, behöver du skapa en ny plånbok eller importera en befintlig."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

@@ -64,7 +64,8 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
 
   // if list takes 300.0 pixels of height on screen and scrollthumb height is 40.0
   // then max bar offset is 260.0
-  double get barMaxScrollExtent => (context.size!.height - (widget.scrollbarHeight + widget.scrollbarBottomMargin)).abs();
+  double get barMaxScrollExtent =>
+      (context.size!.height - (widget.scrollbarHeight + widget.scrollbarBottomMargin)).abs();
   double get barMinScrollExtent => widget.scrollbarTopMargin;
 
   // this is usually length (in pixels) of list
@@ -72,6 +73,7 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
   double get viewMaxScrollExtent => widget.controller.position.maxScrollExtent;
   // this is usually 0.0
   double get viewMinScrollExtent => widget.controller.position.minScrollExtent;
+  // double _previousMaxScrollExtent = 0.0;
 
   double getScrollViewDelta(
     double barDelta,
@@ -95,7 +97,10 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
       return;
     }
 
-    final RenderBox scrollbarBox = scrollbarKey.currentContext?.findRenderObject() as RenderBox;
+    final RenderBox? scrollbarBox = scrollbarKey.currentContext?.findRenderObject() as RenderBox?;
+    if (scrollbarBox == null) {
+      return;
+    }
     final Offset touchPosition = details.globalPosition;
     final Offset scrollbarPosition = scrollbarBox.localToGlobal(Offset.zero);
 
@@ -241,14 +246,21 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
       if (notification is ScrollUpdateNotification) {
         _viewOffset += notification.scrollDelta!;
         // lines removed for bounce scroll physics:
-        // if (_viewOffset < widget.controller.position.minScrollExtent) {
-        //   _viewOffset = widget.controller.position.minScrollExtent;
+        // if (_viewOffset < viewMinScrollExtent) {
+        //   _viewOffset = viewMinScrollExtent;
         // }
         // if (_viewOffset > viewMaxScrollExtent) {
         //   _viewOffset = viewMaxScrollExtent;
         // }
 
-        if (_viewOffset < widget.controller.position.minScrollExtent || _viewOffset > viewMaxScrollExtent) {
+        // if (_previousMaxScrollExtent != viewMaxScrollExtent) {
+        //   double diff = viewMaxScrollExtent - _previousMaxScrollExtent;
+        //   diff = diff * (barMaxScrollExtent / viewMaxScrollExtent);
+        //   _barOffsetTop -= diff;
+        // }
+        // _previousMaxScrollExtent = viewMaxScrollExtent;
+
+        if (_viewOffset < viewMinScrollExtent || _viewOffset > viewMaxScrollExtent) {
           // don't update the bar offset:
           return;
         }
@@ -269,7 +281,25 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
         if (_barOffsetBottom < 0) {
           _barOffsetBottom = 0;
         }
+      // glue scroll bar to the top on overscroll:
+      } else if (notification is OverscrollNotification) {
+        if (_barOffsetTop > barMinScrollExtent && _barOffsetTop < (barMinScrollExtent + 100)) {
+          setState(() {
+            _barOffsetTop = barMinScrollExtent;
+          });
+        }
       }
+      /*else if (notification is OverscrollNotification) {
+        var diff = viewMaxScrollExtent - _viewOffset;
+        if (diff != 0 && diff < 300) {
+          _barOffsetTop = barMaxScrollExtent;
+        }
+      }*/
+      // stick the bar to bottom when overscrolling:
+      // final double diff = viewMaxScrollExtent - _viewOffset;
+      // if (diff != 0 && diff < 200) {
+      //   _barOffsetTop = barMaxScrollExtent;
+      // }
     });
   }
 
@@ -308,7 +338,8 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
                 width: widget.scrollbarInvisibleWidth,
                 height: widget.scrollbarHeight,
                 // padding: EdgeInsets.only(left: 20.0, top: 10.0, bottom: 10.0),
-                margin: EdgeInsets.only(top: _barOffsetTop >= 0 ? _barOffsetTop : 0, bottom: _barOffsetBottom >= 0 ? _barOffsetBottom : 0),
+                margin: EdgeInsets.only(
+                    top: _barOffsetTop >= 0 ? _barOffsetTop : 0, bottom: _barOffsetBottom >= 0 ? _barOffsetBottom : 0),
                 child: _buildScrollThumb(),
               ),
             ),
@@ -327,7 +358,9 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
       decoration: BoxDecoration(
         // borderRadius: BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
         // borderRadius: BorderRadius.all(Radius.circular(10)),
-        borderRadius: _isDragInProcess ? const BorderRadius.all(Radius.circular(10)) : const BorderRadius.all(Radius.circular(1.5)),
+        borderRadius: _isDragInProcess
+            ? const BorderRadius.all(Radius.circular(10))
+            : const BorderRadius.all(Radius.circular(1.5)),
         color: widget.scrollbarColor,
       ),
     );

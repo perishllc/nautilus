@@ -204,6 +204,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Виберіть, в якій одиниці відображати суми.\n1 ньяно = 0,000001 НАНО, або \n1,000,000 ньяно = 1 НАНО"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("На разі представлено"),
+        "dayAgo": MessageLookupByLibrary.simpleMessage("День тому"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Помилка розшифровки!"),
         "defaultAccountName":
@@ -307,6 +308,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "% 1 було вилучено з обраних!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Вибране"),
         "featured": MessageLookupByLibrary.simpleMessage("Рекомендовані"),
+        "fewDaysAgo":
+            MessageLookupByLibrary.simpleMessage("Декілька днів тому"),
+        "fewHoursAgo":
+            MessageLookupByLibrary.simpleMessage("Кілька годин тому"),
+        "fewMinutesAgo":
+            MessageLookupByLibrary.simpleMessage("Кілька хвилин тому"),
+        "fewSecondsAgo":
+            MessageLookupByLibrary.simpleMessage("Кілька секунд тому"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Введіть пароль для створення резервної копії."),
         "from": MessageLookupByLibrary.simpleMessage("Від"),
@@ -354,6 +363,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(
             "Приховати порожні облікові записи"),
         "home": MessageLookupByLibrary.simpleMessage("Головна"),
+        "hourAgo": MessageLookupByLibrary.simpleMessage("Годину тому"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Я розумію ризики"),
         "ignore": MessageLookupByLibrary.simpleMessage("Ігнорувати"),
@@ -427,6 +437,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageHeader": MessageLookupByLibrary.simpleMessage("Повідомлення"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
             "Мінімальна сума для пересилання %1 NANO"),
+        "minuteAgo": MessageLookupByLibrary.simpleMessage("Хвилину тому"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 неправильне слово"),
         "mnemonicPhrase":
@@ -656,6 +667,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "send": MessageLookupByLibrary.simpleMessage("Надіслати"),
         "sendAmountConfirm":
             MessageLookupByLibrary.simpleMessage("Надіслати %1 Nano"),
+        "sendAmounts": MessageLookupByLibrary.simpleMessage("Відправити суми"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Сталася помилка. Спробуйте ще раз пізніше."),
         "sendFrom": MessageLookupByLibrary.simpleMessage("Надіслано з"),
@@ -768,7 +780,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackingWarning":
             MessageLookupByLibrary.simpleMessage("Відстеження вимкнено"),
         "trackingWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "Функціональність подарункової картки може бути обмежена або не працювати взагалі, якщо відстеження вимкнено. Ми використовуємо цей дозвіл ВИКЛЮЧНО для цієї функції, жодні ваші дані не продаються, не збираються та не відстежуються з будь-якою іншою метою, окрім функціональності, і ми цього не хочемо :)"),
+            "Функціональність подарункової картки може бути обмежена або не працювати взагалі, якщо відстеження вимкнено. Ми використовуємо цей дозвіл ВИКЛЮЧНО для цієї функції. Абсолютно жодні ваші дані не продаються, не збираються та не відстежуються на сервері з будь-якою іншою метою"),
         "trackingWarningBodyShort": MessageLookupByLibrary.simpleMessage(
             "Посилання на подарункові картки не працюватимуть належним чином"),
         "transactions": MessageLookupByLibrary.simpleMessage("Трансакції"),
@@ -856,6 +868,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Обліковий запис лише для перегляду"),
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Надсилання вимкнено на адресах лише для перегляду"),
+        "weekAgo": MessageLookupByLibrary.simpleMessage("Тиждень тому"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Ласкаво просимо до Nautilus. Щоб продовжити ви можете створити новий гаманець або імпортувати існуючий."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(

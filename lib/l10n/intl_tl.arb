@@ -535,6 +535,11 @@
     "type": "text",
     "description": "change_representative_current_header"
   },
+  "dayAgo": "Kahapon",
+  "@dayAgo": {
+    "type": "text",
+    "description": "history_day_ago"
+  },
   "decryptionError": "Error sa pag-decryption!",
   "@decryptionError": {
     "type": "text",
@@ -845,6 +850,26 @@
     "type": "text",
     "description": "featured"
   },
+  "fewDaysAgo": "Ilang araw na ang nakalipas",
+  "@fewDaysAgo": {
+    "type": "text",
+    "description": "history_few_days_ago"
+  },
+  "fewHoursAgo": "Ilang oras ang nakalipas",
+  "@fewHoursAgo": {
+    "type": "text",
+    "description": "history_few_hours_ago"
+  },
+  "fewMinutesAgo": "Ilang minuto ang nakalipas",
+  "@fewMinutesAgo": {
+    "type": "text",
+    "description": "history_few_minutes_ago"
+  },
+  "fewSecondsAgo": "Ilang segundo ang nakalipas",
+  "@fewSecondsAgo": {
+    "type": "text",
+    "description": "history_few_seconds_ago"
+  },
   "fingerprintSeedBackup": "Kumpirmahin ang fingerprint para i-back up ang wallet seed.",
   "@fingerprintSeedBackup": {
     "type": "text",
@@ -994,6 +1019,11 @@
   "@home": {
     "type": "text",
     "description": "home"
+  },
+  "hourAgo": "Isang oras ang nakaraan",
+  "@hourAgo": {
+    "type": "text",
+    "description": "history_hour_ago"
   },
   "ignore": "Huwag pansinin",
   "@ignore": {
@@ -1214,6 +1244,11 @@
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
+  },
+  "minuteAgo": "Isang minuto ang nakalipas",
+  "@minuteAgo": {
+    "type": "text",
+    "description": "history_minute_ago"
   },
   "mnemonicInvalidWord": "%1 ay hindi valid na salita",
   "@mnemonicInvalidWord": {
@@ -1915,6 +1950,11 @@
     "type": "text",
     "description": "send_amount_confirm"
   },
+  "sendAmounts": "Magpadala ng Mga Halaga",
+  "@sendAmounts": {
+    "type": "text",
+    "description": "split_bill_send_amounts"
+  },
   "sendError": "Nagkaroon ng error. Subukan ulit mamaya.",
   "@sendError": {
     "type": "text",
@@ -2250,7 +2290,7 @@
     "type": "text",
     "description": "home_tracking_warning"
   },
-  "trackingWarningBodyLong": "Maaaring mabawasan o hindi gumana ang paggana ng Gift Card kung hindi pinagana ang pagsubaybay. EKSKLUSIBONG ginagamit namin ang pahintulot na ito para sa feature na ito, talagang wala sa iyong data ang ibinebenta, kinokolekta o sinusubaybayan para sa anumang iba pang layunin maliban sa functionality, at hindi rin namin gugustuhin :)",
+  "trackingWarningBodyLong": "Maaaring mabawasan o hindi gumana ang paggana ng Gift Card kung hindi pinagana ang pagsubaybay. EKSKLUSIBONG ginagamit namin ang pahintulot na ito para sa feature na ito. Talagang wala sa iyong data ang ibinebenta, kinokolekta o sinusubaybayan sa backend para sa anumang layuning higit sa kinakailangan",
   "@trackingWarningBodyLong": {
     "type": "text",
     "description": "tracking_warning_body_long"
@@ -2504,6 +2544,11 @@
   "@watchOnlySendDisabled": {
     "type": "text",
     "description": "watch_only_send_disabled"
+  },
+  "weekAgo": "Isang linggo na ang nakalipas",
+  "@weekAgo": {
+    "type": "text",
+    "description": "history_week_ago"
   },
   "welcomeText": "Maligayang pagdating sa Nautilus. Para magpatuloy, gumawa ng bagong wallet o gamitin ang dating wallet.",
   "@welcomeText": {
