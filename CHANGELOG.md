@@ -1,3 +1,8 @@
+## v0.6.5 - [2022-09-XX]
+#### Added
+#### Changed
+#### Fixed
+- More scrolling fixes
 ## v0.6.4 - [2022-09-09]
 #### Added
 - Split bill menu now gives the option to send amounts instead of just requests

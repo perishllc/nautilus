@@ -281,9 +281,9 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
         if (_barOffsetBottom < 0) {
           _barOffsetBottom = 0;
         }
-      // glue scroll bar to the top on overscroll:
+        // glue scroll bar to the top on overscroll:
       } else if (notification is OverscrollNotification) {
-        if (_barOffsetTop > barMinScrollExtent && _barOffsetTop < (barMinScrollExtent + 100)) {
+        if (_barOffsetTop > barMinScrollExtent && notification.overscroll < 0) {
           setState(() {
             _barOffsetTop = barMinScrollExtent;
           });

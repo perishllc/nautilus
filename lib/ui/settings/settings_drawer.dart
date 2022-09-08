@@ -2869,7 +2869,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                               fontWeight: FontWeight.w100,
                               color: StateContainer.of(context).curTheme.text60)),
                     ),
-
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemSingleLine(
                       context,
                       NonTranslatable.nanswap,
