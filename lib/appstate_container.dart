@@ -229,6 +229,11 @@ class StateContainerState extends State<StateContainer> {
   void addActiveOrSettingsAlert(AlertResponseItem? active, AlertResponseItem? settingsAlert) {
     setState(() {
       if (active != null) {
+        // if this is alert 4041 (connection warning) and 4040 is in the stack, remove it:
+        if (active.id == 4041 && activeAlerts.any((AlertResponseItem element) => element.id == 4040)) {
+          activeAlerts.removeWhere((AlertResponseItem element) => element.id == 4040);
+        }
+
         // disallow duplicates:
         if (!activeAlerts.any((AlertResponseItem element) => element.id == active.id)) {
           activeAlerts.add(active);

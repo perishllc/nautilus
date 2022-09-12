@@ -1,16 +1,19 @@
-## v0.6.5 - [2022-09-13]
+## v0.6.5 - [2022-09-14]
 #### Added
 - Sunshine Theme! A new lightmode theme
 - The default theme is now dependent on your OS's dark mode preferences
   - Default light theme is Sunshine and the Default dark is Nautilus
 #### Changed
-- Updated default theme to be even brighter
+- Lots of tweaks to the default theme to be brighter while keeping good contrast & text readability
 - Massively improved XMR sync times by actually caching wallet state
 - Minor scrolling improvements
+- Refactored list gradients and tweaked heights / alignments
 #### Fixed
 - More scrolling fixes
 - Hopefully the last localized currency bug
 - Bug when disabling xmr with the section open confused state
+- Changelog was using the wrong background color
+- State bugs with connection warnings
 ## v0.6.4 - [2022-09-09]
 #### Added
 - Split bill menu now gives the option to send amounts instead of just requests

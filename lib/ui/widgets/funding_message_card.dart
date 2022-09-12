@@ -89,6 +89,7 @@ class _FundingMessageCardState extends State<FundingMessageCard> {
           foregroundColor: StateContainer.of(context).curTheme.success!.withOpacity(0.15), padding: EdgeInsets.zero,
           // highlightColor: StateContainer.of(context).curTheme.success!.withOpacity(0.15),
           // splashColor: StateContainer.of(context).curTheme.success!.withOpacity(0.15),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
         onPressed: widget.onPressed as void Function()?,
         child: Container(

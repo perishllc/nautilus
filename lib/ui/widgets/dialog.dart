@@ -187,7 +187,7 @@ class AppDialogs {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
-              backgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
+              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,

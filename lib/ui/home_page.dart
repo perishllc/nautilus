@@ -67,6 +67,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/custom_monero.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/example_cards.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/hcaptcha.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/reactive_refresh.dart';
@@ -898,6 +899,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     if (StateContainer.of(context).wallet!.loading) {
       setState(() {
         StateContainer.of(context).wallet!.loading = false;
+        StateContainer.of(context).wallet!.unifiedLoading = false;
+        StateContainer.of(context).wallet!.historyLoading = false;
       });
     }
     return;
@@ -2662,314 +2665,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
 
     return _buildUnifiedCard(txData, _emptyAnimation, displayName!, context);
-  } //Dummy Transaction Card End
-
-  // Welcome Card
-  TextSpan _getExampleHeaderSpan(BuildContext context) {
-    String workingStr;
-    if (StateContainer.of(context).selectedAccount == null || StateContainer.of(context).selectedAccount!.index == 0) {
-      workingStr = AppLocalization.of(context).exampleCardIntro;
-    } else {
-      workingStr = AppLocalization.of(context).newAccountIntro;
-    }
-    if (!workingStr.contains("NANO")) {
-      return TextSpan(
-        text: workingStr,
-        style: AppStyles.textStyleTransactionWelcome(context),
-      );
-    }
-    // Colorize NANO
-    final List<String> splitStr = workingStr.split("NANO");
-    if (splitStr.length != 2) {
-      return TextSpan(
-        text: workingStr,
-        style: AppStyles.textStyleTransactionWelcome(context),
-      );
-    }
-    return TextSpan(
-      text: '',
-      children: [
-        TextSpan(
-          text: splitStr[0],
-          style: AppStyles.textStyleTransactionWelcome(context),
-        ),
-        TextSpan(
-          text: "NANO",
-          style: AppStyles.textStyleTransactionWelcomePrimary(context),
-        ),
-        TextSpan(
-          text: splitStr[1],
-          style: AppStyles.textStyleTransactionWelcome(context),
-        ),
-      ],
-    );
   }
 
-  Widget _buildWelcomeTransactionCard(BuildContext context) {
-    return Container(
-      margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
-      decoration: BoxDecoration(
-        color: StateContainer.of(context).curTheme.backgroundDark,
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
-      ),
-      child: IntrinsicHeight(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-              width: 7.0,
-              decoration: BoxDecoration(
-                borderRadius:
-                    const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
-                color: StateContainer.of(context).curTheme.primary,
-                boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
-              ),
-            ),
-            Flexible(
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 15.0),
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: _getExampleHeaderSpan(context),
-                ),
-              ),
-            ),
-            Container(
-              width: 7.0,
-              decoration: BoxDecoration(
-                borderRadius:
-                    const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
-                color: StateContainer.of(context).curTheme.primary,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  } // Welcome Card End
-
-  Widget _buildWelcomePaymentCardTwo(BuildContext context) {
-    return Container(
-      margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
-      decoration: BoxDecoration(
-        color: StateContainer.of(context).curTheme.backgroundDark,
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
-      ),
-      child: IntrinsicHeight(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-              width: 7.0,
-              decoration: BoxDecoration(
-                borderRadius:
-                    const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
-                color: StateContainer.of(context).curTheme.primary,
-                boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
-              ),
-            ),
-            Flexible(
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 15.0),
-                child: RichText(
-                  text: TextSpan(
-                    text: AppLocalization.of(context).examplePaymentExplainer,
-                    style: AppStyles.textStyleTransactionWelcome(context),
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              width: 7.0,
-              decoration: BoxDecoration(
-                borderRadius:
-                    const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
-                color: StateContainer.of(context).curTheme.primary,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  } // Welcome Card End
-
-  // Loading Transaction Card
-  Widget _buildLoadingTransactionCard(String type, String amount, String address, BuildContext context) {
-    String text;
-    IconData icon;
-    Color? iconColor;
-    if (type == "Sent") {
-      text = "Senttt";
-      icon = AppIcons.dotfilled;
-      iconColor = StateContainer.of(context).curTheme.text20;
-    } else {
-      text = "Receiveddd";
-      icon = AppIcons.dotfilled;
-      iconColor = StateContainer.of(context).curTheme.primary20;
-    }
-    return Container(
-      margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
-      decoration: BoxDecoration(
-        color: StateContainer.of(context).curTheme.backgroundDark,
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
-      ),
-      child: TextButton(
-        onPressed: () {},
-        style: TextButton.styleFrom(
-          foregroundColor: StateContainer.of(context).curTheme.text15,
-          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-          padding: EdgeInsets.zero,
-        ),
-        // splashColor: StateContainer.of(context).curTheme.text15,
-        // highlightColor: StateContainer.of(context).curTheme.text15,
-        // splashColor: StateContainer.of(context).curTheme.text15,
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    // Transaction Icon
-                    Opacity(
-                      opacity: _opacityAnimation.value,
-                      child: Container(
-                          margin: const EdgeInsetsDirectional.only(end: 16.0),
-                          child: Icon(icon, color: iconColor, size: 20)),
-                    ),
-                    SizedBox(
-                      width: UIUtil.getDrawerAwareScreenWidth(context) / 4,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          // Transaction Type Text
-                          Stack(
-                            alignment: AlignmentDirectional.centerStart,
-                            children: <Widget>[
-                              Text(
-                                text,
-                                textAlign: TextAlign.start,
-                                style: const TextStyle(
-                                  fontFamily: "NunitoSans",
-                                  fontSize: AppFontSizes.small,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.transparent,
-                                ),
-                              ),
-                              Opacity(
-                                opacity: _opacityAnimation.value,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: StateContainer.of(context).curTheme.text45,
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: Text(
-                                    text,
-                                    textAlign: TextAlign.start,
-                                    style: const TextStyle(
-                                      fontFamily: "NunitoSans",
-                                      fontSize: AppFontSizes.small - 4,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.transparent,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          // Amount Text
-                          Stack(
-                            alignment: AlignmentDirectional.centerStart,
-                            children: <Widget>[
-                              Text(
-                                amount,
-                                textAlign: TextAlign.start,
-                                style: const TextStyle(
-                                    fontFamily: "NunitoSans",
-                                    color: Colors.transparent,
-                                    fontSize: AppFontSizes.smallest,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              Opacity(
-                                opacity: _opacityAnimation.value,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: StateContainer.of(context).curTheme.primary20,
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: Text(
-                                    amount,
-                                    textAlign: TextAlign.start,
-                                    style: const TextStyle(
-                                        fontFamily: "NunitoSans",
-                                        color: Colors.transparent,
-                                        fontSize: AppFontSizes.smallest - 3,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                // Address Text
-                SizedBox(
-                  width: UIUtil.getDrawerAwareScreenWidth(context) / 2.4,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Stack(
-                        alignment: AlignmentDirectional.centerEnd,
-                        children: <Widget>[
-                          Text(
-                            address,
-                            textAlign: TextAlign.end,
-                            style: const TextStyle(
-                              fontSize: AppFontSizes.smallest,
-                              fontFamily: 'OverpassMono',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.transparent,
-                            ),
-                          ),
-                          Opacity(
-                            opacity: _opacityAnimation.value,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: StateContainer.of(context).curTheme.text20,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Text(
-                                address,
-                                textAlign: TextAlign.end,
-                                style: const TextStyle(
-                                  fontSize: AppFontSizes.smallest - 3,
-                                  fontFamily: 'OverpassMono',
-                                  fontWeight: FontWeight.w100,
-                                  color: Colors.transparent,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  } // Loading Transaction Card End
 
   Widget _buildSearchbarAnimation() {
     return SearchBarAnimation(
@@ -4110,7 +3807,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         _moneroListKey = GlobalKey<AnimatedListState>();
         setState(() {
           _moneroList = ListModel<dynamic>(
-            listKey: listKey as GlobalKey<AnimatedListState>,
+            listKey: listKey!,
             initialItems: [],
           );
         });
@@ -4134,16 +3831,16 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             controller: _xmrScrollController,
             padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
             children: <Widget>[
-              _buildLoadingTransactionCard("Sent", "10244000", "123456789121234", context),
-              _buildLoadingTransactionCard("Received", "100,00000", "@fosse1234", context),
-              _buildLoadingTransactionCard("Sent", "14500000", "12345678912345671234", context),
-              _buildLoadingTransactionCard("Sent", "12,51200", "123456789121234", context),
-              _buildLoadingTransactionCard("Received", "1,45300", "123456789121234", context),
-              _buildLoadingTransactionCard("Sent", "100,00000", "12345678912345671234", context),
-              _buildLoadingTransactionCard("Received", "24,00000", "12345678912345671234", context),
-              _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
-              _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
-              _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "10244000", "123456789121234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Received", "100,00000", "@fosse1234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "14500000", "12345678912345671234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "12,51200", "123456789121234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Received", "1,45300", "123456789121234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "100,00000", "12345678912345671234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Received", "24,00000", "12345678912345671234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
             ],
           ));
     } else if (!StateContainer.of(context).wallet!.unifiedLoading) {
@@ -4259,16 +3956,16 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             controller: _scrollController,
             padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
             children: <Widget>[
-              _buildLoadingTransactionCard("Sent", "10244000", "123456789121234", context),
-              _buildLoadingTransactionCard("Received", "100,00000", "@fosse1234", context),
-              _buildLoadingTransactionCard("Sent", "14500000", "12345678912345671234", context),
-              _buildLoadingTransactionCard("Sent", "12,51200", "123456789121234", context),
-              _buildLoadingTransactionCard("Received", "1,45300", "123456789121234", context),
-              _buildLoadingTransactionCard("Sent", "100,00000", "12345678912345671234", context),
-              _buildLoadingTransactionCard("Received", "24,00000", "12345678912345671234", context),
-              _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
-              _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
-              _buildLoadingTransactionCard("Sent", "1,00000", "123456789121234", context),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "10244000", "123456789121234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Received", "100,00000", "@fosse1234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "14500000", "12345678912345671234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "12,51200", "123456789121234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Received", "1,45300", "123456789121234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "100,00000", "12345678912345671234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Received", "24,00000", "12345678912345671234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
+              ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
             ],
           ));
     } else if (!StateContainer.of(context).wallet!.xmrLoading) {
@@ -4299,7 +3996,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 Column(
                   children: activeAlerts,
                 ),
-              _buildWelcomeTransactionCard(context),
+              ExampleCards.welcomeTransactionCard(context),
               _buildDummyTXCard(
                 context,
                 amount_raw: "30000000000000000000000000000000",
@@ -4318,7 +4015,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 is_tx: true,
                 timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 1),
               ),
-              _buildWelcomePaymentCardTwo(context),
+              ExampleCards.welcomePaymentCardTwo(context),
 
               _buildDummyTXCard(
                 context,

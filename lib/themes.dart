@@ -121,9 +121,11 @@ class NautilusTheme extends BaseTheme {
   // static const Color tealDark = Color.fromRGBO(16, 16, 16, 1);
   // static const Color tealDarkest = Color.fromRGBO(10, 10, 10, 1);
 
-  static const Color tealLight = Color.fromRGBO(48, 48, 48, 1);
-  static const Color tealDark = Color.fromRGBO(32, 32, 32, 1);
-  static const Color tealDarkest = Color.fromRGBO(10, 10, 10, 1);
+  // static const Color tealLight = Color.fromRGBO(48, 48, 48, 1);
+  // static const Color tealDark = Color.fromRGBO(32, 32, 32, 1);
+  static const Color tealLight = Color.fromRGBO(32, 32, 32, 1);
+  static const Color tealDark = Color.fromRGBO(48, 48, 48, 1);
+  static const Color tealDarkest = Color.fromRGBO(24, 24, 24, 1);
 
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
