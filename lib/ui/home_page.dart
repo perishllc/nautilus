@@ -68,6 +68,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/custom_monero.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/hcaptcha.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/reactive_refresh.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
@@ -150,7 +151,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   late ScrollController _scrollController;
   int _maxHistItems = 10;
   bool _listExtended = false;
-  double _lastExtentPixels = 0;
   int _trueMaxHistItems = 10000;
   late ScrollController _xmrScrollController;
   late TabController _tabController;
@@ -1297,7 +1297,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   // TODO: this is honestly a terrible system, but it works really well:
   void _scrollListener() {
-    // print("aaaa");
     if ((_historyListMap[StateContainer.of(context).wallet!.address]?.isEmpty ?? true) ||
         (StateContainer.of(context).wallet?.loading ?? true)) {
       return;
@@ -1306,8 +1305,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       if (_trueMaxHistItems >= _maxHistItems) {
         setState(() {
           _listExtended = true;
-          _lastExtentPixels = _scrollController.position.pixels;
-          _maxHistItems += 2;
+          _maxHistItems += 20;
           generateUnifiedList(fastUpdate: true);
         });
       }
@@ -1315,7 +1313,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     if (_listExtended && (_scrollController.position.extentAfter > 10 || _scrollController.position.extentAfter < 2)) {
       setState(() {
         _listExtended = false;
-        _lastExtentPixels = _scrollController.position.pixels;
       });
     }
   }
@@ -2231,47 +2228,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
   }
 
-  Widget _buildListGradients(bool top) {
-    if (top) {
-      return // list gradients:
-          Align(
-        alignment: Alignment.topCenter,
-        child: Container(
-          height: 10.0,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                StateContainer.of(context).curTheme.background00!,
-                StateContainer.of(context).curTheme.background!
-              ],
-              begin: const AlignmentDirectional(0.5, 1.0),
-              end: const AlignmentDirectional(0.5, -1.0),
-            ),
-          ),
-        ),
-      );
-    } else {
-      return Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          height: 20.0,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: <Color>[
-                StateContainer.of(context).curTheme.background00!,
-                StateContainer.of(context).curTheme.background!
-              ],
-              begin: const AlignmentDirectional(0.5, -1),
-              end: const AlignmentDirectional(0.5, 0.5),
-            ),
-          ),
-        ),
-      );
-    }
-  }
-
   Widget _buildMainColumnView(BuildContext context) {
     if (_tabController.index == 0 && _receiveDisabled) {
       if (StateContainer.of(context).wallet?.address != null &&
@@ -2347,15 +2303,32 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                               Stack(
                                 children: <Widget>[
                                   _getUnifiedListWidget(context),
-                                  // list gradients:
-                                  _buildListGradients(true),
-                                  _buildListGradients(false),
+                                  ListGradient(
+                                    height: 10,
+                                    top: true,
+                                    color: StateContainer.of(context).curTheme.background!,
+                                  ),
+                                  ListGradient(
+                                    height: 20,
+                                    top: false,
+                                    color: StateContainer.of(context).curTheme.background!,
+                                  ),
                                 ],
                               ),
                               Stack(
                                 children: <Widget>[
                                   _getMoneroListWidget(context),
                                   const CustomMonero(),
+                                  ListGradient(
+                                    height: 10,
+                                    top: true,
+                                    color: StateContainer.of(context).curTheme.background!,
+                                  ),
+                                  ListGradient(
+                                    height: 20,
+                                    top: false,
+                                    color: StateContainer.of(context).curTheme.background!,
+                                  ),
                                   // TextButton(
                                   //   onPressed: () async {
                                   //     Sheets.showAppHeightEightSheet(context: context, widget: SetRestoreHeightSheet());
@@ -2373,9 +2346,16 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                         : Stack(
                             children: <Widget>[
                               _getUnifiedListWidget(context),
-                              // list gradients:
-                              _buildListGradients(true),
-                              _buildListGradients(false),
+                              ListGradient(
+                                height: 10,
+                                top: true,
+                                color: StateContainer.of(context).curTheme.background!,
+                              ),
+                              ListGradient(
+                                height: 20,
+                                top: false,
+                                color: StateContainer.of(context).curTheme.background!,
+                              ),
                             ],
                           ),
                   ),

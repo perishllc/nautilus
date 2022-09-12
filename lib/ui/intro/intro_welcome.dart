@@ -141,9 +141,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                             children: [
                               Container(
                                 // margin: const EdgeInsets.only(top: 0),
-                                color: Colors.white,
-                                // padding: EdgeInsets.zero,
-                                // width: double.infinity,
+                                color: StateContainer.of(context).curTheme.text,
                                 width: landscape
                                     ? MediaQuery.of(context).size.width / 2
                                     : MediaQuery.of(context).size.width,

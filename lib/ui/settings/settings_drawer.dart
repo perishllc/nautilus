@@ -67,6 +67,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/funding_message_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/funding_messages_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
@@ -115,7 +116,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   NotificationSetting _curNotificiationSetting = NotificationSetting(NotificationOptions.ON);
   ContactsSetting _curContactsSetting = ContactsSetting(ContactsOptions.OFF);
   ContactsSetting _curUnopenedWarningSetting = ContactsSetting(ContactsOptions.ON);
-  ContactsSetting _curShowMoneroSetting = ContactsSetting(ContactsOptions.ON);
+  ContactsSetting _curXmrEnabledSetting = ContactsSetting(ContactsOptions.ON);
   ContactsSetting _curTrackingSetting = ContactsSetting(ContactsOptions.ON);
   NatriconSetting _curNatriconSetting = NatriconSetting(NatriconOptions.ON);
   NyaniconSetting _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
@@ -125,7 +126,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   UnlockSetting _curUnlockSetting = UnlockSetting(UnlockOption.NO);
   LockTimeoutSetting _curTimeoutSetting = LockTimeoutSetting(LockTimeoutOption.ONE);
   ThemeSetting _curThemeSetting = ThemeSetting(ThemeOptions.NAUTILUS);
-  int _curXMRRestoreHeight = 0;
+  int _curXmrRestoreHeight = 0;
 
   late bool _loadingAccounts;
 
@@ -226,15 +227,15 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       });
     });
     // Get show monero setting:
-    sl.get<SharedPrefsUtil>().getShowMoneroOn().then((bool contactsOn) {
+    sl.get<SharedPrefsUtil>().getXmrEnabled().then((bool contactsOn) {
       setState(() {
-        _curShowMoneroSetting = contactsOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
+        _curXmrEnabledSetting = contactsOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
       });
     });
     // restore height:
-    sl.get<SharedPrefsUtil>().getXMRRestoreHeight().then((int height) {
+    sl.get<SharedPrefsUtil>().getXmrRestoreHeight().then((int height) {
       setState(() {
-        _curXMRRestoreHeight = StateContainer.of(context).xmrRestoreHeight ?? 0;
+        _curXmrRestoreHeight = StateContainer.of(context).xmrRestoreHeight ?? 0;
       });
     });
     // Get tracking authorization:
@@ -405,8 +406,9 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     // xmr:
     _xmrSub = EventTaxiImpl.singleton().registerTo<XMREvent>().listen((XMREvent event) {
       if (event.type == "set_restore_height") {
+        if (!mounted) return;
         setState(() {
-          _curXMRRestoreHeight = int.parse(event.message);
+          _curXmrRestoreHeight = int.parse(event.message);
         });
       }
     });
@@ -743,11 +745,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     }
 
     final bool enabled = picked == ContactsOptions.ON;
-    await sl.get<SharedPrefsUtil>().setShowMoneroOn(enabled);
+    await sl.get<SharedPrefsUtil>().setXmrEnabled(enabled);
     if (!mounted) return;
-    StateContainer.of(context).setShowXMR(enabled);
+    StateContainer.of(context).setXmrEnabled(enabled);
     setState(() {
-      _curShowMoneroSetting = ContactsSetting(picked);
+      _curXmrEnabledSetting = ContactsSetting(picked);
     });
   }
 
@@ -2275,24 +2277,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     scrollbarColor: StateContainer.of(context).curTheme.primary!,
                     child: _buildSettingsList(),
                   ),
-                  // List Top Gradient End
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      height: 20.0,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            StateContainer.of(context).curTheme.backgroundDark!,
-                            StateContainer.of(context).curTheme.backgroundDark00!
-                          ],
-                          begin: const AlignmentDirectional(0.5, -1.0),
-                          end: const AlignmentDirectional(0.5, 1.0),
-                        ),
-                      ),
-                    ),
-                  ), // List Top Gradient End
+                  ListGradient(
+                    height: 20,
+                    top: true,
+                    color: StateContainer.of(context).curTheme.backgroundDark!,
+                  ),
                 ],
               ),
             ),
@@ -2564,11 +2553,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                         _unopenedWarningDialog),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context).showMoneroHeader,
-                        _curShowMoneroSetting, AppIcons.money_bill_alt, _showMoneroDialog),
+                        _curXmrEnabledSetting, AppIcons.money_bill_alt, _showMoneroDialog),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemDoubleLine(
                         context, AppLocalization.of(context).setXMRRestoreHeight, null, AppIcons.backupseed,
-                        overrideSubtitle: _curXMRRestoreHeight.toString(), () async {
+                        overrideSubtitle: _curXmrRestoreHeight.toString(), () async {
                       Sheets.showAppHeightEightSheet(context: context, widget: SetXMRRestoreHeightSheet());
                     }),
                     // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
@@ -2683,24 +2672,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     }),
                   ],
                 ),
-                // List Top Gradient End
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    height: 20.0,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          StateContainer.of(context).curTheme.backgroundDark!,
-                          StateContainer.of(context).curTheme.backgroundDark00!
-                        ],
-                        begin: const AlignmentDirectional(0.5, -1.0),
-                        end: const AlignmentDirectional(0.5, 1.0),
-                      ),
-                    ),
-                  ),
-                ), //List Top Gradient End
+                ListGradient(
+                  height: 20,
+                  top: true,
+                  color: StateContainer.of(context).curTheme.backgroundDark!,
+                ),
               ],
             )),
           ],
@@ -3015,24 +2991,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                   ],
                 ),
-                // List Top Gradient End
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    height: 20.0,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: <Color>[
-                          StateContainer.of(context).curTheme.backgroundDark!,
-                          StateContainer.of(context).curTheme.backgroundDark00!
-                        ],
-                        begin: const AlignmentDirectional(0.5, -1.0),
-                        end: const AlignmentDirectional(0.5, 1.0),
-                      ),
-                    ),
-                  ),
-                ), //List Top Gradient End
+                ListGradient(
+                  height: 20,
+                  top: true,
+                  color: StateContainer.of(context).curTheme.backgroundDark!,
+                ),
               ],
             )),
           ],

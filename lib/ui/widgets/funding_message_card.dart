@@ -145,7 +145,7 @@ class _FundingMessageCardState extends State<FundingMessageCard> {
                   linearGradient: LinearGradient(
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
-                    stops: [0.2, 0.5, 0.9].map((e) => e * (1 / minFundedPercent)).toList(),
+                    stops: [0.2, 0.5, 0.9].map((double e) => e * (1 / minFundedPercent)).toList(),
                     colors: [
                       StateContainer.of(context).curTheme.error!,
                       StateContainer.of(context).curTheme.warning!,

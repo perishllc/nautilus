@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/xmr_event.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/util/blake2b.dart';
+import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 // import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -26,10 +28,27 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
 
   StreamSubscription<XMREvent>? _xmrSub;
 
+  String? walletData;
+
+  Future<void> initWallet() async {
+    await Future<dynamic>.delayed(const Duration(milliseconds: 3500));
+    walletData = await sl.get<SharedPrefsUtil>().getXmrWalletData();
+    if (walletData != null) {
+      webViewController?.runJavascript("window.walletData = '$walletData'; window.action = 'xmr_init';");
+    } else {
+      webViewController?.runJavascript("window.action = 'xmr_init';");
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     _registerBus();
+
+    // get xmr wallet data:
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      initWallet();
+    });
   }
 
   @override
@@ -40,16 +59,24 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
 
   void _registerBus() {
     // xmr:
-    _xmrSub = EventTaxiImpl.singleton().registerTo<XMREvent>().listen((XMREvent event) {
+    _xmrSub = EventTaxiImpl.singleton().registerTo<XMREvent>().listen((XMREvent event) async {
       if (event.type == "xmr_reload") {
         webViewController?.reload();
+        initWallet();
       }
       if (event.type == "xmr_send" || event.type == "xmr_get_fee") {
         // webViewController?.reload();
-        List<String> msgs = event.message.split(":");
+        final List<String> msgs = event.message.split(":");
         final String address = msgs[0];
         final String amount = msgs[1];
-        webViewController?.runJavascript("window.action = '${event.type}'; window.address = '$address'; window.amount = '$amount';");
+        webViewController
+            ?.runJavascript("window.action = '${event.type}'; window.address = '$address'; window.amount = '$amount';");
+      }
+      if (event.type == "update_wallet_data") {
+        walletData = event.message;
+        if (walletData != null) {
+          sl.get<SharedPrefsUtil>().setXmrWalletData(walletData!);
+        }
       }
     });
   }
@@ -68,7 +95,7 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
     super.build(context);
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-      height: 0,
+      height: 100,
 
       // margin: const EdgeInsets.all(30),
       child: ClipRRect(
@@ -79,11 +106,16 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
           future: StateContainer.of(context).getSeed(),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.hasData && snapshot.data != null) {
-              final String hashedSeed = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(snapshot.data as String))).substring(0, 64);
-              String url = "http://localhost:8080/assets/xmr/index.html#s=$hashedSeed&h=${StateContainer.of(context).xmrRestoreHeight}";
+              final String hashedSeed =
+                  NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(snapshot.data as String))).substring(0, 64);
+              String url = "http://localhost:8080/assets/xmr/index.html#s=$hashedSeed";
 
               if (kDebugMode) {
-                url = "http://142.93.244.88:8080/#s=$hashedSeed&h=${StateContainer.of(context).xmrRestoreHeight}";
+                url = "http://142.93.244.88:8080/#s=$hashedSeed";
+              }
+              final int? restoreHeight = StateContainer.of(context).xmrRestoreHeight;
+              if (restoreHeight != null && restoreHeight > 0) {
+                url += "&h=$restoreHeight";
               }
               return WebView(
                 initialUrl: url,
@@ -95,18 +127,10 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
                   JavascriptChannel(
                       name: "XMR",
                       onMessageReceived: (JavascriptMessage message) {
-                        // message contains the 'h-captcha-response' token.
-                        // Send it to your server in the login or other
-                        // data for verification via /siteverify
-                        // see: https://docs.hcaptcha.com/#server
-                        // widget.callback(message.message);
-                        // Navigator.of(context).pop();
-
                         final String messageString = message.message;
                         final String type = messageString.substring(0, messageString.indexOf(":"));
                         final String eventMessage = messageString.substring(messageString.indexOf(":") + 1);
                         print("type: $type - eventMessage: $eventMessage");
-
                         EventTaxiImpl.singleton().fire(XMREvent(type: type, message: eventMessage));
                       }),
                   JavascriptChannel(
@@ -123,59 +147,6 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
             return const SizedBox();
           },
         ),
-        // WebView(
-        //   // initialUrl: "http://142.93.244.88:8080/#s=$hashedSeed",
-        //   initialUrl: "http://142.93.244.88:8080/#s=${hashedSeed}",
-        //   javascriptMode: JavascriptMode.unrestricted,
-        //   debuggingEnabled: true,
-        //   gestureNavigationEnabled: true,
-        //   zoomEnabled: false,
-        //   javascriptChannels: {
-        //     JavascriptChannel(
-        //         name: "XMR",
-        //         onMessageReceived: (JavascriptMessage message) {
-        //           // message contains the 'h-captcha-response' token.
-        //           // Send it to your server in the login or other
-        //           // data for verification via /siteverify
-        //           // see: https://docs.hcaptcha.com/#server
-        //           // widget.callback(message.message);
-        //           // Navigator.of(context).pop();
-
-        //           final String messageString = message.message;
-        //           final String type = messageString.substring(0, messageString.indexOf(":"));
-        //           final String eventMessage = messageString.substring(messageString.indexOf(":") + 1);
-
-        //           print("@@@@@@@@@@@@@@@@@@@@@");
-        //           print("type: $type - eventMessage: $eventMessage");
-
-        //           EventTaxiImpl.singleton().fire(XMREvent(type: type, message: eventMessage));
-        //         }),
-        //     JavascriptChannel(
-        //         name: "CloseWebView",
-        //         onMessageReceived: (JavascriptMessage message) {
-        //           Navigator.of(context).pop();
-        //         })
-        //   },
-        //   // onWebViewCreated: (WebViewController w) {
-        //   //   webViewController = w;
-        //   // },
-        // ),
-        // child: InAppWebView(
-        //   // key: webViewKey,
-        //   initialUrlRequest: URLRequest(url: Uri.parse("http://perish.co:3000/xmr")),
-        //   gestureRecognizers: Set()
-        //     ..add(Factory<TapGestureRecognizer>(
-        //       () => TapGestureRecognizer(),
-        //     ))
-        //     ..add(Factory<VerticalDragGestureRecognizer>(
-        //       () => VerticalDragGestureRecognizer(),
-        //     ))
-        //     ..add(Factory<HorizontalDragGestureRecognizer>(
-        //       () => HorizontalDragGestureRecognizer(),
-        //     )),
-
-        //   // initialOptions: options,
-        // ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,6 @@ import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:decimal/decimal.dart';
 
 // ignore: must_be_immutable
 class TopCard extends StatefulWidget {
@@ -49,7 +49,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
 
   String xmrBalance = "0";
   double syncPercentage = 0;
-  String xmrStatus = "CONNECTING...";
+  String xmrStatus = "";
   Color? xmrStatusColor;
 
   void _registerBus() {
@@ -86,12 +86,12 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
             break;
 
           case "loading":
-            title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusLoading, context) + "...";
+            title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusLoading, context);
             color = StateContainer.of(context).curTheme.warning;
             break;
 
           case "connecting":
-            title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusConnecting, context) + "...";
+            title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusConnecting, context);
             color = StateContainer.of(context).curTheme.warning;
             break;
 
@@ -109,6 +109,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
             color = StateContainer.of(context).curTheme.success;
             break;
         }
+        print("NEW_STATUS: $title");
         setState(() {
           xmrStatus = title;
           xmrStatusColor = color;
@@ -336,13 +337,51 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
                         //   dimension: 10.0,
                         //   child: Container(color: xmrStatusColor),
                         // ),
-                        Text(
-                          xmrStatus,
-                          textAlign: TextAlign.center,
-                          style: AppStyles.textStyleCurrencyAlt(context).copyWith(
-                            color: xmrStatusColor,
-                          ),
-                        ),
+                        if (xmrStatus.isNotEmpty)
+                          if (!<Color?>[
+                            StateContainer.of(context).curTheme.success,
+                            StateContainer.of(context).curTheme.error,
+                          ].contains(xmrStatusColor))
+                            DefaultTextStyle(
+                              textAlign: TextAlign.center,
+                              style: AppStyles.textStyleCurrencyAlt(context).copyWith(
+                                color: xmrStatusColor,
+                              ),
+                              child: AnimatedTextKit(
+                                animatedTexts: <AnimatedText>[
+                                  WavyAnimatedText(xmrStatus, speed: const Duration(milliseconds: 100)),
+                                ],
+                                repeatForever: true,
+                                isRepeatingAnimation: true,
+                              ),
+                            )
+                          else
+                            Text(
+                              xmrStatus,
+                              textAlign: TextAlign.center,
+                              style: AppStyles.textStyleCurrencyAlt(context).copyWith(
+                                color: xmrStatusColor,
+                              ),
+                            )
+                        else
+                          DefaultTextStyle(
+                            textAlign: TextAlign.center,
+                            style: AppStyles.textStyleCurrencyAlt(context).copyWith(
+                              color: StateContainer.of(context).curTheme.primary,
+                            ),
+                            child: AnimatedTextKit(
+                              animatedTexts: <AnimatedText>[
+                                WavyAnimatedText(
+                                    CaseChange.toUpperCase(
+                                      AppLocalization.of(context).xmrStatusConnecting,
+                                      context,
+                                    ),
+                                    speed: const Duration(milliseconds: 100)),
+                              ],
+                              repeatForever: true,
+                              isRepeatingAnimation: true,
+                            ),
+                          )
                       ],
                     ),
                   if (nanoMode)

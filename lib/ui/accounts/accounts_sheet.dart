@@ -26,6 +26,7 @@ import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:quiver/strings.dart';
@@ -75,7 +76,8 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
     for (final Account account in widget.accounts) {
       resp.balances!.forEach((String address, AccountBalanceItem balance) {
         address = address.replaceAll("xrb_", "nano_");
-        final String combinedBalance = (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.receivable!)!).toString();
+        final String combinedBalance =
+            (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.receivable!)!).toString();
         if (account.address == address && combinedBalance != account.balance) {
           sl.get<DBHelper>().updateAccountBalance(account, combinedBalance);
           setState(() {
@@ -87,12 +89,15 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
   }
 
   void _registerBus() {
-    _accountModifiedSub = EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((AccountModifiedEvent event) {
+    _accountModifiedSub =
+        EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((AccountModifiedEvent event) {
       if (event.deleted) {
         if (event.account!.selected) {
           Future.delayed(const Duration(milliseconds: 50), () {
             setState(() {
-              widget.accounts.where((Account a) => a.index == StateContainer.of(context).selectedAccount!.index).forEach((Account account) {
+              widget.accounts
+                  .where((Account a) => a.index == StateContainer.of(context).selectedAccount!.index)
+                  .forEach((Account account) {
                 account.selected = true;
               });
             });
@@ -276,38 +281,17 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                           ),
                         ),
 
-                      //List Top Gradient
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          height: 20.0,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                StateContainer.of(context).curTheme.backgroundDark00!,
-                                StateContainer.of(context).curTheme.backgroundDark!,
-                              ],
-                              begin: const AlignmentDirectional(0.5, 1.0),
-                              end: const AlignmentDirectional(0.5, -1.0),
-                            ),
-                          ),
-                        ),
+                      // begin: const AlignmentDirectional(0.5, 1.0),
+                      // end: const AlignmentDirectional(0.5, -1.0),
+                      ListGradient(
+                        height: 20,
+                        top: true,
+                        color: StateContainer.of(context).curTheme.backgroundDark!,
                       ),
-                      // List Bottom Gradient
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          height: 20.0,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [StateContainer.of(context).curTheme.backgroundDark!, StateContainer.of(context).curTheme.backgroundDark00!],
-                              begin: const AlignmentDirectional(0.5, 1.0),
-                              end: const AlignmentDirectional(0.5, -1.0),
-                            ),
-                          ),
-                        ),
+                      ListGradient(
+                        height: 20,
+                        top: false,
+                        color: StateContainer.of(context).curTheme.backgroundDark!,
                       ),
                     ],
                   )),
@@ -322,8 +306,11 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                     AppLocalization.of(context).hideEmptyAccounts,
                     Dimens.BUTTON_COMPACT_LEFT_DIMENS,
                     onPressed: () async {
-                      AppDialogs.showConfirmDialog(context, AppLocalization.of(context).hideAccountsHeader,
-                          AppLocalization.of(context).hideAccountsConfirmation, CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
+                      AppDialogs.showConfirmDialog(
+                          context,
+                          AppLocalization.of(context).hideAccountsHeader,
+                          AppLocalization.of(context).hideAccountsConfirmation,
+                          CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
                         await Future<dynamic>.delayed(const Duration(milliseconds: 250));
                         final List<Account> accountsToRemove = <Account>[];
                         for (final Account account in widget.accounts) {
@@ -372,7 +359,10 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                             _addingAccount = true;
                           });
                           StateContainer.of(context).getSeed().then((String seed) {
-                            sl.get<DBHelper>().addAccount(seed, nameBuilder: AppLocalization.of(context).defaultNewAccountName).then((Account? newAccount) {
+                            sl
+                                .get<DBHelper>()
+                                .addAccount(seed, nameBuilder: AppLocalization.of(context).defaultNewAccountName)
+                                .then((Account? newAccount) {
                               if (newAccount == null) {
                                 sl.get<Logger>().d("Error adding account: account was null");
                                 return;
@@ -497,7 +487,9 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                                         margin: EdgeInsets.only(left: account.watchOnly ? 5 : 0),
                                         child: Icon(
                                           account.watchOnly ? AppIcons.search : AppIcons.accountwallet,
-                                          color: account.selected ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary,
+                                          color: account.selected
+                                              ? StateContainer.of(context).curTheme.success
+                                              : StateContainer.of(context).curTheme.primary,
                                           size: 30,
                                         ),
                                       ),
@@ -569,7 +561,8 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                                       text: "",
                                       children: [
                                         TextSpan(
-                                          text: getThemeAwareRawAccuracy(context, isEmpty(account.balance) ? "0" : account.balance),
+                                          text: getThemeAwareRawAccuracy(
+                                              context, isEmpty(account.balance) ? "0" : account.balance),
                                           style: TextStyle(
                                               fontSize: 16.0,
                                               fontFamily: "NunitoSans",
@@ -588,7 +581,8 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                                         TextSpan(
                                           text: account.balance != null
                                               ? (!account.selected)
-                                                  ? getRawAsThemeAwareFormattedAmount(context, isEmpty(account.balance) ? "0" : account.balance)
+                                                  ? getRawAsThemeAwareFormattedAmount(
+                                                      context, isEmpty(account.balance) ? "0" : account.balance)
                                                   : getRawAsThemeAwareFormattedAmount(context, account.balance)
                                               : "",
                                           style: TextStyle(

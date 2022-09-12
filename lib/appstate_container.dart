@@ -7,6 +7,7 @@ import 'package:devicelocale/devicelocale.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -33,7 +34,6 @@ import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
-import 'package:nautilus_wallet_flutter/network/model/request/account_history_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/fcm_update_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/subscribe_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
@@ -78,6 +78,7 @@ Future<void> firebaseMessagingForegroundHandler(RemoteMessage message) async {
 
 class _InheritedStateContainer extends InheritedWidget {
   // You must pass through a child and your state.
+  // ignore: use_super_parameters
   const _InheritedStateContainer({
     Key? key,
     required this.data,
@@ -124,7 +125,7 @@ class StateContainerState extends State<StateContainer> {
   // String minRawReceive = "0";
 
   // maximum number of queued messages before we just instantly update the UI:
-  final int MAX_SEQUENTIAL_UPDATES = 5;
+  static const int MAX_SEQUENTIAL_UPDATES = 5;
 
   AppWallet? wallet;
   String currencyLocale = "en_US";
@@ -132,7 +133,9 @@ class StateContainerState extends State<StateContainer> {
   AvailableCurrency curCurrency = AvailableCurrency(AvailableCurrencyEnum.USD);
   LanguageSetting curLanguage = LanguageSetting(AvailableLanguage.DEFAULT);
   AvailableBlockExplorer curBlockExplorer = AvailableBlockExplorer(AvailableBlockExplorerEnum.NANOLOOKER);
-  BaseTheme curTheme = NautilusTheme();
+
+  BaseTheme curTheme =
+      SchedulerBinding.instance.window.platformBrightness == Brightness.dark ? NautilusTheme() : IndiumTheme();
   bool nyanoMode = false;
   String currencyMode = CurrencyModeSetting(CurrencyModeOptions.NANO).getDisplayName();
   // Currently selected account
@@ -145,6 +148,7 @@ class StateContainerState extends State<StateContainer> {
   String xmrAddress = "";
   int? xmrRestoreHeight;
   bool xmrEnabled = true;
+  String? xmrWalletData;
   String xmrFee = "";
   String xmrBalance = "0";
   final InAppLocalhostServer localhostServer = InAppLocalhostServer();
@@ -295,8 +299,8 @@ class StateContainerState extends State<StateContainer> {
     if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
       final List<TXData> solids = await sl.get<DBHelper>().getAccountSpecificSolids(wallet!.address);
       // check for duplicates and remove:
-      final Set<String?> uuids = {};
-      final List<int?> idsToRemove = [];
+      final Set<String?> uuids = <String?>{};
+      final List<int?> idsToRemove = <int?>[];
       for (final TXData solid in solids) {
         if (!uuids.contains(solid.uuid)) {
           uuids.add(solid.uuid);
@@ -532,12 +536,12 @@ class StateContainerState extends State<StateContainer> {
       setCurrencyMode(currencyMode);
     });
     // Get xmr restore height:
-    sl.get<SharedPrefsUtil>().getXMRRestoreHeight().then((int height) {
-      setXMRRestoreHeight(height);
+    sl.get<SharedPrefsUtil>().getXmrRestoreHeight().then((int height) {
+      setXmrRestoreHeight(height);
     });
     // Get xmr enabled:
-    sl.get<SharedPrefsUtil>().getShowMoneroOn().then((bool enabled) {
-      setShowXMR(enabled);
+    sl.get<SharedPrefsUtil>().getXmrEnabled().then((bool enabled) {
+      setXmrEnabled(enabled);
     });
     // restore payments from the cache
     updateSolids();
@@ -691,13 +695,16 @@ class StateContainerState extends State<StateContainer> {
         });
       }
       if (event.type == "update_restore_height") {
-        setXMRRestoreHeight(int.parse(event.message));
+        final int? height = int.tryParse(event.message);
+        if (height == null) {
+          log.e("Failed to parse restore height");
+          return;
+        }
+        setXmrRestoreHeight(height);
       }
       if (event.type == "update_fee") {
         setState(() {
           xmrFee = event.message;
-          print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-          print(xmrFee);
         });
       }
       if (event.type == "update_balance") {
@@ -864,18 +871,21 @@ class StateContainerState extends State<StateContainer> {
   }
 
   // set xmr restore height:
-  void setXMRRestoreHeight(int height) {
+  void setXmrRestoreHeight(int height) {
     setState(() {
       xmrRestoreHeight = height;
     });
     EventTaxiImpl.singleton().fire(XMREvent(type: "set_restore_height", message: height.toString()));
   }
 
-  // Change currency mode setting
-  void setShowXMR(bool enabled) {
+  // show / hide xmr section setting
+  void setXmrEnabled(bool enabled) {
     setState(() {
       xmrEnabled = enabled;
     });
+    if (!enabled) {
+      EventTaxiImpl.singleton().fire(XMREvent(type: "mode_change", message: "nano"));
+    }
     // start/stop web server for xmr:
     if (enabled && !localhostServer.isRunning()) {
       localhostServer.start();

@@ -30,7 +30,7 @@ import 'package:flutter/widgets.dart';
 class ExtraAppIcons {
   ExtraAppIcons._();
 
-  static const _kFontFam = 'ExtraAppIcons';
+  static const String _kFontFam = "ExtraAppIcons";
   static const String? _kFontPkg = null;
 
   static const IconData money = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);

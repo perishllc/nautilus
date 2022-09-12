@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:flutter/scheduler.dart';
 import 'package:intl/intl.dart';
 import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
@@ -35,12 +36,12 @@ class SharedPrefsUtil {
   static const String cur_language = 'fkalium_language_pref';
   static const String cur_theme = 'fkalium_theme_pref';
   static const String cur_explorer = 'fkalium_cur_explorer_pref';
-  static const String user_representative = 'fkalium_user_rep'; // For when non-opened accounts have set a representative
+  static const String user_representative =
+      'fkalium_user_rep'; // For when non-opened accounts have set a representative
   static const String firstcontact_added = 'fkalium_first_c_added';
   static const String notification_enabled = 'fkalium_notification_on';
   static const String contacts_enabled = 'fnautilus_contacts_on';
   static const String unopened_warning = 'fnautilus_unopened_warning';
-  static const String show_monero = 'fnautilus_show_monero';
   static const String funding_enabled = 'fnautilus_funding_on';
   static const String lock_kalium = 'fkalium_lock_dev';
   static const String kalium_lock_timeout = 'fkalium_lock_timeout';
@@ -64,10 +65,16 @@ class SharedPrefsUtil {
   static const String last_napi_users_check = 'fnautilus_last_napi_users_check';
   // store app version (for showing the change log):
   static const String app_version = 'fnautilus_app_version';
-  // xmr restore height:
-  static const String xmr_restore_height = 'fnautilus_xmr_restore_height';
   // tracking permissions:
   static const String tracking_enabled = 'fnautilus_tracking_enabled';
+
+  // xmr settings / data:
+  // xmr on:
+  static const String xmr_enabled = 'fnautilus_xmr_enabled';
+  // xmr restore height:
+  static const String xmr_restore_height = 'fnautilus_xmr_restore_height';
+  // xmr wallet data:
+  static const String xmr_wallet_data = 'fnautilus_xmr_wallet_data';
 
   // For plain-text data
   Future<void> set(String key, dynamic value) async {
@@ -222,7 +229,8 @@ class SharedPrefsUtil {
   }
 
   Future<AuthenticationMethod> getAuthMethod() async {
-    return AuthenticationMethod(AuthMethod.values[(await get(auth_method, defaultValue: AuthMethod.BIOMETRICS.index) as int)]);
+    return AuthenticationMethod(
+        AuthMethod.values[(await get(auth_method, defaultValue: AuthMethod.BIOMETRICS.index) as int)]);
   }
 
   Future<void> setCurrency(AvailableCurrency currency) async {
@@ -230,8 +238,9 @@ class SharedPrefsUtil {
   }
 
   Future<AvailableCurrency> getCurrency(Locale deviceLocale) async {
-    return AvailableCurrency(
-        AvailableCurrencyEnum.values[(await get(cur_currency, defaultValue: AvailableCurrency.getBestForLocale(deviceLocale).currency.index) as int)]);
+    return AvailableCurrency(AvailableCurrencyEnum.values[
+        (await get(cur_currency, defaultValue: AvailableCurrency.getBestForLocale(deviceLocale).currency.index)
+            as int)]);
   }
 
   Future<void> setLanguage(LanguageSetting language) async {
@@ -239,7 +248,8 @@ class SharedPrefsUtil {
   }
 
   Future<LanguageSetting> getLanguage() async {
-    return LanguageSetting(AvailableLanguage.values[await get(cur_language, defaultValue: AvailableLanguage.DEFAULT.index) as int]);
+    return LanguageSetting(
+        AvailableLanguage.values[await get(cur_language, defaultValue: AvailableLanguage.DEFAULT.index) as int]);
   }
 
   Future<void> setTheme(ThemeSetting theme) async {
@@ -251,12 +261,14 @@ class SharedPrefsUtil {
   }
 
   Future<AvailableBlockExplorer> getBlockExplorer() async {
-    return AvailableBlockExplorer(
-        AvailableBlockExplorerEnum.values[(await get(cur_explorer, defaultValue: AvailableBlockExplorerEnum.NANOLOOKER.index) as int)]);
+    return AvailableBlockExplorer(AvailableBlockExplorerEnum
+        .values[(await get(cur_explorer, defaultValue: AvailableBlockExplorerEnum.NANOLOOKER.index) as int)]);
   }
 
   Future<ThemeSetting> getTheme() async {
-    return ThemeSetting(ThemeOptions.values[(await get(cur_theme, defaultValue: ThemeOptions.NAUTILUS.index) as int)]);
+    final bool isDarkMode = SchedulerBinding.instance.window.platformBrightness == Brightness.dark;
+    final int defaultValue = isDarkMode ? ThemeOptions.NAUTILUS.index : ThemeOptions.INDIUM.index;
+    return ThemeSetting(ThemeOptions.values[(await get(cur_theme, defaultValue: defaultValue) as int)]);
   }
 
   Future<void> setRepresentative(String? rep) async {
@@ -341,12 +353,12 @@ class SharedPrefsUtil {
     return await get(funding_enabled, defaultValue: true) as bool;
   }
 
-  Future<bool> getShowMoneroOn() async {
-    return await get(show_monero, defaultValue: true) as bool;
+  Future<bool> getXmrEnabled() async {
+    return await get(xmr_enabled, defaultValue: true) as bool;
   }
 
-  Future<void> setShowMoneroOn(bool value) async {
-    return set(show_monero, value);
+  Future<void> setXmrEnabled(bool value) async {
+    return set(xmr_enabled, value);
   }
 
   Future<bool> getTrackingEnabled() async {
@@ -374,7 +386,8 @@ class SharedPrefsUtil {
   }
 
   Future<LockTimeoutSetting> getLockTimeout() async {
-    return LockTimeoutSetting(LockTimeoutOption.values[await get(kalium_lock_timeout, defaultValue: LockTimeoutOption.ONE.index) as int]);
+    return LockTimeoutSetting(
+        LockTimeoutOption.values[await get(kalium_lock_timeout, defaultValue: LockTimeoutOption.ONE.index) as int]);
   }
 
   // Locking out when max pin attempts exceeded
@@ -403,15 +416,19 @@ class SharedPrefsUtil {
     final int attempts = await getLockAttempts();
     if (attempts >= 20) {
       // 4+ failed attempts
-      await set(pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(const Duration(hours: 24))));
+      await set(
+          pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(const Duration(hours: 24))));
     } else if (attempts >= 15) {
       // 3 failed attempts
-      await set(pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(const Duration(minutes: 15))));
+      await set(
+          pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(const Duration(minutes: 15))));
     } else if (attempts >= 10) {
       // 2 failed attempts
-      await set(pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(const Duration(minutes: 5))));
+      await set(
+          pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(const Duration(minutes: 5))));
     } else if (attempts >= 5) {
-      await set(pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(const Duration(minutes: 1))));
+      await set(
+          pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(const Duration(minutes: 1))));
     }
   }
 
@@ -472,7 +489,8 @@ class SharedPrefsUtil {
   }
 
   Future<String> getCurrencyMode() async {
-    return await get(currency_mode, defaultValue: CurrencyModeSetting(CurrencyModeOptions.NANO).getDisplayName()) as String;
+    return await get(currency_mode, defaultValue: CurrencyModeSetting(CurrencyModeOptions.NANO).getDisplayName())
+        as String;
   }
 
   Future<void> setCurrencyMode(String currencyMode) async {
@@ -509,12 +527,20 @@ class SharedPrefsUtil {
     }
   }
 
-  Future<void> setXMRRestoreHeight(int height) async {
+  Future<void> setXmrRestoreHeight(int height) async {
     return set(xmr_restore_height, height);
   }
 
-  Future<int> getXMRRestoreHeight() async {
-    return await get(xmr_restore_height, defaultValue: 2702447) as int;
+  Future<int> getXmrRestoreHeight() async {
+    return await get(xmr_restore_height, defaultValue: 0) as int;
+  }
+
+  Future<void> setXmrWalletData(String data) async {
+    return set(xmr_wallet_data, data);
+  }
+
+  Future<String?> getXmrWalletData() async {
+    return await get(xmr_wallet_data, defaultValue: null) as String?;
   }
 
   // TODO:
@@ -539,7 +565,6 @@ class SharedPrefsUtil {
     await prefs.remove(notification_enabled);
     await prefs.remove(contacts_enabled);
     await prefs.remove(unopened_warning);
-    await prefs.remove(show_monero);
     await prefs.remove(funding_enabled);
     await prefs.remove(lock_kalium);
     await prefs.remove(pin_attempts);
@@ -553,7 +578,10 @@ class SharedPrefsUtil {
     await prefs.remove(last_napi_users_check);
     await prefs.remove(ninja_api_cache);
     await prefs.remove(firstcontact_added);
+    await prefs.remove(xmr_enabled);
     await prefs.remove(xmr_restore_height);
+    await prefs.remove(xmr_wallet_data);
+    await prefs.remove(cur_theme);
     // don't remove this preference since it's annoying when you log out:
     // await prefs.remove(tracking_enabled);
     // remove the dismissals of any important alerts:

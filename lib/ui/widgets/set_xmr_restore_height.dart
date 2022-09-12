@@ -184,8 +184,8 @@ class _SetXMRRestoreHeightSheetState extends State<SetXMRRestoreHeightSheet> {
                     }
 
                     final int height = int.parse(_amountController!.text);
-                    sl.get<SharedPrefsUtil>().setXMRRestoreHeight(height);
-                    StateContainer.of(context).setXMRRestoreHeight(height);
+                    sl.get<SharedPrefsUtil>().setXmrRestoreHeight(height);
+                    StateContainer.of(context).setXmrRestoreHeight(height);
 
                     Navigator.of(context).pop();
                   }),

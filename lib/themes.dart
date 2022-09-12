@@ -21,6 +21,7 @@ enum OverlayTheme {
   COPPER,
   MONOCHROME,
   MIDNIGHT,
+  SUNSHINE,
   PERISHABLE,
 }
 
@@ -116,9 +117,12 @@ class NautilusTheme extends BaseTheme {
 
   // static const Color tealLight = Color.fromRGBO(64, 64, 64, 1);
 
-  static const Color tealLight = Color.fromRGBO(24, 24, 24, 1);
+  // static const Color tealLight = Color.fromRGBO(24, 24, 24, 1);
+  // static const Color tealDark = Color.fromRGBO(16, 16, 16, 1);
+  // static const Color tealDarkest = Color.fromRGBO(10, 10, 10, 1);
 
-  static const Color tealDark = Color.fromRGBO(16, 16, 16, 1);
+  static const Color tealLight = Color.fromRGBO(48, 48, 48, 1);
+  static const Color tealDark = Color.fromRGBO(32, 32, 32, 1);
   static const Color tealDarkest = Color.fromRGBO(10, 10, 10, 1);
 
   static const Color white = Color(0xFFFFFFFF);
@@ -323,6 +327,111 @@ class IndiumTheme extends BaseTheme {
   static const Color white = Color(0xFFFFFFFF);
 
   static const Color whiteishDark = Color(0xFFE8F0FA);
+
+  static const Color grey = Color(0xFF454868);
+
+  static const Color black = Color(0xFF000000);
+
+  static const Color darkDeepBlue = Color(0xFF0050BB);
+
+  static const Color yellow = Color(0xFFFFB300);
+
+  static const Color yellowDark = Color(0xFFFFCB00);
+
+  static const Color red = Color(0xFFE80000);
+
+  static const Color redDark = Color(0xFFB20000);
+
+  Color? primary = deepBlue;
+  Color? primary60 = deepBlue.withOpacity(0.6);
+  Color? primary45 = deepBlue.withOpacity(0.45);
+  Color? primary30 = deepBlue.withOpacity(0.3);
+  Color? primary20 = deepBlue.withOpacity(0.2);
+  Color? primary15 = deepBlue.withOpacity(0.15);
+  Color? primary10 = deepBlue.withOpacity(0.1);
+
+  Color? success = green;
+  Color? success60 = green.withOpacity(0.6);
+  Color? success45 = green.withOpacity(0.45);
+  Color? success30 = green.withOpacity(0.3);
+  Color? success15 = green.withOpacity(0.15);
+
+  Color? successDark = greenLight;
+  Color? successDark30 = greenLight.withOpacity(0.3);
+
+  Color? warning = yellow;
+  Color? warning60 = yellow.withOpacity(0.6);
+  Color? warning45 = yellow.withOpacity(0.45);
+  Color? warning30 = yellow.withOpacity(0.3);
+  Color? warning15 = yellow.withOpacity(0.15);
+
+  Color? warningDark = yellowDark;
+  Color? warningDark30 = yellowDark.withOpacity(0.3);
+
+  Color? error = red;
+  Color? error60 = red.withOpacity(0.6);
+  Color? error30 = red.withOpacity(0.3);
+  Color? error15 = red.withOpacity(0.15);
+
+  Color? errorDark = redDark;
+  Color? errorDark30 = redDark.withOpacity(0.3);
+
+  Color? background = white;
+  Color? background40 = white.withOpacity(0.4);
+  Color? background00 = white.withOpacity(0.0);
+
+  Color? backgroundDark = white;
+  Color? backgroundDark00 = white.withOpacity(0.0);
+
+  Color? backgroundDarkest = whiteishDark;
+
+  Color? text = grey.withOpacity(0.9);
+  Color? text60 = grey.withOpacity(0.6);
+  Color? text45 = grey.withOpacity(0.45);
+  Color? text30 = grey.withOpacity(0.3);
+  Color? text20 = grey.withOpacity(0.2);
+  Color? text15 = grey.withOpacity(0.15);
+  Color? text10 = grey.withOpacity(0.1);
+  Color? text05 = grey.withOpacity(0.05);
+  Color? text03 = grey.withOpacity(0.03);
+
+  Color? overlay90 = black.withOpacity(0.9);
+  Color? overlay85 = black.withOpacity(0.85);
+  Color? overlay80 = black.withOpacity(0.8);
+  Color? overlay70 = black.withOpacity(0.70);
+  Color? overlay50 = black.withOpacity(0.5);
+  Color? overlay30 = black.withOpacity(0.3);
+  Color? overlay20 = black.withOpacity(0.2);
+
+  Color? barrier = black.withOpacity(0.7);
+  Color? barrierWeaker = black.withOpacity(0.4);
+  Color? barrierWeakest = black.withOpacity(0.3);
+  Color? barrierStronger = black.withOpacity(0.85);
+
+  Color? animationOverlayMedium = white.withOpacity(0.7);
+  Color? animationOverlayStrong = white.withOpacity(0.85);
+
+  Brightness? brightness = Brightness.light;
+  SystemUiOverlayStyle? statusBar = SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent);
+
+  BoxShadow? boxShadow = BoxShadow(color: darkDeepBlue.withOpacity(0.1), offset: const Offset(0, 5), blurRadius: 15);
+  BoxShadow? boxShadowButton = BoxShadow(color: darkDeepBlue.withOpacity(0.2), offset: const Offset(0, 5), blurRadius: 15);
+
+  // OverlayTheme? qrScanTheme = OverlayTheme.INDIUM;
+}
+
+class SunshineTheme extends BaseTheme {
+  // static const Color deepBlue = Color(0xFF0050BB);
+  static const Color deepBlue = Color(0xFF4080D7);
+
+
+  static const Color green = Color(0xFF00A873);
+
+  static const Color greenLight = Color(0xFF9EEDD4);
+
+  static const Color white = Color.fromRGBO(255, 168, 124, 1);
+
+  static const Color whiteishDark = Color.fromRGBO(239, 227, 213, 1);
 
   static const Color grey = Color(0xFF454868);
 
@@ -1299,7 +1408,7 @@ class PerishableTheme extends BaseTheme {
   );
 }
 
-enum AppIconEnum { NAUTILUS, TITANIUM, INDIUM, NEPTUNIUM, THORIUM, CARBON, PURPELIUM, NYANO }
+enum AppIconEnum { NAUTILUS, TITANIUM, INDIUM, SUNSHINE, NEPTUNIUM, THORIUM, CARBON, PURPELIUM, NYANO }
 
 class AppIcon {
   static const MethodChannel _channel = MethodChannel('fappchannel');
