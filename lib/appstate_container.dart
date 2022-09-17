@@ -134,8 +134,7 @@ class StateContainerState extends State<StateContainer> {
   LanguageSetting curLanguage = LanguageSetting(AvailableLanguage.DEFAULT);
   AvailableBlockExplorer curBlockExplorer = AvailableBlockExplorer(AvailableBlockExplorerEnum.NANOLOOKER);
 
-  BaseTheme curTheme =
-      SchedulerBinding.instance.window.platformBrightness == Brightness.dark ? NautilusTheme() : IndiumTheme();
+  BaseTheme curTheme = SchedulerBinding.instance.window.platformBrightness == Brightness.dark ? NautilusTheme() : IndiumTheme();
   bool nyanoMode = false;
   String currencyMode = CurrencyModeSetting(CurrencyModeOptions.NANO).getDisplayName();
   // Currently selected account
@@ -443,8 +442,7 @@ class StateContainerState extends State<StateContainer> {
       dismissable: true,
     );
     try {
-      final http.Response response =
-          await http.get(Uri.parse("https://branch.io"), headers: {'Content-type': 'application/json'});
+      final http.Response response = await http.get(Uri.parse("https://branch.io"), headers: {'Content-type': 'application/json'});
 
       // we only care to show this if branch is unreachable but our backend is:
       final bool connected = await sl.get<AccountService>().isConnected();
@@ -585,11 +583,12 @@ class StateContainerState extends State<StateContainer> {
     _priceEventSub = EventTaxiImpl.singleton().registerTo<PriceEvent>().listen((PriceEvent event) {
       // PriceResponse's get pushed periodically, it wasn't a request we made so don't pop the queue
       // handle the null case in debug mode:
-      setState(() {
-        if (wallet != null) {
+      if (wallet != null) {
+        setState(() {
           wallet!.localCurrencyPrice = event.response!.price?.toString() ?? wallet!.localCurrencyPrice;
-        }
-      });
+          wallet!.xmrPrice = event.response!.xmrPrice.toString();
+        });
+      }
     });
     _connStatusSub = EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((ConnStatusEvent event) {
       if (event.status == ConnectionStatus.CONNECTED) {
@@ -607,9 +606,7 @@ class StateContainerState extends State<StateContainer> {
     _fcmUpdateSub = EventTaxiImpl.singleton().registerTo<FcmUpdateEvent>().listen((FcmUpdateEvent event) {
       if (wallet != null) {
         sl.get<SharedPrefsUtil>().getNotificationsOn().then((bool enabled) {
-          sl
-              .get<AccountService>()
-              .sendRequest(FcmUpdateRequest(account: wallet!.address, fcmToken: event.token, enabled: enabled));
+          sl.get<AccountService>().sendRequest(FcmUpdateRequest(account: wallet!.address, fcmToken: event.token, enabled: enabled));
         });
       }
     });
@@ -617,8 +614,7 @@ class StateContainerState extends State<StateContainer> {
       handleStoredMessages(event);
     });
     // Account has been deleted or name changed
-    _accountModifiedSub =
-        EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((AccountModifiedEvent event) {
+    _accountModifiedSub = EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((AccountModifiedEvent event) {
       if (!event.deleted) {
         if (event.account!.index == selectedAccount!.index) {
           setState(() {
@@ -771,8 +767,7 @@ class StateContainerState extends State<StateContainer> {
       walletUsername = user.getDisplayName();
     }
     setState(() {
-      wallet = AppWallet(
-          address: account.address, user: user, username: walletUsername, watchOnly: watchOnly, loading: true);
+      wallet = AppWallet(address: account.address, user: user, username: walletUsername, watchOnly: watchOnly, loading: true);
       requestUpdate();
       updateSolids();
     });
@@ -964,6 +959,7 @@ class StateContainerState extends State<StateContainer> {
         wallet!.accountBalance = BigInt.tryParse(response.balance!)!;
       }
       wallet!.localCurrencyPrice = response.price.toString();
+      wallet!.xmrPrice = response.xmrPrice.toString();
       sl.get<AccountService>().pop();
       sl.get<AccountService>().processQueue();
     });
@@ -980,8 +976,7 @@ class StateContainerState extends State<StateContainer> {
       sl.get<AccountService>().processQueue();
       return;
     }
-    final ReceivableResponseItem receivableItem =
-        ReceivableResponseItem(hash: resp.hash, source: resp.account, amount: resp.amount);
+    final ReceivableResponseItem receivableItem = ReceivableResponseItem(hash: resp.hash, source: resp.account, amount: resp.amount);
     final String? receivedHash = await handleReceivableItem(receivableItem, link_as_account: resp.block!.linkAsAccount);
     if (receivedHash != null) {
       final AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
@@ -1081,8 +1076,7 @@ class StateContainerState extends State<StateContainer> {
       if (accountResp.openBlock == null) {
         sl.get<Logger>().d("Handling ${item.hash} as open");
         try {
-          final ProcessResponse resp =
-              await sl.get<AccountService>().requestOpen(item.amount, item.hash, link_as_account, privKey);
+          final ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, link_as_account, privKey);
           wallet!.openBlock = resp.hash;
           wallet!.frontier = resp.hash;
           receivableRequests.remove(item.hash);
@@ -1096,8 +1090,8 @@ class StateContainerState extends State<StateContainer> {
         }
       } else {
         try {
-          final ProcessResponse resp = await sl.get<AccountService>().requestReceive(
-              wallet!.representative, accountResp.frontier, item.amount, item.hash, link_as_account, privKey);
+          final ProcessResponse resp =
+              await sl.get<AccountService>().requestReceive(wallet!.representative, accountResp.frontier, item.amount, item.hash, link_as_account, privKey);
           // wallet.frontier = resp.hash;
           receivableRequests.remove(item.hash);
           alreadyReceived.add(item.hash);
@@ -1147,8 +1141,7 @@ class StateContainerState extends State<StateContainer> {
       // Publish open
       sl.get<Logger>().d("Handling ${item.hash} as open");
       try {
-        final ProcessResponse resp =
-            await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet!.address, await _getPrivKey());
+        final ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet!.address, await _getPrivKey());
         wallet!.openBlock = resp.hash;
         wallet!.frontier = resp.hash;
         receivableRequests.remove(item.hash);
@@ -1163,8 +1156,9 @@ class StateContainerState extends State<StateContainer> {
       sl.get<Logger>().d("Handling ${item.hash} as receive");
 
       try {
-        final ProcessResponse resp = await sl.get<AccountService>().requestReceive(
-            wallet!.representative, wallet!.frontier, item.amount, item.hash, wallet!.address, await _getPrivKey());
+        final ProcessResponse resp = await sl
+            .get<AccountService>()
+            .requestReceive(wallet!.representative, wallet!.frontier, item.amount, item.hash, wallet!.address, await _getPrivKey());
 
         wallet!.frontier = resp.hash;
         receivableRequests.remove(item.hash);
@@ -1197,8 +1191,7 @@ class StateContainerState extends State<StateContainer> {
     sl.get<DBHelper>().getAccounts(await getSeed()).then((List<Account> accounts) {
       for (final Account account in accounts) {
         resp.balances!.forEach((String address, AccountBalanceItem balance) {
-          final String combinedBalance =
-              (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.receivable!)!).toString();
+          final String combinedBalance = (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.receivable!)!).toString();
           if (address == account.address && combinedBalance != account.balance) {
             sl.get<DBHelper>().updateAccountBalance(account, combinedBalance);
           }
@@ -1221,11 +1214,7 @@ class StateContainerState extends State<StateContainer> {
       }
       sl.get<AccountService>().clearQueue();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
-          account: wallet!.address,
-          currency: curCurrency.getIso4217Code(),
-          uuid: uuid,
-          fcmToken: fcmToken,
-          notificationEnabled: notificationsEnabled));
+          account: wallet!.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
       sl.get<AccountService>().processQueue();
       // Request account history
 
@@ -1237,8 +1226,7 @@ class StateContainerState extends State<StateContainer> {
         count = 50;
       }
       try {
-        final AccountHistoryResponse resp =
-            await sl.get<AccountService>().requestAccountHistory(wallet!.address, count: count, raw: true);
+        final AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(wallet!.address, count: count, raw: true);
         _requestBalances();
         bool postedToHome = false;
         // Iterate list in reverse (oldest to newest block)
@@ -1246,8 +1234,8 @@ class StateContainerState extends State<StateContainer> {
           // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
           if (!wallet!.history.contains(item)) {
             const int startIndex = 0; // Index to start inserting into the list
-            int lastIndex = resp.history!.indexWhere((AccountHistoryResponseItem item) => wallet!.history.contains(
-                item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
+            int lastIndex = resp.history!.indexWhere((AccountHistoryResponseItem item) =>
+                wallet!.history.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
             lastIndex = lastIndex <= 0 ? resp.history!.length : lastIndex;
             setState(() {
               wallet!.history.insertAll(0, resp.history!.getRange(startIndex, lastIndex));
@@ -1277,15 +1265,13 @@ class StateContainerState extends State<StateContainer> {
         // Receive receivables
         if (receivable) {
           receivableRequests.clear();
-          final ReceivableResponse receivableResp = await sl
-              .get<AccountService>()
-              .getReceivable(wallet!.address, max(wallet!.blockCount ?? 0, 10), threshold: receiveThreshold);
+          final ReceivableResponse receivableResp =
+              await sl.get<AccountService>().getReceivable(wallet!.address, max(wallet!.blockCount ?? 0, 10), threshold: receiveThreshold);
 
           // remove any receivables in the wallet history that are not in the receivable response:
           if (wallet!.watchOnly) {
             // check for duplicates in the wallet history:
-            final List<String?> receivableHashes =
-                receivableResp.blocks!.values.map((ReceivableResponseItem block) => block.hash).toList();
+            final List<String?> receivableHashes = receivableResp.blocks!.values.map((ReceivableResponseItem block) => block.hash).toList();
             final List<AccountHistoryResponseItem> toRemove = [];
             for (final AccountHistoryResponseItem histItem in wallet!.history) {
               if (histItem.type == BlockTypes.RECEIVE) {
@@ -1378,11 +1364,7 @@ class StateContainerState extends State<StateContainer> {
       }
       sl.get<AccountService>().removeSubscribeHistoryReceivableFromQueue();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
-          account: wallet!.address,
-          currency: curCurrency.getIso4217Code(),
-          uuid: uuid,
-          fcmToken: fcmToken,
-          notificationEnabled: notificationsEnabled));
+          account: wallet!.address, currency: curCurrency.getIso4217Code(), uuid: uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
       sl.get<AccountService>().processQueue();
     }
   }
@@ -1920,6 +1902,7 @@ class StateContainerState extends State<StateContainer> {
       encryptedSecret = null;
       xmrAddress = "";
       xmrFee = "";
+      xmrRestoreHeight = 0;
     });
     sl.get<DBHelper>().dropAccounts();
     sl.get<AccountService>().clearQueue();

@@ -276,7 +276,7 @@ class AccountService {
         final SubscribeResponse resp = await compute(subscribeResponseFromJson, msg);
         // Post to callbacks
         EventTaxiImpl.singleton().fire(SubscribeEvent(response: resp));
-      } else if (msg.containsKey("currency") && msg.containsKey("price") && msg.containsKey("btc")) {
+      } else if (msg.containsKey("currency") && msg.containsKey("price") && msg.containsKey("xmr")) {
         // Price info sent from server
         final PriceResponse resp = PriceResponse.fromJson(msg as Map<String, dynamic>);
         EventTaxiImpl.singleton().fire(PriceEvent(response: resp));

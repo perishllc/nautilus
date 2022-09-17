@@ -16,8 +16,8 @@ class PriceResponse {
   @JsonKey(name: 'price', fromJson: _toDouble)
   double? price;
 
-  @JsonKey(name: 'btc', fromJson: _toDouble)
-  double? btcPrice;
+  @JsonKey(name: 'xmr', fromJson: _toDouble)
+  double? xmrPrice;
 
   PriceResponse();
 

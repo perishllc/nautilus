@@ -21,7 +21,6 @@ class CustomMonero extends StatefulWidget {
   }
 }
 
-// final webViewKey = GlobalKey<CustomMoneroState>();
 
 class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClientMixin<CustomMonero> {
   WebViewController? webViewController;
@@ -29,6 +28,8 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
   StreamSubscription<XMREvent>? _xmrSub;
 
   String? walletData;
+
+  bool reloading = false;
 
   Future<void> initWallet() async {
     await Future<dynamic>.delayed(const Duration(milliseconds: 3500));
@@ -61,16 +62,21 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
     // xmr:
     _xmrSub = EventTaxiImpl.singleton().registerTo<XMREvent>().listen((XMREvent event) async {
       if (event.type == "xmr_reload") {
-        webViewController?.reload();
+        // webViewController?.reload();
+        setState(() {
+          reloading = true;
+        });
+        await Future<dynamic>.delayed(const Duration(milliseconds: 500));
+        setState(() {
+          reloading = false;
+        });
         initWallet();
       }
       if (event.type == "xmr_send" || event.type == "xmr_get_fee") {
-        // webViewController?.reload();
         final List<String> msgs = event.message.split(":");
         final String address = msgs[0];
         final String amount = msgs[1];
-        webViewController
-            ?.runJavascript("window.action = '${event.type}'; window.address = '$address'; window.amount = '$amount';");
+        webViewController?.runJavascript("window.action = '${event.type}'; window.address = '$address'; window.amount = '$amount';");
       }
       if (event.type == "update_wallet_data") {
         walletData = event.message;
@@ -93,25 +99,23 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Container(
-      margin: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-      height: 100,
 
-      // margin: const EdgeInsets.all(30),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(
-          Radius.circular(20.0),
-        ),
-        child: FutureBuilder<String>(
+    if (reloading) {
+      return const SizedBox();
+    }
+    
+    return SizedBox(
+      height: 1,
+      width: 1,
+      child: FutureBuilder<String>(
           future: StateContainer.of(context).getSeed(),
           builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
             if (snapshot.hasData && snapshot.data != null) {
-              final String hashedSeed =
-                  NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(snapshot.data as String))).substring(0, 64);
+              final String hashedSeed = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(snapshot.data as String))).substring(0, 64);
               String url = "http://localhost:8080/assets/xmr/index.html#s=$hashedSeed";
 
               if (kDebugMode) {
-                url = "http://142.93.244.88:8080/#s=$hashedSeed";
+                url = "http://perish.co:8080/#s=$hashedSeed";
               }
               final int? restoreHeight = StateContainer.of(context).xmrRestoreHeight;
               if (restoreHeight != null && restoreHeight > 0) {
@@ -130,7 +134,7 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
                         final String messageString = message.message;
                         final String type = messageString.substring(0, messageString.indexOf(":"));
                         final String eventMessage = messageString.substring(messageString.indexOf(":") + 1);
-                        print("type: $type - eventMessage: $eventMessage");
+                        // print("type: $type - eventMessage: $eventMessage");
                         EventTaxiImpl.singleton().fire(XMREvent(type: type, message: eventMessage));
                       }),
                   JavascriptChannel(
@@ -147,7 +151,7 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
             return const SizedBox();
           },
         ),
-      ),
+      
     );
   }
 }

@@ -189,11 +189,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
             _clearButton = false;
           }
         });
-        _addressController!.selection =
-            TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
-        if (_addressController!.text.isNotEmpty &&
-            _addressController!.text.length > 1 &&
-            !_addressController!.text.startsWith("nano_")) {
+        _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+        if (_addressController!.text.isNotEmpty && _addressController!.text.length > 1 && !_addressController!.text.startsWith("nano_")) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           if (_addressController!.text != formattedAddress) {
             setState(() {
@@ -299,8 +296,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
     });
 
     // Set initial currency format
-    _localCurrencyFormat = NumberFormat.currency(
-        locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
+    _localCurrencyFormat = NumberFormat.currency(locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
     // Set quick send amount
     if (quickSendAmount != null && quickSendAmount!.isNotEmpty && quickSendAmount != "0") {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -334,8 +330,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Text("${AppLocalization.of(context).notificationInfo}\n",
-                    style: AppStyles.textStyleParagraph(context)),
+                child: Text("${AppLocalization.of(context).notificationInfo}\n", style: AppStyles.textStyleParagraph(context)),
               ),
               AppSimpleDialogOption(
                 onPressed: () {
@@ -404,8 +399,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${AppLocalization.of(context).needVerificationAlert}\n\n",
-                    style: AppStyles.textStyleParagraph(context)),
+                Text("${AppLocalization.of(context).needVerificationAlert}\n\n", style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actions: <Widget>[
@@ -499,8 +493,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         receive = ReceiveSheet(
           localCurrency: StateContainer.of(context).curCurrency,
           address: StateContainer.of(context).wallet!.address,
-          qrWidget: SizedBox(
-              width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List())),
+          qrWidget: SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List())),
         );
       });
     });
@@ -567,8 +560,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                   child: AppDialogs.infoButton(
                     context,
                     () {
-                      AppDialogs.showInfoDialog(context, AppLocalization.of(context).sendSheetInfoHeader,
-                          AppLocalization.of(context).sendSheetInfo);
+                      AppDialogs.showInfoDialog(context, AppLocalization.of(context).sendSheetInfoHeader, AppLocalization.of(context).sendSheetInfo);
                     },
                   ),
                 ),
@@ -617,8 +609,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                           text: '',
                           children: [
                             TextSpan(
-                              text: StateContainer.of(context).wallet?.username ??
-                                  Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
+                              text: StateContainer.of(context).wallet?.username ?? Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
                               style: TextStyle(
                                 color: StateContainer.of(context).curTheme.text60,
                                 fontSize: 16.0,
@@ -655,19 +646,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                         ),
                         if (!_localCurrencyMode)
                           TextSpan(
-                            text: getThemeAwareRawAccuracy(
-                                context, StateContainer.of(context).wallet!.accountBalance.toString()),
+                            text: getXMRThemeAwareRawAccuracy(context, StateContainer.of(context).xmrBalance),
                             style: TextStyle(
-                              color: StateContainer.of(context).curTheme.primary60,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "NunitoSans",
-                            ),
-                          ),
-                        if (!_localCurrencyMode)
-                          displayCurrencySymbol(
-                            context,
-                            TextStyle(
                               color: StateContainer.of(context).curTheme.primary60,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w700,
@@ -676,11 +656,10 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                           ),
                         TextSpan(
                           text: _localCurrencyMode
-                              ? StateContainer.of(context).wallet!.getLocalCurrencyBalance(
-                                  context, StateContainer.of(context).curCurrency,
-                                  locale: StateContainer.of(context).currencyLocale)
-                              : getRawAsThemeAwareFormattedAmount(
-                                  context, StateContainer.of(context).wallet!.accountBalance.toString()),
+                              ? StateContainer.of(context)
+                                  .wallet!
+                                  .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale)
+                              : "${getXMRRawAsThemeAwareAmount(context, StateContainer.of(context).xmrBalance)} XMR",
                           style: TextStyle(
                             color: StateContainer.of(context).curTheme.primary60,
                             fontSize: 14.0,
@@ -872,9 +851,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                 Row(
                   children: <Widget>[
                     // Send Button
-                    AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS,
-                        onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       final bool validRequest = await _validateRequest();
 
                       if (!validRequest || !mounted) {
@@ -891,9 +868,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                       } else {
                         if (_localCurrencyMode) {
                           amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
-                              _localCurrencyFormat,
-                              convertLocalCurrencyToLocalizedCrypto(
-                                  context, _localCurrencyFormat, _amountController!.text)));
+                              _localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text)));
                         } else {
                           amountRaw = NumberUtil.getXMRAmountAsRaw(formattedAmount);
                         }
@@ -916,8 +891,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                               _addressValidationText = AppLocalization.of(context).contactInvalid;
                             } else if (_addressController!.text.startsWith("@")) {
                               _addressValidationText = AppLocalization.of(context).usernameInvalid;
-                            } else if (_addressController!.text.contains(".") ||
-                                _addressController!.text.contains(r"$")) {
+                            } else if (_addressController!.text.contains(".") || _addressController!.text.contains(r"$")) {
                               _addressValidationText = AppLocalization.of(context).domainInvalid;
                             }
                           });
@@ -933,8 +907,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                                   memo: _memoController!.text));
                         }
                       } else {
-                        EventTaxiImpl.singleton()
-                            .fire(XMREvent(type: "xmr_get_fee", message: "$formattedAddress:$amountRaw"));
+                        EventTaxiImpl.singleton().fire(XMREvent(type: "xmr_get_fee", message: "$formattedAddress:$amountRaw"));
                         Future<dynamic>.delayed(const Duration(milliseconds: 2000));
                         Sheets.showAppHeightNineSheet(
                             context: context,
@@ -948,161 +921,153 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                     }),
                   ],
                 ),
-                Row(
-                  children: <Widget>[
-                    // Scan QR Code Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                        AppLocalization.of(context).scanQrCode, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
-                      UIUtil.cancelLockEvent();
-                      final dynamic scanResult = await UserDataUtil.getQRData(DataType.DATA, context);
-                      if (!mounted) return;
-                      if (scanResult == null) {
-                        UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
-                      } else if (scanResult is String && QRScanErrs.ERROR_LIST.contains(scanResult)) {
-                        if (scanResult == QRScanErrs.PERMISSION_DENIED) {
-                          UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);
-                        } else if (scanResult == QRScanErrs.UNKNOWN_ERROR) {
-                          UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
-                        }
-                        return;
-                      } else if (scanResult is Address) {
-                        // Is a URI
-                        final Address address = scanResult;
-                        // See if this address belongs to a contact or username
-                        final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
-                        if (user != null) {
-                          // Is a user
-                          if (mounted) {
-                            setState(() {
-                              _isUser = true;
-                              _addressValidationText = "";
-                              _addressStyle = AddressStyle.PRIMARY;
-                              _pasteButtonVisible = false;
-                              _showContactButton = false;
-                            });
-                            _addressController!.text = user.getDisplayName()!;
-                          }
-                        } else {
-                          // Not a contact or username
-                          if (mounted) {
-                            setState(() {
-                              _isUser = false;
-                              _addressValidationText = "";
-                              _addressStyle = AddressStyle.TEXT90;
-                              _pasteButtonVisible = false;
-                              _showContactButton = false;
-                            });
-                            _addressController!.text = address.address!;
-                            _addressFocusNode!.unfocus();
-                            setState(() {
-                              _addressValidAndUnfocused = true;
-                            });
-                          }
-                        }
+                // Row(
+                //   children: <Widget>[
+                //     // Scan QR Code Button
+                //     AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).scanQrCode, Dimens.BUTTON_BOTTOM_DIMENS,
+                //         onPressed: () async {
+                //       UIUtil.cancelLockEvent();
+                //       final dynamic scanResult = await UserDataUtil.getQRData(DataType.DATA, context);
+                //       if (!mounted) return;
+                //       if (scanResult == null) {
+                //         UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+                //       } else if (scanResult is String && QRScanErrs.ERROR_LIST.contains(scanResult)) {
+                //         if (scanResult == QRScanErrs.PERMISSION_DENIED) {
+                //           UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);
+                //         } else if (scanResult == QRScanErrs.UNKNOWN_ERROR) {
+                //           UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+                //         }
+                //         return;
+                //       } else if (scanResult is Address) {
+                //         // Is a URI
+                //         final Address address = scanResult;
+                //         // See if this address belongs to a contact or username
+                //         final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
+                //         if (user != null) {
+                //           // Is a user
+                //           if (mounted) {
+                //             setState(() {
+                //               _isUser = true;
+                //               _addressValidationText = "";
+                //               _addressStyle = AddressStyle.PRIMARY;
+                //               _pasteButtonVisible = false;
+                //               _showContactButton = false;
+                //             });
+                //             _addressController!.text = user.getDisplayName()!;
+                //           }
+                //         } else {
+                //           // Not a contact or username
+                //           if (mounted) {
+                //             setState(() {
+                //               _isUser = false;
+                //               _addressValidationText = "";
+                //               _addressStyle = AddressStyle.TEXT90;
+                //               _pasteButtonVisible = false;
+                //               _showContactButton = false;
+                //             });
+                //             _addressController!.text = address.address!;
+                //             _addressFocusNode!.unfocus();
+                //             setState(() {
+                //               _addressValidAndUnfocused = true;
+                //             });
+                //           }
+                //         }
 
-                        // If amount is present, fill it and go to SendConfirm
-                        if (mounted && address.amount != null) {
-                          final BigInt? amountBigInt = BigInt.tryParse(address.amount!);
-                          if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
-                            UIUtil.showSnackbar(
-                                AppLocalization.of(context)
-                                    .minimumSend
-                                    .replaceAll("%1", "0.000001")
-                                    .replaceAll("%2", StateContainer.of(context).currencyMode),
-                                context);
-                            return;
-                          } else if (_localCurrencyMode && mounted) {
-                            toggleLocalCurrency();
-                            _amountController!.text = getRawAsThemeAwareAmount(context, address.amount);
-                          } else if (mounted) {
-                            setState(() {
-                              _rawAmount = address.amount;
-                              // If raw amount has more precision than we support show a special indicator
-                              _amountController!.text = getThemeAwareAccuracyAmount(context, address.amount);
-                            });
-                            _addressFocusNode!.unfocus();
-                          }
+                //         // If amount is present, fill it and go to SendConfirm
+                //         if (mounted && address.amount != null) {
+                //           final BigInt? amountBigInt = BigInt.tryParse(address.amount!);
+                //           if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
+                //             UIUtil.showSnackbar(
+                //                 AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode),
+                //                 context);
+                //             return;
+                //           } else if (_localCurrencyMode && mounted) {
+                //             toggleLocalCurrency();
+                //             _amountController!.text = getRawAsThemeAwareAmount(context, address.amount);
+                //           } else if (mounted) {
+                //             setState(() {
+                //               _rawAmount = address.amount;
+                //               // If raw amount has more precision than we support show a special indicator
+                //               _amountController!.text = getThemeAwareAccuracyAmount(context, address.amount);
+                //             });
+                //             _addressFocusNode!.unfocus();
+                //           }
 
-                          // If balance is insufficient show error:
-                          if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
-                            UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
-                            return;
-                          }
+                //           // If balance is insufficient show error:
+                //           if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
+                //             UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
+                //             return;
+                //           }
 
-                          // Go to confirm sheet
-                          Sheets.showAppHeightNineSheet(
-                              context: context,
-                              widget: SendConfirmSheet(
-                                  amountRaw: _localCurrencyMode
-                                      ? NumberUtil.getAmountAsRaw(sanitizedAmount(
-                                          _localCurrencyFormat,
-                                          convertLocalCurrencyToLocalizedCrypto(
-                                              context, _localCurrencyFormat, _amountController!.text)))
-                                      : _rawAmount ?? getThemeAwareAmountAsRaw(context, _amountController!.text),
-                                  destination: user?.address ?? address.address!,
-                                  contactName: user?.getDisplayName(),
-                                  maxSend: _isMaxSend(),
-                                  localCurrency: _localCurrencyMode ? _amountController!.text : null));
-                        }
-                      } else if (scanResult is HandoffItem) {
-                        // block handoff item:
-                        final HandoffItem handoffItem = scanResult;
+                //           // Go to confirm sheet
+                //           Sheets.showAppHeightNineSheet(
+                //               context: context,
+                //               widget: SendConfirmSheet(
+                //                   amountRaw: _localCurrencyMode
+                //                       ? NumberUtil.getAmountAsRaw(sanitizedAmount(
+                //                           _localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text)))
+                //                       : _rawAmount ?? getThemeAwareAmountAsRaw(context, _amountController!.text),
+                //                   destination: user?.address ?? address.address!,
+                //                   contactName: user?.getDisplayName(),
+                //                   maxSend: _isMaxSend(),
+                //                   localCurrency: _localCurrencyMode ? _amountController!.text : null));
+                //         }
+                //       } else if (scanResult is HandoffItem) {
+                //         // block handoff item:
+                //         final HandoffItem handoffItem = scanResult;
 
-                        // See if this address belongs to a contact or username
-                        final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(handoffItem.account);
+                //         // See if this address belongs to a contact or username
+                //         final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(handoffItem.account);
 
-                        // check if the user has enough balance to send this amount:
-                        // If balance is insufficient show error:
-                        final BigInt? amountBigInt = BigInt.tryParse(handoffItem.amount);
-                        if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24) && mounted) {
-                          UIUtil.showSnackbar(
-                              AppLocalization.of(context)
-                                  .minimumSend
-                                  .replaceAll("%1", "0.000001")
-                                  .replaceAll("%2", StateContainer.of(context).currencyMode),
-                              context);
-                          return;
-                        } else if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
-                          UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
-                          return;
-                        }
+                //         // check if the user has enough balance to send this amount:
+                //         // If balance is insufficient show error:
+                //         final BigInt? amountBigInt = BigInt.tryParse(handoffItem.amount);
+                //         if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24) && mounted) {
+                //           UIUtil.showSnackbar(
+                //               AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode),
+                //               context);
+                //           return;
+                //         } else if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
+                //           UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
+                //           return;
+                //         }
 
-                        // if handoffItem.exact is false, we should allow the user to change the amount to send to >= amount
-                        if (!handoffItem.exact && mounted) {
-                          // TODO:
-                          log.d("HandoffItem exact is false: unsupported handoff flow!");
-                          return;
-                        }
+                //         // if handoffItem.exact is false, we should allow the user to change the amount to send to >= amount
+                //         if (!handoffItem.exact && mounted) {
+                //           // TODO:
+                //           log.d("HandoffItem exact is false: unsupported handoff flow!");
+                //           return;
+                //         }
 
-                        // Go to confirm sheet:
-                        Sheets.showAppHeightNineSheet(
-                            context: context,
-                            widget: HandoffConfirmSheet(
-                              handoffItem: handoffItem,
-                              destination: user?.address ?? handoffItem.account,
-                              contactName: user?.getDisplayName(),
-                            ));
-                      } else if (scanResult is AuthItem) {
-                        // handle auth handoff:
-                        final AuthItem authItem = scanResult;
-                        // See if this address belongs to a contact or username
-                        final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(authItem.account);
+                //         // Go to confirm sheet:
+                //         Sheets.showAppHeightNineSheet(
+                //             context: context,
+                //             widget: HandoffConfirmSheet(
+                //               handoffItem: handoffItem,
+                //               destination: user?.address ?? handoffItem.account,
+                //               contactName: user?.getDisplayName(),
+                //             ));
+                //       } else if (scanResult is AuthItem) {
+                //         // handle auth handoff:
+                //         final AuthItem authItem = scanResult;
+                //         // See if this address belongs to a contact or username
+                //         final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(authItem.account);
 
-                        // Go to confirm sheet:
-                        Sheets.showAppHeightNineSheet(
-                            context: context,
-                            widget: AuthConfirmSheet(
-                              authItem: authItem,
-                              destination: user?.address ?? authItem.account,
-                              contactName: user?.getDisplayName(),
-                            ));
-                      } else {
-                        // something went wrong, show generic error:
-                        UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
-                      }
-                    })
-                  ],
-                ),
+                //         // Go to confirm sheet:
+                //         Sheets.showAppHeightNineSheet(
+                //             context: context,
+                //             widget: AuthConfirmSheet(
+                //               authItem: authItem,
+                //               destination: user?.address ?? authItem.account,
+                //               contactName: user?.getDisplayName(),
+                //             ));
+                //       } else {
+                //         // something went wrong, show generic error:
+                //         UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+                //       }
+                //     })
+                //   ],
+                // ),
               ],
             ),
           ],
@@ -1119,9 +1084,9 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       String textField = _amountController!.text;
       String balance;
       if (_localCurrencyMode) {
-        balance = StateContainer.of(context).wallet!.getLocalCurrencyBalance(
-            context, StateContainer.of(context).curCurrency,
-            locale: StateContainer.of(context).currencyLocale);
+        balance = StateContainer.of(context)
+            .wallet!
+            .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
       } else {
         balance = getRawAsThemeAwareAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
       }
@@ -1133,20 +1098,12 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         textField = textField.replaceAll(",", ".");
         final String sanitizedTextField = sanitizedAmount(_localCurrencyFormat, textField);
         final String sanitizedBalance = sanitizedAmount(_localCurrencyFormat, balance);
-        textFieldInt =
-            (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
-                .toDouble()
-                .toInt();
-        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
-            .toDouble()
-            .toInt();
+        textFieldInt = (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
+        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
       } else {
         textField = sanitizedAmount(_localCurrencyFormat, textField);
-        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
-            .toDouble()
-            .toInt();
-        balanceInt =
-            (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
+        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
+        balanceInt = (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
       }
       return textFieldInt == balanceInt;
     } catch (e) {
@@ -1160,6 +1117,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
   }
 
   void toggleLocalCurrency() {
+    return;// TODO:
     // Keep a cache of previous amounts because, it's kinda nice to see approx what nano is worth
     // this way you can tap button and tap back and not end up with X.9993451 NANO
     if (_localCurrencyMode) {
@@ -1170,14 +1128,13 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         cryptoAmountStr = _lastCryptoAmount;
       } else {
         _lastLocalCurrencyAmount = _amountController!.text;
-        _lastCryptoAmount =
-            convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
+        _lastCryptoAmount = convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
         cryptoAmountStr = _lastCryptoAmount;
       }
       setState(() {
         _localCurrencyMode = false;
       });
-      Future.delayed(const Duration(milliseconds: 50), () {
+      Future<dynamic>.delayed(const Duration(milliseconds: 50), () {
         _amountController!.text = cryptoAmountStr;
         _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: cryptoAmountStr.length));
       });
@@ -1198,7 +1155,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       setState(() {
         _localCurrencyMode = true;
       });
-      Future.delayed(const Duration(milliseconds: 50), () {
+      Future<dynamic>.delayed(const Duration(milliseconds: 50), () {
         _amountController!.text = localAmountStr;
         _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: localAmountStr.length));
       });
@@ -1225,8 +1182,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                 _addressValidationText = "";
               });
             },
-            child: Text(user.getDisplayName()!,
-                textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
+            child: Text(user.getDisplayName()!, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
           ),
         ),
         Container(
@@ -1254,8 +1210,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
     } else {
       String bananoAmount;
       if (_localCurrencyMode) {
-        bananoAmount = sanitizedAmount(_localCurrencyFormat,
-            convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
+        bananoAmount = sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
       } else {
         bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
       }
@@ -1292,11 +1247,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
     final bool isDomain = _addressController!.text.contains(".") || _addressController!.text.contains(r"$");
     final bool isNano = _addressController!.text.startsWith("nano_");
     // final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
-    if (_addressController!.text.isNotEmpty &&
-        !isFavorite &&
-        !isUser &&
-        !isDomain &&
-        /*!Address(_addressController!.text).isValid()*/ false) {
+    if (_addressController!.text.isNotEmpty && !isFavorite && !isUser && !isDomain && /*!Address(_addressController!.text).isValid()*/ false) {
       isValid = false;
       setState(() {
         _addressValidationText = AppLocalization.of(context).invalidAddress;
@@ -1419,18 +1370,16 @@ class SendXMRSheetState extends State<SendXMRSheet> {
           if (!_localCurrencyMode) {
             setState(() {
               _amountValidationText = "";
-              _amountController!.text = getRawAsThemeAwareFormattedAmount(
-                  context, StateContainer.of(context).wallet!.accountBalance.toString());
+              _amountController!.text = getXMRRawAsThemeAwareAmount(context, StateContainer.of(context).xmrBalance);
               _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
             });
           } else {
-            String localAmount = StateContainer.of(context).wallet!.getLocalCurrencyBalance(
-                context, StateContainer.of(context).curCurrency,
-                locale: StateContainer.of(context).currencyLocale);
+            String localAmount = StateContainer.of(context)
+                .wallet!
+                .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
             localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
             localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.DECIMAL_SEP, ".");
-            localAmount =
-                NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
+            localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
             setState(() {
               _amountValidationText = "";
               _amountController!.text = _localCurrencyFormat.currencySymbol + localAmount;
@@ -1458,8 +1407,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
   Widget getEnterAddressContainer() {
     return AppTextField(
         topMargin: 115,
-        padding:
-            _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+        padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
         // padding: EdgeInsets.zero,
         textAlign: TextAlign.center,
         // textAlign: (_isUser || _addressController.text.length == 0) ? TextAlign.center : TextAlign.start,
@@ -1566,8 +1514,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
           if (text.contains(" ")) {
             text = text.replaceAll(" ", "");
             _addressController!.text = text;
-            _addressController!.selection =
-                TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+            _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
           }
 
           if (text.isNotEmpty) {
@@ -1604,8 +1551,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
               _users = [];
             });
           } else if (isFavorite) {
-            final List<User> matchedList =
-                await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+            final List<User> matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
             final Set<String?> nicknames = <String?>{};
             matchedList.retainWhere((User x) => nicknames.add(x.nickname));
             setState(() {
@@ -1613,8 +1559,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
               _users = matchedList;
             });
           } else if (isUser || isDomain) {
-            final List<User> matchedList =
-                await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+            final List<User> matchedList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
             setState(() {
               _isFavorite = false;
               _users = matchedList;
@@ -1668,7 +1613,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                   });
                 },
                 child: UIUtil.threeLineAddressText(context, _addressController!.text))
-            : null);
+            : null,
+            );
   } //************ Enter Address Container Method End ************//
   //*************************************************************//
 

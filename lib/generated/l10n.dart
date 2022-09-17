@@ -5280,6 +5280,16 @@ class AppLocalization {
     );
   }
 
+  /// `this may take a while...`
+  String get thisMayTakeSomeTime {
+    return Intl.message(
+      'this may take a while...',
+      name: 'thisMayTakeSomeTime',
+      desc: 'xmr_sync_takes_time',
+      args: [],
+    );
+  }
+
   /// `Yes`
   String get yes {
     return Intl.message(

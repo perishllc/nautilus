@@ -6,8 +6,8 @@ class NumberUtil {
   static BigInt rawPerNano = BigInt.parse("1000000000000000000000000000000");
   static BigInt rawPerNyano = BigInt.parse("1000000000000000000000000");
   static BigInt rawPerXMR = BigInt.parse("1000000000000");
-  // static BigInt convertXMRtoNano = BigInt.parse("1000000000000000000");
-  static BigInt convertXMRtoNano = BigInt.parse("1000000000000000000000000000");
+  static BigInt convertXMRtoNano = BigInt.parse("1000000000000000000");
+  // static BigInt convertXMRtoNano = BigInt.parse("1000000000000000000000000000");
 
 
   /// Convert raw to ban and return as BigDecimal

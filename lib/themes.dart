@@ -111,21 +111,10 @@ abstract class NyanTheme extends BaseTheme {
 class NautilusTheme extends BaseTheme {
   static const Color nautilusBlue = Color(0xFF4080D7);
 
-  // static const Color tealLightest = Color.fromRGBO(128, 128, 128, 1);
-
-  static const Color tealLightest = nautilusBlue;
-
-  // static const Color tealLight = Color.fromRGBO(64, 64, 64, 1);
-
-  // static const Color tealLight = Color.fromRGBO(24, 24, 24, 1);
-  // static const Color tealDark = Color.fromRGBO(16, 16, 16, 1);
-  // static const Color tealDarkest = Color.fromRGBO(10, 10, 10, 1);
-
-  // static const Color tealLight = Color.fromRGBO(48, 48, 48, 1);
-  // static const Color tealDark = Color.fromRGBO(32, 32, 32, 1);
-  static const Color tealLight = Color.fromRGBO(32, 32, 32, 1);
-  static const Color tealDark = Color.fromRGBO(48, 48, 48, 1);
-  static const Color tealDarkest = Color.fromRGBO(24, 24, 24, 1);
+  static const Color main = nautilusBlue;
+  static const Color bg = Color.fromRGBO(32, 32, 32, 1);
+  static const Color bgDark = Color.fromRGBO(24, 24, 24, 1);
+  static const Color bgDarkest = Color.fromRGBO(48, 48, 48, 1);
 
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
@@ -139,13 +128,13 @@ class NautilusTheme extends BaseTheme {
   static const Color red = Color(0xFFE80000);
   static const Color redDark = Color(0xFFB20000);
 
-  Color? primary = tealLightest;
-  Color? primary60 = tealLightest.withOpacity(0.6);
-  Color? primary45 = tealLightest.withOpacity(0.45);
-  Color? primary30 = tealLightest.withOpacity(0.3);
-  Color? primary20 = tealLightest.withOpacity(0.2);
-  Color? primary15 = tealLightest.withOpacity(0.15);
-  Color? primary10 = tealLightest.withOpacity(0.1);
+  Color? primary = main;
+  Color? primary60 = main.withOpacity(0.6);
+  Color? primary45 = main.withOpacity(0.45);
+  Color? primary30 = main.withOpacity(0.3);
+  Color? primary20 = main.withOpacity(0.2);
+  Color? primary15 = main.withOpacity(0.15);
+  Color? primary10 = main.withOpacity(0.1);
 
   Color? success = green;
   Color? success60 = green.withOpacity(0.6);
@@ -173,14 +162,14 @@ class NautilusTheme extends BaseTheme {
   Color? errorDark = redDark;
   Color? errorDark30 = redDark.withOpacity(0.3);
 
-  Color? background = tealLight;
-  Color? background40 = tealLight.withOpacity(0.4);
-  Color? background00 = tealLight.withOpacity(0.0);
+  Color? background = bg;
+  Color? background40 = bg.withOpacity(0.4);
+  Color? background00 = bg.withOpacity(0.0);
 
-  Color? backgroundDark = tealDark;
-  Color? backgroundDark00 = tealDark.withOpacity(0.0);
+  Color? backgroundDark = bgDark;
+  Color? backgroundDark00 = bgDark.withOpacity(0.0);
 
-  Color? backgroundDarkest = tealDarkest;
+  Color? backgroundDarkest = bgDarkest;
 
   Color? text = white.withOpacity(0.9);
   Color? text60 = white.withOpacity(0.6);
@@ -423,39 +412,32 @@ class IndiumTheme extends BaseTheme {
 }
 
 class SunshineTheme extends BaseTheme {
-  // static const Color deepBlue = Color(0xFF0050BB);
-  static const Color deepBlue = Color(0xFF4080D7);
+  static const Color nautilusBlue = Color(0xFF4080D7);
 
+  static const Color bg = Color(0xFFFFCB42);
+  static const Color bgDark = Color(0xFFFFB200);
+  static const Color bgDarkest = Color(0xFFFFCB42);
 
-  static const Color green = Color(0xFF00A873);
+  static const Color white = Color.fromARGB(255, 255, 255, 255);
 
-  static const Color greenLight = Color(0xFF9EEDD4);
-
-  static const Color white = Color.fromRGBO(255, 168, 124, 1);
-
-  static const Color whiteishDark = Color.fromRGBO(239, 227, 213, 1);
-
-  static const Color grey = Color(0xFF454868);
-
+  // static const Color grey = Color(0xFF454868);
+  static const Color grey = Color(0xFF353858);
   static const Color black = Color(0xFF000000);
 
-  static const Color darkDeepBlue = Color(0xFF0050BB);
-
-  static const Color yellow = Color(0xFFFFB300);
-
-  static const Color yellowDark = Color(0xFFFFCB00);
-
+  static const Color greenDark = Color(0xFF41E099);
+  static const Color green = Color(0xFF148A55);
+  static const Color yellow = Color.fromARGB(255, 153, 0, 255);
+  static const Color yellowDark = Color.fromARGB(255, 132, 0, 255);
   static const Color red = Color(0xFFE80000);
-
   static const Color redDark = Color(0xFFB20000);
 
-  Color? primary = deepBlue;
-  Color? primary60 = deepBlue.withOpacity(0.6);
-  Color? primary45 = deepBlue.withOpacity(0.45);
-  Color? primary30 = deepBlue.withOpacity(0.3);
-  Color? primary20 = deepBlue.withOpacity(0.2);
-  Color? primary15 = deepBlue.withOpacity(0.15);
-  Color? primary10 = deepBlue.withOpacity(0.1);
+  Color? primary = nautilusBlue;
+  Color? primary60 = nautilusBlue.withOpacity(0.6);
+  Color? primary45 = nautilusBlue.withOpacity(0.45);
+  Color? primary30 = nautilusBlue.withOpacity(0.3);
+  Color? primary20 = nautilusBlue.withOpacity(0.2);
+  Color? primary15 = nautilusBlue.withOpacity(0.15);
+  Color? primary10 = nautilusBlue.withOpacity(0.1);
 
   Color? success = green;
   Color? success60 = green.withOpacity(0.6);
@@ -463,8 +445,8 @@ class SunshineTheme extends BaseTheme {
   Color? success30 = green.withOpacity(0.3);
   Color? success15 = green.withOpacity(0.15);
 
-  Color? successDark = greenLight;
-  Color? successDark30 = greenLight.withOpacity(0.3);
+  Color? successDark = greenDark;
+  Color? successDark30 = greenDark.withOpacity(0.3);
 
   Color? warning = yellow;
   Color? warning60 = yellow.withOpacity(0.6);
@@ -483,14 +465,14 @@ class SunshineTheme extends BaseTheme {
   Color? errorDark = redDark;
   Color? errorDark30 = redDark.withOpacity(0.3);
 
-  Color? background = white;
-  Color? background40 = white.withOpacity(0.4);
-  Color? background00 = white.withOpacity(0.0);
+  Color? background = bg;
+  Color? background40 = bg.withOpacity(0.4);
+  Color? background00 = bg.withOpacity(0.0);
 
-  Color? backgroundDark = white;
-  Color? backgroundDark00 = white.withOpacity(0.0);
+  Color? backgroundDark = bgDark;
+  Color? backgroundDark00 = bgDark.withOpacity(0.0);
 
-  Color? backgroundDarkest = whiteishDark;
+  Color? backgroundDarkest = bgDarkest;
 
   Color? text = grey.withOpacity(0.9);
   Color? text60 = grey.withOpacity(0.6);
@@ -521,8 +503,11 @@ class SunshineTheme extends BaseTheme {
   Brightness? brightness = Brightness.light;
   SystemUiOverlayStyle? statusBar = SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent);
 
-  BoxShadow? boxShadow = BoxShadow(color: darkDeepBlue.withOpacity(0.1), offset: const Offset(0, 5), blurRadius: 15);
-  BoxShadow? boxShadowButton = BoxShadow(color: darkDeepBlue.withOpacity(0.2), offset: const Offset(0, 5), blurRadius: 15);
+  // BoxShadow? boxShadow = BoxShadow(color: darkDeepBlue.withOpacity(0.1), offset: const Offset(0, 5), blurRadius: 15);
+  // BoxShadow? boxShadowButton = BoxShadow(color: darkDeepBlue.withOpacity(0.2), offset: const Offset(0, 5), blurRadius: 15);
+
+  BoxShadow? boxShadow = const BoxShadow(color: Colors.transparent);
+  BoxShadow? boxShadowButton = const BoxShadow(color: Colors.transparent);
 
   // OverlayTheme? qrScanTheme = OverlayTheme.INDIUM;
 }

@@ -17,7 +17,7 @@ SubscribeResponse _$SubscribeResponseFromJson(Map<String, dynamic> json) =>
       ..receivable = json['receivable'] as String?
       ..uuid = json['uuid'] as String?
       ..price = _toDouble(json['price'])
-      ..btcPrice = _toDouble(json['btc'])
+      ..xmrPrice = _toDouble(json['xmr'])
       ..receivableCount = json['receivable_count'] as int?
       ..confirmationHeight = _toInt(json['confirmation_height'] as String?);
 
@@ -32,7 +32,7 @@ Map<String, dynamic> _$SubscribeResponseToJson(SubscribeResponse instance) =>
       'receivable': instance.receivable,
       'uuid': instance.uuid,
       'price': instance.price,
-      'btc': instance.btcPrice,
+      'xmr': instance.xmrPrice,
       'receivable_count': instance.receivableCount,
       'confirmation_height': instance.confirmationHeight,
     };
