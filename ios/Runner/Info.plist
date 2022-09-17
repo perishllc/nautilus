@@ -35,7 +35,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -65,14 +65,25 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NFCReaderUsageDescription</key>
+	<string>Allow contactless Nano payments</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Camera permission is required for barcode scanning.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Allow sending to contacts</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>App needs to authenticate using faces.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Photo library access is required for saving the account QR code.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo library access is required for saving the account QR code.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Used strictly for install / link attribution (i.e. promotional links)</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -86,8 +97,6 @@
 	<false/>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
-	<key>NFCReaderUsageDescription</key>
-	<string>Allow contactless Nano payments</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -120,14 +129,5 @@
 		<string>test-app.perish.co</string>
 		<string>nautilus-alternate.test-app.link</string>
 	</array>
-	<key>NSContactsUsageDescription</key>
-	<string>Allow sending to contacts</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsLocalNetworking</key>
-		<true/>
-	</dict>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>Used strictly for install / link attribution (i.e. promotional links)</string>
 </dict>
 </plist>
