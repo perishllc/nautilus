@@ -89,6 +89,7 @@ class _FundingMessageCardState extends State<FundingMessageCard> {
           foregroundColor: StateContainer.of(context).curTheme.success!.withOpacity(0.15), padding: EdgeInsets.zero,
           // highlightColor: StateContainer.of(context).curTheme.success!.withOpacity(0.15),
           // splashColor: StateContainer.of(context).curTheme.success!.withOpacity(0.15),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
         onPressed: widget.onPressed as void Function()?,
         child: Container(
@@ -145,7 +146,7 @@ class _FundingMessageCardState extends State<FundingMessageCard> {
                   linearGradient: LinearGradient(
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
-                    stops: [0.2, 0.5, 0.9].map((e) => e * (1 / minFundedPercent)).toList(),
+                    stops: [0.2, 0.5, 0.9].map((double e) => e * (1 / minFundedPercent)).toList(),
                     colors: [
                       StateContainer.of(context).curTheme.error!,
                       StateContainer.of(context).curTheme.warning!,

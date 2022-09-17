@@ -9,42 +9,6 @@ import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 
 /// Main wallet object that's passed around the app via state
 class AppWallet {
-  // AppWallet({
-  //   this.address,
-  //   this.user,
-  //   this.username,
-  //   this.frontier,
-  //   this.openBlock,
-  //   this.representativeBlock,
-  //   this.blockCount,
-  //   this.watchOnly = false,
-  //   this.confirmationHeight = -1,
-  //   this.loading = true,
-  //   this.historyLoading = true,
-  //   this.solidsLoading = true,
-  //   this.unifiedLoading = true,
-  //   String? representative,
-  //   String? localCurrencyPrice,
-  //   // String? btcPrice,
-  //   BigInt? accountBalance,
-  //   List<AccountHistoryResponseItem>? history,
-  //   List<TXData>? solids,
-  // }) {
-  //   address = address;
-  //   user = user;
-  //   username = username;
-  //   accountBalance = accountBalance ?? BigInt.zero;
-  //   frontier = frontier;
-  //   openBlock = openBlock;
-  //   representativeBlock = representativeBlock;
-  //   _representative = representative;
-  //   _localCurrencyPrice = localCurrencyPrice ?? "0";
-  //   // _btcPrice = btcPrice ?? "0";
-  //   blockCount = blockCount ?? 0;
-  //   history = history ?? [];
-  //   solids = solids ?? [];
-  //   unified = unified ?? [];
-  // }
 
   AppWallet({
     this.address,
@@ -63,6 +27,7 @@ class AppWallet {
     this.unifiedLoading = true,
     this.representative = nautilusRepresentative,
     this.localCurrencyPrice = "0",
+    this.xmrPrice = "0",
     BigInt? accountBalance,
     List<AccountHistoryResponseItem>? history,
     List<TXData>? solids,
@@ -91,7 +56,7 @@ class AppWallet {
   String? representativeBlock;
   String representative;
   String localCurrencyPrice;
-  // String? _btcPrice;
+  String? xmrPrice;
   int? blockCount;
   int confirmationHeight;
   List<AccountHistoryResponseItem> history;

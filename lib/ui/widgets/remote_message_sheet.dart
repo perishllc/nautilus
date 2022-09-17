@@ -17,6 +17,7 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -201,41 +202,15 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                         ],
                       ),
                     ),
-                    //List Top Gradient End
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        height: 12.0,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              StateContainer.of(context).curTheme.backgroundDark00!,
-                              StateContainer.of(context).curTheme.backgroundDark!
-                            ],
-                            begin: const AlignmentDirectional(0.5, 1.0),
-                            end: const AlignmentDirectional(0.5, -1.0),
-                          ),
-                        ),
-                      ),
+                    ListGradient(
+                      height: 12,
+                      top: true,
+                      color: StateContainer.of(context).curTheme.backgroundDark!,
                     ),
-                    //List Bottom Gradient
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        height: 36.0,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              StateContainer.of(context).curTheme.backgroundDark00!,
-                              StateContainer.of(context).curTheme.backgroundDark!
-                            ],
-                            begin: const AlignmentDirectional(0.5, -1),
-                            end: const AlignmentDirectional(0.5, 0.5),
-                          ),
-                        ),
-                      ),
+                    ListGradient(
+                      height: 36,
+                      top: false,
+                      color: StateContainer.of(context).curTheme.backgroundDark!,
                     ),
                   ],
                 ),

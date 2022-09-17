@@ -54,8 +54,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
             onPressed: () async {
               bool trackingEnabled = false;
               if (Platform.isIOS) {
-                trackingEnabled =
-                    await AppTrackingTransparency.requestTrackingAuthorization() == TrackingStatus.authorized;
+                trackingEnabled = await AppTrackingTransparency.requestTrackingAuthorization() == TrackingStatus.authorized;
               } else {
                 trackingEnabled = (await AppDialogs.showTrackingDialog(context))!;
               }
@@ -136,32 +135,27 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                       width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                        children: <Widget>[
                           Stack(
-                            children: [
+                            children: <Widget>[
                               Container(
-                                // margin: const EdgeInsets.only(top: 0),
-                                color: Colors.white,
-                                // padding: EdgeInsets.zero,
-                                // width: double.infinity,
-                                width: landscape
-                                    ? MediaQuery.of(context).size.width / 2
-                                    : MediaQuery.of(context).size.width,
-                                height: 90,
+                                alignment: Alignment.topCenter,
+                                margin: const EdgeInsets.only(top: 20),
+                                color: StateContainer.of(context).curTheme.text,
+                                width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
+                                height: 80,
                               ),
                               Container(
-                                // margin:
+                                alignment: Alignment.topCenter,
                                 padding: EdgeInsets.zero,
-                                width: landscape
-                                    ? MediaQuery.of(context).size.width / 2
-                                    : MediaQuery.of(context).size.width,
+                                width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
+                                height: 100,
                                 child: TextLiquidFill(
                                   text: CaseChange.toUpperCase(NonTranslatable.nautilus, context),
                                   waveColor: NautilusTheme.nautilusBlue,
                                   boxBackgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
-                                  textStyle:
-                                      const TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold, color: Colors.white),
-                                  boxHeight: 100.0,
+                                  textStyle: const TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold, color: Colors.white),
+                                  boxHeight: 100,
                                   boxWidth: double.infinity,
                                   loadDuration: const Duration(seconds: 3),
                                   waveDuration: const Duration(seconds: 3),
@@ -169,14 +163,10 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                                 ),
                               ),
                               Container(
+                                alignment: Alignment.topCenter,
                                 margin: const EdgeInsets.only(top: 90),
                                 color: StateContainer.of(context).curTheme.backgroundDark,
-                                // color: Colors.green,
-                                // padding: EdgeInsets.zero,
-                                // width: double.infinity,
-                                width: landscape
-                                    ? MediaQuery.of(context).size.width / 2
-                                    : MediaQuery.of(context).size.width,
+                                width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
                                 height: 15,
                               ),
                             ],
@@ -205,8 +195,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                   Row(
                     children: <Widget>[
                       // New Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).newWallet,
-                          Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).newWallet, Dimens.BUTTON_TOP_DIMENS,
                           instanceKey: const Key("new_wallet_button"), onPressed: () {
                         Navigator.of(context).pushNamed('/intro_backup_safety');
                       }),
@@ -215,8 +204,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                   Row(
                     children: <Widget>[
                       // Import Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                          AppLocalization.of(context).importWallet, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).importWallet, Dimens.BUTTON_BOTTOM_DIMENS,
+                          onPressed: () {
                         Navigator.of(context).pushNamed('/intro_import');
                       }),
                     ],
@@ -280,8 +269,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${AppLocalization.of(context).importGiftIntro}\n\n",
-                    style: AppStyles.textStyleParagraph(context)),
+                Text("${AppLocalization.of(context).importGiftIntro}\n\n", style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actionsAlignment: MainAxisAlignment.end,

@@ -18,8 +18,8 @@ import 'package:flutter/widgets.dart';
 class AppIcons {
   AppIcons._();
 
-  static const _ogFontFam = 'AppIcons';
-  static const _kFontFam = 'ExtraAppIcons';
+  static const String _ogFontFam = "AppIcons";
+  static const String _kFontFam = "ExtraAppIcons";
   static const String? _kFontPkg = null;
 
   static const IconData accountswitcher = IconData(0xe800, fontFamily: _ogFontFam, fontPackage: _kFontPkg);

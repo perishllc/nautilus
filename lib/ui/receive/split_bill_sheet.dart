@@ -25,6 +25,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
@@ -169,42 +170,15 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                             ),
                           ),
                         ),
-
-                      // List Top Gradient
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          height: 20.0,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                StateContainer.of(context).curTheme.backgroundDark00!,
-                                StateContainer.of(context).curTheme.backgroundDark!,
-                              ],
-                              begin: const AlignmentDirectional(0.5, 1.0),
-                              end: const AlignmentDirectional(0.5, -1.0),
-                            ),
-                          ),
-                        ),
+                      ListGradient(
+                        height: 20,
+                        top: true,
+                        color: StateContainer.of(context).curTheme.backgroundDark!,
                       ),
-                      // List Bottom Gradient
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          height: 20.0,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                StateContainer.of(context).curTheme.backgroundDark!,
-                                StateContainer.of(context).curTheme.backgroundDark00!
-                              ],
-                              begin: const AlignmentDirectional(0.5, 1.0),
-                              end: const AlignmentDirectional(0.5, -1.0),
-                            ),
-                          ),
-                        ),
+                      ListGradient(
+                        height: 20,
+                        top: false,
+                        color: StateContainer.of(context).curTheme.backgroundDark!,
                       ),
                     ],
                   )),
@@ -228,9 +202,8 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                               _addingAccount = true;
                             });
 
-                            final User? user =
-                                await Sheets.showAppHeightEightSheet(context: context, widget: const SplitBillAddUserSheet())
-                                    as User?;
+                            final User? user = await Sheets.showAppHeightEightSheet(
+                                context: context, widget: const SplitBillAddUserSheet()) as User?;
                             if (!mounted) return;
 
                             if (user == null || user.address == null) {

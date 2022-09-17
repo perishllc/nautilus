@@ -2610,6 +2610,11 @@
     "type": "text",
     "description": "xmr_syncing_status"
   },
+  "thisMayTakeSomeTime": "this may take a while...",
+  "@thisMayTakeSomeTime": {
+    "type": "text",
+    "description": "xmr_sync_takes_time"
+  },
   "yes": "Yes",
   "@yes": {
     "type": "text",

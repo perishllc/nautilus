@@ -67,6 +67,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/funding_message_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/funding_messages_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
@@ -115,7 +116,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   NotificationSetting _curNotificiationSetting = NotificationSetting(NotificationOptions.ON);
   ContactsSetting _curContactsSetting = ContactsSetting(ContactsOptions.OFF);
   ContactsSetting _curUnopenedWarningSetting = ContactsSetting(ContactsOptions.ON);
-  ContactsSetting _curShowMoneroSetting = ContactsSetting(ContactsOptions.ON);
+  ContactsSetting _curXmrEnabledSetting = ContactsSetting(ContactsOptions.ON);
   ContactsSetting _curTrackingSetting = ContactsSetting(ContactsOptions.ON);
   NatriconSetting _curNatriconSetting = NatriconSetting(NatriconOptions.ON);
   NyaniconSetting _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
@@ -125,7 +126,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   UnlockSetting _curUnlockSetting = UnlockSetting(UnlockOption.NO);
   LockTimeoutSetting _curTimeoutSetting = LockTimeoutSetting(LockTimeoutOption.ONE);
   ThemeSetting _curThemeSetting = ThemeSetting(ThemeOptions.NAUTILUS);
-  int _curXMRRestoreHeight = 0;
+  int _curXmrRestoreHeight = 0;
 
   late bool _loadingAccounts;
 
@@ -151,6 +152,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     // ask for contacts permission:
     if (!contactsOn) {
       // final bool contactsEnabled = await cont.FlutterContacts.requestPermission();
+      // ignore: prefer_const_declarations
       final bool contactsEnabled = false;
       await sl.get<SharedPrefsUtil>().setContactsOn(contactsEnabled);
       setState(() {
@@ -226,15 +228,15 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       });
     });
     // Get show monero setting:
-    sl.get<SharedPrefsUtil>().getShowMoneroOn().then((bool contactsOn) {
+    sl.get<SharedPrefsUtil>().getXmrEnabled().then((bool contactsOn) {
       setState(() {
-        _curShowMoneroSetting = contactsOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
+        _curXmrEnabledSetting = contactsOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
       });
     });
     // restore height:
-    sl.get<SharedPrefsUtil>().getXMRRestoreHeight().then((int height) {
+    sl.get<SharedPrefsUtil>().getXmrRestoreHeight().then((int height) {
       setState(() {
-        _curXMRRestoreHeight = StateContainer.of(context).xmrRestoreHeight ?? 0;
+        _curXmrRestoreHeight = StateContainer.of(context).xmrRestoreHeight ?? 0;
       });
     });
     // Get tracking authorization:
@@ -405,8 +407,9 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     // xmr:
     _xmrSub = EventTaxiImpl.singleton().registerTo<XMREvent>().listen((XMREvent event) {
       if (event.type == "set_restore_height") {
+        if (!mounted) return;
         setState(() {
-          _curXMRRestoreHeight = int.parse(event.message);
+          _curXmrRestoreHeight = int.parse(event.message);
         });
       }
     });
@@ -491,14 +494,14 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           );
         })) {
       case AuthMethod.PIN:
-        sl.get<SharedPrefsUtil>().setAuthMethod(AuthenticationMethod(AuthMethod.PIN)).then((result) {
+        sl.get<SharedPrefsUtil>().setAuthMethod(AuthenticationMethod(AuthMethod.PIN)).then((void result) {
           setState(() {
             _curAuthMethod = AuthenticationMethod(AuthMethod.PIN);
           });
         });
         break;
       case AuthMethod.BIOMETRICS:
-        sl.get<SharedPrefsUtil>().setAuthMethod(AuthenticationMethod(AuthMethod.BIOMETRICS)).then((result) {
+        sl.get<SharedPrefsUtil>().setAuthMethod(AuthenticationMethod(AuthMethod.BIOMETRICS)).then((void result) {
           setState(() {
             _curAuthMethod = AuthenticationMethod(AuthMethod.BIOMETRICS);
           });
@@ -549,7 +552,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           );
         })) {
       case NotificationOptions.ON:
-        sl.get<SharedPrefsUtil>().setNotificationsOn(true).then((result) {
+        sl.get<SharedPrefsUtil>().setNotificationsOn(true).then((void result) {
           EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: true));
           FirebaseMessaging.instance.requestPermission();
           FirebaseMessaging.instance.getToken().then((String? fcmToken) {
@@ -558,7 +561,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         });
         break;
       case NotificationOptions.OFF:
-        sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((result) {
+        sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((void result) {
           EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: false));
           FirebaseMessaging.instance.getToken().then((String? fcmToken) {
             EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
@@ -743,11 +746,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     }
 
     final bool enabled = picked == ContactsOptions.ON;
-    await sl.get<SharedPrefsUtil>().setShowMoneroOn(enabled);
+    await sl.get<SharedPrefsUtil>().setXmrEnabled(enabled);
     if (!mounted) return;
-    StateContainer.of(context).setShowXMR(enabled);
+    StateContainer.of(context).setXmrEnabled(enabled);
     setState(() {
-      _curShowMoneroSetting = ContactsSetting(picked);
+      _curXmrEnabledSetting = ContactsSetting(picked);
     });
   }
 
@@ -824,129 +827,129 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     });
   }
 
-  Future<void> _nyaniconDialog() async {
-    switch (await showDialog<NyaniconOptions>(
-        context: context,
-        barrierColor: StateContainer.of(context).curTheme.barrier,
-        builder: (BuildContext context) {
-          return AppSimpleDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            title: Text(
-              AppLocalization.of(context).nyanicon,
-              style: AppStyles.textStyleDialogHeader(context),
-            ),
-            children: <Widget>[
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, NyaniconOptions.ON);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Text(
-                    AppLocalization.of(context).onStr,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, NyaniconOptions.OFF);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Text(
-                    AppLocalization.of(context).off,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-            ],
-          );
-        })) {
-      case NyaniconOptions.ON:
-        sl.get<SharedPrefsUtil>().setUseNyanicon(true).then((result) {
-          setState(() {
-            StateContainer.of(context).setNyaniconOn(true);
-            _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
-          });
-        });
-        break;
-      case NyaniconOptions.OFF:
-        sl.get<SharedPrefsUtil>().setUseNyanicon(false).then((result) {
-          setState(() {
-            StateContainer.of(context).setNyaniconOn(false);
-            _curNyaniconSetting = NyaniconSetting(NyaniconOptions.OFF);
-          });
-        });
-        break;
-      default:
-        break;
-    }
-  }
+  // Future<void> _nyaniconDialog() async {
+  //   switch (await showDialog<NyaniconOptions>(
+  //       context: context,
+  //       barrierColor: StateContainer.of(context).curTheme.barrier,
+  //       builder: (BuildContext context) {
+  //         return AppSimpleDialog(
+  //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+  //           title: Text(
+  //             AppLocalization.of(context).nyanicon,
+  //             style: AppStyles.textStyleDialogHeader(context),
+  //           ),
+  //           children: <Widget>[
+  //             AppSimpleDialogOption(
+  //               onPressed: () {
+  //                 Navigator.pop(context, NyaniconOptions.ON);
+  //               },
+  //               child: Padding(
+  //                 padding: const EdgeInsets.symmetric(vertical: 8),
+  //                 child: Text(
+  //                   AppLocalization.of(context).onStr,
+  //                   style: AppStyles.textStyleDialogOptions(context),
+  //                 ),
+  //               ),
+  //             ),
+  //             AppSimpleDialogOption(
+  //               onPressed: () {
+  //                 Navigator.pop(context, NyaniconOptions.OFF);
+  //               },
+  //               child: Padding(
+  //                 padding: const EdgeInsets.symmetric(vertical: 8),
+  //                 child: Text(
+  //                   AppLocalization.of(context).off,
+  //                   style: AppStyles.textStyleDialogOptions(context),
+  //                 ),
+  //               ),
+  //             ),
+  //           ],
+  //         );
+  //       })) {
+  //     case NyaniconOptions.ON:
+  //       sl.get<SharedPrefsUtil>().setUseNyanicon(true).then((result) {
+  //         setState(() {
+  //           StateContainer.of(context).setNyaniconOn(true);
+  //           _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
+  //         });
+  //       });
+  //       break;
+  //     case NyaniconOptions.OFF:
+  //       sl.get<SharedPrefsUtil>().setUseNyanicon(false).then((result) {
+  //         setState(() {
+  //           StateContainer.of(context).setNyaniconOn(false);
+  //           _curNyaniconSetting = NyaniconSetting(NyaniconOptions.OFF);
+  //         });
+  //       });
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }
 
-  Future<String?> _onrampDialog() async {
-    const String onramper_url =
-        "https://widget.onramper.com?apiKey=${Sensitive.ONRAMPER_API_KEY}&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&darkMode=true";
-    const String moonpay_url = "https://buy.moonpay.com/?currencyCode=xno&colorCode=%234080D7";
-    const String simplex_url = "https://buy.chainbits.com";
+  // Future<String?> _onrampDialog() async {
+  //   const String onramper_url =
+  //       "https://widget.onramper.com?apiKey=${Sensitive.ONRAMPER_API_KEY}&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&darkMode=true";
+  //   const String moonpay_url = "https://buy.moonpay.com/?currencyCode=xno&colorCode=%234080D7";
+  //   const String simplex_url = "https://buy.chainbits.com";
 
-    final String? choice = await showDialog<String>(
-        context: context,
-        barrierColor: StateContainer.of(context).curTheme.barrier,
-        builder: (BuildContext context) {
-          return AppSimpleDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            title: Text(
-              AppLocalization.of(context).onramp,
-              style: AppStyles.textStyleDialogHeader(context),
-            ),
-            children: <Widget>[
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, simplex_url);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Text(
-                    AppLocalization.of(context).simplex,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, onramper_url);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Text(
-                    AppLocalization.of(context).onramper,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
-                  UIUtil.showSnackbar(AppLocalization.of(context).addressCopied, context, durationMs: 1500);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Text(
-                    AppLocalization.of(context).copyWalletAddressToClipboard,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-            ],
-          );
-        });
+  //   final String? choice = await showDialog<String>(
+  //       context: context,
+  //       barrierColor: StateContainer.of(context).curTheme.barrier,
+  //       builder: (BuildContext context) {
+  //         return AppSimpleDialog(
+  //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+  //           title: Text(
+  //             AppLocalization.of(context).onramp,
+  //             style: AppStyles.textStyleDialogHeader(context),
+  //           ),
+  //           children: <Widget>[
+  //             AppSimpleDialogOption(
+  //               onPressed: () {
+  //                 Navigator.pop(context, simplex_url);
+  //               },
+  //               child: Padding(
+  //                 padding: const EdgeInsets.symmetric(vertical: 8),
+  //                 child: Text(
+  //                   AppLocalization.of(context).simplex,
+  //                   style: AppStyles.textStyleDialogOptions(context),
+  //                 ),
+  //               ),
+  //             ),
+  //             AppSimpleDialogOption(
+  //               onPressed: () {
+  //                 Navigator.pop(context, onramper_url);
+  //               },
+  //               child: Padding(
+  //                 padding: const EdgeInsets.symmetric(vertical: 8),
+  //                 child: Text(
+  //                   AppLocalization.of(context).onramper,
+  //                   style: AppStyles.textStyleDialogOptions(context),
+  //                 ),
+  //               ),
+  //             ),
+  //             AppSimpleDialogOption(
+  //               onPressed: () {
+  //                 Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
+  //                 UIUtil.showSnackbar(AppLocalization.of(context).addressCopied, context, durationMs: 1500);
+  //               },
+  //               child: Padding(
+  //                 padding: const EdgeInsets.symmetric(vertical: 8),
+  //                 child: Text(
+  //                   AppLocalization.of(context).copyWalletAddressToClipboard,
+  //                   style: AppStyles.textStyleDialogOptions(context),
+  //                 ),
+  //               ),
+  //             ),
+  //           ],
+  //         );
+  //       });
 
-    return choice;
-  }
+  //   return choice;
+  // }
 
   List<Widget> _buildMinRawOptions() {
-    final List<Widget> ret = [];
+    final List<Widget> ret = <Widget>[];
     for (final MinRawOptions value in MinRawOptions.values) {
       ret.add(SimpleDialogOption(
         onPressed: () {
@@ -965,7 +968,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   }
 
   List<Widget> _buildCurrencyModeOptions() {
-    final List<Widget> ret = [];
+    final List<Widget> ret = <Widget>[];
     for (final CurrencyModeOptions value in CurrencyModeOptions.values) {
       ret.add(SimpleDialogOption(
         onPressed: () {
@@ -1011,7 +1014,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         });
 
     final String rawValue = MinRawSetting(chosen).getRaw();
-    sl.get<SharedPrefsUtil>().setMinRawReceive(rawValue).then((result) {
+    sl.get<SharedPrefsUtil>().setMinRawReceive(rawValue).then((void result) {
       setState(() {
         StateContainer.of(context).setMinRawReceive(rawValue);
         _curMinRawSetting = MinRawSetting(chosen);
@@ -1047,7 +1050,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         });
 
     final String currencyMode = CurrencyModeSetting(chosen).getDisplayName();
-    sl.get<SharedPrefsUtil>().setCurrencyMode(currencyMode).then((result) {
+    sl.get<SharedPrefsUtil>().setCurrencyMode(currencyMode).then((void result) {
       setState(() {
         StateContainer.of(context).setCurrencyMode(currencyMode);
         _curCurrencyModeSetting = CurrencyModeSetting(chosen);
@@ -1095,14 +1098,14 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           );
         })) {
       case UnlockOption.YES:
-        sl.get<SharedPrefsUtil>().setLock(true).then((result) {
+        sl.get<SharedPrefsUtil>().setLock(true).then((void result) {
           setState(() {
             _curUnlockSetting = UnlockSetting(UnlockOption.YES);
           });
         });
         break;
       case UnlockOption.NO:
-        sl.get<SharedPrefsUtil>().setLock(false).then((result) {
+        sl.get<SharedPrefsUtil>().setLock(false).then((void result) {
           setState(() {
             _curUnlockSetting = UnlockSetting(UnlockOption.NO);
           });
@@ -1114,7 +1117,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   }
 
   List<Widget> _buildCurrencyOptions() {
-    final List<Widget> ret = [];
+    final List<Widget> ret = <Widget>[];
     for (final AvailableCurrencyEnum value in AvailableCurrencyEnum.values) {
       ret.add(SimpleDialogOption(
         onPressed: () {
@@ -1149,7 +1152,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           );
         });
     if (selection != null) {
-      sl.get<SharedPrefsUtil>().setCurrency(AvailableCurrency(selection)).then((result) {
+      sl.get<SharedPrefsUtil>().setCurrency(AvailableCurrency(selection)).then((void result) {
         if (StateContainer.of(context).curCurrency.currency != selection) {
           setState(() {
             StateContainer.of(context).curCurrency = AvailableCurrency(selection);
@@ -1161,7 +1164,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   }
 
   List<Widget> _buildLanguageOptions() {
-    final List<Widget> ret = [];
+    final List<Widget> ret = <Widget>[];
     for (final AvailableLanguage value in AvailableLanguage.values) {
       ret.add(SimpleDialogOption(
         onPressed: () {
@@ -1196,7 +1199,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           );
         });
     if (selection != null) {
-      sl.get<SharedPrefsUtil>().setLanguage(LanguageSetting(selection)).then((result) {
+      sl.get<SharedPrefsUtil>().setLanguage(LanguageSetting(selection)).then((void result) {
         if (StateContainer.of(context).curLanguage.language != selection) {
           setState(() {
             StateContainer.of(context).updateLanguage(LanguageSetting(selection));
@@ -1207,7 +1210,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   }
 
   List<Widget> _buildExplorerOptions() {
-    final List<Widget> ret = [];
+    final List<Widget> ret = <Widget>[];
     for (final AvailableBlockExplorerEnum value in AvailableBlockExplorerEnum.values) {
       ret.add(SimpleDialogOption(
         onPressed: () {
@@ -1245,7 +1248,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           );
         });
     if (selection != null) {
-      sl.get<SharedPrefsUtil>().setBlockExplorer(AvailableBlockExplorer(selection)).then((result) {
+      sl.get<SharedPrefsUtil>().setBlockExplorer(AvailableBlockExplorer(selection)).then((void result) {
         if (StateContainer.of(context).curBlockExplorer.explorer != selection) {
           setState(() {
             StateContainer.of(context).updateBlockExplorer(AvailableBlockExplorer(selection));
@@ -1256,7 +1259,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   }
 
   List<Widget> _buildLockTimeoutOptions() {
-    final List<Widget> ret = [];
+    final List<Widget> ret = <Widget>[];
     for (final LockTimeoutOption value in LockTimeoutOption.values) {
       ret.add(SimpleDialogOption(
         onPressed: () {
@@ -1290,7 +1293,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
             children: _buildLockTimeoutOptions(),
           );
         });
-    sl.get<SharedPrefsUtil>().setLockTimeout(LockTimeoutSetting(selection)).then((result) {
+    sl.get<SharedPrefsUtil>().setLockTimeout(LockTimeoutSetting(selection)).then((void result) {
       if (_curTimeoutSetting.setting != selection) {
         sl.get<SharedPrefsUtil>().setLockTimeout(LockTimeoutSetting(selection)).then((_) {
           setState(() {
@@ -1302,7 +1305,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   }
 
   List<Widget> _buildThemeOptions() {
-    final List<Widget> ret = [];
+    final List<Widget> ret = <Widget>[];
     for (final ThemeOptions value in ThemeOptions.values) {
       ret.add(SimpleDialogOption(
         onPressed: () {
@@ -1338,7 +1341,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         });
     if (selection != null) {
       if (_curThemeSetting != ThemeSetting(selection)) {
-        sl.get<SharedPrefsUtil>().setTheme(ThemeSetting(selection)).then((result) {
+        sl.get<SharedPrefsUtil>().setTheme(ThemeSetting(selection)).then((void result) {
           setState(() {
             StateContainer.of(context).updateTheme(ThemeSetting(selection));
             _curThemeSetting = ThemeSetting(selection);
@@ -1419,9 +1422,9 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     }
 
     if (_slideOffset > 0.7) {
-      controller.forward(from: controller.value);
+      controller.fling(velocity: 1);
     } else {
-      controller.reverse();
+      controller.fling(velocity: -1);
       // we don't call setState since it will trigger a re-render which will cause the animation to be reset before it completes:
       if (_moreSettingsOpen) {
         _moreSettingsOpen = false;
@@ -1840,7 +1843,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         Padding(
             padding: const EdgeInsets.only(top: 10, bottom: 10),
             child: Column(
-              children: [
+              children: <Widget>[
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.center,
                 //   children: <Widget>[
@@ -2275,24 +2278,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     scrollbarColor: StateContainer.of(context).curTheme.primary!,
                     child: _buildSettingsList(),
                   ),
-                  // List Top Gradient End
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      height: 20.0,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            StateContainer.of(context).curTheme.backgroundDark!,
-                            StateContainer.of(context).curTheme.backgroundDark00!
-                          ],
-                          begin: const AlignmentDirectional(0.5, -1.0),
-                          end: const AlignmentDirectional(0.5, 1.0),
-                        ),
-                      ),
-                    ),
-                  ), // List Top Gradient End
+                  ListGradient(
+                    height: 20,
+                    top: true,
+                    color: StateContainer.of(context).curTheme.backgroundDark!,
+                  ),
                 ],
               ),
             ),
@@ -2306,9 +2296,12 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     return Container(
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
-        boxShadow: [
+        boxShadow: <BoxShadow>[
           BoxShadow(
-              color: StateContainer.of(context).curTheme.barrierWeakest!, offset: const Offset(-5, 0), blurRadius: 20),
+            color: StateContainer.of(context).curTheme.barrierWeakest!,
+            offset: const Offset(-5, 0),
+            blurRadius: 20,
+          ),
         ],
       ),
       child: SafeArea(
@@ -2362,7 +2355,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
               children: <Widget>[
                 ListView(
                   padding: const EdgeInsets.only(top: 15.0),
-                  children: [
+                  children: <Widget>[
                     Container(
                       margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                       child: Text(AppLocalization.of(context).preferences,
@@ -2428,23 +2421,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                   ],
                 ),
                 // List Top Gradient End
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    height: 20.0,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          StateContainer.of(context).curTheme.backgroundDark!,
-                          StateContainer.of(context).curTheme.backgroundDark00!
-                        ],
-                        begin: const AlignmentDirectional(0.5, -1.0),
-                        end: const AlignmentDirectional(0.5, 1.0),
-                      ),
-                    ),
-                  ),
-                ), //List Top Gradient End
+                ListGradient(
+                  height: 20,
+                  top: true,
+                  color: StateContainer.of(context).curTheme.backgroundDark!,
+                ),
               ],
             )),
           ],
@@ -2460,7 +2441,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       return;
     }
 
-    final List<Map<String, dynamic>> jsonList = [];
+    final List<Map<String, dynamic>> jsonList = <Map<String, dynamic>>[];
     for (final TXData txData in transactionData) {
       jsonList.add(txData.toJson());
     }
@@ -2483,16 +2464,19 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     final File contactsFile = File("${baseDirectory.path}/$filename");
     await contactsFile.writeAsString(json.encode(jsonList));
     UIUtil.cancelLockEvent();
-    Share.shareFiles(["${baseDirectory.path}/$filename"]);
+    Share.shareFiles(<String>["${baseDirectory.path}/$filename"]);
   }
 
   Widget buildMoreSettingsMenu(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
-        boxShadow: [
+        boxShadow: <BoxShadow>[
           BoxShadow(
-              color: StateContainer.of(context).curTheme.barrierWeakest!, offset: const Offset(-5, 0), blurRadius: 20),
+            color: StateContainer.of(context).curTheme.barrierWeakest!,
+            offset: const Offset(-5, 0),
+            blurRadius: 20,
+          ),
         ],
       ),
       child: SafeArea(
@@ -2531,7 +2515,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                             },
                             child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                       ),
-                      // Security Header Text
+                      // Header Text
                       Text(
                         AppLocalization.of(context).moreSettings,
                         style: AppStyles.textStyleSettingsHeader(context),
@@ -2564,11 +2548,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                         _unopenedWarningDialog),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context).showMoneroHeader,
-                        _curShowMoneroSetting, AppIcons.money_bill_alt, _showMoneroDialog),
+                        _curXmrEnabledSetting, AppIcons.money_bill_alt, _showMoneroDialog),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemDoubleLine(
                         context, AppLocalization.of(context).setXMRRestoreHeight, null, AppIcons.backupseed,
-                        overrideSubtitle: _curXMRRestoreHeight.toString(), () async {
+                        overrideSubtitle: _curXmrRestoreHeight.toString(), () async {
                       Sheets.showAppHeightEightSheet(context: context, widget: SetXMRRestoreHeightSheet());
                     }),
                     // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
@@ -2670,7 +2654,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                         StateContainer.of(context).updateWallet(account: mainAccount!);
                         // force users list to update on the home page:
                         EventTaxiImpl.singleton().fire(ContactModifiedEvent());
-                        EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: []));
+                        EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: <TXData>[]));
 
                         StateContainer.of(context).updateUnified(true);
                         EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
@@ -2683,24 +2667,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     }),
                   ],
                 ),
-                // List Top Gradient End
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    height: 20.0,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          StateContainer.of(context).curTheme.backgroundDark!,
-                          StateContainer.of(context).curTheme.backgroundDark00!
-                        ],
-                        begin: const AlignmentDirectional(0.5, -1.0),
-                        end: const AlignmentDirectional(0.5, 1.0),
-                      ),
-                    ),
-                  ),
-                ), //List Top Gradient End
+                ListGradient(
+                  height: 20,
+                  top: true,
+                  color: StateContainer.of(context).curTheme.backgroundDark!,
+                ),
               ],
             )),
           ],
@@ -2713,9 +2684,12 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     return Container(
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
-        boxShadow: [
+        boxShadow: <BoxShadow>[
           BoxShadow(
-              color: StateContainer.of(context).curTheme.barrierWeakest!, offset: const Offset(-5, 0), blurRadius: 20),
+            color: StateContainer.of(context).curTheme.barrierWeakest!,
+            offset: const Offset(-5, 0),
+            blurRadius: 20,
+          ),
         ],
       ),
       child: SafeArea(
@@ -2769,7 +2743,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
               children: <Widget>[
                 ListView(
                   padding: const EdgeInsets.only(top: 15),
-                  children: [
+                  children: <Widget>[
                     Container(
                       margin: const EdgeInsetsDirectional.only(start: 30, bottom: 10),
                       child: Text(AppLocalization.of(context).getNano,
@@ -2869,7 +2843,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                               fontWeight: FontWeight.w100,
                               color: StateContainer.of(context).curTheme.text60)),
                     ),
-
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemSingleLine(
                       context,
                       NonTranslatable.nanswap,
@@ -2889,24 +2863,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                   ],
                 ),
-                // List Top Gradient End
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    height: 20,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          StateContainer.of(context).curTheme.backgroundDark!,
-                          StateContainer.of(context).curTheme.backgroundDark00!
-                        ],
-                        begin: const AlignmentDirectional(0.5, -1.0),
-                        end: const AlignmentDirectional(0.5, 1.0),
-                      ),
-                    ),
-                  ),
-                ), //List Top Gradient End
+                ListGradient(
+                  height: 20,
+                  top: true,
+                  color: StateContainer.of(context).curTheme.backgroundDark!,
+                ),
               ],
             )),
           ],
@@ -2919,9 +2880,12 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     return Container(
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
-        boxShadow: [
+        boxShadow: <BoxShadow>[
           BoxShadow(
-              color: StateContainer.of(context).curTheme.barrierWeakest!, offset: const Offset(-5, 0), blurRadius: 20),
+            color: StateContainer.of(context).curTheme.barrierWeakest!,
+            offset: const Offset(-5, 0),
+            blurRadius: 20,
+          ),
         ],
       ),
       child: SafeArea(
@@ -3015,24 +2979,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                   ],
                 ),
-                // List Top Gradient End
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    height: 20.0,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: <Color>[
-                          StateContainer.of(context).curTheme.backgroundDark!,
-                          StateContainer.of(context).curTheme.backgroundDark00!
-                        ],
-                        begin: const AlignmentDirectional(0.5, -1.0),
-                        end: const AlignmentDirectional(0.5, 1.0),
-                      ),
-                    ),
-                  ),
-                ), //List Top Gradient End
+                ListGradient(
+                  height: 20,
+                  top: true,
+                  color: StateContainer.of(context).curTheme.backgroundDark!,
+                ),
               ],
             )),
           ],

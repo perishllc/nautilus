@@ -15,6 +15,11 @@ SubscribeResponse subscribeResponseFromJson(Map<dynamic, dynamic> json) {
 
 @JsonSerializable()
 class SubscribeResponse {
+
+  factory SubscribeResponse.fromJson(Map<String, dynamic> json) => _$SubscribeResponseFromJson(json);
+
+  SubscribeResponse();
+  
   @JsonKey(name: 'frontier')
   String? frontier;
 
@@ -44,17 +49,13 @@ class SubscribeResponse {
   @JsonKey(name: 'price', fromJson: _toDouble)
   double? price;
 
-  @JsonKey(name: 'btc', fromJson: _toDouble)
-  double? btcPrice;
+  @JsonKey(name: 'xmr', fromJson: _toDouble)
+  double? xmrPrice;
 
   @JsonKey(name: 'receivable_count')
   int? receivableCount;
 
-  @JsonKey(name: 'confirmation_height', nullable: false, fromJson: _toInt)
+  @JsonKey(name: 'confirmation_height', fromJson: _toInt)
   int? confirmationHeight;
-
-  SubscribeResponse();
-
-  factory SubscribeResponse.fromJson(Map<String, dynamic> json) => _$SubscribeResponseFromJson(json);
   Map<String, dynamic> toJson() => _$SubscribeResponseToJson(this);
 }

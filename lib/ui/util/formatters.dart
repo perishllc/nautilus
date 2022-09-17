@@ -187,8 +187,8 @@ String convertLocalToCrypto(String cryptoAmount, NumberFormat? currencyFormat) {
 
 // formats to 1,456,789.123456:
 String normalizedAmount(NumberFormat currencyFormat, String amount) {
-  amount = amount.replaceAll(currencyFormat.symbols.GROUP_SEP, "G");
   amount = amount.replaceAll(currencyFormat.symbols.DECIMAL_SEP, "D");
+  amount = amount.replaceAll(currencyFormat.symbols.GROUP_SEP, "G");
   amount = amount.replaceAll("D", ".").replaceAll("G", ",");
   return amount;
 }
@@ -249,7 +249,12 @@ String convertLocalCurrencyToLocalizedCrypto(BuildContext context, NumberFormat 
   final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
   final String nanoAmount =
       NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
-  return convertCryptoToLocalAmount(nanoAmount, localCurrencyFormat);
+
+  // replace dec separator as this function expects the localized version:
+  // no need to put the group separator back in as it's stripped again anyways:
+  final String localizedNanoAmount = nanoAmount.replaceAll(".", localCurrencyFormat.symbols.DECIMAL_SEP);
+
+  return convertCryptoToLocalAmount(localizedNanoAmount, localCurrencyFormat);
 }
 
 String convertCryptoToLocalCurrency(BuildContext context, NumberFormat localCurrencyFormat, String amount) {

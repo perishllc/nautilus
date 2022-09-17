@@ -35,8 +35,15 @@ class UIUtil {
     final String stringPartOne = address.substring(0, 12);
     final String stringPartTwo = address.substring(12, 22);
     final String stringPartThree = address.substring(22, 44);
-    final String stringPartFour = address.substring(44, 59);
-    final String stringPartFive = address.substring(59);
+    late final String stringPartFour;
+    late final String stringPartFive;
+    if (address.length > 58) {
+      stringPartFour = address.substring(44, 59);
+      stringPartFive = address.substring(59);
+    } else {
+      stringPartFour = address.substring(40, 44);
+      stringPartFive = address.substring(44);
+    }
     switch (type) {
       case ThreeLineAddressTextType.PRIMARY60:
         return Column(

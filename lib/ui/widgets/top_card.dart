@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,6 @@ import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:decimal/decimal.dart';
 
 // ignore: must_be_immutable
 class TopCard extends StatefulWidget {
@@ -36,7 +36,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
 
   String hashedSeed = "";
 
-  // Price conversion state (BTC, NANO, NONE)
+  // Price conversion state (XMR, NANO, NONE)
   PriceConversion? _priceConversion;
 
   // Main card height
@@ -49,8 +49,20 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
 
   String xmrBalance = "0";
   double syncPercentage = 0;
-  String xmrStatus = "CONNECTING...";
+  String xmrStatus = "";
+  String xmrState = "";
   Color? xmrStatusColor;
+  Timer? _syncTimer;
+  bool stillSyncing = false;
+
+  void areWeStillSyncing() {
+    if (!mounted) return;
+    if (stillSyncing != (xmrState == "syncing")) {
+      setState(() {
+        stillSyncing = xmrState == "syncing";
+      });
+    }
+  }
 
   void _registerBus() {
     _xmrEventSub = EventTaxiImpl.singleton().registerTo<XMREvent>().listen((XMREvent event) {
@@ -79,6 +91,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
       if (event.type == "update_status") {
         String title = "";
         Color? color = Colors.transparent;
+        xmrState = event.message;
         switch (event.message) {
           case "error":
             title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusError, context);
@@ -86,12 +99,13 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
             break;
 
           case "loading":
-            title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusLoading, context) + "...";
+            title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusLoading, context);
             color = StateContainer.of(context).curTheme.warning;
+            stillSyncing = false;
             break;
 
           case "connecting":
-            title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusConnecting, context) + "...";
+            title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusConnecting, context);
             color = StateContainer.of(context).curTheme.warning;
             break;
 
@@ -103,10 +117,12 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
             } else {
               title += '...';
             }
+            _syncTimer = Timer(const Duration(milliseconds: 3500), areWeStillSyncing);
             break;
           case "ready":
             title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusSynchronized, context);
             color = StateContainer.of(context).curTheme.success;
+            stillSyncing = false;
             break;
         }
         setState(() {
@@ -172,11 +188,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
                 const Text(
                   "1234567",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: "NunitoSans",
-                      fontSize: AppFontSizes.small,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.transparent),
+                  style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w600, color: Colors.transparent),
                 ),
                 Opacity(
                   opacity: widget.opacityAnimation.value,
@@ -188,11 +200,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
                     child: const Text(
                       "1234567",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: "NunitoSans",
-                          fontSize: AppFontSizes.small - 3,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.transparent),
+                      style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small - 3, fontWeight: FontWeight.w600, color: Colors.transparent),
                     ),
                   ),
                 ),
@@ -205,11 +213,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
               children: <Widget>[
                 const AutoSizeText(
                   "1234567",
-                  style: TextStyle(
-                      fontFamily: "NunitoSans",
-                      fontSize: AppFontSizes.largestc,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.transparent),
+                  style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.largestc, fontWeight: FontWeight.w900, color: Colors.transparent),
                   maxLines: 1,
                   stepGranularity: 0.1,
                   minFontSize: 1,
@@ -223,11 +227,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
                     ),
                     child: const AutoSizeText(
                       "1234567",
-                      style: TextStyle(
-                          fontFamily: "NunitoSans",
-                          fontSize: AppFontSizes.largestc - 8,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.transparent),
+                      style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.largestc - 8, fontWeight: FontWeight.w900, color: Colors.transparent),
                       maxLines: 1,
                       stepGranularity: 0.1,
                       minFontSize: 1,
@@ -244,11 +244,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
                 const Text(
                   "1234567",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: "NunitoSans",
-                      fontSize: AppFontSizes.small,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.transparent),
+                  style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w600, color: Colors.transparent),
                 ),
                 Opacity(
                   opacity: widget.opacityAnimation.value,
@@ -260,11 +256,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
                     child: const Text(
                       "1234567",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: "NunitoSans",
-                          fontSize: AppFontSizes.small - 3,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.transparent),
+                      style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small - 3, fontWeight: FontWeight.w600, color: Colors.transparent),
                     ),
                   ),
                 ),
@@ -322,9 +314,9 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
                   if (nanoMode)
                     if (_priceConversion == PriceConversion.CURRENCY)
                       Text(
-                        StateContainer.of(context).wallet!.getLocalCurrencyBalance(
-                            context, StateContainer.of(context).curCurrency,
-                            locale: StateContainer.of(context).currencyLocale),
+                        StateContainer.of(context)
+                            .wallet!
+                            .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale),
                         textAlign: TextAlign.center,
                         style: AppStyles.textStyleCurrencyAlt(context),
                       ),
@@ -336,13 +328,63 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
                         //   dimension: 10.0,
                         //   child: Container(color: xmrStatusColor),
                         // ),
+                        if (xmrStatus.isNotEmpty)
+                          if (!<String>["ready", "error"].contains(xmrState))
+                            DefaultTextStyle(
+                              textAlign: TextAlign.center,
+                              style: AppStyles.textStyleCurrencyAlt(context).copyWith(
+                                color: xmrStatusColor,
+                              ),
+                              child: AnimatedTextKit(
+                                animatedTexts: <AnimatedText>[
+                                  WavyAnimatedText(xmrStatus, speed: const Duration(milliseconds: 100)),
+                                ],
+                                repeatForever: true,
+                                isRepeatingAnimation: true,
+                              ),
+                            )
+                          else
+                            Text(
+                              xmrStatus,
+                              textAlign: TextAlign.center,
+                              style: AppStyles.textStyleCurrencyAlt(context).copyWith(
+                                color: xmrStatusColor,
+                              ),
+                            )
+                        else
+                          DefaultTextStyle(
+                            textAlign: TextAlign.center,
+                            style: AppStyles.textStyleCurrencyAlt(context).copyWith(
+                              color: StateContainer.of(context).curTheme.primary,
+                            ),
+                            child: AnimatedTextKit(
+                              animatedTexts: <AnimatedText>[
+                                WavyAnimatedText(
+                                    CaseChange.toUpperCase(
+                                      AppLocalization.of(context).xmrStatusConnecting,
+                                      context,
+                                    ),
+                                    speed: const Duration(milliseconds: 100)),
+                              ],
+                              repeatForever: true,
+                              isRepeatingAnimation: true,
+                            ),
+                          ),
+                      ],
+                    ),
+                  if (!nanoMode && stillSyncing)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
                         Text(
-                          xmrStatus,
+                          AppLocalization.of(context).thisMayTakeSomeTime,
                           textAlign: TextAlign.center,
                           style: AppStyles.textStyleCurrencyAlt(context).copyWith(
                             color: xmrStatusColor,
+                            fontSize: AppFontSizes.smallest,
                           ),
-                        ),
+                        )
                       ],
                     ),
                   if (nanoMode)
@@ -351,8 +393,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          constraints:
-                              BoxConstraints(maxWidth: (UIUtil.getDrawerAwareScreenWidth(context) - 205).abs()),
+                          constraints: BoxConstraints(maxWidth: (UIUtil.getDrawerAwareScreenWidth(context) - 205).abs()),
                           child: AutoSizeText.rich(
                             TextSpan(
                               children: [
@@ -362,8 +403,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
                                   displayCurrencySymbol(context, AppStyles.textStyleCurrencySmaller(context)),
                                 // Main balance text
                                 TextSpan(
-                                  text: getRawAsThemeAwareFormattedAmount(
-                                      context, StateContainer.of(context).wallet?.accountBalance.toString()),
+                                  text: getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet?.accountBalance.toString()),
                                   style: _priceConversion == PriceConversion.CURRENCY
                                       ? AppStyles.textStyleCurrency(context)
                                       : AppStyles.textStyleCurrencySmaller(
@@ -387,11 +427,10 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          constraints:
-                              BoxConstraints(maxWidth: (UIUtil.getDrawerAwareScreenWidth(context) - 205).abs()),
+                          constraints: BoxConstraints(maxWidth: (UIUtil.getDrawerAwareScreenWidth(context) - 205).abs()),
                           child: AutoSizeText.rich(
                             TextSpan(
-                              children: [
+                              children: <InlineSpan>[
                                 // Main balance text
                                 TextSpan(
                                   text: xmrBalance,
@@ -436,81 +475,78 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
       margin: EdgeInsets.only(left: 14.0, right: 14.0, top: MediaQuery.of(context).size.height * 0.005),
       child: Stack(
         children: <Widget>[
-          Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                  width: 80.0,
-                  height: mainCardHeight,
-                  alignment: AlignmentDirectional.topStart,
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    curve: Curves.easeInOut,
-                    margin: EdgeInsetsDirectional.only(top: settingsIconMarginTop, start: 5),
-                    height: 50,
-                    width: 50,
-                    child: !UIUtil.isTablet(context)
-                        ? TextButton(
-                            key: const Key("home_settings_button"),
-                            style: TextButton.styleFrom(
-                              foregroundColor: StateContainer.of(context).curTheme.text15,
-                              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                              // highlightColor: StateContainer.of(context).curTheme.text15,
-                              // splashColor: StateContainer.of(context).curTheme.text15,
+          Row(crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              width: 80.0,
+              height: mainCardHeight,
+              alignment: AlignmentDirectional.topStart,
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeInOut,
+                margin: EdgeInsetsDirectional.only(top: settingsIconMarginTop, start: 5),
+                height: 50,
+                width: 50,
+                child: !UIUtil.isTablet(context)
+                    ? TextButton(
+                        key: const Key("home_settings_button"),
+                        style: TextButton.styleFrom(
+                          foregroundColor: StateContainer.of(context).curTheme.text15,
+                          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                          // highlightColor: StateContainer.of(context).curTheme.text15,
+                          // splashColor: StateContainer.of(context).curTheme.text15,
+                        ),
+                        onPressed: () {
+                          widget.scaffoldKey.currentState?.openDrawer();
+                        },
+                        child: Stack(
+                          children: [
+                            Icon(
+                              AppIcons.settings,
+                              color: StateContainer.of(context).curTheme.text,
+                              size: 24,
                             ),
-                            onPressed: () {
-                              widget.scaffoldKey.currentState?.openDrawer();
-                            },
-                            child: Stack(
-                              children: [
-                                Icon(
-                                  AppIcons.settings,
-                                  color: StateContainer.of(context).curTheme.text,
-                                  size: 24,
-                                ),
-                                if (!StateContainer.of(context).activeAlertIsRead)
-                                  Positioned(
-                                    top: -3,
-                                    right: -3,
-                                    child: Container(
-                                      padding: const EdgeInsets.all(3),
-                                      decoration: BoxDecoration(
-                                        color: StateContainer.of(context).curTheme.backgroundDark,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: StateContainer.of(context).curTheme.success,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        height: 11,
-                                        width: 11,
-                                      ),
+                            if (!StateContainer.of(context).activeAlertIsRead)
+                              Positioned(
+                                top: -3,
+                                right: -3,
+                                child: Container(
+                                  padding: const EdgeInsets.all(3),
+                                  decoration: BoxDecoration(
+                                    color: StateContainer.of(context).curTheme.backgroundDark,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: StateContainer.of(context).curTheme.success,
+                                      shape: BoxShape.circle,
                                     ),
-                                  )
-                              ],
-                            ),
-                          )
-                        : const SizedBox(),
-                  ),
-                ),
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                  height: mainCardHeight,
-                  child: _getBalanceWidget(),
-                ),
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeInOut,
-                  width: 80,
-                  height: mainCardHeight,
-                ),
-              ]),
+                                    height: 11,
+                                    width: 11,
+                                  ),
+                                ),
+                              )
+                          ],
+                        ),
+                      )
+                    : const SizedBox(),
+              ),
+            ),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              height: mainCardHeight,
+              child: _getBalanceWidget(),
+            ),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              width: 80,
+              height: mainCardHeight,
+            ),
+          ]),
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             curve: Curves.easeInOut,

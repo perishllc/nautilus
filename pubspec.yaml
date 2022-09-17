@@ -8,7 +8,7 @@ publish_to: "none"
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.6.4+88
+version: 0.6.5+92
 
 environment:
   sdk: '>=2.18.0 <3.0.0'
@@ -28,7 +28,7 @@ dependencies:
   uuid: ^3.0.6
 
   # Secureley store data in a keystore
-  flutter_secure_storage: ^5.0.2
+  flutter_secure_storage: ^6.0.0
 
   # Nano core functions
   # flutter_nano_ffi: ^2.0.0
@@ -57,7 +57,8 @@ dependencies:
   package_info: ^2.0.2
 
   # Device-specific info
-  device_info_plus: ^3.2.4
+  device_info_plus: ^4.1.2
+  android_id: ^0.0.7
 
   # JSON Serialization
   json_annotation: ^4.6.0
@@ -124,7 +125,7 @@ dependencies:
   share_plus: ^4.0.4
 
   # File picker
-  file_picker: ^5.0.0
+  file_picker: ^5.1.0
 
   # Deep link support
   flutter_branch_sdk: ^6.0.0
@@ -286,7 +287,7 @@ dependency_overrides:
     git:
       url: https://github.com/rshrc/flutter_inappwebview
       ref: master
-  device_info_plus_platform_interface: 2.3.0+1
+  # device_info_plus_platform_interface: 2.3.0+1
 
 dev_dependencies:
   flutter_test:
@@ -297,7 +298,7 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.1.11
   json_serializable: ^6.3.1
-  analyzer: ^4.1.0
+  analyzer: ^4.7.0
   dart_style: ^2.2.3
 
   # screenshot generation:
@@ -371,17 +372,11 @@ flutter:
     - CHANGELOG.md
     # xmr:
     - assets/xmr/
-    - assets/xmr/apple-touch-icon.png
-    - assets/xmr/favicon-16x16.png
-    - assets/xmr/favicon-32x32.png
     - assets/xmr/index.html
     - assets/xmr/main.js
     - assets/xmr/monero_wallet_full.js
-    - monero_wallet_full.wasm
-    - assets/xmr/monero_wallet_keys.js
-    - assets/xmr/monero_wallet_keys.wasm
+    - assets/xmr/monero_wallet_full.wasm
     - assets/xmr/monero_web_worker.js
-    - assets/xmr/monero_web_worker.js.map
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

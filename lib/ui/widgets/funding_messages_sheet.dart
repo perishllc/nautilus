@@ -9,11 +9,11 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/funding_message_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/funding_specific_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 
 class FundingMessagesSheet extends StatefulWidget {
-
   const FundingMessagesSheet({this.alerts, this.hasDismissButton = true}) : super();
   final List<FundingResponseItem>? alerts;
   final bool hasDismissButton;
@@ -96,35 +96,15 @@ class _FundingMessagesSheetState extends State<FundingMessagesSheet> {
                         children: _buildFundingAlerts(context, widget.alerts),
                       ),
                     ),
-                    //List Top Gradient End
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        height: 12.0,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [StateContainer.of(context).curTheme.backgroundDark00!, StateContainer.of(context).curTheme.backgroundDark!],
-                            begin: const AlignmentDirectional(0.5, 1.0),
-                            end: const AlignmentDirectional(0.5, -1.0),
-                          ),
-                        ),
-                      ),
+                    ListGradient(
+                      height: 12,
+                      top: true,
+                      color: StateContainer.of(context).curTheme.backgroundDark!,
                     ),
-                    //List Bottom Gradient
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        height: 36.0,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [StateContainer.of(context).curTheme.backgroundDark00!, StateContainer.of(context).curTheme.backgroundDark!],
-                            begin: const AlignmentDirectional(0.5, -1),
-                            end: const AlignmentDirectional(0.5, 0.5),
-                          ),
-                        ),
-                      ),
+                    ListGradient(
+                      height: 36,
+                      top: false,
+                      color: StateContainer.of(context).curTheme.backgroundDark!,
                     ),
                   ],
                 ),

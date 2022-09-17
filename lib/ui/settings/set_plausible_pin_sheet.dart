@@ -246,8 +246,8 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
   }
 
   Future<void> submitAndEncrypt() async {
-    String? seed = await sl.get<Vault>().getSeed();
-    String? currentPin = await sl.get<Vault>().getPin();
+    final String? seed = await sl.get<Vault>().getSeed();
+    final String? currentPin = await sl.get<Vault>().getPin();
     if (!mounted) return;
     if (createPasswordController!.text.isEmpty || confirmPasswordController!.text.isEmpty) {
       setState(() {

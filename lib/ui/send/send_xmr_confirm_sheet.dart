@@ -63,11 +63,17 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
   late bool animationOpen;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
+  StreamSubscription<XMREvent>? _xmrSub;
 
   void _registerBus() {
     _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((AuthenticatedEvent event) {
       if (event.authType == AUTH_EVENT_TYPE.SEND) {
         _doSend();
+      }
+    });
+    _xmrSub = EventTaxiImpl.singleton().registerTo<XMREvent>().listen((XMREvent event) {
+      if (event.type == "send_done" || event.type == "send_failed") {
+        _sendDone(event.type == "send_failed");
       }
     });
   }
@@ -131,9 +137,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                   ),
                   // Container for the amount text
                   Container(
-                    margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.105,
-                        right: MediaQuery.of(context).size.width * 0.105),
+                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                     padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -178,9 +182,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                   // Address text
                   Container(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                      margin: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width * 0.105,
-                          right: MediaQuery.of(context).size.width * 0.105),
+                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
@@ -205,9 +207,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                   if (StateContainer.of(context).xmrFee.isNotEmpty)
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.105,
-                            right: MediaQuery.of(context).size.width * 0.105),
+                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: StateContainer.of(context).curTheme.backgroundDarkest,
@@ -230,15 +230,15 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context,
-                        AppButtonType.PRIMARY,
-                        CaseChange.toUpperCase(AppLocalization.of(context).confirm, context),
-                        Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: () async {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
 
                       final bool isMessage = widget.memo.isNotEmpty && (widget.amountRaw == "0");
+
+                      if (!mounted) return;
 
                       final String authText = isMessage
                           ? AppLocalization.of(context).sendMessageConfirm
@@ -256,8 +256,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
 
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         try {
-                          final bool authenticated =
-                              await sl.get<BiometricUtil>().authenticateWithBiometrics(context, authText);
+                          final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, authText);
                           if (authenticated) {
                             sl.get<HapticUtil>().fingerprintSucess();
                             EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
@@ -275,10 +274,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(
-                        context,
-                        AppButtonType.PRIMARY_OUTLINE,
-                        CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -302,6 +298,8 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
       return true;
     }
 
+    if (!mounted) return false;
+
     final bool? option = await showDialog<bool>(
         context: context,
         barrierDismissible: false,
@@ -319,8 +317,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${AppLocalization.of(context).unopenedWarningWarning}\n\n",
-                    style: AppStyles.textStyleParagraph(context)),
+                Text("${AppLocalization.of(context).unopenedWarningWarning}\n\n", style: AppStyles.textStyleParagraph(context)),
                 RichText(
                   textAlign: TextAlign.start,
                   text: TextSpan(
@@ -370,45 +367,15 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
   }
 
   Future<void> _doSend() async {
-    bool memoSendFailed = false;
     try {
-      final bool isMessage = widget.amountRaw == "0";
-      final String walletAddress = StateContainer.of(context).wallet!.address!;
-
-      _showAnimation(context, isMessage ? AnimationType.SEND_MESSAGE : AnimationType.SEND);
+      _showAnimation(context, AnimationType.SEND);
 
       EventTaxiImpl.singleton().fire(XMREvent(type: "xmr_send", message: "${widget.destination}:${widget.amountRaw}"));
 
-      // sleep to flex the animation a bit:
-      await Future<dynamic>.delayed(const Duration(milliseconds: 3500));
-
-      // Show complete
-      String? contactName = widget.contactName;
-      if (widget.contactName == null || widget.contactName!.isEmpty) {
-        final User? user = await sl.get<DBHelper>().getUserWithAddress(widget.destination);
-        if (user != null) {
-          contactName = user.getDisplayName();
-        }
+      await Future<dynamic>.delayed(const Duration(milliseconds: 10000));
+      if (mounted) {
+        throw Exception("transaction timeout");
       }
-      // StateContainer.of(context).requestUpdate();
-      // StateContainer.of(context).updateTXMemos();
-      // if (isMessage) {
-      //   StateContainer.of(context).updateSolids();
-      // }
-      // StateContainer.of(context).updateUnified(true);
-
-      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-      Sheets.showAppHeightNineSheet(
-          context: context,
-          closeOnTap: true,
-          removeUntilHome: true,
-          widget: SendXMRCompleteSheet(
-            amountRaw: widget.amountRaw,
-            destination: widget.destination,
-            contactName: contactName,
-            memo: widget.memo,
-            localAmount: widget.localCurrency,
-          ));
     } catch (error) {
       sl.get<Logger>().d("send_xmr_confirm_error: $error");
       // Send failed
@@ -420,22 +387,60 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
     }
   }
 
+  Future<void> _sendDone(bool failed) async {
+    // sleep to flex the animation a bit:
+    await Future<dynamic>.delayed(const Duration(milliseconds: 1500));
+    if (!mounted) return;
+
+    if (failed) {
+      // Send failed
+      if (animationOpen) {
+        Navigator.of(context).pop();
+      }
+      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context, durationMs: 5000);
+      Navigator.of(context).pop();
+    } else {
+      // Show complete
+      String? contactName = widget.contactName;
+      if (widget.contactName == null || widget.contactName!.isEmpty) {
+        final User? user = await sl.get<DBHelper>().getUserWithAddress(widget.destination);
+        if (user != null) {
+          contactName = user.getDisplayName();
+        }
+      }
+
+      if (!mounted) return;
+
+      Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+      Sheets.showAppHeightNineSheet(
+          context: context,
+          closeOnTap: true,
+          removeUntilHome: true,
+          widget: SendXMRCompleteSheet(
+            amountRaw: widget.amountRaw,
+            destination: widget.destination,
+            contactName: contactName,
+            memo: widget.memo,
+            localAmount: widget.localCurrency,
+          ));
+    }
+  }
+
   Future<void> authenticateWithPin() async {
     // PIN Authentication
     final String? expectedPin = await sl.get<Vault>().getPin();
     final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
-    final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    if (!mounted) return;
+    final bool? auth = await Navigator.of(context).push(MaterialPageRoute<bool>(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: AppLocalization.of(context)
-            .sendAmountConfirm
-            .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
-            .replaceAll("%2", "XMR"),
+        description:
+            AppLocalization.of(context).sendAmountConfirm.replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw)).replaceAll("%2", "XMR"),
       );
     }));
-    if (auth != null && auth) {
+    if (auth ?? false) {
       await Future<dynamic>.delayed(const Duration(milliseconds: 200));
       EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
     }

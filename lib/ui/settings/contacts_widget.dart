@@ -24,6 +24,7 @@ import 'package:nautilus_wallet_flutter/ui/contacts/add_contact.dart';
 import 'package:nautilus_wallet_flutter/ui/contacts/contact_details.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:path_provider/path_provider.dart';
@@ -451,41 +452,15 @@ class _ContactsListState extends State<ContactsList> {
                         return buildSingleContact(context, _contacts[index]);
                       },
                     ),
-                    //List Top Gradient End
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        height: 20.0,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              StateContainer.of(context).curTheme.backgroundDark!,
-                              StateContainer.of(context).curTheme.backgroundDark00!
-                            ],
-                            begin: const AlignmentDirectional(0.5, -1.0),
-                            end: const AlignmentDirectional(0.5, 1.0),
-                          ),
-                        ),
-                      ),
+                    ListGradient(
+                      height: 20,
+                      top: true,
+                      color: StateContainer.of(context).curTheme.backgroundDark!,
                     ),
-                    //List Bottom Gradient End
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        height: 15.0,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              StateContainer.of(context).curTheme.backgroundDark00!,
-                              StateContainer.of(context).curTheme.backgroundDark!,
-                            ],
-                            begin: const AlignmentDirectional(0.5, -1.0),
-                            end: const AlignmentDirectional(0.5, 1.0),
-                          ),
-                        ),
-                      ),
+                    ListGradient(
+                      height: 20,
+                      top: false,
+                      color: StateContainer.of(context).curTheme.backgroundDark!,
                     ),
                   ],
                 ),

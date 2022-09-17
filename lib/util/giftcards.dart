@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:android_id/android_id.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:http/http.dart' as http;
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -75,12 +77,23 @@ class GiftCards {
 
   Future<String?> _getDeviceUUID() async {
     final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    if (Platform.isIOS) {
-      final IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
-      return iosDeviceInfo.identifierForVendor;
-    } else if (Platform.isAndroid) {
-      final AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
-      return androidDeviceInfo.androidId;
+    try {
+      if (Platform.isIOS) {
+        final IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
+        return iosDeviceInfo.identifierForVendor;
+      } else if (Platform.isAndroid) {
+        late String androidId;
+        const AndroidId androidIdPlugin = AndroidId();
+
+        androidId = await androidIdPlugin.getId() ?? "failed";
+        if (androidId == "failed") {
+          return null;
+        }
+
+        return androidId;
+      }
+    } catch (e) {
+      return null;
     }
     return null;
   }
