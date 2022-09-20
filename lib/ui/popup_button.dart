@@ -8,7 +8,7 @@ import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/pay_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/auth/auth_confirm_sheet.dart';
@@ -89,16 +89,16 @@ class AppPopupButtonState extends State<AppPopupButton> {
               widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, user: user, address: address.address, quickSendAmount: address.amount));
         }
       }
-    } else if (scanResult is HandoffItem) {
+    } else if (scanResult is PayItem) {
       // block handoff item:
-      final HandoffItem handoffItem = scanResult;
+      final PayItem payItem = scanResult;
 
       // See if this address belongs to a contact or username
-      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(handoffItem.account);
+      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(payItem.account);
 
       // check if the user has enough balance to send this amount:
       // If balance is insufficient show error:
-      final BigInt? amountBigInt = BigInt.tryParse(handoffItem.amount);
+      final BigInt? amountBigInt = BigInt.tryParse(payItem.amount);
       if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24) && mounted) {
         UIUtil.showSnackbar(
             AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
@@ -108,10 +108,10 @@ class AppPopupButtonState extends State<AppPopupButton> {
         return;
       }
 
-      // if handoffItem.exact is false, we should allow the user to change the amount to send to >= amount
-      if (!handoffItem.exact && mounted) {
+      // if payItem.exact is false, we should allow the user to change the amount to send to >= amount
+      if (!payItem.exact && mounted) {
         // TODO:
-        sl.get<Logger>().e("HandoffItem exact is false: unsupported handoff flow!");
+        sl.get<Logger>().e("PayItem exact is false: unsupported handoff flow!");
         return;
       }
 
@@ -119,8 +119,8 @@ class AppPopupButtonState extends State<AppPopupButton> {
       Sheets.showAppHeightNineSheet(
           context: context,
           widget: HandoffConfirmSheet(
-            handoffItem: handoffItem,
-            destination: user?.address ?? handoffItem.account,
+            payItem: payItem,
+            destination: user?.address ?? payItem.account,
             contactName: user?.getDisplayName(),
           ));
     } else if (scanResult is AuthItem) {

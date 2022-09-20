@@ -16,6 +16,7 @@ AlertResponseItem _$AlertResponseItemFromJson(Map<String, dynamic> json) =>
       longDescription: json['long_description'] as String?,
       link: json['link'] as String?,
       timestamp: json['timestamp'] as int?,
+      dismissable: json['dismissable'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$AlertResponseItemToJson(AlertResponseItem instance) =>
@@ -28,4 +29,5 @@ Map<String, dynamic> _$AlertResponseItemToJson(AlertResponseItem instance) =>
       'long_description': instance.longDescription,
       'link': instance.link,
       'timestamp': instance.timestamp,
+      'dismissable': instance.dismissable,
     };

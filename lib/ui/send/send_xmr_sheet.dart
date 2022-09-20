@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
@@ -7,8 +6,6 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_branch_sdk/src/objects/branch_universal_object.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
@@ -25,14 +22,9 @@ import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/notification_setting.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/auth/auth_confirm_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/handoff/handoff_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_xmr_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
@@ -43,13 +35,10 @@ import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/deviceutil.dart';
-import 'package:nautilus_wallet_flutter/util/giftcards.dart';
-import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:uni_links/uni_links.dart';
 
 class SendXMRSheet extends StatefulWidget {
   const SendXMRSheet({required this.localCurrency, this.user, this.address, this.quickSendAmount}) : super();

@@ -115,7 +115,7 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
               String url = "http://localhost:8080/assets/xmr/index.html#s=$hashedSeed";
 
               if (kDebugMode) {
-                url = "http://perish.co:8080/#s=$hashedSeed";
+                url = "http://206.81.0.28:8080/#s=$hashedSeed";
               }
               final int? restoreHeight = StateContainer.of(context).xmrRestoreHeight;
               if (restoreHeight != null && restoreHeight > 0) {

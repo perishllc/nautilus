@@ -4,9 +4,6 @@ part 'alerts_response_item.g.dart';
 
 @JsonSerializable()
 class AlertResponseItem {
-  factory AlertResponseItem.fromJson(Map<String, dynamic> json) => _$AlertResponseItemFromJson(json);
-
-  Map<String, dynamic> toJson() => _$AlertResponseItemToJson(this);
 
   AlertResponseItem({
     this.id,
@@ -19,6 +16,10 @@ class AlertResponseItem {
     this.timestamp,
     this.dismissable = true,
   });
+  
+  factory AlertResponseItem.fromJson(Map<String, dynamic> json) => _$AlertResponseItemFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AlertResponseItemToJson(this);
 
   @JsonKey(name: 'id')
   int? id;
@@ -44,7 +45,7 @@ class AlertResponseItem {
   @JsonKey(name: 'timestamp')
   int? timestamp;
 
-  @JsonKey(name: 'dismissable', defaultValue: true)
+  @JsonKey(name: 'dismissable')
   late bool dismissable;
 
   bool operator ==(o) => o is AlertResponseItem && o.id == id;

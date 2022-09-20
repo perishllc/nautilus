@@ -43,7 +43,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/account_history_r
 import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/pay_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -2134,15 +2134,15 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             context: context,
             widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, user: user, address: address.address, quickSendAmount: amount));
       }
-    } else if (result is HandoffItem) {
+    } else if (result is PayItem) {
       // handle block handoff:
-      final HandoffItem handoffItem = result;
+      final PayItem payItem = result;
       // See if this address belongs to a contact or username
-      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(handoffItem.account);
+      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(payItem.account);
 
       // check if the user has enough balance to send this amount:
       // If balance is insufficient show error:
-      final BigInt? amountBigInt = BigInt.tryParse(handoffItem.amount);
+      final BigInt? amountBigInt = BigInt.tryParse(payItem.amount);
       if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24) && mounted) {
         UIUtil.showSnackbar(
             AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
@@ -2152,10 +2152,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         return;
       }
 
-      // if handoffItem.exact is false, we should allow the user to change the amount to send to >= amount
-      if (!handoffItem.exact && mounted) {
+      // if payItem.exact is false, we should allow the user to change the amount to send to >= amount
+      if (!payItem.exact && mounted) {
         // TODO:
-        log.d("HandoffItem exact is false: unsupported handoff flow!");
+        log.d("PayItem exact is false: unsupported handoff flow!");
         return;
       }
 
@@ -2163,8 +2163,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       Sheets.showAppHeightNineSheet(
           context: context,
           widget: HandoffConfirmSheet(
-            handoffItem: handoffItem,
-            destination: user?.address ?? handoffItem.account,
+            payItem: payItem,
+            destination: user?.address ?? payItem.account,
             contactName: user?.getDisplayName(),
           ));
     } else if (result is AuthItem) {
@@ -2192,6 +2192,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       await prefs.reload();
       final List<String>? backgroundMessages = prefs.getStringList("background_messages");
       // process the message now that we're in the foreground:
+
+      if (!mounted) return;
 
       if (backgroundMessages != null) {
         // EventTaxiImpl.singleton().fire(FcmMessageEvent(message_list: backgroundMessages));
@@ -3633,8 +3635,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     converted.amount_raw = (BigInt.parse(converted.amount_raw!) * NumberUtil.convertXMRtoNano).toString();
 
     converted.block ??= tx["hash"] as String;
-    converted.request_time ??= tx["block"]["state"]["timestamp"] as int;
-    converted.height ??= tx["block"]["state"]["height"] as int;
+    // converted.request_time ??= tx["block"]["state"]["timestamp"] as int;
+    // converted.height ??= tx["block"]["state"]["height"] as int;
+    if (tx["block"] != null) {
+      converted.request_time ??= tx["block"]["state"]["timestamp"] as int?;
+      converted.height ??= tx["block"]["state"]["height"] as int?;
+    }
 
     if (tx["isConfirmed"] != null) {
       converted.is_fulfilled = tx["isConfirmed"] as bool; // confirmation status

@@ -1,3 +1,9 @@
+## v0.6.6 - [2022-09-XX]
+#### Added
+- New logo?
+#### Changed
+- Refactors and updates to block handoff handling
+#### Fixed
 ## v0.6.5 - [2022-09-18]
 #### Added
 - Sunshine Theme! A new lightmode theme

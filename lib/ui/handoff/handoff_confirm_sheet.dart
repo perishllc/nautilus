@@ -16,7 +16,7 @@ import 'package:nautilus_wallet_flutter/model/state_block.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/handoff_reply_request.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/pay_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_response.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -36,7 +36,7 @@ import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class HandoffConfirmSheet extends StatefulWidget {
   const HandoffConfirmSheet(
-      {required this.handoffItem,
+      {required this.payItem,
       required this.destination,
       this.contactName,
       this.localCurrency,
@@ -47,7 +47,7 @@ class HandoffConfirmSheet extends StatefulWidget {
       this.memo = ""})
       : super();
 
-  final HandoffItem handoffItem;
+  final PayItem payItem;
   final String destination;
   final String? contactName;
   final String? localCurrency;
@@ -58,6 +58,7 @@ class HandoffConfirmSheet extends StatefulWidget {
   final String paperWalletSeed;
   final String memo;
 
+  @override
   HandoffConfirmSheetState createState() => HandoffConfirmSheetState();
 }
 
@@ -146,7 +147,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                         text: "",
                         children: [
                           TextSpan(
-                            text: getThemeAwareRawAccuracy(context, widget.handoffItem.amount),
+                            text: getThemeAwareRawAccuracy(context, widget.payItem.amount),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           displayCurrencySymbol(
@@ -154,7 +155,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                             AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
-                            text: getRawAsThemeAwareFormattedAmount(context, widget.handoffItem.amount),
+                            text: getRawAsThemeAwareFormattedAmount(context, widget.payItem.amount),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
@@ -219,7 +220,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                         text: "",
                         children: [
                           TextSpan(
-                            text: widget.handoffItem.label,
+                            text: widget.payItem.label,
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
@@ -227,7 +228,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
-                            text: widget.handoffItem.message,
+                            text: widget.payItem.message,
                             style: AppStyles.textStyleParagraphPrimary(context).copyWith(fontSize: AppFontSizes.small),
                           ),
                         ],
@@ -247,7 +248,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                   //   child: RichText(
                   //     textAlign: TextAlign.center,
                   //     text: TextSpan(
-                  //       text: widget.handoffItem.message,
+                  //       text: widget.payItem.message,
                   //       style: AppStyles.textStyleParagraphPrimary(context),
                   //     ),
                   //   ),
@@ -255,7 +256,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                   // RichText(
                   //   textAlign: TextAlign.center,
                   //   text: TextSpan(
-                  //     text: widget.handoffItem.message,
+                  //     text: widget.payItem.message,
                   //     style: AppStyles.textStyleParagraphPrimary(context),
                   //   ),
                   // ),
@@ -281,7 +282,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
 
                       final String authText = AppLocalization.of(context)
                           .sendAmountConfirm
-                          .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.handoffItem.amount))
+                          .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.payItem.amount))
                           .replaceAll("%2", StateContainer.of(context).currencyMode);
 
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
@@ -327,16 +328,16 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
       // ProcessResponse? resp = await sl.get<AccountService>().requestSend(
       //     StateContainer.of(context).wallet!.representative,
       //     StateContainer.of(context).wallet!.frontier,
-      //     widget.handoffItem.amount,
+      //     widget.payItem.amount,
       //     widget.destination,
       //     StateContainer.of(context).wallet!.address,
       //     NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
       //     max: widget.maxSend);
       // StateContainer.of(context).wallet!.frontier = resp.hash;
-      // StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.handoffItem.amount!);
+      // StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.payItem.amount!);
 
       // check if we need to generate the PoW first:
-      if (!widget.handoffItem.work) {
+      if (!widget.payItem.work) {
         // we must provide our own PoW:
         // TODO:
       }
@@ -344,7 +345,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
       // construct the response to the server:
       String? url;
 
-      for (final Method method in widget.handoffItem.methods) {
+      for (final Method method in widget.payItem.methods) {
         if (method.type == "http") {
           url = method.url;
         }
@@ -365,7 +366,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
             url,
             StateContainer.of(context).wallet!.representative,
             StateContainer.of(context).wallet!.frontier,
-            widget.handoffItem.amount,
+            widget.payItem.amount,
             widget.destination,
             StateContainer.of(context).wallet!.address,
             NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
@@ -378,7 +379,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
         poppedError = handoffResponse.message;
         throw Exception("Handoff failed");
       } else {
-        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.handoffItem.amount);
+        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.payItem.amount);
       }
 
       // Show complete
@@ -402,7 +403,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
           closeOnTap: true,
           removeUntilHome: true,
           widget: HandoffCompleteSheet(
-              amountRaw: widget.handoffItem.amount,
+              amountRaw: widget.payItem.amount,
               destination: widget.destination,
               contactName: contactName,
               memo: widget.memo,
@@ -433,7 +434,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
         plausiblePin: plausiblePin,
         description: AppLocalization.of(context)
             .sendAmountConfirm
-            .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.handoffItem.amount))
+            .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.payItem.amount))
             .replaceAll("%2", StateContainer.of(context).currencyMode),
       );
     }));

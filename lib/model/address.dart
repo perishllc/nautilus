@@ -3,7 +3,7 @@ import 'dart:core';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/pay_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 
 // Object to represent an account address or address URI, and provide useful utilities
@@ -11,16 +11,16 @@ import 'package:nautilus_wallet_flutter/service_locator.dart';
 dynamic uriParser(String value) {
   String? finAmount;
   final String? finAddress = NanoAccounts.findAccountInString(NanoAccountType.NANO, value.toLowerCase().replaceAll("\n", ""));
-  HandoffItem? finHandoffItem;
+  PayItem? finPayItem;
   AuthItem? finAuthItem;
 
-  final List<String> split = value.split(':');
+  final List<String> split = value.split(":");
   if (split.length > 1) {
     final Uri? uri = Uri.tryParse(value);
 
     if (uri != null) {
-      if (uri.queryParameters['amount'] != null) {
-        final BigInt? amount = BigInt.tryParse(uri.queryParameters['amount']!);
+      if (uri.queryParameters["amount"] != null) {
+        final BigInt? amount = BigInt.tryParse(uri.queryParameters["amount"]!);
         if (amount != null) {
           finAmount = amount.toString();
         }
@@ -35,15 +35,15 @@ dynamic uriParser(String value) {
         }
         final String decodedHandoff = utf8.decode(base64Url.decode(encodedHandoff));
         try {
-          finHandoffItem = HandoffItem.fromJson(jsonDecode(decodedHandoff) as Map<String, dynamic>);
+          finPayItem = PayItem.fromJson(jsonDecode(decodedHandoff) as Map<String, dynamic>);
         } catch (error) {
           sl.get<Logger>().e(error);
         }
       }
 
-      if (uri.queryParameters["handoff"] != null) {
+      if (uri.queryParameters["pay"] != null) {
         // base64 decode the string:
-        String? encodedHandoff = uri.queryParameters["handoff"];
+        String? encodedHandoff = uri.queryParameters["pay"];
         if (encodedHandoff == null) return;
         encodedHandoff = encodedHandoff.replaceAll(RegExp(r"\s+\b|\b\s"), "");
         // attempt to recover from bad base64 encoding:
@@ -52,7 +52,7 @@ dynamic uriParser(String value) {
         }
         final String decodedHandoff = utf8.decode(base64Url.decode(encodedHandoff));
         try {
-          finHandoffItem = HandoffItem.fromJson(jsonDecode(decodedHandoff) as Map<String, dynamic>);
+          finPayItem = PayItem.fromJson(jsonDecode(decodedHandoff) as Map<String, dynamic>);
         } catch (error) {
           sl.get<Logger>().e(error);
         }
@@ -93,12 +93,12 @@ dynamic uriParser(String value) {
       }
     }
 
-    if (finHandoffItem != null) {
+    if (finPayItem != null) {
       // grab the amount from the uri if not present in the JSON block:
-      if (finAmount != null && finHandoffItem.amount == null) {
-        finHandoffItem.amount = finAmount;
+      if (finAmount != null && finPayItem.amount == null) {
+        finPayItem.amount = finAmount;
       }
-      return finHandoffItem;
+      return finPayItem;
     }
     if (finAuthItem != null) {
       return finAuthItem;
@@ -158,12 +158,12 @@ class Address {
   void _parseAddressString(String? value) {
     if (value != null) {
       address = NanoAccounts.findAccountInString(NanoAccountType.NANO, value.toLowerCase().replaceAll("\n", ""));
-      final split = value.split(':');
+      final List<String> split = value.split(":");
       if (split.length > 1) {
         final Uri? uri = Uri.tryParse(value);
         if (uri != null) {
-          if (uri.queryParameters['amount'] != null) {
-            final BigInt? bigAmount = BigInt.tryParse(uri.queryParameters['amount']!);
+          if (uri.queryParameters["amount"] != null) {
+            final BigInt? bigAmount = BigInt.tryParse(uri.queryParameters["amount"]!);
             if (amount != null) {
               amount = bigAmount.toString();
             }

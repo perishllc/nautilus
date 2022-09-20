@@ -9,7 +9,7 @@ import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/handoff_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/pay_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:quiver/strings.dart';
@@ -60,7 +60,7 @@ class UserDataUtil {
       }
       if (fin is Address && fin.isValid()) {
         return fin;
-      } else if (fin is HandoffItem && fin.isValid()) {
+      } else if (fin is PayItem && fin.isValid()) {
         return fin;
       } else if (fin is AuthItem && fin.isValid()) {
         return fin;
