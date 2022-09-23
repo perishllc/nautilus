@@ -6,9 +6,10 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 enum TransactionStateOptions { UNCONFIRMED, CONFIRMED, FAILED, UNACKNOWLEDGED, UNREAD, FULFILLED, UNFULFILLED, PAID, UNPAID, FAILED_MSG, NOT_SENT, RECEIVABLE }
 
 class TransactionStateTag extends StatelessWidget {
-  final TransactionStateOptions? transactionState;
 
-  TransactionStateTag({Key? key, this.transactionState}) : super(key: key);
+  const TransactionStateTag({super.key, this.transactionState});
+  
+  final TransactionStateOptions? transactionState;
 
   String getStateText(BuildContext context, TransactionStateOptions? state) {
     switch (state) {

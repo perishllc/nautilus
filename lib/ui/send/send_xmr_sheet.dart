@@ -615,7 +615,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
               ),
             ),
             // Balance Text
-            FutureBuilder(
+            FutureBuilder<PriceConversion>(
               future: sl.get<SharedPrefsUtil>().getPriceConversion(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData && snapshot.data != null && snapshot.data != PriceConversion.HIDDEN) {

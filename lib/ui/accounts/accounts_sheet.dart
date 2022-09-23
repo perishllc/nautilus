@@ -395,20 +395,20 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                     ),
                   ],
                 ),
-              //A row with Close button
-              Row(
-                children: <Widget>[
-                  AppButton.buildAppButton(
-                    context,
-                    AppButtonType.PRIMARY_OUTLINE,
-                    AppLocalization.of(context).close,
-                    Dimens.BUTTON_BOTTOM_DIMENS,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
+              // //A row with Close button
+              // Row(
+              //   children: <Widget>[
+              //     AppButton.buildAppButton(
+              //       context,
+              //       AppButtonType.PRIMARY_OUTLINE,
+              //       AppLocalization.of(context).close,
+              //       Dimens.BUTTON_BOTTOM_DIMENS,
+              //       onPressed: () {
+              //         Navigator.pop(context);
+              //       },
+              //     ),
+              //   ],
+              // ),
             ],
           ),
         ));

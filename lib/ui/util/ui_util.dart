@@ -52,7 +52,7 @@ class UIUtil {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: '',
-                children: [
+                children: <InlineSpan>[
                   TextSpan(
                     text: stringPartOne,
                     style: AppStyles.textStyleAddressPrimary60(context),
@@ -68,7 +68,7 @@ class UIUtil {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: '',
-                children: [
+                children: <InlineSpan>[
                   TextSpan(
                     text: stringPartThree,
                     style: AppStyles.textStyleAddressText60(context),
@@ -80,7 +80,7 @@ class UIUtil {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: '',
-                children: [
+                children: <InlineSpan>[
                   TextSpan(
                     text: stringPartFour,
                     style: AppStyles.textStyleAddressText60(context),
@@ -105,7 +105,7 @@ class UIUtil {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: '',
-                children: [
+                children: <InlineSpan>[
                   TextSpan(
                     text: stringPartOne,
                     style: AppStyles.textStyleAddressPrimary(context),
@@ -121,7 +121,7 @@ class UIUtil {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: '',
-                children: [
+                children: <InlineSpan>[
                   TextSpan(
                     text: stringPartThree,
                     style: AppStyles.textStyleAddressText90(context),
@@ -133,7 +133,7 @@ class UIUtil {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: '',
-                children: [
+                children: <InlineSpan>[
                   TextSpan(
                     text: stringPartFour,
                     style: AppStyles.textStyleAddressText90(context),
@@ -161,7 +161,7 @@ class UIUtil {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: '',
-                children: [
+                children: <InlineSpan>[
                   TextSpan(
                     text: stringPartOne,
                     style: AppStyles.textStyleAddressSuccess(context),
@@ -177,7 +177,7 @@ class UIUtil {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: '',
-                children: [
+                children: <InlineSpan>[
                   TextSpan(
                     text: stringPartThree,
                     style: AppStyles.textStyleAddressText90(context),
@@ -189,7 +189,7 @@ class UIUtil {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: '',
-                children: [
+                children: <InlineSpan>[
                   TextSpan(
                     text: stringPartFour,
                     style: AppStyles.textStyleAddressText90(context),
@@ -210,7 +210,7 @@ class UIUtil {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: '',
-                children: [
+                children: <InlineSpan>[
                   TextSpan(
                     text: stringPartOne,
                     style: AppStyles.textStyleAddressSuccess(context),
@@ -226,7 +226,7 @@ class UIUtil {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: '',
-                children: [
+                children: <InlineSpan>[
                   TextSpan(
                     text: stringPartThree,
                     style: AppStyles.textStyleAddressSuccess(context),
@@ -238,7 +238,7 @@ class UIUtil {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: '',
-                children: [
+                children: <InlineSpan>[
                   TextSpan(
                     text: stringPartFour,
                     style: AppStyles.textStyleAddressSuccess(context),
@@ -268,7 +268,7 @@ class UIUtil {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: '',
-                children: [
+                children: <InlineSpan>[
                   TextSpan(
                     text: stringPartOne,
                     style: AppStyles.textStyleAddressPrimary60(context),
@@ -293,7 +293,7 @@ class UIUtil {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: '',
-                children: [
+                children: <InlineSpan>[
                   TextSpan(
                     text: stringPartOne,
                     style: AppStyles.textStyleAddressPrimary(context),
@@ -318,7 +318,7 @@ class UIUtil {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text: '',
-                children: [
+                children: <InlineSpan>[
                   TextSpan(
                     text: stringPartOne,
                     style: AppStyles.textStyleAddressSuccess(context),
@@ -422,14 +422,6 @@ class UIUtil {
     await browser.open(url: Uri.parse(url), options: options);
   }
 
-  // static Widget getWebView(BuildContext context, String url) {
-  //   InAppWebView(
-  //     key: webViewKey,
-  //     initialUrlRequest: URLRequest(url: Uri.parse("https://inappwebview.dev/")),
-  //     initialOptions: options,
-  //   );
-  // }
-
   static double drawerWidth(BuildContext context) {
     if (MediaQuery.of(context).size.width < 375) {
       return MediaQuery.of(context).size.width * 0.94;
@@ -529,5 +521,24 @@ class UIUtil {
       return true;
     else
       return false;
+  }
+}
+
+
+/// This is used so that the elevation of the container is kept and the
+/// drop shadow is not clipped.
+class SizeTransitionNoClip extends AnimatedWidget {
+  const SizeTransitionNoClip({required Animation<double> sizeFactor, this.child}) : super(listenable: sizeFactor);
+
+  final Widget? child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: AlignmentDirectional.topStart,
+      widthFactor: null,
+      heightFactor: (listenable as Animation<double>).value,
+      child: child,
+    );
   }
 }

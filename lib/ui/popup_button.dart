@@ -17,19 +17,19 @@ import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_xmr_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 class AppPopupButton extends StatefulWidget {
-  const AppPopupButton({required this.moneroEnabled}) : super();
+  const AppPopupButton({required this.moneroEnabled, this.enabled = true}) : super();
 
   @override
   AppPopupButtonState createState() => AppPopupButtonState();
 
   final bool moneroEnabled;
+  final bool enabled;
 }
 
 class AppPopupButtonState extends State<AppPopupButton> {
@@ -49,7 +49,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
   }
 
   Future<void> scanAndHandleResult() async {
-    final dynamic scanResult = await Navigator.pushNamed(context, '/before_scan_screen');
+    final dynamic scanResult = await Navigator.pushNamed(context, "/before_scan_screen");
     if (!mounted) return;
     if (scanResult == null) {
       UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
@@ -250,20 +250,13 @@ class AppPopupButtonState extends State<AppPopupButton> {
               key: const Key("home_send_button"),
               style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
-                backgroundColor: StateContainer.of(context).wallet != null && !disableSend /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
+                backgroundColor: StateContainer.of(context).wallet != null && !disableSend && widget.enabled
                     ? isSendButtonColorPrimary
                         ? StateContainer.of(context).curTheme.primary
                         : StateContainer.of(context).curTheme.success
                     : StateContainer.of(context).curTheme.primary60,
-                foregroundColor: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
-                    ? StateContainer.of(context).curTheme.background40
-                    : Colors.transparent,
-                // highlightColor: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
-                //     ? StateContainer.of(context).curTheme.background40
-                //     : Colors.transparent,
-                // splashColor: StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet.accountBalance > BigInt.zero*/
-                //     ? StateContainer.of(context).curTheme.background40
-                //     : Colors.transparent,
+                foregroundColor:
+                    StateContainer.of(context).wallet != null && widget.enabled ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
               ),
               onPressed: () {
                 if (widget.moneroEnabled) {

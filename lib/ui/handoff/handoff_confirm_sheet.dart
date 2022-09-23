@@ -126,7 +126,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).handoff, context),
+                          CaseChange.toUpperCase(AppLocalization.of(context).sending, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],

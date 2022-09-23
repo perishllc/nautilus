@@ -11,10 +11,10 @@ import 'package:nautilus_wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 
 class FundingSpecificSheet extends StatefulWidget {
+  const FundingSpecificSheet({required this.alert, this.hasDismissButton = true}) : super();
+
   final FundingResponseItem alert;
   final bool hasDismissButton;
-
-  FundingSpecificSheet({required this.alert, this.hasDismissButton = true}) : super();
 
   @override
   // ignore: library_private_types_in_public_api
@@ -116,11 +116,8 @@ class _FundingSpecificSheetState extends State<FundingSpecificSheet> {
                             Container(
                               margin: const EdgeInsetsDirectional.only(top: 16, bottom: 2),
                               child: Text(
-                                widget.alert.longDescription != null
-                                    ? widget.alert.longDescription!
-                                    : widget.alert.shortDescription!,
-                                style: AppStyles.remoteMessageCardShortDescription(context)
-                                    .copyWith(fontSize: AppFontSizes.medium),
+                                widget.alert.longDescription != null ? widget.alert.longDescription! : widget.alert.shortDescription!,
+                                style: AppStyles.remoteMessageCardShortDescription(context).copyWith(fontSize: AppFontSizes.medium),
                               ),
                             ),
                         ],
@@ -145,8 +142,8 @@ class _FundingSpecificSheetState extends State<FundingSpecificSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).donateButton,
-                        Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).donateButton, Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: () async {
                       // Go to send with address
                       Future.delayed(const Duration(milliseconds: 1000), () async {
                         Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
@@ -163,8 +160,8 @@ class _FundingSpecificSheetState extends State<FundingSpecificSheet> {
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close,
-                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () {
                       Navigator.pop(context);
                     }),
                   ],

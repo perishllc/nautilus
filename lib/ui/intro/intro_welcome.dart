@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
@@ -21,7 +23,6 @@ import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 
 class IntroWelcomePage extends StatefulWidget {
   @override
@@ -121,14 +122,9 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                     Container(
                       width: MediaQuery.of(context).size.width / 2,
                       margin: const EdgeInsets.only(bottom: 30),
-                      // Width/Height ratio for the animation is needed because BoxFit is not working as expected
-                      // width: double.infinity,
-                      // width: MediaQuery.of(context).size.width / 2,
-                      // constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 2),
-                      // height: MediaQuery.of(context).size.width * 4 / 8,
-                      // width: MediaQuery.of(context).size.width,
-
-                      child: Image.asset("assets/logo.png"),
+                      height: 200,
+                      // child: Image.asset("assets/logo.png"),
+                      child: SvgPicture.asset("assets/logo.svg"),
                     ),
 
                     SizedBox(

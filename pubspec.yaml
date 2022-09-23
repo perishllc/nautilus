@@ -94,7 +94,7 @@ dependencies:
   event_taxi: ^1.0.0
 
   # SVG
-  flutter_svg: ^1.1.3
+  flutter_svg: ^1.1.5
 
   # nfc:
   nfc_manager: ^3.2.0
@@ -236,7 +236,7 @@ dependencies:
   #   path: ./crypto_plugins/flutter_libmonero
 
   # search bar + text highlighting:
-  searchbar_animation: ^0.0.2
+  searchbar_animation: ^0.0.3
   substring_highlight: ^1.0.33
 
   # localization:
@@ -268,7 +268,7 @@ flutter_intl:
 
 dependency_overrides:
   ffi: ^2.0.1
-  web3dart: 2.0.0
+  # web3dart: 2.0.0
   # analyzer: ^4.1.0
   # dart_style: ^2.2.3
   # flutter_launcher_icons:
@@ -357,6 +357,7 @@ flutter:
     # - assets/store/reps.json
     # - assets/logo-square.png
     - assets/logo.png
+    - assets/logo.svg
     - assets/logos/nanocafe.png
     - assets/logos/redeemforme.png
     - assets/logos/onramper.png

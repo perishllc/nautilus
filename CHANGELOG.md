@@ -1,9 +1,14 @@
-## v0.6.6 - [2022-09-XX]
+## v0.6.6 - [2022-09-25]
 #### Added
-- New logo?
+- New logo! (again)
 #### Changed
+- XMR no longer waits for the tab to be visible before starting to load / sync (only when xmr is enabled)
 - Refactors and updates to block handoff handling
+- Minor UI tweaks
 #### Fixed
+- Lots of minor xmr mode fixes
+- Search fixes
+- Performance improvements for scrolling
 ## v0.6.5 - [2022-09-18]
 #### Added
 - Sunshine Theme! A new lightmode theme

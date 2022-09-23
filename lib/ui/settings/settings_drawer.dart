@@ -2776,7 +2776,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       NonTranslatable.nanocafe,
                       AppIcons.coins,
                       onPressed: () async {
-                        const String url = "https://nanocafe.cc";
+                        const String url = "https://nanocafe.cc/faucet";
                         await UIUtil.showChromeSafariWebview(context, url);
                       },
                       iconOverride: const SizedBox(

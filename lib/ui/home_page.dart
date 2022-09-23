@@ -4,7 +4,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -13,7 +12,6 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
@@ -26,7 +24,6 @@ import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/tx_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/unified_home_event.dart';
 import 'package:nautilus_wallet_flutter/bus/xmr_event.dart';
-import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/localize.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
@@ -48,8 +45,10 @@ import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/auth/auth_confirm_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/gift/gift_qr_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/handoff/handoff_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/home/card_actions.dart';
+import 'package:nautilus_wallet_flutter/ui/home/payment_details_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/home/top_card.dart';
 import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_xmr_sheet.dart';
@@ -57,7 +56,6 @@ import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/settings_drawer.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/users/add_blocked.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
@@ -74,13 +72,10 @@ import 'package:nautilus_wallet_flutter/ui/widgets/reactive_refresh.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/top_card.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/transaction_state_tag.dart';
-import 'package:nautilus_wallet_flutter/util/box.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/giftcards.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
-import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nfc_manager/nfc_manager.dart';
@@ -90,7 +85,6 @@ import 'package:rate_my_app/rate_my_app.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:substring_highlight/substring_highlight.dart';
-import 'package:uuid/uuid.dart';
 
 // ignore: must_be_immutable
 class AppHomePage extends StatefulWidget {
@@ -140,13 +134,14 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   final TextEditingController _searchController = TextEditingController();
   bool _searchOpen = false;
   bool _noSearchResults = false;
+  bool _xmrNoSearchResults = false;
 
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
   // List<User> _contacts = [];
   // List<User> _blocked = [];
-  List<User> _users = [];
+  List<User> _users = <User>[];
   // List<TXData> _txData = [];
-  List<TXData> _txRecords = [];
+  List<TXData> _txRecords = <TXData>[];
 
   // "infinite scroll":
   late ScrollController _scrollController;
@@ -179,6 +174,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   // receive disabled?:
   bool _receiveDisabled = false;
+  bool _xmrSRDisabled = true;
+  String _currentMode = "nano";
 
   Future<void> _switchToAccount(String account) async {
     final List<Account> accounts = await sl.get<DBHelper>().getAccounts(await StateContainer.of(context).getSeed());
@@ -719,8 +716,14 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     _tabController = TabController(vsync: this, length: 2);
     _tabController.addListener(() {
       final String mode = _tabController.index == 0 ? "nano" : "monero";
-      EventTaxiImpl.singleton().fire(XMREvent(type: "mode_change", message: mode));
-      if (_tabController.index == 0) {
+      if (_currentMode != mode) {
+        setState(() {
+          _currentMode = mode;
+        });
+        EventTaxiImpl.singleton().fire(XMREvent(type: "mode_change", message: mode));
+      }
+
+      if (_currentMode == "nano") {
         if (!_receiveDisabled) {
           if (StateContainer.of(context).wallet?.address == null || StateContainer.of(context).wallet!.address!.isEmpty) {
             setState(() {
@@ -734,19 +737,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             });
           }
         }
-      } else if (_tabController.index == 1) {
-        if (!_receiveDisabled) {
-          if (StateContainer.of(context).xmrAddress.isEmpty) {
-            setState(() {
-              _receiveDisabled = true;
-            });
-          }
-        } else {
-          if (StateContainer.of(context).xmrAddress.isNotEmpty) {
-            setState(() {
-              _receiveDisabled = false;
-            });
-          }
+      } else if (_currentMode == "monero") {
+        if (!_xmrSRDisabled && StateContainer.of(context).xmrAddress.isEmpty || _xmrSRDisabled && StateContainer.of(context).xmrAddress.isNotEmpty) {
+          setState(() {
+            _xmrSRDisabled = !_xmrSRDisabled;
+          });
         }
       }
     });
@@ -1022,14 +1017,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     });
   }
 
-  // void _updateTXData() {
-  //   sl.get<DBHelper>().getTXData().then((List<TXData> txData) {
-  //     setState(() {
-  //       _txData = txData;
-  //     });
-  //   });
-  // }
-
   Future<void> _updateTXDetailsMap(String? account) async {
     final List<TXData> data = await sl.get<DBHelper>().getAccountSpecificTXData(account);
     if (!mounted) return;
@@ -1211,47 +1198,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           });
         }
       }
-
-      // if (event.type == "update_txs") {
-      //   final List<dynamic> txs = jsonDecode(event.message) as List<dynamic>;
-      //   for (var tx in txs) {
-      //     print(tx);
-      //   }
-      //   _moneroHistoryList = txs;
-      // }
-
-      // if (event.type == "update_status") {
-      //   if (event.message == "ready") {
-      //     setState(() {
-      //       StateContainer.of(context).wallet!.xmrLoading = false;
-      //     });
-      //   }
-      // } else if (event.type == "update_progress") {
-      //   if (event.message == "1") {
-      //     setState(() {
-      //       StateContainer.of(context).wallet!.xmrLoading = false;
-      //     });
-      //   }
-      // }
     });
-  }
-
-  @override
-  void dispose() {
-    _destroyBus();
-    WidgetsBinding.instance.removeObserver(this);
-    _scrollController.removeListener(_scrollListener);
-    _scrollController.dispose();
-    _xmrScrollController.dispose();
-    _tabController.dispose();
-    _placeholderCardAnimationController.dispose();
-    // confetti:
-    _confettiControllerLeft.dispose();
-    _confettiControllerRight.dispose();
-
-    NfcManager.instance.stopSession();
-
-    super.dispose();
   }
 
   void _destroyBus() {
@@ -1285,6 +1232,24 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     if (_xmrSub != null) {
       _xmrSub!.cancel();
     }
+  }
+
+  @override
+  void dispose() {
+    _destroyBus();
+    WidgetsBinding.instance.removeObserver(this);
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+    _xmrScrollController.dispose();
+    _tabController.dispose();
+    _placeholderCardAnimationController.dispose();
+    // confetti:
+    _confettiControllerLeft.dispose();
+    _confettiControllerRight.dispose();
+
+    NfcManager.instance.stopSession();
+
+    super.dispose();
   }
 
   // TODO: this is honestly a terrible system, but it works really well:
@@ -1416,12 +1381,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     });
     sl.get<HapticUtil>().success();
     // Hide refresh indicator after 2.5 seconds
-    Future.delayed(const Duration(milliseconds: 2500), () {
+    Future<dynamic>.delayed(const Duration(milliseconds: 2500), () {
       setState(() {
         _isRefreshing = false;
       });
     });
-    if (_tabController.index == 0) {
+    if (_currentMode == "nano") {
       await StateContainer.of(context).requestUpdate();
       if (!mounted) return;
       // queries the db for account specific solids:
@@ -1552,43 +1517,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
     return 0;
   }
-
-  // void renderQueueOld() {
-  // if (!overrideRenderQueue) {
-  //   // check the render queue:
-  //   if (_renderQueue.length > 0) {
-  //     // push to the renderQueue and return:
-  //     setState(() {
-  //       _renderQueue.add(fastUpdate);
-  //     });
-  //     return;
-  //   }
-  //   // push to the render queue, we're the first to render:
-  //   setState(() {
-  //     _renderQueue.add(fastUpdate);
-  //   });
-  // }
-
-  //     // done with this render, see if there's another in the queue:
-  // if (_renderQueue.length > 0) {
-  //   // if this was a slow render then the next must be after at least 2.5 seconds:
-  //   // if this was a fast render then the next must be after at least 0.5 seconds
-  //   Duration timeBetweenRenders = fastUpdate ? RENDER_QUEUE_SHORT : RENDER_QUEUE_LONG;
-  //   print("START");
-  //   Timer(const Duration(seconds: 10), () async {
-  //     print("END");
-  //     if (mounted) {
-  //       // we just rendered so pop the last element of the list:
-  //       setState(() {
-  //         _renderQueue.removeLast();
-  //       });
-  //       if (_renderQueue.isNotEmpty) {
-  //         generateUnifiedList(fastUpdate: _renderQueue.last, overrideRenderQueue: true);
-  //       }
-  //     }
-  //   });
-  // }
-  // }
 
   Future<void> generateMoneroList({bool fastUpdate = false}) async {
     ListModel<dynamic>? ULM = _moneroList;
@@ -1746,15 +1674,15 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     //   unifiedList.sort(amountSortComparison);
     // }
 
-    final bool areThereNoSearchResults = unifiedList.isEmpty && _searchController.text.isNotEmpty;
+    final bool noSearchResults = unifiedList.isEmpty && _searchController.text.isNotEmpty;
 
-    if (areThereNoSearchResults) {
+    if (noSearchResults) {
       unifiedList.add(const SizedBox());
     }
 
-    if (areThereNoSearchResults != _noSearchResults) {
+    if (noSearchResults != _xmrNoSearchResults) {
       setState(() {
-        _noSearchResults = areThereNoSearchResults;
+        _xmrNoSearchResults = noSearchResults;
       });
     }
 
@@ -2026,15 +1954,15 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       unifiedList.sort(amountSortComparison);
     }
 
-    final bool areThereNoSearchResults = unifiedList.isEmpty && _searchController.text.isNotEmpty;
+    final bool noSearchResults = unifiedList.isEmpty && _searchController.text.isNotEmpty;
 
-    if (areThereNoSearchResults) {
+    if (noSearchResults) {
       unifiedList.add(const SizedBox());
     }
 
-    if (areThereNoSearchResults != _noSearchResults) {
+    if (noSearchResults != _noSearchResults) {
       setState(() {
-        _noSearchResults = areThereNoSearchResults;
+        _noSearchResults = noSearchResults;
       });
     }
 
@@ -2205,16 +2133,17 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   }
 
   Widget _buildMainColumnView(BuildContext context) {
-    if (_tabController.index == 0 && _receiveDisabled) {
-      if (StateContainer.of(context).wallet?.address != null && StateContainer.of(context).wallet!.address!.isNotEmpty) {
+    if (_currentMode == "nano") {
+      if (_receiveDisabled && StateContainer.of(context).wallet?.address != null && StateContainer.of(context).wallet!.address!.isNotEmpty) {
         setState(() {
           _receiveDisabled = false;
         });
       }
-    } else if (_tabController.index == 1 && _receiveDisabled) {
-      if (StateContainer.of(context).xmrAddress.isNotEmpty) {
+    }
+    if (_currentMode == "monero") {
+      if (_xmrSRDisabled && StateContainer.of(context).xmrAddress.isNotEmpty) {
         setState(() {
-          _receiveDisabled = false;
+          _xmrSRDisabled = false;
         });
       }
     }
@@ -2236,15 +2165,17 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                   ),
                   if (StateContainer.of(context).xmrEnabled)
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 16),
+                      margin: const EdgeInsets.symmetric(horizontal: 14),
                       child: TabBar(
                         controller: _tabController,
-                        indicatorWeight: 3,
+                        indicatorWeight: 2,
                         indicatorColor: StateContainer.of(context).curTheme.primary,
                         indicatorPadding: const EdgeInsets.only(
-                          left: 20,
-                          right: 20,
+                          left: 15,
+                          right: 15,
                         ),
+                        isScrollable: false,
+                        splashBorderRadius: const BorderRadius.all(Radius.circular(15)),
                         tabs: <Widget>[
                           Tab(
                             child: Container(
@@ -2270,11 +2201,21 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                       ),
                     ),
                   const SizedBox(height: 6),
+                  // load xmr tab immediately if enabled to speed up the syncing process:
+                  if (StateContainer.of(context).xmrEnabled)
+                    Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        const CustomMonero(),
+                        Container(width: 2, height: 2, color: StateContainer.of(context).curTheme.background?.withOpacity(1)),
+                      ],
+                    ),
+
                   Expanded(
                     child: (StateContainer.of(context).xmrEnabled)
                         ? TabBarView(
                             controller: _tabController,
-                            children: [
+                            children: <Widget>[
                               Stack(
                                 children: <Widget>[
                                   _getUnifiedListWidget(context),
@@ -2293,7 +2234,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                               Stack(
                                 children: <Widget>[
                                   _getMoneroListWidget(context),
-                                  const CustomMonero(),
                                   ListGradient(
                                     height: 10,
                                     top: true,
@@ -2341,41 +2281,38 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 ],
               ),
 
-              // Buttons
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS),
-                      boxShadow: [StateContainer.of(context).curTheme.boxShadowButton!],
-                    ),
-                    height: 55,
-                    width: (UIUtil.getDrawerAwareScreenWidth(context) - 42).abs() / 2,
-                    margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
-                    // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
-                    child: TextButton(
-                      key: const Key("home_receive_button"),
-                      style: TextButton.styleFrom(
-                        backgroundColor: !_receiveDisabled ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
-                        foregroundColor: !_receiveDisabled ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                        // highlightColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
-                        // splashColor: receive != null ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+              if (_currentMode == "nano")
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS),
+                        boxShadow: <BoxShadow>[StateContainer.of(context).curTheme.boxShadowButton!],
                       ),
-                      child: AutoSizeText(
-                        AppLocalization.of(context).receive,
-                        textAlign: TextAlign.center,
-                        style: AppStyles.textStyleButtonPrimary(context),
-                        maxLines: 1,
-                        stepGranularity: 0.5,
-                      ),
-                      onPressed: () async {
-                        if (_receiveDisabled) {
-                          return;
-                        }
+                      height: 55,
+                      width: (UIUtil.getDrawerAwareScreenWidth(context) - 42).abs() / 2,
+                      margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
+                      // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
+                      child: TextButton(
+                        key: const Key("home_receive_button"),
+                        style: TextButton.styleFrom(
+                          backgroundColor: !_receiveDisabled ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
+                          foregroundColor: !_receiveDisabled ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                        ),
+                        child: AutoSizeText(
+                          AppLocalization.of(context).receive,
+                          textAlign: TextAlign.center,
+                          style: AppStyles.textStyleButtonPrimary(context),
+                          maxLines: 1,
+                          stepGranularity: 0.5,
+                        ),
+                        onPressed: () async {
+                          if (_receiveDisabled) {
+                            return;
+                          }
 
-                        if (_tabController.index == 0) {
                           final String data = "nano:${StateContainer.of(context).wallet!.address}";
                           final Widget qrWidget = SizedBox(
                             width: MediaQuery.of(context).size.width,
@@ -2389,7 +2326,44 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                                 address: StateContainer.of(context).wallet!.address,
                                 qrWidget: qrWidget,
                               ));
-                        } else {
+                        },
+                      ),
+                    ),
+                    const AppPopupButton(moneroEnabled: false, enabled: true),
+                  ],
+                )
+              else
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS),
+                        boxShadow: <BoxShadow>[StateContainer.of(context).curTheme.boxShadowButton!],
+                      ),
+                      height: 55,
+                      width: (UIUtil.getDrawerAwareScreenWidth(context) - 42).abs() / 2,
+                      margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
+                      // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
+                      child: TextButton(
+                        key: const Key("home_receive_button"),
+                        style: TextButton.styleFrom(
+                          backgroundColor: !_xmrSRDisabled ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.primary60,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
+                          foregroundColor: !_xmrSRDisabled ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                        ),
+                        child: AutoSizeText(
+                          AppLocalization.of(context).receive,
+                          textAlign: TextAlign.center,
+                          style: AppStyles.textStyleButtonPrimary(context),
+                          maxLines: 1,
+                          stepGranularity: 0.5,
+                        ),
+                        onPressed: () async {
+                          if (_xmrSRDisabled) {
+                            return;
+                          }
+
                           final String data = "monero:${StateContainer.of(context).xmrAddress}";
                           final Widget qrWidget = SizedBox(
                             width: MediaQuery.of(context).size.width,
@@ -2404,14 +2378,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                               localCurrency: StateContainer.of(context).curCurrency,
                             ),
                           );
-                        }
-                      },
+                        },
+                      ),
                     ),
-                  ),
-                  AppPopupButton(moneroEnabled: _tabController.index == 1),
-                ],
-              ),
-
+                    AppPopupButton(moneroEnabled: true, enabled: !_xmrSRDisabled),
+                  ],
+                ),
               // confetti: LEFT
               Align(
                 alignment: Alignment.centerLeft,
@@ -2538,7 +2510,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
         borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
+        boxShadow: <BoxShadow>[StateContainer.of(context).curTheme.boxShadow!],
       ),
       child: IntrinsicHeight(
         child: Row(
@@ -2681,261 +2653,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       searchBoxBorderColour: StateContainer.of(context).curTheme.text,
       hintText: _searchOpen ? AppLocalization.of(context).searchHint : "",
     );
-  }
-
-  //Main Card
-  // Widget _buildMainCard(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) {} //Main Card
-
-  // TX / Card Action functions:
-  static Future<void> resendRequest(BuildContext context, TXData txDetails) async {
-    // show sending animation:
-    bool animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.REQUEST, onPoppedCallback: () => animationOpen = false);
-
-    bool sendFailed = false;
-
-    // send the request again:
-    final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
-    // get epoch time as hex:
-    final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
-    final String nonceHex = secondsSinceEpoch.toRadixString(16);
-    final String signature = NanoSignatures.signBlock(nonceHex, privKey);
-
-    // check validity locally:
-    final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-    final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
-    if (!isValid) {
-      throw Exception("Invalid signature?!");
-    }
-
-    // create a local memo object:
-    const Uuid uuid = Uuid();
-    final String localUuid = "LOCAL:${uuid.v4()}";
-    final TXData requestTXData = TXData(
-      from_address: txDetails.from_address,
-      to_address: txDetails.to_address,
-      amount_raw: txDetails.amount_raw,
-      uuid: localUuid,
-      block: txDetails.block,
-      is_acknowledged: false,
-      is_fulfilled: false,
-      is_request: true,
-      is_memo: false,
-      // request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
-      request_time: txDetails.request_time,
-      memo: txDetails.memo, // store unencrypted memo
-      height: txDetails.height,
-    );
-    // add it to the database:
-    await sl.get<DBHelper>().addTXData(requestTXData);
-
-    try {
-      // encrypt the memo if it's not empty:
-      String? encryptedMemo;
-      if (txDetails.memo != null && txDetails.memo!.isNotEmpty) {
-        encryptedMemo = Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
-      }
-      await sl.get<AccountService>().requestPayment(
-          txDetails.to_address, txDetails.amount_raw, StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
-    } catch (error) {
-      sl.get<Logger>().v("Error encrypting memo: $error");
-      sendFailed = true;
-    }
-
-    // if the memo send failed delete the object:
-    if (sendFailed) {
-      sl.get<Logger>().v("request send failed, deleting TXData object");
-      // remove failed txdata from the database:
-      await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
-      // show error:
-      UIUtil.showSnackbar(AppLocalization.of(context).requestSendError, context, durationMs: 5000);
-    } else {
-      // delete the old request by uuid:
-      await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
-      // memo sent successfully, show success:
-      UIUtil.showSnackbar(AppLocalization.of(context).requestSentButNotReceived, context, durationMs: 5000);
-    }
-    await StateContainer.of(context).updateSolids();
-    await StateContainer.of(context).updateTXMemos();
-    await StateContainer.of(context).updateUnified(false);
-
-    Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-  }
-
-  static Future<void> resendMemo(BuildContext context, TXData txDetails) async {
-    // show sending animation:
-    bool animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.SEND_MESSAGE, onPoppedCallback: () => animationOpen = false);
-
-    bool memoSendFailed = false;
-
-    // send the memo again:
-    final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
-    // get epoch time as hex:
-    final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
-    final String nonceHex = secondsSinceEpoch.toRadixString(16);
-    final String signature = NanoSignatures.signBlock(nonceHex, privKey);
-
-    // check validity locally:
-    final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-    final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
-    if (!isValid) {
-      throw Exception("Invalid signature?!");
-    }
-
-    // create a local memo object:
-    const Uuid uuid = Uuid();
-    final String localUuid = "LOCAL:${uuid.v4()}";
-    final TXData memoTXData = TXData(
-      from_address: txDetails.from_address,
-      to_address: txDetails.to_address,
-      amount_raw: txDetails.amount_raw,
-      uuid: localUuid,
-      block: txDetails.block,
-      is_acknowledged: false,
-      is_fulfilled: false,
-      is_request: false,
-      is_memo: true,
-      // request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
-      request_time: txDetails.request_time,
-      memo: txDetails.memo, // store unencrypted memo
-      height: txDetails.height,
-    );
-    // add it to the database:
-    await sl.get<DBHelper>().addTXData(memoTXData);
-
-    try {
-      // encrypt the memo:
-      final String encryptedMemo = Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
-      await sl.get<AccountService>().sendTXMemo(txDetails.to_address!, StateContainer.of(context).wallet!.address!, txDetails.amount_raw, signature, nonceHex,
-          encryptedMemo, txDetails.block, localUuid);
-    } catch (e) {
-      memoSendFailed = true;
-    }
-
-    // if the memo send failed delete the object:
-    if (memoSendFailed) {
-      sl.get<Logger>().v("memo send failed, deleting TXData object");
-      // remove from the database:
-      await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
-      // show error:
-      UIUtil.showSnackbar(AppLocalization.of(context).sendMemoError, context, durationMs: 5000);
-    } else {
-      // delete the old memo by uuid:
-      await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
-      // memo sent successfully, show success:
-      UIUtil.showSnackbar(AppLocalization.of(context).memoSentButNotReceived, context, durationMs: 5000);
-      await StateContainer.of(context).updateTXMemos();
-    }
-
-    Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-  }
-
-  static Future<void> resendMessage(BuildContext context, TXData txDetails) async {
-    // show sending animation:
-    bool animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.SEND_MESSAGE, onPoppedCallback: () => animationOpen = false);
-
-    bool sendFailed = false;
-
-    // send the message again:
-    final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
-    // get epoch time as hex:
-    final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
-    final String nonceHex = secondsSinceEpoch.toRadixString(16);
-    final String signature = NanoSignatures.signBlock(nonceHex, privKey);
-
-    // check validity locally:
-    final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-    final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
-    if (!isValid) {
-      throw Exception("Invalid signature?!");
-    }
-
-    // create a local memo object:
-    const Uuid uuid = Uuid();
-    final String localUuid = "LOCAL:${uuid.v4()}";
-    final TXData messageTXData = TXData(
-      from_address: txDetails.from_address,
-      to_address: txDetails.to_address,
-      amount_raw: txDetails.amount_raw,
-      uuid: localUuid,
-      block: txDetails.block,
-      is_acknowledged: false,
-      is_fulfilled: false,
-      is_request: false,
-      is_memo: false,
-      is_message: true,
-      // request_time: (DateTime.now().millisecondsSinceEpoch ~/ 1000).toString(),
-      request_time: txDetails.request_time,
-      memo: txDetails.memo, // store unencrypted memo
-      height: txDetails.height,
-    );
-    // add it to the database:
-    await sl.get<DBHelper>().addTXData(messageTXData);
-
-    try {
-      // encrypt the memo if it's not empty:
-      String? encryptedMemo;
-      if (txDetails.memo != null && txDetails.memo!.isNotEmpty) {
-        encryptedMemo = Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
-      }
-      await sl
-          .get<AccountService>()
-          .sendTXMessage(txDetails.to_address!, StateContainer.of(context).wallet!.address!, signature, nonceHex, encryptedMemo!, localUuid);
-    } catch (error) {
-      sl.get<Logger>().v("Error encrypting memo: $error");
-      sendFailed = true;
-    }
-
-    // if the memo send failed delete the object:
-    if (sendFailed) {
-      sl.get<Logger>().v("request send failed, deleting TXData object");
-      // remove failed txdata from the database:
-      await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
-      // show error:
-      UIUtil.showSnackbar(AppLocalization.of(context).sendMemoError, context, durationMs: 5000);
-    } else {
-      // delete the old request by uuid:
-      await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
-      // memo sent successfully, show success:
-      UIUtil.showSnackbar(AppLocalization.of(context).memoSentButNotReceived, context, durationMs: 5000);
-    }
-    await StateContainer.of(context).updateSolids();
-    await StateContainer.of(context).updateUnified(false);
-
-    Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-  }
-
-  static Future<void> payTX(BuildContext context, TXData txDetails) async {
-    String? address;
-    if (txDetails.is_request || txDetails.is_memo) {
-      if (txDetails.to_address == StateContainer.of(context).wallet!.address) {
-        address = txDetails.from_address;
-      } else {
-        address = txDetails.to_address;
-      }
-    } else {
-      // address = item.account;
-      address = txDetails.from_address;
-    }
-    // See if a contact
-    final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address!);
-    final String? quickSendAmount = txDetails.amount_raw;
-    // a bit of a hack since send sheet doesn't have a way to tell if we're in nyano mode on creation:
-    // if (StateContainer.of(context).nyanoMode) {
-    //   quickSendAmount = "${quickSendAmount!}000000";
-    // }
-
-    // Go to send with address
-    await Sheets.showAppHeightNineSheet(
-        context: context,
-        widget: SendSheet(
-          localCurrency: StateContainer.of(context).curCurrency,
-          address: address,
-          quickSendAmount: quickSendAmount,
-          user: user,
-        ));
   }
 
   Future<String> getGiftBalance(String? address) async {
@@ -3129,10 +2846,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
 
     if (txDetails.is_tx) {
-      // if ((item.confirmed != null && !item.confirmed!) || (currentConfHeight > -1 && item.height != null && item.height! > currentConfHeight)) {
-      //   transactionState = TransactionStateOptions.UNCONFIRMED;
-      // }
-      if (_tabController.index == 0) {
+      if (_currentMode == "nano") {
         if ((!txDetails.is_fulfilled) || (currentConfHeight > -1 && txDetails.height != null && txDetails.height! > currentConfHeight)) {
           transactionState = TransactionStateOptions.UNCONFIRMED;
         }
@@ -3169,7 +2883,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           label: label,
           onPressed: (BuildContext context) async {
             if (!mounted) return;
-            await payTX(context, txDetails);
+            await CardActions.payTX(context, txDetails);
             if (!mounted) return;
             await Slidable.of(context)!.close();
           }));
@@ -3186,7 +2900,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           label: AppLocalization.of(context).reply,
           onPressed: (BuildContext context) async {
             if (!mounted) return;
-            await payTX(context, txDetails);
+            await CardActions.payTX(context, txDetails);
             if (!mounted) return;
             await Slidable.of(context)!.close();
           }));
@@ -3204,7 +2918,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             label: AppLocalization.of(context).retry,
             onPressed: (BuildContext context) async {
               if (!mounted) return;
-              await resendRequest(context, txDetails);
+              await CardActions.resendRequest(context, txDetails);
               if (!mounted) return;
               await Slidable.of(context)!.close();
             }));
@@ -3218,7 +2932,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             label: AppLocalization.of(context).retry,
             onPressed: (BuildContext context) async {
               if (!mounted) return;
-              await resendMemo(context, txDetails);
+              await CardActions.resendMemo(context, txDetails);
               if (!mounted) return;
               await Slidable.of(context)!.close();
             }));
@@ -3233,7 +2947,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             label: AppLocalization.of(context).retry,
             onPressed: (BuildContext context) async {
               if (!mounted) return;
-              await resendMessage(context, txDetails);
+              await CardActions.resendMessage(context, txDetails);
               if (!mounted) return;
               await Slidable.of(context)!.close();
             }));
@@ -3272,11 +2986,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     return Slidable(
       enabled: slideEnabled,
       endActionPane: actionPane,
-      child: _SizeTransitionNoClip(
+      child: SizeTransitionNoClip(
         sizeFactor: animation,
         child: Stack(
           alignment: AlignmentDirectional.centerEnd,
-          children: [
+          children: <Widget>[
             Container(
               margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
               decoration: BoxDecoration(
@@ -3316,7 +3030,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                           ),
                           margin: const EdgeInsetsDirectional.only(start: 20.0),
                           child: Row(
-                            children: [
+                            children: <Widget>[
                               Container(
                                 margin: const EdgeInsetsDirectional.only(end: 16.0),
                                 child: Icon(
@@ -3390,7 +3104,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                                                 textAlign: TextAlign.start,
                                                 text: TextSpan(
                                                   text: "",
-                                                  children: [
+                                                  children: <InlineSpan>[
                                                     displayCurrencySymbol(
                                                       context,
                                                       AppStyles.textStyleTransactionAmount(context),
@@ -3703,7 +3417,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     if (index < StateContainer.of(context).activeAlerts.length && StateContainer.of(context).activeAlerts.isNotEmpty) {
       return _buildRemoteMessageCard(StateContainer.of(context).activeAlerts[index]);
     }
-    if (index == 0 && _noSearchResults) {
+    if (index == 0 && _xmrNoSearchResults) {
       return _buildNoSearchResultsCard(context);
     }
 
@@ -4053,342 +3767,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
           initialItemCount: _unifiedListMap[StateContainer.of(context).wallet!.address]!.length,
           itemBuilder: _buildUnifiedItem,
-        ),
-      ),
-    );
-  }
-}
-
-/// This is used so that the elevation of the container is kept and the
-/// drop shadow is not clipped.
-///
-class _SizeTransitionNoClip extends AnimatedWidget {
-  const _SizeTransitionNoClip({required Animation<double> sizeFactor, this.child}) : super(listenable: sizeFactor);
-
-  final Widget? child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: AlignmentDirectional.topStart,
-      widthFactor: null,
-      heightFactor: (listenable as Animation<double>).value,
-      child: child,
-    );
-  }
-}
-
-class PaymentDetailsSheet extends StatefulWidget {
-  const PaymentDetailsSheet({this.txDetails}) : super();
-  final TXData? txDetails;
-
-  @override
-  PaymentDetailsSheetState createState() => PaymentDetailsSheetState();
-}
-
-class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
-  // // Current state references
-  // bool _linkCopied = false;
-  // // Timer reference so we can cancel repeated events
-  // Timer? _linkCopiedTimer;
-  // Current state references
-  bool _seedCopied = false;
-  // Timer reference so we can cancel repeated events
-  Timer? _seedCopiedTimer;
-  // address copied
-  bool _addressCopied = false;
-  // Timer reference so we can cancel repeated events
-  Timer? _addressCopiedTimer;
-
-  @override
-  Widget build(BuildContext context) {
-    // check if recipient of the request
-    // also check if the request is fulfilled
-    bool isUnfulfilledPayableRequest = false;
-    bool isUnacknowledgedSendableRequest = false;
-    bool resendableMemo = false;
-    bool isGiftLoad = false;
-
-    final TXData txDetails = widget.txDetails!;
-
-    final String? walletAddress = StateContainer.of(context).wallet!.address;
-
-    if (walletAddress == txDetails.to_address) {
-      txDetails.is_acknowledged = true;
-    }
-
-    if (walletAddress == txDetails.to_address && txDetails.is_request && !txDetails.is_fulfilled) {
-      isUnfulfilledPayableRequest = true;
-    }
-    if (walletAddress == txDetails.from_address && txDetails.is_request && !txDetails.is_acknowledged) {
-      isUnacknowledgedSendableRequest = true;
-    }
-
-    String? walletSeed;
-    String? sharableLink;
-
-    if (txDetails.record_type == RecordTypes.GIFT_LOAD) {
-      isGiftLoad = true;
-
-      // Get the wallet seed by splitting the metadata by :
-      final List<String> metadataList = txDetails.metadata!.split(RecordTypes.SEPARATOR);
-      walletSeed = metadataList[0];
-      sharableLink = metadataList[1];
-    }
-
-    String? addressToCopy = txDetails.to_address;
-    if (txDetails.to_address == StateContainer.of(context).wallet!.address) {
-      addressToCopy = txDetails.from_address;
-    }
-
-    if (txDetails.is_memo) {
-      if (txDetails.status == StatusTypes.CREATE_FAILED) {
-        resendableMemo = true;
-      }
-      if (!txDetails.is_acknowledged && txDetails.memo!.isNotEmpty && !isGiftLoad) {
-        resendableMemo = true;
-      }
-    }
-
-    return SafeArea(
-      minimum: EdgeInsets.only(
-        bottom: MediaQuery.of(context).size.height * 0.035,
-      ),
-      child: SizedBox(
-        width: double.infinity,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                // Sheet handle
-                Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 24),
-                  height: 5,
-                  width: MediaQuery.of(context).size.width * 0.15,
-                  decoration: BoxDecoration(
-                    color: StateContainer.of(context).curTheme.text20,
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                ),
-                // A row for View Details button
-                if (!isGiftLoad && !txDetails.is_message)
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).viewTX, Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () async {
-                        await UIUtil.showBlockExplorerWebview(context, txDetails.block);
-                      }),
-                    ],
-                  ),
-                // A row for Copy Address Button
-                if (!isGiftLoad)
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          // Copy Address Button
-                          _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
-                          _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
-                          Dimens.BUTTON_TOP_DIMENS, onPressed: () {
-                        Clipboard.setData(ClipboardData(text: addressToCopy));
-                        if (mounted) {
-                          setState(() {
-                            // Set copied style
-                            _addressCopied = true;
-                          });
-                        }
-                        if (_addressCopiedTimer != null) {
-                          _addressCopiedTimer!.cancel();
-                        }
-                        _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
-                          if (mounted) {
-                            setState(() {
-                              _addressCopied = false;
-                            });
-                          }
-                        });
-                      }),
-                    ],
-                  ),
-                // Mark as paid / unpaid button for requests
-                if (txDetails.is_request)
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          // Share Address Button
-                          AppButtonType.PRIMARY_OUTLINE,
-                          !txDetails.is_fulfilled ? AppLocalization.of(context).markAsPaid : AppLocalization.of(context).markAsUnpaid,
-                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
-                        // update the tx in the db:
-                        if (txDetails.is_fulfilled) {
-                          await sl.get<DBHelper>().changeTXFulfillmentStatus(txDetails.uuid, false);
-                        } else {
-                          await sl.get<DBHelper>().changeTXFulfillmentStatus(txDetails.uuid, true);
-                        }
-                        // setState(() {});
-                        if (!mounted) return;
-                        await StateContainer.of(context).updateSolids();
-                        if (!mounted) return;
-                        await StateContainer.of(context).updateUnified(true);
-                        if (!mounted) return;
-                        Navigator.of(context).pop();
-                      }),
-                    ],
-                  ),
-
-                // pay this request button:
-                if (isUnfulfilledPayableRequest)
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).payRequest, Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () {
-                        Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
-
-                        AppHomePageState.payTX(context, txDetails);
-                      }),
-                    ],
-                  ),
-
-                // block this user from sending you requests:
-                if (txDetails.is_request && StateContainer.of(context).wallet!.address != txDetails.from_address)
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).blockUser, Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () {
-                        Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
-
-                        Sheets.showAppHeightNineSheet(
-                            context: context,
-                            widget: AddBlockedSheet(
-                              address: txDetails.from_address,
-                            ));
-                      }),
-                    ],
-                  ),
-
-                // re-send request button:
-                if (isUnacknowledgedSendableRequest)
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).sendRequestAgain, Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () async {
-                        // send the request again:
-                        AppHomePageState.resendRequest(context, txDetails);
-                      }),
-                    ],
-                  ),
-                // re-send memo button
-                if (resendableMemo)
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          // Share Address Button
-                          AppButtonType.PRIMARY_OUTLINE,
-                          AppLocalization.of(context).resendMemo,
-                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
-                        AppHomePageState.resendMemo(context, txDetails);
-                      }),
-                    ],
-                  ),
-                // delete this request button
-                if (txDetails.is_request)
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).deleteRequest, Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () {
-                        Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
-                        sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
-                        StateContainer.of(context).updateSolids();
-                        StateContainer.of(context).updateUnified(false);
-                      }),
-                    ],
-                  ),
-                if (isGiftLoad)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          // show link QR
-                          AppButtonType.PRIMARY,
-                          AppLocalization.of(context).showLinkOptions,
-                          Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () async {
-                        final Widget qrWidget = SizedBox(width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, sharableLink!));
-                        Sheets.showAppHeightEightSheet(context: context, widget: GiftQRSheet(link: sharableLink, qrWidget: qrWidget));
-                      }),
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).viewTX, Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
-                          onPressed: () async {
-                        await UIUtil.showBlockExplorerWebview(context, txDetails.block);
-                      }),
-                    ],
-                  ),
-                if (isGiftLoad)
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          // copy seed button
-                          _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
-                          _seedCopied ? AppLocalization.of(context).seedCopiedShort : AppLocalization.of(context).copySeed,
-                          Dimens.BUTTON_BOTTOM_EXCEPTION_DIMENS, onPressed: () {
-                        Clipboard.setData(ClipboardData(text: walletSeed));
-                        if (!mounted) return;
-                        setState(() {
-                          // Set copied style
-                          _seedCopied = true;
-                        });
-                        if (_seedCopiedTimer != null) {
-                          _seedCopiedTimer!.cancel();
-                        }
-                        _seedCopiedTimer = Timer(const Duration(milliseconds: 800), () {
-                          if (!mounted) return;
-                          setState(() {
-                            _seedCopied = false;
-                          });
-                        });
-                      }),
-                    ],
-                  ),
-                // if (isGiftLoad)
-                //   Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: <Widget>[
-                //       AppButton.buildAppButton(
-                //           context,
-                //           // copy link button
-                //           _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
-                //           _linkCopied ? AppLocalization.of(context).linkCopied : AppLocalization.of(context).copyLink,
-                //           Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
-                //         Clipboard.setData(ClipboardData(text: sharableLink));
-                //         setState(() {
-                //           // Set copied style
-                //           _linkCopied = true;
-                //         });
-                //         if (_linkCopiedTimer != null) {
-                //           _linkCopiedTimer!.cancel();
-                //         }
-                //         _linkCopiedTimer = Timer(const Duration(milliseconds: 800), () {
-                //           setState(() {
-                //             _linkCopied = false;
-                //           });
-                //         });
-                //       }),
-                //       AppButton.buildAppButton(
-                //           context,
-                //           // share link button
-                //           AppButtonType.PRIMARY_OUTLINE,
-                //           AppLocalization.of(context).shareLink,
-                //           Dimens.BUTTON_COMPACT_RIGHT_DIMENS, onPressed: () {
-                //         Share.share(sharableLink!);
-                //       }),
-                //     ],
-                //   ),
-              ],
-            ),
-          ],
         ),
       ),
     );
