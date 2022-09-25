@@ -9,7 +9,7 @@ part 'handoff_reply_request.g.dart';
 @JsonSerializable()
 class HandoffReplyRequest extends BaseRequest {
 
-  HandoffReplyRequest({this.block, this.message, this.label});
+  HandoffReplyRequest({this.block, this.message, this.label, this.metadata});
 
   factory HandoffReplyRequest.fromJson(Map<String, dynamic> json) => _$HandoffReplyRequestFromJson(json);
 
@@ -25,4 +25,7 @@ class HandoffReplyRequest extends BaseRequest {
 
   @JsonKey(name: "label")
   String? label;
+
+  @JsonKey(name: "metadata")
+  Map<String, String?>? metadata;
 }

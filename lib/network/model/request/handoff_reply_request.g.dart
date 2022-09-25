@@ -13,6 +13,9 @@ HandoffReplyRequest _$HandoffReplyRequestFromJson(Map<String, dynamic> json) =>
           : StateBlock.fromJson(json['block'] as Map<String, dynamic>),
       message: json['message'] as String?,
       label: json['label'] as String?,
+      metadata: (json['metadata'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String?),
+      ),
     );
 
 Map<String, dynamic> _$HandoffReplyRequestToJson(
@@ -21,4 +24,5 @@ Map<String, dynamic> _$HandoffReplyRequestToJson(
       'block': instance.block,
       'message': instance.message,
       'label': instance.label,
+      'metadata': instance.metadata,
     };

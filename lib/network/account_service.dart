@@ -745,7 +745,7 @@ class AccountService {
 
   Future<HandoffResponse> requestHandoffHTTP(
       String URI, String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,
-      {bool max = false, String? work, String? label, String? message}) async {
+      {bool max = false, String? work, String? label, String? message, Map<String, String?>? metadata}) async {
     final StateBlock sendBlock = StateBlock(
         subtype: BlockTypes.SEND,
         previous: previous,
@@ -765,7 +765,7 @@ class AccountService {
     await sendBlock.sign(privKey);
 
     // Process
-    final HandoffReplyRequest handoffReplyRequest = HandoffReplyRequest(block: sendBlock, label: label, message: message);
+    final HandoffReplyRequest handoffReplyRequest = HandoffReplyRequest(block: sendBlock, label: label, message: message, metadata: metadata);
 
     // return requestHandoff(handoffReplyRequest);
 

@@ -1,3 +1,8 @@
+## v0.6.6 - [2022-10-XX]
+#### Added
+#### Changed
+- Updates to block handoff specs
+#### Fixed
 ## v0.6.6 - [2022-09-25]
 #### Added
 - New logo! (again)
