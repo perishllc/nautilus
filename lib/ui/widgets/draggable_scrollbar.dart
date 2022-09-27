@@ -262,6 +262,15 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
 
         if (_viewOffset < viewMinScrollExtent || _viewOffset > viewMaxScrollExtent) {
           // don't update the bar offset:
+
+          // teleport the scroll bar back to the top:
+          if (_viewOffset < viewMinScrollExtent) {
+            if (_barOffsetTop != barMinScrollExtent) {
+              setState(() {
+                _barOffsetTop = barMinScrollExtent;
+              });
+            }
+          }
           return;
         }
 
@@ -281,7 +290,8 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
         if (_barOffsetBottom < 0) {
           _barOffsetBottom = 0;
         }
-        // glue scroll bar to the top on overscroll:
+
+      // glue scroll bar to the top on overscroll (android only):
       } else if (notification is OverscrollNotification) {
         if (_barOffsetTop > barMinScrollExtent && notification.overscroll < 0) {
           setState(() {
@@ -289,6 +299,7 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
           });
         }
       }
+      
       /*else if (notification is OverscrollNotification) {
         var diff = viewMaxScrollExtent - _viewOffset;
         if (diff != 0 && diff < 300) {

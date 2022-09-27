@@ -1,8 +1,9 @@
-## v0.6.6 - [2022-10-XX]
+## v0.6.7 - [2022-10-XX]
 #### Added
 #### Changed
 - Updates to block handoff specs
 #### Fixed
+- Scroll bar bug on ios
 ## v0.6.6 - [2022-09-25]
 #### Added
 - New logo! (again)
