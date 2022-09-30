@@ -104,7 +104,7 @@ dependencies:
   # nearby messages (google / crossplatform API):
   # flutter_nearby_messages_api: ^0.0.8
   # reliably check connection status:
-  internet_connection_checker: ^0.0.1+4
+  internet_connection_checker: ^1.0.0+1
   connectivity_plus: ^2.3.6
 
   # ask users to rate the app:
@@ -205,6 +205,9 @@ dependencies:
       ref: main
   x25519: ^0.1.1
   encrypt: ^5.0.1
+
+  # day night mode:
+  day_night_switcher: ^0.2.0+1
 
   # xmr:
   # flutter_libmonero:

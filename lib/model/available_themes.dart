@@ -6,10 +6,12 @@ enum ThemeOptions { NAUTILUS, TITANIUM, INDIUM, SUNSHINE, NEPTUNIUM, THORIUM, CA
 
 /// Represent notification on/off setting
 class ThemeSetting extends SettingSelectionItem {
-  ThemeOptions theme;
 
   ThemeSetting(this.theme);
+  
+  ThemeOptions theme;
 
+  @override
   String getDisplayName(BuildContext context) {
     switch (theme) {
       case ThemeOptions.CARBON:

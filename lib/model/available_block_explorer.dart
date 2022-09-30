@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/model/setting_item.dart';
 
-enum AvailableBlockExplorerEnum { NANOCOMMUNITY, NANOLOOKER, NANOCRAWLER, NANOCAFE  }
+enum AvailableBlockExplorerEnum { NANOCOMMUNITY, NANOLOOKER, NANOCAFE  }
 
 /// Represent the available authentication methods our app supports
 class AvailableBlockExplorer extends SettingSelectionItem {
-  AvailableBlockExplorerEnum explorer;
 
   AvailableBlockExplorer(this.explorer);
+  AvailableBlockExplorerEnum explorer;
 
+  @override
   String getDisplayName(BuildContext context) {
     switch (explorer) {
-      case AvailableBlockExplorerEnum.NANOCRAWLER:
-        return "nanocrawler.cc";
       case AvailableBlockExplorerEnum.NANOLOOKER:
         return "nanolooker.com";
       case AvailableBlockExplorerEnum.NANOCAFE:

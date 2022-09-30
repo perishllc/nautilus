@@ -407,8 +407,6 @@ class IndiumTheme extends BaseTheme {
 
   BoxShadow? boxShadow = BoxShadow(color: darkDeepBlue.withOpacity(0.1), offset: const Offset(0, 5), blurRadius: 15);
   BoxShadow? boxShadowButton = BoxShadow(color: darkDeepBlue.withOpacity(0.2), offset: const Offset(0, 5), blurRadius: 15);
-
-  // OverlayTheme? qrScanTheme = OverlayTheme.INDIUM;
 }
 
 class SunshineTheme extends BaseTheme {
@@ -509,7 +507,6 @@ class SunshineTheme extends BaseTheme {
   BoxShadow? boxShadow = const BoxShadow(color: Colors.transparent);
   BoxShadow? boxShadowButton = const BoxShadow(color: Colors.transparent);
 
-  // OverlayTheme? qrScanTheme = OverlayTheme.INDIUM;
 }
 
 class NeptuniumTheme extends BaseTheme {
@@ -1402,39 +1399,5 @@ class AppIcon {
 
   static Future<void> setAppIcon(AppIconEnum? iconToChange) async {
     return;
-    // if (!Platform.isIOS) {
-    // }
-    // String iconStr = "nautilus";
-    // switch (iconToChange) {
-    //   case AppIconEnum.THORIUM:
-    //     iconStr = "thorium";
-    //     break;
-    //   case AppIconEnum.NEPTUNIUM:
-    //     iconStr = "neptunium";
-    //     break;
-    //   case AppIconEnum.INDIUM:
-    //     iconStr = "indium";
-    //     break;
-    //   case AppIconEnum.TITANIUM:
-    //     iconStr = "titanium";
-    //     break;
-    //   case AppIconEnum.CARBON:
-    //     iconStr = "carbon";
-    //     break;
-    //   case AppIconEnum.PURPELIUM:
-    //     iconStr = "purpeleium";
-    //     break;
-    //   case AppIconEnum.NYANO:
-    //     iconStr = "nyano";
-    //     break;
-    //   case AppIconEnum.NAUTILUS:
-    //   default:
-    //     iconStr = "nautilus";
-    //     break;
-    // }
-    // final Map<String, dynamic> params = <String, dynamic>{
-    //   'icon': iconStr,
-    // };
-    // return await _channel.invokeMethod('changeIcon', params);
   }
 }

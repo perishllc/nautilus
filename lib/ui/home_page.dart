@@ -1291,7 +1291,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       }
     }
     if (_listExtended && !_listExtendedTimerRunning) {
-      print("timer started");
       _listExtendedTimerRunning = true;
       Future<dynamic>.delayed(const Duration(milliseconds: 500), () {
         setState(() {

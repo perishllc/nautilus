@@ -1,15 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
 import 'package:nautilus_wallet_flutter/model/available_language.dart';
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalization> {
-  final LanguageSetting languageSetting;
 
   const AppLocalizationsDelegate(this.languageSetting);
+  
+  final LanguageSetting languageSetting;
 
   @override
   bool isSupported(Locale locale) {
@@ -40,7 +40,7 @@ class NonTranslatable {
     } else if (explorer.explorer == AvailableBlockExplorerEnum.NANOCAFE) {
       return "https://nanocafe.cc/$hash";
     }
-    return "https://nanocrawler.cc/explorer/block/$hash";
+    return "https://nanolooker.com/block/$hash";
   }
 
   static String getAccountExplorerUrl(String? account, AvailableBlockExplorer explorer) {
@@ -51,7 +51,7 @@ class NonTranslatable {
     } else if (explorer.explorer == AvailableBlockExplorerEnum.NANOCAFE) {
       return "https://nanocafe.cc/$account";
     }
-    return "https://nanocrawler.cc/explorer/account/$account";
+    return "https://nanolooker.com/account/$account";
   }
 
   static String get discordUrl {

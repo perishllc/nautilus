@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,6 +14,7 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/localize.dart';
+import 'package:nautilus_wallet_flutter/model/available_themes.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
@@ -31,6 +34,8 @@ class IntroWelcomePage extends StatefulWidget {
 
 class IntroWelcomePageState extends State<IntroWelcomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  bool isDarkModeEnabled = SchedulerBinding.instance.window.platformBrightness == Brightness.dark;
 
   Timer? timer;
 
@@ -98,6 +103,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final Color? primaryColor = StateContainer.of(context).curTheme.primary;
     final bool landscape = MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -123,8 +129,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                       width: MediaQuery.of(context).size.width / 2,
                       margin: const EdgeInsets.only(bottom: 30),
                       height: 200,
-                      // child: Image.asset("assets/logo.png"),
-                      child: SvgPicture.asset("assets/logo.svg"),
+                      child: SvgPicture.asset("assets/logo.svg", color: primaryColor),
                     ),
 
                     SizedBox(
@@ -148,7 +153,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                                 height: 100,
                                 child: TextLiquidFill(
                                   text: CaseChange.toUpperCase(NonTranslatable.nautilus, context),
-                                  waveColor: NautilusTheme.nautilusBlue,
+                                  waveColor: primaryColor ?? NautilusTheme.nautilusBlue,
                                   boxBackgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
                                   textStyle: const TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold, color: Colors.white),
                                   boxHeight: 100,
@@ -188,6 +193,24 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
               //A column with "New Wallet" and "Import Wallet" buttons
               Column(
                 children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(right: 28),
+                    alignment: Alignment.centerRight,
+                    child: DayNightSwitcherIcon(
+                      isDarkModeEnabled: isDarkModeEnabled,
+                      onStateChanged: (bool enabled) {
+                        setState(() {
+                          isDarkModeEnabled = enabled;
+
+                          if (!isDarkModeEnabled) {
+                            StateContainer.of(context).updateTheme(ThemeSetting(ThemeOptions.INDIUM));
+                          } else {
+                            StateContainer.of(context).updateTheme(ThemeSetting(ThemeOptions.NAUTILUS));
+                          }
+                        });
+                      },
+                    ),
+                  ),
                   Row(
                     children: <Widget>[
                       // New Wallet Button

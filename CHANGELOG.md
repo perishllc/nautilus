@@ -1,9 +1,11 @@
 ## v0.6.7 - [2022-10-XX]
 #### Added
+- Dark mode switcher in the intro screen
 #### Changed
 - Updates to block handoff specs
+- Remove nanocrawler from block explorer list, as it is being shut down
 #### Fixed
-- Scroll bar bug on ios
+- Scroll bar bugs
 ## v0.6.6 - [2022-09-25]
 #### Added
 - New logo! (again)
