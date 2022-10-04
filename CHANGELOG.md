@@ -5,7 +5,7 @@
 - Updates to block handoff specs
 - Remove nanocrawler from block explorer list, as it is being shut down
 #### Fixed
-- Scroll bar bugs
+- lots of scroll bar bugs
 ## v0.6.6 - [2022-09-25]
 #### Added
 - New logo! (again)

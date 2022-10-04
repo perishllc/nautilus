@@ -7,20 +7,23 @@ import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 
 class ExampleCards {
   // Welcome Card
-  static TextSpan _getExampleHeaderSpan(BuildContext context) {
+  static TextSpan _getExampleHeaderSpan(BuildContext context, [bool xmr = false]) {
     String workingStr;
     if (StateContainer.of(context).selectedAccount == null || StateContainer.of(context).selectedAccount!.index == 0) {
       workingStr = AppLocalization.of(context).exampleCardIntro;
     } else {
       workingStr = AppLocalization.of(context).newAccountIntro;
     }
-    if (!workingStr.contains("NANO")) {
+    if (!workingStr.contains("NANO") && !workingStr.contains("XMR")) {
       return TextSpan(
         text: workingStr,
         style: AppStyles.textStyleTransactionWelcome(context),
       );
     }
-    // Colorize NANO
+
+    final String word = xmr ? "XMR" : "NANO";
+    
+    // Colorize NANO/XMR
     final List<String> splitStr = workingStr.split("NANO");
     if (splitStr.length != 2) {
       return TextSpan(
@@ -36,7 +39,7 @@ class ExampleCards {
           style: AppStyles.textStyleTransactionWelcome(context),
         ),
         TextSpan(
-          text: "NANO",
+          text: word,
           style: AppStyles.textStyleTransactionWelcomePrimary(context),
         ),
         TextSpan(
@@ -47,13 +50,13 @@ class ExampleCards {
     );
   }
 
-  static Widget welcomeTransactionCard(BuildContext context) {
+  static Widget welcomeTransactionCard(BuildContext context, [bool xmr = false]) {
     return Container(
       margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
         borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
+        boxShadow: <BoxShadow>[StateContainer.of(context).curTheme.boxShadow!],
       ),
       child: IntrinsicHeight(
         child: Row(
@@ -65,7 +68,7 @@ class ExampleCards {
                 borderRadius:
                     const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
-                boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
+                boxShadow: <BoxShadow>[StateContainer.of(context).curTheme.boxShadow!],
               ),
             ),
             Flexible(
@@ -73,7 +76,7 @@ class ExampleCards {
                 padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 15.0),
                 child: RichText(
                   textAlign: TextAlign.center,
-                  text: _getExampleHeaderSpan(context),
+                  text: _getExampleHeaderSpan(context, xmr),
                 ),
               ),
             ),
@@ -89,7 +92,7 @@ class ExampleCards {
         ),
       ),
     );
-  } // Welcome Card End
+  }
 
   static Widget welcomePaymentCardTwo(BuildContext context) {
     return Container(

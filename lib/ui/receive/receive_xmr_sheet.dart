@@ -7,6 +7,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
@@ -277,10 +278,10 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
                             ),
                             Center(
                               child: SizedBox(
-                                height: computedMaxSize / 8,
+                                height: computedMaxSize / 12,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
-                                  child: const Image(image: AssetImage("assets/logo.png")),
+                                  child: SvgPicture.asset("assets/logo.svg", color: StateContainer.of(context).curTheme.primary),
                                 ),
                               ),
                             ),

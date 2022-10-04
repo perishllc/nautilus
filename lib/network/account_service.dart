@@ -44,7 +44,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/subscribe_respons
 import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:synchronized/synchronized.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:web_socket_channel/io.dart';

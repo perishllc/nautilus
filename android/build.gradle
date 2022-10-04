@@ -7,9 +7,8 @@ buildscript {
     }
 
     dependencies {
-        // https://issuetracker.google.com/issues/202985154 prevents >7.1.0
-        // classpath 'com.android.tools.build:gradle:7.0.0'
         classpath 'com.android.tools.build:gradle:4.2.0'
+        // classpath 'com.android.tools.build:gradle:7.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.3.10'
     }

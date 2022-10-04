@@ -8,6 +8,7 @@ import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -46,7 +47,7 @@ class NumericalRangeFormatter extends TextInputFormatter {
 }
 
 class ReceiveShowQRSheet extends StatefulWidget {
-  ReceiveShowQRSheet({required this.localCurrency, this.address, this.qrWidget}) : super();
+  const ReceiveShowQRSheet({required this.localCurrency, this.address, this.qrWidget}) : super();
 
   final AvailableCurrency localCurrency;
   final Widget? qrWidget;
@@ -80,7 +81,8 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
 
   Future<Uint8List?> _capturePng() async {
     if (shareCardKey != null && shareCardKey!.currentContext != null) {
-      final RenderRepaintBoundary boundary = shareCardKey!.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      final RenderRepaintBoundary? boundary = shareCardKey!.currentContext!.findRenderObject() as RenderRepaintBoundary?;
+      if (boundary == null) return null;
       final ui.Image image = await boundary.toImage(pixelRatio: 5.0);
       final ByteData byteData = (await image.toByteData(format: ui.ImageByteFormat.png))!;
       return byteData.buffer.asUint8List();
@@ -279,10 +281,10 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                             ),
                             Center(
                               child: SizedBox(
-                                height: computedMaxSize / 8,
+                                height: computedMaxSize / 12,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
-                                  child: const Image(image: AssetImage("assets/logo.png")),
+                                  child: SvgPicture.asset("assets/logo.svg", color: StateContainer.of(context).curTheme.primary),
                                 ),
                               ),
                             ),
@@ -486,7 +488,7 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
       hintText: _amountHint == null ? "" : AppLocalization.of(context).enterAmount,
       prefixButton: _rawAmount == null
           ? TextFieldButton(
-            padding: EdgeInsets.zero,
+              padding: EdgeInsets.zero,
               widget: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
