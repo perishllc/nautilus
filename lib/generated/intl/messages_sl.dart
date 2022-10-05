@@ -750,6 +750,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToReveal":
             MessageLookupByLibrary.simpleMessage("Pritisnite za ogled"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Tema"),
+        "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
+            "to lahko traja nekaj časa ..."),
         "to": MessageLookupByLibrary.simpleMessage("Na"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Preveč neuspešnih poizkusov."),

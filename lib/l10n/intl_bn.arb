@@ -2270,6 +2270,11 @@
     "type": "text",
     "description": "theme_header"
   },
+  "thisMayTakeSomeTime": "এটি একটু সময় নিতে পারে...",
+  "@thisMayTakeSomeTime": {
+    "type": "text",
+    "description": "xmr_loading_takes_time"
+  },
   "to": "প্রতি",
   "@to": {
     "type": "text",

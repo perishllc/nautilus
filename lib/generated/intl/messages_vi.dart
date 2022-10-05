@@ -751,6 +751,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToHide": MessageLookupByLibrary.simpleMessage("Nhấn để ẩn"),
         "tapToReveal": MessageLookupByLibrary.simpleMessage("Nhấn để hiển thị"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Chủ đề"),
+        "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
+            "Việc này có thể mất một lúc..."),
         "to": MessageLookupByLibrary.simpleMessage("tới"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Quá nhiều lần mở khoá thất bại."),

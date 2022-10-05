@@ -758,6 +758,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToReveal":
             MessageLookupByLibrary.simpleMessage("Tik om zichtbaar te maken"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Thema"),
+        "thisMayTakeSomeTime":
+            MessageLookupByLibrary.simpleMessage("Dit kan een tijdje duren..."),
         "to": MessageLookupByLibrary.simpleMessage("Naar"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Te veel mislukte ontgrendelpogingen."),

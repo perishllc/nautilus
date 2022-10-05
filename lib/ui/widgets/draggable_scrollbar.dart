@@ -149,11 +149,6 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
         throw Exception("_barOffsetTop < 0");
       }
 
-      // amount to move as scrollViewDelta * (barHeight / viewHeight)
-      // relative:
-      // final double viewDelta = getScrollViewDelta(moveToHeight - prevOffset, barMaxScrollExtent, viewMaxScrollExtent);
-      // _viewOffset = widget.controller.position.pixels + viewDelta;
-
       // absolute:
       double capped = _barOffsetTop - widget.scrollbarTopMargin;
       capped = max(min(capped, barMaxScrollExtent), 0);
@@ -165,14 +160,6 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
       if (_viewOffset > viewMaxScrollExtent) {
         _viewOffset = viewMaxScrollExtent;
       }
-
-      // print(_viewOffset);
-
-      // if (justJumped) return;
-      // justJumped = true;
-      // Timer(const Duration(milliseconds: 250), () {
-      //   justJumped = false;
-      // });
 
       // prevent refresh indicator from going off:
       if (_viewOffset < 0.1) {
@@ -253,10 +240,8 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
     });
     // set a timer to hide the scrollbar after some time:
     if (!_invisibleTimerQueued && hideAfterDuration) {
-      setState(() {
-        _invisibleTimerQueued = true;
-        Timer(widget.scrollbarHideAfterDuration, hideScrollbar);
-      });
+      Timer(widget.scrollbarHideAfterDuration, hideScrollbar);
+      _invisibleTimerQueued = true;
     }
 
     // if notification was fired when user drags we don't need to update scrollThumb position
@@ -271,11 +256,6 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
         // the view was updated:
         final double diff = viewMaxScrollExtent - lastViewMaxScrollExtent;
         lastViewMaxScrollExtent = viewMaxScrollExtent;
-        // _barOffsetTop -= getBarDelta(
-        //   diff,
-        //   barMaxScrollExtent,
-        //   viewMaxScrollExtent,
-        // );
         _barOffsetTop -= getBarDelta(
           diff,
           barTotalScrollExtent,
@@ -284,97 +264,87 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
       }
     }
 
-    // print(barMaxScrollExtent / viewMaxScrollExtent);
+    if (notification is ScrollUpdateNotification) {
+      _viewOffset += notification.scrollDelta!;
+      // lines removed for bounce scroll physics:
+      // if (_viewOffset < viewMinScrollExtent) {
+      //   _viewOffset = viewMinScrollExtent;
+      // }
+      // if (_viewOffset > viewMaxScrollExtent) {
+      //   _viewOffset = viewMaxScrollExtent;
+      // }
 
-    setState(() {
-      if (notification is ScrollUpdateNotification) {
-        _viewOffset += notification.scrollDelta!;
-        // lines removed for bounce scroll physics:
-        // if (_viewOffset < viewMinScrollExtent) {
-        //   _viewOffset = viewMinScrollExtent;
-        // }
-        // if (_viewOffset > viewMaxScrollExtent) {
-        //   _viewOffset = viewMaxScrollExtent;
-        // }
+      // if (_previousMaxScrollExtent != viewMaxScrollExtent) {
+      //   double diff = viewMaxScrollExtent - _previousMaxScrollExtent;
+      //   diff = diff * (barMaxScrollExtent / viewMaxScrollExtent);
+      //   _barOffsetTop -= diff;
+      // }
+      // _previousMaxScrollExtent = viewMaxScrollExtent;
 
-        // if (_previousMaxScrollExtent != viewMaxScrollExtent) {
-        //   double diff = viewMaxScrollExtent - _previousMaxScrollExtent;
-        //   diff = diff * (barMaxScrollExtent / viewMaxScrollExtent);
-        //   _barOffsetTop -= diff;
-        // }
-        // _previousMaxScrollExtent = viewMaxScrollExtent;
+      if (_viewOffset < viewMinScrollExtent || _viewOffset > viewMaxScrollExtent) {
+        // don't update the bar offset:
 
-        if (_viewOffset < viewMinScrollExtent || _viewOffset > viewMaxScrollExtent) {
-          // don't update the bar offset:
-
-          // teleport the scroll bar back to the top:
-          if (_viewOffset < viewMinScrollExtent) {
-            if (_barOffsetTop != barMinScrollExtent) {
-              setState(() {
-                _barOffsetTop = barMinScrollExtent;
-              });
-            }
+        // teleport the scroll bar back to the top:
+        if (_viewOffset < viewMinScrollExtent) {
+          if (_barOffsetTop != barMinScrollExtent) {
+            setState(() {
+              _barOffsetTop = barMinScrollExtent;
+            });
           }
+        }
 
-          // teleport the scroll bar back to the bottom:
-          if (_viewOffset > viewMaxScrollExtent) {
-            if (_barOffsetTop != barMaxScrollExtent) {
-              setState(() {
-                _barOffsetTop = barMaxScrollExtent;
-              });
-            }
+        // teleport the scroll bar back to the bottom:
+        if (_viewOffset > viewMaxScrollExtent) {
+          if (_barOffsetTop != barMaxScrollExtent) {
+            setState(() {
+              _barOffsetTop = barMaxScrollExtent;
+            });
           }
-          return;
         }
-
-        // _barOffsetTop += getBarDelta(
-        //   notification.scrollDelta!,
-        //   barMaxScrollExtent,
-        //   viewMaxScrollExtent,
-        // );
-
-        _barOffsetTop += getBarDelta(
-          notification.scrollDelta!,
-          barTotalScrollExtent,
-          viewMaxScrollExtent,
-        );
-
-        if (_barOffsetTop < barMinScrollExtent) {
-          _barOffsetTop = barMinScrollExtent;
-        }
-        if (_barOffsetTop > barMaxScrollExtent) {
-          _barOffsetTop = barMaxScrollExtent;
-        }
-        _barOffsetBottom = barMaxScrollExtent - _barOffsetTop;
-        if (_barOffsetBottom < 0) {
-          _barOffsetBottom = 0;
-        }
-
-        // glue scroll bar to the top / bottom on overscroll (android only):
-      } else if (notification is OverscrollNotification) {
-        if (_barOffsetTop > barMinScrollExtent && notification.overscroll < 0) {
-          setState(() {
-            _barOffsetTop = barMinScrollExtent;
-          });
-        } else if (_barOffsetTop < barMaxScrollExtent && notification.overscroll > 0) {
-          setState(() {
-            _barOffsetTop = barMaxScrollExtent;
-          });
-        }
+        return;
       }
 
-      /*else if (notification is OverscrollNotification) {
+      _barOffsetTop += getBarDelta(
+        notification.scrollDelta!,
+        barTotalScrollExtent,
+        viewMaxScrollExtent,
+      );
+
+      if (_barOffsetTop < barMinScrollExtent) {
+        _barOffsetTop = barMinScrollExtent;
+      }
+      if (_barOffsetTop > barMaxScrollExtent) {
+        _barOffsetTop = barMaxScrollExtent;
+      }
+      _barOffsetBottom = barMaxScrollExtent - _barOffsetTop;
+      if (_barOffsetBottom < 0) {
+        _barOffsetBottom = 0;
+      }
+
+      // glue scroll bar to the top / bottom on overscroll (android only):
+    } else if (notification is OverscrollNotification) {
+      if (_barOffsetTop > barMinScrollExtent && notification.overscroll < 0) {
+        setState(() {
+          _barOffsetTop = barMinScrollExtent;
+        });
+      } else if (_barOffsetTop < barMaxScrollExtent && notification.overscroll > 0) {
+        setState(() {
+          _barOffsetTop = barMaxScrollExtent;
+        });
+      }
+    }
+
+    /*else if (notification is OverscrollNotification) {
         var diff = viewMaxScrollExtent - _viewOffset;
         if (diff != 0 && diff < 300) {
           _barOffsetTop = barMaxScrollExtent;
         }
       }*/
-      // stick the bar to bottom when overscrolling:
-      // final double diff = viewMaxScrollExtent - _viewOffset;
-      // if (diff != 0 && diff < 200) {
-      //   _barOffsetTop = barMaxScrollExtent;
-      // }
-    });
+    // stick the bar to bottom when overscrolling:
+    // final double diff = viewMaxScrollExtent - _viewOffset;
+    // if (diff != 0 && diff < 200) {
+    //   _barOffsetTop = barMaxScrollExtent;
+    // }
   }
 
   @override

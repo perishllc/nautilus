@@ -2270,6 +2270,11 @@
     "type": "text",
     "description": "theme_header"
   },
+  "thisMayTakeSomeTime": "Dit kan een tijdje duren...",
+  "@thisMayTakeSomeTime": {
+    "type": "text",
+    "description": "xmr_loading_takes_time"
+  },
   "to": "Naar",
   "@to": {
     "type": "text",

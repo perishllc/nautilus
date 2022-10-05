@@ -756,6 +756,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToReveal":
             MessageLookupByLibrary.simpleMessage("Tocca per visualizzare"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Tema"),
+        "thisMayTakeSomeTime":
+            MessageLookupByLibrary.simpleMessage("potrebbe volerci un po\'..."),
         "to": MessageLookupByLibrary.simpleMessage("A"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Troppi tentativi di sblocco falliti."),

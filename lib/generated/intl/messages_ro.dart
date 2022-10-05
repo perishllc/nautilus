@@ -755,6 +755,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToReveal":
             MessageLookupByLibrary.simpleMessage("Apăsați pentru a afișa"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Aspect"),
+        "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
+            "acest lucru poate dura ceva timp..."),
         "to": MessageLookupByLibrary.simpleMessage("Către"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Prea multe încercări de deblocare eșuate."),

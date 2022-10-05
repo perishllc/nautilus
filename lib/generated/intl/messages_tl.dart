@@ -778,6 +778,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToReveal":
             MessageLookupByLibrary.simpleMessage("Tapikin para buksan"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Tema"),
+        "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
+            "magtatagal pa ito ng ilang sandali..."),
         "to": MessageLookupByLibrary.simpleMessage("Sa"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Masyadong madaming maling unlock attempts."),

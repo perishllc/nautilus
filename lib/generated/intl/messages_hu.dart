@@ -759,6 +759,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToHide": MessageLookupByLibrary.simpleMessage("Tap to hide"),
         "tapToReveal": MessageLookupByLibrary.simpleMessage("Tap to reveal"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Téma"),
+        "thisMayTakeSomeTime":
+            MessageLookupByLibrary.simpleMessage("ez eltarthat egy ideig..."),
         "to": MessageLookupByLibrary.simpleMessage("Küldés ide"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Túl sok hibás feloldási kísérlet."),

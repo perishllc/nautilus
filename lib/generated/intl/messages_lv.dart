@@ -750,6 +750,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToReveal":
             MessageLookupByLibrary.simpleMessage("Pieskaries, lai parādītu"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Motīvs"),
+        "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
+            "tas var aizņemt kādu laiku..."),
         "to": MessageLookupByLibrary.simpleMessage("Adresāts"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Pārāk daudz atslēgšanas mēģinājumi."),

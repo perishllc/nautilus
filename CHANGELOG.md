@@ -1,8 +1,9 @@
-## v0.6.7 - [2022-10-XX]
+## v0.6.7 - [2022-10-10]
 #### Added
 - Dark mode switcher in the intro screen
+- Massive performance improvements to scrolling large lists using lazy loading, especially when using the scrollbar
 #### Changed
-- Updates to block handoff specs
+- Updates to block handoff handling
 - Remove nanocrawler from block explorer list, as it is being shut down
 #### Fixed
 - lots of scroll bar bugs

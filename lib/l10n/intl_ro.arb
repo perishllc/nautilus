@@ -2270,6 +2270,11 @@
     "type": "text",
     "description": "theme_header"
   },
+  "thisMayTakeSomeTime": "acest lucru poate dura ceva timp...",
+  "@thisMayTakeSomeTime": {
+    "type": "text",
+    "description": "xmr_loading_takes_time"
+  },
   "to": "Către",
   "@to": {
     "type": "text",

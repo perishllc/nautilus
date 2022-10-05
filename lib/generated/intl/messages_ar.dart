@@ -729,6 +729,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToHide": MessageLookupByLibrary.simpleMessage("إضغط للاخفاء"),
         "tapToReveal": MessageLookupByLibrary.simpleMessage("اضغط للكشف"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("مظهر"),
+        "thisMayTakeSomeTime":
+            MessageLookupByLibrary.simpleMessage("هذا قد يستغرق بعض الوقت..."),
         "to": MessageLookupByLibrary.simpleMessage("إلى"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "العديد من محاولات الفتح الفاشلة."),

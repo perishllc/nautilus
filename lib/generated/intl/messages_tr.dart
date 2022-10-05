@@ -740,6 +740,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToReveal":
             MessageLookupByLibrary.simpleMessage("Göstermek için dokun"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Tema"),
+        "thisMayTakeSomeTime":
+            MessageLookupByLibrary.simpleMessage("bu biraz zaman alabilir..."),
         "to": MessageLookupByLibrary.simpleMessage("Adres"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Çok fazla kilit açma denemesi başarız oldu."),

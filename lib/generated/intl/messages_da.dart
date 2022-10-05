@@ -745,6 +745,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToReveal":
             MessageLookupByLibrary.simpleMessage("Klikněte pro zobrazení"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Tématika"),
+        "thisMayTakeSomeTime":
+            MessageLookupByLibrary.simpleMessage("det kan tage lidt tid..."),
         "to": MessageLookupByLibrary.simpleMessage("Pro"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Příliš mnoho neúspěšných pokusů o odemknutí."),

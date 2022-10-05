@@ -2270,6 +2270,11 @@
     "type": "text",
     "description": "theme_header"
   },
+  "thisMayTakeSomeTime": "可能還要等一下...",
+  "@thisMayTakeSomeTime": {
+    "type": "text",
+    "description": "xmr_loading_takes_time"
+  },
   "to": "至：",
   "@to": {
     "type": "text",

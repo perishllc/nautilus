@@ -4600,6 +4600,16 @@ class AppLocalization {
     );
   }
 
+  /// `this may take a while...`
+  String get thisMayTakeSomeTime {
+    return Intl.message(
+      'this may take a while...',
+      name: 'thisMayTakeSomeTime',
+      desc: 'xmr_loading_takes_time',
+      args: [],
+    );
+  }
+
   /// `To`
   String get to {
     return Intl.message(
@@ -5276,16 +5286,6 @@ class AppLocalization {
       'Syncing',
       name: 'xmrStatusSynchronizing',
       desc: 'xmr_syncing_status',
-      args: [],
-    );
-  }
-
-  /// `this may take a while...`
-  String get thisMayTakeSomeTime {
-    return Intl.message(
-      'this may take a while...',
-      name: 'thisMayTakeSomeTime',
-      desc: 'xmr_sync_takes_time',
       args: [],
     );
   }

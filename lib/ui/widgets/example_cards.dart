@@ -22,7 +22,7 @@ class ExampleCards {
     }
 
     final String word = xmr ? "XMR" : "NANO";
-    
+
     // Colorize NANO/XMR
     final List<String> splitStr = workingStr.split("NANO");
     if (splitStr.length != 2) {
@@ -65,8 +65,7 @@ class ExampleCards {
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius:
-                    const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
                 boxShadow: <BoxShadow>[StateContainer.of(context).curTheme.boxShadow!],
               ),
@@ -83,8 +82,7 @@ class ExampleCards {
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius:
-                    const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+                borderRadius: const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
               ),
             ),
@@ -109,8 +107,7 @@ class ExampleCards {
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius:
-                    const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
                 boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
               ),
@@ -129,8 +126,7 @@ class ExampleCards {
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius:
-                    const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+                borderRadius: const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
               ),
             ),
@@ -159,7 +155,7 @@ class ExampleCards {
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
         borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
+        boxShadow: <BoxShadow>[StateContainer.of(context).curTheme.boxShadow!],
       ),
       child: TextButton(
         onPressed: () {},
@@ -183,9 +179,7 @@ class ExampleCards {
                     // Transaction Icon
                     Opacity(
                       opacity: opacity,
-                      child: Container(
-                          margin: const EdgeInsetsDirectional.only(end: 16.0),
-                          child: Icon(icon, color: iconColor, size: 20)),
+                      child: Container(margin: const EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
                     ),
                     SizedBox(
                       width: UIUtil.getDrawerAwareScreenWidth(context) / 4,
@@ -235,10 +229,11 @@ class ExampleCards {
                                 amount,
                                 textAlign: TextAlign.start,
                                 style: const TextStyle(
-                                    fontFamily: "NunitoSans",
-                                    color: Colors.transparent,
-                                    fontSize: AppFontSizes.smallest,
-                                    fontWeight: FontWeight.w600),
+                                  fontFamily: "NunitoSans",
+                                  color: Colors.transparent,
+                                  fontSize: AppFontSizes.smallest,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                               Opacity(
                                 opacity: opacity,
@@ -251,10 +246,11 @@ class ExampleCards {
                                     amount,
                                     textAlign: TextAlign.start,
                                     style: const TextStyle(
-                                        fontFamily: "NunitoSans",
-                                        color: Colors.transparent,
-                                        fontSize: AppFontSizes.smallest - 3,
-                                        fontWeight: FontWeight.w600),
+                                      fontFamily: "NunitoSans",
+                                      color: Colors.transparent,
+                                      fontSize: AppFontSizes.smallest - 3,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -314,6 +310,227 @@ class ExampleCards {
         ),
       ),
     );
-  } // Loading Transaction Card End
+  }
 
+  static Widget placeholderCard(BuildContext context) {
+    const String text = "Senttt";
+    const IconData icon = AppIcons.dotfilled;
+    final Color? iconColor = StateContainer.of(context).curTheme.text20;
+    const String amount = "10244000";
+    const String address = "123456789121234";
+    const double opacity = 1;
+    return Container(
+      margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+      decoration: BoxDecoration(
+        color: StateContainer.of(context).curTheme.backgroundDark,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: <BoxShadow>[StateContainer.of(context).curTheme.boxShadow!],
+      ),
+      child: TextButton(
+        onPressed: () {},
+        style: TextButton.styleFrom(
+          foregroundColor: StateContainer.of(context).curTheme.text15,
+          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          padding: EdgeInsets.zero,
+        ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    // Transaction Icon
+                    Opacity(
+                      opacity: opacity,
+                      child: Container(margin: const EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
+                    ),
+                    SizedBox(
+                      width: UIUtil.getDrawerAwareScreenWidth(context) / 4,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          // Transaction Type Text
+                          Stack(
+                            alignment: AlignmentDirectional.centerStart,
+                            children: <Widget>[
+                              const Text(
+                                text,
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontFamily: "NunitoSans",
+                                  fontSize: AppFontSizes.small,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.transparent,
+                                ),
+                              ),
+                              Opacity(
+                                opacity: opacity,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: StateContainer.of(context).curTheme.text45,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: const Text(
+                                    text,
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      fontFamily: "NunitoSans",
+                                      fontSize: AppFontSizes.small - 4,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.transparent,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          // Amount Text
+                          Stack(
+                            alignment: AlignmentDirectional.centerStart,
+                            children: <Widget>[
+                              Text(
+                                amount,
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                  fontFamily: "NunitoSans",
+                                  color: Colors.transparent,
+                                  fontSize: AppFontSizes.smallest,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Opacity(
+                                opacity: opacity,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: StateContainer.of(context).curTheme.primary20,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Text(
+                                    amount,
+                                    textAlign: TextAlign.start,
+                                    style: const TextStyle(
+                                      fontFamily: "NunitoSans",
+                                      color: Colors.transparent,
+                                      fontSize: AppFontSizes.smallest - 3,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                // Address Text
+                SizedBox(
+                  width: UIUtil.getDrawerAwareScreenWidth(context) / 2.4,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Stack(
+                        alignment: AlignmentDirectional.centerEnd,
+                        children: <Widget>[
+                          Text(
+                            address,
+                            textAlign: TextAlign.end,
+                            style: const TextStyle(
+                              fontSize: AppFontSizes.smallest,
+                              fontFamily: 'OverpassMono',
+                              fontWeight: FontWeight.w100,
+                              color: Colors.transparent,
+                            ),
+                          ),
+                          Opacity(
+                            opacity: opacity,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: StateContainer.of(context).curTheme.text20,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Text(
+                                address,
+                                textAlign: TextAlign.end,
+                                style: const TextStyle(
+                                  fontSize: AppFontSizes.smallest - 3,
+                                  fontFamily: 'OverpassMono',
+                                  fontWeight: FontWeight.w100,
+                                  color: Colors.transparent,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  // no search results:
+  static Widget noSearchResultsCard(BuildContext context) {
+    return Container(
+      margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+      decoration: BoxDecoration(
+        color: StateContainer.of(context).curTheme.backgroundDark,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: <BoxShadow>[StateContainer.of(context).curTheme.boxShadow!],
+      ),
+      child: IntrinsicHeight(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Container(
+              width: 7.0,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
+                color: StateContainer.of(context).curTheme.primary,
+                boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
+              ),
+            ),
+            Flexible(
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 15.0),
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: AppLocalization.of(context).noSearchResults,
+                    style: AppStyles.textStyleTransactionWelcome(context),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              width: 7.0,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+                color: StateContainer.of(context).curTheme.primary,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static Widget loadingCard(BuildContext context) {
+    return Container(
+      margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+      height: 65,
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: const <Widget>[
+        CircularProgressIndicator(),
+      ]),
+    );
+  }
 }

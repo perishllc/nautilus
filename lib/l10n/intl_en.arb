@@ -2270,6 +2270,11 @@
     "type": "text",
     "description": "theme_header"
   },
+  "thisMayTakeSomeTime": "this may take a while...",
+  "@thisMayTakeSomeTime": {
+    "type": "text",
+    "description": "xmr_loading_takes_time"
+  },
   "to": "To",
   "@to": {
     "type": "text",
@@ -2609,11 +2614,6 @@
   "@xmrStatusSynchronizing": {
     "type": "text",
     "description": "xmr_syncing_status"
-  },
-  "thisMayTakeSomeTime": "this may take a while...",
-  "@thisMayTakeSomeTime": {
-    "type": "text",
-    "description": "xmr_sync_takes_time"
   },
   "yes": "Yes",
   "@yes": {

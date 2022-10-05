@@ -766,6 +766,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToReveal":
             MessageLookupByLibrary.simpleMessage("Нажмите, чтобы показать"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Тема"),
+        "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
+            "это может занять некоторое время..."),
         "to": MessageLookupByLibrary.simpleMessage("на"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Много неудачных попыток разблокировки."),

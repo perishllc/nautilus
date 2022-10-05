@@ -11,10 +11,10 @@ import 'package:confetti/confetti.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
+import 'package:keframe/keframe.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -148,9 +148,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   late ScrollController _scrollController;
   int initialMaxHistItems = 25;
   int _maxHistItems = 25;
-  bool _listExtended = false;
-  bool _listExtendedTimerRunning = false;
   int _trueMaxHistItems = 10000;
+  bool _loadingMore = false;
   late ScrollController _xmrScrollController;
   late TabController _tabController;
 
@@ -715,9 +714,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     // _updateTXData();
     // infinite scroll:
     _scrollController = ScrollController();
-    // _scrollController = ScrollController()..addListener(_scrollListener);
-    // Timer.periodic(const Duration(milliseconds: 500), (Timer t) => _scrollListener());
-    _xmrScrollController = ScrollController() /*..addListener(_scrollListener)*/;
+    _xmrScrollController = ScrollController();
     _tabController = TabController(vsync: this, length: 2);
     _tabController.addListener(() {
       final String mode = _tabController.index == 0 ? "nano" : "monero";
@@ -1245,7 +1242,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   void dispose() {
     _destroyBus();
     WidgetsBinding.instance.removeObserver(this);
-    _scrollController.removeListener(_scrollListener);
+    // _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
     _xmrScrollController.dispose();
     _tabController.dispose();
@@ -1259,27 +1256,21 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     super.dispose();
   }
 
-  // TODO: this is honestly a terrible system, but it works really well:
-  void _scrollListener() {
+  Future<void> _loadMore() async {
     if ((_historyListMap[StateContainer.of(context).wallet!.address]?.isEmpty ?? true) || (StateContainer.of(context).wallet?.loading ?? true)) {
       return;
     }
 
-    if (!_listExtended && (_scrollController.position.extentAfter <= 100)) {
-      if (_trueMaxHistItems >= _maxHistItems) {
+    if (_trueMaxHistItems >= _maxHistItems) {
+      setState(() {
+        _loadingMore = true;
+      });
+
+      Future<void>.delayed(const Duration(milliseconds: 500), () async {
+        _maxHistItems += 20;
+        await generateUnifiedList(fastUpdate: true);
         setState(() {
-          _listExtended = true;
-          _maxHistItems += 20;
-          generateUnifiedList(fastUpdate: true);
-        });
-      }
-    }
-    if (_listExtended && !_listExtendedTimerRunning) {
-      _listExtendedTimerRunning = true;
-      Future<dynamic>.delayed(const Duration(milliseconds: 50), () {
-        setState(() {
-          _listExtended = false;
-          _listExtendedTimerRunning = false;
+          _loadingMore = false;
         });
       });
     }
@@ -1977,7 +1968,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
 
     // create a list of indices to remove:
-    removeIndices = [];
+    removeIndices = <int>[];
 
     // remove anything that's not supposed to be there anymore:
     ULM.items.where((dynamic item) => !unifiedList.contains(item)).forEach((dynamic dynamicItem) {
@@ -2513,51 +2504,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       ),
     );
   }
-
-  Widget _buildNoSearchResultsCard(BuildContext context) {
-    return Container(
-      margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
-      decoration: BoxDecoration(
-        color: StateContainer.of(context).curTheme.backgroundDark,
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: <BoxShadow>[StateContainer.of(context).curTheme.boxShadow!],
-      ),
-      child: IntrinsicHeight(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-              width: 7.0,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
-                color: StateContainer.of(context).curTheme.primary,
-                boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
-              ),
-            ),
-            Flexible(
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 15.0),
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: AppLocalization.of(context).noSearchResults,
-                    style: AppStyles.textStyleTransactionWelcome(context),
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              width: 7.0,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
-                color: StateContainer.of(context).curTheme.primary,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  } // Welcome Card End
 
   // Dummy Transaction Card
   Widget _buildDummyTXCard(BuildContext context,
@@ -3388,7 +3334,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       return _buildRemoteMessageCard(StateContainer.of(context).activeAlerts[index]);
     }
     if (index == 0 && _noSearchResults) {
-      return _buildNoSearchResultsCard(context);
+      return ExampleCards.noSearchResultsCard(context);
     }
 
     int localIndex = index;
@@ -3397,9 +3343,15 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
 
     String ADR = StateContainer.of(context).wallet!.address!;
-
     if (StateContainer.of(context).activeAlerts.isNotEmpty) {
-      ADR = "${ADR}alert";
+      ADR += "alert";
+    }
+
+    if (_loadingMore) {
+      final int maxLen = _unifiedListMap[ADR]!.length + StateContainer.of(context).activeAlerts.length;
+      if (index == maxLen - 1) {
+        return ExampleCards.loadingCard(context);
+      }
     }
 
     final dynamic indexedItem = _unifiedListMap[ADR]![localIndex];
@@ -3428,7 +3380,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       return _buildRemoteMessageCard(StateContainer.of(context).activeAlerts[index]);
     }
     if (index == 0 && _xmrNoSearchResults) {
-      return _buildNoSearchResultsCard(context);
+      return ExampleCards.noSearchResultsCard(context);
     }
 
     int localIndex = index;
@@ -3498,7 +3450,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       }
     }
 
-    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet!.loading || StateContainer.of(context).wallet!.xmrLoading) {
+    if (StateContainer.of(context).wallet == null ||
+        StateContainer.of(context).wallet!.loading ||
+        (StateContainer.of(context).wallet!.xmrLoading && StateContainer.of(context).xmrEnabled)) {
       // Loading Animation
       return ReactiveRefreshIndicator(
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -3635,8 +3589,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       }
     }
 
+    // Loading Animation
     if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet!.loading || StateContainer.of(context).wallet!.unifiedLoading) {
-      // Loading Animation
       return ReactiveRefreshIndicator(
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           onRefresh: _refresh,
@@ -3658,10 +3612,13 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
             ],
           ));
-    } else if (!StateContainer.of(context).wallet!.xmrLoading) {
+    // TODO: animation for xmr list
+      // } else if (!StateContainer.of(context).xmrEnabled || !StateContainer.of(context).wallet!.xmrLoading) {
+    } else {
       _disposeAnimation();
     }
 
+    // welcome cards:
     if (StateContainer.of(context).wallet!.history.isEmpty && StateContainer.of(context).wallet!.solids.isEmpty) {
       final List<Widget> activeAlerts = [];
       for (final AlertResponseItem alert in StateContainer.of(context).activeAlerts) {
@@ -3742,44 +3699,52 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       );
     }
 
+    String ADR = StateContainer.of(context).wallet!.address!;
+
     if (StateContainer.of(context).activeAlerts.isNotEmpty) {
+      ADR += "alert";
       // Setup unified list
-      if (!_unifiedListKeyMap.containsKey("${StateContainer.of(context).wallet!.address}alert")) {
-        _unifiedListKeyMap.putIfAbsent("${StateContainer.of(context).wallet!.address}alert", () => GlobalKey<AnimatedListState>());
+      if (!_unifiedListKeyMap.containsKey(ADR)) {
+        _unifiedListKeyMap.putIfAbsent(ADR, () => GlobalKey<AnimatedListState>());
         setState(() {
           _unifiedListMap.putIfAbsent(
             StateContainer.of(context).wallet!.address!,
             () => ListModel<dynamic>(
-              listKey: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address!}alert"]!,
+              listKey: _unifiedListKeyMap[ADR]!,
               initialItems: StateContainer.of(context).wallet!.unified,
             ),
           );
         });
       }
-      return DraggableScrollbar(
-        controller: _scrollController,
-        scrollbarColor: StateContainer.of(context).curTheme.primary!,
-        scrollbarTopMargin: 10.0,
-        scrollbarBottomMargin: 20.0,
-        child: ReactiveRefreshIndicator(
-          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-          onRefresh: _refresh,
-          isRefreshing: _isRefreshing,
-          child: AnimatedList(
-            physics: const AlwaysScrollableScrollPhysics(),
-            controller: _scrollController,
-            key: _unifiedListKeyMap["${StateContainer.of(context).wallet!.address}alert"],
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-            initialItemCount: _unifiedListMap["${StateContainer.of(context).wallet!.address}alert"]!.length + StateContainer.of(context).activeAlerts.length,
-            itemBuilder: _buildUnifiedItem,
-          ),
-        ),
-      );
     }
+    // return DraggableScrollbar(
+    //   controller: _scrollController,
+    //   scrollbarColor: StateContainer.of(context).curTheme.primary!,
+    //   scrollbarTopMargin: 10.0,
+    //   scrollbarBottomMargin: 20.0,
+    //   child: ReactiveRefreshIndicator(
+    //     backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+    //     onRefresh: _refresh,
+    //     isRefreshing: _isRefreshing,
+    //     child: AnimatedList(
+    //       physics: const AlwaysScrollableScrollPhysics(),
+    //       controller: _scrollController,
+    //       key: _unifiedListKeyMap[ADR],
+    //       padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
+    //       initialItemCount: _unifiedListMap[ADR]!.length + StateContainer.of(context).activeAlerts.length,
+    //       itemBuilder: _buildUnifiedItem,
+    //     ),
+    //   ),
+    // );
+
+
+    final Widget placeholder = ExampleCards.placeholderCard(context);
 
     return NotificationListener<ScrollNotification>(
       onNotification: (ScrollNotification notification) {
-        _scrollListener();
+        if (!_loadingMore && (_scrollController.position.extentAfter <= 30)) {
+          _loadMore();
+        }
         return true;
       },
       child: DraggableScrollbar(
@@ -3795,10 +3760,26 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             physics: const AlwaysScrollableScrollPhysics(),
             controller: _scrollController,
             primary: false,
-            key: _unifiedListKeyMap[StateContainer.of(context).wallet!.address!],
+            key: _unifiedListKeyMap[ADR],
             padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-            initialItemCount: _unifiedListMap[StateContainer.of(context).wallet!.address]!.length,
-            itemBuilder: _buildUnifiedItem,
+            initialItemCount: _unifiedListMap[ADR]!.length + StateContainer.of(context).activeAlerts.length,
+            itemBuilder: (BuildContext context, int index, Animation<double> animation) {
+              if (_loadingMore) {
+                final int maxLen = _unifiedListMap[ADR]!.length + StateContainer.of(context).activeAlerts.length;
+                if (index == maxLen - 1) {
+                  return ExampleCards.loadingCard(context);
+                }
+              }
+              return FrameSeparateWidget(
+                index: index,
+                placeHolder: placeholder,
+                // placeHolder: Container(
+                //   color: index.isEven ? Colors.red : Colors.blue,
+                //   height: 65,
+                // ),
+                child: _buildUnifiedItem(context, index, animation),
+              );
+            },
           ),
         ),
       ),

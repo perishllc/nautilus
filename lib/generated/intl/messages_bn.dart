@@ -756,6 +756,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToReveal":
             MessageLookupByLibrary.simpleMessage("প্রকাশ করতে আলতো চাপুন"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("থিম"),
+        "thisMayTakeSomeTime":
+            MessageLookupByLibrary.simpleMessage("এটি একটু সময় নিতে পারে..."),
         "to": MessageLookupByLibrary.simpleMessage("প্রতি"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "আনলক করার অনেক চেষ্টা ব্যর্থ হয়েছে।"),

@@ -1180,7 +1180,7 @@ class StateContainerState extends State<StateContainer> {
       return;
     }
 
-    final List<String> addressToRequest = [];
+    final List<String> addressToRequest = <String>[];
     for (final Account account in accounts) {
       if (account.address != null) {
         addressToRequest.add(account.address!);

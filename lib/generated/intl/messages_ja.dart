@@ -647,6 +647,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToHide": MessageLookupByLibrary.simpleMessage("タップして非表示にする"),
         "tapToReveal": MessageLookupByLibrary.simpleMessage("タップして表示する"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("壁紙"),
+        "thisMayTakeSomeTime":
+            MessageLookupByLibrary.simpleMessage("これは時間がかかる場合があります..."),
         "to": MessageLookupByLibrary.simpleMessage("送金先"),
         "tooManyFailedAttempts":
             MessageLookupByLibrary.simpleMessage("既定のロック解除の失敗回数を超えています。"),

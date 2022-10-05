@@ -747,6 +747,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToReveal":
             MessageLookupByLibrary.simpleMessage("Ketuk untuk mendedahkan"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Tema"),
+        "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
+            "ini mungkin mengambil sedikit masa..."),
         "to": MessageLookupByLibrary.simpleMessage("Ke"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Terlalu banyak percubaan membuka kunci gagal."),

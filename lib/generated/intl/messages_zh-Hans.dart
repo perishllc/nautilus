@@ -584,6 +584,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToHide": MessageLookupByLibrary.simpleMessage("点击隐藏"),
         "tapToReveal": MessageLookupByLibrary.simpleMessage("点击揭示"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("主题"),
+        "thisMayTakeSomeTime":
+            MessageLookupByLibrary.simpleMessage("可能还要等一下..."),
         "to": MessageLookupByLibrary.simpleMessage("至"),
         "tooManyFailedAttempts":
             MessageLookupByLibrary.simpleMessage("解锁失败太多次。"),

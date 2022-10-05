@@ -751,6 +751,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToReveal":
             MessageLookupByLibrary.simpleMessage("Tryck för att visa"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Tema"),
+        "thisMayTakeSomeTime":
+            MessageLookupByLibrary.simpleMessage("det här kan ta ett tag..."),
         "to": MessageLookupByLibrary.simpleMessage("Till"),
         "tooManyFailedAttempts":
             MessageLookupByLibrary.simpleMessage("För många ogiltiga försök."),

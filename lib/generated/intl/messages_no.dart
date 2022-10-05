@@ -748,6 +748,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tapToHide": MessageLookupByLibrary.simpleMessage("Trykk for å skjule"),
         "tapToReveal": MessageLookupByLibrary.simpleMessage("Trykk for å vise"),
         "themeHeader": MessageLookupByLibrary.simpleMessage("Tema"),
+        "thisMayTakeSomeTime":
+            MessageLookupByLibrary.simpleMessage("dette kan ta en stund..."),
         "to": MessageLookupByLibrary.simpleMessage("Til"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "For mange forsøk på å låse opp mislyktes."),
