@@ -951,6 +951,16 @@ class AppLocalization {
     );
   }
 
+  /// `Copy Monero Seed`
+  String get copyXMRSeed {
+    return Intl.message(
+      'Copy Monero Seed',
+      name: 'copyXMRSeed',
+      desc: 'copy_xmr_seed_btn',
+      args: [],
+    );
+  }
+
   /// `Copy wallet address to clipboard`
   String get copyWalletAddressToClipboard {
     return Intl.message(

@@ -174,7 +174,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
 
   // Get balance display
   Widget _getBalanceWidget() {
-    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet!.loading) {
+    if (StateContainer.of(context).wallet?.loading ?? true) {
       // Placeholder for balance text
       return Column(
         mainAxisSize: MainAxisSize.min,
@@ -237,31 +237,6 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
               ],
             ),
           ),
-          if (_priceConversion == PriceConversion.CURRENCY)
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: <Widget>[
-                const Text(
-                  "1234567",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small, fontWeight: FontWeight.w600, color: Colors.transparent),
-                ),
-                Opacity(
-                  opacity: widget.opacityAnimation.value,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.text20,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: const Text(
-                      "1234567",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontFamily: "NunitoSans", fontSize: AppFontSizes.small - 3, fontWeight: FontWeight.w600, color: Colors.transparent),
-                    ),
-                  ),
-                ),
-              ],
-            ),
         ],
       );
     }

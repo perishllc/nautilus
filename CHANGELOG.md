@@ -1,12 +1,17 @@
 ## v0.6.7 - [2022-10-10]
 #### Added
+- Ability to backup / copy the monero wallet seed (it's generated deterministicallyt based on your nano account's seed)
 - Dark mode switcher in the intro screen
 - Massive performance improvements to scrolling large lists using lazy loading, especially when using the scrollbar
+- Added animations to the list loader
 #### Changed
+- Updates to changelog / url buttons at the bottom of the settings drawer
 - Updates to block handoff handling
 - Remove nanocrawler from block explorer list, as it is being shut down
+- XMR is now off by default (more complicated for new users)
 #### Fixed
 - lots of scroll bar bugs
+- top card loading animation was oversized
 ## v0.6.6 - [2022-09-25]
 #### Added
 - New logo! (again)

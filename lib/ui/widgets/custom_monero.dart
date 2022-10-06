@@ -9,6 +9,7 @@ import 'package:nautilus_wallet_flutter/bus/xmr_event.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/util/blake2b.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:nautilus_wallet_flutter/util/xmr_util.dart';
 // import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -20,7 +21,6 @@ class CustomMonero extends StatefulWidget {
     return CustomMoneroState();
   }
 }
-
 
 class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClientMixin<CustomMonero> {
   WebViewController? webViewController;
@@ -103,55 +103,55 @@ class CustomMoneroState extends State<CustomMonero> with AutomaticKeepAliveClien
     if (reloading) {
       return const SizedBox();
     }
-    
+
     return SizedBox(
       height: 1,
       width: 1,
       child: FutureBuilder<String>(
-          future: StateContainer.of(context).getSeed(),
-          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-            if (snapshot.hasData && snapshot.data != null) {
-              final String hashedSeed = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(snapshot.data as String))).substring(0, 64);
-              String url = "http://localhost:8080/assets/xmr/index.html#s=$hashedSeed";
+        future: StateContainer.of(context).getSeed(),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.hasData && snapshot.data != null) {
+            final String secret = XmrUtil.seedToXmrSecretKey(snapshot.data as String);
 
-              if (kDebugMode) {
-                url = "http://206.81.0.28:8080/#s=$hashedSeed";
-              }
-              final int? restoreHeight = StateContainer.of(context).xmrRestoreHeight;
-              if (restoreHeight != null && restoreHeight > 0) {
-                url += "&h=$restoreHeight";
-              }
-              return WebView(
-                initialUrl: url,
-                javascriptMode: JavascriptMode.unrestricted,
-                debuggingEnabled: !kReleaseMode,
-                gestureNavigationEnabled: true,
-                zoomEnabled: false,
-                javascriptChannels: {
-                  JavascriptChannel(
-                      name: "XMR",
-                      onMessageReceived: (JavascriptMessage message) {
-                        final String messageString = message.message;
-                        final String type = messageString.substring(0, messageString.indexOf(":"));
-                        final String eventMessage = messageString.substring(messageString.indexOf(":") + 1);
-                        // print("type: $type - eventMessage: $eventMessage");
-                        EventTaxiImpl.singleton().fire(XMREvent(type: type, message: eventMessage));
-                      }),
-                  JavascriptChannel(
-                      name: "CloseWebView",
-                      onMessageReceived: (JavascriptMessage message) {
-                        Navigator.of(context).pop();
-                      })
-                },
-                onWebViewCreated: (WebViewController w) {
-                  webViewController = w;
-                },
-              );
+            String url = "http://localhost:8080/assets/xmr/index.html#s=$secret";
+
+            if (kDebugMode) {
+              url = "http://206.81.0.28:8080/#s=$secret";
             }
-            return const SizedBox();
-          },
-        ),
-      
+            final int? restoreHeight = StateContainer.of(context).xmrRestoreHeight;
+            if (restoreHeight != null && restoreHeight > 0) {
+              url += "&h=$restoreHeight";
+            }
+            return WebView(
+              initialUrl: url,
+              javascriptMode: JavascriptMode.unrestricted,
+              debuggingEnabled: !kReleaseMode,
+              gestureNavigationEnabled: true,
+              zoomEnabled: false,
+              javascriptChannels: <JavascriptChannel>{
+                JavascriptChannel(
+                    name: "XMR",
+                    onMessageReceived: (JavascriptMessage message) {
+                      final String messageString = message.message;
+                      final String type = messageString.substring(0, messageString.indexOf(":"));
+                      final String eventMessage = messageString.substring(messageString.indexOf(":") + 1);
+                      // print("type: $type - eventMessage: $eventMessage");
+                      EventTaxiImpl.singleton().fire(XMREvent(type: type, message: eventMessage));
+                    }),
+                JavascriptChannel(
+                    name: "CloseWebView",
+                    onMessageReceived: (JavascriptMessage message) {
+                      Navigator.of(context).pop();
+                    })
+              },
+              onWebViewCreated: (WebViewController w) {
+                webViewController = w;
+              },
+            );
+          }
+          return const SizedBox();
+        },
+      ),
     );
   }
 }

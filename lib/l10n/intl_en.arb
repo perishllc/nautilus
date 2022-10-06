@@ -450,6 +450,11 @@
     "type": "text",
     "description": "copy_seed_btn"
   },
+  "copyXMRSeed": "Copy Monero Seed",
+  "@copyXMRSeed": {
+    "type": "text",
+    "description": "copy_xmr_seed_btn"
+  },
   "copyWalletAddressToClipboard": "Copy wallet address to clipboard",
   "@copyWalletAddressToClipboard": {
     "type": "text",

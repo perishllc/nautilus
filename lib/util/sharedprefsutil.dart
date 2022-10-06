@@ -354,7 +354,7 @@ class SharedPrefsUtil {
   }
 
   Future<bool> getXmrEnabled() async {
-    return await get(xmr_enabled, defaultValue: true) as bool;
+    return await get(xmr_enabled, defaultValue: false) as bool;
   }
 
   Future<void> setXmrEnabled(bool value) async {

@@ -167,6 +167,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Copy Seed"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Copy wallet address to clipboard"),
+        "copyXMRSeed": MessageLookupByLibrary.simpleMessage("Copy Monero Seed"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Create a password."),
         "createGiftCard":

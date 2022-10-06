@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 
 class ExampleCards {
   // Welcome Card
@@ -530,6 +532,25 @@ class ExampleCards {
       height: 65,
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: const <Widget>[
         CircularProgressIndicator(),
+      ]),
+    );
+  }
+
+  static Widget loadingCardAdvanced(BuildContext context, AnimationController customController) {
+    return Container(
+      margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
+      height: 65,
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+        LottieBuilder.asset(
+          AppAnimation.getAnimationFilePath(AnimationType.GENERIC),
+          width: 60,
+          height: 60,
+          controller: customController,
+          onLoaded: (LottieComposition composition) {
+            customController.duration = composition.duration;
+            customController.repeat();
+          },
+        ),
       ]),
     );
   }

@@ -102,6 +102,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   // Controller for placeholder card animations
   late AnimationController _placeholderCardAnimationController;
+  late AnimationController _loadMoreAnimationController;
   late Animation<double> _opacityAnimation;
   late Animation<double> _emptyAnimation;
   late bool _animationDisposed;
@@ -754,6 +755,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       vsync: this,
     );
     _placeholderCardAnimationController.addListener(_animationControllerListener);
+    _loadMoreAnimationController = AnimationController(vsync: this);
     _opacityAnimation = Tween<double>(begin: 1.0, end: 0.4).animate(
       CurvedAnimation(
         parent: _placeholderCardAnimationController,
@@ -1247,6 +1249,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     _xmrScrollController.dispose();
     _tabController.dispose();
     _placeholderCardAnimationController.dispose();
+    _loadMoreAnimationController.dispose();
     // confetti:
     _confettiControllerLeft.dispose();
     _confettiControllerRight.dispose();
@@ -1266,7 +1269,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         _loadingMore = true;
       });
 
-      Future<void>.delayed(const Duration(milliseconds: 500), () async {
+      // random delay between 500ms and 1.5s:
+      Future<void>.delayed(Duration(milliseconds: 500 + Random().nextInt(1000)), () async {
         _maxHistItems += 20;
         await generateUnifiedList(fastUpdate: true);
         setState(() {
@@ -1285,8 +1289,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     if (!_historyListMap.containsKey(StateContainer.of(context).wallet!.address)) {
       return;
     }
-    final List<int> unconfirmedUpdate = [];
-    final List<int> confirmedUpdate = [];
+    final List<int> unconfirmedUpdate = <int>[];
+    final List<int> confirmedUpdate = <int>[];
     for (int i = 0; i < _historyListMap[StateContainer.of(context).wallet!.address]!.length; i++) {
       if ((_historyListMap[StateContainer.of(context).wallet!.address]![i].confirmed == null ||
               _historyListMap[StateContainer.of(context).wallet!.address]![i].confirmed!) &&
@@ -3612,7 +3616,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               ExampleCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
             ],
           ));
-    // TODO: animation for xmr list
+      // TODO: animation for xmr list
       // } else if (!StateContainer.of(context).xmrEnabled || !StateContainer.of(context).wallet!.xmrLoading) {
     } else {
       _disposeAnimation();
@@ -3620,7 +3624,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
     // welcome cards:
     if (StateContainer.of(context).wallet!.history.isEmpty && StateContainer.of(context).wallet!.solids.isEmpty) {
-      final List<Widget> activeAlerts = [];
+      final List<Widget> activeAlerts = <Widget>[];
       for (final AlertResponseItem alert in StateContainer.of(context).activeAlerts) {
         activeAlerts.add(_buildRemoteMessageCard(alert));
       }
@@ -3737,7 +3741,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     //   ),
     // );
 
-
     final Widget placeholder = ExampleCards.placeholderCard(context);
 
     return NotificationListener<ScrollNotification>(
@@ -3768,6 +3771,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 final int maxLen = _unifiedListMap[ADR]!.length + StateContainer.of(context).activeAlerts.length;
                 if (index == maxLen - 1) {
                   return ExampleCards.loadingCard(context);
+                  // return ExampleCards.loadingCardAdvanced(context, _loadMoreAnimationController);
                 }
               }
               return FrameSeparateWidget(

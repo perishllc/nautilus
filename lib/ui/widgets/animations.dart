@@ -21,7 +21,6 @@ enum AnimationType {
 }
 
 class AnimationLoadingOverlay extends ModalRoute<void> {
-
   AnimationLoadingOverlay(this.type, this.barrier, this.barrierStronger, {this.onPoppedCallback});
   AnimationType type;
   Function? onPoppedCallback;
