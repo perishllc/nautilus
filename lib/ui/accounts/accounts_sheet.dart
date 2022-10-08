@@ -32,7 +32,7 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:quiver/strings.dart';
 
 class AppAccountsSheet extends StatefulWidget {
-  const AppAccountsSheet({Key? key, required this.accounts}) : super(key: key);
+  const AppAccountsSheet({super.key, required this.accounts});
 
   final List<Account> accounts;
 
@@ -76,8 +76,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
     for (final Account account in widget.accounts) {
       resp.balances!.forEach((String address, AccountBalanceItem balance) {
         address = address.replaceAll("xrb_", "nano_");
-        final String combinedBalance =
-            (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.receivable!)!).toString();
+        final String combinedBalance = (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.receivable!)!).toString();
         if (account.address == address && combinedBalance != account.balance) {
           sl.get<DBHelper>().updateAccountBalance(account, combinedBalance);
           setState(() {
@@ -89,15 +88,12 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
   }
 
   void _registerBus() {
-    _accountModifiedSub =
-        EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((AccountModifiedEvent event) {
+    _accountModifiedSub = EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((AccountModifiedEvent event) {
       if (event.deleted) {
         if (event.account!.selected) {
-          Future.delayed(const Duration(milliseconds: 50), () {
+          Future<void>.delayed(const Duration(milliseconds: 50), () {
             setState(() {
-              widget.accounts
-                  .where((Account a) => a.index == StateContainer.of(context).selectedAccount!.index)
-                  .forEach((Account account) {
+              widget.accounts.where((Account a) => a.index == StateContainer.of(context).selectedAccount!.index).forEach((Account account) {
                 account.selected = true;
               });
             });
@@ -184,78 +180,122 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              //A container for the header
-              Container(
-                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
-                child: Column(
-                  children: <Widget>[
-                    // Sheet handle
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 60,
+                    height: 60,
+                    child: AppDialogs.infoButton(
+                      context,
+                      () {
+                        AppDialogs.showConfirmDialog(context, AppLocalization.of(context).hideAccountsHeader,
+                            AppLocalization.of(context).hideAccountsConfirmation, CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
+                          await Future<dynamic>.delayed(const Duration(milliseconds: 250));
+                          final List<Account> accountsToRemove = <Account>[];
+                          for (final Account account in widget.accounts) {
+                            if (account.selected || account.index == 0 || account.watchOnly || account.balance == null) {
+                              continue;
+                            }
+
+                            if (BigInt.tryParse(account.balance!) == BigInt.zero) {
+                              accountsToRemove.add(account);
+                            }
+                          }
+                          for (final Account account in accountsToRemove) {
+                            await sl.get<DBHelper>().deleteAccount(account);
+                            EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: account, deleted: true));
+                            setState(() {
+                              widget.accounts.removeWhere((Account acc) => acc.index == account.index);
+                            });
+                          }
+                        }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
+                      },
+                      icon: AppIcons.trashcan,
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 15.0),
-                      constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
-                      child: Column(
-                        children: <Widget>[
-                          AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context).accounts, context),
-                            style: AppStyles.textStyleHeader(context),
-                            maxLines: 1,
-                            stepGranularity: 0.1,
-                          ),
-                        ],
+                  ),
+                  Column(
+                    children: <Widget>[
+                      // Sheet handle
+                      Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        height: 5,
+                        width: MediaQuery.of(context).size.width * 0.15,
+                        decoration: BoxDecoration(
+                          color: StateContainer.of(context).curTheme.text20,
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 5.0),
-                      child: RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: '',
-                          children: [
-                            TextSpan(
-                              text: "(",
-                              style: TextStyle(
-                                color: StateContainer.of(context).curTheme.primary60,
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w100,
-                                fontFamily: "NunitoSans",
-                              ),
-                            ),
-                            TextSpan(
-                              text: getRawAsThemeAwareFormattedAmount(context, _getTotalBalance()),
-                              style: TextStyle(
-                                color: StateContainer.of(context).curTheme.primary60,
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "NunitoSans",
-                              ),
-                            ),
-                            TextSpan(
-                              text: (StateContainer.of(context).nyanoMode) ? (" nyano)") : (" NANO)"),
-                              style: TextStyle(
-                                color: StateContainer.of(context).curTheme.primary60,
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w100,
-                                fontFamily: "NunitoSans",
-                              ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 15.0),
+                        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
+                        child: Column(
+                          children: <Widget>[
+                            AutoSizeText(
+                              CaseChange.toUpperCase(AppLocalization.of(context).accounts, context),
+                              style: AppStyles.textStyleHeader(context),
+                              maxLines: 1,
+                              stepGranularity: 0.1,
                             ),
                           ],
                         ),
                       ),
-                    )
-                  ],
-                ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 5.0),
+                        child: RichText(
+                          textAlign: TextAlign.start,
+                          text: TextSpan(
+                            text: '',
+                            children: [
+                              TextSpan(
+                                text: "(",
+                                style: TextStyle(
+                                  color: StateContainer.of(context).curTheme.primary60,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w100,
+                                  fontFamily: "NunitoSans",
+                                ),
+                              ),
+                              TextSpan(
+                                text: getRawAsThemeAwareFormattedAmount(context, _getTotalBalance()),
+                                style: TextStyle(
+                                  color: StateContainer.of(context).curTheme.primary60,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: "NunitoSans",
+                                ),
+                              ),
+                              TextSpan(
+                                text: (StateContainer.of(context).nyanoMode) ? (" nyano)") : (" NANO)"),
+                                style: TextStyle(
+                                  color: StateContainer.of(context).curTheme.primary60,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w100,
+                                  fontFamily: "NunitoSans",
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    width: 60,
+                    height: 60,
+                    child: AppDialogs.infoButton(
+                      context,
+                      () {
+                        Sheets.showAppHeightEightSheet(context: context, widget: const AddWatchOnlyAccountSheet());
+                      },
+                      icon: AppIcons.search,
+                    ),
+                  ),
+                ],
               ),
 
-              //A list containing accounts
+              // A list containing accounts
               Expanded(
                   key: expandedKey,
                   child: Stack(
@@ -298,51 +338,6 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
               const SizedBox(
                 height: 15,
               ),
-              Row(
-                children: [
-                  AppButton.buildAppButton(
-                    context,
-                    AppButtonType.PRIMARY,
-                    AppLocalization.of(context).hideEmptyAccounts,
-                    Dimens.BUTTON_COMPACT_LEFT_DIMENS,
-                    onPressed: () async {
-                      AppDialogs.showConfirmDialog(
-                          context,
-                          AppLocalization.of(context).hideAccountsHeader,
-                          AppLocalization.of(context).hideAccountsConfirmation,
-                          CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
-                        await Future<dynamic>.delayed(const Duration(milliseconds: 250));
-                        final List<Account> accountsToRemove = <Account>[];
-                        for (final Account account in widget.accounts) {
-                          if (account.selected || account.index == 0 || account.watchOnly || account.balance == null) {
-                            continue;
-                          }
-
-                          if (BigInt.tryParse(account.balance!) == BigInt.zero) {
-                            accountsToRemove.add(account);
-                          }
-                        }
-                        for (final Account account in accountsToRemove) {
-                          await sl.get<DBHelper>().deleteAccount(account);
-                          EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: account, deleted: true));
-                          setState(() {
-                            widget.accounts.removeWhere((Account acc) => acc.index == account.index);
-                          });
-                        }
-                      }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
-                    },
-                  ),
-                  AppButton.buildAppButton(
-                    context,
-                    AppButtonType.PRIMARY,
-                    AppLocalization.of(context).addWatchOnlyAccount,
-                    Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
-                    onPressed: () {
-                      Sheets.showAppHeightEightSheet(context: context, widget: const AddWatchOnlyAccountSheet());
-                    },
-                  ),
-                ],
-              ),
               //A row with Add Account button
               if (widget.accounts.length < MAX_ACCOUNTS)
                 Row(
@@ -359,10 +354,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                             _addingAccount = true;
                           });
                           StateContainer.of(context).getSeed().then((String seed) {
-                            sl
-                                .get<DBHelper>()
-                                .addAccount(seed, nameBuilder: AppLocalization.of(context).defaultNewAccountName)
-                                .then((Account? newAccount) {
+                            sl.get<DBHelper>().addAccount(seed, nameBuilder: AppLocalization.of(context).defaultNewAccountName).then((Account? newAccount) {
                               if (newAccount == null) {
                                 sl.get<Logger>().d("Error adding account: account was null");
                                 return;
@@ -395,20 +387,20 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                     ),
                   ],
                 ),
-              // //A row with Close button
-              // Row(
-              //   children: <Widget>[
-              //     AppButton.buildAppButton(
-              //       context,
-              //       AppButtonType.PRIMARY_OUTLINE,
-              //       AppLocalization.of(context).close,
-              //       Dimens.BUTTON_BOTTOM_DIMENS,
-              //       onPressed: () {
-              //         Navigator.pop(context);
-              //       },
-              //     ),
-              //   ],
-              // ),
+              // Close button
+              Row(
+                children: <Widget>[
+                  AppButton.buildAppButton(
+                    context,
+                    AppButtonType.PRIMARY_OUTLINE,
+                    AppLocalization.of(context).close,
+                    Dimens.BUTTON_BOTTOM_DIMENS,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
         ));
@@ -487,9 +479,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                                         margin: EdgeInsets.only(left: account.watchOnly ? 5 : 0),
                                         child: Icon(
                                           account.watchOnly ? AppIcons.search : AppIcons.accountwallet,
-                                          color: account.selected
-                                              ? StateContainer.of(context).curTheme.success
-                                              : StateContainer.of(context).curTheme.primary,
+                                          color: account.selected ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary,
                                           size: 30,
                                         ),
                                       ),
@@ -561,8 +551,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                                       text: "",
                                       children: [
                                         TextSpan(
-                                          text: getThemeAwareRawAccuracy(
-                                              context, isEmpty(account.balance) ? "0" : account.balance),
+                                          text: getThemeAwareRawAccuracy(context, isEmpty(account.balance) ? "0" : account.balance),
                                           style: TextStyle(
                                               fontSize: 16.0,
                                               fontFamily: "NunitoSans",
@@ -581,8 +570,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                                         TextSpan(
                                           text: account.balance != null
                                               ? (!account.selected)
-                                                  ? getRawAsThemeAwareFormattedAmount(
-                                                      context, isEmpty(account.balance) ? "0" : account.balance)
+                                                  ? getRawAsThemeAwareFormattedAmount(context, isEmpty(account.balance) ? "0" : account.balance)
                                                   : getRawAsThemeAwareFormattedAmount(context, account.balance)
                                               : "",
                                           style: TextStyle(

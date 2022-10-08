@@ -90,6 +90,15 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     super.initState();
     _registerBus();
     animationOpen = false;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // show warning dialog if this is a send:
+      if ((widget.amountRaw != "0") && widget.link.isEmpty) {
+        if (!await showUnopenedWarning(widget.destination)) {
+          Navigator.of(context).pop();
+        }
+      }
+    });
   }
 
   @override
@@ -263,6 +272,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
                       final bool isMessage = widget.memo.isNotEmpty && (widget.amountRaw == "0");
 
+                      if (!mounted) return;
+
                       final String authText = isMessage
                           ? AppLocalization.of(context).sendMessageConfirm
                           : AppLocalization.of(context)
@@ -270,10 +281,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                               .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
                               .replaceAll("%2", StateContainer.of(context).currencyMode);
 
-                      // show warning dialog if this is a send:
-                      if ((widget.amountRaw != "0") && widget.link.isEmpty && !await showUnopenedWarning(widget.destination)) {
-                        return;
-                      }
+                      if (!mounted) return;
 
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         try {
@@ -314,10 +322,16 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       return true;
     }
     // check if the address is open:
-    final AccountInfoResponse accountInfo = await sl.get<AccountService>().getAccountInfo(address);
-    if (!accountInfo.unopened) {
-      return true;
+    try {
+      final AccountInfoResponse accountInfo = await sl.get<AccountService>().getAccountInfo(address);
+      if (!accountInfo.unopened) {
+        return true;
+      }
+    } catch (e) {
+      return false;
     }
+
+    if (!mounted) return false;
 
     final bool? option = await showDialog<bool>(
         context: context,

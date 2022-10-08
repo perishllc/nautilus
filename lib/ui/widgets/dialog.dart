@@ -125,7 +125,7 @@ class AppDialogs {
     ]);
   }
 
-  static Widget infoButton(BuildContext context, void Function()? onPressed) {
+  static Widget infoButton(BuildContext context, void Function()? onPressed,{IconData icon = AppIcons.info}) {
     // A container for the info button
     return SizedBox(
       width: 50,
@@ -136,11 +136,11 @@ class AppDialogs {
           foregroundColor: StateContainer.of(context).curTheme.text15,
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           padding: const EdgeInsets.all(10.0),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
           tapTargetSize: MaterialTapTargetSize.padded,
         ),
         onPressed: onPressed,
-        child: Icon(AppIcons.info, size: 24, color: StateContainer.of(context).curTheme.text),
+        child: Icon(icon, size: 24, color: StateContainer.of(context).curTheme.text),
       ),
     );
   }

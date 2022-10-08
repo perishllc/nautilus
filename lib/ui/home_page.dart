@@ -7,6 +7,7 @@ import 'dart:math';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:confetti/confetti.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -52,6 +53,7 @@ import 'package:nautilus_wallet_flutter/ui/home/payment_details_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/home/top_card.dart';
 import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/receive/receive_show_qr.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_xmr_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
@@ -1120,10 +1122,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   void _registerBus() {
     _historySub = EventTaxiImpl.singleton().registerTo<HistoryHomeEvent>().listen((HistoryHomeEvent event) {
       updateHistoryList(event.items);
-      // // update tx memo's
-      // if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.address != null) {
-      //   _updateTXDetailsMap(StateContainer.of(context).wallet.address);
-      // }
+      // update tx memo's a second later since it could arrive late:
+      Future<void>.delayed(const Duration(seconds: 1), () {
+        _updateTXDetailsMap(StateContainer.of(context).wallet?.address);
+      });
       // handle deep links:
       if (StateContainer.of(context).initialDeepLink != null) {
         handleDeepLink(StateContainer.of(context).initialDeepLink);
@@ -1131,7 +1133,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       }
     });
     _txUpdatesSub = EventTaxiImpl.singleton().registerTo<TXUpdateEvent>().listen((TXUpdateEvent event) {
-      if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.address != null) {
+      if (StateContainer.of(context).wallet?.address != null) {
         _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
       }
     });
@@ -2120,20 +2122,18 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   // handle receivable messages
   Future<void> handleReceivableBackgroundMessages() async {
-    if (StateContainer.of(context).wallet != null) {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.reload();
-      final List<String>? backgroundMessages = prefs.getStringList("background_messages");
-      // process the message now that we're in the foreground:
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.reload();
+    final List<String>? backgroundMessages = prefs.getStringList("background_messages");
+    // process the message now that we're in the foreground:
 
-      if (!mounted) return;
+    if (!mounted) return;
 
-      if (backgroundMessages != null) {
-        // EventTaxiImpl.singleton().fire(FcmMessageEvent(message_list: backgroundMessages));
-        await StateContainer.of(context).handleStoredMessages(FcmMessageEvent(message_list: backgroundMessages));
-        // clear the storage since we just processed it:
-        await prefs.remove("background_messages");
-      }
+    if (backgroundMessages != null) {
+      // EventTaxiImpl.singleton().fire(FcmMessageEvent(message_list: backgroundMessages));
+      await StateContainer.of(context).handleStoredMessages(FcmMessageEvent(message_list: backgroundMessages));
+      // clear the storage since we just processed it:
+      await prefs.remove("background_messages");
     }
   }
 
@@ -2307,7 +2307,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                           foregroundColor: !_receiveDisabled ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
                         ),
                         child: AutoSizeText(
-                          AppLocalization.of(context).receive,
+                          AppLocalization.of(context).request,
                           textAlign: TextAlign.center,
                           style: AppStyles.textStyleButtonPrimary(context),
                           maxLines: 1,
@@ -2389,6 +2389,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                     AppPopupButton(moneroEnabled: true, enabled: !_xmrSRDisabled),
                   ],
                 ),
+
               // confetti: LEFT
               Align(
                 alignment: Alignment.centerLeft,

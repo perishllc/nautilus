@@ -546,15 +546,16 @@ class _AddContactSheetState extends State<AddContactSheet> {
                                               borderRadius: BorderRadius.circular(25),
                                             ),
                                             margin: const EdgeInsets.only(bottom: 50),
-                                            child: ListView.builder(
-                                              shrinkWrap: true,
-                                              padding: EdgeInsets.zero,
-                                              itemCount: _users.length,
-                                              itemBuilder: (BuildContext context, int index) {
-                                                return _buildUserItem(_users[index]);
-                                              },
-                                            ), // ********* The pop-up Contacts List End ********* //
-                                            // ************************************************** //
+                                            child: _users.isEmpty
+                                                ? const SizedBox()
+                                                : ListView.builder(
+                                                    shrinkWrap: true,
+                                                    padding: EdgeInsets.zero,
+                                                    itemCount: _users.length,
+                                                    itemBuilder: (BuildContext context, int index) {
+                                                      return _buildUserItem(_users[index]);
+                                                    },
+                                                  ),
                                           ),
                                         ),
                                       ),

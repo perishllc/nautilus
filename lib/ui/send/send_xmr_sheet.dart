@@ -582,11 +582,15 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                       ),
                     ),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: 40,
                     child: Align(
                       alignment: Alignment.center,
-                      child: Text("|", textAlign: TextAlign.center),
+                      child: Text("|",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: StateContainer.of(context).curTheme.text30,
+                          )),
                     ),
                   ),
                   Expanded(
@@ -730,39 +734,6 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                                   child: Stack(
                                     alignment: Alignment.topCenter,
                                     children: <Widget>[
-                                      // Container(
-                                      //   margin:
-                                      //       EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                                      //   alignment: Alignment.bottomCenter,
-                                      //   constraints: const BoxConstraints(maxHeight: 160, minHeight: 0),
-                                      //   // ********************************************* //
-                                      //   // ********* The pop-up Contacts List ********* //
-                                      //   child: ClipRRect(
-                                      //     borderRadius: BorderRadius.circular(25),
-                                      //     child: Container(
-                                      //       decoration: BoxDecoration(
-                                      //         borderRadius: BorderRadius.circular(25),
-                                      //         color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                      //       ),
-                                      //       child: Container(
-                                      //         decoration: BoxDecoration(
-                                      //           borderRadius: BorderRadius.circular(25),
-                                      //         ),
-                                      //         margin: const EdgeInsets.only(bottom: 50),
-                                      //         child: ListView.builder(
-                                      //           shrinkWrap: true,
-                                      //           // padding: const EdgeInsets.only(bottom: 0, top: 0),
-                                      //           itemCount: _users.length,
-                                      //           itemBuilder: (BuildContext context, int index) {
-                                      //             return _buildUserItem(_users[index]);
-                                      //           },
-                                      //         ), // ********* The pop-up Contacts List End ********* //
-                                      //         // ************************************************** //
-                                      //       ),
-                                      //     ),
-                                      //   ),
-                                      // ),
-
                                       // ******* Enter Address Container ******* //
                                       getEnterAddressContainer(),
                                       // ******* Enter Address Container End ******* //
@@ -1106,7 +1077,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
   }
 
   void toggleLocalCurrency() {
-    return;// TODO:
+    return; // TODO:
     // Keep a cache of previous amounts because, it's kinda nice to see approx what nano is worth
     // this way you can tap button and tap back and not end up with X.9993451 NANO
     if (_localCurrencyMode) {
@@ -1395,215 +1366,215 @@ class SendXMRSheetState extends State<SendXMRSheet> {
   //*******************************************************//
   Widget getEnterAddressContainer() {
     return AppTextField(
-        topMargin: 115,
-        padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
-        // padding: EdgeInsets.zero,
-        textAlign: TextAlign.center,
-        // textAlign: (_isUser || _addressController.text.length == 0) ? TextAlign.center : TextAlign.start,
-        focusNode: _addressFocusNode,
-        controller: _addressController,
-        cursorColor: StateContainer.of(context).curTheme.primary,
-        inputFormatters: [
-          if (_isUser) LengthLimitingTextInputFormatter(20) else LengthLimitingTextInputFormatter(65),
-        ],
-        textInputAction: _memoController!.text.isEmpty ? TextInputAction.next : TextInputAction.done,
-        maxLines: null,
-        autocorrect: false,
-        hintText: _addressHint ?? AppLocalization.of(context).enterUserOrAddress,
-        prefixButton: TextFieldButton(
-            icon: AppIcons.scan,
-            onPressed: () async {
-              UIUtil.cancelLockEvent();
-              final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
-              if (!mounted) return;
-              if (scanResult == null) {
-                UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
-              } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
-                if (mounted) {
-                  setState(() {
-                    _addressController!.text = scanResult;
-                    _addressValidationText = "";
-                    _addressValidAndUnfocused = true;
-                  });
-                  _addressFocusNode!.unfocus();
-                }
+      topMargin: 115,
+      padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+      // padding: EdgeInsets.zero,
+      textAlign: TextAlign.center,
+      // textAlign: (_isUser || _addressController.text.length == 0) ? TextAlign.center : TextAlign.start,
+      focusNode: _addressFocusNode,
+      controller: _addressController,
+      cursorColor: StateContainer.of(context).curTheme.primary,
+      inputFormatters: [
+        if (_isUser) LengthLimitingTextInputFormatter(20) else LengthLimitingTextInputFormatter(65),
+      ],
+      textInputAction: _memoController!.text.isEmpty ? TextInputAction.next : TextInputAction.done,
+      maxLines: null,
+      autocorrect: false,
+      hintText: _addressHint ?? AppLocalization.of(context).enterUserOrAddress,
+      prefixButton: TextFieldButton(
+          icon: AppIcons.scan,
+          onPressed: () async {
+            UIUtil.cancelLockEvent();
+            final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
+            if (!mounted) return;
+            if (scanResult == null) {
+              UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
+            } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
+              if (mounted) {
+                setState(() {
+                  _addressController!.text = scanResult;
+                  _addressValidationText = "";
+                  _addressValidAndUnfocused = true;
+                });
+                _addressFocusNode!.unfocus();
               }
-            }),
-        fadePrefixOnCondition: true,
-        prefixShowFirstCondition: _showContactButton && _users.isEmpty,
-        suffixButton: TextFieldButton(
-          icon: _clearButton ? AppIcons.clear : AppIcons.paste,
-          onPressed: () {
-            if (_clearButton) {
-              setState(() {
-                _isUser = false;
-                _addressValidationText = "";
-                _pasteButtonVisible = true;
-                _clearButton = false;
-                _showContactButton = true;
-                _addressController!.text = "";
-                _users = [];
-              });
-              return;
             }
-            Clipboard.getData("text/plain").then((ClipboardData? data) {
-              if (data == null || data.text == null) {
-                return;
-              }
-              final Address address = Address(data.text);
-              String addressText = data.text!;
-              // if (!address.isValid()) {
-              //   return;
-              // }
-              sl.get<DBHelper>().getUserOrContactWithAddress(addressText).then((User? user) {
-                if (user == null) {
-                  setState(() {
-                    _isUser = false;
-                    _addressValidationText = "";
-                    _addressStyle = AddressStyle.TEXT90;
-                    _pasteButtonVisible = true;
-                    _clearButton = true;
-                    _showContactButton = false;
-                    _addressController!.text = addressText;
-                    _addressFocusNode!.unfocus();
-                    _addressValidAndUnfocused = true;
-                  });
-                } else {
-                  // Is a user
-                  setState(() {
-                    _addressController!.text = user.getDisplayName()!;
-                    _addressFocusNode!.unfocus();
-                    _users = [];
-                    _isUser = true;
-                    _addressValidationText = "";
-                    _addressStyle = AddressStyle.PRIMARY;
-                    _pasteButtonVisible = true;
-                    _clearButton = true;
-                    _showContactButton = false;
-                  });
-                }
-              });
-            });
-          },
-        ),
-        fadeSuffixOnCondition: true,
-        suffixShowFirstCondition: _pasteButtonVisible,
-        style: _addressStyle == AddressStyle.TEXT60
-            ? AppStyles.textStyleAddressText60(context)
-            : _addressStyle == AddressStyle.TEXT90
-                ? AppStyles.textStyleAddressText90(context)
-                : AppStyles.textStyleAddressPrimary(context),
-        onChanged: (String text) async {
-          bool isUser = false;
-          final bool isDomain = text.contains(".") || text.contains(r"$");
-          final bool isFavorite = text.startsWith("★");
-          final bool isNano = text.startsWith("nano_");
-
-          // prevent spaces:
-          if (text.contains(" ")) {
-            text = text.replaceAll(" ", "");
-            _addressController!.text = text;
-            _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
-          }
-
-          if (text.isNotEmpty) {
+          }),
+      fadePrefixOnCondition: true,
+      prefixShowFirstCondition: _showContactButton && _users.isEmpty,
+      suffixButton: TextFieldButton(
+        icon: _clearButton ? AppIcons.clear : AppIcons.paste,
+        onPressed: () {
+          if (_clearButton) {
             setState(() {
-              _showContactButton = false;
-              _pasteButtonVisible = true;
-              _clearButton = true;
-            });
-          } else {
-            setState(() {
-              _showContactButton = true;
+              _isUser = false;
+              _addressValidationText = "";
               _pasteButtonVisible = true;
               _clearButton = false;
-            });
-          }
-
-          if (text.isNotEmpty && !isUser && !isNano) {
-            isUser = true;
-          }
-
-          if (text.isNotEmpty && text.startsWith("nano_")) {
-            isUser = false;
-          }
-
-          if (text.isNotEmpty && text.contains(".")) {
-            isUser = false;
-          }
-
-          // check if it's a real nano address:
-          // bool isUser = !text.startsWith("nano_") && !text.startsWith("★");
-          if (text.isEmpty) {
-            setState(() {
-              _isUser = false;
+              _showContactButton = true;
+              _addressController!.text = "";
               _users = [];
             });
-          } else if (isFavorite) {
-            final List<User> matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
-            final Set<String?> nicknames = <String?>{};
-            matchedList.retainWhere((User x) => nicknames.add(x.nickname));
-            setState(() {
-              _isFavorite = true;
-              _users = matchedList;
-            });
-          } else if (isUser || isDomain) {
-            final List<User> matchedList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
-            setState(() {
-              _isFavorite = false;
-              _users = matchedList;
-            });
-          } else {
-            setState(() {
-              _isUser = false;
-              _users = [];
-            });
+            return;
           }
-          // Always reset the error message to be less annoying
-          if (_addressValidationText.isNotEmpty) {
-            setState(() {
-              _addressValidationText = "";
+          Clipboard.getData("text/plain").then((ClipboardData? data) {
+            if (data == null || data.text == null) {
+              return;
+            }
+            final Address address = Address(data.text);
+            String addressText = data.text!;
+            // if (!address.isValid()) {
+            //   return;
+            // }
+            sl.get<DBHelper>().getUserOrContactWithAddress(addressText).then((User? user) {
+              if (user == null) {
+                setState(() {
+                  _isUser = false;
+                  _addressValidationText = "";
+                  _addressStyle = AddressStyle.TEXT90;
+                  _pasteButtonVisible = true;
+                  _clearButton = true;
+                  _showContactButton = false;
+                  _addressController!.text = addressText;
+                  _addressFocusNode!.unfocus();
+                  _addressValidAndUnfocused = true;
+                });
+              } else {
+                // Is a user
+                setState(() {
+                  _addressController!.text = user.getDisplayName()!;
+                  _addressFocusNode!.unfocus();
+                  _users = [];
+                  _isUser = true;
+                  _addressValidationText = "";
+                  _addressStyle = AddressStyle.PRIMARY;
+                  _pasteButtonVisible = true;
+                  _clearButton = true;
+                  _showContactButton = false;
+                });
+              }
             });
-          }
-          if (isNano && Address(text).isValid()) {
-            _addressFocusNode!.unfocus();
-            setState(() {
-              _addressStyle = AddressStyle.TEXT90;
-              _addressValidationText = "";
-              _pasteButtonVisible = false;
-            });
-          } else {
-            setState(() {
-              _addressStyle = AddressStyle.TEXT60;
-            });
-          }
+          });
+        },
+      ),
+      fadeSuffixOnCondition: true,
+      suffixShowFirstCondition: _pasteButtonVisible,
+      style: _addressStyle == AddressStyle.TEXT60
+          ? AppStyles.textStyleAddressText60(context)
+          : _addressStyle == AddressStyle.TEXT90
+              ? AppStyles.textStyleAddressText90(context)
+              : AppStyles.textStyleAddressPrimary(context),
+      onChanged: (String text) async {
+        bool isUser = false;
+        final bool isDomain = text.contains(".") || text.contains(r"$");
+        final bool isFavorite = text.startsWith("★");
+        final bool isNano = text.startsWith("nano_");
 
-          if ((isUser || isFavorite) != _isUser) {
-            setState(() {
-              _isUser = isUser || isFavorite;
-            });
-          }
-        },
-        onSubmitted: (String text) {
-          if (_memoController!.text.isEmpty) {
-            FocusScope.of(context).nextFocus();
-          } else {
-            FocusScope.of(context).unfocus();
-          }
-        },
-        overrideTextFieldWidget: _addressValidAndUnfocused
-            ? GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _addressValidAndUnfocused = false;
-                  });
-                  Future.delayed(const Duration(milliseconds: 50), () {
-                    FocusScope.of(context).requestFocus(_addressFocusNode);
-                  });
-                },
-                child: UIUtil.threeLineAddressText(context, _addressController!.text))
-            : null,
-            );
+        // prevent spaces:
+        if (text.contains(" ")) {
+          text = text.replaceAll(" ", "");
+          _addressController!.text = text;
+          _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+        }
+
+        if (text.isNotEmpty) {
+          setState(() {
+            _showContactButton = false;
+            _pasteButtonVisible = true;
+            _clearButton = true;
+          });
+        } else {
+          setState(() {
+            _showContactButton = true;
+            _pasteButtonVisible = true;
+            _clearButton = false;
+          });
+        }
+
+        if (text.isNotEmpty && !isUser && !isNano) {
+          isUser = true;
+        }
+
+        if (text.isNotEmpty && text.startsWith("nano_")) {
+          isUser = false;
+        }
+
+        if (text.isNotEmpty && text.contains(".")) {
+          isUser = false;
+        }
+
+        // check if it's a real nano address:
+        // bool isUser = !text.startsWith("nano_") && !text.startsWith("★");
+        if (text.isEmpty) {
+          setState(() {
+            _isUser = false;
+            _users = [];
+          });
+        } else if (isFavorite) {
+          final List<User> matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+          final Set<String?> nicknames = <String?>{};
+          matchedList.retainWhere((User x) => nicknames.add(x.nickname));
+          setState(() {
+            _isFavorite = true;
+            _users = matchedList;
+          });
+        } else if (isUser || isDomain) {
+          final List<User> matchedList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+          setState(() {
+            _isFavorite = false;
+            _users = matchedList;
+          });
+        } else {
+          setState(() {
+            _isUser = false;
+            _users = [];
+          });
+        }
+        // Always reset the error message to be less annoying
+        if (_addressValidationText.isNotEmpty) {
+          setState(() {
+            _addressValidationText = "";
+          });
+        }
+        if (isNano && Address(text).isValid()) {
+          _addressFocusNode!.unfocus();
+          setState(() {
+            _addressStyle = AddressStyle.TEXT90;
+            _addressValidationText = "";
+            _pasteButtonVisible = false;
+          });
+        } else {
+          setState(() {
+            _addressStyle = AddressStyle.TEXT60;
+          });
+        }
+
+        if ((isUser || isFavorite) != _isUser) {
+          setState(() {
+            _isUser = isUser || isFavorite;
+          });
+        }
+      },
+      onSubmitted: (String text) {
+        if (_memoController!.text.isEmpty) {
+          FocusScope.of(context).nextFocus();
+        } else {
+          FocusScope.of(context).unfocus();
+        }
+      },
+      overrideTextFieldWidget: _addressValidAndUnfocused
+          ? GestureDetector(
+              onTap: () {
+                setState(() {
+                  _addressValidAndUnfocused = false;
+                });
+                Future.delayed(const Duration(milliseconds: 50), () {
+                  FocusScope.of(context).requestFocus(_addressFocusNode);
+                });
+              },
+              child: UIUtil.threeLineAddressText(context, _addressController!.text))
+          : null,
+    );
   } //************ Enter Address Container Method End ************//
   //*************************************************************//
 

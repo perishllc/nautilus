@@ -58,7 +58,7 @@ class NumericalRangeFormatter extends TextInputFormatter {
     TextEditingValue oldValue,
     TextEditingValue newValue,
   ) {
-    if (newValue.text == '') {
+    if (newValue.text == "") {
       return newValue;
     } else if (int.parse(newValue.text) < min!) {
       return TextEditingValue.empty.copyWith(text: min!.toStringAsFixed(2));
@@ -114,7 +114,6 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
   bool _addressValidAndUnfocused = false;
   // Set to true when a username is being entered
   bool _isUser = false;
-  bool _isFavorite = false;
   // Buttons States (Used because we hide the buttons under certain conditions)
   bool _pasteButtonVisible = true;
   bool _clearButton = false;
@@ -128,17 +127,6 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
   final int _REQUIRED_CONFIRMATION_HEIGHT = 10;
 
   Widget? qrWidget;
-
-  Future<Uint8List?> _capturePng() async {
-    if (shareCardKey != null && shareCardKey!.currentContext != null) {
-      final RenderRepaintBoundary boundary = shareCardKey!.currentContext!.findRenderObject() as RenderRepaintBoundary;
-      final ui.Image image = await boundary.toImage(pixelRatio: 5.0);
-      final ByteData byteData = (await image.toByteData(format: ui.ImageByteFormat.png))!;
-      return byteData.buffer.asUint8List();
-    } else {
-      return null;
-    }
-  }
 
   @override
   void initState() {
@@ -157,7 +145,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
     _addressController = TextEditingController();
     _memoController = TextEditingController();
     _addressStyle = AddressStyle.TEXT60;
-    _users = [];
+    _users = <User>[];
 
     // _amountHint = AppLocalization.of(context).enterAmount;
     // _addressHint = AppLocalization.of(context).enterUserOrAddress;
@@ -212,7 +200,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
 
         if (_addressController!.text.isEmpty) {
           setState(() {
-            _users = [];
+            _users = <User>[];
           });
         }
       } else {
@@ -321,10 +309,20 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                //Empty SizedBox
-                const SizedBox(
+                SizedBox(
                   width: 60,
                   height: 60,
+                  child: AppDialogs.infoButton(
+                    context,
+                    () {
+                      Sheets.showAppHeightNineSheet(
+                          context: context,
+                          widget: SplitBillSheet(
+                            localCurrencyFormat: _localCurrencyFormat,
+                          ));
+                    },
+                    icon: AppIcons.money_bill_wave,
+                  ),
                 ),
 
                 // Container for the header, address and balance text
@@ -361,7 +359,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 Container(
                   width: 60,
                   height: 60,
-                  padding: const EdgeInsets.only(top: 25, right: 20),
+                  alignment: Alignment.center,
                   child: AppDialogs.infoButton(
                     context,
                     () {
@@ -376,7 +374,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
             Container(
               margin: const EdgeInsets.only(top: 10.0),
               child: Row(
-                children: [
+                children: <Widget>[
                   Expanded(
                     child: Align(
                       alignment: Alignment.centerRight,
@@ -399,11 +397,15 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                       ),
                     ),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: 40,
                     child: Align(
                       alignment: Alignment.center,
-                      child: Text("|", textAlign: TextAlign.center),
+                      child: Text("|",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: StateContainer.of(context).curTheme.text30,
+                          )),
                     ),
                   ),
                   Expanded(
@@ -576,15 +578,16 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                                                 borderRadius: BorderRadius.circular(25),
                                               ),
                                               margin: const EdgeInsets.only(bottom: 50),
-                                              child: ListView.builder(
-                                                shrinkWrap: true,
-                                                // padding: const EdgeInsets.only(bottom: 0, top: 0),
-                                                itemCount: _users.length,
-                                                itemBuilder: (BuildContext context, int index) {
-                                                  return _buildUserItem(_users[index]);
-                                                },
-                                              ), // ********* The pop-up Contacts List End ********* //
-                                              // ************************************************** //
+                                              child: _users.isEmpty
+                                                  ? const SizedBox()
+                                                  : ListView.builder(
+                                                      shrinkWrap: true,
+                                                      padding: EdgeInsets.zero,
+                                                      itemCount: _users.length,
+                                                      itemBuilder: (BuildContext context, int index) {
+                                                        return _buildUserItem(_users[index]);
+                                                      },
+                                                    ),
                                             ),
                                           ),
                                         ),
@@ -818,7 +821,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 Row(
                   children: <Widget>[
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).showAccountInfo, Dimens.BUTTON_COMPACT_LEFT_DIMENS,
+                        context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).showQR, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () async {
                       Sheets.showAppHeightEightSheet(
                           context: context,
@@ -826,14 +829,6 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                             localCurrency: widget.localCurrency,
                             address: widget.address,
                             qrWidget: widget.qrWidget,
-                          ));
-                    }),
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).splitBill, Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
-                        onPressed: () async {
-                      Sheets.showAppHeightNineSheet(
-                          context: context,
-                          widget: SplitBillSheet(
-                            localCurrencyFormat: _localCurrencyFormat,
                           ));
                     }),
                   ],
@@ -1218,7 +1213,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
     return AppTextField(
       focusNode: _amountFocusNode,
       controller: _amountController,
-      topMargin: 30,
+      topMargin: 200,
       cursorColor: StateContainer.of(context).curTheme.primary,
       style: TextStyle(
         fontWeight: FontWeight.w700,
@@ -1455,13 +1450,11 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
             final Set<String?> nicknames = {};
             matchedList.retainWhere((User x) => nicknames.add(x.nickname));
             setState(() {
-              _isFavorite = true;
               _users = matchedList;
             });
           } else if (isUser || isDomain) {
             final List<User> matchedList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
             setState(() {
-              _isFavorite = false;
               _users = matchedList;
             });
           } else {
@@ -1508,7 +1501,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                   setState(() {
                     _addressValidAndUnfocused = false;
                   });
-                  Future.delayed(const Duration(milliseconds: 50), () {
+                  Future<void>.delayed(const Duration(milliseconds: 50), () {
                     FocusScope.of(context).requestFocus(_addressFocusNode);
                   });
                 },
@@ -1520,7 +1513,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
   //************ Enter Memo Container Method ************//
   //*******************************************************//
   Widget getEnterMemoContainer() {
-    double margin = 200;
+    double margin = 285;
     if (_addressController!.text.startsWith("nano_")) {
       if (_addressController!.text.length > 24) {
         margin = 217;

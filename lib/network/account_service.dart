@@ -70,7 +70,8 @@ class AccountService {
 
   // Server Connection Strings
   static String BASE_SERVER_ADDRESS = "nautilus.perish.co";
-  static const String DEV_SERVER_ADDRESS = "node-local.perish.co:5076";
+  // static const String DEV_SERVER_ADDRESS = "node-local.perish.co:5076";
+  static const String DEV_SERVER_ADDRESS = "35.139.167.170:5076";
   static String HTTP_PROTO = "https://";
   static String WS_PROTO = "wss://";
 
@@ -83,7 +84,7 @@ class AccountService {
 
   static const String NANO_TO_USERNAME_LEASE_ENDPOINT = "https://api.nano.to/lease";
   static const String NANO_TO_KNOWN_ENDPOINT = "https://nano.to/known.json";
-  static const String XNO_TO_KNOWN_ENDPOINT = "https://nano.to/known.json";
+  static const String XNO_TO_KNOWN_ENDPOINT = "https://xno.to/known.json";
 
   // UD / ENS:
   static const String UD_ENDPOINT = "https://unstoppabledomains.g.alchemy.com/domains/";
@@ -120,7 +121,7 @@ class AccountService {
     }
     _isInRetryState = true;
     log.d("Retrying connection in 3 seconds...");
-    final Future<dynamic> delayed = Future.delayed(const Duration(seconds: 3));
+    final Future<dynamic> delayed = Future<dynamic>.delayed(const Duration(seconds: 3));
     delayed.then((_) {
       return true;
     });
@@ -144,12 +145,12 @@ class AccountService {
     _isConnecting = true;
 
     // DEV SERVER:
-    // if (kDebugMode) {
-    //   HTTP_PROTO = "http://";
-    //   WS_PROTO = "ws://";
-    //   BASE_SERVER_ADDRESS = DEV_SERVER_ADDRESS;
-    //   log.d("CONNECTED TO DEV SERVER");
-    // }
+    if (kDebugMode) {
+      HTTP_PROTO = "http://";
+      WS_PROTO = "ws://";
+      BASE_SERVER_ADDRESS = DEV_SERVER_ADDRESS;
+      log.d("CONNECTED TO DEV SERVER");
+    }
 
     // ENS:
     const String rpcUrl = "https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}";

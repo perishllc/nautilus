@@ -206,11 +206,10 @@ dependencies:
   app_tracking_transparency: ^2.0.2+4
 
   # list optimization:
-  # keframe:
-  #   git:
-  #     url: https://github.com/LianjiaTech/keframe
-  #     ref: master
   keframe: ^3.0.0
+
+  # home buttons:
+  carousel_slider: ^4.1.1
 
 flutter_intl:
   enabled: true

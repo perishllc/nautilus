@@ -5,6 +5,9 @@
 - Massive performance improvements to scrolling large lists using lazy loading, especially when using the scrollbar
 - Added animations to the list loader
 #### Changed
+- UI/UX overhaul to improve the experience for new users 
+- Buttons to add watch only accounts and hide empty accounts turned into icons
+- Unopened account warning now pops up as soon as the send confirmation screen is opened rather than waiting for you to press confirm
 - Updates to changelog / url buttons at the bottom of the settings drawer
 - Updates to block handoff handling
 - Remove nanocrawler from block explorer list, as it is being shut down
