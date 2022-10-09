@@ -1,6 +1,6 @@
 ## v0.6.7 - [2022-10-10]
 #### Added
-- Ability to backup / copy the monero wallet seed (it's generated deterministicallyt based on your nano account's seed)
+- Ability to backup / copy the monero wallet seed (it's generated deterministically based on your nano account's seed)
 - Dark mode switcher in the intro screen
 - Massive performance improvements to scrolling large lists using lazy loading, especially when using the scrollbar
 - Added animations to the list loader

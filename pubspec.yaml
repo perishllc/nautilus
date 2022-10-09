@@ -325,7 +325,7 @@ flutter:
     - assets/illustrations/transferfunds_start.svg
     - assets/illustrations/transferfunds_paperwalletonly.svg
     # changelog:
-    # - CHANGELOG.md
+    - CHANGELOG.md
     # xmr:
     - assets/xmr/
     - assets/xmr/index.html
