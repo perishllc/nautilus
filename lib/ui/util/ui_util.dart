@@ -366,28 +366,30 @@ class UIUtil {
 
   static Future<void> showBlockExplorerWebview(BuildContext context, String? hash) async {
     cancelLockEvent();
-    final InAppBrowser browser = InAppBrowser();
-    final InAppBrowserClassOptions options = InAppBrowserClassOptions(
-        crossPlatform: InAppBrowserOptions(
-          hideUrlBar: true,
-          toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
-        ),
-        inAppWebViewGroupOptions: InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
+    // final InAppBrowser browser = InAppBrowser();
+    // final InAppBrowserClassOptions options = InAppBrowserClassOptions(
+    //     crossPlatform: InAppBrowserOptions(
+    //       hideUrlBar: true,
+    //       toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
+    //     ),
+    //     inAppWebViewGroupOptions: InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
     final String url = NonTranslatable.getBlockExplorerUrl(hash, StateContainer.of(context).curBlockExplorer);
-    await browser.openUrlRequest(urlRequest: URLRequest(url: Uri.parse(url)), options: options);
+    // await browser.openUrlRequest(urlRequest: URLRequest(url: Uri.parse(url)), options: options);
+    showChromeSafariWebview(context, url);
   }
 
   static Future<void> showAccountWebview(BuildContext context, String? account) async {
     cancelLockEvent();
-    final InAppBrowser browser = InAppBrowser();
-    final InAppBrowserClassOptions options = InAppBrowserClassOptions(
-        crossPlatform: InAppBrowserOptions(
-          hideUrlBar: true,
-          toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
-        ),
-        inAppWebViewGroupOptions: InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
+    // final InAppBrowser browser = InAppBrowser();
+    // final InAppBrowserClassOptions options = InAppBrowserClassOptions(
+    //     crossPlatform: InAppBrowserOptions(
+    //       hideUrlBar: true,
+    //       toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
+    //     ),
+    //     inAppWebViewGroupOptions: InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
     final String url = NonTranslatable.getAccountExplorerUrl(account, StateContainer.of(context).curBlockExplorer);
-    await browser.openUrlRequest(urlRequest: URLRequest(url: Uri.parse(url)), options: options);
+    // await browser.openUrlRequest(urlRequest: URLRequest(url: Uri.parse(url)), options: options);
+    showChromeSafariWebview(context, url);
   }
 
   static Future<void> showWebview(BuildContext context, String url) async {

@@ -151,8 +151,18 @@ class Address {
     return address!.substring(0, 12);
   }
 
+  String? getUltraShort() {
+    if (address == null || address!.length < 64) {
+      return null;
+    }
+    return "${address!.substring(5, 9)}...${address!.substring(address!.length - 4)}";
+  }
+
   bool isValid() {
-    return address == null ? false : NanoAccounts.isValid(NanoAccountType.NANO, address!);
+    if (address == null) {
+      return false;
+    }
+    return NanoAccounts.isValid(NanoAccountType.NANO, address!);
   }
 
   void _parseAddressString(String? value) {

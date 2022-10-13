@@ -31,7 +31,7 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 
 class SplitBillSheet extends StatefulWidget {
-  const SplitBillSheet({Key? key, required this.localCurrencyFormat}) : super(key: key);
+  const SplitBillSheet({super.key, required this.localCurrencyFormat});
 
   final NumberFormat localCurrencyFormat;
 
@@ -50,8 +50,6 @@ class SplitBillSheetState extends State<SplitBillSheet> {
   bool _addingAccount = false;
   final ScrollController _scrollController = ScrollController();
 
-  late bool _accountIsChanging;
-
   Future<bool> _onWillPop() async {
     return true;
   }
@@ -60,7 +58,6 @@ class SplitBillSheetState extends State<SplitBillSheet> {
   void initState() {
     super.initState();
     _addingAccount = false;
-    _accountIsChanging = false;
   }
 
   @override

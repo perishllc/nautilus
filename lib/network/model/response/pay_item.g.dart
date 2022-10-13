@@ -15,6 +15,10 @@ PayItem _$PayItemFromJson(Map<String, dynamic> json) => PayItem()
   ..label = json['label'] as String? ?? ''
   ..message = json['message'] as String? ?? ''
   ..signature = json['signature'] as String? ?? ''
+  ..metadata = (json['metadata'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String?),
+      ) ??
+      {}
   ..exact = json['exact'] as bool? ?? true
   ..work = json['work'] as bool? ?? true
   ..reuse = json['reuse'] as bool? ?? false;
@@ -26,6 +30,7 @@ Map<String, dynamic> _$PayItemToJson(PayItem instance) => <String, dynamic>{
       'label': instance.label,
       'message': instance.message,
       'signature': instance.signature,
+      'metadata': instance.metadata,
       'exact': instance.exact,
       'work': instance.work,
       'reuse': instance.reuse,

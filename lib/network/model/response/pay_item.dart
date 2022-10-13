@@ -29,6 +29,9 @@ class PayItem {
   @JsonKey(name: 'signature', defaultValue: "")
   late String signature;
 
+  @JsonKey(name: 'metadata', defaultValue: {})
+  Map<String, String?>? metadata;
+
   @JsonKey(name: 'exact', defaultValue: true)
   late bool exact;
 

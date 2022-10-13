@@ -357,6 +357,7 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
 
   // Build contact items for the list
   Widget _buildUserItem(User user) {
+    final String clickable = "${user.getDisplayName(ignoreNickname: true)!} (${Address(user.address).getUltraShort()})";
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -374,7 +375,7 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
                 _addressValidationText = "";
               });
             },
-            child: Text(user.getDisplayName(ignoreNickname: true)!, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
+            child: Text(clickable, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
           ),
         ),
         Container(

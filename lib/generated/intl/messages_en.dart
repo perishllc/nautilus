@@ -318,6 +318,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "An error occured while trying to create a gift card link"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "An error occured while trying to create a gift card, THE GIFT CARD LINK OR SEED HAS BEEN COPIED TO YOUR CLIPBOARD, YOUR FUNDS MAY BE CONTAINED WITHIN IT DEPENDING ON WHAT WENT WRONG."),
+        "giftCardInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Gift Sheet Info"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Gift From"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a split amount to distribute from the gift card rather than the entire balance."),

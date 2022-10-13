@@ -37,6 +37,7 @@ import 'package:nautilus_wallet_flutter/ui/lock_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/password_lock_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/purchase_nano.dart';
 import 'package:nautilus_wallet_flutter/ui/register/register_username.dart';
+import 'package:nautilus_wallet_flutter/ui/scan_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/swap/swap_xmr_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
@@ -114,12 +115,12 @@ class AppState extends State<App> {
           dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           primaryColor: StateContainer.of(context).curTheme.primary,
           backgroundColor: StateContainer.of(context).curTheme.background,
+          brightness: StateContainer.of(context).curTheme.brightness,
           fontFamily: "NunitoSans",
-          brightness: Brightness.dark,
           useMaterial3: true,
           colorScheme: ColorScheme.fromSwatch().copyWith(
               secondary: StateContainer.of(context).curTheme.primary10,
-              brightness: Brightness.dark,
+              brightness: StateContainer.of(context).curTheme.brightness,
               error: StateContainer.of(context).curTheme.error,
               primary: StateContainer.of(context).curTheme.primary),
         ),
@@ -338,6 +339,11 @@ class AppState extends State<App> {
             case '/swap_xmr':
               return NoTransitionRoute(
                 builder: (_) => SwapXMRScreen(localCurrency: StateContainer.of(context).curCurrency),
+                settings: settings,
+              );
+            case '/scan':
+              return NoTransitionRoute(
+                builder: (_) => const ScanScreen(),
                 settings: settings,
               );
             // case '/payments_page':

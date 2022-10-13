@@ -820,8 +820,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).showQR, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).showQR, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () async {
                       Sheets.showAppHeightEightSheet(
                           context: context,
@@ -1073,6 +1072,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
 
   // Build contact items for the list
   Widget _buildUserItem(User user) {
+    final String clickable = "${user.getDisplayName()!} (${Address(user.address).getUltraShort()})";
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -1091,7 +1091,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 _addressValidationText = "";
               });
             },
-            child: Text(user.getDisplayName()!, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
+            child: Text(clickable, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
           ),
         ),
         Container(
@@ -1210,10 +1210,19 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
   //************ Enter Amount Container Method ************//
   //*******************************************************//
   Widget getEnterAmountContainer() {
+    double margin = 200;
+    if (_addressController!.text.startsWith("nano_")) {
+      if (_addressController!.text.length > 24) {
+        margin += 15;
+      }
+      if (_addressController!.text.length > 48) {
+        margin += 20;
+      }
+    }
     return AppTextField(
+      topMargin: margin,
       focusNode: _amountFocusNode,
       controller: _amountController,
-      topMargin: 200,
       cursorColor: StateContainer.of(context).curTheme.primary,
       style: TextStyle(
         fontWeight: FontWeight.w700,
@@ -1508,7 +1517,6 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 child: UIUtil.threeLineAddressText(context, _addressController!.text))
             : null);
   } //************ Enter Address Container Method End ************//
-  //*************************************************************//
 
   //************ Enter Memo Container Method ************//
   //*******************************************************//
@@ -1516,10 +1524,10 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
     double margin = 285;
     if (_addressController!.text.startsWith("nano_")) {
       if (_addressController!.text.length > 24) {
-        margin = 217;
+        margin += 10;
       }
       if (_addressController!.text.length > 48) {
-        margin = 238;
+        margin += 10;
       }
     }
     return AppTextField(
@@ -1548,5 +1556,4 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
       },
     );
   } //************ Enter Memo Container Method End ************//
-  //*************************************************************//
 }

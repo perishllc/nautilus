@@ -48,7 +48,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
   bool _showRegisterButton = false;
   Map? _leaseDetails;
   // int _leaseSelected = 0;
-  String? _leaseSelected = "1 Day";
+  String? _leaseSelected = "2 Days";
   int _leaseSelectedIndex = 0;
   // Used to replace address textfield with colorized TextSpan
   bool _usernameValidAndUnfocused = false;
@@ -129,9 +129,9 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
             _usernameValidationText = "";
           })
         },
-        value: "${_leaseDetails!["plans"][i]["name"]}",
+        value: "${_leaseDetails!["plans"][i]["title"]}",
         child: Text(
-          "${_leaseDetails!["plans"][i]["name"]}",
+          "${_leaseDetails!["plans"][i]["title"]}",
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
@@ -151,18 +151,6 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
             });
           },
         ));
-
-    // return DropdownButton(
-    //   items: _leaseDetails["plans"].forEach((dynamic item) => DropdownMenuItem<String>(child: Text(item), value: item)).toList(),
-    //   onChanged: (String value) {
-    //     setState(() {
-    //       print("previous ${this._leaseSelected}");
-    //       print("selected $value");
-    //       _leaseSelected = value;
-    //     });
-    //   },
-    //   value: _leaseSelected,
-    // );
   }
 
   Widget getPrice() {
@@ -172,17 +160,15 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
 
     // go through the plans to find the one that matches the selected duration:
     for (int i = 0; i < (_leaseDetails!["plans"] as List<dynamic>).length; i++) {
-      if (_leaseDetails!["plans"][i]["name"] == _leaseSelected) {
+      if (_leaseDetails!["plans"][i]["title"] == _leaseSelected) {
         _leaseSelectedIndex = i;
         break;
       }
     }
 
     String? price;
-    if (_leaseDetails!["plans"][_leaseSelectedIndex]["raw_amount"] != null) {
-      price = _leaseDetails!["plans"][_leaseSelectedIndex]["raw_amount"] as String?;
-    } else if (_leaseDetails!["plans"][_leaseSelectedIndex]["amount_raw"] != null) {
-      price = _leaseDetails!["plans"][_leaseSelectedIndex]["amount_raw"] as String?;
+    if (_leaseDetails!["plans"][_leaseSelectedIndex]["value_raw"] != null) {
+      price = _leaseDetails!["plans"][_leaseSelectedIndex]["value_raw"] as String?;
     } else {
       return Container();
     }
@@ -248,7 +234,8 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                               width: 50,
                               child: TextButton(
                                   style: TextButton.styleFrom(
-                                    foregroundColor: StateContainer.of(context).curTheme.text15, backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                                    foregroundColor: StateContainer.of(context).curTheme.text15,
+                                    backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                                     padding: EdgeInsets.zero,
                                   ),
@@ -413,26 +400,30 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                               return;
                             }
                             final Map<String, dynamic> resp = await sl.get<AccountService>().checkUsernameAvailability(username) as Map<String, dynamic>;
-                            if (resp != null) {
-                              if (resp["available"] == true) {
-                                setState(() {
-                                  _leaseDetails = resp;
-                                  _usernameValidationText = AppLocalization.of(context).usernameAvailable;
-                                  _showRegisterButton = true;
-                                });
-                              } else if (resp["available"] == false) {
-                                setState(() {
-                                  _usernameValidationText = AppLocalization.of(context).usernameUnavailable;
-                                });
-                              } else if (resp["status"] == "Invalid") {
-                                setState(() {
-                                  _usernameValidationText = AppLocalization.of(context).usernameInvalid;
-                                });
-                              } else {
-                                setState(() {
-                                  _usernameValidationText = AppLocalization.of(context).usernameError;
-                                });
-                              }
+                            if (resp == null) {
+                              setState(() {
+                                _usernameValidationText = AppLocalization.of(context).usernameError;
+                              });
+                              return;
+                            }
+                            if (resp["available"] == true) {
+                              setState(() {
+                                _leaseDetails = resp;
+                                _usernameValidationText = AppLocalization.of(context).usernameAvailable;
+                                _showRegisterButton = true;
+                              });
+                            } else if (resp["available"] == false) {
+                              setState(() {
+                                _usernameValidationText = AppLocalization.of(context).usernameUnavailable;
+                              });
+                            } else if (resp["message"] != null) {
+                              setState(() {
+                                _usernameValidationText = AppLocalization.of(context).usernameInvalid;
+                              });
+                            } else {
+                              setState(() {
+                                _usernameValidationText = AppLocalization.of(context).usernameError;
+                              });
                             }
                           }),
                         ],
@@ -446,10 +437,8 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                             final String username = _usernameController!.text.replaceAll("@", "");
 
                             String? price;
-                            if (_leaseDetails!["plans"][_leaseSelectedIndex]["raw_amount"] != null) {
-                              price = _leaseDetails!["plans"][_leaseSelectedIndex]["raw_amount"] as String?;
-                            } else if (_leaseDetails!["plans"][_leaseSelectedIndex]["amount_raw"] != null) {
-                              price = _leaseDetails!["plans"][_leaseSelectedIndex]["amount_raw"] as String?;
+                            if (_leaseDetails!["plans"][_leaseSelectedIndex]["value_raw"] != null) {
+                              price = _leaseDetails!["plans"][_leaseSelectedIndex]["value_raw"] as String?;
                             } else {
                               return Container();
                             }
@@ -461,7 +450,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                                 _usernameValidationText = AppLocalization.of(context).insufficientBalance;
                               });
                             } else {
-                              final String? destination = _leaseDetails!["plans"][_leaseSelectedIndex]["address"] as String?;
+                              final String? destination = _leaseDetails!["address"] as String?;
                               if (destination == null) {
                                 return Container();
                               }
@@ -475,8 +464,8 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                                     // quickSendAmount: item.amount,
                                     amountRaw: price,
                                     username: username,
-                                    checkUrl: _leaseDetails!["plans"][_leaseSelectedIndex]["check_url"] as String?,
-                                    leaseDuration: _leaseDetails!["plans"][_leaseSelectedIndex]["name"] as String?,
+                                    checkUrl: _leaseDetails!["check_url"] as String?,
+                                    leaseDuration: _leaseDetails!["plans"][_leaseSelectedIndex]["title"] as String?,
                                   ));
                             }
                           }),

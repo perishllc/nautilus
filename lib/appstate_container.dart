@@ -259,12 +259,12 @@ class StateContainerState extends State<StateContainer> {
   }
 
   void updateFundingAlerts(List<FundingResponseItem>? alerts) {
-    if (Platform.isIOS) {
-      // filter out alerts that can't be shown on iOS:
-      alerts = alerts?.where((FundingResponseItem item) {
-        return item.showOnIos ?? false;
-      }).toList();
-    }
+    // if (Platform.isIOS) {
+    //   // filter out alerts that can't be shown on iOS:
+    //   alerts = alerts?.where((FundingResponseItem item) {
+    //     return item.showOnIos ?? false;
+    //   }).toList();
+    // }
     setState(() {
       fundingAlerts = alerts;
     });

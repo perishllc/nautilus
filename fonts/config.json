@@ -179,6 +179,12 @@
       "css": "content_copy",
       "code": 59404,
       "src": "material"
+    },
+    {
+      "uid": "656b3512c2b4defd5a6d4e95fbc21065",
+      "css": "gift",
+      "code": 61547,
+      "src": "fontawesome5"
     }
   ]
 }

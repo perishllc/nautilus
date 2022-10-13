@@ -37,12 +37,11 @@ class _FundingMessagesSheetState extends State<FundingMessagesSheet> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                //Empty SizedBox
                 const SizedBox(
                   width: 60,
                   height: 60,
                 ),
-                //Container for the address text and sheet handle
+                // Container for the address text and sheet handle
                 Column(
                   children: <Widget>[
                     // Sheet handle
@@ -73,7 +72,6 @@ class _FundingMessagesSheetState extends State<FundingMessagesSheet> {
                     ),
                   ],
                 ),
-                //Empty SizedBox
                 const SizedBox(
                   width: 60,
                   height: 60,
@@ -121,31 +119,33 @@ class _FundingMessagesSheetState extends State<FundingMessagesSheet> {
       return [];
     }
 
-    for (final FundingResponseItem alert in alerts) {
-      ret.add(
-        Container(
-          padding: const EdgeInsetsDirectional.only(
-            start: 12,
-            end: 12,
-            bottom: 20,
+    if (!Platform.isIOS) {
+      for (final FundingResponseItem alert in alerts) {
+        ret.add(
+          Container(
+            padding: const EdgeInsetsDirectional.only(
+              start: 12,
+              end: 12,
+              bottom: 20,
+            ),
+            child: FundingMessageCard(
+              title: alert.title,
+              shortDescription: alert.shortDescription,
+              goalAmountRaw: alert.goalAmountRaw,
+              currentAmountRaw: alert.currentAmountRaw,
+              onPressed: () {
+                Sheets.showAppHeightEightSheet(
+                  context: context,
+                  widget: FundingSpecificSheet(
+                    alert: alert,
+                    hasDismissButton: false,
+                  ),
+                );
+              },
+            ),
           ),
-          child: FundingMessageCard(
-            title: alert.title,
-            shortDescription: alert.shortDescription,
-            goalAmountRaw: alert.goalAmountRaw,
-            currentAmountRaw: alert.currentAmountRaw,
-            onPressed: () {
-              Sheets.showAppHeightEightSheet(
-                context: context,
-                widget: FundingSpecificSheet(
-                  alert: alert,
-                  hasDismissButton: false,
-                ),
-              );
-            },
-          ),
-        ),
-      );
+        );
+      }
     }
 
     if (Platform.isIOS) {

@@ -14,8 +14,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppDialogs {
-  static void showConfirmDialog(
-      BuildContext context, String title, String content, String buttonText, Function onPressed,
+  static void showConfirmDialog(BuildContext context, String title, String content, String buttonText, Function onPressed,
       {String? cancelText, Function? cancelAction, bool barrierDismissible = true}) {
     cancelText ??= AppLocalization.of(context).cancel.toUpperCase();
 
@@ -35,7 +34,7 @@ class AppDialogs {
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
               ),
               child: Container(
@@ -52,10 +51,11 @@ class AppDialogs {
                 }
               },
             ),
-            TextButton(
-              style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
+                backgroundColor: StateContainer.of(context).curTheme.background,
               ),
               child: Container(
                 constraints: const BoxConstraints(maxWidth: 100),
@@ -84,6 +84,7 @@ class AppDialogs {
     Function? onPressed,
   }) async {
     closeText ??= AppLocalization.of(context).close.toUpperCase();
+    final ScrollController _scrollController = ScrollController();
     await showDialog(
       barrierColor: StateContainer.of(context).curTheme.barrier,
       context: context,
@@ -97,12 +98,39 @@ class AppDialogs {
             title,
             style: AppStyles.textStyleButtonPrimaryOutline(context),
           ),
-          content: Text(content, style: AppStyles.textStyleParagraph(context)),
+          // content: Text(content, style: AppStyles.textStyleParagraph(context)),
+          content: DraggableScrollbar(
+            controller: _scrollController,
+            scrollbarColor: StateContainer.of(context).curTheme.primary!,
+            scrollbarTopMargin: 2.0,
+            scrollbarBottomMargin: 2.0,
+            scrollbarHeight: 30,
+            scrollbarHideAfterDuration: Duration.zero,
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              // child: AutoSizeText(
+              //   AppLocalization.of(context).giftInfo,
+              //   style: AppStyles.textStyleParagraph(context),
+              //   maxLines: 12,
+              //   minFontSize: 12,
+              //   stepGranularity: 0.5,
+              // ),
+              child: Text(
+                AppLocalization.of(context).giftInfo,
+                style: AppStyles.textStyleParagraph(context),
+              ),
+              // ),
+            ),
+          ),
           actions: <Widget>[
-            TextButton(
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                padding: const EdgeInsets.all(12),
+              ),
               child: Text(
                 closeText!,
-                style: AppStyles.textStyleDialogButtonText(context),
+                style: AppStyles.textStyleDialogButtonText(context).copyWith(fontSize: AppFontSizes.small),
               ),
               onPressed: () async {
                 Navigator.of(context).pop();
@@ -125,7 +153,7 @@ class AppDialogs {
     ]);
   }
 
-  static Widget infoButton(BuildContext context, void Function()? onPressed,{IconData icon = AppIcons.info}) {
+  static Widget infoButton(BuildContext context, void Function()? onPressed, {IconData icon = AppIcons.info}) {
     // A container for the info button
     return SizedBox(
       width: 50,
@@ -194,8 +222,7 @@ class AppDialogs {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(AppLocalization.of(context).changeLog,
-                        textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
+                    child: Text(AppLocalization.of(context).changeLog, textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
                   ),
                   Container(
                     constraints: const BoxConstraints(minHeight: 300, maxHeight: 400),
@@ -270,9 +297,7 @@ class AppDialogs {
                             Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
                             Sheets.showAppHeightNineSheet(
-                                context: context,
-                                widget: FundingMessagesSheet(
-                                    alerts: StateContainer.of(context).fundingAlerts, hasDismissButton: false));
+                                context: context, widget: FundingMessagesSheet(alerts: StateContainer.of(context).fundingAlerts, hasDismissButton: false));
                           });
                         },
                         child: Text(
@@ -286,8 +311,7 @@ class AppDialogs {
                       TextButton(
                         key: const Key("changelog_dismiss_button"),
                         onPressed: () => Navigator.of(context).pop(),
-                        child:
-                            Text(AppLocalization.of(context).dismiss, style: AppStyles.textStyleDialogOptions(context)),
+                        child: Text(AppLocalization.of(context).dismiss, style: AppStyles.textStyleDialogOptions(context)),
                       ),
                     ]),
                   ),
@@ -316,8 +340,7 @@ class AppDialogs {
                 AppDialogs.infoButton(
                   context,
                   () {
-                    AppDialogs.showInfoDialog(context, AppLocalization.of(context).trackingHeader,
-                        AppLocalization.of(context).trackingWarningBodyLong);
+                    AppDialogs.showInfoDialog(context, AppLocalization.of(context).trackingHeader, AppLocalization.of(context).trackingWarningBodyLong);
                   },
                 )
               ],

@@ -4070,6 +4070,16 @@ class AppLocalization {
     );
   }
 
+  /// `Gift Sheet Info`
+  String get giftCardInfoHeader {
+    return Intl.message(
+      'Gift Sheet Info',
+      name: 'giftCardInfoHeader',
+      desc: 'gift_card_sheet_info_header',
+      args: [],
+    );
+  }
+
   /// `Sent`
   String get sent {
     return Intl.message(

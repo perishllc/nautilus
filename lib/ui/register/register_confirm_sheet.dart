@@ -265,7 +265,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
         try {
           // final Map<String, dynamic> resp = await sl.get<AccountService>().checkUsernameUrl(widget.checkUrl!) as Map<String, dynamic>;
           final resp = await sl.get<AccountService>().checkUsernameUrl(widget.checkUrl!);
-          if (resp != null && resp["completed"] == true) {
+          if (resp != null && resp["success"] == true) {
             success = true;
           } else {
             // check if it's been more than 30 seconds:

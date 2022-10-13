@@ -52,42 +52,43 @@ class AppPopupButtonState extends State<AppPopupButton> {
     final dynamic scanResult = await Navigator.pushNamed(context, "/before_scan_screen");
     if (!mounted) return;
     if (scanResult == null) {
-      UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
-    } else if (scanResult is String && QRScanErrs.ERROR_LIST.contains(scanResult)) {
+      return;
+    }
+
+    if (scanResult is String && QRScanErrs.ERROR_LIST.contains(scanResult)) {
       if (scanResult == QRScanErrs.PERMISSION_DENIED) {
         UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);
       } else if (scanResult == QRScanErrs.UNKNOWN_ERROR) {
         UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
       }
       return;
-    } else if (scanResult is Address) {
+    }
+
+    if (scanResult is Address) {
       // Is a URI
       final Address address = scanResult;
       if (address.address == null) {
         UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
+        return;
+      }
+      // See if this address belongs to a contact
+      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
+      if (!mounted) return;
+      // If amount is present, fill it and go to SendConfirm
+      final BigInt? amountBigInt = address.amount != null ? BigInt.tryParse(address.amount!) : null;
+      bool sufficientBalance = false;
+      if (amountBigInt != null && StateContainer.of(context).wallet!.accountBalance > amountBigInt) {
+        sufficientBalance = true;
+      }
+      if (amountBigInt != null && sufficientBalance) {
+        // Go to confirm sheet
+        Sheets.showAppHeightNineSheet(
+            context: context, widget: SendConfirmSheet(amountRaw: address.amount!, destination: address.address!, contactName: user?.getDisplayName()));
       } else {
-        // See if this address belongs to a contact
-        final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
-        if (!mounted) return;
-        // If amount is present, fill it and go to SendConfirm
-        final BigInt? amountBigInt = address.amount != null ? BigInt.tryParse(address.amount!) : null;
-        bool sufficientBalance = false;
-        if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24)) {
-          UIUtil.showSnackbar(
-              AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
-        } else if (amountBigInt != null && StateContainer.of(context).wallet!.accountBalance > amountBigInt) {
-          sufficientBalance = true;
-        }
-        if (amountBigInt != null && sufficientBalance) {
-          // Go to confirm sheet
-          Sheets.showAppHeightNineSheet(
-              context: context, widget: SendConfirmSheet(amountRaw: address.amount!, destination: address.address!, contactName: user?.getDisplayName()));
-        } else {
-          // Go to send sheet
-          Sheets.showAppHeightNineSheet(
-              context: context,
-              widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, user: user, address: address.address, quickSendAmount: address.amount));
-        }
+        // Go to send sheet
+        Sheets.showAppHeightNineSheet(
+            context: context,
+            widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, user: user, address: address.address, quickSendAmount: address.amount));
       }
     } else if (scanResult is PayItem) {
       // block handoff item:
@@ -96,14 +97,12 @@ class AppPopupButtonState extends State<AppPopupButton> {
       // See if this address belongs to a contact or username
       final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(payItem.account);
 
+      if (!mounted) return;
+
       // check if the user has enough balance to send this amount:
       // If balance is insufficient show error:
       final BigInt? amountBigInt = BigInt.tryParse(payItem.amount);
-      if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24) && mounted) {
-        UIUtil.showSnackbar(
-            AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
-        return;
-      } else if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
+      if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
         UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
         return;
       }

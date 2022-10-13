@@ -85,11 +85,11 @@ class UserDataUtil {
   static Future<dynamic> getQRData(DataType type, BuildContext context) async {
     UIUtil.cancelLockEvent();
     try {
-      final String data = (await BarcodeScanner.scan()).rawContent;
+      final String? data = await Navigator.pushNamed(context, "/scan") as String?;
       if (isEmpty(data)) {
         return null;
       }
-      return _parseData(data, type);
+      return _parseData(data!, type);
     } on PlatformException catch (e) {
       if (e.code == BarcodeScanner.cameraAccessDenied) {
         UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);

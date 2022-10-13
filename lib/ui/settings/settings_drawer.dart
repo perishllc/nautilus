@@ -1565,8 +1565,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           Column(
             children: settingsAlerts,
           ),
-        if (!Platform.isIOS &&
-            StateContainer.of(context).fundingAlerts != null &&
+        if (StateContainer.of(context).fundingAlerts != null &&
             StateContainer.of(context).fundingAlerts!.isNotEmpty &&
             _curFundingSetting.setting == FundingOptions.SHOW)
           Container(
@@ -1581,29 +1580,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
               currentAmountRaw: StateContainer.of(context).fundingAlerts![currentFundingIndex].currentAmountRaw,
               goalAmountRaw: StateContainer.of(context).fundingAlerts![currentFundingIndex].goalAmountRaw,
               hideAmounts: true,
-              onPressed: () {
-                Sheets.showAppHeightEightSheet(
-                  context: context,
-                  widget: FundingMessagesSheet(
-                    alerts: StateContainer.of(context).fundingAlerts,
-                    hasDismissButton: false,
-                  ),
-                );
-              },
-            ),
-          ),
-        if (Platform.isIOS && StateContainer.of(context).fundingAlerts != null && _curFundingSetting.setting == FundingOptions.SHOW)
-          Container(
-            padding: const EdgeInsetsDirectional.only(
-              start: 12,
-              end: 12,
-              bottom: 20,
-            ),
-            child: FundingMessageCard(
-              title: AppLocalization.of(context).donateToSupport,
-              shortDescription: AppLocalization.of(context).supportDevelopment,
-              hideAmounts: true,
-              hideProgressBar: true,
               onPressed: () {
                 Sheets.showAppHeightEightSheet(
                   context: context,

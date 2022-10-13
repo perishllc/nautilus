@@ -2005,6 +2005,11 @@
     "type": "text",
     "description": "send_sheet_info_header"
   },
+  "giftCardInfoHeader": "Gift Sheet Info",
+  "@giftCardInfoHeader": {
+    "type": "text",
+    "description": "gift_card_sheet_info_header"
+  },
   "sent": "Sent",
   "@sent": {
     "type": "text",

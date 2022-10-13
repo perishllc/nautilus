@@ -387,6 +387,7 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
 
   // Build contact items for the list
   Widget _buildUserItem(User user) {
+    final String clickable = "${user.getDisplayName(ignoreNickname: true)!} (${Address(user.address).getUltraShort()})";
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -404,7 +405,7 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
                 _addressValidationText = "";
               });
             },
-            child: Text(user.getDisplayName(ignoreNickname: true)!, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
+            child: Text(clickable, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
           ),
         ),
         Container(
@@ -594,8 +595,6 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
                         );
                       }
 
-                      print(user.type);
-
                       Navigator.of(context).pop(user);
                     }
                     // if (await validateForm()) {
@@ -618,7 +617,7 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
                   // Close Button
                   AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                       onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.of(context).pop();
                   }),
                 ],
               ),

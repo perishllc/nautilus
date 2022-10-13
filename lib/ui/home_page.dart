@@ -323,6 +323,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             barrierColor: StateContainer.of(context).curTheme.barrier,
             builder: (BuildContext context) {
               return AlertDialog(
+                actionsPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 title: Text(
                   AppLocalization.of(context).giftAlert,
@@ -380,36 +381,27 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                     onPressed: () {
                       Navigator.pop(context, 0);
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        AppLocalization.of(context).refund,
-                        style: AppStyles.textStyleDialogOptions(context),
-                      ),
+                    child: Text(
+                      AppLocalization.of(context).refund,
+                      style: AppStyles.textStyleDialogOptions(context),
                     ),
                   ),
                   AppSimpleDialogOption(
                     onPressed: () {
                       Navigator.pop(context, 1);
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        AppLocalization.of(context).receive,
-                        style: AppStyles.textStyleDialogOptions(context),
-                      ),
+                    child: Text(
+                      AppLocalization.of(context).receive,
+                      style: AppStyles.textStyleDialogOptions(context),
                     ),
                   ),
                   AppSimpleDialogOption(
                     onPressed: () {
                       Navigator.pop(context, 2);
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        AppLocalization.of(context).close,
-                        style: AppStyles.textStyleDialogOptions(context),
-                      ),
+                    child: Text(
+                      AppLocalization.of(context).close,
+                      style: AppStyles.textStyleDialogOptions(context),
                     ),
                   )
                 ],
@@ -481,6 +473,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             builder: (BuildContext context) {
               return AlertDialog(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                actionsPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 title: Text(
                   AppLocalization.of(context).giftAlert,
                   style: AppStyles.textStyleDialogHeader(context),
@@ -537,24 +530,18 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                     onPressed: () {
                       Navigator.pop(context, 0);
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        AppLocalization.of(context).receive,
-                        style: AppStyles.textStyleDialogOptions(context),
-                      ),
+                    child: Text(
+                      AppLocalization.of(context).receive,
+                      style: AppStyles.textStyleDialogOptions(context),
                     ),
                   ),
                   AppSimpleDialogOption(
                     onPressed: () {
                       Navigator.pop(context, 1);
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        AppLocalization.of(context).close,
-                        style: AppStyles.textStyleDialogOptions(context),
-                      ),
+                    child: Text(
+                      AppLocalization.of(context).close,
+                      style: AppStyles.textStyleDialogOptions(context),
                     ),
                   )
                 ],
@@ -593,7 +580,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             if (!mounted) return;
 
             if (res["error"] != null) {
-              log.d(res);
               // something went wrong, show error:
               UIUtil.showSnackbar(AppLocalization.of(context).errorProcessingGiftCard, context, durationMs: 4000);
             } else if (res["success"] != null) {
@@ -1272,8 +1258,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       });
 
       // random delay between 500ms and 1.5s:
-      Future<void>.delayed(Duration(milliseconds: 500 + Random().nextInt(1000)), () async {
-        _maxHistItems += 20;
+      Future<void>.delayed(Duration(milliseconds: 250 + Random().nextInt(500)), () async {
+        _maxHistItems += 25;
         await generateUnifiedList(fastUpdate: true);
         setState(() {
           _loadingMore = false;
@@ -1702,7 +1688,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     });
     // mark anything out of place or not in the unified list as to be removed:
     if (_searchController.text.isNotEmpty) {
-      ULM.items.where((item) => ULM!.items.indexOf(item) != (unifiedList.indexOf(item))).forEach((dynamic dynamicItem) {
+      ULM.items.where((dynamic item) => ULM!.items.indexOf(item) != (unifiedList.indexOf(item))).forEach((dynamic dynamicItem) {
         removeIndices.add(ULM!.items.indexOf(dynamicItem));
       });
     }
@@ -1785,7 +1771,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       if (!uuids.contains(req.uuid)) {
         uuids.add(req.uuid);
       } else {
-        log.d("detected duplicate TXData2! removing...");
+        log.e("detected duplicate TXData2! removing...");
         idsToRemove.add(req.id);
         await sl.get<DBHelper>().deleteTXDataByID(req.id);
         if (!mounted) return;
@@ -1858,7 +1844,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       // override the sorting algo if the search is numeric:
       overrideSort = double.tryParse(lowerCaseSearch) != null;
 
-      for (final dynamicItem in unifiedList) {
+      for (final dynamic dynamicItem in unifiedList) {
         bool shouldRemove = true;
 
         final TXData txDetails = dynamicItem is TXData
@@ -2078,11 +2064,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       // check if the user has enough balance to send this amount:
       // If balance is insufficient show error:
       final BigInt? amountBigInt = BigInt.tryParse(payItem.amount);
-      if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(24) && mounted) {
-        UIUtil.showSnackbar(
-            AppLocalization.of(context).minimumSend.replaceAll("%1", "0.000001").replaceAll("%2", StateContainer.of(context).currencyMode), context);
-        return;
-      } else if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
+      if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
         UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
         return;
       }
@@ -2431,7 +2413,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   @override
   Widget build(BuildContext context) {
     // handle branch gift if it exists:
-    if (StateContainer.of(context).gift != null) {
+    if (StateContainer.of(context).gift != null && !_lockTriggered) {
       handleBranchGift(StateContainer.of(context).gift);
       StateContainer.of(context).resetGift();
     }
@@ -2568,6 +2550,29 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   Widget _buildSearchbarAnimation() {
     return SearchBarAnimation(
+      // isOriginalAnimation: false,
+      // textEditingController: _searchController,
+      // cursorColour: StateContainer.of(context).curTheme.primary,
+      // isSearchBoxOnRightSide: !Bidi.isRtlLanguage(),
+      // buttonWidget: Icon(
+      //   Icons.search,
+      //   size: 26,
+      //   color: StateContainer.of(context).curTheme.text,
+      // ),
+      // secondaryButtonWidget: Icon(
+      //   Icons.close,
+      //   size: 20,
+      //   color: StateContainer.of(context).curTheme.text,
+      // ),
+      // trailingWidget: Icon(
+      //   Icons.search,
+      //   size: 20,
+      //   color: StateContainer.of(context).curTheme.primary,
+      // ),
+      // buttonColour: StateContainer.of(context).curTheme.backgroundDark, // icon background color
+      // hintTextColour: StateContainer.of(context).curTheme.text30,
+      // searchBoxColour: StateContainer.of(context).curTheme.backgroundDark, // background of the searchbox itself
+      // enableBoxShadow: false,
       isOriginalAnimation: false,
       textEditingController: _searchController,
       cursorColour: StateContainer.of(context).curTheme.primary,

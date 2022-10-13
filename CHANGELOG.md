@@ -1,3 +1,11 @@
+## v0.6.8 - [2022-10-15]
+#### Added
+- New QR Code Scanning UI
+#### Changed
+- When typing out usernames in forms a shortened version of the address is now shown next to the username
+#### Fixed
+- QR Code Scanning
+- nano.to username registration
 ## v0.6.7 - [2022-10-10]
 #### Added
 - Ability to backup / copy the monero wallet seed (it's generated deterministically based on your nano account's seed)

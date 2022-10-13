@@ -43,6 +43,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/receivable_respon
 import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
 import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/util/blake2b.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:synchronized/synchronized.dart';
@@ -82,7 +83,7 @@ class AccountService {
   static String SERVER_ADDRESS_FUNDING = "$HTTP_PROTO$BASE_SERVER_ADDRESS/funding";
   static String SERVER_ADDRESS_GIFT = "$HTTP_PROTO$BASE_SERVER_ADDRESS/gift";
 
-  static const String NANO_TO_USERNAME_LEASE_ENDPOINT = "https://api.nano.to/lease";
+  static const String NANO_TO_USERNAME_LEASE_ENDPOINT = "https://api.nano.to/";
   static const String NANO_TO_KNOWN_ENDPOINT = "https://nano.to/known.json";
   static const String XNO_TO_KNOWN_ENDPOINT = "https://xno.to/known.json";
 
@@ -505,15 +506,14 @@ class AccountService {
   }
 
   Future<dynamic> checkUsernameAvailability(String username) async {
-    final http.Response response = await http.get(Uri.parse("$NANO_TO_USERNAME_LEASE_ENDPOINT/$username"), headers: {"Accept": "application/json"});
-    if (response.statusCode != 200) {
-      return null;
-    }
+    final http.Response response = await http.get(Uri.parse("$NANO_TO_USERNAME_LEASE_ENDPOINT/$username/lease"), headers: {"Accept": "application/json"});
+    // if (response.statusCode != 200) {
+    //   return {"available": false};
+    // }
     final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
-    if (decoded.containsKey("error")) {
-      return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
-    }
-
+    // if (decoded.containsKey("error")) {
+    //   return {"available": false};
+    // }
     return decoded;
   }
 
@@ -743,6 +743,23 @@ class AccountService {
 
     return requestProcess(processRequest);
   }
+
+  // Future<String?> isUsernameRegistered(String username) async {
+  //   return null;
+  // }
+  // Future<void> registerUsername(String username) async {
+  //   // Suppose your private key is P, and your account is A.
+  //   // Part 1 to registration: Register a username -> account mapping:
+  //   // 1. Compute the account A2 which has the private key: blake2b("username registration:" + username)
+  //   Uint8List privateKey = NanoHelpers.stringToBytesUtf8("username registration:$username");
+  //   // TODO: check if the username is already registered:
+  //   bool isRegistered = isUsernameRegistered(username) == null;
+  //   if (isRegistered) {
+  //     throw Exception("Username is already registered");
+  //   }
+  //   // send 1 raw to
+  //   // blake2b()
+  // }
 
   Future<HandoffResponse> requestHandoffHTTP(
       String URI, String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,

@@ -1,4 +1,7 @@
+import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decimal/decimal.dart';
@@ -6,14 +9,16 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_branch_sdk/src/objects/branch_universal_object.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/bus/deep_link_event.dart';
 import 'package:nautilus_wallet_flutter/bus/fcm_update_event.dart';
 import 'package:nautilus_wallet_flutter/bus/notification_setting_change_event.dart';
-import 'package:nautilus_wallet_flutter/bus/xmr_event.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/address.dart';
@@ -22,10 +27,15 @@ import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/notification_setting.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/pay_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/auth/auth_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/handoff/handoff_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/send/send_xmr_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
@@ -35,38 +45,30 @@ import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/deviceutil.dart';
+import 'package:nautilus_wallet_flutter/util/giftcards.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:uni_links/uni_links.dart';
 
-class SendXMRSheet extends StatefulWidget {
-  const SendXMRSheet({required this.localCurrency, this.user, this.address, this.quickSendAmount}) : super();
+class SendGiftSheet extends StatefulWidget {
+  const SendGiftSheet({required this.localCurrency}) : super();
 
   final AvailableCurrency localCurrency;
-  final User? user;
-  final String? address;
-  final String? quickSendAmount;
 
-  @override
-  SendXMRSheetState createState() => SendXMRSheetState();
+  SendGiftSheetState createState() => SendGiftSheetState();
 }
 
 enum AddressStyle { TEXT60, TEXT90, PRIMARY }
 
-mixin SendSheetHelpers {
-  static String stripPrefixes(String addressText) {
-    return addressText.replaceAll("@", "").replaceAll("★", "");
-  }
-}
-
-class SendXMRSheetState extends State<SendXMRSheet> {
+class SendGiftSheetState extends State<SendGiftSheet> {
   final Logger log = sl.get<Logger>();
 
-  FocusNode? _addressFocusNode;
   FocusNode? _amountFocusNode;
   FocusNode? _memoFocusNode;
-  TextEditingController? _addressController;
   TextEditingController? _amountController;
   TextEditingController? _memoController;
 
@@ -96,10 +98,6 @@ class SendXMRSheetState extends State<SendXMRSheet> {
   String _lastCryptoAmount = "";
   late NumberFormat _localCurrencyFormat;
 
-  bool isIpad = false;
-
-  final int _REQUIRED_CONFIRMATION_HEIGHT = 10;
-
   // Receive card instance
   ReceiveSheet? receive;
 
@@ -109,35 +107,17 @@ class SendXMRSheetState extends State<SendXMRSheet> {
   void initState() {
     super.initState();
     _amountFocusNode = FocusNode();
-    _addressFocusNode = FocusNode();
     _memoFocusNode = FocusNode();
     _amountController = TextEditingController();
-    _addressController = TextEditingController();
     _memoController = TextEditingController();
     _addressStyle = AddressStyle.TEXT60;
     _users = [];
-    quickSendAmount = widget.quickSendAmount;
     animationOpen = false;
 
     // _amountHint = AppLocalization.of(context).enterAmount;
     // _addressHint = AppLocalization.of(context).enterUserOrAddress;
     // _memoHint = AppLocalization.of(context).enterMemo;
 
-    if (widget.user != null) {
-      // Setup initial state for contact pre-filled
-      _addressController!.text = widget.user!.getDisplayName()!;
-      _isUser = true;
-      _showContactButton = false;
-      _pasteButtonVisible = false;
-      _addressStyle = AddressStyle.PRIMARY;
-    } else if (widget.address != null) {
-      // Setup initial state with prefilled address
-      _addressController!.text = widget.address!;
-      _showContactButton = false;
-      _pasteButtonVisible = false;
-      _addressStyle = AddressStyle.TEXT90;
-      _addressValidAndUnfocused = true;
-    }
     // On amount focus change
     _amountFocusNode!.addListener(() {
       if (_amountFocusNode!.hasFocus) {
@@ -161,113 +141,6 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         setState(() {
           _amountHint = AppLocalization.of(context).enterAmount;
         });
-      }
-    });
-    // On address focus change
-    _addressFocusNode!.addListener(() async {
-      if (_addressFocusNode!.hasFocus) {
-        setState(() {
-          _addressHint = "";
-          _addressValidationText = "";
-          _addressValidAndUnfocused = false;
-          _pasteButtonVisible = true;
-          _addressStyle = AddressStyle.TEXT60;
-          if (_addressController!.text.isNotEmpty) {
-            _clearButton = true;
-          } else {
-            _clearButton = false;
-          }
-        });
-        _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
-        if (_addressController!.text.isNotEmpty && _addressController!.text.length > 1 && !_addressController!.text.startsWith("nano_")) {
-          final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
-          if (_addressController!.text != formattedAddress) {
-            setState(() {
-              _addressController!.text = formattedAddress;
-            });
-          }
-          final List<User> userList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(formattedAddress);
-          setState(() {
-            _users = userList;
-          });
-        }
-
-        if (_addressController!.text.isEmpty) {
-          setState(() {
-            _users = [];
-          });
-        }
-      } else {
-        setState(() {
-          _addressHint = AppLocalization.of(context).enterUserOrAddress;
-          _users = [];
-          if (Address(_addressController!.text).isValid()) {
-            _addressValidAndUnfocused = true;
-          }
-          if (_addressController!.text.isEmpty) {
-            _pasteButtonVisible = true;
-          }
-        });
-
-        if (SendSheetHelpers.stripPrefixes(_addressController!.text).isEmpty) {
-          setState(() {
-            _addressController!.text = "";
-          });
-          return;
-        }
-        if (_addressController!.text.isNotEmpty) {
-          final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
-          // check if in the username db:
-          String? address;
-          String? type;
-          final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
-          if (user != null) {
-            type = user.type;
-            if (_addressController!.text != user.getDisplayName()) {
-              setState(() {
-                _addressController!.text = user.getDisplayName()!;
-              });
-            }
-          } else {
-            // check if UD / ENS / opencap address
-            if (_addressController!.text.contains(r"$")) {
-              // check if opencap address:
-              address = await sl.get<AccountService>().checkOpencapDomain(formattedAddress);
-              if (address != null) {
-                type = UserTypes.OPENCAP;
-              }
-            } else if (_addressController!.text.contains(".")) {
-              // check if UD domain:
-              address = await sl.get<AccountService>().checkUnstoppableDomain(formattedAddress);
-              if (address != null) {
-                type = UserTypes.UD;
-              } else {
-                // check if ENS domain:
-                address = await sl.get<AccountService>().checkENSDomain(formattedAddress);
-                if (address != null) {
-                  type = UserTypes.ENS;
-                }
-              }
-            }
-          }
-
-          if (type != null) {
-            setState(() {
-              _pasteButtonVisible = false;
-              _addressStyle = AddressStyle.PRIMARY;
-            });
-
-            if (address != null && user == null) {
-              // add to the db if missing:
-              final User user = User(username: formattedAddress, address: address, type: type, is_blocked: false);
-              await sl.get<DBHelper>().addUser(user);
-            }
-          } else {
-            setState(() {
-              _addressStyle = AddressStyle.TEXT60;
-            });
-          }
-        }
       }
     });
     // On memo focus change
@@ -294,15 +167,6 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         });
       });
     }
-
-    // kind of a hack but w/e
-    DeviceUtil.isIpad().then((bool value) {
-      if (value) {
-        setState(() {
-          isIpad = true;
-        });
-      }
-    });
   }
 
   Future<bool> showNotificationDialog() async {
@@ -373,129 +237,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
     }
   }
 
-  Future<bool> showNeedVerificationAlert() async {
-    switch (await showDialog<int>(
-        context: context,
-        barrierColor: StateContainer.of(context).curTheme.barrier,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            title: Text(
-              AppLocalization.of(context).needVerificationAlertHeader,
-              style: AppStyles.textStyleDialogHeader(context),
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Text("${AppLocalization.of(context).needVerificationAlert}\n\n", style: AppStyles.textStyleParagraph(context)),
-              ],
-            ),
-            actions: <Widget>[
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, 1);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    AppLocalization.of(context).goToQRCode,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, 0);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    AppLocalization.of(context).ok,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-            ],
-          );
-        })) {
-      case 1:
-        // go to qr code
-        if (receive == null) {
-          return false;
-        }
-        Navigator.of(context).pop();
-        // TODO: BACKLOG: this is a roundabout solution to get the qr code to show up
-        // probably better to do with an event bus
-        Sheets.showAppHeightNineSheet(context: context, widget: receive!);
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  Future<void> showFallbackConnectedAlert() async {
-    await showDialog<bool>(
-        context: context,
-        barrierColor: StateContainer.of(context).curTheme.barrier,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            title: Text(
-              AppLocalization.of(context).fallbackHeader,
-              style: AppStyles.textStyleDialogHeader(context),
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Text("${AppLocalization.of(context).fallbackInfo}\n\n", style: AppStyles.textStyleParagraph(context)),
-              ],
-            ),
-            actions: <Widget>[
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    AppLocalization.of(context).ok,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-            ],
-          );
-        });
-  }
-
-  void paintQrCode({String? address}) {
-    final QrPainter painter = QrPainter(
-      data: address ?? StateContainer.of(context).wallet!.address!,
-      version: 6,
-      gapless: false,
-      errorCorrectionLevel: QrErrorCorrectLevel.Q,
-    );
-    painter.toImageData(MediaQuery.of(context).size.width).then((ByteData? byteData) {
-      setState(() {
-        receive = ReceiveSheet(
-          localCurrency: StateContainer.of(context).curCurrency,
-          address: StateContainer.of(context).wallet!.address,
-          qrWidget: SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List())),
-        );
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    // Create QR ahead of time because it improves performance this way
-    if (receive == null && StateContainer.of(context).wallet != null) {
-      paintQrCode();
-    }
-
-    // The main column that holds everything
     return SafeArea(
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
@@ -531,7 +274,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                         children: <Widget>[
                           // Header
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context).sendFrom, context),
+                            CaseChange.toUpperCase(AppLocalization.of(context).createGiftCard, context),
                             style: AppStyles.textStyleHeader(context),
                             textAlign: TextAlign.center,
                             maxLines: 1,
@@ -542,14 +285,13 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                     ),
                   ],
                 ),
-                Container(
+                SizedBox(
                   width: 60,
                   height: 60,
-                  padding: const EdgeInsets.only(top: 25, right: 20),
                   child: AppDialogs.infoButton(
                     context,
                     () {
-                      AppDialogs.showInfoDialog(context, AppLocalization.of(context).sendSheetInfoHeader, AppLocalization.of(context).sendSheetInfo);
+                      AppDialogs.showInfoDialog(context, AppLocalization.of(context).giftCardInfoHeader, AppLocalization.of(context).giftInfo);
                     },
                   ),
                 ),
@@ -559,7 +301,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
             Container(
               margin: const EdgeInsets.only(top: 10.0),
               child: Row(
-                children: [
+                children: <Widget>[
                   Expanded(
                     child: Align(
                       alignment: Alignment.centerRight,
@@ -567,7 +309,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                         textAlign: TextAlign.start,
                         text: TextSpan(
                           text: '',
-                          children: [
+                          children: <InlineSpan>[
                             TextSpan(
                               text: StateContainer.of(context).selectedAccount!.name,
                               style: TextStyle(
@@ -600,7 +342,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                         textAlign: TextAlign.start,
                         text: TextSpan(
                           text: '',
-                          children: [
+                          children: <InlineSpan>[
                             TextSpan(
                               text: StateContainer.of(context).wallet?.username ?? Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
                               style: TextStyle(
@@ -621,7 +363,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
             // Balance Text
             FutureBuilder<PriceConversion>(
               future: sl.get<SharedPrefsUtil>().getPriceConversion(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData && snapshot.data != null && snapshot.data != PriceConversion.HIDDEN) {
                   return RichText(
                     textAlign: TextAlign.start,
@@ -639,8 +381,18 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                         ),
                         if (!_localCurrencyMode)
                           TextSpan(
-                            text: getXMRThemeAwareRawAccuracy(context, StateContainer.of(context).xmrBalance),
+                            text: getThemeAwareRawAccuracy(context, StateContainer.of(context).wallet!.accountBalance.toString()),
                             style: TextStyle(
+                              color: StateContainer.of(context).curTheme.primary60,
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: "NunitoSans",
+                            ),
+                          ),
+                        if (!_localCurrencyMode)
+                          displayCurrencySymbol(
+                            context,
+                            TextStyle(
                               color: StateContainer.of(context).curTheme.primary60,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w700,
@@ -652,7 +404,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                               ? StateContainer.of(context)
                                   .wallet!
                                   .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale)
-                              : "${getXMRRawAsThemeAwareAmount(context, StateContainer.of(context).xmrBalance)} XMR",
+                              : getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString()),
                           style: TextStyle(
                             color: StateContainer.of(context).curTheme.primary60,
                             fontSize: 14.0,
@@ -691,7 +443,6 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                 child: GestureDetector(
                   onTap: () {
                     // Clear focus of our fields when tapped in this empty space
-                    _addressFocusNode!.unfocus();
                     _amountFocusNode!.unfocus();
                     _memoFocusNode!.unfocus();
                   },
@@ -725,8 +476,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                                 // ******* Enter Amount Error Container End ******* //
                               ],
                             ),
-
-                            // Column for Enter Address container + Enter Address Error container
+                            // Column for Enter Memo container + Enter Memo Error container
                             Column(
                               children: <Widget>[
                                 Container(
@@ -734,18 +484,25 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                                   child: Stack(
                                     alignment: Alignment.topCenter,
                                     children: <Widget>[
-                                      // ******* Enter Address Container ******* //
-                                      getEnterAddressContainer(),
-                                      // ******* Enter Address Container End ******* //
+                                      Container(
+                                        margin:
+                                            EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                        alignment: Alignment.bottomCenter,
+                                        constraints: const BoxConstraints(maxHeight: 174, minHeight: 0),
+                                      ),
+
+                                      // ******* Enter Memo Container ******* //
+                                      getEnterMemoContainer(),
+                                      // ******* Enter Memo Container End ******* //
                                     ],
                                   ),
                                 ),
 
-                                // ******* Enter Address Error Container ******* //
+                                // ******* Enter Memo Error Container ******* //
                                 Container(
                                   alignment: AlignmentDirectional.center,
                                   margin: const EdgeInsets.only(top: 3),
-                                  child: Text(_addressValidationText,
+                                  child: Text(_memoValidationText,
                                       style: TextStyle(
                                         fontSize: 14.0,
                                         color: StateContainer.of(context).curTheme.primary,
@@ -753,47 +510,9 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                                         fontWeight: FontWeight.w600,
                                       )),
                                 ),
-                                // ******* Enter Address Error Container End ******* //
+                                // ******* Enter Memo Error Container End ******* //
                               ],
                             ),
-
-                            // // Column for Enter Memo container + Enter Memo Error container
-                            // Column(
-                            //   children: <Widget>[
-                            //     Container(
-                            //       alignment: Alignment.topCenter,
-                            //       child: Stack(
-                            //         alignment: Alignment.topCenter,
-                            //         children: <Widget>[
-                            //           Container(
-                            //             margin:
-                            //                 EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                            //             alignment: Alignment.bottomCenter,
-                            //             constraints: const BoxConstraints(maxHeight: 174, minHeight: 0),
-                            //           ),
-
-                            //           // ******* Enter Memo Container ******* //
-                            //           getEnterMemoContainer(),
-                            //           // ******* Enter Memo Container End ******* //
-                            //         ],
-                            //       ),
-                            //     ),
-
-                            //     // ******* Enter Memo Error Container ******* //
-                            //     Container(
-                            //       alignment: AlignmentDirectional.center,
-                            //       margin: const EdgeInsets.only(top: 3),
-                            //       child: Text(_memoValidationText,
-                            //           style: TextStyle(
-                            //             fontSize: 14.0,
-                            //             color: StateContainer.of(context).curTheme.primary,
-                            //             fontFamily: "NunitoSans",
-                            //             fontWeight: FontWeight.w600,
-                            //           )),
-                            //     ),
-                            //     // ******* Enter Memo Error Container End ******* //
-                            //   ],
-                            // ),
                           ],
                         ),
                       ],
@@ -811,14 +530,14 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                 Row(
                   children: <Widget>[
                     // Send Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).createGiftCard, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       final bool validRequest = await _validateRequest();
 
                       if (!validRequest || !mounted) {
                         return;
                       }
 
-                      String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
+                      late String formattedAddress;
                       final String formattedAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
 
                       String amountRaw;
@@ -830,25 +549,55 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                           amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
                               _localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text)));
                         } else {
-                          amountRaw = NumberUtil.getXMRAmountAsRaw(formattedAmount);
+                          if (_rawAmount != null) {
+                            amountRaw = _rawAmount!;
+                          } else {
+                            if (!mounted) return;
+                            amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
+                          }
                         }
+                      }
+
+                      String? link;
+                      String? paperWalletSeed;
+
+                      // we need to create a gift card and change the destination address to the gift card address:
+                      paperWalletSeed = NanoSeeds.generateSeed();
+                      final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
+                      // final String paperWalletAccount = "nano_1i4fcujt49de3mio9eb9y5jakw8o9m1za6ntidxn4nkwgnunktpy54z1ma58";
+                      if (!mounted) return;
+                      final BranchResponse<dynamic> giftCardItem = await sl<GiftCards>().createGiftCard(
+                        context,
+                        paperWalletSeed: paperWalletSeed,
+                        amountRaw: amountRaw,
+                        memo: _memoController!.text,
+                      );
+
+                      if (giftCardItem.success) {
+                        link = giftCardItem.result as String;
+                        formattedAddress = paperWalletAccount;
+                      } else {
+                        if (!mounted) return;
+                        UIUtil.showSnackbar(AppLocalization.of(context).giftCardCreationError, context);
+                        return;
                       }
 
                       bool isMaxSend = false;
                       if (_isMaxSend()) {
                         isMaxSend = true;
                         if (!mounted) return;
-                        amountRaw = StateContainer.of(context).xmrBalance;
+                        amountRaw = StateContainer.of(context).wallet!.accountBalance.toString();
                       }
 
-                      EventTaxiImpl.singleton().fire(XMREvent(type: "xmr_get_fee", message: "$formattedAddress:$amountRaw"));
-                      Future<dynamic>.delayed(const Duration(milliseconds: 2000));
-                      Sheets.showAppHeightNineSheet(
+                      Sheets.showAppHeightEightSheet(
                           context: context,
-                          widget: SendXMRConfirmSheet(
+                          widget: SendConfirmSheet(
                               amountRaw: amountRaw,
                               destination: formattedAddress,
                               maxSend: isMaxSend,
+                              // phoneNumber: phoneNumber ?? "",
+                              link: link,
+                              paperWalletSeed: paperWalletSeed,
                               localCurrency: _localCurrencyMode ? _amountController!.text : null,
                               memo: _memoController!.text));
                     }),
@@ -897,13 +646,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
     }
   }
 
-  bool _isPhoneNumber(String text) {
-    // TODO: make more thorough:
-    return double.tryParse(text) != null;
-  }
-
   void toggleLocalCurrency() {
-    return; // TODO:
     // Keep a cache of previous amounts because, it's kinda nice to see approx what nano is worth
     // this way you can tap button and tap back and not end up with X.9993451 NANO
     if (_localCurrencyMode) {
@@ -920,7 +663,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       setState(() {
         _localCurrencyMode = false;
       });
-      Future<dynamic>.delayed(const Duration(milliseconds: 50), () {
+      Future<void>.delayed(const Duration(milliseconds: 50), () {
         _amountController!.text = cryptoAmountStr;
         _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: cryptoAmountStr.length));
       });
@@ -941,7 +684,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       setState(() {
         _localCurrencyMode = true;
       });
-      Future<dynamic>.delayed(const Duration(milliseconds: 50), () {
+      Future<void>.delayed(const Duration(milliseconds: 50), () {
         _amountController!.text = localAmountStr;
         _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: localAmountStr.length));
       });
@@ -959,8 +702,6 @@ class SendXMRSheetState extends State<SendXMRSheet> {
           width: double.infinity - 5,
           child: TextButton(
             onPressed: () {
-              _addressController!.text = user.getDisplayName()!;
-              _addressFocusNode!.unfocus();
               setState(() {
                 _isUser = true;
                 _showContactButton = false;
@@ -986,10 +727,9 @@ class SendXMRSheetState extends State<SendXMRSheet> {
   Future<bool> _validateRequest() async {
     bool isValid = true;
     _amountFocusNode!.unfocus();
-    _addressFocusNode!.unfocus();
     _memoFocusNode!.unfocus();
     // Validate amount
-    if (_amountController!.text.trim().isEmpty && _memoController!.text.trim().isNotEmpty) {
+    if (_amountController!.text.trim().isEmpty && _memoController!.text.trim().isEmpty) {
       isValid = false;
       setState(() {
         _amountValidationText = AppLocalization.of(context).amountMissing;
@@ -999,13 +739,17 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       if (_localCurrencyMode) {
         bananoAmount = sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
       } else {
-        bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
+        if (_rawAmount == null) {
+          bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
+        } else {
+          bananoAmount = getRawAsThemeAwareAmount(context, _rawAmount);
+        }
       }
       if (bananoAmount.isEmpty) {
         bananoAmount = "0";
       }
-      final BigInt balanceRaw = BigInt.parse(StateContainer.of(context).xmrBalance);
-      final BigInt? sendAmount = BigInt.tryParse(NumberUtil.getXMRAmountAsRaw(bananoAmount));
+      final BigInt balanceRaw = StateContainer.of(context).wallet!.accountBalance;
+      final BigInt? sendAmount = BigInt.tryParse(getThemeAwareAmountAsRaw(context, bananoAmount));
       if (sendAmount == null || sendAmount == BigInt.zero) {
         if (_memoController!.text.trim().isEmpty) {
           isValid = false;
@@ -1028,55 +772,6 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         });
       }
     }
-    // Validate address
-    final bool isUser = _addressController!.text.startsWith("@");
-    final bool isFavorite = _addressController!.text.startsWith("★");
-    final bool isDomain = _addressController!.text.contains(".") || _addressController!.text.contains(r"$");
-    final bool isNano = _addressController!.text.startsWith("nano_");
-    // final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
-    if (_addressController!.text.isNotEmpty && !isFavorite && !isUser && !isDomain && /*!Address(_addressController!.text).isValid()*/ false) {
-      isValid = false;
-      setState(() {
-        _addressValidationText = AppLocalization.of(context).invalidAddress;
-        _pasteButtonVisible = true;
-      });
-    } else if (!isUser && !isFavorite) {
-      setState(() {
-        _addressValidationText = "";
-        _pasteButtonVisible = false;
-      });
-      _addressFocusNode!.unfocus();
-    }
-    if (isValid) {
-      // notifications must be turned on if sending a request or memo:
-      final bool notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
-
-      // if (((_memoController!.text.isNotEmpty && _addressController!.text.isNotEmpty)) && !notificationsEnabled) {
-      //   final bool notificationTurnedOn = await showNotificationDialog();
-      //   if (!notificationTurnedOn) {
-      //     isValid = false;
-      //   } else {
-      //     // not sure why this is needed to get it to update:
-      //     // probably event bus related:
-      //     await sl.get<SharedPrefsUtil>().setNotificationsOn(true);
-      //   }
-      // }
-
-      // if (isValid && isRequest) {
-      //   // still valid && you have to meet requirements to send requests:
-      //   if (StateContainer.of(context).wallet!.user == null && StateContainer.of(context).wallet!.confirmationHeight < _REQUIRED_CONFIRMATION_HEIGHT) {
-      //     isValid = false;
-      //     await showNeedVerificationAlert();
-      //   }
-      // }
-
-      // if (isValid && sl.get<AccountService>().fallbackConnected) {
-      //   if (_memoController!.text.trim().isNotEmpty) {
-      //     isValid = false;
-      //     await showFallbackConnectedAlert();
-      //   }
-      // }
-    }
     return isValid;
   }
 
@@ -1084,9 +779,9 @@ class SendXMRSheetState extends State<SendXMRSheet> {
   //*******************************************************//
   Widget getEnterAmountContainer() {
     return AppTextField(
+      topMargin: 80,
       focusNode: _amountFocusNode,
       controller: _amountController,
-      topMargin: 30,
       cursorColor: StateContainer.of(context).curTheme.primary,
       style: TextStyle(
         fontWeight: FontWeight.w700,
@@ -1157,7 +852,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
           if (!_localCurrencyMode) {
             setState(() {
               _amountValidationText = "";
-              _amountController!.text = getXMRRawAsThemeAwareAmount(context, StateContainer.of(context).xmrBalance);
+              _amountController!.text = getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
               _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
             });
           } else {
@@ -1181,244 +876,15 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       textAlign: TextAlign.center,
       onSubmitted: (String text) {
         FocusScope.of(context).unfocus();
-        if (!Address(_addressController!.text).isValid()) {
-          FocusScope.of(context).requestFocus(_addressFocusNode);
-        }
       },
     );
   } //************ Enter Address Container Method End ************//
-  //*************************************************************//
-
-  //************ Enter Address Container Method ************//
-  //*******************************************************//
-  Widget getEnterAddressContainer() {
-    return AppTextField(
-      topMargin: 115,
-      padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
-      // padding: EdgeInsets.zero,
-      textAlign: TextAlign.center,
-      // textAlign: (_isUser || _addressController.text.length == 0) ? TextAlign.center : TextAlign.start,
-      focusNode: _addressFocusNode,
-      controller: _addressController,
-      cursorColor: StateContainer.of(context).curTheme.primary,
-      inputFormatters: [
-        if (_isUser) LengthLimitingTextInputFormatter(20) else LengthLimitingTextInputFormatter(65),
-      ],
-      textInputAction: _memoController!.text.isEmpty ? TextInputAction.next : TextInputAction.done,
-      maxLines: null,
-      autocorrect: false,
-      hintText: _addressHint ?? AppLocalization.of(context).enterUserOrAddress,
-      prefixButton: TextFieldButton(
-          icon: AppIcons.scan,
-          onPressed: () async {
-            UIUtil.cancelLockEvent();
-            final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
-            if (!mounted) return;
-            if (scanResult == null) {
-              UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
-            } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
-              if (mounted) {
-                setState(() {
-                  _addressController!.text = scanResult;
-                  _addressValidationText = "";
-                  _addressValidAndUnfocused = true;
-                });
-                _addressFocusNode!.unfocus();
-              }
-            }
-          }),
-      fadePrefixOnCondition: true,
-      prefixShowFirstCondition: _showContactButton && _users.isEmpty,
-      suffixButton: TextFieldButton(
-        icon: _clearButton ? AppIcons.clear : AppIcons.paste,
-        onPressed: () {
-          if (_clearButton) {
-            setState(() {
-              _isUser = false;
-              _addressValidationText = "";
-              _pasteButtonVisible = true;
-              _clearButton = false;
-              _showContactButton = true;
-              _addressController!.text = "";
-              _users = [];
-            });
-            return;
-          }
-          Clipboard.getData("text/plain").then((ClipboardData? data) {
-            if (data == null || data.text == null) {
-              return;
-            }
-            final Address address = Address(data.text);
-            String addressText = data.text!;
-            // if (!address.isValid()) {
-            //   return;
-            // }
-            sl.get<DBHelper>().getUserOrContactWithAddress(addressText).then((User? user) {
-              if (user == null) {
-                setState(() {
-                  _isUser = false;
-                  _addressValidationText = "";
-                  _addressStyle = AddressStyle.TEXT90;
-                  _pasteButtonVisible = true;
-                  _clearButton = true;
-                  _showContactButton = false;
-                  _addressController!.text = addressText;
-                  _addressFocusNode!.unfocus();
-                  _addressValidAndUnfocused = true;
-                });
-              } else {
-                // Is a user
-                setState(() {
-                  _addressController!.text = user.getDisplayName()!;
-                  _addressFocusNode!.unfocus();
-                  _users = [];
-                  _isUser = true;
-                  _addressValidationText = "";
-                  _addressStyle = AddressStyle.PRIMARY;
-                  _pasteButtonVisible = true;
-                  _clearButton = true;
-                  _showContactButton = false;
-                });
-              }
-            });
-          });
-        },
-      ),
-      fadeSuffixOnCondition: true,
-      suffixShowFirstCondition: _pasteButtonVisible,
-      style: _addressStyle == AddressStyle.TEXT60
-          ? AppStyles.textStyleAddressText60(context)
-          : _addressStyle == AddressStyle.TEXT90
-              ? AppStyles.textStyleAddressText90(context)
-              : AppStyles.textStyleAddressPrimary(context),
-      onChanged: (String text) async {
-        bool isUser = false;
-        final bool isDomain = text.contains(".") || text.contains(r"$");
-        final bool isFavorite = text.startsWith("★");
-        final bool isNano = text.startsWith("nano_");
-
-        // prevent spaces:
-        if (text.contains(" ")) {
-          text = text.replaceAll(" ", "");
-          _addressController!.text = text;
-          _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
-        }
-
-        if (text.isNotEmpty) {
-          setState(() {
-            _showContactButton = false;
-            _pasteButtonVisible = true;
-            _clearButton = true;
-          });
-        } else {
-          setState(() {
-            _showContactButton = true;
-            _pasteButtonVisible = true;
-            _clearButton = false;
-          });
-        }
-
-        if (text.isNotEmpty && !isUser && !isNano) {
-          isUser = true;
-        }
-
-        if (text.isNotEmpty && text.startsWith("nano_")) {
-          isUser = false;
-        }
-
-        if (text.isNotEmpty && text.contains(".")) {
-          isUser = false;
-        }
-
-        // check if it's a real nano address:
-        // bool isUser = !text.startsWith("nano_") && !text.startsWith("★");
-        if (text.isEmpty) {
-          setState(() {
-            _isUser = false;
-            _users = [];
-          });
-        } else if (isFavorite) {
-          final List<User> matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
-          final Set<String?> nicknames = <String?>{};
-          matchedList.retainWhere((User x) => nicknames.add(x.nickname));
-          setState(() {
-            _isFavorite = true;
-            _users = matchedList;
-          });
-        } else if (isUser || isDomain) {
-          final List<User> matchedList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
-          setState(() {
-            _isFavorite = false;
-            _users = matchedList;
-          });
-        } else {
-          setState(() {
-            _isUser = false;
-            _users = [];
-          });
-        }
-        // Always reset the error message to be less annoying
-        if (_addressValidationText.isNotEmpty) {
-          setState(() {
-            _addressValidationText = "";
-          });
-        }
-        if (isNano && Address(text).isValid()) {
-          _addressFocusNode!.unfocus();
-          setState(() {
-            _addressStyle = AddressStyle.TEXT90;
-            _addressValidationText = "";
-            _pasteButtonVisible = false;
-          });
-        } else {
-          setState(() {
-            _addressStyle = AddressStyle.TEXT60;
-          });
-        }
-
-        if ((isUser || isFavorite) != _isUser) {
-          setState(() {
-            _isUser = isUser || isFavorite;
-          });
-        }
-      },
-      onSubmitted: (String text) {
-        if (_memoController!.text.isEmpty) {
-          FocusScope.of(context).nextFocus();
-        } else {
-          FocusScope.of(context).unfocus();
-        }
-      },
-      overrideTextFieldWidget: _addressValidAndUnfocused
-          ? GestureDetector(
-              onTap: () {
-                setState(() {
-                  _addressValidAndUnfocused = false;
-                });
-                Future.delayed(const Duration(milliseconds: 50), () {
-                  FocusScope.of(context).requestFocus(_addressFocusNode);
-                });
-              },
-              child: UIUtil.threeLineAddressText(context, _addressController!.text))
-          : null,
-    );
-  } //************ Enter Address Container Method End ************//
-  //*************************************************************//
 
   //************ Enter Memo Container Method ************//
   //*******************************************************//
   Widget getEnterMemoContainer() {
-    double margin = 200;
-    if (_addressController!.text.startsWith("nano_")) {
-      if (_addressController!.text.length > 24) {
-        margin = 217;
-      }
-      if (_addressController!.text.length > 48) {
-        margin = 238;
-      }
-    }
     return AppTextField(
-      topMargin: margin,
+      topMargin: 165,
       focusNode: _memoFocusNode,
       controller: _memoController,
       cursorColor: StateContainer.of(context).curTheme.primary,
@@ -1443,5 +909,4 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       },
     );
   } //************ Enter Memo Container Method End ************//
-  //*************************************************************//
 }

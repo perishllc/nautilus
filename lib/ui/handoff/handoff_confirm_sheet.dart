@@ -370,6 +370,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
             widget.destination,
             StateContainer.of(context).wallet!.address,
             NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
+            metadata: widget.payItem.metadata,
           );
 
       if (!mounted) return;

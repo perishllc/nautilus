@@ -8,7 +8,7 @@ publish_to: "none"
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.6.7+96
+version: 0.6.8+98
 
 environment:
   sdk: '>=2.18.2 <3.0.0'
@@ -107,6 +107,9 @@ dependencies:
     git:
       url: https://github.com/perishllc/barcode_scan2.git
       ref: main
+  mobile_scanner: ^2.0.0
+  dotted_border: ^2.0.0+2
+  image_picker: ^0.8.6
 
   # Share files
   share_plus: ^4.3.0
@@ -189,7 +192,8 @@ dependencies:
   day_night_switcher: ^0.2.0+1
 
   # search bar + text highlighting:
-  searchbar_animation: ^0.0.3
+  # searchbar_animation: ^0.0.3
+  searchbar_animation: 0.0.3
   substring_highlight: ^1.0.33
 
   # localization:
@@ -325,7 +329,7 @@ flutter:
     - assets/illustrations/transferfunds_start.svg
     - assets/illustrations/transferfunds_paperwalletonly.svg
     # changelog:
-    - CHANGELOG.md
+    # - CHANGELOG.md
     # xmr:
     - assets/xmr/
     - assets/xmr/index.html

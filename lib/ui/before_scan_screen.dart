@@ -27,7 +27,7 @@ class BeforeScanScreenState extends State<BeforeScanScreen> {
         Navigator.pop(context);
       },
       child: Hero(
-        tag: 'scanButton',
+        tag: "scanButton",
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 100),
           curve: Curves.easeOut,
