@@ -166,6 +166,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Seedi Kopyala"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Cüzdan adresini panoya kopyala"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Monero Tohumunu Kopyala"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Bir şifre oluştur."),
         "createGiftCard":
@@ -317,6 +319,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hediye kartı bağlantısı oluşturmaya çalışırken bir hata oluştu"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "Hediye kartı oluşturmaya çalışırken bir hata oluştu, HEDİYE KARTI BAĞLANTISI VEYA TOHUM PANOLARINIZA KOPYALANDI, YANLIŞ OLDUĞUNA GÖRE FONLARINIZ İÇERİSİNDE OLABİLİR."),
+        "giftCardInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Hediye Sayfası Bilgisi"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Hediye Gönderen"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "NANO ile Dijital Hediye Kartı Yükleyin! Alıcının ne zaman açtıklarını görmesi için bir miktar ve isteğe bağlı bir mesaj belirleyin!\n\nOluşturulduktan sonra, herkese gönderebileceğiniz bir bağlantı alacaksınız, bu da açıldığında Nautilus\'u kurduktan sonra parayı alıcıya otomatik olarak dağıtacaktır!\n\nAlıcı zaten bir Nautilus kullanıcısıysa, bağlantıyı açtıktan sonra parayı hesabına aktarma istemi alacaktır."),

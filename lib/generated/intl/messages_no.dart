@@ -171,6 +171,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Kopier Seed"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Kopier lommebokadresse til utklippstavlen"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Kopier Monero Seed"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Lag et passord."),
         "createGiftCard": MessageLookupByLibrary.simpleMessage("Lag gavekort"),
@@ -323,6 +325,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Det oppstod en feil under forsøk på å opprette en gavekortkobling"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "Det oppstod en feil under forsøk på å opprette et gavekort, GAVEKORT-LINKEN ELLER SEEDEN HAR BLITT KOPIERT TIL UTKLIPPTAVLEN DIN, DINE MIDLER KAN INNHOLDES I DET, AVHENGIG AV HVA GIKK FEIL."),
+        "giftCardInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Gaveark info"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Gave fra"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Last inn et digitalt gavekort med NANO! Angi et beløp, og en valgfri melding for mottakeren å se når de åpner den!\n\nNår du er opprettet, får du en lenke som du kan sende til hvem som helst, som når den åpnes automatisk vil distribuere midlene til mottakeren etter installasjon av Nautilus!\n\nHvis mottakeren allerede er en Nautilus-bruker, vil de få beskjed om å overføre midlene til kontoen sin når lenken åpnes"),

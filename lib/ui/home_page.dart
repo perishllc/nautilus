@@ -7,7 +7,6 @@ import 'dart:math';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:confetti/confetti.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -53,7 +52,6 @@ import 'package:nautilus_wallet_flutter/ui/home/payment_details_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/home/top_card.dart';
 import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/receive/receive_show_qr.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_xmr_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';

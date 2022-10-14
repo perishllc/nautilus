@@ -175,6 +175,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Kopiera seed"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Kopiera plånbokens adress till Urklipp"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Kopiera Monero Seed"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Ställ in ett lösenord."),
         "createGiftCard":
@@ -326,6 +328,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ett fel uppstod när du försökte skapa en presentkortslänk"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "Ett fel uppstod när du försökte skapa ett presentkort, PRESENTKORTSLÄNKEN ELLER SEEDEN HAR KOPIERATS TILL DIN URLIPP, DINA MEDEL KAN INNEHÅLLAS I DET BEROENDE PÅ VAD BLEV FEL."),
+        "giftCardInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Presentkort Info"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Gåva från"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Ladda ett digitalt presentkort med NANO! Ange ett belopp, och ett valfritt meddelande för mottagaren att se när de öppnar det!\n\nNär du väl har skapat får du en länk som du kan skicka till vem som helst, som när den öppnas automatiskt distribuerar pengarna till mottagaren efter installationen av Nautilus!\n\nOm mottagaren redan är en Nautilus-användare kommer de att få en uppmaning att överföra pengarna till sitt konto när länken öppnas"),

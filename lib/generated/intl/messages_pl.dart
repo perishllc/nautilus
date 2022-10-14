@@ -168,6 +168,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Kopiuj nasiono"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Skopiuj adres portfela do schowka"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Kopiuj nasiona Monero"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Stwórz hasło"),
         "createGiftCard":
@@ -320,6 +322,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Wystąpił błąd podczas próby utworzenia łącza do karty podarunkowej"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "Wystąpił błąd podczas próby utworzenia karty podarunkowej, LINK DO KARTY PODARUNKOWEJ LUB NASIONA ZOSTAŁY SKOPIOWANE DO TWOJEGO SCHOWEK, TWOJE ŚRODKI MOGĄ BYĆ W TYM ŚRODKU W ZALEŻNOŚCI OD TEGO, CO POSZŁO NIEPRAWIDŁOWO."),
+        "giftCardInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Informacje o arkuszu prezentowym"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Prezent od"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Załaduj cyfrową kartę podarunkową za pomocą NANO! Ustaw kwotę i opcjonalną wiadomość, aby odbiorca zobaczył, kiedy ją otworzy!\n\nPo utworzeniu otrzymasz link, który możesz wysłać każdemu, który po otwarciu automatycznie rozdzieli środki do odbiorcy po zainstalowaniu Nautilusa!\n\nJeśli odbiorca jest już użytkownikiem Nautilus, po otwarciu linku otrzyma monit o przelanie środków na swoje konto"),

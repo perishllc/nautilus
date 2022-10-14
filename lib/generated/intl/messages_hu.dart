@@ -172,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Seed Másolása"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Másolja a pénztárca címét a vágólapra"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Másolja a Monero Seed-et"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Create a password."),
         "createGiftCard":
@@ -327,6 +329,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hiba történt az ajándékutalvány linkjének létrehozásakor"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "Hiba történt az ajándékutalvány létrehozása közben, AZ AJÁNDÉKUTALVÁNY HIVATKOZÁSA VAGY A CETOLÓGÉP MÁSOLVA A VÁGÓPÁLARA, AZ ÖN ALAPJA TARTALMAZHATNA AZTÓL, HOGY MI TÖRTÉNT EL."),
+        "giftCardInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Ajándéklap információ"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Ajándék"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Töltsön be egy digitális ajándékkártyát NANO segítségével! Állítson be egy összeget, és választható üzenetet a címzett számára, hogy lássa, mikor nyitja meg!\n\nMiután létrehozta, kap egy linket, amelyet bárkinek elküldhet, amely megnyitásakor automatikusan elosztja a pénzeszközöket a címzettnek a Nautilus telepítése után!\n\nHa a címzett már Nautilus felhasználó, akkor a hivatkozás megnyitásakor felszólítást kap arra, hogy utalja át a pénzt számlájára"),

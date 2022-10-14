@@ -167,6 +167,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Salin Benih"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Salin alamat dompet ke papan keratan"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Salin Benih Monero"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Buat kata laluan."),
         "createGiftCard":
@@ -324,6 +326,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ralat berlaku semasa cuba membuat pautan kad hadiah"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "Ralat telah berlaku semasa cuba membuat kad hadiah, PAUTAN KAD HADIAH ATAU BENIH TELAH DISANLIN KE PAPAN Klip ANDA, DANA ANDA MUNGKIN TERKANDUNG DI DALAMNYA BERGANTUNG PADA SALAH YANG BERLAKU."),
+        "giftCardInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Maklumat Lembaran Hadiah"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Hadiah Dari"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Muatkan Kad Hadiah Digital dengan NANO! Tetapkan jumlah, dan mesej pilihan untuk penerima untuk melihat apabila mereka membukanya!\n\nSetelah dibuat, anda akan mendapat pautan yang boleh anda hantar kepada sesiapa sahaja, yang apabila dibuka secara automatik akan mengagihkan dana kepada penerima selepas memasang Nautilus!\n\nSekiranya penerima sudah menjadi pengguna Nautilus, mereka akan mendapat arahan untuk memindahkan dana ke akaun mereka semasa membuka pautan"),

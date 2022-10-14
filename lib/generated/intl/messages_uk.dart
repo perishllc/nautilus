@@ -176,6 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Копіювати seed"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Копіювати адресу торбинки до буфера"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Скопіюйте Monero Seed"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Створити пароль."),
         "createGiftCard":
@@ -332,6 +334,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Під час спроби створити посилання на подарункову картку сталася помилка"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "Під час спроби створити подарункову картку сталася помилка. ПОСИЛАННЯ НА ПОДАРУНКОВУ КАРТКУ АБО НАСІННЯ БУЛО СКОПІЙОВАНО У БУФЕР ОБМІНУ, ВАШІ КОШТИ МОЖУТЬ БУТИ В НЬОМУ ЗАЛЕЖНО ВІД ТЕГО, ЩО ПІШЛО НЕ БУДЬ."),
+        "giftCardInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Інформація про подарунковий аркуш"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Подарунок від"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Завантажте цифрову подарункову карту з NANO! Встановіть суму та необов\'язкове повідомлення для одержувача, щоб побачити, коли він його відкриє!\n\nПісля створення ви отримаєте посилання, яке можна відправити кожному, яка при відкритті автоматично розподілить кошти одержувачу після установки Nautilus!\n\nЯкщо одержувач вже є користувачем Nautilus, він отримає запит на переказ коштів на свій рахунок після відкриття посилання"),

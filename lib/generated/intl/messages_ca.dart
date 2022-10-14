@@ -169,6 +169,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Kopírovat semínko"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Copy wallet address to clipboard"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Còpia Monero Seed"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Vytvořte si heslo."),
         "createGiftCard":
@@ -318,6 +320,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "S\'ha produït un error en intentar crear un enllaç de targeta regal"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "S\'ha produït un error en intentar crear una targeta regal, S\'HA COPIAT L\'ENLLAÇ DE LA TARGETA REGAL O LA LLAVOR AL TEU PORTAPELLORS, ELS VOSTRES FONS ES PODEN CONTINGUIR-HI DEPENDI DEL QUÈ S\'HA FALLAT."),
+        "giftCardInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Informació del full de regal"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Gift From"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they will get a prompt to transfer the funds into their account upon opening the link"),

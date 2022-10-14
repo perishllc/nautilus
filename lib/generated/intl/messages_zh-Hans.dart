@@ -131,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("复制种子"),
         "copyWalletAddressToClipboard":
             MessageLookupByLibrary.simpleMessage("将钱包地址复制到剪贴板"),
+        "copyXMRSeed": MessageLookupByLibrary.simpleMessage("复制门罗币种子"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("创建一个密码。"),
         "createGiftCard": MessageLookupByLibrary.simpleMessage("创建礼品卡"),
@@ -249,6 +250,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("尝试创建礼品卡链接时出错"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "尝试创建礼品卡时发生错误，礼品卡链接或种子已复制到您的剪贴板，您的资金可能包含在其中，具体取决于出现的问题。"),
+        "giftCardInfoHeader": MessageLookupByLibrary.simpleMessage("礼品单信息"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("礼物来自"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "使用 NANO 加载一张数字礼品卡！设置金额和一条可选消息，供收件人打开时查看！\n\n创建后，您将获得一个可以发送给任何人的链接，该链接打开后将在安装Nautilus后自动将资金分配给收款人！\n\n如果收款人已经是Nautilus用户，他们将在打开链接时收到将资金转入其账户的提示。"),

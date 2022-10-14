@@ -175,6 +175,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("কপি সীড"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "ক্লিপবোর্ডে ওয়ালেট ঠিকানা অনুলিপি করুন"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("মনের বীজ অনুলিপি করুন"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("একটি পাসওয়ার্ড তৈরি করুন."),
         "createGiftCard":
@@ -327,6 +329,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "একটি উপহার কার্ড লিঙ্ক তৈরি করার চেষ্টা করার সময় একটি ত্রুটি ঘটেছে৷"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "একটি উপহার কার্ড তৈরি করার চেষ্টা করার সময় একটি ত্রুটি ঘটেছে, উপহার কার্ডের লিঙ্ক বা বীজ আপনার ক্লিপবোর্ডে কপি করা হয়েছে, কি ভুল হয়েছে তার উপর নির্ভর করে আপনার তহবিল এর মধ্যে থাকতে পারে৷"),
+        "giftCardInfoHeader":
+            MessageLookupByLibrary.simpleMessage("উপহার শীট তথ্য"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("উপহার থেকে"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "ন্যানো দিয়ে একটি ডিজিটাল উপহার কার্ড লোড করুন! একটি পরিমাণ সেট করুন, এবং প্রাপক যখন এটি খুলবেন তা দেখার জন্য একটি ঐচ্ছিক বার্তা!\n\nএকবার তৈরি হলে, আপনি একটি লিঙ্ক পাবেন যা আপনি যে কাউকে পাঠাতে পারেন, যা খোলা হলে স্বয়ংক্রিয়ভাবে Nautilus ইনস্টল করার পরে প্রাপকের কাছে তহবিল বিতরণ করবে!\n\nযদি প্রাপক ইতিমধ্যেই একটি নটিলাস ব্যবহারকারী হন তবে লিঙ্কটি খোলার পরে তারা তাদের অ্যাকাউন্টে তহবিল স্থানান্তর করার জন্য একটি প্রম্পট পাবেন।"),

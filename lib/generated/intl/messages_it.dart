@@ -173,6 +173,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Copia Seed"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Copia l\'indirizzo del portafoglio negli appunti"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Copia il seme di Monero"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Crea una password."),
         "createGiftCard":
@@ -330,6 +332,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Si è verificato un errore durante il tentativo di creare un collegamento alla carta regalo"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "Si è verificato un errore durante il tentativo di creare una carta regalo, IL LINK O IL SEED DELLA CARTA REGALO È STATO COPIATO NEGLI APPUNTI, I TUOI FONDI POSSONO ESSERE CONTENUTI IN ESSI A SECONDA DI COSA È ANDATO storto."),
+        "giftCardInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Informazioni sul foglio regalo"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Regalo da"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Carica una carta regalo digitale con NANO! Imposta un importo e un messaggio opzionale che il destinatario può vedere quando lo apre!\n\nUna volta creato, riceverai un link che puoi inviare a chiunque, che una volta aperto distribuirà automaticamente i fondi al destinatario dopo aver installato Nautilus!\n\nSe il destinatario è già un utente Nautilus, riceverà una richiesta di trasferire i fondi sul proprio conto all\'apertura del link."),

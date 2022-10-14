@@ -164,6 +164,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("نسخ المفتاح الخاص"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "نسخ عنوان المحفظة إلى الحافظة"),
+        "copyXMRSeed": MessageLookupByLibrary.simpleMessage("نسخ بذور مونيرو"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("أنشئ كلمة مرور."),
         "createGiftCard":
@@ -310,6 +311,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "حدث خطأ أثناء محاولة إنشاء رابط بطاقة هدايا"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "حدث خطأ أثناء محاولة إنشاء بطاقة هدايا ، أو تم نسخ رابط بطاقة الهدايا أو البذرة إلى الحافظة الخاصة بك ، وقد يتم الاحتفاظ بأموالك بداخلها بناءً على الخطأ الذي حدث."),
+        "giftCardInfoHeader":
+            MessageLookupByLibrary.simpleMessage("معلومات ورقة الهدايا"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("هدية من"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "قم بتحميل بطاقة هدايا رقمية باستخدام NANO! قم بتعيين مبلغ ورسالة اختيارية للمستلم ليراها عند فتحه!\n\nبمجرد الإنشاء، ستحصل على رابط يمكنك إرساله إلى أي شخص، والذي عند فتحه سيوزع الأموال تلقائيًا على المستلم بعد تثبيت Nautilus!\n\nإذا كان المستلم مستخدمًا لـ Nautilus بالفعل، فسيتلقى مطالبة بتحويل الأموال إلى حسابه عند فتح الرابط."),

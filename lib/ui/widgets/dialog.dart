@@ -82,6 +82,7 @@ class AppDialogs {
     bool barrierDismissible = true,
     String? closeText,
     Function? onPressed,
+    bool scrollable = false,
   }) async {
     closeText ??= AppLocalization.of(context).close.toUpperCase();
     final ScrollController _scrollController = ScrollController();
@@ -99,38 +100,36 @@ class AppDialogs {
             style: AppStyles.textStyleButtonPrimaryOutline(context),
           ),
           // content: Text(content, style: AppStyles.textStyleParagraph(context)),
-          content: DraggableScrollbar(
-            controller: _scrollController,
-            scrollbarColor: StateContainer.of(context).curTheme.primary!,
-            scrollbarTopMargin: 2.0,
-            scrollbarBottomMargin: 2.0,
-            scrollbarHeight: 30,
-            scrollbarHideAfterDuration: Duration.zero,
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              // child: AutoSizeText(
-              //   AppLocalization.of(context).giftInfo,
-              //   style: AppStyles.textStyleParagraph(context),
-              //   maxLines: 12,
-              //   minFontSize: 12,
-              //   stepGranularity: 0.5,
-              // ),
-              child: Text(
-                AppLocalization.of(context).giftInfo,
-                style: AppStyles.textStyleParagraph(context),
-              ),
-              // ),
-            ),
-          ),
+          content: scrollable
+              ? DraggableScrollbar(
+                  controller: _scrollController,
+                  scrollbarColor: StateContainer.of(context).curTheme.primary!,
+                  scrollbarTopMargin: 2.0,
+                  scrollbarBottomMargin: 2.0,
+                  scrollbarHeight: 30,
+                  scrollbarHideAfterDuration: Duration.zero,
+                  child: SingleChildScrollView(
+                    controller: _scrollController,
+                    child: Text(
+                      content,
+                      style: AppStyles.textStyleParagraph(context),
+                    ),
+                  ),
+                )
+              : Text(
+                  content,
+                  style: AppStyles.textStyleParagraph(context),
+                ),
           actions: <Widget>[
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
+                backgroundColor: StateContainer.of(context).curTheme.background,
               ),
               child: Text(
                 closeText!,
-                style: AppStyles.textStyleDialogButtonText(context).copyWith(fontSize: AppFontSizes.small),
+                style: AppStyles.textStyleDialogButtonText(context).copyWith(fontSize: AppFontSizes.smallest),
               ),
               onPressed: () async {
                 Navigator.of(context).pop();

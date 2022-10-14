@@ -1,8 +1,10 @@
-## v0.6.8 - [2022-10-15]
+## v0.6.8 - [2022-10-16]
 #### Added
 - New QR Code Scanning UI
+- New menu for creating gift cards (send -> present icon)
 #### Changed
 - When typing out usernames in forms a shortened version of the address is now shown next to the username
+- UI tweaks for gift cards
 #### Fixed
 - QR Code Scanning
 - nano.to username registration

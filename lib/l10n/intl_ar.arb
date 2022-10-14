@@ -455,6 +455,11 @@
     "type": "text",
     "description": "onramp_copy"
   },
+  "copyXMRSeed": "نسخ بذور مونيرو",
+  "@copyXMRSeed": {
+    "type": "text",
+    "description": "copy_xmr_seed_btn"
+  },
   "createAPasswordHeader": "أنشئ كلمة مرور.",
   "@createAPasswordHeader": {
     "type": "text",
@@ -924,6 +929,11 @@
   "@giftCardCreationErrorSent": {
     "type": "text",
     "description": "gift_generic_error"
+  },
+  "giftCardInfoHeader": "معلومات ورقة الهدايا",
+  "@giftCardInfoHeader": {
+    "type": "text",
+    "description": "gift_card_sheet_info_header"
   },
   "giftFrom": "هدية من",
   "@giftFrom": {

@@ -174,6 +174,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Kopieer Seed"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Wallet-adres naar klembord kopiëren"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Kopieer Monero Seed"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Creëer een wachten"),
         "createGiftCard":
@@ -328,6 +330,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Er is een fout opgetreden bij het maken van een cadeaubonlink"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "Er is een fout opgetreden bij het maken van een cadeaubon. DE LINK OF HET ZAADJE IS GEKOPIEERD NAAR UW CLIPBOARD. UW FONDSEN KUNNEN ERIN BEVAT AFHANKELIJK VAN WAT ER FOUT GING."),
+        "giftCardInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Informatie over cadeaubladen"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Cadeau van"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Laad een digitale cadeaukaart met NANO! Stel een bedrag in en een optioneel bericht voor de ontvanger om te zien wanneer ze het openen!\n\nEenmaal gemaakt, krijg je een link die je naar iedereen kunt sturen, die, wanneer geopend, het geld automatisch naar de ontvanger zal verdelen na het installeren van Nautilus!\n\nAls de ontvanger al Nautilus-gebruiker is, krijgt hij bij het openen van de link een prompt om het geld naar zijn rekening over te maken."),

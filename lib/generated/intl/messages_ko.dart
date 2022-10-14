@@ -149,6 +149,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Copy Seed"),
         "copyWalletAddressToClipboard":
             MessageLookupByLibrary.simpleMessage("지갑 주소를 클립보드로 복사"),
+        "copyXMRSeed": MessageLookupByLibrary.simpleMessage("모네로 씨앗 복사"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Create a password."),
         "createGiftCard": MessageLookupByLibrary.simpleMessage("기프트 카드 만들기"),
@@ -276,6 +277,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "기프트 카드 링크를 만드는 동안 오류가 발생했습니다."),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "기프트 카드를 생성하는 동안 오류가 발생했습니다. 기프트 카드 링크 또는 시드가 클립보드에 복사되었습니다. 무엇이 잘못되었는지에 따라 자금이 클립보드에 포함될 수 있습니다."),
+        "giftCardInfoHeader": MessageLookupByLibrary.simpleMessage("선물 시트 정보"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("선물 보낸 사람"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "NANO로 디지털 기프트 카드를 로드하세요!금액을 설정하고 수신자가 열 때 볼 수 있는 선택적 메시지를 설정합니다.\n\n링크가 생성되면 누구에게나 보낼 수 있으며, 링크를 열면 Nautilus를 설치 한 후 수취인에게 자동으로 자금을 분배합니다!\n\n수취인이 이미 Nautilus 사용자인 경우 링크를 열 때 자금을 계좌로 이체하라는 메시지가 표시됩니다."),

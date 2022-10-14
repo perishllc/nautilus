@@ -291,7 +291,12 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                   child: AppDialogs.infoButton(
                     context,
                     () {
-                      AppDialogs.showInfoDialog(context, AppLocalization.of(context).giftCardInfoHeader, AppLocalization.of(context).giftInfo);
+                      AppDialogs.showInfoDialog(
+                        context,
+                        AppLocalization.of(context).giftCardInfoHeader,
+                        AppLocalization.of(context).giftInfo,
+                        scrollable: true,
+                      );
                     },
                   ),
                 ),
@@ -530,7 +535,8 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                 Row(
                   children: <Widget>[
                     // Send Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).createGiftCard, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).createGiftCard, Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: () async {
                       final bool validRequest = await _validateRequest();
 
                       if (!validRequest || !mounted) {

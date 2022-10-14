@@ -172,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Sao chép hạt giống"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Sao chép địa chỉ ví vào clipboard"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Sao chép hạt giống Monero"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Tạo mật khẩu."),
         "createGiftCard":
@@ -323,6 +325,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Đã xảy ra lỗi khi cố gắng tạo liên kết thẻ quà tặng"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "Đã xảy ra lỗi khi cố gắng tạo thẻ quà tặng, LIÊN KẾT THẺ QUÀ TẶNG HOẶC GIỐNG ĐÃ ĐƯỢC SAO CHÉP VÀO BẢNG ĐIỂM CỦA BẠN, QUỸ CỦA BẠN CÓ THỂ ĐƯỢC CHỨA TRONG VẬY PHỤ THUỘC VÀO ĐIỀU GÌ SAI."),
+        "giftCardInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Thông tin tờ quà tặng"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Quà Tặng Từ"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Nạp thẻ quà tặng kỹ thuật số với NANO! Đặt số tiền và một tin nhắn tùy chọn cho người nhận để xem khi họ mở nó!\n\nSau khi tạo, bạn sẽ nhận được một liên kết mà bạn có thể gửi cho bất kỳ ai, khi mở sẽ tự động phân phối tiền cho người nhận sau khi cài đặt Nautilus!\n\nNếu người nhận đã là người dùng Nautilus, họ sẽ nhận được lời nhắc để chuyển tiền vào tài khoản của họ khi mở liên kết"),

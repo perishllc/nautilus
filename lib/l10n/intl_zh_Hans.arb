@@ -455,6 +455,11 @@
     "type": "text",
     "description": "onramp_copy"
   },
+  "copyXMRSeed": "复制门罗币种子",
+  "@copyXMRSeed": {
+    "type": "text",
+    "description": "copy_xmr_seed_btn"
+  },
   "createAPasswordHeader": "创建一个密码。",
   "@createAPasswordHeader": {
     "type": "text",
@@ -924,6 +929,11 @@
   "@giftCardCreationErrorSent": {
     "type": "text",
     "description": "gift_generic_error"
+  },
+  "giftCardInfoHeader": "礼品单信息",
+  "@giftCardInfoHeader": {
+    "type": "text",
+    "description": "gift_card_sheet_info_header"
   },
   "giftFrom": "礼物来自",
   "@giftFrom": {

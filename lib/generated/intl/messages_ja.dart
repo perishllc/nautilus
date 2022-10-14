@@ -147,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("シードをコピーする"),
         "copyWalletAddressToClipboard":
             MessageLookupByLibrary.simpleMessage("ウォレットアドレスをクリップボードにコピー"),
+        "copyXMRSeed": MessageLookupByLibrary.simpleMessage("モネロシードをコピー"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("パスワードを作成する"),
         "createGiftCard": MessageLookupByLibrary.simpleMessage("ギフトカードを作成"),
@@ -275,6 +276,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ギフトカード リンクの作成中にエラーが発生しました"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "ギフト カードの作成中にエラーが発生しました。ギフト カードのリンクまたはシードがクリップボードにコピーされました。問題によっては、資金がクリップボードに含まれている可能性があります。"),
+        "giftCardInfoHeader": MessageLookupByLibrary.simpleMessage("ギフトシート情報"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("ギフト元"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "NANOでデジタルギフトカードを読み込もう！金額と、受信者がそれを開いたときに表示するオプションのメッセージを設定します！\n\n作成すると、誰にでも送信できるリンクが届きます。リンクを開くと、Nautilusをインストールした後に自動的に受取人に資金が分配されます！\n\n受取人がすでにNautilusユーザーの場合、リンクを開くと口座に資金を送金するように促されます。"),

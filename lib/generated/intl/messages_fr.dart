@@ -180,6 +180,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Copier clé privée"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Copier l\'adresse du portefeuille dans le presse-papiers"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Copier la graine Monero"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Créer un mot de passe."),
         "createGiftCard":
@@ -338,6 +340,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Une erreur s\'est produite lors de la tentative de création d\'un lien de carte-cadeau"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "Une erreur s\'est produite lors de la tentative de création d\'une carte-cadeau, LE LIEN OU LA GRAINE DE LA CARTE-CADEAU A ÉTÉ COPIÉ SUR VOTRE PRESSE-PAPIER, VOS FONDS PEUVENT Y ÊTRE CONTENUS SELON CE QUI S\'EST TROMPÉ."),
+        "giftCardInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Informations sur la fiche-cadeau"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Cadeau de"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Chargez une carte-cadeau numérique avec NANO ! Définissez un montant et un message facultatif pour que le destinataire puisse voir quand il l\'ouvre !\n\nUne fois créé, vous recevrez un lien que vous pourrez envoyer à n\'importe qui, une fois ouvert, distribuera automatiquement les fonds au destinataire après l\'installation de Nautilus !\n\nSi le destinataire est déjà un utilisateur de Nautilus, il sera invité à transférer les fonds sur son compte à l\'ouverture du lien"),

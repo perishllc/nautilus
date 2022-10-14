@@ -176,6 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Seed kopieren"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Wallet-Adresse in die Zwischenablage kopieren"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Kopieren Sie Monero-Seed"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Wähle ein Passwort."),
         "createGiftCard":
@@ -337,6 +339,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Beim Versuch, einen Geschenkkarten-Link zu erstellen, ist ein Fehler aufgetreten"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "Beim Versuch, eine Geschenkkarte zu erstellen, ist ein Fehler aufgetreten! Der Link zur Geschenkkarte und zum Download von Nautilus, mit Seed (getrennt von einem ^ Zeichen) wurde in ihre Zwischenablage kopiert. Je nach Fehlerart ist es möglich, dass die übertragenen Nanos wieder hergestellt werden können."),
+        "giftCardInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Informationen zum Geschenkbogen"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Geschenk von"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Laden Sie eine digitale Geschenkkarte mit NANO! Legen Sie einen Betrag und optional eine Nachricht fest, damit der Empfänger sehen kann, wenn er ihn öffnet!\n\nNach der Erstellung erhalten Sie einen Link, den Sie an jeden senden können. Wenn er geöffnet wird, wird das Geld nach der Installation von Nautilus automatisch an den Empfänger verteilt!\n\nWenn der Empfänger bereits Nautilus-Benutzer ist, wird er beim Öffnen des Links aufgefordert, das Geld auf sein Konto zu überweisen."),

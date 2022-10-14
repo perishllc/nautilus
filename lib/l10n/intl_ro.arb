@@ -455,6 +455,11 @@
     "type": "text",
     "description": "onramp_copy"
   },
+  "copyXMRSeed": "Copiați sămânța Monero",
+  "@copyXMRSeed": {
+    "type": "text",
+    "description": "copy_xmr_seed_btn"
+  },
   "createAPasswordHeader": "Creați o parolă.",
   "@createAPasswordHeader": {
     "type": "text",
@@ -924,6 +929,11 @@
   "@giftCardCreationErrorSent": {
     "type": "text",
     "description": "gift_generic_error"
+  },
+  "giftCardInfoHeader": "Informații foaie cadou",
+  "@giftCardInfoHeader": {
+    "type": "text",
+    "description": "gift_card_sheet_info_header"
   },
   "giftFrom": "Cadou de la",
   "@giftFrom": {

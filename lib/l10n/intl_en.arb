@@ -450,15 +450,15 @@
     "type": "text",
     "description": "copy_seed_btn"
   },
-  "copyXMRSeed": "Copy Monero Seed",
-  "@copyXMRSeed": {
-    "type": "text",
-    "description": "copy_xmr_seed_btn"
-  },
   "copyWalletAddressToClipboard": "Copy wallet address to clipboard",
   "@copyWalletAddressToClipboard": {
     "type": "text",
     "description": "onramp_copy"
+  },
+  "copyXMRSeed": "Copy Monero Seed",
+  "@copyXMRSeed": {
+    "type": "text",
+    "description": "copy_xmr_seed_btn"
   },
   "createAPasswordHeader": "Create a password.",
   "@createAPasswordHeader": {
@@ -929,6 +929,11 @@
   "@giftCardCreationErrorSent": {
     "type": "text",
     "description": "gift_generic_error"
+  },
+  "giftCardInfoHeader": "Gift Sheet Info",
+  "@giftCardInfoHeader": {
+    "type": "text",
+    "description": "gift_card_sheet_info_header"
   },
   "giftFrom": "Gift From",
   "@giftFrom": {
@@ -2004,11 +2009,6 @@
   "@sendSheetInfoHeader": {
     "type": "text",
     "description": "send_sheet_info_header"
-  },
-  "giftCardInfoHeader": "Gift Sheet Info",
-  "@giftCardInfoHeader": {
-    "type": "text",
-    "description": "gift_card_sheet_info_header"
   },
   "sent": "Sent",
   "@sent": {

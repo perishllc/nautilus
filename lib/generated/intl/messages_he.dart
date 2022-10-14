@@ -159,6 +159,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("העתק סיד"),
         "copyWalletAddressToClipboard":
             MessageLookupByLibrary.simpleMessage("העתק את כתובת הארנק ללוח"),
+        "copyXMRSeed": MessageLookupByLibrary.simpleMessage("העתק Monero Seed"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Create a password."),
         "createGiftCard":
@@ -300,6 +301,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "אירעה שגיאה בעת ניסיון ליצור קישור לכרטיס מתנה"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "אירעה שגיאה בעת ניסיון ליצור כרטיס מתנה, הקישור או ה-SEED של כרטיס המתנה הועתקו ללוח שלך, הכספים שלך עשויים להיות כלולים בתוכו, תלוי במה השתבש."),
+        "giftCardInfoHeader":
+            MessageLookupByLibrary.simpleMessage("מידע על גיליון מתנה"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("מתנה מ"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "טען כרטיס מתנה דיגיטלי עם NANO! הגדר סכום, והודעה אופציונלית עבור הנמען כדי לראות מתי הוא פותח אותו!\n\nלאחר שנוצר, תקבל קישור שאתה יכול לשלוח לכל אחד, אשר כאשר נפתח באופן אוטומטי להפיץ את הכספים לנמען לאחר התקנת נאוטילוס!\n\nאם הנמען הוא כבר משתמש Nautilus הם יקבלו הנחיה להעביר את הכספים לחשבון שלהם עם פתיחת הקישור"),

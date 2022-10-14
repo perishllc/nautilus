@@ -170,6 +170,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Копирай Seed"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Копиране на адреса на портфейла в клипборда"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Копирайте Monero Seed"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Задай парола "),
         "createGiftCard":
@@ -324,6 +326,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Възникна грешка при опит за създаване на връзка към карта за подарък"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "Възникна грешка при опит за създаване на карта за подарък, ВРЪЗКАТА КЪМ КАРТАТА ЗА ПОДАРЪК ИЛИ СЕМЕНАТА Е КОПИРАН ВЪВ ВАШИЯ КЛИПБОРД, ВАШИТЕ СРЕДСТВА МОЖЕ ДА СЕ СЪДЪРЖАТ В НЕГО В ЗАВИСИМОСТ ОТ КАКВО СЕ СЛУЧИ."),
+        "giftCardInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Информация за подаръчния лист"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Подарък От"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Заредете цифрова карта за подарък с NANO! Задайте сума и незадължително съобщение, което получателят да види, когато го отвори!\n\nВеднъж създаден, ще получите линк, който можете да изпратите на всеки, който при отваряне автоматично ще разпредели средствата на получателя след инсталирането на Nautilus!\n\nАко получателят вече е потребител на Nautilus, той ще получи подкана да прехвърли средствата в сметката си при отваряне на връзката"),

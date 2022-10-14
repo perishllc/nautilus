@@ -172,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Kopiraj ključ"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Kopirajte naslov denarnice v odložišče"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Kopiraj Monero Seed"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Create a password."),
         "createGiftCard":
@@ -324,6 +326,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Med poskusom ustvarjanja povezave do darilne kartice je prišlo do napake"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "Med poskusom ustvarjanja darilne kartice je prišlo do napake, POVEZAVA DO DARILNE KARTICE ALI SEME JE BILO KOPIRANO V VAŠE ODLOŽIŠČE, VAŠA SREDSTVA SO MORDA V NJEM, GLEDE NA TO, KAJ JE ŠLO NAROBE."),
+        "giftCardInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Informacije o darilnem listu"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Darilo Od"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Naložite digitalno darilno kartico z NANO! Nastavite znesek in izbirno sporočilo, da bo prejemnik videl, kdaj ga odpre!\n\nKo ustvarite, boste dobili povezavo, ki jo lahko pošljete vsakomur, ki bo ob odprtju samodejno razdelila sredstva prejemniku po namestitvi Nautilusa!\n\nČe je prejemnik že uporabnik Nautilusa, bo ob odprtju povezave dobil poziv za prenos sredstev na svoj račun"),

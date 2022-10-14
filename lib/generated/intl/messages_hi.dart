@@ -172,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("सीड कॉपी करें"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "वॉलेट एड्रेस को क्लिपबोर्ड पर कॉपी करें"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("मोनरो बीज कॉपी करें"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("एक पासवर्ड बनाएं।"),
         "createGiftCard":
@@ -321,6 +323,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "उपहार कार्ड लिंक बनाने का प्रयास करते समय एक त्रुटि हुई"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "उपहार कार्ड बनाने का प्रयास करते समय एक त्रुटि हुई, उपहार कार्ड लिंक या बीज को आपके क्लिपबोर्ड पर कॉपी कर दिया गया है, आपके फंड में क्या गलत हुआ इस पर निर्भर करते हुए इसमें शामिल हो सकते हैं।"),
+        "giftCardInfoHeader":
+            MessageLookupByLibrary.simpleMessage("उपहार पत्रक जानकारी"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("गिफ्ट फ्रॉम"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "NANO के साथ एक डिजिटल गिफ्ट कार्ड लोड करें! प्राप्तकर्ता को यह देखने के लिए कि वे कब खोलते हैं, राशि और एक वैकल्पिक संदेश सेट करें!\n\nएक बार बनने के बाद, आपको एक लिंक मिलेगा जिसे आप किसी को भी भेज सकते हैं, जिसे खोलने पर नॉटिलस स्थापित करने के बाद प्राप्तकर्ता को स्वचालित रूप से धन वितरित किया जाएगा!\n\nयदि प्राप्तकर्ता पहले से ही एक Nautilus उपयोगकर्ता है, तो उन्हें लिंक खोलने पर अपने खाते में धनराशि स्थानांतरित करने का संकेत मिलेगा।"),

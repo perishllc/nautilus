@@ -455,6 +455,11 @@
     "type": "text",
     "description": "onramp_copy"
   },
+  "copyXMRSeed": "Kopiuj nasiona Monero",
+  "@copyXMRSeed": {
+    "type": "text",
+    "description": "copy_xmr_seed_btn"
+  },
   "createAPasswordHeader": "Stwórz hasło",
   "@createAPasswordHeader": {
     "type": "text",
@@ -924,6 +929,11 @@
   "@giftCardCreationErrorSent": {
     "type": "text",
     "description": "gift_generic_error"
+  },
+  "giftCardInfoHeader": "Informacje o arkuszu prezentowym",
+  "@giftCardInfoHeader": {
+    "type": "text",
+    "description": "gift_card_sheet_info_header"
   },
   "giftFrom": "Prezent od",
   "@giftFrom": {

@@ -172,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Kopēt sēklu"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Copy wallet address to clipboard"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Kopējiet Monero Seed"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Create a password."),
         "createGiftCard":
@@ -328,6 +330,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mēģinot izveidot dāvanu kartes saiti, radās kļūda"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "Mēģinot izveidot dāvanu karti, radās kļūda, DĀVANU KARTES SAITE VAI SĒKLA IR KOPĒTA JŪSU STARPKLĀTĒ, TAJĀ VAR BŪT JŪSU LĪDZEKĻI ATKARĪBĀ NO KAS NOTIEK NELABI."),
+        "giftCardInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Informācija par dāvanu lapu"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Gift From"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they will get a prompt to transfer the funds into their account upon opening the link"),

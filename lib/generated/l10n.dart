@@ -951,22 +951,22 @@ class AppLocalization {
     );
   }
 
-  /// `Copy Monero Seed`
-  String get copyXMRSeed {
-    return Intl.message(
-      'Copy Monero Seed',
-      name: 'copyXMRSeed',
-      desc: 'copy_xmr_seed_btn',
-      args: [],
-    );
-  }
-
   /// `Copy wallet address to clipboard`
   String get copyWalletAddressToClipboard {
     return Intl.message(
       'Copy wallet address to clipboard',
       name: 'copyWalletAddressToClipboard',
       desc: 'onramp_copy',
+      args: [],
+    );
+  }
+
+  /// `Copy Monero Seed`
+  String get copyXMRSeed {
+    return Intl.message(
+      'Copy Monero Seed',
+      name: 'copyXMRSeed',
+      desc: 'copy_xmr_seed_btn',
       args: [],
     );
   }
@@ -1909,6 +1909,16 @@ class AppLocalization {
       'An error occured while trying to create a gift card, THE GIFT CARD LINK OR SEED HAS BEEN COPIED TO YOUR CLIPBOARD, YOUR FUNDS MAY BE CONTAINED WITHIN IT DEPENDING ON WHAT WENT WRONG.',
       name: 'giftCardCreationErrorSent',
       desc: 'gift_generic_error',
+      args: [],
+    );
+  }
+
+  /// `Gift Sheet Info`
+  String get giftCardInfoHeader {
+    return Intl.message(
+      'Gift Sheet Info',
+      name: 'giftCardInfoHeader',
+      desc: 'gift_card_sheet_info_header',
       args: [],
     );
   }
@@ -4066,16 +4076,6 @@ class AppLocalization {
       'Send Sheet Info',
       name: 'sendSheetInfoHeader',
       desc: 'send_sheet_info_header',
-      args: [],
-    );
-  }
-
-  /// `Gift Sheet Info`
-  String get giftCardInfoHeader {
-    return Intl.message(
-      'Gift Sheet Info',
-      name: 'giftCardInfoHeader',
-      desc: 'gift_card_sheet_info_header',
       args: [],
     );
   }

@@ -176,6 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Kopyahin ang seed"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Kopyahin ang address ng wallet sa clipboard"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Kopyahin ang Monero Seed"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Gumawa ng password"),
         "createGiftCard":
@@ -334,6 +336,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "May naganap na error habang sinusubukang gumawa ng link ng gift card"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "May naganap na error habang sinusubukang gumawa ng gift card, ANG GIFT CARD LINK O SEED AY NAKOPYA SA IYONG CLIPBOARD, ANG IYONG PONDO AY MAAARING NILALAMAN SA LOOB NITO DEPENDE SA KUNG ANO ANG NAGING MALI."),
+        "giftCardInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Impormasyon sa Gift Sheet"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Regalo Mula"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Mag-load ng Digital Gift Card gamit ang NANO! Magtakda ng halaga, at opsyonal na mensahe para makita ng tatanggap kapag binuksan nila ito!\n\nSa sandaling nilikha, makakakuha ka ng isang link na maaari mong ipadala sa sinuman, na kapag binuksan ay awtomatikong ipamahagi ang mga pondo sa tatanggap pagkatapos i-install ang Nautilus!\n\nKung ang tatanggap ay isang gumagamit ng Nautilus, makakakuha sila ng prompt upang ilipat ang mga pondo sa kanilang account sa pagbubukas ng link."),

@@ -170,6 +170,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "copySeed": MessageLookupByLibrary.simpleMessage("Copiere seed"),
         "copyWalletAddressToClipboard": MessageLookupByLibrary.simpleMessage(
             "Copiați adresa portofelului în clipboard"),
+        "copyXMRSeed":
+            MessageLookupByLibrary.simpleMessage("Copiați sămânța Monero"),
         "createAPasswordHeader":
             MessageLookupByLibrary.simpleMessage("Creați o parolă."),
         "createGiftCard":
@@ -326,6 +328,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "A apărut o eroare la încercarea de a crea un link pentru cardul cadou"),
         "giftCardCreationErrorSent": MessageLookupByLibrary.simpleMessage(
             "A apărut o eroare în timpul încercării de a crea un card cadou, LINKUL CARDULUI CADOU SAU SEMÂNȚA A FOST COPIAT ÎN CLIPBOARD, FONDIILE DVS. POT FI CONȚINUTE ÎN ACEA ÎN FUNȚIE DE CE S-A GREUT."),
+        "giftCardInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Informații foaie cadou"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Cadou de la"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
             "Încărcați un card cadou digital cu NANO! Setați o sumă și un mesaj opțional pe care destinatarul să îl vadă când îl deschide!\n\nOdată creat, veți primi un link pe care îl puteți trimite oricui, care, atunci când este deschis, va distribui automat fondurile destinatarului după instalarea Nautilus!\n\nDacă destinatarul este deja utilizator Nautilus, acesta va primi o solicitare de a transfera fondurile în contul său la deschiderea linkului"),

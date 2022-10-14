@@ -1756,7 +1756,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
             // Show another confirm dialog
             AppDialogs.showConfirmDialog(context, AppLocalization.of(context).logoutAreYouSure, AppLocalization.of(context).logoutReassurance,
                 CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
-
               // prevent interaction while logging out:
               AppAnimation.animationLauncher(context, AnimationType.GENERIC);
 
@@ -2383,9 +2382,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     ),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context).showUnopenedWarning, _curUnopenedWarningSetting, AppIcons.warning, _unopenedWarningDialog),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemDoubleLine(
                         context, AppLocalization.of(context).showMoneroHeader, _curXmrEnabledSetting, AppIcons.money_bill_alt, _showMoneroDialog),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context).setXMRRestoreHeight, null, AppIcons.backupseed,
@@ -2395,6 +2391,9 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     // AppSettings.buildSettingsListItemDoubleLine(
                     //     context, AppLocalization.of(context).showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    AppSettings.buildSettingsListItemDoubleLine(
+                        context, AppLocalization.of(context).showUnopenedWarning, _curUnopenedWarningSetting, AppIcons.warning, _unopenedWarningDialog),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemDoubleLine(
                         context, AppLocalization.of(context).showFunding, _curFundingSetting, AppIcons.money_bill_wave, _fundingDialog),
