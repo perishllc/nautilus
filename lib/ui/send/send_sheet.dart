@@ -669,6 +669,7 @@ class SendSheetState extends State<SendSheet> {
                           ));
                     },
                     icon: AppIcons.gift,
+                    key: const Key("gift_button"),
                   ),
                 ),
 

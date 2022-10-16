@@ -155,13 +155,14 @@ class AppDialogs {
     ]);
   }
 
-  static Widget infoButton(BuildContext context, void Function()? onPressed, {IconData icon = AppIcons.info}) {
+  static Widget infoButton(BuildContext context, void Function()? onPressed, {IconData icon = AppIcons.info, Key? key}) {
     // A container for the info button
     return SizedBox(
       width: 50,
       height: 50,
       // margin: EdgeInsetsDirectional.only(),
       child: TextButton(
+        key: key,
         style: TextButton.styleFrom(
           foregroundColor: StateContainer.of(context).curTheme.text15,
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,

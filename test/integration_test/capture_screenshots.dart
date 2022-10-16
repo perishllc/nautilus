@@ -181,6 +181,13 @@ void main() {
     await saveScreenshot(binding, "send_screen");
     await pumpSettleWait(tester, halfSecond);
 
+    // gift card button:
+    await tester.tap(find.byKey(const Key("gift_button")));
+    await pumpSettleWait(tester, halfSecond);
+
+    await saveScreenshot(binding, "gift_card_screen");
+    await pumpSettleWait(tester, halfSecond);
+
     await goBack(tester);
     await pumpSettleWait(tester, halfSecond);
 

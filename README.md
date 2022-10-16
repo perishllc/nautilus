@@ -50,6 +50,9 @@ ___
       <img src="/screenshots/android/1080-2116/send_screen.png" width="200">
       <img src="/screenshots/android/1080-2116/receive_screen.png" width="200">
    </div>
+   <div style="display: flex; flex-direction: row; gap: 10px;">
+      <img src="/screenshots/android/1080-2116/gift_card_screen.png" width="200">
+   </div>
 </div>
 
 ---
