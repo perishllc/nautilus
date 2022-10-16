@@ -35,6 +35,7 @@ import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_gift.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
+import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
@@ -660,6 +661,7 @@ class SendSheetState extends State<SendSheet> {
                   child: AppDialogs.infoButton(
                     context,
                     () {
+                      Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
                       Sheets.showAppHeightEightSheet(
                           context: context,
                           widget: SendGiftSheet(

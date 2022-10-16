@@ -41,6 +41,7 @@ class AppDialogs {
                 constraints: const BoxConstraints(maxWidth: 100),
                 child: Text(
                   cancelText!,
+                  textAlign: TextAlign.center,
                   style: AppStyles.textStyleDialogButtonText(context),
                 ),
               ),
@@ -61,6 +62,7 @@ class AppDialogs {
                 constraints: const BoxConstraints(maxWidth: 100),
                 child: Text(
                   buttonText,
+                  textAlign: TextAlign.center,
                   style: AppStyles.textStyleDialogButtonText(context),
                 ),
               ),
@@ -129,6 +131,7 @@ class AppDialogs {
               ),
               child: Text(
                 closeText!,
+                textAlign: TextAlign.center,
                 style: AppStyles.textStyleDialogButtonText(context).copyWith(fontSize: AppFontSizes.smallest),
               ),
               onPressed: () async {

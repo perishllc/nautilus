@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +7,10 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
-import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
-import 'package:nautilus_wallet_flutter/util/ninja/api.dart';
-import 'package:nautilus_wallet_flutter/util/ninja/ninja_node.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class IntroBackupSafetyPage extends StatefulWidget {
   @override
@@ -23,22 +18,23 @@ class IntroBackupSafetyPage extends StatefulWidget {
 }
 
 class IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
 
     // set random representative as the default:
-    NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? nodes) {
-      if (nodes != null && nodes.isNotEmpty) {
-        final Random random = Random();
-        final NinjaNode randomNode = nodes[random.nextInt(nodes.length)];
-        sl.get<SharedPrefsUtil>().setRepresentative(randomNode.account);
-        // StateContainer.of(context).wallet.defaultRepresentative = randomNode.account;
-        AppWallet.defaultRepresentative = randomNode.account!;
-      }
-    });
+    // disabled as it has been unreliable for some reason:
+    // NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? nodes) {
+    //   if (nodes != null && nodes.isNotEmpty) {
+    //     final Random random = Random();
+    //     final NinjaNode randomNode = nodes[random.nextInt(nodes.length)];
+    //     sl.get<SharedPrefsUtil>().setRepresentative(randomNode.account);
+    //     // StateContainer.of(context).wallet.defaultRepresentative = randomNode.account;
+    //     AppWallet.defaultRepresentative = randomNode.account!;
+    //   }
+    // });
 
     sl.get<Vault>().setSeed(NanoSeeds.generateSeed()).then((String? result) {
       // Update wallet
