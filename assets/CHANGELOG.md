@@ -1,8 +1,8 @@
 ## v0.6.9 - [2022-10-22]
-#### Added
 #### Changed
 - Start working on bip39 seed support (still a WIP)
 - Revert some button styling changes
+- Updated generated domains to use nautilus.io
 #### Fixed
 - Updated a lot of packages and minor fixes
 ## v0.6.8 - [2022-10-16]
