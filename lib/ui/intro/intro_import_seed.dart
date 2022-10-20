@@ -440,7 +440,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                     prefixButton: TextFieldButton(
                                       icon: AppIcons.scan,
                                       onPressed: () {
-                                        if (NanoSeeds.isValidBip39Seed(_seedInputController.text)) {
+                                        if (NanoUtil.isValidBip39Seed(_seedInputController.text)) {
                                           return;
                                         }
                                         // TODO:
@@ -455,7 +455,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                           if (data == null || data.text == null) {
                                             return;
                                           }
-                                          if (NanoSeeds.isValidBip39Seed(data.text!)) {
+                                          if (NanoUtil.isValidBip39Seed(data.text!)) {
                                             _seedInputController.text = data.text!;
                                             setState(() {
                                               _seedIsValid = true;
@@ -649,7 +649,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                               if (_seedMode) {
                                 _seedInputFocusNode.unfocus();
                                 // If seed valid, log them in
-                                if (NanoSeeds.isValidBip39Seed(_seedInputController.text)) {
+                                if (NanoUtil.isValidBip39Seed(_seedInputController.text)) {
                                   await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
                                   await sl.get<Vault>().setSeed(_seedInputController.text);
                                   await sl.get<DBHelper>().dropAccounts();

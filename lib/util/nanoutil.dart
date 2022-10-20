@@ -23,4 +23,13 @@ class NanoUtil {
     }
     StateContainer.of(context).updateWallet(account: selectedAcct);
   }
+
+  static bool isValidBip39Seed(String seed) {
+    // Ensure seed is 64 characters long
+    if (seed == null || seed.length != 128) {
+      return false;
+    }
+    // Ensure seed only contains hex characters, 0-9;A-F
+    return NanoHelpers.isHexString(seed);
+  }
 }
