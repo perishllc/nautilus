@@ -52,11 +52,10 @@ class AppDialogs {
                 }
               },
             ),
-            ElevatedButton(
+            TextButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
-                backgroundColor: StateContainer.of(context).curTheme.background,
               ),
               child: Container(
                 constraints: const BoxConstraints(maxWidth: 100),
@@ -204,7 +203,7 @@ class AppDialogs {
   // }
 
   static Future<void> showChangeLog(BuildContext context) async {
-    String changeLogMarkdown = await DefaultAssetBundle.of(context).loadString("CHANGELOG.md");
+    String changeLogMarkdown = await DefaultAssetBundle.of(context).loadString("assets/CHANGELOG.md");
     final ScrollController scrollController = ScrollController();
 
     // replace the first h2 with an h1:

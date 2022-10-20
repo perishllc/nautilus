@@ -1,3 +1,8 @@
+## v0.6.9 - [2022-10-22]
+#### Added
+#### Changed
+- Revert some button styling changes
+#### Fixed
 ## v0.6.8 - [2022-10-16]
 #### Added
 - New QR Code Scanning UI

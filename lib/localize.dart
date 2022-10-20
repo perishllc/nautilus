@@ -67,11 +67,11 @@ class NonTranslatable {
   }
 
   static String get eulaUrl {
-    return "https://perish.co/nautilus/eula.html";
+    return "https://nautilus.io/eula";
   }
 
   static String get privacyUrl {
-    return "https://perish.co/nautilus/privacy.html";
+    return "https://nautilus.io/privacy";
   }
 
   static String get nanocafe {
@@ -91,7 +91,7 @@ class NonTranslatable {
   }
 
   static String get genericStoreLink {
-    return "https://nautiluswallet.app";
+    return "https://nautilus.io";
   }
 
   static String get hcaptchaUrl {

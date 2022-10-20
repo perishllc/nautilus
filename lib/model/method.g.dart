@@ -8,6 +8,7 @@ part of 'method.dart';
 
 Method _$MethodFromJson(Map<String, dynamic> json) => Method(
       type: json['type'] as String,
+      subtype: json['subtype'] as String?,
       url: json['url'] as String?,
     );
 
@@ -22,6 +23,7 @@ Map<String, dynamic> _$MethodToJson(Method instance) {
     }
   }
 
+  writeNotNull('subtype', instance.subtype);
   writeNotNull('url', instance.url);
   return val;
 }

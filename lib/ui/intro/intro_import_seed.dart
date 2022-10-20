@@ -25,16 +25,17 @@ class IntroImportSeedPage extends StatefulWidget {
 }
 
 class IntroImportSeedState extends State<IntroImportSeedPage> {
-  GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
 
   // Plaintext seed
-  FocusNode _seedInputFocusNode = FocusNode();
-  TextEditingController _seedInputController = TextEditingController();
+  final FocusNode _seedInputFocusNode = FocusNode();
+  final TextEditingController _seedInputController = TextEditingController();
   // Mnemonic Phrase
-  FocusNode _mnemonicFocusNode = FocusNode();
-  TextEditingController _mnemonicController = TextEditingController();
+  final FocusNode _mnemonicFocusNode = FocusNode();
+  final TextEditingController _mnemonicController = TextEditingController();
 
   bool _seedMode = false; // False if restoring phrase, true if restoring seed
+  // String _seedMode = "phrase"; // "phrase" if restoring phrase, "seed" if restoring seed, "bip39" if restoring bip39
 
   bool _seedIsValid = false;
   bool _showSeedError = false;
