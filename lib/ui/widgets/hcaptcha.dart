@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/localize.dart';
 import 'package:webview_flutter/webview_flutter.dart';

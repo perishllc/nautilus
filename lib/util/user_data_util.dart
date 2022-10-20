@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
@@ -91,13 +90,15 @@ class UserDataUtil {
       }
       return _parseData(data!, type);
     } on PlatformException catch (e) {
-      if (e.code == BarcodeScanner.cameraAccessDenied) {
-        UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);
-        return QRScanErrs.PERMISSION_DENIED;
-      } else {
-        UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
-        return QRScanErrs.UNKNOWN_ERROR;
-      }
+      // if (e.code == BarcodeScanner.cameraAccessDenied) {
+      //   UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);
+      //   return QRScanErrs.PERMISSION_DENIED;
+      // } else {
+      //   UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+      //   return QRScanErrs.UNKNOWN_ERROR;
+      // }
+      UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+      return QRScanErrs.UNKNOWN_ERROR;
     } on FormatException {
       return QRScanErrs.CANCEL_ERROR;
     } catch (e) {

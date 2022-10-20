@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
@@ -12,12 +11,10 @@ import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/method.dart';
-import 'package:nautilus_wallet_flutter/model/state_block.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
-import 'package:nautilus_wallet_flutter/network/model/request/handoff_reply_request.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/pay_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/handoff_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/pay_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/handoff/handoff_complete_sheet.dart';
@@ -343,19 +340,32 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
       }
 
       // construct the response to the server:
-      String? url;
+      String? handoffUrl;
+      String? cancelUrl;
 
       for (final Method method in widget.payItem.methods) {
         if (method.type == "http") {
-          url = method.url;
+          switch (method.subtype) {
+            case "handoff":
+              handoffUrl = method.url;
+              break;
+            case "cancel":
+              cancelUrl = method.url;
+              break;
+            default:
+              handoffUrl = method.url;
+              break;
+          }
         }
       }
 
-      if (url == null) {
+      if (handoffUrl == null) {
         // no method we support:
         poppedError = AppLocalization.of(context).handoffSupportedMethodNotFound;
         throw Exception("No supported method found");
       }
+
+      // TODO: call cancel URL if we leave the screen:
 
       // construct the request:
 
@@ -363,7 +373,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
       // debug:
       // url = "http://node-local.perish.co:5076/handoff";
       final HandoffResponse handoffResponse = await sl.get<AccountService>().requestHandoffHTTP(
-            url,
+            handoffUrl,
             StateContainer.of(context).wallet!.representative,
             StateContainer.of(context).wallet!.frontier,
             widget.payItem.amount,

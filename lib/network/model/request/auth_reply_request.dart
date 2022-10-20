@@ -1,6 +1,5 @@
 import 'dart:core';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:nautilus_wallet_flutter/model/state_block.dart';
 import 'package:nautilus_wallet_flutter/network/model/base_request.dart';
 
 part 'auth_reply_request.g.dart';

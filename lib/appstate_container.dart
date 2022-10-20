@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 
 import 'package:devicelocale/devicelocale.dart';
@@ -1065,7 +1064,7 @@ class StateContainerState extends State<StateContainer> {
       }
 
       if (correctAccount == null) {
-        log.d("Could not find account for ${link_as_account}");
+        log.d("Could not find account for $link_as_account");
         receivableRequests.remove(item.hash);
         return null;
       }

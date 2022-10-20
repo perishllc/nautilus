@@ -115,7 +115,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
           _countDownTxt = _formatCountDisplay(count);
         });
       }
-      Future.delayed(const Duration(seconds: 1), () {
+      Future<void>.delayed(const Duration(seconds: 1), () {
         _runCountdown(count - 1);
       });
     } else {

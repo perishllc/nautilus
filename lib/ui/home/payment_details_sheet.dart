@@ -13,7 +13,6 @@ import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/ui/gift/gift_qr_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/home/card_actions.dart';
-import 'package:nautilus_wallet_flutter/ui/home_page.dart';
 import 'package:nautilus_wallet_flutter/ui/users/add_blocked.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';

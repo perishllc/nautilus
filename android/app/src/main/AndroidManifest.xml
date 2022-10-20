@@ -119,18 +119,16 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="app.perish.co" />
+                <data android:scheme="https" android:host="app.nautilus.io" />
                 <!-- example-alternate domain is required for App Links when the Journeys/Web SDK and Deepviews are used inside your website.  -->
                 <data android:scheme="https" android:host="nautilus-alternate.app.link" />
                 <!-- test mode: -->
-                <data android:scheme="https" android:host="test-app.perish.co" />
+                <data android:scheme="https" android:host="test-app.nautilus.io" />
                 <data android:scheme="https" android:host="nautilus.test-app.link" />
                 <data android:scheme="https" android:host="nautilus-alternate.test-app.link" />
             </intent-filter>
 
         </activity>
-
-        <activity android:name="com.apptreesoftware.barcodescan.BarcodeScannerActivity" />
 
 
         <!-- Launcher Activity to handle incoming Branch intents -->

@@ -43,7 +43,6 @@ import 'package:nautilus_wallet_flutter/network/model/response/receivable_respon
 import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
 import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/util/blake2b.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:synchronized/synchronized.dart';
@@ -146,12 +145,12 @@ class AccountService {
     _isConnecting = true;
 
     // DEV SERVER:
-    if (kDebugMode) {
-      HTTP_PROTO = "http://";
-      WS_PROTO = "ws://";
-      BASE_SERVER_ADDRESS = DEV_SERVER_ADDRESS;
-      log.d("CONNECTED TO DEV SERVER");
-    }
+    // if (kDebugMode) {
+    //   HTTP_PROTO = "http://";
+    //   WS_PROTO = "ws://";
+    //   BASE_SERVER_ADDRESS = DEV_SERVER_ADDRESS;
+    //   log.d("CONNECTED TO DEV SERVER");
+    // }
 
     // ENS:
     const String rpcUrl = "https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}";

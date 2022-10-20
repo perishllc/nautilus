@@ -1,16 +1,13 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math' as Math;
-import 'dart:typed_data';
+import 'dart:math' as math;
 import 'dart:ui' as ui;
 
-import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
@@ -39,7 +36,7 @@ class NumericalRangeFormatter extends TextInputFormatter {
     if (newValue.text == '') {
       return newValue;
     } else if (int.parse(newValue.text) < min!) {
-      return const TextEditingValue().copyWith(text: min!.toStringAsFixed(2));
+      return TextEditingValue.empty.copyWith(text: min!.toStringAsFixed(2));
     } else {
       return int.parse(newValue.text) > max! ? oldValue : newValue;
     }
@@ -182,7 +179,7 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                       final double availableHeight =
                           (StateContainer.of(context).wallet?.username != null) ? (constraints.maxHeight - 70) : constraints.maxHeight;
                       const double widthDivideFactor = 1.3;
-                      final double computedMaxSize = Math.min(availableWidth / widthDivideFactor, availableHeight);
+                      final double computedMaxSize = math.min(availableWidth / widthDivideFactor, availableHeight);
                       return Center(
                         child: Stack(
                           children: <Widget>[

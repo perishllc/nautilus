@@ -131,12 +131,12 @@
 	</dict>
 	<key>branch_universal_link_domains</key>
 	<array>
-		<string>app.perish.co</string>
+		<string>app.nautilus.io</string>
 		<string>nautilus-alternate.app.link</string>
 	</array>
 	<key>branch_universal_link_test_domains</key>
 	<array>
-		<string>test-app.perish.co</string>
+		<string>test-app.nautilus.io</string>
 		<string>nautilus-alternate.test-app.link</string>
 	</array>
 	<key>NSAppTransportSecurity</key>

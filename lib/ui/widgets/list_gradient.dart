@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
 
 // ignore: must_be_immutable
 class ListGradient extends StatefulWidget {

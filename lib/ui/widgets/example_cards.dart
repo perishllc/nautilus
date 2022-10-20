@@ -393,10 +393,10 @@ class ExampleCards {
                           Stack(
                             alignment: AlignmentDirectional.centerStart,
                             children: <Widget>[
-                              Text(
+                              const Text(
                                 amount,
                                 textAlign: TextAlign.start,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontFamily: "NunitoSans",
                                   color: Colors.transparent,
                                   fontSize: AppFontSizes.smallest,
@@ -410,10 +410,10 @@ class ExampleCards {
                                     color: StateContainer.of(context).curTheme.primary20,
                                     borderRadius: BorderRadius.circular(5),
                                   ),
-                                  child: Text(
+                                  child: const Text(
                                     amount,
                                     textAlign: TextAlign.start,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       fontFamily: "NunitoSans",
                                       color: Colors.transparent,
                                       fontSize: AppFontSizes.smallest - 3,
@@ -438,10 +438,10 @@ class ExampleCards {
                       Stack(
                         alignment: AlignmentDirectional.centerEnd,
                         children: <Widget>[
-                          Text(
+                          const Text(
                             address,
                             textAlign: TextAlign.end,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: AppFontSizes.smallest,
                               fontFamily: 'OverpassMono',
                               fontWeight: FontWeight.w100,
@@ -455,10 +455,10 @@ class ExampleCards {
                                 color: StateContainer.of(context).curTheme.text20,
                                 borderRadius: BorderRadius.circular(5),
                               ),
-                              child: Text(
+                              child: const Text(
                                 address,
                                 textAlign: TextAlign.end,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: AppFontSizes.smallest - 3,
                                   fontFamily: 'OverpassMono',
                                   fontWeight: FontWeight.w100,

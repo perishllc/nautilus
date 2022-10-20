@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 
 class SendCompleteSheet extends StatefulWidget {
+
+  const SendCompleteSheet({required this.amountRaw, required this.destination, this.contactName, this.localAmount, this.memo = ""}) : super();
+  
   final String amountRaw;
   final String destination;
   final String? contactName;
   final String? localAmount;
   final String memo;
 
-  SendCompleteSheet({required this.amountRaw, required this.destination, this.contactName, this.localAmount, this.memo = ""}) : super();
-
+  @override
   _SendCompleteSheetState createState() => _SendCompleteSheetState();
 }
 

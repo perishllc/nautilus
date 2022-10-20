@@ -9,19 +9,8 @@ import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class FundingMessageCard extends StatefulWidget {
-  final AlertResponseItem? alert;
-  final Function? onPressed;
-  final bool showDesc;
-  final bool showTimestamp;
-  final bool hasBg;
-  final String? goalAmountRaw;
-  final String? currentAmountRaw;
-  final String? shortDescription;
-  final String? title;
-  final bool hideAmounts;
-  final bool hideProgressBar;
 
-  FundingMessageCard({
+  const FundingMessageCard({
     this.alert,
     this.onPressed,
     this.title,
@@ -34,7 +23,20 @@ class FundingMessageCard extends StatefulWidget {
     this.hideAmounts = false,
     this.hideProgressBar = false,
   });
+  
+  final AlertResponseItem? alert;
+  final Function? onPressed;
+  final bool showDesc;
+  final bool showTimestamp;
+  final bool hasBg;
+  final String? goalAmountRaw;
+  final String? currentAmountRaw;
+  final String? shortDescription;
+  final String? title;
+  final bool hideAmounts;
+  final bool hideProgressBar;
 
+  @override
   _FundingMessageCardState createState() => _FundingMessageCardState();
 }
 

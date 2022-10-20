@@ -102,10 +102,6 @@ dependencies:
   # QR Codes
   qr_flutter: ^4.0.0 # Generator
   pretty_qr_code: ^2.0.2
-  barcode_scan2:
-    git:
-      url: https://github.com/perishllc/barcode_scan2.git
-      ref: main
   mobile_scanner: ^2.0.0
   dotted_border: ^2.0.0+2
   image_picker: ^0.8.6
@@ -228,7 +224,7 @@ flutter_intl:
 
 dependency_overrides:
   ffi: ^2.0.1
-  web3dart: 2.0.0
+  # web3dart: 2.0.0
   # analyzer: ^4.1.0
   # dart_style: ^2.2.3
   # flutter_launcher_icons:

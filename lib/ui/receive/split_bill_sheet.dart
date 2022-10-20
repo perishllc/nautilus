@@ -12,7 +12,6 @@ import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -259,9 +258,9 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                       for (final User user in users) {
                         final String displayName = user.displayNameOrShortestAddress()!;
 
-                        final TextEditingController _amountController =
+                        final TextEditingController amountController =
                             userMap[displayName]["_amountController"] as TextEditingController;
-                        final TextEditingController _memoController =
+                        final TextEditingController memoController =
                             userMap[displayName]["_memoController"] as TextEditingController;
 
                         // final String amountRaw = userMap[displayName]["_amountController"].text as String;
@@ -269,17 +268,17 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                         // final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
 
                         final String formattedAmount =
-                            sanitizedAmount(widget.localCurrencyFormat, _amountController.text);
+                            sanitizedAmount(widget.localCurrencyFormat, amountController.text);
 
                         String amountRaw;
-                        if (_amountController.text.isEmpty || _amountController.text == "0") {
+                        if (amountController.text.isEmpty || amountController.text == "0") {
                           amountRaw = "0";
                         } else {
                           if (_localCurrencyMode) {
                             amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
                                 widget.localCurrencyFormat,
                                 convertLocalCurrencyToLocalizedCrypto(
-                                    context, widget.localCurrencyFormat, _amountController.text)));
+                                    context, widget.localCurrencyFormat, amountController.text)));
                           } else {
                             if (!mounted) return;
                             amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
@@ -292,8 +291,8 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                               amountRaw: amountRaw,
                               destination: user.address!,
                               contactName: user.getDisplayName(),
-                              localCurrency: _localCurrencyMode ? _amountController.text : null,
-                              memo: _memoController.text,
+                              localCurrency: _localCurrencyMode ? amountController.text : null,
+                              memo: memoController.text,
                             ));
                       }
                     },
@@ -308,9 +307,9 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                       for (final User user in users) {
                         final String displayName = user.displayNameOrShortestAddress()!;
 
-                        final TextEditingController _amountController =
+                        final TextEditingController amountController =
                             userMap[displayName]["_amountController"] as TextEditingController;
-                        final TextEditingController _memoController =
+                        final TextEditingController memoController =
                             userMap[displayName]["_memoController"] as TextEditingController;
 
                         // final String amountRaw = userMap[displayName]["_amountController"].text as String;
@@ -318,17 +317,17 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                         // final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
 
                         final String formattedAmount =
-                            sanitizedAmount(widget.localCurrencyFormat, _amountController.text);
+                            sanitizedAmount(widget.localCurrencyFormat, amountController.text);
 
                         String amountRaw;
-                        if (_amountController.text.isEmpty || _amountController.text == "0") {
+                        if (amountController.text.isEmpty || amountController.text == "0") {
                           amountRaw = "0";
                         } else {
                           if (_localCurrencyMode) {
                             amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
                                 widget.localCurrencyFormat,
                                 convertLocalCurrencyToLocalizedCrypto(
-                                    context, widget.localCurrencyFormat, _amountController.text)));
+                                    context, widget.localCurrencyFormat, amountController.text)));
                           } else {
                             if (!mounted) return;
                             amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
@@ -341,8 +340,8 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                               amountRaw: amountRaw,
                               destination: user.address!,
                               contactName: user.getDisplayName(),
-                              localCurrency: _localCurrencyMode ? _amountController.text : null,
-                              memo: _memoController.text,
+                              localCurrency: _localCurrencyMode ? amountController.text : null,
+                              memo: memoController.text,
                             ));
                       }
                     },
@@ -468,47 +467,47 @@ class SplitBillSheetState extends State<SplitBillSheet> {
     // this way you can tap button and tap back and not end up with X.9993451 NANO
     for (final String addr in userMap.keys) {
       if (userMap[addr]["_amountController"] != null) {
-        final TextEditingController _amountController = userMap[addr]["_amountController"] as TextEditingController;
-        String _lastLocalCurrencyAmount = userMap[addr]["_lastLocalCurrencyAmount"] as String;
-        String _lastCryptoAmount = userMap[addr]["_lastCryptoAmount"] as String;
+        final TextEditingController amountController = userMap[addr]["_amountController"] as TextEditingController;
+        String lastLocalCurrencyAmount = userMap[addr]["_lastLocalCurrencyAmount"] as String;
+        String lastCryptoAmount = userMap[addr]["_lastCryptoAmount"] as String;
 
         if (_localCurrencyMode) {
           // Switching to crypto-mode
           String cryptoAmountStr;
           // Check out previous state
-          if (_amountController.text == _lastLocalCurrencyAmount) {
-            cryptoAmountStr = _lastCryptoAmount;
+          if (amountController.text == lastLocalCurrencyAmount) {
+            cryptoAmountStr = lastCryptoAmount;
           } else {
-            _lastLocalCurrencyAmount = _amountController.text;
-            _lastCryptoAmount =
-                convertLocalCurrencyToLocalizedCrypto(context, widget.localCurrencyFormat, _amountController.text);
-            cryptoAmountStr = _lastCryptoAmount;
+            lastLocalCurrencyAmount = amountController.text;
+            lastCryptoAmount =
+                convertLocalCurrencyToLocalizedCrypto(context, widget.localCurrencyFormat, amountController.text);
+            cryptoAmountStr = lastCryptoAmount;
           }
           // setState(() {
           //   _localCurrencyMode = false;
           // });
-          Future.delayed(const Duration(milliseconds: 50), () {
-            _amountController.text = cryptoAmountStr;
-            _amountController.selection = TextSelection.fromPosition(TextPosition(offset: cryptoAmountStr.length));
+          Future<void>.delayed(const Duration(milliseconds: 50), () {
+            amountController.text = cryptoAmountStr;
+            amountController.selection = TextSelection.fromPosition(TextPosition(offset: cryptoAmountStr.length));
           });
         } else {
           // Switching to local-currency mode
           String localAmountStr;
           // Check our previous state
-          if (_amountController.text == _lastCryptoAmount) {
-            localAmountStr = _lastLocalCurrencyAmount;
-            if (!_lastLocalCurrencyAmount.startsWith(widget.localCurrencyFormat.currencySymbol)) {
-              _lastLocalCurrencyAmount = widget.localCurrencyFormat.currencySymbol + _lastLocalCurrencyAmount;
+          if (amountController.text == lastCryptoAmount) {
+            localAmountStr = lastLocalCurrencyAmount;
+            if (!lastLocalCurrencyAmount.startsWith(widget.localCurrencyFormat.currencySymbol)) {
+              lastLocalCurrencyAmount = widget.localCurrencyFormat.currencySymbol + lastLocalCurrencyAmount;
             }
           } else {
-            _lastCryptoAmount = _amountController.text;
-            _lastLocalCurrencyAmount =
-                convertCryptoToLocalCurrency(context, widget.localCurrencyFormat, _amountController.text);
-            localAmountStr = _lastLocalCurrencyAmount;
+            lastCryptoAmount = amountController.text;
+            lastLocalCurrencyAmount =
+                convertCryptoToLocalCurrency(context, widget.localCurrencyFormat, amountController.text);
+            localAmountStr = lastLocalCurrencyAmount;
           }
-          Future.delayed(const Duration(milliseconds: 50), () {
-            _amountController.text = localAmountStr;
-            _amountController.selection = TextSelection.fromPosition(TextPosition(offset: localAmountStr.length));
+          Future<void>.delayed(const Duration(milliseconds: 50), () {
+            amountController.text = localAmountStr;
+            amountController.selection = TextSelection.fromPosition(TextPosition(offset: localAmountStr.length));
           });
         }
       }
@@ -526,10 +525,10 @@ class SplitBillSheetState extends State<SplitBillSheet> {
   }
 
   ActionPane _getSlideActionsForUser(BuildContext context, User user, StateSetter setState) {
-    final List<Widget> _actions = [];
+    final List<Widget> actions = [];
 
     if (users.isNotEmpty) {
-      _actions.add(SlidableAction(
+      actions.add(SlidableAction(
           autoClose: false,
           borderRadius: BorderRadius.circular(5.0),
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
@@ -549,7 +548,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
       motion: const ScrollMotion(),
       extentRatio: 0.25,
       // All actions are defined in the children parameter.
-      children: _actions,
+      children: actions,
     );
   }
 
@@ -564,9 +563,9 @@ class SplitBillSheetState extends State<SplitBillSheet> {
     userMap[userAddress].putIfAbsent("_lastLocalCurrencyAmount", () => "");
     userMap[userAddress].putIfAbsent("_lastCryptoAmount", () => "");
 
-    final FocusNode _amountFocusNode = userMap[userAddress]["_amountFocusNode"] as FocusNode;
-    _amountFocusNode.addListener(() {
-      if (_amountFocusNode.hasFocus) {
+    final FocusNode amountFocusNode = userMap[userAddress]["_amountFocusNode"] as FocusNode;
+    amountFocusNode.addListener(() {
+      if (amountFocusNode.hasFocus) {
         userMap[userAddress]["_amountHint"] = null;
       } else {
         userMap[userAddress]["_amountHint"] = AppLocalization.of(context).enterAmount;
@@ -658,9 +657,9 @@ class SplitBillSheetState extends State<SplitBillSheet> {
     userMap[userAddress].putIfAbsent("_memoFocusNode", () => FocusNode());
     userMap[userAddress].putIfAbsent("_memoController", () => TextEditingController());
     userMap[userAddress].putIfAbsent("_memoHint", () => AppLocalization.of(context).enterMemo);
-    final FocusNode _memoFocusNode = userMap[userAddress]["_memoFocusNode"] as FocusNode;
-    _memoFocusNode.addListener(() {
-      if (_memoFocusNode.hasFocus) {
+    final FocusNode memoFocusNode = userMap[userAddress]["_memoFocusNode"] as FocusNode;
+    memoFocusNode.addListener(() {
+      if (memoFocusNode.hasFocus) {
         userMap[userAddress]["_memoHint"] = null;
       } else {
         userMap[userAddress]["_memoHint"] = AppLocalization.of(context).enterMemo;

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,6 +31,7 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 class ChangeRepManualSheet extends StatefulWidget {
   final TextEditingController repController;
@@ -168,26 +168,24 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                             hintText: _showChangeRepHint ? AppLocalization.of(context).changeRepHint : "",
                             prefixButton: TextFieldButton(
                               icon: AppIcons.scan,
-                              onPressed: () {
+                              onPressed: () async {
                                 UIUtil.cancelLockEvent();
-                                BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/).then((res) {
-                                  final result = res.rawContent;
-                                  if (result == null) {
-                                    return;
-                                  }
-                                  final Address address = Address(result);
-                                  if (address.isValid()) {
-                                    setState(() {
-                                      _addressValidAndUnfocused = true;
-                                      _showPasteButton = false;
-                                      _repAddressValid = true;
-                                    });
-                                    widget.repController.text = address.address!;
-                                    _repFocusNode!.unfocus();
-                                  } else {
-                                    UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
-                                  }
-                                });
+                                final String? result = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
+                                if (result == null) {
+                                  return;
+                                }
+                                final Address address = Address(result);
+                                if (address.isValid()) {
+                                  setState(() {
+                                    _addressValidAndUnfocused = true;
+                                    _showPasteButton = false;
+                                    _repAddressValid = true;
+                                  });
+                                  widget.repController.text = address.address!;
+                                  _repFocusNode!.unfocus();
+                                } else {
+                                  UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
+                                }
                               },
                             ),
                             fadePrefixOnCondition: true,

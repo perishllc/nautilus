@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
@@ -26,6 +25,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
+import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 class AppTransferOverviewSheet {
   AppTransferOverviewSheet();
@@ -160,17 +160,18 @@ class AppTransferOverviewSheet {
                               AppButtonType.PRIMARY,
                               AppLocalization.of(context).scanQrCode,
                               Dimens.BUTTON_TOP_DIMENS,
-                              onPressed: () {
+                              onPressed: () async {
                                 UIUtil.cancelLockEvent();
-                                BarcodeScanner.scan(/*StateContainer.of(context).curTheme.qrScanTheme*/).then((ScanResult val) {
-                                  final String value = val.rawContent;
+                                final String? result = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
+                                if (result == null) {
+                                  return;
+                                }
 
-                                  if (!NanoSeeds.isValidSeed(value)) {
-                                    UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidSeed, context);
-                                    return;
-                                  }
-                                  startTransfer(context, value);
-                                });
+                                if (!NanoSeeds.isValidSeed(result)) {
+                                  UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidSeed, context);
+                                  return;
+                                }
+                                startTransfer(context, result);
                               },
                             ),
                           ],
