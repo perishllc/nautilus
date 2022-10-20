@@ -84,6 +84,9 @@ dependencies {
     implementation "com.bottlerocketstudios:vault:1.4.2"
     implementation 'androidx.multidex:multidex:2.0.1'
 
+    // barcode scanning:
+    implementation 'com.google.mlkit:barcode-scanning:17.0.2'
+
     // required for all Android apps
     // implementation 'io.branch.sdk.android:library:'
     implementation 'io.branch.sdk.android:library:5.+'
