@@ -8,7 +8,7 @@ publish_to: "none"
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.6.9+99
+version: 0.6.9+100
 
 environment:
   sdk: '>=2.18.2 <3.0.0'
@@ -183,9 +183,6 @@ dependencies:
       ref: main
   x25519: ^0.1.1
   encrypt: ^5.0.1
-
-  # day night mode:
-  day_night_switcher: ^0.2.0+1
 
   # search bar + text highlighting:
   # searchbar_animation: ^0.0.3

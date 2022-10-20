@@ -1,4 +1,6 @@
-## v0.6.9 - [2022-10-22]
+## v0.6.9 - [2022-10-21]
+#### Added
+- Theme switcher on intro
 #### Changed
 - Start working on bip39 seed support (still a WIP)
 - Revert some button styling changes

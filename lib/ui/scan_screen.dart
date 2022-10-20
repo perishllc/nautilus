@@ -72,20 +72,12 @@ class ScanScreenState extends State<ScanScreen> {
                     children: <Widget>[
                       IconButton(
                         color: Colors.white,
-                        // icon: const Icon(AppIcons.back),
-                        // icon: const Icon(Icons.exit_to_app),
                         icon: const Icon(Icons.arrow_back),
                         iconSize: 32.0,
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
                       ),
-                      // IconButton(
-                      //   color: Colors.white,
-                      //   icon: const Icon(Icons.image_outlined),
-                      //   iconSize: 32.0,
-                      //   onPressed: scanImage,
-                      // ),
                     ],
                   ),
                 ),

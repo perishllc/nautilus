@@ -4,12 +4,12 @@ import 'dart:io';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
@@ -99,6 +99,54 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
         }
       });
     });
+  }
+
+  Future<void> _themeDialog() async {
+    final ThemeOptions? selection = await showAppDialog<ThemeOptions>(
+        context: context,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            title: Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Text(
+                AppLocalization.of(context).themeHeader,
+                style: AppStyles.textStyleDialogHeader(context),
+              ),
+            ),
+            children: _buildThemeOptions(),
+          );
+        });
+    if (selection != null) {
+      ThemeSetting _curThemeSetting = await sl.get<SharedPrefsUtil>().getTheme();
+      if (_curThemeSetting != ThemeSetting(selection)) {
+        sl.get<SharedPrefsUtil>().setTheme(ThemeSetting(selection)).then((void result) {
+          setState(() {
+            StateContainer.of(context).updateTheme(ThemeSetting(selection));
+            _curThemeSetting = ThemeSetting(selection);
+          });
+        });
+      }
+    }
+  }
+
+  List<Widget> _buildThemeOptions() {
+    final List<Widget> ret = <Widget>[];
+    for (final ThemeOptions value in ThemeOptions.values) {
+      ret.add(SimpleDialogOption(
+        onPressed: () {
+          Navigator.pop(context, value);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Text(
+            ThemeSetting(value).getDisplayName(context),
+            style: AppStyles.textStyleDialogOptions(context),
+          ),
+        ),
+      ));
+    }
+    return ret;
   }
 
   @override
@@ -193,24 +241,41 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
               //A column with "New Wallet" and "Import Wallet" buttons
               Column(
                 children: <Widget>[
-                  Container(
-                    margin: const EdgeInsets.only(right: 28),
-                    alignment: Alignment.centerRight,
-                    child: DayNightSwitcherIcon(
-                      isDarkModeEnabled: isDarkModeEnabled,
-                      onStateChanged: (bool enabled) {
-                        setState(() {
-                          isDarkModeEnabled = enabled;
+                  // Container(
+                  //   margin: const EdgeInsets.only(right: 28),
+                  //   alignment: Alignment.centerRight,
+                  //   child: DayNightSwitcherIcon(
+                  //     isDarkModeEnabled: isDarkModeEnabled,
+                  //     onStateChanged: (bool enabled) {
+                  //       setState(() {
+                  //         isDarkModeEnabled = enabled;
 
-                          if (!isDarkModeEnabled) {
-                            StateContainer.of(context).updateTheme(ThemeSetting(ThemeOptions.INDIUM));
-                          } else {
-                            StateContainer.of(context).updateTheme(ThemeSetting(ThemeOptions.NAUTILUS));
-                          }
-                        });
+                  //         if (!isDarkModeEnabled) {
+                  //           StateContainer.of(context).updateTheme(ThemeSetting(ThemeOptions.INDIUM));
+                  //         } else {
+                  //           StateContainer.of(context).updateTheme(ThemeSetting(ThemeOptions.NAUTILUS));
+                  //         }
+                  //       });
+                  //     },
+                  //   ),
+                  // ),
+
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 16, right: 28),
+                    alignment: Alignment.centerRight,
+                    child: FloatingActionButton(
+                      backgroundColor: StateContainer.of(context).curTheme.successDark,
+                      onPressed: () {
+                        _themeDialog();
                       },
+                      child: Icon(
+                        AppIcons.theme,
+                        size: 32,
+                        color: StateContainer.of(context).curTheme.text,
+                      ),
                     ),
                   ),
+
                   Row(
                     children: <Widget>[
                       // New Wallet Button
