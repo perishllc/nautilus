@@ -20,7 +20,7 @@ dependencies:
     sdk: flutter
 
   # contacts:
-  flutter_contacts: ^1.1.4
+  # flutter_contacts: ^1.1.4
 
   # uuid:
   uuid: ^3.0.6
