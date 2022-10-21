@@ -21,6 +21,7 @@ class ScanScreenState extends State<ScanScreen> {
   // Future<void> scanImage() async {
   //   final ImagePicker imagePicker = ImagePicker();
   //   final XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
+  //   // cameraController.analyzeImage(path);
   // }
 
   @override

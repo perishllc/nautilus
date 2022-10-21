@@ -8,10 +8,10 @@ publish_to: "none"
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.6.9+100
+version: 0.6.9+101
 
 environment:
-  sdk: '>=2.18.2 <3.0.0'
+  sdk: ">=2.18.2 <3.0.0"
 
 dependencies:
   flutter:
@@ -102,12 +102,17 @@ dependencies:
   # QR Codes
   qr_flutter: ^4.0.0 # Generator
   pretty_qr_code: ^2.0.2
-  mobile_scanner: ^2.0.0
   dotted_border: ^2.0.0+2
   image_picker: ^0.8.6
+  # mobile_scanner: ^2.0.0
+  # mobile_scanner bug:
+  # https://github.com/juliansteenbakker/mobile_scanner/issues/221
+  mobile_scanner:
+    git:
+      url: https://github.com/juliansteenbakker/mobile_scanner.git
+      ref: master
 
   # Share files
-  # share_plus: ^4.3.0
   share_plus: ^6.0.0
 
   # File picker
@@ -195,7 +200,6 @@ dependencies:
   # confetti:
   confetti: ^0.7.0
 
-  
   path: ^1.8.1
 
   # hcaptcha:
@@ -206,7 +210,7 @@ dependencies:
   keframe: ^3.0.0
 
   # home buttons:
-  carousel_slider: ^4.1.1
+  # carousel_slider: ^4.1.1
 
 flutter_intl:
   enabled: true
