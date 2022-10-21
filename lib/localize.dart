@@ -87,7 +87,7 @@ class NonTranslatable {
   }
 
   static String get promoLink {
-    return "https://perish.co/promo";
+    return "https://nautilus.io/promo";
   }
 
   static String get genericStoreLink {
