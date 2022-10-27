@@ -27,6 +27,7 @@ import 'package:nautilus_wallet_flutter/model/notification_setting.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/pay_item.dart';
+import 'package:nautilus_wallet_flutter/network/username_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/auth/auth_confirm_sheet.dart';
@@ -242,18 +243,18 @@ class SendSheetState extends State<SendSheet> {
             // check if UD / ENS / opencap address
             if (_addressController!.text.contains(r"$")) {
               // check if opencap address:
-              address = await sl.get<AccountService>().checkOpencapDomain(formattedAddress);
+              address = await sl.get<UsernameService>().checkOpencapDomain(formattedAddress);
               if (address != null) {
                 type = UserTypes.OPENCAP;
               }
             } else if (_addressController!.text.contains(".")) {
               // check if UD domain:
-              address = await sl.get<AccountService>().checkUnstoppableDomain(formattedAddress);
+              address = await sl.get<UsernameService>().checkUnstoppableDomain(formattedAddress);
               if (address != null) {
                 type = UserTypes.UD;
               } else {
                 // check if ENS domain:
-                address = await sl.get<AccountService>().checkENSDomain(formattedAddress);
+                address = await sl.get<UsernameService>().checkENSDomain(formattedAddress);
                 if (address != null) {
                   type = UserTypes.ENS;
                 }
@@ -1307,15 +1308,13 @@ class SendSheetState extends State<SendSheet> {
     final bool isFavorite = _addressController!.text.startsWith("★");
     final bool isDomain = _addressController!.text.contains(".") || _addressController!.text.contains(r"$");
     final bool isNano = _addressController!.text.startsWith("nano_");
-    // final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
-    /*  if (_addressController!.text.trim().isEmpty && isRequest) {
+    if (_addressController!.text.trim().isEmpty) {
       isValid = false;
       setState(() {
         _addressValidationText = AppLocalization.of(context).addressMissing;
         _pasteButtonVisible = true;
       });
-    } else */
-    if (_addressController!.text.isNotEmpty /*&& !isPhoneNumber*/ && !isFavorite && !isUser && !isDomain && !Address(_addressController!.text).isValid()) {
+    } else if (_addressController!.text.isNotEmpty && !isFavorite && !isUser && !isDomain && !Address(_addressController!.text).isValid()) {
       isValid = false;
       setState(() {
         _addressValidationText = AppLocalization.of(context).invalidAddress;

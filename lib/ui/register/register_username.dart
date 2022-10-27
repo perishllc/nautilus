@@ -9,6 +9,7 @@ import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/username_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/register/register_confirm_sheet.dart';
@@ -399,7 +400,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                               });
                               return;
                             }
-                            final Map<String, dynamic> resp = await sl.get<AccountService>().checkUsernameAvailability(username) as Map<String, dynamic>;
+                            final Map<String, dynamic> resp = await sl.get<UsernameService>().checkUsernameAvailability(username) as Map<String, dynamic>;
                             if (resp == null) {
                               setState(() {
                                 _usernameValidationText = AppLocalization.of(context).usernameError;

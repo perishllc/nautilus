@@ -9,6 +9,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:magic_sdk/magic_sdk.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
@@ -99,6 +100,9 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
         }
       });
     });
+
+    // var magic = Magic.instance;
+    // var token = await magic.auth.loginWithMagicLink(email: textController.text);
   }
 
   Future<void> _themeDialog() async {
@@ -276,24 +280,49 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                     ),
                   ),
 
+                  // TODO: magic
                   Row(
                     children: <Widget>[
                       // New Wallet Button
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).newWallet, Dimens.BUTTON_TOP_DIMENS,
-                          instanceKey: const Key("new_wallet_button"), onPressed: () {
-                        Navigator.of(context).pushNamed('/intro_backup_safety');
+                          instanceKey: const Key("get_started"), onPressed: () {
+                        Navigator.of(context).pushNamed('/login');
                       }),
                     ],
                   ),
+
                   Row(
                     children: <Widget>[
-                      // Import Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).importWallet, Dimens.BUTTON_BOTTOM_DIMENS,
-                          onPressed: () {
+                      // New Wallet Button
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).newWallet, Dimens.BUTTON_COMPACT_LEFT_DIMENS,
+                          instanceKey: const Key("new_wallet_button"), onPressed: () {
+                        Navigator.of(context).pushNamed('/intro_backup_safety');
+                      }),
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).importWallet, Dimens.BUTTON_COMPACT_RIGHT_DIMENS, onPressed: () {
                         Navigator.of(context).pushNamed('/intro_import');
                       }),
                     ],
                   ),
+
+                  // Row(
+                  //   children: <Widget>[
+                  //     // New Wallet Button
+                  //     AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).newWallet, Dimens.BUTTON_TOP_DIMENS,
+                  //         instanceKey: const Key("new_wallet_button"), onPressed: () {
+                  //       Navigator.of(context).pushNamed('/intro_backup_safety');
+                  //     }),
+                  //   ],
+                  // ),
+                  // Row(
+                  //   children: <Widget>[
+                  //     // Import Wallet Button
+                  //     AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).importWallet, Dimens.BUTTON_BOTTOM_DIMENS,
+                  //         onPressed: () {
+                  //       Navigator.of(context).pushNamed('/intro_import');
+                  //     }),
+                  //   ],
+                  // ),
                 ],
               ),
             ],

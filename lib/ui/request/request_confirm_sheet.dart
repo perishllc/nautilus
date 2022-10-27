@@ -14,6 +14,7 @@ import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/metadata_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -34,14 +35,16 @@ import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:uuid/uuid.dart';
 
 class RequestConfirmSheet extends StatefulWidget {
+
+  const RequestConfirmSheet({required this.amountRaw, required this.destination, this.contactName, this.localCurrency, this.memo}) : super();
+  
   final String amountRaw;
   final String destination;
   final String? contactName;
   final String? localCurrency;
   final String? memo;
 
-  RequestConfirmSheet({required this.amountRaw, required this.destination, this.contactName, this.localCurrency, this.memo}) : super();
-
+  @override
   _RequestConfirmSheetState createState() => _RequestConfirmSheetState();
 }
 
@@ -307,7 +310,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         }
 
         await sl
-            .get<AccountService>()
+            .get<MetadataService>()
             .requestPayment(widget.destination, widget.amountRaw, StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
       } catch (e) {
         sl.get<Logger>().e("payment request failed: ${e.toString()}");

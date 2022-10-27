@@ -49,8 +49,8 @@ import 'package:synchronized/synchronized.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:web_socket_channel/io.dart';
 
-late Web3Client _web3Client;
-late Ens ens;
+// late Web3Client _web3Client;
+// late Ens ens;
 
 Map? decodeJson(dynamic src) {
   return json.decode(src as String) as Map?;
@@ -75,6 +75,9 @@ class AccountService {
   static String HTTP_PROTO = "https://";
   static String WS_PROTO = "wss://";
 
+  static String RPC_URL = "nautilus.perish.co";
+  static String WS_URL = "nautilus.perish.co";
+
   // ignore_for_file: non_constant_identifier_names
   static String SERVER_ADDRESS_WS = "$WS_PROTO$BASE_SERVER_ADDRESS";
   static String SERVER_ADDRESS_HTTP = "$HTTP_PROTO$BASE_SERVER_ADDRESS/api";
@@ -82,14 +85,12 @@ class AccountService {
   static String SERVER_ADDRESS_FUNDING = "$HTTP_PROTO$BASE_SERVER_ADDRESS/funding";
   static String SERVER_ADDRESS_GIFT = "$HTTP_PROTO$BASE_SERVER_ADDRESS/gift";
 
+  // auth:
+  static String AUTH_SERVER = "https://auth.perish.co";
+
   static const String NANO_TO_USERNAME_LEASE_ENDPOINT = "https://api.nano.to/";
   static const String NANO_TO_KNOWN_ENDPOINT = "https://nano.to/known.json";
   static const String XNO_TO_KNOWN_ENDPOINT = "https://xno.to/known.json";
-
-  // UD / ENS:
-  static const String UD_ENDPOINT = "https://unstoppabledomains.g.alchemy.com/domains/";
-  static const String ENS_RPC_ENDPOINT = "https://mainnet.infura.io/v3/";
-  static const String ENS_WSS_ENDPOINT = "wss://mainnet.infura.io/ws/v3/";
 
   final Logger log = sl.get<Logger>();
 
@@ -152,15 +153,6 @@ class AccountService {
     //   log.d("CONNECTED TO DEV SERVER");
     // }
 
-    // ENS:
-    const String rpcUrl = "https://mainnet.infura.io/v3/${Sensitive.INFURA_API_KEY}";
-    const String wsUrl = "wss://mainnet.infura.io/ws/v3/${Sensitive.INFURA_API_KEY}";
-
-    _web3Client = Web3Client(rpcUrl, http.Client(), socketConnector: () {
-      return IOWebSocketChannel.connect(wsUrl).cast<String>();
-    });
-    ens = Ens(client: _web3Client);
-
     try {
       final PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
@@ -201,18 +193,6 @@ class AccountService {
   }
 
   // are we connected?
-  // Future<bool> isConnected() async {
-  //   try {
-  //     final List<InternetAddress> result = await InternetAddress.lookup(_BASE_SERVER_ADDRESS);
-  //     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-  //       print(result[0].rawAddress);
-  //       return true;
-  //     }
-  //   } on SocketException catch (_) {
-  //     log.d('not connected to the internet!');
-  //   }
-  //   return false;
-  // }
 
   Future<bool> isConnected() async {
     final ConnectivityResult connectivityResult = await Connectivity().checkConnectivity();
@@ -277,7 +257,7 @@ class AccountService {
         final SubscribeResponse resp = await compute(subscribeResponseFromJson, msg);
         // Post to callbacks
         EventTaxiImpl.singleton().fire(SubscribeEvent(response: resp));
-      } else if (msg.containsKey("currency") && msg.containsKey("price") && msg.containsKey("xmr")) {
+      } else if (msg.containsKey("currency") && msg.containsKey("price")) {
         // Price info sent from server
         final PriceResponse resp = PriceResponse.fromJson(msg as Map<String, dynamic>);
         EventTaxiImpl.singleton().fire(PriceEvent(response: resp));
@@ -426,108 +406,6 @@ class AccountService {
     return decoded;
   }
 
-  Future<String?> checkUnstoppableDomain(String domain) async {
-    final http.Response response =
-        await http.get(Uri.parse(UD_ENDPOINT + domain), headers: {'Content-type': 'application/json', 'Authorization': 'Bearer ${Sensitive.UD_API_KEY}'});
-
-    if (response.statusCode != 200) {
-      return null;
-    }
-    final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
-    String? address;
-
-    if (decoded != null && decoded["records"] != null && decoded["records"]["crypto.NANO.address"] != null) {
-      address = decoded["records"]["crypto.NANO.address"] as String?;
-      if (NanoAccounts.isValid(NanoAccountType.NANO, address!)) {
-        return address;
-      }
-    }
-
-    return null;
-  }
-
-  Future<String?> checkENSDomain(String domain) async {
-    final String pubKey = await ens.withName(domain).getCoinAddress(CoinType.NANO);
-    if (pubKey.isEmpty) {
-      return null;
-    } else {
-      final String address = NanoAccounts.createAccount(NanoAccountType.NANO, pubKey);
-      // Validating address
-      if (NanoAccounts.isValid(NanoAccountType.NANO, address)) {
-        return address;
-      } else {
-        return null;
-      }
-    }
-  }
-
-  Future<String?> checkOpencapDomain(String domain) async {
-    // get the SRV record:
-    final String tld = domain.split(r"$").last;
-    String resolvedDomain = "";
-
-    // GET the SRV record using Cloudflare's DNS over HTTPS API:
-
-    final http.Response dnsSRVResp =
-        await http.get(Uri.parse("https://cloudflare-dns.com/dns-query?name=$tld&type=SRV"), headers: {"Accept": "application/dns-json"});
-    if (dnsSRVResp.statusCode != 200) {
-      return null;
-    }
-
-    final Map decodedSRVResp = json.decode(dnsSRVResp.body) as Map<dynamic, dynamic>;
-    if (decodedSRVResp.containsKey("Answer")) {
-      final List<dynamic> decodedAnswer = decodedSRVResp["Answer"] as List<dynamic>;
-      for (final dynamic ans in decodedAnswer) {
-        if (ans["data"] != null) {
-          final String srvRecord = ans["data"] as String;
-          final List<String> splitStrs = srvRecord.split(" ");
-          resolvedDomain = splitStrs.last;
-        }
-      }
-    }
-
-    if (resolvedDomain.isEmpty) {
-      return null;
-    }
-
-    // GET /v1/addresses?alias=alice$domain.tld&address_type=300
-
-    final http.Response response =
-        await http.get(Uri.parse("https://$resolvedDomain/v1/addresses?alias=$domain&address_type=300"), headers: {"Accept": "application/json"});
-    if (response.statusCode != 200) {
-      return null;
-    }
-    final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
-    if (decoded.containsKey("address")) {
-      return decoded["address"] as String?;
-    }
-    return null;
-  }
-
-  Future<dynamic> checkUsernameAvailability(String username) async {
-    final http.Response response = await http.get(Uri.parse("$NANO_TO_USERNAME_LEASE_ENDPOINT/$username/lease"), headers: {"Accept": "application/json"});
-    // if (response.statusCode != 200) {
-    //   return {"available": false};
-    // }
-    final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
-    // if (decoded.containsKey("error")) {
-    //   return {"available": false};
-    // }
-    return decoded;
-  }
-
-  Future<dynamic> checkUsernameUrl(String URL) async {
-    final http.Response response = await http.get(Uri.parse(URL), headers: {"Accept": "application/json"});
-    if (response.statusCode != 200) {
-      return null;
-    }
-    final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
-    if (decoded.containsKey("error")) {
-      return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
-    }
-    return decoded;
-  }
-
   Future<AccountInfoResponse> getAccountInfo(String account) async {
     final AccountInfoRequest request = AccountInfoRequest(account: account);
     final dynamic response = await makeHttpRequest(request);
@@ -583,64 +461,6 @@ class AccountService {
       response["history"] = [];
     }
     return AccountHistoryResponse.fromJson(response as Map<String, dynamic>);
-  }
-
-  // request money from an account:
-  Future<void> requestPayment(
-      String? account, String? amountRaw, String? requestingAccount, String requestSignature, String requestNonce, String? memoEnc, String localUuid) async {
-    final PaymentRequest request = PaymentRequest(
-        account: account,
-        amount_raw: amountRaw,
-        requesting_account: requestingAccount,
-        request_signature: requestSignature,
-        request_nonce: requestNonce,
-        memo_enc: memoEnc,
-        local_uuid: localUuid);
-
-    // queueRequest(request);
-    final dynamic response = await makeHttpRequest(request);
-    if (response is ErrorResponse) {
-      throw Exception("Received error ${response.error}");
-    }
-  }
-
-  // send payment record (memo) to an account:
-  Future<void> sendTXMemo(String account, String requestingAccount, String? amountRaw, String requestSignature, String requestNonce, String memoEnc,
-      String? block, String localUuid) async {
-    final PaymentMemo request = PaymentMemo(
-        account: account,
-        requesting_account: requestingAccount,
-        request_signature: requestSignature,
-        request_nonce: requestNonce,
-        memo_enc: memoEnc,
-        block: block,
-        local_uuid: localUuid);
-    final dynamic response = await makeHttpRequest(request);
-    if (response is ErrorResponse) {
-      throw Exception("Received error ${response.error} ${response.details}");
-    }
-  }
-
-  Future<void> sendTXMessage(String account, String requestingAccount, String requestSignature, String requestNonce, String memoEnc, String localUuid) async {
-    final PaymentMessage request = PaymentMessage(
-        account: account,
-        requesting_account: requestingAccount,
-        request_signature: requestSignature,
-        request_nonce: requestNonce,
-        memo_enc: memoEnc,
-        local_uuid: localUuid);
-    final dynamic response = await makeHttpRequest(request);
-    if (response is ErrorResponse) {
-      throw Exception("Received error ${response.error} ${response.details}");
-    }
-  }
-
-  Future<void> requestACK(String? requestUuid, String? account, String? requestingAccount) async {
-    final PaymentACK request = PaymentACK(uuid: requestUuid, account: account, requesting_account: requestingAccount);
-    final dynamic response = await makeHttpRequest(request);
-    if (response is ErrorResponse) {
-      throw Exception("Received error ${response.error} ${response.details}");
-    }
   }
 
   Future<AccountsBalancesResponse> requestAccountsBalances(List<String> accounts) async {
@@ -742,23 +562,6 @@ class AccountService {
 
     return requestProcess(processRequest);
   }
-
-  // Future<String?> isUsernameRegistered(String username) async {
-  //   return null;
-  // }
-  // Future<void> registerUsername(String username) async {
-  //   // Suppose your private key is P, and your account is A.
-  //   // Part 1 to registration: Register a username -> account mapping:
-  //   // 1. Compute the account A2 which has the private key: blake2b("username registration:" + username)
-  //   Uint8List privateKey = NanoHelpers.stringToBytesUtf8("username registration:$username");
-  //   // TODO: check if the username is already registered:
-  //   bool isRegistered = isUsernameRegistered(username) == null;
-  //   if (isRegistered) {
-  //     throw Exception("Username is already registered");
-  //   }
-  //   // send 1 raw to
-  //   // blake2b()
-  // }
 
   Future<HandoffResponse> requestHandoffHTTP(
       String URI, String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,

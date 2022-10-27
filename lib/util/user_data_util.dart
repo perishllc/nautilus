@@ -89,21 +89,10 @@ class UserDataUtil {
         return null;
       }
       return _parseData(data!, type);
-    } on PlatformException catch (e) {
-      // if (e.code == BarcodeScanner.cameraAccessDenied) {
-      //   UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);
-      //   return QRScanErrs.PERMISSION_DENIED;
-      // } else {
-      //   UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
-      //   return QRScanErrs.UNKNOWN_ERROR;
-      // }
-      UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
-      return QRScanErrs.UNKNOWN_ERROR;
-    } on FormatException {
-      return QRScanErrs.CANCEL_ERROR;
     } catch (e) {
+      UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
       log.e("Unknown QR Scan Error ${e.toString()}", e);
-      return QRScanErrs.UNKNOWN_ERROR;
+      return null;
     }
   }
 
@@ -120,7 +109,7 @@ class UserDataUtil {
       if (setStream != null) {
         setStream!.cancel();
       }
-      final Future<dynamic> delayed = Future.delayed(const Duration(minutes: 2));
+      final Future<dynamic> delayed = Future<dynamic>.delayed(const Duration(minutes: 2));
       delayed.then((_) {
         return true;
       });

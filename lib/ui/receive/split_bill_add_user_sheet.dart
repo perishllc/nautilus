@@ -9,6 +9,7 @@ import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/username_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
@@ -81,18 +82,18 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
         // check if UD / ENS / opencap address
         if (_addressController!.text.contains(r"$")) {
           // check if opencap address:
-          address = await sl.get<AccountService>().checkOpencapDomain(formattedAddress);
+          address = await sl.get<UsernameService>().checkOpencapDomain(formattedAddress);
           if (address != null) {
             type = UserTypes.OPENCAP;
           }
         } else if (_addressController!.text.contains(".")) {
           // check if UD domain:
-          address = await sl.get<AccountService>().checkUnstoppableDomain(formattedAddress);
+          address = await sl.get<UsernameService>().checkUnstoppableDomain(formattedAddress);
           if (address != null) {
             type = UserTypes.UD;
           } else {
             // check if ENS domain:
-            address = await sl.get<AccountService>().checkENSDomain(formattedAddress);
+            address = await sl.get<UsernameService>().checkENSDomain(formattedAddress);
             if (address != null) {
               type = UserTypes.ENS;
             }

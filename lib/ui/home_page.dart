@@ -34,6 +34,7 @@ import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/list_model.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/metadata_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
@@ -75,7 +76,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/transaction_state_tag.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/util/giftcards.dart';
+import 'package:nautilus_wallet_flutter/network/giftcards.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
@@ -1034,7 +1035,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         log.v("ACKNOWLEDGING TX_DATA: ${tx.uuid}");
         tx.is_acknowledged = true;
         sl.get<DBHelper>().replaceTXDataByUUID(tx);
-        sl.get<AccountService>().requestACK(tx.uuid, tx.from_address, tx.to_address);
+        sl.get<MetadataService>().requestACK(tx.uuid, tx.from_address, tx.to_address);
       }
       if (tx.is_memo && isEmpty(tx.link) && isNotEmpty(tx.block)) {
         if (_historyListMap[StateContainer.of(context).wallet!.address] != null) {
@@ -1257,7 +1258,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
       // random delay between 500ms and 1.5s:
       Future<void>.delayed(Duration(milliseconds: 250 + Random().nextInt(500)), () async {
-        _maxHistItems += 25;
+        _maxHistItems += 35;
         await generateUnifiedList(fastUpdate: true);
         setState(() {
           _loadingMore = false;

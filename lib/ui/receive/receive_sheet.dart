@@ -21,7 +21,7 @@ import 'package:nautilus_wallet_flutter/model/available_currency.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/notification_setting.dart';
-import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/username_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_show_qr.dart';
@@ -237,18 +237,18 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
             // check if UD / ENS / opencap address
             if (_addressController!.text.contains(r"$")) {
               // check if opencap address:
-              address = await sl.get<AccountService>().checkOpencapDomain(formattedAddress);
+              address = await sl.get<UsernameService>().checkOpencapDomain(formattedAddress);
               if (address != null) {
                 type = UserTypes.OPENCAP;
               }
             } else if (_addressController!.text.contains(".")) {
               // check if UD domain:
-              address = await sl.get<AccountService>().checkUnstoppableDomain(formattedAddress);
+              address = await sl.get<UsernameService>().checkUnstoppableDomain(formattedAddress);
               if (address != null) {
                 type = UserTypes.UD;
               } else {
                 // check if ENS domain:
-                address = await sl.get<AccountService>().checkENSDomain(formattedAddress);
+                address = await sl.get<UsernameService>().checkENSDomain(formattedAddress);
                 if (address != null) {
                   type = UserTypes.ENS;
                 }
@@ -796,9 +796,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                         String? address;
 
                         // check if UD domain:
-                        address = await sl.get<AccountService>().checkUnstoppableDomain(_addressController!.text);
-                        address ??= await sl.get<AccountService>().checkENSDomain(_addressController!.text);
-                        address ??= await sl.get<AccountService>().checkOpencapDomain(_addressController!.text);
+                        address = await sl.get<UsernameService>().checkUnstoppableDomain(_addressController!.text);
+                        address ??= await sl.get<UsernameService>().checkENSDomain(_addressController!.text);
+                        address ??= await sl.get<UsernameService>().checkOpencapDomain(_addressController!.text);
 
                         if (!mounted) return;
 
@@ -821,12 +821,26 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                   children: <Widget>[
                     AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).showQR, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () async {
+                      final String formattedAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
+                      String amountRaw;
+                      if (_amountController!.text.isEmpty || _amountController!.text == "0") {
+                        amountRaw = "0";
+                      } else {
+                        if (_localCurrencyMode) {
+                          amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
+                              _localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text)));
+                        } else {
+                          if (!mounted) return;
+                          amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
+                        }
+                      }
                       Sheets.showAppHeightEightSheet(
                           context: context,
                           widget: ReceiveShowQRSheet(
                             localCurrency: widget.localCurrency,
                             address: widget.address,
                             qrWidget: widget.qrWidget,
+                            amountRaw: amountRaw,
                           ));
                     }),
                   ],

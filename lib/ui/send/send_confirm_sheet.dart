@@ -15,6 +15,8 @@ import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/giftcards.dart';
+import 'package:nautilus_wallet_flutter/network/metadata_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/record_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
@@ -33,7 +35,6 @@ import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/biometrics.dart';
 import 'package:nautilus_wallet_flutter/util/box.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/util/giftcards.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
@@ -63,6 +64,7 @@ class SendConfirmSheet extends StatefulWidget {
   final String paperWalletSeed;
   final String memo;
 
+  @override
   _SendConfirmSheetState createState() => _SendConfirmSheetState();
 }
 
@@ -467,11 +469,11 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           final String encryptedMemo = Box.encrypt(widget.memo, widget.destination, privKey);
 
           if (isMessage) {
-            await sl.get<AccountService>().sendTXMessage(widget.destination, walletAddress, signature, nonceHex, encryptedMemo, localUuid);
+            await sl.get<MetadataService>().sendTXMessage(widget.destination, walletAddress, signature, nonceHex, encryptedMemo, localUuid);
           } else {
             // just a memo:
             await sl
-                .get<AccountService>()
+                .get<MetadataService>()
                 .sendTXMemo(widget.destination, walletAddress, widget.amountRaw, signature, nonceHex, encryptedMemo, resp?.hash, localUuid);
           }
         } catch (e) {

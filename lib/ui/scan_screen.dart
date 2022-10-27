@@ -1,7 +1,10 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/generated/l10n.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 
 class ScanScreen extends StatefulWidget {
   const ScanScreen() : super();
@@ -13,16 +16,23 @@ class ScanScreen extends StatefulWidget {
 class ScanScreenState extends State<ScanScreen> {
   MobileScannerController cameraController = MobileScannerController();
 
+  bool popped = false;
+
   @override
   void initState() {
     super.initState();
   }
 
-  // Future<void> scanImage() async {
-  //   final ImagePicker imagePicker = ImagePicker();
-  //   final XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
-  //   // cameraController.analyzeImage(path);
-  // }
+  Future<void> scanImage() async {
+    final ImagePicker imagePicker = ImagePicker();
+    final XFile? file = await imagePicker.pickImage(source: ImageSource.gallery);
+    if (file?.path != null) {
+      final bool qrCodeFound = await cameraController.analyzeImage(file!.path);
+      if (!qrCodeFound && mounted && !popped) {
+        UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +48,16 @@ class ScanScreenState extends State<ScanScreen> {
                 debugPrint("Failed to scan Barcode");
                 return;
               }
-              final String code = barcode.rawValue!;
-              Navigator.of(context).pop(code);
+              final String? code = barcode.rawValue;
+              // don't pop for null or empty strings:
+              if (code == null || code.isEmpty) {
+                return;
+              }
+
+              if (!popped) {
+                popped = true;
+                Navigator.of(context).pop(code);
+              }
             },
           ),
           DottedBorder(
@@ -68,8 +86,8 @@ class ScanScreenState extends State<ScanScreen> {
                   margin: const EdgeInsets.only(top: 32),
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    mainAxisAlignment: MainAxisAlignment.start,  
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       IconButton(
                         color: Colors.white,
@@ -77,6 +95,14 @@ class ScanScreenState extends State<ScanScreen> {
                         iconSize: 32.0,
                         onPressed: () {
                           Navigator.of(context).pop();
+                        },
+                      ),
+                      IconButton(
+                        color: Colors.white,
+                        icon: const Icon(Icons.image),
+                        iconSize: 32.0,
+                        onPressed: () {
+                          scanImage();
                         },
                       ),
                     ],

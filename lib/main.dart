@@ -11,6 +11,7 @@ import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
+import 'package:magic_sdk/magic_sdk.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/firebase_options.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
@@ -30,6 +31,7 @@ import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_confirm.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_safety.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_seed.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_import_seed.dart';
+import 'package:nautilus_wallet_flutter/ui/intro/intro_login.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_password.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_password_on_launch.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_welcome.dart';
@@ -77,6 +79,8 @@ Future<void> main() async {
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
   runApp(const StateContainer(child: App()));
+
+  Magic.instance = Magic(Sensitive.MAGIC_SDK_KEY);
 }
 
 class App extends StatefulWidget {
@@ -242,7 +246,12 @@ class AppState extends State<App> {
               );
             case '/home':
               return NoTransitionRoute(
-                builder: (_) => AppHomePage(priceConversion: settings.arguments as PriceConversion?),
+                builder: (_) => Stack(
+                  children: [
+                    AppHomePage(priceConversion: settings.arguments as PriceConversion?),
+                    Magic.instance.relayer,
+                  ],
+                ),
                 settings: settings,
               );
             case '/home_transition':
@@ -253,6 +262,16 @@ class AppState extends State<App> {
             case '/intro_welcome':
               return NoTransitionRoute(
                 builder: (_) => IntroWelcomePage(),
+                settings: settings,
+              );
+            case '/login':
+              return NoTransitionRoute(
+                builder: (_) => Stack(
+                  children: [
+                    IntroLoginPage(),
+                    Magic.instance.relayer,
+                  ],
+                ),
                 settings: settings,
               );
             case '/intro_password_on_launch':

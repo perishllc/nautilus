@@ -11,6 +11,7 @@ import 'package:nautilus_wallet_flutter/model/authentication_method.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
+import 'package:nautilus_wallet_flutter/network/username_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_complete_sheet.dart';
@@ -28,17 +29,8 @@ import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class RegisterConfirmSheet extends StatefulWidget {
-  final String amountRaw;
-  final String destination;
-  final String? contactName;
-  final String? userName;
-  final String? localCurrency;
-  final String? leaseDuration;
-  final String? checkUrl;
-  final String? username;
-  final bool maxSend;
 
-  RegisterConfirmSheet(
+  const RegisterConfirmSheet(
       {required this.amountRaw,
       required this.destination,
       this.contactName,
@@ -50,6 +42,17 @@ class RegisterConfirmSheet extends StatefulWidget {
       this.maxSend = false})
       : super();
 
+  final String amountRaw;
+  final String destination;
+  final String? contactName;
+  final String? userName;
+  final String? localCurrency;
+  final String? leaseDuration;
+  final String? checkUrl;
+  final String? username;
+  final bool maxSend;
+
+  @override
   _RegisterConfirmSheetState createState() => _RegisterConfirmSheetState();
 }
 
@@ -264,7 +267,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
         sl.get<Logger>().v("checking url: ${widget.checkUrl}");
         try {
           // final Map<String, dynamic> resp = await sl.get<AccountService>().checkUsernameUrl(widget.checkUrl!) as Map<String, dynamic>;
-          final resp = await sl.get<AccountService>().checkUsernameUrl(widget.checkUrl!);
+          final resp = await sl.get<UsernameService>().checkUsernameUrl(widget.checkUrl!);
           if (resp != null && resp["success"] == true) {
             success = true;
           } else {

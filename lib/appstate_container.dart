@@ -31,6 +31,7 @@ import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/metadata_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/fcm_update_request.dart';
@@ -1465,7 +1466,7 @@ class StateContainerState extends State<StateContainer> {
     }
 
     // send acknowledgement to server / requester:
-    await sl.get<AccountService>().requestACK(uuid, requestingAccount, wallet!.address);
+    await sl.get<MetadataService>().requestACK(uuid, requestingAccount, wallet!.address);
   }
 
   Future<void> handlePaymentMessage(dynamic data, {bool delay_update = false}) async {
@@ -1540,7 +1541,7 @@ class StateContainerState extends State<StateContainer> {
       await updateUnified(false);
     }
     // send acknowledgement to server / requester:
-    await sl.get<AccountService>().requestACK(uuid, requestingAccount, wallet!.address);
+    await sl.get<MetadataService>().requestACK(uuid, requestingAccount, wallet!.address);
   }
 
   Future<void> handlePaymentRecord(dynamic data, {bool delay_update = false}) async {
@@ -1837,7 +1838,7 @@ class StateContainerState extends State<StateContainer> {
     }
 
     // send acknowledgement to server / requester:
-    await sl.get<AccountService>().requestACK(uuid, requestingAccount, wallet!.address);
+    await sl.get<MetadataService>().requestACK(uuid, requestingAccount, wallet!.address);
   }
 
   Future<void> handlePaymentACK(dynamic data, {bool delay_update = false}) async {

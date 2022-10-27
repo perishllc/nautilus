@@ -53,7 +53,7 @@ class AppDialogs {
               },
             ),
             TextButton(
-              style: ElevatedButton.styleFrom(
+              style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
               ),
@@ -122,11 +122,10 @@ class AppDialogs {
                   style: AppStyles.textStyleParagraph(context),
                 ),
           actions: <Widget>[
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
+            TextButton(
+              style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
-                backgroundColor: StateContainer.of(context).curTheme.background,
               ),
               child: Text(
                 closeText!,

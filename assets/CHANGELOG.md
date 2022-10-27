@@ -1,3 +1,12 @@
+## v0.7.0 - [2022-10-XX]
+#### Added
+- Ability to scan QR codes from images (WIP)
+#### Changed
+- Prepopulate the show qr screen with the amount from the request screen if the amount is not zero / null
+#### Fixed
+- QR code scanning bugs
+- More minor button styling fixes
+- Form validation fixes on send sheet
 ## v0.6.9 - [2022-10-21]
 #### Added
 - Theme switcher on intro

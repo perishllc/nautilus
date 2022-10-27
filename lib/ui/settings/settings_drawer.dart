@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:logger/logger.dart';
+import 'package:magic_sdk/magic_sdk.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/bus/contacts_setting_change_event.dart';
@@ -1753,27 +1754,38 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
               AppLocalization.of(context).logoutAction.toUpperCase(), () {
             // Show another confirm dialog
             AppDialogs.showConfirmDialog(context, AppLocalization.of(context).logoutAreYouSure, AppLocalization.of(context).logoutReassurance,
-                CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
+                CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
               // prevent interaction while logging out:
               AppAnimation.animationLauncher(context, AnimationType.GENERIC);
 
               // Unsubscribe from notifications
-              sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((_) async {
-                try {
-                  final String? fcmToken = await FirebaseMessaging.instance.getToken();
-                  EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
-                  EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
-                } catch (e) {}
-                try {
-                  // Delete all data
-                  sl.get<Vault>().deleteAll().then((_) {
-                    sl.get<SharedPrefsUtil>().deleteAll().then((void result) {
-                      StateContainer.of(context).logOut();
-                      Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
-                    });
-                  });
-                } catch (e) {}
-              });
+              await sl.get<SharedPrefsUtil>().setNotificationsOn(false);
+              try {
+                final String? fcmToken = await FirebaseMessaging.instance.getToken();
+                EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
+                EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
+              } catch (e) {
+                log.e(e.toString());
+              }
+
+              // TODO: magic
+              try {
+                final Magic magic = Magic.instance;
+                await magic.user.logout();
+              } catch (e) {
+                log.e(e.toString());
+              }
+
+              try {
+                // Delete all data
+                await sl.get<Vault>().deleteAll();
+                await sl.get<SharedPrefsUtil>().deleteAll();
+                if (!mounted) return;
+                StateContainer.of(context).logOut();
+                Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+              } catch (e) {
+                log.e(e.toString());
+              }
             });
           });
         }),

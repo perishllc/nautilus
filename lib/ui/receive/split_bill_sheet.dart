@@ -17,7 +17,6 @@ import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/split_bill_add_user_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/request/request_confirm_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
@@ -250,7 +249,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                     context,
                     AppButtonType.PRIMARY,
                     AppLocalization.of(context).sendRequests,
-                    Dimens.BUTTON_COMPACT_LEFT_DIMENS,
+                    Dimens.BUTTON_TOP_DIMENS,
                     disabled: users.isEmpty,
                     onPressed: () async {
                       final List<dynamic> requestsToSend = [];
@@ -297,55 +296,55 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                       }
                     },
                   ),
-                  AppButton.buildAppButton(
-                    context,
-                    AppButtonType.PRIMARY,
-                    AppLocalization.of(context).sendAmounts,
-                    Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
-                    disabled: users.isEmpty,
-                    onPressed: () async {
-                      for (final User user in users) {
-                        final String displayName = user.displayNameOrShortestAddress()!;
+                  // AppButton.buildAppButton(
+                  //   context,
+                  //   AppButtonType.PRIMARY,
+                  //   AppLocalization.of(context).sendAmounts,
+                  //   Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
+                  //   disabled: users.isEmpty,
+                  //   onPressed: () async {
+                  //     for (final User user in users) {
+                  //       final String displayName = user.displayNameOrShortestAddress()!;
 
-                        final TextEditingController amountController =
-                            userMap[displayName]["_amountController"] as TextEditingController;
-                        final TextEditingController memoController =
-                            userMap[displayName]["_memoController"] as TextEditingController;
+                  //       final TextEditingController amountController =
+                  //           userMap[displayName]["_amountController"] as TextEditingController;
+                  //       final TextEditingController memoController =
+                  //           userMap[displayName]["_memoController"] as TextEditingController;
 
-                        // final String amountRaw = userMap[displayName]["_amountController"].text as String;
+                  //       // final String amountRaw = userMap[displayName]["_amountController"].text as String;
 
-                        // final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
+                  //       // final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
 
-                        final String formattedAmount =
-                            sanitizedAmount(widget.localCurrencyFormat, amountController.text);
+                  //       final String formattedAmount =
+                  //           sanitizedAmount(widget.localCurrencyFormat, amountController.text);
 
-                        String amountRaw;
-                        if (amountController.text.isEmpty || amountController.text == "0") {
-                          amountRaw = "0";
-                        } else {
-                          if (_localCurrencyMode) {
-                            amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
-                                widget.localCurrencyFormat,
-                                convertLocalCurrencyToLocalizedCrypto(
-                                    context, widget.localCurrencyFormat, amountController.text)));
-                          } else {
-                            if (!mounted) return;
-                            amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
-                          }
-                        }
+                  //       String amountRaw;
+                  //       if (amountController.text.isEmpty || amountController.text == "0") {
+                  //         amountRaw = "0";
+                  //       } else {
+                  //         if (_localCurrencyMode) {
+                  //           amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
+                  //               widget.localCurrencyFormat,
+                  //               convertLocalCurrencyToLocalizedCrypto(
+                  //                   context, widget.localCurrencyFormat, amountController.text)));
+                  //         } else {
+                  //           if (!mounted) return;
+                  //           amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
+                  //         }
+                  //       }
 
-                        await Sheets.showAppHeightNineSheet(
-                            context: context,
-                            widget: SendConfirmSheet(
-                              amountRaw: amountRaw,
-                              destination: user.address!,
-                              contactName: user.getDisplayName(),
-                              localCurrency: _localCurrencyMode ? amountController.text : null,
-                              memo: memoController.text,
-                            ));
-                      }
-                    },
-                  ),
+                  //       await Sheets.showAppHeightNineSheet(
+                  //           context: context,
+                  //           widget: SendConfirmSheet(
+                  //             amountRaw: amountRaw,
+                  //             destination: user.address!,
+                  //             contactName: user.getDisplayName(),
+                  //             localCurrency: _localCurrencyMode ? amountController.text : null,
+                  //             memo: memoController.text,
+                  //           ));
+                  //     }
+                  //   },
+                  // ),
                 ],
               ),
               Row(

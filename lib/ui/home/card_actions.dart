@@ -7,6 +7,7 @@ import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/metadata_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
@@ -67,7 +68,7 @@ class CardActions {
       if (txDetails.memo != null && txDetails.memo!.isNotEmpty) {
         encryptedMemo = Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
       }
-      await sl.get<AccountService>().requestPayment(
+      await sl.get<MetadataService>().requestPayment(
           txDetails.to_address, txDetails.amount_raw, StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
     } catch (error) {
       sl.get<Logger>().v("Error encrypting memo: $error");
@@ -139,7 +140,7 @@ class CardActions {
     try {
       // encrypt the memo:
       final String encryptedMemo = Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
-      await sl.get<AccountService>().sendTXMemo(txDetails.to_address!, StateContainer.of(context).wallet!.address!, txDetails.amount_raw, signature, nonceHex,
+      await sl.get<MetadataService>().sendTXMemo(txDetails.to_address!, StateContainer.of(context).wallet!.address!, txDetails.amount_raw, signature, nonceHex,
           encryptedMemo, txDetails.block, localUuid);
     } catch (e) {
       memoSendFailed = true;
@@ -213,7 +214,7 @@ class CardActions {
         encryptedMemo = Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
       }
       await sl
-          .get<AccountService>()
+          .get<MetadataService>()
           .sendTXMessage(txDetails.to_address!, StateContainer.of(context).wallet!.address!, signature, nonceHex, encryptedMemo!, localUuid);
     } catch (error) {
       sl.get<Logger>().v("Error encrypting memo: $error");

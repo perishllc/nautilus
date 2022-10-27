@@ -21,7 +21,7 @@ import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:uuid/uuid.dart';
 
-import 'nanoutil.dart';
+import '../util/nanoutil.dart';
 
 final BigInt rawPerNano = BigInt.from(10).pow(30);
 final BigInt rawPerNyano = BigInt.from(10).pow(24);

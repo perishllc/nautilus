@@ -44,11 +44,12 @@ class NumericalRangeFormatter extends TextInputFormatter {
 }
 
 class ReceiveShowQRSheet extends StatefulWidget {
-  const ReceiveShowQRSheet({required this.localCurrency, this.address, this.qrWidget}) : super();
+  const ReceiveShowQRSheet({required this.localCurrency, this.address, this.qrWidget, this.amountRaw}) : super();
 
   final AvailableCurrency localCurrency;
   final Widget? qrWidget;
   final String? address;
+  final String? amountRaw;
 
   @override
   ReceiveShowQRSheetState createState() => ReceiveShowQRSheetState();
@@ -101,15 +102,18 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
     _amountFocusNode = FocusNode();
     _amountController = TextEditingController();
 
+    if (isNotEmpty(widget.amountRaw) && widget.amountRaw != "0") {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        setState(() {
+          _amountController!.text = getRawAsThemeAwareAmount(context, widget.amountRaw);
+          redrawQrCode();
+        });
+      });
+    }
+
     // On amount focus change
     _amountFocusNode!.addListener(() {
       if (_amountFocusNode!.hasFocus) {
-        if (_rawAmount != null) {
-          setState(() {
-            _amountController!.text = getRawAsThemeAwareAmount(context, _rawAmount);
-            _rawAmount = null;
-          });
-        }
         setState(() {
           _amountHint = "";
         });
@@ -377,7 +381,7 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
       setState(() {
         _localCurrencyMode = false;
       });
-      Future.delayed(const Duration(milliseconds: 50), () {
+      Future<void>.delayed(const Duration(milliseconds: 50), () {
         _amountController!.text = cryptoAmountStr;
         _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: cryptoAmountStr.length));
       });
@@ -398,7 +402,7 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
       setState(() {
         _localCurrencyMode = true;
       });
-      Future.delayed(const Duration(milliseconds: 50), () {
+      Future<void>.delayed(const Duration(milliseconds: 50), () {
         _amountController!.text = localAmountStr;
         _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: localAmountStr.length));
       });
@@ -473,8 +477,6 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
         // Always reset the error message to be less annoying
         setState(() {
           _amountValidationText = "";
-          // Reset the raw amount
-          _rawAmount = null;
         });
 
         redrawQrCode();
@@ -483,41 +485,39 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
       maxLines: null,
       autocorrect: false,
       hintText: _amountHint == null ? "" : AppLocalization.of(context).enterAmount,
-      prefixButton: _rawAmount == null
-          ? TextFieldButton(
-              padding: EdgeInsets.zero,
-              widget: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: displayCurrencySymbol(
-                      context,
-                      TextStyle(
-                        color: StateContainer.of(context).curTheme.primary,
-                        fontSize: _localCurrencyMode ? 12 : 20,
-                        fontWeight: _localCurrencyMode ? FontWeight.w400 : FontWeight.w800,
-                        fontFamily: "NunitoSans",
-                      ),
-                    ),
-                  ),
-                  const Text("/"),
-                  Text(_localCurrencyFormat.currencySymbol.trim(),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: _localCurrencyMode ? 20 : 12,
-                        fontWeight: _localCurrencyMode ? FontWeight.w800 : FontWeight.w400,
-                        color: StateContainer.of(context).curTheme.primary,
-                        fontFamily: "NunitoSans",
-                      )),
-                ],
+      prefixButton: TextFieldButton(
+        padding: EdgeInsets.zero,
+        widget: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RichText(
+              textAlign: TextAlign.center,
+              text: displayCurrencySymbol(
+                context,
+                TextStyle(
+                  color: StateContainer.of(context).curTheme.primary,
+                  fontSize: _localCurrencyMode ? 12 : 20,
+                  fontWeight: _localCurrencyMode ? FontWeight.w400 : FontWeight.w800,
+                  fontFamily: "NunitoSans",
+                ),
               ),
-              onPressed: () {
-                toggleLocalCurrency();
-              },
-            )
-          : null,
+            ),
+            const Text("/"),
+            Text(_localCurrencyFormat.currencySymbol.trim(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: _localCurrencyMode ? 20 : 12,
+                  fontWeight: _localCurrencyMode ? FontWeight.w800 : FontWeight.w400,
+                  color: StateContainer.of(context).curTheme.primary,
+                  fontFamily: "NunitoSans",
+                )),
+          ],
+        ),
+        onPressed: () {
+          toggleLocalCurrency();
+        },
+      ),
       fadeSuffixOnCondition: true,
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       textAlign: TextAlign.center,
