@@ -2,12 +2,18 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:ens_dart/ens_dart.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
+import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
 import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/util/blake2b.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
+import 'package:web3dart/crypto.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:web_socket_channel/io.dart';
 
@@ -71,8 +77,8 @@ class UsernameService {
   }
 
   Future<String?> checkUnstoppableDomain(String domain) async {
-    final http.Response response =
-        await http.get(Uri.parse(UD_ENDPOINT + domain), headers: {'Content-type': 'application/json', 'Authorization': 'Bearer ${Sensitive.UD_API_KEY}'});
+    final http.Response response = await http.get(Uri.parse(UD_ENDPOINT + domain),
+        headers: {'Content-type': 'application/json', 'Authorization': 'Bearer ${Sensitive.UD_API_KEY}'});
 
     if (response.statusCode != 200) {
       return null;
@@ -112,8 +118,9 @@ class UsernameService {
 
     // GET the SRV record using Cloudflare's DNS over HTTPS API:
 
-    final http.Response dnsSRVResp =
-        await http.get(Uri.parse("https://cloudflare-dns.com/dns-query?name=$tld&type=SRV"), headers: {"Accept": "application/dns-json"});
+    final http.Response dnsSRVResp = await http.get(
+        Uri.parse("https://cloudflare-dns.com/dns-query?name=$tld&type=SRV"),
+        headers: {"Accept": "application/dns-json"});
     if (dnsSRVResp.statusCode != 200) {
       return null;
     }
@@ -136,8 +143,9 @@ class UsernameService {
 
     // GET /v1/addresses?alias=alice$domain.tld&address_type=300
 
-    final http.Response response =
-        await http.get(Uri.parse("https://$resolvedDomain/v1/addresses?alias=$domain&address_type=300"), headers: {"Accept": "application/json"});
+    final http.Response response = await http.get(
+        Uri.parse("https://$resolvedDomain/v1/addresses?alias=$domain&address_type=300"),
+        headers: {"Accept": "application/json"});
     if (response.statusCode != 200) {
       return null;
     }
@@ -149,7 +157,8 @@ class UsernameService {
   }
 
   Future<dynamic> checkUsernameAvailability(String username) async {
-    final http.Response response = await http.get(Uri.parse("$NANO_TO_USERNAME_LEASE_ENDPOINT/$username/lease"), headers: {"Accept": "application/json"});
+    final http.Response response = await http
+        .get(Uri.parse("$NANO_TO_USERNAME_LEASE_ENDPOINT/$username/lease"), headers: {"Accept": "application/json"});
     final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
     return decoded;
   }
@@ -166,11 +175,42 @@ class UsernameService {
     return decoded;
   }
 
-
   // ON CHAIN USERNAMES:
-  // Future<String?> isUsernameRegistered(String username) async {
-  //   return null;
-  // }
+  // credit where credit is due to plasmapower:
+
+  Future<String?> getAddressFromUsername(String username) async {
+// To lookup the account of a username:
+// 1. Compute the account A2 which has the private key blake2b("username registration:" + username)
+// 2. If it has not been opened, it's unregistered
+// 3. If it has been opened, check if the rep field encodes the username. If so, the sender of the send which was received in the open block is the owner of the username. Otherwise, it's permanently unregistered.
+
+    final String a2PrivateKey = bytesToHex(blake2b(hexToBytes("username registration:$username")));
+    final String a2Account = NanoUtil.privateKeyToPublicAddress(a2PrivateKey);
+
+    final AccountInfoResponse accountInfo = await sl.get<AccountService>().getAccountInfo(a2Account);
+
+    
+    if (accountInfo.unopened) {
+      return null;
+    }
+
+    // account is opened:
+    
+
+    return null;
+  }
+
+  Future<String?> getUsernameFromAddress(String username) async {
+// To lookup the username of an account:
+// 1. Compute the account A3 which has the public key A + blake2b("username registration")*G
+// 2. If it has not been opened, this account does not have an associated username
+// 3. If it has been opened, its rep field encodes a username
+// 4. Important: lookup the account of that username. If it's unregistered or registered to a different account, this account is said to not have an associated username.
+// 5. If the username -> account mapping returns the A, then that username is the associated username of the account
+
+    return null;
+  }
+
   // Future<void> registerUsername(String username) async {
   //   // Suppose your private key is P, and your account is A.
   //   // Part 1 to registration: Register a username -> account mapping:

@@ -15,6 +15,19 @@ class NanoUtil {
     return NanoAccounts.createAccount(NanoAccountType.NANO, NanoKeys.createPublicKey(seedToPrivate(seed, index)));
   }
 
+
+  static String privateKeyToPublicAddress(String privateKey) {
+    return NanoAccounts.createAccount(NanoAccountType.NANO, NanoKeys.createPublicKey(privateKey));
+  }
+
+  // static String seedToPrivateBip39(String seed, int index) {
+  //   // return NanoKeys.seedToPrivate(seed, index);
+  // }
+
+  // static String seedToAddressBip39(String seed, int index) {
+  //   // return NanoAccounts.createAccount(NanoAccountType.NANO, NanoKeys.createPublicKey(seedToPrivate(seed, index)));
+  // }
+
   Future<void> loginAccount(String? seed, BuildContext context, {int offset = 0}) async {
     Account? selectedAcct = await sl.get<DBHelper>().getSelectedAccount(seed);
     if (selectedAcct == null) {
@@ -25,7 +38,7 @@ class NanoUtil {
   }
 
   static bool isValidBip39Seed(String seed) {
-    // Ensure seed is 64 characters long
+    // Ensure seed is 128 characters long
     if (seed == null || seed.length != 128) {
       return false;
     }

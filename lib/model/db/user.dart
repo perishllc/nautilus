@@ -10,6 +10,7 @@ class UserTypes {
   static const String NANO_TO = "nano_to";
   static const String OPENCAP = "opencap";
   static const String CONTACT = "contact";
+  static const String ONCHAIN = "onchain";
 }
 
 String? lowerStripAddress(String? address) {
@@ -125,7 +126,7 @@ class User {
   }
 
   static String? getDisplayNameWithType(String? name, String? userType) {
-    if (userType == UserTypes.NANO_TO) {
+    if (userType == UserTypes.NANO_TO || userType == UserTypes.ONCHAIN) {
       return "@${name!}";
     } else {
       return name;

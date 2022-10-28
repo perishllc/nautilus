@@ -1,7 +1,7 @@
-## v0.7.0 - [2022-10-XX]
+## v0.7.0 - [2022-10-31]
 #### Added
-- Ability to scan QR codes from images (WIP)
-- Magic link login + encrypted seed backup
+- Magic link login + encrypted seed backup (WIP)
+- Ability to scan QR codes from images in gallery
 #### Changed
 - Prepopulate the show qr screen with the amount from the request screen if the amount is not zero / null
 #### Fixed

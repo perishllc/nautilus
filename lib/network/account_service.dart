@@ -9,6 +9,8 @@ import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/bus/events.dart';
+import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/state_block.dart';
 import 'package:nautilus_wallet_flutter/network/model/base_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
@@ -345,7 +347,9 @@ class AccountService {
     }
     final List<RequestItem<dynamic>> toRemove = [];
     for (final RequestItem<dynamic> requestItem in _requestQueue!) {
-      if ((requestItem.request is SubscribeRequest || requestItem.request is AccountHistoryRequest || requestItem.request is ReceivableRequest) &&
+      if ((requestItem.request is SubscribeRequest ||
+              requestItem.request is AccountHistoryRequest ||
+              requestItem.request is ReceivableRequest) &&
           !requestItem.isProcessing!) {
         toRemove.add(requestItem);
       }
@@ -382,8 +386,8 @@ class AccountService {
   // HTTP API
 
   Future<dynamic> makeHttpRequest(BaseRequest request) async {
-    final http.Response response =
-        await http.post(Uri.parse(SERVER_ADDRESS_HTTP), headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
+    final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_HTTP),
+        headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
 
     if (response.statusCode != 200) {
       return null;
@@ -409,10 +413,12 @@ class AccountService {
     return infoResponse;
   }
 
-  Future<ReceivableResponse> getReceivable(String? account, int count, {String? threshold, bool includeActive = false}) async {
+  Future<ReceivableResponse> getReceivable(String? account, int count,
+      {String? threshold, bool includeActive = false}) async {
     threshold = threshold ?? BigInt.from(10).pow(24).toString();
 
-    final ReceivableRequest request = ReceivableRequest(account: account, count: count, threshold: threshold, includeActive: includeActive);
+    final ReceivableRequest request =
+        ReceivableRequest(account: account, count: count, threshold: threshold, includeActive: includeActive);
     final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
@@ -510,9 +516,38 @@ class AccountService {
   //   return item;
   // }
 
-  Future<ProcessResponse> requestReceive(String? representative, String? previous, String? balance, String? link, String? account, String? privKey) async {
+  Future<ProcessResponse> requestReceive(
+      String? representative, String? previous, String? balance, String? link, String? account, String? privKey) async {
     final StateBlock receiveBlock = StateBlock(
-        subtype: BlockTypes.RECEIVE, previous: previous, representative: representative, balance: balance, link: link, account: account, privKey: privKey);
+      subtype: BlockTypes.RECEIVE,
+      previous: previous,
+      representative: representative,
+      balance: balance,
+      link: link,
+      account: account,
+      privKey: privKey,
+    );
+
+    // db query to check if username for this address exists:
+    try {
+      User? user = await sl.get<DBHelper>().getUserWithAddress(account!);
+      bool shouldUpdate = false;
+      if (user != null && user.type == UserTypes.ONCHAIN) {
+        int weekAgo = 0;
+        if (user.last_updated == null || user.last_updated! < weekAgo) {
+          // user is out of date, update:
+          shouldUpdate = true;
+        }
+      } else if (user == null) {
+        shouldUpdate = true;
+      }
+
+      if (shouldUpdate) {
+        // check for username here:
+      }
+    } catch (error) {
+      log.e("Error processing receive username $error");
+    }
 
     final BlockInfoItem previousInfo = await requestBlockInfo(previous);
     final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
@@ -523,12 +558,14 @@ class AccountService {
     await receiveBlock.sign(privKey);
 
     // Process
-    final ProcessRequest processRequest = ProcessRequest(block: json.encode(receiveBlock.toJson()), subtype: BlockTypes.RECEIVE);
+    final ProcessRequest processRequest =
+        ProcessRequest(block: json.encode(receiveBlock.toJson()), subtype: BlockTypes.RECEIVE);
 
     return requestProcess(processRequest);
   }
 
-  Future<ProcessResponse> requestSend(String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,
+  Future<ProcessResponse> requestSend(
+      String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,
       {bool max = false}) async {
     final StateBlock sendBlock = StateBlock(
         subtype: BlockTypes.SEND,
@@ -548,13 +585,14 @@ class AccountService {
     await sendBlock.sign(privKey);
 
     // Process
-    final ProcessRequest processRequest = ProcessRequest(block: json.encode(sendBlock.toJson()), subtype: BlockTypes.SEND);
+    final ProcessRequest processRequest =
+        ProcessRequest(block: json.encode(sendBlock.toJson()), subtype: BlockTypes.SEND);
 
     return requestProcess(processRequest);
   }
 
-  Future<HandoffResponse> requestHandoffHTTP(
-      String URI, String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,
+  Future<HandoffResponse> requestHandoffHTTP(String URI, String? representative, String? previous, String? sendAmount,
+      String? link, String? account, String? privKey,
       {bool max = false, String? work, String? label, String? message, Map<String, String?>? metadata}) async {
     final StateBlock sendBlock = StateBlock(
         subtype: BlockTypes.SEND,
@@ -575,12 +613,13 @@ class AccountService {
     await sendBlock.sign(privKey);
 
     // Process
-    final HandoffReplyRequest handoffReplyRequest = HandoffReplyRequest(block: sendBlock, label: label, message: message, metadata: metadata);
+    final HandoffReplyRequest handoffReplyRequest =
+        HandoffReplyRequest(block: sendBlock, label: label, message: message, metadata: metadata);
 
     // return requestHandoff(handoffReplyRequest);
 
-    final http.Response response =
-        await http.post(Uri.parse(URI), headers: {'Content-type': 'application/json'}, body: json.encode(handoffReplyRequest.toJson()));
+    final http.Response response = await http.post(Uri.parse(URI),
+        headers: {'Content-type': 'application/json'}, body: json.encode(handoffReplyRequest.toJson()));
 
     if (response.statusCode != 200) {
       throw Exception("Received error ${response.statusCode}");
@@ -609,7 +648,8 @@ class AccountService {
 
     // return requestHandoff(handoffReplyRequest);
 
-    final http.Response response = await http.post(Uri.parse(URI), headers: {'Content-type': 'application/json'}, body: json.encode(authReplyRequest.toJson()));
+    final http.Response response = await http.post(Uri.parse(URI),
+        headers: {'Content-type': 'application/json'}, body: json.encode(authReplyRequest.toJson()));
 
     if (response.statusCode != 200) {
       throw Exception("Received error ${response.statusCode}");
@@ -631,7 +671,8 @@ class AccountService {
   // Future<HandoffWorkResponse> requestWork(String url, String hash) async {
   // }
 
-  Future<ProcessResponse> requestOpen(String? balance, String? link, String? account, String? privKey, {String? representative}) async {
+  Future<ProcessResponse> requestOpen(String? balance, String? link, String? account, String? privKey,
+      {String? representative}) async {
     representative = representative ?? await sl.get<SharedPrefsUtil>().getRepresentative();
     final StateBlock openBlock = StateBlock(
       subtype: BlockTypes.OPEN,
@@ -647,12 +688,14 @@ class AccountService {
     await openBlock.sign(privKey);
 
     // Process
-    final ProcessRequest processRequest = ProcessRequest(block: json.encode(openBlock.toJson()), subtype: BlockTypes.OPEN);
+    final ProcessRequest processRequest =
+        ProcessRequest(block: json.encode(openBlock.toJson()), subtype: BlockTypes.OPEN);
 
     return requestProcess(processRequest);
   }
 
-  Future<ProcessResponse> requestChange(String? account, String? representative, String? previous, String balance, String privKey) async {
+  Future<ProcessResponse> requestChange(
+      String? account, String? representative, String? previous, String balance, String privKey) async {
     final StateBlock chgBlock = StateBlock(
         subtype: BlockTypes.CHANGE,
         previous: previous,
@@ -670,16 +713,20 @@ class AccountService {
     await chgBlock.sign(privKey);
 
     // Process
-    final ProcessRequest processRequest = ProcessRequest(block: json.encode(chgBlock.toJson()), subtype: BlockTypes.CHANGE);
+    final ProcessRequest processRequest =
+        ProcessRequest(block: json.encode(chgBlock.toJson()), subtype: BlockTypes.CHANGE);
 
     return requestProcess(processRequest);
   }
 
   Future<AlertResponseItem?> getAlert(String lang) async {
-    final http.Response response = await http.get(Uri.parse("$SERVER_ADDRESS_ALERTS/$lang"), headers: {"Accept": "application/json"});
+    final http.Response response =
+        await http.get(Uri.parse("$SERVER_ADDRESS_ALERTS/$lang"), headers: {"Accept": "application/json"});
     if (response.statusCode == 200) {
       List<AlertResponseItem> alerts;
-      alerts = (json.decode(response.body) as List).map((i) => AlertResponseItem.fromJson(i as Map<String, dynamic>)).toList();
+      alerts = (json.decode(response.body) as List)
+          .map((i) => AlertResponseItem.fromJson(i as Map<String, dynamic>))
+          .toList();
       if (alerts.isNotEmpty) {
         if (alerts[0].active!) {
           return alerts[0];
@@ -690,10 +737,13 @@ class AccountService {
   }
 
   Future<List<FundingResponseItem>?> getFunding(String lang) async {
-    final http.Response response = await http.get(Uri.parse("$SERVER_ADDRESS_FUNDING/$lang"), headers: {"Accept": "application/json"});
+    final http.Response response =
+        await http.get(Uri.parse("$SERVER_ADDRESS_FUNDING/$lang"), headers: {"Accept": "application/json"});
     if (response.statusCode == 200) {
       List<FundingResponseItem> alerts;
-      alerts = (json.decode(response.body) as List).map((i) => FundingResponseItem.fromJson(i as Map<String, dynamic>)).toList();
+      alerts = (json.decode(response.body) as List)
+          .map((i) => FundingResponseItem.fromJson(i as Map<String, dynamic>))
+          .toList();
       if (alerts.isNotEmpty) {
         return alerts;
       }

@@ -71,33 +71,34 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
         }
       }
 
-      // check every 500ms if there's a giftcard:
-      timer = Timer.periodic(const Duration(milliseconds: 500), (Timer t) async {
-        if (!mounted) return;
-        if (!openedDialog && StateContainer.of(context).gift != null) {
-          openedDialog = true;
-          timer?.cancel();
+      // TODO: re-enable with a different message:
+      // // check every 500ms if there's a giftcard:
+      // timer = Timer.periodic(const Duration(milliseconds: 500), (Timer t) async {
+      //   if (!mounted) return;
+      //   if (!openedDialog && StateContainer.of(context).gift != null) {
+      //     openedDialog = true;
+      //     timer?.cancel();
 
-          AppDialogs.showConfirmDialog(
-            context,
-            AppLocalization.of(context).giftAlert,
-            AppLocalization.of(context).askSkipSetup,
-            AppLocalization.of(context).ok,
-            () async {
-              setState(() {
-                StateContainer.of(context).introSkiped = true;
-              });
+      //     AppDialogs.showConfirmDialog(
+      //       context,
+      //       AppLocalization.of(context).giftAlert,
+      //       AppLocalization.of(context).askSkipSetup,
+      //       AppLocalization.of(context).ok,
+      //       () async {
+      //         setState(() {
+      //           StateContainer.of(context).introSkiped = true;
+      //         });
 
-              await skipIntro();
-            },
-            cancelText: AppLocalization.of(context).noThanks,
-            cancelAction: () {
-              // do nothing:
-            },
-            barrierDismissible: false,
-          );
-        }
-      });
+      //         await skipIntro();
+      //       },
+      //       cancelText: AppLocalization.of(context).noThanks,
+      //       cancelAction: () {
+      //         // do nothing:
+      //       },
+      //       barrierDismissible: false,
+      //     );
+      //   }
+      // });
     });
 
     // var magic = Magic.instance;
