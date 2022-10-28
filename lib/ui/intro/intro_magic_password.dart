@@ -269,12 +269,15 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
       // decrypt the seed using the password:
       final String decryptedSeed = NanoHelpers.byteToHex(NanoCrypt.decrypt(widget.encryptedSeed, confirmPasswordController!.text));
 
+      await sl.get<Vault>().setSeed(decryptedSeed);
+
+
       // re-encrypt the seed with password:
-      final String reEncryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(decryptedSeed, confirmPasswordController!.text));
-      await sl.get<Vault>().setSeed(reEncryptedSeed);
+      // final String reEncryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(decryptedSeed, confirmPasswordController!.text));
+      // await sl.get<Vault>().setSeed(reEncryptedSeed);
       if (!mounted) return;
       // also encrypt the seed with the session key:
-      StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(decryptedSeed, await sl.get<Vault>().getSessionKey())));
+      // StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(decryptedSeed, await sl.get<Vault>().getSessionKey())));
       await sl.get<DBHelper>().dropAccounts();
       if (!mounted) return;
       await NanoUtil().loginAccount(decryptedSeed, context);
@@ -291,10 +294,11 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     // Generate a new seed, encrypt, and upload to the seed backup endpoint:
     final String seed = NanoSeeds.generateSeed();
     final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController!.text));
-    await sl.get<Vault>().setSeed(encryptedSeed);
+    // await sl.get<Vault>().setSeed(encryptedSeed);
+    await sl.get<Vault>().setSeed(seed);
     if (!mounted) return;
     // Also encrypt it with the session key, so user doesnt need password to sign blocks within the app
-    StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, await sl.get<Vault>().getSessionKey())));
+    // StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, await sl.get<Vault>().getSessionKey())));
 
     if (!mounted) return;
     // Update wallet

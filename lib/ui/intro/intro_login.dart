@@ -53,8 +53,6 @@ class _IntroLoginPageState extends State<IntroLoginPage> {
       final Map<String, dynamic> claim = jsonDecode(didToken[1] as String) as Map<String, dynamic>;
       final String issuer = claim["iss"] as String;
 
-      // skipIntro(key);
-
       final String? encryptedSeed = await sl.get<AuthService>().getEncryptedSeed(issuer);
       if (!mounted) return;
 
@@ -65,25 +63,6 @@ class _IntroLoginPageState extends State<IntroLoginPage> {
     } catch (e) {
       debugPrint('Error: $e');
     }
-  }
-
-  Future<void> skipIntro(String key) async {
-    await sl.get<DBHelper>().dropAccounts();
-    await sl.get<Vault>().setSeed(NanoSeeds.generateSeed());
-    if (!mounted) return;
-    // Update wallet
-    final String seed = await StateContainer.of(context).getSeed();
-    if (!mounted) return;
-    await NanoUtil().loginAccount(seed, context);
-
-    const String DEFAULT_PIN = "000000";
-
-    await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
-    await sl.get<Vault>().writePin(DEFAULT_PIN);
-    final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
-    if (!mounted) return;
-    StateContainer.of(context).requestSubscribe();
-    Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
   }
 
   @override
