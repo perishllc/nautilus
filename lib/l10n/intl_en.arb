@@ -460,6 +460,11 @@
     "type": "text",
     "description": "copy_xmr_seed_btn"
   },
+  "loginOrRegisterHeader": "Login or Register",
+  "@loginOrRegisterHeader": {
+    "type": "text",
+    "description": "login_register_header"
+  },
   "createAPasswordHeader": "Create a password.",
   "@createAPasswordHeader": {
     "type": "text",
@@ -634,6 +639,11 @@
   "@enterAddress": {
     "type": "text",
     "description": "enter_address"
+  },
+  "enterEmail": "Enter Email",
+  "@enterEmail": {
+    "type": "text",
+    "description": "enter_email"
   },
   "enterAmount": "Enter Amount",
   "@enterAmount": {

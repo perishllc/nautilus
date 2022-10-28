@@ -15,9 +15,10 @@ import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class IntroPasswordOnLaunch extends StatefulWidget {
-  final String? seed;
 
-  IntroPasswordOnLaunch({this.seed});
+  const IntroPasswordOnLaunch({this.seed});
+  final String? seed;
+  
   @override
   _IntroPasswordOnLaunchState createState() => _IntroPasswordOnLaunchState();
 }
@@ -111,6 +112,7 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                         if (widget.seed != null) {
                           await sl.get<Vault>().setSeed(widget.seed);
                           await sl.get<DBHelper>().dropAccounts();
+                          if (!mounted) return;
                           await NanoUtil().loginAccount(widget.seed, context);
                           // StateContainer.of(context).requestUpdate();
                           final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
@@ -122,15 +124,14 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                             _pinEnteredCallback(pin);
                           }
                         } else {
-                          sl.get<Vault>().setSeed(NanoSeeds.generateSeed()).then((String? result) {
-                            // Update wallet
-                            StateContainer.of(context).getSeed().then((String seed) {
-                              NanoUtil().loginAccount(seed, context).then((_) {
-                                // StateContainer.of(context).requestUpdate();
-                                Navigator.of(context).pushNamed('/intro_backup_safety');
-                              });
-                            });
-                          });
+                          // Update wallet
+                          await sl.get<Vault>().setSeed(NanoSeeds.generateSeed());
+                          if (!mounted) return;
+                          final String seed = await StateContainer.of(context).getSeed();
+                          if (!mounted) return;
+                          await NanoUtil().loginAccount(seed, context);
+                          if (!mounted) return;
+                          Navigator.of(context).pushNamed('/intro_backup_safety');
                         }
                       }),
                     ],

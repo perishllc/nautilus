@@ -9,7 +9,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:magic_sdk/magic_sdk.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
@@ -253,7 +252,6 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                   //     onStateChanged: (bool enabled) {
                   //       setState(() {
                   //         isDarkModeEnabled = enabled;
-
                   //         if (!isDarkModeEnabled) {
                   //           StateContainer.of(context).updateTheme(ThemeSetting(ThemeOptions.INDIUM));
                   //         } else {
@@ -280,16 +278,17 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                     ),
                   ),
 
-                  // TODO: magic
                   Row(
                     children: <Widget>[
                       // New Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).newWallet, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).loginOrRegisterHeader, Dimens.BUTTON_TOP_DIMENS,
                           instanceKey: const Key("get_started"), onPressed: () {
-                        Navigator.of(context).pushNamed('/login');
+                        Navigator.of(context).pushNamed('/intro_login');
                       }),
                     ],
                   ),
+
+                  const SizedBox(height: 10),// for spacing
 
                   Row(
                     children: <Widget>[

@@ -971,6 +971,16 @@ class AppLocalization {
     );
   }
 
+  /// `Login or Register`
+  String get loginOrRegisterHeader {
+    return Intl.message(
+      'Login or Register',
+      name: 'loginOrRegisterHeader',
+      desc: 'login_register_header',
+      args: [],
+    );
+  }
+
   /// `Create a password.`
   String get createAPasswordHeader {
     return Intl.message(
@@ -1319,6 +1329,16 @@ class AppLocalization {
       'Enter Address',
       name: 'enterAddress',
       desc: 'enter_address',
+      args: [],
+    );
+  }
+
+  /// `Enter Email`
+  String get enterEmail {
+    return Intl.message(
+      'Enter Email',
+      name: 'enterEmail',
+      desc: 'enter_email',
       args: [],
     );
   }

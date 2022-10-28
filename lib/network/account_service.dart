@@ -3,10 +3,8 @@ import 'dart:collection';
 import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:ens_dart/ens_dart.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
@@ -14,10 +12,6 @@ import 'package:nautilus_wallet_flutter/bus/events.dart';
 import 'package:nautilus_wallet_flutter/model/state_block.dart';
 import 'package:nautilus_wallet_flutter/network/model/base_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
-import 'package:nautilus_wallet_flutter/network/model/payment/payment_ack.dart';
-import 'package:nautilus_wallet_flutter/network/model/payment/payment_memo.dart';
-import 'package:nautilus_wallet_flutter/network/model/payment/payment_message.dart';
-import 'package:nautilus_wallet_flutter/network/model/payment/payment_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/account_history_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/account_info_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request/accounts_balances_request.dart';
@@ -46,7 +40,6 @@ import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:synchronized/synchronized.dart';
-import 'package:web3dart/web3dart.dart';
 import 'package:web_socket_channel/io.dart';
 
 // late Web3Client _web3Client;
@@ -84,9 +77,6 @@ class AccountService {
   static String SERVER_ADDRESS_ALERTS = "$HTTP_PROTO$BASE_SERVER_ADDRESS/alerts";
   static String SERVER_ADDRESS_FUNDING = "$HTTP_PROTO$BASE_SERVER_ADDRESS/funding";
   static String SERVER_ADDRESS_GIFT = "$HTTP_PROTO$BASE_SERVER_ADDRESS/gift";
-
-  // auth:
-  static String AUTH_SERVER = "https://auth.perish.co";
 
   static const String NANO_TO_USERNAME_LEASE_ENDPOINT = "https://api.nano.to/";
   static const String NANO_TO_KNOWN_ENDPOINT = "https://nano.to/known.json";

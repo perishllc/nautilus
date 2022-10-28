@@ -32,6 +32,7 @@ import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_safety.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_seed.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_import_seed.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_login.dart';
+import 'package:nautilus_wallet_flutter/ui/intro/intro_magic_password.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_password.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_password_on_launch.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_welcome.dart';
@@ -264,7 +265,7 @@ class AppState extends State<App> {
                 builder: (_) => IntroWelcomePage(),
                 settings: settings,
               );
-            case '/login':
+            case '/intro_login':
               return NoTransitionRoute(
                 builder: (_) => Stack(
                   children: [
@@ -272,6 +273,11 @@ class AppState extends State<App> {
                     Magic.instance.relayer,
                   ],
                 ),
+                settings: settings,
+              );
+            case '/intro_magic_password':
+              return MaterialPageRoute(
+                builder: (_) => IntroMagicPassword(encryptedSeed: settings.arguments as String?),
                 settings: settings,
               );
             case '/intro_password_on_launch':

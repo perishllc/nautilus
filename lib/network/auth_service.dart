@@ -1,4 +1,6 @@
+import 'dart:convert';
 
+import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 
@@ -29,7 +31,41 @@ class AuthService {
 
   final Logger log = sl.get<Logger>();
 
+  Future<String?> getEncryptedSeed(String identifier) async {
+    try {
+      final http.Response resp = await http.get(
+        Uri.parse("$AUTH_SERVER/seed-backup/$identifier"),
+        headers: {"Accept": "application/json"},
+      );
+      if (resp.statusCode != 200) {
+        return null;
+      }
 
+      print(resp.body);
+    } catch (e) {
+      log.e(e);
+      return null;
+    }
 
+    return null;
+  }
 
+  Future<bool> setEncryptedSeed(String identifier, String encryptedSeed) async {
+    final http.Response resp = await http.post(
+      Uri.parse("https://$AUTH_SERVER/seed-backup"),
+      headers: {"Accept": "application/json"},
+      body: json.encode(
+        <String, String>{
+          "identifier": identifier,
+          "encrypted_seed": encryptedSeed,
+        },
+      ),
+    );
+
+    if (resp.statusCode != 200) {
+      return false;
+    }
+
+    return true;
+  }
 }

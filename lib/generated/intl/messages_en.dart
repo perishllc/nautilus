@@ -228,6 +228,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Enter Address"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Enter Amount"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("Enter Email"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Enter Height"),
@@ -396,6 +397,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Authenticate on Launch"),
         "locked": MessageLookupByLibrary.simpleMessage("Locked"),
+        "loginOrRegisterHeader":
+            MessageLookupByLibrary.simpleMessage("Login or Register"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Delete Seed and Logout"),

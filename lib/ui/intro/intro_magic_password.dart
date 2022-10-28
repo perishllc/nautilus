@@ -17,15 +17,15 @@ import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
-class IntroPassword extends StatefulWidget {
-  const IntroPassword({this.seed});
-  final String? seed;
-  
+class IntroMagicPassword extends StatefulWidget {
+  const IntroMagicPassword({this.encryptedSeed});
+  final String? encryptedSeed;
+
   @override
-  _IntroPasswordState createState() => _IntroPasswordState();
+  _IntroMagicPasswordState createState() => _IntroMagicPasswordState();
 }
 
-class _IntroPasswordState extends State<IntroPassword> {
+class _IntroMagicPasswordState extends State<IntroMagicPassword> {
   FocusNode? createPasswordFocusNode;
   TextEditingController? createPasswordController;
   FocusNode? confirmPasswordFocusNode;
@@ -53,8 +53,7 @@ class _IntroPasswordState extends State<IntroPassword> {
         body: TapOutsideUnfocus(
             child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
-            minimum: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
+            minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
             child: Column(
               children: <Widget>[
                 //A widget that holds the header, the paragraph and Back Button
@@ -93,23 +92,22 @@ class _IntroPasswordState extends State<IntroPassword> {
                         ),
                         alignment: AlignmentDirectional.centerStart,
                         child: AutoSizeText(
-                          AppLocalization.of(context).createAPasswordHeader,
+                          widget.encryptedSeed == null ? AppLocalization.of(context).createAPasswordHeader : AppLocalization.of(context).enterPasswordHint,
                           maxLines: 3,
                           stepGranularity: 0.5,
                           style: AppStyles.textStyleHeaderColored(context),
                         ),
                       ),
                       // The paragraph
-                      Container(
-                        margin: EdgeInsetsDirectional.only(
-                            start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
-                        child: AutoSizeText(
-                          AppLocalization.of(context).passwordWillBeRequiredToOpenParagraph,
-                          style: AppStyles.textStyleParagraph(context),
-                          maxLines: 5,
-                          stepGranularity: 0.5,
-                        ),
-                      ),
+                      // Container(
+                      //   margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
+                      //   child: AutoSizeText(
+                      //     AppLocalization.of(context).passwordWillBeRequiredToOpenParagraph,
+                      //     style: AppStyles.textStyleParagraph(context),
+                      //     maxLines: 5,
+                      //     stepGranularity: 0.5,
+                      //   ),
+                      // ),
                       Expanded(
                           child: KeyboardAvoider(
                               duration: Duration.zero,
@@ -117,50 +115,49 @@ class _IntroPasswordState extends State<IntroPassword> {
                               focusPadding: 40,
                               child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
                                 // Create a Password Text Field
-                                AppTextField(
-                                  topMargin: 30,
-                                  padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
-                                  focusNode: createPasswordFocusNode,
-                                  controller: createPasswordController,
-                                  textInputAction: TextInputAction.next,
-                                  maxLines: 1,
-                                  autocorrect: false,
-                                  onChanged: (String newText) {
-                                    if (passwordError != null) {
-                                      setState(() {
-                                        passwordError = null;
-                                      });
-                                    }
-                                    if (confirmPasswordController!.text == createPasswordController!.text) {
-                                      if (mounted) {
+                                if (widget.encryptedSeed == null)
+                                  AppTextField(
+                                    topMargin: 30,
+                                    padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
+                                    focusNode: createPasswordFocusNode,
+                                    controller: createPasswordController,
+                                    textInputAction: TextInputAction.next,
+                                    maxLines: 1,
+                                    autocorrect: false,
+                                    onChanged: (String newText) {
+                                      if (passwordError != null) {
                                         setState(() {
-                                          passwordsMatch = true;
+                                          passwordError = null;
                                         });
                                       }
-                                    } else {
-                                      if (mounted) {
-                                        setState(() {
-                                          passwordsMatch = false;
-                                        });
+                                      if (confirmPasswordController!.text == createPasswordController!.text) {
+                                        if (mounted) {
+                                          setState(() {
+                                            passwordsMatch = true;
+                                          });
+                                        }
+                                      } else {
+                                        if (mounted) {
+                                          setState(() {
+                                            passwordsMatch = false;
+                                          });
+                                        }
                                       }
-                                    }
-                                  },
-                                  hintText: AppLocalization.of(context).createPasswordHint,
-                                  keyboardType: TextInputType.text,
-                                  obscureText: true,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 16.0,
-                                    color: passwordsMatch
-                                        ? StateContainer.of(context).curTheme.primary
-                                        : StateContainer.of(context).curTheme.text,
-                                    fontFamily: "NunitoSans",
+                                    },
+                                    hintText: AppLocalization.of(context).createPasswordHint,
+                                    keyboardType: TextInputType.text,
+                                    obscureText: true,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 16.0,
+                                      color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
+                                      fontFamily: "NunitoSans",
+                                    ),
+                                    onSubmitted: (String text) {
+                                      confirmPasswordFocusNode!.requestFocus();
+                                    },
                                   ),
-                                  onSubmitted: (String text) {
-                                    confirmPasswordFocusNode!.requestFocus();
-                                  },
-                                ),
                                 // Confirm Password Text Field
                                 AppTextField(
                                   topMargin: 20,
@@ -190,16 +187,16 @@ class _IntroPasswordState extends State<IntroPassword> {
                                       }
                                     }
                                   },
-                                  hintText: AppLocalization.of(context).confirmPasswordHint,
+                                  hintText: widget.encryptedSeed == null
+                                      ? AppLocalization.of(context).confirmPasswordHint
+                                      : AppLocalization.of(context).enterPasswordHint,
                                   keyboardType: TextInputType.text,
                                   obscureText: true,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16.0,
-                                    color: passwordsMatch
-                                        ? StateContainer.of(context).curTheme.primary
-                                        : StateContainer.of(context).curTheme.text,
+                                    color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
                                     fontFamily: "NunitoSans",
                                   ),
                                 ),
@@ -226,8 +223,8 @@ class _IntroPasswordState extends State<IntroPassword> {
                     Row(
                       children: <Widget>[
                         // Next Button
-                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).nextButton,
-                            Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).nextButton, Dimens.BUTTON_TOP_DIMENS,
+                            onPressed: () async {
                           await submitAndEncrypt();
                         }),
                       ],
@@ -235,8 +232,8 @@ class _IntroPasswordState extends State<IntroPassword> {
                     Row(
                       children: <Widget>[
                         // Go Back Button
-                        AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                            AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                        AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS,
+                            onPressed: () {
                           Navigator.of(context).pop();
                         }),
                       ],
@@ -250,51 +247,73 @@ class _IntroPasswordState extends State<IntroPassword> {
   }
 
   Future<void> submitAndEncrypt() async {
-    if (createPasswordController!.text.isEmpty || confirmPasswordController!.text.isEmpty) {
+    if ((createPasswordController!.text.isEmpty && widget.encryptedSeed == null) || confirmPasswordController!.text.isEmpty) {
       if (mounted) {
         setState(() {
           passwordError = AppLocalization.of(context).passwordBlank;
         });
       }
-    } else if (createPasswordController!.text != confirmPasswordController!.text) {
+      return;
+    }
+    if (widget.encryptedSeed == null && createPasswordController!.text != confirmPasswordController!.text) {
       if (mounted) {
         setState(() {
           passwordError = AppLocalization.of(context).passwordsDontMatch;
         });
       }
-    } else if (widget.seed != null) {
-      final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
-      await sl.get<Vault>().setSeed(encryptedSeed);
-      StateContainer.of(context).setEncryptedSecret(
-          NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, await sl.get<Vault>().getSessionKey())));
+      return;
+    }
+    if (widget.encryptedSeed != null) {
+      // final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
+
+      // decrypt the seed using the password:
+      final String decryptedSeed = NanoHelpers.byteToHex(NanoCrypt.decrypt(widget.encryptedSeed, confirmPasswordController!.text));
+
+      // re-encrypt the seed with password:
+      final String reEncryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(decryptedSeed, confirmPasswordController!.text));
+      await sl.get<Vault>().setSeed(reEncryptedSeed);
+      if (!mounted) return;
+      // also encrypt the seed with the session key:
+      StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(decryptedSeed, await sl.get<Vault>().getSessionKey())));
       await sl.get<DBHelper>().dropAccounts();
-      await NanoUtil().loginAccount(widget.seed, context);
-      // StateContainer.of(context).requestUpdate();// todo: is this necessary?
-      String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+      if (!mounted) return;
+      await NanoUtil().loginAccount(decryptedSeed, context);
+      if (!mounted) return;
+      final String? pin = await Navigator.of(context).push(MaterialPageRoute<String>(builder: (BuildContext context) {
         return PinScreen(PinOverlayType.NEW_PIN);
       }));
       if (pin != null && pin.length > 5) {
         _pinEnteredCallback(pin);
       }
-    } else {
-      // Generate a new seed and encrypt
-      String seed = NanoSeeds.generateSeed();
-      String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController!.text));
-      await sl.get<Vault>().setSeed(encryptedSeed);
-      // Also encrypt it with the session key, so user doesnt need password to sign blocks within the app
-      StateContainer.of(context)
-          .setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, await sl.get<Vault>().getSessionKey())));
-      // Update wallet
-      NanoUtil().loginAccount(await StateContainer.of(context).getSeed(), context).then((_) {
-        // StateContainer.of(context).requestUpdate();// todo: is this necessary?
-        Navigator.of(context).pushNamed('/intro_backup_safety');
-      });
+      return;
+    }
+
+    // Generate a new seed, encrypt, and upload to the seed backup endpoint:
+    final String seed = NanoSeeds.generateSeed();
+    final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController!.text));
+    await sl.get<Vault>().setSeed(encryptedSeed);
+    if (!mounted) return;
+    // Also encrypt it with the session key, so user doesnt need password to sign blocks within the app
+    StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, await sl.get<Vault>().getSessionKey())));
+
+    if (!mounted) return;
+    // Update wallet
+    await NanoUtil().loginAccount(await StateContainer.of(context).getSeed(), context);
+    if (!mounted) return;
+
+    // Set the pin:
+    final String? pin = await Navigator.of(context).push(MaterialPageRoute<String>(builder: (BuildContext context) {
+      return PinScreen(PinOverlayType.NEW_PIN);
+    }));
+    if (pin != null && pin.length > 5) {
+      _pinEnteredCallback(pin);
     }
   }
 
   Future<void> _pinEnteredCallback(String pin) async {
     await sl.get<Vault>().writePin(pin);
-    PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
+    final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
+    if (!mounted) return;
     StateContainer.of(context).requestSubscribe();
     // Update wallet
     Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
