@@ -40,19 +40,17 @@ class AuthService {
       if (resp.statusCode != 200) {
         return null;
       }
-
-      print(resp.body);
+      final Map<String, dynamic> json = jsonDecode(resp.body) as Map<String, dynamic>;
+      return json["encrypted_seed"] as String?;
     } catch (e) {
       log.e(e);
       return null;
     }
-
-    return null;
   }
 
   Future<bool> setEncryptedSeed(String identifier, String encryptedSeed) async {
     final http.Response resp = await http.post(
-      Uri.parse("https://$AUTH_SERVER/seed-backup"),
+      Uri.parse("$AUTH_SERVER/seed-backup"),
       headers: {"Accept": "application/json"},
       body: json.encode(
         <String, String>{

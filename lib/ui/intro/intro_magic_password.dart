@@ -8,6 +8,7 @@ import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/network/auth_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
@@ -18,8 +19,9 @@ import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class IntroMagicPassword extends StatefulWidget {
-  const IntroMagicPassword({this.encryptedSeed});
+  const IntroMagicPassword({this.encryptedSeed, this.identifier});
   final String? encryptedSeed;
+  final String? identifier;
 
   @override
   _IntroMagicPasswordState createState() => _IntroMagicPasswordState();
@@ -271,7 +273,6 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
 
       await sl.get<Vault>().setSeed(decryptedSeed);
 
-
       // re-encrypt the seed with password:
       // final String reEncryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(decryptedSeed, confirmPasswordController!.text));
       // await sl.get<Vault>().setSeed(reEncryptedSeed);
@@ -310,6 +311,16 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
       return PinScreen(PinOverlayType.NEW_PIN);
     }));
     if (pin != null && pin.length > 5) {
+      // upload encrypted seed to seed backup endpoint:
+      print("@@@@@@@@@@@@@@");
+      print(widget.encryptedSeed);
+      print(widget.identifier);
+      print("@@@@@@@@@@@@@@");
+      await sl.get<AuthService>().setEncryptedSeed(widget.identifier!, encryptedSeed);
+      print("@@@@@@@@@@@@@@");
+      print(widget.encryptedSeed);
+      print(widget.identifier);
+      print("@@@@@@@@@@@@@@");
       _pinEnteredCallback(pin);
     }
   }

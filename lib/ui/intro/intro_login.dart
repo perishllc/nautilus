@@ -59,7 +59,7 @@ class _IntroLoginPageState extends State<IntroLoginPage> {
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      Navigator.of(context).pushNamed('/intro_magic_password', arguments: encryptedSeed);
+      Navigator.of(context).pushNamed('/intro_magic_password', arguments: <String, String?>{"encryptedSeed": encryptedSeed, "issuer": issuer});
     } catch (e) {
       debugPrint('Error: $e');
     }
