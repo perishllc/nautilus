@@ -235,6 +235,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Vnesite naslov"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Vnesite znesek"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Vnesite darilno opombo"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Vnesite višino"),
@@ -406,6 +407,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Avtenticiraj ob zagonu"),
         "locked": MessageLookupByLibrary.simpleMessage("Zaklenjeno"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Odjava"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Izbriši ključ in odjava"),

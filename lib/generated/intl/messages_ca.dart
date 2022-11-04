@@ -231,6 +231,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nastavení hesla k peněžence se nezdařilo"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Zadejte adresu"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Zadejte částku"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
         "enterHeight":
@@ -400,6 +401,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Ověřit při spuštění"),
         "locked": MessageLookupByLibrary.simpleMessage("Zamčeno"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Odhlásit"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Smazat semínko a odhlásit"),

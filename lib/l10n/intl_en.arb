@@ -460,11 +460,6 @@
     "type": "text",
     "description": "copy_xmr_seed_btn"
   },
-  "loginOrRegisterHeader": "Login or Register",
-  "@loginOrRegisterHeader": {
-    "type": "text",
-    "description": "login_register_header"
-  },
   "createAPasswordHeader": "Create a password.",
   "@createAPasswordHeader": {
     "type": "text",
@@ -509,6 +504,11 @@
   "@createPinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to create a pin"
+  },
+  "changePinHint": "Set pin",
+  "@changePinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to set a pin"
   },
   "createQR": "Create QR Code",
   "@createQR": {
@@ -640,15 +640,15 @@
     "type": "text",
     "description": "enter_address"
   },
-  "enterEmail": "Enter Email",
-  "@enterEmail": {
-    "type": "text",
-    "description": "enter_email"
-  },
   "enterAmount": "Enter Amount",
   "@enterAmount": {
     "type": "text",
     "description": "send_amount_hint"
+  },
+  "enterEmail": "Enter Email",
+  "@enterEmail": {
+    "type": "text",
+    "description": "enter_email"
   },
   "enterGiftMemo": "Enter Gift Note",
   "@enterGiftMemo": {
@@ -1190,6 +1190,16 @@
     "type": "text",
     "description": "lockedtxt"
   },
+  "loginOrRegisterHeader": "Login or Register",
+  "@loginOrRegisterHeader": {
+    "type": "text",
+    "description": "login_register_header"
+  },
+  "continueWithoutLogin": "Continue without login",
+  "@continueWithoutLogin": {
+    "type": "text",
+    "description": "alternative_to_login"
+  },
   "logout": "Logout",
   "@logout": {
     "type": "text",
@@ -1579,6 +1589,11 @@
   "@plausibleDeniabilityParagraph": {
     "type": "text",
     "description": "A paragraph that tells warns the user this is plausible deniability pin."
+  },
+  "setPinParagraph": "Set or change your existing PIN.",
+  "@setPinParagraph": {
+    "type": "text",
+    "description": "A paragraph that explains the user can set or change their existing pin."
   },
   "plausibleInfoHeader": "Plausible Deniability Info",
   "@plausibleInfoHeader": {
@@ -2044,6 +2059,11 @@
   "@setPasswordSuccess": {
     "type": "text",
     "description": "Setting a Wallet Password was successful"
+  },
+  "changePin": "Change Pin",
+  "@changePin": {
+    "type": "text",
+    "description": "change_pin"
   },
   "setPin": "Set Pin",
   "@setPin": {

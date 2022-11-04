@@ -240,6 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ilagay ang Address"),
         "enterAmount":
             MessageLookupByLibrary.simpleMessage("Ilagay ang Amount"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Ipasok ang Tala ng Regalo"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Ipasok ang Taas"),
@@ -418,6 +419,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("I-authenticate sa paglunsad"),
         "locked": MessageLookupByLibrary.simpleMessage("Nakalock"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "logoutAction": MessageLookupByLibrary.simpleMessage(
             "Burahin ang seed at mag-logout"),

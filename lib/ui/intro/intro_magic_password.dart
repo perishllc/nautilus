@@ -283,12 +283,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
       if (!mounted) return;
       await NanoUtil().loginAccount(decryptedSeed, context);
       if (!mounted) return;
-      final String? pin = await Navigator.of(context).push(MaterialPageRoute<String>(builder: (BuildContext context) {
-        return PinScreen(PinOverlayType.NEW_PIN);
-      }));
-      if (pin != null && pin.length > 5) {
-        _pinEnteredCallback(pin);
-      }
+      skipPin();
       return;
     }
 
@@ -305,32 +300,33 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     // Update wallet
     await NanoUtil().loginAccount(await StateContainer.of(context).getSeed(), context);
     if (!mounted) return;
+    // upload encrypted seed to seed backup endpoint:
+    await sl.get<AuthService>().setEncryptedSeed(widget.identifier!, encryptedSeed);
+    skipPin();
+  }
 
-    // Set the pin:
-    final String? pin = await Navigator.of(context).push(MaterialPageRoute<String>(builder: (BuildContext context) {
-      return PinScreen(PinOverlayType.NEW_PIN);
-    }));
-    if (pin != null && pin.length > 5) {
-      // upload encrypted seed to seed backup endpoint:
-      print("@@@@@@@@@@@@@@");
-      print(widget.encryptedSeed);
-      print(widget.identifier);
-      print("@@@@@@@@@@@@@@");
-      await sl.get<AuthService>().setEncryptedSeed(widget.identifier!, encryptedSeed);
-      print("@@@@@@@@@@@@@@");
-      print(widget.encryptedSeed);
-      print(widget.identifier);
-      print("@@@@@@@@@@@@@@");
-      _pinEnteredCallback(pin);
-    }
+  Future<void> skipPin() async {
+    await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+    final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
+    if (!mounted) return;
+    StateContainer.of(context).requestSubscribe();
+    Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
   }
 
   Future<void> _pinEnteredCallback(String pin) async {
+    // final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    //   return PinScreen(
+    //     PinOverlayType.NEW_PIN,
+    //   );
+    // }));
+    // if (pin != null && pin.length > 5) {
+    //   _pinEnteredCallback(pin);
+    // }
+    await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
     await sl.get<Vault>().writePin(pin);
     final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
     if (!mounted) return;
     StateContainer.of(context).requestSubscribe();
-    // Update wallet
     Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
   }
 }

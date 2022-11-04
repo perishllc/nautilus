@@ -238,6 +238,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Не удалось установить пароль"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Введите Адрес"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Введите Сумму"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage(
             "Введите примечание к подарку"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Введите рост"),
@@ -414,6 +415,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Аутентификация при запуске"),
         "locked": MessageLookupByLibrary.simpleMessage("Закрыт"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Выход"),
         "logoutAction": MessageLookupByLibrary.simpleMessage(
             "Удаление Seed и выход из системы."),

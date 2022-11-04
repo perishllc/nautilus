@@ -236,6 +236,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("Ievadiet adresi"),
         "enterAmount":
             MessageLookupByLibrary.simpleMessage("Ievadiet daudzumu"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
         "enterHeight":
@@ -409,6 +410,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Autentificēties palaižot"),
         "locked": MessageLookupByLibrary.simpleMessage("Aizslēgts"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Iziet"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Dzēst sēklu un iziet"),

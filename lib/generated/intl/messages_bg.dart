@@ -232,6 +232,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Задаването на парола е невалидно"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Въведи Адрес"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Въведи Сума"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Въведете бележка за подарък"),
         "enterHeight":
@@ -408,6 +409,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Удостовери на Стартиране"),
         "locked": MessageLookupByLibrary.simpleMessage("Заключено"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Отпиши се"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Изтрий Seed и се Отпиши"),

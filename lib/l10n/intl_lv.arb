@@ -640,6 +640,11 @@
     "type": "text",
     "description": "send_amount_hint"
   },
+  "enterEmail": "",
+  "@enterEmail": {
+    "type": "text",
+    "description": "enter_email"
+  },
   "enterGiftMemo": "Enter Gift Note",
   "@enterGiftMemo": {
     "type": "text",
@@ -1179,6 +1184,11 @@
   "@locked": {
     "type": "text",
     "description": "lockedtxt"
+  },
+  "loginOrRegisterHeader": "",
+  "@loginOrRegisterHeader": {
+    "type": "text",
+    "description": "login_register_header"
   },
   "logout": "Iziet",
   "@logout": {

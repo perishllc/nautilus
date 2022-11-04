@@ -233,6 +233,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "वॉलेट पासवर्ड सेट करने में विफल"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("पता दर्ज करें"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("राशि दर्ज करें"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("गिफ़्ट नोट दर्ज करें"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("ऊंचाई दर्ज करें"),
@@ -401,6 +402,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("लॉन्च पर प्रमाणित करें"),
         "locked": MessageLookupByLibrary.simpleMessage("अवरोधित"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("लॉगआउट करें"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("सीड मिटा कर लॉगआउट करें"),

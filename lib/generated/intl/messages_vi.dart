@@ -231,6 +231,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Đặt mật khẩu ví không thành công"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Nhập địa chỉ"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Nhập số lượng"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Nhập Ghi Chú Quà Tặng"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Nhập chiều cao"),
@@ -406,6 +407,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Xác thực khi khởi chạy"),
         "locked": MessageLookupByLibrary.simpleMessage("Đã khoá"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Xóa hạt giống và đăng xuất"),

@@ -77,7 +77,7 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
   double get viewMaxScrollExtent => widget.controller.position.maxScrollExtent;
   // this is usually 0.0
   double get viewMinScrollExtent => widget.controller.position.minScrollExtent;
-  // double _previousMaxScrollExtent = 0.0;
+  double _previousMaxScrollExtent = 0.0;
 
   double getScrollViewDelta(
     double barDelta,
@@ -274,12 +274,12 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
       //   _viewOffset = viewMaxScrollExtent;
       // }
 
-      // if (_previousMaxScrollExtent != viewMaxScrollExtent) {
-      //   double diff = viewMaxScrollExtent - _previousMaxScrollExtent;
-      //   diff = diff * (barMaxScrollExtent / viewMaxScrollExtent);
-      //   _barOffsetTop -= diff;
-      // }
-      // _previousMaxScrollExtent = viewMaxScrollExtent;
+      if (_previousMaxScrollExtent != viewMaxScrollExtent) {
+        double diff = viewMaxScrollExtent - _previousMaxScrollExtent;
+        diff = diff * (barMaxScrollExtent / viewMaxScrollExtent);
+        _barOffsetTop -= diff;
+      }
+      _previousMaxScrollExtent = viewMaxScrollExtent;
 
       if (_viewOffset < viewMinScrollExtent || _viewOffset > viewMaxScrollExtent) {
         // don't update the bar offset:
@@ -309,6 +309,8 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
         barTotalScrollExtent,
         viewMaxScrollExtent,
       );
+
+      print("$barTotalScrollExtent $viewMaxScrollExtent $_barOffsetTop");
 
       if (_barOffsetTop < barMinScrollExtent) {
         _barOffsetTop = barMinScrollExtent;

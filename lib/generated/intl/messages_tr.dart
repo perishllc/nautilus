@@ -229,6 +229,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Şifre oluşturma işlemi başarısız"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Adres Gir"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Miktar Gir"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Hediye Notunu Girin"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Yüksekliği Girin"),
@@ -399,6 +400,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Başlangıçta Kimlik Doğrula"),
         "locked": MessageLookupByLibrary.simpleMessage("Kilitli"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Çıkış"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Seed\'i sil ve çıkış yap"),

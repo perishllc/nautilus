@@ -237,6 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Misslyckades med att ställa in ett lösenord"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Ange adress"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Ange belopp"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Ange presentanteckning"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Ange höjd"),
@@ -408,6 +409,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Verifiera vid uppstart"),
         "locked": MessageLookupByLibrary.simpleMessage("Låst"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Logga ut"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Ta bort seed och logga ut"),

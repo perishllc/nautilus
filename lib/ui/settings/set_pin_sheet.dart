@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:flutter/services.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
@@ -11,17 +11,15 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 
-class SetPasswordSheet extends StatefulWidget {
-  @override
-  // ignore: library_private_types_in_public_api
-  _SetPasswordSheetState createState() => _SetPasswordSheetState();
+class SetPinSheet extends StatefulWidget {
+  _SetPinSheetState createState() => _SetPinSheetState();
 }
 
-class _SetPasswordSheetState extends State<SetPasswordSheet> {
+class _SetPinSheetState extends State<SetPinSheet> {
   FocusNode? createPasswordFocusNode;
   TextEditingController? createPasswordController;
   FocusNode? confirmPasswordFocusNode;
@@ -51,7 +49,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
           children: <Widget>[
             // Sheet handle
             Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               height: 5,
               width: MediaQuery.of(context).size.width * 0.15,
               decoration: BoxDecoration(
@@ -65,26 +63,51 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   // The header
-                  Container(
-                    margin: EdgeInsetsDirectional.only(top: 10, start: 60, end: 60),
-                    child: Column(
-                      children: <Widget>[
-                        AutoSizeText(
-                          CaseChange.toUpperCase(AppLocalization.of(context).createPasswordSheetHeader, context),
-                          style: AppStyles.textStyleHeader(context),
-                          minFontSize: 12,
-                          stepGranularity: 0.1,
-                          textAlign: TextAlign.center,
-                          maxLines: 1,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        width: 60,
+                        height: 60,
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        child: Column(
+                          children: <Widget>[
+                            AutoSizeText(
+                              CaseChange.toUpperCase(AppLocalization.of(context).setPin, context),
+                              style: AppStyles.textStyleHeader(context),
+                              minFontSize: 12,
+                              stepGranularity: 0.1,
+                              textAlign: TextAlign.center,
+                              maxLines: 1,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                      // SizedBox(
+                      //   width: 60,
+                      //   height: 60,
+                      //   // padding: const EdgeInsets.only(top: 25, right: 20),
+                      //   child: AppDialogs.infoButton(
+                      //     context,
+                      //     () {
+                      //       AppDialogs.showInfoDialog(context, AppLocalization.of(context).plausibleInfoHeader, AppLocalization.of(context).plausibleSheetInfo);
+                      //     },
+                      //   ),
+                      // ),
+                      const SizedBox(
+                        width: 60,
+                        height: 60,
+                      ),
+                    ],
                   ),
                   // The paragraph
                   Container(
                     margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
-                      AppLocalization.of(context).passwordWillBeRequiredToOpenParagraph,
+                      AppLocalization.of(context).setPinParagraph,
                       style: AppStyles.textStyleParagraph(context),
                       maxLines: 5,
                       stepGranularity: 0.5,
@@ -92,17 +115,19 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                   ),
                   Expanded(
                       child: KeyboardAvoider(
-                          duration: Duration(milliseconds: 0),
+                          duration: Duration.zero,
                           autoScroll: true,
                           focusPadding: 40,
                           child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
                             // Create a Password Text Field
                             AppTextField(
                               topMargin: 30,
-                              padding: EdgeInsetsDirectional.only(start: 16, end: 16),
+                              padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
                               focusNode: createPasswordFocusNode,
                               controller: createPasswordController,
                               textInputAction: TextInputAction.next,
+                              inputFormatters: [LengthLimitingTextInputFormatter(6)],
+                              keyboardType: TextInputType.number,
                               maxLines: 1,
                               autocorrect: false,
                               onChanged: (String newText) {
@@ -125,8 +150,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                                   }
                                 }
                               },
-                              hintText: AppLocalization.of(context).createPasswordHint,
-                              keyboardType: TextInputType.text,
+                              hintText: AppLocalization.of(context).changePinHint,
                               obscureText: true,
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -135,17 +159,19 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                                 color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
                                 fontFamily: "NunitoSans",
                               ),
-                              onSubmitted: (String text) {
+                              onSubmitted: (text) {
                                 confirmPasswordFocusNode!.requestFocus();
                               },
                             ),
                             // Confirm Password Text Field
                             AppTextField(
                               topMargin: 20,
-                              padding: EdgeInsetsDirectional.only(start: 16, end: 16),
+                              padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
                               focusNode: confirmPasswordFocusNode,
                               controller: confirmPasswordController,
                               textInputAction: TextInputAction.done,
+                              inputFormatters: [LengthLimitingTextInputFormatter(6)],
+                              keyboardType: TextInputType.number,
                               maxLines: 1,
                               autocorrect: false,
                               onChanged: (String newText) {
@@ -168,8 +194,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                                   }
                                 }
                               },
-                              hintText: AppLocalization.of(context).confirmPasswordHint,
-                              keyboardType: TextInputType.text,
+                              hintText: AppLocalization.of(context).confirmPinHint,
                               obscureText: true,
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -201,8 +226,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).setPassword, Dimens.BUTTON_TOP_DIMENS,
-                        onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).setPin, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       await submitAndEncrypt();
                     }),
                   ],
@@ -224,27 +248,20 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
   }
 
   Future<void> submitAndEncrypt() async {
-    String? seed = await sl.get<Vault>().getSeed();
+    final String? seed = await sl.get<Vault>().getSeed();
+    if (!mounted) return;
     if (createPasswordController!.text.isEmpty || confirmPasswordController!.text.isEmpty) {
-      if (mounted) {
-        setState(() {
-          passwordError = AppLocalization.of(context).passwordBlank;
-        });
-      }
+      setState(() {
+        passwordError = AppLocalization.of(context).pinBlank;
+      });
     } else if (createPasswordController!.text != confirmPasswordController!.text) {
-      if (mounted) {
-        setState(() {
-          passwordError = AppLocalization.of(context).passwordsDontMatch;
-        });
-      }
-    } else if (seed == null || !NanoUtil.isValidSeed(seed)) {
-      Navigator.pop(context);
-      UIUtil.showSnackbar(AppLocalization.of(context).encryptionFailedError, context);
+      setState(() {
+        passwordError = AppLocalization.of(context).pinsDontMatch;
+      });
     } else {
-      String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController!.text));
-      await sl.get<Vault>().setSeed(encryptedSeed);
-      StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, await sl.get<Vault>().getSessionKey())));
-      UIUtil.showSnackbar(AppLocalization.of(context).setPasswordSuccess, context);
+      await sl.get<Vault>().writePin(confirmPasswordController!.text);
+      if (!mounted) return;
+      UIUtil.showSnackbar(AppLocalization.of(context).setPinSuccess, context);
       Navigator.pop(context);
     }
   }

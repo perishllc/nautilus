@@ -236,6 +236,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kan geen Wallet-wachtwoord instellen"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Vul adres in"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Vul bedrag in"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Cadeaubon invoeren"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Voer Hoogte in"),
@@ -410,6 +411,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Verifiëren bij starten"),
         "locked": MessageLookupByLibrary.simpleMessage("Vergrendeld"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Uitloggen"),
         "logoutAction": MessageLookupByLibrary.simpleMessage(
             "Seed verwijderen en uitloggen"),

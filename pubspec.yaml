@@ -107,13 +107,13 @@ dependencies:
   pretty_qr_code: ^2.0.2
   dotted_border: ^2.0.0+2
   image_picker: ^0.8.6
-  # mobile_scanner: ^2.0.0
+  mobile_scanner: ^3.0.0-beta.1
   # mobile_scanner bug:
   # https://github.com/juliansteenbakker/mobile_scanner/issues/221
-  mobile_scanner:
-    git:
-      url: https://github.com/juliansteenbakker/mobile_scanner.git
-      ref: master
+  # mobile_scanner:
+  #   git:
+  #     url: https://github.com/juliansteenbakker/mobile_scanner.git
+  #     ref: master
 
   # Share files
   share_plus: ^6.0.0
@@ -214,6 +214,10 @@ dependencies:
 
   # home buttons:
   # carousel_slider: ^4.1.1
+
+  # bip39:
+  bip39_mnemonic: ^3.0.4
+  ed25519_hd_key: ^2.2.0
 
 flutter_intl:
   enabled: true

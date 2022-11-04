@@ -245,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Saisir l’adresse"),
         "enterAmount":
             MessageLookupByLibrary.simpleMessage("Saisir le montant"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Entrez la note cadeau"),
         "enterHeight":
@@ -421,6 +422,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Authentifier au démarrage"),
         "locked": MessageLookupByLibrary.simpleMessage("Verrouillé"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Déconnexion"),
         "logoutAction": MessageLookupByLibrary.simpleMessage(
             "Effacer la clé privée et se déconnecter"),

@@ -238,6 +238,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress":
             MessageLookupByLibrary.simpleMessage("Insira o endereço"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Digite o valor"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Insira a nota de presente"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Insira a Altura"),
@@ -412,6 +413,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Autenticar ao iniciar"),
         "locked": MessageLookupByLibrary.simpleMessage("Bloqueado"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Sair"),
         "logoutAction": MessageLookupByLibrary.simpleMessage("Excluir e sair"),
         "logoutAreYouSure":

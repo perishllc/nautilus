@@ -971,16 +971,6 @@ class AppLocalization {
     );
   }
 
-  /// `Login or Register`
-  String get loginOrRegisterHeader {
-    return Intl.message(
-      'Login or Register',
-      name: 'loginOrRegisterHeader',
-      desc: 'login_register_header',
-      args: [],
-    );
-  }
-
   /// `Create a password.`
   String get createAPasswordHeader {
     return Intl.message(
@@ -1069,6 +1059,16 @@ class AppLocalization {
       'Create a pin',
       name: 'createPinHint',
       desc: 'A text field hint that tells the user to create a pin',
+      args: [],
+    );
+  }
+
+  /// `Set pin`
+  String get changePinHint {
+    return Intl.message(
+      'Set pin',
+      name: 'changePinHint',
+      desc: 'A text field hint that tells the user to set a pin',
       args: [],
     );
   }
@@ -1333,22 +1333,22 @@ class AppLocalization {
     );
   }
 
-  /// `Enter Email`
-  String get enterEmail {
-    return Intl.message(
-      'Enter Email',
-      name: 'enterEmail',
-      desc: 'enter_email',
-      args: [],
-    );
-  }
-
   /// `Enter Amount`
   String get enterAmount {
     return Intl.message(
       'Enter Amount',
       name: 'enterAmount',
       desc: 'send_amount_hint',
+      args: [],
+    );
+  }
+
+  /// `Enter Email`
+  String get enterEmail {
+    return Intl.message(
+      'Enter Email',
+      name: 'enterEmail',
+      desc: 'enter_email',
       args: [],
     );
   }
@@ -2434,6 +2434,26 @@ class AppLocalization {
     );
   }
 
+  /// `Login or Register`
+  String get loginOrRegisterHeader {
+    return Intl.message(
+      'Login or Register',
+      name: 'loginOrRegisterHeader',
+      desc: 'login_register_header',
+      args: [],
+    );
+  }
+
+  /// `Continue without login`
+  String get continueWithoutLogin {
+    return Intl.message(
+      'Continue without login',
+      name: 'continueWithoutLogin',
+      desc: 'alternative_to_login',
+      args: [],
+    );
+  }
+
   /// `Logout`
   String get logout {
     return Intl.message(
@@ -3214,6 +3234,17 @@ class AppLocalization {
       name: 'plausibleDeniabilityParagraph',
       desc:
           'A paragraph that tells warns the user this is plausible deniability pin.',
+      args: [],
+    );
+  }
+
+  /// `Set or change your existing PIN.`
+  String get setPinParagraph {
+    return Intl.message(
+      'Set or change your existing PIN.',
+      name: 'setPinParagraph',
+      desc:
+          'A paragraph that explains the user can set or change their existing pin.',
       args: [],
     );
   }
@@ -4146,6 +4177,16 @@ class AppLocalization {
       'Password has been set successfully',
       name: 'setPasswordSuccess',
       desc: 'Setting a Wallet Password was successful',
+      args: [],
+    );
+  }
+
+  /// `Change Pin`
+  String get changePin {
+    return Intl.message(
+      'Change Pin',
+      name: 'changePin',
+      desc: 'change_pin',
       args: [],
     );
   }

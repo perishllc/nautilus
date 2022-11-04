@@ -14,6 +14,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 
 class DisablePasswordSheet extends StatefulWidget {
   _DisablePasswordSheetState createState() => _DisablePasswordSheetState();
@@ -168,7 +169,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
     } else {
       try {
         String decryptedSeed = NanoHelpers.byteToHex(NanoCrypt.decrypt(encryptedSeed, passwordController!.text));
-        throwIf(!NanoSeeds.isValidSeed(decryptedSeed), const FormatException());
+        throwIf(!NanoUtil.isValidSeed(decryptedSeed), const FormatException());
         await sl.get<Vault>().setSeed(decryptedSeed);
         StateContainer.of(context).resetEncryptedSecret();
         UIUtil.showSnackbar(AppLocalization.of(context).disablePasswordSuccess, context);

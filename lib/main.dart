@@ -33,6 +33,7 @@ import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_seed.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_import_seed.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_login.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_magic_password.dart';
+import 'package:nautilus_wallet_flutter/ui/intro/intro_new_existing.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_password.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_password_on_launch.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_welcome.dart';
@@ -280,6 +281,11 @@ class AppState extends State<App> {
                 builder: (_) => IntroMagicPassword(
                     encryptedSeed: (settings.arguments! as Map<String, String?>)["encryptedSeed"],
                     identifier: (settings.arguments! as Map<String, String?>)["issuer"]),
+                settings: settings,
+              );
+            case '/intro_new_existing':
+              return MaterialPageRoute(
+                builder: (_) => IntroNewExistingPage(),
                 settings: settings,
               );
             case '/intro_password_on_launch':

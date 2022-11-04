@@ -167,7 +167,7 @@ class AppTransferOverviewSheet {
                                   return;
                                 }
 
-                                if (!NanoSeeds.isValidSeed(result)) {
+                                if (!NanoUtil.isValidSeed(result)) {
                                   UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidSeed, context);
                                   return;
                                 }

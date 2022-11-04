@@ -11,6 +11,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/pay_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:quiver/strings.dart';
 import 'package:validators/validators.dart';
 
@@ -46,7 +47,7 @@ class UserDataUtil {
       }
     } else if (type == DataType.SEED) {
       // Check if valid seed
-      if (NanoSeeds.isValidSeed(data)) {
+      if (NanoUtil.isValidSeed(data)) {
         return data;
       }
     } else if (type == DataType.DATA) {
@@ -115,7 +116,7 @@ class UserDataUtil {
       });
       setStream = delayed.asStream().listen((_) {
         Clipboard.getData("text/plain").then((ClipboardData? data) {
-          if (data != null && data.text != null && NanoSeeds.isValidSeed(data.text!)) {
+          if (data != null && data.text != null && NanoUtil.isValidSeed(data.text!)) {
             Clipboard.setData(const ClipboardData(text: ""));
           }
         });

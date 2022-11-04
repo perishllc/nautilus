@@ -12,6 +12,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 class TransferManualEntrySheet extends StatefulWidget {
@@ -125,7 +126,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                                 },
                               ),
                               fadeSuffixOnCondition: true,
-                              suffixShowFirstCondition: !NanoSeeds.isValidSeed(_seedInputController!.text),
+                              suffixShowFirstCondition: !NanoUtil.isValidSeed(_seedInputController!.text),
                               keyboardType: TextInputType.text,
                               style: seedIsValid ? AppStyles.textStyleSeed(context) : AppStyles.textStyleSeedGray(context),
                               onChanged: (String text) {
@@ -134,7 +135,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                                   hasError = false;
                                 });
                                 // If valid seed, clear focus/close keyboard
-                                if (NanoSeeds.isValidSeed(text) && mounted) {
+                                if (NanoUtil.isValidSeed(text) && mounted) {
                                   _seedInputFocusNode!.unfocus();
                                   setState(() {
                                     seedIsValid = true;
@@ -208,7 +209,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                   AppLocalization.of(context).transfer,
                   Dimens.BUTTON_TOP_DIMENS,
                   onPressed: () {
-                    if (NanoSeeds.isValidSeed(_seedInputController!.text) && widget.validSeedCallback != null) {
+                    if (NanoUtil.isValidSeed(_seedInputController!.text) && widget.validSeedCallback != null) {
                       widget.validSeedCallback!(_seedInputController!.text);
                     } else if (mounted) {
                       setState(() {

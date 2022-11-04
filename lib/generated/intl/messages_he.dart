@@ -217,6 +217,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("הכנס כתובת"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("הכנס כמות"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("הזן הערת מתנה"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("הזן גובה"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("הזן הודעה"),
@@ -379,6 +380,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("בצע אימות בעת הפעלה"),
         "locked": MessageLookupByLibrary.simpleMessage("נעל"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "logoutAction": MessageLookupByLibrary.simpleMessage("מחק סיד והתנתק"),
         "logoutAreYouSure": MessageLookupByLibrary.simpleMessage("אתה בטוח?"),

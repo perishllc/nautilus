@@ -224,6 +224,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "أخفق إنشاء كلمة مرور المحفظة\n"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("أدخل العنوان"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("أدخل المبلغ"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("أدخل ملاحظة الهدية"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("أدخل الارتفاع"),
@@ -391,6 +392,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("المصادقة في الاطلاق"),
         "locked": MessageLookupByLibrary.simpleMessage("مقفل"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("خروج"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("حذف المفتاح الخاص والخروج"),

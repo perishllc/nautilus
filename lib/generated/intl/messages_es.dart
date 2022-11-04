@@ -239,6 +239,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Introducir billetera"),
         "enterAmount":
             MessageLookupByLibrary.simpleMessage("Introducir cantidad"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Introduce la nota de regalo"),
         "enterHeight":
@@ -415,6 +416,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Autenticarse al iniciar"),
         "locked": MessageLookupByLibrary.simpleMessage("Bloqueado"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Cerrar sesión"),
         "logoutAction": MessageLookupByLibrary.simpleMessage(
             "Eliminar semilla y cerrar sesión"),

@@ -238,6 +238,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Inserisci Indirizzo"),
         "enterAmount":
             MessageLookupByLibrary.simpleMessage("Inserisci Importo"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Inserisci la nota regalo"),
         "enterHeight":
@@ -411,6 +412,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Autenticazione all\'Avvio"),
         "locked": MessageLookupByLibrary.simpleMessage("Bloccato"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "logoutAction": MessageLookupByLibrary.simpleMessage(
             "Elimina seed e fai il logout"),

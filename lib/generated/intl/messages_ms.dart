@@ -229,6 +229,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Gagal menetapkan kata laluan dompet"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Masukan Alamat"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Masukan Amaun"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Masukkan Nota Hadiah"),
         "enterHeight":
@@ -405,6 +406,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Mengesahkan saat Pelancaran"),
         "locked": MessageLookupByLibrary.simpleMessage("Terkunci"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Log Keluar"),
         "logoutAction": MessageLookupByLibrary.simpleMessage(
             "Memadam benih dan log keluar."),

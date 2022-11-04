@@ -232,6 +232,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kunne ikke velge lommebokens passord"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Angi adresse"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Tast inn beløp"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Skriv inn gavebrev"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Skriv inn Høyde"),
@@ -405,6 +406,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Verifiser ved oppstart"),
         "locked": MessageLookupByLibrary.simpleMessage("Låst"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Logg ut"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Slett Seed og logg ut"),

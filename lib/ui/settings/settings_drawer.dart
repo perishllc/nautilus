@@ -54,6 +54,7 @@ import 'package:nautilus_wallet_flutter/ui/settings/changerepresentative_sheet.d
 import 'package:nautilus_wallet_flutter/ui/settings/contacts_widget.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/disable_password_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/set_password_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/set_pin_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/set_plausible_pin_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/settings_list_item.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_complete_sheet.dart';
@@ -83,6 +84,7 @@ import 'package:nautilus_wallet_flutter/util/ninja/ninja_node.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:quiver/strings.dart';
 import 'package:share_plus/share_plus.dart';
 
 class SettingsSheet extends StatefulWidget {
@@ -484,17 +486,30 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           );
         })) {
       case AuthMethod.PIN:
-        sl.get<SharedPrefsUtil>().setAuthMethod(AuthenticationMethod(AuthMethod.PIN)).then((void result) {
-          setState(() {
-            _curAuthMethod = AuthenticationMethod(AuthMethod.PIN);
-          });
+        // check if pin is set, if not, set it:
+        final String? curPin = await sl.get<Vault>().getPin();
+        if (isEmpty(curPin)) {
+          final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+            return PinScreen(
+              PinOverlayType.NEW_PIN,
+            );
+          }));
+          if (pin == null || pin.length < 6) {
+            return;
+          }
+          await sl.get<Vault>().writePin(pin);
+        }
+
+        await sl.get<SharedPrefsUtil>().setAuthMethod(AuthenticationMethod(AuthMethod.PIN));
+        setState(() {
+          _curAuthMethod = AuthenticationMethod(AuthMethod.PIN);
         });
+
         break;
       case AuthMethod.BIOMETRICS:
-        sl.get<SharedPrefsUtil>().setAuthMethod(AuthenticationMethod(AuthMethod.BIOMETRICS)).then((void result) {
-          setState(() {
-            _curAuthMethod = AuthenticationMethod(AuthMethod.BIOMETRICS);
-          });
+        await sl.get<SharedPrefsUtil>().setAuthMethod(AuthenticationMethod(AuthMethod.BIOMETRICS));
+        setState(() {
+          _curAuthMethod = AuthenticationMethod(AuthMethod.BIOMETRICS);
         });
         break;
       default:
@@ -2273,6 +2288,13 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       }, disabled: _curAuthMethod.method != AuthMethod.PIN || StateContainer.of(context).encryptedSecret != null),
                     ]),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    // Column(children: <Widget>[
+                    //   Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    //   AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).changePin, AppIcons.walletpassword, onPressed: () {
+                    //     Sheets.showAppHeightNineSheet(context: context, widget: SetPinSheet());
+                    //   }, disabled: false),
+                    // ]),
+                    // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                   ],
                 ),
                 // List Top Gradient End

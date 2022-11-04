@@ -198,6 +198,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ウォレットパスワードの作成に失敗しました。"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("アドレスを入力する"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("金額を入力する"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("ギフトメモを入力"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("高さを入力してください"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("メッセージを入力してください"),
@@ -348,6 +349,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loadedInto": MessageLookupByLibrary.simpleMessage("ロード先へ"),
         "lockAppSetting": MessageLookupByLibrary.simpleMessage("起動時に認証する"),
         "locked": MessageLookupByLibrary.simpleMessage("ロック済み"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("ログアウト"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("シードを削除して\nログアウトする"),

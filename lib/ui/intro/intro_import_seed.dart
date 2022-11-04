@@ -5,6 +5,7 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
@@ -13,6 +14,7 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
@@ -38,52 +40,15 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
   // String _seedMode = "nano_phrase"; // "nano_phrase" if restoring phrase, "nano_seed" if restoring seed
   // "bip39_phrase" if restoring bip39 phase "bip39_seed" if restoring bip39 seed
 
-  String _fullMode = "nano_phrase";
+  // String _fullMode = "nano_phrase";
+  // String _fullMode = "bip39_phrase";
   bool _seedMode = false;
-  bool _bip39Mode = false;
+  // bool _bip39Mode = true;
 
   bool _seedIsValid = false;
   bool _showSeedError = false;
   bool _mnemonicIsValid = false;
   String? _mnemonicError;
-
-  String nextMode(String mode) {
-    // switch (mode) {
-    //   case "nano_phrase":
-    //     return "nano_seed";
-    //   case "nano_seed":
-    //     return "bip39_phrase";
-    //   case "bip39_phrase":
-    //     return "bip39_seed";
-    //   case "bip39_seed":
-    //     return "nano_phrase";
-    //   default:
-    //     return "nano_phrase";
-    // }
-
-    // disable bip39 for now:
-    switch (mode) {
-      case "nano_phrase":
-        return "nano_seed";
-      case "nano_seed":
-        return "nano_phrase";
-      default:
-        return "nano_phrase";
-    }
-  }
-
-  String combineBip39(String word, {bool next = false}) {
-    String testAgainst = _fullMode;
-
-    if (next) {
-      testAgainst = nextMode(testAgainst);
-    }
-
-    if (testAgainst.contains("bip39")) {
-      return "Bip39 $word";
-    }
-    return word;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,8 +79,6 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                   foregroundColor: StateContainer.of(context).curTheme.text15,
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                                   padding: EdgeInsets.zero,
-                                  // highlightColor: StateContainer.of(context).curTheme.text15,
-                                  // splashColor: StateContainer.of(context).curTheme.text15,
                                 ),
                                 onPressed: () {
                                   Navigator.pop(context);
@@ -132,14 +95,10 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                   borderRadius: BorderRadius.circular(50.0),
                                 ),
                                 padding: const EdgeInsetsDirectional.only(top: 6, bottom: 6, start: 12, end: 12),
-                                // highlightColor: StateContainer.of(context).curTheme.text15,
-                                // splashColor: StateContainer.of(context).curTheme.text15,
                               ),
                               onPressed: () {
                                 setState(() {
-                                  _fullMode = nextMode(_fullMode);
-                                  _seedMode = _fullMode.contains("seed");
-                                  _bip39Mode = _fullMode.contains("bip39");
+                                  _seedMode = !_seedMode;
                                 });
                               },
                               child: Row(
@@ -147,10 +106,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                   Container(
                                     margin: const EdgeInsetsDirectional.only(end: 8),
                                     child: Text(
-                                      combineBip39(
-                                        _seedMode ? AppLocalization.of(context).secretPhrase : AppLocalization.of(context).seed,
-                                        next: true,
-                                      ),
+                                      _seedMode ? AppLocalization.of(context).secretPhrase : AppLocalization.of(context).seed,
                                       style: TextStyle(
                                         color: StateContainer.of(context).curTheme.text,
                                         fontSize: 20.0,
@@ -175,9 +131,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                         ),
                         alignment: AlignmentDirectional.centerStart,
                         child: AutoSizeText(
-                          combineBip39(
-                            _seedMode ? AppLocalization.of(context).importSeed : AppLocalization.of(context).importSecretPhrase,
-                          ),
+                          _seedMode ? AppLocalization.of(context).importSeed : AppLocalization.of(context).importSecretPhrase,
                           style: AppStyles.textStyleHeaderColored(context),
                           maxLines: 1,
                           minFontSize: 12,
@@ -201,21 +155,21 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                               focusPadding: 40,
                               child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
                                 // The text field for the seed
-                                if (_seedMode && !_bip39Mode)
+                                if (_seedMode)
                                   AppTextField(
                                     leftMargin: smallScreen(context) ? 30 : 40,
                                     rightMargin: smallScreen(context) ? 30 : 40,
                                     topMargin: 20,
                                     focusNode: _seedInputFocusNode,
                                     controller: _seedInputController,
-                                    inputFormatters: [LengthLimitingTextInputFormatter(64), UpperCaseTextFormatter()],
+                                    inputFormatters: [LengthLimitingTextInputFormatter(/*64*/ 128), UpperCaseTextFormatter()],
                                     textInputAction: TextInputAction.done,
                                     maxLines: null,
                                     autocorrect: false,
                                     prefixButton: TextFieldButton(
                                       icon: AppIcons.scan,
                                       onPressed: () async {
-                                        if (NanoSeeds.isValidSeed(_seedInputController.text)) {
+                                        if (NanoUtil.isValidSeed(_seedInputController.text)) {
                                           return;
                                         }
                                         // Scan QR for seed
@@ -224,7 +178,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                         if (result == null) {
                                           return;
                                         }
-                                        if (NanoSeeds.isValidSeed(result)) {
+                                        if (NanoUtil.isValidSeed(result)) {
                                           _seedInputController.text = result;
                                           setState(() {
                                             _seedIsValid = true;
@@ -235,8 +189,6 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                           _seedInputFocusNode.unfocus();
                                           setState(() {
                                             _seedMode = false;
-                                            _bip39Mode = false;
-                                            _fullMode = "nano_phrase";
                                             _mnemonicError = null;
                                             _mnemonicIsValid = true;
                                           });
@@ -246,17 +198,17 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                       },
                                     ),
                                     fadePrefixOnCondition: true,
-                                    prefixShowFirstCondition: !NanoSeeds.isValidSeed(_seedInputController.text),
+                                    prefixShowFirstCondition: !NanoUtil.isValidSeed(_seedInputController.text),
                                     suffixButton: TextFieldButton(
                                       icon: AppIcons.paste,
                                       onPressed: () {
-                                        if (NanoSeeds.isValidSeed(_seedInputController.text)) {
+                                        if (NanoUtil.isValidSeed(_seedInputController.text)) {
                                           return;
                                         }
                                         Clipboard.getData("text/plain").then((ClipboardData? data) {
                                           if (data == null || data.text == null) {
                                             return;
-                                          } else if (NanoSeeds.isValidSeed(data.text!)) {
+                                          } else if (NanoUtil.isValidSeed(data.text!)) {
                                             _seedInputController.text = data.text!;
                                             setState(() {
                                               _seedIsValid = true;
@@ -266,9 +218,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                             _mnemonicFocusNode.unfocus();
                                             _seedInputFocusNode.unfocus();
                                             setState(() {
-                                              _fullMode = "nano_phrase";
                                               _seedMode = false;
-                                              _bip39Mode = false;
                                               _mnemonicError = null;
                                               _mnemonicIsValid = true;
                                             });
@@ -277,7 +227,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                       },
                                     ),
                                     fadeSuffixOnCondition: true,
-                                    suffixShowFirstCondition: !NanoSeeds.isValidSeed(_seedInputController.text),
+                                    suffixShowFirstCondition: !NanoUtil.isValidSeed(_seedInputController.text),
                                     keyboardType: TextInputType.text,
                                     style: _seedIsValid ? AppStyles.textStyleSeed(context) : AppStyles.textStyleSeedGray(context),
                                     onChanged: (String text) {
@@ -286,7 +236,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                         _showSeedError = false;
                                       });
                                       // If valid seed, clear focus/close keyboard
-                                      if (NanoSeeds.isValidSeed(text)) {
+                                      if (NanoUtil.isValidSeed(text)) {
                                         _seedInputFocusNode.unfocus();
                                         setState(() {
                                           _seedIsValid = true;
@@ -298,7 +248,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                       }
                                     },
                                   )
-                                else if (!_seedMode && !_bip39Mode)
+                                else if (!_seedMode)
                                   AppTextField(
                                     leftMargin: smallScreen(context) ? 30 : 40,
                                     rightMargin: smallScreen(context) ? 30 : 40,
@@ -330,14 +280,12 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                           setState(() {
                                             _mnemonicIsValid = true;
                                           });
-                                        } else if (NanoSeeds.isValidSeed(result)) {
+                                        } else if (NanoUtil.isValidSeed(result)) {
                                           _seedInputController.text = result;
                                           _mnemonicFocusNode.unfocus();
                                           _seedInputFocusNode.unfocus();
                                           setState(() {
-                                            _fullMode = "nano_seed";
                                             _seedMode = true;
-                                            _bip39Mode = false;
                                             _seedIsValid = true;
                                             _showSeedError = false;
                                           });
@@ -362,7 +310,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                             setState(() {
                                               _mnemonicIsValid = true;
                                             });
-                                          } else if (NanoSeeds.isValidSeed(data.text!)) {
+                                          } else if (NanoUtil.isValidSeed(data.text!)) {
                                             throw Exception("TODO");
                                             // _seedInputController.text = data.text!;
                                             // _mnemonicFocusNode.unfocus();
@@ -423,115 +371,8 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                         }
                                       }
                                     },
-                                  )
-
-                                // bip39 seed:
-                                else if (_seedMode && _bip39Mode)
-                                  AppTextField(
-                                    leftMargin: smallScreen(context) ? 30 : 40,
-                                    rightMargin: smallScreen(context) ? 30 : 40,
-                                    topMargin: 20,
-                                    focusNode: _seedInputFocusNode,
-                                    controller: _seedInputController,
-                                    inputFormatters: [LengthLimitingTextInputFormatter(64), UpperCaseTextFormatter()],
-                                    textInputAction: TextInputAction.done,
-                                    maxLines: null,
-                                    autocorrect: false,
-                                    prefixButton: TextFieldButton(
-                                      icon: AppIcons.scan,
-                                      onPressed: () {
-                                        if (NanoUtil.isValidBip39Seed(_seedInputController.text)) {
-                                          return;
-                                        }
-                                        // TODO:
-                                      },
-                                    ),
-                                    fadePrefixOnCondition: true,
-                                    prefixShowFirstCondition: !NanoSeeds.isValidSeed(_seedInputController.text),
-                                    suffixButton: TextFieldButton(
-                                      icon: AppIcons.paste,
-                                      onPressed: () {
-                                        Clipboard.getData("text/plain").then((ClipboardData? data) {
-                                          if (data == null || data.text == null) {
-                                            return;
-                                          }
-                                          if (NanoUtil.isValidBip39Seed(data.text!)) {
-                                            _seedInputController.text = data.text!;
-                                            setState(() {
-                                              _seedIsValid = true;
-                                            });
-                                          }
-                                        });
-                                      },
-                                    ),
-                                    fadeSuffixOnCondition: true,
-                                    suffixShowFirstCondition: !NanoSeeds.isValidSeed(_seedInputController.text),
-                                    keyboardType: TextInputType.text,
-                                    style: _seedIsValid ? AppStyles.textStyleSeed(context) : AppStyles.textStyleSeedGray(context),
-                                    onChanged: (String text) {
-                                      // Always reset the error message to be less annoying
-                                      setState(() {
-                                        _showSeedError = false;
-                                      });
-                                      // If valid seed, clear focus/close keyboard
-                                      if (NanoSeeds.isValidSeed(text)) {
-                                        _seedInputFocusNode.unfocus();
-                                        setState(() {
-                                          _seedIsValid = true;
-                                        });
-                                      } else {
-                                        setState(() {
-                                          _seedIsValid = false;
-                                        });
-                                      }
-                                    },
-                                  )
-                                // bip39 phrase:
-                                else if (!_seedMode && _bip39Mode)
-                                  AppTextField(
-                                    leftMargin: smallScreen(context) ? 30 : 40,
-                                    rightMargin: smallScreen(context) ? 30 : 40,
-                                    topMargin: 20,
-                                    focusNode: _mnemonicFocusNode,
-                                    controller: _mnemonicController,
-                                    inputFormatters: [
-                                      SingleSpaceInputFormatter(),
-                                      LowerCaseTextFormatter(),
-                                      FilteringTextInputFormatter(RegExp("[a-zA-Z ]"), allow: true), // bug fix for debug mode when importing a seed
-                                    ],
-                                    textInputAction: TextInputAction.done,
-                                    maxLines: null,
-                                    autocorrect: false,
-                                    prefixButton: TextFieldButton(
-                                      icon: AppIcons.scan,
-                                      onPressed: () async {
-                                        // TODO: Bip39
-                                      },
-                                    ),
-                                    fadePrefixOnCondition: true,
-                                    prefixShowFirstCondition: !NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' ')),
-                                    suffixButton: TextFieldButton(
-                                      icon: AppIcons.paste,
-                                      onPressed: () {
-                                        if (NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' '))) {
-                                          return;
-                                        }
-                                        Clipboard.getData("text/plain").then((ClipboardData? data) {
-                                          if (data == null || data.text == null) {
-                                            return;
-                                          }
-                                          // TODO: Bip39
-                                        });
-                                      },
-                                    ),
-                                    fadeSuffixOnCondition: true,
-                                    suffixShowFirstCondition: !NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' ')),
-                                    keyboardType: TextInputType.text,
-                                    style: _mnemonicIsValid ? AppStyles.textStyleParagraphPrimary(context) : AppStyles.textStyleParagraph(context),
-                                    onChanged: (String text) {
-                                      // TODO:
-                                    },
                                   ),
+
                                 // "Invalid Seed" text that appears if the input is invalid
                                 Container(
                                   margin: const EdgeInsets.only(top: 5),
@@ -564,117 +405,135 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    Container(
-                      margin: const EdgeInsetsDirectional.only(end: 30),
-                      height: 50,
-                      width: 50,
-                      child: TextButton(
-                          style: TextButton.styleFrom(
-                            foregroundColor: StateContainer.of(context).curTheme.primary30,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                            padding: EdgeInsets.zero,
-                            // highlightColor: StateContainer.of(context).curTheme.primary15,
-                            // splashColor: StateContainer.of(context).curTheme.primary30,
-                          ),
-                          onPressed: () async {
-                            if (!_bip39Mode) {
-                              if (_seedMode) {
-                                _seedInputFocusNode.unfocus();
-                                // If seed valid, log them in
-                                if (NanoSeeds.isValidSeed(_seedInputController.text)) {
-                                  await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
-                                  // Navigator.pushNamed(context, '/intro_password_on_launch', arguments: _seedInputController.text);
-                                  await sl.get<Vault>().setSeed(_seedInputController.text);
-                                  await sl.get<DBHelper>().dropAccounts();
-                                  if (!mounted) return;
-                                  await NanoUtil().loginAccount(_seedInputController.text, context);
-                                  if (!mounted) return;
-                                  final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                                    return PinScreen(
-                                      PinOverlayType.NEW_PIN,
-                                    );
-                                  }));
-                                  if (pin != null && pin.length > 5) {
-                                    _pinEnteredCallback(pin);
-                                  }
-                                } else {
-                                  // Display error
-                                  setState(() {
-                                    _showSeedError = true;
-                                  });
-                                }
-                              } else {
-                                // mnemonic mode
-                                _mnemonicFocusNode.unfocus();
-                                if (NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' '))) {
-                                  sl.get<SharedPrefsUtil>().setSeedBackedUp(true).then((result) async {
-                                    // Navigator.pushNamed(context, '/intro_password_on_launch',
-                                    //     arguments: NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' ')));
-                                    final String seed = NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' '));
-                                    await sl.get<Vault>().setSeed(seed);
-                                    await sl.get<DBHelper>().dropAccounts();
-                                    if (!mounted) return;
-                                    await NanoUtil().loginAccount(seed, context);
-                                    if (!mounted) return;
-                                    final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                                      return PinScreen(
-                                        PinOverlayType.NEW_PIN,
-                                      );
-                                    }));
-                                    if (pin != null && pin.length > 5) {
-                                      _pinEnteredCallback(pin);
-                                    }
-                                  });
-                                } else {
-                                  // Show mnemonic error
-                                  if (_mnemonicController.text.split(' ').length != 24) {
-                                    setState(() {
-                                      _mnemonicIsValid = false;
-                                      _mnemonicError = AppLocalization.of(context).mnemonicSizeError;
-                                    });
-                                  } else {
-                                    _mnemonicController.text.split(' ').forEach((String word) {
-                                      if (!NanoMnemomics.isValidWord(word)) {
-                                        setState(() {
-                                          _mnemonicIsValid = false;
-                                          _mnemonicError = AppLocalization.of(context).mnemonicInvalidWord.replaceAll("%1", word);
-                                        });
-                                      }
-                                    });
-                                  }
-                                }
+                    // import ledger:
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY_OUTLINE, /*AppLocalization.of(context).newWallet*/ "Import Hardware", Dimens.BUTTON_COMPACT_LEFT_DIMENS,
+                        instanceKey: const Key("new_wallet_button"), onPressed: () async {
+                      if (_seedMode) {
+                        _seedInputFocusNode.unfocus();
+                        // If seed valid, log them in
+                        if (NanoUtil.isValidBip39Seed(_seedInputController.text)) {
+                          await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+                          await sl.get<Vault>().setSeed(_seedInputController.text);
+                          await sl.get<DBHelper>().dropAccounts();
+                          if (!mounted) return;
+                          await NanoUtil().loginAccount(_seedInputController.text, context);
+                          if (!mounted) return;
+                          // final String? pin = await Navigator.of(context).push(MaterialPageRoute<String>(builder: (BuildContext context) {
+                          //   return PinScreen(
+                          //     PinOverlayType.NEW_PIN,
+                          //   );
+                          // }));
+                          // if (pin != null && pin.length > 5) {
+                          //   _pinEnteredCallback(pin);
+                          // }
+                          skipPin();
+                        } else {
+                          // Display error
+                          setState(() {
+                            _showSeedError = true;
+                          });
+                        }
+                      } else {
+                        // mnemonic mode
+                        _mnemonicFocusNode.unfocus();
+                        if (NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' '))) {
+                          await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+                          // Navigator.pushNamed(context, '/intro_password_on_launch',
+                          //     arguments: NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' ')));
+                          final String seed = NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' '));
+
+                          final String seed2 = await NanoUtil.mnemonicListToSeed(_mnemonicController.text.split(' '));
+
+                          print("seed2: $seed2");
+                          await sl.get<Vault>().setSeed(seed);
+                          await sl.get<DBHelper>().dropAccounts();
+                          if (!mounted) return;
+                          await NanoUtil().loginAccount(seed, context);
+                          if (!mounted) return;
+                          // final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                          //   return PinScreen(
+                          //     PinOverlayType.NEW_PIN,
+                          //   );
+                          // }));
+                          // if (pin != null && pin.length > 5) {
+                          //   _pinEnteredCallback(pin);
+                          // }
+                          skipPin();
+                        } else {
+                          // Show mnemonic error
+                          if (_mnemonicController.text.split(' ').length != 24) {
+                            setState(() {
+                              _mnemonicIsValid = false;
+                              _mnemonicError = AppLocalization.of(context).mnemonicSizeError;
+                            });
+                          } else {
+                            _mnemonicController.text.split(' ').forEach((String word) {
+                              if (!NanoMnemomics.isValidWord(word)) {
+                                setState(() {
+                                  _mnemonicIsValid = false;
+                                  _mnemonicError = AppLocalization.of(context).mnemonicInvalidWord.replaceAll("%1", word);
+                                });
                               }
-                            } else {
-                              // TODO:
-                              if (_seedMode) {
-                                _seedInputFocusNode.unfocus();
-                                // If seed valid, log them in
-                                if (NanoUtil.isValidBip39Seed(_seedInputController.text)) {
-                                  await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
-                                  await sl.get<Vault>().setSeed(_seedInputController.text);
-                                  await sl.get<DBHelper>().dropAccounts();
-                                  if (!mounted) return;
-                                  await NanoUtil().loginAccount(_seedInputController.text, context);
-                                  if (!mounted) return;
-                                  final String? pin = await Navigator.of(context).push(MaterialPageRoute<String>(builder: (BuildContext context) {
-                                    return PinScreen(
-                                      PinOverlayType.NEW_PIN,
-                                    );
-                                  }));
-                                  if (pin != null && pin.length > 5) {
-                                    _pinEnteredCallback(pin);
-                                  }
-                                } else {
-                                  // Display error
-                                  setState(() {
-                                    _showSeedError = true;
-                                  });
-                                }
+                            });
+                          }
+                        }
+                      }
+                    }),
+
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY, /*AppLocalization.of(context).importWallet*/ "Import Standard", Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
+                        onPressed: () async {
+                      if (_seedMode) {
+                        _seedInputFocusNode.unfocus();
+                        // If seed valid, log them in
+                        if (NanoUtil.isValidSeed(_seedInputController.text)) {
+                          await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+                          await sl.get<Vault>().setSeed(_seedInputController.text);
+                          await sl.get<DBHelper>().dropAccounts();
+                          if (!mounted) return;
+                          await NanoUtil().loginAccount(_seedInputController.text, context);
+                          if (!mounted) return;
+
+                          skipPin();
+                        } else {
+                          // Display error
+                          setState(() {
+                            _showSeedError = true;
+                          });
+                        }
+                      } else {
+                        // mnemonic mode
+                        _mnemonicFocusNode.unfocus();
+                        if (NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' '))) {
+                          await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+                          final String seed = NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' '));
+                          await sl.get<Vault>().setSeed(seed);
+                          await sl.get<DBHelper>().dropAccounts();
+                          if (!mounted) return;
+                          await NanoUtil().loginAccount(seed, context);
+                          if (!mounted) return;
+                          skipPin();
+                        } else {
+                          // Show mnemonic error
+                          if (_mnemonicController.text.split(' ').length != 24) {
+                            setState(() {
+                              _mnemonicIsValid = false;
+                              _mnemonicError = AppLocalization.of(context).mnemonicSizeError;
+                            });
+                          } else {
+                            _mnemonicController.text.split(' ').forEach((String word) {
+                              if (!NanoMnemomics.isValidWord(word)) {
+                                setState(() {
+                                  _mnemonicIsValid = false;
+                                  _mnemonicError = AppLocalization.of(context).mnemonicInvalidWord.replaceAll("%1", word);
+                                });
                               }
-                            }
-                          },
-                          child: Icon(AppIcons.forward, color: StateContainer.of(context).curTheme.primary, size: 50)),
-                    ),
+                            });
+                          }
+                        }
+                      }
+                    }),
                   ],
                 ),
               ],
@@ -683,7 +542,23 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
         )));
   }
 
+  Future<void> skipPin() async {
+    await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+    final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
+    if (!mounted) return;
+    StateContainer.of(context).requestSubscribe();
+    Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
+  }
+
   Future<void> _pinEnteredCallback(String pin) async {
+    // final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    //   return PinScreen(
+    //     PinOverlayType.NEW_PIN,
+    //   );
+    // }));
+    // if (pin != null && pin.length > 5) {
+    //   _pinEnteredCallback(pin);
+    // }
     await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
     await sl.get<Vault>().writePin(pin);
     final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();

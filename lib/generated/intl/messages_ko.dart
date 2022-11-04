@@ -200,6 +200,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("주소 입력"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("금액을 입력하세요"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("기프트 노트 입력"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("키 입력"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("메시지 입력"),
@@ -352,6 +353,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Authenticate on Launch"),
         "locked": MessageLookupByLibrary.simpleMessage("Locked"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("로그 아웃"),
         "logoutAction": MessageLookupByLibrary.simpleMessage("시드 삭제 및 로그 아웃"),
         "logoutAreYouSure": MessageLookupByLibrary.simpleMessage("확실합니까?"),

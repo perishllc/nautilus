@@ -230,6 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nie udało się ustawić hasło portfelu"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Wpisz Adres"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Wpisz Ilość"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("Wpisz upominek"),
         "enterHeight":
             MessageLookupByLibrary.simpleMessage("Wprowadź wysokość"),
@@ -403,6 +404,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting": MessageLookupByLibrary.simpleMessage(
             "Potwierdź tożsamość kiedy włączysz Nautilus"),
         "locked": MessageLookupByLibrary.simpleMessage("Zablokowane"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Wyloguj"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Skasuj nasiono i wyloguj?"),

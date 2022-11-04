@@ -289,40 +289,15 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                     ],
                   ),
 
-                  const SizedBox(height: 10),// for spacing
-
                   Row(
                     children: <Widget>[
                       // New Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).newWallet, Dimens.BUTTON_COMPACT_LEFT_DIMENS,
-                          instanceKey: const Key("new_wallet_button"), onPressed: () {
-                        Navigator.of(context).pushNamed('/intro_backup_safety');
-                      }),
-                      AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).importWallet, Dimens.BUTTON_COMPACT_RIGHT_DIMENS, onPressed: () {
-                        Navigator.of(context).pushNamed('/intro_import');
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).continueWithoutLogin, Dimens.BUTTON_BOTTOM_DIMENS,
+                          instanceKey: const Key("new_existing"), onPressed: () {
+                        Navigator.of(context).pushNamed('/intro_new_existing');
                       }),
                     ],
                   ),
-
-                  // Row(
-                  //   children: <Widget>[
-                  //     // New Wallet Button
-                  //     AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).newWallet, Dimens.BUTTON_TOP_DIMENS,
-                  //         instanceKey: const Key("new_wallet_button"), onPressed: () {
-                  //       Navigator.of(context).pushNamed('/intro_backup_safety');
-                  //     }),
-                  //   ],
-                  // ),
-                  // Row(
-                  //   children: <Widget>[
-                  //     // Import Wallet Button
-                  //     AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).importWallet, Dimens.BUTTON_BOTTOM_DIMENS,
-                  //         onPressed: () {
-                  //       Navigator.of(context).pushNamed('/intro_import');
-                  //     }),
-                  //   ],
-                  // ),
                 ],
               ),
             ],

@@ -115,6 +115,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Change Currency"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Change Log"),
+        "changePin": MessageLookupByLibrary.simpleMessage("Change Pin"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("Set pin"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Change Representative"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Change"),
@@ -159,6 +161,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Failed to import contacts"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Sucessfully imported %1 contacts."),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("Continue without login"),
         "copied": MessageLookupByLibrary.simpleMessage("Copied"),
         "copy": MessageLookupByLibrary.simpleMessage("Copy"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Copy Address"),
@@ -663,6 +667,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Password has been set successfully"),
         "setPin": MessageLookupByLibrary.simpleMessage("Set Pin"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "Set or change your existing PIN."),
         "setPinSuccess": MessageLookupByLibrary.simpleMessage(
             "Pin has been set successfully"),
         "setPlausibleDeniabilityPin":

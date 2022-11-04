@@ -239,6 +239,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Не вдалося встановити пароль гаманця"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Введіть адресу"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Введіть суму"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Введіть подарункову записку"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Введіть висоту"),
@@ -416,6 +417,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting": MessageLookupByLibrary.simpleMessage(
             "Вводити пароль після запуска"),
         "locked": MessageLookupByLibrary.simpleMessage("Заблоковано"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Вийти"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Видалити seed і вийти"),

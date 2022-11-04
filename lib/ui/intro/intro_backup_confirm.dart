@@ -91,14 +91,15 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                       // YES Button
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).yes.toUpperCase(), Dimens.BUTTON_TOP_DIMENS,
                           instanceKey: const Key("backup_confirm_button"), onPressed: () async {
-                        final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                          return PinScreen(
-                            PinOverlayType.NEW_PIN,
-                          );
-                        }));
-                        if (pin != null && pin.length > 5) {
-                          _pinEnteredCallback(pin);
-                        }
+                        // final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                        //   return PinScreen(
+                        //     PinOverlayType.NEW_PIN,
+                        //   );
+                        // }));
+                        // if (pin != null && pin.length > 5) {
+                        //   _pinEnteredCallback(pin);
+                        // }
+                        skipPin();
                       }),
                     ],
                   ),
@@ -120,10 +121,19 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
     );
   }
 
+  Future<void> skipPin() async {
+    await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+    final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
+    if (!mounted) return;
+    StateContainer.of(context).requestSubscribe();
+    Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
+  }
+
   Future<void> _pinEnteredCallback(String pin) async {
     await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
     await sl.get<Vault>().writePin(pin);
     final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
+    if (!mounted) return;
     StateContainer.of(context).requestSubscribe();
     Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
   }

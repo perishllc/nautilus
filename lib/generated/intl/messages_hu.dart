@@ -237,6 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Küldés Erre A Címre"),
         "enterAmount":
             MessageLookupByLibrary.simpleMessage("Küldött Mennyiség"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Adja meg az ajándékjegyet"),
         "enterHeight":
@@ -409,6 +410,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Hitelesítés az Indításnál"),
         "locked": MessageLookupByLibrary.simpleMessage("Lezárva"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Kijelentkezés"),
         "logoutAction": MessageLookupByLibrary.simpleMessage(
             "Seed törlése és kijelentkezés"),

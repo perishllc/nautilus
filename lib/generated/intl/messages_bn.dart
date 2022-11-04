@@ -238,6 +238,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "ওয়ালেটের পাসওয়ার্ড সেট করতে ব্যর্থ"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("ঠিকানা লিখুন"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("পরিমান লিখুন"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("উপহার নোট লিখুন"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("উচ্চতা লিখুন"),
@@ -409,6 +410,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("শুরুতেই প্রমাণীকরণ করুন"),
         "locked": MessageLookupByLibrary.simpleMessage("লক করা"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("লগ আউট"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("সিড মুছুন এবং লগআউট করুন"),

@@ -232,6 +232,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Setarea parolei a eșuat"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Introdu adresa"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Introdu suma"),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Introduceți nota cadou"),
         "enterHeight":
@@ -408,6 +409,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Autentificare la deschidere"),
         "locked": MessageLookupByLibrary.simpleMessage("Închis"),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
         "logout": MessageLookupByLibrary.simpleMessage("Deconectare"),
         "logoutAction": MessageLookupByLibrary.simpleMessage(
             "Șterge seed-ul și deconectează-mă"),
