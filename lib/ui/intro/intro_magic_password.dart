@@ -13,7 +13,6 @@ import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
@@ -101,15 +100,15 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                         ),
                       ),
                       // The paragraph
-                      // Container(
-                      //   margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
-                      //   child: AutoSizeText(
-                      //     AppLocalization.of(context).passwordWillBeRequiredToOpenParagraph,
-                      //     style: AppStyles.textStyleParagraph(context),
-                      //     maxLines: 5,
-                      //     stepGranularity: 0.5,
-                      //   ),
-                      // ),
+                      Container(
+                        margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
+                        child: AutoSizeText(
+                          AppLocalization.of(context).passwordDisclaimer,
+                          style: AppStyles.textStyleParagraph(context),
+                          maxLines: 5,
+                          stepGranularity: 0.5,
+                        ),
+                      ),
                       Expanded(
                           child: KeyboardAvoider(
                               duration: Duration.zero,
@@ -269,9 +268,19 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
       // final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
 
       // decrypt the seed using the password:
-      final String decryptedSeed = NanoHelpers.byteToHex(NanoCrypt.decrypt(widget.encryptedSeed, confirmPasswordController!.text));
+      String? decryptedSeed;
+      try {
+        decryptedSeed = NanoHelpers.byteToHex(NanoCrypt.decrypt(widget.encryptedSeed, confirmPasswordController!.text));
 
-      await sl.get<Vault>().setSeed(decryptedSeed);
+        await sl.get<Vault>().setSeed(decryptedSeed);
+      } catch (error) {
+        if (mounted) {
+          setState(() {
+            passwordError = AppLocalization.of(context).passwordIncorrect;
+          });
+        }
+        return;
+      }
 
       // re-encrypt the seed with password:
       // final String reEncryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(decryptedSeed, confirmPasswordController!.text));
@@ -307,6 +316,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
 
   Future<void> skipPin() async {
     await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+    await sl.get<Vault>().writePin("000000");
     final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
     if (!mounted) return;
     StateContainer.of(context).requestSubscribe();

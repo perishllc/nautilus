@@ -70,6 +70,7 @@ class SendConfirmSheet extends StatefulWidget {
 
 class _SendConfirmSheetState extends State<SendConfirmSheet> {
   late bool animationOpen;
+  bool clicking = false;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
 
@@ -268,6 +269,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                     AppButton.buildAppButton(
                         context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
+                      if (clicking) return;
+                      clicking = true;
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
@@ -298,6 +301,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                       } else {
                         await authenticateWithPin();
                       }
+                      clicking = false;
                     })
                   ],
                 ),

@@ -406,8 +406,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     // import ledger:
-                    AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY_OUTLINE, /*AppLocalization.of(context).newWallet*/ "Import Hardware", Dimens.BUTTON_COMPACT_LEFT_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).importHD, Dimens.BUTTON_COMPACT_LEFT_DIMENS,
                         instanceKey: const Key("new_wallet_button"), onPressed: () async {
                       if (_seedMode) {
                         _seedInputFocusNode.unfocus();
@@ -446,6 +445,8 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                           final String seed2 = await NanoUtil.mnemonicListToSeed(_mnemonicController.text.split(' '));
 
                           print("seed2: $seed2");
+
+                          return;
                           await sl.get<Vault>().setSeed(seed);
                           await sl.get<DBHelper>().dropAccounts();
                           if (!mounted) return;
@@ -481,8 +482,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                       }
                     }),
 
-                    AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, /*AppLocalization.of(context).importWallet*/ "Import Standard", Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).importStandard, Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
                         onPressed: () async {
                       if (_seedMode) {
                         _seedInputFocusNode.unfocus();
@@ -544,6 +544,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
 
   Future<void> skipPin() async {
     await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+    await sl.get<Vault>().writePin("000000");
     final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
     if (!mounted) return;
     StateContainer.of(context).requestSubscribe();

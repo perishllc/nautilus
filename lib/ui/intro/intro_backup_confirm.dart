@@ -123,6 +123,7 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
 
   Future<void> skipPin() async {
     await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+    await sl.get<Vault>().writePin("000000");
     final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
     if (!mounted) return;
     StateContainer.of(context).requestSubscribe();

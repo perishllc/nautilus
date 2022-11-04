@@ -258,7 +258,7 @@ class GiftCards {
       await StateContainer.of(context).updateTXMemos();
 
       // Show complete
-      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+      Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
       StateContainer.of(context).requestUpdate();
 
       Sheets.showAppHeightNineSheet(

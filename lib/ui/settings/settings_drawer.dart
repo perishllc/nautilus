@@ -108,6 +108,9 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   // late Animation<Offset> _spendNanoOffsetFloat;
   late Animation<Offset> _useNanoOffsetFloat;
   late ScrollController _scrollController;
+  ScrollController _moreSettingsScrollController = ScrollController();
+  ScrollController _securityScrollController = ScrollController();
+
   double _slideOffset = 0.0;
 
   String versionString = "";
@@ -2232,70 +2235,77 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
             Expanded(
                 child: Stack(
               children: <Widget>[
-                ListView(
-                  padding: const EdgeInsets.only(top: 15.0),
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
-                      child: Text(AppLocalization.of(context).preferences,
-                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
-                    ),
-                    // Authentication Method
-                    if (_hasBiometrics) Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    if (_hasBiometrics)
-                      AppSettings.buildSettingsListItemDoubleLine(
-                          context, AppLocalization.of(context).authMethod, _curAuthMethod, AppIcons.fingerprint, _authMethodDialog),
-                    // Authenticate on Launch
-                    if (StateContainer.of(context).encryptedSecret == null)
-                      Column(children: <Widget>[
-                        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                DraggableScrollbar(
+                  controller: _securityScrollController,
+                  scrollbarTopMargin: 20.0,
+                  scrollbarBottomMargin: 0.0,
+                  scrollbarColor: StateContainer.of(context).curTheme.primary!,
+                  child: ListView(
+                    controller: _securityScrollController,
+                    padding: const EdgeInsets.only(top: 15.0),
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
+                        child: Text(AppLocalization.of(context).preferences,
+                            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                      ),
+                      // Authentication Method
+                      if (_hasBiometrics) Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      if (_hasBiometrics)
                         AppSettings.buildSettingsListItemDoubleLine(
-                            context, AppLocalization.of(context).lockAppSetting, _curUnlockSetting, AppIcons.lock, _lockDialog),
-                      ]),
-                    // Authentication Timer
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                      context,
-                      AppLocalization.of(context).autoLockHeader,
-                      _curTimeoutSetting,
-                      AppIcons.timer,
-                      _lockTimeoutDialog,
-                      disabled: _curUnlockSetting.setting == UnlockOption.NO && StateContainer.of(context).encryptedSecret == null,
-                    ),
-                    // Encrypt option
-                    if (StateContainer.of(context).encryptedSecret == null)
-                      Column(children: <Widget>[
-                        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).setWalletPassword, AppIcons.walletpassword,
-                            onPressed: () {
-                          Sheets.showAppHeightNineSheet(context: context, widget: SetPasswordSheet());
-                        })
-                      ])
-                    else
-                      Column(children: <Widget>[
-                        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).disableWalletPassword, AppIcons.walletpassworddisabled,
-                            onPressed: () {
-                          Sheets.showAppHeightNineSheet(context: context, widget: DisablePasswordSheet());
-                        }),
-                      ]),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    Column(children: <Widget>[
+                            context, AppLocalization.of(context).authMethod, _curAuthMethod, AppIcons.fingerprint, _authMethodDialog),
+                      // Authenticate on Launch
+                      if (StateContainer.of(context).encryptedSecret == null)
+                        Column(children: <Widget>[
+                          Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                          AppSettings.buildSettingsListItemDoubleLine(
+                              context, AppLocalization.of(context).lockAppSetting, _curUnlockSetting, AppIcons.lock, _lockDialog),
+                        ]),
+                      // Authentication Timer
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                      AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).setPlausibleDeniabilityPin, AppIcons.walletpassword,
-                          onPressed: () {
-                        Sheets.showAppHeightNineSheet(context: context, widget: SetPlausiblePinSheet());
-                      }, disabled: _curAuthMethod.method != AuthMethod.PIN || StateContainer.of(context).encryptedSecret != null),
-                    ]),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    // Column(children: <Widget>[
-                    //   Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    //   AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).changePin, AppIcons.walletpassword, onPressed: () {
-                    //     Sheets.showAppHeightNineSheet(context: context, widget: SetPinSheet());
-                    //   }, disabled: false),
-                    // ]),
-                    // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                  ],
+                      AppSettings.buildSettingsListItemDoubleLine(
+                        context,
+                        AppLocalization.of(context).autoLockHeader,
+                        _curTimeoutSetting,
+                        AppIcons.timer,
+                        _lockTimeoutDialog,
+                        disabled: _curUnlockSetting.setting == UnlockOption.NO && StateContainer.of(context).encryptedSecret == null,
+                      ),
+                      // Encrypt option
+                      if (StateContainer.of(context).encryptedSecret == null)
+                        Column(children: <Widget>[
+                          Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                          AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).setWalletPassword, AppIcons.walletpassword,
+                              onPressed: () {
+                            Sheets.showAppHeightNineSheet(context: context, widget: SetPasswordSheet());
+                          })
+                        ])
+                      else
+                        Column(children: <Widget>[
+                          Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                          AppSettings.buildSettingsListItemSingleLine(
+                              context, AppLocalization.of(context).disableWalletPassword, AppIcons.walletpassworddisabled, onPressed: () {
+                            Sheets.showAppHeightNineSheet(context: context, widget: DisablePasswordSheet());
+                          }),
+                        ]),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      Column(children: <Widget>[
+                        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).setPlausibleDeniabilityPin, AppIcons.walletpassword,
+                            onPressed: () {
+                          Sheets.showAppHeightNineSheet(context: context, widget: SetPlausiblePinSheet());
+                        }, disabled: _curAuthMethod.method != AuthMethod.PIN || StateContainer.of(context).encryptedSecret != null),
+                      ]),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      Column(children: <Widget>[
+                        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).changePin, AppIcons.walletpassword, onPressed: () {
+                          Sheets.showAppHeightNineSheet(context: context, widget: SetPinSheet());
+                        }, disabled: false),
+                      ]),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                    ],
+                  ),
                 ),
                 // List Top Gradient End
                 ListGradient(
@@ -2404,126 +2414,133 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
             Expanded(
                 child: Stack(
               children: <Widget>[
-                ListView(
-                  padding: const EdgeInsets.only(top: 15.0),
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
-                      child: Text(AppLocalization.of(context).preferences,
-                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
-                    ),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context).showMoneroHeader, _curXmrEnabledSetting, AppIcons.money_bill_alt, _showMoneroDialog),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context).setXMRRestoreHeight, null, AppIcons.backupseed,
-                        overrideSubtitle: _curXmrRestoreHeight.toString(), () async {
-                      Sheets.showAppHeightEightSheet(context: context, widget: SetXMRRestoreHeightSheet());
-                    }),
-                    // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    // AppSettings.buildSettingsListItemDoubleLine(
-                    //     context, AppLocalization.of(context).showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context).showUnopenedWarning, _curUnopenedWarningSetting, AppIcons.warning, _unopenedWarningDialog),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context).showFunding, _curFundingSetting, AppIcons.money_bill_wave, _fundingDialog),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context).currencyMode, _curCurrencyModeSetting, AppIcons.currency, _currencyModeDialog),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context).receiveMinimum, _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemDoubleLine(
-                        context, AppLocalization.of(context).trackingHeader, _curTrackingSetting, AppIcons.security, _showTrackingDialog),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    Container(
-                      margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
-                      child: Text(AppLocalization.of(context).manage,
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
-                    ),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).changeRepAuthenticate, AppIcons.changerepresentative,
-                        onPressed: () {
-                      AppChangeRepresentativeSheet().mainBottomSheet(context);
-                      if (!StateContainer.of(context).nanoNinjaUpdated) {
-                        NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? result) {
-                          if (result != null) {
-                            StateContainer.of(context).updateNinjaNodes(result);
+                DraggableScrollbar(
+                  controller: _moreSettingsScrollController,
+                  scrollbarTopMargin: 20.0,
+                  scrollbarBottomMargin: 0.0,
+                  scrollbarColor: StateContainer.of(context).curTheme.primary!,
+                  child: ListView(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    controller: _moreSettingsScrollController,
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
+                        child: Text(AppLocalization.of(context).preferences,
+                            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                      ),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemDoubleLine(
+                          context, AppLocalization.of(context).showMoneroHeader, _curXmrEnabledSetting, AppIcons.money_bill_alt, _showMoneroDialog),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemDoubleLine(context, AppLocalization.of(context).setXMRRestoreHeight, null, AppIcons.backupseed,
+                          overrideSubtitle: _curXmrRestoreHeight.toString(), () async {
+                        Sheets.showAppHeightEightSheet(context: context, widget: SetXMRRestoreHeightSheet());
+                      }),
+                      // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      // AppSettings.buildSettingsListItemDoubleLine(
+                      //     context, AppLocalization.of(context).showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemDoubleLine(
+                          context, AppLocalization.of(context).showUnopenedWarning, _curUnopenedWarningSetting, AppIcons.warning, _unopenedWarningDialog),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemDoubleLine(
+                          context, AppLocalization.of(context).showFunding, _curFundingSetting, AppIcons.money_bill_wave, _fundingDialog),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemDoubleLine(
+                          context, AppLocalization.of(context).currencyMode, _curCurrencyModeSetting, AppIcons.currency, _currencyModeDialog),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemDoubleLine(
+                          context, AppLocalization.of(context).receiveMinimum, _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemDoubleLine(
+                          context, AppLocalization.of(context).trackingHeader, _curTrackingSetting, AppIcons.security, _showTrackingDialog),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      Container(
+                        margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
+                        child: Text(AppLocalization.of(context).manage,
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
+                      ),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).changeRepAuthenticate, AppIcons.changerepresentative,
+                          onPressed: () {
+                        AppChangeRepresentativeSheet().mainBottomSheet(context);
+                        if (!StateContainer.of(context).nanoNinjaUpdated) {
+                          NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? result) {
+                            if (result != null) {
+                              StateContainer.of(context).updateNinjaNodes(result);
+                            }
+                          });
+                        }
+                      }),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).exportTXData, AppIcons.file_export, onPressed: () async {
+                        await _exportTransactionData();
+                      }),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).resetDatabase, AppIcons.trashcan, onPressed: () async {
+                        AppDialogs.showConfirmDialog(context, AppLocalization.of(context).resetDatabase, AppLocalization.of(context).resetDatabaseConfirmation,
+                            CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
+                          // push animation to prevent early exit:
+                          bool animationOpen = true;
+                          AppAnimation.animationLauncher(context, AnimationType.GENERIC, onPoppedCallback: () => animationOpen = false);
+
+                          // sleep to flex the animation a bit:
+                          await Future<dynamic>.delayed(const Duration(milliseconds: 500));
+
+                          // Delete the database
+                          try {
+                            await sl.get<DBHelper>().nukeDatabase();
+                          } catch (error) {
+                            log.d("Error resetting database: $error");
                           }
-                        });
-                      }
-                    }),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).exportTXData, AppIcons.file_export, onPressed: () async {
-                      await _exportTransactionData();
-                    }),
-                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).resetDatabase, AppIcons.trashcan, onPressed: () async {
-                      AppDialogs.showConfirmDialog(context, AppLocalization.of(context).resetDatabase, AppLocalization.of(context).resetDatabaseConfirmation,
-                          CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
-                        // push animation to prevent early exit:
-                        bool animationOpen = true;
-                        AppAnimation.animationLauncher(context, AnimationType.GENERIC, onPoppedCallback: () => animationOpen = false);
 
-                        // sleep to flex the animation a bit:
-                        await Future<dynamic>.delayed(const Duration(milliseconds: 500));
+                          // re-populate the users table
+                          try {
+                            await sl.get<DBHelper>().fetchNanoToUsernames();
+                          } catch (error) {
+                            log.d("Error fetching usernames: $error");
+                          }
 
-                        // Delete the database
-                        try {
-                          await sl.get<DBHelper>().nukeDatabase();
-                        } catch (error) {
-                          log.d("Error resetting database: $error");
-                        }
+                          // delete preferences:
+                          await sl.get<SharedPrefsUtil>().deleteAll();
 
-                        // re-populate the users table
-                        try {
-                          await sl.get<DBHelper>().fetchNanoToUsernames();
-                        } catch (error) {
-                          log.d("Error fetching usernames: $error");
-                        }
+                          // add the donations contact:
+                          await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
+                          final User donationsContact = User(
+                              nickname: "NautilusDonations",
+                              address: "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579",
+                              username: "nautilus",
+                              type: UserTypes.CONTACT);
+                          await sl.get<DBHelper>().saveContact(donationsContact);
 
-                        // delete preferences:
-                        await sl.get<SharedPrefsUtil>().deleteAll();
+                          // set the "has asked for contacts" flag so it doesn't ask again:
+                          await sl.get<SharedPrefsUtil>().setContactsOn(false);
 
-                        // add the donations contact:
-                        await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
-                        final User donationsContact = User(
-                            nickname: "NautilusDonations",
-                            address: "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579",
-                            username: "nautilus",
-                            type: UserTypes.CONTACT);
-                        await sl.get<DBHelper>().saveContact(donationsContact);
+                          // re-add account index 0 and switch the account to it:
+                          if (!mounted) return;
+                          final String seed = await StateContainer.of(context).getSeed();
+                          if (!mounted) return;
+                          await NanoUtil().loginAccount(seed, context);
+                          if (!mounted) return;
+                          await StateContainer.of(context).resetRecentlyUsedAccounts();
+                          final Account? mainAccount = await sl.get<DBHelper>().getSelectedAccount(seed);
+                          if (!mounted) return;
+                          StateContainer.of(context).updateWallet(account: mainAccount!);
+                          // force users list to update on the home page:
+                          EventTaxiImpl.singleton().fire(ContactModifiedEvent());
+                          EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: <TXData>[]));
 
-                        // set the "has asked for contacts" flag so it doesn't ask again:
-                        await sl.get<SharedPrefsUtil>().setContactsOn(false);
+                          StateContainer.of(context).updateUnified(true);
+                          EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
 
-                        // re-add account index 0 and switch the account to it:
-                        if (!mounted) return;
-                        final String seed = await StateContainer.of(context).getSeed();
-                        if (!mounted) return;
-                        await NanoUtil().loginAccount(seed, context);
-                        if (!mounted) return;
-                        await StateContainer.of(context).resetRecentlyUsedAccounts();
-                        final Account? mainAccount = await sl.get<DBHelper>().getSelectedAccount(seed);
-                        if (!mounted) return;
-                        StateContainer.of(context).updateWallet(account: mainAccount!);
-                        // force users list to update on the home page:
-                        EventTaxiImpl.singleton().fire(ContactModifiedEvent());
-                        EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: <TXData>[]));
-
-                        StateContainer.of(context).updateUnified(true);
-                        EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
-
-                        // EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: mainAccount));
-                        // if (animationOpen && mounted) {
-                        //   Navigator.of(context).pop();
-                        // }
-                      }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
-                    }),
-                  ],
+                          // EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: mainAccount));
+                          // if (animationOpen && mounted) {
+                          //   Navigator.of(context).pop();
+                          // }
+                        }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
+                      }),
+                    ],
+                  ),
                 ),
                 ListGradient(
                   height: 20,

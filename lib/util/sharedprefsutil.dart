@@ -76,6 +76,10 @@ class SharedPrefsUtil {
   // xmr wallet data:
   static const String xmr_wallet_data = 'fnautilus_xmr_wallet_data';
 
+  // key derivation method:
+  static const String key_derivation = 'fnautilus_key_derivation';
+
+
   // For plain-text data
   Future<void> set(String key, dynamic value) async {
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -542,6 +546,15 @@ class SharedPrefsUtil {
   Future<String?> getXmrWalletData() async {
     return await get(xmr_wallet_data, defaultValue: null) as String?;
   }
+  
+
+  Future<void> setKeyDerivationMethod(String data) async {
+    return set(key_derivation, data);
+  }
+
+  Future<String> getKeyDerivationMethod() async {
+    return await get(key_derivation, defaultValue: "standard") as String;
+  }
 
   // TODO:
   // Future<bool> alreadyDonated( alert) async {
@@ -581,6 +594,7 @@ class SharedPrefsUtil {
     await prefs.remove(xmr_enabled);
     await prefs.remove(xmr_restore_height);
     await prefs.remove(xmr_wallet_data);
+    await prefs.remove(key_derivation);
     await prefs.remove(cur_theme);
     // don't remove this preference since it's annoying when you log out:
     // await prefs.remove(tracking_enabled);

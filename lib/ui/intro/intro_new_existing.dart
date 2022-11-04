@@ -127,7 +127,7 @@ class IntroNewExistingPageState extends State<IntroNewExistingPage> {
                           Container(
                             margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 30 : 40, vertical: 20),
                             child: AutoSizeText(
-                              AppLocalization.of(context).welcomeTextUpdated,
+                              AppLocalization.of(context).welcomeTextWithoutLogin,
                               style: AppStyles.textStyleParagraph(context),
                               maxLines: 4,
                               stepGranularity: 0.5,

@@ -460,15 +460,24 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       bool isEncrypted = false;
       final String? seed = await sl.get<Vault>().getSeed();
       final String? pin = await sl.get<Vault>().getPin();
-      // If we have a seed set, but not a pin - or vice versa
-      // Then delete the seed and pin from device and start over.
-      // This would mean user did not complete the intro screen completely.
-      if (seed != null && pin != null) {
+      // // If we have a seed set, but not a pin - or vice versa
+      // // Then delete the seed and pin from device and start over.
+      // // This would mean user did not complete the intro screen completely.
+      // if (seed != null && pin != null) {
+      //   isLoggedIn = true;
+      //   isEncrypted = seedIsEncrypted(seed);
+      // } else if (seed != null && pin == null) {
+      //   await sl.get<Vault>().deleteSeed();
+      // } else if (pin != null && seed == null) {
+      //   await sl.get<Vault>().deletePin();
+      // }
+
+      // If we have a seed set, we are logged in
+      if (seed != null) {
         isLoggedIn = true;
         isEncrypted = seedIsEncrypted(seed);
-      } else if (seed != null && pin == null) {
-        await sl.get<Vault>().deleteSeed();
-      } else if (pin != null && seed == null) {
+      } else if (pin != null) {
+        // if the seed is null and we have a pin we should delete it:
         await sl.get<Vault>().deletePin();
       }
 

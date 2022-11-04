@@ -280,6 +280,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas Money"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Exchange NANO"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("Enter current pin"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "exportTXData":
             MessageLookupByLibrary.simpleMessage("Export Transactions"),
@@ -369,6 +371,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "It looks like you clicked a link that contains some NANO, in order to receive these funds we just need for you to finish setting up your wallet."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "The link you clicked contains some NANO, would you like to import it to this wallet?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("Import HD"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Import Secret Phrase"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -378,6 +381,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please enter your seed below."),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("Import Seed Instead"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("Import Standard"),
         "importWallet": MessageLookupByLibrary.simpleMessage("Import Wallet"),
         "instantly": MessageLookupByLibrary.simpleMessage("Instantly"),
         "insufficientBalance":
@@ -489,9 +494,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("Paper Wallet"),
         "passwordBlank":
             MessageLookupByLibrary.simpleMessage("Password cannot be empty"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "We\'re not responsible if you forget your password, and by design we are unable to reset or change it for you."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("Incorrect password"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "You will not need a password to open Nautilus anymore."),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "This password will be required to open Nautilus."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "This password will be required to open Nautilus."),
@@ -512,6 +523,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("Create a 6-digit pin"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("Enter pin"),
+        "pinIncorrect":
+            MessageLookupByLibrary.simpleMessage("Incorrect pin entered"),
         "pinInvalid":
             MessageLookupByLibrary.simpleMessage("Invalid pin entered"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("PIN"),
@@ -668,7 +681,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Password has been set successfully"),
         "setPin": MessageLookupByLibrary.simpleMessage("Set Pin"),
         "setPinParagraph": MessageLookupByLibrary.simpleMessage(
-            "Set or change your existing PIN."),
+            "Set or change your existing PIN. If you haven\'t set a PIN yet, the default PIN is 000000."),
         "setPinSuccess": MessageLookupByLibrary.simpleMessage(
             "Pin has been set successfully"),
         "setPlausibleDeniabilityPin":
@@ -831,8 +844,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sends are disabled on watch only addresses"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("A week ago"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(""),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "Welcome to Nautilus. Choose an option to get started or pick a theme using the icon below."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Welcome to Nautilus. To start, create a new wallet or import an existing one."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "To start, create a new wallet or import an existing one."),
         "withAddress": MessageLookupByLibrary.simpleMessage("With Address"),
         "withFee": MessageLookupByLibrary.simpleMessage("With Fee"),
         "withMessage": MessageLookupByLibrary.simpleMessage("With Message"),

@@ -376,7 +376,7 @@ class AppTransferOverviewSheet {
     UIUtil.showSnackbar(AppLocalization.of(context).giftRefundSuccess, context, durationMs: 5000);
   }
 
-  /// Get NUM_SWEEP accounts from seed to request balances for
+  // Get NUM_SWEEP accounts from seed to request balances for
   Future<List<String>> getAccountsFromSeed(BuildContext context, String seed) async {
     final List<String> accountsToRequest = [];
     String privKey;

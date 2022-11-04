@@ -1073,6 +1073,16 @@ class AppLocalization {
     );
   }
 
+  /// `Enter current pin`
+  String get existingPinHint {
+    return Intl.message(
+      'Enter current pin',
+      name: 'existingPinHint',
+      desc: 'A text field hint that tells the user to enter their current pin',
+      args: [],
+    );
+  }
+
   /// `Create QR Code`
   String get createQR {
     return Intl.message(
@@ -2263,6 +2273,26 @@ class AppLocalization {
     );
   }
 
+  /// `Import Standard`
+  String get importStandard {
+    return Intl.message(
+      'Import Standard',
+      name: 'importStandard',
+      desc: 'intro_import_standard',
+      args: [],
+    );
+  }
+
+  /// `Import HD`
+  String get importHD {
+    return Intl.message(
+      'Import HD',
+      name: 'importHD',
+      desc: 'intro_import_hd',
+      args: [],
+    );
+  }
+
   /// `I'm Sure`
   String get imSure {
     return Intl.message(
@@ -3045,6 +3075,16 @@ class AppLocalization {
     );
   }
 
+  /// `Incorrect password`
+  String get passwordIncorrect {
+    return Intl.message(
+      'Incorrect password',
+      name: 'passwordIncorrect',
+      desc: 'An error indicating the password is incorrect',
+      args: [],
+    );
+  }
+
   /// `You will not need a password to open Nautilus anymore.`
   String get passwordNoLongerRequiredToOpenParagraph {
     return Intl.message(
@@ -3073,6 +3113,27 @@ class AppLocalization {
       name: 'passwordWillBeRequiredToOpenParagraph',
       desc:
           'A paragraph that tells the users that the created password will be required to open Nautilus.',
+      args: [],
+    );
+  }
+
+  /// `We're not responsible if you forget your password, and by design we are unable to reset or change it for you.`
+  String get passwordDisclaimer {
+    return Intl.message(
+      'We\'re not responsible if you forget your password, and by design we are unable to reset or change it for you.',
+      name: 'passwordDisclaimer',
+      desc:
+          'A paragraph that we\'re not responsible if you lose your password.',
+      args: [],
+    );
+  }
+
+  /// `This password will be required to open Nautilus.`
+  String get passwordWarning {
+    return Intl.message(
+      'This password will be required to open Nautilus.',
+      name: 'passwordWarning',
+      desc: 'A paragraph that warns the user to not lose their password.',
       args: [],
     );
   }
@@ -3187,6 +3248,16 @@ class AppLocalization {
     );
   }
 
+  /// `Incorrect pin entered`
+  String get pinIncorrect {
+    return Intl.message(
+      'Incorrect pin entered',
+      name: 'pinIncorrect',
+      desc: 'pin_error',
+      args: [],
+    );
+  }
+
   /// `PIN`
   String get pinMethod {
     return Intl.message(
@@ -3238,10 +3309,10 @@ class AppLocalization {
     );
   }
 
-  /// `Set or change your existing PIN.`
+  /// `Set or change your existing PIN. If you haven't set a PIN yet, the default PIN is 000000.`
   String get setPinParagraph {
     return Intl.message(
-      'Set or change your existing PIN.',
+      'Set or change your existing PIN. If you haven\'t set a PIN yet, the default PIN is 000000.',
       name: 'setPinParagraph',
       desc:
           'A paragraph that explains the user can set or change their existing pin.',
@@ -5267,6 +5338,26 @@ class AppLocalization {
       'Welcome to Nautilus. To start, create a new wallet or import an existing one.',
       name: 'welcomeTextUpdated',
       desc: 'intro_welcome_title',
+      args: [],
+    );
+  }
+
+  /// `Welcome to Nautilus. Choose an option to get started or pick a theme using the icon below.`
+  String get welcomeTextLogin {
+    return Intl.message(
+      'Welcome to Nautilus. Choose an option to get started or pick a theme using the icon below.',
+      name: 'welcomeTextLogin',
+      desc: 'intro_welcome_login',
+      args: [],
+    );
+  }
+
+  /// `To start, create a new wallet or import an existing one.`
+  String get welcomeTextWithoutLogin {
+    return Intl.message(
+      'To start, create a new wallet or import an existing one.',
+      name: 'welcomeTextWithoutLogin',
+      desc: 'intro_welcome_no_login',
       args: [],
     );
   }

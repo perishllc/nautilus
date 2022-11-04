@@ -510,6 +510,11 @@
     "type": "text",
     "description": "A text field hint that tells the user to set a pin"
   },
+  "existingPinHint": "Enter current pin",
+  "@existingPinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to enter their current pin"
+  },
   "createQR": "Create QR Code",
   "@createQR": {
     "type": "text",
@@ -1105,6 +1110,16 @@
     "type": "text",
     "description": "intro_welcome_have_wallet"
   },
+  "importStandard": "Import Standard",
+  "@importStandard": {
+    "type": "text",
+    "description": "intro_import_standard"
+  },
+  "importHD": "Import HD",
+  "@importHD": {
+    "type": "text",
+    "description": "intro_import_hd"
+  },
   "imSure": "I'm Sure",
   "@imSure": {
     "type": "text",
@@ -1495,6 +1510,11 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
+  "passwordIncorrect": "Incorrect password",
+  "@passwordIncorrect": {
+    "type": "text",
+    "description": "An error indicating the password is incorrect"
+  },
   "passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open Nautilus anymore.",
   "@passwordNoLongerRequiredToOpenParagraph": {
     "type": "text",
@@ -1509,6 +1529,16 @@
   "@passwordWillBeRequiredToOpenParagraph": {
     "type": "text",
     "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+  },
+  "passwordDisclaimer": "We're not responsible if you forget your password, and by design we are unable to reset or change it for you.",
+  "@passwordDisclaimer": {
+    "type": "text",
+    "description": "A paragraph that we're not responsible if you lose your password."
+  },
+  "passwordWarning": "This password will be required to open Nautilus.",
+  "@passwordWarning": {
+    "type": "text",
+    "description": "A paragraph that warns the user to not lose their password."
   },
   "pay": "Pay",
   "@pay": {
@@ -1565,6 +1595,11 @@
     "type": "text",
     "description": "pin_error"
   },
+  "pinIncorrect": "Incorrect pin entered",
+  "@pinIncorrect": {
+    "type": "text",
+    "description": "pin_error"
+  },
   "pinMethod": "PIN",
   "@pinMethod": {
     "type": "text",
@@ -1590,7 +1625,7 @@
     "type": "text",
     "description": "A paragraph that tells warns the user this is plausible deniability pin."
   },
-  "setPinParagraph": "Set or change your existing PIN.",
+  "setPinParagraph": "Set or change your existing PIN. If you haven't set a PIN yet, the default PIN is 000000.",
   "@setPinParagraph": {
     "type": "text",
     "description": "A paragraph that explains the user can set or change their existing pin."
@@ -2604,6 +2639,16 @@
   "@welcomeTextUpdated": {
     "type": "text",
     "description": "intro_welcome_title"
+  },
+  "welcomeTextLogin": "Welcome to Nautilus. Choose an option to get started or pick a theme using the icon below.",
+  "@welcomeTextLogin": {
+    "type": "text",
+    "description": "intro_welcome_login"
+  },
+  "welcomeTextWithoutLogin": "To start, create a new wallet or import an existing one.",
+  "@welcomeTextWithoutLogin": {
+    "type": "text",
+    "description": "intro_welcome_no_login"
   },
   "withAddress": "With Address",
   "@withAddress": {

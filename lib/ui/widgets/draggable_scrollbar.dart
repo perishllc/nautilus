@@ -274,16 +274,16 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
       //   _viewOffset = viewMaxScrollExtent;
       // }
 
-      if (_previousMaxScrollExtent != viewMaxScrollExtent) {
+      // prevents jitter?:
+      if (_previousMaxScrollExtent != viewMaxScrollExtent && _previousMaxScrollExtent != 0) {
         double diff = viewMaxScrollExtent - _previousMaxScrollExtent;
         diff = diff * (barMaxScrollExtent / viewMaxScrollExtent);
-        _barOffsetTop -= diff;
+        _barOffsetTop += diff;
       }
       _previousMaxScrollExtent = viewMaxScrollExtent;
 
       if (_viewOffset < viewMinScrollExtent || _viewOffset > viewMaxScrollExtent) {
         // don't update the bar offset:
-
         // teleport the scroll bar back to the top:
         if (_viewOffset < viewMinScrollExtent) {
           if (_barOffsetTop != barMinScrollExtent) {
@@ -310,7 +310,7 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
         viewMaxScrollExtent,
       );
 
-      print("$barTotalScrollExtent $viewMaxScrollExtent $_barOffsetTop");
+      // print("$barTotalScrollExtent $viewMaxScrollExtent $_barOffsetTop");
 
       if (_barOffsetTop < barMinScrollExtent) {
         _barOffsetTop = barMinScrollExtent;

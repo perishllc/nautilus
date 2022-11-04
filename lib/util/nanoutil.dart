@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:dart_bip32_bip44/dart_bip32_bip44.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -8,6 +12,7 @@ import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:bip39_mnemonic/bip39_mnemonic.dart';
 import 'package:convert/convert.dart';
 import "package:ed25519_hd_key/ed25519_hd_key.dart";
+import 'package:libcrypto/libcrypto.dart';
 
 class NanoUtil {
   static String seedToPrivate(String seed, int index) {
@@ -39,32 +44,23 @@ class NanoUtil {
     return NanoHelpers.isHexString(seed);
   }
 
-  /// Convert a 24-word mnemonic word list to a nano seed
+  // Convert a 24-word mnemonic word list to a nano seed
   static Future<String> mnemonicListToSeed(List<String> words) async {
     if (words.length != 24) {
       throw Exception('Expected a 24-word list, got a ${words.length} list');
     }
 
-    // // Constructs a Mnemonic from Sentence/Phrase
-    final Mnemonic mnemonic3 = Mnemonic.fromSentence(words.join(' '), Language.english);
-    // print(hex.encode(mnemonic3.entropy));
-    final String seed = hex.encode(mnemonic3.entropy);
+    // var salt = utf8.encode('mnemonic');
+    final Uint8List salt = Uint8List.fromList(utf8.encode('mnemonic'));
+    final Pbkdf2 hasher = Pbkdf2(iterations: 2048);
 
-    KeyData master = await ED25519_HD_KEY.getMasterKeyFromSeed(mnemonic3.entropy);
+    final Uint8List secret = Uint8List.fromList(utf8.encode(words.join(' ')));
 
-    print("##########");
-
-    print(hex.encode(master.key)); // 171cb88b1b3c1db25add599712e36245d75bc65a1a5c9e18d76f9f2b1eab4
-    print(hex.encode(master.chainCode));
-
-    KeyData data = await ED25519_HD_KEY.derivePath("m/44'/165'/0'", mnemonic3.entropy);
-    print(hex.encode(data.key));
+    final String seed = await hasher.sha512(words.join(' '), salt);
 
     print(seed);
 
     return seed;
-    // return "";
-    // return bip39.mnemonicToEntropy(words.join(' ')).toUpperCase();
   }
 
   // static String seedToPrivateBip39(String seed, int index) {

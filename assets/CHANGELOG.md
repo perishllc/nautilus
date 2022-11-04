@@ -2,8 +2,9 @@
 #### Added
 - Magic link login + encrypted seed backup (WIP)
 - Ability to scan QR codes from images in gallery
-- Changing from biometrics to pin prompts for a pin to be set
 #### Changed
+- Default PIN to 000000
+- Ability to change PIN
 - Prepopulate the show qr screen with the amount from the request screen if the amount is not zero / null
 - No longer need to set a pin on intro (we're defaulting to biometrics anyways)
 #### Fixed

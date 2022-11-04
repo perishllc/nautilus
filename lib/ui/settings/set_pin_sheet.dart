@@ -76,7 +76,7 @@ class _SetPinSheetState extends State<SetPinSheet> {
                         child: Column(
                           children: <Widget>[
                             AutoSizeText(
-                              CaseChange.toUpperCase(AppLocalization.of(context).setPin, context),
+                              CaseChange.toUpperCase(AppLocalization.of(context).changePin, context),
                               style: AppStyles.textStyleHeader(context),
                               minFontSize: 12,
                               stepGranularity: 0.1,
@@ -136,21 +136,8 @@ class _SetPinSheetState extends State<SetPinSheet> {
                                     passwordError = null;
                                   });
                                 }
-                                if (confirmPasswordController!.text == createPasswordController!.text) {
-                                  if (mounted) {
-                                    setState(() {
-                                      passwordsMatch = true;
-                                    });
-                                  }
-                                } else {
-                                  if (mounted) {
-                                    setState(() {
-                                      passwordsMatch = false;
-                                    });
-                                  }
-                                }
                               },
-                              hintText: AppLocalization.of(context).changePinHint,
+                              hintText: AppLocalization.of(context).existingPinHint,
                               obscureText: true,
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -180,21 +167,8 @@ class _SetPinSheetState extends State<SetPinSheet> {
                                     passwordError = null;
                                   });
                                 }
-                                if (confirmPasswordController!.text == createPasswordController!.text) {
-                                  if (mounted) {
-                                    setState(() {
-                                      passwordsMatch = true;
-                                    });
-                                  }
-                                } else {
-                                  if (mounted) {
-                                    setState(() {
-                                      passwordsMatch = false;
-                                    });
-                                  }
-                                }
                               },
-                              hintText: AppLocalization.of(context).confirmPinHint,
+                              hintText: AppLocalization.of(context).changePinHint,
                               obscureText: true,
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -226,7 +200,7 @@ class _SetPinSheetState extends State<SetPinSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).setPin, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).changePin, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       await submitAndEncrypt();
                     }),
                   ],
@@ -248,15 +222,15 @@ class _SetPinSheetState extends State<SetPinSheet> {
   }
 
   Future<void> submitAndEncrypt() async {
-    final String? seed = await sl.get<Vault>().getSeed();
+    final String? curPin = await sl.get<Vault>().getPin();
     if (!mounted) return;
     if (createPasswordController!.text.isEmpty || confirmPasswordController!.text.isEmpty) {
       setState(() {
         passwordError = AppLocalization.of(context).pinBlank;
       });
-    } else if (createPasswordController!.text != confirmPasswordController!.text) {
+    } else if (createPasswordController!.text != curPin) {
       setState(() {
-        passwordError = AppLocalization.of(context).pinsDontMatch;
+        passwordError = AppLocalization.of(context).pinIncorrect;
       });
     } else {
       await sl.get<Vault>().writePin(confirmPasswordController!.text);

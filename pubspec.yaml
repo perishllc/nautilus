@@ -116,7 +116,7 @@ dependencies:
   #     ref: master
 
   # Share files
-  share_plus: ^6.0.0
+  share_plus: ^6.2.0
 
   # File picker
   file_picker: ^5.2.0
@@ -218,6 +218,10 @@ dependencies:
   # bip39:
   bip39_mnemonic: ^3.0.4
   ed25519_hd_key: ^2.2.0
+  dart_bip32_bip44: ^0.2.0
+  # cryptography: ^2.0.5
+  # pbkdf2ns: ^0.0.2
+  libcrypto: ^0.2.1
 
 flutter_intl:
   enabled: true

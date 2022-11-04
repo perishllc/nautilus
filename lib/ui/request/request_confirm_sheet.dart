@@ -35,9 +35,8 @@ import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:uuid/uuid.dart';
 
 class RequestConfirmSheet extends StatefulWidget {
-
   const RequestConfirmSheet({required this.amountRaw, required this.destination, this.contactName, this.localCurrency, this.memo}) : super();
-  
+
   final String amountRaw;
   final String destination;
   final String? contactName;
@@ -52,6 +51,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
   late bool animationOpen;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
+  bool clicking = false;
 
   void _registerBus() {
     _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((AuthenticatedEvent event) {
@@ -217,6 +217,8 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                     AppButton.buildAppButton(
                         context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
+                      if (clicking) return;
+                      clicking = true;
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
@@ -239,6 +241,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                       } else {
                         await authenticateWithPin();
                       }
+                      clicking = false;
                     })
                   ],
                 ),
