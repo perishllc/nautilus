@@ -1525,6 +1525,26 @@
     "type": "text",
     "description": "An error indicating a password has been confirmed incorrectly"
   },
+  "passwordTooShort": "Password is too short",
+  "@passwordTooShort": {
+    "type": "text",
+    "description": "An error indicating the password is too short"
+  },
+  "passwordCapitalLetter": "Password must contain at least 1 upper case and lower case letter",
+  "@passwordCapitalLetter": {
+    "type": "text",
+    "description": "password_uppercase_lowercase"
+  },
+  "passwordSpecialCharacter": "Password must contain at least 1 special character",
+  "@passwordSpecialCharacter": {
+    "type": "text",
+    "description": "password_special_character"
+  },
+  "passwordNumber": "Password must contain at least 1 number",
+  "@passwordNumber": {
+    "type": "text",
+    "description": "password_number"
+  },
   "passwordWillBeRequiredToOpenParagraph": "This password will be required to open Nautilus.",
   "@passwordWillBeRequiredToOpenParagraph": {
     "type": "text",

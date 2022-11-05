@@ -204,8 +204,9 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                                 // Error Text
                                 Container(
                                   alignment: AlignmentDirectional.center,
-                                  margin: const EdgeInsets.only(top: 3),
+                                  margin: EdgeInsetsDirectional.only(top: 8, start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40),
                                   child: Text(passwordError == null ? "" : passwordError!,
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize: 14.0,
                                         color: StateContainer.of(context).curTheme.primary,
@@ -294,6 +295,33 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
       if (!mounted) return;
       skipPin();
       return;
+    } else {
+      if (!mounted) return;
+      // password requirements:
+
+      // password must be at least 8 characters:
+      if (confirmPasswordController!.text.length < 8) {
+        setState(() {
+          passwordError = AppLocalization.of(context).passwordTooShort;
+        });
+        return;
+      }
+
+      // make sure password contains a number:
+      if (!confirmPasswordController!.text.contains(RegExp(r"[0-9]"))) {
+        setState(() {
+          passwordError = AppLocalization.of(context).passwordNumber;
+        });
+        return;
+      }
+
+      // make sure password contains an uppercase and lowercase letter:
+      if (!confirmPasswordController!.text.contains(RegExp(r"[a-z]")) || !confirmPasswordController!.text.contains(RegExp(r"[A-Z]"))) {
+        setState(() {
+          passwordError = AppLocalization.of(context).passwordCapitalLetter;
+        });
+        return;
+      }
     }
 
     // Generate a new seed, encrypt, and upload to the seed backup endpoint:

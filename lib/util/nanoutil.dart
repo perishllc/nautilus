@@ -16,7 +16,6 @@ import 'package:libcrypto/libcrypto.dart';
 
 class NanoUtil {
   static String seedToPrivate(String seed, int index) {
-    // return NanoKeys.seedToPrivate(seed, index);
     return NanoHelpers.byteToHex(Ed25519Blake2b.derivePrivkey(NanoHelpers.hexToBytes(seed), index)!).toUpperCase();
   }
 

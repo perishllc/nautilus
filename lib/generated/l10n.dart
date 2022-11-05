@@ -3106,6 +3106,46 @@ class AppLocalization {
     );
   }
 
+  /// `Password is too short`
+  String get passwordTooShort {
+    return Intl.message(
+      'Password is too short',
+      name: 'passwordTooShort',
+      desc: 'An error indicating the password is too short',
+      args: [],
+    );
+  }
+
+  /// `Password must contain at least 1 upper case and lower case letter`
+  String get passwordCapitalLetter {
+    return Intl.message(
+      'Password must contain at least 1 upper case and lower case letter',
+      name: 'passwordCapitalLetter',
+      desc: 'password_uppercase_lowercase',
+      args: [],
+    );
+  }
+
+  /// `Password must contain at least 1 special character`
+  String get passwordSpecialCharacter {
+    return Intl.message(
+      'Password must contain at least 1 special character',
+      name: 'passwordSpecialCharacter',
+      desc: 'password_special_character',
+      args: [],
+    );
+  }
+
+  /// `Password must contain at least 1 number`
+  String get passwordNumber {
+    return Intl.message(
+      'Password must contain at least 1 number',
+      name: 'passwordNumber',
+      desc: 'password_number',
+      args: [],
+    );
+  }
+
   /// `This password will be required to open Nautilus.`
   String get passwordWillBeRequiredToOpenParagraph {
     return Intl.message(

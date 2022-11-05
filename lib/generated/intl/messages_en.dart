@@ -494,6 +494,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("Paper Wallet"),
         "passwordBlank":
             MessageLookupByLibrary.simpleMessage("Password cannot be empty"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "Password must contain at least 1 upper case and lower case letter"),
         "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
             "We\'re not responsible if you forget your password, and by design we are unable to reset or change it for you."),
         "passwordIncorrect":
@@ -501,6 +503,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "You will not need a password to open Nautilus anymore."),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "Password must contain at least 1 number"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "Password must contain at least 1 special character"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("Password is too short"),
         "passwordWarning": MessageLookupByLibrary.simpleMessage(
             "This password will be required to open Nautilus."),
         "passwordWillBeRequiredToOpenParagraph":
