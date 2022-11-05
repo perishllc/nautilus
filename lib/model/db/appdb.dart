@@ -1116,7 +1116,19 @@ class DBHelper {
       }
       final int nextID = nextIndex + 1;
       final String nextName = nameBuilder!.replaceAll("%1", nextID.toString());
-      account = Account(index: nextIndex, name: nextName, lastAccess: 0, selected: false, watchOnly: false, address: NanoUtil.seedToAddress(seed!, nextIndex));
+      final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+      account = Account(
+        index: nextIndex,
+        name: nextName,
+        lastAccess: 0,
+        selected: false,
+        watchOnly: false,
+        address: await NanoUtil.uniSeedToAddress(
+          seed!,
+          nextIndex,
+          derivationMethod,
+        ),
+      );
       await txn.rawInsert('INSERT INTO Accounts (name, acct_index, last_accessed, selected, address) values(?, ?, ?, ?, ?)',
           [account!.name, account!.index, account!.lastAccess, if (account!.selected) 1 else 0, account!.address]);
     });
@@ -1162,7 +1174,18 @@ class DBHelper {
       int nextIndex = offset;
       final int nextID = nextIndex + 1;
       final String nextName = nameBuilder!.replaceAll("%1", nextID.toString());
-      account = Account(index: nextIndex, name: nextName, lastAccess: 0, selected: true, address: NanoUtil.seedToAddress(seed!, nextIndex));
+      final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+      account = Account(
+        index: nextIndex,
+        name: nextName,
+        lastAccess: 0,
+        selected: true,
+        address: await NanoUtil.uniSeedToAddress(
+          seed!,
+          nextIndex,
+          derivationMethod,
+        ),
+      );
       await txn.rawInsert('INSERT INTO Accounts (name, acct_index, last_accessed, selected, address) values(?, ?, ?, ?, ?)',
           [account!.name, account!.index, account!.lastAccess, if (account!.selected) 1 else 0, account!.address]);
     });
@@ -1211,7 +1234,8 @@ class DBHelper {
     if (list.isEmpty) {
       return null;
     }
-    final String address = (list[0]["address"] as String?) ?? NanoUtil.seedToAddress(seed!, list[0]["acct_index"] as int);
+    final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+    final String address = (list[0]["address"] as String?) ?? await NanoUtil.uniSeedToAddress(seed!, list[0]["acct_index"] as int, derivationMethod);
     final Account account = Account(
         id: list[0]["id"] as int?,
         name: list[0]["name"] as String?,
@@ -1235,7 +1259,8 @@ class DBHelper {
     if (list.isEmpty) {
       return null;
     }
-    final String address = NanoUtil.seedToAddress(seed!, list[0]["acct_index"] as int);
+    final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+    final String address = await NanoUtil.uniSeedToAddress(seed!, list[0]["acct_index"] as int, derivationMethod);
     final Account account = Account(
         id: list[0]["id"] as int?,
         name: list[0]["name"] as String?,

@@ -1918,8 +1918,9 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<String> _getPrivKey() async {
+    final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
     final String seed = await getSeed();
-    return NanoUtil.seedToPrivate(seed, selectedAccount!.index!);
+    return NanoUtil.uniSeedToPrivate(seed, selectedAccount!.index!, derivationMethod);
   }
 
   Future<String> getSeed() async {
