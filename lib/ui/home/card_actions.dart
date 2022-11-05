@@ -6,7 +6,6 @@ import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
-import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/metadata_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
@@ -16,6 +15,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/box.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
+import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:uuid/uuid.dart';
 
 class CardActions {
@@ -28,7 +28,13 @@ class CardActions {
     bool sendFailed = false;
 
     // send the request again:
-    final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
+    final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+    final String privKey = await NanoUtil.uniSeedToPrivate(
+      await StateContainer.of(context).getSeed(),
+      StateContainer.of(context).selectedAccount!.index!,
+      derivationMethod,
+    );
+
     // get epoch time as hex:
     final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
     final String nonceHex = secondsSinceEpoch.toRadixString(16);
@@ -103,7 +109,13 @@ class CardActions {
     bool memoSendFailed = false;
 
     // send the memo again:
-    final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
+    final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+    final String privKey = await NanoUtil.uniSeedToPrivate(
+      await StateContainer.of(context).getSeed(),
+      StateContainer.of(context).selectedAccount!.index!,
+      derivationMethod,
+    );
+
     // get epoch time as hex:
     final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
     final String nonceHex = secondsSinceEpoch.toRadixString(16);

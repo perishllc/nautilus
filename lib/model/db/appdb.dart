@@ -8,7 +8,9 @@ import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
+import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -1045,6 +1047,7 @@ class DBHelper {
 
   // Accounts
   Future<List<Account>> getAccounts(String? seed) async {
+    final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
     final Database dbClient = (await db)!;
     final List<Map> list = await dbClient.rawQuery('SELECT * FROM Accounts ORDER BY acct_index');
     final List<Account> accounts = [];
@@ -1060,7 +1063,7 @@ class DBHelper {
           balance: list[i]["balance"] as String?));
     }
     for (final Account acc in accounts) {
-      acc.address ??= NanoUtil.seedToAddress(seed!, acc.index!);
+      acc.address ??= await NanoUtil.uniSeedToAddress(seed!, acc.index!, derivationMethod);
       // check if account has a user:
       final User? user = await getUserWithAddress(acc.address!);
       if (user != null) {
@@ -1085,9 +1088,10 @@ class DBHelper {
           watchOnly: list[i]["watch_only"] == 1,
           balance: list[i]["balance"] as String?));
     }
+    final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
     // check if account has a user:
     for (final Account acc in accounts) {
-      acc.address ??= NanoUtil.seedToAddress(seed!, acc.index!);
+      acc.address ??= await NanoUtil.uniSeedToAddress(seed!, acc.index!, derivationMethod);
       final User? user = await getUserWithAddress(acc.address!);
       if (user != null) {
         acc.user = user;

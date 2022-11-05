@@ -372,6 +372,14 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
       // print(url);
       // debug:
       // url = "http://node-local.perish.co:5076/handoff";
+
+      final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+      final String privKey = await NanoUtil.uniSeedToPrivate(
+        await StateContainer.of(context).getSeed(),
+        StateContainer.of(context).selectedAccount!.index!,
+        derivationMethod,
+      );
+
       final HandoffResponse handoffResponse = await sl.get<AccountService>().requestHandoffHTTP(
             handoffUrl,
             StateContainer.of(context).wallet!.representative,
@@ -379,7 +387,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
             widget.payItem.amount,
             widget.destination,
             StateContainer.of(context).wallet!.address,
-            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
+            privKey,
             metadata: widget.payItem.metadata,
           );
 

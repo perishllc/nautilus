@@ -29,7 +29,6 @@ import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class RegisterConfirmSheet extends StatefulWidget {
-
   const RegisterConfirmSheet(
       {required this.amountRaw,
       required this.destination,
@@ -244,13 +243,13 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
   Future<void> _doSend() async {
     try {
       _showSendingAnimation(context);
-      final ProcessResponse resp = await sl.get<AccountService>().requestSend(
-          StateContainer.of(context).wallet!.representative,
-          StateContainer.of(context).wallet!.frontier,
-          widget.amountRaw,
-          widget.destination,
-          StateContainer.of(context).wallet!.address,
-          NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
+
+      final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+      final String privKey =
+          await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!, derivationMethod);
+
+      final ProcessResponse resp = await sl.get<AccountService>().requestSend(StateContainer.of(context).wallet!.representative,
+          StateContainer.of(context).wallet!.frontier, widget.amountRaw, widget.destination, StateContainer.of(context).wallet!.address, privKey,
           max: widget.maxSend);
       StateContainer.of(context).wallet!.frontier = resp.hash;
       StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);

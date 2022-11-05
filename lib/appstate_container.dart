@@ -751,7 +751,10 @@ class StateContainerState extends State<StateContainer> {
 
   // Update the global wallet instance with a new address
   Future<void> updateWallet({required Account account}) async {
-    final String address = NanoUtil.seedToAddress(await getSeed(), account.index!);
+    final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+    // final String address = NanoUtil.seedToAddress(await getSeed(), account.index!);
+    final String address = await NanoUtil.uniSeedToAddress(await getSeed(), account.index!, derivationMethod);
+
     account.address = account.address ?? address;
     bool watchOnly = false;
     if (account.address != address || account.watchOnly) {
@@ -1070,7 +1073,8 @@ class StateContainerState extends State<StateContainer> {
         return null;
       }
 
-      final String privKey = NanoUtil.seedToPrivate(seed, correctAccount.index!);
+      final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+      final String privKey = await NanoUtil.uniSeedToPrivate(seed, correctAccount.index!, derivationMethod);
 
       // publish open:
       if (accountResp.openBlock == null) {
@@ -1391,7 +1395,12 @@ class StateContainerState extends State<StateContainer> {
       return "Decryption failed: account not found!";
     }
 
-    final String privKey = NanoUtil.seedToPrivate(await getSeed(), correctAccount.index!);
+    final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+    final String privKey = await NanoUtil.uniSeedToPrivate(
+      await getSeed(),
+      correctAccount.index!,
+      derivationMethod,
+    );
     try {
       return Box.decrypt(memoEnc, fromAddress!, privKey);
     } catch (error) {

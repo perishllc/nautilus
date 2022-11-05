@@ -316,12 +316,11 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
     } else {
       try {
-        final ProcessResponse resp = await sl.get<AccountService>().requestChange(
-            StateContainer.of(context).wallet!.address,
-            widget.repController.text,
-            StateContainer.of(context).wallet!.frontier,
-            StateContainer.of(context).wallet!.accountBalance.toString(),
-            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!));
+        final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+        final String privKey =
+            await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!, derivationMethod);
+        final ProcessResponse resp = await sl.get<AccountService>().requestChange(StateContainer.of(context).wallet!.address, widget.repController.text,
+            StateContainer.of(context).wallet!.frontier, StateContainer.of(context).wallet!.accountBalance.toString(), privKey);
         StateContainer.of(context).wallet!.representative = widget.repController.text;
         StateContainer.of(context).wallet!.frontier = resp.hash;
         UIUtil.showSnackbar(AppLocalization.of(context).changeRepSucces, context);

@@ -412,8 +412,9 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                         _seedInputFocusNode.unfocus();
                         // If seed valid, log them in
                         if (NanoUtil.isValidBip39Seed(_seedInputController.text)) {
-                          await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
                           await sl.get<Vault>().setSeed(_seedInputController.text);
+                          await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+                          await sl.get<SharedPrefsUtil>().setKeyDerivationMethod("hd");
                           await sl.get<DBHelper>().dropAccounts();
                           if (!mounted) return;
                           await NanoUtil().loginAccount(_seedInputController.text, context);
@@ -438,28 +439,13 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                         _mnemonicFocusNode.unfocus();
                         if (NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' '))) {
                           await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
-                          // Navigator.pushNamed(context, '/intro_password_on_launch',
-                          //     arguments: NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' ')));
-                          final String seed = NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' '));
-
-                          final String seed2 = await NanoUtil.mnemonicListToSeed(_mnemonicController.text.split(' '));
-
-                          print("seed2: $seed2");
-
-                          return;
+                          await sl.get<SharedPrefsUtil>().setKeyDerivationMethod("hd");
+                          final String seed = await NanoUtil.hdMnemonicListToSeed(_mnemonicController.text.split(' '));
                           await sl.get<Vault>().setSeed(seed);
                           await sl.get<DBHelper>().dropAccounts();
                           if (!mounted) return;
                           await NanoUtil().loginAccount(seed, context);
                           if (!mounted) return;
-                          // final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-                          //   return PinScreen(
-                          //     PinOverlayType.NEW_PIN,
-                          //   );
-                          // }));
-                          // if (pin != null && pin.length > 5) {
-                          //   _pinEnteredCallback(pin);
-                          // }
                           skipPin();
                         } else {
                           // Show mnemonic error

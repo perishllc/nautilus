@@ -415,14 +415,12 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
       ProcessResponse? resp;
 
+      final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
       if (!isMessage) {
-        resp = await sl.get<AccountService>().requestSend(
-            StateContainer.of(context).wallet!.representative,
-            StateContainer.of(context).wallet!.frontier,
-            widget.amountRaw,
-            widget.destination,
-            StateContainer.of(context).wallet!.address,
-            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
+        final String privKey =
+            await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!, derivationMethod);
+        resp = await sl.get<AccountService>().requestSend(StateContainer.of(context).wallet!.representative, StateContainer.of(context).wallet!.frontier,
+            widget.amountRaw, widget.destination, StateContainer.of(context).wallet!.address, privKey,
             max: widget.maxSend);
         if (!mounted) return;
         StateContainer.of(context).wallet!.frontier = resp.hash;
@@ -431,7 +429,11 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
       // if there's a memo to be sent, and this isn't a gift card creation, send it:
       if (widget.memo.isNotEmpty && widget.link.isEmpty) {
-        String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
+        String privKey = await NanoUtil.uniSeedToPrivate(
+          await StateContainer.of(context).getSeed(),
+          StateContainer.of(context).selectedAccount!.index!,
+          derivationMethod,
+        );
         // get epoch time as hex:
         final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
         final String nonceHex = secondsSinceEpoch.toRadixString(16);

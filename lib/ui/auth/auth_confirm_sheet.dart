@@ -315,7 +315,13 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
       final String formatted = stringToSign;
       final String signed = NanoHelpers.byteToHex(NanoHelpers.stringToBytesUtf8(stringToSign));
 
-      final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
+      final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+
+      final String privKey = await NanoUtil.uniSeedToPrivate(
+        await StateContainer.of(context).getSeed(),
+        StateContainer.of(context).selectedAccount!.index!,
+        derivationMethod,
+      );
       final String signature = NanoSignatures.signBlock(signed, privKey);
       // final String pubKey = NanoAccounts.extractPublicKey(walletAddress);
       // final bool isValid = NanoSignatures.validateSig(signed, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));

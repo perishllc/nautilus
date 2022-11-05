@@ -266,7 +266,12 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
     try {
       _showAnimation(context);
 
-      final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
+      final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+      final String privKey = await NanoUtil.uniSeedToPrivate(
+        await StateContainer.of(context).getSeed(),
+        StateContainer.of(context).selectedAccount!.index!,
+        derivationMethod,
+      );
 
       // get epoch time as hex:
       final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;

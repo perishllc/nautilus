@@ -11,6 +11,7 @@
 - QR code scanning bugs
 - More minor button styling fixes
 - Form validation fixes on send sheet
+- Scrollbar fixes
 ## v0.6.9 - [2022-10-21]
 #### Added
 - Theme switcher on intro
