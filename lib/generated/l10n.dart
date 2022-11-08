@@ -1083,6 +1083,17 @@ class AppLocalization {
     );
   }
 
+  /// `Enter current password`
+  String get existingPasswordHint {
+    return Intl.message(
+      'Enter current password',
+      name: 'existingPasswordHint',
+      desc:
+          'A text field hint that tells the user to enter their current password',
+      args: [],
+    );
+  }
+
   /// `Create QR Code`
   String get createQR {
     return Intl.message(
@@ -2514,6 +2525,26 @@ class AppLocalization {
     );
   }
 
+  /// `This appears to be an HD seed, unless you're sure you know what you're doing, you should use the "Import HD" option instead.`
+  String get looksLikeHdSeed {
+    return Intl.message(
+      'This appears to be an HD seed, unless you\'re sure you know what you\'re doing, you should use the "Import HD" option instead.',
+      name: 'looksLikeHdSeed',
+      desc: 'settings_import_hd_warning',
+      args: [],
+    );
+  }
+
+  /// `This appears to be a standard seed, you should use the "Import Standard" option instead.`
+  String get looksLikeStandardSeed {
+    return Intl.message(
+      'This appears to be a standard seed, you should use the "Import Standard" option instead.',
+      name: 'looksLikeStandardSeed',
+      desc: 'settings_import_standard_warning',
+      args: [],
+    );
+  }
+
   /// `Logging out will remove your seed and all Nautilus-related data from this device. If your seed is not backed up, you will never be able to access your funds again`
   String get logoutDetail {
     return Intl.message(
@@ -3157,10 +3188,10 @@ class AppLocalization {
     );
   }
 
-  /// `We're not responsible if you forget your password, and by design we are unable to reset or change it for you.`
+  /// `We're not responsible if you forget your password, and by design we are unable to reset it for you.`
   String get passwordDisclaimer {
     return Intl.message(
-      'We\'re not responsible if you forget your password, and by design we are unable to reset or change it for you.',
+      'We\'re not responsible if you forget your password, and by design we are unable to reset it for you.',
       name: 'passwordDisclaimer',
       desc:
           'A paragraph that we\'re not responsible if you lose your password.',
@@ -4278,6 +4309,26 @@ class AppLocalization {
       'Set Password',
       name: 'setPassword',
       desc: 'A button that sets the wallet password',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get changePassword {
+    return Intl.message(
+      'Change Password',
+      name: 'changePassword',
+      desc: 'A button that changes the magic password',
+      args: [],
+    );
+  }
+
+  /// `Change Seed`
+  String get changeSeed {
+    return Intl.message(
+      'Change Seed',
+      name: 'changeSeed',
+      desc: 'A button that changes the magic seed',
       args: [],
     );
   }

@@ -364,6 +364,44 @@ class UIUtil {
     );
   }
 
+  static Widget sixLineSeedText(BuildContext context, String address, {TextStyle? textStyle}) {
+    textStyle = textStyle ?? AppStyles.textStyleSeed(context);
+    final String stringPartOne = address.substring(0, 22);
+    final String stringPartTwo = address.substring(22, 44);
+    final String stringPartThree = address.substring(44, 64);
+    final String stringPartFour = address.substring(64, 86);
+    final String stringPartFive = address.substring(86, 108);
+    final String stringPartSix = address.substring(108, 128);
+    return Column(
+      children: <Widget>[
+        Text(
+          stringPartOne,
+          style: textStyle,
+        ),
+        Text(
+          stringPartTwo,
+          style: textStyle,
+        ),
+        Text(
+          stringPartThree,
+          style: textStyle,
+        ),
+        Text(
+          stringPartFour,
+          style: textStyle,
+        ),
+        Text(
+          stringPartFive,
+          style: textStyle,
+        ),
+        Text(
+          stringPartSix,
+          style: textStyle,
+        ),
+      ],
+    );
+  }
+
   static Future<void> showBlockExplorerWebview(BuildContext context, String? hash) async {
     cancelLockEvent();
     // final InAppBrowser browser = InAppBrowser();

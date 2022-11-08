@@ -279,8 +279,9 @@ class AppState extends State<App> {
             case '/intro_magic_password':
               return MaterialPageRoute(
                 builder: (_) => IntroMagicPassword(
-                    encryptedSeed: (settings.arguments! as Map<String, String?>)["encryptedSeed"],
-                    identifier: (settings.arguments! as Map<String, String?>)["issuer"]),
+                  entryExists: (settings.arguments! as Map<String, dynamic>)["entryExists"] as bool,
+                  identifier: (settings.arguments! as Map<String, dynamic>)["issuer"] as String?,
+                ),
                 settings: settings,
               );
             case '/intro_new_existing':

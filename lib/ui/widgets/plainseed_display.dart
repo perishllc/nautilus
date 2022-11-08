@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
 
 /// A widget for displaying a mnemonic phrase
@@ -17,11 +16,12 @@ class PlainSeedDisplay extends StatefulWidget {
   final bool obscureSeed;
   final bool showButton;
 
+  @override
   _PlainSeedDisplayState createState() => _PlainSeedDisplayState();
 }
 
 class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
-  static final String _obscuredSeed = '•' * 64;
+  String _obscuredSeed = '•' * 64;
 
   late bool _seedCopied;
   late bool _seedObscured;
@@ -32,6 +32,7 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
     super.initState();
     _seedCopied = false;
     _seedObscured = true;
+    _obscuredSeed = '•' * widget.seed!.length;
   }
 
   @override
@@ -61,16 +62,28 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
             },
             child: Column(
               children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15),
-                  margin: const EdgeInsets.only(top: 25),
-                  decoration: BoxDecoration(
-                    color: StateContainer.of(context).curTheme.backgroundDarkest,
-                    borderRadius: BorderRadius.circular(25),
+                if (widget.seed!.length == 64)
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15),
+                    margin: const EdgeInsets.only(top: 25),
+                    decoration: BoxDecoration(
+                      color: StateContainer.of(context).curTheme.backgroundDarkest,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: UIUtil.threeLineSeedText(context, widget.obscureSeed && _seedObscured ? _obscuredSeed : widget.seed!,
+                        textStyle: _seedCopied ? AppStyles.textStyleSeedGreen(context) : AppStyles.textStyleSeed(context)),
+                  )
+                else
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15),
+                    margin: const EdgeInsets.only(top: 25),
+                    decoration: BoxDecoration(
+                      color: StateContainer.of(context).curTheme.backgroundDarkest,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: UIUtil.sixLineSeedText(context, widget.obscureSeed && _seedObscured ? _obscuredSeed : widget.seed!,
+                        textStyle: _seedCopied ? AppStyles.textStyleSeedGreen(context) : AppStyles.textStyleSeed(context)),
                   ),
-                  child: UIUtil.threeLineSeedText(context, widget.obscureSeed && _seedObscured ? _obscuredSeed : widget.seed!,
-                      textStyle: _seedCopied ? AppStyles.textStyleSeedGreen(context) : AppStyles.textStyleSeed(context)),
-                ),
                 // Tap to reveal or hide
                 if (widget.obscureSeed)
                   Container(

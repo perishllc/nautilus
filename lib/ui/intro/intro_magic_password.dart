@@ -14,12 +14,14 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
+import 'package:nautilus_wallet_flutter/util/blake2b.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:web3dart/crypto.dart';
 
 class IntroMagicPassword extends StatefulWidget {
-  const IntroMagicPassword({this.encryptedSeed, this.identifier});
-  final String? encryptedSeed;
+  const IntroMagicPassword({this.entryExists = false, this.identifier});
+  final bool entryExists;
   final String? identifier;
 
   @override
@@ -93,7 +95,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                         ),
                         alignment: AlignmentDirectional.centerStart,
                         child: AutoSizeText(
-                          widget.encryptedSeed == null ? AppLocalization.of(context).createAPasswordHeader : AppLocalization.of(context).enterPasswordHint,
+                          !widget.entryExists ? AppLocalization.of(context).createAPasswordHeader : AppLocalization.of(context).enterPasswordHint,
                           maxLines: 3,
                           stepGranularity: 0.5,
                           style: AppStyles.textStyleHeaderColored(context),
@@ -116,7 +118,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                               focusPadding: 40,
                               child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
                                 // Create a Password Text Field
-                                if (widget.encryptedSeed == null)
+                                if (!widget.entryExists)
                                   AppTextField(
                                     topMargin: 30,
                                     padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
@@ -188,7 +190,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                                       }
                                     }
                                   },
-                                  hintText: widget.encryptedSeed == null
+                                  hintText: !widget.entryExists
                                       ? AppLocalization.of(context).confirmPasswordHint
                                       : AppLocalization.of(context).enterPasswordHint,
                                   keyboardType: TextInputType.text,
@@ -249,7 +251,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
   }
 
   Future<void> submitAndEncrypt() async {
-    if ((createPasswordController!.text.isEmpty && widget.encryptedSeed == null) || confirmPasswordController!.text.isEmpty) {
+    if ((createPasswordController!.text.isEmpty && !widget.entryExists) || confirmPasswordController!.text.isEmpty) {
       if (mounted) {
         setState(() {
           passwordError = AppLocalization.of(context).passwordBlank;
@@ -257,7 +259,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
       }
       return;
     }
-    if (widget.encryptedSeed == null && createPasswordController!.text != confirmPasswordController!.text) {
+    if (!widget.entryExists && createPasswordController!.text != confirmPasswordController!.text) {
       if (mounted) {
         setState(() {
           passwordError = AppLocalization.of(context).passwordsDontMatch;
@@ -265,13 +267,25 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
       }
       return;
     }
-    if (widget.encryptedSeed != null) {
+    if (widget.entryExists) {
+      // get the encrypted seed from the auth-service:
+      final String fullIdentifier = widget.identifier! + confirmPasswordController!.text;
+      final String? encryptedSeed = await sl.get<AuthService>().getEncryptedSeed(fullIdentifier);
       // final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
+
+      if (encryptedSeed == null) {
+        if (mounted) {
+          setState(() {
+            passwordError = AppLocalization.of(context).passwordIncorrect;
+          });
+        }
+        return;
+      }
 
       // decrypt the seed using the password:
       String? decryptedSeed;
       try {
-        decryptedSeed = NanoHelpers.byteToHex(NanoCrypt.decrypt(widget.encryptedSeed, confirmPasswordController!.text));
+        decryptedSeed = NanoHelpers.byteToHex(NanoCrypt.decrypt(encryptedSeed, confirmPasswordController!.text));
 
         await sl.get<Vault>().setSeed(decryptedSeed);
       } catch (error) {
@@ -284,11 +298,8 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
       }
 
       // re-encrypt the seed with password:
-      // final String reEncryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(decryptedSeed, confirmPasswordController!.text));
-      // await sl.get<Vault>().setSeed(reEncryptedSeed);
       if (!mounted) return;
       // also encrypt the seed with the session key:
-      // StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(decryptedSeed, await sl.get<Vault>().getSessionKey())));
       await sl.get<DBHelper>().dropAccounts();
       if (!mounted) return;
       await NanoUtil().loginAccount(decryptedSeed, context);
@@ -327,18 +338,21 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     // Generate a new seed, encrypt, and upload to the seed backup endpoint:
     final String seed = NanoSeeds.generateSeed();
     final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController!.text));
-    // await sl.get<Vault>().setSeed(encryptedSeed);
     await sl.get<Vault>().setSeed(seed);
-    if (!mounted) return;
-    // Also encrypt it with the session key, so user doesnt need password to sign blocks within the app
-    // StateContainer.of(context).setEncryptedSecret(NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, await sl.get<Vault>().getSessionKey())));
-
     if (!mounted) return;
     // Update wallet
     await NanoUtil().loginAccount(await StateContainer.of(context).getSeed(), context);
     if (!mounted) return;
     // upload encrypted seed to seed backup endpoint:
-    await sl.get<AuthService>().setEncryptedSeed(widget.identifier!, encryptedSeed);
+
+    // create the following entry in the database:
+    // {
+    //   identifier: "${identifier}${hashedPassword}",
+    //   encrypted_seed: encryptedSeed,
+    // }
+    final String hashedPassword = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(confirmPasswordController!.text)));
+    final String fullIdentifier = "${widget.identifier}$hashedPassword";
+    await sl.get<AuthService>().setEncryptedSeed(fullIdentifier, encryptedSeed);
     skipPin();
   }
 

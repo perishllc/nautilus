@@ -312,10 +312,7 @@ class SingleSpaceInputFormatter extends TextInputFormatter {
 class UpperCaseTextFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    return TextEditingValue(
-      text: newValue.text.toUpperCase(),
-      selection: newValue.selection,
-    );
+    return newValue.copyWith(text: newValue.text.toUpperCase());
   }
 }
 
@@ -323,10 +320,7 @@ class UpperCaseTextFormatter extends TextInputFormatter {
 class LowerCaseTextFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    return TextEditingValue(
-      text: newValue.text.toLowerCase(),
-      selection: newValue.selection,
-    );
+    return newValue.copyWith(text: newValue.text.toLowerCase());
   }
 }
 

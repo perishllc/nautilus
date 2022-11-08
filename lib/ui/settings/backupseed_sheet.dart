@@ -38,6 +38,7 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
   Timer? _xmrSeedCopiedTimer;
   late bool _mnemonicCopied;
   Timer? _mnemonicCopiedTimer;
+  late bool _mnemonicDisabled;
 
   @override
   void initState() {
@@ -46,8 +47,14 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
     _seedCopied = false;
     _xmrSeedCopied = false;
     _mnemonicCopied = false;
-    _mnemonic = NanoMnemomics.seedToMnemonic(_seed!);
     showMnemonic = true;
+
+    try {
+      _mnemonic = NanoMnemomics.seedToMnemonic(_seed!);
+    } catch (e) {
+      showMnemonic = false;
+      _mnemonicDisabled = true;
+    }
   }
 
   @override
@@ -99,27 +106,34 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                         ],
                       ),
                       // Switch button
-                      Container(
-                        width: 50,
-                        height: 50,
-                        margin: const EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            foregroundColor: StateContainer.of(context).curTheme.text15,
-                            padding: const EdgeInsets.all(13.0),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-                            tapTargetSize: MaterialTapTargetSize.padded,
-                            // highlightColor: StateContainer.of(context).curTheme.text15,
-                            // splashColor: StateContainer.of(context).curTheme.text15,
+                      if (!_mnemonicDisabled)
+                        Container(
+                          width: 50,
+                          height: 50,
+                          margin: const EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              foregroundColor: StateContainer.of(context).curTheme.text15,
+                              padding: const EdgeInsets.all(13.0),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                              tapTargetSize: MaterialTapTargetSize.padded,
+                              // highlightColor: StateContainer.of(context).curTheme.text15,
+                              // splashColor: StateContainer.of(context).curTheme.text15,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                showMnemonic = !showMnemonic;
+                              });
+                            },
+                            child: Icon(showMnemonic ? AppIcons.seed : Icons.vpn_key, size: 24, color: StateContainer.of(context).curTheme.text),
                           ),
-                          onPressed: () {
-                            setState(() {
-                              showMnemonic = !showMnemonic;
-                            });
-                          },
-                          child: Icon(showMnemonic ? AppIcons.seed : Icons.vpn_key, size: 24, color: StateContainer.of(context).curTheme.text),
+                        )
+                      else
+                        Container(
+                          width: 50,
+                          height: 50,
+                          margin: const EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
                         ),
-                      ),
                     ],
                   ),
                 ],

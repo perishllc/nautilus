@@ -1,7 +1,8 @@
 ## v0.7.0 - [2022-10-31]
 #### Added
-- Magic link login + encrypted seed backup (WIP)
+- Magic link login + encrypted seed backup
 - Ability to scan QR codes from images in gallery
+- Import HD wallets from seed / mnemonic
 #### Changed
 - Default PIN to 000000
 - Ability to change PIN
@@ -12,6 +13,7 @@
 - More minor button styling fixes
 - Form validation fixes on send sheet
 - Scrollbar fixes
+- Import seed phrase fixes
 ## v0.6.9 - [2022-10-21]
 #### Added
 - Theme switcher on intro

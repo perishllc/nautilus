@@ -90,6 +90,7 @@ build/**
 # Translations
 lib/l10n/*.json
 bin/settings.py
+lib/generated/*
 
 # Fastlane
 android/fastlane/report.xml

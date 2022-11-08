@@ -76,6 +76,65 @@ class AppDialogs {
     );
   }
 
+  static Future<bool> waitableConfirmDialog(BuildContext context, String title, String content, String buttonText,
+      {String? cancelText, bool barrierDismissible = true}) async {
+    cancelText ??= AppLocalization.of(context).cancel.toUpperCase();
+
+    final bool res = await showAppDialog(
+      context: context,
+      barrierDismissible: barrierDismissible,
+      builder: (BuildContext context) {
+        return AppAlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          title: Text(
+            title,
+            style: AppStyles.textStyleButtonPrimaryOutline(context),
+          ),
+          content: Text(content, style: AppStyles.textStyleParagraph(context)),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                padding: const EdgeInsets.all(12),
+              ),
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 100),
+                child: Text(
+                  cancelText!,
+                  textAlign: TextAlign.center,
+                  style: AppStyles.textStyleDialogButtonText(context),
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                padding: const EdgeInsets.all(12),
+              ),
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 100),
+                child: Text(
+                  buttonText,
+                  textAlign: TextAlign.center,
+                  style: AppStyles.textStyleDialogButtonText(context),
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+            ),
+          ],
+        );
+      },
+    ) as bool;
+    return res;
+  }
+
   static Future<void> showInfoDialog(
     BuildContext context,
     String title,
@@ -294,7 +353,7 @@ class AppDialogs {
                         onPressed: () async {
                           Navigator.of(context).pop();
                           // Go to send with address
-                          Future.delayed(const Duration(milliseconds: 1000), () {
+                          Future<void>.delayed(const Duration(milliseconds: 1000), () {
                             Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
                             Sheets.showAppHeightNineSheet(

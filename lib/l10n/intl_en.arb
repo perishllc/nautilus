@@ -515,6 +515,11 @@
     "type": "text",
     "description": "A text field hint that tells the user to enter their current pin"
   },
+  "existingPasswordHint": "Enter current password",
+  "@existingPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to enter their current password"
+  },
   "createQR": "Create QR Code",
   "@createQR": {
     "type": "text",
@@ -1230,6 +1235,16 @@
     "type": "text",
     "description": "settings_logout_warning_title"
   },
+  "looksLikeHdSeed": "This appears to be an HD seed, unless you're sure you know what you're doing, you should use the \"Import HD\" option instead.",
+  "@looksLikeHdSeed": {
+    "type": "text",
+    "description": "settings_import_hd_warning"
+  },
+  "looksLikeStandardSeed": "This appears to be a standard seed, you should use the \"Import Standard\" option instead.",
+  "@looksLikeStandardSeed": {
+    "type": "text",
+    "description": "settings_import_standard_warning"
+  },
   "logoutDetail": "Logging out will remove your seed and all Nautilus-related data from this device. If your seed is not backed up, you will never be able to access your funds again",
   "@logoutDetail": {
     "type": "text",
@@ -1550,7 +1565,7 @@
     "type": "text",
     "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
   },
-  "passwordDisclaimer": "We're not responsible if you forget your password, and by design we are unable to reset or change it for you.",
+  "passwordDisclaimer": "We're not responsible if you forget your password, and by design we are unable to reset it for you.",
   "@passwordDisclaimer": {
     "type": "text",
     "description": "A paragraph that we're not responsible if you lose your password."
@@ -2109,6 +2124,16 @@
   "@setPassword": {
     "type": "text",
     "description": "A button that sets the wallet password"
+  },
+  "changePassword": "Change Password",
+  "@changePassword": {
+    "type": "text",
+    "description": "A button that changes the magic password"
+  },
+  "changeSeed": "Change Seed",
+  "@changeSeed": {
+    "type": "text",
+    "description": "A button that changes the magic seed"
   },
   "setPasswordSuccess": "Password has been set successfully",
   "@setPasswordSuccess": {

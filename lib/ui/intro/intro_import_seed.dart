@@ -15,7 +15,7 @@ import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/security.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
@@ -162,7 +162,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                     topMargin: 20,
                                     focusNode: _seedInputFocusNode,
                                     controller: _seedInputController,
-                                    inputFormatters: [LengthLimitingTextInputFormatter(/*64*/ 128), UpperCaseTextFormatter()],
+                                    inputFormatters: <TextInputFormatter>[LengthLimitingTextInputFormatter(128), UpperCaseTextFormatter()],
                                     textInputAction: TextInputAction.done,
                                     maxLines: null,
                                     autocorrect: false,
@@ -210,6 +210,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                             return;
                                           } else if (NanoUtil.isValidSeed(data.text!)) {
                                             _seedInputController.text = data.text!;
+                                            _seedInputFocusNode.unfocus();
                                             setState(() {
                                               _seedIsValid = true;
                                             });
@@ -232,9 +233,11 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                     style: _seedIsValid ? AppStyles.textStyleSeed(context) : AppStyles.textStyleSeedGray(context),
                                     onChanged: (String text) {
                                       // Always reset the error message to be less annoying
-                                      setState(() {
-                                        _showSeedError = false;
-                                      });
+                                      if (_showSeedError) {
+                                        setState(() {
+                                          _showSeedError = false;
+                                        });
+                                      }
                                       // If valid seed, clear focus/close keyboard
                                       if (NanoUtil.isValidSeed(text)) {
                                         _seedInputFocusNode.unfocus();
@@ -277,6 +280,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                         }
                                         if (NanoMnemomics.validateMnemonic(result.split(' '))) {
                                           _mnemonicController.text = result;
+                                          _mnemonicFocusNode.unfocus();
                                           setState(() {
                                             _mnemonicIsValid = true;
                                           });
@@ -307,19 +311,19 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                             return;
                                           } else if (NanoMnemomics.validateMnemonic(data.text!.split(' '))) {
                                             _mnemonicController.text = data.text!;
+                                            _mnemonicFocusNode.unfocus();
                                             setState(() {
                                               _mnemonicIsValid = true;
                                             });
                                           } else if (NanoUtil.isValidSeed(data.text!)) {
-                                            throw Exception("TODO");
-                                            // _seedInputController.text = data.text!;
-                                            // _mnemonicFocusNode.unfocus();
-                                            // _seedInputFocusNode.unfocus();
-                                            // setState(() {
-                                            //   _seedMode = true;
-                                            //   _seedIsValid = true;
-                                            //   _showSeedError = false;
-                                            // });
+                                            _seedInputController.text = data.text!;
+                                            _mnemonicFocusNode.unfocus();
+                                            _seedInputFocusNode.unfocus();
+                                            setState(() {
+                                              _seedMode = true;
+                                              _seedIsValid = true;
+                                              _showSeedError = false;
+                                            });
                                           }
                                         });
                                       },
@@ -429,6 +433,15 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                           // }
                           skipPin();
                         } else {
+                          if (_seedInputController.text.length == 64 && NanoUtil.isValidSeed(_seedInputController.text)) {
+                            await AppDialogs.showInfoDialog(
+                              context,
+                              AppLocalization.of(context).logoutAreYouSure,
+                              AppLocalization.of(context).looksLikeStandardSeed,
+                              closeText: AppLocalization.of(context).ok,
+                            );
+                            return;
+                          }
                           // Display error
                           setState(() {
                             _showSeedError = true;
@@ -474,6 +487,17 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                         _seedInputFocusNode.unfocus();
                         // If seed valid, log them in
                         if (NanoUtil.isValidSeed(_seedInputController.text)) {
+                          if (_seedInputController.text.length == 128) {
+                            // are you sure?
+                            final bool isSure = await AppDialogs.waitableConfirmDialog(context, AppLocalization.of(context).logoutAreYouSure,
+                                AppLocalization.of(context).looksLikeHdSeed, AppLocalization.of(context).imSure,
+                                cancelText: AppLocalization.of(context).goBackButton);
+
+                            if (!isSure) {
+                              return;
+                            }
+                          }
+
                           await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
                           await sl.get<Vault>().setSeed(_seedInputController.text);
                           await sl.get<DBHelper>().dropAccounts();

@@ -115,6 +115,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Change Currency"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Change Log"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Change Password"),
         "changePin": MessageLookupByLibrary.simpleMessage("Change Pin"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("Set pin"),
         "changeRepAuthenticate":
@@ -126,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "This is already your representative!"),
         "changeRepSucces": MessageLookupByLibrary.simpleMessage(
             "Representative Changed Successfully"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("Change Seed"),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Check Availability"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
@@ -280,6 +283,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas Money"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Exchange NANO"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Enter current password"),
         "existingPinHint":
             MessageLookupByLibrary.simpleMessage("Enter current pin"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
@@ -417,6 +422,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Logging out will remove your seed and all Nautilus-related data from this device. If your seed is not backed up, you will never be able to access your funds again"),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "As long as you\'ve backed up your seed you have nothing to worry about."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "This appears to be an HD seed, unless you\'re sure you know what you\'re doing, you should use the \"Import HD\" option instead."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "This appears to be a standard seed, you should use the \"Import Standard\" option instead."),
         "manage": MessageLookupByLibrary.simpleMessage("Manage"),
         "mantaError":
             MessageLookupByLibrary.simpleMessage("Couldn\'t Verify Request"),
@@ -497,7 +506,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
             "Password must contain at least 1 upper case and lower case letter"),
         "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
-            "We\'re not responsible if you forget your password, and by design we are unable to reset or change it for you."),
+            "We\'re not responsible if you forget your password, and by design we are unable to reset it for you."),
         "passwordIncorrect":
             MessageLookupByLibrary.simpleMessage("Incorrect password"),
         "passwordNoLongerRequiredToOpenParagraph":

@@ -50,6 +50,8 @@ import 'package:nautilus_wallet_flutter/ui/accounts/accounts_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/onboard_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/backupseed_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/blocked_widget.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/change_magic_password_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/settings/change_magic_seed_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/changerepresentative_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/contacts_widget.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/disable_password_sheet.dart';
@@ -142,6 +144,9 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   late bool _shareOpen;
   // late bool _spendNanoOpen;
   late bool _useNanoOpen;
+
+  bool _loggedInWithMagic = false;
+  final Magic magic = Magic.instance;
 
   // Called if transfer fails
   void transferError() {
@@ -363,6 +368,20 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       setState(() {
         versionString = "v${packageInfo.version}";
       });
+    });
+
+    // logged in with magic?
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      try {
+        final Magic magic = Magic.instance;
+        if (await magic.user.isLoggedIn()) {
+          setState(() {
+            _loggedInWithMagic = true;
+          });
+        }
+      } catch (e) {
+        log.e(e.toString());
+      }
     });
   }
 
@@ -1067,7 +1086,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               AppLocalization.of(context).lockAppSetting,
               style: AppStyles.textStyleDialogHeader(context),
@@ -1786,10 +1804,10 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                 log.e(e.toString());
               }
 
-              // TODO: magic
               try {
-                final Magic magic = Magic.instance;
-                await magic.user.logout();
+                if (_loggedInWithMagic) {
+                  await magic.user.logout();
+                }
               } catch (e) {
                 log.e(e.toString());
               }
@@ -2272,23 +2290,22 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                         disabled: _curUnlockSetting.setting == UnlockOption.NO && StateContainer.of(context).encryptedSecret == null,
                       ),
                       // Encrypt option
-                      if (StateContainer.of(context).encryptedSecret == null)
-                        Column(children: <Widget>[
-                          Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                          AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).setWalletPassword, AppIcons.walletpassword,
-                              onPressed: () {
-                            Sheets.showAppHeightNineSheet(context: context, widget: SetPasswordSheet());
-                          })
-                        ])
-                      else
-                        Column(children: <Widget>[
-                          Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                          AppSettings.buildSettingsListItemSingleLine(
-                              context, AppLocalization.of(context).disableWalletPassword, AppIcons.walletpassworddisabled, onPressed: () {
-                            Sheets.showAppHeightNineSheet(context: context, widget: DisablePasswordSheet());
-                          }),
-                        ]),
-                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      // if (StateContainer.of(context).encryptedSecret == null)
+                      //   Column(children: <Widget>[
+                      //     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      //     AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).setWalletPassword, AppIcons.walletpassword,
+                      //         onPressed: () {
+                      //       Sheets.showAppHeightNineSheet(context: context, widget: SetPasswordSheet());
+                      //     })
+                      //   ])
+                      // else
+                      //   Column(children: <Widget>[
+                      //     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      //     AppSettings.buildSettingsListItemSingleLine(
+                      //         context, AppLocalization.of(context).disableWalletPassword, AppIcons.walletpassworddisabled, onPressed: () {
+                      //       Sheets.showAppHeightNineSheet(context: context, widget: DisablePasswordSheet());
+                      //     }),
+                      //   ]),
                       Column(children: <Widget>[
                         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).setPlausibleDeniabilityPin, AppIcons.walletpassword,
@@ -2296,13 +2313,27 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                           Sheets.showAppHeightNineSheet(context: context, widget: SetPlausiblePinSheet());
                         }, disabled: _curAuthMethod.method != AuthMethod.PIN || StateContainer.of(context).encryptedSecret != null),
                       ]),
-                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       Column(children: <Widget>[
                         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).changePin, AppIcons.walletpassword, onPressed: () {
                           Sheets.showAppHeightNineSheet(context: context, widget: SetPinSheet());
                         }, disabled: false),
                       ]),
+                      if (_loggedInWithMagic)
+                        Column(children: <Widget>[
+                          Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                          AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).changePassword, AppIcons.walletpassword,
+                              onPressed: () {
+                            Sheets.showAppHeightNineSheet(context: context, widget: ChangeMagicPasswordSheet());
+                          }, disabled: false),
+                        ]),
+                      if (_loggedInWithMagic)
+                        Column(children: <Widget>[
+                          Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                          AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).changeSeed, Icons.vpn_key, onPressed: () {
+                            Sheets.showAppHeightNineSheet(context: context, widget: ChangeMagicSeedSheet());
+                          }, disabled: false),
+                        ]),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     ],
                   ),

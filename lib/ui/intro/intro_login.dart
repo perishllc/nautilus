@@ -53,13 +53,13 @@ class _IntroLoginPageState extends State<IntroLoginPage> {
       final Map<String, dynamic> claim = jsonDecode(didToken[1] as String) as Map<String, dynamic>;
       final String issuer = claim["iss"] as String;
 
-      final String? encryptedSeed = await sl.get<AuthService>().getEncryptedSeed(issuer);
+      final bool entryExists = await sl.get<AuthService>().entryExists(issuer);
       if (!mounted) return;
 
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      Navigator.of(context).pushNamed('/intro_magic_password', arguments: <String, String?>{"encryptedSeed": encryptedSeed, "issuer": issuer});
+      Navigator.of(context).pushNamed('/intro_magic_password', arguments: <String, dynamic>{"entryExists": entryExists, "issuer": issuer});
     } catch (e) {
       debugPrint('Error: $e');
     }

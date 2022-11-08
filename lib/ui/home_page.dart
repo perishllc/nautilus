@@ -148,8 +148,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   // "infinite scroll":
   late ScrollController _scrollController;
-  int initialMaxHistItems = 25;
-  int _maxHistItems = 25;
+  int initialMaxHistItems = 100;
+  int _maxHistItems = 100;
   int _trueMaxHistItems = 10000;
   bool _loadingMore = false;
   late ScrollController _xmrScrollController;
