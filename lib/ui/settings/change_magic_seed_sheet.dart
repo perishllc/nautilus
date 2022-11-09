@@ -112,7 +112,7 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
                   Container(
                     margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
-                      AppLocalization.of(context).setPinParagraph,
+                      AppLocalization.of(context).changeSeedParagraph,
                       style: AppStyles.textStyleParagraph(context),
                       maxLines: 5,
                       stepGranularity: 0.5,
@@ -142,7 +142,7 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
                                   });
                                 }
                               },
-                              hintText: AppLocalization.of(context).existingPasswordHint,
+                              hintText: AppLocalization.of(context).setPassword,
                               obscureText: true,
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -232,46 +232,22 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
       return;
     }
 
-    // // delete the old key if it exists:
+    // delete the old key if it exists:
 
-    // final Magic magic = Magic.instance;
-    // final String key = await magic.user.getIdToken();
-    // final Uint8List decodedKey = base64.decode(key);
-    // final String stringKey = utf8.decode(decodedKey);
-    // final List<dynamic> didToken = jsonDecode(stringKey) as List<dynamic>;
-    // final Map<String, dynamic> claim = jsonDecode(didToken[1] as String) as Map<String, dynamic>;
-    // final String issuer = claim["iss"] as String;
+    final Magic magic = Magic.instance;
+    final String key = await magic.user.getIdToken();
+    final Uint8List decodedKey = base64.decode(key);
+    final String stringKey = utf8.decode(decodedKey);
+    final List<dynamic> didToken = jsonDecode(stringKey) as List<dynamic>;
+    final Map<String, dynamic> claim = jsonDecode(didToken[1] as String) as Map<String, dynamic>;
+    final String issuer = claim["iss"] as String;
 
-    // // check if the current identifier exists:
-    // final String oldHashedPassword = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(createPasswordController!.text)));
-    // final String oldFullIdentifier = "$issuer$oldHashedPassword";
-    // final bool oldIdentifierExists = await sl.get<AuthService>().entryExists(oldFullIdentifier);
+    // get identifier:
+    final String hashedPassword = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(createPasswordController!.text)));
+    final String fullIdentifier = "$issuer$hashedPassword";
 
-    // if (oldIdentifierExists) {
-    //   await sl.get<AuthService>().deleteEncryptedSeed(oldFullIdentifier);
-    // }
+    if (!mounted) return;
 
-    // // create the new key:
-
-    // final String? seed = await sl.get<Vault>().getSeed();
-    // final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController!.text));
-    // // upload encrypted seed to seed backup endpoint:
-    // // create the following entry in the database:
-    // // {
-    // //   identifier: "${identifier}${hashedPassword}",
-    // //   encrypted_seed: encryptedSeed,
-    // // }
-    // final String hashedPassword = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(confirmPasswordController!.text)));
-    // final String fullIdentifier = "$issuer$hashedPassword";
-    // await sl.get<AuthService>().setEncryptedSeed(fullIdentifier, encryptedSeed);
-
-    // if (!mounted) return;
-    // UIUtil.showSnackbar(AppLocalization.of(context).setPasswordSuccess, context);
-
-
-    Navigator.of(context).pushNamed("/intro_import");
-
-
-    // Navigator.pop(context);
+    Navigator.of(context).pushNamed("/intro_import", arguments: <String, String>{"fullIdentifier": fullIdentifier, "password": createPasswordController!.text});
   }
 }

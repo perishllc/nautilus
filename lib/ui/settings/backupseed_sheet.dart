@@ -38,7 +38,7 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
   Timer? _xmrSeedCopiedTimer;
   late bool _mnemonicCopied;
   Timer? _mnemonicCopiedTimer;
-  late bool _mnemonicDisabled;
+  bool _mnemonicDisabled = false;
 
   @override
   void initState() {

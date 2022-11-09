@@ -3391,6 +3391,28 @@ class AppLocalization {
     );
   }
 
+  /// `Change your existing password. If you don't know your current password, just make your best guess as it's not actually required to change it (since you are already logged in), but it does let us delete the existing backup entry.`
+  String get changePasswordParagraph {
+    return Intl.message(
+      'Change your existing password. If you don\'t know your current password, just make your best guess as it\'s not actually required to change it (since you are already logged in), but it does let us delete the existing backup entry.',
+      name: 'changePasswordParagraph',
+      desc:
+          'A paragraph that explains the user can set or change their existing magic password.',
+      args: [],
+    );
+  }
+
+  /// `Change the seed/phrase associated with this magic-link authed account, whatever password you set here will overwrite your existing password, but you can use the same password if you choose.`
+  String get changeSeedParagraph {
+    return Intl.message(
+      'Change the seed/phrase associated with this magic-link authed account, whatever password you set here will overwrite your existing password, but you can use the same password if you choose.',
+      name: 'changeSeedParagraph',
+      desc:
+          'A paragraph that explains the user can set or change their existing magic seed.',
+      args: [],
+    );
+  }
+
   /// `Plausible Deniability Info`
   String get plausibleInfoHeader {
     return Intl.message(

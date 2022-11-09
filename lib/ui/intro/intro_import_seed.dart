@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
+import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
+import 'package:nautilus_wallet_flutter/network/auth_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
@@ -20,8 +22,13 @@ import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
+import 'package:quiver/strings.dart';
 
 class IntroImportSeedPage extends StatefulWidget {
+  const IntroImportSeedPage({this.fullIdentifier, this.password});
+  final String? fullIdentifier;
+  final String? password;
+
   @override
   IntroImportSeedState createState() => IntroImportSeedState();
 }
@@ -416,8 +423,9 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                         _seedInputFocusNode.unfocus();
                         // If seed valid, log them in
                         if (NanoUtil.isValidBip39Seed(_seedInputController.text)) {
-                          await sl.get<Vault>().setSeed(_seedInputController.text);
                           await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+                          await sl.get<Vault>().setSeed(_seedInputController.text);
+                          await changingSeed(_seedInputController.text);
                           await sl.get<SharedPrefsUtil>().setKeyDerivationMethod("hd");
                           await sl.get<DBHelper>().dropAccounts();
                           if (!mounted) return;
@@ -455,6 +463,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                           await sl.get<SharedPrefsUtil>().setKeyDerivationMethod("hd");
                           final String seed = await NanoUtil.hdMnemonicListToSeed(_mnemonicController.text.split(' '));
                           await sl.get<Vault>().setSeed(seed);
+                          await changingSeed(seed);
                           await sl.get<DBHelper>().dropAccounts();
                           if (!mounted) return;
                           await NanoUtil().loginAccount(seed, context);
@@ -500,6 +509,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
 
                           await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
                           await sl.get<Vault>().setSeed(_seedInputController.text);
+                          await changingSeed(_seedInputController.text);
                           await sl.get<DBHelper>().dropAccounts();
                           if (!mounted) return;
                           await NanoUtil().loginAccount(_seedInputController.text, context);
@@ -519,6 +529,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                           await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
                           final String seed = NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' '));
                           await sl.get<Vault>().setSeed(seed);
+                          await changingSeed(_seedInputController.text);
                           await sl.get<DBHelper>().dropAccounts();
                           if (!mounted) return;
                           await NanoUtil().loginAccount(seed, context);
@@ -550,6 +561,24 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
             ),
           ),
         )));
+  }
+
+  Future<void> changingSeed(String seed) async {
+    if (isNotEmpty(widget.fullIdentifier)) {
+      try {
+        final bool identifierExists = await sl.get<AuthService>().entryExists(widget.fullIdentifier!);
+
+        if (identifierExists) {
+          await sl.get<AuthService>().deleteEncryptedSeed(widget.fullIdentifier!);
+        }
+
+        // upload the seed backup:
+        final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, widget.password!));
+        await sl.get<AuthService>().setEncryptedSeed(widget.fullIdentifier!, encryptedSeed);
+      } catch (e) {
+        sl.get<Logger>().e("Error uploading seed backup", e);
+      }
+    }
   }
 
   Future<void> skipPin() async {

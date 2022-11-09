@@ -190,9 +190,8 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                                       }
                                     }
                                   },
-                                  hintText: !widget.entryExists
-                                      ? AppLocalization.of(context).confirmPasswordHint
-                                      : AppLocalization.of(context).enterPasswordHint,
+                                  hintText:
+                                      !widget.entryExists ? AppLocalization.of(context).confirmPasswordHint : AppLocalization.of(context).enterPasswordHint,
                                   keyboardType: TextInputType.text,
                                   obscureText: true,
                                   textAlign: TextAlign.center,
@@ -269,7 +268,8 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     }
     if (widget.entryExists) {
       // get the encrypted seed from the auth-service:
-      final String fullIdentifier = widget.identifier! + confirmPasswordController!.text;
+      final String hashedPassword = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(confirmPasswordController!.text)));
+      final String fullIdentifier = widget.identifier! + hashedPassword;
       final String? encryptedSeed = await sl.get<AuthService>().getEncryptedSeed(fullIdentifier);
       // final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
 

@@ -1,18 +1,16 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dart_bip32_bip44/dart_bip32_bip44.dart';
+import 'package:convert/convert.dart';
+import "package:ed25519_hd_key/ed25519_hd_key.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:libcrypto/libcrypto.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:bip39_mnemonic/bip39_mnemonic.dart';
-import 'package:convert/convert.dart';
-import "package:ed25519_hd_key/ed25519_hd_key.dart";
-import 'package:libcrypto/libcrypto.dart';
 
 class NanoUtil {
   // standard:

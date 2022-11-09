@@ -112,7 +112,7 @@ class _ChangeMagicPasswordSheetState extends State<ChangeMagicPasswordSheet> {
                   Container(
                     margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
-                      AppLocalization.of(context).setPinParagraph,
+                      AppLocalization.of(context).changePasswordParagraph,
                       style: AppStyles.textStyleParagraph(context),
                       maxLines: 5,
                       stepGranularity: 0.5,

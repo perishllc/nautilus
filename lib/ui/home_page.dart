@@ -34,6 +34,7 @@ import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/model/list_model.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/giftcards.dart';
 import 'package:nautilus_wallet_flutter/network/metadata_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/fcm_message_event.dart';
@@ -76,7 +77,6 @@ import 'package:nautilus_wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/transaction_state_tag.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/network/giftcards.dart';
 import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
@@ -205,17 +205,18 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   Future<void> getNotificationPermissions() async {
     bool notificationsAllowed = false;
     try {
-      final NotificationSettings settings = await _firebaseMessaging.requestPermission(sound: true, badge: true, alert: true);
+      final NotificationSettings _throwSettings = await _firebaseMessaging.requestPermission(sound: true, badge: true, alert: true);
+      // might help on android 13?:
+      final NotificationSettings settings = await _firebaseMessaging.getNotificationSettings(); // TODO: remove this line
       if (settings.alert == AppleNotificationSetting.enabled ||
           settings.badge == AppleNotificationSetting.enabled ||
           settings.sound == AppleNotificationSetting.enabled ||
           settings.authorizationStatus == AuthorizationStatus.authorized) {
-        sl.get<SharedPrefsUtil>().getNotificationsSet().then((bool beenSet) {
-          if (!beenSet) {
-            notificationsAllowed = true;
-            sl.get<SharedPrefsUtil>().setNotificationsOn(true);
-          }
-        });
+        final bool beenSet = await sl.get<SharedPrefsUtil>().getNotificationsSet();
+        if (!beenSet) {
+          notificationsAllowed = true;
+          sl.get<SharedPrefsUtil>().setNotificationsOn(true);
+        }
         _firebaseMessaging.getToken().then((String? token) {
           if (token != null) {
             EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: token));

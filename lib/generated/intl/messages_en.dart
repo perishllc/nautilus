@@ -117,6 +117,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeLog": MessageLookupByLibrary.simpleMessage("Change Log"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "Change your existing password. If you don\'t know your current password, just make your best guess as it\'s not actually required to change it (since you are already logged in), but it does let us delete the existing backup entry."),
         "changePin": MessageLookupByLibrary.simpleMessage("Change Pin"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("Set pin"),
         "changeRepAuthenticate":
@@ -129,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeRepSucces": MessageLookupByLibrary.simpleMessage(
             "Representative Changed Successfully"),
         "changeSeed": MessageLookupByLibrary.simpleMessage("Change Seed"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "Change the seed/phrase associated with this magic-link authed account, whatever password you set here will overwrite your existing password, but you can use the same password if you choose."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Check Availability"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),

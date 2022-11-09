@@ -368,10 +368,10 @@ class UIUtil {
     textStyle = textStyle ?? AppStyles.textStyleSeed(context);
     final String stringPartOne = address.substring(0, 22);
     final String stringPartTwo = address.substring(22, 44);
-    final String stringPartThree = address.substring(44, 64);
-    final String stringPartFour = address.substring(64, 86);
-    final String stringPartFive = address.substring(86, 108);
-    final String stringPartSix = address.substring(108, 128);
+    final String stringPartThree = address.substring(44, 66);
+    final String stringPartFour = address.substring(66, 88);
+    final String stringPartFive = address.substring(88, 110);
+    final String stringPartSix = address.substring(110, 128);
     return Column(
       children: <Widget>[
         Text(
