@@ -184,7 +184,7 @@ class UsernameService {
 // 2. If it has not been opened, it's unregistered
 // 3. If it has been opened, check if the rep field encodes the username. If so, the sender of the send which was received in the open block is the owner of the username. Otherwise, it's permanently unregistered.
 
-    final String a2PrivateKey = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes("username registration:$username")));
+    final String a2PrivateKey = NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode("username registration:$username"))));
     final String a2Account = NanoUtil.privateKeyToPublicAddress(a2PrivateKey);
 
     final AccountInfoResponse accountInfo = await sl.get<AccountService>().getAccountInfo(a2Account);

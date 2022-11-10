@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
@@ -253,7 +256,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                               AppLocalization.of(context).imSure,
                               () async {
                                 // get the encrypted seed from the auth-service:
-                                final String hashedPassword = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(confirmPasswordController!.text)));
+                                final String hashedPassword = NanoHelpers.byteToHex(blake2b(utf8.encode(confirmPasswordController!.text)));
                                 final String fullIdentifier = "${widget.identifier}$hashedPassword";
                                 String? encryptedSeed = await sl.get<AuthService>().getEncryptedSeed(fullIdentifier);
                                 // final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
@@ -326,7 +329,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     }
     if (widget.entryExists) {
       // get the encrypted seed from the auth-service:
-      final String hashedPassword = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(confirmPasswordController!.text)));
+      final String hashedPassword = NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
       final String fullIdentifier = widget.identifier! + hashedPassword;
       final String? encryptedSeed = await sl.get<AuthService>().getEncryptedSeed(fullIdentifier);
       // final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
@@ -387,7 +390,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     //   identifier: "${identifier}${hashedPassword}",
     //   encrypted_seed: encryptedSeed,
     // }
-    final String hashedPassword = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(confirmPasswordController!.text)));
+    final String hashedPassword = NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
     final String fullIdentifier = "${widget.identifier}$hashedPassword";
     await sl.get<AuthService>().setEncryptedSeed(fullIdentifier, encryptedSeed);
     skipPin();
