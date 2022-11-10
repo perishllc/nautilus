@@ -256,7 +256,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                               AppLocalization.of(context).imSure,
                               () async {
                                 // get the encrypted seed from the auth-service:
-                                final String hashedPassword = NanoHelpers.byteToHex(blake2b(utf8.encode(confirmPasswordController!.text)));
+                                final String hashedPassword = NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
                                 final String fullIdentifier = "${widget.identifier}$hashedPassword";
                                 String? encryptedSeed = await sl.get<AuthService>().getEncryptedSeed(fullIdentifier);
                                 // final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
