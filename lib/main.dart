@@ -317,8 +317,8 @@ class AppState extends State<App> {
             case '/intro_import':
               return MaterialPageRoute(
                 builder: (_) => IntroImportSeedPage(
-                    password: (settings.arguments! as Map<String, String>)["password"],
-                    fullIdentifier: (settings.arguments! as Map<String, String>)["fullIdentifier"]),
+                    password: (settings.arguments as Map<String, String>?)?["password"],
+                    fullIdentifier: (settings.arguments as Map<String, String>?)?["fullIdentifier"]),
                 settings: settings,
               );
             case '/lock_screen':
