@@ -93,11 +93,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "為了防止濫用，我們要求您解決驗證碼才能在下一頁領取禮品卡。"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("變更貨幣單位"),
         "changeLog": MessageLookupByLibrary.simpleMessage("更改日誌"),
+        "changePassword": MessageLookupByLibrary.simpleMessage("更改密碼"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "更改現有密碼。如果您不知道當前密碼，請做出最佳猜測，因為實際上不需要更改它（因為您已經登錄），但它確實讓我們刪除了現有的備份條目。"),
+        "changePin": MessageLookupByLibrary.simpleMessage("更改引腳"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("設置引腳"),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage("變更代表"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("變更"),
         "changeRepHint": MessageLookupByLibrary.simpleMessage("輸入新代表"),
         "changeRepSame": MessageLookupByLibrary.simpleMessage("這已經是您的代表了！"),
         "changeRepSucces": MessageLookupByLibrary.simpleMessage("代表變更成功"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("改變種子"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "更改與此magic-link authed 帳戶關聯的種子/短語，您在此處設置的任何密碼都將覆蓋您現有的密碼，但您可以選擇使用相同的密碼。"),
         "checkAvailability": MessageLookupByLibrary.simpleMessage("查看可用性"),
         "close": MessageLookupByLibrary.simpleMessage("關閉"),
         "confirm": MessageLookupByLibrary.simpleMessage("確認"),
@@ -123,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "contactsImportErr": MessageLookupByLibrary.simpleMessage("無法匯入聯絡人"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("順利匯出 %1 個聯絡人"),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("無需登錄即可繼續"),
         "copied": MessageLookupByLibrary.simpleMessage("已複製"),
         "copy": MessageLookupByLibrary.simpleMessage("複製"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("複製地址"),
@@ -177,7 +187,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("無法設定錢包密碼"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("輸入地址"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("輸入金額"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("輸入電子郵件"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("輸入禮品備註"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("輸入高度"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("輸入訊息"),
@@ -217,6 +227,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("氣, 錢"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("交換納米"),
+        "existingPasswordHint": MessageLookupByLibrary.simpleMessage("輸入當前密碼"),
+        "existingPinHint": MessageLookupByLibrary.simpleMessage("輸入當前引腳"),
         "exit": MessageLookupByLibrary.simpleMessage("退出"),
         "exportTXData": MessageLookupByLibrary.simpleMessage("出口交易"),
         "failed": MessageLookupByLibrary.simpleMessage("失敗"),
@@ -290,12 +302,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "看起來你點擊了一個包含一些 NANO 的鏈接，為了接收這些資金，我們只需要你完成設置你的錢包。"),
         "importGiftv2":
             MessageLookupByLibrary.simpleMessage("您點擊的鏈接包含一些 NANO，您想將其導入此錢包嗎？"),
+        "importHD": MessageLookupByLibrary.simpleMessage("導入高清"),
         "importSecretPhrase": MessageLookupByLibrary.simpleMessage("輸入秘密詞語"),
         "importSecretPhraseHint":
             MessageLookupByLibrary.simpleMessage("請輸入您的 24 個秘密詞語。每個詞應用空格分隔。"),
         "importSeed": MessageLookupByLibrary.simpleMessage("匯入種子"),
         "importSeedHint": MessageLookupByLibrary.simpleMessage("請在下方輸入您的種子"),
         "importSeedInstead": MessageLookupByLibrary.simpleMessage("匯入種子"),
+        "importStandard": MessageLookupByLibrary.simpleMessage("進口標準"),
         "importWallet": MessageLookupByLibrary.simpleMessage("匯入現有錢包"),
         "instantly": MessageLookupByLibrary.simpleMessage("立刻"),
         "insufficientBalance": MessageLookupByLibrary.simpleMessage("餘額不足"),
@@ -315,7 +329,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loadedInto": MessageLookupByLibrary.simpleMessage("載入到"),
         "lockAppSetting": MessageLookupByLibrary.simpleMessage("啟動時要求驗證"),
         "locked": MessageLookupByLibrary.simpleMessage("已鎖定"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage("登錄或註冊"),
         "logout": MessageLookupByLibrary.simpleMessage("登出"),
         "logoutAction": MessageLookupByLibrary.simpleMessage("刪除種子並登出"),
         "logoutAreYouSure": MessageLookupByLibrary.simpleMessage("您確定嗎？"),
@@ -323,6 +337,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "本動作會刪除您在本裝置裡頭的種子及所有和 Nautilus 有關的資料。如果您的種子沒有備份，您將永遠無法存取您的帳戶"),
         "logoutReassurance":
             MessageLookupByLibrary.simpleMessage("只要您已備份您的種子，就不必擔心。"),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "這似乎是一個高清種子，除非你確定你知道你在做什麼，否則你應該使用“導入高清”選項。"),
+        "looksLikeStandardSeed":
+            MessageLookupByLibrary.simpleMessage("這似乎是一個標準種子，您應該改用“導入標準”選項。"),
         "manage": MessageLookupByLibrary.simpleMessage("管理"),
         "mantaError": MessageLookupByLibrary.simpleMessage("無法驗證請求"),
         "manualEntry": MessageLookupByLibrary.simpleMessage("手動輸入"),
@@ -362,6 +380,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage("沒有要導出的交易。"),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("節點狀態"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("沒有任何"),
         "notSent": MessageLookupByLibrary.simpleMessage("未傳送"),
         "notificationBody": MessageLookupByLibrary.simpleMessage("查看交易明細"),
         "notificationHeaderSupplement":
@@ -387,8 +406,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "paid": MessageLookupByLibrary.simpleMessage("支付"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("紙錢包"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage("密碼不得留白"),
+        "passwordCapitalLetter":
+            MessageLookupByLibrary.simpleMessage("密碼必須至少包含 1 個大寫和小寫字母"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "如果您忘記了密碼，我們概不負責，並且我們無法為您重置或更改密碼。"),
+        "passwordIncorrect": MessageLookupByLibrary.simpleMessage("密碼錯誤"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage("您日後啟動 Nautilus 時不用輸入密碼。"),
+        "passwordNumber":
+            MessageLookupByLibrary.simpleMessage("密碼必須至少包含 1 個數字"),
+        "passwordSpecialCharacter":
+            MessageLookupByLibrary.simpleMessage("密碼必須至少包含 1 個特殊字符"),
+        "passwordTooShort": MessageLookupByLibrary.simpleMessage("密碼太短"),
+        "passwordWarning":
+            MessageLookupByLibrary.simpleMessage("打開 Nautilus 需要此密碼。"),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage("以後需要這個密碼方可開啟 Nautilus。"),
         "passwordsDontMatch": MessageLookupByLibrary.simpleMessage("密碼不匹配"),
@@ -404,6 +435,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("建立 6 個數字組成的辨識碼"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("輸入識別碼"),
+        "pinIncorrect": MessageLookupByLibrary.simpleMessage("輸入的密碼不正確"),
         "pinInvalid": MessageLookupByLibrary.simpleMessage("輸入的識別碼無效"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("識別碼"),
         "pinRepChange": MessageLookupByLibrary.simpleMessage("輸入識別碼以變更代表。"),
@@ -533,6 +565,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPassword": MessageLookupByLibrary.simpleMessage("設定密碼"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage("順利設定密碼"),
         "setPin": MessageLookupByLibrary.simpleMessage("設置引腳"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "設置或更改您現有的 PIN。如果您尚未設置 PIN，則默認 PIN 為 000000。"),
         "setPinSuccess": MessageLookupByLibrary.simpleMessage("已成功設置引腳"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("設置合理的引腳"),
@@ -670,8 +704,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("一星期前"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "歡迎來到 Nautilus。接著您可建立新錢包或匯入現有錢包"),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "歡迎來到鸚鵡螺。選擇一個選項以開始使用或使用下面的圖標選擇一個主題。"),
         "welcomeTextUpdated":
             MessageLookupByLibrary.simpleMessage("歡迎來到鸚鵡螺。首先，創建一個新錢包或導入現有錢包。"),
+        "welcomeTextWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("首先，創建一個新錢包或導入現有錢包。"),
         "withAddress": MessageLookupByLibrary.simpleMessage("有地址"),
         "withFee": MessageLookupByLibrary.simpleMessage("有費用"),
         "withMessage": MessageLookupByLibrary.simpleMessage("有訊息"),

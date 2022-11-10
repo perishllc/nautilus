@@ -109,6 +109,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("שנה מטבע חליפין"),
         "changeLog": MessageLookupByLibrary.simpleMessage("שינוי יומן"),
+        "changePassword": MessageLookupByLibrary.simpleMessage("שנה סיסמא"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "שנה את הסיסמה הקיימת שלך. אם אינך יודע את הסיסמה הנוכחית שלך, פשוט בצע את הניחוש הטוב ביותר שלך, כי למעשה אין צורך לשנות אותה (מכיוון שאתה כבר מחובר), אך היא מאפשרת לנו למחוק את ערך הגיבוי הקיים."),
+        "changePin": MessageLookupByLibrary.simpleMessage("שנה סיכה"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("הגדר סיכה"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("שנה נציג"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("שנה"),
@@ -118,6 +123,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("זה כבר הנציג שלך!"),
         "changeRepSucces":
             MessageLookupByLibrary.simpleMessage("נציג השתנה בהצלחה"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("שנה זרע"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "שנה את המקור/הביטוי המשויך לחשבון המאושר עם קישור הקסם הזה, כל סיסמה שתגדיר כאן תחליף את הסיסמה הקיימת שלך, אבל אתה יכול להשתמש באותה סיסמה אם תבחר."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("בדוק זמינות"),
         "close": MessageLookupByLibrary.simpleMessage("סגור"),
@@ -151,6 +159,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ייבוא איש קשר נכשל"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "יבוא אנשי הקשר של %1 עבר בהצלחה"),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("המשך ללא התחברות"),
         "copied": MessageLookupByLibrary.simpleMessage("Copied"),
         "copy": MessageLookupByLibrary.simpleMessage("Copy"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("העתק כתובת"),
@@ -217,7 +227,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("הכנס כתובת"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("הכנס כמות"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("הזן אימייל"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("הזן הערת מתנה"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("הזן גובה"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("הזן הודעה"),
@@ -263,6 +273,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("כסף גז"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("החלף NANO"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("הכנס סיסמא נוכחית"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("הזן את הסיכה הנוכחית"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "exportTXData": MessageLookupByLibrary.simpleMessage("ייצוא עסקאות"),
         "failed": MessageLookupByLibrary.simpleMessage("נכשל"),
@@ -348,6 +362,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "נראה שלחצת על קישור שמכיל קצת NANO, כדי לקבל את הכספים האלה אנחנו רק צריכים שתסיים להגדיר את הארנק שלך."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "הקישור שלחצתם מכיל קצת NANO, האם תרצה לייבא אותו לארנק הזה?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("ייבוא HD"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Import Secret Phrase"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -357,6 +372,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("בבקשה תכניס את הסיד שלך."),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("Import Seed Instead"),
+        "importStandard": MessageLookupByLibrary.simpleMessage("תקן ייבוא"),
         "importWallet": MessageLookupByLibrary.simpleMessage("ייבא ארנק"),
         "instantly": MessageLookupByLibrary.simpleMessage("באופן מידי"),
         "insufficientBalance":
@@ -380,7 +396,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("בצע אימות בעת הפעלה"),
         "locked": MessageLookupByLibrary.simpleMessage("נעל"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader":
+            MessageLookupByLibrary.simpleMessage("התחבר או הרשמה"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "logoutAction": MessageLookupByLibrary.simpleMessage("מחק סיד והתנתק"),
         "logoutAreYouSure": MessageLookupByLibrary.simpleMessage("אתה בטוח?"),
@@ -388,6 +405,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Logging out will remove your seed and all Nautilus-related data from this device. If your seed is not backed up, you will never be able to access your funds again"),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "כל עוד גיבית את הסיד שלך, אין לך מה לדאוג."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "נראה שזה זרע HD, אלא אם אתה בטוח שאתה יודע מה אתה עושה, עליך להשתמש באפשרות \"ייבוא HD\" במקום זאת."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "נראה שזהו זרע סטנדרטי, עליך להשתמש באפשרות \"ייבוא תקן\" במקום זאת."),
         "manage": MessageLookupByLibrary.simpleMessage("נהל"),
         "mantaError":
             MessageLookupByLibrary.simpleMessage("Couldn\'t Verify Request"),
@@ -434,6 +455,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("אין עסקאות לייצא."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("מצב צומת"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("אף אחד"),
         "notSent": MessageLookupByLibrary.simpleMessage("לא נשלח"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "פתח את נאטריום בשביל לצפות בטרנסקציה."),
@@ -463,9 +485,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("ארנק נייר"),
         "passwordBlank":
             MessageLookupByLibrary.simpleMessage("Password cannot be empty"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "הסיסמה חייבת להכיל לפחות אות אחת גדולה ואות קטנה"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "איננו אחראים אם תשכח את הסיסמה שלך, ולפי התכנון איננו יכולים לאפס או לשנות אותה עבורך."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("סיסמא לא נכונה"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "You will not need a password to open Nautilus anymore."),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "הסיסמה חייבת להכיל לפחות מספר אחד"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "הסיסמה חייבת להכיל לפחות תו מיוחד אחד"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("הסיסמה קצרה מדי"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "סיסמה זו תידרש לפתיחת Nautilus."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "This password will be required to open Nautilus."),
@@ -485,6 +521,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("יצר קוד באורך 6 ספרות"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("הכנס קוד"),
+        "pinIncorrect": MessageLookupByLibrary.simpleMessage("הוזן סיכה שגויה"),
         "pinInvalid": MessageLookupByLibrary.simpleMessage("הוכנס קוד לא תקין"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("קוד"),
         "pinRepChange":
@@ -634,6 +671,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Password has been set successfully"),
         "setPin": MessageLookupByLibrary.simpleMessage("הגדר סיכה"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "הגדר או שנה את ה-PIN הקיים שלך. אם עדיין לא הגדרת קוד PIN, קוד ברירת המחדל הוא 000000."),
         "setPinSuccess":
             MessageLookupByLibrary.simpleMessage("סיכה הוגדרה בהצלחה"),
         "setPlausibleDeniabilityPin":
@@ -795,8 +834,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("לפני שבוע"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "ברוך הבא לנאטריום. בכדי להמשיך, אתה רשאי לייצר ארנק חדש או לייבא אחד קיים."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "ברוכים הבאים לנאוטילוס. בחר אפשרות להתחיל או בחר ערכת נושא באמצעות הסמל למטה."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "ברוכים הבאים לנאוטילוס. כדי להתחיל, צור ארנק חדש או ייבא ארנק קיים."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "כדי להתחיל, צור ארנק חדש או ייבא ארנק קיים."),
         "withAddress": MessageLookupByLibrary.simpleMessage("עם כתובת"),
         "withFee": MessageLookupByLibrary.simpleMessage("עם עמלה"),
         "withMessage": MessageLookupByLibrary.simpleMessage("עם הודעה"),

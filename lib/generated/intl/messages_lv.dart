@@ -120,6 +120,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "Lai novērstu ļaunprātīgu izmantošanu, mēs pieprasām jums atrisināt captcha, lai nākamajā lapā varētu pieprasīt dāvanu karti."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Mainīt valūtu"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Change Log"),
+        "changePassword": MessageLookupByLibrary.simpleMessage("Mainīt paroli"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "Mainiet savu esošo paroli. Ja nezināt savu pašreizējo paroli, vienkārši uzminējiet, jo tā faktiski nav jāmaina (jo jūs jau esat pieteicies), taču tas ļauj mums izdzēst esošo rezerves ierakstu."),
+        "changePin": MessageLookupByLibrary.simpleMessage("Mainīt Pin"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("Iestatīt tapu"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Mainīt pārstāvi"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Mainīt"),
@@ -129,6 +134,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "This is already your representative!"),
         "changeRepSucces":
             MessageLookupByLibrary.simpleMessage("Pārstāvis nomainīts sekmīgi"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("Mainīt sēklu"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "Mainiet sēklu/frāzi, kas saistīta ar šo maģiskās saites autentificēto kontu, neatkarīgi no šeit iestatītās paroles tiks pārrakstīta jūsu esošā parole, taču varat izmantot to pašu paroli, ja vēlaties."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Check Availability"),
         "close": MessageLookupByLibrary.simpleMessage("Aizvērt"),
@@ -164,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Neizdevās importēt kontaktus"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Sekmīgi importēti %1 kontakti."),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("Turpināt bez pieteikšanās"),
         "copied": MessageLookupByLibrary.simpleMessage("Nokopēts"),
         "copy": MessageLookupByLibrary.simpleMessage("Kopēt"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Kopēt adresi"),
@@ -236,7 +246,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("Ievadiet adresi"),
         "enterAmount":
             MessageLookupByLibrary.simpleMessage("Ievadiet daudzumu"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("Ievadiet e-pastu"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
         "enterHeight":
@@ -286,6 +296,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gas Money"),
         "exchangeNano":
             MessageLookupByLibrary.simpleMessage("Apmainīties ar NANO"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Ievadiet pašreizējo paroli"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("Ievadiet pašreizējo PIN"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "exportTXData":
             MessageLookupByLibrary.simpleMessage("Eksporta darījumi"),
@@ -377,6 +391,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Šķiet, ka noklikšķinājāt uz saites, kurā ir ietverts NANO. Lai saņemtu šos līdzekļus, mums tikai jāpabeidz sava maka iestatīšana."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Saite, uz kuras noklikšķinājāt, satur kādu NANO. Vai vēlaties to importēt šajā makā?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("Importēt HD"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importēt slepeno frāzi"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -386,6 +401,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Zemāk norādiet sēklu."),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("Importēt privāto atslēgu"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("Importa standarts"),
         "importWallet": MessageLookupByLibrary.simpleMessage("Importēt maku"),
         "instantly": MessageLookupByLibrary.simpleMessage("Uzreiz"),
         "insufficientBalance":
@@ -410,7 +427,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Autentificēties palaižot"),
         "locked": MessageLookupByLibrary.simpleMessage("Aizslēgts"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(
+            "Pieteikties vai Reģistrēties"),
         "logout": MessageLookupByLibrary.simpleMessage("Iziet"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Dzēst sēklu un iziet"),
@@ -420,6 +438,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Izejot tiks aizmirsta jūsu sēkla un visi Nautilus saistītie dati šajā ierīcē. Ja neesat izveidojis maka sēklas rezerves kopiju, maks un tā līdzekļi tiks neatgriezeniski zaudēti"),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Ja vien esat saglabājis maka sēklu, jums ne par ko nav jāuztraucas."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "Šķiet, ka tas ir HD sēkla, ja vien neesat pārliecināts, ka zināt, ko darāt, tā vietā izmantojiet opciju \"Importēt HD\"."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "Šķiet, ka šī ir standarta sēkla, tā vietā izmantojiet opciju \"Importēt standartu\"."),
         "manage": MessageLookupByLibrary.simpleMessage("Pārvaldīt"),
         "mantaError":
             MessageLookupByLibrary.simpleMessage("Couldn\'t Verify Request"),
@@ -468,6 +490,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nav eksportējamu darījumu."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Node Status"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("Nav"),
         "notSent": MessageLookupByLibrary.simpleMessage("not sent"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Atveriet Nautilus, lai apskatītu šo transakciju"),
@@ -497,9 +520,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("Papīra maks"),
         "passwordBlank":
             MessageLookupByLibrary.simpleMessage("Password cannot be empty"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "Parolē jāsatur vismaz 1 lielais un mazais burts"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "Mēs neesam atbildīgi, ja aizmirstat savu paroli, un mēs nevaram to atiestatīt vai mainīt jūsu vietā."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("nepareiza parole"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "You will not need a password to open Nautilus anymore."),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "Parolē ir jābūt vismaz 1 ciparam"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "Parolē jāsatur vismaz 1 speciālā rakstzīme"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("Parole ir pārāk īsa"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "Šī parole būs nepieciešama, lai atvērtu Nautilus."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "This password will be required to open Nautilus."),
@@ -519,6 +556,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("Izveidojiet sešu ciparu PIN"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("Ievadiet PIN"),
+        "pinIncorrect": MessageLookupByLibrary.simpleMessage(
+            "Ievadīta nepareiza spraudīte"),
         "pinInvalid": MessageLookupByLibrary.simpleMessage("Nepareizs PIN"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("PIN"),
         "pinRepChange": MessageLookupByLibrary.simpleMessage(
@@ -680,6 +719,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Password has been set successfully"),
         "setPin": MessageLookupByLibrary.simpleMessage("Iestatīt Pin"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "Iestatiet vai mainiet savu esošo PIN. Ja vēl neesat iestatījis PIN, noklusējuma PIN ir 000000."),
         "setPinSuccess":
             MessageLookupByLibrary.simpleMessage("Pin ir veiksmīgi iestatīts"),
         "setPlausibleDeniabilityPin":
@@ -853,8 +894,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("Pirms nedēļas"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Sveicināti Nautilus. Izveidojiet jaunu maku vai importējiet eksistējošu"),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "Laipni lūdzam Nautilus. Izvēlieties opciju, lai sāktu darbu, vai izvēlieties motīvu, izmantojot tālāk esošo ikonu."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Laipni lūdzam Nautilus. Lai sāktu, izveidojiet jaunu maku vai importējiet esošu."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Lai sāktu, izveidojiet jaunu maku vai importējiet esošu."),
         "withAddress": MessageLookupByLibrary.simpleMessage("With Address"),
         "withFee": MessageLookupByLibrary.simpleMessage("Ar maksu"),
         "withMessage": MessageLookupByLibrary.simpleMessage("With Message"),

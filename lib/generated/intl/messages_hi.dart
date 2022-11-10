@@ -119,6 +119,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "दुरुपयोग को रोकने के लिए, हम चाहते हैं कि आप अगले पृष्ठ पर उपहार कार्ड का दावा करने के लिए एक कैप्चा हल करें।"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("मुद्रा बदलें"),
         "changeLog": MessageLookupByLibrary.simpleMessage("लॉग बदलें"),
+        "changePassword": MessageLookupByLibrary.simpleMessage("पासवर्ड बदलें"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "अपना मौजूदा पासवर्ड बदलें। यदि आप अपना वर्तमान पासवर्ड नहीं जानते हैं, तो बस अपना सर्वश्रेष्ठ अनुमान लगाएं क्योंकि वास्तव में इसे बदलने की आवश्यकता नहीं है (चूंकि आप पहले से लॉग इन हैं), लेकिन यह हमें मौजूदा बैकअप प्रविष्टि को हटाने देता है।"),
+        "changePin": MessageLookupByLibrary.simpleMessage("पिन बदलें"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("पिन सेट करें"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("प्रतिनिधि बदलें"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("बदलें"),
@@ -128,6 +133,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "यह पहले से ही आपका प्रतिनिधि है!"),
         "changeRepSucces": MessageLookupByLibrary.simpleMessage(
             "प्रतिनिधि सफलतापूर्वक बदल गया"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("बीज बदलें"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "इस मैजिक-लिंक ऑथर्ड अकाउंट से जुड़े बीज/वाक्यांश को बदलें, आप यहां जो भी पासवर्ड सेट करेंगे, वह आपके मौजूदा पासवर्ड को ओवरराइट कर देगा, लेकिन आप चाहें तो उसी पासवर्ड का उपयोग कर सकते हैं।"),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("उपलब्धता जाँचें"),
         "close": MessageLookupByLibrary.simpleMessage("बंद करें"),
@@ -164,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("संपर्क आयात नहीं हो सकें"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "%1 संपर्क सफलतापूर्वक आयात हो गए हैं।"),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("लॉगिन के बिना जारी रखें"),
         "copied": MessageLookupByLibrary.simpleMessage("कॉपी हो गया"),
         "copy": MessageLookupByLibrary.simpleMessage("कॉपी"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("पता कॉपी करें"),
@@ -233,7 +243,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "वॉलेट पासवर्ड सेट करने में विफल"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("पता दर्ज करें"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("राशि दर्ज करें"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("ईमेल दर्ज करें"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("गिफ़्ट नोट दर्ज करें"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("ऊंचाई दर्ज करें"),
@@ -282,6 +292,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("गैस मनी"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("एक्सचेंज नैनो"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("वर्तमान पासवर्ड डालें"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("वर्तमान पिन दर्ज करें"),
         "exit": MessageLookupByLibrary.simpleMessage("बाहर निकलें"),
         "exportTXData": MessageLookupByLibrary.simpleMessage("निर्यात लेनदेन"),
         "failed": MessageLookupByLibrary.simpleMessage("विफल रहा"),
@@ -370,6 +384,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "ऐसा लगता है कि आपने एक लिंक पर क्लिक किया है जिसमें कुछ नैनो है, इन निधियों को प्राप्त करने के लिए हमें बस आपके वॉलेट की स्थापना पूरी करने की आवश्यकता है।"),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "आपके द्वारा क्लिक किए गए लिंक में कुछ नैनो है, क्या आप इसे इस वॉलेट में आयात करना चाहेंगे?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("आयात एचडी"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("गुप्त वाक्यांश आयात करें"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -379,6 +394,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "कृपया नीचे अपना सीड दर्ज करें।"),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("इसके बजाय सीड आयात करें"),
+        "importStandard": MessageLookupByLibrary.simpleMessage("आयात मानक"),
         "importWallet": MessageLookupByLibrary.simpleMessage("वॉलेट आयात हैं"),
         "instantly": MessageLookupByLibrary.simpleMessage("तुरन्त"),
         "insufficientBalance":
@@ -402,7 +418,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("लॉन्च पर प्रमाणित करें"),
         "locked": MessageLookupByLibrary.simpleMessage("अवरोधित"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader":
+            MessageLookupByLibrary.simpleMessage("भाग लें या पंजीकरण करें"),
         "logout": MessageLookupByLibrary.simpleMessage("लॉगआउट करें"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("सीड मिटा कर लॉगआउट करें"),
@@ -412,6 +429,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "लॉगआउट करने पर आपके सीड और नेट्रियम से संबंधित सभी डेटा हट जाएंगे। यदि आपने अपने सीड को बैकअप नहीं किया, तो आप कभी भी अपने धन का उपयोग नहीं कर पाएंगे।"),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "अगर आपने अपने सीड को बैकअप कर लिया है, तो आपको चिंता करने की कोई आवश्यकता नहीं है।"),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "यह एक एचडी बीज प्रतीत होता है, जब तक कि आप सुनिश्चित न हों कि आप जानते हैं कि आप क्या कर रहे हैं, आपको इसके बजाय \"आयात एचडी\" विकल्प का उपयोग करना चाहिए।"),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "यह एक मानक बीज प्रतीत होता है, आपको इसके बजाय \"आयात मानक\" विकल्प का उपयोग करना चाहिए।"),
         "manage": MessageLookupByLibrary.simpleMessage("प्रबंधन | मैनेज"),
         "mantaError":
             MessageLookupByLibrary.simpleMessage("अनुरोध सत्यापित नहीं कर सके"),
@@ -462,6 +483,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "निर्यात करने के लिए कोई लेनदेन नहीं है।"),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("नोड स्थिति"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("कोई भी नहीं"),
         "notSent": MessageLookupByLibrary.simpleMessage("नहीं भेजा गया"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "इस लेनदेन को देखने के लिए नेट्रियम खोलें"),
@@ -491,9 +513,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("पेपर वॉलेट"),
         "passwordBlank":
             MessageLookupByLibrary.simpleMessage("पासवर्ड खाली नहीं हो सकता"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "पासवर्ड में कम से कम 1 अपर केस और लोअर केस लेटर होना चाहिए"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "यदि आप अपना पासवर्ड भूल जाते हैं, तो हम जिम्मेदार नहीं हैं, और डिज़ाइन के अनुसार हम इसे आपके लिए रीसेट या परिवर्तित करने में असमर्थ हैं।"),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("गलत पासवर्ड"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "अब आपको नाट्रियम खोलने के लिए पासवर्ड की जरूरत नहीं पड़ेगी।"),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "पासवर्ड में कम से कम 1 नंबर होना चाहिए"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "पासवर्ड में कम से कम 1 विशेष वर्ण होना चाहिए"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("पारण शब्द बहुत छोटा है"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "नॉटिलस को खोलने के लिए इस पासवर्ड की आवश्यकता होगी।"),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "नैट्रियम खोलने के लिए इस पासवर्ड की आवश्यकता होगी।"),
@@ -515,6 +551,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("एक 6 अंकों का पिन बनाएँ"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("पिन दर्ज करें"),
+        "pinIncorrect":
+            MessageLookupByLibrary.simpleMessage("गलत पिन डाला गया"),
         "pinInvalid":
             MessageLookupByLibrary.simpleMessage("गलत पिन दर्ज किया गया"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("पिन"),
@@ -676,6 +714,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "पासवर्ड सफलतापूर्वक सेट कर दिया गया है"),
         "setPin": MessageLookupByLibrary.simpleMessage("पिन सेट करें"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "अपना मौजूदा पिन सेट करें या बदलें। यदि आपने अभी तक पिन सेट नहीं किया है, तो डिफ़ॉल्ट पिन 000000 है।"),
         "setPinSuccess": MessageLookupByLibrary.simpleMessage(
             "पिन सफलतापूर्वक सेट कर दिया गया है"),
         "setPlausibleDeniabilityPin":
@@ -849,8 +889,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("एक हफ्ते पहले"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "नेट्रियम में आपका स्वागत है। आगे बढ़ने के लिए, आप एक नया वॉलेट बना सकते हैं या एक मौजूदा वॉलेट को आयात कर सकते हैं।"),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "नॉटिलस में आपका स्वागत है। आरंभ करने के लिए एक विकल्प चुनें या नीचे दिए गए आइकन का उपयोग करके कोई थीम चुनें।"),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "नॉटिलस में आपका स्वागत है। शुरू करने के लिए, एक नया वॉलेट बनाएं या किसी मौजूदा को आयात करें।"),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "शुरू करने के लिए, एक नया वॉलेट बनाएं या किसी मौजूदा को आयात करें।"),
         "withAddress": MessageLookupByLibrary.simpleMessage("पते के साथ"),
         "withFee": MessageLookupByLibrary.simpleMessage("शुल्क के साथ"),
         "withMessage": MessageLookupByLibrary.simpleMessage("मैसेज के साथ"),

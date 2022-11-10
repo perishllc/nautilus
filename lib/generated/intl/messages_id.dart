@@ -118,6 +118,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Ubah Mata Uang"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Perubahan Log"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Ganti kata sandi"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "Ubah kata sandi Anda yang ada. Jika Anda tidak tahu kata sandi Anda saat ini, buat tebakan terbaik Anda karena sebenarnya tidak diperlukan untuk mengubahnya (karena Anda sudah masuk), tetapi itu memungkinkan kami menghapus entri cadangan yang ada."),
+        "changePin": MessageLookupByLibrary.simpleMessage("Ganti PIN"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("Setel pin"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Ubah Perwakilan"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Ubah"),
@@ -127,6 +133,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ini sudah menjadi perwakilan Anda!"),
         "changeRepSucces":
             MessageLookupByLibrary.simpleMessage("Perwakilan Berhasil Diubah"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("Ganti Benih"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "Ubah seed/frase yang terkait dengan akun authed tautan ajaib ini, kata sandi apa pun yang Anda tetapkan di sini akan menimpa kata sandi Anda yang ada, tetapi Anda dapat menggunakan kata sandi yang sama jika Anda mau."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Periksa Ketersediaan"),
         "close": MessageLookupByLibrary.simpleMessage("Tutup"),
@@ -163,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gagal mengimpor kontak"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Berhasil mengimpor %1 kontak"),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("Lanjutkan tanpa login"),
         "copied": MessageLookupByLibrary.simpleMessage("Disalin"),
         "copy": MessageLookupByLibrary.simpleMessage("Salin"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Salin Alamat"),
@@ -233,7 +244,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Gagal menetapkan kata sandi dompet"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Masukkan Alamat"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Masukkan Jumlah"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("Masukan email"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Masukkan Gift Note"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Masukkan Tinggi"),
@@ -284,6 +295,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Uang Gas"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Tukarkan NANO"),
+        "existingPasswordHint": MessageLookupByLibrary.simpleMessage(
+            "Masukkan kata sandi saat ini"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("Masukkan pin saat ini"),
         "exit": MessageLookupByLibrary.simpleMessage("Keluar"),
         "exportTXData":
             MessageLookupByLibrary.simpleMessage("Transaksi Ekspor"),
@@ -375,6 +390,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sepertinya Anda mengklik tautan yang berisi beberapa NANO, untuk menerima dana ini kami hanya perlu menyelesaikan pengaturan dompet Anda."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Tautan yang Anda klik mengandung beberapa NANO, apakah Anda ingin mengimpornya ke dompet ini?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("Impor HD"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Impor Kata Rahasia"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -384,6 +400,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Masukkan benih dompet anda dibawah ini."),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("Impor Benih Saja"),
+        "importStandard": MessageLookupByLibrary.simpleMessage("Standar Impor"),
         "importWallet": MessageLookupByLibrary.simpleMessage("Impor Dompet"),
         "instantly": MessageLookupByLibrary.simpleMessage("Segera"),
         "insufficientBalance":
@@ -408,7 +425,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting": MessageLookupByLibrary.simpleMessage(
             "Otentikasi saat diluncurkan."),
         "locked": MessageLookupByLibrary.simpleMessage("Terkunci"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader":
+            MessageLookupByLibrary.simpleMessage("masuk atau mendaftar"),
         "logout": MessageLookupByLibrary.simpleMessage("Keluar"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Hapus benih dan keluar"),
@@ -417,6 +435,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Keluar akan menghapus benih anda dan semua data terkait kalium dari perangkat ini. Jika benih anda belum disimpan, Anda tidak akan pernah bisa mengakses dana anda lagi."),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Selama anda yakin sudah menyimpan benih anda dengan aman, anda tidak perlu khawatir."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "Ini tampaknya merupakan benih HD, kecuali jika Anda yakin tahu apa yang Anda lakukan, Anda harus menggunakan opsi \"Impor HD\"."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "Ini tampaknya menjadi benih standar, Anda harus menggunakan opsi \"Impor Standar\"."),
         "manage": MessageLookupByLibrary.simpleMessage("Mengelola"),
         "mantaError": MessageLookupByLibrary.simpleMessage(
             "Tidak dapat memverifikasi permintaan"),
@@ -468,6 +490,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tidak ada transaksi untuk diekspor."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Status Node"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("Tidak ada"),
         "notSent": MessageLookupByLibrary.simpleMessage("tidak terkirim"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Buka Nautilus untuk melihat transaksi."),
@@ -497,9 +520,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("Dompet Kertas"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
             "Kata sandi tidak boleh kosong"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "Kata sandi harus mengandung setidaknya 1 huruf besar dan huruf kecil"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "Kami tidak bertanggung jawab jika Anda lupa kata sandi Anda, dan secara desain kami tidak dapat mengatur ulang atau mengubahnya untuk Anda."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("kata kunci Salah"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Anda tidak akan memerlukan kata sandi lagi untuk membuka Nautilus."),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "Kata sandi harus mengandung setidaknya 1 angka"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "Kata sandi harus mengandung setidaknya 1 karakter khusus"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("Kata sandi terlalu pendek"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "Kata sandi ini akan diperlukan untuk membuka Nautilus."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Kata sandi digunakan untuk membuka Nautilus."),
@@ -522,6 +559,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("Buat pin 6 angka"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("Masukkan pin"),
+        "pinIncorrect":
+            MessageLookupByLibrary.simpleMessage("Pin yang dimasukkan salah"),
         "pinInvalid":
             MessageLookupByLibrary.simpleMessage("Pin yang dimasukkan salah"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("PIN"),
@@ -682,6 +721,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Kata sandi berhasil ditetapkan"),
         "setPin": MessageLookupByLibrary.simpleMessage("Setel Pin"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "Setel atau ubah PIN Anda yang ada. Jika Anda belum menyetel PIN, PIN default adalah 000000."),
         "setPinSuccess":
             MessageLookupByLibrary.simpleMessage("Pin telah berhasil disetel"),
         "setPlausibleDeniabilityPin":
@@ -856,8 +897,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("Seminggu yang lalu"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Selamat datang di Nautilus. Untuk melanjutkan, anda bisa membuat dompet baru atau mengimpor dompet lama anda."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "Selamat datang di Nautilus. Pilih opsi untuk memulai atau pilih tema menggunakan ikon di bawah."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Selamat datang di Nautilus. Untuk memulai, buat dompet baru atau impor dompet yang sudah ada."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Untuk memulai, buat dompet baru atau impor dompet yang sudah ada."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Dengan Alamat"),
         "withFee": MessageLookupByLibrary.simpleMessage("Dengan Biaya"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Dengan Pesan"),

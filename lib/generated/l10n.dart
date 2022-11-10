@@ -640,6 +640,47 @@ class AppLocalization {
     );
   }
 
+  /// `Change Password`
+  String get changePassword {
+    return Intl.message(
+      'Change Password',
+      name: 'changePassword',
+      desc: 'A button that changes the magic password',
+      args: [],
+    );
+  }
+
+  /// `Change your existing password. If you don't know your current password, just make your best guess as it's not actually required to change it (since you are already logged in), but it does let us delete the existing backup entry.`
+  String get changePasswordParagraph {
+    return Intl.message(
+      'Change your existing password. If you don\'t know your current password, just make your best guess as it\'s not actually required to change it (since you are already logged in), but it does let us delete the existing backup entry.',
+      name: 'changePasswordParagraph',
+      desc:
+          'A paragraph that explains the user can set or change their existing magic password.',
+      args: [],
+    );
+  }
+
+  /// `Change Pin`
+  String get changePin {
+    return Intl.message(
+      'Change Pin',
+      name: 'changePin',
+      desc: 'change_pin',
+      args: [],
+    );
+  }
+
+  /// `Set pin`
+  String get changePinHint {
+    return Intl.message(
+      'Set pin',
+      name: 'changePinHint',
+      desc: 'A text field hint that tells the user to set a pin',
+      args: [],
+    );
+  }
+
   /// `Change Representative`
   String get changeRepAuthenticate {
     return Intl.message(
@@ -686,6 +727,27 @@ class AppLocalization {
       'Representative Changed Successfully',
       name: 'changeRepSucces',
       desc: 'change_representative_success',
+      args: [],
+    );
+  }
+
+  /// `Change Seed`
+  String get changeSeed {
+    return Intl.message(
+      'Change Seed',
+      name: 'changeSeed',
+      desc: 'A button that changes the magic seed',
+      args: [],
+    );
+  }
+
+  /// `Change the seed/phrase associated with this magic-link authed account, whatever password you set here will overwrite your existing password, but you can use the same password if you choose.`
+  String get changeSeedParagraph {
+    return Intl.message(
+      'Change the seed/phrase associated with this magic-link authed account, whatever password you set here will overwrite your existing password, but you can use the same password if you choose.',
+      name: 'changeSeedParagraph',
+      desc:
+          'A paragraph that explains the user can set or change their existing magic seed.',
       args: [],
     );
   }
@@ -891,6 +953,16 @@ class AppLocalization {
     );
   }
 
+  /// `Continue without login`
+  String get continueWithoutLogin {
+    return Intl.message(
+      'Continue without login',
+      name: 'continueWithoutLogin',
+      desc: 'alternative_to_login',
+      args: [],
+    );
+  }
+
   /// `Copied`
   String get copied {
     return Intl.message(
@@ -1059,37 +1131,6 @@ class AppLocalization {
       'Create a pin',
       name: 'createPinHint',
       desc: 'A text field hint that tells the user to create a pin',
-      args: [],
-    );
-  }
-
-  /// `Set pin`
-  String get changePinHint {
-    return Intl.message(
-      'Set pin',
-      name: 'changePinHint',
-      desc: 'A text field hint that tells the user to set a pin',
-      args: [],
-    );
-  }
-
-  /// `Enter current pin`
-  String get existingPinHint {
-    return Intl.message(
-      'Enter current pin',
-      name: 'existingPinHint',
-      desc: 'A text field hint that tells the user to enter their current pin',
-      args: [],
-    );
-  }
-
-  /// `Enter current password`
-  String get existingPasswordHint {
-    return Intl.message(
-      'Enter current password',
-      name: 'existingPasswordHint',
-      desc:
-          'A text field hint that tells the user to enter their current password',
       args: [],
     );
   }
@@ -1664,6 +1705,27 @@ class AppLocalization {
     );
   }
 
+  /// `Enter current password`
+  String get existingPasswordHint {
+    return Intl.message(
+      'Enter current password',
+      name: 'existingPasswordHint',
+      desc:
+          'A text field hint that tells the user to enter their current password',
+      args: [],
+    );
+  }
+
+  /// `Enter current pin`
+  String get existingPinHint {
+    return Intl.message(
+      'Enter current pin',
+      name: 'existingPinHint',
+      desc: 'A text field hint that tells the user to enter their current pin',
+      args: [],
+    );
+  }
+
   /// `Exit`
   String get exit {
     return Intl.message(
@@ -2224,6 +2286,16 @@ class AppLocalization {
     );
   }
 
+  /// `Import HD`
+  String get importHD {
+    return Intl.message(
+      'Import HD',
+      name: 'importHD',
+      desc: 'intro_import_hd',
+      args: [],
+    );
+  }
+
   /// `Import Secret Phrase`
   String get importSecretPhrase {
     return Intl.message(
@@ -2274,16 +2346,6 @@ class AppLocalization {
     );
   }
 
-  /// `Import Wallet`
-  String get importWallet {
-    return Intl.message(
-      'Import Wallet',
-      name: 'importWallet',
-      desc: 'intro_welcome_have_wallet',
-      args: [],
-    );
-  }
-
   /// `Import Standard`
   String get importStandard {
     return Intl.message(
@@ -2294,12 +2356,12 @@ class AppLocalization {
     );
   }
 
-  /// `Import HD`
-  String get importHD {
+  /// `Import Wallet`
+  String get importWallet {
     return Intl.message(
-      'Import HD',
-      name: 'importHD',
-      desc: 'intro_import_hd',
+      'Import Wallet',
+      name: 'importWallet',
+      desc: 'intro_welcome_have_wallet',
       args: [],
     );
   }
@@ -2485,12 +2547,22 @@ class AppLocalization {
     );
   }
 
-  /// `Continue without login`
-  String get continueWithoutLogin {
+  /// `Login`
+  String get loginButton {
     return Intl.message(
-      'Continue without login',
-      name: 'continueWithoutLogin',
-      desc: 'alternative_to_login',
+      'Login',
+      name: 'loginButton',
+      desc: 'login_button',
+      args: [],
+    );
+  }
+
+  /// `Register`
+  String get registerButton {
+    return Intl.message(
+      'Register',
+      name: 'registerButton',
+      desc: 'register_button',
       args: [],
     );
   }
@@ -2515,32 +2587,32 @@ class AppLocalization {
     );
   }
 
+  /// `Reset Account`
+  String get resetAccountButton {
+    return Intl.message(
+      'Reset Account',
+      name: 'resetAccountButton',
+      desc: 'reset_account_button',
+      args: [],
+    );
+  }
+
+  /// `This will make a new account with the password you have just set, the old account won't be deleted unless the passwords chosen are the same.`
+  String get resetAccountParagraph {
+    return Intl.message(
+      'This will make a new account with the password you have just set, the old account won\'t be deleted unless the passwords chosen are the same.',
+      name: 'resetAccountParagraph',
+      desc: 'reset_account_warning',
+      args: [],
+    );
+  }
+
   /// `Are you sure?`
   String get logoutAreYouSure {
     return Intl.message(
       'Are you sure?',
       name: 'logoutAreYouSure',
       desc: 'settings_logout_warning_title',
-      args: [],
-    );
-  }
-
-  /// `This appears to be an HD seed, unless you're sure you know what you're doing, you should use the "Import HD" option instead.`
-  String get looksLikeHdSeed {
-    return Intl.message(
-      'This appears to be an HD seed, unless you\'re sure you know what you\'re doing, you should use the "Import HD" option instead.',
-      name: 'looksLikeHdSeed',
-      desc: 'settings_import_hd_warning',
-      args: [],
-    );
-  }
-
-  /// `This appears to be a standard seed, you should use the "Import Standard" option instead.`
-  String get looksLikeStandardSeed {
-    return Intl.message(
-      'This appears to be a standard seed, you should use the "Import Standard" option instead.',
-      name: 'looksLikeStandardSeed',
-      desc: 'settings_import_standard_warning',
       args: [],
     );
   }
@@ -2561,6 +2633,26 @@ class AppLocalization {
       'As long as you\'ve backed up your seed you have nothing to worry about.',
       name: 'logoutReassurance',
       desc: 'settings_logout_warning_message',
+      args: [],
+    );
+  }
+
+  /// `This appears to be an HD seed, unless you're sure you know what you're doing, you should use the "Import HD" option instead.`
+  String get looksLikeHdSeed {
+    return Intl.message(
+      'This appears to be an HD seed, unless you\'re sure you know what you\'re doing, you should use the "Import HD" option instead.',
+      name: 'looksLikeHdSeed',
+      desc: 'settings_import_hd_warning',
+      args: [],
+    );
+  }
+
+  /// `This appears to be a standard seed, you should use the "Import Standard" option instead.`
+  String get looksLikeStandardSeed {
+    return Intl.message(
+      'This appears to be a standard seed, you should use the "Import Standard" option instead.',
+      name: 'looksLikeStandardSeed',
+      desc: 'settings_import_standard_warning',
       args: [],
     );
   }
@@ -2856,6 +2948,16 @@ class AppLocalization {
     );
   }
 
+  /// `None`
+  String get noneMethod {
+    return Intl.message(
+      'None',
+      name: 'noneMethod',
+      desc: 'settings_none_method',
+      args: [],
+    );
+  }
+
   /// `No Search Results!`
   String get noSearchResults {
     return Intl.message(
@@ -3106,6 +3208,27 @@ class AppLocalization {
     );
   }
 
+  /// `Password must contain at least 1 upper case and lower case letter`
+  String get passwordCapitalLetter {
+    return Intl.message(
+      'Password must contain at least 1 upper case and lower case letter',
+      name: 'passwordCapitalLetter',
+      desc: 'password_uppercase_lowercase',
+      args: [],
+    );
+  }
+
+  /// `We're not responsible if you forget your password, and by design we are unable to reset or change it for you.`
+  String get passwordDisclaimer {
+    return Intl.message(
+      'We\'re not responsible if you forget your password, and by design we are unable to reset or change it for you.',
+      name: 'passwordDisclaimer',
+      desc:
+          'A paragraph that we\'re not responsible if you lose your password.',
+      args: [],
+    );
+  }
+
   /// `Incorrect password`
   String get passwordIncorrect {
     return Intl.message(
@@ -3127,32 +3250,22 @@ class AppLocalization {
     );
   }
 
+  /// `Password must contain at least 1 number`
+  String get passwordNumber {
+    return Intl.message(
+      'Password must contain at least 1 number',
+      name: 'passwordNumber',
+      desc: 'password_number',
+      args: [],
+    );
+  }
+
   /// `Passwords do not match`
   String get passwordsDontMatch {
     return Intl.message(
       'Passwords do not match',
       name: 'passwordsDontMatch',
       desc: 'An error indicating a password has been confirmed incorrectly',
-      args: [],
-    );
-  }
-
-  /// `Password is too short`
-  String get passwordTooShort {
-    return Intl.message(
-      'Password is too short',
-      name: 'passwordTooShort',
-      desc: 'An error indicating the password is too short',
-      args: [],
-    );
-  }
-
-  /// `Password must contain at least 1 upper case and lower case letter`
-  String get passwordCapitalLetter {
-    return Intl.message(
-      'Password must contain at least 1 upper case and lower case letter',
-      name: 'passwordCapitalLetter',
-      desc: 'password_uppercase_lowercase',
       args: [],
     );
   }
@@ -3167,12 +3280,22 @@ class AppLocalization {
     );
   }
 
-  /// `Password must contain at least 1 number`
-  String get passwordNumber {
+  /// `Password is too short`
+  String get passwordTooShort {
     return Intl.message(
-      'Password must contain at least 1 number',
-      name: 'passwordNumber',
-      desc: 'password_number',
+      'Password is too short',
+      name: 'passwordTooShort',
+      desc: 'An error indicating the password is too short',
+      args: [],
+    );
+  }
+
+  /// `This password will be required to open Nautilus.`
+  String get passwordWarning {
+    return Intl.message(
+      'This password will be required to open Nautilus.',
+      name: 'passwordWarning',
+      desc: 'A paragraph that warns the user to not lose their password.',
       args: [],
     );
   }
@@ -3184,27 +3307,6 @@ class AppLocalization {
       name: 'passwordWillBeRequiredToOpenParagraph',
       desc:
           'A paragraph that tells the users that the created password will be required to open Nautilus.',
-      args: [],
-    );
-  }
-
-  /// `We're not responsible if you forget your password, and by design we are unable to reset it for you.`
-  String get passwordDisclaimer {
-    return Intl.message(
-      'We\'re not responsible if you forget your password, and by design we are unable to reset it for you.',
-      name: 'passwordDisclaimer',
-      desc:
-          'A paragraph that we\'re not responsible if you lose your password.',
-      args: [],
-    );
-  }
-
-  /// `This password will be required to open Nautilus.`
-  String get passwordWarning {
-    return Intl.message(
-      'This password will be required to open Nautilus.',
-      name: 'passwordWarning',
-      desc: 'A paragraph that warns the user to not lose their password.',
       args: [],
     );
   }
@@ -3309,21 +3411,21 @@ class AppLocalization {
     );
   }
 
-  /// `Invalid pin entered`
-  String get pinInvalid {
-    return Intl.message(
-      'Invalid pin entered',
-      name: 'pinInvalid',
-      desc: 'pin_error',
-      args: [],
-    );
-  }
-
   /// `Incorrect pin entered`
   String get pinIncorrect {
     return Intl.message(
       'Incorrect pin entered',
       name: 'pinIncorrect',
+      desc: 'pin_error',
+      args: [],
+    );
+  }
+
+  /// `Invalid pin entered`
+  String get pinInvalid {
+    return Intl.message(
+      'Invalid pin entered',
+      name: 'pinInvalid',
       desc: 'pin_error',
       args: [],
     );
@@ -3376,39 +3478,6 @@ class AppLocalization {
       name: 'plausibleDeniabilityParagraph',
       desc:
           'A paragraph that tells warns the user this is plausible deniability pin.',
-      args: [],
-    );
-  }
-
-  /// `Set or change your existing PIN. If you haven't set a PIN yet, the default PIN is 000000.`
-  String get setPinParagraph {
-    return Intl.message(
-      'Set or change your existing PIN. If you haven\'t set a PIN yet, the default PIN is 000000.',
-      name: 'setPinParagraph',
-      desc:
-          'A paragraph that explains the user can set or change their existing pin.',
-      args: [],
-    );
-  }
-
-  /// `Change your existing password. If you don't know your current password, just make your best guess as it's not actually required to change it (since you are already logged in), but it does let us delete the existing backup entry.`
-  String get changePasswordParagraph {
-    return Intl.message(
-      'Change your existing password. If you don\'t know your current password, just make your best guess as it\'s not actually required to change it (since you are already logged in), but it does let us delete the existing backup entry.',
-      name: 'changePasswordParagraph',
-      desc:
-          'A paragraph that explains the user can set or change their existing magic password.',
-      args: [],
-    );
-  }
-
-  /// `Change the seed/phrase associated with this magic-link authed account, whatever password you set here will overwrite your existing password, but you can use the same password if you choose.`
-  String get changeSeedParagraph {
-    return Intl.message(
-      'Change the seed/phrase associated with this magic-link authed account, whatever password you set here will overwrite your existing password, but you can use the same password if you choose.',
-      name: 'changeSeedParagraph',
-      desc:
-          'A paragraph that explains the user can set or change their existing magic seed.',
       args: [],
     );
   }
@@ -4335,26 +4404,6 @@ class AppLocalization {
     );
   }
 
-  /// `Change Password`
-  String get changePassword {
-    return Intl.message(
-      'Change Password',
-      name: 'changePassword',
-      desc: 'A button that changes the magic password',
-      args: [],
-    );
-  }
-
-  /// `Change Seed`
-  String get changeSeed {
-    return Intl.message(
-      'Change Seed',
-      name: 'changeSeed',
-      desc: 'A button that changes the magic seed',
-      args: [],
-    );
-  }
-
   /// `Password has been set successfully`
   String get setPasswordSuccess {
     return Intl.message(
@@ -4365,22 +4414,23 @@ class AppLocalization {
     );
   }
 
-  /// `Change Pin`
-  String get changePin {
-    return Intl.message(
-      'Change Pin',
-      name: 'changePin',
-      desc: 'change_pin',
-      args: [],
-    );
-  }
-
   /// `Set Pin`
   String get setPin {
     return Intl.message(
       'Set Pin',
       name: 'setPin',
       desc: 'A button that sets the plausible deniability password',
+      args: [],
+    );
+  }
+
+  /// `Set or change your existing PIN. If you haven't set a PIN yet, the default PIN is 000000.`
+  String get setPinParagraph {
+    return Intl.message(
+      'Set or change your existing PIN. If you haven\'t set a PIN yet, the default PIN is 000000.',
+      name: 'setPinParagraph',
+      desc:
+          'A paragraph that explains the user can set or change their existing pin.',
       args: [],
     );
   }
@@ -5445,22 +5495,22 @@ class AppLocalization {
     );
   }
 
-  /// `Welcome to Nautilus. To start, create a new wallet or import an existing one.`
-  String get welcomeTextUpdated {
-    return Intl.message(
-      'Welcome to Nautilus. To start, create a new wallet or import an existing one.',
-      name: 'welcomeTextUpdated',
-      desc: 'intro_welcome_title',
-      args: [],
-    );
-  }
-
   /// `Welcome to Nautilus. Choose an option to get started or pick a theme using the icon below.`
   String get welcomeTextLogin {
     return Intl.message(
       'Welcome to Nautilus. Choose an option to get started or pick a theme using the icon below.',
       name: 'welcomeTextLogin',
       desc: 'intro_welcome_login',
+      args: [],
+    );
+  }
+
+  /// `Welcome to Nautilus. To start, create a new wallet or import an existing one.`
+  String get welcomeTextUpdated {
+    return Intl.message(
+      'Welcome to Nautilus. To start, create a new wallet or import an existing one.',
+      name: 'welcomeTextUpdated',
+      desc: 'intro_welcome_title',
       args: [],
     );
   }

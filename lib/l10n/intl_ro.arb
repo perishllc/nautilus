@@ -295,6 +295,26 @@
     "type": "text",
     "description": "change_log_header"
   },
+  "changePassword": "Schimbaţi parola",
+  "@changePassword": {
+    "type": "text",
+    "description": "A button that changes the magic password"
+  },
+  "changePasswordParagraph": "Schimbați parola existentă. Dacă nu vă cunoașteți parola actuală, ghiciți-vă, deoarece nu este necesar să o schimbați (din moment ce sunteți deja autentificat), dar ne permite să ștergem intrarea de rezervă existentă.",
+  "@changePasswordParagraph": {
+    "type": "text",
+    "description": "A paragraph that explains the user can set or change their existing magic password."
+  },
+  "changePin": "Schimba pin-ul",
+  "@changePin": {
+    "type": "text",
+    "description": "change_pin"
+  },
+  "changePinHint": "Setați pinul",
+  "@changePinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to set a pin"
+  },
   "changeRepAuthenticate": "Schimbă reprezentantul",
   "@changeRepAuthenticate": {
     "type": "text",
@@ -319,6 +339,16 @@
   "@changeRepSucces": {
     "type": "text",
     "description": "change_representative_success"
+  },
+  "changeSeed": "Schimbați Semințele",
+  "@changeSeed": {
+    "type": "text",
+    "description": "A button that changes the magic seed"
+  },
+  "changeSeedParagraph": "Schimbați semințele/expresia asociată cu acest cont autentificat prin link magic, orice parolă pe care o setați aici va suprascrie parola existentă, dar puteți utiliza aceeași parolă dacă doriți.",
+  "@changeSeedParagraph": {
+    "type": "text",
+    "description": "A paragraph that explains the user can set or change their existing magic seed."
   },
   "checkAvailability": "Verifică disponibilitatea",
   "@checkAvailability": {
@@ -419,6 +449,11 @@
   "@contactsImportSuccess": {
     "type": "text",
     "description": "contact_import_success"
+  },
+  "continueWithoutLogin": "Continuați fără autentificare",
+  "@continueWithoutLogin": {
+    "type": "text",
+    "description": "alternative_to_login"
   },
   "copied": "Copiat",
   "@copied": {
@@ -640,7 +675,7 @@
     "type": "text",
     "description": "send_amount_hint"
   },
-  "enterEmail": "",
+  "enterEmail": "Introduceți adresa de email",
   "@enterEmail": {
     "type": "text",
     "description": "enter_email"
@@ -789,6 +824,16 @@
   "@exchangeNano": {
     "type": "text",
     "description": "exchange_nano"
+  },
+  "existingPasswordHint": "Introduceti parola curenta",
+  "@existingPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to enter their current password"
+  },
+  "existingPinHint": "Introduceți pinul curent",
+  "@existingPinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to enter their current pin"
   },
   "exit": "Ieșire",
   "@exit": {
@@ -1070,6 +1115,11 @@
     "type": "text",
     "description": "import_gift_v2"
   },
+  "importHD": "Import HD",
+  "@importHD": {
+    "type": "text",
+    "description": "intro_import_hd"
+  },
   "importSecretPhrase": "Importare formulă secretă",
   "@importSecretPhrase": {
     "type": "text",
@@ -1094,6 +1144,11 @@
   "@importSeedInstead": {
     "type": "text",
     "description": "importSeedInstead"
+  },
+  "importStandard": "Standard de import",
+  "@importStandard": {
+    "type": "text",
+    "description": "intro_import_standard"
   },
   "importWallet": "Importă portofelul",
   "@importWallet": {
@@ -1185,7 +1240,12 @@
     "type": "text",
     "description": "lockedtxt"
   },
-  "loginOrRegisterHeader": "",
+  "loginButton": "Autentificare",
+  "@loginButton": {
+    "type": "text",
+    "description": "login_button"
+  },
+  "loginOrRegisterHeader": "Conectați-vă sau Înregistrați-vă",
   "@loginOrRegisterHeader": {
     "type": "text",
     "description": "login_register_header"
@@ -1214,6 +1274,16 @@
   "@logoutReassurance": {
     "type": "text",
     "description": "settings_logout_warning_message"
+  },
+  "looksLikeHdSeed": "Aceasta pare a fi o sămânță HD, cu excepția cazului în care ești sigur că știi ce faci, ar trebui să folosești opțiunea „Import HD” în schimb.",
+  "@looksLikeHdSeed": {
+    "type": "text",
+    "description": "settings_import_hd_warning"
+  },
+  "looksLikeStandardSeed": "Aceasta pare a fi o sămânță standard, ar trebui să utilizați opțiunea „Import Standard” în schimb.",
+  "@looksLikeStandardSeed": {
+    "type": "text",
+    "description": "settings_import_standard_warning"
   },
   "manage": "Administrare",
   "@manage": {
@@ -1360,6 +1430,11 @@
     "type": "text",
     "description": "settings_node_status"
   },
+  "noneMethod": "Nici unul",
+  "@noneMethod": {
+    "type": "text",
+    "description": "settings_none_method"
+  },
   "noSearchResults": "Niciun rezultat de căutare!",
   "@noSearchResults": {
     "type": "text",
@@ -1485,15 +1560,50 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
+  "passwordCapitalLetter": "Parola trebuie să conțină cel puțin o literă mare și o literă mică",
+  "@passwordCapitalLetter": {
+    "type": "text",
+    "description": "password_uppercase_lowercase"
+  },
+  "passwordDisclaimer": "Nu suntem responsabili dacă vă uitați parola și, prin proiectare, nu putem să o resetam sau să o modificăm pentru dvs.",
+  "@passwordDisclaimer": {
+    "type": "text",
+    "description": "A paragraph that we're not responsible if you lose your password."
+  },
+  "passwordIncorrect": "Parola incorecta",
+  "@passwordIncorrect": {
+    "type": "text",
+    "description": "An error indicating the password is incorrect"
+  },
   "passwordNoLongerRequiredToOpenParagraph": "Deschideți aplicația fără a mai introduce parola.",
   "@passwordNoLongerRequiredToOpenParagraph": {
     "type": "text",
     "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
   },
+  "passwordNumber": "Parola trebuie să conțină cel puțin 1 număr",
+  "@passwordNumber": {
+    "type": "text",
+    "description": "password_number"
+  },
   "passwordsDontMatch": "Parolele nu corespund",
   "@passwordsDontMatch": {
     "type": "text",
     "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordSpecialCharacter": "Parola trebuie să conțină cel puțin 1 caracter special",
+  "@passwordSpecialCharacter": {
+    "type": "text",
+    "description": "password_special_character"
+  },
+  "passwordTooShort": "Parola este prea scurtă",
+  "@passwordTooShort": {
+    "type": "text",
+    "description": "An error indicating the password is too short"
+  },
+  "passwordWarning": "Această parolă va fi necesară pentru a deschide Nautilus.",
+  "@passwordWarning": {
+    "type": "text",
+    "description": "A paragraph that warns the user to not lose their password."
   },
   "passwordWillBeRequiredToOpenParagraph": "Această parolă va fi necesară pentru a deschide Nautilus.",
   "@passwordWillBeRequiredToOpenParagraph": {
@@ -1549,6 +1659,11 @@
   "@pinEnterTitle": {
     "type": "text",
     "description": "pin_enter_title"
+  },
+  "pinIncorrect": "PIN introdus incorect",
+  "@pinIncorrect": {
+    "type": "text",
+    "description": "pin_error"
   },
   "pinInvalid": "PIN invalid",
   "@pinInvalid": {
@@ -1694,6 +1809,11 @@
   "@refund": {
     "type": "text",
     "description": "refund"
+  },
+  "registerButton": "Inregistreaza-te",
+  "@registerButton": {
+    "type": "text",
+    "description": "register_button"
   },
   "registerFor": "pentru",
   "@registerFor": {
@@ -1849,6 +1969,16 @@
   "@resendMemo": {
     "type": "text",
     "description": "resend_memo"
+  },
+  "resetAccountButton": "Resetează contul",
+  "@resetAccountButton": {
+    "type": "text",
+    "description": "reset_account_button"
+  },
+  "resetAccountParagraph": "Acest lucru va crea un cont nou cu parola pe care tocmai ați setat-o, contul vechi nu va fi șters decât dacă parolele alese sunt aceleași.",
+  "@resetAccountParagraph": {
+    "type": "text",
+    "description": "reset_account_warning"
   },
   "resetDatabase": "Resetați baza de date",
   "@resetDatabase": {
@@ -2049,6 +2179,11 @@
   "@setPin": {
     "type": "text",
     "description": "A button that sets the plausible deniability password"
+  },
+  "setPinParagraph": "Setați sau modificați codul PIN existent. Dacă nu ați setat încă un PIN, PIN-ul implicit este 000000.",
+  "@setPinParagraph": {
+    "type": "text",
+    "description": "A paragraph that explains the user can set or change their existing pin."
   },
   "setPinSuccess": "Pinul a fost setat cu succes",
   "@setPinSuccess": {
@@ -2580,10 +2715,20 @@
     "type": "text",
     "description": "intro_welcome_title"
   },
+  "welcomeTextLogin": "Bun venit la Nautilus. Alegeți o opțiune pentru a începe sau alegeți o temă folosind pictograma de mai jos.",
+  "@welcomeTextLogin": {
+    "type": "text",
+    "description": "intro_welcome_login"
+  },
   "welcomeTextUpdated": "Bun venit la Nautilus. Pentru a începe, creați un portofel nou sau importați unul existent.",
   "@welcomeTextUpdated": {
     "type": "text",
     "description": "intro_welcome_title"
+  },
+  "welcomeTextWithoutLogin": "Pentru a începe, creați un portofel nou sau importați unul existent.",
+  "@welcomeTextWithoutLogin": {
+    "type": "text",
+    "description": "intro_welcome_no_login"
   },
   "withAddress": "Cu adresa",
   "@withAddress": {

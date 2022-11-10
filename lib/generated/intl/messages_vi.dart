@@ -119,6 +119,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Đổi loại tiền pháp định"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Thay đổi Nhật ký"),
+        "changePassword": MessageLookupByLibrary.simpleMessage("Đổi mật khẩu"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "Thay đổi mật khẩu hiện có của bạn. Nếu bạn không biết mật khẩu hiện tại của mình, chỉ cần phỏng đoán chính xác nhất vì thực tế không bắt buộc phải thay đổi mật khẩu (vì bạn đã đăng nhập), nhưng nó cho phép chúng tôi xóa mục sao lưu hiện có."),
+        "changePin": MessageLookupByLibrary.simpleMessage("Thay đổi pin"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("Đặt ghim"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Thay đổi đại diện"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Thay đổi"),
@@ -128,6 +133,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Đây đã là người đại diện của bạn!"),
         "changeRepSucces":
             MessageLookupByLibrary.simpleMessage("Đã đổi đại diện thành công"),
+        "changeSeed":
+            MessageLookupByLibrary.simpleMessage("Thay đổi hạt giống"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "Thay đổi hạt giống / cụm từ được liên kết với tài khoản được tự động liên kết kỳ diệu này, bất kỳ mật khẩu nào bạn đặt ở đây sẽ ghi đè lên mật khẩu hiện có của bạn, nhưng bạn có thể sử dụng cùng một mật khẩu nếu bạn chọn."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Kiểm tra tính khả dụng"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
@@ -163,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nhập liên hệ thất bại"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Đã nhập thành công %1 liên hệ."),
+        "continueWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Tiếp tục mà không cần đăng nhập"),
         "copied": MessageLookupByLibrary.simpleMessage("Đã sao chép"),
         "copy": MessageLookupByLibrary.simpleMessage("Sao chép"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Sao chép địa chỉ"),
@@ -231,7 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Đặt mật khẩu ví không thành công"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Nhập địa chỉ"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Nhập số lượng"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("Nhập Email"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Nhập Ghi Chú Quà Tặng"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Nhập chiều cao"),
@@ -280,6 +291,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Tiền gas"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Trao đổi NANO"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Nhập mật khẩu hiện tại"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("Nhập mã pin hiện tại"),
         "exit": MessageLookupByLibrary.simpleMessage("Thoát"),
         "exportTXData":
             MessageLookupByLibrary.simpleMessage("Giao dịch xuất khẩu"),
@@ -373,6 +388,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Có vẻ như bạn đã nhấp vào một liên kết có chứa một số NANO, để nhận được những khoản tiền này, chúng tôi chỉ cần bạn hoàn tất việc thiết lập ví của mình."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Liên kết bạn đã nhấp vào chứa một số NANO, bạn có muốn nhập nó vào ví này không?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("Nhập HD"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Nhập cụm từ bí mật"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -382,6 +398,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nhập hạt giống của bạn vào phần dưới đây."),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("Nhập hạt giống"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("Tiêu chuẩn nhập khẩu"),
         "importWallet": MessageLookupByLibrary.simpleMessage("Nhập ví hiện có"),
         "instantly": MessageLookupByLibrary.simpleMessage("Ngay tức thì"),
         "insufficientBalance":
@@ -407,7 +425,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Xác thực khi khởi chạy"),
         "locked": MessageLookupByLibrary.simpleMessage("Đã khoá"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader":
+            MessageLookupByLibrary.simpleMessage("đăng nhập hay đăng ký"),
         "logout": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Xóa hạt giống và đăng xuất"),
@@ -417,6 +436,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Đăng xuất sẽ xóa hạt giống (seed) của bạn và tất cả dữ liệu liên quan đến Nautilus khỏi thiết bị này. Nếu bạn không lưu lại hạt giống, bạn sẽ không thể truy cập vào ví của mình."),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Sẽ không có gì phải lo lắng nếu bạn đã sao lưu hạt giống."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "Đây có vẻ là nguồn gốc HD, trừ khi bạn chắc chắn rằng mình biết mình đang làm gì, bạn nên sử dụng tùy chọn \"Nhập HD\" để thay thế."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "Đây có vẻ là một hạt giống tiêu chuẩn, bạn nên sử dụng tùy chọn \"Tiêu chuẩn Nhập khẩu\" để thay thế."),
         "manage": MessageLookupByLibrary.simpleMessage("Quản lí"),
         "mantaError":
             MessageLookupByLibrary.simpleMessage("Không thể xác minh yêu cầu"),
@@ -467,6 +490,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Không có giao dịch nào để xuất."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Trạng thái nút"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("Không có"),
         "notSent": MessageLookupByLibrary.simpleMessage("chưa được gửi"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Mở Nautilus để xem giao dịch này"),
@@ -496,9 +520,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("Ví giấy"),
         "passwordBlank":
             MessageLookupByLibrary.simpleMessage("Không thể bỏ trống mật khẩu"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "Mật khẩu phải có ít nhất 1 chữ hoa và chữ thường"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi không chịu trách nhiệm nếu bạn quên mật khẩu của mình và theo thiết kế, chúng tôi không thể đặt lại hoặc thay đổi mật khẩu cho bạn."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("mật khẩu không đúng"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Bạn sẽ không cần mật khẩu để mở Nautilus nữa."),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "Mật khẩu phải chứa ít nhất 1 số"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("Mật khẩu quá ngắn"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "Mật khẩu này sẽ được yêu cầu để mở Nautilus."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Mật khẩu này sẽ được yêu cầu để mở Nautilus."),
@@ -520,6 +558,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("Tạo mã PIN 6 chữ số"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("Nhập PIN"),
+        "pinIncorrect":
+            MessageLookupByLibrary.simpleMessage("Đã nhập sai mã pin"),
         "pinInvalid":
             MessageLookupByLibrary.simpleMessage("Mã PIN đã nhập không hợp lệ"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("Mã PIN"),
@@ -680,6 +720,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess":
             MessageLookupByLibrary.simpleMessage("Đã đặt mật khẩu thành công"),
         "setPin": MessageLookupByLibrary.simpleMessage("Đặt mã pin"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "Đặt hoặc thay đổi mã PIN hiện có của bạn. Nếu bạn chưa đặt mã PIN, mã PIN mặc định là 000000."),
         "setPinSuccess": MessageLookupByLibrary.simpleMessage(
             "Mã pin đã được đặt thành công"),
         "setPlausibleDeniabilityPin":
@@ -856,8 +898,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("Một tuần trước"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Chào mừng đến với Nautilus. Để bắt đầu, bạn có thể tạo ví mới hoặc nhập ví hiện có."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "Chào mừng đến với Nautilus. Chọn một tùy chọn để bắt đầu hoặc chọn một chủ đề bằng biểu tượng bên dưới."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Chào mừng đến với Nautilus. Để bắt đầu, hãy tạo một ví mới hoặc nhập một ví hiện có."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Để bắt đầu, hãy tạo một ví mới hoặc nhập một ví hiện có."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Với địa chỉ"),
         "withFee": MessageLookupByLibrary.simpleMessage("Có phí"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Với tin nhắn"),

@@ -104,6 +104,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "悪用を防ぐため、次のページでギフト カードを受け取るにはキャプチャを解決する必要があります。"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("通貨を変更する"),
         "changeLog": MessageLookupByLibrary.simpleMessage("変更ログ"),
+        "changePassword": MessageLookupByLibrary.simpleMessage("パスワードを変更する"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "既存のパスワードを変更します。現在のパスワードがわからない場合は、(すでにログインしているため) 実際には変更する必要がないため、できるだけ推測してください。ただし、既存のバックアップ エントリを削除することはできます。"),
+        "changePin": MessageLookupByLibrary.simpleMessage("ピンの変更"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("セットピン"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("代理人を変更する"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("変更する"),
@@ -111,6 +116,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeRepSame":
             MessageLookupByLibrary.simpleMessage("これはすでにあなたの代表です！"),
         "changeRepSucces": MessageLookupByLibrary.simpleMessage("代理人が変更されました"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("シードを変更"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "このマジック リンクで認証されたアカウントに関連付けられているシード/フレーズを変更します。ここで設定したパスワードは既存のパスワードを上書きしますが、必要に応じて同じパスワードを使用できます。"),
         "checkAvailability": MessageLookupByLibrary.simpleMessage("空き状況を確認する"),
         "close": MessageLookupByLibrary.simpleMessage("閉じる"),
         "confirm": MessageLookupByLibrary.simpleMessage("確認しました"),
@@ -139,6 +147,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("連絡先をインポートできませんでした"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("％1の連絡先を正常にインポートしました。"),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("ログインせずに続行"),
         "copied": MessageLookupByLibrary.simpleMessage("コピー済み"),
         "copy": MessageLookupByLibrary.simpleMessage("コピーする"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("アドレスをコピーする"),
@@ -198,7 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ウォレットパスワードの作成に失敗しました。"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("アドレスを入力する"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("金額を入力する"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("メールアドレスを入力して"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("ギフトメモを入力"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("高さを入力してください"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("メッセージを入力してください"),
@@ -241,6 +251,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("ガスマネー"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("交換ナノ"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("現在のパスワードを入力してください"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("現在のピンを入力してください"),
         "exit": MessageLookupByLibrary.simpleMessage("終了する"),
         "exportTXData": MessageLookupByLibrary.simpleMessage("輸出取引"),
         "failed": MessageLookupByLibrary.simpleMessage("失敗した"),
@@ -322,6 +336,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "NANO を含むリンクをクリックしたようです。これらの資金を受け取るには、ウォレットの設定を完了する必要があります。"),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "クリックしたリンクには NANO が含まれています。このウォレットにインポートしますか?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("HD のインポート"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("シークレットフレーズをインポートする"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -330,6 +345,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "importSeedHint": MessageLookupByLibrary.simpleMessage("シードを入力してください。"),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("代わりにシードをインポートする"),
+        "importStandard": MessageLookupByLibrary.simpleMessage("インポート標準"),
         "importWallet": MessageLookupByLibrary.simpleMessage("ウォレットをインポートする"),
         "instantly": MessageLookupByLibrary.simpleMessage("今すぐ"),
         "insufficientBalance": MessageLookupByLibrary.simpleMessage("残高不足です"),
@@ -349,7 +365,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "loadedInto": MessageLookupByLibrary.simpleMessage("ロード先へ"),
         "lockAppSetting": MessageLookupByLibrary.simpleMessage("起動時に認証する"),
         "locked": MessageLookupByLibrary.simpleMessage("ロック済み"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader":
+            MessageLookupByLibrary.simpleMessage("ログインまたは登録"),
         "logout": MessageLookupByLibrary.simpleMessage("ログアウト"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("シードを削除して\nログアウトする"),
@@ -359,6 +376,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "ログアウトすると、このデバイスからシードとすべてのナトリアム関連データが削除されます。シードをバックアップしていない場合、資金に再びアクセスすることができなくなります"),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "シードをバックアップしていれば、心配する必要はありません。"),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "これは HD シードのようです。何をしているのかよくわからない場合は、代わりに「HD のインポート」オプションを使用してください。"),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "これは標準シードのようです。代わりに「標準のインポート」オプションを使用する必要があります。"),
         "manage": MessageLookupByLibrary.simpleMessage("管理"),
         "mantaError": MessageLookupByLibrary.simpleMessage("要求を確認できません。"),
         "manualEntry": MessageLookupByLibrary.simpleMessage("手動で入力"),
@@ -402,6 +423,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("エクスポートするトランザクションはありません。"),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("ノードステータス"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("なし"),
         "notSent": MessageLookupByLibrary.simpleMessage("未送信"),
         "notificationBody":
             MessageLookupByLibrary.simpleMessage("ナトリアムを開いてこのトランザクションを表示します"),
@@ -429,9 +451,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "paid": MessageLookupByLibrary.simpleMessage("支払った"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("ペーパーウォレット"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage("パスワードは空欄にできません"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "パスワードには大文字と小文字を少なくとも 1 文字含める必要があります"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "パスワードを忘れた場合、当社は責任を負いません。設計上、パスワードをリセットまたは変更することはできません。"),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("パスワードが正しくありません"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Nautilusを開く際にパスワードを必要としなくなります。"),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "パスワードには少なくとも 1 つの数字が含まれている必要があります"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "パスワードには少なくとも 1 つの特殊文字が含まれている必要があります"),
+        "passwordTooShort": MessageLookupByLibrary.simpleMessage("パスワードが短すぎます"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "Nautilus を開くには、このパスワードが必要です。"),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "このパスワードはNautilusを開く際に必要となります。"),
@@ -449,6 +484,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("暗証番号が正しいことを確認しました"),
         "pinCreateTitle": MessageLookupByLibrary.simpleMessage("6桁の暗証番号を作成する"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("暗証番号を入力してください"),
+        "pinIncorrect":
+            MessageLookupByLibrary.simpleMessage("間違った PIN が入力されました"),
         "pinInvalid": MessageLookupByLibrary.simpleMessage("入力した暗証番号が無効です"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("ピン"),
         "pinRepChange":
@@ -591,6 +628,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess":
             MessageLookupByLibrary.simpleMessage("パスワードの設定に成功しました。"),
         "setPin": MessageLookupByLibrary.simpleMessage("ピンを設定"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "既存の PIN を設定または変更します。 PIN をまだ設定していない場合、デフォルトの PIN は 000000 です。"),
         "setPinSuccess": MessageLookupByLibrary.simpleMessage("ピンが正常に設定されました"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("もっともらしいピンを設定する"),
@@ -742,8 +781,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("1週間前"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "ナトリアムへようこそ。最初に、新しいウォレットを作成するか、既存のウォレットをインポートします。"),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "ノーチラスへようこそ。開始するオプションを選択するか、下のアイコンを使用してテーマを選択します。"),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "ノーチラスへようこそ。まず、新しいウォレットを作成するか、既存のウォレットをインポートします。"),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "まず、新しいウォレットを作成するか、既存のウォレットをインポートします。"),
         "withAddress": MessageLookupByLibrary.simpleMessage("住所付き"),
         "withFee": MessageLookupByLibrary.simpleMessage("有料"),
         "withMessage": MessageLookupByLibrary.simpleMessage("メッセージ付き"),

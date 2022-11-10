@@ -295,6 +295,26 @@
     "type": "text",
     "description": "change_log_header"
   },
+  "changePassword": "Ganti kata sandi",
+  "@changePassword": {
+    "type": "text",
+    "description": "A button that changes the magic password"
+  },
+  "changePasswordParagraph": "Ubah kata sandi Anda yang ada. Jika Anda tidak tahu kata sandi Anda saat ini, buat tebakan terbaik Anda karena sebenarnya tidak diperlukan untuk mengubahnya (karena Anda sudah masuk), tetapi itu memungkinkan kami menghapus entri cadangan yang ada.",
+  "@changePasswordParagraph": {
+    "type": "text",
+    "description": "A paragraph that explains the user can set or change their existing magic password."
+  },
+  "changePin": "Ganti PIN",
+  "@changePin": {
+    "type": "text",
+    "description": "change_pin"
+  },
+  "changePinHint": "Setel pin",
+  "@changePinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to set a pin"
+  },
   "changeRepAuthenticate": "Ubah Perwakilan",
   "@changeRepAuthenticate": {
     "type": "text",
@@ -319,6 +339,16 @@
   "@changeRepSucces": {
     "type": "text",
     "description": "change_representative_success"
+  },
+  "changeSeed": "Ganti Benih",
+  "@changeSeed": {
+    "type": "text",
+    "description": "A button that changes the magic seed"
+  },
+  "changeSeedParagraph": "Ubah seed/frase yang terkait dengan akun authed tautan ajaib ini, kata sandi apa pun yang Anda tetapkan di sini akan menimpa kata sandi Anda yang ada, tetapi Anda dapat menggunakan kata sandi yang sama jika Anda mau.",
+  "@changeSeedParagraph": {
+    "type": "text",
+    "description": "A paragraph that explains the user can set or change their existing magic seed."
   },
   "checkAvailability": "Periksa Ketersediaan",
   "@checkAvailability": {
@@ -419,6 +449,11 @@
   "@contactsImportSuccess": {
     "type": "text",
     "description": "contact_import_success"
+  },
+  "continueWithoutLogin": "Lanjutkan tanpa login",
+  "@continueWithoutLogin": {
+    "type": "text",
+    "description": "alternative_to_login"
   },
   "copied": "Disalin",
   "@copied": {
@@ -640,7 +675,7 @@
     "type": "text",
     "description": "send_amount_hint"
   },
-  "enterEmail": "",
+  "enterEmail": "Masukan email",
   "@enterEmail": {
     "type": "text",
     "description": "enter_email"
@@ -789,6 +824,16 @@
   "@exchangeNano": {
     "type": "text",
     "description": "exchange_nano"
+  },
+  "existingPasswordHint": "Masukkan kata sandi saat ini",
+  "@existingPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to enter their current password"
+  },
+  "existingPinHint": "Masukkan pin saat ini",
+  "@existingPinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to enter their current pin"
   },
   "exit": "Keluar",
   "@exit": {
@@ -1070,6 +1115,11 @@
     "type": "text",
     "description": "import_gift_v2"
   },
+  "importHD": "Impor HD",
+  "@importHD": {
+    "type": "text",
+    "description": "intro_import_hd"
+  },
   "importSecretPhrase": "Impor Kata Rahasia",
   "@importSecretPhrase": {
     "type": "text",
@@ -1094,6 +1144,11 @@
   "@importSeedInstead": {
     "type": "text",
     "description": "importSeedInstead"
+  },
+  "importStandard": "Standar Impor",
+  "@importStandard": {
+    "type": "text",
+    "description": "intro_import_standard"
   },
   "importWallet": "Impor Dompet",
   "@importWallet": {
@@ -1185,7 +1240,12 @@
     "type": "text",
     "description": "lockedtxt"
   },
-  "loginOrRegisterHeader": "",
+  "loginButton": "Gabung",
+  "@loginButton": {
+    "type": "text",
+    "description": "login_button"
+  },
+  "loginOrRegisterHeader": "masuk atau mendaftar",
   "@loginOrRegisterHeader": {
     "type": "text",
     "description": "login_register_header"
@@ -1214,6 +1274,16 @@
   "@logoutReassurance": {
     "type": "text",
     "description": "settings_logout_warning_message"
+  },
+  "looksLikeHdSeed": "Ini tampaknya merupakan benih HD, kecuali jika Anda yakin tahu apa yang Anda lakukan, Anda harus menggunakan opsi \"Impor HD\".",
+  "@looksLikeHdSeed": {
+    "type": "text",
+    "description": "settings_import_hd_warning"
+  },
+  "looksLikeStandardSeed": "Ini tampaknya menjadi benih standar, Anda harus menggunakan opsi \"Impor Standar\".",
+  "@looksLikeStandardSeed": {
+    "type": "text",
+    "description": "settings_import_standard_warning"
   },
   "manage": "Mengelola",
   "@manage": {
@@ -1360,6 +1430,11 @@
     "type": "text",
     "description": "settings_node_status"
   },
+  "noneMethod": "Tidak ada",
+  "@noneMethod": {
+    "type": "text",
+    "description": "settings_none_method"
+  },
   "noSearchResults": "Tidak Ada Hasil Pencarian!",
   "@noSearchResults": {
     "type": "text",
@@ -1485,15 +1560,50 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
+  "passwordCapitalLetter": "Kata sandi harus mengandung setidaknya 1 huruf besar dan huruf kecil",
+  "@passwordCapitalLetter": {
+    "type": "text",
+    "description": "password_uppercase_lowercase"
+  },
+  "passwordDisclaimer": "Kami tidak bertanggung jawab jika Anda lupa kata sandi Anda, dan secara desain kami tidak dapat mengatur ulang atau mengubahnya untuk Anda.",
+  "@passwordDisclaimer": {
+    "type": "text",
+    "description": "A paragraph that we're not responsible if you lose your password."
+  },
+  "passwordIncorrect": "kata kunci Salah",
+  "@passwordIncorrect": {
+    "type": "text",
+    "description": "An error indicating the password is incorrect"
+  },
   "passwordNoLongerRequiredToOpenParagraph": "Anda tidak akan memerlukan kata sandi lagi untuk membuka Nautilus.",
   "@passwordNoLongerRequiredToOpenParagraph": {
     "type": "text",
     "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
   },
+  "passwordNumber": "Kata sandi harus mengandung setidaknya 1 angka",
+  "@passwordNumber": {
+    "type": "text",
+    "description": "password_number"
+  },
   "passwordsDontMatch": "Kata sandi tidak cocok",
   "@passwordsDontMatch": {
     "type": "text",
     "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordSpecialCharacter": "Kata sandi harus mengandung setidaknya 1 karakter khusus",
+  "@passwordSpecialCharacter": {
+    "type": "text",
+    "description": "password_special_character"
+  },
+  "passwordTooShort": "Kata sandi terlalu pendek",
+  "@passwordTooShort": {
+    "type": "text",
+    "description": "An error indicating the password is too short"
+  },
+  "passwordWarning": "Kata sandi ini akan diperlukan untuk membuka Nautilus.",
+  "@passwordWarning": {
+    "type": "text",
+    "description": "A paragraph that warns the user to not lose their password."
   },
   "passwordWillBeRequiredToOpenParagraph": "Kata sandi digunakan untuk membuka Nautilus.",
   "@passwordWillBeRequiredToOpenParagraph": {
@@ -1549,6 +1659,11 @@
   "@pinEnterTitle": {
     "type": "text",
     "description": "pin_enter_title"
+  },
+  "pinIncorrect": "Pin yang dimasukkan salah",
+  "@pinIncorrect": {
+    "type": "text",
+    "description": "pin_error"
   },
   "pinInvalid": "Pin yang dimasukkan salah",
   "@pinInvalid": {
@@ -1694,6 +1809,11 @@
   "@refund": {
     "type": "text",
     "description": "refund"
+  },
+  "registerButton": "Daftar",
+  "@registerButton": {
+    "type": "text",
+    "description": "register_button"
   },
   "registerFor": "untuk",
   "@registerFor": {
@@ -1849,6 +1969,16 @@
   "@resendMemo": {
     "type": "text",
     "description": "resend_memo"
+  },
+  "resetAccountButton": "Setel Ulang Akun",
+  "@resetAccountButton": {
+    "type": "text",
+    "description": "reset_account_button"
+  },
+  "resetAccountParagraph": "Ini akan membuat akun baru dengan kata sandi yang baru saja Anda tetapkan, akun lama tidak akan dihapus kecuali kata sandi yang dipilih sama.",
+  "@resetAccountParagraph": {
+    "type": "text",
+    "description": "reset_account_warning"
   },
   "resetDatabase": "Setel ulang Database",
   "@resetDatabase": {
@@ -2049,6 +2179,11 @@
   "@setPin": {
     "type": "text",
     "description": "A button that sets the plausible deniability password"
+  },
+  "setPinParagraph": "Setel atau ubah PIN Anda yang ada. Jika Anda belum menyetel PIN, PIN default adalah 000000.",
+  "@setPinParagraph": {
+    "type": "text",
+    "description": "A paragraph that explains the user can set or change their existing pin."
   },
   "setPinSuccess": "Pin telah berhasil disetel",
   "@setPinSuccess": {
@@ -2580,10 +2715,20 @@
     "type": "text",
     "description": "intro_welcome_title"
   },
+  "welcomeTextLogin": "Selamat datang di Nautilus. Pilih opsi untuk memulai atau pilih tema menggunakan ikon di bawah.",
+  "@welcomeTextLogin": {
+    "type": "text",
+    "description": "intro_welcome_login"
+  },
   "welcomeTextUpdated": "Selamat datang di Nautilus. Untuk memulai, buat dompet baru atau impor dompet yang sudah ada.",
   "@welcomeTextUpdated": {
     "type": "text",
     "description": "intro_welcome_title"
+  },
+  "welcomeTextWithoutLogin": "Untuk memulai, buat dompet baru atau impor dompet yang sudah ada.",
+  "@welcomeTextWithoutLogin": {
+    "type": "text",
+    "description": "intro_welcome_no_login"
   },
   "withAddress": "Dengan Alamat",
   "@withAddress": {

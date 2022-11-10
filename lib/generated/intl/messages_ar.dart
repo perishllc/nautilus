@@ -113,6 +113,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "من أجل منع إساءة الاستخدام ، نطلب منك حل captcha للمطالبة ببطاقة الهدايا في الصفحة التالية."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("تغيير العملة"),
         "changeLog": MessageLookupByLibrary.simpleMessage("سجل التغيير"),
+        "changePassword": MessageLookupByLibrary.simpleMessage("غير كلمة السر"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "غيّر كلمة مرورك الحالية. إذا كنت لا تعرف كلمة مرورك الحالية ، فما عليك سوى تخمين أفضل ما لديك لأنه ليس مطلوبًا في الواقع تغييرها (نظرًا لأنك قمت بتسجيل الدخول بالفعل) ، ولكنها تتيح لنا حذف إدخال النسخ الاحتياطي الحالي."),
+        "changePin": MessageLookupByLibrary.simpleMessage("تغيير الدبوس"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("تعيين دبوس"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("تغير المندوب"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("تغير"),
@@ -122,6 +127,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("هذا هو بالفعل ممثلك!"),
         "changeRepSucces":
             MessageLookupByLibrary.simpleMessage("تم تغير المندوب بنجاح"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("تغيير البذور"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "قم بتغيير العبارة الأولية المرتبطة بهذا الحساب المصادق عليه الارتباط السحري ، مهما كانت كلمة المرور التي قمت بتعيينها هنا ستحل محل كلمة المرور الحالية ، ولكن يمكنك استخدام نفس كلمة المرور إذا اخترت ذلك."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("تحقق من التوفر"),
         "close": MessageLookupByLibrary.simpleMessage("إغلاق"),
@@ -156,6 +164,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("فشل استيراد جهات الاتصال"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("تم جلب جهات اتصال %1 بنجاح."),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("تواصل بدون تسجيل الدخول"),
         "copied": MessageLookupByLibrary.simpleMessage("تم نسخ"),
         "copy": MessageLookupByLibrary.simpleMessage("نسخ"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("نسخ العنوان"),
@@ -224,7 +234,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "أخفق إنشاء كلمة مرور المحفظة\n"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("أدخل العنوان"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("أدخل المبلغ"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail":
+            MessageLookupByLibrary.simpleMessage("أدخل البريد الإلكتروني"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("أدخل ملاحظة الهدية"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("أدخل الارتفاع"),
@@ -272,6 +283,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("أموال الغاز"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("صرف نانو"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("إدخل كلمة السر الحالية"),
+        "existingPinHint": MessageLookupByLibrary.simpleMessage(
+            "أدخل رقم التعريف الشخصي الحالي"),
         "exit": MessageLookupByLibrary.simpleMessage("خروج"),
         "exportTXData": MessageLookupByLibrary.simpleMessage("معاملات التصدير"),
         "failed": MessageLookupByLibrary.simpleMessage("فشل"),
@@ -358,6 +373,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "يبدو أنك نقرت على رابط يحتوي على بعض NANO ، من أجل تلقي هذه الأموال ، نحتاج فقط لك لإنهاء إعداد محفظتك."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "الرابط الذي نقرت عليه يحتوي على بعض NANO ، هل ترغب في استيراده إلى هذه المحفظة؟"),
+        "importHD": MessageLookupByLibrary.simpleMessage("استيراد HD"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("استيراد العبارة السرية"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -367,6 +383,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أدخل المفتاح الخاص"),
         "importSeedInstead": MessageLookupByLibrary.simpleMessage(
             "بدلاً من ذلك، استيراد المفتاح الخاص"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("معيار الاستيراد"),
         "importWallet": MessageLookupByLibrary.simpleMessage("إجلب محفظة"),
         "instantly": MessageLookupByLibrary.simpleMessage("فوراً"),
         "insufficientBalance":
@@ -392,7 +410,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("المصادقة في الاطلاق"),
         "locked": MessageLookupByLibrary.simpleMessage("مقفل"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader":
+            MessageLookupByLibrary.simpleMessage("تسجيل الدخول أو التسجيل"),
         "logout": MessageLookupByLibrary.simpleMessage("خروج"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("حذف المفتاح الخاص والخروج"),
@@ -402,6 +421,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "خروجك من حساب نتريوم سوف يحذف البيانات من الجهاز. إذا مفتاحك الخاص غير محفوظ في مكان أمن، سوف تفقد رصيدك نهائيا"),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "ليس هناك خشية إذا قمت بحفض نسخة للمفتاح الخاص"),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "يبدو أن هذا هو بذرة HD ، ما لم تكن متأكدًا من أنك تعرف ما تفعله ، يجب عليك استخدام خيار \"استيراد HD\" بدلاً من ذلك."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "يبدو أن هذا أساس قياسي ، يجب عليك استخدام خيار \"استيراد قياسي\" بدلاً من ذلك."),
         "manage": MessageLookupByLibrary.simpleMessage("إدارة"),
         "mantaError":
             MessageLookupByLibrary.simpleMessage("لا يمكن التحقق من الطلب\n"),
@@ -451,6 +474,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لا توجد معاملات للتصدير."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("حالة العقدة"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("لا أحد"),
         "notSent": MessageLookupByLibrary.simpleMessage("لم يتم إرسالها"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "أفتح نتريوم للكشف عن هذا التعامل"),
@@ -480,9 +504,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("المحفظة الورقية"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
             "لا يمكن أن تكون كلمة المرور فارغة\n"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "يجب أن تحتوي كلمة المرور على حرف واحد كبير وصغير على الأقل"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "نحن لسنا مسؤولين إذا نسيت كلمة المرور الخاصة بك ، وبحكم التصميم لا يمكننا إعادة تعيينها أو تغييرها نيابة عنك."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("كلمة سر خاطئة"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "لن تحتاج إلى كلمة مرور لفتح  نتريم بعد الآن.\n"),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "يجب أن تحتوي كلمة المرور على حرف خاص واحد على الأقل"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("كلمة المرور قصيرة جدا"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "ستكون كلمة المرور هذه مطلوبة لفتح Nautilus."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "هناك حاجة إلى كلمة المرور لفتح نتريم"),
@@ -503,6 +541,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("ضع 6 أرقام رمز الPIN"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("أدخل رمز الPIN"),
+        "pinIncorrect": MessageLookupByLibrary.simpleMessage(
+            "تم إدخال رقم التعريف الشخصي غير الصحيح"),
         "pinInvalid":
             MessageLookupByLibrary.simpleMessage("رمز الPIN غير صحيح"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("PIN"),
@@ -661,6 +701,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "تم إنشاء كلمة مرور المحفظة بنجاح\n"),
         "setPin": MessageLookupByLibrary.simpleMessage("تعيين دبوس"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "قم بتعيين أو تغيير رقم التعريف الشخصي الحالي الخاص بك. إذا لم تقم بتعيين رقم تعريف شخصي حتى الآن ، فإن رقم التعريف الشخصي الافتراضي هو 000000."),
         "setPinSuccess": MessageLookupByLibrary.simpleMessage(
             "تم تعيين رقم التعريف الشخصي بنجاح"),
         "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(
@@ -829,8 +871,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("منذ أسبوع"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "أهلا بك في نتريوم. لتبدأ، إحدث محفظة أو إجلب محفظة موجودة."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "مرحبا بكم في نوتيلوس. حدد خيارًا للبدء أو اختر سمة باستخدام الرمز أدناه."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "مرحبًا بكم في نوتيلوس. للبدء ، أنشئ محفظة جديدة أو استورد محفظة حالية."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "للبدء ، أنشئ محفظة جديدة أو استورد محفظة حالية."),
         "withAddress": MessageLookupByLibrary.simpleMessage("مع العنوان"),
         "withFee": MessageLookupByLibrary.simpleMessage("مع رسوم"),
         "withMessage": MessageLookupByLibrary.simpleMessage("مع رسالة"),

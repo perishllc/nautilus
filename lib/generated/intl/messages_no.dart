@@ -120,6 +120,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "For å forhindre misbruk krever vi at du løser en captcha for å kunne kreve gavekortet på neste side."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Endre valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Endre logg"),
+        "changePassword": MessageLookupByLibrary.simpleMessage("Bytt passord"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "Endre ditt eksisterende passord. Hvis du ikke kjenner det nåværende passordet ditt, gjør du bare din beste gjetning ettersom det faktisk ikke er nødvendig å endre det (siden du allerede er logget på), men det lar oss slette den eksisterende sikkerhetskopioppføringen."),
+        "changePin": MessageLookupByLibrary.simpleMessage("Bytt pinne"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("Sett pinne"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Endre representant"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Endre"),
@@ -129,6 +134,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Dette er allerede din representant!"),
         "changeRepSucces":
             MessageLookupByLibrary.simpleMessage("Representant endret"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("Bytt frø"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "Endre frøet/frasen som er knyttet til denne magiske lenken godkjente kontoen, uansett passord du angir her vil overskrive det eksisterende passordet ditt, men du kan bruke det samme passordet hvis du velger det."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Sjekk tilgjengelighet"),
         "close": MessageLookupByLibrary.simpleMessage("Lukk"),
@@ -163,6 +171,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kunne ikke importere kontakter"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("%1 kontakter importert."),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("Fortsett uten pålogging"),
         "copied": MessageLookupByLibrary.simpleMessage("Kopiert"),
         "copy": MessageLookupByLibrary.simpleMessage("Kopier"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Kopier adresse"),
@@ -232,7 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kunne ikke velge lommebokens passord"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Angi adresse"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Tast inn beløp"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("Skriv inn e-post"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Skriv inn gavebrev"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Skriv inn Høyde"),
@@ -281,6 +291,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gass Penger"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Bytt NANO"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Skriv inn nåværende passord"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("Skriv inn gjeldende pin"),
         "exit": MessageLookupByLibrary.simpleMessage("Avslutt"),
         "exportTXData":
             MessageLookupByLibrary.simpleMessage("Eksporter transaksjoner"),
@@ -373,6 +387,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Det ser ut til at du har klikket på en lenke som inneholder noe NANO, for å motta disse midlene trenger vi bare at du fullfører konfigureringen av lommeboken din."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Linken du klikket inneholder noe NANO, vil du importere det til denne lommeboken?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("Importer HD"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importer tilknytningkode"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -382,6 +397,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Angi Seed nedenfor"),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("Importer Seed i stedet"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("Importstandard"),
         "importWallet":
             MessageLookupByLibrary.simpleMessage("Importer lommebok"),
         "instantly": MessageLookupByLibrary.simpleMessage("Øyeblikkelig"),
@@ -406,7 +423,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Verifiser ved oppstart"),
         "locked": MessageLookupByLibrary.simpleMessage("Låst"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(
+            "Logg inn eller registrer deg"),
         "logout": MessageLookupByLibrary.simpleMessage("Logg ut"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Slett Seed og logg ut"),
@@ -416,6 +434,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Når du logger ut fjernes ditt Seed og all Nautilus-relatert data fra denne enheten. Om ditt Seed ikke er sikkerhetskopiert, vil du aldri kunne få tilgang til dine midler igjen"),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Så lenge du har sikkerhetskopiert ditt Seed, har du ingenting å bekymre deg over."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "Dette ser ut til å være et HD-frø, med mindre du er sikker på at du vet hva du gjør, bør du bruke alternativet \"Importer HD\" i stedet."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "Dette ser ut til å være et standard frø, du bør bruke alternativet \"Import standard\" i stedet."),
         "manage": MessageLookupByLibrary.simpleMessage("Administrer"),
         "mantaError": MessageLookupByLibrary.simpleMessage(
             "Kunne ikke bekrefte forespørsel"),
@@ -469,6 +491,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Det er ingen transaksjoner å eksportere."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Node Status"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("Ingen"),
         "notSent": MessageLookupByLibrary.simpleMessage("ikke sendt"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Åpne Nautilus for å vise denne transaksjonen"),
@@ -498,9 +521,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("Papirlommebok"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
             "Passordet kan ikke være tomt"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "Passordet må inneholde minst én stor og liten bokstav"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "Vi er ikke ansvarlige hvis du glemmer passordet ditt, og vi kan ikke tilbakestille eller endre det for deg."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("feil passord"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Du trenger ikke lenger et passord for å åpne Nautilus."),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "Passordet må inneholde minst ett tall"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "Passordet må inneholde minst 1 spesialtegn"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("Passordet er for kort"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "Dette passordet kreves for å åpne Nautilus."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Dette passordet vil være påkrevd for å åpne Nautilus."),
@@ -524,6 +561,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Opprett en 6-sifret PIN-kode"),
         "pinEnterTitle":
             MessageLookupByLibrary.simpleMessage("Tast inn PIN-kode"),
+        "pinIncorrect": MessageLookupByLibrary.simpleMessage("Feil pin angitt"),
         "pinInvalid": MessageLookupByLibrary.simpleMessage(
             "Den inntastede PIN-koden er ugyldig"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("PIN-kode"),
@@ -685,6 +723,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess":
             MessageLookupByLibrary.simpleMessage("Passordet er valgt"),
         "setPin": MessageLookupByLibrary.simpleMessage("Sett Pin"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "Angi eller endre din eksisterende PIN-kode. Hvis du ikke har angitt en PIN-kode ennå, er standard-PIN-koden 000000."),
         "setPinSuccess":
             MessageLookupByLibrary.simpleMessage("Pin har blitt satt"),
         "setPlausibleDeniabilityPin":
@@ -852,8 +892,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("En uke siden"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Velkommen til Nautilus. For å starte, kan du opprette en ny lommebok eller importere en eksisterende."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "Velkommen til Nautilus. Velg et alternativ for å komme i gang eller velg et tema ved å bruke ikonet nedenfor."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Velkommen til Nautilus. For å starte, lag en ny lommebok eller importer en eksisterende."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "For å starte, opprett en ny lommebok eller importer en eksisterende."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Med adresse"),
         "withFee": MessageLookupByLibrary.simpleMessage("Med gebyr"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Med melding"),

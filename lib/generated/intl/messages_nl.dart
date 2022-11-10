@@ -122,6 +122,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Verander valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Logboek wijzigen"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Verander wachtwoord"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "Wijzig uw bestaande wachtwoord. Als je je huidige wachtwoord niet weet, doe dan gewoon je best, want het is niet echt nodig om het te wijzigen (omdat je al bent ingelogd), maar het laat ons wel de bestaande back-upvermelding verwijderen."),
+        "changePin": MessageLookupByLibrary.simpleMessage("Verander pincode"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("Pin instellen"),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage(
             "Verander van vertegenwoordiger"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Verander"),
@@ -131,6 +137,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Dit is al je vertegenwoordiger!"),
         "changeRepSucces": MessageLookupByLibrary.simpleMessage(
             "Nieuwe vertegenwoordiger opgeslagen"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("Wijzig zaad"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "Wijzig de seed/phrase die is gekoppeld aan dit door magic-link geverifieerde account, welk wachtwoord u hier ook instelt, uw bestaande wachtwoord wordt overschreven, maar u kunt hetzelfde wachtwoord gebruiken als u dat wilt."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Beschikbaarheid controleren"),
         "close": MessageLookupByLibrary.simpleMessage("Sluiten"),
@@ -166,6 +175,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Contacten importeren mislukt"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "%1 contacten succesvol geïmporteerd"),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("Doorgaan zonder inloggen"),
         "copied": MessageLookupByLibrary.simpleMessage("Gekopieerd"),
         "copy": MessageLookupByLibrary.simpleMessage("Kopiëren"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Kopieer adres"),
@@ -236,7 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kan geen Wallet-wachtwoord instellen"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Vul adres in"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Vul bedrag in"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("Voer email in"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Cadeaubon invoeren"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Voer Hoogte in"),
@@ -285,6 +296,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gasgeld"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Ruil NANO"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Vul huidig wachtwoord in"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("Voer huidige pincode in"),
         "exit": MessageLookupByLibrary.simpleMessage("Verlaten"),
         "exportTXData":
             MessageLookupByLibrary.simpleMessage("Transacties exporteren"),
@@ -377,6 +392,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Het lijkt erop dat je op een link hebt geklikt die wat NANO bevat, om deze fondsen te ontvangen, hoeven we alleen maar je portemonnee te voltooien."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "De link waarop je hebt geklikt, bevat wat NANO, wil je deze in deze portemonnee importeren?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("HD importeren"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importeer geheime zin"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -386,6 +402,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vul je seed in."),
         "importSeedInstead": MessageLookupByLibrary.simpleMessage(
             "In plaats daarvan seed importeren"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("Standaard importeren"),
         "importWallet":
             MessageLookupByLibrary.simpleMessage("Importeer wallet"),
         "instantly": MessageLookupByLibrary.simpleMessage("Direct"),
@@ -411,7 +429,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Verifiëren bij starten"),
         "locked": MessageLookupByLibrary.simpleMessage("Vergrendeld"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader":
+            MessageLookupByLibrary.simpleMessage("Log in of Registreer"),
         "logout": MessageLookupByLibrary.simpleMessage("Uitloggen"),
         "logoutAction": MessageLookupByLibrary.simpleMessage(
             "Seed verwijderen en uitloggen"),
@@ -421,6 +440,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Uitloggen zorgt ervoor dat jouw seed en alle Nautilus-gerelateerde informatie van dit toestel worden verwijderd. Als je geen back-up hebt gemaakt, kan je niet meer bij de inhoud van jouw wallet."),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Als je een back-up hebt gemaakt van jouw seed, is er niks aan de hand."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "Dit lijkt een HD-seed te zijn, tenzij u zeker weet wat u doet, moet u in plaats daarvan de optie \"HD importeren\" gebruiken."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "Dit lijkt een standaard seed te zijn, in plaats daarvan moet je de optie \"Import Standard\" gebruiken."),
         "manage": MessageLookupByLibrary.simpleMessage("Beheren"),
         "mantaError": MessageLookupByLibrary.simpleMessage(
             "Kan het verzoek niet verifiëren"),
@@ -473,6 +496,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Er zijn geen transacties om te exporteren."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Knoopstatus"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("Geen"),
         "notSent": MessageLookupByLibrary.simpleMessage("niet verzonden"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Open Nautilus om de transactie te zien."),
@@ -502,9 +526,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("Papieren wallet"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
             "Wachtwoord mag niet leeg zijn"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "Wachtwoord moet minimaal 1 hoofdletter en kleine letter bevatten"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "Wij zijn niet verantwoordelijk als u uw wachtwoord bent vergeten, en door het ontwerp kunnen we het niet voor u resetten of wijzigen."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("Incorrect wachtwoord"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Je hebt geen wachtwoord meer nodig om Nautilus te openen."),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "Wachtwoord moet minimaal 1 cijfer bevatten"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "Wachtwoord moet minimaal 1 speciaal teken bevatten"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("Wachtwoord is te kort"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "Dit wachtwoord is vereist om Nautilus te openen."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Dit wachtwoord is vereist om Nautilus te openen."),
@@ -527,6 +565,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Creëer een 6-cijferige pincode"),
         "pinEnterTitle":
             MessageLookupByLibrary.simpleMessage("Voer pincode in"),
+        "pinIncorrect":
+            MessageLookupByLibrary.simpleMessage("Onjuiste pincode ingevoerd"),
         "pinInvalid":
             MessageLookupByLibrary.simpleMessage("Ongeldige pincode ingevoerd"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("Pincode"),
@@ -690,6 +730,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Wachtwoord is succesvol ingesteld"),
         "setPin": MessageLookupByLibrary.simpleMessage("Pin instellen"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "Stel uw bestaande pincode in of wijzig deze. Als u nog geen pincode hebt ingesteld, is de standaardpincode 000000."),
         "setPinSuccess":
             MessageLookupByLibrary.simpleMessage("Pin is succesvol ingesteld"),
         "setPlausibleDeniabilityPin":
@@ -862,8 +904,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("Een week geleden"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Welkom bij Nautilus. Creëer een nieuwe wallet of importeer een bestaande wallet om verder te gaan."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "Welkom bij Nautilus. Kies een optie om aan de slag te gaan of kies een thema met behulp van het onderstaande pictogram."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Welkom bij Nautilus. Maak om te beginnen een nieuwe portemonnee of importeer een bestaande."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Maak om te beginnen een nieuwe portemonnee of importeer een bestaande."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Met adres"),
         "withFee": MessageLookupByLibrary.simpleMessage("Tegen vergoeding"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Met boodschap"),

@@ -120,6 +120,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Per prevenire abusi, ti chiediamo di risolvere un captcha per richiedere la carta regalo nella pagina successiva."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Cambia Valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Registro modifiche"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Cambia la password"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "Cambia la tua password esistente. Se non conosci la tua password attuale, fai la tua ipotesi migliore in quanto non è effettivamente necessario cambiarla (poiché hai già effettuato l\'accesso), ma ci consente di eliminare la voce di backup esistente."),
+        "changePin": MessageLookupByLibrary.simpleMessage("Cambia pin"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("Imposta spilla"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Cambia Rappresentante"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Cambia"),
@@ -129,6 +135,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Questo è già il tuo rappresentante!"),
         "changeRepSucces": MessageLookupByLibrary.simpleMessage(
             "Rappresentante Cambiato con Successo"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("Cambia seme"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "Modifica il seme/frase associato a questo account autenticato con collegamento magico, qualunque password imposti qui sovrascriverà la password esistente, ma puoi utilizzare la stessa password se lo desideri."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Verifica disponibilità"),
         "close": MessageLookupByLibrary.simpleMessage("Chiudi"),
@@ -165,6 +174,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Errore nell\'importazione contatti"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "%1 contatti importati con successo"),
+        "continueWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Continua senza effettuare il login"),
         "copied": MessageLookupByLibrary.simpleMessage("Copiato"),
         "copy": MessageLookupByLibrary.simpleMessage("Copia"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Copia Indirizzo"),
@@ -238,7 +249,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Inserisci Indirizzo"),
         "enterAmount":
             MessageLookupByLibrary.simpleMessage("Inserisci Importo"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail":
+            MessageLookupByLibrary.simpleMessage("Inserisci l\'email"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Inserisci la nota regalo"),
         "enterHeight":
@@ -289,6 +301,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Denaro del gas"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Scambio NANO"),
+        "existingPasswordHint": MessageLookupByLibrary.simpleMessage(
+            "Immetti la password corrente"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("Inserisci il pin corrente"),
         "exit": MessageLookupByLibrary.simpleMessage("Esci"),
         "exportTXData":
             MessageLookupByLibrary.simpleMessage("Transazioni di esportazione"),
@@ -379,6 +395,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sembra che tu abbia cliccato su un link che contiene alcuni NANO, per ricevere questi fondi abbiamo solo bisogno che tu finisca di configurare il tuo portafoglio."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Il link che hai cliccato contiene dei NANO, vorresti importarlo in questo portafoglio?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("Importa HD"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importa Frase Segreta"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -388,6 +405,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Inserisci il seed qui in basso."),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("Oppure Importa Seed"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("Standard di importazione"),
         "importWallet": MessageLookupByLibrary.simpleMessage("Importa"),
         "instantly": MessageLookupByLibrary.simpleMessage("Subito"),
         "insufficientBalance":
@@ -412,7 +431,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Autenticazione all\'Avvio"),
         "locked": MessageLookupByLibrary.simpleMessage("Bloccato"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader":
+            MessageLookupByLibrary.simpleMessage("Login o Registrati"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "logoutAction": MessageLookupByLibrary.simpleMessage(
             "Elimina seed e fai il logout"),
@@ -421,6 +441,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Facendo il logout il tuo seed e tutti i dati relativi a Nautilus verranno rimossi dal dispositivo. Se non hai salvato il tuo seed, non sarai più in grado di accedere ai tuoi fondi."),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Finché avrai un backup del seed non avrai nulla di cui preoccuparti."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "Questo sembra essere un seme HD, a meno che tu non sia sicuro di sapere cosa stai facendo, dovresti invece usare l\'opzione \"Importa HD\"."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "Questo sembra essere un seme standard, dovresti invece usare l\'opzione \"Importa standard\"."),
         "manage": MessageLookupByLibrary.simpleMessage("Gestisci"),
         "mantaError": MessageLookupByLibrary.simpleMessage(
             "Errore nella Verifica della Richiesta"),
@@ -473,6 +497,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Non ci sono transazioni da esportare."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Stato nodo"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("Nessuno"),
         "notSent": MessageLookupByLibrary.simpleMessage("non inviato"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Apri Nautilus per vedere la transazione."),
@@ -503,9 +528,23 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Portafoglio Cartaceo"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
             "La password non può essere vuota"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "La password deve contenere almeno 1 lettera maiuscola e minuscola"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "Non siamo responsabili se dimentichi la tua password e, in base alla progettazione, non siamo in grado di reimpostarla o modificarla per te."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("password errata"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Non avrai più bisogno di una password per aprire Nautilus."),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "La password deve contenere almeno 1 numero"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "La password deve contenere almeno 1 carattere speciale"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("La password è troppo corta"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "Questa password sarà richiesta per aprire Nautilus."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Questa password sarà richiesta per aprire Nautilus."),
@@ -528,6 +567,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("Crea un pin a 6 cifre"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("Inserisci pin"),
+        "pinIncorrect": MessageLookupByLibrary.simpleMessage(
+            "È stato inserito un PIN errato"),
         "pinInvalid": MessageLookupByLibrary.simpleMessage("Pin errato"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("PIN"),
         "pinRepChange": MessageLookupByLibrary.simpleMessage(
@@ -688,6 +729,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "La password è stata impostata correttamente"),
         "setPin": MessageLookupByLibrary.simpleMessage("Imposta pin"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "Imposta o modifica il PIN esistente. Se non hai ancora impostato un PIN, il PIN predefinito è 000000."),
         "setPinSuccess": MessageLookupByLibrary.simpleMessage(
             "Il pin è stato impostato correttamente"),
         "setPlausibleDeniabilityPin":
@@ -863,8 +906,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("Una settimana fa"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Benvenuto in Nautilus. Per continuare, puoi creare un nuovo portafoglio o importarne uno esistente."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "Benvenuto in Nautilus. Scegli un\'opzione per iniziare o scegli un tema usando l\'icona qui sotto."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Benvenuto in Nautilus. Per iniziare, crea un nuovo portafoglio o importane uno esistente."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Per iniziare, crea un nuovo portafoglio o importane uno esistente."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Con indirizzo"),
         "withFee": MessageLookupByLibrary.simpleMessage("Con Tariffa"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Con messaggio"),

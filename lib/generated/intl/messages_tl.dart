@@ -122,6 +122,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Palitan ang Currency"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Baguhin ang Log"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Palitan ANG password"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "Baguhin ang iyong umiiral na password. Kung hindi mo alam ang iyong kasalukuyang password, hulaan na lang ang iyong pinakamahusay dahil hindi naman talaga kailangan na baguhin ito (dahil naka-log in ka na), ngunit hinahayaan kami nitong tanggalin ang kasalukuyang backup na entry."),
+        "changePin": MessageLookupByLibrary.simpleMessage("Baguhin ang Pin"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("Itakda ang pin"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Palitan ang Representative"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Palitan"),
@@ -131,6 +137,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ito ang iyong kinatawan!"),
         "changeRepSucces": MessageLookupByLibrary.simpleMessage(
             "Ang Representative ay napalitan"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("Baguhin ang Binhi"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "Baguhin ang seed/phrase na nauugnay sa magic-link na na-authed account na ito, anuman ang password na itinakda mo dito ay mao-overwrite ang iyong umiiral na password, ngunit maaari mong gamitin ang parehong password kung pipiliin mo."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Suriin ang Availability"),
         "close": MessageLookupByLibrary.simpleMessage("Isara"),
@@ -166,6 +175,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hindi ma-import ang mga kontak"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("Na-import na ang %1 kontak"),
+        "continueWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Magpatuloy nang walang pag-login"),
         "copied": MessageLookupByLibrary.simpleMessage("Nakopya"),
         "copy": MessageLookupByLibrary.simpleMessage("Kopyahin"),
         "copyAddress":
@@ -240,7 +251,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ilagay ang Address"),
         "enterAmount":
             MessageLookupByLibrary.simpleMessage("Ilagay ang Amount"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("Ipasok ang Email"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Ipasok ang Tala ng Regalo"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Ipasok ang Taas"),
@@ -290,6 +301,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas Pera"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Palitan ng NANO"),
+        "existingPasswordHint": MessageLookupByLibrary.simpleMessage(
+            "Ipasok ang kasalukuyang password"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("Ilagay ang kasalukuyang pin"),
         "exit": MessageLookupByLibrary.simpleMessage("Lumabas"),
         "exportTXData": MessageLookupByLibrary.simpleMessage(
             "I-export ang mga Transaksyon"),
@@ -385,6 +400,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mukhang nag-click ka sa isang link na naglalaman ng ilang NANO, para matanggap ang mga pondong ito kailangan lang namin para matapos mo ang pag-set up ng iyong wallet."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Ang link na iyong na-click ay naglalaman ng ilang NANO, gusto mo bang i-import ito sa wallet na ito?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("Mag-import ng HD"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("I-import ang secret phrase"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -395,6 +411,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ilagay ang iyong seed sa ibaba."),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("I-import ang seed"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("Pamantayan sa Pag-import"),
         "importWallet": MessageLookupByLibrary.simpleMessage("Dating Wallet"),
         "instantly": MessageLookupByLibrary.simpleMessage("Agad"),
         "insufficientBalance":
@@ -419,7 +437,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("I-authenticate sa paglunsad"),
         "locked": MessageLookupByLibrary.simpleMessage("Nakalock"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader":
+            MessageLookupByLibrary.simpleMessage("Mag-login o Magrehistro"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "logoutAction": MessageLookupByLibrary.simpleMessage(
             "Burahin ang seed at mag-logout"),
@@ -429,6 +448,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mabubura ang iyong seed at lahat ng Nautilus-related na data sa aparato na ito kapag ikaw ay nag-logout. Kapag wala kang back up ng iyong seed, hindi mo na ulit ma-aaccess ang iyong pondo."),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Wala kang dapat ikabahala basta may back up ka ng iyong seed."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "Ito ay mukhang isang HD seed, maliban kung sigurado kang alam mo kung ano ang iyong ginagawa, dapat mong gamitin ang pagpipiliang \"Import HD\" sa halip."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "Lumilitaw na ito ay isang karaniwang binhi, dapat mong gamitin ang pagpipiliang \"Import Standard\" sa halip."),
         "manage": MessageLookupByLibrary.simpleMessage("Pamamahala"),
         "mantaError":
             MessageLookupByLibrary.simpleMessage("Hindi ma-verify ang Request"),
@@ -483,6 +506,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Walang mga transaksyong ie-export."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Katayuan ng Node"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("wala"),
         "notSent": MessageLookupByLibrary.simpleMessage("hindi ipinadala"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Buksan ang Nautilus para tingnan ito."),
@@ -513,9 +537,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("Paper Wallet"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
             "Ang password ay hindi pwedeng blangko"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "Dapat maglaman ang password ng hindi bababa sa 1 upper case at lower case na titik"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "Wala kaming pananagutan kung nakalimutan mo ang iyong password, at ayon sa disenyo ay hindi namin ito mai-reset o mababago para sa iyo."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("Maling password"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Hindi mo na kailangan ng password para mabuksan ang Nautilus"),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "Ang password ay dapat maglaman ng hindi bababa sa 1 numero"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "Dapat maglaman ang password ng hindi bababa sa 1 espesyal na character"),
+        "passwordTooShort": MessageLookupByLibrary.simpleMessage(
+            "Masyadong maikli ang password"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "Ang password na ito ay kinakailangan upang buksan ang Nautilus."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Itong password ay kailangan para mabuksan ang Nautilus"),
@@ -538,6 +576,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("Gumawa ng 6-digit pin"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("Ilagay ang pin"),
+        "pinIncorrect":
+            MessageLookupByLibrary.simpleMessage("Maling pin ang ipinasok"),
         "pinInvalid": MessageLookupByLibrary.simpleMessage(
             "Hindi tama ang pin na nilagay"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("PIN"),
@@ -707,6 +747,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Ang password ay nakalagay na"),
         "setPin": MessageLookupByLibrary.simpleMessage("Itakda ang Pin"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "Itakda o baguhin ang iyong kasalukuyang PIN. Kung hindi ka pa nakakapagtakda ng PIN, ang default na PIN ay 000000."),
         "setPinSuccess": MessageLookupByLibrary.simpleMessage(
             "Matagumpay na naitakda ang pin"),
         "setPlausibleDeniabilityPin":
@@ -886,8 +928,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Isang linggo na ang nakalipas"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Maligayang pagdating sa Nautilus. Para magpatuloy, gumawa ng bagong wallet o gamitin ang dating wallet."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "Maligayang pagdating sa Nautilus. Pumili ng opsyon para makapagsimula o pumili ng tema gamit ang icon sa ibaba."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Maligayang pagdating sa Nautilus. Para magsimula, gumawa ng bagong wallet o mag-import ng dati."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Upang magsimula, gumawa ng bagong wallet o mag-import ng dati."),
         "withAddress":
             MessageLookupByLibrary.simpleMessage("Gamit ang Address"),
         "withFee": MessageLookupByLibrary.simpleMessage("May Bayad"),

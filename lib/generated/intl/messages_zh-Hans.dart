@@ -94,11 +94,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "为了防止滥用，我们要求您解决验证码才能在下一页领取礼品卡。"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("更改货币"),
         "changeLog": MessageLookupByLibrary.simpleMessage("更改日志"),
+        "changePassword": MessageLookupByLibrary.simpleMessage("更改密码"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "更改现有密码。如果您不知道当前密码，请做出最佳猜测，因为实际上不需要更改它（因为您已经登录），但它确实让我们删除了现有的备份条目。"),
+        "changePin": MessageLookupByLibrary.simpleMessage("更改引脚"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("设置引脚"),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage("更改代表"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("更改"),
         "changeRepHint": MessageLookupByLibrary.simpleMessage("输入新代表"),
         "changeRepSame": MessageLookupByLibrary.simpleMessage("这已经是你的代表了！"),
         "changeRepSucces": MessageLookupByLibrary.simpleMessage("代表更改成功"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("改变种子"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "更改与此magic-link authed 帐户关联的种子/短语，您在此处设置的任何密码都将覆盖您现有的密码，但您可以选择使用相同的密码。"),
         "checkAvailability": MessageLookupByLibrary.simpleMessage("查看空房情况"),
         "close": MessageLookupByLibrary.simpleMessage("关闭"),
         "confirm": MessageLookupByLibrary.simpleMessage("确认"),
@@ -123,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "contactsImportErr": MessageLookupByLibrary.simpleMessage("无法导入联系人"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("已成功导入％1个联系人"),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("无需登录即可继续"),
         "copied": MessageLookupByLibrary.simpleMessage("已复制"),
         "copy": MessageLookupByLibrary.simpleMessage("复制"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("复制地址"),
@@ -177,7 +187,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("钱包密码设置失败"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("输入地址"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("输入金额"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("输入电子邮件"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("输入礼品备注"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("输入高度"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("输入消息"),
@@ -217,6 +227,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("煤气钱"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("交换纳米"),
+        "existingPasswordHint": MessageLookupByLibrary.simpleMessage("输入当前密码"),
+        "existingPinHint": MessageLookupByLibrary.simpleMessage("输入当前引脚"),
         "exit": MessageLookupByLibrary.simpleMessage("退出"),
         "exportTXData": MessageLookupByLibrary.simpleMessage("出口交易"),
         "failed": MessageLookupByLibrary.simpleMessage("失败了"),
@@ -290,12 +302,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "看起来你点击了一个包含一些 NANO 的链接，为了接收这些资金，我们只需要你完成设置你的钱包。"),
         "importGiftv2":
             MessageLookupByLibrary.simpleMessage("您点击的链接包含一些 NANO，您想将其导入此钱包吗？"),
+        "importHD": MessageLookupByLibrary.simpleMessage("导入高清"),
         "importSecretPhrase": MessageLookupByLibrary.simpleMessage("输入秘密词语"),
         "importSecretPhraseHint":
             MessageLookupByLibrary.simpleMessage("请输入您的24个秘密词语。每个词语应该由空格分隔。"),
         "importSeed": MessageLookupByLibrary.simpleMessage("导入种子"),
         "importSeedHint": MessageLookupByLibrary.simpleMessage("请在下面输入您的种子。"),
         "importSeedInstead": MessageLookupByLibrary.simpleMessage("导入种子"),
+        "importStandard": MessageLookupByLibrary.simpleMessage("进口标准"),
         "importWallet": MessageLookupByLibrary.simpleMessage("导入现有钱包"),
         "instantly": MessageLookupByLibrary.simpleMessage("立刻"),
         "insufficientBalance": MessageLookupByLibrary.simpleMessage("余额不足"),
@@ -315,7 +329,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loadedInto": MessageLookupByLibrary.simpleMessage("已加载到"),
         "lockAppSetting": MessageLookupByLibrary.simpleMessage("启动时要求验证"),
         "locked": MessageLookupByLibrary.simpleMessage("已锁定"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage("登录或注册"),
         "logout": MessageLookupByLibrary.simpleMessage("登出"),
         "logoutAction": MessageLookupByLibrary.simpleMessage("删除种子并登出"),
         "logoutAreYouSure": MessageLookupByLibrary.simpleMessage("您确定？"),
@@ -323,6 +337,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "注销将从此设备中删除您的种子和所有与Nautilus相关的数据。如果您的种子代码没有备份，您将永远无法再次访问您的帐户"),
         "logoutReassurance":
             MessageLookupByLibrary.simpleMessage("只要您有备份您的种子，就没有什么可担心的。"),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "这似乎是一个高清种子，除非你确定你知道你在做什么，否则你应该使用“导入高清”选项。"),
+        "looksLikeStandardSeed":
+            MessageLookupByLibrary.simpleMessage("这似乎是一个标准种子，您应该改用“导入标准”选项。"),
         "manage": MessageLookupByLibrary.simpleMessage("管理"),
         "mantaError": MessageLookupByLibrary.simpleMessage("无法验证请求"),
         "manualEntry": MessageLookupByLibrary.simpleMessage("手动输入"),
@@ -362,6 +380,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage("没有要导出的交易。"),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("节点状态"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("没有任何"),
         "notSent": MessageLookupByLibrary.simpleMessage("未发送"),
         "notificationBody":
             MessageLookupByLibrary.simpleMessage("打开Nautilus查看此交易"),
@@ -388,8 +407,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "paid": MessageLookupByLibrary.simpleMessage("已支付"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("纸钱包"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage("密码不能为空"),
+        "passwordCapitalLetter":
+            MessageLookupByLibrary.simpleMessage("密码必须至少包含 1 个大写和小写字母"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "如果您忘记了密码，我们概不负责，并且我们无法为您重置或更改密码。"),
+        "passwordIncorrect": MessageLookupByLibrary.simpleMessage("密码错误"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage("您以后打开Nautilus不再需要密码了。"),
+        "passwordNumber":
+            MessageLookupByLibrary.simpleMessage("密码必须至少包含 1 个数字"),
+        "passwordSpecialCharacter":
+            MessageLookupByLibrary.simpleMessage("密码必须至少包含 1 个特殊字符"),
+        "passwordTooShort": MessageLookupByLibrary.simpleMessage("密码太短"),
+        "passwordWarning":
+            MessageLookupByLibrary.simpleMessage("打开 Nautilus 需要此密码。"),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage("以后需要这个密码才能打开Nautilus。"),
         "passwordsDontMatch": MessageLookupByLibrary.simpleMessage("密码不匹配"),
@@ -404,6 +435,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinConfirmTitle": MessageLookupByLibrary.simpleMessage("确认您的识别码"),
         "pinCreateTitle": MessageLookupByLibrary.simpleMessage("创建一个6位数的识别码"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("输入识别码"),
+        "pinIncorrect": MessageLookupByLibrary.simpleMessage("输入的密码不正确"),
         "pinInvalid": MessageLookupByLibrary.simpleMessage("输入的识别码无效"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("识别码"),
         "pinRepChange": MessageLookupByLibrary.simpleMessage("输入识别码以更改代表。"),
@@ -534,6 +566,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPassword": MessageLookupByLibrary.simpleMessage("设置密码"),
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage("密码设置成功"),
         "setPin": MessageLookupByLibrary.simpleMessage("设置引脚"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "设置或更改您现有的 PIN。如果您尚未设置 PIN，则默认 PIN 为 000000。"),
         "setPinSuccess": MessageLookupByLibrary.simpleMessage("已成功设置引脚"),
         "setPlausibleDeniabilityPin":
             MessageLookupByLibrary.simpleMessage("设置合理的引脚"),
@@ -671,8 +705,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("一星期前"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "欢迎来到Nautilus。下一步，您可以创建新钱包或导入已有钱包。"),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "欢迎来到鹦鹉螺。选择一个选项以开始使用或使用下面的图标选择一个主题。"),
         "welcomeTextUpdated":
             MessageLookupByLibrary.simpleMessage("欢迎来到鹦鹉螺。首先，创建一个新钱包或导入现有钱包。"),
+        "welcomeTextWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("首先，创建一个新钱包或导入现有钱包。"),
         "withAddress": MessageLookupByLibrary.simpleMessage("有地址"),
         "withFee": MessageLookupByLibrary.simpleMessage("有费用"),
         "withMessage": MessageLookupByLibrary.simpleMessage("带消息"),

@@ -278,8 +278,10 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                                 } catch (e) {
                                   await authenticateWithPin(context);
                                 }
-                              } else {
+                              } else if (authMethod.method == AuthMethod.PIN) {
                                 await authenticateWithPin(context);
+                              } else {
+                                EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE_MANUAL));
                               }
                             },
                           ),

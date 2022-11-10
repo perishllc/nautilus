@@ -121,6 +121,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Valuta Megváltoztatása"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Változási napló"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Jelszó módosítása"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "Változtassa meg meglévő jelszavát. Ha nem ismeri jelenlegi jelszavát, csak tippelje meg, mivel valójában nem szükséges megváltoztatnia (mivel Ön már bejelentkezett), de lehetővé teszi, hogy töröljük a meglévő biztonsági bejegyzést."),
+        "changePin": MessageLookupByLibrary.simpleMessage("Pin módosítása"),
+        "changePinHint":
+            MessageLookupByLibrary.simpleMessage("Állítsa be a tűt"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Képviselő Megváltoztatása"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Megváltoztat"),
@@ -129,6 +136,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ez már a képviselője!"),
         "changeRepSucces": MessageLookupByLibrary.simpleMessage(
             "Képviselő Sikeresen Kiválasztva"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("Change Seed"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "Módosítsa a magic-link hitelesített fiókhoz társított magot/kifejezést, az itt beállított jelszó felülírja a meglévő jelszavát, de ha úgy dönt, használhatja ugyanazt a jelszót."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Szabad szobák ellenőrzése"),
         "close": MessageLookupByLibrary.simpleMessage("Bezárás"),
@@ -164,6 +174,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sikertelen kontakt importálás"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Sikeresen importáltál %1 kontaktot"),
+        "continueWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Folytatás bejelentkezés nélkül"),
         "copied": MessageLookupByLibrary.simpleMessage("Copied"),
         "copy": MessageLookupByLibrary.simpleMessage("Copy"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Cím Másolása"),
@@ -237,7 +249,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Küldés Erre A Címre"),
         "enterAmount":
             MessageLookupByLibrary.simpleMessage("Küldött Mennyiség"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail":
+            MessageLookupByLibrary.simpleMessage("Írja be az e-mail címet"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Adja meg az ajándékjegyet"),
         "enterHeight":
@@ -287,6 +300,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gáz Pénz"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Csere NANO"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Írd be a jelenlegi jelszót"),
+        "existingPinHint": MessageLookupByLibrary.simpleMessage(
+            "Adja meg az aktuális PIN-kódot"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "exportTXData":
             MessageLookupByLibrary.simpleMessage("Export tranzakciók"),
@@ -376,6 +393,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Úgy tűnik, egy NANO-t tartalmazó linkre kattintott. Ahhoz, hogy megkapjuk ezeket az összegeket, csak be kell fejeznünk pénztárcája beállítását."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "A link, amelyre kattintott, NANO-t tartalmaz. Szeretné importálni ebbe a pénztárcába?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("HD importálása"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Import Secret Phrase"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -385,6 +403,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Írd be a seeded."),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("Import Seed Instead"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("Szabvány importálása"),
         "importWallet":
             MessageLookupByLibrary.simpleMessage("Tárca Importálása"),
         "instantly": MessageLookupByLibrary.simpleMessage("Azonnal"),
@@ -410,7 +430,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Hitelesítés az Indításnál"),
         "locked": MessageLookupByLibrary.simpleMessage("Lezárva"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(
+            "Bejelentkezés vagy Regisztráció"),
         "logout": MessageLookupByLibrary.simpleMessage("Kijelentkezés"),
         "logoutAction": MessageLookupByLibrary.simpleMessage(
             "Seed törlése és kijelentkezés"),
@@ -420,6 +441,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ha kijelentkezel, elvész a beírt seeded, és minden Nautilushoz kapcsolódó adatod az eszközről. Ha nem őrizted meg a seeded, nem fogsz tudni hozzáférni a tőkédhez."),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Ha elmentetted a seeded, akkor nem lehet baj."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "Úgy tűnik, hogy ez egy HD-mag, hacsak nem biztos abban, hogy tudja, mit csinál, használja inkább a „HD importálása” opciót."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "Ez egy szabványos magnak tűnik, inkább a \"Szabvány importálása\" opciót kell használnia."),
         "manage": MessageLookupByLibrary.simpleMessage("Kezelés"),
         "mantaError":
             MessageLookupByLibrary.simpleMessage("Couldn\'t Verify Request"),
@@ -473,6 +498,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus":
             MessageLookupByLibrary.simpleMessage("Csomópont állapota"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("Egyik sem"),
         "notSent": MessageLookupByLibrary.simpleMessage("nem küldött"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Nyisd meg a Nautilusot, hogy megnézhesd a tranzakciót."),
@@ -502,9 +528,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("Paper Wallet"),
         "passwordBlank":
             MessageLookupByLibrary.simpleMessage("Password cannot be empty"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "A jelszónak tartalmaznia kell legalább 1 kis- és nagybetűt"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "Nem vállalunk felelősséget, ha elfelejti jelszavát, és a tervezés miatt nem áll módunkban visszaállítani vagy megváltoztatni azt az Ön helyett."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("hibás jelszó"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "You will not need a password to open Nautilus anymore."),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "A jelszónak legalább 1 számot kell tartalmaznia"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "A jelszónak legalább 1 speciális karaktert kell tartalmaznia"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("A jelszó túl rövid"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "Ez a jelszó szükséges a Nautilus megnyitásához."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "This password will be required to open Nautilus."),
@@ -528,6 +568,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hozz létre egy 6 számjegyű PIN-kódot"),
         "pinEnterTitle":
             MessageLookupByLibrary.simpleMessage("Írd be a PIN-kódod"),
+        "pinIncorrect":
+            MessageLookupByLibrary.simpleMessage("Helytelen PIN-kódot írt be"),
         "pinInvalid": MessageLookupByLibrary.simpleMessage("Helytelen PIN-kód"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("PIN"),
         "pinRepChange": MessageLookupByLibrary.simpleMessage(
@@ -690,6 +732,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Password has been set successfully"),
         "setPin": MessageLookupByLibrary.simpleMessage("Set Pin"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "Állítsa be vagy módosítsa meglévő PIN-kódját. Ha még nem állított be PIN-kódot, az alapértelmezett PIN-kód a 000000."),
         "setPinSuccess": MessageLookupByLibrary.simpleMessage(
             "A PIN-kód beállítása sikeresen megtörtént"),
         "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(
@@ -866,8 +910,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("Egy hete"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Üdvözöllek a Nautilusban! Hozz létre egy új tárcát, vagy importálj egy létezőt."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "Üdvözöljük a Nautilusban. Válasszon egy lehetőséget a kezdéshez, vagy válasszon témát az alábbi ikon segítségével."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Üdvözöljük a Nautilusban. A kezdéshez hozzon létre egy új pénztárcát, vagy importáljon egy meglévőt."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "A kezdéshez hozzon létre egy új pénztárcát, vagy importáljon egy meglévőt."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Címmel"),
         "withFee": MessageLookupByLibrary.simpleMessage("Díjjal"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Üzenettel"),

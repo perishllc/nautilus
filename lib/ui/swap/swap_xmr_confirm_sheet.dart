@@ -183,17 +183,17 @@ class SwapXMRConfirmSheetState extends State<SwapXMRConfirmSheet> {
                   //     ),
                   //   ),
 
-                    Container(
-                      margin: const EdgeInsets.only(top: 30.0, bottom: 10),
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context).registerFor, context),
-                            style: AppStyles.textStyleHeader(context),
-                          ),
-                        ],
-                      ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          CaseChange.toUpperCase(AppLocalization.of(context).registerFor, context),
+                          style: AppStyles.textStyleHeader(context),
+                        ),
+                      ],
                     ),
+                  ),
                   // if (widget.memo.isNotEmpty)
                   //   Container(
                   //       padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
@@ -241,8 +241,10 @@ class SwapXMRConfirmSheetState extends State<SwapXMRConfirmSheet> {
                         } catch (e) {
                           await authenticateWithPin();
                         }
-                      } else {
+                      } else if (authMethod.method == AuthMethod.PIN) {
                         await authenticateWithPin();
+                      } else {
+                        EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
                       }
                     })
                   ],

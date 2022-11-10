@@ -123,6 +123,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("মুদ্রা পরিবর্তন"),
         "changeLog": MessageLookupByLibrary.simpleMessage("লগ পরিবর্তন করুন"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("পাসওয়ার্ড পরিবর্তন করুন"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "আপনার বিদ্যমান পাসওয়ার্ড পরিবর্তন করুন. আপনি যদি আপনার বর্তমান পাসওয়ার্ডটি না জানেন, তবে আপনার সেরা অনুমান করুন কারণ এটি পরিবর্তন করার প্রয়োজন নেই (যেহেতু আপনি ইতিমধ্যেই লগ ইন করেছেন), তবে এটি আমাদের বিদ্যমান ব্যাকআপ এন্ট্রি মুছে দিতে দেয়।"),
+        "changePin": MessageLookupByLibrary.simpleMessage("পিন পরিবর্তন করুন"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("পিন সেট করুন"),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage(
             "রিপ্রেজেন্টেটিভ পরিবর্তন করুন"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("পরিবর্তন"),
@@ -132,6 +138,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "এটি ইতিমধ্যেই আপনার প্রতিনিধি!"),
         "changeRepSucces": MessageLookupByLibrary.simpleMessage(
             "রিপ্রেজেন্টেটিভ সফলভাবে পরিবর্তন করা হয়েছে"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("বীজ পরিবর্তন করুন"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "এই ম্যাজিক-লিঙ্ক প্রমাণিত অ্যাকাউন্টের সাথে যুক্ত বীজ/বাক্যাংশ পরিবর্তন করুন, আপনি এখানে যে পাসওয়ার্ড সেট করবেন তা আপনার বিদ্যমান পাসওয়ার্ডটি ওভাররাইট করবে, তবে আপনি যদি চয়ন করেন তবে আপনি একই পাসওয়ার্ড ব্যবহার করতে পারেন।"),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("প্রাপ্যতা পরীক্ষা করুন"),
         "close": MessageLookupByLibrary.simpleMessage("বন্ধ"),
@@ -167,6 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "পরিচিতিগুলি আমদানি করতে ব্যর্থ"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "সফলভাবে আমদানি করা হয়েছে %1 কন্টাক্ট"),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("লগইন ছাড়াই চালিয়ে যান"),
         "copied": MessageLookupByLibrary.simpleMessage("কপি করা হয়েছে"),
         "copy": MessageLookupByLibrary.simpleMessage("কপি"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("ঠিকানা কপি করুন"),
@@ -238,7 +249,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "ওয়ালেটের পাসওয়ার্ড সেট করতে ব্যর্থ"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("ঠিকানা লিখুন"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("পরিমান লিখুন"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("ইমেইল প্রদান করুন"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("উপহার নোট লিখুন"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("উচ্চতা লিখুন"),
@@ -288,6 +299,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("গ্যাস টাকা"),
         "exchangeNano":
             MessageLookupByLibrary.simpleMessage("ন্যানো বিনিময় করুন"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("বর্তমান পাসওয়ার্ড লিখুন"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("বর্তমান পিন লিখুন"),
         "exit": MessageLookupByLibrary.simpleMessage("বাহির"),
         "exportTXData": MessageLookupByLibrary.simpleMessage("রপ্তানি লেনদেন"),
         "failed": MessageLookupByLibrary.simpleMessage("ব্যর্থ হওয়া"),
@@ -376,6 +391,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "দেখে মনে হচ্ছে আপনি একটি লিঙ্কে ক্লিক করেছেন যাতে কিছু NANO রয়েছে, এই তহবিলগুলি পাওয়ার জন্য আমাদের শুধু আপনার ওয়ালেট সেট আপ করা শেষ করতে হবে৷"),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "আপনি যে লিঙ্কটি ক্লিক করেছেন তাতে কিছু NANO রয়েছে, আপনি কি এটি এই ওয়ালেটে আমদানি করতে চান?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("এইচডি আমদানি করুন"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("গোপন বাক্যাংশ আমদানি করুন"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -385,6 +401,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "অনুগ্রহ করে নিচে আপনার সীড লিখুন।"),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("পরিবর্তে সীড আমদানি করুন"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("স্ট্যান্ডার্ড আমদানি করুন"),
         "importWallet":
             MessageLookupByLibrary.simpleMessage("ওয়ালেট আমদানি করুন"),
         "instantly": MessageLookupByLibrary.simpleMessage("তাত্ক্ষণিকভাবে"),
@@ -410,7 +428,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("শুরুতেই প্রমাণীকরণ করুন"),
         "locked": MessageLookupByLibrary.simpleMessage("লক করা"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader":
+            MessageLookupByLibrary.simpleMessage("প্রবেশ করুন অথবা নিবন্ধন"),
         "logout": MessageLookupByLibrary.simpleMessage("লগ আউট"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("সিড মুছুন এবং লগআউট করুন"),
@@ -420,6 +439,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "লগ আউট করলে আপনার সীড এবং সমস্ত ন্যাট্রিয়াম-সম্পর্কিত ডেটা মুছে যাবে। যদি আপনার বীজ ব্যাক আপ না করা হয়, আপনি আর কখনও আপনার তহবিল অ্যাক্সেস করতে সক্ষম হবে না"),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "যেহেতু আপনি আপনার সিড ব্যাকআপ করেছেন ততক্ষণ আপনার চিন্তার কিছু নেই।"),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "এটি একটি HD বীজ বলে মনে হচ্ছে, যদি না আপনি নিশ্চিত হন যে আপনি কী করছেন তা জানেন, আপনার পরিবর্তে \"ইম্পোর্ট এইচডি\" বিকল্পটি ব্যবহার করা উচিত৷"),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "এটি একটি আদর্শ বীজ বলে মনে হচ্ছে, এর পরিবর্তে আপনার \"ইমপোর্ট স্ট্যান্ডার্ড\" বিকল্পটি ব্যবহার করা উচিত।"),
         "manage": MessageLookupByLibrary.simpleMessage("ম্যানেজ করুন"),
         "mantaError":
             MessageLookupByLibrary.simpleMessage("অনুরোধ যাচাই করা যায়নি"),
@@ -472,6 +495,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("রপ্তানির কোনো লেনদেন নেই।"),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("নোডের অবস্থা"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("কোনোটিই নয়"),
         "notSent": MessageLookupByLibrary.simpleMessage("পাঠানো হয়নি"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "এই লেনদেন দেখতে Natrium খুলুন"),
@@ -501,9 +525,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("পেপার ওয়ালেট"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
             "পাসওয়ার্ড খালি রাখা যাবে না"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "পাসওয়ার্ডে কমপক্ষে 1টি বড় হাতের এবং ছোট হাতের অক্ষর থাকতে হবে"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "আপনি যদি আপনার পাসওয়ার্ড ভুলে যান তাহলে আমরা দায়ী নই, এবং ডিজাইন অনুসারে আমরা আপনার জন্য এটি রিসেট বা পরিবর্তন করতে অক্ষম।"),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("ভুল পাসওয়ার্ড৤"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Natrium খুলতে আপনার আর পাসওয়ার্ড লাগবে না।"),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "পাসওয়ার্ডে কমপক্ষে 1 নম্বর থাকতে হবে"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "পাসওয়ার্ডে কমপক্ষে ১টি বিশেষ অক্ষর থাকতে হবে"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("পাসওয়ার্ড অত্যন্ত ছোট"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "নটিলাস খুলতে এই পাসওয়ার্ডের প্রয়োজন হবে।"),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Natrium খোলার জন্য এই পাসওয়ার্ডের প্রয়োজন হবে।"),
@@ -525,6 +563,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("একটি 6 অঙ্কের পিন তৈরি করুন"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("পিন লিখুন"),
+        "pinIncorrect":
+            MessageLookupByLibrary.simpleMessage("ভুল পিন প্রবেশ করান"),
         "pinInvalid":
             MessageLookupByLibrary.simpleMessage("অবৈধ পিন প্রবেশ করা হয়েছে"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("পিন"),
@@ -689,6 +729,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "পাসওয়ার্ড সফলভাবে সেট করা হয়েছে"),
         "setPin": MessageLookupByLibrary.simpleMessage("পিন সেট করুন"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "আপনার বিদ্যমান পিন সেট বা পরিবর্তন করুন। আপনি যদি এখনও একটি পিন সেট না করে থাকেন তবে ডিফল্ট পিনটি হল 000000৷"),
         "setPinSuccess":
             MessageLookupByLibrary.simpleMessage("পিন সফলভাবে সেট করা হয়েছে৷"),
         "setPlausibleDeniabilityPin":
@@ -861,8 +903,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("এক সপ্তাহ আগে"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "নাট্রিয়ামে স্বাগতম। শুরু করার জন্য, আপনি একটি নতুন ওয়ালেট তৈরি করতে পারেন অথবা বিদ্যমান একটি ব্যবহার করতে পারেন।"),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "নটিলাসে স্বাগতম। শুরু করার জন্য একটি বিকল্প চয়ন করুন বা নীচের আইকনটি ব্যবহার করে একটি থিম চয়ন করুন৷"),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "নটিলাসে স্বাগতম। শুরু করতে, একটি নতুন ওয়ালেট তৈরি করুন বা বিদ্যমান একটি আমদানি করুন৷"),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "শুরু করতে, একটি নতুন ওয়ালেট তৈরি করুন বা বিদ্যমান একটি আমদানি করুন৷"),
         "withAddress": MessageLookupByLibrary.simpleMessage("ঠিকানা সহ"),
         "withFee": MessageLookupByLibrary.simpleMessage("ফি সহ"),
         "withMessage": MessageLookupByLibrary.simpleMessage("বার্তা সহ"),

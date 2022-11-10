@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/setting_item.dart';
 
-enum AuthMethod { PIN, BIOMETRICS }
+enum AuthMethod { PIN, BIOMETRICS, NONE }
 
 /// Represent the available authentication methods our app supports
 class AuthenticationMethod extends SettingSelectionItem {
@@ -16,6 +16,8 @@ class AuthenticationMethod extends SettingSelectionItem {
         return AppLocalization.of(context).biometricsMethod;
       case AuthMethod.PIN:
         return AppLocalization.of(context).pinMethod;
+      case AuthMethod.NONE:
+        return AppLocalization.of(context).noneMethod;
       default:
         return AppLocalization.of(context).pinMethod;
     }

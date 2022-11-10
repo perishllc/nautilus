@@ -116,6 +116,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Per evitar l\'abús, us demanem que resolgueu un captcha per reclamar la targeta regal a la pàgina següent."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Změna měny"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Change Log"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Canvia la contrasenya"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "Canvia la teva contrasenya existent. Si no coneixeu la vostra contrasenya actual, només heu d\'endevinar, ja que en realitat no cal canviar-la (ja que ja heu iniciat sessió), però ens permet suprimir l\'entrada de còpia de seguretat existent."),
+        "changePin": MessageLookupByLibrary.simpleMessage("Canvia el PIN"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("Posa el pin"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Změnit zástupce"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Změnit"),
@@ -125,6 +131,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "This is already your representative!"),
         "changeRepSucces":
             MessageLookupByLibrary.simpleMessage("Zástupce byl úspěšně změněn"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("Canvia llavor"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "Canvieu la llavor/frase associada amb aquest compte autenticat d\'enllaç màgic, qualsevol contrasenya que hàgiu establert aquí sobreescriurà la contrasenya existent, però podeu utilitzar la mateixa contrasenya si ho voleu."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Check Availability"),
         "close": MessageLookupByLibrary.simpleMessage("Zavřít"),
@@ -160,6 +169,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Import kontaktů se nezdařil"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "%1 kontaktů bylo úspěšně importováno."),
+        "continueWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Continueu sense iniciar sessió"),
         "copied": MessageLookupByLibrary.simpleMessage("Zkopírováno"),
         "copy": MessageLookupByLibrary.simpleMessage("Kopírovat"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Kopírovat adresu"),
@@ -231,7 +242,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nastavení hesla k peněžence se nezdařilo"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Zadejte adresu"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Zadejte částku"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage(
+            "Introduïu el correu electrònic"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
         "enterHeight":
@@ -280,6 +292,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas Money"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Intercanvi NANO"),
+        "existingPasswordHint": MessageLookupByLibrary.simpleMessage(
+            "Introduïu la contrasenya actual"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("Introduïu el pin actual"),
         "exit": MessageLookupByLibrary.simpleMessage("Odejít"),
         "exportTXData":
             MessageLookupByLibrary.simpleMessage("Transaccions d\'exportació"),
@@ -366,6 +382,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sembla que heu fet clic en un enllaç que conté una mica de NANO, per rebre aquests fons només necessitem que acabeu de configurar la vostra cartera."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "L\'enllaç que heu fet clic conté una mica de NANO, voleu importar-lo a aquesta cartera?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("Importar HD"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importujte tajnou frázi"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -376,6 +393,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Prosím, zadejte vaše semínko níže."),
         "importSeedInstead": MessageLookupByLibrary.simpleMessage(
             "Místo toho importovat semínko"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("Importació estàndard"),
         "importWallet":
             MessageLookupByLibrary.simpleMessage("Importovat pěněženku"),
         "instantly": MessageLookupByLibrary.simpleMessage("Ihned"),
@@ -401,7 +420,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Ověřit při spuštění"),
         "locked": MessageLookupByLibrary.simpleMessage("Zamčeno"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(
+            "Inicieu sessió o registreu-vos"),
         "logout": MessageLookupByLibrary.simpleMessage("Odhlásit"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Smazat semínko a odhlásit"),
@@ -411,6 +431,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Odhlášením odstraníte z tohoto zařízení vaše semínko a všechna data související s Nautilus. Pokud vaše semínko není zálohováno, už nikdy nebudete mít přístup ke svým prostředkům"),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Pokud jste zálohovali své semínko, nemusíte se ničeho obávat."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "Sembla ser una llavor HD, tret que estigueu segur de saber què feu, hauríeu d\'utilitzar l\'opció \"Importa HD\"."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "Sembla ser una llavor estàndard, hauríeu d\'utilitzar l\'opció \"Importa estàndard\"."),
         "manage": MessageLookupByLibrary.simpleMessage("Spravovat"),
         "mantaError": MessageLookupByLibrary.simpleMessage(
             "Požadavek se nepodařilo ověřit"),
@@ -461,6 +485,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "No hi ha transaccions per exportar."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Node Status"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("Cap"),
         "notSent": MessageLookupByLibrary.simpleMessage("not sent"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Otevřete Nautilus pro zobrazení této transakce"),
@@ -491,9 +516,23 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Papírová Peněženka"),
         "passwordBlank":
             MessageLookupByLibrary.simpleMessage("Heslo nemůže být prázdné"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "La contrasenya ha de contenir almenys 1 lletra majúscula i minúscula"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "No som responsables si oblideu la vostra contrasenya i, per disseny, no podem restablir-la ni canviar-la."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("contrasenya incorrecta"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Už nebudete potřebovat heslo pro otevření Nautilus."),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "La contrasenya ha de contenir almenys 1 número"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "La contrasenya ha de contenir almenys 1 caràcter especial"),
+        "passwordTooShort": MessageLookupByLibrary.simpleMessage(
+            "La contrasenya és massa curta"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "Aquesta contrasenya serà necessària per obrir Nautilus."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Toto heslo bude vyžadováno k otevření Nautilus."),
@@ -515,6 +554,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("Vytvořte si šestimístný pin"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("Zadejte pin"),
+        "pinIncorrect": MessageLookupByLibrary.simpleMessage(
+            "S\'ha introduït un pin incorrecte"),
         "pinInvalid": MessageLookupByLibrary.simpleMessage("Neplatný pin"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("PIN"),
         "pinRepChange": MessageLookupByLibrary.simpleMessage(
@@ -676,6 +717,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Heslo bylo úspěšně nastaveno"),
         "setPin": MessageLookupByLibrary.simpleMessage("Estableix el Pin"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "Estableix o canvia el teu PIN existent. Si encara no heu definit cap PIN, el PIN predeterminat és 000000."),
         "setPinSuccess": MessageLookupByLibrary.simpleMessage(
             "El pin s\'ha establert correctament"),
         "setPlausibleDeniabilityPin":
@@ -850,8 +893,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("Fa una setmana"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Vítejte v Nautilus. Nejprve můžete vytvořit novou peněženku nebo importovat stávající."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "Benvingut a Nautilus. Trieu una opció per començar o trieu un tema amb la icona següent."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Benvingut a Nautilus. Per començar, creeu una cartera nova o importeu-ne una existent."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Per començar, creeu una cartera nova o importeu-ne una existent."),
         "withAddress": MessageLookupByLibrary.simpleMessage("With Address"),
         "withFee": MessageLookupByLibrary.simpleMessage("Amb Quota"),
         "withMessage": MessageLookupByLibrary.simpleMessage("With Message"),

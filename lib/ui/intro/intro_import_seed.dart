@@ -529,7 +529,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                           await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
                           final String seed = NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' '));
                           await sl.get<Vault>().setSeed(seed);
-                          await changingSeed(_seedInputController.text);
+                          await changingSeed(seed);
                           await sl.get<DBHelper>().dropAccounts();
                           if (!mounted) return;
                           await NanoUtil().loginAccount(seed, context);

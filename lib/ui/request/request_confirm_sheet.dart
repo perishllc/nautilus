@@ -238,8 +238,10 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                         } catch (e) {
                           await authenticateWithPin();
                         }
-                      } else {
+                      } else if (authMethod.method == AuthMethod.PIN) {
                         await authenticateWithPin();
+                      } else {
+                        EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.REQUEST));
                       }
                       clicking = false;
                     })

@@ -415,6 +415,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Authenticate on Launch"),
         "locked": MessageLookupByLibrary.simpleMessage("Locked"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Login"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("Login or Register"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
@@ -478,6 +479,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "There\'s no transactions to export."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Node Status"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("None"),
         "notSent": MessageLookupByLibrary.simpleMessage("not sent"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Open Nautilus to view this transaction"),
@@ -510,7 +512,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
             "Password must contain at least 1 upper case and lower case letter"),
         "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
-            "We\'re not responsible if you forget your password, and by design we are unable to reset it for you."),
+            "We\'re not responsible if you forget your password, and by design we are unable to reset or change it for you."),
         "passwordIncorrect":
             MessageLookupByLibrary.simpleMessage("Incorrect password"),
         "passwordNoLongerRequiredToOpenParagraph":
@@ -591,6 +593,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "A minimum amount to receive. If a payment or request is received with an amount less than this, it will be ignored."),
         "received": MessageLookupByLibrary.simpleMessage("Received"),
         "refund": MessageLookupByLibrary.simpleMessage("Refund"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Register"),
         "registerFor": MessageLookupByLibrary.simpleMessage("for"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Register Username"),
@@ -641,6 +644,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "requireCaptcha": MessageLookupByLibrary.simpleMessage(
             "Require CAPTCHA to claim gift card"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("Resend this memo"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Reset Account"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "This will make a new account with the password you have just set, the old account won\'t be deleted unless the passwords chosen are the same."),
         "resetDatabase": MessageLookupByLibrary.simpleMessage("Reset the App"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(
             "Are you sure? This will delete any gift cards you have created, memos, messages, and contacts will all be erased.\n\nThis will NOT delete your wallet\'s internal seed, but you should still back it up if you haven\'t done so already. If you\'re having issues or encountering a bug, you should report it on the discord server (the link to it is at the bottom of the settings drawer)."),

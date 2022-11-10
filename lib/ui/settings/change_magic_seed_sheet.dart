@@ -9,11 +9,7 @@ import 'package:magic_sdk/magic_sdk.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/model/vault.dart';
-import 'package:nautilus_wallet_flutter/network/auth_service.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
@@ -21,12 +17,11 @@ import 'package:nautilus_wallet_flutter/util/blake2b.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 
 class ChangeMagicSeedSheet extends StatefulWidget {
+  @override
   _ChangeMagicSeedSheetState createState() => _ChangeMagicSeedSheetState();
 }
 
 class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
-  FocusNode? createPasswordFocusNode;
-  TextEditingController? createPasswordController;
   FocusNode? confirmPasswordFocusNode;
   TextEditingController? confirmPasswordController;
 
@@ -38,9 +33,7 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
   void initState() {
     super.initState();
     passwordsMatch = false;
-    createPasswordFocusNode = FocusNode();
     confirmPasswordFocusNode = FocusNode();
-    createPasswordController = TextEditingController();
     confirmPasswordController = TextEditingController();
   }
 
@@ -243,11 +236,11 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
     final String issuer = claim["iss"] as String;
 
     // get identifier:
-    final String hashedPassword = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(createPasswordController!.text)));
+    final String hashedPassword = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(confirmPasswordController!.text)));
     final String fullIdentifier = "$issuer$hashedPassword";
 
     if (!mounted) return;
 
-    Navigator.of(context).pushNamed("/intro_import", arguments: <String, String>{"fullIdentifier": fullIdentifier, "password": createPasswordController!.text});
+    Navigator.of(context).pushNamed("/intro_import", arguments: <String, String>{"fullIdentifier": fullIdentifier, "password": confirmPasswordController!.text});
   }
 }

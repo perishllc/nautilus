@@ -504,6 +504,18 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                   ),
                 ),
               ),
+              AppSimpleDialogOption(
+                onPressed: () {
+                  Navigator.pop(context, AuthMethod.NONE);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    AppLocalization.of(context).noneMethod,
+                    style: AppStyles.textStyleDialogOptions(context),
+                  ),
+                ),
+              ),
             ],
           );
         })) {
@@ -532,6 +544,20 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         await sl.get<SharedPrefsUtil>().setAuthMethod(AuthenticationMethod(AuthMethod.BIOMETRICS));
         setState(() {
           _curAuthMethod = AuthenticationMethod(AuthMethod.BIOMETRICS);
+        });
+        break;
+      case AuthMethod.NONE:
+        // can't unlock on NONE:
+        if (_curUnlockSetting.setting == UnlockOption.YES) {
+          await sl.get<SharedPrefsUtil>().setLock(false);
+          setState(() {
+            _curUnlockSetting = UnlockSetting(UnlockOption.NO);
+          });
+        }
+
+        await sl.get<SharedPrefsUtil>().setAuthMethod(AuthenticationMethod(AuthMethod.NONE));
+        setState(() {
+          _curAuthMethod = AuthenticationMethod(AuthMethod.NONE);
         });
         break;
       default:
@@ -2193,6 +2219,10 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   }
 
   Widget buildSecurityMenu(BuildContext context) {
+    bool authLaunchDisabled = false;
+    if (_curAuthMethod.method == AuthMethod.NONE && _curUnlockSetting.setting == UnlockOption.NO) {
+      authLaunchDisabled = true;
+    }
     return Container(
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
@@ -2277,7 +2307,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                         Column(children: <Widget>[
                           Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                           AppSettings.buildSettingsListItemDoubleLine(
-                              context, AppLocalization.of(context).lockAppSetting, _curUnlockSetting, AppIcons.lock, _lockDialog),
+                              context, AppLocalization.of(context).lockAppSetting, _curUnlockSetting, AppIcons.lock, _lockDialog,
+                              disabled: authLaunchDisabled),
                         ]),
                       // Authentication Timer
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),

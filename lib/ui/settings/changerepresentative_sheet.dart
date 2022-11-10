@@ -124,6 +124,7 @@ class AppChangeRepresentativeSheet {
             // Authenticate
             final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
             final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+            // if (!mounted) return;
             if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
               try {
                 final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, AppLocalization.of(context).changeRepAuthenticate);
@@ -134,9 +135,10 @@ class AppChangeRepresentativeSheet {
               } catch (e) {
                 await authenticateWithPin(rep.account, context);
               }
-            } else {
-              // PIN Authentication
+            } else if (authMethod.method == AuthMethod.PIN) {
               await authenticateWithPin(rep.account, context);
+            } else {
+              EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
             }
           },
           child: Container(
@@ -458,9 +460,10 @@ class AppChangeRepresentativeSheet {
                                         } catch (e) {
                                           await authenticateWithPin(AppWallet.nautilusRepresentative, context);
                                         }
-                                      } else {
-                                        // PIN Authentication
+                                      } else if (authMethod.method == AuthMethod.PIN) {
                                         await authenticateWithPin(AppWallet.nautilusRepresentative, context);
+                                      } else {
+                                        EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
                                       }
                                     },
                                   ),

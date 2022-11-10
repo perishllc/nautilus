@@ -120,6 +120,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Spremeni valuto"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Spremeni dnevnik"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Spremeni geslo"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "Spremenite obstoječe geslo. Če ne poznate svojega trenutnega gesla, ugibajte po svojih najboljših močeh, saj ga dejansko ni treba spremeniti (ker ste že prijavljeni), vendar nam omogoča, da izbrišemo obstoječi varnostni vnos."),
+        "changePin": MessageLookupByLibrary.simpleMessage("Spremeni PIN"),
+        "changePinHint":
+            MessageLookupByLibrary.simpleMessage("Nastavite žebljiček"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Zamenjaj predstavnika"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Zamenjaj"),
@@ -129,6 +136,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("To je že vaš predstavnik!"),
         "changeRepSucces": MessageLookupByLibrary.simpleMessage(
             "Predstavnik uspešno zamenjan"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("Spremeni seme"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "Spremenite seme/frazo, povezano s tem overjenim računom z magično povezavo, katero koli geslo, ki ga nastavite tukaj, bo prepisalo vaše obstoječe geslo, vendar lahko uporabite isto geslo, če želite."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Preverite razpoložljivost"),
         "close": MessageLookupByLibrary.simpleMessage("Zapri"),
@@ -163,6 +173,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ni možno uvoziti stikov"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("Uspešen uvoz %1 stikov."),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("Nadaljujte brez prijave"),
         "copied": MessageLookupByLibrary.simpleMessage("Skopirano"),
         "copy": MessageLookupByLibrary.simpleMessage("Kopiraj"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Kopiraj naslov"),
@@ -235,7 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Vnesite naslov"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Vnesite znesek"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("Vnesite e-pošto"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Vnesite darilno opombo"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Vnesite višino"),
@@ -284,6 +296,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Plinski denar"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Menjava NANO"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Vnesite trenutno geslo"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("Vnesite trenutni pin"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "exportTXData":
             MessageLookupByLibrary.simpleMessage("Izvozne transakcije"),
@@ -374,6 +390,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Videti je, da ste kliknili povezavo, ki vsebuje nekaj NANO. Da bi prejeli ta sredstva, potrebujete le, da dokončate nastavitev svoje denarnice."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Povezava, ki ste jo kliknili, vsebuje nekaj NANO, ali bi ga radi uvozili v to denarnico?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("Uvoz HD"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Uvozi skrivni niz"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -383,6 +400,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Spodaj vnesite ključ."),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("Uvozi zasebni ključ"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("Uvozni standard"),
         "importWallet": MessageLookupByLibrary.simpleMessage("Uvozi denarnico"),
         "instantly": MessageLookupByLibrary.simpleMessage("Takoj"),
         "insufficientBalance":
@@ -407,7 +426,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Avtenticiraj ob zagonu"),
         "locked": MessageLookupByLibrary.simpleMessage("Zaklenjeno"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(
+            "Prijavite se ali se registrirajte"),
         "logout": MessageLookupByLibrary.simpleMessage("Odjava"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Izbriši ključ in odjava"),
@@ -417,6 +437,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Odjava bo izbrisala zasebni ključ in vse podatke v povezavi z aplikacijo Nautilus. Če zasebnega ključa niste shranili, ne boste imeli več dostopa do vašega računa."),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Dokler imate shranjen zasebni ključ, ste lahko brez skrbi."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "Zdi se, da je to seme HD, razen če ste prepričani, da veste, kaj počnete, raje uporabite možnost »Uvozi HD«."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "Zdi se, da je to standardno seme, namesto tega bi morali uporabiti možnost \"Uvozi standard\"."),
         "manage": MessageLookupByLibrary.simpleMessage("Upravljaj"),
         "mantaError":
             MessageLookupByLibrary.simpleMessage("Couldn\'t Verify Request"),
@@ -467,6 +491,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ni transakcij za izvoz."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Stanje vozlišča"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("Noben"),
         "notSent": MessageLookupByLibrary.simpleMessage("ni poslano"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Odpri Nautilus za ogled transakcije"),
@@ -497,9 +522,23 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Papirna denarnica"),
         "passwordBlank":
             MessageLookupByLibrary.simpleMessage("Password cannot be empty"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "Geslo mora vsebovati vsaj 1 veliko in malo črko"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "Ne odgovarjamo, če pozabite geslo, in po zasnovi ga ne moremo ponastaviti ali spremeniti namesto vas."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("napačno geslo"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "You will not need a password to open Nautilus anymore."),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "Geslo mora vsebovati vsaj 1 številko"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "Geslo mora vsebovati vsaj 1 poseben znak"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("Geslo je prekratko"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "To geslo bo potrebno za odpiranje Nautilusa."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "This password will be required to open Nautilus."),
@@ -521,6 +560,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("Ustvari 6-mestni PIN"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("Vnesite PIN"),
+        "pinIncorrect":
+            MessageLookupByLibrary.simpleMessage("Vnesen napačen PIN"),
         "pinInvalid": MessageLookupByLibrary.simpleMessage("Neveljaven PIN"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("PIN"),
         "pinRepChange": MessageLookupByLibrary.simpleMessage(
@@ -681,6 +722,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Password has been set successfully"),
         "setPin": MessageLookupByLibrary.simpleMessage("Set Pin"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "Nastavite ali spremenite svoj obstoječi PIN. Če kode PIN še niste nastavili, je privzeta koda PIN 000000."),
         "setPinSuccess": MessageLookupByLibrary.simpleMessage(
             "Pin je bil uspešno nastavljen"),
         "setPlausibleDeniabilityPin": MessageLookupByLibrary.simpleMessage(
@@ -854,8 +897,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("Pred enim tednom"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Dobrodošli v Nautilus. Za začetek ustvarite novo denarnico ali uvozite že obstoječo."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "Dobrodošli v Nautilusu. Za začetek izberite možnost ali izberite temo s spodnjo ikono."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Dobrodošli v Nautilusu. Za začetek ustvarite novo denarnico ali uvozite obstoječo."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Za začetek ustvarite novo denarnico ali uvozite obstoječo."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Z naslovom"),
         "withFee": MessageLookupByLibrary.simpleMessage("S honorarjem"),
         "withMessage": MessageLookupByLibrary.simpleMessage("S sporočilom"),

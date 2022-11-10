@@ -295,6 +295,26 @@
     "type": "text",
     "description": "change_log_header"
   },
+  "changePassword": "비밀번호 변경",
+  "@changePassword": {
+    "type": "text",
+    "description": "A button that changes the magic password"
+  },
+  "changePasswordParagraph": "기존 비밀번호를 변경합니다. 현재 비밀번호를 모르는 경우 실제로 비밀번호를 변경할 필요는 없지만(이미 로그인되어 있으므로) 기존 백업 항목을 삭제할 수 있으므로 최선을 다해 추측하십시오.",
+  "@changePasswordParagraph": {
+    "type": "text",
+    "description": "A paragraph that explains the user can set or change their existing magic password."
+  },
+  "changePin": "핀 변경",
+  "@changePin": {
+    "type": "text",
+    "description": "change_pin"
+  },
+  "changePinHint": "핀 설정",
+  "@changePinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to set a pin"
+  },
   "changeRepAuthenticate": "대리인 변경",
   "@changeRepAuthenticate": {
     "type": "text",
@@ -319,6 +339,16 @@
   "@changeRepSucces": {
     "type": "text",
     "description": "change_representative_success"
+  },
+  "changeSeed": "시드 변경",
+  "@changeSeed": {
+    "type": "text",
+    "description": "A button that changes the magic seed"
+  },
+  "changeSeedParagraph": "이 매직 링크 인증 계정과 연결된 시드/구문을 변경합니다. 여기에 설정한 비밀번호가 무엇이든 기존 비밀번호를 덮어쓰지만 원하는 경우 동일한 비밀번호를 사용할 수 있습니다.",
+  "@changeSeedParagraph": {
+    "type": "text",
+    "description": "A paragraph that explains the user can set or change their existing magic seed."
   },
   "checkAvailability": "이용 가능 확인",
   "@checkAvailability": {
@@ -419,6 +449,11 @@
   "@contactsImportSuccess": {
     "type": "text",
     "description": "contact_import_success"
+  },
+  "continueWithoutLogin": "로그인하지 않고 계속",
+  "@continueWithoutLogin": {
+    "type": "text",
+    "description": "alternative_to_login"
   },
   "copied": "Copied",
   "@copied": {
@@ -640,7 +675,7 @@
     "type": "text",
     "description": "send_amount_hint"
   },
-  "enterEmail": "",
+  "enterEmail": "이메일 입력",
   "@enterEmail": {
     "type": "text",
     "description": "enter_email"
@@ -789,6 +824,16 @@
   "@exchangeNano": {
     "type": "text",
     "description": "exchange_nano"
+  },
+  "existingPasswordHint": "현재 비밀번호를 입력하세요",
+  "@existingPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to enter their current password"
+  },
+  "existingPinHint": "현재 핀 입력",
+  "@existingPinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to enter their current pin"
   },
   "exit": "Exit",
   "@exit": {
@@ -1070,6 +1115,11 @@
     "type": "text",
     "description": "import_gift_v2"
   },
+  "importHD": "HD 가져오기",
+  "@importHD": {
+    "type": "text",
+    "description": "intro_import_hd"
+  },
   "importSecretPhrase": "Import Secret Phrase",
   "@importSecretPhrase": {
     "type": "text",
@@ -1094,6 +1144,11 @@
   "@importSeedInstead": {
     "type": "text",
     "description": "importSeedInstead"
+  },
+  "importStandard": "수입기준",
+  "@importStandard": {
+    "type": "text",
+    "description": "intro_import_standard"
   },
   "importWallet": "기존 지갑",
   "@importWallet": {
@@ -1185,7 +1240,12 @@
     "type": "text",
     "description": "lockedtxt"
   },
-  "loginOrRegisterHeader": "",
+  "loginButton": "로그인",
+  "@loginButton": {
+    "type": "text",
+    "description": "login_button"
+  },
+  "loginOrRegisterHeader": "로그인 또는 등록",
   "@loginOrRegisterHeader": {
     "type": "text",
     "description": "login_register_header"
@@ -1214,6 +1274,16 @@
   "@logoutReassurance": {
     "type": "text",
     "description": "settings_logout_warning_message"
+  },
+  "looksLikeHdSeed": "이것은 HD 시드인 것 같습니다. 무엇을 하고 있는지 확실하지 않다면 \"HD 가져오기\" 옵션을 대신 사용해야 합니다.",
+  "@looksLikeHdSeed": {
+    "type": "text",
+    "description": "settings_import_hd_warning"
+  },
+  "looksLikeStandardSeed": "이것은 표준 시드인 것으로 보이며 대신 \"표준 가져오기\" 옵션을 사용해야 합니다.",
+  "@looksLikeStandardSeed": {
+    "type": "text",
+    "description": "settings_import_standard_warning"
   },
   "manage": "설정",
   "@manage": {
@@ -1360,6 +1430,11 @@
     "type": "text",
     "description": "settings_node_status"
   },
+  "noneMethod": "없음",
+  "@noneMethod": {
+    "type": "text",
+    "description": "settings_none_method"
+  },
   "noSearchResults": "검색 결과 없음!",
   "@noSearchResults": {
     "type": "text",
@@ -1485,15 +1560,50 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
+  "passwordCapitalLetter": "비밀번호는 1개 이상의 대문자와 소문자를 포함해야 합니다",
+  "@passwordCapitalLetter": {
+    "type": "text",
+    "description": "password_uppercase_lowercase"
+  },
+  "passwordDisclaimer": "비밀번호를 잊어버린 경우 당사는 책임을 지지 않으며 의도적으로 비밀번호를 재설정하거나 변경할 수 없습니다.",
+  "@passwordDisclaimer": {
+    "type": "text",
+    "description": "A paragraph that we're not responsible if you lose your password."
+  },
+  "passwordIncorrect": "잘못된 비밀번호",
+  "@passwordIncorrect": {
+    "type": "text",
+    "description": "An error indicating the password is incorrect"
+  },
   "passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open Nautilus anymore.",
   "@passwordNoLongerRequiredToOpenParagraph": {
     "type": "text",
     "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
   },
+  "passwordNumber": "비밀번호는 1개 이상의 숫자를 포함해야 합니다.",
+  "@passwordNumber": {
+    "type": "text",
+    "description": "password_number"
+  },
   "passwordsDontMatch": "Passwords do not match",
   "@passwordsDontMatch": {
     "type": "text",
     "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordSpecialCharacter": "비밀번호에는 최소 1개의 특수 문자가 포함되어야 합니다.",
+  "@passwordSpecialCharacter": {
+    "type": "text",
+    "description": "password_special_character"
+  },
+  "passwordTooShort": "비밀번호가 너무 짧습니다",
+  "@passwordTooShort": {
+    "type": "text",
+    "description": "An error indicating the password is too short"
+  },
+  "passwordWarning": "이 암호는 노틸러스를 열 때 필요합니다.",
+  "@passwordWarning": {
+    "type": "text",
+    "description": "A paragraph that warns the user to not lose their password."
   },
   "passwordWillBeRequiredToOpenParagraph": "This password will be required to open Nautilus.",
   "@passwordWillBeRequiredToOpenParagraph": {
@@ -1549,6 +1659,11 @@
   "@pinEnterTitle": {
     "type": "text",
     "description": "pin_enter_title"
+  },
+  "pinIncorrect": "잘못된 핀이 입력되었습니다.",
+  "@pinIncorrect": {
+    "type": "text",
+    "description": "pin_error"
   },
   "pinInvalid": "잘못된 비밀번호가 입력되었습니다.",
   "@pinInvalid": {
@@ -1694,6 +1809,11 @@
   "@refund": {
     "type": "text",
     "description": "refund"
+  },
+  "registerButton": "등록하다",
+  "@registerButton": {
+    "type": "text",
+    "description": "register_button"
   },
   "registerFor": "...에 대한",
   "@registerFor": {
@@ -1849,6 +1969,16 @@
   "@resendMemo": {
     "type": "text",
     "description": "resend_memo"
+  },
+  "resetAccountButton": "계정 재설정",
+  "@resetAccountButton": {
+    "type": "text",
+    "description": "reset_account_button"
+  },
+  "resetAccountParagraph": "이렇게 하면 방금 설정한 암호로 새 계정이 만들어지며 선택한 암호가 동일하지 않으면 이전 계정이 삭제되지 않습니다.",
+  "@resetAccountParagraph": {
+    "type": "text",
+    "description": "reset_account_warning"
   },
   "resetDatabase": "데이터베이스 재설정",
   "@resetDatabase": {
@@ -2049,6 +2179,11 @@
   "@setPin": {
     "type": "text",
     "description": "A button that sets the plausible deniability password"
+  },
+  "setPinParagraph": "기존 PIN을 설정하거나 변경합니다. 아직 PIN을 설정하지 않은 경우 기본 PIN은 000000입니다.",
+  "@setPinParagraph": {
+    "type": "text",
+    "description": "A paragraph that explains the user can set or change their existing pin."
   },
   "setPinSuccess": "핀이 성공적으로 설정되었습니다.",
   "@setPinSuccess": {
@@ -2580,10 +2715,20 @@
     "type": "text",
     "description": "intro_welcome_title"
   },
+  "welcomeTextLogin": "노틸러스에 오신 것을 환영합니다. 시작하는 옵션을 선택하거나 아래 아이콘을 사용하여 테마를 선택하세요.",
+  "@welcomeTextLogin": {
+    "type": "text",
+    "description": "intro_welcome_login"
+  },
   "welcomeTextUpdated": "노틸러스에 오신 것을 환영합니다. 시작하려면 새 지갑을 만들거나 기존 지갑을 가져오세요.",
   "@welcomeTextUpdated": {
     "type": "text",
     "description": "intro_welcome_title"
+  },
+  "welcomeTextWithoutLogin": "시작하려면 새 지갑을 만들거나 기존 지갑을 가져오세요.",
+  "@welcomeTextWithoutLogin": {
+    "type": "text",
+    "description": "intro_welcome_no_login"
   },
   "withAddress": "주소 포함",
   "@withAddress": {

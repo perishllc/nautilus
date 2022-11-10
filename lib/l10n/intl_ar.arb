@@ -295,6 +295,26 @@
     "type": "text",
     "description": "change_log_header"
   },
+  "changePassword": "غير كلمة السر",
+  "@changePassword": {
+    "type": "text",
+    "description": "A button that changes the magic password"
+  },
+  "changePasswordParagraph": "غيّر كلمة مرورك الحالية. إذا كنت لا تعرف كلمة مرورك الحالية ، فما عليك سوى تخمين أفضل ما لديك لأنه ليس مطلوبًا في الواقع تغييرها (نظرًا لأنك قمت بتسجيل الدخول بالفعل) ، ولكنها تتيح لنا حذف إدخال النسخ الاحتياطي الحالي.",
+  "@changePasswordParagraph": {
+    "type": "text",
+    "description": "A paragraph that explains the user can set or change their existing magic password."
+  },
+  "changePin": "تغيير الدبوس",
+  "@changePin": {
+    "type": "text",
+    "description": "change_pin"
+  },
+  "changePinHint": "تعيين دبوس",
+  "@changePinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to set a pin"
+  },
   "changeRepAuthenticate": "تغير المندوب",
   "@changeRepAuthenticate": {
     "type": "text",
@@ -319,6 +339,16 @@
   "@changeRepSucces": {
     "type": "text",
     "description": "change_representative_success"
+  },
+  "changeSeed": "تغيير البذور",
+  "@changeSeed": {
+    "type": "text",
+    "description": "A button that changes the magic seed"
+  },
+  "changeSeedParagraph": "قم بتغيير العبارة الأولية المرتبطة بهذا الحساب المصادق عليه الارتباط السحري ، مهما كانت كلمة المرور التي قمت بتعيينها هنا ستحل محل كلمة المرور الحالية ، ولكن يمكنك استخدام نفس كلمة المرور إذا اخترت ذلك.",
+  "@changeSeedParagraph": {
+    "type": "text",
+    "description": "A paragraph that explains the user can set or change their existing magic seed."
   },
   "checkAvailability": "تحقق من التوفر",
   "@checkAvailability": {
@@ -419,6 +449,11 @@
   "@contactsImportSuccess": {
     "type": "text",
     "description": "contact_import_success"
+  },
+  "continueWithoutLogin": "تواصل بدون تسجيل الدخول",
+  "@continueWithoutLogin": {
+    "type": "text",
+    "description": "alternative_to_login"
   },
   "copied": "تم نسخ",
   "@copied": {
@@ -640,7 +675,7 @@
     "type": "text",
     "description": "send_amount_hint"
   },
-  "enterEmail": "",
+  "enterEmail": "أدخل البريد الإلكتروني",
   "@enterEmail": {
     "type": "text",
     "description": "enter_email"
@@ -789,6 +824,16 @@
   "@exchangeNano": {
     "type": "text",
     "description": "exchange_nano"
+  },
+  "existingPasswordHint": "إدخل كلمة السر الحالية",
+  "@existingPasswordHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to enter their current password"
+  },
+  "existingPinHint": "أدخل رقم التعريف الشخصي الحالي",
+  "@existingPinHint": {
+    "type": "text",
+    "description": "A text field hint that tells the user to enter their current pin"
   },
   "exit": "خروج",
   "@exit": {
@@ -1070,6 +1115,11 @@
     "type": "text",
     "description": "import_gift_v2"
   },
+  "importHD": "استيراد HD",
+  "@importHD": {
+    "type": "text",
+    "description": "intro_import_hd"
+  },
   "importSecretPhrase": "استيراد العبارة السرية",
   "@importSecretPhrase": {
     "type": "text",
@@ -1094,6 +1144,11 @@
   "@importSeedInstead": {
     "type": "text",
     "description": "importSeedInstead"
+  },
+  "importStandard": "معيار الاستيراد",
+  "@importStandard": {
+    "type": "text",
+    "description": "intro_import_standard"
   },
   "importWallet": "إجلب محفظة",
   "@importWallet": {
@@ -1185,7 +1240,12 @@
     "type": "text",
     "description": "lockedtxt"
   },
-  "loginOrRegisterHeader": "",
+  "loginButton": "تسجيل الدخول",
+  "@loginButton": {
+    "type": "text",
+    "description": "login_button"
+  },
+  "loginOrRegisterHeader": "تسجيل الدخول أو التسجيل",
   "@loginOrRegisterHeader": {
     "type": "text",
     "description": "login_register_header"
@@ -1214,6 +1274,16 @@
   "@logoutReassurance": {
     "type": "text",
     "description": "settings_logout_warning_message"
+  },
+  "looksLikeHdSeed": "يبدو أن هذا هو بذرة HD ، ما لم تكن متأكدًا من أنك تعرف ما تفعله ، يجب عليك استخدام خيار \"استيراد HD\" بدلاً من ذلك.",
+  "@looksLikeHdSeed": {
+    "type": "text",
+    "description": "settings_import_hd_warning"
+  },
+  "looksLikeStandardSeed": "يبدو أن هذا أساس قياسي ، يجب عليك استخدام خيار \"استيراد قياسي\" بدلاً من ذلك.",
+  "@looksLikeStandardSeed": {
+    "type": "text",
+    "description": "settings_import_standard_warning"
   },
   "manage": "إدارة",
   "@manage": {
@@ -1360,6 +1430,11 @@
     "type": "text",
     "description": "settings_node_status"
   },
+  "noneMethod": "لا أحد",
+  "@noneMethod": {
+    "type": "text",
+    "description": "settings_none_method"
+  },
   "noSearchResults": "لا توجد نتائج بحث!",
   "@noSearchResults": {
     "type": "text",
@@ -1485,15 +1560,50 @@
     "type": "text",
     "description": "An error indicating a password has been entered incorrectly"
   },
+  "passwordCapitalLetter": "يجب أن تحتوي كلمة المرور على حرف واحد كبير وصغير على الأقل",
+  "@passwordCapitalLetter": {
+    "type": "text",
+    "description": "password_uppercase_lowercase"
+  },
+  "passwordDisclaimer": "نحن لسنا مسؤولين إذا نسيت كلمة المرور الخاصة بك ، وبحكم التصميم لا يمكننا إعادة تعيينها أو تغييرها نيابة عنك.",
+  "@passwordDisclaimer": {
+    "type": "text",
+    "description": "A paragraph that we're not responsible if you lose your password."
+  },
+  "passwordIncorrect": "كلمة سر خاطئة",
+  "@passwordIncorrect": {
+    "type": "text",
+    "description": "An error indicating the password is incorrect"
+  },
   "passwordNoLongerRequiredToOpenParagraph": "لن تحتاج إلى كلمة مرور لفتح  نتريم بعد الآن.\n",
   "@passwordNoLongerRequiredToOpenParagraph": {
     "type": "text",
     "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
   },
+  "passwordNumber": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+  "@passwordNumber": {
+    "type": "text",
+    "description": "password_number"
+  },
   "passwordsDontMatch": "كلمة المرور غير مطابقة\n",
   "@passwordsDontMatch": {
     "type": "text",
     "description": "An error indicating a password has been confirmed incorrectly"
+  },
+  "passwordSpecialCharacter": "يجب أن تحتوي كلمة المرور على حرف خاص واحد على الأقل",
+  "@passwordSpecialCharacter": {
+    "type": "text",
+    "description": "password_special_character"
+  },
+  "passwordTooShort": "كلمة المرور قصيرة جدا",
+  "@passwordTooShort": {
+    "type": "text",
+    "description": "An error indicating the password is too short"
+  },
+  "passwordWarning": "ستكون كلمة المرور هذه مطلوبة لفتح Nautilus.",
+  "@passwordWarning": {
+    "type": "text",
+    "description": "A paragraph that warns the user to not lose their password."
   },
   "passwordWillBeRequiredToOpenParagraph": "هناك حاجة إلى كلمة المرور لفتح نتريم",
   "@passwordWillBeRequiredToOpenParagraph": {
@@ -1549,6 +1659,11 @@
   "@pinEnterTitle": {
     "type": "text",
     "description": "pin_enter_title"
+  },
+  "pinIncorrect": "تم إدخال رقم التعريف الشخصي غير الصحيح",
+  "@pinIncorrect": {
+    "type": "text",
+    "description": "pin_error"
   },
   "pinInvalid": "رمز الPIN غير صحيح",
   "@pinInvalid": {
@@ -1694,6 +1809,11 @@
   "@refund": {
     "type": "text",
     "description": "refund"
+  },
+  "registerButton": "يسجل",
+  "@registerButton": {
+    "type": "text",
+    "description": "register_button"
   },
   "registerFor": "من أجل",
   "@registerFor": {
@@ -1849,6 +1969,16 @@
   "@resendMemo": {
     "type": "text",
     "description": "resend_memo"
+  },
+  "resetAccountButton": "إعادة تعيين الحساب",
+  "@resetAccountButton": {
+    "type": "text",
+    "description": "reset_account_button"
+  },
+  "resetAccountParagraph": "سيؤدي هذا إلى إنشاء حساب جديد بكلمة المرور التي قمت بتعيينها للتو ، ولن يتم حذف الحساب القديم ما لم تكن كلمات المرور المختارة هي نفسها.",
+  "@resetAccountParagraph": {
+    "type": "text",
+    "description": "reset_account_warning"
   },
   "resetDatabase": "إعادة تعيين قاعدة البيانات",
   "@resetDatabase": {
@@ -2049,6 +2179,11 @@
   "@setPin": {
     "type": "text",
     "description": "A button that sets the plausible deniability password"
+  },
+  "setPinParagraph": "قم بتعيين أو تغيير رقم التعريف الشخصي الحالي الخاص بك. إذا لم تقم بتعيين رقم تعريف شخصي حتى الآن ، فإن رقم التعريف الشخصي الافتراضي هو 000000.",
+  "@setPinParagraph": {
+    "type": "text",
+    "description": "A paragraph that explains the user can set or change their existing pin."
   },
   "setPinSuccess": "تم تعيين رقم التعريف الشخصي بنجاح",
   "@setPinSuccess": {
@@ -2580,10 +2715,20 @@
     "type": "text",
     "description": "intro_welcome_title"
   },
+  "welcomeTextLogin": "مرحبا بكم في نوتيلوس. حدد خيارًا للبدء أو اختر سمة باستخدام الرمز أدناه.",
+  "@welcomeTextLogin": {
+    "type": "text",
+    "description": "intro_welcome_login"
+  },
   "welcomeTextUpdated": "مرحبًا بكم في نوتيلوس. للبدء ، أنشئ محفظة جديدة أو استورد محفظة حالية.",
   "@welcomeTextUpdated": {
     "type": "text",
     "description": "intro_welcome_title"
+  },
+  "welcomeTextWithoutLogin": "للبدء ، أنشئ محفظة جديدة أو استورد محفظة حالية.",
+  "@welcomeTextWithoutLogin": {
+    "type": "text",
+    "description": "intro_welcome_no_login"
   },
   "withAddress": "مع العنوان",
   "@withAddress": {

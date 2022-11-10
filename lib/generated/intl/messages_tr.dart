@@ -115,6 +115,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kötüye kullanımı önlemek için, bir sonraki sayfada hediye kartını talep etmek için bir captcha çözmenizi istiyoruz."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Para Birimi"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Girişi değiştir"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Şifre değiştir"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "Mevcut şifrenizi değiştirin. Mevcut şifrenizi bilmiyorsanız, en iyi tahmininizi yapın çünkü aslında şifrenizi değiştirmeniz gerekmemektedir (zaten oturum açmış olduğunuz için), ancak mevcut yedekleme girişini silmemize izin vermektedir."),
+        "changePin": MessageLookupByLibrary.simpleMessage("Pin\'i değiştir"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("PIN ayarla"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Temsilci Değiştir"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Değiştir"),
@@ -124,6 +130,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bu zaten sizin temsilciniz!"),
         "changeRepSucces": MessageLookupByLibrary.simpleMessage(
             "Temsilciniz Başarıyla Değiştirildi"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("Tohum Değiştir"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "Bu sihirli bağlantı yetkilendirilmiş hesapla ilişkili çekirdeği/ifadeyi değiştirin, burada belirlediğiniz parola ne olursa olsun, mevcut parolanızın üzerine yazacaktır, ancak isterseniz aynı parolayı kullanabilirsiniz."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Durumu Kontrol Et"),
         "close": MessageLookupByLibrary.simpleMessage("Kapat"),
@@ -158,6 +167,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Rehberi içe aktarmada sorun oluştu"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("%1 kişi içe aktarıldı"),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("Giriş yapmadan devam et"),
         "copied": MessageLookupByLibrary.simpleMessage("Kopyalandı"),
         "copy": MessageLookupByLibrary.simpleMessage("Kopyala"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Adresi Kopyala"),
@@ -229,7 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Şifre oluşturma işlemi başarısız"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Adres Gir"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Miktar Gir"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("E-posta Girin"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Hediye Notunu Girin"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Yüksekliği Girin"),
@@ -277,6 +288,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gaz Para"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("NANO değişimi"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Güncel şifrenizi giriniz"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("Geçerli PIN\'i girin"),
         "exit": MessageLookupByLibrary.simpleMessage("Çıkış"),
         "exportTXData":
             MessageLookupByLibrary.simpleMessage("İhracat İşlemleri"),
@@ -366,6 +381,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Görünüşe göre biraz NANO içeren bir bağlantıya tıkladınız, bu fonları almak için cüzdanınızı ayarlamanızı tamamlamanız yeterli."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Tıkladığınız bağlantı biraz NANO içeriyor, onu bu cüzdana aktarmak ister misiniz?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("HD\'yi içe aktar"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Gizli Cümle Aktar"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -375,6 +391,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lütfen seed\'inizi girin."),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("Seedle İçe Aktar"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("İthalat Standardı"),
         "importWallet": MessageLookupByLibrary.simpleMessage("İçe Aktar"),
         "instantly": MessageLookupByLibrary.simpleMessage("Hemen"),
         "insufficientBalance":
@@ -400,7 +418,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Başlangıçta Kimlik Doğrula"),
         "locked": MessageLookupByLibrary.simpleMessage("Kilitli"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader":
+            MessageLookupByLibrary.simpleMessage("giriş yap veya kaydol"),
         "logout": MessageLookupByLibrary.simpleMessage("Çıkış"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Seed\'i sil ve çıkış yap"),
@@ -410,6 +429,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Çıkış yaptığınızda seed\'iniz ve Nautilus\'la ilgili bütün verileriniz bu cihazdan silinecektir. Seed\'inizi yedeklemediyseniz paranıza bir daha asla ulaşamazsınız."),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Seed\'inizi yedeklediyseniz endişe etmenize gerek yok."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "Bu bir HD çekirdeği gibi görünüyor, ne yaptığınızı bildiğinizden emin değilseniz, bunun yerine \"HD\'yi İçe Aktar\" seçeneğini kullanmalısınız."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "Bu standart bir tohum gibi görünüyor, bunun yerine \"Import Standard\" seçeneğini kullanmalısınız."),
         "manage": MessageLookupByLibrary.simpleMessage("Yönet"),
         "mantaError":
             MessageLookupByLibrary.simpleMessage("İstek onaylanamadı"),
@@ -460,6 +483,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Dışa aktarılacak işlem yok."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Düğüm Durumu"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("Hiçbiri"),
         "notSent": MessageLookupByLibrary.simpleMessage("gönderilmedi"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Bu transferi görmek için Nautilus’u aç."),
@@ -489,9 +513,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("Kağıt Cüzdan"),
         "passwordBlank":
             MessageLookupByLibrary.simpleMessage("Şifre alanı boş olamaz"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "Şifre en az 1 büyük harf ve küçük harf içermelidir"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "Parolanızı unutursanız sorumlu değiliz ve tasarım gereği parolanızı sizin için sıfırlayamıyor veya değiştiremiyoruz."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("yanlış parola"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Artık Nautilus\'u açmak için şifre gerekmeyecek."),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "Şifre en az 1 rakam içermelidir"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "Şifre en az 1 özel karakter içermelidir"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("Şifre çok kısa"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "Nautilus\'u açmak için bu parola gerekli olacaktır."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Nautilus\'u açabilmek için bu şifre gerekecek."),
@@ -511,6 +549,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("6 haneli şifre oluşturun"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("Şifre girin"),
+        "pinIncorrect":
+            MessageLookupByLibrary.simpleMessage("Yanlış pin girildi"),
         "pinInvalid":
             MessageLookupByLibrary.simpleMessage("Geçersiz şifre girdiniz"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("Pin Kodu"),
@@ -672,6 +712,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess":
             MessageLookupByLibrary.simpleMessage("Şifre başarıyla oluşturuldu"),
         "setPin": MessageLookupByLibrary.simpleMessage("Pimi Ayarla"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "Mevcut PIN\'inizi ayarlayın veya değiştirin. Henüz bir PIN belirlemediyseniz, varsayılan PIN 000000\'dir."),
         "setPinSuccess":
             MessageLookupByLibrary.simpleMessage("Pin başarıyla ayarlandı"),
         "setPlausibleDeniabilityPin":
@@ -845,8 +887,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("Bir hafta önce"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Nautilus\'a hoşgeldiniz. Devam etmek için yeni bir cüzdan oluşturabilir veya var olanı içe aktarabilirsiniz."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "Nautilus\'a hoş geldiniz. Başlamak için bir seçenek belirleyin veya aşağıdaki simgeyi kullanarak bir tema seçin."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Nautilus\'a hoş geldiniz. Başlamak için yeni bir cüzdan oluşturun veya mevcut bir cüzdanı içe aktarın."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Başlamak için yeni bir cüzdan oluşturun veya mevcut bir cüzdanı içe aktarın."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Adres ile"),
         "withFee": MessageLookupByLibrary.simpleMessage("Ücretli"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Mesaj ile"),

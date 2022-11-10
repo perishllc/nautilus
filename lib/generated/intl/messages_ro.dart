@@ -119,6 +119,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Schimbă valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Schimbare jurnal"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Schimbaţi parola"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "Schimbați parola existentă. Dacă nu vă cunoașteți parola actuală, ghiciți-vă, deoarece nu este necesar să o schimbați (din moment ce sunteți deja autentificat), dar ne permite să ștergem intrarea de rezervă existentă."),
+        "changePin": MessageLookupByLibrary.simpleMessage("Schimba pin-ul"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("Setați pinul"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Schimbă reprezentantul"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Schimbă"),
@@ -128,6 +134,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Acesta este deja reprezentantul tău!"),
         "changeRepSucces": MessageLookupByLibrary.simpleMessage(
             "Reprezentant schimbat cu succes"),
+        "changeSeed":
+            MessageLookupByLibrary.simpleMessage("Schimbați Semințele"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "Schimbați semințele/expresia asociată cu acest cont autentificat prin link magic, orice parolă pe care o setați aici va suprascrie parola existentă, dar puteți utiliza aceeași parolă dacă doriți."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Verifică disponibilitatea"),
         "close": MessageLookupByLibrary.simpleMessage("Închide"),
@@ -162,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Importarea contactelor a eșuat"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("Am importat %1 contacte"),
+        "continueWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Continuați fără autentificare"),
         "copied": MessageLookupByLibrary.simpleMessage("Copiat"),
         "copy": MessageLookupByLibrary.simpleMessage("Copiere"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Copiază adresa"),
@@ -232,7 +244,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Setarea parolei a eșuat"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Introdu adresa"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Introdu suma"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail":
+            MessageLookupByLibrary.simpleMessage("Introduceți adresa de email"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Introduceți nota cadou"),
         "enterHeight":
@@ -285,6 +298,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Bani de gaz"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Schimbă NANO"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Introduceti parola curenta"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("Introduceți pinul curent"),
         "exit": MessageLookupByLibrary.simpleMessage("Ieșire"),
         "exportTXData":
             MessageLookupByLibrary.simpleMessage("Tranzacții de export"),
@@ -375,6 +392,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Se pare că ați dat clic pe un link care conține niște NANO, pentru a primi aceste fonduri avem nevoie doar pentru a finaliza configurarea portofelului."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Linkul pe care ați dat clic conține niște NANO, doriți să îl importați în acest portofel?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("Import HD"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importare formulă secretă"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -384,6 +402,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Introdu seed-ul mai jos."),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("Introducere seed-ul în loc"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("Standard de import"),
         "importWallet":
             MessageLookupByLibrary.simpleMessage("Importă portofelul"),
         "instantly": MessageLookupByLibrary.simpleMessage("Imediat"),
@@ -409,7 +429,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Autentificare la deschidere"),
         "locked": MessageLookupByLibrary.simpleMessage("Închis"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(
+            "Conectați-vă sau Înregistrați-vă"),
         "logout": MessageLookupByLibrary.simpleMessage("Deconectare"),
         "logoutAction": MessageLookupByLibrary.simpleMessage(
             "Șterge seed-ul și deconectează-mă"),
@@ -419,6 +440,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Prin deconectare vom elimina seed-ul și toate datele legate de Nautilus de pe acest dispozitiv. Dacă seed-ul nu are o copie de rezervă/backup, fondurile for fi pierdute permanent."),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Dacă aveți seed-ul salvat nu există motive de îngrijorare."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "Aceasta pare a fi o sămânță HD, cu excepția cazului în care ești sigur că știi ce faci, ar trebui să folosești opțiunea „Import HD” în schimb."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "Aceasta pare a fi o sămânță standard, ar trebui să utilizați opțiunea „Import Standard” în schimb."),
         "manage": MessageLookupByLibrary.simpleMessage("Administrare"),
         "mantaError": MessageLookupByLibrary.simpleMessage(
             "Nu s-a putut verifica cererea"),
@@ -470,6 +495,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nu există tranzacții de exportat."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Starea nodului"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("Nici unul"),
         "notSent": MessageLookupByLibrary.simpleMessage("nu a fost trimis"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Deschide Nautilus pentru a vizualiza tranzacția."),
@@ -499,9 +525,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("Paper Wallet"),
         "passwordBlank":
             MessageLookupByLibrary.simpleMessage("Parola nu poate fi goală"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "Parola trebuie să conțină cel puțin o literă mare și o literă mică"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "Nu suntem responsabili dacă vă uitați parola și, prin proiectare, nu putem să o resetam sau să o modificăm pentru dvs."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("Parola incorecta"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Deschideți aplicația fără a mai introduce parola."),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "Parola trebuie să conțină cel puțin 1 număr"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "Parola trebuie să conțină cel puțin 1 caracter special"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("Parola este prea scurtă"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "Această parolă va fi necesară pentru a deschide Nautilus."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Această parolă va fi necesară pentru a deschide Nautilus."),
@@ -523,6 +563,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("Creați un PIN cu 6 cifre"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("Introdu PIN-ul"),
+        "pinIncorrect":
+            MessageLookupByLibrary.simpleMessage("PIN introdus incorect"),
         "pinInvalid": MessageLookupByLibrary.simpleMessage("PIN invalid"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("PIN"),
         "pinRepChange": MessageLookupByLibrary.simpleMessage(
@@ -684,6 +726,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Parola a fost setată cu succes"),
         "setPin": MessageLookupByLibrary.simpleMessage("Setați PIN"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "Setați sau modificați codul PIN existent. Dacă nu ați setat încă un PIN, PIN-ul implicit este 000000."),
         "setPinSuccess": MessageLookupByLibrary.simpleMessage(
             "Pinul a fost setat cu succes"),
         "setPlausibleDeniabilityPin":
@@ -861,8 +905,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("Acum o saptamana"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Bine ai venit! Pentru a continua, creează un portofel nou sau importă unul deja existent."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "Bun venit la Nautilus. Alegeți o opțiune pentru a începe sau alegeți o temă folosind pictograma de mai jos."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Bun venit la Nautilus. Pentru a începe, creați un portofel nou sau importați unul existent."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Pentru a începe, creați un portofel nou sau importați unul existent."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Cu adresa"),
         "withFee": MessageLookupByLibrary.simpleMessage("Cu Taxa"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Cu mesaj"),

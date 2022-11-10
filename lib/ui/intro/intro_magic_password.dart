@@ -13,6 +13,7 @@ import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:nautilus_wallet_flutter/util/blake2b.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
@@ -226,21 +227,78 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                     Row(
                       children: <Widget>[
                         // Next Button
-                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).nextButton, Dimens.BUTTON_TOP_DIMENS,
-                            onPressed: () async {
+                        AppButton.buildAppButton(
+                            context,
+                            AppButtonType.PRIMARY,
+                            widget.entryExists ? AppLocalization.of(context).loginButton : AppLocalization.of(context).registerButton,
+                            Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                           await submitAndEncrypt();
                         }),
                       ],
                     ),
-                    Row(
-                      children: <Widget>[
-                        // Go Back Button
-                        AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS,
-                            onPressed: () {
-                          Navigator.of(context).pop();
-                        }),
-                      ],
-                    ),
+                    if (widget.entryExists)
+                      Row(
+                        children: <Widget>[
+                          // Next Button
+                          AppButton.buildAppButton(
+                              context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).resetAccountButton, Dimens.BUTTON_BOTTOM_DIMENS,
+                              onPressed: () async {
+                            if (!checkPasswordRequirements()) {
+                              return;
+                            }
+                            AppDialogs.showConfirmDialog(
+                              context,
+                              AppLocalization.of(context).logoutAreYouSure,
+                              AppLocalization.of(context).resetAccountParagraph,
+                              AppLocalization.of(context).imSure,
+                              () async {
+                                // get the encrypted seed from the auth-service:
+                                final String hashedPassword = NanoHelpers.byteToHex(blake2b(NanoHelpers.hexToBytes(confirmPasswordController!.text)));
+                                final String fullIdentifier = "${widget.identifier}$hashedPassword";
+                                String? encryptedSeed = await sl.get<AuthService>().getEncryptedSeed(fullIdentifier);
+                                // final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
+
+                                if (encryptedSeed == null) {
+                                  // delete the account if it exists:
+                                  await sl.get<AuthService>().deleteEncryptedSeed(fullIdentifier);
+                                }
+
+                                // Generate a new seed, encrypt, and upload to the seed backup endpoint:
+                                final String seed = NanoSeeds.generateSeed();
+                                encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController!.text));
+                                await sl.get<Vault>().setSeed(seed);
+                                if (!mounted) return;
+                                // Update wallet
+                                await NanoUtil().loginAccount(await StateContainer.of(context).getSeed(), context);
+                                if (!mounted) return;
+                                // upload encrypted seed to seed backup endpoint:
+
+                                // create the following entry in the database:
+                                // {
+                                //   identifier: "${identifier}${hashedPassword}",
+                                //   encrypted_seed: encryptedSeed,
+                                // }
+                                await sl.get<AuthService>().setEncryptedSeed(fullIdentifier, encryptedSeed);
+                                skipPin();
+                              },
+                              cancelText: AppLocalization.of(context).goBackButton,
+                              cancelAction: () {
+                                return;
+                              },
+                            );
+                          }),
+                        ],
+                      )
+                    else
+                      Row(
+                        children: <Widget>[
+                          // Go Back Button
+                          AppButton.buildAppButton(
+                              context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                            Navigator.of(context).pop();
+                          }),
+                        ],
+                      ),
                   ],
                 ),
               ],
@@ -309,28 +367,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     } else {
       if (!mounted) return;
       // password requirements:
-
-      // password must be at least 8 characters:
-      if (confirmPasswordController!.text.length < 8) {
-        setState(() {
-          passwordError = AppLocalization.of(context).passwordTooShort;
-        });
-        return;
-      }
-
-      // make sure password contains a number:
-      if (!confirmPasswordController!.text.contains(RegExp(r"[0-9]"))) {
-        setState(() {
-          passwordError = AppLocalization.of(context).passwordNumber;
-        });
-        return;
-      }
-
-      // make sure password contains an uppercase and lowercase letter:
-      if (!confirmPasswordController!.text.contains(RegExp(r"[a-z]")) || !confirmPasswordController!.text.contains(RegExp(r"[A-Z]"))) {
-        setState(() {
-          passwordError = AppLocalization.of(context).passwordCapitalLetter;
-        });
+      if (!checkPasswordRequirements()) {
         return;
       }
     }
@@ -380,5 +417,34 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     if (!mounted) return;
     StateContainer.of(context).requestSubscribe();
     Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
+  }
+
+  bool checkPasswordRequirements() {
+    print(confirmPasswordController!.text);
+    // password must be at least 8 characters:
+    if (confirmPasswordController!.text.length < 8) {
+      setState(() {
+        passwordError = AppLocalization.of(context).passwordTooShort;
+      });
+      return false;
+    }
+
+    // make sure password contains a number:
+    if (!confirmPasswordController!.text.contains(RegExp(r"[0-9]"))) {
+      setState(() {
+        passwordError = AppLocalization.of(context).passwordNumber;
+      });
+      return false;
+    }
+
+    // make sure password contains an uppercase and lowercase letter:
+    if (!confirmPasswordController!.text.contains(RegExp(r"[a-z]")) || !confirmPasswordController!.text.contains(RegExp(r"[A-Z]"))) {
+      setState(() {
+        passwordError = AppLocalization.of(context).passwordCapitalLetter;
+      });
+      return false;
+    }
+
+    return true;
   }
 }

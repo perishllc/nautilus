@@ -105,6 +105,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "남용을 방지하기 위해 다음 페이지에서 기프트 카드를 청구하려면 보안 문자를 해결해야 합니다."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("통화 변경"),
         "changeLog": MessageLookupByLibrary.simpleMessage("변경 로그"),
+        "changePassword": MessageLookupByLibrary.simpleMessage("비밀번호 변경"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "기존 비밀번호를 변경합니다. 현재 비밀번호를 모르는 경우 실제로 비밀번호를 변경할 필요는 없지만(이미 로그인되어 있으므로) 기존 백업 항목을 삭제할 수 있으므로 최선을 다해 추측하십시오."),
+        "changePin": MessageLookupByLibrary.simpleMessage("핀 변경"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("핀 설정"),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage("대리인 변경"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("바꾸기"),
         "changeRepHint": MessageLookupByLibrary.simpleMessage("새로운 대리인을 입력하세요"),
@@ -112,6 +117,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("이것은 이미 당신의 대표입니다!"),
         "changeRepSucces":
             MessageLookupByLibrary.simpleMessage("대리인이 성공적으로 변경되었습니다"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("시드 변경"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "이 매직 링크 인증 계정과 연결된 시드/구문을 변경합니다. 여기에 설정한 비밀번호가 무엇이든 기존 비밀번호를 덮어쓰지만 원하는 경우 동일한 비밀번호를 사용할 수 있습니다."),
         "checkAvailability": MessageLookupByLibrary.simpleMessage("이용 가능 확인"),
         "close": MessageLookupByLibrary.simpleMessage("닫기"),
         "confirm": MessageLookupByLibrary.simpleMessage("확인"),
@@ -141,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("연락처를 가져오지 못했습니다."),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("%1개의 연락처를 성공적으로 가져왔습니다."),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("로그인하지 않고 계속"),
         "copied": MessageLookupByLibrary.simpleMessage("Copied"),
         "copy": MessageLookupByLibrary.simpleMessage("Copy"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("주소 복사"),
@@ -200,7 +210,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Failed to set a wallet password"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("주소 입력"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("금액을 입력하세요"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("이메일 입력"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("기프트 노트 입력"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("키 입력"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("메시지 입력"),
@@ -243,6 +253,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("가스 머니"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("거래소 나노"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("현재 비밀번호를 입력하세요"),
+        "existingPinHint": MessageLookupByLibrary.simpleMessage("현재 핀 입력"),
         "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "exportTXData": MessageLookupByLibrary.simpleMessage("수출 거래"),
         "failed": MessageLookupByLibrary.simpleMessage("실패했습니다"),
@@ -322,6 +335,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "일부 NANO가 포함된 링크를 클릭한 것 같습니다. 이 자금을 받으려면 지갑 설정을 완료하기만 하면 됩니다."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "클릭한 링크에 일부 나노가 포함되어 있습니다. 이 지갑으로 가져오시겠습니까?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("HD 가져오기"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Import Secret Phrase"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -330,6 +344,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "importSeedHint": MessageLookupByLibrary.simpleMessage("아래에 시드를 입력하세요"),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("Import Seed Instead"),
+        "importStandard": MessageLookupByLibrary.simpleMessage("수입기준"),
         "importWallet": MessageLookupByLibrary.simpleMessage("기존 지갑"),
         "instantly": MessageLookupByLibrary.simpleMessage("Instantly"),
         "insufficientBalance":
@@ -353,7 +368,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Authenticate on Launch"),
         "locked": MessageLookupByLibrary.simpleMessage("Locked"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader":
+            MessageLookupByLibrary.simpleMessage("로그인 또는 등록"),
         "logout": MessageLookupByLibrary.simpleMessage("로그 아웃"),
         "logoutAction": MessageLookupByLibrary.simpleMessage("시드 삭제 및 로그 아웃"),
         "logoutAreYouSure": MessageLookupByLibrary.simpleMessage("확실합니까?"),
@@ -361,6 +377,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "로그 아웃하면 시드와 모든 Nautilus 관련 데이터가 삭제됩니다. 귀하의 시드가 백업되지 않은 경우 귀하의 자금을 다시  복구 할 수 없습니다."),
         "logoutReassurance":
             MessageLookupByLibrary.simpleMessage("시드를 백업했다면, 걱정하지 않으셔도 됩니다."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "이것은 HD 시드인 것 같습니다. 무엇을 하고 있는지 확실하지 않다면 \"HD 가져오기\" 옵션을 대신 사용해야 합니다."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "이것은 표준 시드인 것으로 보이며 대신 \"표준 가져오기\" 옵션을 사용해야 합니다."),
         "manage": MessageLookupByLibrary.simpleMessage("설정"),
         "mantaError":
             MessageLookupByLibrary.simpleMessage("Couldn\'t Verify Request"),
@@ -405,6 +425,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage("내보낼 거래가 없습니다."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("노드 상태"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("없음"),
         "notSent": MessageLookupByLibrary.simpleMessage("보내지 않음"),
         "notificationBody":
             MessageLookupByLibrary.simpleMessage("이 거래를 보려면 Nautilus을 여십시오."),
@@ -433,9 +454,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("Paper Wallet"),
         "passwordBlank":
             MessageLookupByLibrary.simpleMessage("Password cannot be empty"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "비밀번호는 1개 이상의 대문자와 소문자를 포함해야 합니다"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "비밀번호를 잊어버린 경우 당사는 책임을 지지 않으며 의도적으로 비밀번호를 재설정하거나 변경할 수 없습니다."),
+        "passwordIncorrect": MessageLookupByLibrary.simpleMessage("잘못된 비밀번호"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "You will not need a password to open Nautilus anymore."),
+        "passwordNumber":
+            MessageLookupByLibrary.simpleMessage("비밀번호는 1개 이상의 숫자를 포함해야 합니다."),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "비밀번호에는 최소 1개의 특수 문자가 포함되어야 합니다."),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("비밀번호가 너무 짧습니다"),
+        "passwordWarning":
+            MessageLookupByLibrary.simpleMessage("이 암호는 노틸러스를 열 때 필요합니다."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "This password will be required to open Nautilus."),
@@ -455,6 +489,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("6자리 비밀번호를 만드세요"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("비밀번호를 입력 하세요"),
+        "pinIncorrect": MessageLookupByLibrary.simpleMessage("잘못된 핀이 입력되었습니다."),
         "pinInvalid":
             MessageLookupByLibrary.simpleMessage("잘못된 비밀번호가 입력되었습니다."),
         "pinMethod": MessageLookupByLibrary.simpleMessage("비밀번호"),
@@ -602,6 +637,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Password has been set successfully"),
         "setPin": MessageLookupByLibrary.simpleMessage("핀 설정"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "기존 PIN을 설정하거나 변경합니다. 아직 PIN을 설정하지 않은 경우 기본 PIN은 000000입니다."),
         "setPinSuccess":
             MessageLookupByLibrary.simpleMessage("핀이 성공적으로 설정되었습니다."),
         "setPlausibleDeniabilityPin":
@@ -752,8 +789,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("일주일 전"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Nautilus에 오신 것을 환영합니다. 계속하려면, 새 지갑을 만들거나 기존 지갑을 불러오세요."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "노틸러스에 오신 것을 환영합니다. 시작하는 옵션을 선택하거나 아래 아이콘을 사용하여 테마를 선택하세요."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "노틸러스에 오신 것을 환영합니다. 시작하려면 새 지갑을 만들거나 기존 지갑을 가져오세요."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "시작하려면 새 지갑을 만들거나 기존 지갑을 가져오세요."),
         "withAddress": MessageLookupByLibrary.simpleMessage("주소 포함"),
         "withFee": MessageLookupByLibrary.simpleMessage("수수료 포함"),
         "withMessage": MessageLookupByLibrary.simpleMessage("메시지 포함"),

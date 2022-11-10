@@ -292,8 +292,10 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                         } catch (e) {
                           await authenticateWithPin();
                         }
-                      } else {
+                      } else if (authMethod.method == AuthMethod.PIN) {
                         await authenticateWithPin();
+                      } else {
+                        EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
                       }
                     })
                   ],

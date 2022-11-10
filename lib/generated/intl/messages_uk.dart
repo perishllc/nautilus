@@ -122,6 +122,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Змінити валюту"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Журнал змін"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Змінити пароль"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "Змініть існуючий пароль. Якщо ви не знаєте свій поточний пароль, просто припустіть, оскільки насправді його не потрібно змінювати (оскільки ви вже ввійшли в систему), але це дозволяє нам видалити наявний резервний запис."),
+        "changePin": MessageLookupByLibrary.simpleMessage("Змінити PIN-код"),
+        "changePinHint":
+            MessageLookupByLibrary.simpleMessage("Встановити шпильку"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Зміна представника"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Зміна"),
@@ -131,6 +138,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Це вже ваш представник!"),
         "changeRepSucces": MessageLookupByLibrary.simpleMessage(
             "Представника змінено успішно"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("Змінити насіння"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "Змініть початкове значення/фразу, пов’язану з цим обліковим записом із автентифікацією за допомогою магічного посилання, будь-який пароль, який ви встановите тут, перезапише ваш існуючий пароль, але ви можете використовувати той самий пароль, якщо забажаєте."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Перевірити наявність"),
         "close": MessageLookupByLibrary.simpleMessage("Закрити"),
@@ -166,6 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Не вдалося імпортувати контакти"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Успішно імпортовано %1 контактів."),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("Продовжити без входу"),
         "copied": MessageLookupByLibrary.simpleMessage("Скопійовано"),
         "copy": MessageLookupByLibrary.simpleMessage("Скопіювати"),
         "copyAddress":
@@ -239,7 +251,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Не вдалося встановити пароль гаманця"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Введіть адресу"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Введіть суму"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("Введіть Email"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Введіть подарункову записку"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Введіть висоту"),
@@ -289,6 +301,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Газові гроші"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Обмін NANO"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Введіть поточний пароль"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("Введіть поточний PIN-код"),
         "exit": MessageLookupByLibrary.simpleMessage("Вийти"),
         "exportTXData":
             MessageLookupByLibrary.simpleMessage("Експортні операції"),
@@ -382,6 +398,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Схоже, ви натиснули посилання, яке містить частину NANO. Щоб отримати ці кошти, нам потрібно лише завершити налаштування свого гаманця."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Посилання, яке ви клацнули, містить трохи NANO, чи хочете ви імпортувати його в цей гаманець?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("Імпорт HD"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Імпортувати секретну фразу"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -391,6 +408,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Будь ласка введіть ваш seed нижче."),
         "importSeedInstead": MessageLookupByLibrary.simpleMessage(
             "Замість того імпортувати seed"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("Стандарт імпорту"),
         "importWallet":
             MessageLookupByLibrary.simpleMessage("Імпортувати гаманець"),
         "instantly": MessageLookupByLibrary.simpleMessage("Миттєво"),
@@ -417,7 +436,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting": MessageLookupByLibrary.simpleMessage(
             "Вводити пароль після запуска"),
         "locked": MessageLookupByLibrary.simpleMessage("Заблоковано"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader":
+            MessageLookupByLibrary.simpleMessage("Увійти або зареєструватися"),
         "logout": MessageLookupByLibrary.simpleMessage("Вийти"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Видалити seed і вийти"),
@@ -427,6 +447,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Якщо ви вийдете то ваш seed і всі Nautilus дані буде видалено з вашого пристрою . Якщо ви не зробили резервну копію seed ви НІКОЛИ не відновите гаманці"),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Якщо ви зробили резервну копію вашої мнемонічної фрази вам не варто хвилюватися."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "Схоже, що це початкове значення HD. Якщо ви не впевнені, що знаєте, що робите, вам слід скористатися опцією «Імпортувати HD»."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "Здається, це стандартне насіння, натомість вам слід скористатися опцією «Імпорт стандарту»."),
         "manage": MessageLookupByLibrary.simpleMessage("Керувати"),
         "mantaError":
             MessageLookupByLibrary.simpleMessage("Не вдалося перевірити запит"),
@@ -479,6 +503,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Немає транзакцій для експорту."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Статус вузла"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("Жодного"),
         "notSent": MessageLookupByLibrary.simpleMessage("не надіслано"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Відкрити Nautilus щоб переглянути трансакції"),
@@ -509,9 +534,23 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Паперовий гаманець"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
             "Пароль не може бути порожнім"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "Пароль має містити принаймні 1 велику та малу літеру"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "Ми не несемо відповідальності, якщо ви забудете свій пароль, і ми не можемо скинути чи змінити його замість вас."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("Неправильний пароль"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Вам більше не треба буде пароль щоб відкрити Nautilus."),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "Пароль має містити принаймні 1 цифру"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "Пароль повинен містити принаймні 1 спеціальний символ"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("Пароль занадто короткий"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "Цей пароль знадобиться, щоб відкрити Nautilus."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Цей пароль буде необхідним щоб відкрити Nautilus."),
@@ -535,6 +574,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Придумайте пін код із 6и цифр"),
         "pinEnterTitle":
             MessageLookupByLibrary.simpleMessage("Введіть пін код"),
+        "pinIncorrect": MessageLookupByLibrary.simpleMessage(
+            "Введено неправильний PIN-код"),
         "pinInvalid":
             MessageLookupByLibrary.simpleMessage("Введено невірний пін код"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("Пін код"),
@@ -698,6 +739,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess": MessageLookupByLibrary.simpleMessage(
             "Пароль було успішно встановлено"),
         "setPin": MessageLookupByLibrary.simpleMessage("Встановити PIN-код"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "Встановіть або змініть наявний PIN-код. Якщо ви ще не встановили PIN-код, стандартним PIN-кодом буде 000000."),
         "setPinSuccess":
             MessageLookupByLibrary.simpleMessage("PIN-код встановлено успішно"),
         "setPlausibleDeniabilityPin":
@@ -879,8 +922,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("Тиждень тому"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Ласкаво просимо до Nautilus. Щоб продовжити ви можете створити новий гаманець або імпортувати існуючий."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "Ласкаво просимо до Наутілуса. Виберіть варіант, щоб почати, або виберіть тему за допомогою значка нижче."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Ласкаво просимо до Наутілуса. Для початку створіть новий гаманець або імпортуйте наявний."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Для початку створіть новий гаманець або імпортуйте наявний."),
         "withAddress": MessageLookupByLibrary.simpleMessage("З адресою"),
         "withFee": MessageLookupByLibrary.simpleMessage("З платою"),
         "withMessage": MessageLookupByLibrary.simpleMessage("З повідомленням"),

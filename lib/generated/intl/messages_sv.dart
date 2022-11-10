@@ -122,6 +122,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "För att förhindra missbruk kräver vi att du löser en captcha för att göra anspråk på presentkortet på nästa sida."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Ändra valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Ändra logg"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Ändra lösenord"),
+        "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
+            "Ändra ditt befintliga lösenord. Om du inte känner till ditt nuvarande lösenord, gör bara din bästa gissning eftersom det faktiskt inte krävs för att ändra det (eftersom du redan är inloggad), men det låter oss ta bort den befintliga backup-posten."),
+        "changePin": MessageLookupByLibrary.simpleMessage("Byt stift"),
+        "changePinHint": MessageLookupByLibrary.simpleMessage("Sätt stift"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Byt representant"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Ändra"),
@@ -131,6 +137,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Det här är redan din representant!"),
         "changeRepSucces":
             MessageLookupByLibrary.simpleMessage("Representanten är nu ändrad"),
+        "changeSeed": MessageLookupByLibrary.simpleMessage("Byt utsäde"),
+        "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
+            "Ändra fröet/frasen som är associerad med detta magiska länkgodkända konto, vilket lösenord du än anger här kommer att skriva över ditt befintliga lösenord, men du kan använda samma lösenord om du vill."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Kontrollera tillgänglighet"),
         "close": MessageLookupByLibrary.simpleMessage("Stäng"),
@@ -166,6 +175,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Gick ej att importera kontakter"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Lyckad import av %1 kontakter"),
+        "continueWithoutLogin":
+            MessageLookupByLibrary.simpleMessage("Fortsätt utan inloggning"),
         "copied": MessageLookupByLibrary.simpleMessage("Kopierad"),
         "copy": MessageLookupByLibrary.simpleMessage("Kopiera"),
         "copyAddress": MessageLookupByLibrary.simpleMessage("Kopiera adress"),
@@ -237,7 +248,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Misslyckades med att ställa in ett lösenord"),
         "enterAddress": MessageLookupByLibrary.simpleMessage("Ange adress"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Ange belopp"),
-        "enterEmail": MessageLookupByLibrary.simpleMessage(""),
+        "enterEmail": MessageLookupByLibrary.simpleMessage("Skriv in e-mail"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Ange presentanteckning"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Ange höjd"),
@@ -286,6 +297,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas pengar"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Byt NANO"),
+        "existingPasswordHint":
+            MessageLookupByLibrary.simpleMessage("Skriv in nuvarande lösenord"),
+        "existingPinHint":
+            MessageLookupByLibrary.simpleMessage("Ange aktuell pin"),
         "exit": MessageLookupByLibrary.simpleMessage("Tillbaka"),
         "exportTXData":
             MessageLookupByLibrary.simpleMessage("Exportera transaktioner"),
@@ -376,6 +391,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Det verkar som att du klickade på en länk som innehåller lite NANO, för att kunna ta emot dessa pengar behöver vi bara för att du ska slutföra konfigureringen av din plånbok."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Länken du klickade på innehåller lite NANO, vill du importera den till den här plånboken?"),
+        "importHD": MessageLookupByLibrary.simpleMessage("Importera HD"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importera hemlig fras"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
@@ -385,6 +401,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ange ditt seed nedanför."),
         "importSeedInstead":
             MessageLookupByLibrary.simpleMessage("Importera seed istället"),
+        "importStandard":
+            MessageLookupByLibrary.simpleMessage("Importstandard"),
         "importWallet":
             MessageLookupByLibrary.simpleMessage("Importera plånbok"),
         "instantly": MessageLookupByLibrary.simpleMessage("Omedelbart"),
@@ -409,7 +427,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Verifiera vid uppstart"),
         "locked": MessageLookupByLibrary.simpleMessage("Låst"),
-        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(""),
+        "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(
+            "logga in eller registrera dig"),
         "logout": MessageLookupByLibrary.simpleMessage("Logga ut"),
         "logoutAction":
             MessageLookupByLibrary.simpleMessage("Ta bort seed och logga ut"),
@@ -419,6 +438,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vid utloggning raderas ditt seed och all kaliumrelaterad data från denna enhet. Om du inte har säkerhetskopierat ditt seed, kommer du aldrig att kunna komma åt dina tillgångar igen."),
         "logoutReassurance": MessageLookupByLibrary.simpleMessage(
             "Så länge du har säkerhetskopierat ditt seed har du inget att oroa dig över."),
+        "looksLikeHdSeed": MessageLookupByLibrary.simpleMessage(
+            "Detta verkar vara ett HD-frö, såvida du inte är säker på att du vet vad du gör, bör du använda alternativet \"Importera HD\" istället."),
+        "looksLikeStandardSeed": MessageLookupByLibrary.simpleMessage(
+            "Detta verkar vara ett standardfrö, du bör använda alternativet \"Importera standard\" istället."),
         "manage": MessageLookupByLibrary.simpleMessage("Förvaltning"),
         "mantaError": MessageLookupByLibrary.simpleMessage(
             "Kunde inte verifiera begäran"),
@@ -470,6 +493,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Det finns inga transaktioner att exportera."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Nod Status"),
+        "noneMethod": MessageLookupByLibrary.simpleMessage("Ingen"),
         "notSent": MessageLookupByLibrary.simpleMessage("inte skickat"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
             "Öppna Nautilus för att visa transaktion."),
@@ -499,9 +523,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "paperWallet": MessageLookupByLibrary.simpleMessage("Pappersplånbok"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
             "Lösenordsfältet kan ej lämnas tomt"),
+        "passwordCapitalLetter": MessageLookupByLibrary.simpleMessage(
+            "Lösenordet måste innehålla minst 1 stor och liten bokstav"),
+        "passwordDisclaimer": MessageLookupByLibrary.simpleMessage(
+            "Vi är inte ansvariga om du glömmer ditt lösenord, och genom designen kan vi inte återställa eller ändra det åt dig."),
+        "passwordIncorrect":
+            MessageLookupByLibrary.simpleMessage("fel lösenord"),
         "passwordNoLongerRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Du behöver inte lösenord för att öppna Nautilus längre."),
+        "passwordNumber": MessageLookupByLibrary.simpleMessage(
+            "Lösenordet måste innehålla minst 1 nummer"),
+        "passwordSpecialCharacter": MessageLookupByLibrary.simpleMessage(
+            "Lösenordet måste innehålla minst 1 specialtecken"),
+        "passwordTooShort":
+            MessageLookupByLibrary.simpleMessage("Lösenordet är för kort"),
+        "passwordWarning": MessageLookupByLibrary.simpleMessage(
+            "Detta lösenord kommer att krävas för att öppna Nautilus."),
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage(
                 "Lösenordet behövs för att öppna Nautilus."),
@@ -524,6 +562,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinCreateTitle":
             MessageLookupByLibrary.simpleMessage("Skapa en 6-siffrig PIN-kod"),
         "pinEnterTitle": MessageLookupByLibrary.simpleMessage("Ange PIN-kod"),
+        "pinIncorrect":
+            MessageLookupByLibrary.simpleMessage("Fel pinkod har angetts"),
         "pinInvalid":
             MessageLookupByLibrary.simpleMessage("Felaktig PIN-kod angiven"),
         "pinMethod": MessageLookupByLibrary.simpleMessage("PIN"),
@@ -686,6 +726,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setPasswordSuccess":
             MessageLookupByLibrary.simpleMessage("Lösenordet har ställts in"),
         "setPin": MessageLookupByLibrary.simpleMessage("Ställ in stift"),
+        "setPinParagraph": MessageLookupByLibrary.simpleMessage(
+            "Ställ in eller ändra din befintliga PIN-kod. Om du inte har angett en PIN-kod än är standard-PIN-koden 000000."),
         "setPinSuccess":
             MessageLookupByLibrary.simpleMessage("Pin har ställts in"),
         "setPlausibleDeniabilityPin":
@@ -855,8 +897,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "weekAgo": MessageLookupByLibrary.simpleMessage("En vecka sedan"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Välkommen till Nautilus. För att fortsätta, behöver du skapa en ny plånbok eller importera en befintlig."),
+        "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
+            "Välkommen till Nautilus. Välj ett alternativ för att komma igång eller välj ett tema med hjälp av ikonen nedan."),
         "welcomeTextUpdated": MessageLookupByLibrary.simpleMessage(
             "Välkommen till Nautilus. Börja med att skapa en ny plånbok eller importera en befintlig."),
+        "welcomeTextWithoutLogin": MessageLookupByLibrary.simpleMessage(
+            "Börja med att skapa en ny plånbok eller importera en befintlig."),
         "withAddress": MessageLookupByLibrary.simpleMessage("Med adress"),
         "withFee": MessageLookupByLibrary.simpleMessage("Med avgift"),
         "withMessage": MessageLookupByLibrary.simpleMessage("Med Meddelande"),
