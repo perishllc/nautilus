@@ -1321,7 +1321,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           handleDeepLink(StateContainer.of(context).initialDeepLink);
           StateContainer.of(context).initialDeepLink = null;
         }
-        // branch gift:
         if (StateContainer.of(context).gift != null && !_lockTriggered) {
           handleBranchGift(StateContainer.of(context).gift);
           StateContainer.of(context).resetGift();

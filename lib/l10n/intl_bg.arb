@@ -450,6 +450,11 @@
     "type": "text",
     "description": "contact_import_success"
   },
+  "continueButton": "продължи",
+  "@continueButton": {
+    "type": "text",
+    "description": "A continue button that goes to the next screen."
+  },
   "continueWithoutLogin": "Продължете без влизане",
   "@continueWithoutLogin": {
     "type": "text",

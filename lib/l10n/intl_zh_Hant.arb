@@ -450,6 +450,11 @@
     "type": "text",
     "description": "contact_import_success"
   },
+  "continueButton": "繼續",
+  "@continueButton": {
+    "type": "text",
+    "description": "A continue button that goes to the next screen."
+  },
   "continueWithoutLogin": "無需登錄即可繼續",
   "@continueWithoutLogin": {
     "type": "text",

@@ -54,8 +54,6 @@ import 'package:nautilus_wallet_flutter/ui/settings/change_magic_password_sheet.
 import 'package:nautilus_wallet_flutter/ui/settings/change_magic_seed_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/changerepresentative_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/contacts_widget.dart';
-import 'package:nautilus_wallet_flutter/ui/settings/disable_password_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/settings/set_password_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/set_pin_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/set_plausible_pin_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/settings_list_item.dart';
@@ -1686,10 +1684,10 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           Navigator.of(context).pushNamed("/register_username");
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).createGiftCard, AppIcons.export_icon, onPressed: () {
-        //   Navigator.of(context).pushNamed("/gift_paper_wallet");
-        // }),
-        // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).createGiftCard, AppIcons.export_icon, onPressed: () {
+          Navigator.of(context).pushNamed("/gift_paper_wallet");
+        }),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).swapXMR, AppIcons.swapcurrency, onPressed: () {
         //   Navigator.of(context).pushNamed("/swap_xmr");
         // }),

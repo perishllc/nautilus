@@ -55,7 +55,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
             context,
             AppLocalization.of(context).trackingHeader,
             AppLocalization.of(context).askTracking,
-            closeText: AppLocalization.of(context).ok,
+            closeText: AppLocalization.of(context).continueButton.toUpperCase(),
             barrierDismissible: false,
             onPressed: () async {
               bool trackingEnabled = false;

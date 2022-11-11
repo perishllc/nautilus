@@ -450,6 +450,11 @@
     "type": "text",
     "description": "contact_import_success"
   },
+  "continueButton": "계속하다",
+  "@continueButton": {
+    "type": "text",
+    "description": "A continue button that goes to the next screen."
+  },
   "continueWithoutLogin": "로그인하지 않고 계속",
   "@continueWithoutLogin": {
     "type": "text",

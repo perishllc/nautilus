@@ -450,6 +450,11 @@
     "type": "text",
     "description": "contact_import_success"
   },
+  "continueButton": "जारी रखना",
+  "@continueButton": {
+    "type": "text",
+    "description": "A continue button that goes to the next screen."
+  },
   "continueWithoutLogin": "लॉगिन के बिना जारी रखें",
   "@continueWithoutLogin": {
     "type": "text",

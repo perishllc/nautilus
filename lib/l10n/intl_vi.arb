@@ -450,6 +450,11 @@
     "type": "text",
     "description": "contact_import_success"
   },
+  "continueButton": "Tiếp tục",
+  "@continueButton": {
+    "type": "text",
+    "description": "A continue button that goes to the next screen."
+  },
   "continueWithoutLogin": "Tiếp tục mà không cần đăng nhập",
   "@continueWithoutLogin": {
     "type": "text",
