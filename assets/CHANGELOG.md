@@ -1,3 +1,7 @@
+## v0.7.0 - [2022-11-XX]
+#### Added
+#### Changed
+#### Fixed
 ## v0.7.0 - [2022-11-10]
 #### Added
 - Magic link login + encrypted seed backup
