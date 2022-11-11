@@ -167,6 +167,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Rehberi içe aktarmada sorun oluştu"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("%1 kişi içe aktarıldı"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Devam et"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Giriş yapmadan devam et"),
         "copied": MessageLookupByLibrary.simpleMessage("Kopyalandı"),
@@ -418,6 +419,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Başlangıçta Kimlik Doğrula"),
         "locked": MessageLookupByLibrary.simpleMessage("Kilitli"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Giriş yapmak"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("giriş yap veya kaydol"),
         "logout": MessageLookupByLibrary.simpleMessage("Çıkış"),
@@ -598,6 +600,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Alınacak minimum miktar. Bundan daha az bir miktarla bir ödeme veya talep alınırsa, göz ardı edilecektir."),
         "received": MessageLookupByLibrary.simpleMessage("Alındı"),
         "refund": MessageLookupByLibrary.simpleMessage("İade"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Kayıt ol"),
         "registerFor": MessageLookupByLibrary.simpleMessage("için"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Kullanıcı Adı Kaydet"),
@@ -648,6 +651,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hediye kartı talep etmek için CAPTCHA gerektir"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Bu notu tekrar gönderme"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Hesabı Sıfırla"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Bu, yeni belirlediğiniz şifre ile yeni bir hesap oluşturacaktır, seçilen şifreler aynı olmadıkça eski hesap silinmeyecektir."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Veritabanını sıfırla"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

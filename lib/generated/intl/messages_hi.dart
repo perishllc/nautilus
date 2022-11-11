@@ -172,6 +172,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("संपर्क आयात नहीं हो सकें"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "%1 संपर्क सफलतापूर्वक आयात हो गए हैं।"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("जारी रखना"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("लॉगिन के बिना जारी रखें"),
         "copied": MessageLookupByLibrary.simpleMessage("कॉपी हो गया"),
@@ -418,6 +419,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("लॉन्च पर प्रमाणित करें"),
         "locked": MessageLookupByLibrary.simpleMessage("अवरोधित"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("लॉग इन करें"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("भाग लें या पंजीकरण करें"),
         "logout": MessageLookupByLibrary.simpleMessage("लॉगआउट करें"),
@@ -599,6 +601,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "प्राप्त करने के लिए न्यूनतम राशि यदि इससे कम राशि के साथ भुगतान या अनुरोध प्राप्त होता है, तो इसे अनदेखा कर दिया जाएगा।"),
         "received": MessageLookupByLibrary.simpleMessage("मिले -"),
         "refund": MessageLookupByLibrary.simpleMessage("रिफंड"),
+        "registerButton":
+            MessageLookupByLibrary.simpleMessage("पंजीकरण करवाना"),
         "registerFor": MessageLookupByLibrary.simpleMessage("के लिए"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("उपयोगकर्ता नाम रजिस्टर करें"),
@@ -649,6 +653,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "उपहार कार्ड का दावा करने के लिए कैप्चा की आवश्यकता है"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("इस ज्ञापन को फिर से भेजें"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("खाता रीसेट करें"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "यह आपके द्वारा अभी-अभी सेट किए गए पासवर्ड के साथ एक नया खाता बना देगा, पुराना खाता तब तक नहीं हटाया जाएगा जब तक कि चुने गए पासवर्ड समान न हों।"),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("डेटाबेस को रीसेट करें"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

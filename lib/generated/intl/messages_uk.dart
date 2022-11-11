@@ -176,6 +176,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Не вдалося імпортувати контакти"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Успішно імпортовано %1 контактів."),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Продовжити"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Продовжити без входу"),
         "copied": MessageLookupByLibrary.simpleMessage("Скопійовано"),
@@ -436,6 +437,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting": MessageLookupByLibrary.simpleMessage(
             "Вводити пароль після запуска"),
         "locked": MessageLookupByLibrary.simpleMessage("Заблоковано"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Логін"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("Увійти або зареєструватися"),
         "logout": MessageLookupByLibrary.simpleMessage("Вийти"),
@@ -623,6 +625,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Мінімальна сума для отримання. Якщо платіж або запит надійде на суму менше цієї, вона буде проігнорована."),
         "received": MessageLookupByLibrary.simpleMessage("Отримано"),
         "refund": MessageLookupByLibrary.simpleMessage("Повернення"),
+        "registerButton":
+            MessageLookupByLibrary.simpleMessage("зареєструватися"),
         "registerFor": MessageLookupByLibrary.simpleMessage("для"),
         "registerUsername": MessageLookupByLibrary.simpleMessage(
             "Зареєструвати Ім\'я користувача"),
@@ -674,6 +678,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Вимагайте CAPTCHA, щоб отримати подарункову картку"),
         "resendMemo": MessageLookupByLibrary.simpleMessage(
             "Повторно надіслати цю пам\'ятку"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Скинути акаунт"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Це створить новий обліковий запис із паролем, який ви щойно встановили, старий обліковий запис не буде видалено, якщо вибрані паролі не збігаються."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Скидання бази даних"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

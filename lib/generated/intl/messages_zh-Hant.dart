@@ -131,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contactsImportErr": MessageLookupByLibrary.simpleMessage("無法匯入聯絡人"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("順利匯出 %1 個聯絡人"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("繼續"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("無需登錄即可繼續"),
         "copied": MessageLookupByLibrary.simpleMessage("已複製"),
@@ -329,6 +330,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loadedInto": MessageLookupByLibrary.simpleMessage("載入到"),
         "lockAppSetting": MessageLookupByLibrary.simpleMessage("啟動時要求驗證"),
         "locked": MessageLookupByLibrary.simpleMessage("已鎖定"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("登錄"),
         "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage("登錄或註冊"),
         "logout": MessageLookupByLibrary.simpleMessage("登出"),
         "logoutAction": MessageLookupByLibrary.simpleMessage("刪除種子並登出"),
@@ -472,6 +474,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "收到的最低金額。如果收到的付款或請求金額少於此金額，則會被忽略。"),
         "received": MessageLookupByLibrary.simpleMessage("收到"),
         "refund": MessageLookupByLibrary.simpleMessage("退款"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("登記"),
         "registerFor": MessageLookupByLibrary.simpleMessage("為了"),
         "registerUsername": MessageLookupByLibrary.simpleMessage("註冊用戶名"),
         "registerUsernameHeader": MessageLookupByLibrary.simpleMessage("註冊用戶名"),
@@ -514,6 +517,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "requireCaptcha":
             MessageLookupByLibrary.simpleMessage("要求 CAPTCHA 領取禮品卡"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("重新傳送此備忘錄"),
+        "resetAccountButton": MessageLookupByLibrary.simpleMessage("重置帳戶"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "這將使用您剛剛設置的密碼創建一個新帳戶，除非選擇的密碼相同，否則舊帳戶不會被刪除。"),
         "resetDatabase": MessageLookupByLibrary.simpleMessage("重設資料庫"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(
             "您確定要重設內部資料庫嗎？ \n\n這可能會修復與更新應用程式相關的問題，但也會刪除所有儲存的偏好設定。這不會刪除您的錢包種子。如果您遇到問題，則應備份種子，重新安裝該應用程序，如果問題仍然存在，請隨時在 github 或不和諧上進行錯誤報告。"),

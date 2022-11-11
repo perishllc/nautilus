@@ -175,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Falha ao importar contatos"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Importado com sucesso %1 contatos"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Continuar"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Continuar sem login"),
         "copied": MessageLookupByLibrary.simpleMessage("Copiado"),
@@ -430,6 +431,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Autenticar ao iniciar"),
         "locked": MessageLookupByLibrary.simpleMessage("Bloqueado"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Conecte-se"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("Faça login ou cadastre-se"),
         "logout": MessageLookupByLibrary.simpleMessage("Sair"),
@@ -615,6 +617,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Um valor mínimo para receber. Se um pagamento ou solicitação for recebido com um valor menor que esse, ele será ignorado."),
         "received": MessageLookupByLibrary.simpleMessage("Recebido"),
         "refund": MessageLookupByLibrary.simpleMessage("reembolso"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Registro"),
         "registerFor": MessageLookupByLibrary.simpleMessage("pelo"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Registrar nome de"),
@@ -667,6 +670,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Exigir CAPTCHA para reivindicar vale-presente"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Reenviar este memorando"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Redefinir conta"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Isso fará uma nova conta com a senha que você acabou de definir, a conta antiga não será excluída a menos que as senhas escolhidas sejam as mesmas."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Redefinir o banco de"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

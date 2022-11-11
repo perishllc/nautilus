@@ -169,6 +169,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Неуспешно импортиране на Контакти"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Успешно добавен %1 контакт/и."),
+        "continueButton": MessageLookupByLibrary.simpleMessage("продължи"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Продължете без влизане"),
         "copied": MessageLookupByLibrary.simpleMessage("Копирано"),
@@ -427,6 +428,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Удостовери на Стартиране"),
         "locked": MessageLookupByLibrary.simpleMessage("Заключено"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Влизам"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("Влезте или се регистрирайте"),
         "logout": MessageLookupByLibrary.simpleMessage("Отпиши се"),
@@ -610,6 +612,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Минимална сума за получаване. Ако плащането или искането е получено със сума, по-малка от тази, тя ще бъде игнорирана."),
         "received": MessageLookupByLibrary.simpleMessage("Получено"),
         "refund": MessageLookupByLibrary.simpleMessage("Възстановяване"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Регистрирам"),
         "registerFor": MessageLookupByLibrary.simpleMessage("за"),
         "registerUsername": MessageLookupByLibrary.simpleMessage(
             "Регистриране на потребителско име"),
@@ -662,6 +665,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Изискване на CAPTCHA за заявяване на карта за подарък"),
         "resendMemo": MessageLookupByLibrary.simpleMessage(
             "Повторно изпращане на тази бележка"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Нулиране на акаунта"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Това ще създаде нов акаунт с паролата, която току-що сте задали, старият акаунт няма да бъде изтрит, освен ако избраните пароли не са същите."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Нулиране на базата данни"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

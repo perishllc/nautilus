@@ -171,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kunne ikke importere kontakter"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("%1 kontakter importert."),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Fortsette"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Fortsett uten pålogging"),
         "copied": MessageLookupByLibrary.simpleMessage("Kopiert"),
@@ -423,6 +424,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Verifiser ved oppstart"),
         "locked": MessageLookupByLibrary.simpleMessage("Låst"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Logg Inn"),
         "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(
             "Logg inn eller registrer deg"),
         "logout": MessageLookupByLibrary.simpleMessage("Logg ut"),
@@ -607,6 +609,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Et minimumsbeløp å motta. Hvis en betaling eller forespørsel mottas med et beløp mindre enn dette, det vil bli ignorert."),
         "received": MessageLookupByLibrary.simpleMessage("Mottatt"),
         "refund": MessageLookupByLibrary.simpleMessage("tilbakebetaling"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Registrere"),
         "registerFor": MessageLookupByLibrary.simpleMessage("for"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Registrer brukernavn"),
@@ -659,6 +662,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Krev CAPTCHA for å kreve gavekort"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Send dette notatet på nytt"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Tilbakestill konto"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Dette vil opprette en ny konto med passordet du nettopp har angitt, den gamle kontoen vil ikke bli slettet med mindre passordene som er valgt er de samme."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Tilbakestill databasen"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

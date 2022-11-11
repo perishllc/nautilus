@@ -168,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Failed to import contacts"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Sucessfully imported %1 contacts."),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Continue"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Continue without login"),
         "copied": MessageLookupByLibrary.simpleMessage("Copied"),

@@ -131,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contactsImportErr": MessageLookupByLibrary.simpleMessage("无法导入联系人"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("已成功导入％1个联系人"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("继续"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("无需登录即可继续"),
         "copied": MessageLookupByLibrary.simpleMessage("已复制"),
@@ -329,6 +330,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loadedInto": MessageLookupByLibrary.simpleMessage("已加载到"),
         "lockAppSetting": MessageLookupByLibrary.simpleMessage("启动时要求验证"),
         "locked": MessageLookupByLibrary.simpleMessage("已锁定"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("登录"),
         "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage("登录或注册"),
         "logout": MessageLookupByLibrary.simpleMessage("登出"),
         "logoutAction": MessageLookupByLibrary.simpleMessage("删除种子并登出"),
@@ -474,6 +476,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "收取的最低金额。如果收到的金额低于此金额的付款或请求，则会被忽略。"),
         "received": MessageLookupByLibrary.simpleMessage("收到"),
         "refund": MessageLookupByLibrary.simpleMessage("退款"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("登记"),
         "registerFor": MessageLookupByLibrary.simpleMessage("为了"),
         "registerUsername": MessageLookupByLibrary.simpleMessage("注册用户名"),
         "registerUsernameHeader":
@@ -518,6 +521,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "requireCaptcha":
             MessageLookupByLibrary.simpleMessage("要求 CAPTCHA 领取礼品卡"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("重新发送此备忘录"),
+        "resetAccountButton": MessageLookupByLibrary.simpleMessage("重置帐户"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "这将使用您刚刚设置的密码创建一个新帐户，除非选择的密码相同，否则旧帐户不会被删除。"),
         "resetDatabase": MessageLookupByLibrary.simpleMessage("重置数据库"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(
             "确实要重置内部数据库吗？ \n\n这可能会解决与更新应用程序有关的问题，但也会删除所有已保存的首选项。这不会删除你的钱包种子。如果你遇到问题，你应该备份你的种子，重新安装应用程序，如果问题仍然存在，请随时在github或Discord上提交错误报告。"),

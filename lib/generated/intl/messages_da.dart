@@ -168,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Import kontaktů se nezdařil"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "%1 kontaktů bylo úspěšně importováno."),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Blive ved"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Fortsæt uden login"),
         "copied": MessageLookupByLibrary.simpleMessage("Zkopírováno"),
@@ -419,6 +420,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Ověřit při spuštění"),
         "locked": MessageLookupByLibrary.simpleMessage("Zamčeno"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Log på"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("Log ind eller tilmeld dig"),
         "logout": MessageLookupByLibrary.simpleMessage("Odhlásit"),
@@ -602,6 +604,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Et minimumsbeløb at modtage. Hvis en betaling eller anmodning modtages med et beløb mindre end dette, det vil blive ignoreret."),
         "received": MessageLookupByLibrary.simpleMessage("Přijmuto"),
         "refund": MessageLookupByLibrary.simpleMessage("tilbagebetaling"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Tilmeld"),
         "registerFor": MessageLookupByLibrary.simpleMessage("til"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Registrer brugernavn"),
@@ -653,6 +656,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kræv CAPTCHA for at gøre krav på gavekort"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Send dette notat igen"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Nulstil konto"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Dette vil oprette en ny konto med den adgangskode, du lige har indstillet, den gamle konto vil ikke blive slettet, medmindre de valgte adgangskoder er de samme."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Nulstil databasen"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

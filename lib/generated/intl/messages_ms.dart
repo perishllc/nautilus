@@ -168,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gagal mengimpor kontak"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Berhasil mengimpor %1 kontak"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("teruskan"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Teruskan tanpa log masuk"),
         "copied": MessageLookupByLibrary.simpleMessage("Disalin"),
@@ -424,6 +425,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Mengesahkan saat Pelancaran"),
         "locked": MessageLookupByLibrary.simpleMessage("Terkunci"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Log masuk"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("Log masuk atau Daftar"),
         "logout": MessageLookupByLibrary.simpleMessage("Log Keluar"),
@@ -605,6 +607,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Jumlah minimum untuk diterima. Jika pembayaran atau permintaan diterima dengan jumlah yang kurang daripada ini, ia akan diabaikan."),
         "received": MessageLookupByLibrary.simpleMessage("Diterima"),
         "refund": MessageLookupByLibrary.simpleMessage("Bayaran Balik"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Daftar"),
         "registerFor": MessageLookupByLibrary.simpleMessage("bagi"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Daftar Nama Pengguna"),
@@ -655,6 +658,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Memerlukan CAPTCHA untuk menuntut kad hadiah"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Hantar semula memo ini"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Tetapkan Semula Akaun"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Ini akan membuat akaun baharu dengan kata laluan yang baru anda tetapkan, akaun lama tidak akan dipadamkan melainkan kata laluan yang dipilih adalah sama."),
         "resetDatabase": MessageLookupByLibrary.simpleMessage(
             "Tetapkan semula Pangkalan Data"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

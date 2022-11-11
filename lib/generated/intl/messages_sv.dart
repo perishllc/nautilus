@@ -175,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Gick ej att importera kontakter"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Lyckad import av %1 kontakter"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Fortsätta"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Fortsätt utan inloggning"),
         "copied": MessageLookupByLibrary.simpleMessage("Kopierad"),
@@ -427,6 +428,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Verifiera vid uppstart"),
         "locked": MessageLookupByLibrary.simpleMessage("Låst"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Logga in"),
         "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(
             "logga in eller registrera dig"),
         "logout": MessageLookupByLibrary.simpleMessage("Logga ut"),
@@ -608,6 +610,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ett minimibelopp att ta emot. Om en betalning eller begäran tas emot med ett belopp som är mindre än detta, det kommer att ignoreras."),
         "received": MessageLookupByLibrary.simpleMessage("Mottagit"),
         "refund": MessageLookupByLibrary.simpleMessage("Återbetalning"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Registrera"),
         "registerFor": MessageLookupByLibrary.simpleMessage("för"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Registrera användarnamn"),
@@ -660,6 +663,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kräv CAPTCHA för att göra anspråk på presentkort"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Skicka detta memo igen"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Återställ konto"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Detta kommer att skapa ett nytt konto med lösenordet du just har angett, det gamla kontot kommer inte att raderas om inte de valda lösenorden är desamma."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Återställ databasen"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

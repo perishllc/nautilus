@@ -147,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("連絡先をインポートできませんでした"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("％1の連絡先を正常にインポートしました。"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("継続する"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("ログインせずに続行"),
         "copied": MessageLookupByLibrary.simpleMessage("コピー済み"),
@@ -365,6 +366,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loadedInto": MessageLookupByLibrary.simpleMessage("ロード先へ"),
         "lockAppSetting": MessageLookupByLibrary.simpleMessage("起動時に認証する"),
         "locked": MessageLookupByLibrary.simpleMessage("ロック済み"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("ログイン"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("ログインまたは登録"),
         "logout": MessageLookupByLibrary.simpleMessage("ログアウト"),
@@ -528,6 +530,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "受け取る最低金額。これより少ない金額の支払いまたは要求が受領された場合、それは無視されます。"),
         "received": MessageLookupByLibrary.simpleMessage("着金済み"),
         "refund": MessageLookupByLibrary.simpleMessage("払い戻し"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("登録"),
         "registerFor": MessageLookupByLibrary.simpleMessage("にとって"),
         "registerUsername": MessageLookupByLibrary.simpleMessage("ユーザー名の登録"),
         "registerUsernameHeader":
@@ -573,6 +576,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "requireCaptcha":
             MessageLookupByLibrary.simpleMessage("ギフトカードを受け取るには CAPTCHA が必要です"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("このメモを再送する"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("アカウントをリセット"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "これにより、設定したパスワードで新しいアカウントが作成されます。選択したパスワードが同じでない限り、古いアカウントは削除されません。"),
         "resetDatabase": MessageLookupByLibrary.simpleMessage("データベースをリセットする"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(
             "内部データベースをリセットしてよろしいですか? \n\nこれにより、アプリのアップデートに関連する問題が修正される可能性がありますが、保存されているすべての設定も削除されます。ウォレットシードは削除されません。問題が発生している場合は、シードをバックアップしてアプリを再インストールし、問題が解決しない場合は、githubまたはDiscordでバグレポートを作成してください。"),

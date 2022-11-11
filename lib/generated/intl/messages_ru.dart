@@ -176,6 +176,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Не удалось импортировать"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("Успешно импортированы %1"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Продолжать"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Продолжить без входа"),
         "copied": MessageLookupByLibrary.simpleMessage("Скопировано"),
@@ -435,6 +436,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Аутентификация при запуске"),
         "locked": MessageLookupByLibrary.simpleMessage("Закрыт"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Авторизоваться"),
         "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(
             "Войдите или зарегистрируйтесь"),
         "logout": MessageLookupByLibrary.simpleMessage("Выход"),
@@ -620,6 +622,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Минимальная сумма для получения. Если платеж или запрос получен на сумму меньше указанной, они будут проигнорированы."),
         "received": MessageLookupByLibrary.simpleMessage("Получено"),
         "refund": MessageLookupByLibrary.simpleMessage("Возврат"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("регистр"),
         "registerFor": MessageLookupByLibrary.simpleMessage("для"),
         "registerUsername": MessageLookupByLibrary.simpleMessage(
             "Зарегистрировать имя пользователя"),
@@ -672,6 +675,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Требовать CAPTCHA для получения подарочной карты"),
         "resendMemo": MessageLookupByLibrary.simpleMessage(
             "Повторно отправить эту заметку"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Сбросить учетную запись"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Это создаст новую учетную запись с только что установленным паролем, старая учетная запись не будет удалена, если выбранные пароли не совпадают."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Сброс базы данных"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

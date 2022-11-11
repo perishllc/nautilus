@@ -176,6 +176,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Error al importar contactos"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "%1 contactos importados con éxito"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Continuar"),
         "continueWithoutLogin": MessageLookupByLibrary.simpleMessage(
             "Continuar sin iniciar sesión"),
         "copied": MessageLookupByLibrary.simpleMessage("Copiado"),
@@ -435,6 +436,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Autenticarse al iniciar"),
         "locked": MessageLookupByLibrary.simpleMessage("Bloqueado"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Acceso"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("Inicie sesión o regístrese"),
         "logout": MessageLookupByLibrary.simpleMessage("Cerrar sesión"),
@@ -620,6 +622,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Un importe mínimo a recibir. Si se recibe un pago o solicitud con un importe inferior a este, se ignorará."),
         "received": MessageLookupByLibrary.simpleMessage("Recibidos"),
         "refund": MessageLookupByLibrary.simpleMessage("Devolución"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Registro"),
         "registerFor": MessageLookupByLibrary.simpleMessage("para"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Registrar usuario"),
@@ -672,6 +675,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Requerir CAPTCHA para reclamar la tarjeta de regalo"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Reenviar esta nota"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Restablecer cuenta"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Esto creará una nueva cuenta con la contraseña que acaba de configurar, la cuenta anterior no se eliminará a menos que las contraseñas elegidas sean las mismas."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Restablecer base de datos"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

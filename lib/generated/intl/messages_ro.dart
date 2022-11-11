@@ -172,6 +172,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Importarea contactelor a eșuat"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("Am importat %1 contacte"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Continua"),
         "continueWithoutLogin": MessageLookupByLibrary.simpleMessage(
             "Continuați fără autentificare"),
         "copied": MessageLookupByLibrary.simpleMessage("Copiat"),
@@ -429,6 +430,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Autentificare la deschidere"),
         "locked": MessageLookupByLibrary.simpleMessage("Închis"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Autentificare"),
         "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(
             "Conectați-vă sau Înregistrați-vă"),
         "logout": MessageLookupByLibrary.simpleMessage("Deconectare"),
@@ -611,6 +613,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "O sumă minimă de primit. Dacă se primește o plată sau o cerere cu o sumă mai mică decât aceasta, aceasta va fi ignorată."),
         "received": MessageLookupByLibrary.simpleMessage("Ai primit"),
         "refund": MessageLookupByLibrary.simpleMessage("Rambursare"),
+        "registerButton":
+            MessageLookupByLibrary.simpleMessage("Inregistreaza-te"),
         "registerFor": MessageLookupByLibrary.simpleMessage("pentru"),
         "registerUsername": MessageLookupByLibrary.simpleMessage(
             "Înregistrare Nume utilizator"),
@@ -664,6 +668,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Solicitați CAPTCHA pentru a revendica cardul cadou"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Retrimite acest memo"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Resetează contul"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Acest lucru va crea un cont nou cu parola pe care tocmai ați setat-o, contul vechi nu va fi șters decât dacă parolele alese sunt aceleași."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Resetați baza de date"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

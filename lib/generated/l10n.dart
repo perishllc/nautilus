@@ -953,6 +953,16 @@ class AppLocalization {
     );
   }
 
+  /// `Continue`
+  String get continueButton {
+    return Intl.message(
+      'Continue',
+      name: 'continueButton',
+      desc: 'A continue button that goes to the next screen.',
+      args: [],
+    );
+  }
+
   /// `Continue without login`
   String get continueWithoutLogin {
     return Intl.message(
@@ -2537,16 +2547,6 @@ class AppLocalization {
     );
   }
 
-  /// `Login or Register`
-  String get loginOrRegisterHeader {
-    return Intl.message(
-      'Login or Register',
-      name: 'loginOrRegisterHeader',
-      desc: 'login_register_header',
-      args: [],
-    );
-  }
-
   /// `Login`
   String get loginButton {
     return Intl.message(
@@ -2557,12 +2557,12 @@ class AppLocalization {
     );
   }
 
-  /// `Register`
-  String get registerButton {
+  /// `Login or Register`
+  String get loginOrRegisterHeader {
     return Intl.message(
-      'Register',
-      name: 'registerButton',
-      desc: 'register_button',
+      'Login or Register',
+      name: 'loginOrRegisterHeader',
+      desc: 'login_register_header',
       args: [],
     );
   }
@@ -2583,26 +2583,6 @@ class AppLocalization {
       'Delete Seed and Logout',
       name: 'logoutAction',
       desc: 'settings_logout_alert_confirm_cta',
-      args: [],
-    );
-  }
-
-  /// `Reset Account`
-  String get resetAccountButton {
-    return Intl.message(
-      'Reset Account',
-      name: 'resetAccountButton',
-      desc: 'reset_account_button',
-      args: [],
-    );
-  }
-
-  /// `This will make a new account with the password you have just set, the old account won't be deleted unless the passwords chosen are the same.`
-  String get resetAccountParagraph {
-    return Intl.message(
-      'This will make a new account with the password you have just set, the old account won\'t be deleted unless the passwords chosen are the same.',
-      name: 'resetAccountParagraph',
-      desc: 'reset_account_warning',
       args: [],
     );
   }
@@ -3712,6 +3692,16 @@ class AppLocalization {
     );
   }
 
+  /// `Register`
+  String get registerButton {
+    return Intl.message(
+      'Register',
+      name: 'registerButton',
+      desc: 'register_button',
+      args: [],
+    );
+  }
+
   /// `for`
   String get registerFor {
     return Intl.message(
@@ -4019,6 +4009,26 @@ class AppLocalization {
       'Resend this memo',
       name: 'resendMemo',
       desc: 'resend_memo',
+      args: [],
+    );
+  }
+
+  /// `Reset Account`
+  String get resetAccountButton {
+    return Intl.message(
+      'Reset Account',
+      name: 'resetAccountButton',
+      desc: 'reset_account_button',
+      args: [],
+    );
+  }
+
+  /// `This will make a new account with the password you have just set, the old account won't be deleted unless the passwords chosen are the same.`
+  String get resetAccountParagraph {
+    return Intl.message(
+      'This will make a new account with the password you have just set, the old account won\'t be deleted unless the passwords chosen are the same.',
+      name: 'resetAccountParagraph',
+      desc: 'reset_account_warning',
       args: [],
     );
   }

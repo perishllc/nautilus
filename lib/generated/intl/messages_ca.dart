@@ -169,6 +169,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Import kontaktů se nezdařil"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "%1 kontaktů bylo úspěšně importováno."),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Continua"),
         "continueWithoutLogin": MessageLookupByLibrary.simpleMessage(
             "Continueu sense iniciar sessió"),
         "copied": MessageLookupByLibrary.simpleMessage("Zkopírováno"),
@@ -420,6 +421,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Ověřit při spuštění"),
         "locked": MessageLookupByLibrary.simpleMessage("Zamčeno"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("iniciar Sessió"),
         "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(
             "Inicieu sessió o registreu-vos"),
         "logout": MessageLookupByLibrary.simpleMessage("Odhlásit"),
@@ -601,6 +603,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "A minimum amount to receive. If a payment or request is received with an amount less than this, it will be ignored."),
         "received": MessageLookupByLibrary.simpleMessage("Přijmuto"),
         "refund": MessageLookupByLibrary.simpleMessage("Refund"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Registra\'t"),
         "registerFor": MessageLookupByLibrary.simpleMessage("for"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Register Username"),
@@ -651,6 +654,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "requireCaptcha": MessageLookupByLibrary.simpleMessage(
             "Requereix CAPTCHA per reclamar la targeta regal"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("Resend this memo"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Restableix el compte"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Això crearà un compte nou amb la contrasenya que acabeu d\'establir, el compte antic no s\'eliminarà tret que les contrasenyes escollides siguin les mateixes."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Reset the Database"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

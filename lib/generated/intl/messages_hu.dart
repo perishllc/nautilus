@@ -174,6 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sikertelen kontakt importálás"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Sikeresen importáltál %1 kontaktot"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Folytatni"),
         "continueWithoutLogin": MessageLookupByLibrary.simpleMessage(
             "Folytatás bejelentkezés nélkül"),
         "copied": MessageLookupByLibrary.simpleMessage("Copied"),
@@ -430,6 +431,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Hitelesítés az Indításnál"),
         "locked": MessageLookupByLibrary.simpleMessage("Lezárva"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Belépés"),
         "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(
             "Bejelentkezés vagy Regisztráció"),
         "logout": MessageLookupByLibrary.simpleMessage("Kijelentkezés"),
@@ -617,6 +619,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Minimális összeg a fogadáshoz. Ha ennél kisebb összegű fizetés vagy kérés érkezik, akkor azt figyelmen kívül hagyják."),
         "received": MessageLookupByLibrary.simpleMessage("Fogadott"),
         "refund": MessageLookupByLibrary.simpleMessage("visszatérítés"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Regisztráció"),
         "registerFor": MessageLookupByLibrary.simpleMessage("mert"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Regisztráció Felhasználónév"),
@@ -669,6 +672,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "A CAPTCHA megkövetelése az ajándékutalvány igényléséhez"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("A feljegyzés újraküldése"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Fiók alaphelyzetbe állítása"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Ezzel új fiókot hoz létre az imént beállított jelszóval, és a régi fiók nem törlődik, kivéve, ha a kiválasztott jelszavak megegyeznek."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Az adatbázis visszaállítása"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

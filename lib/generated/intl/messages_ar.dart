@@ -164,6 +164,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("فشل استيراد جهات الاتصال"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("تم جلب جهات اتصال %1 بنجاح."),
+        "continueButton": MessageLookupByLibrary.simpleMessage("يكمل"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("تواصل بدون تسجيل الدخول"),
         "copied": MessageLookupByLibrary.simpleMessage("تم نسخ"),
@@ -410,6 +411,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("المصادقة في الاطلاق"),
         "locked": MessageLookupByLibrary.simpleMessage("مقفل"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("تسجيل الدخول أو التسجيل"),
         "logout": MessageLookupByLibrary.simpleMessage("خروج"),
@@ -588,6 +590,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "الحد الأدنى للمبلغ لتلقيه. إذا تم استلام دفعة أو طلب بمبلغ أقل من هذا، فسيتم تجاهله."),
         "received": MessageLookupByLibrary.simpleMessage("تم الإستلام"),
         "refund": MessageLookupByLibrary.simpleMessage("استرداد"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("يسجل"),
         "registerFor": MessageLookupByLibrary.simpleMessage("من أجل"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("تسجيل اسم المستخدم"),
@@ -636,6 +639,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "يتطلب اختبار CAPTCHA للمطالبة ببطاقة الهدايا"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("إعادة إرسال هذه المذكرة"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("إعادة تعيين الحساب"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "سيؤدي هذا إلى إنشاء حساب جديد بكلمة المرور التي قمت بتعيينها للتو ، ولن يتم حذف الحساب القديم ما لم تكن كلمات المرور المختارة هي نفسها."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("إعادة تعيين قاعدة البيانات"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

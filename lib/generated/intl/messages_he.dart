@@ -159,6 +159,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ייבוא איש קשר נכשל"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "יבוא אנשי הקשר של %1 עבר בהצלחה"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("לְהַמשִׁיך"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("המשך ללא התחברות"),
         "copied": MessageLookupByLibrary.simpleMessage("Copied"),
@@ -396,6 +397,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("בצע אימות בעת הפעלה"),
         "locked": MessageLookupByLibrary.simpleMessage("נעל"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("התחברות"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("התחבר או הרשמה"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
@@ -565,6 +567,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "סכום מינימלי לקבל. אם יתקבלו תשלום או בקשה בסכום הנמוך מזה, יתעלמו מהם."),
         "received": MessageLookupByLibrary.simpleMessage("התקבל"),
         "refund": MessageLookupByLibrary.simpleMessage("החזר כספי"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("הירשם"),
         "registerFor": MessageLookupByLibrary.simpleMessage("בשביל"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("רשום שם משתמש"),
@@ -610,6 +613,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "requireCaptcha": MessageLookupByLibrary.simpleMessage(
             "דרוש CAPTCHA כדי לתבוע כרטיס מתנה"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("שלח שוב תזכיר זה"),
+        "resetAccountButton": MessageLookupByLibrary.simpleMessage("אפס חשבון"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "זה ייצור חשבון חדש עם הסיסמה שהגדרת זה עתה, החשבון הישן לא יימחק אלא אם הסיסמאות שנבחרו זהות."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("אפס את מסד הנתונים"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

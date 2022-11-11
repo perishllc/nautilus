@@ -172,6 +172,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nhập liên hệ thất bại"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Đã nhập thành công %1 liên hệ."),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
         "continueWithoutLogin": MessageLookupByLibrary.simpleMessage(
             "Tiếp tục mà không cần đăng nhập"),
         "copied": MessageLookupByLibrary.simpleMessage("Đã sao chép"),
@@ -425,6 +426,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Xác thực khi khởi chạy"),
         "locked": MessageLookupByLibrary.simpleMessage("Đã khoá"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("đăng nhập hay đăng ký"),
         "logout": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
@@ -607,6 +609,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Một số tiền tối thiểu để nhận. Nếu nhận được thanh toán hoặc yêu cầu với số tiền nhỏ hơn số tiền này, nó sẽ bị bỏ qua."),
         "received": MessageLookupByLibrary.simpleMessage("Đã nhận"),
         "refund": MessageLookupByLibrary.simpleMessage("Hoàn tiền"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "registerFor": MessageLookupByLibrary.simpleMessage("cho"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Đăng ký tên người dùng"),
@@ -656,6 +659,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Yêu cầu CAPTCHA để yêu cầu thẻ quà tặng"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Gửi lại bản ghi nhớ này"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Cài đặt lại tài khoản"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Thao tác này sẽ tạo tài khoản mới với mật khẩu bạn vừa đặt, tài khoản cũ sẽ không bị xóa trừ khi mật khẩu được chọn giống nhau."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Đặt lại cơ sở dữ liệu"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

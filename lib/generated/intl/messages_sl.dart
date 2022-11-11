@@ -173,6 +173,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ni možno uvoziti stikov"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("Uspešen uvoz %1 stikov."),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Nadaljuj"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Nadaljujte brez prijave"),
         "copied": MessageLookupByLibrary.simpleMessage("Skopirano"),
@@ -426,6 +427,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Avtenticiraj ob zagonu"),
         "locked": MessageLookupByLibrary.simpleMessage("Zaklenjeno"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Vpiši se"),
         "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(
             "Prijavite se ali se registrirajte"),
         "logout": MessageLookupByLibrary.simpleMessage("Odjava"),
@@ -608,6 +610,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Minimalni znesek za prejemanje. Če prejmete plačilo ali zahtevo z zneskom, manjšim od tega, bo to prezrto."),
         "received": MessageLookupByLibrary.simpleMessage("Prejeto"),
         "refund": MessageLookupByLibrary.simpleMessage("Vračilo"),
+        "registerButton":
+            MessageLookupByLibrary.simpleMessage("Registrirajte se"),
         "registerFor": MessageLookupByLibrary.simpleMessage("za"),
         "registerUsername": MessageLookupByLibrary.simpleMessage(
             "Registrirajte uporabniško ime"),
@@ -658,6 +662,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Za prevzem darilne kartice zahtevajte CAPTCHA"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Ponovno pošljite to beležko"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Ponastavi račun"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "S tem boste ustvarili nov račun z geslom, ki ste ga pravkar nastavili, stari račun ne bo izbrisan, razen če so izbrana gesla enaka."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Ponastavite zbirko podatkov"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

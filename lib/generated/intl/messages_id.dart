@@ -172,6 +172,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gagal mengimpor kontak"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Berhasil mengimpor %1 kontak"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Melanjutkan"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Lanjutkan tanpa login"),
         "copied": MessageLookupByLibrary.simpleMessage("Disalin"),
@@ -425,6 +426,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting": MessageLookupByLibrary.simpleMessage(
             "Otentikasi saat diluncurkan."),
         "locked": MessageLookupByLibrary.simpleMessage("Terkunci"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Gabung"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("masuk atau mendaftar"),
         "logout": MessageLookupByLibrary.simpleMessage("Keluar"),
@@ -607,6 +609,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Jumlah minimum untuk menerima. Jika pembayaran atau permintaan diterima dengan jumlah kurang dari ini, itu akan diabaikan."),
         "received": MessageLookupByLibrary.simpleMessage("Diterima"),
         "refund": MessageLookupByLibrary.simpleMessage("Pengembalian"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Daftar"),
         "registerFor": MessageLookupByLibrary.simpleMessage("untuk"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Daftar Username"),
@@ -657,6 +660,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Memerlukan CAPTCHA untuk mengklaim kartu hadiah"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Kirim ulang memo ini"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Setel Ulang Akun"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Ini akan membuat akun baru dengan kata sandi yang baru saja Anda tetapkan, akun lama tidak akan dihapus kecuali kata sandi yang dipilih sama."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Setel ulang Database"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

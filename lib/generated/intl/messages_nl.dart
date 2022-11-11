@@ -175,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Contacten importeren mislukt"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "%1 contacten succesvol geïmporteerd"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Doorgaan"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Doorgaan zonder inloggen"),
         "copied": MessageLookupByLibrary.simpleMessage("Gekopieerd"),
@@ -429,6 +430,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Verifiëren bij starten"),
         "locked": MessageLookupByLibrary.simpleMessage("Vergrendeld"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Log in"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("Log in of Registreer"),
         "logout": MessageLookupByLibrary.simpleMessage("Uitloggen"),
@@ -612,6 +614,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Een minimumbedrag om te ontvangen. Als een betaling of verzoek wordt ontvangen met een lager bedrag dan dit, wordt deze genegeerd."),
         "received": MessageLookupByLibrary.simpleMessage("Ontvangen"),
         "refund": MessageLookupByLibrary.simpleMessage("Terugbetaling"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Register"),
         "registerFor": MessageLookupByLibrary.simpleMessage("voor"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Gebruikersnaam registreren"),
@@ -665,6 +668,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "CAPTCHA vereisen om cadeaubon te claimen"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Deze memo opnieuw verzenden"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Account resetten"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Hiermee wordt een nieuw account gemaakt met het wachtwoord dat u zojuist hebt ingesteld, het oude account wordt niet verwijderd tenzij de gekozen wachtwoorden hetzelfde zijn."),
         "resetDatabase": MessageLookupByLibrary.simpleMessage(
             "De database opnieuw instellen"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

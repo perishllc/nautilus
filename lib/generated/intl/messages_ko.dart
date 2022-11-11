@@ -149,6 +149,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("연락처를 가져오지 못했습니다."),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("%1개의 연락처를 성공적으로 가져왔습니다."),
+        "continueButton": MessageLookupByLibrary.simpleMessage("계속하다"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("로그인하지 않고 계속"),
         "copied": MessageLookupByLibrary.simpleMessage("Copied"),
@@ -368,6 +369,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Authenticate on Launch"),
         "locked": MessageLookupByLibrary.simpleMessage("Locked"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("로그인"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("로그인 또는 등록"),
         "logout": MessageLookupByLibrary.simpleMessage("로그 아웃"),
@@ -533,6 +535,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "받을 최소 금액입니다.이보다 적은 금액으로 결제 또는 요청이 접수되면 무시됩니다."),
         "received": MessageLookupByLibrary.simpleMessage("수신 완료"),
         "refund": MessageLookupByLibrary.simpleMessage("환불"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("등록하다"),
         "registerFor": MessageLookupByLibrary.simpleMessage("...에 대한"),
         "registerUsername": MessageLookupByLibrary.simpleMessage("등록 사용자 이름"),
         "registerUsernameHeader":
@@ -579,6 +582,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "requireCaptcha":
             MessageLookupByLibrary.simpleMessage("기프트 카드를 청구하려면 보안문자가 필요합니다."),
         "resendMemo": MessageLookupByLibrary.simpleMessage("이 메모 다시 보내기"),
+        "resetAccountButton": MessageLookupByLibrary.simpleMessage("계정 재설정"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "이렇게 하면 방금 설정한 암호로 새 계정이 만들어지며 선택한 암호가 동일하지 않으면 이전 계정이 삭제되지 않습니다."),
         "resetDatabase": MessageLookupByLibrary.simpleMessage("데이터베이스 재설정"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(
             "내부 데이터베이스를 재설정하시겠습니까? \n\n이렇게 하면 앱 업데이트와 관련된 문제가 해결될 수 있지만 저장된 환경 설정도 모두 삭제됩니다.지갑 시드는 삭제되지 않습니다.문제가 발생하면 시드를 백업하고 앱을 다시 설치해야하며 문제가 지속되면 github 또는 discord에서 버그 보고서를 작성하십시오."),

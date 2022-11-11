@@ -172,6 +172,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Neizdevās importēt kontaktus"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Sekmīgi importēti %1 kontakti."),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Turpināt"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Turpināt bez pieteikšanās"),
         "copied": MessageLookupByLibrary.simpleMessage("Nokopēts"),
@@ -427,6 +428,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Autentificēties palaižot"),
         "locked": MessageLookupByLibrary.simpleMessage("Aizslēgts"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Pieslēgties"),
         "loginOrRegisterHeader": MessageLookupByLibrary.simpleMessage(
             "Pieteikties vai Reģistrēties"),
         "logout": MessageLookupByLibrary.simpleMessage("Iziet"),
@@ -604,6 +606,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "A minimum amount to receive. If a payment or request is received with an amount less than this, it will be ignored."),
         "received": MessageLookupByLibrary.simpleMessage("Saņemtie"),
         "refund": MessageLookupByLibrary.simpleMessage("Refund"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Reģistrēties"),
         "registerFor": MessageLookupByLibrary.simpleMessage("for"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Register Username"),
@@ -654,6 +657,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "requireCaptcha": MessageLookupByLibrary.simpleMessage(
             "Lai pieprasītu dāvanu karti, ir nepieciešams CAPTCHA"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("Resend this memo"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Atiestatīt kontu"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Tādējādi tiks izveidots jauns konts ar tikko iestatīto paroli. Vecais konts netiks dzēsts, ja vien izvēlētās paroles nebūs vienādas."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Reset the Database"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

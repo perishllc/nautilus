@@ -168,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nie udało się importować kontaktów"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Z powodzeniem importowao %1 contacts"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Kontynuować"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Kontynuuj bez logowania"),
         "copied": MessageLookupByLibrary.simpleMessage("Skopiowane"),
@@ -421,6 +422,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting": MessageLookupByLibrary.simpleMessage(
             "Potwierdź tożsamość kiedy włączysz Nautilus"),
         "locked": MessageLookupByLibrary.simpleMessage("Zablokowane"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Zaloguj sie"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("Zaloguj się lub zarejestruj"),
         "logout": MessageLookupByLibrary.simpleMessage("Wyloguj"),
@@ -606,6 +608,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Minimalna kwota do otrzymania. Jeśli płatność lub żądanie zostanie odebrane z kwotą mniejszą niż ta, zostanie zignorowane."),
         "received": MessageLookupByLibrary.simpleMessage("Odebrane"),
         "refund": MessageLookupByLibrary.simpleMessage("Zwrot"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Zarejestrować"),
         "registerFor": MessageLookupByLibrary.simpleMessage("dla"),
         "registerUsername": MessageLookupByLibrary.simpleMessage(
             "Zarejestruj nazwę użytkownika"),
@@ -656,6 +659,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Wymagaj CAPTCHA, aby odebrać kartę podarunkową"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Wyślij ponownie tę notatkę"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Zresetuj konto"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Spowoduje to utworzenie nowego konta z właśnie ustawionym hasłem, stare konto nie zostanie usunięte, chyba że wybrane hasła są takie same."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Resetowanie bazy danych"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

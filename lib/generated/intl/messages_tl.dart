@@ -175,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hindi ma-import ang mga kontak"),
         "contactsImportSuccess":
             MessageLookupByLibrary.simpleMessage("Na-import na ang %1 kontak"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Magpatuloy"),
         "continueWithoutLogin": MessageLookupByLibrary.simpleMessage(
             "Magpatuloy nang walang pag-login"),
         "copied": MessageLookupByLibrary.simpleMessage("Nakopya"),
@@ -437,6 +438,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("I-authenticate sa paglunsad"),
         "locked": MessageLookupByLibrary.simpleMessage("Nakalock"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Mag log in"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("Mag-login o Magrehistro"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
@@ -626,6 +628,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Isang minimum na halaga na matatanggap. Kung ang isang pagbabayad o kahilingan ay natanggap na may halagang mas mababa kaysa dito, ito ay hindi papansinin."),
         "received": MessageLookupByLibrary.simpleMessage("Natanggap"),
         "refund": MessageLookupByLibrary.simpleMessage("Refund"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Magrehistro"),
         "registerFor": MessageLookupByLibrary.simpleMessage("para sa"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Magrehistro Username"),
@@ -678,6 +681,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Atasan ang CAPTCHA na mag-claim ng gift card"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Ipadala muli ang memo"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("I-reset ang Account"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Gagawa ito ng bagong account gamit ang password na itinakda mo lang, hindi made-delete ang lumang account maliban kung magkapareho ang mga napiling password."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("I-reset ang Database"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

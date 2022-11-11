@@ -176,6 +176,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Import fehlgeschlagen"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "%1 Kontakte wurden importiert"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Fortsetzen"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Ohne Anmeldung fortfahren"),
         "copied": MessageLookupByLibrary.simpleMessage("Kopiert"),
@@ -438,6 +439,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting": MessageLookupByLibrary.simpleMessage(
             "Authentifizierung beim Öffnen"),
         "locked": MessageLookupByLibrary.simpleMessage("Gesperrt"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Anmeldung"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("Anmelden oder Registrieren"),
         "logout": MessageLookupByLibrary.simpleMessage("Ausloggen"),
@@ -624,6 +626,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ein Mindestbetrag, den Sie erhalten müssen. Wenn eine Zahlung oder Anfrage mit einem geringeren Betrag eingeht, wird sie ignoriert."),
         "received": MessageLookupByLibrary.simpleMessage("Empfangen"),
         "refund": MessageLookupByLibrary.simpleMessage("Rückerstattung"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Registrieren"),
         "registerFor": MessageLookupByLibrary.simpleMessage("zum"),
         "registerUsername":
             MessageLookupByLibrary.simpleMessage("Nutzername registrieren"),
@@ -675,6 +678,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Fordern Sie CAPTCHA an, um die Geschenkkarte anzufordern"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("Dieses Memo erneut senden"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Konto zurücksetzen"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Dadurch wird ein neues Konto mit dem Passwort erstellt, das Sie gerade festgelegt haben. Das alte Konto wird nicht gelöscht, es sei denn, die gewählten Passwörter sind dieselben."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Die Datenbank zurücksetzen"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

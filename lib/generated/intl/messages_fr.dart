@@ -181,6 +181,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "L’import des contacts a échoué"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "Import de %1 contacts réussi"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("Continuer"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("Continuer sans connexion"),
         "copied": MessageLookupByLibrary.simpleMessage("Copié"),
@@ -441,6 +442,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Authentifier au démarrage"),
         "locked": MessageLookupByLibrary.simpleMessage("Verrouillé"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("Connexion"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("Connexion ou Inscription"),
         "logout": MessageLookupByLibrary.simpleMessage("Déconnexion"),
@@ -625,6 +627,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Un montant minimum à recevoir. Si un paiement ou une demande est reçu avec un montant inférieur à ce montant, il sera ignoré."),
         "received": MessageLookupByLibrary.simpleMessage("Reçu"),
         "refund": MessageLookupByLibrary.simpleMessage("Remboursement"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("S\'inscrire"),
         "registerFor": MessageLookupByLibrary.simpleMessage("pour"),
         "registerUsername": MessageLookupByLibrary.simpleMessage(
             "Enregistrer Nom d\'utilisateur"),
@@ -676,6 +679,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "requireCaptcha": MessageLookupByLibrary.simpleMessage(
             "Exiger CAPTCHA pour réclamer une carte-cadeau"),
         "resendMemo": MessageLookupByLibrary.simpleMessage("Renvoyer ce mémo"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("Réinitialiser le compte"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "Cela créera un nouveau compte avec le mot de passe que vous venez de définir, l\'ancien compte ne sera pas supprimé à moins que les mots de passe choisis ne soient les mêmes."),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("Réinitialisation de la base"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(

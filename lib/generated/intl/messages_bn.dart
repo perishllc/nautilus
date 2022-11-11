@@ -176,6 +176,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "পরিচিতিগুলি আমদানি করতে ব্যর্থ"),
         "contactsImportSuccess": MessageLookupByLibrary.simpleMessage(
             "সফলভাবে আমদানি করা হয়েছে %1 কন্টাক্ট"),
+        "continueButton": MessageLookupByLibrary.simpleMessage("চালিয়ে যান"),
         "continueWithoutLogin":
             MessageLookupByLibrary.simpleMessage("লগইন ছাড়াই চালিয়ে যান"),
         "copied": MessageLookupByLibrary.simpleMessage("কপি করা হয়েছে"),
@@ -428,6 +429,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("শুরুতেই প্রমাণীকরণ করুন"),
         "locked": MessageLookupByLibrary.simpleMessage("লক করা"),
+        "loginButton": MessageLookupByLibrary.simpleMessage("প্রবেশ করুন"),
         "loginOrRegisterHeader":
             MessageLookupByLibrary.simpleMessage("প্রবেশ করুন অথবা নিবন্ধন"),
         "logout": MessageLookupByLibrary.simpleMessage("লগ আউট"),
@@ -610,6 +612,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "প্রাপ্ত ন্যূনতম পরিমাণ। যদি কোনও অর্থ প্রদান বা অনুরোধ এর চেয়ে কম পরিমাণে গ্রহণ করা হয়, তবে এটি উপেক্ষা করা হবে।"),
         "received": MessageLookupByLibrary.simpleMessage("গৃহীত"),
         "refund": MessageLookupByLibrary.simpleMessage("ফেরত"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("নিবন্ধন"),
         "registerFor": MessageLookupByLibrary.simpleMessage("জন্য"),
         "registerUsername": MessageLookupByLibrary.simpleMessage(
             "ব্যবহারকারীর নাম নিবন্ধন করুন"),
@@ -664,6 +667,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "উপহার কার্ড দাবি করার জন্য ক্যাপচা প্রয়োজন"),
         "resendMemo":
             MessageLookupByLibrary.simpleMessage("এই মেমো পুনরায় পাঠন করুন"),
+        "resetAccountButton":
+            MessageLookupByLibrary.simpleMessage("অ্যাকাউন্ট রিসেট করুন"),
+        "resetAccountParagraph": MessageLookupByLibrary.simpleMessage(
+            "এটি আপনার এইমাত্র সেট করা পাসওয়ার্ড দিয়ে একটি নতুন অ্যাকাউন্ট তৈরি করবে, নির্বাচিত পাসওয়ার্ডগুলি একই না হলে পুরানো অ্যাকাউন্টটি মুছে ফেলা হবে না।"),
         "resetDatabase":
             MessageLookupByLibrary.simpleMessage("ডাটাবেস রিসেট করুন"),
         "resetDatabaseConfirmation": MessageLookupByLibrary.simpleMessage(
