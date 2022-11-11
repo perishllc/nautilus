@@ -15,7 +15,6 @@ android/app/release
 .svn/
 .aab
 .apk
-lib/firebase_options.dart
 
 # IntelliJ related
 *.iml
