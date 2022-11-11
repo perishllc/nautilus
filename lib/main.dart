@@ -19,7 +19,6 @@ import 'package:nautilus_wallet_flutter/localize.dart';
 import 'package:nautilus_wallet_flutter/model/available_currency.dart';
 import 'package:nautilus_wallet_flutter/model/available_language.dart';
 import 'package:nautilus_wallet_flutter/model/vault.dart';
-import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/avatar/avatar.dart';
@@ -49,9 +48,14 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // load environment variables:
+  await dotenv.load();
+
   // Setup Service Provide
   setupServiceLocator();
   // Setup logger, only show warning and higher in release mode.
@@ -67,7 +71,7 @@ Future<void> main() async {
   );
 
   await FirebaseAppCheck.instance.activate(
-    webRecaptchaSiteKey: Sensitive.CAPTCHA_SITE_KEY,
+    webRecaptchaSiteKey: dotenv.env["CAPTCHA_SITE_KEY"],
   );
   FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
 
@@ -82,7 +86,7 @@ Future<void> main() async {
   }
   runApp(const StateContainer(child: App()));
 
-  Magic.instance = Magic(Sensitive.MAGIC_SDK_KEY);
+  Magic.instance = Magic(dotenv.env["MAGIC_SDK_KEY"]!);
 }
 
 class App extends StatefulWidget {

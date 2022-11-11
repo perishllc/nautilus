@@ -15,7 +15,6 @@ android/app/release
 .svn/
 .aab
 .apk
-lib/sensitive.dart
 lib/firebase_options.dart
 
 # IntelliJ related
@@ -90,7 +89,6 @@ build/**
 # Translations
 lib/l10n/*.json
 bin/settings.py
-lib/generated/*
 
 # Fastlane
 android/fastlane/report.xml
@@ -98,3 +96,7 @@ ios/fastlane/report.xml
 ios/fastlane/Preview.html
 ios/fastlane/metadata/review_information
 ios/fastlane/metadata/trade_representative_contact_information
+
+
+# CI/CD
+.env

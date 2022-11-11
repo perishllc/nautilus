@@ -8,6 +8,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
 import 'package:magic_sdk/magic_sdk.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
@@ -42,7 +43,6 @@ import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/funding_response_item.dart';
-import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
@@ -874,127 +874,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       _curFundingSetting = FundingSetting(picked);
     });
   }
-
-  // Future<void> _nyaniconDialog() async {
-  //   switch (await showDialog<NyaniconOptions>(
-  //       context: context,
-  //       barrierColor: StateContainer.of(context).curTheme.barrier,
-  //       builder: (BuildContext context) {
-  //         return AppSimpleDialog(
-  //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-  //           title: Text(
-  //             AppLocalization.of(context).nyanicon,
-  //             style: AppStyles.textStyleDialogHeader(context),
-  //           ),
-  //           children: <Widget>[
-  //             AppSimpleDialogOption(
-  //               onPressed: () {
-  //                 Navigator.pop(context, NyaniconOptions.ON);
-  //               },
-  //               child: Padding(
-  //                 padding: const EdgeInsets.symmetric(vertical: 8),
-  //                 child: Text(
-  //                   AppLocalization.of(context).onStr,
-  //                   style: AppStyles.textStyleDialogOptions(context),
-  //                 ),
-  //               ),
-  //             ),
-  //             AppSimpleDialogOption(
-  //               onPressed: () {
-  //                 Navigator.pop(context, NyaniconOptions.OFF);
-  //               },
-  //               child: Padding(
-  //                 padding: const EdgeInsets.symmetric(vertical: 8),
-  //                 child: Text(
-  //                   AppLocalization.of(context).off,
-  //                   style: AppStyles.textStyleDialogOptions(context),
-  //                 ),
-  //               ),
-  //             ),
-  //           ],
-  //         );
-  //       })) {
-  //     case NyaniconOptions.ON:
-  //       sl.get<SharedPrefsUtil>().setUseNyanicon(true).then((result) {
-  //         setState(() {
-  //           StateContainer.of(context).setNyaniconOn(true);
-  //           _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
-  //         });
-  //       });
-  //       break;
-  //     case NyaniconOptions.OFF:
-  //       sl.get<SharedPrefsUtil>().setUseNyanicon(false).then((result) {
-  //         setState(() {
-  //           StateContainer.of(context).setNyaniconOn(false);
-  //           _curNyaniconSetting = NyaniconSetting(NyaniconOptions.OFF);
-  //         });
-  //       });
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // }
-
-  // Future<String?> _onrampDialog() async {
-  //   const String onramper_url =
-  //       "https://widget.onramper.com?apiKey=${Sensitive.ONRAMPER_API_KEY}&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&darkMode=true";
-  //   const String moonpay_url = "https://buy.moonpay.com/?currencyCode=xno&colorCode=%234080D7";
-  //   const String simplex_url = "https://buy.chainbits.com";
-
-  //   final String? choice = await showDialog<String>(
-  //       context: context,
-  //       barrierColor: StateContainer.of(context).curTheme.barrier,
-  //       builder: (BuildContext context) {
-  //         return AppSimpleDialog(
-  //           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-  //           title: Text(
-  //             AppLocalization.of(context).onramp,
-  //             style: AppStyles.textStyleDialogHeader(context),
-  //           ),
-  //           children: <Widget>[
-  //             AppSimpleDialogOption(
-  //               onPressed: () {
-  //                 Navigator.pop(context, simplex_url);
-  //               },
-  //               child: Padding(
-  //                 padding: const EdgeInsets.symmetric(vertical: 8),
-  //                 child: Text(
-  //                   AppLocalization.of(context).simplex,
-  //                   style: AppStyles.textStyleDialogOptions(context),
-  //                 ),
-  //               ),
-  //             ),
-  //             AppSimpleDialogOption(
-  //               onPressed: () {
-  //                 Navigator.pop(context, onramper_url);
-  //               },
-  //               child: Padding(
-  //                 padding: const EdgeInsets.symmetric(vertical: 8),
-  //                 child: Text(
-  //                   AppLocalization.of(context).onramper,
-  //                   style: AppStyles.textStyleDialogOptions(context),
-  //                 ),
-  //               ),
-  //             ),
-  //             AppSimpleDialogOption(
-  //               onPressed: () {
-  //                 Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
-  //                 UIUtil.showSnackbar(AppLocalization.of(context).addressCopied, context, durationMs: 1500);
-  //               },
-  //               child: Padding(
-  //                 padding: const EdgeInsets.symmetric(vertical: 8),
-  //                 child: Text(
-  //                   AppLocalization.of(context).copyWalletAddressToClipboard,
-  //                   style: AppStyles.textStyleDialogOptions(context),
-  //                 ),
-  //               ),
-  //             ),
-  //           ],
-  //         );
-  //       });
-
-  //   return choice;
-  // }
 
   List<Widget> _buildMinRawOptions() {
     final List<Widget> ret = <Widget>[];
@@ -2690,8 +2569,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       AppLocalization.of(context).onramper,
                       AppIcons.coins,
                       onPressed: () async {
-                        const String url =
-                            "https://widget.onramper.com?apiKey=${Sensitive.ONRAMPER_API_KEY}&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&&darkMode=true";
+                        final String url =
+                            "https://widget.onramper.com?apiKey=${dotenv.env["ONRAMPER_API_KEY"]!}&color=4080D7&onlyCryptos=NANO&defaultCrypto=NANO&&darkMode=true";
                         await UIUtil.showChromeSafariWebview(context, url);
                       },
                       iconOverride: const SizedBox(

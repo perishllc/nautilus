@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
@@ -37,7 +38,6 @@ import 'package:nautilus_wallet_flutter/network/model/response/price_response.da
 import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/receivable_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
-import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -484,7 +484,7 @@ class AccountService {
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
     final String runningVersion = packageInfo.version;
     final http.Response response = await http.post(Uri.parse("https://api.nanswap.com/v1/create-order"),
-        headers: {"Accept": "application/json", "nanswap-api-key": Sensitive.NANSWAP_API_KEY},
+        headers: {"Accept": "application/json", "nanswap-api-key": dotenv.env["NANSWAP_API_KEY"]!},
         body: json.encode(
           <String, String?>{
             "from": "XNO",

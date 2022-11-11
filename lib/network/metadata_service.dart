@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:ens_dart/ens_dart.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/network/model/base_request.dart';
@@ -11,10 +10,8 @@ import 'package:nautilus_wallet_flutter/network/model/payment/payment_memo.dart'
 import 'package:nautilus_wallet_flutter/network/model/payment/payment_message.dart';
 import 'package:nautilus_wallet_flutter/network/model/payment/payment_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
-import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:web3dart/web3dart.dart';
-import 'package:web_socket_channel/io.dart';
 
 // MetadataService singleton
 class MetadataService {

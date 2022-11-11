@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-// import 'package:nautilus_wallet_flutter/sensitive.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
@@ -60,7 +59,7 @@ class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     // // For iOS
-    // await nearbyMessagesApi.setAPIKey(Sensitive.MESSAGES_API_KEY);
+    // await nearbyMessagesApi.setAPIKey(dotenv.env["MESSAGES_API_KEY"]!);
 
     // nearbyMessagesApi.onFound = (message) {
     //   print('~~~onFound : $message');

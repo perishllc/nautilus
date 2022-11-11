@@ -22,6 +22,9 @@ dependencies:
   # magic:
   magic_sdk: ^2.0.0
 
+  # cicd:
+  flutter_dotenv: ^5.0.2
+
   # contacts:
   flutter_contacts: ^1.1.4
 
@@ -297,6 +300,7 @@ flutter:
         - asset: fonts/Comfortaa-Light.ttf
           weight: 300
   assets:
+    - .env
     # animations:
     - assets/animations/load-n.json
     - assets/animations/rocket.json
