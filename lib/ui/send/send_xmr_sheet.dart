@@ -216,12 +216,12 @@ class SendXMRSheetState extends State<SendXMRSheet> {
           });
           return;
         }
-        if (_addressController!.text.isNotEmpty) {
+        if (_addressController!.text.isNotEmpty && !_addressController!.text.contains("★")) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           // check if in the username db:
           String? address;
           String? type;
-          final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
+          final User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController!.text);
           if (user != null) {
             type = user.type;
             if (_addressController!.text != user.getDisplayName()) {
@@ -948,40 +948,6 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       });
     }
   }
-
-  // Build contact items for the list
-  Widget _buildUserItem(User user) {
-    final String clickable = "${user.getDisplayName()!} (${Address(user.address).getUltraShort()})";
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        SizedBox(
-          height: 42,
-          width: double.infinity - 5,
-          child: TextButton(
-            onPressed: () {
-              _addressController!.text = user.getDisplayName()!;
-              _addressFocusNode!.unfocus();
-              setState(() {
-                _isUser = true;
-                _showContactButton = false;
-                _pasteButtonVisible = false;
-                _addressStyle = AddressStyle.PRIMARY;
-                _addressValidationText = "";
-              });
-            },
-            child: Text(clickable, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 25),
-          height: 1,
-          color: StateContainer.of(context).curTheme.text03,
-        ),
-      ],
-    );
-  }
-
   /// Validate form data to see if valid
   /// @returns true if valid, false otherwise
   Future<bool> _validateRequest() async {

@@ -19,6 +19,7 @@ import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/misc.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
@@ -116,7 +117,7 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           String? address;
           String? type;
-          final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
+          final User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController!.text);
           if (user != null) {
             type = user.type;
             if (_addressController!.text != user.getDisplayName()) {
@@ -356,38 +357,6 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
     );
   }
 
-  // Build contact items for the list
-  Widget _buildUserItem(User user) {
-    final String clickable = "${user.getDisplayName(ignoreNickname: true)!} (${Address(user.address).getUltraShort()})";
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        SizedBox(
-          height: 42,
-          width: double.infinity - 5,
-          child: TextButton(
-            onPressed: () {
-              _addressController!.text = user.getDisplayName(ignoreNickname: true)!;
-              _addressFocusNode!.unfocus();
-              setState(() {
-                _isUser = true;
-                _pasteButtonVisible = false;
-                _addressStyle = AddressStyle.PRIMARY;
-                _addressValidationText = "";
-              });
-            },
-            child: Text(clickable, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 25),
-          height: 1,
-          color: StateContainer.of(context).curTheme.text03,
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return TapOutsideUnfocus(
@@ -493,7 +462,16 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
                                                     padding: EdgeInsets.zero,
                                                     itemCount: _users.length,
                                                     itemBuilder: (BuildContext context, int index) {
-                                                      return _buildUserItem(_users[index]);
+                                                      return Misc.buildUserItem(context, _users[index], true, (User user) {
+                                                        _addressController!.text = user.getDisplayName(ignoreNickname: true)!;
+                                                        _addressFocusNode!.unfocus();
+                                                        setState(() {
+                                                          _isUser = true;
+                                                          _pasteButtonVisible = false;
+                                                          _addressStyle = AddressStyle.PRIMARY;
+                                                          _addressValidationText = "";
+                                                        });
+                                                      });
                                                     },
                                                   ),
                                           ),
@@ -629,7 +607,7 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
         });
       } else {
         // check if there's a corresponding address:
-        final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
+        final User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController!.text);
         if (user != null) {
           setState(() {
             if (user.address != null) {

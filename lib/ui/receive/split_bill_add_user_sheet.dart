@@ -16,6 +16,7 @@ import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/misc.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
@@ -67,8 +68,8 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
       final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
       String? address;
       String? type;
-      User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
-      user ??= await sl.get<DBHelper>().getUserOrContactWithAddress(formattedAddress);
+      User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController!.text);
+      user ??= await sl.get<DBHelper>().getUserOrContactWithAddress(_addressController!.text);
       if (user != null) {
         type = user.type;
         if (_addressController!.text != user.getDisplayName()) {
@@ -386,38 +387,6 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
     );
   }
 
-  // Build contact items for the list
-  Widget _buildUserItem(User user) {
-    final String clickable = "${user.getDisplayName(ignoreNickname: true)!} (${Address(user.address).getUltraShort()})";
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        SizedBox(
-          height: 42,
-          width: double.infinity - 5,
-          child: TextButton(
-            onPressed: () {
-              _addressController!.text = user.getDisplayName(ignoreNickname: true)!;
-              _addressFocusNode!.unfocus();
-              setState(() {
-                _isUser = true;
-                _pasteButtonVisible = false;
-                _addressStyle = AddressStyle.PRIMARY;
-                _addressValidationText = "";
-              });
-            },
-            child: Text(clickable, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 25),
-          height: 1,
-          color: StateContainer.of(context).curTheme.text03,
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return TapOutsideUnfocus(
@@ -523,7 +492,16 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
                                                     padding: EdgeInsets.zero,
                                                     itemCount: _users.length,
                                                     itemBuilder: (BuildContext context, int index) {
-                                                      return _buildUserItem(_users[index]);
+                                                      return Misc.buildUserItem(context, _users[index], true, (User user) {
+                                                        _addressController!.text = user.getDisplayName(ignoreNickname: true)!;
+                                                        _addressFocusNode!.unfocus();
+                                                        setState(() {
+                                                          _isUser = true;
+                                                          _pasteButtonVisible = false;
+                                                          _addressStyle = AddressStyle.PRIMARY;
+                                                          _addressValidationText = "";
+                                                        });
+                                                      });
                                                     },
                                                   ),
                                           ),
@@ -678,7 +656,7 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
         });
       } else {
         // check if there's a corresponding address:
-        final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
+        final User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController!.text);
         if (user != null) {
           setState(() {
             _userType = user.type;

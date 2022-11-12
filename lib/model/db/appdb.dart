@@ -9,6 +9,7 @@ import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:path/path.dart';
@@ -574,8 +575,15 @@ class DBHelper {
 
   Future<User?> getUserOrContactWithName(String name) async {
     final Database dbClient = (await db)!;
-    final List<Map> list =
-        await dbClient.rawQuery('SELECT * FROM Users WHERE lower(username) = ? OR lower(nickname) = ?', [name.toLowerCase(), name.toLowerCase()]);
+    List<Map> list = [];
+    if (name.contains("@")) {
+      list = await dbClient.rawQuery('SELECT * FROM Users WHERE lower(username) = ?', [SendSheetHelpers.stripPrefixes(name.toLowerCase())]);
+    } else if (name.contains("★")) {
+      list = await dbClient.rawQuery('SELECT * FROM Users WHERE lower(nickname) = ?', [SendSheetHelpers.stripPrefixes(name.toLowerCase())]);
+    } else {
+      list = await dbClient.rawQuery('SELECT * FROM Users WHERE lower(username) = ? OR lower(nickname) = ?', [name.toLowerCase(), name.toLowerCase()]);
+    }
+
     if (list.isNotEmpty) {
       return User(
           username: list[0]["username"] as String?,

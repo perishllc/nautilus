@@ -35,6 +35,7 @@ import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/misc.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/numberutil.dart';
@@ -220,12 +221,12 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
           });
           return;
         }
-        if (_addressController!.text.isNotEmpty) {
+        if (_addressController!.text.isNotEmpty && !_addressController!.text.contains("★")) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           // check if in the username db:
           String? address;
           String? type;
-          final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
+          final User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController!.text);
           if (user != null) {
             type = user.type;
             if (_addressController!.text != user.getDisplayName()) {
@@ -584,7 +585,17 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                                                       padding: EdgeInsets.zero,
                                                       itemCount: _users.length,
                                                       itemBuilder: (BuildContext context, int index) {
-                                                        return _buildUserItem(_users[index]);
+                                                        return Misc.buildUserItem(context, _users[index], false, (User user) {
+                                                          _addressController!.text = user.getDisplayName()!;
+                                                          _addressFocusNode!.unfocus();
+                                                          setState(() {
+                                                            _isUser = true;
+                                                            _showContactButton = false;
+                                                            _pasteButtonVisible = false;
+                                                            _addressStyle = AddressStyle.PRIMARY;
+                                                            _addressValidationText = "";
+                                                          });
+                                                        });
                                                       },
                                                     ),
                                             ),
@@ -770,7 +781,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                           _addressController!.text.contains(".") ||
                           _addressController!.text.contains(r"$")) {
                         // Need to make sure its a valid contact or user
-                        final User? user = await sl.get<DBHelper>().getUserOrContactWithName(formattedAddress);
+                        final User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController!.text);
                         if (user == null) {
                           setState(() {
                             if (_addressController!.text.startsWith("★")) {
@@ -1081,39 +1092,6 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
       default:
         return false;
     }
-  }
-
-  // Build contact items for the list
-  Widget _buildUserItem(User user) {
-    final String clickable = "${user.getDisplayName()!} (${Address(user.address).getUltraShort()})";
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        SizedBox(
-          height: 42,
-          width: double.infinity - 5,
-          child: TextButton(
-            onPressed: () {
-              _addressController!.text = user.getDisplayName()!;
-              _addressFocusNode!.unfocus();
-              setState(() {
-                _isUser = true;
-                _showContactButton = false;
-                _pasteButtonVisible = false;
-                _addressStyle = AddressStyle.PRIMARY;
-                _addressValidationText = "";
-              });
-            },
-            child: Text(clickable, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 25),
-          height: 1,
-          color: StateContainer.of(context).curTheme.text03,
-        ),
-      ],
-    );
   }
 
   /// Validate form data to see if valid

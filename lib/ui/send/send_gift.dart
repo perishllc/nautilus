@@ -681,37 +681,6 @@ class SendGiftSheetState extends State<SendGiftSheet> {
     }
   }
 
-  // Build contact items for the list
-  Widget _buildUserItem(User user) {
-    final String clickable = "${user.getDisplayName()!} (${Address(user.address).getUltraShort()})";
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        SizedBox(
-          height: 42,
-          width: double.infinity - 5,
-          child: TextButton(
-            onPressed: () {
-              setState(() {
-                _isUser = true;
-                _showContactButton = false;
-                _pasteButtonVisible = false;
-                _addressStyle = AddressStyle.PRIMARY;
-                _addressValidationText = "";
-              });
-            },
-            child: Text(clickable, textAlign: TextAlign.center, style: AppStyles.textStyleAddressPrimary(context)),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 25),
-          height: 1,
-          color: StateContainer.of(context).curTheme.text03,
-        ),
-      ],
-    );
-  }
-
   /// Validate form data to see if valid
   /// @returns true if valid, false otherwise
   Future<bool> _validateRequest() async {
