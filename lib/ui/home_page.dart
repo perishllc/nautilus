@@ -3248,39 +3248,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
     histItem = histItem["state"];
 
-    // tx:
-    // if (histItem["isIncoming"] as bool) {
-    //   converted.sub_type = BlockTypes.RECEIVE;
-    //   converted.to_address = StateContainer.of(context).xmrAddress;
-    //   converted.from_address = histItem["incomingTransfers"][0]["state"]["address"] as String;
-    //   final List<dynamic> inputs = histItem["incomingTransfers"][0]["state"]["amount"]["_d"] as List<dynamic>;
-    //   int totalIn = 0;
-    //   for (final dynamic input in inputs) {
-    //     totalIn += input as int;
-    //   }
-    //   converted.amount_raw = totalIn.toString();
-    // } else if (histItem["isOutgoing"] as bool) {
-    //   converted.sub_type = BlockTypes.SEND;
-    //   converted.from_address = StateContainer.of(context).xmrAddress;
-    //   converted.to_address = histItem["outgoingTransfer"]["state"]["addresses"][0] as String;
-    //   final List<dynamic> outputs = histItem["outgoingTransfer"]["state"]["amount"]["_d"] as List<dynamic>;
-    //   int totalOut = 0;
-    //   for (final dynamic output in outputs) {
-    //     totalOut += output as int;
-    //   }
-    //   converted.amount_raw = totalOut.toString();
-    // }
-    // // convert to xmr amount:
-    // converted.amount_raw = (BigInt.parse(converted.amount_raw!) * BigInt.parse("1000000000000000000000000")).toString();
-    // converted.block ??= histItem["hash"] as String;
-    // converted.request_time ??= histItem["block"]["state"]["timestamp"] as int;
-    // if (histItem["isConfirmed"] != null) {
-    //   converted.is_fulfilled = histItem["isConfirmed"] as bool; // confirmation status
-    // } else {
-    //   converted.is_fulfilled = true; // default to true as it cannot be null
-    // }
-    // // converted.height ??= histItem.height!; // block height
-
     // transfer:
 
     final dynamic tx = histItem["tx"]["state"];
@@ -3289,25 +3256,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       converted.sub_type = BlockTypes.RECEIVE;
       converted.to_address = StateContainer.of(context).xmrAddress;
       converted.from_address = histItem["address"] as String;
-
-      // final List<dynamic> inputs = histItem["amount"]["_d"] as List<dynamic>;
-      // int totalIn = 0;
-      // for (final dynamic input in inputs) {
-      //   totalIn += input as int;
-      // }
-      // converted.amount_raw = totalIn.toString();
       converted.amount_raw = histItem["amount"] as String;
     } else if (tx["isOutgoing"] as bool) {
       converted.sub_type = BlockTypes.SEND;
       converted.from_address = StateContainer.of(context).xmrAddress;
       converted.to_address = histItem["addresses"][0] as String;
-
-      // final List<dynamic> outputs = histItem["amount"]["_d"] as List<dynamic>;
-      // int totalOut = 0;
-      // for (final dynamic output in outputs) {
-      //   totalOut += output as int;
-      // }
-      // converted.amount_raw = totalOut.toString();
       converted.amount_raw = histItem["amount"] as String;
     }
 
