@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
@@ -33,6 +34,7 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/auth/auth_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/handoff/handoff_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/scan_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_gift.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
@@ -324,6 +326,18 @@ class SendSheetState extends State<SendSheet> {
     });
   }
 
+  @override
+  void dispose() {
+    _amountFocusNode!.dispose();
+    _addressFocusNode!.dispose();
+    _memoFocusNode!.dispose();
+    _amountController!.dispose();
+    _addressController!.dispose();
+    _memoController!.dispose();
+
+    super.dispose();
+  }
+
   Future<bool> showNotificationDialog() async {
     final NotificationOptions? option = await showDialog<NotificationOptions>(
         context: context,
@@ -476,6 +490,7 @@ class SendSheetState extends State<SendSheet> {
     final dynamic scanResult = await UserDataUtil.getQRData(DataType.DATA, context);
     if (!mounted) return;
     if (scanResult == null) {
+      // ignore: use_build_context_synchronously
       UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
     } else if (scanResult is String && QRScanErrs.ERROR_LIST.contains(scanResult)) {
       if (scanResult == QRScanErrs.PERMISSION_DENIED) {
@@ -489,6 +504,7 @@ class SendSheetState extends State<SendSheet> {
       final Address address = scanResult;
       // See if this address belongs to a contact or username
       final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
+
       if (user != null) {
         // Is a user
         if (mounted) {
@@ -1112,7 +1128,9 @@ class SendSheetState extends State<SendSheet> {
                         AppButtonType.PRIMARY_OUTLINE,
                         AppLocalization.of(context).scanQrCode,
                         Dimens.BUTTON_COMPACT_LEFT_DIMENS,
-                        onPressed: _scanQR,
+                        onPressed: () {
+                          _scanQR();
+                        },
                       ),
                       // scan for nfc
                       AppButton.buildAppButton(
@@ -1400,32 +1418,73 @@ class SendSheetState extends State<SendSheet> {
               },
             )
           : null,
-      suffixButton: TextFieldButton(
-        icon: AppIcons.max,
-        onPressed: () {
-          if (_isMaxSend()) {
-            return;
-          }
-          if (!_localCurrencyMode) {
-            setState(() {
-              _amountValidationText = "";
-              _amountController!.text = getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
-              _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
-            });
-          } else {
-            String localAmount = StateContainer.of(context)
-                .wallet!
-                .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
-            localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
-            localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.DECIMAL_SEP, ".");
-            localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
-            setState(() {
-              _amountValidationText = "";
-              _amountController!.text = _localCurrencyFormat.currencySymbol + localAmount;
-              _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
-            });
-          }
-        },
+      suffixButton: Column(
+        children: [
+          Container(
+            height: 10,
+            padding: EdgeInsets.zero,
+            margin: EdgeInsets.zero,
+            child: TextFieldButton(
+              icon: AppIcons.max,
+              padding: EdgeInsets.zero,
+              onPressed: () {
+                if (_isMaxSend()) {
+                  return;
+                }
+                if (!_localCurrencyMode) {
+                  setState(() {
+                    _amountValidationText = "";
+                    _amountController!.text = getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
+                    _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
+                  });
+                } else {
+                  String localAmount = StateContainer.of(context)
+                      .wallet!
+                      .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
+                  localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
+                  localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.DECIMAL_SEP, ".");
+                  localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
+                  setState(() {
+                    _amountValidationText = "";
+                    _amountController!.text = _localCurrencyFormat.currencySymbol + localAmount;
+                    _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
+                  });
+                }
+              },
+            ),
+          ),
+          Container(
+            height: 10,
+            child: TextFieldButton(
+              icon: AppIcons.max,
+              padding: EdgeInsets.zero,
+              onPressed: () {
+                if (_isMaxSend()) {
+                  return;
+                }
+                if (!_localCurrencyMode) {
+                  setState(() {
+                    _amountValidationText = "";
+                    _amountController!.text = getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
+                    _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
+                  });
+                } else {
+                  String localAmount = StateContainer.of(context)
+                      .wallet!
+                      .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
+                  localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
+                  localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.DECIMAL_SEP, ".");
+                  localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
+                  setState(() {
+                    _amountValidationText = "";
+                    _amountController!.text = _localCurrencyFormat.currencySymbol + localAmount;
+                    _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
+                  });
+                }
+              },
+            ),
+          ),
+        ],
       ),
       // fadeSuffixOnCondition: true,
       suffixShowFirstCondition: !_isMaxSend(),
@@ -1460,24 +1519,11 @@ class SendSheetState extends State<SendSheet> {
         autocorrect: false,
         hintText: _addressHint ?? AppLocalization.of(context).enterUserOrAddress,
         prefixButton: TextFieldButton(
-            icon: AppIcons.scan,
-            onPressed: () async {
-              UIUtil.cancelLockEvent();
-              final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
-              if (!mounted) return;
-              if (scanResult == null) {
-                UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
-              } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
-                if (mounted) {
-                  setState(() {
-                    _addressController!.text = scanResult;
-                    _addressValidationText = "";
-                    _addressValidAndUnfocused = true;
-                  });
-                  _addressFocusNode!.unfocus();
-                }
-              }
-            }),
+          icon: AppIcons.scan,
+          onPressed: () async {
+            await _scanQR();
+          },
+        ),
         fadePrefixOnCondition: true,
         prefixShowFirstCondition: _showContactButton && _users.isEmpty,
         suffixButton: TextFieldButton(

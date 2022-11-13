@@ -10,7 +10,9 @@ import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/pay_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/ui/scan_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
+import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:quiver/strings.dart';
 import 'package:validators/validators.dart';
@@ -85,7 +87,11 @@ class UserDataUtil {
   static Future<dynamic> getQRData(DataType type, BuildContext context) async {
     UIUtil.cancelLockEvent();
     try {
-      final String? data = await Navigator.pushNamed(context, "/scan") as String?;
+      final String? data = await Sheets.showAppHeightFullSheet(
+        context: context,
+        widget: const ScanScreen(),
+      );
+
       if (isEmpty(data)) {
         return null;
       }

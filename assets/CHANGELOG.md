@@ -1,7 +1,8 @@
-## v0.7.0 - [2022-11-XX]
+## v0.7.1 - [2022-11-XX]
 #### Added
 #### Changed
 #### Fixed
+- Even more QR code scanning bugs
 ## v0.7.0 - [2022-11-10]
 #### Added
 - Magic link login + encrypted seed backup

@@ -74,8 +74,8 @@ class AppTextField extends StatefulWidget {
   final int? maxLines;
   final bool autocorrect;
   final String? hintText;
-  final TextFieldButton? prefixButton;
-  final TextFieldButton? suffixButton;
+  final Widget? prefixButton;
+  final Widget? suffixButton;
   final bool? fadePrefixOnCondition;
   final bool? prefixShowFirstCondition;
   final bool? fadeSuffixOnCondition;

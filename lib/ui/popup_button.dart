@@ -62,9 +62,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
         UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
       }
       return;
-    }
-
-    if (scanResult is Address) {
+    } else if (scanResult is Address) {
       // Is a URI
       final Address address = scanResult;
       if (address.address == null) {
