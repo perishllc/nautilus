@@ -1418,73 +1418,32 @@ class SendSheetState extends State<SendSheet> {
               },
             )
           : null,
-      suffixButton: Column(
-        children: [
-          Container(
-            height: 10,
-            padding: EdgeInsets.zero,
-            margin: EdgeInsets.zero,
-            child: TextFieldButton(
-              icon: AppIcons.max,
-              padding: EdgeInsets.zero,
-              onPressed: () {
-                if (_isMaxSend()) {
-                  return;
-                }
-                if (!_localCurrencyMode) {
-                  setState(() {
-                    _amountValidationText = "";
-                    _amountController!.text = getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
-                    _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
-                  });
-                } else {
-                  String localAmount = StateContainer.of(context)
-                      .wallet!
-                      .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
-                  localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
-                  localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.DECIMAL_SEP, ".");
-                  localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
-                  setState(() {
-                    _amountValidationText = "";
-                    _amountController!.text = _localCurrencyFormat.currencySymbol + localAmount;
-                    _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
-                  });
-                }
-              },
-            ),
-          ),
-          Container(
-            height: 10,
-            child: TextFieldButton(
-              icon: AppIcons.max,
-              padding: EdgeInsets.zero,
-              onPressed: () {
-                if (_isMaxSend()) {
-                  return;
-                }
-                if (!_localCurrencyMode) {
-                  setState(() {
-                    _amountValidationText = "";
-                    _amountController!.text = getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
-                    _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
-                  });
-                } else {
-                  String localAmount = StateContainer.of(context)
-                      .wallet!
-                      .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
-                  localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
-                  localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.DECIMAL_SEP, ".");
-                  localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
-                  setState(() {
-                    _amountValidationText = "";
-                    _amountController!.text = _localCurrencyFormat.currencySymbol + localAmount;
-                    _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
-                  });
-                }
-              },
-            ),
-          ),
-        ],
+      suffixButton: TextFieldButton(
+        icon: AppIcons.max,
+        onPressed: () {
+          if (_isMaxSend()) {
+            return;
+          }
+          if (!_localCurrencyMode) {
+            setState(() {
+              _amountValidationText = "";
+              _amountController!.text = getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
+              _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
+            });
+          } else {
+            String localAmount = StateContainer.of(context)
+                .wallet!
+                .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
+            localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
+            localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.DECIMAL_SEP, ".");
+            localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
+            setState(() {
+              _amountValidationText = "";
+              _amountController!.text = _localCurrencyFormat.currencySymbol + localAmount;
+              _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
+            });
+          }
+        },
       ),
       // fadeSuffixOnCondition: true,
       suffixShowFirstCondition: !_isMaxSend(),
