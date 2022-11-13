@@ -311,16 +311,12 @@ flutter:
     - assets/animations/world-lines.json
     - assets/animations/world-plane.json
     # other assets
-    # - assets/store/known.json
-    # - assets/store/reps.json
-    # - assets/logo-square.png
     - assets/logo.png
     - assets/logo.svg
     - assets/logos/nanocafe.png
     - assets/logos/redeemforme.png
     - assets/logos/onramper.png
     - assets/logos/nanswap.png
-    # - assets/logos/redeemforme.svg
     # nyano assets:
     - assets/nyano/images/logos/cat-head-collar-black-1000 × 1180.png
     # illustrations:
