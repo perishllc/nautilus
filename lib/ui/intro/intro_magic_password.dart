@@ -257,7 +257,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                               () async {
                                 // get the encrypted seed from the auth-service:
                                 final String hashedPassword = NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
-                                final String fullIdentifier = "${widget.identifier}$hashedPassword";
+                                final String fullIdentifier = "${widget.identifier}:$hashedPassword";
                                 String? encryptedSeed = await sl.get<AuthService>().getEncryptedSeed(fullIdentifier);
                                 // final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
 
@@ -330,7 +330,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     if (widget.entryExists) {
       // get the encrypted seed from the auth-service:
       final String hashedPassword = NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
-      final String fullIdentifier = widget.identifier! + hashedPassword;
+      final String fullIdentifier = "${widget.identifier!}:$hashedPassword";
       final String? encryptedSeed = await sl.get<AuthService>().getEncryptedSeed(fullIdentifier);
       // final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
 
@@ -391,7 +391,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     //   encrypted_seed: encryptedSeed,
     // }
     final String hashedPassword = NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
-    final String fullIdentifier = "${widget.identifier}$hashedPassword";
+    final String fullIdentifier = "${widget.identifier}:$hashedPassword";
     await sl.get<AuthService>().setEncryptedSeed(fullIdentifier, encryptedSeed);
     skipPin();
   }

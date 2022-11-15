@@ -275,7 +275,7 @@ class _ChangeMagicPasswordSheetState extends State<ChangeMagicPasswordSheet> {
 
     // check if the current identifier exists:
     final String oldHashedPassword = NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(createPasswordController!.text))));
-    final String oldFullIdentifier = "$issuer$oldHashedPassword";
+    final String oldFullIdentifier = "$issuer:$oldHashedPassword";
     final bool oldIdentifierExists = await sl.get<AuthService>().entryExists(oldFullIdentifier);
 
     if (oldIdentifierExists) {
@@ -293,7 +293,7 @@ class _ChangeMagicPasswordSheetState extends State<ChangeMagicPasswordSheet> {
     //   encrypted_seed: encryptedSeed,
     // }
     final String hashedPassword = NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
-    final String fullIdentifier = "$issuer$hashedPassword";
+    final String fullIdentifier = "$issuer:$hashedPassword";
     await sl.get<AuthService>().setEncryptedSeed(fullIdentifier, encryptedSeed);
 
     if (/*password incorrect*/ false) {
