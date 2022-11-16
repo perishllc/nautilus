@@ -1563,10 +1563,10 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           Navigator.of(context).pushNamed("/register_username");
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).createGiftCard, AppIcons.export_icon, onPressed: () {
-          Navigator.of(context).pushNamed("/gift_paper_wallet");
-        }),
-        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+        // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).createGiftCard, AppIcons.export_icon, onPressed: () {
+        //   Navigator.of(context).pushNamed("/gift_paper_wallet");
+        // }),
+        // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).swapXMR, AppIcons.swapcurrency, onPressed: () {
         //   Navigator.of(context).pushNamed("/swap_xmr");
         // }),

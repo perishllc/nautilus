@@ -64,26 +64,25 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                 children: <Widget>[
                   // The header
                   Container(
-                    margin: const EdgeInsetsDirectional.only(top: 10, start: 60, end: 60),
+                    margin: const EdgeInsetsDirectional.only(top: 10, start: 10, end: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
                           width: 60,
                           height: 60,
                         ),
-                        Column(
-                          children: <Widget>[
-                            AutoSizeText(
-                              CaseChange.toUpperCase(AppLocalization.of(context).createPasswordSheetHeader, context),
-                              style: AppStyles.textStyleHeader(context),
-                              minFontSize: 12,
-                              stepGranularity: 0.1,
-                              textAlign: TextAlign.center,
-                              maxLines: 1,
-                            ),
-                          ],
+                        Container(
+                          height: 60,
+                          alignment: Alignment.center,
+                          child: AutoSizeText(
+                            CaseChange.toUpperCase(AppLocalization.of(context).setPin, context),
+                            style: AppStyles.textStyleHeader(context),
+                            minFontSize: 12,
+                            stepGranularity: 0.1,
+                            textAlign: TextAlign.center,
+                            maxLines: 1,
+                          ),
                         ),
                         SizedBox(
                           width: 60,
@@ -92,8 +91,8 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                           child: AppDialogs.infoButton(
                             context,
                             () {
-                              AppDialogs.showInfoDialog(
-                                  context, AppLocalization.of(context).plausibleInfoHeader, AppLocalization.of(context).plausibleSheetInfo);
+                              AppDialogs.showInfoDialog(context, AppLocalization.of(context).plausibleInfoHeader,
+                                  AppLocalization.of(context).plausibleSheetInfo);
                             },
                           ),
                         ),
@@ -102,7 +101,8 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                   ),
                   // The paragraph
                   Container(
-                    margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
+                    margin: EdgeInsetsDirectional.only(
+                        start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
                       AppLocalization.of(context).plausibleDeniabilityParagraph,
                       style: AppStyles.textStyleParagraph(context),
@@ -153,7 +153,9 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16.0,
-                                color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
+                                color: passwordsMatch
+                                    ? StateContainer.of(context).curTheme.primary
+                                    : StateContainer.of(context).curTheme.text,
                                 fontFamily: "NunitoSans",
                               ),
                               onSubmitted: (text) {
@@ -197,7 +199,9 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16.0,
-                                color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
+                                color: passwordsMatch
+                                    ? StateContainer.of(context).curTheme.primary
+                                    : StateContainer.of(context).curTheme.text,
                                 fontFamily: "NunitoSans",
                               ),
                             ),
@@ -223,7 +227,8 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).setPin, Dimens.BUTTON_TOP_DIMENS,
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY, AppLocalization.of(context).setPin, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       await submitAndEncrypt();
                     }),
@@ -231,8 +236,8 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
-                        onPressed: () {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close,
+                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.pop(context);
                     }),
                   ],

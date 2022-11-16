@@ -3,15 +3,12 @@ import 'dart:typed_data';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:magic_sdk/magic_sdk.dart';
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/dimens.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
-import 'package:nautilus_wallet_flutter/model/vault.dart';
 import 'package:nautilus_wallet_flutter/network/auth_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
@@ -19,8 +16,6 @@ import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
-import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
 class IntroLoginPage extends StatefulWidget {
   const IntroLoginPage({super.key});
