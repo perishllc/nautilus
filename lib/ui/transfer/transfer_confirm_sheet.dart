@@ -251,7 +251,7 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
     Navigator.of(context).pop();
   }
 
-  Future<BigInt> autoProcessWallets(Map<String, AccountBalanceItem> privKeyBalanceMap, AppWallet? wallet) async {
+  Future<BigInt> autoProcessWallets(Map<String, AccountBalanceItem> privKeyBalanceMap, String address) async {
     BigInt totalTransferred = BigInt.zero;
     try {
       // state.lockCallback();
@@ -289,7 +289,7 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         resp = await sl.get<AccountService>().getAccountInfo(account);
         final ProcessResponse sendResp = await sl
             .get<AccountService>()
-            .requestSend(AppWallet.defaultRepresentative, resp.frontier, resp.balance, wallet!.address, account, balanceItem.privKey, max: true);
+            .requestSend(AppWallet.defaultRepresentative, resp.frontier, resp.balance, address, account, balanceItem.privKey, max: true);
         if (sendResp.hash != null) {
           totalTransferred += BigInt.parse(balanceItem.balance!);
         }

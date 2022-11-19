@@ -1,6 +1,7 @@
 ## v0.7.1 - [2022-11-XX]
 #### Added
 #### Changed
+- Made it impossible to confirm a transaction before the send warning has a chance to show up
 - UI fixes in the set plausible pin menu
 #### Fixed
 - Even more QR code scanning bugs

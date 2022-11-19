@@ -108,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Error: can\'t reach Branch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Connection Warning"),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Business"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -367,6 +368,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Hide Empty Accounts"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Home"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("An hour ago"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
@@ -498,6 +500,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Payment Requests, Memos, and Messages will not function properly."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
+        "obscureInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Obscure Transaction Info"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Obscure Transaction"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "This is NOT true privacy, but it will make it harder for the recipient to see who sent them funds."),
         "off": MessageLookupByLibrary.simpleMessage("Off"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("On"),
@@ -733,6 +741,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Check out Nautilus! A premier NANO mobile wallet!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Share Text"),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Shop"),
         "show": MessageLookupByLibrary.simpleMessage("Show"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("Account Info"),
         "showAccountQR":

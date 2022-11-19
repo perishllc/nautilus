@@ -76,8 +76,7 @@ class AppDialogs {
     );
   }
 
-  static Future<bool> waitableConfirmDialog(BuildContext context, String title, String content, String buttonText,
-      {String? cancelText, bool barrierDismissible = true}) async {
+  static Future<bool> waitableConfirmDialog(BuildContext context, String title, String content, String buttonText, {String? cancelText, bool barrierDismissible = true}) async {
     cancelText ??= AppLocalization.of(context).cancel.toUpperCase();
 
     final bool res = await showAppDialog(

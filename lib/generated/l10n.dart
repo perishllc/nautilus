@@ -560,6 +560,66 @@ class AppLocalization {
     );
   }
 
+  /// `Obscure Transaction Info`
+  String get obscureInfoHeader {
+    return Intl.message(
+      'Obscure Transaction Info',
+      name: 'obscureInfoHeader',
+      desc: 'obscure_tx_info',
+      args: [],
+    );
+  }
+
+  /// `Obscure Transaction`
+  String get obscureTransaction {
+    return Intl.message(
+      'Obscure Transaction',
+      name: 'obscureTransaction',
+      desc: 'obscure_tx',
+      args: [],
+    );
+  }
+
+  /// `This is NOT true privacy, but it will make it harder for the recipient to see who sent them funds.`
+  String get obscureTransactionBody {
+    return Intl.message(
+      'This is NOT true privacy, but it will make it harder for the recipient to see who sent them funds.',
+      name: 'obscureTransactionBody',
+      desc: 'obscure_tx_body',
+      args: [],
+    );
+  }
+
+  /// `Business`
+  String get businessButton {
+    return Intl.message(
+      'Business',
+      name: 'businessButton',
+      desc: 'business_button',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get homeButton {
+    return Intl.message(
+      'Home',
+      name: 'homeButton',
+      desc: 'home_button',
+      args: [],
+    );
+  }
+
+  /// `Shop`
+  String get shopButton {
+    return Intl.message(
+      'Shop',
+      name: 'shopButton',
+      desc: 'shop_button',
+      args: [],
+    );
+  }
+
   /// `We can't seem to reach the Branch API, this is usually cause by some sort of network issue or VPN blocking the connection.\n\n You should still be able to use the app as normal, however sending and receiving gift cards may not work.`
   String get branchConnectErrorLongDesc {
     return Intl.message(

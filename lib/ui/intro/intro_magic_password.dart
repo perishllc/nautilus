@@ -60,7 +60,8 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
         body: TapOutsideUnfocus(
             child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
-            minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
+            minimum: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
             child: Column(
               children: <Widget>[
                 //A widget that holds the header, the paragraph and Back Button
@@ -99,7 +100,9 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                         ),
                         alignment: AlignmentDirectional.centerStart,
                         child: AutoSizeText(
-                          !widget.entryExists ? AppLocalization.of(context).createAPasswordHeader : AppLocalization.of(context).enterPasswordHint,
+                          !widget.entryExists
+                              ? AppLocalization.of(context).createAPasswordHeader
+                              : AppLocalization.of(context).enterPasswordHint,
                           maxLines: 3,
                           stepGranularity: 0.5,
                           style: AppStyles.textStyleHeaderColored(context),
@@ -107,7 +110,8 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                       ),
                       // The paragraph
                       Container(
-                        margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
+                        margin: EdgeInsetsDirectional.only(
+                            start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                         child: AutoSizeText(
                           AppLocalization.of(context).passwordDisclaimer,
                           style: AppStyles.textStyleParagraph(context),
@@ -158,7 +162,9 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                                     style: TextStyle(
                                       fontWeight: FontWeight.w700,
                                       fontSize: 16.0,
-                                      color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
+                                      color: passwordsMatch
+                                          ? StateContainer.of(context).curTheme.primary
+                                          : StateContainer.of(context).curTheme.text,
                                       fontFamily: "NunitoSans",
                                     ),
                                     onSubmitted: (String text) {
@@ -194,22 +200,28 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                                       }
                                     }
                                   },
-                                  hintText:
-                                      !widget.entryExists ? AppLocalization.of(context).confirmPasswordHint : AppLocalization.of(context).enterPasswordHint,
+                                  hintText: !widget.entryExists
+                                      ? AppLocalization.of(context).confirmPasswordHint
+                                      : AppLocalization.of(context).enterPasswordHint,
                                   keyboardType: TextInputType.text,
                                   obscureText: true,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16.0,
-                                    color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
+                                    color: passwordsMatch
+                                        ? StateContainer.of(context).curTheme.primary
+                                        : StateContainer.of(context).curTheme.text,
                                     fontFamily: "NunitoSans",
                                   ),
                                 ),
                                 // Error Text
                                 Container(
                                   alignment: AlignmentDirectional.center,
-                                  margin: EdgeInsetsDirectional.only(top: 8, start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40),
+                                  margin: EdgeInsetsDirectional.only(
+                                      top: 8,
+                                      start: smallScreen(context) ? 30 : 40,
+                                      end: smallScreen(context) ? 30 : 40),
                                   child: Text(passwordError == null ? "" : passwordError!,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
@@ -233,7 +245,9 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                         AppButton.buildAppButton(
                             context,
                             AppButtonType.PRIMARY,
-                            widget.entryExists ? AppLocalization.of(context).loginButton : AppLocalization.of(context).registerButton,
+                            widget.entryExists
+                                ? AppLocalization.of(context).loginButton
+                                : AppLocalization.of(context).registerButton,
                             Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                           await submitAndEncrypt();
                         }),
@@ -244,8 +258,10 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                         children: <Widget>[
                           // Next Button
                           AppButton.buildAppButton(
-                              context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).resetAccountButton, Dimens.BUTTON_BOTTOM_DIMENS,
-                              onPressed: () async {
+                              context,
+                              AppButtonType.PRIMARY_OUTLINE,
+                              AppLocalization.of(context).resetAccountButton,
+                              Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                             if (!checkPasswordRequirements()) {
                               return;
                             }
@@ -256,7 +272,8 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                               AppLocalization.of(context).imSure,
                               () async {
                                 // get the encrypted seed from the auth-service:
-                                final String hashedPassword = NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
+                                final String hashedPassword = NanoHelpers.byteToHex(
+                                    blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
                                 final String fullIdentifier = "${widget.identifier}:$hashedPassword";
                                 String? encryptedSeed = await sl.get<AuthService>().getEncryptedSeed(fullIdentifier);
                                 // final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
@@ -268,7 +285,8 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
 
                                 // Generate a new seed, encrypt, and upload to the seed backup endpoint:
                                 final String seed = NanoSeeds.generateSeed();
-                                encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController!.text));
+                                encryptedSeed =
+                                    NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController!.text));
                                 await sl.get<Vault>().setSeed(seed);
                                 if (!mounted) return;
                                 // Update wallet
@@ -296,8 +314,8 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                       Row(
                         children: <Widget>[
                           // Go Back Button
-                          AppButton.buildAppButton(
-                              context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                          AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
+                              AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                             Navigator.of(context).pop();
                           }),
                         ],
@@ -329,7 +347,8 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     }
     if (widget.entryExists) {
       // get the encrypted seed from the auth-service:
-      final String hashedPassword = NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
+      final String hashedPassword =
+          NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
       final String fullIdentifier = "${widget.identifier!}:$hashedPassword";
       final String? encryptedSeed = await sl.get<AuthService>().getEncryptedSeed(fullIdentifier);
       // final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
@@ -375,6 +394,22 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
       }
     }
 
+    if (!mounted) return;
+
+    final bool noSeedToImport = await AppDialogs.waitableConfirmDialog(context, "Do you have a seed to import?",
+        "if you don't know what this means you should just press continue.", "Continue",
+        barrierDismissible: false, cancelText: "I have a seed",);
+    return;
+
+    final String hashedPassword =
+        NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
+    final String fullIdentifier = "${widget.identifier}:$hashedPassword";
+
+    if (!noSeedToImport) {
+      Navigator.of(context).pushNamed("/intro_import",
+          arguments: <String, String>{"fullIdentifier": fullIdentifier, "password": confirmPasswordController!.text});
+    }
+
     // Generate a new seed, encrypt, and upload to the seed backup endpoint:
     final String seed = NanoSeeds.generateSeed();
     final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, confirmPasswordController!.text));
@@ -390,8 +425,6 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     //   identifier: "${identifier}${hashedPassword}",
     //   encrypted_seed: encryptedSeed,
     // }
-    final String hashedPassword = NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
-    final String fullIdentifier = "${widget.identifier}:$hashedPassword";
     await sl.get<AuthService>().setEncryptedSeed(fullIdentifier, encryptedSeed);
     skipPin();
   }
@@ -441,7 +474,8 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     }
 
     // make sure password contains an uppercase and lowercase letter:
-    if (!confirmPasswordController!.text.contains(RegExp(r"[a-z]")) || !confirmPasswordController!.text.contains(RegExp(r"[A-Z]"))) {
+    if (!confirmPasswordController!.text.contains(RegExp(r"[a-z]")) ||
+        !confirmPasswordController!.text.contains(RegExp(r"[A-Z]"))) {
       setState(() {
         passwordError = AppLocalization.of(context).passwordCapitalLetter;
       });

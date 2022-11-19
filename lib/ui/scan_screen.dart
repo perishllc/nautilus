@@ -40,26 +40,28 @@ class ScanScreenState extends State<ScanScreen> {
       body: Stack(
         alignment: Alignment.center,
         children: <Widget>[
-          MobileScanner(
-            allowDuplicates: false,
-            controller: cameraController,
-            onDetect: (Barcode barcode, MobileScannerArguments? args) {
-              if (barcode.rawValue == null) {
-                debugPrint("Failed to scan Barcode");
-                return;
-              }
-              final String? code = barcode.rawValue;
-              // don't pop for null or empty strings:
-              if (code == null || code.isEmpty) {
-                return;
-              }
+          // MobileScanner(
+          //   controller: cameraController,
+          //   // onDetect: (Barcode barcode, MobileScannerArguments? args) {
+          //   //   if (barcode.rawValue == null) {
+          //   //     debugPrint("Failed to scan Barcode");
+          //   //     return;
+          //   //   }
+          //   //   final String? code = barcode.rawValue;
+          //   //   // don't pop for null or empty strings:
+          //   //   if (code == null || code.isEmpty) {
+          //   //     return;
+          //   //   }
 
-              if (!popped) {
-                popped = true;
-                Navigator.of(context).pop(code);
-              }
-            },
-          ),
+          //   //   if (!popped) {
+          //   //     popped = true;
+          //   //     Navigator.of(context).pop(code);
+          //   //   }
+          //   // },
+          //   onDetect: (var a) {
+
+          //   },
+          // ),
           DottedBorder(
             strokeWidth: 8,
             dashPattern: const <double>[30, 35],

@@ -13,7 +13,11 @@ import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/wallet.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/accounts_balances_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/process_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/receivable_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/receivable_response_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_confirm_sheet.dart';
@@ -123,17 +127,20 @@ class AppTransferOverviewSheet {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               Container(
-                                constraints:
-                                    BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.2, maxWidth: MediaQuery.of(context).size.width * 0.6),
+                                constraints: BoxConstraints(
+                                    maxHeight: MediaQuery.of(context).size.height * 0.2,
+                                    maxWidth: MediaQuery.of(context).size.width * 0.6),
                                 child: Stack(
                                   children: <Widget>[
                                     Center(
                                       child: SvgPicture.asset("assets/illustrations/transferfunds_paperwalletonly.svg",
-                                          color: StateContainer.of(context).curTheme.text45, width: MediaQuery.of(context).size.width),
+                                          color: StateContainer.of(context).curTheme.text45,
+                                          width: MediaQuery.of(context).size.width),
                                     ),
                                     Center(
                                       child: SvgPicture.asset("assets/illustrations/transferfunds_start.svg",
-                                          color: StateContainer.of(context).curTheme.primary, width: MediaQuery.of(context).size.width),
+                                          color: StateContainer.of(context).curTheme.primary,
+                                          width: MediaQuery.of(context).size.width),
                                     ),
                                   ],
                                 ),
@@ -142,7 +149,9 @@ class AppTransferOverviewSheet {
                                 alignment: AlignmentDirectional.centerStart,
                                 margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
                                 child: AutoSizeText(
-                                  AppLocalization.of(context).transferIntro.replaceAll("%1", AppLocalization.of(context).scanQrCode),
+                                  AppLocalization.of(context)
+                                      .transferIntro
+                                      .replaceAll("%1", AppLocalization.of(context).scanQrCode),
                                   style: AppStyles.textStyleParagraph(context),
                                   textAlign: TextAlign.start,
                                   maxLines: 6,
@@ -162,7 +171,8 @@ class AppTransferOverviewSheet {
                               Dimens.BUTTON_TOP_DIMENS,
                               onPressed: () async {
                                 UIUtil.cancelLockEvent();
-                                final String? result = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
+                                final String? result =
+                                    await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
                                 if (result == null) {
                                   return;
                                 }
@@ -206,7 +216,8 @@ class AppTransferOverviewSheet {
   Future<void> startTransfer(BuildContext context, String seed, {bool manualEntry = false}) async {
     // Show loading overlay
     _animationOpen = true;
-    final AnimationType animationType = manualEntry ? AnimationType.TRANSFER_SEARCHING_MANUAL : AnimationType.TRANSFER_SEARCHING_QR;
+    final AnimationType animationType =
+        manualEntry ? AnimationType.TRANSFER_SEARCHING_MANUAL : AnimationType.TRANSFER_SEARCHING_QR;
     AppAnimation.animationLauncher(context, animationType, onPoppedCallback: () => _animationOpen = false);
     // Get accounts from seed
     final List<String> accounts = await getAccountsFromSeed(context, seed);
@@ -280,10 +291,11 @@ class AppTransferOverviewSheet {
     return BigInt.zero;
   }
 
-  Future<void> startAutoTransfer(BuildContext context, String seed, AppWallet? wallet) async {
+  Future<void> startAutoTransfer(BuildContext context, String seed, AppWallet wallet) async {
     // Show loading overlay
     _animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.TRANSFER_SEARCHING_MANUAL, onPoppedCallback: () => _animationOpen = false);
+    AppAnimation.animationLauncher(context, AnimationType.TRANSFER_SEARCHING_MANUAL,
+        onPoppedCallback: () => _animationOpen = false);
 
     // Get accounts from seed
     final List<String> accounts = await getAccountsFromSeed(context, seed);
@@ -308,7 +320,8 @@ class AppTransferOverviewSheet {
         return;
       }
 
-      amountTransferred = await const AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, wallet);
+      amountTransferred =
+          await const AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, wallet.address!);
     } catch (e) {
       sl.get<Logger>().e("error", e);
       if (_animationOpen) {
@@ -332,7 +345,8 @@ class AppTransferOverviewSheet {
   Future<void> startAutoRefund(BuildContext context, String seed, String refundAddress) async {
     // Show loading overlay
     _animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.TRANSFER_SEARCHING_MANUAL, onPoppedCallback: () => _animationOpen = false);
+    AppAnimation.animationLauncher(context, AnimationType.TRANSFER_SEARCHING_MANUAL,
+        onPoppedCallback: () => _animationOpen = false);
 
     // sleep for a couple seconds to flex the animation:
     await Future<dynamic>.delayed(const Duration(seconds: 3));
@@ -374,6 +388,77 @@ class AppTransferOverviewSheet {
       Navigator.of(context).pop();
     }
     UIUtil.showSnackbar(AppLocalization.of(context).giftRefundSuccess, context, durationMs: 5000);
+  }
+
+  Future<void> receiveAtIndex(BuildContext context, String seed, int index, String derivationMethod) async {
+    final String receivingAccount = await NanoUtil.uniSeedToAddress(seed, index, derivationMethod);
+    final String receivingAccountPrivKey = await NanoUtil.uniSeedToPrivate(seed, index, derivationMethod);
+
+    final AccountsBalancesResponse resp = await sl.get<AccountService>().requestAccountsBalances([receivingAccount]);
+    final AccountBalanceItem balanceItem = resp.balances!.values.first;
+    balanceItem.privKey = receivingAccountPrivKey;
+
+    BigInt totalTransferred = BigInt.zero;
+
+    // sleep for a couple seconds to ensure it's confirmed
+    // await Future<dynamic>.delayed(const Duration(seconds: 2));
+
+    final AccountInfoResponse accountInfoResp = await sl.get<AccountService>().getAccountInfo(receivingAccount);
+    if (!accountInfoResp.unopened) {
+      balanceItem.frontier = accountInfoResp.frontier;
+    }
+    // Receive receivable blocks
+    final ReceivableResponse pr = await sl.get<AccountService>().getReceivable(receivingAccount, 10);
+    final Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks!;
+    for (final String hash in receivableBlocks.keys) {
+      final ReceivableResponseItem? item = receivableBlocks[hash];
+      if (balanceItem.frontier != null) {
+        final ProcessResponse resp = await sl.get<AccountService>().requestReceive(AppWallet.defaultRepresentative,
+            balanceItem.frontier, item!.amount, hash, receivingAccount, balanceItem.privKey);
+        if (resp.hash != null) {
+          balanceItem.frontier = resp.hash;
+          totalTransferred += BigInt.parse(item.amount!);
+        }
+      } else {
+        final ProcessResponse resp =
+            await sl.get<AccountService>().requestOpen(item!.amount, hash, receivingAccount, balanceItem.privKey);
+        if (resp.hash != null) {
+          balanceItem.frontier = resp.hash;
+          totalTransferred += BigInt.parse(item.amount!);
+        }
+      }
+      // Hack that waits for blocks to be confirmed
+      await Future<dynamic>.delayed(const Duration(milliseconds: 600));
+    }
+  }
+
+  Future<void> sendAtIndex(BuildContext context, String seed, int index, String derivationMethod, String address,
+      String amountRaw, bool maxSend) async {
+    final String sendingAccount = await NanoUtil.uniSeedToAddress(seed, index, derivationMethod);
+
+    // Hack that waits for blocks to be confirmed
+    await Future<dynamic>.delayed(const Duration(milliseconds: 600));
+
+    // // AccountBalanceItem balanceItem = AccountBalanceItem(balance: );
+    final AccountInfoResponse accountInfoResp = await sl.get<AccountService>().getAccountInfo(sendingAccount);
+
+    final String privKey = await NanoUtil.uniSeedToPrivate(
+      await StateContainer.of(context).getSeed(),
+      index,
+      derivationMethod,
+    );
+
+    final ProcessResponse resp = await sl.get<AccountService>().requestSend(
+          StateContainer.of(context).wallet!.representative,
+          accountInfoResp.frontier,
+          amountRaw,
+          address,
+          sendingAccount,
+          privKey,
+          max: maxSend,
+        );
+    // Hack that waits for blocks to be confirmed
+    await Future<dynamic>.delayed(const Duration(milliseconds: 600));
   }
 
   // Get NUM_SWEEP accounts from seed to request balances for

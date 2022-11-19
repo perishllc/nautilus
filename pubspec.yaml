@@ -56,6 +56,10 @@ dependencies:
   ens_dart: ^1.0.0
   web3dart: ^2.4.1
 
+  # charts:
+  coingecko_api: ^1.1.0+2
+  fl_chart: ^0.55.2
+
   # Device-specific info
   device_info_plus: ^7.0.1
   android_id: ^0.0.7
@@ -110,6 +114,7 @@ dependencies:
   dotted_border: ^2.0.0+2
   image_picker: ^0.8.6
   mobile_scanner: ^3.0.0-beta.1
+  # mobile_scanner: 3.0.0-beta.1
 
   # Share files
   share_plus: ^6.2.0
@@ -219,7 +224,6 @@ flutter_intl:
   arb_dir: lib/l10n
   output_dir: lib/generated
   use_deferred_loading: false
-  upload_overwrite: true
   localizely:
     project_id: 6991a0b2-4aa6-49c1-82d8-fcd38488d8b4
 
@@ -237,14 +241,12 @@ dependency_overrides:
       url: https://github.com/perishllc/uni_links.git
       path: uni_links_platform_interface
       ref: main
-
   # https://github.com/pichillilorenzo/flutter_inappwebview/issues/1223
   # flutter_inappwebview:
   #   git:
   #     url: https://github.com/rshrc/flutter_inappwebview
   #     ref: master
   # device_info_plus_platform_interface: 2.3.0+1
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
