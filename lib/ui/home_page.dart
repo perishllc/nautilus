@@ -48,6 +48,7 @@ import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/auth/auth_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/business/checkout_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/handoff/handoff_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/home/card_actions.dart';
 import 'package:nautilus_wallet_flutter/ui/home/market_card.dart';
@@ -56,9 +57,11 @@ import 'package:nautilus_wallet_flutter/ui/home/top_card.dart';
 import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_xmr_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/scan_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/settings_drawer.dart';
+import 'package:nautilus_wallet_flutter/ui/shop/shop_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
@@ -2499,13 +2502,45 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           currentIndex: _selectedIndex,
           selectedItemColor: StateContainer.of(context).curTheme.primary,
           unselectedItemColor: StateContainer.of(context).curTheme.text,
-          onTap: (int index) {
+          onTap: (int index) async {
             if (_selectedIndex == index) {
-              _scrollController.animateTo(
-                0.0,
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.easeOut,
-              );
+              if (index == 1) {
+                _scrollController.animateTo(
+                  0.0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeOut,
+                );
+              }
+            } else if (index != 1) {
+              if (index == 2) {
+                final String data = "nano:${StateContainer.of(context).wallet!.address}";
+                final Widget qrWidget = SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: await UIUtil.getQRImage(context, data),
+                );
+                await Sheets.showAppHeightFullSheet(
+                  context: context,
+                  widget: CheckoutSheet(
+                    localCurrency: StateContainer.of(context).curCurrency,
+                    address: StateContainer.of(context).wallet!.address,
+                    qrWidget: qrWidget,
+                  ),
+                );
+              }
+
+              if (index == 0) {
+                await Sheets.showAppHeightFullSheet(
+                  context: context,
+                  widget: ShopSheet(
+                    localCurrency: StateContainer.of(context).curCurrency,
+                  ),
+                );
+              }
+
+              // return to home:
+              setState(() {
+                _selectedIndex = 1;
+              });
             }
             setState(() {
               _selectedIndex = index;

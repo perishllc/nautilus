@@ -396,10 +396,14 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
 
     if (!mounted) return;
 
-    final bool noSeedToImport = await AppDialogs.waitableConfirmDialog(context, "Do you have a seed to import?",
-        "if you don't know what this means you should just press continue.", "Continue",
-        barrierDismissible: false, cancelText: "I have a seed",);
-    return;
+    final bool noSeedToImport = await AppDialogs.waitableConfirmDialog(
+      context,
+      AppLocalization.of(context).doYouHaveSeedHeader,
+      AppLocalization.of(context).doYouHaveSeedBody,
+      AppLocalization.of(context).continueButton,
+      cancelText: AppLocalization.of(context).haveSeedToImport,
+      barrierDismissible: false,
+    );
 
     final String hashedPassword =
         NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
@@ -408,6 +412,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     if (!noSeedToImport) {
       Navigator.of(context).pushNamed("/intro_import",
           arguments: <String, String>{"fullIdentifier": fullIdentifier, "password": confirmPasswordController!.text});
+      return;
     }
 
     // Generate a new seed, encrypt, and upload to the seed backup endpoint:

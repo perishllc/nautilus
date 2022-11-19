@@ -1175,6 +1175,21 @@
     "type": "text",
     "description": "send_confirm_warning"
   },
+  "haveSeedToImport": "I have a seed",
+  "@haveSeedToImport": {
+    "type": "text",
+    "description": "have_seed_to_import"
+  },
+  "doYouHaveSeedHeader": "Do you have a seed to import?",
+  "@doYouHaveSeedHeader": {
+    "type": "text",
+    "description": "do_have_seed_to_import"
+  },
+  "doYouHaveSeedBody": "If you're not sure what this means then you probably don't have a seed to import and can just press continue.",
+  "@doYouHaveSeedBody": {
+    "type": "text",
+    "description": "do_have_seed_to_import_body"
+  },
   "instantly": "Instantly",
   "@instantly": {
     "type": "text",

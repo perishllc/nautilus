@@ -227,6 +227,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("Disable Wallet Password"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Dismiss"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "If you\'re not sure what this means then you probably don\'t have a seed to import and can just press continue."),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "Do you have a seed to import?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Invalid Domain Name"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Donate"),
@@ -358,6 +362,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Something went wrong while trying to handoff block!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "A supported handoff method couldn\'t be found!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("I have a seed"),
         "hide": MessageLookupByLibrary.simpleMessage("Hide"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Hide Account?"),

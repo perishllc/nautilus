@@ -2406,6 +2406,36 @@ class AppLocalization {
     );
   }
 
+  /// `I have a seed`
+  String get haveSeedToImport {
+    return Intl.message(
+      'I have a seed',
+      name: 'haveSeedToImport',
+      desc: 'have_seed_to_import',
+      args: [],
+    );
+  }
+
+  /// `Do you have a seed to import?`
+  String get doYouHaveSeedHeader {
+    return Intl.message(
+      'Do you have a seed to import?',
+      name: 'doYouHaveSeedHeader',
+      desc: 'do_have_seed_to_import',
+      args: [],
+    );
+  }
+
+  /// `If you're not sure what this means then you probably don't have a seed to import and can just press continue.`
+  String get doYouHaveSeedBody {
+    return Intl.message(
+      'If you\'re not sure what this means then you probably don\'t have a seed to import and can just press continue.',
+      name: 'doYouHaveSeedBody',
+      desc: 'do_have_seed_to_import_body',
+      args: [],
+    );
+  }
+
   /// `Instantly`
   String get instantly {
     return Intl.message(
