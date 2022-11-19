@@ -99,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("오류: Branch API에 연결할 수 없습니다."),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("연결 경고"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("취소"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("보안문자"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -322,6 +323,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("계정을 숨기시겠습니까?"),
         "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage("빈 계정 숨기기"),
         "home": MessageLookupByLibrary.simpleMessage("홈"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("한 시간 전에"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
@@ -444,6 +446,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "결제 요청, 메모, 메시지가 제대로 작동하지 않습니다."),
         "notifications": MessageLookupByLibrary.simpleMessage("알림"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("냐니콘"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("끄기"),
         "ok": MessageLookupByLibrary.simpleMessage("오케이"),
         "onStr": MessageLookupByLibrary.simpleMessage("켜기"),
@@ -667,6 +672,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Nautilus을 확인하세요! Nano의 공식 Android 지갑!"),
         "shareText": MessageLookupByLibrary.simpleMessage("텍스트 공유"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("보여 주다"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("계정 정보"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage("계정 QR 코드 표시"),

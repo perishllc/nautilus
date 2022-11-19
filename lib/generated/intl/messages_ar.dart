@@ -107,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "خطأ: لا يمكن الوصول إلى فرع API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("تحذير الاتصال"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("كلمة التحقق"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -360,6 +361,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("إخفاء الحسابات الفارغة"),
         "home": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("قبل ساعة"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("أنا أدرك المخاطر\n"),
@@ -494,6 +496,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "لن تعمل طلبات الدفع والمذكرات والرسائل بشكل صحيح."),
         "notifications": MessageLookupByLibrary.simpleMessage("تنبيهات"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("نيانيكون"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("غلق"),
         "ok": MessageLookupByLibrary.simpleMessage("طيب"),
         "onStr": MessageLookupByLibrary.simpleMessage("فتح"),
@@ -733,6 +738,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "راجع نتريوم! محفظة نتريوم الرسمية للهاتف"),
         "shareText": MessageLookupByLibrary.simpleMessage("مشاركة النص"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("يعرض"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("معلومات الحساب"),

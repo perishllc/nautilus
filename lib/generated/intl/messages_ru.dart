@@ -115,6 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ошибка: не удается получить доступ к Branch API"),
         "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(
             "Предупреждение о подключении"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Капча"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -385,6 +386,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Скрыть пустые аккаунты"),
         "home": MessageLookupByLibrary.simpleMessage("Главная"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Час назад"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Я понимаю риски"),
@@ -520,6 +522,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Платежные запросы, заметки и сообщения не будут работать должным образом."),
         "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Ньяникон"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Выкл."),
         "ok": MessageLookupByLibrary.simpleMessage("Ок"),
         "onStr": MessageLookupByLibrary.simpleMessage("Вкл."),
@@ -771,6 +776,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Оцените Nautilus! Лучший Android кошелёк Nano!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Поделиться текстом"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("Показывать"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Информация об аккаунте"),

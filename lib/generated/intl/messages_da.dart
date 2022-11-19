@@ -110,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Fejl: Kan ikke nå Branch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Advarsel om forbindelse"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Zrušit"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -369,6 +370,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Skjul tomme konti"),
         "home": MessageLookupByLibrary.simpleMessage("Hjem"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("En time siden"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Chápu rizika"),
@@ -505,6 +507,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Betalingsanmodninger, notater og meddelelser vil ikke fungere korrekt."),
         "notifications": MessageLookupByLibrary.simpleMessage("Upozornění"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Off"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("On"),
@@ -750,6 +755,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Vyzkoušejte Nautilus! Špičková mobilní peněženka NANO!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Del tekst"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("At vise"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Kontooplysninger"),

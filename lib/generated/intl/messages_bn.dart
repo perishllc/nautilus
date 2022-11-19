@@ -116,6 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "ত্রুটি: শাখা API-এ পৌঁছানো যাচ্ছে না"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("সংযোগ সতর্কতা"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("বাতিল"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("ক্যাপচা"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -378,6 +379,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("খালি অ্যাকাউন্ট লুকান"),
         "home": MessageLookupByLibrary.simpleMessage("হোম"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("এক ঘন্টা আগে"),
         "iUnderstandTheRisks": MessageLookupByLibrary.simpleMessage(
             "আমি ঝুঁকির কারণগুলি বুঝতে পারছি"),
@@ -515,6 +517,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "অর্থপ্রদানের অনুরোধ, মেমো এবং বার্তাগুলি সঠিকভাবে কাজ করবে না।"),
         "notifications": MessageLookupByLibrary.simpleMessage("বিজ্ঞপ্তিপত্র"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("নায়নিকন"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("বন্ধ"),
         "ok": MessageLookupByLibrary.simpleMessage("আচ্ছা"),
         "onStr": MessageLookupByLibrary.simpleMessage("চালু"),
@@ -762,6 +767,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Check out Nautilus! A premier NANO mobile wallet!"),
         "shareText": MessageLookupByLibrary.simpleMessage("টেক্সট শেয়ার করুন"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("দেখান"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("অ্যাকাউন্ট তথ্য"),

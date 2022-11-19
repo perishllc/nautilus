@@ -110,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Error: no es pot accedir a l\'API Branch"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Avís de connexió"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Zrušit"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -369,6 +370,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Amaga els comptes buits"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Fa una hora"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Chápu rizika"),
@@ -505,6 +507,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Les sol·licituds de pagament, les notes i els missatges no funcionaran correctament."),
         "notifications": MessageLookupByLibrary.simpleMessage("Upozornění"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Off"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("On"),
@@ -751,6 +756,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Vyzkoušejte Nautilus! Špičková mobilní peněženka NANO!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Comparteix el text"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("Espectacle"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Informació del compte"),

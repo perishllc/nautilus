@@ -111,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Błąd: nie można połączyć się z Branch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Ostrzeżenie o połączeniu"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Anuluj"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -371,6 +372,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Ukryj puste konta"),
         "home": MessageLookupByLibrary.simpleMessage("Strona główna"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Godzinę temu"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Rozumiem ryzyka"),
@@ -508,6 +510,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Żądania płatności, notatki i wiadomości nie będą działać prawidłowo."),
         "notifications": MessageLookupByLibrary.simpleMessage("Powiadomienia"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Wyłączone"),
         "ok": MessageLookupByLibrary.simpleMessage("Okej"),
         "onStr": MessageLookupByLibrary.simpleMessage("Włączone"),
@@ -755,6 +760,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Zobacz Nautilus! Oficjalny portfel Nano dla Android!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Udostępnij tekst"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("Pokazać"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Informacje o koncie"),

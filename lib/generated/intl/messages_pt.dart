@@ -116,6 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Erro: não é possível acessar a API Branch"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Aviso de conexão"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("CAPTCHA"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -380,6 +381,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Ocultar contas vazias"),
         "home": MessageLookupByLibrary.simpleMessage("Casa"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Uma hora atrás"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Eu entendo os riscos"),
@@ -515,6 +517,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Solicitações de pagamento, memorandos e mensagens não funcionarão corretamente."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notificações"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Ícone Nyanicon"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Desativar"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("Ativar"),
@@ -764,6 +769,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Confira Nautilus! Carteira Nano oficial para Android!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Compartilhar texto"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("mostrar"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Informações da Conta"),

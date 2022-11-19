@@ -115,6 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Помилка: неможливо отримати доступ до Branch API"),
         "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(
             "Попередження про підключення"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Відмовитися"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -385,6 +386,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(
             "Приховати порожні облікові записи"),
         "home": MessageLookupByLibrary.simpleMessage("Головна"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Годину тому"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Я розумію ризики"),
@@ -523,6 +525,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Платіжні запити, нотатки та повідомлення не працюватимуть належним чином."),
         "notifications": MessageLookupByLibrary.simpleMessage("Повідомлення"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Няникон"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Вимкнуто"),
         "ok": MessageLookupByLibrary.simpleMessage("Гаразд"),
         "onStr": MessageLookupByLibrary.simpleMessage("Увімкнуто"),
@@ -775,6 +780,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Спробуйте Nautilus!  Найкращий мобільний гаманець для NANO!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Поділитися текстом"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("Показати"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage(
             "Інформація про обліковий запис"),

@@ -102,6 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "שגיאה: לא ניתן להגיע ל-Banch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("אזהרת חיבור"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("בטל"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -349,6 +350,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("הסתר חשבונות ריקים"),
         "home": MessageLookupByLibrary.simpleMessage("דף הבית"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("לפני שעה"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
@@ -475,6 +477,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "בקשות תשלום, תזכירים והודעות לא יפעלו כראוי."),
         "notifications": MessageLookupByLibrary.simpleMessage("התראות"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("ניאניקון"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("כבוי"),
         "ok": MessageLookupByLibrary.simpleMessage("בסדר"),
         "onStr": MessageLookupByLibrary.simpleMessage("פועל"),
@@ -702,6 +707,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Check out Nautilus! A premier NANO mobile wallet!"),
         "shareText": MessageLookupByLibrary.simpleMessage("שתף טקסט"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("הופעה"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("פרטי חשבון"),
         "showAccountQR":

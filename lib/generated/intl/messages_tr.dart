@@ -109,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hata: Branch API\'ye ulaşılamıyor"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Bağlantı Uyarısı"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("İptal"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -368,6 +369,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Boş Hesapları Gizle"),
         "home": MessageLookupByLibrary.simpleMessage("Ana Sayfa"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Bir saat önce"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Risklerin Farkındayım"),
@@ -503,6 +505,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ödeme İstekleri, Notlar ve Mesajlar düzgün çalışmayacaktır."),
         "notifications": MessageLookupByLibrary.simpleMessage("Bildirimler"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Kapalı"),
         "ok": MessageLookupByLibrary.simpleMessage("Tamam"),
         "onStr": MessageLookupByLibrary.simpleMessage("Açık"),
@@ -745,6 +750,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Nano\'nun resmi Android Cüzdanı Nautilus\'u denesene!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Metni Paylaş"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("Göstermek"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Hesap bilgisi"),

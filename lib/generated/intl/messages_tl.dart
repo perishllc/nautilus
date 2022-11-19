@@ -115,6 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Error: hindi maabot ang Branch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Babala sa Koneksyon"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Kanselahin"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -386,6 +387,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(
             "Itago ang Mga Walang Lamang Account"),
         "home": MessageLookupByLibrary.simpleMessage("Tahanan"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo":
             MessageLookupByLibrary.simpleMessage("Isang oras ang nakaraan"),
         "iUnderstandTheRisks":
@@ -526,6 +528,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hindi gagana nang maayos ang Mga Kahilingan sa Pagbabayad, Memo, at Mensahe."),
         "notifications": MessageLookupByLibrary.simpleMessage("Abiso"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Off"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("On"),
@@ -781,6 +786,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Tingnan ang Nautilus! Ang opisyal na Android Wallet ng Nano!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Ibahagi ang Teksto"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("Ipakita"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Impormasyon ng Account"),

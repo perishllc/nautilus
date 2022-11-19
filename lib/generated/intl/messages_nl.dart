@@ -115,6 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Fout: kan Branch API niet bereiken"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Verbindingswaarschuwing"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Annuleer"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -379,6 +380,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Lege accounts verbergen"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Een uur geleden"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Ik begrijp de risico\'s"),
@@ -516,6 +518,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Betalingsverzoeken, memo\'s en berichten werken niet correct."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notificaties"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Uit"),
         "ok": MessageLookupByLibrary.simpleMessage("Oké"),
         "onStr": MessageLookupByLibrary.simpleMessage("Aan"),
@@ -762,6 +767,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Probeer Nautilus! Een premium mobiele Nano wallet!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Tekst delen"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("Show"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Account informatie"),

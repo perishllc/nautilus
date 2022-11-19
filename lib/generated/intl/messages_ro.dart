@@ -112,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Eroare: nu se poate accesa Branch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Avertisment de conectare"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Renunţare"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -379,6 +380,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Ascunde conturile goale"),
         "home": MessageLookupByLibrary.simpleMessage("Acasă"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Acum o oră"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Înțeleg riscurile"),
@@ -515,6 +517,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Solicitările de plată, notele și mesajele nu vor funcționa corect."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notificări"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Dezactivate"),
         "ok": MessageLookupByLibrary.simpleMessage("Bine"),
         "onStr": MessageLookupByLibrary.simpleMessage("Activate"),
@@ -760,6 +765,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Încearcă Nautilus! Portofelul mobil NANO de talie mondială!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Partajați text"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("Spectacol"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Informatii cont"),

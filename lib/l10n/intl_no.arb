@@ -270,6 +270,11 @@
     "type": "text",
     "description": "branch_connection_error_title"
   },
+  "businessButton": "",
+  "@businessButton": {
+    "type": "text",
+    "description": "business_button"
+  },
   "cancel": "Avbryt",
   "@cancel": {
     "type": "text",
@@ -1085,6 +1090,11 @@
     "type": "text",
     "description": "home"
   },
+  "homeButton": "",
+  "@homeButton": {
+    "type": "text",
+    "description": "home_button"
+  },
   "hourAgo": "En time siden",
   "@hourAgo": {
     "type": "text",
@@ -1509,6 +1519,21 @@
   "@nyanicon": {
     "type": "text",
     "description": "nyanicon_settings"
+  },
+  "obscureInfoHeader": "",
+  "@obscureInfoHeader": {
+    "type": "text",
+    "description": "obscure_tx_info"
+  },
+  "obscureTransaction": "",
+  "@obscureTransaction": {
+    "type": "text",
+    "description": "obscure_tx"
+  },
+  "obscureTransactionBody": "",
+  "@obscureTransactionBody": {
+    "type": "text",
+    "description": "obscure_tx_body"
   },
   "off": "Deaktiver",
   "@off": {
@@ -2264,6 +2289,11 @@
   "@shareText": {
     "type": "text",
     "description": "settings_share_text"
+  },
+  "shopButton": "",
+  "@shopButton": {
+    "type": "text",
+    "description": "shop_button"
   },
   "show": "Forestilling",
   "@show": {

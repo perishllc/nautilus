@@ -113,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "त्रुटि: शाखा एपीआई तक नहीं पहुंच सकता"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("कनेक्शन चेतावनी"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("रद्द करें"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("कॅप्चा"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -371,6 +372,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("खाली खाते छुपाएं"),
         "home": MessageLookupByLibrary.simpleMessage("होम"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("एक घंटे पहले"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("मैं जोखिमो को समझता हूँ"),
@@ -503,6 +505,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "भुगतान अनुरोध, मेमो और संदेश ठीक से काम नहीं करेंगे।"),
         "notifications": MessageLookupByLibrary.simpleMessage("सूचनाएं"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("न्यैनिकॉन"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("बंद"),
         "ok": MessageLookupByLibrary.simpleMessage("ओके"),
         "onStr": MessageLookupByLibrary.simpleMessage("चालू"),
@@ -747,6 +752,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "नैट्रियम की जाँच करें! एक प्रमुख नैनो मोबाइल वॉलेट!"),
         "shareText": MessageLookupByLibrary.simpleMessage("पाठ साझा करें"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("प्रदर्शन"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("खाता जानकारी"),
         "showAccountQR":

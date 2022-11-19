@@ -113,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Napaka: Branch API ni mogoč"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Opozorilo o povezavi"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Prekliči"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -377,6 +378,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Skrij prazne račune"),
         "home": MessageLookupByLibrary.simpleMessage("Domov"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Pred uro"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
@@ -511,6 +513,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Zahtevki za plačilo, beležke in sporočila ne bodo delovali pravilno."),
         "notifications": MessageLookupByLibrary.simpleMessage("Opozorila"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Izklopi"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("Vklopi"),
@@ -755,6 +760,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Preveri Nautilus! Uradna mobilna Nano denarnica!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Delite besedilo"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("Prikaži"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Informacije o računu"),

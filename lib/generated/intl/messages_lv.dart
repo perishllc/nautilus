@@ -114,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kļūda: nevar sasniegt Branch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Brīdinājums par savienojumu"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Atcelt"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -378,6 +379,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Paslēpt tukšos kontus"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Pirms stundas"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
@@ -510,6 +512,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Maksājumu pieprasījumi, piezīmes un ziņojumi nedarbosies pareizi."),
         "notifications": MessageLookupByLibrary.simpleMessage("Paziņojumi"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Izslēgts"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("Ieslēgts"),
@@ -752,6 +757,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Uzmet aci Nautilus! Izcils NANO viedais maks!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Kopīgot tekstu"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("Rādīt"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Konta informācija"),

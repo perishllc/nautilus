@@ -112,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Lỗi: không thể truy cập API chi nhánh"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Cảnh báo kết nối"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("mã ngẫu nhiên"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -375,6 +376,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Ẩn tài khoản trống"),
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Một tiếng trước"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Tôi hiểu những rủi ro"),
@@ -510,6 +512,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Yêu cầu thanh toán, Bản ghi nhớ và Tin nhắn sẽ không hoạt động bình thường."),
         "notifications": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Tắt"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("Bật"),
@@ -754,6 +759,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Thử ngay Nautilus! Ví Nano di động hàng đầu!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Chia sẻ văn bản"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("Trình diễn"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Thông tin tài khoản"),

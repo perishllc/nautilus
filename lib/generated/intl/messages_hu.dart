@@ -114,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hiba: nem érhető el a Branch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Csatlakozási figyelmeztetés"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Mégse"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -380,6 +381,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Üres fiókok elrejtése"),
         "home": MessageLookupByLibrary.simpleMessage("Otthon"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Egy órája"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
@@ -518,6 +520,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "A fizetési kérelmek, emlékeztetők és üzenetek nem működnek megfelelően."),
         "notifications": MessageLookupByLibrary.simpleMessage("Értesítések"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Ki"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("Be"),
@@ -766,6 +771,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Próbáld ki a Nautilusot, a Nano hivatalos Androidos tárcáját!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Szöveg megosztása"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("Előadás"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Számlainformáció"),

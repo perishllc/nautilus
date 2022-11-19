@@ -109,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ralat: tidak dapat mencapai API Cawangan"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Amaran Sambungan"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Batal"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -375,6 +376,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Sembunyikan Akaun Kosong"),
         "home": MessageLookupByLibrary.simpleMessage("Rumah"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Satu jam yang lalu"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Saya Memahami Risiko"),
@@ -509,6 +511,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Permintaan Pembayaran, Memo dan Mesej tidak akan berfungsi dengan baik."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifikasi"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Off"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("On"),
@@ -752,6 +757,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Semakkan Nautilus! Dompet Android Nano yang rasmi"),
         "shareText": MessageLookupByLibrary.simpleMessage("Kongsi Teks"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("Tunjukkan"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Maklumat akaun"),

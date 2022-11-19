@@ -98,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorShortDesc":
             MessageLookupByLibrary.simpleMessage("エラー: Branch API にアクセスできません"),
         "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage("接続警告"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("キャプチャ"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -323,6 +324,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("空のアカウントを非表示"),
         "home": MessageLookupByLibrary.simpleMessage("ホーム"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("1時間前"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("リスクを理解しました。"),
@@ -442,6 +444,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "支払い請求、メモ、およびメッセージは正しく機能しません。"),
         "notifications": MessageLookupByLibrary.simpleMessage("通知"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("ニャニコン"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("オフ"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "onStr": MessageLookupByLibrary.simpleMessage("オン"),
@@ -658,6 +663,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "優秀なナノモバイルウォレットであるナトリアムを使ってみましょう。"),
         "shareText": MessageLookupByLibrary.simpleMessage("テキストを共有"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("見せる"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("アカウント情報"),
         "showAccountQR":

@@ -116,6 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Fehler: Verzweigungs-API kann nicht erreicht werden"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Verbindungswarnung"),
+        "businessButton": MessageLookupByLibrary.simpleMessage(""),
         "cancel": MessageLookupByLibrary.simpleMessage("Abbrechen"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -388,6 +389,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Leere Konten ausblenden"),
         "home": MessageLookupByLibrary.simpleMessage("Zuhause"),
+        "homeButton": MessageLookupByLibrary.simpleMessage(""),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Vor einer Stunde"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Ich verstehe die Risiken"),
@@ -527,6 +529,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "notifications":
             MessageLookupByLibrary.simpleMessage("Benachrichtigungen"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
         "off": MessageLookupByLibrary.simpleMessage("Aus"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("An"),
@@ -774,6 +779,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Probier mal Nautilus, Nanos offizielles Android-Wallet!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Text teilen"),
+        "shopButton": MessageLookupByLibrary.simpleMessage(""),
         "show": MessageLookupByLibrary.simpleMessage("Zeigen"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Kontoinformation"),

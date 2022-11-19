@@ -255,36 +255,6 @@
     "type": "text",
     "description": "block_user"
   },
-  "obscureInfoHeader": "Obscure Transaction Info",
-  "@obscureInfoHeader": {
-    "type": "text",
-    "description": "obscure_tx_info"
-  },
-  "obscureTransaction": "Obscure Transaction",
-  "@obscureTransaction": {
-    "type": "text",
-    "description": "obscure_tx"
-  },
-  "obscureTransactionBody": "This is NOT true privacy, but it will make it harder for the recipient to see who sent them funds.",
-  "@obscureTransactionBody": {
-    "type": "text",
-    "description": "obscure_tx_body"
-  },
-  "businessButton": "Business",
-  "@businessButton": {
-    "type": "text",
-    "description": "business_button"
-  },
-  "homeButton": "Home",
-  "@homeButton": {
-    "type": "text",
-    "description": "home_button"
-  },
-  "shopButton": "Shop",
-  "@shopButton": {
-    "type": "text",
-    "description": "shop_button"
-  },
   "branchConnectErrorLongDesc": "We can't seem to reach the Branch API, this is usually cause by some sort of network issue or VPN blocking the connection.\n\n You should still be able to use the app as normal, however sending and receiving gift cards may not work.",
   "@branchConnectErrorLongDesc": {
     "type": "text",
@@ -299,6 +269,11 @@
   "@branchConnectErrorTitle": {
     "type": "text",
     "description": "branch_connection_error_title"
+  },
+  "businessButton": "Business",
+  "@businessButton": {
+    "type": "text",
+    "description": "business_button"
   },
   "cancel": "Cancel",
   "@cancel": {
@@ -1115,6 +1090,11 @@
     "type": "text",
     "description": "home"
   },
+  "homeButton": "Home",
+  "@homeButton": {
+    "type": "text",
+    "description": "home_button"
+  },
   "hourAgo": "An hour ago",
   "@hourAgo": {
     "type": "text",
@@ -1539,6 +1519,21 @@
   "@nyanicon": {
     "type": "text",
     "description": "nyanicon_settings"
+  },
+  "obscureInfoHeader": "Obscure Transaction Info",
+  "@obscureInfoHeader": {
+    "type": "text",
+    "description": "obscure_tx_info"
+  },
+  "obscureTransaction": "Obscure Transaction",
+  "@obscureTransaction": {
+    "type": "text",
+    "description": "obscure_tx"
+  },
+  "obscureTransactionBody": "This is NOT true privacy, but it will make it harder for the recipient to see who sent them funds.",
+  "@obscureTransactionBody": {
+    "type": "text",
+    "description": "obscure_tx_body"
   },
   "off": "Off",
   "@off": {
@@ -2294,6 +2289,11 @@
   "@shareText": {
     "type": "text",
     "description": "settings_share_text"
+  },
+  "shopButton": "Shop",
+  "@shopButton": {
+    "type": "text",
+    "description": "shop_button"
   },
   "show": "Show",
   "@show": {
