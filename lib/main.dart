@@ -40,7 +40,7 @@ import 'package:nautilus_wallet_flutter/ui/lock_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/password_lock_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/purchase_nano.dart';
 import 'package:nautilus_wallet_flutter/ui/register/register_username.dart';
-import 'package:nautilus_wallet_flutter/ui/scan_screen.dart';
+import 'package:nautilus_wallet_flutter/ui/scan/scan_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/swap/swap_xmr_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';

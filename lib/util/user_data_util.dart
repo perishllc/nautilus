@@ -10,7 +10,7 @@ import 'package:nautilus_wallet_flutter/model/address.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/pay_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/ui/scan_screen.dart';
+import 'package:nautilus_wallet_flutter/ui/scan/scan_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';

@@ -57,7 +57,7 @@ import 'package:nautilus_wallet_flutter/ui/home/top_card.dart';
 import 'package:nautilus_wallet_flutter/ui/popup_button.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_xmr_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/scan_screen.dart';
+import 'package:nautilus_wallet_flutter/ui/scan/scan_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/settings/settings_drawer.dart';

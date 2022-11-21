@@ -34,7 +34,7 @@ import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/auth/auth_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/handoff/handoff_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/receive/receive_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/scan_screen.dart';
+import 'package:nautilus_wallet_flutter/ui/scan/scan_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_gift.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
