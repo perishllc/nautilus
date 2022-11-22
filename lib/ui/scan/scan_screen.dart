@@ -42,7 +42,9 @@ class ScanScreenState extends State<ScanScreen> {
         children: <Widget>[
           MobileScanner(
             controller: cameraController,
-            onDetect: (Barcode barcode, MobileScannerArguments? args) {
+            onDetect: (BarcodeCapture barcodeCapture) {
+              if (barcodeCapture.barcodes.isEmpty) return;
+              final Barcode barcode = barcodeCapture.barcodes.first;
               if (barcode.rawValue == null) {
                 debugPrint("Failed to scan Barcode");
                 return;
