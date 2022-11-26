@@ -21,6 +21,11 @@ dependencies:
 
   # magic:
   magic_sdk: ^2.0.0
+  # magic_sdk:
+  #   git:
+  #     url: https://github.com/magiclabs/magic-flutter.git
+  #     path: packages/magic_sdk
+  #     ref: main
 
   # cicd:
   flutter_dotenv: ^5.0.2
@@ -54,7 +59,9 @@ dependencies:
 
   # ENS:
   ens_dart: ^1.0.0
-  web3dart: ^2.4.1
+  # web3dart: ^2.4.1
+  # version 2.5.0 breaks things:
+  web3dart: 2.4.1
 
   # charts:
   coingecko_api: ^1.1.0+2
