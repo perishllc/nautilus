@@ -1288,10 +1288,17 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
       // random delay between 500ms and 1.5s:
       Future<void>.delayed(Duration(milliseconds: 250 + Random().nextInt(500)), () async {
-        _maxHistItems += 35;
+        _maxHistItems += 25;
         await generateUnifiedList(fastUpdate: true);
+        final double oldMaxScroll = _scrollController.position.maxScrollExtent;
         setState(() {
           _loadingMore = false;
+        });
+        // post frame callback to wait for the list to be built:
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          final double maxScrollDiff = _scrollController.position.maxScrollExtent - oldMaxScroll;
+          // can't be exact because otherwise the jump doesn't register for w/e reason:
+          _scrollController.jumpTo(_scrollController.position.maxScrollExtent - maxScrollDiff - 1);
         });
       });
     }
