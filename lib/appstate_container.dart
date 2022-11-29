@@ -1964,4 +1964,14 @@ class StateContainerState extends State<StateContainer> {
       child: widget.child,
     );
   }
+
+  Future<bool> isSubscribed(BuildContext context) async {
+    // first check if the subscription is active:
+    final bool activeSubscription = await sl.get<SharedPrefsUtil>().getProStatus();
+    return activeSubscription;
+    // if (activeSubscription) {
+    //   return true;
+    // }
+    // return false;
+  }
 }

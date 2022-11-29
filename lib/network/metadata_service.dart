@@ -14,7 +14,10 @@ import 'package:nautilus_wallet_flutter/service_locator.dart';
 // MetadataService singleton
 class MetadataService {
   // Constructor
-  MetadataService() {}
+  MetadataService();
+
+  static const String PRO_PAYMENT_ADDRESS = "nano_35n1a3fbbar5imzmsyrfxaeqwgkgkd7autbjxon9btfbui5ys86g8kmpbjte";
+  static const String PRO_PAYMENT_MONTHLY_COST = "1000000000000000000000000000000";
 
   // meta:
   static String META_SERVER = "https://meta.perish.co";
@@ -24,7 +27,9 @@ class MetadataService {
   static String WS_PROTO = "wss://";
 
   // ignore_for_file: non_constant_identifier_names
-  static String SERVER_ADDRESS_HTTP = "$HTTP_PROTO$META_SERVER/api";
+  // static String SERVER_ADDRESS_HTTP = "$HTTP_PROTO$META_SERVER/api";
+  static String SERVER_ADDRESS_PAYMENTS = "$META_SERVER/payments";
+  static String SERVER_ADDRESS_NOTIFICATIONS = "$META_SERVER/notifications";
   static String SERVER_ADDRESS_ALERTS = "$META_SERVER/alerts";
   static String SERVER_ADDRESS_FUNDING = "$META_SERVER/funding";
 
@@ -34,8 +39,23 @@ class MetadataService {
 
   // HTTP API
 
-  Future<dynamic> makeHttpRequest(BaseRequest request) async {
-    final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_HTTP),
+  Future<dynamic> makeNotificationsRequest(BaseRequest request) async {
+    final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_NOTIFICATIONS),
+        headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
+
+    if (response.statusCode != 200) {
+      return null;
+    }
+    final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
+    if (decoded.containsKey("error")) {
+      return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
+    }
+
+    return decoded;
+  }
+
+  Future<dynamic> makePaymentsRequest(BaseRequest request) async {
+    final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_PAYMENTS),
         headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
 
     if (response.statusCode != 200) {
@@ -62,7 +82,7 @@ class MetadataService {
         local_uuid: localUuid);
 
     // queueRequest(request);
-    final dynamic response = await makeHttpRequest(request);
+    final dynamic response = await makePaymentsRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
     }
@@ -79,7 +99,7 @@ class MetadataService {
         memo_enc: memoEnc,
         block: block,
         local_uuid: localUuid);
-    final dynamic response = await makeHttpRequest(request);
+    final dynamic response = await makePaymentsRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error} ${response.details}");
     }
@@ -94,7 +114,7 @@ class MetadataService {
         request_nonce: requestNonce,
         memo_enc: memoEnc,
         local_uuid: localUuid);
-    final dynamic response = await makeHttpRequest(request);
+    final dynamic response = await makePaymentsRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error} ${response.details}");
     }
@@ -102,7 +122,7 @@ class MetadataService {
 
   Future<void> requestACK(String? requestUuid, String? account, String? requestingAccount) async {
     final PaymentACK request = PaymentACK(uuid: requestUuid, account: account, requesting_account: requestingAccount);
-    final dynamic response = await makeHttpRequest(request);
+    final dynamic response = await makePaymentsRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error} ${response.details}");
     }

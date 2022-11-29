@@ -285,48 +285,45 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         )),
 
                   // obsfucation checkbox:
-                  Container(
-                    margin: const EdgeInsets.only(top: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Checkbox(
-                          value: obsfucationMode,
-                          activeColor: StateContainer.of(context).curTheme.primary,
-                          onChanged: (bool? value) {
-                            if (value == null) return;
-                            setState(() {
-                              obsfucationMode = value;
-                            });
-                          },
-                        ),
-                        const SizedBox(width: 10),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              obsfucationMode = !obsfucationMode;
-                            });
-                          },
-                          child: Text(
-                            AppLocalization.of(context).obscureTransaction,
-                            style: AppStyles.textStyleParagraph(context),
+                  if (widget.amountRaw != "0" && widget.link.isEmpty)
+                    Container(
+                      margin: const EdgeInsets.only(top: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Checkbox(
+                            value: obsfucationMode,
+                            activeColor: StateContainer.of(context).curTheme.primary,
+                            onChanged: onObsfuscationChanged,
                           ),
-                        ),
-                        Container(
-                          width: 60,
-                          height: 60,
-                          alignment: Alignment.center,
-                          child: AppDialogs.infoButton(
-                            context,
-                            () {
-                              AppDialogs.showInfoDialog(context, AppLocalization.of(context).obscureInfoHeader,
-                                  AppLocalization.of(context).obscureTransactionBody,);
+                          const SizedBox(width: 10),
+                          GestureDetector(
+                            onTap: () {
+                              onObsfuscationChanged(!obsfucationMode);
                             },
+                            child: Text(
+                              AppLocalization.of(context).obscureTransaction,
+                              style: AppStyles.textStyleParagraph(context),
+                            ),
                           ),
-                        ),
-                      ],
+                          Container(
+                            width: 60,
+                            height: 60,
+                            alignment: Alignment.center,
+                            child: AppDialogs.infoButton(
+                              context,
+                              () {
+                                AppDialogs.showInfoDialog(
+                                  context,
+                                  AppLocalization.of(context).obscureInfoHeader,
+                                  AppLocalization.of(context).obscureTransactionBody,
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),
@@ -749,5 +746,17 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       await Future<dynamic>.delayed(const Duration(milliseconds: 200));
       EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
     }
+  }
+
+  Future<void> onObsfuscationChanged(bool? value) async {
+    if (value == null) return;
+    if (value) {
+      if (!(await AppDialogs.proCheck(context))) {
+        return;
+      }
+    }
+    setState(() {
+      obsfucationMode = value;
+    });
   }
 }

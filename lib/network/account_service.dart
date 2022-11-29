@@ -78,7 +78,6 @@ class AccountService {
   static String SERVER_ADDRESS_HTTP = "$HTTP_PROTO$BASE_SERVER_ADDRESS/api";
   static String SERVER_ADDRESS_ALERTS = "$HTTP_PROTO$BASE_SERVER_ADDRESS/alerts";
   static String SERVER_ADDRESS_FUNDING = "$HTTP_PROTO$BASE_SERVER_ADDRESS/funding";
-  static String SERVER_ADDRESS_GIFT = "$HTTP_PROTO$BASE_SERVER_ADDRESS/gift";
 
   static const String NANO_TO_USERNAME_LEASE_ENDPOINT = "https://api.nano.to/";
   static const String NANO_TO_KNOWN_ENDPOINT = "https://nano.to/known.json";

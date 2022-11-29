@@ -27,6 +27,8 @@ final BigInt rawPerNano = BigInt.from(10).pow(30);
 final BigInt rawPerNyano = BigInt.from(10).pow(24);
 
 class GiftCards {
+  static const String SERVER_ADDRESS_GIFT = "https://meta.perish.co/gift";
+
   Future<BranchResponse<dynamic>> createGiftCard(
     BuildContext context, {
     required String paperWalletSeed,
@@ -110,7 +112,7 @@ class GiftCards {
         "error": "Something went wrong",
       };
     }
-    final http.Response response = await http.post(Uri.parse(AccountService.SERVER_ADDRESS_HTTP),
+    final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_GIFT),
         headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken},
         body: json.encode(
           {

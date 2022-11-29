@@ -19,13 +19,6 @@ class AuthService {
   static String RPC_URL = "nautilus.perish.co";
   static String WS_URL = "nautilus.perish.co";
 
-  // ignore_for_file: non_constant_identifier_names
-  static String SERVER_ADDRESS_WS = "$WS_PROTO$BASE_SERVER_ADDRESS";
-  static String SERVER_ADDRESS_HTTP = "$HTTP_PROTO$BASE_SERVER_ADDRESS/api";
-  static String SERVER_ADDRESS_ALERTS = "$HTTP_PROTO$BASE_SERVER_ADDRESS/alerts";
-  static String SERVER_ADDRESS_FUNDING = "$HTTP_PROTO$BASE_SERVER_ADDRESS/funding";
-  static String SERVER_ADDRESS_GIFT = "$HTTP_PROTO$BASE_SERVER_ADDRESS/gift";
-
   // auth:
   static String AUTH_SERVER = "https://auth.perish.co";
 

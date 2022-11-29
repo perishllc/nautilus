@@ -5,6 +5,7 @@
 - UI fixes in the set plausible pin menu
 #### Fixed
 - Even more QR code scanning bugs
+- Long standing scroll bar issues
 ## v0.7.0 - [2022-11-10]
 #### Added
 - Magic link login + encrypted seed backup

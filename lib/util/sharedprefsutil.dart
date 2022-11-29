@@ -79,6 +79,10 @@ class SharedPrefsUtil {
   // key derivation method:
   static const String key_derivation = 'fnautilus_key_derivation';
 
+  // pro sub status (whether they have paid):
+  static const String pro_sub_status = 'fnautilus_pro_sub_status';
+  // whether they should automatically renew:
+  static const String pro_renew_active = 'fnautilus_pro_renew_active';
 
   // For plain-text data
   Future<void> set(String key, dynamic value) async {
@@ -111,6 +115,20 @@ class SharedPrefsUtil {
       final DateTime now = DateTime.now().toUtc();
       final DateTime expired = now.add(Duration(seconds: expiry));
       expiryVal = expired.millisecondsSinceEpoch;
+    } else {
+      expiryVal = expiry;
+    }
+    // ignore: always_specify_types
+    final Map<String, dynamic> msg = {'data': value, 'expiry': expiryVal};
+    final String serialized = json.encode(msg);
+    await set(key, serialized);
+  }
+
+  /// Set a key with absolute expiry, expiry is in seconds
+  Future<void> setWithAbsoluteExpiry(String key, dynamic value, int expiry) async {
+    int expiryVal;
+    if (expiry != -1) {
+      expiryVal = expiry * 1000;
     } else {
       expiryVal = expiry;
     }
@@ -546,7 +564,6 @@ class SharedPrefsUtil {
   Future<String?> getXmrWalletData() async {
     return await get(xmr_wallet_data, defaultValue: null) as String?;
   }
-  
 
   Future<void> setKeyDerivationMethod(String data) async {
     return set(key_derivation, data);
@@ -554,6 +571,31 @@ class SharedPrefsUtil {
 
   Future<String> getKeyDerivationMethod() async {
     return await get(key_derivation, defaultValue: "standard") as String;
+  }
+
+  // check again in a month:
+  Future<void> setProStatus({int? relativeExpireTime, int? absoluteExpireTime}) async {
+    if (relativeExpireTime != null) {
+      return setWithExpiry(pro_sub_status, true, relativeExpireTime);
+    } else if (absoluteExpireTime != null) {
+      return setWithAbsoluteExpiry(pro_sub_status, true, absoluteExpireTime);
+    } else {
+      throw Exception("setProStatus requires either relative or absolute expire time");
+    }
+  }
+
+  Future<bool> getProStatus() async {
+    bool? proStatus = await getWithExpiry(pro_sub_status) as bool?;
+    proStatus ??= false;
+    return proStatus;
+  }
+
+  Future<void> setProRenewActive(bool active) async {
+    return set(pro_renew_active, active);
+  }
+
+  Future<bool> getRenewActive() async {
+    return await get(pro_renew_active, defaultValue: false) as bool;
   }
 
   // TODO:
@@ -596,6 +638,8 @@ class SharedPrefsUtil {
     await prefs.remove(xmr_wallet_data);
     await prefs.remove(key_derivation);
     await prefs.remove(cur_theme);
+    await prefs.remove(pro_sub_status);
+    await prefs.remove(pro_renew_active);
     // don't remove this preference since it's annoying when you log out:
     // await prefs.remove(tracking_enabled);
     // remove the dismissals of any important alerts:

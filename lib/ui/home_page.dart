@@ -2500,25 +2500,31 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               label: AppLocalization.of(context).homeButton,
               backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
             ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.business),
-              label: AppLocalization.of(context).businessButton,
-              backgroundColor: StateContainer.of(context).curTheme.warning,
-            ),
+            // BottomNavigationBarItem(
+            //   icon: const Icon(Icons.business),
+            //   label: AppLocalization.of(context).businessButton,
+            //   backgroundColor: StateContainer.of(context).curTheme.warning,
+            // ),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: StateContainer.of(context).curTheme.primary,
           unselectedItemColor: StateContainer.of(context).curTheme.text,
           onTap: (int index) async {
+            // special case for when you double tap home, scroll to the top:
             if (_selectedIndex == index) {
               if (index == 1) {
                 _scrollController.animateTo(
-                  0.0,
+                  0,
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.easeOut,
                 );
               }
-            } else if (index != 1) {
+              return;
+            }
+            setState(() {
+              _selectedIndex = index;
+            });
+            if (index != 1) {
               if (index == 2) {
                 final String data = "nano:${StateContainer.of(context).wallet!.address}";
                 final Widget qrWidget = SizedBox(
@@ -2549,9 +2555,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 _selectedIndex = 1;
               });
             }
-            setState(() {
-              _selectedIndex = index;
-            });
           },
         ),
       ),

@@ -5,16 +5,22 @@ import 'package:markdown/markdown.dart' as md;
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
 import 'package:nautilus_wallet_flutter/generated/l10n.dart';
+import 'package:nautilus_wallet_flutter/network/metadata_service.dart';
+import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
+import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/funding_messages_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppDialogs {
-  static void showConfirmDialog(BuildContext context, String title, String content, String buttonText, Function onPressed,
+  static void showConfirmDialog(
+      BuildContext context, String title, String content, String buttonText, Function onPressed,
       {String? cancelText, Function? cancelAction, bool barrierDismissible = true}) {
     cancelText ??= AppLocalization.of(context).cancel.toUpperCase();
 
@@ -76,7 +82,8 @@ class AppDialogs {
     );
   }
 
-  static Future<bool> waitableConfirmDialog(BuildContext context, String title, String content, String buttonText, {String? cancelText, bool barrierDismissible = true}) async {
+  static Future<bool> waitableConfirmDialog(BuildContext context, String title, String content, String buttonText,
+      {String? cancelText, bool barrierDismissible = true}) async {
     cancelText ??= AppLocalization.of(context).cancel.toUpperCase();
 
     final bool res = await showAppDialog(
@@ -119,6 +126,104 @@ class AppDialogs {
                 constraints: const BoxConstraints(maxWidth: 100),
                 child: Text(
                   buttonText,
+                  textAlign: TextAlign.center,
+                  style: AppStyles.textStyleDialogButtonText(context),
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+            ),
+          ],
+        );
+      },
+    ) as bool;
+    return res;
+  }
+
+  static Future<bool> proCheck(BuildContext context) async {
+    // first check if pro is enabled
+    final bool isSubbed = await StateContainer.of(context).isSubscribed(context);
+    if (isSubbed) return true;
+
+    // search through the wallet history to see if we paid to the pro address:
+    bool hasPaid = false;
+    int paidTimestamp = 0;
+    final List<AccountHistoryResponseItem>? history = StateContainer.of(context).wallet?.history;
+    if (history != null && history.isNotEmpty) {
+      for (final AccountHistoryResponseItem histItem in history) {
+        if (histItem.subtype == BlockTypes.SEND && histItem.account == MetadataService.PRO_PAYMENT_ADDRESS) {
+          if (BigInt.parse(histItem.amount!) >= BigInt.parse(MetadataService.PRO_PAYMENT_MONTHLY_COST)) {
+            hasPaid = true;
+            paidTimestamp = histItem.local_timestamp ?? 0;
+            break;
+          }
+        }
+      }
+    }
+
+    if (hasPaid) {
+      const int monthInSecs = 2628000;
+      final int nowInSecs = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+      bool paymentWasRecent = false;
+      if (paidTimestamp > 0) {
+        final int monthFromPayment = paidTimestamp + monthInSecs;
+        // make sure the payment was made within the last month
+        if (nowInSecs - paidTimestamp < monthInSecs) {
+          sl.get<SharedPrefsUtil>().setProStatus(absoluteExpireTime: monthFromPayment);
+          paymentWasRecent = true;
+        }
+      } else {
+        // If we don't have a timestamp, we can't be sure if the payment was recent,
+        // so just set it to be a month from now:
+        sl.get<SharedPrefsUtil>().setProStatus(relativeExpireTime: monthInSecs);
+        paymentWasRecent = true;
+      }
+      if (paymentWasRecent) {
+        return true;
+      }
+    }
+
+    final bool res = await showAppDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AppAlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          title: Text(
+            "Nautilus Pro Subscription Required",
+            style: AppStyles.textStyleButtonPrimaryOutline(context),
+          ),
+          content: Text("1 Nano a month", style: AppStyles.textStyleParagraph(context)),
+          actions: <Widget>[
+            TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                padding: const EdgeInsets.all(12),
+              ),
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 100),
+                child: Text(
+                  AppLocalization.of(context).noThanks,
+                  textAlign: TextAlign.center,
+                  style: AppStyles.textStyleDialogButtonText(context),
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                padding: const EdgeInsets.all(12),
+              ),
+              child: Container(
+                constraints: const BoxConstraints(maxWidth: 100),
+                child: Text(
+                  "Subscribe",
                   textAlign: TextAlign.center,
                   style: AppStyles.textStyleDialogButtonText(context),
                 ),
@@ -211,7 +316,8 @@ class AppDialogs {
     ]);
   }
 
-  static Widget infoButton(BuildContext context, void Function()? onPressed, {IconData icon = AppIcons.info, Key? key}) {
+  static Widget infoButton(BuildContext context, void Function()? onPressed,
+      {IconData icon = AppIcons.info, Key? key}) {
     // A container for the info button
     return SizedBox(
       width: 50,
@@ -281,7 +387,8 @@ class AppDialogs {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(AppLocalization.of(context).changeLog, textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
+                    child: Text(AppLocalization.of(context).changeLog,
+                        textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
                   ),
                   Container(
                     constraints: const BoxConstraints(minHeight: 300, maxHeight: 400),
@@ -356,7 +463,9 @@ class AppDialogs {
                             Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
                             Sheets.showAppHeightNineSheet(
-                                context: context, widget: FundingMessagesSheet(alerts: StateContainer.of(context).fundingAlerts, hasDismissButton: false));
+                                context: context,
+                                widget: FundingMessagesSheet(
+                                    alerts: StateContainer.of(context).fundingAlerts, hasDismissButton: false));
                           });
                         },
                         child: Text(
@@ -370,7 +479,8 @@ class AppDialogs {
                       TextButton(
                         key: const Key("changelog_dismiss_button"),
                         onPressed: () => Navigator.of(context).pop(),
-                        child: Text(AppLocalization.of(context).dismiss, style: AppStyles.textStyleDialogOptions(context)),
+                        child:
+                            Text(AppLocalization.of(context).dismiss, style: AppStyles.textStyleDialogOptions(context)),
                       ),
                     ]),
                   ),
@@ -399,7 +509,8 @@ class AppDialogs {
                 AppDialogs.infoButton(
                   context,
                   () {
-                    AppDialogs.showInfoDialog(context, AppLocalization.of(context).trackingHeader, AppLocalization.of(context).trackingWarningBodyLong);
+                    AppDialogs.showInfoDialog(context, AppLocalization.of(context).trackingHeader,
+                        AppLocalization.of(context).trackingWarningBodyLong);
                   },
                 )
               ],
