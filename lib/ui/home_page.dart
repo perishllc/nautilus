@@ -187,6 +187,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   int _selectedIndex = 1;
 
+  bool _hasSub = false;
+
   Future<void> _switchToAccount(String account) async {
     final List<Account> accounts = await sl.get<DBHelper>().getAccounts(await StateContainer.of(context).getSeed());
     if (!mounted) return;
@@ -873,6 +875,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
       // add donations contact:
       _addSampleContact();
+
+      // check for nautilus pro sub:
+      if (!mounted) return;
+      _hasSub = await AppDialogs.proCheck(context, showDialog: false);
     });
     // confetti:
     _confettiControllerLeft = ConfettiController(duration: const Duration(milliseconds: 150));
@@ -2094,16 +2100,20 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         Sheets.showAppHeightNineSheet(
             context: context,
             widget: SendConfirmSheet(
-                amountRaw: amount, destination: address.address!, contactName: user?.getDisplayName()));
+              amountRaw: amount,
+              destination: address.address!,
+              contactName: user?.getDisplayName(),
+            ));
       } else {
         // Go to send with address
         Sheets.showAppHeightNineSheet(
             context: context,
             widget: SendSheet(
-                localCurrency: StateContainer.of(context).curCurrency,
-                user: user,
-                address: address.address,
-                quickSendAmount: amount));
+              localCurrency: StateContainer.of(context).curCurrency,
+              user: user,
+              address: address.address,
+              quickSendAmount: amount,
+            ));
       }
     } else if (result is PayItem) {
       // handle block handoff:

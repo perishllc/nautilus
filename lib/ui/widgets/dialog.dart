@@ -10,6 +10,7 @@ import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
@@ -141,19 +142,23 @@ class AppDialogs {
     return res;
   }
 
-  static Future<bool> proCheck(BuildContext context) async {
+  static Future<bool> proCheck(BuildContext context, {bool showDialog = true}) async {
     // first check if pro is enabled
     final bool isSubbed = await StateContainer.of(context).isSubscribed(context);
     if (isSubbed) return true;
 
     // search through the wallet history to see if we paid to the pro address:
     bool hasPaid = false;
+    bool lifetime = false;
     int paidTimestamp = 0;
     final List<AccountHistoryResponseItem>? history = StateContainer.of(context).wallet?.history;
     if (history != null && history.isNotEmpty) {
       for (final AccountHistoryResponseItem histItem in history) {
         if (histItem.subtype == BlockTypes.SEND && histItem.account == MetadataService.PRO_PAYMENT_ADDRESS) {
           if (BigInt.parse(histItem.amount!) >= BigInt.parse(MetadataService.PRO_PAYMENT_MONTHLY_COST)) {
+            if (BigInt.parse(histItem.amount!) >= BigInt.parse(MetadataService.PRO_PAYMENT_LIFETIME_COST)) {
+              lifetime = true;
+            }
             hasPaid = true;
             paidTimestamp = histItem.local_timestamp ?? 0;
             break;
@@ -161,10 +166,16 @@ class AppDialogs {
         }
       }
     }
+    const int monthInSecs = 2628000;
+    final int nowInSecs = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+
+    if (lifetime) {
+      final int farFuture = nowInSecs + (100 * 365 * 24 * 60 * 60);
+      sl.get<SharedPrefsUtil>().setProStatus(absoluteExpireTime: farFuture);
+      return true;
+    }
 
     if (hasPaid) {
-      const int monthInSecs = 2628000;
-      final int nowInSecs = DateTime.now().millisecondsSinceEpoch ~/ 1000;
       bool paymentWasRecent = false;
       if (paidTimestamp > 0) {
         final int monthFromPayment = paidTimestamp + monthInSecs;
@@ -183,6 +194,8 @@ class AppDialogs {
         return true;
       }
     }
+
+    if (!showDialog) return false;
 
     final bool res = await showAppDialog(
       context: context,
@@ -228,8 +241,21 @@ class AppDialogs {
                   style: AppStyles.textStyleDialogButtonText(context),
                 ),
               ),
-              onPressed: () {
-                Navigator.of(context).pop(true);
+              onPressed: () async {
+                Navigator.of(context).pop(false);
+                // Go to send with address
+                Future<void>.delayed(const Duration(milliseconds: 1000), () {
+                  Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+
+                  Sheets.showAppHeightNineSheet(
+                    context: context,
+                    widget: SendSheet(
+                      localCurrency: StateContainer.of(context).curCurrency,
+                      address: MetadataService.PRO_PAYMENT_ADDRESS,
+                      quickSendAmount: MetadataService.PRO_PAYMENT_MONTHLY_COST,
+                    ),
+                  );
+                });
               },
             ),
           ],
@@ -465,7 +491,9 @@ class AppDialogs {
                             Sheets.showAppHeightNineSheet(
                                 context: context,
                                 widget: FundingMessagesSheet(
-                                    alerts: StateContainer.of(context).fundingAlerts, hasDismissButton: false));
+                                  alerts: StateContainer.of(context).fundingAlerts,
+                                  hasDismissButton: false,
+                                ));
                           });
                         },
                         child: Text(

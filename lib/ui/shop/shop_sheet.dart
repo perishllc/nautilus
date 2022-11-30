@@ -160,10 +160,6 @@ class ShopSheetState extends State<ShopSheet> {
                   ),
                 ],
               ),
-
-
-
-              
             ],
           ),
         ),
