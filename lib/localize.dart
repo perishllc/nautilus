@@ -6,9 +6,8 @@ import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
 import 'package:nautilus_wallet_flutter/model/available_language.dart';
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalization> {
-
   const AppLocalizationsDelegate(this.languageSetting);
-  
+
   final LanguageSetting languageSetting;
 
   @override
@@ -82,8 +81,20 @@ class NonTranslatable {
     return "redeemfor.me";
   }
 
+  static String get luckynano {
+    return "luckynano.com";
+  }
+
+  static String get playnano {
+    return "playnano.online";
+  }
+
   static String get nanswap {
     return "nanswap.com";
+  }
+
+  static String get onramper {
+    return "onramper";
   }
 
   static String get promoLink {
@@ -108,5 +119,9 @@ class NonTranslatable {
 
   static String get monero {
     return "Monero";
+  }
+
+  static String get playNanoRefLink {
+    return "https://playnano.online/?ref=nautilus";
   }
 }
