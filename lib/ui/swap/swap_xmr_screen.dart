@@ -235,7 +235,7 @@ class SwapXMRScreenState extends State<SwapXMRScreen> {
                 padding: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
                 child: DraggableScrollbar(
                   controller: _scrollController,
-                  scrollbarColor: StateContainer.of(context).curTheme.primary!,
+                  scrollbarColor: StateContainer.of(context).curTheme.primary,
                   scrollbarTopMargin: 2.0,
                   scrollbarBottomMargin: 2.0,
                   scrollbarHeight: 30,

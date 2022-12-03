@@ -576,7 +576,7 @@ class DBHelper {
   Future<User?> getUserOrContactWithName(String name) async {
     final Database dbClient = (await db)!;
     List<Map> list = [];
-    if (name.contains("@")) {
+    if (name.contains("@") || name.contains(".") || name.contains("#")) {
       list = await dbClient.rawQuery('SELECT * FROM Users WHERE lower(username) = ?', [SendSheetHelpers.stripPrefixes(name.toLowerCase())]);
     } else if (name.contains("★")) {
       list = await dbClient.rawQuery('SELECT * FROM Users WHERE lower(nickname) = ?', [SendSheetHelpers.stripPrefixes(name.toLowerCase())]);

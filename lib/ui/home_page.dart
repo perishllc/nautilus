@@ -3635,7 +3635,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       // }
       return DraggableScrollbar(
         controller: _scrollController,
-        scrollbarColor: StateContainer.of(context).curTheme.primary!,
+        scrollbarColor: StateContainer.of(context).curTheme.primary,
         scrollbarTopMargin: 10.0,
         scrollbarBottomMargin: 20.0,
         child: ReactiveRefreshIndicator(
@@ -3679,7 +3679,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
     return DraggableScrollbar(
       controller: _xmrScrollController,
-      scrollbarColor: StateContainer.of(context).curTheme.primary!,
+      scrollbarColor: StateContainer.of(context).curTheme.primary,
       scrollbarTopMargin: 10.0,
       scrollbarBottomMargin: 20.0,
       child: ReactiveRefreshIndicator(
@@ -3790,7 +3790,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       }
       return DraggableScrollbar(
         controller: _scrollController,
-        scrollbarColor: StateContainer.of(context).curTheme.primary!,
+        scrollbarColor: StateContainer.of(context).curTheme.primary,
         scrollbarTopMargin: 10.0,
         scrollbarBottomMargin: 20.0,
         child: ReactiveRefreshIndicator(
@@ -3883,7 +3883,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
     // return DraggableScrollbar(
     //   controller: _scrollController,
-    //   scrollbarColor: StateContainer.of(context).curTheme.primary!,
+    //   scrollbarColor: StateContainer.of(context).curTheme.primary,
     //   scrollbarTopMargin: 10.0,
     //   scrollbarBottomMargin: 20.0,
     //   child: ReactiveRefreshIndicator(
@@ -3912,7 +3912,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       },
       child: DraggableScrollbar(
         controller: _scrollController,
-        scrollbarColor: StateContainer.of(context).curTheme.primary!,
+        scrollbarColor: StateContainer.of(context).curTheme.primary,
         scrollbarTopMargin: 10.0,
         scrollbarBottomMargin: 20.0,
         child: ReactiveRefreshIndicator(

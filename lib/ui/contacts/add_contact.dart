@@ -143,8 +143,11 @@ class _AddContactSheetState extends State<AddContactSheet> {
               });
             }
           } else {
-            // check if UD / ENS / opencap address
-            if (_addressController!.text.contains(r"$")) {
+            // check if UD / ENS / opencap / onchain address:
+            address = await sl.get<UsernameService>().checkOnchainUsername(formattedAddress);
+            if (address != null) {
+              type = UserTypes.ONCHAIN;
+            } else if (_addressController!.text.contains(r"$")) {
               // check if opencap address:
               address = await sl.get<UsernameService>().checkOpencapDomain(formattedAddress);
               if (address != null) {

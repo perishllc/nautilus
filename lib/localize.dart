@@ -120,8 +120,4 @@ class NonTranslatable {
   static String get monero {
     return "Monero";
   }
-
-  static String get playNanoRefLink {
-    return "https://playnano.online/?ref=nautilus";
-  }
 }

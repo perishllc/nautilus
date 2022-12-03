@@ -149,7 +149,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                       else
                         DraggableScrollbar(
                           controller: _scrollController,
-                          scrollbarColor: StateContainer.of(context).curTheme.primary!,
+                          scrollbarColor: StateContainer.of(context).curTheme.primary,
                           scrollbarTopMargin: 20.0,
                           scrollbarBottomMargin: 12.0,
                           child: KeyboardAvoider(

@@ -85,7 +85,7 @@ class _FundingMessagesSheetState extends State<FundingMessagesSheet> {
                   children: [
                     DraggableScrollbar(
                       controller: _scrollController,
-                      scrollbarColor: StateContainer.of(context).curTheme.primary!,
+                      scrollbarColor: StateContainer.of(context).curTheme.primary,
                       scrollbarTopMargin: 16,
                       scrollbarBottomMargin: 32,
                       child: ListView(

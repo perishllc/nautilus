@@ -31,6 +31,10 @@ class NanoUtil {
     return NanoAccounts.createAccount(NanoAccountType.NANO, createPublicKey(privateKey));
   }
 
+  static String publicKeyToPublicAddress(String publicKey) {
+    return NanoAccounts.createAccount(NanoAccountType.NANO, publicKey);
+  }
+
   // standard + hd:
   static bool isValidSeed(String seed) {
     // Ensure seed is 64 or 128 characters long

@@ -12,7 +12,7 @@ import 'package:nautilus_wallet_flutter/network/account_service.dart';
 import 'package:nautilus_wallet_flutter/network/username_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/register/register_confirm_sheet.dart';
+import 'package:nautilus_wallet_flutter/ui/register/register_nano_to_confirm_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
 import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
@@ -32,12 +32,12 @@ import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
 //   //     ];
 // }
 
-class RegisterUsernameScreen extends StatefulWidget {
+class RegisterNanoToUsernameScreen extends StatefulWidget {
   @override
-  _RegisterUsernameScreenState createState() => _RegisterUsernameScreenState();
+  _RegisterNanoToUsernameScreenState createState() => _RegisterNanoToUsernameScreenState();
 }
 
-class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
+class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   FocusNode? _usernameFocusNode;
   TextEditingController? _usernameController;
@@ -400,7 +400,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                               });
                               return;
                             }
-                            final Map<String, dynamic> resp = await sl.get<UsernameService>().checkUsernameAvailability(username) as Map<String, dynamic>;
+                            final Map<String, dynamic> resp = await sl.get<UsernameService>().checkNanoToUsernameAvailability(username) as Map<String, dynamic>;
                             if (resp == null) {
                               setState(() {
                                 _usernameValidationText = AppLocalization.of(context).usernameError;
@@ -458,7 +458,7 @@ class _RegisterUsernameScreenState extends State<RegisterUsernameScreen> {
                               // build the transaction:
                               Sheets.showAppHeightNineSheet(
                                   context: context,
-                                  widget: RegisterConfirmSheet(
+                                  widget: RegisterNanoToConfirmSheet(
                                     // localCurrency: StateContainer.of(context).curCurrency,
                                     // contact: contact,
                                     destination: destination,

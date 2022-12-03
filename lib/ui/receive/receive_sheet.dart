@@ -235,8 +235,11 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
               });
             }
           } else {
-            // check if UD / ENS / opencap address
-            if (_addressController!.text.contains(r"$")) {
+            // check if UD / ENS / opencap / onchain address:
+            address = await sl.get<UsernameService>().checkOnchainUsername(formattedAddress);
+            if (address != null) {
+              type = UserTypes.ONCHAIN;
+            } else if (_addressController!.text.contains(r"$")) {
               // check if opencap address:
               address = await sl.get<UsernameService>().checkOpencapDomain(formattedAddress);
               if (address != null) {
@@ -786,7 +789,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                           setState(() {
                             if (_addressController!.text.startsWith("★")) {
                               _addressValidationText = AppLocalization.of(context).contactInvalid;
-                            } else if (_addressController!.text.startsWith("@")) {
+                            } else if (_addressController!.text.startsWith("@") || _addressController!.text.startsWith("#")) {
                               _addressValidationText = AppLocalization.of(context).usernameInvalid;
                             } else if (_addressController!.text.contains(".") || _addressController!.text.contains(r"$")) {
                               _addressValidationText = AppLocalization.of(context).domainInvalid;
@@ -1141,7 +1144,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
       }
     }
     // Validate address
-    final bool isUser = _addressController!.text.startsWith("@");
+    final bool isUser = _addressController!.text.startsWith("@") || _addressController!.text.startsWith("#");
     final bool isFavorite = _addressController!.text.startsWith("★");
     final bool isDomain = _addressController!.text.contains(".") || _addressController!.text.contains(r"$");
     final bool isNano = _addressController!.text.startsWith("nano_");

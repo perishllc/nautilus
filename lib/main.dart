@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
@@ -23,7 +24,6 @@ import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/styles.dart';
 import 'package:nautilus_wallet_flutter/ui/avatar/avatar.dart';
 import 'package:nautilus_wallet_flutter/ui/avatar/avatar_change.dart';
-import 'package:nautilus_wallet_flutter/ui/scan/before_scan_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/gift/gift_paper_wallet.dart';
 import 'package:nautilus_wallet_flutter/ui/home_page.dart';
 import 'package:nautilus_wallet_flutter/ui/intro/intro_backup_confirm.dart';
@@ -39,7 +39,9 @@ import 'package:nautilus_wallet_flutter/ui/intro/intro_welcome.dart';
 import 'package:nautilus_wallet_flutter/ui/lock_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/password_lock_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/purchase_nano.dart';
-import 'package:nautilus_wallet_flutter/ui/register/register_username.dart';
+import 'package:nautilus_wallet_flutter/ui/register/register_nano_to_username.dart';
+import 'package:nautilus_wallet_flutter/ui/register/register_onchain_username.dart';
+import 'package:nautilus_wallet_flutter/ui/scan/before_scan_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/scan/scan_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/swap/swap_xmr_screen.dart';
 import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
@@ -48,7 +50,6 @@ import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -356,9 +357,14 @@ class AppState extends State<App> {
                 settings: settings,
               );
             // nautilus API routes:
-            case '/register_username':
+            case '/register_nano_to_username':
               return NoTransitionRoute(
-                builder: (_) => RegisterUsernameScreen(),
+                builder: (_) => RegisterNanoToUsernameScreen(),
+                settings: settings,
+              );
+            case '/register_onchain_username':
+              return NoTransitionRoute(
+                builder: (_) => RegisterOnchainUsernameScreen(),
                 settings: settings,
               );
             // case '/payments_page':

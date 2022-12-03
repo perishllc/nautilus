@@ -293,7 +293,7 @@ class AppDialogs {
           content: scrollable
               ? DraggableScrollbar(
                   controller: _scrollController,
-                  scrollbarColor: StateContainer.of(context).curTheme.primary!,
+                  scrollbarColor: StateContainer.of(context).curTheme.primary,
                   scrollbarTopMargin: 2.0,
                   scrollbarBottomMargin: 2.0,
                   scrollbarHeight: 30,
@@ -422,7 +422,7 @@ class AppDialogs {
                       controller: scrollController,
                       scrollbarTopMargin: 0,
                       scrollbarBottomMargin: 0,
-                      scrollbarColor: StateContainer.of(context).curTheme.primary!,
+                      scrollbarColor: StateContainer.of(context).curTheme.primary,
                       child: ListView(
                         controller: scrollController,
                         children: [

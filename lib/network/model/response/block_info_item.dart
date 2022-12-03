@@ -27,14 +27,11 @@ class BlockInfoItem {
   @JsonKey(name: 'contents')
   String? contents;
 
-  BlockInfoItem({String? blockAccount, String? amount, String? balance, String? receivable, String? sourceAccount, String? contents}) {
-    this.blockAccount = blockAccount;
-    this.amount = amount;
-    this.balance = balance;
-    this.receivable = receivable;
-    this.sourceAccount = sourceAccount;
-    this.contents = contents;
-  }
+  // 2022:
+  @JsonKey(name: 'confirmed')
+  bool? confirmed;
+
+  BlockInfoItem({this.blockAccount, this.amount, this.balance, this.receivable, this.sourceAccount, this.contents, this.confirmed});
 
   factory BlockInfoItem.fromJson(Map<String, dynamic> json) => _$BlockInfoItemFromJson(json);
   Map<String, dynamic> toJson() => _$BlockInfoItemToJson(this);

@@ -1435,12 +1435,12 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
               onHorizontalDragUpdate: subMenuDragUpdate,
               child: SlideTransition(position: _securityOffsetFloat, child: buildSecurityMenu(context)),
             ),
-            GestureDetector(
-              onHorizontalDragStart: subMenuDragStart,
-              onHorizontalDragEnd: subMenuDragEnd,
-              onHorizontalDragUpdate: subMenuDragUpdate,
-              child: SlideTransition(position: _useNanoOffsetFloat, child: buildUseNanoMenu(context)),
-            ),
+            // GestureDetector(
+            //   onHorizontalDragStart: subMenuDragStart,
+            //   onHorizontalDragEnd: subMenuDragEnd,
+            //   onHorizontalDragUpdate: subMenuDragUpdate,
+            //   child: SlideTransition(position: _useNanoOffsetFloat, child: buildUseNanoMenu(context)),
+            // ),
             GestureDetector(
               onHorizontalDragStart: subMenuDragStart,
               onHorizontalDragEnd: subMenuDragEnd,
@@ -1563,26 +1563,31 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         //   Navigator.of(context).pushNamed("/payments_page");
         // }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).useNano, AppIcons.coins,
-            onPressed: () async {
-          // Navigator.of(context).pushNamed("/purchase_nano");
-          // final String? choice = await _onrampDialog();
-          // if (choice != null) {
-          //   await UIUtil.showWebview(context, choice);
-          // }
-          setState(() {
-            _useNanoOpen = true;
-          });
-          _useNanoController.forward();
-        }),
-        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+        // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).useNano, AppIcons.coins,
+        //     onPressed: () async {
+        //   // Navigator.of(context).pushNamed("/purchase_nano");
+        //   // final String? choice = await _onrampDialog();
+        //   // if (choice != null) {
+        //   //   await UIUtil.showWebview(context, choice);
+        //   // }
+        //   setState(() {
+        //     _useNanoOpen = true;
+        //   });
+        //   _useNanoController.forward();
+        // }),
+        // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).spendNano, AppIcons.coins, onPressed: () async {
         //   Navigator.of(context).pushNamed("/spend_nano");
         // }),
         // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).registerUsername, AppIcons.at,
             onPressed: () {
-          Navigator.of(context).pushNamed("/register_username");
+          Navigator.of(context).pushNamed("/register_onchain_username");
+        }),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+        AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).registerUsername, Icons.tag,
+            onPressed: () {
+          Navigator.of(context).pushNamed("/register_nano_to_username");
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         // AppSettings.buildSettingsListItemSingleLine(context, AppLocalization.of(context).createGiftCard, AppIcons.export_icon, onPressed: () {
@@ -2141,7 +2146,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     controller: _scrollController,
                     scrollbarTopMargin: 20.0,
                     scrollbarBottomMargin: 0.0,
-                    scrollbarColor: StateContainer.of(context).curTheme.primary!,
+                    scrollbarColor: StateContainer.of(context).curTheme.primary,
                     child: _buildSettingsList(),
                   ),
                   ListGradient(
@@ -2227,7 +2232,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                   controller: _securityScrollController,
                   scrollbarTopMargin: 20.0,
                   scrollbarBottomMargin: 0.0,
-                  scrollbarColor: StateContainer.of(context).curTheme.primary!,
+                  scrollbarColor: StateContainer.of(context).curTheme.primary,
                   child: ListView(
                     controller: _securityScrollController,
                     padding: const EdgeInsets.only(top: 15.0),
@@ -2431,7 +2436,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                   controller: _moreSettingsScrollController,
                   scrollbarTopMargin: 20.0,
                   scrollbarBottomMargin: 0.0,
-                  scrollbarColor: StateContainer.of(context).curTheme.primary!,
+                  scrollbarColor: StateContainer.of(context).curTheme.primary,
                   child: ListView(
                     padding: const EdgeInsets.only(top: 15.0),
                     controller: _moreSettingsScrollController,

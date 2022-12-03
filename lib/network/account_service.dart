@@ -687,8 +687,10 @@ class AccountService {
     await openBlock.sign(privKey);
 
     // Process
-    final ProcessRequest processRequest =
-        ProcessRequest(block: json.encode(openBlock.toJson()), subtype: BlockTypes.OPEN);
+    final ProcessRequest processRequest = ProcessRequest(
+      block: json.encode(openBlock.toJson()),
+      subtype: BlockTypes.OPEN,
+    );
 
     return requestProcess(processRequest);
   }
@@ -696,13 +698,14 @@ class AccountService {
   Future<ProcessResponse> requestChange(
       String? account, String? representative, String? previous, String balance, String privKey) async {
     final StateBlock chgBlock = StateBlock(
-        subtype: BlockTypes.CHANGE,
-        previous: previous,
-        representative: representative,
-        balance: balance,
-        link: "0000000000000000000000000000000000000000000000000000000000000000",
-        account: account,
-        privKey: privKey);
+      subtype: BlockTypes.CHANGE,
+      previous: previous,
+      representative: representative,
+      balance: balance,
+      link: "0000000000000000000000000000000000000000000000000000000000000000",
+      account: account,
+      privKey: privKey,
+    );
 
     final BlockInfoItem previousInfo = await requestBlockInfo(previous);
     final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);

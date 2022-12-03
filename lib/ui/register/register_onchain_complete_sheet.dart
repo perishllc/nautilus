@@ -9,18 +9,18 @@ import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
 import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
 
-class RequestCompleteSheet extends StatefulWidget {
+class RegisterOnchainCompleteSheet extends StatefulWidget {
   final String? amountRaw;
   final String? destination;
   final String? contactName;
   final String? localAmount;
 
-  RequestCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount}) : super();
+  RegisterOnchainCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount}) : super();
 
-  _RequestCompleteSheetState createState() => _RequestCompleteSheetState();
+  _RegisterNanoToCompleteSheetState createState() => _RegisterNanoToCompleteSheetState();
 }
 
-class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
+class _RegisterNanoToCompleteSheetState extends State<RegisterOnchainCompleteSheet> {
   @override
   void initState() {
     super.initState();

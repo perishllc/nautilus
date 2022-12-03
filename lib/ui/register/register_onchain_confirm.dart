@@ -28,8 +28,8 @@ import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 
-class RegisterConfirmSheet extends StatefulWidget {
-  const RegisterConfirmSheet(
+class RegisterOnchainConfirmSheet extends StatefulWidget {
+  const RegisterOnchainConfirmSheet(
       {required this.amountRaw,
       required this.destination,
       this.contactName,
@@ -52,10 +52,10 @@ class RegisterConfirmSheet extends StatefulWidget {
   final bool maxSend;
 
   @override
-  _RegisterConfirmSheetState createState() => _RegisterConfirmSheetState();
+  _RegisterOnchainConfirmSheetState createState() => _RegisterOnchainConfirmSheetState();
 }
 
-class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
+class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmSheet> {
   late bool animationOpen;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
@@ -268,7 +268,7 @@ class _RegisterConfirmSheetState extends State<RegisterConfirmSheet> {
         sl.get<Logger>().v("checking url: ${widget.checkUrl}");
         try {
           // final Map<String, dynamic> resp = await sl.get<AccountService>().checkUsernameUrl(widget.checkUrl!) as Map<String, dynamic>;
-          final resp = await sl.get<UsernameService>().checkUsernameUrl(widget.checkUrl!);
+          final resp = await sl.get<UsernameService>().checkNanoToUsernameUrl(widget.checkUrl!);
           if (resp != null && resp["success"] == true) {
             success = true;
           } else {

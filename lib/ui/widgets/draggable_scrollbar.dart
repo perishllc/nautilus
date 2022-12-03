@@ -32,7 +32,7 @@ class DraggableScrollbar extends StatefulWidget {
   final bool enableJumpScroll;
   final ScrollController controller;
   final bool showTouchArea;
-  final Color scrollbarColor;
+  final Color? scrollbarColor;
 
   @override
   DraggableScrollbarState createState() => DraggableScrollbarState();
