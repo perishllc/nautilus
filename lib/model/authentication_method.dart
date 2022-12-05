@@ -13,13 +13,13 @@ class AuthenticationMethod extends SettingSelectionItem {
   String getDisplayName(BuildContext context) {
     switch (method) {
       case AuthMethod.BIOMETRICS:
-        return AppLocalization.of(context).biometricsMethod;
+        return Z.of(context).biometricsMethod;
       case AuthMethod.PIN:
-        return AppLocalization.of(context).pinMethod;
+        return Z.of(context).pinMethod;
       case AuthMethod.NONE:
-        return AppLocalization.of(context).noneMethod;
+        return Z.of(context).noneMethod;
       default:
-        return AppLocalization.of(context).pinMethod;
+        return Z.of(context).pinMethod;
     }
   }
 

@@ -127,7 +127,7 @@ class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
                       child: Column(
                         children: <Widget>[
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context).accounts, context),
+                            CaseChange.toUpperCase(Z.of(context).accounts, context),
                             style: AppStyles.textStyleHeader(context),
                             maxLines: 1,
                             stepGranularity: 0.1,
@@ -265,7 +265,7 @@ class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY_OUTLINE,
-                    AppLocalization.of(context).nearby,
+                    Z.of(context).nearby,
                     Dimens.BUTTON_BOTTOM_DIMENS,
                     onPressed: () async {},
                   ),
@@ -277,7 +277,7 @@ class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY_OUTLINE,
-                    AppLocalization.of(context).close,
+                    Z.of(context).close,
                     Dimens.BUTTON_BOTTOM_DIMENS,
                     onPressed: () {
                       Navigator.pop(context);

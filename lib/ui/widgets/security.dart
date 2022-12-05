@@ -103,7 +103,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
               } else {
                 setState(() {
                   _pin = "";
-                  _header = AppLocalization.of(context).pinInvalid;
+                  _header = Z.of(context).pinInvalid;
                   _dotStates = List.filled(_pinLength, AppIcons.dotemtpy);
                   _controller.value = 0;
                 });
@@ -115,7 +115,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
               _dotStates = List.filled(_pinLength, AppIcons.dotemtpy);
               _pin = "";
               _pinConfirmed = "";
-              _header = AppLocalization.of(context).pinConfirmError;
+              _header = Z.of(context).pinConfirmError;
               _controller.value = 0;
             });
           }
@@ -246,7 +246,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
                   setState(() {
                     _awaitingConfirmation = true;
                     _dotStates = List.filled(_pinLength, AppIcons.dotemtpy);
-                    _header = AppLocalization.of(context).pinConfirmTitle;
+                    _header = Z.of(context).pinConfirmTitle;
                   });
                 } else {
                   // First and second pins match
@@ -290,7 +290,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
   Widget build(BuildContext context) {
     if (pinEnterTitle.isEmpty) {
       setState(() {
-        pinEnterTitle = AppLocalization.of(context).pinEnterTitle;
+        pinEnterTitle = Z.of(context).pinEnterTitle;
         if (widget.type == PinOverlayType.ENTER_PIN) {
           _header = pinEnterTitle;
         }
@@ -298,7 +298,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
     }
     if (pinCreateTitle.isEmpty) {
       setState(() {
-        pinCreateTitle = AppLocalization.of(context).pinCreateTitle;
+        pinCreateTitle = Z.of(context).pinCreateTitle;
         if (widget.type == PinOverlayType.NEW_PIN) {
           _header = pinCreateTitle;
         }

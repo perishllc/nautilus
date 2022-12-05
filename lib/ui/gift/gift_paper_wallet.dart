@@ -149,7 +149,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
     if (_amountController!.text.trim().isEmpty) {
       isValid = false;
       setState(() {
-        _amountValidationText = AppLocalization.of(context).amountMissing;
+        _amountValidationText = Z.of(context).amountMissing;
       });
     } else {
       String bananoAmount;
@@ -166,12 +166,12 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       if (sendAmount == null || sendAmount == BigInt.zero) {
         isValid = false;
         setState(() {
-          _amountValidationText = AppLocalization.of(context).amountMissing;
+          _amountValidationText = Z.of(context).amountMissing;
         });
       } else if (sendAmount > balanceRaw) {
         isValid = false;
         setState(() {
-          _amountValidationText = AppLocalization.of(context).insufficientBalance;
+          _amountValidationText = Z.of(context).insufficientBalance;
         });
       }
     }
@@ -194,17 +194,17 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       if (splitAmount == null || splitAmount == BigInt.zero) {
         isValid = false;
         setState(() {
-          _splitAmountValidationText = AppLocalization.of(context).amountMissing;
+          _splitAmountValidationText = Z.of(context).amountMissing;
         });
       } else if (sendAmount != null && splitAmount > sendAmount) {
         isValid = false;
         setState(() {
-          _splitAmountValidationText = AppLocalization.of(context).amountGiftGreaterError;
+          _splitAmountValidationText = Z.of(context).amountGiftGreaterError;
         });
       } else if (splitAmount > balanceRaw) {
         isValid = false;
         setState(() {
-          _splitAmountValidationText = AppLocalization.of(context).insufficientBalance;
+          _splitAmountValidationText = Z.of(context).insufficientBalance;
         });
       }
     }
@@ -263,7 +263,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                 ),
                 alignment: AlignmentDirectional.center,
                 child: AutoSizeText(
-                  AppLocalization.of(context).createGiftHeader,
+                  Z.of(context).createGiftHeader,
                   style: AppStyles.textStyleHeaderColored(context),
                   stepGranularity: 0.1,
                   maxLines: 1,
@@ -284,14 +284,14 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                   child: SingleChildScrollView(
                     controller: _scrollController,
                     // child: AutoSizeText(
-                    //   AppLocalization.of(context).giftInfo,
+                    //   Z.of(context).giftInfo,
                     //   style: AppStyles.textStyleParagraph(context),
                     //   maxLines: 12,
                     //   minFontSize: 12,
                     //   stepGranularity: 0.5,
                     // ),
                     child: Text(
-                      AppLocalization.of(context).giftInfo,
+                      Z.of(context).giftInfo,
                       style: AppStyles.textStyleParagraph(context),
                     ),
                     // ),
@@ -404,7 +404,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                           width: 10,
                         ),
                         Text(
-                          AppLocalization.of(context).requireCaptcha,
+                          Z.of(context).requireCaptcha,
                           style: TextStyle(
                             fontSize: 14.0,
                             color: StateContainer.of(context).curTheme.text,
@@ -423,7 +423,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).createGiftCard, Dimens.BUTTON_BOTTOM_DIMENS,
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).createGiftCard, Dimens.BUTTON_BOTTOM_DIMENS,
                       onPressed: () {
                     final bool isValid = _validateRequest();
                     if (!isValid) {
@@ -605,7 +605,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       textInputAction: TextInputAction.next,
       maxLines: null,
       autocorrect: false,
-      hintText: _amountHint == null ? "" : AppLocalization.of(context).enterAmount,
+      hintText: _amountHint == null ? "" : Z.of(context).enterAmount,
       prefixButton: TextFieldButton(
         padding: EdgeInsets.zero,
         widget: Row(
@@ -707,7 +707,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       textInputAction: TextInputAction.next,
       maxLines: null,
       autocorrect: false,
-      hintText: _splitAmountHint == null ? "" : AppLocalization.of(context).enterSplitAmount,
+      hintText: _splitAmountHint == null ? "" : Z.of(context).enterSplitAmount,
       fadeSuffixOnCondition: true,
       suffixShowFirstCondition: !_isMaxSend(),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -735,7 +735,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _memoHint == null ? "" : AppLocalization.of(context).enterGiftMemo,
+      hintText: _memoHint == null ? "" : Z.of(context).enterGiftMemo,
       fadeSuffixOnCondition: true,
       style: TextStyle(
         // fontWeight: FontWeight.w700,

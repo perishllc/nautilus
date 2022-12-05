@@ -71,7 +71,7 @@ class ShopSheetState extends State<ShopSheet> {
                   child: Column(
                     children: <Widget>[
                       AutoSizeText(
-                        AppLocalization.of(context).useNano,
+                        Z.of(context).useNano,
                         style: AppStyles.textStyleHeader(context),
                         maxLines: 1,
                         stepGranularity: 0.1,
@@ -85,10 +85,10 @@ class ShopSheetState extends State<ShopSheet> {
                   children: [
                     UseCard(
                       icon: AppIcons.content_copy,
-                      title: AppLocalization.of(context).copyWalletAddressToClipboard,
+                      title: Z.of(context).copyWalletAddressToClipboard,
                       onPress: () async {
                         Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
-                        UIUtil.showSnackbar(AppLocalization.of(context).addressCopied, context, durationMs: 1500);
+                        UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
                       },
                     ),
                   ],
@@ -99,7 +99,7 @@ class ShopSheetState extends State<ShopSheet> {
                   child: Row(
                     children: [
                       Text(
-                        AppLocalization.of(context).getNano,
+                        Z.of(context).getNano,
                         style: AppStyles.textStyleHeader2Colored(context),
                       ),
                     ],
@@ -131,7 +131,7 @@ class ShopSheetState extends State<ShopSheet> {
                   child: Row(
                     children: [
                       Text(
-                        AppLocalization.of(context).spendNano,
+                        Z.of(context).spendNano,
                         style: AppStyles.textStyleHeader2Colored(context),
                       ),
                     ],
@@ -156,7 +156,7 @@ class ShopSheetState extends State<ShopSheet> {
                 //   child: Row(
                 //     children: [
                 //       Text(
-                //         AppLocalization.of(context).exchangeNano,
+                //         Z.of(context).exchangeNano,
                 //         style: AppStyles.textStyleHeader2Colored(context),
                 //       ),
                 //     ],
@@ -188,7 +188,7 @@ class ShopSheetState extends State<ShopSheet> {
                   child: Row(
                     children: [
                       Text(
-                        AppLocalization.of(context).exchangeNano,
+                        Z.of(context).exchangeNano,
                         style: AppStyles.textStyleHeader2Colored(context),
                       ),
                     ],

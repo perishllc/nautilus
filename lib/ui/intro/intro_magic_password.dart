@@ -101,8 +101,8 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                         alignment: AlignmentDirectional.centerStart,
                         child: AutoSizeText(
                           !widget.entryExists
-                              ? AppLocalization.of(context).createAPasswordHeader
-                              : AppLocalization.of(context).enterPasswordHint,
+                              ? Z.of(context).createAPasswordHeader
+                              : Z.of(context).enterPasswordHint,
                           maxLines: 3,
                           stepGranularity: 0.5,
                           style: AppStyles.textStyleHeaderColored(context),
@@ -113,7 +113,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                         margin: EdgeInsetsDirectional.only(
                             start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                         child: AutoSizeText(
-                          AppLocalization.of(context).passwordDisclaimer,
+                          Z.of(context).passwordDisclaimer,
                           style: AppStyles.textStyleParagraph(context),
                           maxLines: 5,
                           stepGranularity: 0.5,
@@ -155,7 +155,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                                         }
                                       }
                                     },
-                                    hintText: AppLocalization.of(context).createPasswordHint,
+                                    hintText: Z.of(context).createPasswordHint,
                                     keyboardType: TextInputType.text,
                                     obscureText: true,
                                     textAlign: TextAlign.center,
@@ -201,8 +201,8 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                                     }
                                   },
                                   hintText: !widget.entryExists
-                                      ? AppLocalization.of(context).confirmPasswordHint
-                                      : AppLocalization.of(context).enterPasswordHint,
+                                      ? Z.of(context).confirmPasswordHint
+                                      : Z.of(context).enterPasswordHint,
                                   keyboardType: TextInputType.text,
                                   obscureText: true,
                                   textAlign: TextAlign.center,
@@ -246,8 +246,8 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                             context,
                             AppButtonType.PRIMARY,
                             widget.entryExists
-                                ? AppLocalization.of(context).loginButton
-                                : AppLocalization.of(context).registerButton,
+                                ? Z.of(context).loginButton
+                                : Z.of(context).registerButton,
                             Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                           await submitAndEncrypt();
                         }),
@@ -260,16 +260,16 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                           AppButton.buildAppButton(
                               context,
                               AppButtonType.PRIMARY_OUTLINE,
-                              AppLocalization.of(context).resetAccountButton,
+                              Z.of(context).resetAccountButton,
                               Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                             if (!checkPasswordRequirements()) {
                               return;
                             }
                             AppDialogs.showConfirmDialog(
                               context,
-                              AppLocalization.of(context).logoutAreYouSure,
-                              AppLocalization.of(context).resetAccountParagraph,
-                              AppLocalization.of(context).imSure,
+                              Z.of(context).logoutAreYouSure,
+                              Z.of(context).resetAccountParagraph,
+                              Z.of(context).imSure,
                               () async {
                                 // get the encrypted seed from the auth-service:
                                 final String hashedPassword = NanoHelpers.byteToHex(
@@ -302,7 +302,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                                 await sl.get<AuthService>().setEncryptedSeed(fullIdentifier, encryptedSeed);
                                 skipPin();
                               },
-                              cancelText: AppLocalization.of(context).goBackButton,
+                              cancelText: Z.of(context).goBackButton,
                               cancelAction: () {
                                 return;
                               },
@@ -315,7 +315,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                         children: <Widget>[
                           // Go Back Button
                           AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                              AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                              Z.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                             Navigator.of(context).pop();
                           }),
                         ],
@@ -332,7 +332,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     if ((createPasswordController!.text.isEmpty && !widget.entryExists) || confirmPasswordController!.text.isEmpty) {
       if (mounted) {
         setState(() {
-          passwordError = AppLocalization.of(context).passwordBlank;
+          passwordError = Z.of(context).passwordBlank;
         });
       }
       return;
@@ -340,7 +340,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     if (!widget.entryExists && createPasswordController!.text != confirmPasswordController!.text) {
       if (mounted) {
         setState(() {
-          passwordError = AppLocalization.of(context).passwordsDontMatch;
+          passwordError = Z.of(context).passwordsDontMatch;
         });
       }
       return;
@@ -356,7 +356,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
       if (encryptedSeed == null) {
         if (mounted) {
           setState(() {
-            passwordError = AppLocalization.of(context).passwordIncorrect;
+            passwordError = Z.of(context).passwordIncorrect;
           });
         }
         return;
@@ -371,7 +371,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
       } catch (error) {
         if (mounted) {
           setState(() {
-            passwordError = AppLocalization.of(context).passwordIncorrect;
+            passwordError = Z.of(context).passwordIncorrect;
           });
         }
         return;
@@ -398,10 +398,10 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
 
     final bool noSeedToImport = await AppDialogs.waitableConfirmDialog(
       context,
-      AppLocalization.of(context).doYouHaveSeedHeader,
-      AppLocalization.of(context).doYouHaveSeedBody,
-      AppLocalization.of(context).continueButton,
-      cancelText: AppLocalization.of(context).haveSeedToImport,
+      Z.of(context).doYouHaveSeedHeader,
+      Z.of(context).doYouHaveSeedBody,
+      Z.of(context).continueButton,
+      cancelText: Z.of(context).haveSeedToImport,
       barrierDismissible: false,
     );
 
@@ -465,7 +465,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     // password must be at least 8 characters:
     if (confirmPasswordController!.text.length < 8) {
       setState(() {
-        passwordError = AppLocalization.of(context).passwordTooShort;
+        passwordError = Z.of(context).passwordTooShort;
       });
       return false;
     }
@@ -473,7 +473,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     // make sure password contains a number:
     if (!confirmPasswordController!.text.contains(RegExp(r"[0-9]"))) {
       setState(() {
-        passwordError = AppLocalization.of(context).passwordNumber;
+        passwordError = Z.of(context).passwordNumber;
       });
       return false;
     }
@@ -482,7 +482,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     if (!confirmPasswordController!.text.contains(RegExp(r"[a-z]")) ||
         !confirmPasswordController!.text.contains(RegExp(r"[A-Z]"))) {
       setState(() {
-        passwordError = AppLocalization.of(context).passwordCapitalLetter;
+        passwordError = Z.of(context).passwordCapitalLetter;
       });
       return false;
     }

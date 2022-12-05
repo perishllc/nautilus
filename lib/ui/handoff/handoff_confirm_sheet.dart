@@ -123,7 +123,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).sending, context),
+                          CaseChange.toUpperCase(Z.of(context).sending, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -172,7 +172,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).to, context),
+                          CaseChange.toUpperCase(Z.of(context).to, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -195,7 +195,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).registerFor, context),
+                          CaseChange.toUpperCase(Z.of(context).registerFor, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -269,7 +269,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(Z.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
@@ -277,7 +277,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
 
                       if (!mounted) return;
 
-                      final String authText = AppLocalization.of(context)
+                      final String authText = Z.of(context)
                           .sendAmountConfirm
                           .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.payItem.amount))
                           .replaceAll("%2", StateContainer.of(context).currencyMode);
@@ -304,7 +304,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(Z.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -363,7 +363,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
 
       if (handoffUrl == null) {
         // no method we support:
-        poppedError = AppLocalization.of(context).handoffSupportedMethodNotFound;
+        poppedError = Z.of(context).handoffSupportedMethodNotFound;
         throw Exception("No supported method found");
       }
 
@@ -439,7 +439,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
         UIUtil.showSnackbar(poppedError, context, durationMs: 5000);
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).sendError, context, durationMs: 5000);
       Navigator.of(context).pop();
     }
   }
@@ -453,7 +453,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: AppLocalization.of(context)
+        description: Z.of(context)
             .sendAmountConfirm
             .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.payItem.amount))
             .replaceAll("%2", StateContainer.of(context).currencyMode),

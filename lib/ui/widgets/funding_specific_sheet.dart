@@ -58,7 +58,7 @@ class _FundingSpecificSheetState extends State<FundingSpecificSheet> {
                     //     children: <Widget>[
                     //       // Header
                     //       AutoSizeText(
-                    //         CaseChange.toUpperCase(AppLocalization.of(context).messageHeader, context),
+                    //         CaseChange.toUpperCase(Z.of(context).messageHeader, context),
                     //         style: AppStyles.textStyleHeader(context),
                     //         textAlign: TextAlign.center,
                     //         maxLines: 1,
@@ -142,7 +142,7 @@ class _FundingSpecificSheetState extends State<FundingSpecificSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).donateButton, Dimens.BUTTON_TOP_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).donateButton, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       // Go to send with address
                       Future.delayed(const Duration(milliseconds: 1000), () async {
@@ -160,7 +160,7 @@ class _FundingSpecificSheetState extends State<FundingSpecificSheet> {
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                       Navigator.pop(context);
                     }),

@@ -196,9 +196,9 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                       () {
                         AppDialogs.showConfirmDialog(
                             context,
-                            AppLocalization.of(context).hideAccountsHeader,
-                            AppLocalization.of(context).hideAccountsConfirmation,
-                            CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
+                            Z.of(context).hideAccountsHeader,
+                            Z.of(context).hideAccountsConfirmation,
+                            CaseChange.toUpperCase(Z.of(context).yes, context), () async {
                           await Future<dynamic>.delayed(const Duration(milliseconds: 250));
                           final List<Account> accountsToRemove = <Account>[];
                           for (final Account account in widget.accounts) {
@@ -220,7 +220,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                               widget.accounts.removeWhere((Account acc) => acc.index == account.index);
                             });
                           }
-                        }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
+                        }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
                       },
                       icon: AppIcons.trashcan,
                     ),
@@ -243,7 +243,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                         child: Column(
                           children: <Widget>[
                             AutoSizeText(
-                              CaseChange.toUpperCase(AppLocalization.of(context).accounts, context),
+                              CaseChange.toUpperCase(Z.of(context).accounts, context),
                               style: AppStyles.textStyleHeader(context),
                               maxLines: 1,
                               stepGranularity: 0.1,
@@ -355,7 +355,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                     AppButton.buildAppButton(
                       context,
                       AppButtonType.PRIMARY,
-                      AppLocalization.of(context).addAccount,
+                      Z.of(context).addAccount,
                       Dimens.BUTTON_BOTTOM_DIMENS,
                       disabled: _addingAccount,
                       onPressed: () {
@@ -366,7 +366,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                           StateContainer.of(context).getSeed().then((String seed) {
                             sl
                                 .get<DBHelper>()
-                                .addAccount(seed, nameBuilder: AppLocalization.of(context).defaultNewAccountName)
+                                .addAccount(seed, nameBuilder: Z.of(context).defaultNewAccountName)
                                 .then((Account? newAccount) {
                               if (newAccount == null) {
                                 sl.get<Logger>().d("Error adding account: account was null");
@@ -406,7 +406,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY_OUTLINE,
-                    AppLocalization.of(context).close,
+                    Z.of(context).close,
                     Dimens.BUTTON_BOTTOM_DIMENS,
                     onPressed: () {
                       Navigator.pop(context);
@@ -641,7 +641,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
         backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
         foregroundColor: StateContainer.of(context).curTheme.primary,
         icon: Icons.edit,
-        label: AppLocalization.of(context).edit,
+        label: Z.of(context).edit,
         onPressed: (BuildContext context) async {
           await Future<dynamic>.delayed(const Duration(milliseconds: 250));
           if (!mounted) return;
@@ -655,14 +655,14 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
         backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
         foregroundColor: StateContainer.of(context).curTheme.warning,
         icon: Icons.copy,
-        label: AppLocalization.of(context).copy,
+        label: Z.of(context).copy,
         onPressed: (BuildContext context) async {
           await Clipboard.setData(
             ClipboardData(text: account.address),
           );
           if (!mounted) return;
           UIUtil.showSnackbar(
-            AppLocalization.of(context).addressCopied,
+            Z.of(context).addressCopied,
             context,
           );
         }));
@@ -673,13 +673,13 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
           foregroundColor: StateContainer.of(context).curTheme.error60,
           icon: Icons.delete,
-          label: AppLocalization.of(context).hide,
+          label: Z.of(context).hide,
           onPressed: (BuildContext context) {
             AppDialogs.showConfirmDialog(
                 context,
-                AppLocalization.of(context).hideAccountHeader,
-                AppLocalization.of(context).removeAccountText.replaceAll("%1", AppLocalization.of(context).addAccount),
-                CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () async {
+                Z.of(context).hideAccountHeader,
+                Z.of(context).removeAccountText.replaceAll("%1", Z.of(context).addAccount),
+                CaseChange.toUpperCase(Z.of(context).yes, context), () async {
               await Future<dynamic>.delayed(const Duration(milliseconds: 250));
               // Remove account
               await sl.get<DBHelper>().deleteAccount(account);
@@ -688,7 +688,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                 widget.accounts.removeWhere((Account acc) => acc.index == account.index);
               });
               await Slidable.of(context)!.close();
-            }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
+            }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
           }));
     }
 

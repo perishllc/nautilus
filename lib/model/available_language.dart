@@ -111,7 +111,7 @@ class LanguageSetting extends SettingSelectionItem {
       case AvailableLanguage.BENGALI:
         return "Bengali (bn)";
       default:
-        return AppLocalization.of(context).systemDefault;
+        return Z.of(context).systemDefault;
     }
   }
 

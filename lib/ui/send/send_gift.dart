@@ -98,9 +98,9 @@ class SendGiftSheetState extends State<SendGiftSheet> {
     _users = [];
     animationOpen = false;
 
-    // _amountHint = AppLocalization.of(context).enterAmount;
-    // _addressHint = AppLocalization.of(context).enterUserOrAddress;
-    // _memoHint = AppLocalization.of(context).enterMemo;
+    // _amountHint = Z.of(context).enterAmount;
+    // _addressHint = Z.of(context).enterUserOrAddress;
+    // _memoHint = Z.of(context).enterMemo;
 
     // On amount focus change
     _amountFocusNode!.addListener(() {
@@ -123,7 +123,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
         });
       } else {
         setState(() {
-          _amountHint = AppLocalization.of(context).enterAmount;
+          _amountHint = Z.of(context).enterAmount;
         });
       }
     });
@@ -136,7 +136,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
         });
       } else {
         setState(() {
-          _memoHint = AppLocalization.of(context).enterMemo;
+          _memoHint = Z.of(context).enterMemo;
         });
       }
     });
@@ -161,13 +161,13 @@ class SendGiftSheetState extends State<SendGiftSheet> {
           return AppSimpleDialog(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
-              AppLocalization.of(context).notifications,
+              Z.of(context).notifications,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Text("${AppLocalization.of(context).notificationInfo}\n", style: AppStyles.textStyleParagraph(context)),
+                child: Text("${Z.of(context).notificationInfo}\n", style: AppStyles.textStyleParagraph(context)),
               ),
               AppSimpleDialogOption(
                 onPressed: () {
@@ -176,7 +176,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).onStr,
+                    Z.of(context).onStr,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -188,7 +188,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).off,
+                    Z.of(context).off,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -258,7 +258,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                         children: <Widget>[
                           // Header
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context).createGiftCard, context),
+                            CaseChange.toUpperCase(Z.of(context).createGiftCard, context),
                             style: AppStyles.textStyleHeader(context),
                             textAlign: TextAlign.center,
                             maxLines: 1,
@@ -277,8 +277,8 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                     () {
                       AppDialogs.showInfoDialog(
                         context,
-                        AppLocalization.of(context).giftCardInfoHeader,
-                        AppLocalization.of(context).giftInfo,
+                        Z.of(context).giftCardInfoHeader,
+                        Z.of(context).giftInfo,
                         scrollable: true,
                       );
                     },
@@ -519,7 +519,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                 Row(
                   children: <Widget>[
                     // Send Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).createGiftCard, Dimens.BUTTON_TOP_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).createGiftCard, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       final bool validRequest = await _validateRequest();
 
@@ -568,7 +568,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                         formattedAddress = paperWalletAccount;
                       } else {
                         if (!mounted) return;
-                        UIUtil.showSnackbar(AppLocalization.of(context).giftCardCreationError, context);
+                        UIUtil.showSnackbar(Z.of(context).giftCardCreationError, context);
                         return;
                       }
 
@@ -691,7 +691,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
     if (_amountController!.text.trim().isEmpty && _memoController!.text.trim().isEmpty) {
       isValid = false;
       setState(() {
-        _amountValidationText = AppLocalization.of(context).amountMissing;
+        _amountValidationText = Z.of(context).amountMissing;
       });
     } else {
       String bananoAmount;
@@ -713,7 +713,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
         if (_memoController!.text.trim().isEmpty) {
           isValid = false;
           setState(() {
-            _amountValidationText = AppLocalization.of(context).amountMissing;
+            _amountValidationText = Z.of(context).amountMissing;
           });
         } else {
           setState(() {
@@ -723,7 +723,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
       } else if (sendAmount > balanceRaw) {
         isValid = false;
         setState(() {
-          _amountValidationText = AppLocalization.of(context).insufficientBalance;
+          _amountValidationText = Z.of(context).insufficientBalance;
         });
       } else {
         setState(() {
@@ -766,7 +766,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
       textInputAction: TextInputAction.next,
       maxLines: null,
       autocorrect: false,
-      hintText: _amountHint ?? AppLocalization.of(context).enterAmount,
+      hintText: _amountHint ?? Z.of(context).enterAmount,
       prefixButton: _rawAmount == null
           ? TextFieldButton(
               padding: EdgeInsets.zero,
@@ -853,7 +853,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _memoHint ?? AppLocalization.of(context).enterMemo,
+      hintText: _memoHint ?? Z.of(context).enterMemo,
       fadeSuffixOnCondition: true,
       style: TextStyle(
         color: StateContainer.of(context).curTheme.text60,

@@ -62,7 +62,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                     child: Column(
                       children: <Widget>[
                         AutoSizeText(
-                          CaseChange.toUpperCase(AppLocalization.of(context).disablePasswordSheetHeader, context),
+                          CaseChange.toUpperCase(Z.of(context).disablePasswordSheetHeader, context),
                           style: AppStyles.textStyleHeader(context),
                           minFontSize: 12,
                           stepGranularity: 0.1,
@@ -76,7 +76,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                   Container(
                     margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
-                      AppLocalization.of(context).passwordNoLongerRequiredToOpenParagraph,
+                      Z.of(context).passwordNoLongerRequiredToOpenParagraph,
                       style: AppStyles.textStyleParagraph(context),
                       maxLines: 5,
                       stepGranularity: 0.5,
@@ -104,7 +104,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                                   });
                                 }
                               },
-                              hintText: AppLocalization.of(context).enterPasswordHint,
+                              hintText: Z.of(context).enterPasswordHint,
                               keyboardType: TextInputType.text,
                               obscureText: true,
                               style: TextStyle(
@@ -136,7 +136,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).disablePasswordSheetHeader, Dimens.BUTTON_TOP_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).disablePasswordSheetHeader, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       await submitAndDecrypt();
                     }),
@@ -144,7 +144,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                       Navigator.pop(context);
                     }),
@@ -163,7 +163,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
     if (passwordController!.text.isEmpty) {
       if (mounted) {
         setState(() {
-          passwordError = AppLocalization.of(context).passwordBlank;
+          passwordError = Z.of(context).passwordBlank;
         });
       }
     } else {
@@ -172,12 +172,12 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
         throwIf(!NanoUtil.isValidSeed(decryptedSeed), const FormatException());
         await sl.get<Vault>().setSeed(decryptedSeed);
         StateContainer.of(context).resetEncryptedSecret();
-        UIUtil.showSnackbar(AppLocalization.of(context).disablePasswordSuccess, context);
+        UIUtil.showSnackbar(Z.of(context).disablePasswordSuccess, context);
         Navigator.pop(context);
       } catch (e) {
         if (mounted) {
           setState(() {
-            passwordError = AppLocalization.of(context).invalidPassword;
+            passwordError = Z.of(context).invalidPassword;
           });
         }
       }

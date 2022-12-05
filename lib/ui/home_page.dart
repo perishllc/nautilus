@@ -277,8 +277,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     StateContainer.of(context).introSkiped = false;
     AppDialogs.showInfoDialog(
       context,
-      AppLocalization.of(context).introSkippedWarningHeader,
-      AppLocalization.of(context).introSkippedWarningContent,
+      Z.of(context).introSkippedWarningHeader,
+      Z.of(context).introSkippedWarningContent,
       barrierDismissible: false,
     );
   }
@@ -338,18 +338,18 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 actionsPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 title: Text(
-                  AppLocalization.of(context).giftAlert,
+                  Z.of(context).giftAlert,
                   style: AppStyles.textStyleDialogHeader(context),
                 ),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Text("${AppLocalization.of(context).importGift}\n\n", style: AppStyles.textStyleParagraph(context)),
+                    Text("${Z.of(context).importGift}\n\n", style: AppStyles.textStyleParagraph(context)),
                     RichText(
                       textAlign: TextAlign.start,
                       text: TextSpan(
-                        text: "${AppLocalization.of(context).giftFrom}: ",
+                        text: "${Z.of(context).giftFrom}: ",
                         style: AppStyles.textStyleParagraph(context),
                         children: [
                           TextSpan(
@@ -361,13 +361,13 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                     ),
                     if (memo.isNotEmpty)
                       Text(
-                        "${AppLocalization.of(context).giftMessage}: $memo\n",
+                        "${Z.of(context).giftMessage}: $memo\n",
                         style: AppStyles.textStyleParagraph(context),
                       ),
                     RichText(
                       textAlign: TextAlign.start,
                       text: TextSpan(
-                        text: "${AppLocalization.of(context).giftAmount}: ",
+                        text: "${Z.of(context).giftAmount}: ",
                         style: AppStyles.textStyleParagraph(context),
                         children: <InlineSpan>[
                           TextSpan(
@@ -394,7 +394,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                       Navigator.pop(context, 0);
                     },
                     child: Text(
-                      AppLocalization.of(context).refund,
+                      Z.of(context).refund,
                       style: AppStyles.textStyleDialogOptions(context),
                     ),
                   ),
@@ -403,7 +403,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                       Navigator.pop(context, 1);
                     },
                     child: Text(
-                      AppLocalization.of(context).receive,
+                      Z.of(context).receive,
                       style: AppStyles.textStyleDialogOptions(context),
                     ),
                   ),
@@ -412,7 +412,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                       Navigator.pop(context, 2);
                     },
                     child: Text(
-                      AppLocalization.of(context).close,
+                      Z.of(context).close,
                       style: AppStyles.textStyleDialogOptions(context),
                     ),
                   )
@@ -427,10 +427,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             if (requireCaptcha) {
               await AppDialogs.showInfoDialog(
                 context,
-                AppLocalization.of(context).captchaWarning,
-                AppLocalization.of(context).captchaWarningBody,
+                Z.of(context).captchaWarning,
+                Z.of(context).captchaWarningBody,
                 barrierDismissible: false,
-                closeText: CaseChange.toUpperCase(AppLocalization.of(context).ok, context),
+                closeText: CaseChange.toUpperCase(Z.of(context).ok, context),
               );
               if (!mounted) return;
               await Navigator.of(context).push(
@@ -488,19 +488,19 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 actionsPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 title: Text(
-                  AppLocalization.of(context).giftAlert,
+                  Z.of(context).giftAlert,
                   style: AppStyles.textStyleDialogHeader(context),
                 ),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Text("${AppLocalization.of(context).importGiftv2}\n\n",
+                    Text("${Z.of(context).importGiftv2}\n\n",
                         style: AppStyles.textStyleParagraph(context)),
                     RichText(
                       textAlign: TextAlign.start,
                       text: TextSpan(
-                        text: "${AppLocalization.of(context).giftFrom}: ",
+                        text: "${Z.of(context).giftFrom}: ",
                         style: AppStyles.textStyleParagraph(context),
                         children: [
                           TextSpan(
@@ -512,13 +512,13 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                     ),
                     if (memo.isNotEmpty)
                       Text(
-                        "${AppLocalization.of(context).giftMessage}: $memo\n",
+                        "${Z.of(context).giftMessage}: $memo\n",
                         style: AppStyles.textStyleParagraph(context),
                       ),
                     RichText(
                       textAlign: TextAlign.start,
                       text: TextSpan(
-                        text: "${AppLocalization.of(context).giftAmount}: ",
+                        text: "${Z.of(context).giftAmount}: ",
                         style: AppStyles.textStyleParagraph(context),
                         children: [
                           TextSpan(
@@ -545,7 +545,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                       Navigator.pop(context, 0);
                     },
                     child: Text(
-                      AppLocalization.of(context).receive,
+                      Z.of(context).receive,
                       style: AppStyles.textStyleDialogOptions(context),
                     ),
                   ),
@@ -554,7 +554,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                       Navigator.pop(context, 1);
                     },
                     child: Text(
-                      AppLocalization.of(context).close,
+                      Z.of(context).close,
                       style: AppStyles.textStyleDialogOptions(context),
                     ),
                   )
@@ -569,10 +569,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             if (requireCaptcha) {
               await AppDialogs.showInfoDialog(
                 context,
-                AppLocalization.of(context).captchaWarning,
-                AppLocalization.of(context).captchaWarningBody,
+                Z.of(context).captchaWarning,
+                Z.of(context).captchaWarningBody,
                 barrierDismissible: false,
-                closeText: CaseChange.toUpperCase(AppLocalization.of(context).ok, context),
+                closeText: CaseChange.toUpperCase(Z.of(context).ok, context),
               );
               if (!mounted) return;
               await Navigator.of(context).push(
@@ -598,10 +598,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
             if (res["error"] != null) {
               // something went wrong, show error:
-              UIUtil.showSnackbar(AppLocalization.of(context).errorProcessingGiftCard, context, durationMs: 4000);
+              UIUtil.showSnackbar(Z.of(context).errorProcessingGiftCard, context, durationMs: 4000);
             } else if (res["success"] != null) {
               // show success:
-              UIUtil.showSnackbar(AppLocalization.of(context).giftProcessSuccess, context, durationMs: 4000);
+              UIUtil.showSnackbar(Z.of(context).giftProcessSuccess, context, durationMs: 4000);
             }
 
             if (animationOpen) {
@@ -636,19 +636,19 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             return AlertDialog(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
               title: Text(
-                AppLocalization.of(context).giftAlertEmpty,
+                Z.of(context).giftAlertEmpty,
                 style: AppStyles.textStyleDialogHeader(context),
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Text("${AppLocalization.of(context).importGiftEmpty}\n\n",
+                  Text("${Z.of(context).importGiftEmpty}\n\n",
                       style: AppStyles.textStyleParagraph(context)),
                   RichText(
                     textAlign: TextAlign.start,
                     text: TextSpan(
-                      text: "${AppLocalization.of(context).giftFrom}: ",
+                      text: "${Z.of(context).giftFrom}: ",
                       style: AppStyles.textStyleParagraph(context),
                       children: [
                         TextSpan(
@@ -660,13 +660,13 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                   ),
                   if (memo.isNotEmpty)
                     Text(
-                      "${AppLocalization.of(context).giftMessage}: $memo\n",
+                      "${Z.of(context).giftMessage}: $memo\n",
                       style: AppStyles.textStyleParagraph(context),
                     ),
                   RichText(
                     textAlign: TextAlign.start,
                     text: TextSpan(
-                      text: "${AppLocalization.of(context).giftAmount}: ",
+                      text: "${Z.of(context).giftAmount}: ",
                       style: AppStyles.textStyleParagraph(context),
                       children: [
                         TextSpan(
@@ -694,7 +694,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Text(
-                      AppLocalization.of(context).ok,
+                      Z.of(context).ok,
                       style: AppStyles.textStyleDialogOptions(context),
                     ),
                   ),
@@ -803,11 +803,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       if (rateMyApp.shouldOpenDialog) {
         rateMyApp.showRateDialog(
           context,
-          title: AppLocalization.of(context).rateTheApp,
-          message: AppLocalization.of(context).rateTheAppDescription,
-          rateButton: AppLocalization.of(context).rate,
-          noButton: AppLocalization.of(context).noThanks,
-          laterButton: AppLocalization.of(context).maybeLater,
+          title: Z.of(context).rateTheApp,
+          message: Z.of(context).rateTheAppDescription,
+          rateButton: Z.of(context).rate,
+          noButton: Z.of(context).noThanks,
+          laterButton: Z.of(context).maybeLater,
           listener: (RateMyAppDialogButton button) {
             // The button click listener (useful if you want to cancel the click event).
             switch (button) {
@@ -891,9 +891,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     final AlertResponseItem alert = AlertResponseItem(
       id: 4041,
       active: true,
-      title: AppLocalization.of(context).connectionWarning,
-      shortDescription: AppLocalization.of(context).connectionWarningBodyShort,
-      longDescription: AppLocalization.of(context).connectionWarningBodyLong,
+      title: Z.of(context).connectionWarning,
+      shortDescription: Z.of(context).connectionWarningBodyShort,
+      longDescription: Z.of(context).connectionWarningBodyLong,
       dismissable: false,
     );
     if (showWarning) {
@@ -916,9 +916,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     final AlertResponseItem alert = AlertResponseItem(
       id: 4042,
       active: true,
-      title: AppLocalization.of(context).notificationWarning,
-      shortDescription: AppLocalization.of(context).notificationWarningBodyShort,
-      longDescription: AppLocalization.of(context).notificationWarningBodyLong,
+      title: Z.of(context).notificationWarning,
+      shortDescription: Z.of(context).notificationWarningBodyShort,
+      longDescription: Z.of(context).notificationWarningBodyLong,
     );
     // don't show if already dismissed:
     // if (await sl.get<SharedPrefsUtil>().shouldShowAlert(alert)) {
@@ -931,9 +931,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     final AlertResponseItem alert = AlertResponseItem(
       id: 4043,
       active: true,
-      title: AppLocalization.of(context).trackingWarning,
-      shortDescription: AppLocalization.of(context).trackingWarningBodyShort,
-      longDescription: AppLocalization.of(context).trackingWarningBodyLong,
+      title: Z.of(context).trackingWarning,
+      shortDescription: Z.of(context).trackingWarningBodyShort,
+      longDescription: Z.of(context).trackingWarningBodyLong,
       dismissable: true,
     );
     // don't show if already dismissed:
@@ -1147,7 +1147,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         if (purchaseDetails.status == PurchaseStatus.error) {
           // _handleError(purchaseDetails.error!);
           UIUtil.showSnackbar(
-            /*AppLocalization.of(context)!.purchaseError*/ "There was an error handling the purchase request!",
+            /*Z.of(context)!.purchaseError*/ "There was an error handling the purchase request!",
             context,
           );
         } else if (purchaseDetails.status == PurchaseStatus.purchased ||
@@ -1661,11 +1661,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           amountStr = getRawAsThemeAwareAmount(context, txDetails.amount_raw);
           if (txDetails.is_request) {
             if (isRecipient) {
-              if (AppLocalization.of(context).request.toLowerCase().contains(lowerCaseSearch)) {
+              if (Z.of(context).request.toLowerCase().contains(lowerCaseSearch)) {
                 shouldRemove = false;
               }
             } else {
-              if (AppLocalization.of(context).asked.toLowerCase().contains(lowerCaseSearch)) {
+              if (Z.of(context).asked.toLowerCase().contains(lowerCaseSearch)) {
                 shouldRemove = false;
               }
             }
@@ -1674,12 +1674,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
         if (txDetails.is_tx) {
           if (txDetails.sub_type == BlockTypes.SEND) {
-            if (AppLocalization.of(context).sent.toLowerCase().contains(lowerCaseSearch)) {
+            if (Z.of(context).sent.toLowerCase().contains(lowerCaseSearch)) {
               shouldRemove = false;
             }
           }
           if (txDetails.sub_type == BlockTypes.RECEIVE) {
-            if (AppLocalization.of(context).received.toLowerCase().contains(lowerCaseSearch)) {
+            if (Z.of(context).received.toLowerCase().contains(lowerCaseSearch)) {
               shouldRemove = false;
             }
           }
@@ -1702,7 +1702,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         }
 
         if (txDetails.record_type == RecordTypes.GIFT_LOAD) {
-          if (AppLocalization.of(context).loaded.toLowerCase().contains(lowerCaseSearch)) {
+          if (Z.of(context).loaded.toLowerCase().contains(lowerCaseSearch)) {
             shouldRemove = false;
           }
         }
@@ -1947,11 +1947,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           amountStr = getRawAsThemeAwareAmount(context, txDetails.amount_raw);
           if (txDetails.is_request) {
             if (isRecipient) {
-              if (AppLocalization.of(context).request.toLowerCase().contains(lowerCaseSearch)) {
+              if (Z.of(context).request.toLowerCase().contains(lowerCaseSearch)) {
                 shouldRemove = false;
               }
             } else {
-              if (AppLocalization.of(context).asked.toLowerCase().contains(lowerCaseSearch)) {
+              if (Z.of(context).asked.toLowerCase().contains(lowerCaseSearch)) {
                 shouldRemove = false;
               }
             }
@@ -1960,12 +1960,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
         if (txDetails.is_tx) {
           if (txDetails.sub_type == BlockTypes.SEND) {
-            if (AppLocalization.of(context).sent.toLowerCase().contains(lowerCaseSearch)) {
+            if (Z.of(context).sent.toLowerCase().contains(lowerCaseSearch)) {
               shouldRemove = false;
             }
           }
           if (txDetails.sub_type == BlockTypes.RECEIVE) {
-            if (AppLocalization.of(context).received.toLowerCase().contains(lowerCaseSearch)) {
+            if (Z.of(context).received.toLowerCase().contains(lowerCaseSearch)) {
               shouldRemove = false;
             }
           }
@@ -1988,7 +1988,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         }
 
         if (txDetails.record_type == RecordTypes.GIFT_LOAD) {
-          if (AppLocalization.of(context).loaded.toLowerCase().contains(lowerCaseSearch)) {
+          if (Z.of(context).loaded.toLowerCase().contains(lowerCaseSearch)) {
             shouldRemove = false;
           }
         }
@@ -2148,7 +2148,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       // If balance is insufficient show error:
       final BigInt? amountBigInt = BigInt.tryParse(payItem.amount);
       if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
-        UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
+        UIUtil.showSnackbar(Z.of(context).insufficientBalance, context);
         return;
       }
 
@@ -2383,7 +2383,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                               !_receiveDisabled ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
                         ),
                         child: AutoSizeText(
-                          AppLocalization.of(context).request,
+                          Z.of(context).request,
                           textAlign: TextAlign.center,
                           style: AppStyles.textStyleButtonPrimary(context),
                           maxLines: 1,
@@ -2437,7 +2437,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                               !_xmrSRDisabled ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
                         ),
                         child: AutoSizeText(
-                          AppLocalization.of(context).receive,
+                          Z.of(context).receive,
                           textAlign: TextAlign.center,
                           style: AppStyles.textStyleButtonPrimary(context),
                           maxLines: 1,
@@ -2525,17 +2525,17 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: const Icon(Icons.shopping_bag),
-              label: AppLocalization.of(context).shopButton,
+              label: Z.of(context).shopButton,
               backgroundColor: StateContainer.of(context).curTheme.warning,
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.home),
-              label: AppLocalization.of(context).homeButton,
+              label: Z.of(context).homeButton,
               backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
             ),
             // BottomNavigationBarItem(
             //   icon: const Icon(Icons.business),
-            //   label: AppLocalization.of(context).businessButton,
+            //   label: Z.of(context).businessButton,
             //   backgroundColor: StateContainer.of(context).curTheme.warning,
             // ),
           ],
@@ -2660,9 +2660,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       return const SizedBox();
     }
     if (alert.id == 4040) {
-      alert.title = AppLocalization.of(context).branchConnectErrorTitle;
-      alert.shortDescription = AppLocalization.of(context).branchConnectErrorShortDesc;
-      alert.longDescription = AppLocalization.of(context).branchConnectErrorLongDesc;
+      alert.title = Z.of(context).branchConnectErrorTitle;
+      alert.shortDescription = Z.of(context).branchConnectErrorShortDesc;
+      alert.longDescription = Z.of(context).branchConnectErrorLongDesc;
       // alert.dismissable = false;
     }
     return Container(
@@ -2806,7 +2806,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       },
       enableBoxBorder: true,
       searchBoxBorderColour: StateContainer.of(context).curTheme.text,
-      hintText: _searchOpen ? AppLocalization.of(context).searchHint : "",
+      hintText: _searchOpen ? Z.of(context).searchHint : "",
     );
   }
 
@@ -2863,21 +2863,21 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     if (txDetails.is_message || txDetails.is_request) {
       if (txDetails.is_request) {
         if (txDetails.isRecipient(walletAddress)) {
-          itemText = AppLocalization.of(context).request;
+          itemText = Z.of(context).request;
           icon = AppIcons.call_made;
           iconColor = StateContainer.of(context).curTheme.text60;
         } else {
-          itemText = AppLocalization.of(context).asked;
+          itemText = Z.of(context).asked;
           icon = AppIcons.call_received;
           iconColor = StateContainer.of(context).curTheme.primary60;
         }
       } else if (txDetails.is_message) {
         if (txDetails.isRecipient(walletAddress)) {
-          itemText = AppLocalization.of(context).received;
+          itemText = Z.of(context).received;
           icon = AppIcons.call_received;
           iconColor = StateContainer.of(context).curTheme.primary60;
         } else {
-          itemText = AppLocalization.of(context).sent;
+          itemText = Z.of(context).sent;
           icon = AppIcons.call_made;
           iconColor = StateContainer.of(context).curTheme.text60;
         }
@@ -2885,11 +2885,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     } else if (txDetails.is_tx) {
       if (isGift) {
         if (txDetails.record_type == RecordTypes.GIFT_LOAD) {
-          itemText = AppLocalization.of(context).loaded;
+          itemText = Z.of(context).loaded;
           icon = AppIcons.transferfunds;
           iconColor = StateContainer.of(context).curTheme.primary60;
         } else if (txDetails.record_type == RecordTypes.GIFT_OPEN) {
-          itemText = AppLocalization.of(context).opened;
+          itemText = Z.of(context).opened;
           icon = AppIcons.transferfunds;
           iconColor = StateContainer.of(context).curTheme.primary60;
         } else {
@@ -2897,11 +2897,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         }
       } else {
         if (txDetails.sub_type == BlockTypes.SEND) {
-          itemText = AppLocalization.of(context).sent;
+          itemText = Z.of(context).sent;
           icon = AppIcons.sent;
           iconColor = StateContainer.of(context).curTheme.text60;
         } else {
-          itemText = AppLocalization.of(context).received;
+          itemText = Z.of(context).received;
           icon = AppIcons.received;
           iconColor = StateContainer.of(context).curTheme.primary60;
         }
@@ -3023,10 +3023,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     final List<Widget> slideActions = [];
     String? label;
     if (txDetails.is_tx) {
-      label = AppLocalization.of(context).send;
+      label = Z.of(context).send;
     } else {
       if (txDetails.is_request && txDetails.isRecipient(walletAddress)) {
-        label = AppLocalization.of(context).pay;
+        label = Z.of(context).pay;
       }
     }
 
@@ -3055,7 +3055,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           backgroundColor: StateContainer.of(context).curTheme.background!,
           foregroundColor: StateContainer.of(context).curTheme.success,
           icon: Icons.send,
-          label: AppLocalization.of(context).reply,
+          label: Z.of(context).reply,
           onPressed: (BuildContext context) async {
             if (!mounted) return;
             await CardActions.payTX(context, txDetails);
@@ -3073,7 +3073,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             backgroundColor: StateContainer.of(context).curTheme.background!,
             foregroundColor: StateContainer.of(context).curTheme.warning60,
             icon: Icons.refresh_rounded,
-            label: AppLocalization.of(context).retry,
+            label: Z.of(context).retry,
             onPressed: (BuildContext context) async {
               if (!mounted) return;
               await CardActions.resendRequest(context, txDetails);
@@ -3087,7 +3087,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             backgroundColor: StateContainer.of(context).curTheme.background!,
             foregroundColor: StateContainer.of(context).curTheme.warning60,
             icon: Icons.refresh_rounded,
-            label: AppLocalization.of(context).retry,
+            label: Z.of(context).retry,
             onPressed: (BuildContext context) async {
               if (!mounted) return;
               await CardActions.resendMemo(context, txDetails);
@@ -3102,7 +3102,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             backgroundColor: StateContainer.of(context).curTheme.background!,
             foregroundColor: StateContainer.of(context).curTheme.warning60,
             icon: Icons.refresh_rounded,
-            label: AppLocalization.of(context).retry,
+            label: Z.of(context).retry,
             onPressed: (BuildContext context) async {
               if (!mounted) return;
               await CardActions.resendMessage(context, txDetails);
@@ -3119,7 +3119,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           backgroundColor: StateContainer.of(context).curTheme.background!,
           foregroundColor: StateContainer.of(context).curTheme.error60,
           icon: Icons.delete,
-          label: AppLocalization.of(context).delete,
+          label: Z.of(context).delete,
           onPressed: (BuildContext context) async {
             if (txDetails.uuid != null) {
               await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
@@ -3679,8 +3679,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               _buildDummyTXCard(
                 context,
                 amount_raw: "30000000000000000000000000000000",
-                displayName: AppLocalization.of(context).exampleRecRecipient,
-                memo: AppLocalization.of(context).exampleRecRecipientMessage,
+                displayName: Z.of(context).exampleRecRecipient,
+                memo: Z.of(context).exampleRecRecipientMessage,
                 is_recipient: true,
                 is_tx: true,
                 timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60),
@@ -3688,8 +3688,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               _buildDummyTXCard(
                 context,
                 amount_raw: "50000000000000000000000000000000",
-                displayName: AppLocalization.of(context).examplePayRecipient,
-                memo: AppLocalization.of(context).examplePayRecipientMessage,
+                displayName: Z.of(context).examplePayRecipient,
+                memo: Z.of(context).examplePayRecipientMessage,
                 is_recipient: false,
                 is_tx: true,
                 timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 1),
@@ -3834,8 +3834,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               _buildDummyTXCard(
                 context,
                 amount_raw: "30000000000000000000000000000000",
-                displayName: AppLocalization.of(context).exampleRecRecipient,
-                memo: AppLocalization.of(context).exampleRecRecipientMessage,
+                displayName: Z.of(context).exampleRecRecipient,
+                memo: Z.of(context).exampleRecRecipientMessage,
                 is_recipient: true,
                 is_tx: true,
                 timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60),
@@ -3843,8 +3843,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               _buildDummyTXCard(
                 context,
                 amount_raw: "50000000000000000000000000000000",
-                displayName: AppLocalization.of(context).examplePayRecipient,
-                memo: AppLocalization.of(context).examplePayRecipientMessage,
+                displayName: Z.of(context).examplePayRecipient,
+                memo: Z.of(context).examplePayRecipientMessage,
                 is_recipient: false,
                 is_tx: true,
                 timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 1),
@@ -3854,8 +3854,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               _buildDummyTXCard(
                 context,
                 amount_raw: "10000000000000000000000000000000",
-                displayName: AppLocalization.of(context).examplePaymentTo,
-                memo: AppLocalization.of(context).examplePaymentFulfilledMemo,
+                displayName: Z.of(context).examplePaymentTo,
+                memo: Z.of(context).examplePaymentFulfilledMemo,
                 is_recipient: false,
                 is_request: true,
                 is_fulfilled: true,
@@ -3864,8 +3864,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               _buildDummyTXCard(
                 context,
                 amount_raw: "2000000000000000000000000000000000",
-                displayName: AppLocalization.of(context).examplePaymentFrom,
-                memo: AppLocalization.of(context).examplePaymentReceivableMemo,
+                displayName: Z.of(context).examplePaymentFrom,
+                memo: Z.of(context).examplePaymentReceivableMemo,
                 is_recipient: true,
                 is_request: true,
                 is_fulfilled: false,
@@ -3873,8 +3873,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               ),
               _buildDummyTXCard(
                 context,
-                displayName: AppLocalization.of(context).examplePaymentTo,
-                memo: AppLocalization.of(context).examplePaymentMessage,
+                displayName: Z.of(context).examplePaymentTo,
+                memo: Z.of(context).examplePaymentMessage,
                 is_recipient: true,
                 is_message: true,
                 is_fulfilled: false,

@@ -59,23 +59,23 @@ class UserDetailsSheet {
                             onPressed: () {
                               AppDialogs.showConfirmDialog(
                                   context,
-                                  AppLocalization.of(context).removeContact,
-                                  AppLocalization.of(context)
+                                  Z.of(context).removeContact,
+                                  Z.of(context)
                                       .removeContactConfirmation
                                       .replaceAll('%1', user.username!),
-                                  CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
+                                  CaseChange.toUpperCase(Z.of(context).yes, context), () {
                                 // sl.get<DBHelper>().deleteContact(user).then((deleted) {
                                 //   if (deleted) {
                                 //     // Delete image if exists
                                 //     EventTaxiImpl.singleton().fire(RemovedEvent(contact: user));
                                 //     EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: user));
-                                //     UIUtil.showSnackbar(AppLocalization.of(context).contactRemoved.replaceAll("%1", user.username), context);
+                                //     UIUtil.showSnackbar(Z.of(context).contactRemoved.replaceAll("%1", user.username), context);
                                 //     Navigator.of(context).pop();
                                 //   } else {
                                 //     // TODO - error for failing to delete contact
                                 //   }
                                 // });
-                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
+                              }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
                             },
                             child: Icon(AppIcons.trashcan, size: 24, color: StateContainer.of(context).curTheme.text),
                           ),
@@ -87,7 +87,7 @@ class UserDetailsSheet {
                           child: Column(
                             children: <Widget>[
                               AutoSizeText(
-                                CaseChange.toUpperCase(AppLocalization.of(context).favoriteHeader, context),
+                                CaseChange.toUpperCase(Z.of(context).favoriteHeader, context),
                                 style: AppStyles.textStyleHeader(context),
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
@@ -188,7 +188,7 @@ class UserDetailsSheet {
                             // Address Copied text container
                             Container(
                               margin: const EdgeInsets.only(top: 5, bottom: 5),
-                              child: Text(_addressCopied ? AppLocalization.of(context).addressCopied : "",
+                              child: Text(_addressCopied ? Z.of(context).addressCopied : "",
                                   style: TextStyle(
                                     fontSize: 14.0,
                                     color: StateContainer.of(context).curTheme.success,
@@ -207,7 +207,7 @@ class UserDetailsSheet {
                         Row(
                           children: <Widget>[
                             // Send Button
-                            AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send,
+                            AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).send,
                                 Dimens.BUTTON_TOP_DIMENS,
                                 disabled: StateContainer.of(context).wallet!.accountBalance == BigInt.zero,
                                 onPressed: () {
@@ -222,7 +222,7 @@ class UserDetailsSheet {
                           children: <Widget>[
                             // Close Button
                             AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                                AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                                Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                               Navigator.pop(context);
                             }),
                           ],

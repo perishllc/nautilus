@@ -29,7 +29,7 @@ class ScanScreenState extends State<ScanScreen> {
     if (file?.path != null) {
       final bool qrCodeFound = await cameraController.analyzeImage(file!.path);
       if (!qrCodeFound && mounted && !popped) {
-        UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+        UIUtil.showSnackbar(Z.of(context).qrUnknownError, context);
       }
     }
   }

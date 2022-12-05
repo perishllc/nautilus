@@ -110,7 +110,7 @@ mixin SendSheetHelpers {
   //       });
   //     }
   //   } else {
-  //     _addressHint = AppLocalization.of(context).enterUserOrAddress;
+  //     _addressHint = Z.of(context).enterUserOrAddress;
   //     _users = [];
   //     if (Address(_addressController!.text).isValid()) {
   //       _addressValidAndUnfocused = true;
@@ -239,9 +239,9 @@ class SendSheetState extends State<SendSheet> {
     quickSendAmount = widget.quickSendAmount;
     animationOpen = false;
 
-    // _amountHint = AppLocalization.of(context).enterAmount;
-    // _addressHint = AppLocalization.of(context).enterUserOrAddress;
-    // _memoHint = AppLocalization.of(context).enterMemo;
+    // _amountHint = Z.of(context).enterAmount;
+    // _addressHint = Z.of(context).enterUserOrAddress;
+    // _memoHint = Z.of(context).enterMemo;
 
     if (widget.user != null) {
       // Setup initial state for contact pre-filled
@@ -279,7 +279,7 @@ class SendSheetState extends State<SendSheet> {
         });
       } else {
         setState(() {
-          _amountHint = AppLocalization.of(context).enterAmount;
+          _amountHint = Z.of(context).enterAmount;
         });
       }
     });
@@ -322,7 +322,7 @@ class SendSheetState extends State<SendSheet> {
         }
       } else {
         setState(() {
-          _addressHint = AppLocalization.of(context).enterUserOrAddress;
+          _addressHint = Z.of(context).enterUserOrAddress;
           _users = [];
           if (Address(_addressController!.text).isValid()) {
             _addressValidAndUnfocused = true;
@@ -406,7 +406,7 @@ class SendSheetState extends State<SendSheet> {
         });
       } else {
         setState(() {
-          _memoHint = AppLocalization.of(context).enterMemo;
+          _memoHint = Z.of(context).enterMemo;
         });
       }
     });
@@ -460,13 +460,13 @@ class SendSheetState extends State<SendSheet> {
           return AppSimpleDialog(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
-              AppLocalization.of(context).notifications,
+              Z.of(context).notifications,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Text("${AppLocalization.of(context).notificationInfo}\n",
+                child: Text("${Z.of(context).notificationInfo}\n",
                     style: AppStyles.textStyleParagraph(context)),
               ),
               AppSimpleDialogOption(
@@ -476,7 +476,7 @@ class SendSheetState extends State<SendSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).onStr,
+                    Z.of(context).onStr,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -488,7 +488,7 @@ class SendSheetState extends State<SendSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).off,
+                    Z.of(context).off,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -529,14 +529,14 @@ class SendSheetState extends State<SendSheet> {
           return AlertDialog(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
-              AppLocalization.of(context).needVerificationAlertHeader,
+              Z.of(context).needVerificationAlertHeader,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${AppLocalization.of(context).needVerificationAlert}\n\n",
+                Text("${Z.of(context).needVerificationAlert}\n\n",
                     style: AppStyles.textStyleParagraph(context)),
               ],
             ),
@@ -548,7 +548,7 @@ class SendSheetState extends State<SendSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).goToQRCode,
+                    Z.of(context).goToQRCode,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -560,7 +560,7 @@ class SendSheetState extends State<SendSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).ok,
+                    Z.of(context).ok,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -608,12 +608,12 @@ class SendSheetState extends State<SendSheet> {
     if (!mounted) return;
     if (scanResult == null) {
       // ignore: use_build_context_synchronously
-      UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+      UIUtil.showSnackbar(Z.of(context).qrUnknownError, context);
     } else if (scanResult is String && QRScanErrs.ERROR_LIST.contains(scanResult)) {
       if (scanResult == QRScanErrs.PERMISSION_DENIED) {
-        UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);
+        UIUtil.showSnackbar(Z.of(context).qrInvalidPermissions, context);
       } else if (scanResult == QRScanErrs.UNKNOWN_ERROR) {
-        UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+        UIUtil.showSnackbar(Z.of(context).qrUnknownError, context);
       }
       return;
     } else if (scanResult is Address) {
@@ -669,7 +669,7 @@ class SendSheetState extends State<SendSheet> {
 
         // If balance is insufficient show error:
         if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
-          UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
+          UIUtil.showSnackbar(Z.of(context).insufficientBalance, context);
           return;
         }
 
@@ -698,7 +698,7 @@ class SendSheetState extends State<SendSheet> {
       // If balance is insufficient show error:
       final BigInt? amountBigInt = BigInt.tryParse(payItem.amount);
       if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
-        UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
+        UIUtil.showSnackbar(Z.of(context).insufficientBalance, context);
         return;
       }
 
@@ -733,7 +733,7 @@ class SendSheetState extends State<SendSheet> {
           ));
     } else {
       // something went wrong, show generic error:
-      UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+      UIUtil.showSnackbar(Z.of(context).qrUnknownError, context);
     }
   }
 
@@ -828,7 +828,7 @@ class SendSheetState extends State<SendSheet> {
                         children: <Widget>[
                           // Header
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context).sendFrom, context),
+                            CaseChange.toUpperCase(Z.of(context).sendFrom, context),
                             style: AppStyles.textStyleHeader(context),
                             textAlign: TextAlign.center,
                             maxLines: 1,
@@ -845,8 +845,8 @@ class SendSheetState extends State<SendSheet> {
                   child: AppDialogs.infoButton(
                     context,
                     () {
-                      AppDialogs.showInfoDialog(context, AppLocalization.of(context).sendSheetInfoHeader,
-                          AppLocalization.of(context).sendSheetInfo);
+                      AppDialogs.showInfoDialog(context, Z.of(context).sendSheetInfoHeader,
+                          Z.of(context).sendSheetInfo);
                     },
                   ),
                 ),
@@ -869,7 +869,7 @@ class SendSheetState extends State<SendSheet> {
                     _addressCopied = false;
                   });
                 });
-                UIUtil.showSnackbar(AppLocalization.of(context).addressCopied, context, durationMs: 1500);
+                UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
               },
               child: Column(
                 children: [
@@ -1199,7 +1199,7 @@ class SendSheetState extends State<SendSheet> {
                   children: <Widget>[
                     // Send Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS,
+                        context, AppButtonType.PRIMARY, Z.of(context).send, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       final bool validRequest = await _validateRequest();
 
@@ -1244,13 +1244,13 @@ class SendSheetState extends State<SendSheet> {
                         if (user == null) {
                           setState(() {
                             if (_addressController!.text.startsWith("★")) {
-                              _addressValidationText = AppLocalization.of(context).contactInvalid;
+                              _addressValidationText = Z.of(context).contactInvalid;
                             } else if (_addressController!.text.startsWith("@") ||
                                 _addressController!.text.startsWith("#")) {
-                              _addressValidationText = AppLocalization.of(context).usernameInvalid;
+                              _addressValidationText = Z.of(context).usernameInvalid;
                             } else if (_addressController!.text.contains(".") ||
                                 _addressController!.text.contains(r"$")) {
-                              _addressValidationText = AppLocalization.of(context).domainInvalid;
+                              _addressValidationText = Z.of(context).domainInvalid;
                             }
                           });
                         } else {
@@ -1286,7 +1286,7 @@ class SendSheetState extends State<SendSheet> {
                       AppButton.buildAppButton(
                         context,
                         AppButtonType.PRIMARY_OUTLINE,
-                        AppLocalization.of(context).scanQrCode,
+                        Z.of(context).scanQrCode,
                         Dimens.BUTTON_COMPACT_LEFT_DIMENS,
                         onPressed: () {
                           _scanQR();
@@ -1296,7 +1296,7 @@ class SendSheetState extends State<SendSheet> {
                       AppButton.buildAppButton(
                         context,
                         AppButtonType.PRIMARY_OUTLINE,
-                        AppLocalization.of(context).scanNFC,
+                        Z.of(context).scanNFC,
                         Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
                         onPressed: _scanNFC,
                       )
@@ -1309,7 +1309,7 @@ class SendSheetState extends State<SendSheet> {
                       AppButton.buildAppButton(
                         context,
                         AppButtonType.PRIMARY_OUTLINE,
-                        AppLocalization.of(context).scanQrCode,
+                        Z.of(context).scanQrCode,
                         Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: _scanQR,
                       )
@@ -1428,7 +1428,7 @@ class SendSheetState extends State<SendSheet> {
     if (_amountController!.text.trim().isEmpty && _memoController!.text.trim().isEmpty) {
       isValid = false;
       setState(() {
-        _amountValidationText = AppLocalization.of(context).amountMissing;
+        _amountValidationText = Z.of(context).amountMissing;
       });
     } else {
       String bananoAmount;
@@ -1451,7 +1451,7 @@ class SendSheetState extends State<SendSheet> {
         if (_memoController!.text.trim().isEmpty) {
           isValid = false;
           setState(() {
-            _amountValidationText = AppLocalization.of(context).amountMissing;
+            _amountValidationText = Z.of(context).amountMissing;
           });
         } else {
           setState(() {
@@ -1461,7 +1461,7 @@ class SendSheetState extends State<SendSheet> {
       } else if (sendAmount > balanceRaw) {
         isValid = false;
         setState(() {
-          _amountValidationText = AppLocalization.of(context).insufficientBalance;
+          _amountValidationText = Z.of(context).insufficientBalance;
         });
       } else {
         setState(() {
@@ -1477,7 +1477,7 @@ class SendSheetState extends State<SendSheet> {
     if (_addressController!.text.trim().isEmpty) {
       isValid = false;
       setState(() {
-        _addressValidationText = AppLocalization.of(context).addressMissing;
+        _addressValidationText = Z.of(context).addressMissing;
         _pasteButtonVisible = true;
       });
     } else if (_addressController!.text.isNotEmpty &&
@@ -1487,7 +1487,7 @@ class SendSheetState extends State<SendSheet> {
         !Address(_addressController!.text).isValid()) {
       isValid = false;
       setState(() {
-        _addressValidationText = AppLocalization.of(context).invalidAddress;
+        _addressValidationText = Z.of(context).invalidAddress;
         _pasteButtonVisible = true;
       });
     } else if (!isUser && !isFavorite) {
@@ -1557,7 +1557,7 @@ class SendSheetState extends State<SendSheet> {
       textInputAction: TextInputAction.next,
       maxLines: null,
       autocorrect: false,
-      hintText: _amountHint ?? AppLocalization.of(context).enterAmount,
+      hintText: _amountHint ?? Z.of(context).enterAmount,
       prefixButton: _rawAmount == null
           ? TextFieldButton(
               padding: EdgeInsets.zero,
@@ -1654,7 +1654,7 @@ class SendSheetState extends State<SendSheet> {
         textInputAction: _memoController!.text.isEmpty ? TextInputAction.next : TextInputAction.done,
         maxLines: null,
         autocorrect: false,
-        hintText: _addressHint ?? AppLocalization.of(context).enterUserOrAddress,
+        hintText: _addressHint ?? Z.of(context).enterUserOrAddress,
         prefixButton: TextFieldButton(
           icon: AppIcons.scan,
           onPressed: () async {
@@ -1861,7 +1861,7 @@ class SendSheetState extends State<SendSheet> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _memoHint ?? AppLocalization.of(context).enterMemo,
+      hintText: _memoHint ?? Z.of(context).enterMemo,
       fadeSuffixOnCondition: true,
       style: TextStyle(
         color: StateContainer.of(context).curTheme.text60,

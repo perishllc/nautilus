@@ -477,28 +477,28 @@ String getTimeAgoString(BuildContext context, int epochTime) {
 
   if (diff < 60) {
     // a few seconds ago
-    timeStr = AppLocalization.of(context).fewSecondsAgo;
+    timeStr = Z.of(context).fewSecondsAgo;
   } else if (diff < 120) {
     // a minute ago
-    timeStr = AppLocalization.of(context).minuteAgo;
+    timeStr = Z.of(context).minuteAgo;
   } else if (diff < 3600) {
     // 2-60 minutes ago
-    timeStr = AppLocalization.of(context).fewMinutesAgo;
+    timeStr = Z.of(context).fewMinutesAgo;
   } else if (diff < 7200) {
     // 1-2 hours ago
-    timeStr = AppLocalization.of(context).hourAgo;
+    timeStr = Z.of(context).hourAgo;
   } else if (diff < 86400) {
     // 2-24 hours ago
-    timeStr = AppLocalization.of(context).fewHoursAgo;
+    timeStr = Z.of(context).fewHoursAgo;
   } else if (diff < 172800) {
     // 24-48 hours ago
-    timeStr = AppLocalization.of(context).dayAgo;
+    timeStr = Z.of(context).dayAgo;
   } else if (diff < 604800) {
     // 2-7 days ago
-    timeStr = AppLocalization.of(context).fewDaysAgo;
+    timeStr = Z.of(context).fewDaysAgo;
   } else if (diff < 1209600) {
     // 1-2 weeks ago
-    timeStr = AppLocalization.of(context).weekAgo;
+    timeStr = Z.of(context).weekAgo;
   } else {
     return timeStr;
   }

@@ -94,23 +94,23 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
         xmrState = event.message;
         switch (event.message) {
           case "error":
-            title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusError, context);
+            title = CaseChange.toUpperCase(Z.of(context).xmrStatusError, context);
             color = StateContainer.of(context).curTheme.error;
             break;
 
           case "loading":
-            title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusLoading, context);
+            title = CaseChange.toUpperCase(Z.of(context).xmrStatusLoading, context);
             color = StateContainer.of(context).curTheme.warning;
             stillSyncing = false;
             break;
 
           case "connecting":
-            title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusConnecting, context);
+            title = CaseChange.toUpperCase(Z.of(context).xmrStatusConnecting, context);
             color = StateContainer.of(context).curTheme.warning;
             break;
 
           case "syncing":
-            title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusSynchronizing, context);
+            title = CaseChange.toUpperCase(Z.of(context).xmrStatusSynchronizing, context);
             color = StateContainer.of(context).curTheme.warning;
             if (syncPercentage > 0) {
               title += ' ${(syncPercentage * 100).toStringAsPrecision(3)}%';
@@ -120,7 +120,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
             _syncTimer = Timer(const Duration(milliseconds: 3500), areWeStillSyncing);
             break;
           case "ready":
-            title = CaseChange.toUpperCase(AppLocalization.of(context).xmrStatusSynchronized, context);
+            title = CaseChange.toUpperCase(Z.of(context).xmrStatusSynchronized, context);
             color = StateContainer.of(context).curTheme.success;
             stillSyncing = false;
             break;
@@ -336,7 +336,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
                               animatedTexts: <AnimatedText>[
                                 WavyAnimatedText(
                                     CaseChange.toUpperCase(
-                                      AppLocalization.of(context).xmrStatusConnecting,
+                                      Z.of(context).xmrStatusConnecting,
                                       context,
                                     ),
                                     speed: const Duration(milliseconds: 100)),
@@ -353,7 +353,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          AppLocalization.of(context).thisMayTakeSomeTime,
+                          Z.of(context).thisMayTakeSomeTime,
                           textAlign: TextAlign.center,
                           style: AppStyles.textStyleCurrencyAlt(context).copyWith(
                             color: xmrStatusColor,

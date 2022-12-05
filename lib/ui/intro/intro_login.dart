@@ -107,7 +107,7 @@ class _IntroLoginPageState extends State<IntroLoginPage> {
                         ),
                         alignment: AlignmentDirectional.centerStart,
                         child: AutoSizeText(
-                          AppLocalization.of(context).loginOrRegisterHeader,
+                          Z.of(context).loginOrRegisterHeader,
                           maxLines: 3,
                           stepGranularity: 0.5,
                           style: AppStyles.textStyleHeaderColored(context),
@@ -118,7 +118,7 @@ class _IntroLoginPageState extends State<IntroLoginPage> {
                       // Container(
                       //   margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                       //   child: AutoSizeText(
-                      //     AppLocalization.of(context).passwordWillBeRequiredToOpenParagraph,
+                      //     Z.of(context).passwordWillBeRequiredToOpenParagraph,
                       //     style: AppStyles.textStyleParagraph(context),
                       //     maxLines: 5,
                       //     stepGranularity: 0.5,
@@ -146,7 +146,7 @@ class _IntroLoginPageState extends State<IntroLoginPage> {
                                       });
                                     }
                                   },
-                                  hintText: AppLocalization.of(context).enterEmail,
+                                  hintText: Z.of(context).enterEmail,
                                   keyboardType: TextInputType.emailAddress,
                                   textAlign: TextAlign.center,
                                   // style: TextStyle(
@@ -179,7 +179,7 @@ class _IntroLoginPageState extends State<IntroLoginPage> {
                     Row(
                       children: <Widget>[
                         // Next Button
-                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).nextButton, Dimens.BUTTON_BOTTOM_DIMENS,
+                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).nextButton, Dimens.BUTTON_BOTTOM_DIMENS,
                             onPressed: () async {
                           loginFunction(email: emailController.text);
                         }),
@@ -188,7 +188,7 @@ class _IntroLoginPageState extends State<IntroLoginPage> {
                     // Row(
                     //   children: <Widget>[
                     //     // Go Back Button
-                    //     AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS,
+                    //     AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS,
                     //         onPressed: () {
                     //       Navigator.of(context).pop();
                     //     }),

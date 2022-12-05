@@ -76,7 +76,7 @@ class _SetPinSheetState extends State<SetPinSheet> {
                         child: Column(
                           children: <Widget>[
                             AutoSizeText(
-                              CaseChange.toUpperCase(AppLocalization.of(context).changePin, context),
+                              CaseChange.toUpperCase(Z.of(context).changePin, context),
                               style: AppStyles.textStyleHeader(context),
                               minFontSize: 12,
                               stepGranularity: 0.1,
@@ -93,7 +93,7 @@ class _SetPinSheetState extends State<SetPinSheet> {
                       //   child: AppDialogs.infoButton(
                       //     context,
                       //     () {
-                      //       AppDialogs.showInfoDialog(context, AppLocalization.of(context).plausibleInfoHeader, AppLocalization.of(context).plausibleSheetInfo);
+                      //       AppDialogs.showInfoDialog(context, Z.of(context).plausibleInfoHeader, Z.of(context).plausibleSheetInfo);
                       //     },
                       //   ),
                       // ),
@@ -107,7 +107,7 @@ class _SetPinSheetState extends State<SetPinSheet> {
                   Container(
                     margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
-                      AppLocalization.of(context).setPinParagraph,
+                      Z.of(context).setPinParagraph,
                       style: AppStyles.textStyleParagraph(context),
                       maxLines: 5,
                       stepGranularity: 0.5,
@@ -137,7 +137,7 @@ class _SetPinSheetState extends State<SetPinSheet> {
                                   });
                                 }
                               },
-                              hintText: AppLocalization.of(context).existingPinHint,
+                              hintText: Z.of(context).existingPinHint,
                               obscureText: true,
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -168,7 +168,7 @@ class _SetPinSheetState extends State<SetPinSheet> {
                                   });
                                 }
                               },
-                              hintText: AppLocalization.of(context).changePinHint,
+                              hintText: Z.of(context).changePinHint,
                               obscureText: true,
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -200,14 +200,14 @@ class _SetPinSheetState extends State<SetPinSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).changePin, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).changePin, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       await submitAndEncrypt();
                     }),
                   ],
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                       Navigator.pop(context);
                     }),
@@ -226,16 +226,16 @@ class _SetPinSheetState extends State<SetPinSheet> {
     if (!mounted) return;
     if (createPasswordController!.text.isEmpty || confirmPasswordController!.text.isEmpty) {
       setState(() {
-        passwordError = AppLocalization.of(context).pinBlank;
+        passwordError = Z.of(context).pinBlank;
       });
     } else if (createPasswordController!.text != curPin) {
       setState(() {
-        passwordError = AppLocalization.of(context).pinIncorrect;
+        passwordError = Z.of(context).pinIncorrect;
       });
     } else {
       await sl.get<Vault>().writePin(confirmPasswordController!.text);
       if (!mounted) return;
-      UIUtil.showSnackbar(AppLocalization.of(context).setPinSuccess, context);
+      UIUtil.showSnackbar(Z.of(context).setPinSuccess, context);
       Navigator.pop(context);
     }
   }

@@ -41,7 +41,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
               borderRadius: BorderRadius.circular(15),
             ),
             title: Text(
-              AppLocalization.of(context).notifications,
+              Z.of(context).notifications,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             children: <Widget>[
@@ -52,7 +52,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).onStr,
+                    Z.of(context).onStr,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -64,7 +64,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).off,
+                    Z.of(context).off,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -133,7 +133,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                     //     children: <Widget>[
                     //       // Header
                     //       AutoSizeText(
-                    //         CaseChange.toUpperCase(AppLocalization.of(context).messageHeader, context),
+                    //         CaseChange.toUpperCase(Z.of(context).messageHeader, context),
                     //         style: AppStyles.textStyleHeader(context),
                     //         textAlign: TextAlign.center,
                     //         maxLines: 1,
@@ -220,7 +220,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                 if (widget.alert!.link != null)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).readMore,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).readMore,
                           Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                         final Uri uri = Uri.parse(widget.alert!.link!);
                         if (await canLaunchUrl(uri)) {
@@ -237,7 +237,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                       AppButton.buildAppButton(
                           context,
                           AppButtonType.PRIMARY,
-                          AppLocalization.of(context).enableNotifications,
+                          Z.of(context).enableNotifications,
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                         final bool enabledNotifications = await showNotificationDialog();
                         if (!mounted) return;
@@ -254,7 +254,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                   Row(
                     children: <Widget>[
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY,
-                          AppLocalization.of(context).enableTracking, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                          Z.of(context).enableTracking, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                         bool? trackingEnabled;
                         if (Platform.isIOS) {
                           final TrackingStatus status = await AppTrackingTransparency.requestTrackingAuthorization();
@@ -282,7 +282,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                   Row(
                     children: <Widget>[
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                          AppLocalization.of(context).dismiss, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                          Z.of(context).dismiss, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         sl.get<SharedPrefsUtil>().dismissAlertForWeek(widget.alert!);
                         StateContainer.of(context).removeActiveOrSettingsAlert(widget.alert, null);
                         if (widget.alert?.priority == "high") {
@@ -296,7 +296,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                   Row(
                     children: <Widget>[
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                          AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                          Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.pop(context);
                       }),
                     ],

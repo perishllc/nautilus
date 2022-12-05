@@ -53,9 +53,9 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
           // Show a custom explainer dialog before the system dialog
           await AppDialogs.showInfoDialog(
             context,
-            AppLocalization.of(context).trackingHeader,
-            AppLocalization.of(context).askTracking,
-            closeText: AppLocalization.of(context).continueButton.toUpperCase(),
+            Z.of(context).trackingHeader,
+            Z.of(context).askTracking,
+            closeText: Z.of(context).continueButton.toUpperCase(),
             barrierDismissible: false,
             onPressed: () async {
               bool trackingEnabled = false;
@@ -81,9 +81,9 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
 
       //     AppDialogs.showConfirmDialog(
       //       context,
-      //       AppLocalization.of(context).giftAlert,
-      //       AppLocalization.of(context).askSkipSetup,
-      //       AppLocalization.of(context).ok,
+      //       Z.of(context).giftAlert,
+      //       Z.of(context).askSkipSetup,
+      //       Z.of(context).ok,
       //       () async {
       //         setState(() {
       //           StateContainer.of(context).introSkiped = true;
@@ -91,7 +91,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
 
       //         await skipIntro();
       //       },
-      //       cancelText: AppLocalization.of(context).noThanks,
+      //       cancelText: Z.of(context).noThanks,
       //       cancelAction: () {
       //         // do nothing:
       //       },
@@ -114,7 +114,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
             title: Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
-                AppLocalization.of(context).themeHeader,
+                Z.of(context).themeHeader,
                 style: AppStyles.textStyleDialogHeader(context),
               ),
             ),
@@ -229,7 +229,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                           Container(
                             margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 30 : 40, vertical: 20),
                             child: AutoSizeText(
-                              AppLocalization.of(context).welcomeTextLogin,
+                              Z.of(context).welcomeTextLogin,
                               style: AppStyles.textStyleParagraph(context),
                               maxLines: 4,
                               stepGranularity: 0.5,
@@ -282,7 +282,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                   Row(
                     children: <Widget>[
                       // New Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).loginOrRegisterHeader, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).loginOrRegisterHeader, Dimens.BUTTON_TOP_DIMENS,
                           instanceKey: const Key("get_started"), onPressed: () {
                         Navigator.of(context).pushNamed('/intro_login');
                       }),
@@ -292,7 +292,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                   Row(
                     children: <Widget>[
                       // New Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).continueWithoutLogin, Dimens.BUTTON_BOTTOM_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).continueWithoutLogin, Dimens.BUTTON_BOTTOM_DIMENS,
                           instanceKey: const Key("new_existing"), onPressed: () {
                         Navigator.of(context).pushNamed('/intro_new_existing');
                       }),
@@ -350,14 +350,14 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
           return AlertDialog(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
-              AppLocalization.of(context).giftAlert,
+              Z.of(context).giftAlert,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${AppLocalization.of(context).importGiftIntro}\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text("${Z.of(context).importGiftIntro}\n\n", style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actionsAlignment: MainAxisAlignment.end,
@@ -369,7 +369,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).close,
+                    Z.of(context).close,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),

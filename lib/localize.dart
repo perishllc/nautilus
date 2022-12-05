@@ -5,8 +5,8 @@ import 'package:nautilus_wallet_flutter/generated/l10n.dart';
 import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
 import 'package:nautilus_wallet_flutter/model/available_language.dart';
 
-class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalization> {
-  const AppLocalizationsDelegate(this.languageSetting);
+class ZsDelegate extends LocalizationsDelegate<Z> {
+  const ZsDelegate(this.languageSetting);
 
   final LanguageSetting languageSetting;
 
@@ -16,15 +16,15 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalization> {
   }
 
   @override
-  Future<AppLocalization> load(Locale locale) {
+  Future<Z> load(Locale locale) {
     if (languageSetting.language == AvailableLanguage.DEFAULT) {
-      return AppLocalization.load(locale);
+      return Z.load(locale);
     }
-    return AppLocalization.load(Locale(languageSetting.getLocaleString()));
+    return Z.load(Locale(languageSetting.getLocaleString()));
   }
 
   @override
-  bool shouldReload(LocalizationsDelegate<AppLocalization> old) {
+  bool shouldReload(LocalizationsDelegate<Z> old) {
     return true;
   }
 }

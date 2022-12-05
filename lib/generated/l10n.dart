@@ -12,42 +12,42 @@ import 'intl/messages_all.dart';
 // ignore_for_file: join_return_with_assignment, prefer_final_in_for_each
 // ignore_for_file: avoid_redundant_argument_values, avoid_escaping_inner_quotes
 
-class AppLocalization {
-  AppLocalization();
+class Z {
+  Z();
 
-  static AppLocalization? _current;
+  static Z? _current;
 
-  static AppLocalization get current {
+  static Z get current {
     assert(_current != null,
-        'No instance of AppLocalization was loaded. Try to initialize the AppLocalization delegate before accessing AppLocalization.current.');
+        'No instance of Z was loaded. Try to initialize the Z delegate before accessing Z.current.');
     return _current!;
   }
 
-  static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
+  static const ZDelegate delegate = ZDelegate();
 
-  static Future<AppLocalization> load(Locale locale) {
+  static Future<Z> load(Locale locale) {
     final name = (locale.countryCode?.isEmpty ?? false)
         ? locale.languageCode
         : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      final instance = AppLocalization();
-      AppLocalization._current = instance;
+      final instance = Z();
+      Z._current = instance;
 
       return instance;
     });
   }
 
-  static AppLocalization of(BuildContext context) {
-    final instance = AppLocalization.maybeOf(context);
+  static Z of(BuildContext context) {
+    final instance = Z.maybeOf(context);
     assert(instance != null,
-        'No instance of AppLocalization present in the widget tree. Did you add AppLocalization.delegate in localizationsDelegates?');
+        'No instance of Z present in the widget tree. Did you add Z.delegate in localizationsDelegates?');
     return instance!;
   }
 
-  static AppLocalization? maybeOf(BuildContext context) {
-    return Localizations.of<AppLocalization>(context, AppLocalization);
+  static Z? maybeOf(BuildContext context) {
+    return Localizations.of<Z>(context, Z);
   }
 
   /// `Account`
@@ -5786,8 +5786,8 @@ class AppLocalization {
   }
 }
 
-class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {
-  const AppLocalizationDelegate();
+class ZDelegate extends LocalizationsDelegate<Z> {
+  const ZDelegate();
 
   List<Locale> get supportedLocales {
     return const <Locale>[
@@ -5829,9 +5829,9 @@ class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
   @override
-  Future<AppLocalization> load(Locale locale) => AppLocalization.load(locale);
+  Future<Z> load(Locale locale) => Z.load(locale);
   @override
-  bool shouldReload(AppLocalizationDelegate old) => false;
+  bool shouldReload(ZDelegate old) => false;
 
   bool _isSupported(Locale locale) {
     for (var supportedLocale in supportedLocales) {

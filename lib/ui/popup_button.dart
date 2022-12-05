@@ -57,16 +57,16 @@ class AppPopupButtonState extends State<AppPopupButton> {
 
     if (scanResult is String && QRScanErrs.ERROR_LIST.contains(scanResult)) {
       if (scanResult == QRScanErrs.PERMISSION_DENIED) {
-        UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidPermissions, context);
+        UIUtil.showSnackbar(Z.of(context).qrInvalidPermissions, context);
       } else if (scanResult == QRScanErrs.UNKNOWN_ERROR) {
-        UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+        UIUtil.showSnackbar(Z.of(context).qrUnknownError, context);
       }
       return;
     } else if (scanResult is Address) {
       // Is a URI
       final Address address = scanResult;
       if (address.address == null) {
-        UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
+        UIUtil.showSnackbar(Z.of(context).qrInvalidAddress, context);
         return;
       }
       // See if this address belongs to a contact
@@ -101,7 +101,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
       // If balance is insufficient show error:
       final BigInt? amountBigInt = BigInt.tryParse(payItem.amount);
       if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
-        UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
+        UIUtil.showSnackbar(Z.of(context).insufficientBalance, context);
         return;
       }
 
@@ -144,7 +144,7 @@ class AppPopupButtonState extends State<AppPopupButton> {
       }
 
       // something went wrong, show generic error:
-      UIUtil.showSnackbar(AppLocalization.of(context).qrUnknownError, context);
+      UIUtil.showSnackbar(Z.of(context).qrUnknownError, context);
     }
   }
 
@@ -264,11 +264,11 @@ class AppPopupButtonState extends State<AppPopupButton> {
                   Sheets.showAppHeightNineSheet(context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency));
                 }
                 if (disableSend) {
-                  UIUtil.showSnackbar(AppLocalization.of(context).watchOnlySendDisabled, context);
+                  UIUtil.showSnackbar(Z.of(context).watchOnlySendDisabled, context);
                 }
               },
               child: AutoSizeText(
-                AppLocalization.of(context).send,
+                Z.of(context).send,
                 textAlign: TextAlign.center,
                 style: AppStyles.textStyleButtonPrimary(context),
                 maxLines: 1,

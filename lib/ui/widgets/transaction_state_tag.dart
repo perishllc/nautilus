@@ -14,25 +14,25 @@ class TransactionStateTag extends StatelessWidget {
   String getStateText(BuildContext context, TransactionStateOptions? state) {
     switch (state) {
       case TransactionStateOptions.UNCONFIRMED:
-        return AppLocalization.of(context).unconfirmed;
+        return Z.of(context).unconfirmed;
       case TransactionStateOptions.CONFIRMED:
         return "tag";
       case TransactionStateOptions.FAILED:
-        return AppLocalization.of(context).failed;
+        return Z.of(context).failed;
       case TransactionStateOptions.UNACKNOWLEDGED:
-        return AppLocalization.of(context).unacknowledged;
+        return Z.of(context).unacknowledged;
       case TransactionStateOptions.UNREAD:
-        return AppLocalization.of(context).unread;
+        return Z.of(context).unread;
       case TransactionStateOptions.PAID:
-        return AppLocalization.of(context).paid;
+        return Z.of(context).paid;
       case TransactionStateOptions.UNPAID:
-        return AppLocalization.of(context).unpaid;
+        return Z.of(context).unpaid;
       case TransactionStateOptions.FAILED_MSG:
-        return AppLocalization.of(context).failedMessage;
+        return Z.of(context).failedMessage;
       case TransactionStateOptions.NOT_SENT:
-        return AppLocalization.of(context).notSent;
+        return Z.of(context).notSent;
       case TransactionStateOptions.RECEIVABLE:
-        return AppLocalization.of(context).receivable;
+        return Z.of(context).receivable;
       default:
         return "";
     }

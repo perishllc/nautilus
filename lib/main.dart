@@ -136,15 +136,15 @@ class AppState extends State<App> {
               primary: StateContainer.of(context).curTheme.primary),
         ),
         localizationsDelegates: [
-          AppLocalizationsDelegate(StateContainer.of(context).curLanguage),
-          AppLocalization.delegate,
+          ZsDelegate(StateContainer.of(context).curLanguage),
+          Z.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
 
         locale: StateContainer.of(context).curLanguage.language == AvailableLanguage.DEFAULT ? null : StateContainer.of(context).curLanguage.getLocale(),
-        // supportedLocales: AppLocalization.delegate.supportedLocales,
+        // supportedLocales: Z.delegate.supportedLocales,
         supportedLocales: const <Locale>[
           Locale('en', 'US'), // English
           Locale('he', 'IL'), // Hebrew
@@ -438,14 +438,14 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
         if (!mounted) return;
         AppDialogs.showConfirmDialog(
             context,
-            CaseChange.toUpperCase(AppLocalization.of(context).warning, context),
-            AppLocalization.of(context).rootWarning,
-            AppLocalization.of(context).iUnderstandTheRisks.toUpperCase(),
+            CaseChange.toUpperCase(Z.of(context).warning, context),
+            Z.of(context).rootWarning,
+            Z.of(context).iUnderstandTheRisks.toUpperCase(),
             () async {
               await sl.get<SharedPrefsUtil>().setHasSeenRootWarning();
               checkLoggedIn();
             },
-            cancelText: AppLocalization.of(context).exit.toUpperCase(),
+            cancelText: Z.of(context).exit.toUpperCase(),
             cancelAction: () {
               if (Platform.isIOS) {
                 exit(0);

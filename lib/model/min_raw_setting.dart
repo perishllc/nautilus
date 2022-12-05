@@ -56,9 +56,9 @@ class MinRawSetting extends SettingSelectionItem {
       case MinRawOptions.HUNDRED_THOUSAND_NYANO:
         return (StateContainer.of(context).nyanoMode) ? '100,000 nyano' : '0.1 NANO';
       case MinRawOptions.OFF:
-        return AppLocalization.of(context).off;
+        return Z.of(context).off;
       default:
-        return AppLocalization.of(context).off;
+        return Z.of(context).off;
     }
   }
 

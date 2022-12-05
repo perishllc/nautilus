@@ -99,11 +99,11 @@ class AccountDetailsSheet {
                                             onPressed: () {
                                               AppDialogs.showConfirmDialog(
                                                   context,
-                                                  AppLocalization.of(context).hideAccountHeader,
-                                                  AppLocalization.of(context)
+                                                  Z.of(context).hideAccountHeader,
+                                                  Z.of(context)
                                                       .removeAccountText
-                                                      .replaceAll("%1", AppLocalization.of(context).addAccount),
-                                                  CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
+                                                      .replaceAll("%1", Z.of(context).addAccount),
+                                                  CaseChange.toUpperCase(Z.of(context).yes, context), () {
                                                 // Remove account
                                                 deleted = true;
                                                 sl.get<DBHelper>().deleteAccount(account).then((int id) {
@@ -113,7 +113,7 @@ class AccountDetailsSheet {
                                                 });
                                               },
                                                   cancelText:
-                                                      CaseChange.toUpperCase(AppLocalization.of(context).no, context));
+                                                      CaseChange.toUpperCase(Z.of(context).no, context));
                                             },
                                             child: Icon(AppIcons.trashcan,
                                                 size: 24, color: StateContainer.of(context).curTheme.text),
@@ -125,7 +125,7 @@ class AccountDetailsSheet {
                                   child: Column(
                                     children: <Widget>[
                                       AutoSizeText(
-                                        CaseChange.toUpperCase(AppLocalization.of(context).account, context),
+                                        CaseChange.toUpperCase(Z.of(context).account, context),
                                         style: AppStyles.textStyleHeader(context),
                                         textAlign: TextAlign.center,
                                         maxLines: 1,
@@ -230,8 +230,8 @@ class AccountDetailsSheet {
                                         // Share Address Button
                                         _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
                                         _addressCopied
-                                            ? AppLocalization.of(context).addressCopied
-                                            : AppLocalization.of(context).copyAddress,
+                                            ? Z.of(context).addressCopied
+                                            : Z.of(context).copyAddress,
                                         Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                                       Clipboard.setData(ClipboardData(text: account.address));
                                       setState(() {
@@ -253,7 +253,7 @@ class AccountDetailsSheet {
                                   children: <Widget>[
                                     // Close Button
                                     AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                                        AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                                        Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                                       Navigator.pop(context);
                                     }),
                                   ],

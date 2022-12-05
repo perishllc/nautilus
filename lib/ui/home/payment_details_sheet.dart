@@ -116,7 +116,7 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 if (!isGiftLoad && !txDetails.is_message)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).viewTX, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).viewTX, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         await UIUtil.showBlockExplorerWebview(context, txDetails.block);
                       }),
@@ -130,7 +130,7 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           context,
                           // Copy Address Button
                           _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
-                          _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
+                          _addressCopied ? Z.of(context).addressCopied : Z.of(context).copyAddress,
                           Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                         Clipboard.setData(ClipboardData(text: addressToCopy));
                         if (mounted) {
@@ -160,7 +160,7 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           context,
                           // Share Address Button
                           AppButtonType.PRIMARY_OUTLINE,
-                          !txDetails.is_fulfilled ? AppLocalization.of(context).markAsPaid : AppLocalization.of(context).markAsUnpaid,
+                          !txDetails.is_fulfilled ? Z.of(context).markAsPaid : Z.of(context).markAsUnpaid,
                           Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                         // update the tx in the db:
                         if (txDetails.is_fulfilled) {
@@ -183,7 +183,7 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 if (isUnfulfilledPayableRequest)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).payRequest, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).payRequest, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () {
                         Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
@@ -196,7 +196,7 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 if (txDetails.is_request && StateContainer.of(context).wallet!.address != txDetails.from_address)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).blockUser, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).blockUser, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () {
                         Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
@@ -213,7 +213,7 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 if (isUnacknowledgedSendableRequest)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).sendRequestAgain, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).sendRequestAgain, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         // send the request again:
                         CardActions.resendRequest(context, txDetails);
@@ -228,7 +228,7 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           context,
                           // Share Address Button
                           AppButtonType.PRIMARY_OUTLINE,
-                          AppLocalization.of(context).resendMemo,
+                          Z.of(context).resendMemo,
                           Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                         CardActions.resendMemo(context, txDetails);
                       }),
@@ -238,7 +238,7 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 if (txDetails.is_request)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).deleteRequest, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).deleteRequest, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () {
                         Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
                         sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
@@ -255,12 +255,12 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           context,
                           // show link QR
                           AppButtonType.PRIMARY,
-                          AppLocalization.of(context).showLinkOptions,
+                          Z.of(context).showLinkOptions,
                           Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () async {
                         final Widget qrWidget = SizedBox(width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, sharableLink!));
                         Sheets.showAppHeightEightSheet(context: context, widget: GiftQRSheet(link: sharableLink, qrWidget: qrWidget));
                       }),
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).viewTX, Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).viewTX, Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
                           onPressed: () async {
                         await UIUtil.showBlockExplorerWebview(context, txDetails.block);
                       }),
@@ -273,7 +273,7 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           context,
                           // copy seed button
                           _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
-                          _seedCopied ? AppLocalization.of(context).seedCopiedShort : AppLocalization.of(context).copySeed,
+                          _seedCopied ? Z.of(context).seedCopiedShort : Z.of(context).copySeed,
                           Dimens.BUTTON_BOTTOM_EXCEPTION_DIMENS, onPressed: () {
                         Clipboard.setData(ClipboardData(text: walletSeed));
                         if (!mounted) return;

@@ -12,9 +12,9 @@ class ExampleCards {
   static TextSpan _getExampleHeaderSpan(BuildContext context, [bool xmr = false]) {
     String workingStr;
     if (StateContainer.of(context).selectedAccount == null || StateContainer.of(context).selectedAccount!.index == 0) {
-      workingStr = AppLocalization.of(context).exampleCardIntro;
+      workingStr = Z.of(context).exampleCardIntro;
     } else {
-      workingStr = AppLocalization.of(context).newAccountIntro;
+      workingStr = Z.of(context).newAccountIntro;
     }
     if (!workingStr.contains("NANO") && !workingStr.contains("XMR")) {
       return TextSpan(
@@ -119,7 +119,7 @@ class ExampleCards {
                 padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 15.0),
                 child: RichText(
                   text: TextSpan(
-                    text: AppLocalization.of(context).examplePaymentExplainer,
+                    text: Z.of(context).examplePaymentExplainer,
                     style: AppStyles.textStyleTransactionWelcome(context),
                   ),
                 ),
@@ -507,7 +507,7 @@ class ExampleCards {
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                    text: AppLocalization.of(context).noSearchResults,
+                    text: Z.of(context).noSearchResults,
                     style: AppStyles.textStyleTransactionWelcome(context),
                   ),
                 ),

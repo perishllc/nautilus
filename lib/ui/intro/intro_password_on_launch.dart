@@ -72,7 +72,7 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                       ),
                       alignment: AlignmentDirectional.centerStart,
                       child: AutoSizeText(
-                        AppLocalization.of(context).requireAPasswordToOpenHeader,
+                        Z.of(context).requireAPasswordToOpenHeader,
                         maxLines: 3,
                         stepGranularity: 0.5,
                         style: AppStyles.textStyleHeaderColored(context),
@@ -82,7 +82,7 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                     Container(
                       margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                       child: AutoSizeText(
-                        AppLocalization.of(context).createPasswordFirstParagraph,
+                        Z.of(context).createPasswordFirstParagraph,
                         style: AppStyles.textStyleParagraph(context),
                         maxLines: 5,
                         stepGranularity: 0.5,
@@ -91,7 +91,7 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                     Container(
                       margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 8),
                       child: AutoSizeText(
-                        AppLocalization.of(context).createPasswordSecondParagraph,
+                        Z.of(context).createPasswordSecondParagraph,
                         style: AppStyles.textStyleParagraphPrimary(context),
                         maxLines: 4,
                         stepGranularity: 0.5,
@@ -107,7 +107,7 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                   Row(
                     children: <Widget>[
                       // Skip Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).noSkipButton, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).noSkipButton, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         if (widget.seed != null) {
                           await sl.get<Vault>().setSeed(widget.seed);
@@ -139,7 +139,7 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                   Row(
                     children: <Widget>[
                       // Yes BUTTON
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).yesButton, Dimens.BUTTON_BOTTOM_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).yesButton, Dimens.BUTTON_BOTTOM_DIMENS,
                           onPressed: () {
                         Navigator.of(context).pushNamed('/intro_password', arguments: widget.seed);
                       }),

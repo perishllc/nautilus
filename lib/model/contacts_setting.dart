@@ -13,10 +13,10 @@ class ContactsSetting extends SettingSelectionItem {
   String getDisplayName(BuildContext context) {
     switch (setting) {
       case ContactsOptions.ON:
-        return AppLocalization.of(context).onStr;
+        return Z.of(context).onStr;
       case ContactsOptions.OFF:
       default:
-        return AppLocalization.of(context).off;
+        return Z.of(context).off;
     }
   }
 

@@ -115,7 +115,7 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
         });
       } else {
         setState(() {
-          _amountHint = AppLocalization.of(context).enterAmount;
+          _amountHint = Z.of(context).enterAmount;
         });
       }
     });
@@ -301,7 +301,7 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
                             context,
                             // Copy Address Button
                             _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                            _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
+                            _addressCopied ? Z.of(context).addressCopied : Z.of(context).copyAddress,
                             Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
                           Clipboard.setData(ClipboardData(text: widget.address));
                           setState(() {
@@ -323,7 +323,7 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
                             context,
                             // Share Address Button
                             AppButtonType.PRIMARY_OUTLINE,
-                            AppLocalization.of(context).addressShare,
+                            Z.of(context).addressShare,
                             Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
                             disabled: _showShareCard, onPressed: () {
                           final String receiveCardFileName = "share_${widget.address}.png";
@@ -482,7 +482,7 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
       textInputAction: TextInputAction.next,
       maxLines: null,
       autocorrect: false,
-      hintText: _amountHint == null ? "" : AppLocalization.of(context).enterAmount,
+      hintText: _amountHint == null ? "" : Z.of(context).enterAmount,
       prefixButton: _rawAmount == null
           ? TextFieldButton(
             padding: EdgeInsets.zero,

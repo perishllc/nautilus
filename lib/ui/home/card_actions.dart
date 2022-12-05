@@ -87,12 +87,12 @@ class CardActions {
       // remove failed txdata from the database:
       await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       // show error:
-      UIUtil.showSnackbar(AppLocalization.of(context).requestSendError, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).requestSendError, context, durationMs: 5000);
     } else {
       // delete the old request by uuid:
       await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
       // memo sent successfully, show success:
-      UIUtil.showSnackbar(AppLocalization.of(context).requestSentButNotReceived, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).requestSentButNotReceived, context, durationMs: 5000);
     }
     await StateContainer.of(context).updateSolids();
     await StateContainer.of(context).updateTXMemos();
@@ -164,12 +164,12 @@ class CardActions {
       // remove from the database:
       await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       // show error:
-      UIUtil.showSnackbar(AppLocalization.of(context).sendMemoError, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).sendMemoError, context, durationMs: 5000);
     } else {
       // delete the old memo by uuid:
       await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
       // memo sent successfully, show success:
-      UIUtil.showSnackbar(AppLocalization.of(context).memoSentButNotReceived, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).memoSentButNotReceived, context, durationMs: 5000);
       await StateContainer.of(context).updateTXMemos();
     }
 
@@ -239,12 +239,12 @@ class CardActions {
       // remove failed txdata from the database:
       await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       // show error:
-      UIUtil.showSnackbar(AppLocalization.of(context).sendMemoError, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).sendMemoError, context, durationMs: 5000);
     } else {
       // delete the old request by uuid:
       await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
       // memo sent successfully, show success:
-      UIUtil.showSnackbar(AppLocalization.of(context).memoSentButNotReceived, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).memoSentButNotReceived, context, durationMs: 5000);
     }
     await StateContainer.of(context).updateSolids();
     await StateContainer.of(context).updateUnified(false);

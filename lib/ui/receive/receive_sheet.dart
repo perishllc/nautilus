@@ -146,9 +146,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
     _addressStyle = AddressStyle.TEXT60;
     _users = <User>[];
 
-    // _amountHint = AppLocalization.of(context).enterAmount;
-    // _addressHint = AppLocalization.of(context).enterUserOrAddress;
-    // _memoHint = AppLocalization.of(context).enterMemo;
+    // _amountHint = Z.of(context).enterAmount;
+    // _addressHint = Z.of(context).enterUserOrAddress;
+    // _memoHint = Z.of(context).enterMemo;
 
     // On amount focus change
     _amountFocusNode!.addListener(() {
@@ -164,7 +164,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
         });
       } else {
         setState(() {
-          _amountHint = AppLocalization.of(context).enterAmount;
+          _amountHint = Z.of(context).enterAmount;
         });
       }
     });
@@ -207,7 +207,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
         }
       } else {
         setState(() {
-          _addressHint = AppLocalization.of(context).enterUserOrAddress;
+          _addressHint = Z.of(context).enterUserOrAddress;
           _users = <User>[];
           if (Address(_addressController!.text).isValid()) {
             _addressValidAndUnfocused = true;
@@ -291,7 +291,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
         });
       } else {
         setState(() {
-          _memoHint = AppLocalization.of(context).enterMemo;
+          _memoHint = Z.of(context).enterMemo;
         });
       }
     });
@@ -352,7 +352,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                         children: <Widget>[
                           // Header
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context).requestFrom, context),
+                            CaseChange.toUpperCase(Z.of(context).requestFrom, context),
                             style: AppStyles.textStyleHeader(context),
                             textAlign: TextAlign.center,
                             maxLines: 1,
@@ -370,8 +370,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                   child: AppDialogs.infoButton(
                     context,
                     () {
-                      AppDialogs.showInfoDialog(context, AppLocalization.of(context).requestSheetInfoHeader,
-                          AppLocalization.of(context).requestSheetInfo);
+                      AppDialogs.showInfoDialog(context, Z.of(context).requestSheetInfoHeader,
+                          Z.of(context).requestSheetInfo);
                     },
                   ),
                 ),
@@ -394,7 +394,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                     _addressCopied = false;
                   });
                 });
-                UIUtil.showSnackbar(AppLocalization.of(context).addressCopied, context, durationMs: 1500);
+                UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
               },
               child: Column(
                 children: [
@@ -726,7 +726,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 //       context,
                 //       // Share Address Button
                 //       AppButtonType.PRIMARY_OUTLINE,
-                //       AppLocalization.of(context).shareViaNFC,
+                //       Z.of(context).shareViaNFC,
                 //       Dimens.BUTTON_BOTTOM_DIMENS,
                 //       onPressed: () async {
                 //         // final availability = await FlutterNfcKit.nfcAvailability;
@@ -775,7 +775,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 //       context,
                 //       // Share Address Button
                 //       AppButtonType.PRIMARY_OUTLINE,
-                //       AppLocalization.of(context).nearby,
+                //       Z.of(context).nearby,
                 //       Dimens.BUTTON_BOTTOM_DIMENS,
                 //       onPressed: () async {
                 //         Sheets.showAppHeightNineSheet(
@@ -789,7 +789,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 Row(
                   children: <Widget>[
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, AppLocalization.of(context).request, Dimens.BUTTON_TOP_DIMENS,
+                        context, AppButtonType.PRIMARY, Z.of(context).request, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       final bool validRequest = await _validateRequest();
                       if (!mounted) return;
@@ -832,13 +832,13 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                         if (user == null) {
                           setState(() {
                             if (_addressController!.text.startsWith("★")) {
-                              _addressValidationText = AppLocalization.of(context).contactInvalid;
+                              _addressValidationText = Z.of(context).contactInvalid;
                             } else if (_addressController!.text.startsWith("@") ||
                                 _addressController!.text.startsWith("#")) {
-                              _addressValidationText = AppLocalization.of(context).usernameInvalid;
+                              _addressValidationText = Z.of(context).usernameInvalid;
                             } else if (_addressController!.text.contains(".") ||
                                 _addressController!.text.contains(r"$")) {
-                              _addressValidationText = AppLocalization.of(context).domainInvalid;
+                              _addressValidationText = Z.of(context).domainInvalid;
                             }
                           });
                         } else {
@@ -863,7 +863,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                         if (!mounted) return;
 
                         if (address == null) {
-                          _addressValidationText = AppLocalization.of(context).domainInvalid;
+                          _addressValidationText = Z.of(context).domainInvalid;
                         }
                       } else {
                         Sheets.showAppHeightNineSheet(
@@ -879,7 +879,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).showQR,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).showQR,
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                       final String formattedAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
                       String amountRaw;
@@ -1046,13 +1046,13 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
         builder: (BuildContext context) {
           return AppSimpleDialog(
             title: Text(
-              AppLocalization.of(context).notifications,
+              Z.of(context).notifications,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Text("${AppLocalization.of(context).notificationInfo}\n",
+                child: Text("${Z.of(context).notificationInfo}\n",
                     style: AppStyles.textStyleParagraph(context)),
               ),
               AppSimpleDialogOption(
@@ -1062,7 +1062,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).onStr,
+                    Z.of(context).onStr,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -1074,7 +1074,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).off,
+                    Z.of(context).off,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -1117,14 +1117,14 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
               borderRadius: BorderRadius.circular(15),
             ),
             title: Text(
-              AppLocalization.of(context).needVerificationAlertHeader,
+              Z.of(context).needVerificationAlertHeader,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${AppLocalization.of(context).needVerificationAlert}\n\n",
+                Text("${Z.of(context).needVerificationAlert}\n\n",
                     style: AppStyles.textStyleParagraph(context)),
               ],
             ),
@@ -1136,7 +1136,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).ok,
+                    Z.of(context).ok,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -1171,7 +1171,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
     if (_amountController!.text.trim().isEmpty) {
       isValid = false;
       setState(() {
-        _amountValidationText = AppLocalization.of(context).amountMissing;
+        _amountValidationText = Z.of(context).amountMissing;
       });
     } else {
       String bananoAmount;
@@ -1194,7 +1194,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
         if (_memoController!.text.trim().isEmpty) {
           isValid = false;
           setState(() {
-            _amountValidationText = AppLocalization.of(context).amountMissing;
+            _amountValidationText = Z.of(context).amountMissing;
           });
         } else {
           setState(() {
@@ -1216,7 +1216,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
     if (_addressController!.text.trim().isEmpty) {
       isValid = false;
       setState(() {
-        _addressValidationText = AppLocalization.of(context).addressMissing;
+        _addressValidationText = Z.of(context).addressMissing;
         _pasteButtonVisible = true;
       });
     } else if (_addressController!.text.isNotEmpty &&
@@ -1226,7 +1226,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
         !Address(_addressController!.text).isValid()) {
       isValid = false;
       setState(() {
-        _addressValidationText = AppLocalization.of(context).invalidAddress;
+        _addressValidationText = Z.of(context).invalidAddress;
         _pasteButtonVisible = true;
       });
     } else if (!isUser && !isFavorite) {
@@ -1328,7 +1328,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
       textInputAction: TextInputAction.next,
       maxLines: null,
       autocorrect: false,
-      hintText: _amountHint ?? AppLocalization.of(context).enterAmount,
+      hintText: _amountHint ?? Z.of(context).enterAmount,
       prefixButton: _rawAmount == null
           ? TextFieldButton(
               padding: EdgeInsets.zero,
@@ -1393,7 +1393,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
         textInputAction: _memoController!.text.isEmpty ? TextInputAction.next : TextInputAction.done,
         maxLines: null,
         autocorrect: false,
-        hintText: _addressHint ?? AppLocalization.of(context).enterUserOrAddress,
+        hintText: _addressHint ?? Z.of(context).enterUserOrAddress,
         prefixButton: TextFieldButton(
             icon: AppIcons.scan,
             onPressed: () async {
@@ -1401,7 +1401,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
               final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
               if (!mounted) return;
               if (scanResult == null) {
-                UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
+                UIUtil.showSnackbar(Z.of(context).qrInvalidAddress, context);
               } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
                 if (mounted) {
                   setState(() {
@@ -1611,7 +1611,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _memoHint ?? AppLocalization.of(context).enterMemo,
+      hintText: _memoHint ?? Z.of(context).enterMemo,
       fadeSuffixOnCondition: true,
       style: TextStyle(
         color: StateContainer.of(context).curTheme.text60,

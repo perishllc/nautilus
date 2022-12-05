@@ -113,7 +113,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                   Container(
                                     margin: const EdgeInsetsDirectional.only(end: 8),
                                     child: Text(
-                                      _seedMode ? AppLocalization.of(context).secretPhrase : AppLocalization.of(context).seed,
+                                      _seedMode ? Z.of(context).secretPhrase : Z.of(context).seed,
                                       style: TextStyle(
                                         color: StateContainer.of(context).curTheme.text,
                                         fontSize: 20.0,
@@ -138,7 +138,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                         ),
                         alignment: AlignmentDirectional.centerStart,
                         child: AutoSizeText(
-                          _seedMode ? AppLocalization.of(context).importSeed : AppLocalization.of(context).importSecretPhrase,
+                          _seedMode ? Z.of(context).importSeed : Z.of(context).importSecretPhrase,
                           style: AppStyles.textStyleHeaderColored(context),
                           maxLines: 1,
                           minFontSize: 12,
@@ -150,7 +150,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                         margin: EdgeInsets.only(left: smallScreen(context) ? 30 : 40, right: smallScreen(context) ? 30 : 40, top: 15.0),
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          _seedMode ? AppLocalization.of(context).importSeedHint : AppLocalization.of(context).importSecretPhraseHint,
+                          _seedMode ? Z.of(context).importSeedHint : Z.of(context).importSecretPhraseHint,
                           style: AppStyles.textStyleParagraph(context),
                           textAlign: TextAlign.start,
                         ),
@@ -200,7 +200,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                             _mnemonicIsValid = true;
                                           });
                                         } else {
-                                          UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidSeed, context);
+                                          UIUtil.showSnackbar(Z.of(context).qrInvalidSeed, context);
                                         }
                                       },
                                     ),
@@ -301,7 +301,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                             _showSeedError = false;
                                           });
                                         } else {
-                                          UIUtil.showSnackbar(AppLocalization.of(context).qrMnemonicError, context);
+                                          UIUtil.showSnackbar(Z.of(context).qrMnemonicError, context);
                                         }
                                       },
                                     ),
@@ -375,7 +375,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                             setState(() {
                                               _mnemonicIsValid = false;
                                               setState(() {
-                                                _mnemonicError = AppLocalization.of(context).mnemonicInvalidWord.replaceAll("%1", lastWord);
+                                                _mnemonicError = Z.of(context).mnemonicInvalidWord.replaceAll("%1", lastWord);
                                               });
                                             });
                                           }
@@ -393,7 +393,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                               ? ""
                                               : _mnemonicError!
                                           : _showSeedError
-                                              ? AppLocalization.of(context).seedInvalid
+                                              ? Z.of(context).seedInvalid
                                               : "",
                                       style: TextStyle(
                                         fontSize: 14.0,
@@ -417,7 +417,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     // import ledger:
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).importHD, Dimens.BUTTON_COMPACT_LEFT_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).importHD, Dimens.BUTTON_COMPACT_LEFT_DIMENS,
                         instanceKey: const Key("new_wallet_button"), onPressed: () async {
                       if (_seedMode) {
                         _seedInputFocusNode.unfocus();
@@ -444,9 +444,9 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                           if (_seedInputController.text.length == 64 && NanoUtil.isValidSeed(_seedInputController.text)) {
                             await AppDialogs.showInfoDialog(
                               context,
-                              AppLocalization.of(context).logoutAreYouSure,
-                              AppLocalization.of(context).looksLikeStandardSeed,
-                              closeText: AppLocalization.of(context).ok,
+                              Z.of(context).logoutAreYouSure,
+                              Z.of(context).looksLikeStandardSeed,
+                              closeText: Z.of(context).ok,
                             );
                             return;
                           }
@@ -474,14 +474,14 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                           if (_mnemonicController.text.split(' ').length != 24) {
                             setState(() {
                               _mnemonicIsValid = false;
-                              _mnemonicError = AppLocalization.of(context).mnemonicSizeError;
+                              _mnemonicError = Z.of(context).mnemonicSizeError;
                             });
                           } else {
                             _mnemonicController.text.split(' ').forEach((String word) {
                               if (!NanoMnemomics.isValidWord(word)) {
                                 setState(() {
                                   _mnemonicIsValid = false;
-                                  _mnemonicError = AppLocalization.of(context).mnemonicInvalidWord.replaceAll("%1", word);
+                                  _mnemonicError = Z.of(context).mnemonicInvalidWord.replaceAll("%1", word);
                                 });
                               }
                             });
@@ -490,7 +490,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                       }
                     }),
 
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).importStandard, Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).importStandard, Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
                         onPressed: () async {
                       if (_seedMode) {
                         _seedInputFocusNode.unfocus();
@@ -498,9 +498,9 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                         if (NanoUtil.isValidSeed(_seedInputController.text)) {
                           if (_seedInputController.text.length == 128) {
                             // are you sure?
-                            final bool isSure = await AppDialogs.waitableConfirmDialog(context, AppLocalization.of(context).logoutAreYouSure,
-                                AppLocalization.of(context).looksLikeHdSeed, AppLocalization.of(context).imSure,
-                                cancelText: AppLocalization.of(context).goBackButton);
+                            final bool isSure = await AppDialogs.waitableConfirmDialog(context, Z.of(context).logoutAreYouSure,
+                                Z.of(context).looksLikeHdSeed, Z.of(context).imSure,
+                                cancelText: Z.of(context).goBackButton);
 
                             if (!isSure) {
                               return;
@@ -540,14 +540,14 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                           if (_mnemonicController.text.split(' ').length != 24) {
                             setState(() {
                               _mnemonicIsValid = false;
-                              _mnemonicError = AppLocalization.of(context).mnemonicSizeError;
+                              _mnemonicError = Z.of(context).mnemonicSizeError;
                             });
                           } else {
                             _mnemonicController.text.split(' ').forEach((String word) {
                               if (!NanoMnemomics.isValidWord(word)) {
                                 setState(() {
                                   _mnemonicIsValid = false;
-                                  _mnemonicError = AppLocalization.of(context).mnemonicInvalidWord.replaceAll("%1", word);
+                                  _mnemonicError = Z.of(context).mnemonicInvalidWord.replaceAll("%1", word);
                                 });
                               }
                             });

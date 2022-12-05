@@ -245,7 +245,7 @@ class _BackupSeedQRSheetState extends State<BackupSeedQRSheet> {
                             context,
                             // Copy Address Button
                             _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                            _addressCopied ? AppLocalization.of(context).seedCopiedShort : AppLocalization.of(context).copySeed,
+                            _addressCopied ? Z.of(context).seedCopiedShort : Z.of(context).copySeed,
                             Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                           Clipboard.setData(ClipboardData(text: widget.data));
                           setState(() {
@@ -271,7 +271,7 @@ class _BackupSeedQRSheetState extends State<BackupSeedQRSheet> {
                             context,
                             // Share Address Button
                             AppButtonType.PRIMARY_OUTLINE,
-                            AppLocalization.of(context).close,
+                            Z.of(context).close,
                             Dimens.BUTTON_BOTTOM_DIMENS,
                             onPressed: () {
                               Navigator.pop(context);
@@ -284,7 +284,7 @@ class _BackupSeedQRSheetState extends State<BackupSeedQRSheet> {
                     //         context,
                     //         // Share Address Button
                     //         AppButtonType.PRIMARY_OUTLINE,
-                    //         AppLocalization.of(context).requestPayment,
+                    //         Z.of(context).requestPayment,
                     //         Dimens.BUTTON_BOTTOM_DIMENS,
                     //         disabled: _showShareCard, onPressed: () {
                     //       // do nothing

@@ -63,7 +63,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
     BigInt baseAmount = BigInt.parse(NATRICON_BASE_RAW);
     BigInt sendAmount = baseAmount + BigInt.from(nonce!);
     if (StateContainer.of(context).wallet!.accountBalance < sendAmount) {
-      UIUtil.showSnackbar(AppLocalization.of(context).insufficientBalance, context);
+      UIUtil.showSnackbar(Z.of(context).insufficientBalance, context);
       return;
     }
     Sheets.showAppHeightNineSheet(
@@ -185,7 +185,7 @@ class _AvatarChangePageState extends State<AvatarChangePage> {
                     children: <Widget>[
                       // Go Back Button
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                          AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                          Z.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.of(context).popUntil((Route route) => route.isFirst);
                       }),
                     ],

@@ -119,7 +119,7 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).registering, context),
+                          CaseChange.toUpperCase(Z.of(context).registering, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -142,7 +142,7 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).registerFor, context),
+                          CaseChange.toUpperCase(Z.of(context).registerFor, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -197,7 +197,7 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(Z.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
@@ -207,7 +207,7 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
                         try {
                           final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
                               context,
-                              AppLocalization.of(context)
+                              Z.of(context)
                                   .sendAmountConfirm
                                   .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
                                   .replaceAll("%2", StateContainer.of(context).currencyMode));
@@ -230,7 +230,7 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(Z.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -309,7 +309,7 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
+      UIUtil.showSnackbar(Z.of(context).sendError, context);
       Navigator.of(context).pop();
     }
   }
@@ -323,7 +323,7 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: AppLocalization.of(context)
+        description: Z.of(context)
             .sendAmountConfirm
             .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
             .replaceAll("%2", StateContainer.of(context).currencyMode),

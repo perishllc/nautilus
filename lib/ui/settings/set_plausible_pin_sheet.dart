@@ -76,7 +76,7 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                           height: 60,
                           alignment: Alignment.center,
                           child: AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context).setPin, context),
+                            CaseChange.toUpperCase(Z.of(context).setPin, context),
                             style: AppStyles.textStyleHeader(context),
                             minFontSize: 12,
                             stepGranularity: 0.1,
@@ -91,8 +91,8 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                           child: AppDialogs.infoButton(
                             context,
                             () {
-                              AppDialogs.showInfoDialog(context, AppLocalization.of(context).plausibleInfoHeader,
-                                  AppLocalization.of(context).plausibleSheetInfo);
+                              AppDialogs.showInfoDialog(context, Z.of(context).plausibleInfoHeader,
+                                  Z.of(context).plausibleSheetInfo);
                             },
                           ),
                         ),
@@ -104,7 +104,7 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                     margin: EdgeInsetsDirectional.only(
                         start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
-                      AppLocalization.of(context).plausibleDeniabilityParagraph,
+                      Z.of(context).plausibleDeniabilityParagraph,
                       style: AppStyles.textStyleParagraph(context),
                       maxLines: 5,
                       stepGranularity: 0.5,
@@ -147,7 +147,7 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                                   }
                                 }
                               },
-                              hintText: AppLocalization.of(context).createPinHint,
+                              hintText: Z.of(context).createPinHint,
                               obscureText: true,
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -193,7 +193,7 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                                   }
                                 }
                               },
-                              hintText: AppLocalization.of(context).confirmPinHint,
+                              hintText: Z.of(context).confirmPinHint,
                               obscureText: true,
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -228,7 +228,7 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                 Row(
                   children: <Widget>[
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, AppLocalization.of(context).setPin, Dimens.BUTTON_TOP_DIMENS,
+                        context, AppButtonType.PRIMARY, Z.of(context).setPin, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       await submitAndEncrypt();
                     }),
@@ -236,7 +236,7 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close,
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.pop(context);
                     }),
@@ -256,21 +256,21 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
     if (!mounted) return;
     if (createPasswordController!.text.isEmpty || confirmPasswordController!.text.isEmpty) {
       setState(() {
-        passwordError = AppLocalization.of(context).pinBlank;
+        passwordError = Z.of(context).pinBlank;
       });
     } else if (createPasswordController!.text != confirmPasswordController!.text) {
       setState(() {
-        passwordError = AppLocalization.of(context).pinsDontMatch;
+        passwordError = Z.of(context).pinsDontMatch;
       });
     } else if (currentPin != null && currentPin.isNotEmpty && currentPin == confirmPasswordController!.text) {
       // prevent the user from setting the plausible pin to the same thing as their real pin:
       setState(() {
-        passwordError = AppLocalization.of(context).invalidPin;
+        passwordError = Z.of(context).invalidPin;
       });
     } else {
       await sl.get<Vault>().writePlausiblePin(confirmPasswordController!.text);
       if (!mounted) return;
-      UIUtil.showSnackbar(AppLocalization.of(context).setPinSuccess, context);
+      UIUtil.showSnackbar(Z.of(context).setPinSuccess, context);
       Navigator.pop(context);
     }
   }

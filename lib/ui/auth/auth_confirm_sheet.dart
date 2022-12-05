@@ -121,7 +121,7 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).authenticating, context),
+                          CaseChange.toUpperCase(Z.of(context).authenticating, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -196,7 +196,7 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).registerFor, context),
+                          CaseChange.toUpperCase(Z.of(context).registerFor, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -224,7 +224,7 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(Z.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
@@ -232,7 +232,7 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
 
                       if (!mounted) return;
 
-                      final String authText = AppLocalization.of(context).authConfirm;
+                      final String authText = Z.of(context).authConfirm;
 
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         try {
@@ -256,7 +256,7 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(Z.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -285,7 +285,7 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
 
       if (url == null) {
         // no method we support:
-        poppedError = AppLocalization.of(context).handoffSupportedMethodNotFound;
+        poppedError = Z.of(context).handoffSupportedMethodNotFound;
         throw Exception("No supported method found");
       }
 
@@ -371,7 +371,7 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
         UIUtil.showSnackbar(poppedError, context, durationMs: 5000);
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).sendError, context, durationMs: 5000);
       Navigator.of(context).pop();
     }
   }
@@ -386,7 +386,7 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: AppLocalization.of(context).authConfirm,
+        description: Z.of(context).authConfirm,
       );
     }));
     if (auth != null && auth) {

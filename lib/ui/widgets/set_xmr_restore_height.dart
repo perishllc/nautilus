@@ -46,7 +46,7 @@ class _SetXMRRestoreHeightSheetState extends State<SetXMRRestoreHeightSheet> {
         });
       } else {
         setState(() {
-          _amountHint = AppLocalization.of(context).enterHeight;
+          _amountHint = Z.of(context).enterHeight;
         });
       }
     });
@@ -86,7 +86,7 @@ class _SetXMRRestoreHeightSheetState extends State<SetXMRRestoreHeightSheet> {
                       ),
                     ),
                     AutoSizeText(
-                      CaseChange.toUpperCase(AppLocalization.of(context).setRestoreHeight, context),
+                      CaseChange.toUpperCase(Z.of(context).setRestoreHeight, context),
                       style: AppStyles.textStyleHeader(context),
                       textAlign: TextAlign.center,
                       maxLines: 1,
@@ -128,7 +128,7 @@ class _SetXMRRestoreHeightSheetState extends State<SetXMRRestoreHeightSheet> {
                                 topMargin: 30,
                                 padding: const EdgeInsets.symmetric(horizontal: 30),
                                 textInputAction: TextInputAction.done,
-                                hintText: _amountHint ?? AppLocalization.of(context).enterHeight,
+                                hintText: _amountHint ?? Z.of(context).enterHeight,
                                 keyboardType: TextInputType.number,
 
                                 style: TextStyle(
@@ -177,7 +177,7 @@ class _SetXMRRestoreHeightSheetState extends State<SetXMRRestoreHeightSheet> {
                 children: <Widget>[
                   // Set Restore Height Button
                   AppButton.buildAppButton(
-                      context, AppButtonType.PRIMARY, AppLocalization.of(context).set, Dimens.BUTTON_TOP_DIMENS,
+                      context, AppButtonType.PRIMARY, Z.of(context).set, Dimens.BUTTON_TOP_DIMENS,
                       onPressed: () async {
                     if (!await validateForm()) {
                       return;
@@ -194,7 +194,7 @@ class _SetXMRRestoreHeightSheetState extends State<SetXMRRestoreHeightSheet> {
               Row(
                 children: <Widget>[
                   // Close Button
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close,
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close,
                       Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                     Navigator.pop(context);
                   }),
@@ -216,12 +216,12 @@ class _SetXMRRestoreHeightSheetState extends State<SetXMRRestoreHeightSheet> {
     if (formAmount.isEmpty) {
       isValid = false;
       setState(() {
-        _amountValidationText = AppLocalization.of(context).enterHeight;
+        _amountValidationText = Z.of(context).enterHeight;
       });
     } else if (restoreHeight == null || restoreHeight < 0) {
       isValid = false;
       setState(() {
-        _amountValidationText = AppLocalization.of(context).invalidHeight;
+        _amountValidationText = Z.of(context).invalidHeight;
       });
     }
     return isValid;

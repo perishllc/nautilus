@@ -57,7 +57,7 @@ class AppTransferCompleteSheet {
                               alignment: AlignmentDirectional.centerStart,
                               margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 60),
                               child: Text(
-                                AppLocalization.of(context).transferComplete.replaceAll("%1", transferAmount).replaceAll("%2", StateContainer.of(context).currencyMode),
+                                Z.of(context).transferComplete.replaceAll("%1", transferAmount).replaceAll("%2", StateContainer.of(context).currencyMode),
                                 style: AppStyles.textStyleParagraphSuccess(context),
                                 textAlign: TextAlign.start,
                               )),
@@ -65,7 +65,7 @@ class AppTransferCompleteSheet {
                               alignment: AlignmentDirectional.centerStart,
                               margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 60),
                               child: Text(
-                                AppLocalization.of(context).transferClose,
+                                Z.of(context).transferClose,
                                 style: AppStyles.textStyleParagraph(context),
                                 textAlign: TextAlign.start,
                               )),
@@ -78,7 +78,7 @@ class AppTransferCompleteSheet {
                         AppButton.buildAppButton(
                           context,
                           AppButtonType.SUCCESS_OUTLINE,
-                          AppLocalization.of(context).close.toUpperCase(),
+                          Z.of(context).close.toUpperCase(),
                           Dimens.BUTTON_BOTTOM_DIMENS,
                           onPressed: () {
                             Navigator.of(context).pop();

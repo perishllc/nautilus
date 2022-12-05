@@ -13,10 +13,10 @@ class NyaniconSetting extends SettingSelectionItem {
   String getDisplayName(BuildContext context) {
     switch (setting) {
       case NyaniconOptions.ON:
-        return AppLocalization.of(context).onStr;
+        return Z.of(context).onStr;
       case NyaniconOptions.OFF:
       default:
-        return AppLocalization.of(context).off;
+        return Z.of(context).off;
     }
   }
 

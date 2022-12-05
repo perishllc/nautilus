@@ -112,7 +112,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).requesting, context),
+                          CaseChange.toUpperCase(Z.of(context).requesting, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -161,7 +161,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).from, context),
+                          CaseChange.toUpperCase(Z.of(context).from, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -183,7 +183,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context).withMessage, context),
+                            CaseChange.toUpperCase(Z.of(context).withMessage, context),
                             style: AppStyles.textStyleHeader(context),
                           ),
                         ],
@@ -215,7 +215,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(Z.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       if (clicking) return;
                       clicking = true;
@@ -227,7 +227,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                         try {
                           final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
                               context,
-                              AppLocalization.of(context)
+                              Z.of(context)
                                   .requestAmountConfirm
                                   .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
                                   .replaceAll("%2", StateContainer.of(context).currencyMode));
@@ -251,7 +251,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(Z.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -340,7 +340,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         await StateContainer.of(context).updateUnified(true);
         // go to home and show error:
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-        UIUtil.showSnackbar(AppLocalization.of(context).requestError, context, durationMs: 5500);
+        UIUtil.showSnackbar(Z.of(context).requestError, context, durationMs: 5500);
       } else {
         sl.get<Logger>().v("request succeeded");
 
@@ -382,7 +382,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         Navigator.of(context).pop();
       }
       sendFailed = true;
-      UIUtil.showSnackbar(AppLocalization.of(context).requestError, context, durationMs: 3500);
+      UIUtil.showSnackbar(Z.of(context).requestError, context, durationMs: 3500);
       Navigator.of(context).pop();
     }
   }
@@ -396,7 +396,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: AppLocalization.of(context)
+        description: Z.of(context)
             .sendAmountConfirm
             .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
             .replaceAll("%2", StateContainer.of(context).currencyMode),

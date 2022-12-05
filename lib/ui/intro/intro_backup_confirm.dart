@@ -63,7 +63,7 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                       ),
                       alignment: AlignmentDirectional.centerStart,
                       child: AutoSizeText(
-                        AppLocalization.of(context).ackBackedUp,
+                        Z.of(context).ackBackedUp,
                         maxLines: 4,
                         stepGranularity: 0.5,
                         style: AppStyles.textStyleHeaderColored(context),
@@ -73,7 +73,7 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                     Container(
                       margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
                       child: AutoSizeText(
-                        AppLocalization.of(context).secretWarning,
+                        Z.of(context).secretWarning,
                         style: AppStyles.textStyleParagraph(context),
                         maxLines: 5,
                         stepGranularity: 0.5,
@@ -89,7 +89,7 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                   Row(
                     children: <Widget>[
                       // YES Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).yes.toUpperCase(), Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).yes.toUpperCase(), Dimens.BUTTON_TOP_DIMENS,
                           instanceKey: const Key("backup_confirm_button"), onPressed: () async {
                         // final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                         //   return PinScreen(
@@ -107,7 +107,7 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                     children: <Widget>[
                       // NO BUTTON
                       AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).no.toUpperCase(), Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                          context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).no.toUpperCase(), Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.of(context).pop();
                       }),
                     ],

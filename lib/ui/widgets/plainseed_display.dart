@@ -44,7 +44,7 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
           margin: EdgeInsets.only(left: smallScreen(context) ? 30 : 40, right: smallScreen(context) ? 30 : 40, top: 15.0),
           alignment: Alignment.centerLeft,
           child: AutoSizeText(
-            AppLocalization.of(context).seedDescription,
+            Z.of(context).seedDescription,
             style: AppStyles.textStyleParagraph(context),
             maxLines: 5,
             stepGranularity: 0.5,
@@ -90,11 +90,11 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
                     margin: const EdgeInsetsDirectional.only(top: 8),
                     child: _seedObscured
                         ? AutoSizeText(
-                            AppLocalization.of(context).tapToReveal,
+                            Z.of(context).tapToReveal,
                             style: AppStyles.textStyleParagraphThinPrimary(context),
                           )
                         : Text(
-                            AppLocalization.of(context).tapToHide,
+                            Z.of(context).tapToHide,
                             style: AppStyles.textStyleParagraphThinPrimary(context),
                           ),
                   ),
@@ -128,7 +128,7 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
               // borderSide:
               //     BorderSide(color: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary, width: 1.0),
               child: AutoSizeText(
-                _seedCopied ? AppLocalization.of(context).copied : AppLocalization.of(context).copy,
+                _seedCopied ? Z.of(context).copied : Z.of(context).copy,
                 textAlign: TextAlign.center,
                 style: _seedCopied ? AppStyles.textStyleButtonSuccessSmallOutline(context) : AppStyles.textStyleButtonPrimarySmallOutline(context),
                 maxLines: 1,

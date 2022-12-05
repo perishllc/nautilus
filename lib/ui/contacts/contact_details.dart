@@ -154,20 +154,20 @@ class ContactDetailsSheet {
                             onPressed: () {
                               AppDialogs.showConfirmDialog(
                                   context,
-                                  AppLocalization.of(context).removeContact,
-                                  AppLocalization.of(context).removeContactConfirmation.replaceAll("%1", contact.getDisplayName()!),
-                                  CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
+                                  Z.of(context).removeContact,
+                                  Z.of(context).removeContactConfirmation.replaceAll("%1", contact.getDisplayName()!),
+                                  CaseChange.toUpperCase(Z.of(context).yes, context), () {
                                 sl.get<DBHelper>().deleteContact(contact).then((bool deleted) {
                                   if (deleted) {
                                     EventTaxiImpl.singleton().fire(ContactRemovedEvent(contact: contact));
                                     EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: contact));
-                                    UIUtil.showSnackbar(AppLocalization.of(context).contactRemoved.replaceAll("%1", contact.getDisplayName()!), context);
+                                    UIUtil.showSnackbar(Z.of(context).contactRemoved.replaceAll("%1", contact.getDisplayName()!), context);
                                     Navigator.of(context).pop();
                                   } else {
                                     // TODO - error for failing to delete contact
                                   }
                                 });
-                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
+                              }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
                             },
                             child: Icon(AppIcons.trashcan, size: 24, color: StateContainer.of(context).curTheme.text),
                           ),
@@ -179,7 +179,7 @@ class ContactDetailsSheet {
                           child: Column(
                             children: <Widget>[
                               AutoSizeText(
-                                CaseChange.toUpperCase(AppLocalization.of(context).contactHeader, context),
+                                CaseChange.toUpperCase(Z.of(context).contactHeader, context),
                                 style: AppStyles.textStyleHeader(context),
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
@@ -276,7 +276,7 @@ class ContactDetailsSheet {
                               // Address Copied text container
                               Container(
                                 margin: const EdgeInsets.only(top: 5, bottom: 5),
-                                child: Text(_addressCopied ? AppLocalization.of(context).addressCopied : "",
+                                child: Text(_addressCopied ? Z.of(context).addressCopied : "",
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: StateContainer.of(context).curTheme.success,
@@ -290,7 +290,7 @@ class ContactDetailsSheet {
                                   child: Column(
                                     children: <Widget>[
                                       Text(
-                                        CaseChange.toUpperCase(AppLocalization.of(context).aliases, context),
+                                        CaseChange.toUpperCase(Z.of(context).aliases, context),
                                         style: AppStyles.textStyleHeader(context),
                                       ),
                                     ],
@@ -308,7 +308,7 @@ class ContactDetailsSheet {
                         Row(
                           children: <Widget>[
                             // Send Button
-                            AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS,
+                            AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).send, Dimens.BUTTON_TOP_DIMENS,
                                 disabled: StateContainer.of(context).wallet!.accountBalance == BigInt.zero, onPressed: () {
                               Navigator.of(context).pop();
                               Sheets.showAppHeightNineSheet(
@@ -319,7 +319,7 @@ class ContactDetailsSheet {
                         Row(
                           children: <Widget>[
                             // Close Button
-                            AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                            AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                                 onPressed: () {
                               Navigator.pop(context);
                             }),

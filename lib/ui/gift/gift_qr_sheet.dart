@@ -236,7 +236,7 @@ class GiftQRSheetState extends State<GiftQRSheet> {
                         context,
                         // Copy Address Button
                         _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _linkCopied ? AppLocalization.of(context).linkCopied : AppLocalization.of(context).copyLink,
+                        _linkCopied ? Z.of(context).linkCopied : Z.of(context).copyLink,
                         Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
                       Clipboard.setData(ClipboardData(text: widget.link));
                       setState(() {
@@ -258,7 +258,7 @@ class GiftQRSheetState extends State<GiftQRSheet> {
                         context,
                         // Share Address Button
                         AppButtonType.PRIMARY_OUTLINE,
-                        AppLocalization.of(context).shareLink,
+                        Z.of(context).shareLink,
                         Dimens.BUTTON_COMPACT_RIGHT_DIMENS, onPressed: () {
                       Share.share(widget.link);
                     }),

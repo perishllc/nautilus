@@ -95,7 +95,7 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                             child: Column(
                               children: <Widget>[
                                 AutoSizeText(
-                                  CaseChange.toUpperCase(showMnemonic ? AppLocalization.of(context).secretPhrase : AppLocalization.of(context).seed, context),
+                                  CaseChange.toUpperCase(showMnemonic ? Z.of(context).secretPhrase : Z.of(context).seed, context),
                                   style: AppStyles.textStyleHeader(context),
                                   maxLines: 1,
                                   stepGranularity: 0.1,
@@ -166,7 +166,7 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                         context,
                         // Copy Mnemonic Button
                         _mnemonicCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _mnemonicCopied ? AppLocalization.of(context).secretPhraseCopied : AppLocalization.of(context).secretPhraseCopy,
+                        _mnemonicCopied ? Z.of(context).secretPhraseCopied : Z.of(context).secretPhraseCopy,
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       UserDataUtil.setSecureClipboardItem(_mnemonic!.join(" "));
                       setState(() {
@@ -193,7 +193,7 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                         context,
                         // Copy Seed Button
                         _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _seedCopied ? AppLocalization.of(context).seedCopiedShort : AppLocalization.of(context).copySeed,
+                        _seedCopied ? Z.of(context).seedCopiedShort : Z.of(context).copySeed,
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       UserDataUtil.setSecureClipboardItem(_seed);
                       setState(() {
@@ -219,7 +219,7 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                         context,
                         // Copy Seed Button
                         _xmrSeedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _xmrSeedCopied ? AppLocalization.of(context).seedCopiedShort : AppLocalization.of(context).copyXMRSeed,
+                        _xmrSeedCopied ? Z.of(context).seedCopiedShort : Z.of(context).copyXMRSeed,
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       if (_seed == null) return;
                       UserDataUtil.setSecureClipboardItem(XmrUtil.seedToXmrSecretKey(_seed!));
@@ -245,7 +245,7 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                       context,
                       // Show QR Button
                       AppButtonType.PRIMARY_OUTLINE,
-                      AppLocalization.of(context).showQR,
+                      Z.of(context).showQR,
                       Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                     final Widget qrWidget = SizedBox(width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, _seed!));
                     Sheets.showAppHeightEightSheet(

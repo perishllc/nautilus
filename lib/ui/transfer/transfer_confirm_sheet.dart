@@ -79,7 +79,7 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
             Container(
               margin: const EdgeInsets.only(top: 30.0, left: 70, right: 70),
               child: AutoSizeText(
-                CaseChange.toUpperCase(AppLocalization.of(context).transferHeader, context),
+                CaseChange.toUpperCase(Z.of(context).transferHeader, context),
                 style: AppStyles.textStyleHeader(context),
                 textAlign: TextAlign.center,
                 maxLines: 2,
@@ -98,21 +98,21 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                     Container(
                         margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 60),
                         child: Text(
-                          AppLocalization.of(context).transferConfirmInfo.replaceAll("%1", getThemeAwareAccuracyAmount(context, totalToTransfer.toString())),
+                          Z.of(context).transferConfirmInfo.replaceAll("%1", getThemeAwareAccuracyAmount(context, totalToTransfer.toString())),
                           style: AppStyles.textStyleParagraphPrimary(context),
                           textAlign: TextAlign.start,
                         )),
                     Container(
                         margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 60),
                         child: Text(
-                          AppLocalization.of(context).transferConfirmInfoSecond,
+                          Z.of(context).transferConfirmInfoSecond,
                           style: AppStyles.textStyleParagraph(context),
                           textAlign: TextAlign.start,
                         )),
                     Container(
                         margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 60),
                         child: Text(
-                          AppLocalization.of(context).transferConfirmInfoThird,
+                          Z.of(context).transferConfirmInfoThird,
                           style: AppStyles.textStyleParagraph(context),
                           textAlign: TextAlign.start,
                         )),
@@ -126,7 +126,7 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                   children: <Widget>[
                     // Send Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(Z.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       animationOpen = true;
                       AppAnimation.animationLauncher(context, AnimationType.TRANSFER_TRANSFERRING, onPoppedCallback: () => animationOpen = false);
@@ -138,7 +138,7 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                   children: <Widget>[
                     // Scan QR Code Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).cancel.toUpperCase(), Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                        context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).cancel.toUpperCase(), Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
                   ],

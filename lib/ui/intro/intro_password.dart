@@ -93,7 +93,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                         ),
                         alignment: AlignmentDirectional.centerStart,
                         child: AutoSizeText(
-                          AppLocalization.of(context).createAPasswordHeader,
+                          Z.of(context).createAPasswordHeader,
                           maxLines: 3,
                           stepGranularity: 0.5,
                           style: AppStyles.textStyleHeaderColored(context),
@@ -104,7 +104,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                         margin: EdgeInsetsDirectional.only(
                             start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                         child: AutoSizeText(
-                          AppLocalization.of(context).passwordWillBeRequiredToOpenParagraph,
+                          Z.of(context).passwordWillBeRequiredToOpenParagraph,
                           style: AppStyles.textStyleParagraph(context),
                           maxLines: 5,
                           stepGranularity: 0.5,
@@ -145,7 +145,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                                       }
                                     }
                                   },
-                                  hintText: AppLocalization.of(context).createPasswordHint,
+                                  hintText: Z.of(context).createPasswordHint,
                                   keyboardType: TextInputType.text,
                                   obscureText: true,
                                   textAlign: TextAlign.center,
@@ -190,7 +190,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                                       }
                                     }
                                   },
-                                  hintText: AppLocalization.of(context).confirmPasswordHint,
+                                  hintText: Z.of(context).confirmPasswordHint,
                                   keyboardType: TextInputType.text,
                                   obscureText: true,
                                   textAlign: TextAlign.center,
@@ -226,7 +226,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                     Row(
                       children: <Widget>[
                         // Next Button
-                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).nextButton,
+                        AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).nextButton,
                             Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                           await submitAndEncrypt();
                         }),
@@ -236,7 +236,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                       children: <Widget>[
                         // Go Back Button
                         AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                            AppLocalization.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                            Z.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                           Navigator.of(context).pop();
                         }),
                       ],
@@ -253,13 +253,13 @@ class _IntroPasswordState extends State<IntroPassword> {
     if (createPasswordController!.text.isEmpty || confirmPasswordController!.text.isEmpty) {
       if (mounted) {
         setState(() {
-          passwordError = AppLocalization.of(context).passwordBlank;
+          passwordError = Z.of(context).passwordBlank;
         });
       }
     } else if (createPasswordController!.text != confirmPasswordController!.text) {
       if (mounted) {
         setState(() {
-          passwordError = AppLocalization.of(context).passwordsDontMatch;
+          passwordError = Z.of(context).passwordsDontMatch;
         });
       }
     } else if (widget.seed != null) {

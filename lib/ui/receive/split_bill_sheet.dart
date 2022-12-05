@@ -110,7 +110,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                           child: Column(
                             children: <Widget>[
                               AutoSizeText(
-                                CaseChange.toUpperCase(AppLocalization.of(context).splitBillHeader, context),
+                                CaseChange.toUpperCase(Z.of(context).splitBillHeader, context),
                                 style: AppStyles.textStyleHeader(context),
                                 maxLines: 1,
                                 stepGranularity: 0.1,
@@ -129,8 +129,8 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                     child: AppDialogs.infoButton(
                       context,
                       () {
-                        AppDialogs.showInfoDialog(context, AppLocalization.of(context).splitBillInfoHeader,
-                            AppLocalization.of(context).splitBillInfo);
+                        AppDialogs.showInfoDialog(context, Z.of(context).splitBillInfoHeader,
+                            Z.of(context).splitBillInfo);
                       },
                     ),
                   ),
@@ -209,7 +209,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
 
                               if (userMap.keys.contains(userOrAddress)) {
                                 sl.get<Logger>().v("Error adding account: user already in list!");
-                                UIUtil.showSnackbar(AppLocalization.of(context).userAlreadyAddedError, context);
+                                UIUtil.showSnackbar(Z.of(context).userAlreadyAddedError, context);
                                 setState(() {
                                   _addingAccount = false;
                                 });
@@ -248,7 +248,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY,
-                    AppLocalization.of(context).sendRequests,
+                    Z.of(context).sendRequests,
                     Dimens.BUTTON_TOP_DIMENS,
                     disabled: users.isEmpty,
                     onPressed: () async {
@@ -299,7 +299,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                   // AppButton.buildAppButton(
                   //   context,
                   //   AppButtonType.PRIMARY,
-                  //   AppLocalization.of(context).sendAmounts,
+                  //   Z.of(context).sendAmounts,
                   //   Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
                   //   disabled: users.isEmpty,
                   //   onPressed: () async {
@@ -352,7 +352,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY_OUTLINE,
-                    AppLocalization.of(context).close,
+                    Z.of(context).close,
                     Dimens.BUTTON_BOTTOM_DIMENS,
                     onPressed: () {
                       Navigator.pop(context);
@@ -533,7 +533,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
           foregroundColor: StateContainer.of(context).curTheme.error60,
           icon: Icons.delete,
-          label: AppLocalization.of(context).remove,
+          label: Z.of(context).remove,
           onPressed: (BuildContext context) {
             setState(() {
               users.remove(user);
@@ -558,7 +558,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
     userMap.putIfAbsent(userAddress, () => {});
     userMap[userAddress].putIfAbsent("_amountFocusNode", () => FocusNode());
     userMap[userAddress].putIfAbsent("_amountController", () => TextEditingController());
-    userMap[userAddress].putIfAbsent("_amountHint", () => AppLocalization.of(context).enterAmount);
+    userMap[userAddress].putIfAbsent("_amountHint", () => Z.of(context).enterAmount);
     userMap[userAddress].putIfAbsent("_lastLocalCurrencyAmount", () => "");
     userMap[userAddress].putIfAbsent("_lastCryptoAmount", () => "");
 
@@ -567,7 +567,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
       if (amountFocusNode.hasFocus) {
         userMap[userAddress]["_amountHint"] = null;
       } else {
-        userMap[userAddress]["_amountHint"] = AppLocalization.of(context).enterAmount;
+        userMap[userAddress]["_amountHint"] = Z.of(context).enterAmount;
       }
       setState(() {});
     });
@@ -655,13 +655,13 @@ class SplitBillSheetState extends State<SplitBillSheet> {
     userMap.putIfAbsent(userAddress, () => {});
     userMap[userAddress].putIfAbsent("_memoFocusNode", () => FocusNode());
     userMap[userAddress].putIfAbsent("_memoController", () => TextEditingController());
-    userMap[userAddress].putIfAbsent("_memoHint", () => AppLocalization.of(context).enterMemo);
+    userMap[userAddress].putIfAbsent("_memoHint", () => Z.of(context).enterMemo);
     final FocusNode memoFocusNode = userMap[userAddress]["_memoFocusNode"] as FocusNode;
     memoFocusNode.addListener(() {
       if (memoFocusNode.hasFocus) {
         userMap[userAddress]["_memoHint"] = null;
       } else {
-        userMap[userAddress]["_memoHint"] = AppLocalization.of(context).enterMemo;
+        userMap[userAddress]["_memoHint"] = Z.of(context).enterMemo;
       }
       setState(() {});
     });

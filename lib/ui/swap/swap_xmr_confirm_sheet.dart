@@ -100,7 +100,7 @@ class SwapXMRConfirmSheetState extends State<SwapXMRConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).swapping, context),
+                          CaseChange.toUpperCase(Z.of(context).swapping, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -188,7 +188,7 @@ class SwapXMRConfirmSheetState extends State<SwapXMRConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).registerFor, context),
+                          CaseChange.toUpperCase(Z.of(context).registerFor, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -220,7 +220,7 @@ class SwapXMRConfirmSheetState extends State<SwapXMRConfirmSheet> {
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(Z.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
@@ -230,7 +230,7 @@ class SwapXMRConfirmSheetState extends State<SwapXMRConfirmSheet> {
                           if (!mounted) return;
                           final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
                               context,
-                              AppLocalization.of(context)
+                              Z.of(context)
                                   .sendAmountConfirm
                                   .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
                                   .replaceAll("%2", StateContainer.of(context).currencyMode));
@@ -253,7 +253,7 @@ class SwapXMRConfirmSheetState extends State<SwapXMRConfirmSheet> {
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(Z.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -326,7 +326,7 @@ class SwapXMRConfirmSheetState extends State<SwapXMRConfirmSheet> {
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).giftCardCreationErrorSent, context, durationMs: 20000);
+      UIUtil.showSnackbar(Z.of(context).giftCardCreationErrorSent, context, durationMs: 20000);
       Navigator.of(context).pop();
     }
   }
@@ -340,7 +340,7 @@ class SwapXMRConfirmSheetState extends State<SwapXMRConfirmSheet> {
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: AppLocalization.of(context)
+        description: Z.of(context)
             .sendAmountConfirm
             .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
             .replaceAll("%2", StateContainer.of(context).currencyMode),

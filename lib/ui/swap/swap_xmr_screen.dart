@@ -127,7 +127,7 @@ class SwapXMRScreenState extends State<SwapXMRScreen> {
     if (_amountController!.text.trim().isEmpty) {
       isValid = false;
       setState(() {
-        _amountValidationText = AppLocalization.of(context).amountMissing;
+        _amountValidationText = Z.of(context).amountMissing;
       });
     } else {
       String bananoAmount;
@@ -144,12 +144,12 @@ class SwapXMRScreenState extends State<SwapXMRScreen> {
       if (sendAmount == null || sendAmount == BigInt.zero) {
         isValid = false;
         setState(() {
-          _amountValidationText = AppLocalization.of(context).amountMissing;
+          _amountValidationText = Z.of(context).amountMissing;
         });
       } else if (sendAmount > balanceRaw) {
         isValid = false;
         setState(() {
-          _amountValidationText = AppLocalization.of(context).insufficientBalance;
+          _amountValidationText = Z.of(context).insufficientBalance;
         });
       }
     }
@@ -158,13 +158,13 @@ class SwapXMRScreenState extends State<SwapXMRScreen> {
     if (_xmrAddressController!.text.trim().isEmpty) {
       isValid = false;
       setState(() {
-        _xmrAddressValidationText = AppLocalization.of(context).addressMissing;
+        _xmrAddressValidationText = Z.of(context).addressMissing;
       });
     } else {
       // if (!Address(_xmrAddressController!.text).isValid()) {
       //   isValid = false;
       //   setState(() {
-      //     _xmrAddressValidationText = AppLocalization.of(context).invalidAddress;
+      //     _xmrAddressValidationText = Z.of(context).invalidAddress;
       //   });
       // }
     }
@@ -222,7 +222,7 @@ class SwapXMRScreenState extends State<SwapXMRScreen> {
                 ),
                 alignment: AlignmentDirectional.center,
                 child: AutoSizeText(
-                  AppLocalization.of(context).swapXMRHeader,
+                  Z.of(context).swapXMRHeader,
                   style: AppStyles.textStyleHeaderColored(context),
                   stepGranularity: 0.1,
                   maxLines: 1,
@@ -243,14 +243,14 @@ class SwapXMRScreenState extends State<SwapXMRScreen> {
                   child: SingleChildScrollView(
                     controller: _scrollController,
                     // child: AutoSizeText(
-                    //   AppLocalization.of(context).giftInfo,
+                    //   Z.of(context).giftInfo,
                     //   style: AppStyles.textStyleParagraph(context),
                     //   maxLines: 12,
                     //   minFontSize: 12,
                     //   stepGranularity: 0.5,
                     // ),
                     child: Text(
-                      AppLocalization.of(context).swapXMRInfo,
+                      Z.of(context).swapXMRInfo,
                       style: AppStyles.textStyleParagraph(context),
                     ),
                     // ),
@@ -335,7 +335,7 @@ class SwapXMRScreenState extends State<SwapXMRScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).swapXMRHeader, Dimens.BUTTON_BOTTOM_DIMENS,
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).swapXMRHeader, Dimens.BUTTON_BOTTOM_DIMENS,
                       onPressed: () async {
                     final bool isValid = _validateRequest();
                     if (!isValid) {
@@ -494,7 +494,7 @@ class SwapXMRScreenState extends State<SwapXMRScreen> {
       textInputAction: TextInputAction.next,
       maxLines: null,
       autocorrect: false,
-      hintText: _amountHint == null ? "" : AppLocalization.of(context).enterAmount,
+      hintText: _amountHint == null ? "" : Z.of(context).enterAmount,
       prefixButton: TextFieldButton(
         padding: EdgeInsets.zero,
         widget: Row(
@@ -582,7 +582,7 @@ class SwapXMRScreenState extends State<SwapXMRScreen> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _xmrAddressHint == null ? "" : AppLocalization.of(context).enterMoneroAddress,
+      hintText: _xmrAddressHint == null ? "" : Z.of(context).enterMoneroAddress,
       fadeSuffixOnCondition: true,
       style: TextStyle(
         // fontWeight: FontWeight.w700,

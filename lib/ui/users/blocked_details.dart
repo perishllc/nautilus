@@ -176,18 +176,18 @@ class BlockedDetailsSheet {
                             onPressed: () {
                               AppDialogs.showConfirmDialog(
                                   context,
-                                  AppLocalization.of(context).removeBlocked,
-                                  AppLocalization.of(context)
+                                  Z.of(context).removeBlocked,
+                                  Z.of(context)
                                       .removeBlockedConfirmation
                                       .replaceAll('%1', blocked.getDisplayName()!),
-                                  CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
+                                  CaseChange.toUpperCase(Z.of(context).yes, context), () {
                                 sl.get<DBHelper>().unblockUser(blocked).then((bool deleted) {
                                   if (deleted) {
                                     // Delete image if exists
                                     EventTaxiImpl.singleton().fire(BlockedRemovedEvent(user: blocked));
                                     EventTaxiImpl.singleton().fire(BlockedModifiedEvent(user: blocked));
                                     UIUtil.showSnackbar(
-                                        AppLocalization.of(context)
+                                        Z.of(context)
                                             .blockedRemoved
                                             .replaceAll("%1", blocked.getDisplayName()!),
                                         context);
@@ -196,7 +196,7 @@ class BlockedDetailsSheet {
                                     // TODO: - error for failing to delete contact
                                   }
                                 });
-                              }, cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
+                              }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
                             },
                             child: Icon(AppIcons.trashcan, size: 24, color: StateContainer.of(context).curTheme.text),
                           ),
@@ -208,7 +208,7 @@ class BlockedDetailsSheet {
                           child: Column(
                             children: <Widget>[
                               AutoSizeText(
-                                CaseChange.toUpperCase(AppLocalization.of(context).blockedHeader, context),
+                                CaseChange.toUpperCase(Z.of(context).blockedHeader, context),
                                 style: AppStyles.textStyleHeader(context),
                                 textAlign: TextAlign.center,
                                 maxLines: 1,
@@ -309,7 +309,7 @@ class BlockedDetailsSheet {
                               // Address Copied text container
                               Container(
                                 margin: const EdgeInsets.only(top: 5, bottom: 5),
-                                child: Text(_addressCopied ? AppLocalization.of(context).addressCopied : "",
+                                child: Text(_addressCopied ? Z.of(context).addressCopied : "",
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: StateContainer.of(context).curTheme.success,
@@ -323,7 +323,7 @@ class BlockedDetailsSheet {
                                   child: Column(
                                     children: <Widget>[
                                       Text(
-                                        CaseChange.toUpperCase(AppLocalization.of(context).aliases, context),
+                                        CaseChange.toUpperCase(Z.of(context).aliases, context),
                                         style: AppStyles.textStyleHeader(context),
                                       ),
                                     ],
@@ -341,7 +341,7 @@ class BlockedDetailsSheet {
                         // Row(
                         //   children: <Widget>[
                         //     // TODO: unblock Button
-                        //     AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS,
+                        //     AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).send, Dimens.BUTTON_TOP_DIMENS,
                         //         disabled: StateContainer.of(context).wallet.accountBalance == BigInt.zero, onPressed: () {
                         //       Navigator.of(context).pop();
                         //       Sheets.showAppHeightNineSheet(
@@ -353,7 +353,7 @@ class BlockedDetailsSheet {
                           children: <Widget>[
                             // Close Button
                             AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                                AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                                Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                               Navigator.pop(context);
                             }),
                           ],

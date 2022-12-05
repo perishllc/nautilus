@@ -103,7 +103,7 @@ class AppTransferOverviewSheet {
                                   margin: const EdgeInsets.only(top: 15.0),
                                   constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                                   child: AutoSizeText(
-                                    CaseChange.toUpperCase(AppLocalization.of(context).transferHeader, context),
+                                    CaseChange.toUpperCase(Z.of(context).transferHeader, context),
                                     style: AppStyles.textStyleHeader(context),
                                     textAlign: TextAlign.center,
                                     maxLines: 2,
@@ -149,9 +149,9 @@ class AppTransferOverviewSheet {
                                 alignment: AlignmentDirectional.centerStart,
                                 margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
                                 child: AutoSizeText(
-                                  AppLocalization.of(context)
+                                  Z.of(context)
                                       .transferIntro
-                                      .replaceAll("%1", AppLocalization.of(context).scanQrCode),
+                                      .replaceAll("%1", Z.of(context).scanQrCode),
                                   style: AppStyles.textStyleParagraph(context),
                                   textAlign: TextAlign.start,
                                   maxLines: 6,
@@ -167,7 +167,7 @@ class AppTransferOverviewSheet {
                             AppButton.buildAppButton(
                               context,
                               AppButtonType.PRIMARY,
-                              AppLocalization.of(context).scanQrCode,
+                              Z.of(context).scanQrCode,
                               Dimens.BUTTON_TOP_DIMENS,
                               onPressed: () async {
                                 UIUtil.cancelLockEvent();
@@ -178,7 +178,7 @@ class AppTransferOverviewSheet {
                                 }
 
                                 if (!NanoUtil.isValidSeed(result)) {
-                                  UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidSeed, context);
+                                  UIUtil.showSnackbar(Z.of(context).qrInvalidSeed, context);
                                   return;
                                 }
                                 startTransfer(context, result);
@@ -191,7 +191,7 @@ class AppTransferOverviewSheet {
                             AppButton.buildAppButton(
                               context,
                               AppButtonType.PRIMARY_OUTLINE,
-                              AppLocalization.of(context).manualEntry,
+                              Z.of(context).manualEntry,
                               Dimens.BUTTON_BOTTOM_DIMENS,
                               onPressed: () {
                                 Sheets.showAppHeightNineSheet(
@@ -240,7 +240,7 @@ class AppTransferOverviewSheet {
       });
       accountsToRemove.forEach(privKeyBalanceMap.remove);
       if (privKeyBalanceMap.isEmpty) {
-        UIUtil.showSnackbar(AppLocalization.of(context).transferNoFunds, context);
+        UIUtil.showSnackbar(Z.of(context).transferNoFunds, context);
         return;
       }
       // Go to confirmation screen
@@ -251,7 +251,7 @@ class AppTransferOverviewSheet {
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
+      UIUtil.showSnackbar(Z.of(context).sendError, context);
     }
   }
 
@@ -316,7 +316,7 @@ class AppTransferOverviewSheet {
       });
       accountsToRemove.forEach(privKeyBalanceMap.remove);
       if (privKeyBalanceMap.isEmpty) {
-        UIUtil.showSnackbar(AppLocalization.of(context).transferNoFunds, context, durationMs: 5000);
+        UIUtil.showSnackbar(Z.of(context).transferNoFunds, context, durationMs: 5000);
         return;
       }
 
@@ -327,7 +327,7 @@ class AppTransferOverviewSheet {
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).giftProcessError, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).giftProcessError, context, durationMs: 5000);
     }
 
     // sleep for a couple seconds to flex the animation / since this happens pretty fast
@@ -336,9 +336,9 @@ class AppTransferOverviewSheet {
       Navigator.of(context).pop();
     }
     if (amountTransferred == BigInt.zero) {
-      UIUtil.showSnackbar(AppLocalization.of(context).giftProcessError, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).giftProcessError, context, durationMs: 5000);
     } else {
-      UIUtil.showSnackbar(AppLocalization.of(context).giftProcessSuccess, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).giftProcessSuccess, context, durationMs: 5000);
     }
   }
 
@@ -368,7 +368,7 @@ class AppTransferOverviewSheet {
       });
       accountsToRemove.forEach(privKeyBalanceMap.remove);
       if (privKeyBalanceMap.isEmpty) {
-        UIUtil.showSnackbar(AppLocalization.of(context).transferNoFunds, context);
+        UIUtil.showSnackbar(Z.of(context).transferNoFunds, context);
         return;
       }
 
@@ -382,12 +382,12 @@ class AppTransferOverviewSheet {
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).giftProcessError, context);
+      UIUtil.showSnackbar(Z.of(context).giftProcessError, context);
     }
     if (_animationOpen) {
       Navigator.of(context).pop();
     }
-    UIUtil.showSnackbar(AppLocalization.of(context).giftRefundSuccess, context, durationMs: 5000);
+    UIUtil.showSnackbar(Z.of(context).giftRefundSuccess, context, durationMs: 5000);
   }
 
   Future<void> receiveAtIndex(BuildContext context, String seed, int index, String derivationMethod) async {

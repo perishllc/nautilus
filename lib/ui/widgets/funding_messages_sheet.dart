@@ -61,7 +61,7 @@ class _FundingMessagesSheetState extends State<FundingMessagesSheet> {
                         children: <Widget>[
                           // Header
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context).fundingHeader, context),
+                            CaseChange.toUpperCase(Z.of(context).fundingHeader, context),
                             style: AppStyles.textStyleHeader(context),
                             textAlign: TextAlign.center,
                             maxLines: 1,
@@ -157,7 +157,7 @@ class _FundingMessagesSheetState extends State<FundingMessagesSheet> {
             end: 12,
             bottom: 20,
           ),
-          child: Text(AppLocalization.of(context).iosFundingMessage),
+          child: Text(Z.of(context).iosFundingMessage),
         ),
       );
     }

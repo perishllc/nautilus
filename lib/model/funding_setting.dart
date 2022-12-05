@@ -13,10 +13,10 @@ class FundingSetting extends SettingSelectionItem {
   String getDisplayName(BuildContext context) {
     switch (setting) {
       case FundingOptions.SHOW:
-        return AppLocalization.of(context).onStr;
+        return Z.of(context).onStr;
       case FundingOptions.HIDE:
       default:
-        return AppLocalization.of(context).off;
+        return Z.of(context).off;
     }
   }
 

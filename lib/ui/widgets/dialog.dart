@@ -27,7 +27,7 @@ class AppDialogs {
   static void showConfirmDialog(
       BuildContext context, String title, String content, String buttonText, Function onPressed,
       {String? cancelText, Function? cancelAction, bool barrierDismissible = true}) {
-    cancelText ??= AppLocalization.of(context).cancel.toUpperCase();
+    cancelText ??= Z.of(context).cancel.toUpperCase();
 
     showAppDialog(
       context: context,
@@ -89,7 +89,7 @@ class AppDialogs {
 
   static Future<bool> waitableConfirmDialog(BuildContext context, String title, String content, String buttonText,
       {String? cancelText, bool barrierDismissible = true}) async {
-    cancelText ??= AppLocalization.of(context).cancel.toUpperCase();
+    cancelText ??= Z.of(context).cancel.toUpperCase();
 
     final bool res = await showAppDialog(
       context: context,
@@ -210,11 +210,11 @@ class AppDialogs {
             borderRadius: BorderRadius.circular(15),
           ),
           title: Text(
-            AppLocalization.of(context).proSubRequiredHeader,
+            Z.of(context).proSubRequiredHeader,
             style: AppStyles.textStyleButtonPrimaryOutline(context),
           ),
           content: Text(
-            AppLocalization.of(context).proSubRequiredParagraph,
+            Z.of(context).proSubRequiredParagraph,
             style: AppStyles.textStyleParagraph(context),
           ),
           actions: <Widget>[
@@ -226,7 +226,7 @@ class AppDialogs {
               child: Container(
                 constraints: const BoxConstraints(maxWidth: 100),
                 child: Text(
-                  AppLocalization.of(context).noThanks,
+                  Z.of(context).noThanks,
                   textAlign: TextAlign.center,
                   style: AppStyles.textStyleDialogButtonText(context),
                 ),
@@ -243,7 +243,7 @@ class AppDialogs {
                 child: Container(
                   constraints: const BoxConstraints(maxWidth: 100),
                   child: Text(
-                    AppLocalization.of(context).subscribeWithApple,
+                    Z.of(context).subscribeWithApple,
                     textAlign: TextAlign.center,
                     style: AppStyles.textStyleDialogButtonText(context),
                   ),
@@ -271,7 +271,7 @@ class AppDialogs {
               child: Container(
                 constraints: const BoxConstraints(maxWidth: 100),
                 child: Text(
-                  AppLocalization.of(context).subscribeButton,
+                  Z.of(context).subscribeButton,
                   textAlign: TextAlign.center,
                   style: AppStyles.textStyleDialogButtonText(context),
                 ),
@@ -308,7 +308,7 @@ class AppDialogs {
     Function? onPressed,
     bool scrollable = false,
   }) async {
-    closeText ??= AppLocalization.of(context).close.toUpperCase();
+    closeText ??= Z.of(context).close.toUpperCase();
     final ScrollController _scrollController = ScrollController();
     await showDialog(
       barrierColor: StateContainer.of(context).curTheme.barrier,
@@ -412,7 +412,7 @@ class AppDialogs {
   //         actions: <Widget>[
   //           TextButton(
   //             child: Text(
-  //               AppLocalization.of(context).close.toUpperCase(),
+  //               Z.of(context).close.toUpperCase(),
   //               style: AppStyles.textStyleDialogButtonText(context),
   //             ),
   //             onPressed: () {
@@ -447,7 +447,7 @@ class AppDialogs {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(AppLocalization.of(context).changeLog,
+                    child: Text(Z.of(context).changeLog,
                         textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
                   ),
                   Container(
@@ -531,7 +531,7 @@ class AppDialogs {
                           });
                         },
                         child: Text(
-                          AppLocalization.of(context).supportTheDeveloper,
+                          Z.of(context).supportTheDeveloper,
                           style: TextStyle(
                             fontSize: AppFontSizes.medium,
                             color: StateContainer.of(context).curTheme.primary,
@@ -542,7 +542,7 @@ class AppDialogs {
                         key: const Key("changelog_dismiss_button"),
                         onPressed: () => Navigator.of(context).pop(),
                         child:
-                            Text(AppLocalization.of(context).dismiss, style: AppStyles.textStyleDialogOptions(context)),
+                            Text(Z.of(context).dismiss, style: AppStyles.textStyleDialogOptions(context)),
                       ),
                     ]),
                   ),
@@ -565,14 +565,14 @@ class AppDialogs {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  AppLocalization.of(context).trackingHeader,
+                  Z.of(context).trackingHeader,
                   style: AppStyles.textStyleDialogHeader(context),
                 ),
                 AppDialogs.infoButton(
                   context,
                   () {
-                    AppDialogs.showInfoDialog(context, AppLocalization.of(context).trackingHeader,
-                        AppLocalization.of(context).trackingWarningBodyLong);
+                    AppDialogs.showInfoDialog(context, Z.of(context).trackingHeader,
+                        Z.of(context).trackingWarningBodyLong);
                   },
                 )
               ],
@@ -585,7 +585,7 @@ class AppDialogs {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).onStr,
+                    Z.of(context).onStr,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -597,7 +597,7 @@ class AppDialogs {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).off,
+                    Z.of(context).off,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),

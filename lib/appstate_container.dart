@@ -433,9 +433,9 @@ class StateContainerState extends State<StateContainer> {
       active: true,
       // can't get localized strings in this context: :/
       // TODO: find a way, but as a temp fix for the settings drawer, we need to put in something:
-      // title: AppLocalization.of(context).branchConnectErrorTitle,
-      // shortDescription: AppLocalization.of(context).branchConnectErrorShortDesc,
-      // longDescription: AppLocalization.of(context).branchConnectErrorLongDesc,
+      // title: Z.of(context).branchConnectErrorTitle,
+      // shortDescription: Z.of(context).branchConnectErrorShortDesc,
+      // longDescription: Z.of(context).branchConnectErrorLongDesc,
       title: "Connection Warning",
       shortDescription: "Error: can't reach Branch API",
       longDescription:

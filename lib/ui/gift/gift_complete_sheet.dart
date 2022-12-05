@@ -65,7 +65,7 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      // hintText: _memoHint ?? AppLocalization.of(context).enterMemo,
+      // hintText: _memoHint ?? Z.of(context).enterMemo,
       fadeSuffixOnCondition: true,
       style: TextStyle(
         color: StateContainer.of(context).curTheme.text60,
@@ -84,7 +84,7 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
   @override
   Widget build(BuildContext context) {
     if (widget.link.isNotEmpty && _messageController.text.isEmpty) {
-      _messageController.text = "${AppLocalization.of(context).defaultGiftMessage} ${widget.link}";
+      _messageController.text = "${Z.of(context).defaultGiftMessage} ${widget.link}";
     }
     return SafeArea(
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
@@ -133,7 +133,7 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                           children: <Widget>[
                             // "SENT TO" text
                             Text(
-                              CaseChange.toUpperCase(AppLocalization.of(context).loaded, context),
+                              CaseChange.toUpperCase(Z.of(context).loaded, context),
                               style: TextStyle(
                                 fontSize: 28.0,
                                 fontWeight: FontWeight.w700,
@@ -185,7 +185,7 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                       getMessageEditor(),
                       Container(
                         alignment: AlignmentDirectional.center,
-                        child: Text(AppLocalization.of(context).tapMessageToEdit,
+                        child: Text(Z.of(context).tapMessageToEdit,
                             style: TextStyle(
                               fontSize: 14.0,
                               color: StateContainer.of(context).curTheme.primary,
@@ -208,7 +208,7 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                         context,
                         // copy message Button
                         _messageCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _messageCopied ? AppLocalization.of(context).messageCopied : AppLocalization.of(context).copyMessage,
+                        _messageCopied ? Z.of(context).messageCopied : Z.of(context).copyMessage,
                         Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
                       Clipboard.setData(ClipboardData(text: _messageController.text));
                       setState(() {
@@ -228,7 +228,7 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                         context,
                         // share message button
                         AppButtonType.PRIMARY_OUTLINE,
-                        AppLocalization.of(context).shareMessage,
+                        Z.of(context).shareMessage,
                         Dimens.BUTTON_COMPACT_RIGHT_DIMENS, onPressed: () {
                       Share.share(_messageController.text);
                     }),
@@ -241,7 +241,7 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                         context,
                         // show link QR
                         AppButtonType.PRIMARY,
-                        AppLocalization.of(context).showLinkOptions,
+                        Z.of(context).showLinkOptions,
                         Dimens.BUTTON_BOTTOM_EXCEPTION_DIMENS, onPressed: () async {
                       final Widget qrWidget = SizedBox(width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, widget.link));
                       Sheets.showAppHeightEightSheet(context: context, widget: GiftQRSheet(link: widget.link, qrWidget: qrWidget));

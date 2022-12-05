@@ -115,11 +115,11 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
                 margin: const EdgeInsetsDirectional.only(top: 8),
                 child: _seedObscured
                     ? AutoSizeText(
-                        AppLocalization.of(context).tapToReveal,
+                        Z.of(context).tapToReveal,
                         style: AppStyles.textStyleParagraphThinPrimary(context),
                       )
                     : Text(
-                        AppLocalization.of(context).tapToHide,
+                        Z.of(context).tapToHide,
                         style: AppStyles.textStyleParagraphThinPrimary(context),
                       ),
               ),
@@ -153,7 +153,7 @@ class _MnemonicDisplayState extends State<MnemonicDisplay> {
             // borderSide:
             //     BorderSide(color: _seedCopied ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary, width: 1.0),
             child: AutoSizeText(
-              _seedCopied ? AppLocalization.of(context).copied : AppLocalization.of(context).copy,
+              _seedCopied ? Z.of(context).copied : Z.of(context).copy,
               textAlign: TextAlign.center,
               style: _seedCopied ? AppStyles.textStyleButtonSuccessSmallOutline(context) : AppStyles.textStyleButtonPrimarySmallOutline(context),
               maxLines: 1,

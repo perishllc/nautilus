@@ -120,9 +120,9 @@ class SendXMRSheetState extends State<SendXMRSheet> {
     quickSendAmount = widget.quickSendAmount;
     animationOpen = false;
 
-    // _amountHint = AppLocalization.of(context).enterAmount;
-    // _addressHint = AppLocalization.of(context).enterUserOrAddress;
-    // _memoHint = AppLocalization.of(context).enterMemo;
+    // _amountHint = Z.of(context).enterAmount;
+    // _addressHint = Z.of(context).enterUserOrAddress;
+    // _memoHint = Z.of(context).enterMemo;
 
     if (widget.user != null) {
       // Setup initial state for contact pre-filled
@@ -160,7 +160,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         });
       } else {
         setState(() {
-          _amountHint = AppLocalization.of(context).enterAmount;
+          _amountHint = Z.of(context).enterAmount;
         });
       }
     });
@@ -200,7 +200,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         }
       } else {
         setState(() {
-          _addressHint = AppLocalization.of(context).enterUserOrAddress;
+          _addressHint = Z.of(context).enterUserOrAddress;
           _users = [];
           if (Address(_addressController!.text).isValid()) {
             _addressValidAndUnfocused = true;
@@ -283,7 +283,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         });
       } else {
         setState(() {
-          _memoHint = AppLocalization.of(context).enterMemo;
+          _memoHint = Z.of(context).enterMemo;
         });
       }
     });
@@ -317,13 +317,13 @@ class SendXMRSheetState extends State<SendXMRSheet> {
           return AppSimpleDialog(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
-              AppLocalization.of(context).notifications,
+              Z.of(context).notifications,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Text("${AppLocalization.of(context).notificationInfo}\n", style: AppStyles.textStyleParagraph(context)),
+                child: Text("${Z.of(context).notificationInfo}\n", style: AppStyles.textStyleParagraph(context)),
               ),
               AppSimpleDialogOption(
                 onPressed: () {
@@ -332,7 +332,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).onStr,
+                    Z.of(context).onStr,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -344,7 +344,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).off,
+                    Z.of(context).off,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -385,14 +385,14 @@ class SendXMRSheetState extends State<SendXMRSheet> {
           return AlertDialog(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
-              AppLocalization.of(context).needVerificationAlertHeader,
+              Z.of(context).needVerificationAlertHeader,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${AppLocalization.of(context).needVerificationAlert}\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text("${Z.of(context).needVerificationAlert}\n\n", style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actions: <Widget>[
@@ -403,7 +403,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).goToQRCode,
+                    Z.of(context).goToQRCode,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -415,7 +415,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).ok,
+                    Z.of(context).ok,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -446,14 +446,14 @@ class SendXMRSheetState extends State<SendXMRSheet> {
           return AlertDialog(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
-              AppLocalization.of(context).fallbackHeader,
+              Z.of(context).fallbackHeader,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${AppLocalization.of(context).fallbackInfo}\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text("${Z.of(context).fallbackInfo}\n\n", style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actions: <Widget>[
@@ -464,7 +464,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).ok,
+                    Z.of(context).ok,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -535,7 +535,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                         children: <Widget>[
                           // Header
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context).sendFrom, context),
+                            CaseChange.toUpperCase(Z.of(context).sendFrom, context),
                             style: AppStyles.textStyleHeader(context),
                             textAlign: TextAlign.center,
                             maxLines: 1,
@@ -553,7 +553,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                   child: AppDialogs.infoButton(
                     context,
                     () {
-                      AppDialogs.showInfoDialog(context, AppLocalization.of(context).sendSheetInfoHeader, AppLocalization.of(context).sendSheetInfo);
+                      AppDialogs.showInfoDialog(context, Z.of(context).sendSheetInfoHeader, Z.of(context).sendSheetInfo);
                     },
                   ),
                 ),
@@ -815,7 +815,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                 Row(
                   children: <Widget>[
                     // Send Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).send, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).send, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       final bool validRequest = await _validateRequest();
 
                       if (!validRequest || !mounted) {
@@ -962,7 +962,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
     if (_amountController!.text.trim().isEmpty && _memoController!.text.trim().isNotEmpty) {
       isValid = false;
       setState(() {
-        _amountValidationText = AppLocalization.of(context).amountMissing;
+        _amountValidationText = Z.of(context).amountMissing;
       });
     } else {
       String bananoAmount;
@@ -980,7 +980,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         if (_memoController!.text.trim().isEmpty) {
           isValid = false;
           setState(() {
-            _amountValidationText = AppLocalization.of(context).amountMissing;
+            _amountValidationText = Z.of(context).amountMissing;
           });
         } else {
           setState(() {
@@ -990,7 +990,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       } else if (sendAmount > balanceRaw) {
         isValid = false;
         setState(() {
-          _amountValidationText = AppLocalization.of(context).insufficientBalance;
+          _amountValidationText = Z.of(context).insufficientBalance;
         });
       } else {
         setState(() {
@@ -1007,7 +1007,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
     if (_addressController!.text.isNotEmpty && !isFavorite && !isUser && !isDomain && /*!Address(_addressController!.text).isValid()*/ false) {
       isValid = false;
       setState(() {
-        _addressValidationText = AppLocalization.of(context).invalidAddress;
+        _addressValidationText = Z.of(context).invalidAddress;
         _pasteButtonVisible = true;
       });
     } else if (!isUser && !isFavorite) {
@@ -1082,7 +1082,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       textInputAction: TextInputAction.next,
       maxLines: null,
       autocorrect: false,
-      hintText: _amountHint ?? AppLocalization.of(context).enterAmount,
+      hintText: _amountHint ?? Z.of(context).enterAmount,
       prefixButton: _rawAmount == null
           ? TextFieldButton(
               padding: EdgeInsets.zero,
@@ -1177,7 +1177,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       textInputAction: _memoController!.text.isEmpty ? TextInputAction.next : TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _addressHint ?? AppLocalization.of(context).enterUserOrAddress,
+      hintText: _addressHint ?? Z.of(context).enterUserOrAddress,
       prefixButton: TextFieldButton(
           icon: AppIcons.scan,
           onPressed: () async {
@@ -1185,7 +1185,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
             final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
             if (!mounted) return;
             if (scanResult == null) {
-              UIUtil.showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
+              UIUtil.showSnackbar(Z.of(context).qrInvalidAddress, context);
             } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
               if (mounted) {
                 setState(() {
@@ -1398,7 +1398,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
-      hintText: _memoHint ?? AppLocalization.of(context).enterMemo,
+      hintText: _memoHint ?? Z.of(context).enterMemo,
       fadeSuffixOnCondition: true,
       style: TextStyle(
         color: StateContainer.of(context).curTheme.text60,

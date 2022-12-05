@@ -74,7 +74,7 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
                         child: Column(
                           children: <Widget>[
                             AutoSizeText(
-                              CaseChange.toUpperCase(AppLocalization.of(context).changeSeed, context),
+                              CaseChange.toUpperCase(Z.of(context).changeSeed, context),
                               style: AppStyles.textStyleHeader(context),
                               minFontSize: 12,
                               stepGranularity: 0.1,
@@ -91,7 +91,7 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
                       //   child: AppDialogs.infoButton(
                       //     context,
                       //     () {
-                      //       AppDialogs.showInfoDialog(context, AppLocalization.of(context).plausibleInfoHeader, AppLocalization.of(context).plausibleSheetInfo);
+                      //       AppDialogs.showInfoDialog(context, Z.of(context).plausibleInfoHeader, Z.of(context).plausibleSheetInfo);
                       //     },
                       //   ),
                       // ),
@@ -105,7 +105,7 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
                   Container(
                     margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
-                      AppLocalization.of(context).changeSeedParagraph,
+                      Z.of(context).changeSeedParagraph,
                       style: AppStyles.textStyleParagraph(context),
                       maxLines: 5,
                       stepGranularity: 0.5,
@@ -135,7 +135,7 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
                                   });
                                 }
                               },
-                              hintText: AppLocalization.of(context).setPassword,
+                              hintText: Z.of(context).setPassword,
                               obscureText: true,
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -167,7 +167,7 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).changeSeed, Dimens.BUTTON_TOP_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).changeSeed, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       await submitAndEncrypt();
                     }),
@@ -175,7 +175,7 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                       Navigator.pop(context);
                     }),
@@ -194,7 +194,7 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
     if (!mounted) return;
     if (confirmPasswordController!.text.isEmpty) {
       setState(() {
-        passwordError = AppLocalization.of(context).passwordBlank;
+        passwordError = Z.of(context).passwordBlank;
       });
       return;
     }
@@ -204,7 +204,7 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
     // password must be at least 8 characters:
     if (confirmPasswordController!.text.length < 8) {
       setState(() {
-        passwordError = AppLocalization.of(context).passwordTooShort;
+        passwordError = Z.of(context).passwordTooShort;
       });
       return;
     }
@@ -212,7 +212,7 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
     // make sure password contains a number:
     if (!confirmPasswordController!.text.contains(RegExp(r"[0-9]"))) {
       setState(() {
-        passwordError = AppLocalization.of(context).passwordNumber;
+        passwordError = Z.of(context).passwordNumber;
       });
       return;
     }
@@ -220,7 +220,7 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
     // make sure password contains an uppercase and lowercase letter:
     if (!confirmPasswordController!.text.contains(RegExp(r"[a-z]")) || !confirmPasswordController!.text.contains(RegExp(r"[A-Z]"))) {
       setState(() {
-        passwordError = AppLocalization.of(context).passwordCapitalLetter;
+        passwordError = Z.of(context).passwordCapitalLetter;
       });
       return;
     }

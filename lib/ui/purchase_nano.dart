@@ -85,7 +85,7 @@ class _PurchaseNanoScreenState extends State<PurchaseNanoScreen> {
                     //   child: Column(
                     //     children: <Widget>[
                     //       AutoSizeText(
-                    //         AppLocalization.of(context).secretInfo,
+                    //         Z.of(context).secretInfo,
                     //         style: AppStyles.textStyleParagraph(context),
                     //         maxLines: 5,
                     //         stepGranularity: 0.5,
@@ -93,7 +93,7 @@ class _PurchaseNanoScreenState extends State<PurchaseNanoScreen> {
                     //       Container(
                     //         margin: EdgeInsetsDirectional.only(top: 15),
                     //         child: AutoSizeText(
-                    //           AppLocalization.of(context).secretWarning,
+                    //           Z.of(context).secretWarning,
                     //           style: AppStyles.textStyleParagraphPrimary(context),
                     //           maxLines: 4,
                     //           stepGranularity: 0.5,
@@ -110,7 +110,7 @@ class _PurchaseNanoScreenState extends State<PurchaseNanoScreen> {
               // Row(
               //   mainAxisAlignment: MainAxisAlignment.center,
               //   children: <Widget>[
-              //     AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).gotItButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+              //     AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).gotItButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
               //       Navigator.of(context).pushNamed('/intro_backup', arguments: StateContainer.of(context).encryptedSecret);
               //     }),
               //   ],

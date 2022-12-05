@@ -105,7 +105,7 @@ class IntroBackupSeedState extends State<IntroBackupSeedPage> {
                                 Container(
                                   margin: const EdgeInsetsDirectional.only(end: 8),
                                   child: Text(
-                                    !_showMnemonic ? AppLocalization.of(context).secretPhrase : AppLocalization.of(context).seed,
+                                    !_showMnemonic ? Z.of(context).secretPhrase : Z.of(context).seed,
                                     style: TextStyle(
                                       color: StateContainer.of(context).curTheme.text,
                                       fontSize: 20.0,
@@ -134,7 +134,7 @@ class IntroBackupSeedState extends State<IntroBackupSeedPage> {
                           Container(
                             constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - (smallScreen(context) ? 120 : 140)),
                             child: AutoSizeText(
-                              _showMnemonic ? AppLocalization.of(context).secretPhrase : AppLocalization.of(context).seed,
+                              _showMnemonic ? Z.of(context).secretPhrase : Z.of(context).seed,
                               style: AppStyles.textStyleHeaderColored(context),
                               stepGranularity: 0.1,
                               minFontSize: 12.0,
@@ -167,7 +167,7 @@ class IntroBackupSeedState extends State<IntroBackupSeedPage> {
                   AppButton.buildAppButton(
                     context,
                     AppButtonType.PRIMARY,
-                    AppLocalization.of(context).backupConfirmButton,
+                    Z.of(context).backupConfirmButton,
                     Dimens.BUTTON_BOTTOM_DIMENS,
                     instanceKey: const Key("backed_it_up_button"),
                     onPressed: () {

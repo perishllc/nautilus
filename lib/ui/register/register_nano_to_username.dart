@@ -268,7 +268,7 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                         ),
                         alignment: AlignmentDirectional.center,
                         child: AutoSizeText(
-                          AppLocalization.of(context).registerUsernameHeader,
+                          Z.of(context).registerUsernameHeader,
                           style: AppStyles.textStyleHeaderColored(context),
                           stepGranularity: 0.1,
                           maxLines: 1,
@@ -282,7 +282,7 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                         child: Column(
                           children: <Widget>[
                             AutoSizeText(
-                              AppLocalization.of(context).usernameInfo,
+                              Z.of(context).usernameInfo,
                               style: AppStyles.textStyleParagraph(context),
                               maxLines: 6,
                               stepGranularity: 0.5,
@@ -290,7 +290,7 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                             Container(
                               margin: const EdgeInsetsDirectional.only(top: 15),
                               child: AutoSizeText(
-                                AppLocalization.of(context).usernameWarning,
+                                Z.of(context).usernameWarning,
                                 style: AppStyles.textStyleParagraphPrimary(context),
                                 maxLines: 2,
                                 // maxFontSize: 14,
@@ -311,7 +311,7 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                               child: Column(
                                 children: <Widget>[
                                   AutoSizeText(
-                                    AppLocalization.of(context).usernameAlreadyRegistered,
+                                    Z.of(context).usernameAlreadyRegistered,
                                     style: AppStyles.textStyleParagraph(context),
                                     maxLines: 6,
                                     stepGranularity: 0.5,
@@ -375,7 +375,7 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                       AppButton.buildAppButton(
                         context,
                         AppButtonType.PRIMARY,
-                        AppLocalization.of(context).close,
+                        Z.of(context).close,
                         Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () {
                           // go back:
@@ -391,39 +391,39 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                     Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).checkAvailability, Dimens.BUTTON_BOTTOM_DIMENS,
+                          AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).checkAvailability, Dimens.BUTTON_BOTTOM_DIMENS,
                               onPressed: () async {
                             final String username = _usernameController!.text.replaceAll("@", "");
                             if (_usernameController!.text.isEmpty) {
                               setState(() {
-                                _usernameValidationText = AppLocalization.of(context).usernameEmpty;
+                                _usernameValidationText = Z.of(context).usernameEmpty;
                               });
                               return;
                             }
                             final Map<String, dynamic> resp = await sl.get<UsernameService>().checkNanoToUsernameAvailability(username) as Map<String, dynamic>;
                             if (resp == null) {
                               setState(() {
-                                _usernameValidationText = AppLocalization.of(context).usernameError;
+                                _usernameValidationText = Z.of(context).usernameError;
                               });
                               return;
                             }
                             if (resp["available"] == true) {
                               setState(() {
                                 _leaseDetails = resp;
-                                _usernameValidationText = AppLocalization.of(context).usernameAvailable;
+                                _usernameValidationText = Z.of(context).usernameAvailable;
                                 _showRegisterButton = true;
                               });
                             } else if (resp["available"] == false) {
                               setState(() {
-                                _usernameValidationText = AppLocalization.of(context).usernameUnavailable;
+                                _usernameValidationText = Z.of(context).usernameUnavailable;
                               });
                             } else if (resp["message"] != null) {
                               setState(() {
-                                _usernameValidationText = AppLocalization.of(context).usernameInvalid;
+                                _usernameValidationText = Z.of(context).usernameInvalid;
                               });
                             } else {
                               setState(() {
-                                _usernameValidationText = AppLocalization.of(context).usernameError;
+                                _usernameValidationText = Z.of(context).usernameError;
                               });
                             }
                           }),
@@ -433,7 +433,7 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                     Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).registerUsername, Dimens.BUTTON_BOTTOM_DIMENS,
+                          AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).registerUsername, Dimens.BUTTON_BOTTOM_DIMENS,
                               onPressed: () async {
                             final String username = _usernameController!.text.replaceAll("@", "");
 
@@ -448,7 +448,7 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                             final BigInt sendAmount = BigInt.tryParse(price!)!;
                             if (sendAmount > balanceRaw) {
                               setState(() {
-                                _usernameValidationText = AppLocalization.of(context).insufficientBalance;
+                                _usernameValidationText = Z.of(context).insufficientBalance;
                               });
                             } else {
                               final String? destination = _leaseDetails!["address"] as String?;
@@ -493,7 +493,7 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
         textInputAction: TextInputAction.done,
         maxLines: null,
         autocorrect: false,
-        hintText: _usernameHint == null ? "" : AppLocalization.of(context).enterUsername,
+        hintText: _usernameHint == null ? "" : Z.of(context).enterUsername,
         fadePrefixOnCondition: true,
         style: _usernameStyle == AddressStyle.TEXT60
             ? AppStyles.textStyleAddressText60(context)

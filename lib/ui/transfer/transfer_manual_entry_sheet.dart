@@ -66,7 +66,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
             Container(
               margin: const EdgeInsets.only(top: 30.0, left: 70, right: 70),
               child: AutoSizeText(
-                CaseChange.toUpperCase(AppLocalization.of(context).transferHeader, context),
+                CaseChange.toUpperCase(Z.of(context).transferHeader, context),
                 style: AppStyles.textStyleHeader(context),
                 textAlign: TextAlign.center,
                 maxLines: 2,
@@ -84,7 +84,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                       margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 50 : 60, vertical: 10),
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        AppLocalization.of(context).transferManualHint,
+                        Z.of(context).transferManualHint,
                         style: AppStyles.textStyleParagraph(context),
                         textAlign: TextAlign.start,
                       ),
@@ -150,7 +150,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                             // "Invalid Seed" text that appears if the input is invalid
                             Container(
                               margin: const EdgeInsets.only(top: 5),
-                              child: Text(AppLocalization.of(context).seedInvalid,
+                              child: Text(Z.of(context).seedInvalid,
                                   style: TextStyle(
                                     fontSize: 14.0,
                                     color: hasError ? StateContainer.of(context).curTheme.primary : Colors.transparent,
@@ -190,7 +190,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                       alignment: AlignmentDirectional.centerStart,
                       margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
                       child: AutoSizeText(
-                        AppLocalization.of(context).transferIntroShort,
+                        Z.of(context).transferIntroShort,
                         style: AppStyles.textStyleParagraph(context),
                         textAlign: TextAlign.start,
                         maxLines: 4,
@@ -206,7 +206,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                 AppButton.buildAppButton(
                   context,
                   AppButtonType.PRIMARY,
-                  AppLocalization.of(context).transfer,
+                  Z.of(context).transfer,
                   Dimens.BUTTON_TOP_DIMENS,
                   onPressed: () {
                     if (NanoUtil.isValidSeed(_seedInputController!.text) && widget.validSeedCallback != null) {
@@ -226,7 +226,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                 AppButton.buildAppButton(
                   context,
                   AppButtonType.PRIMARY_OUTLINE,
-                  AppLocalization.of(context).cancel,
+                  Z.of(context).cancel,
                   Dimens.BUTTON_BOTTOM_DIMENS,
                   onPressed: () {
                     Navigator.of(context).pop();

@@ -188,7 +188,7 @@ class BlockedListState extends State<BlockedList> {
   // Future<void> _exportContacts() async {
   //   List<User> contacts = await sl.get<DBHelper>().getBlockedUsers();
   //   if (contacts.length == 0) {
-  //     UIUtil.showSnackbar(AppLocalization.of(context).noContactsExport, context);
+  //     UIUtil.showSnackbar(Z.of(context).noContactsExport, context);
   //     return;
   //   }
   //   List<Map<String, dynamic>> jsonList = [];
@@ -210,7 +210,7 @@ class BlockedListState extends State<BlockedList> {
   //   if (result != null) {
   //     File f = File(result.files.single.path);
   //     if (!await f.exists()) {
-  //       UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
+  //       UIUtil.showSnackbar(Z.of(context).contactsImportErr, context);
   //       return;
   //     }
   //     try {
@@ -236,19 +236,19 @@ class BlockedListState extends State<BlockedList> {
   //       if (numSaved > 0) {
   //         _updateContacts();
   //         EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: Contact(name: "", address: "")));
-  //         UIUtil.showSnackbar(AppLocalization.of(context).contactsImportSuccess.replaceAll("%1", numSaved.toString()), context);
+  //         UIUtil.showSnackbar(Z.of(context).contactsImportSuccess.replaceAll("%1", numSaved.toString()), context);
   //       } else {
-  //         UIUtil.showSnackbar(AppLocalization.of(context).noContactsImport, context);
+  //         UIUtil.showSnackbar(Z.of(context).noContactsImport, context);
   //       }
   //     } catch (e) {
   //       log.e(e.toString(), e);
-  //       UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
+  //       UIUtil.showSnackbar(Z.of(context).contactsImportErr, context);
   //       return;
   //     }
   //   } else {
   //     // Cancelled by user
   //     log.e("FilePicker cancelled by user");
-  //     UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
+  //     UIUtil.showSnackbar(Z.of(context).contactsImportErr, context);
   //     return;
   //   }
   // }
@@ -304,7 +304,7 @@ class BlockedListState extends State<BlockedList> {
                         ),
                         //Contacts Header Text
                         Text(
-                          AppLocalization.of(context).blockedHeader,
+                          Z.of(context).blockedHeader,
                           style: AppStyles.textStyleSettingsHeader(context),
                         ),
                       ],
@@ -312,8 +312,8 @@ class BlockedListState extends State<BlockedList> {
                     Container(
                       margin: const EdgeInsets.only(right: 25),
                       child: AppDialogs.infoButton(context, () {
-                        AppDialogs.showInfoDialog(context, AppLocalization.of(context).blockedInfoHeader,
-                            AppLocalization.of(context).blockedInfo);
+                        AppDialogs.showInfoDialog(context, Z.of(context).blockedInfoHeader,
+                            Z.of(context).blockedInfo);
                       }),
                     ),
                   ],
@@ -351,7 +351,7 @@ class BlockedListState extends State<BlockedList> {
                 child: Row(
                   children: <Widget>[
                     AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE,
-                        AppLocalization.of(context).addBlocked, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                        Z.of(context).addBlocked, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Sheets.showAppHeightEightSheet(context: context, widget: AddBlockedSheet());
                     }),
                   ],

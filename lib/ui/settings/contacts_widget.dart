@@ -254,7 +254,7 @@ class _ContactsListState extends State<ContactsList> {
       return;
     }
     if (contacts.isEmpty) {
-      UIUtil.showSnackbar(AppLocalization.of(context).noContactsExport, context);
+      UIUtil.showSnackbar(Z.of(context).noContactsExport, context);
       return;
     }
     final List<Map<String, dynamic>> jsonList = [];
@@ -281,7 +281,7 @@ class _ContactsListState extends State<ContactsList> {
         if (!mounted) {
           return;
         }
-        UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
+        UIUtil.showSnackbar(Z.of(context).contactsImportErr, context);
         return;
       }
       try {
@@ -312,16 +312,16 @@ class _ContactsListState extends State<ContactsList> {
           _updateContacts();
           EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: User(nickname: "", address: "")));
           UIUtil.showSnackbar(
-              AppLocalization.of(context).contactsImportSuccess.replaceAll("%1", numSaved.toString()), context);
+              Z.of(context).contactsImportSuccess.replaceAll("%1", numSaved.toString()), context);
         } else {
-          UIUtil.showSnackbar(AppLocalization.of(context).noContactsImport, context);
+          UIUtil.showSnackbar(Z.of(context).noContactsImport, context);
         }
       } catch (e) {
         log.e(e.toString(), e);
         if (!mounted) {
           return;
         }
-        UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
+        UIUtil.showSnackbar(Z.of(context).contactsImportErr, context);
         return;
       }
     } else {
@@ -330,7 +330,7 @@ class _ContactsListState extends State<ContactsList> {
       if (!mounted) {
         return;
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).contactsImportErr, context);
+      UIUtil.showSnackbar(Z.of(context).contactsImportErr, context);
       return;
     }
   }
@@ -386,7 +386,7 @@ class _ContactsListState extends State<ContactsList> {
                         ),
                         //Contacts Header Text
                         Text(
-                          AppLocalization.of(context).contactsHeader,
+                          Z.of(context).contactsHeader,
                           style: AppStyles.textStyleSettingsHeader(context),
                         ),
                       ],
@@ -470,7 +470,7 @@ class _ContactsListState extends State<ContactsList> {
                 child: Row(
                   children: <Widget>[
                     AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE,
-                        AppLocalization.of(context).addContact, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                        Z.of(context).addContact, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Sheets.showAppHeightEightSheet(context: context, widget: AddContactSheet());
                     }),
                   ],

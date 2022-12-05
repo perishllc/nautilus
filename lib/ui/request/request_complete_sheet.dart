@@ -97,7 +97,7 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
                       children: <Widget>[
                         // "SENT TO" text
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).requestedFrom, context),
+                          CaseChange.toUpperCase(Z.of(context).requestedFrom, context),
                           style: TextStyle(
                             fontSize: 28.0,
                             fontWeight: FontWeight.w700,
@@ -128,7 +128,7 @@ class _RequestCompleteSheetState extends State<RequestCompleteSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).close, context),
+                    AppButton.buildAppButton(context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(Z.of(context).close, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),

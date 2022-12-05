@@ -127,7 +127,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).sending, context),
+                          CaseChange.toUpperCase(Z.of(context).sending, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -171,7 +171,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(AppLocalization.of(context).to, context),
+                          CaseChange.toUpperCase(Z.of(context).to, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -195,7 +195,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                       child: Column(
                         children: <Widget>[
                           Text(
-                            CaseChange.toUpperCase(AppLocalization.of(context).withFee, context),
+                            CaseChange.toUpperCase(Z.of(context).withFee, context),
                             style: AppStyles.textStyleHeader(context),
                           ),
                         ],
@@ -228,7 +228,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(AppLocalization.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(Z.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
@@ -239,8 +239,8 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                       if (!mounted) return;
 
                       final String authText = isMessage
-                          ? AppLocalization.of(context).sendMessageConfirm
-                          : AppLocalization.of(context)
+                          ? Z.of(context).sendMessageConfirm
+                          : Z.of(context)
                               .sendAmountConfirm
                               .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
                               .replaceAll("%2", StateContainer.of(context).currencyMode);
@@ -274,7 +274,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(AppLocalization.of(context).cancel, context),
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(Z.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -310,18 +310,18 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
               borderRadius: BorderRadius.circular(15),
             ),
             title: Text(
-              AppLocalization.of(context).unopenedWarningWarningHeader,
+              Z.of(context).unopenedWarningWarningHeader,
               style: AppStyles.textStyleDialogHeader(context),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${AppLocalization.of(context).unopenedWarningWarning}\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text("${Z.of(context).unopenedWarningWarning}\n\n", style: AppStyles.textStyleParagraph(context)),
                 RichText(
                   textAlign: TextAlign.start,
                   text: TextSpan(
-                    text: "${AppLocalization.of(context).address}:\n",
+                    text: "${Z.of(context).address}:\n",
                     style: AppStyles.textStyleParagraph(context),
                     children: [
                       TextSpan(
@@ -342,7 +342,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).imSure,
+                    Z.of(context).imSure,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -354,7 +354,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    AppLocalization.of(context).goBackButton,
+                    Z.of(context).goBackButton,
                     style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
@@ -382,7 +382,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).sendError, context, durationMs: 5000);
       Navigator.of(context).pop();
     }
   }
@@ -397,7 +397,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).sendError, context, durationMs: 5000);
       Navigator.of(context).pop();
     } else {
       // Show complete
@@ -437,7 +437,7 @@ class _SendXMRConfirmSheetState extends State<SendXMRConfirmSheet> {
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
         description:
-            AppLocalization.of(context).sendAmountConfirm.replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw)).replaceAll("%2", "XMR"),
+            Z.of(context).sendAmountConfirm.replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw)).replaceAll("%2", "XMR"),
       );
     }));
     if (auth ?? false) {
