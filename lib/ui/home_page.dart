@@ -370,16 +370,16 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                         text: "${AppLocalization.of(context).giftAmount}: ",
                         style: AppStyles.textStyleParagraph(context),
                         children: <InlineSpan>[
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, balance.toString()),
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
                           displayCurrencySymbol(
                             context,
                             AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
                             text: actualAmount,
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                          TextSpan(
-                            text: getThemeAwareRawAccuracy(context, balance.toString()),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                         ],
@@ -521,16 +521,16 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                         text: "${AppLocalization.of(context).giftAmount}: ",
                         style: AppStyles.textStyleParagraph(context),
                         children: [
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, balance.toString()),
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
                           displayCurrencySymbol(
                             context,
                             AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
                             text: actualAmount,
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                          TextSpan(
-                            text: getThemeAwareRawAccuracy(context, balance.toString()),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                         ],
@@ -669,16 +669,16 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                       text: "${AppLocalization.of(context).giftAmount}: ",
                       style: AppStyles.textStyleParagraph(context),
                       children: [
+                        TextSpan(
+                          text: getThemeAwareRawAccuracy(context, amountRaw),
+                          style: AppStyles.textStyleParagraphPrimary(context),
+                        ),
                         displayCurrencySymbol(
                           context,
                           AppStyles.textStyleParagraphPrimary(context),
                         ),
                         TextSpan(
                           text: supposedAmount,
-                          style: AppStyles.textStyleParagraphPrimary(context),
-                        ),
-                        TextSpan(
-                          text: getThemeAwareRawAccuracy(context, amountRaw),
                           style: AppStyles.textStyleParagraphPrimary(context),
                         ),
                       ],
@@ -3218,6 +3218,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                                   if (!txDetails.is_message && !isEmpty(txDetails.amount_raw))
                                     Row(
                                       children: <Widget>[
+                                        Text(
+                                          getThemeAwareRawAccuracy(context, txDetails.amount_raw),
+                                          style: AppStyles.textStyleTransactionAmount(context),
+                                        ),
                                         RichText(
                                           textAlign: TextAlign.start,
                                           text: TextSpan(
@@ -3242,10 +3246,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                                                 color: StateContainer.of(context).curTheme.warning60,
                                                 fontSize: AppFontSizes.smallest,
                                                 fontWeight: FontWeight.w600)),
-                                        Text(
-                                          getThemeAwareRawAccuracy(context, txDetails.amount_raw),
-                                          style: AppStyles.textStyleTransactionAmount(context),
-                                        ),
                                         if (isGift &&
                                             txDetails.record_type == RecordTypes.GIFT_LOAD &&
                                             txDetails.metadata!.split(RecordTypes.SEPARATOR).length > 2)
@@ -3253,6 +3253,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                                             children: <Widget>[
                                               Text(
                                                 " : ",
+                                                style: AppStyles.textStyleTransactionAmount(context),
+                                              ),
+                                              Text(
+                                                getThemeAwareRawAccuracy(
+                                                    context, txDetails.metadata!.split(RecordTypes.SEPARATOR)[2]),
                                                 style: AppStyles.textStyleTransactionAmount(context),
                                               ),
                                               RichText(
@@ -3269,11 +3274,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                                               ),
                                               Text(
                                                 getRawAsThemeAwareFormattedAmount(
-                                                    context, txDetails.metadata!.split(RecordTypes.SEPARATOR)[2]),
-                                                style: AppStyles.textStyleTransactionAmount(context),
-                                              ),
-                                              Text(
-                                                getThemeAwareRawAccuracy(
                                                     context, txDetails.metadata!.split(RecordTypes.SEPARATOR)[2]),
                                                 style: AppStyles.textStyleTransactionAmount(context),
                                               ),

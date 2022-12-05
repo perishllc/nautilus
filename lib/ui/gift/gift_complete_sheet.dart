@@ -160,16 +160,16 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                           text: TextSpan(
                             text: "",
                             children: [
+                              TextSpan(
+                                text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                                style: AppStyles.textStyleParagraphSuccess(context),
+                              ),
                               displayCurrencySymbol(
                                 context,
                                 AppStyles.textStyleParagraphSuccess(context),
                               ),
                               TextSpan(
                                 text: getRawAsThemeAwareAmount(context, widget.amountRaw),
-                                style: AppStyles.textStyleParagraphSuccess(context),
-                              ),
-                              TextSpan(
-                                text: getThemeAwareRawAccuracy(context, widget.amountRaw),
                                 style: AppStyles.textStyleParagraphSuccess(context),
                               ),
                               TextSpan(

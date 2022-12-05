@@ -202,16 +202,16 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         text: TextSpan(
                           text: "",
                           children: [
+                            TextSpan(
+                              text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
                             displayCurrencySymbol(
                               context,
                               AppStyles.textStyleParagraphPrimary(context),
                             ),
                             TextSpan(
                               text: getRawAsThemeAwareFormattedAmount(context, widget.amountRaw),
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            TextSpan(
-                              text: getThemeAwareRawAccuracy(context, widget.amountRaw),
                               style: AppStyles.textStyleParagraphPrimary(context),
                             ),
                             TextSpan(

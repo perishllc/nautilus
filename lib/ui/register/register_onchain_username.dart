@@ -132,6 +132,10 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
       text: TextSpan(
         text: '',
         children: [
+          TextSpan(
+            text: getThemeAwareRawAccuracy(context, price),
+            style: AppStyles.textStyleTransactionAmount(context),
+          ),
           displayCurrencySymbol(
             context,
             AppStyles.textStyleTransactionAmount(context),
@@ -141,10 +145,6 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
             style: AppStyles.textStyleTransactionAmount(
               context,
             ),
-          ),
-          TextSpan(
-            text: getThemeAwareRawAccuracy(context, price),
-            style: AppStyles.textStyleTransactionAmount(context),
           ),
         ],
       ),

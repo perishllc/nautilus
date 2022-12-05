@@ -137,16 +137,16 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                       text: TextSpan(
                         text: "",
                         children: [
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
                           displayCurrencySymbol(
                             context,
                             AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
                             text: getRawAsThemeAwareAmount(context, widget.amountRaw),
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                          TextSpan(
-                            text: getThemeAwareRawAccuracy(context, widget.amountRaw),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
@@ -190,16 +190,16 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                         text: TextSpan(
                           text: "",
                           children: [
+                            TextSpan(
+                              text: getThemeAwareRawAccuracy(context, widget.splitAmountRaw),
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
                             displayCurrencySymbol(
                               context,
                               AppStyles.textStyleParagraphPrimary(context),
                             ),
                             TextSpan(
                               text: getRawAsThemeAwareAmount(context, widget.splitAmountRaw),
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                            TextSpan(
-                              text: getThemeAwareRawAccuracy(context, widget.splitAmountRaw),
                               style: AppStyles.textStyleParagraphPrimary(context),
                             ),
                             TextSpan(

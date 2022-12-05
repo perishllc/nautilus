@@ -163,16 +163,16 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
                       text: TextSpan(
                         text: "${widget.leaseDuration!} : ",
                         children: [
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                            style: AppStyles.textStyleAddressPrimary(context),
+                          ),
                           displayCurrencySymbol(
                             context,
                             AppStyles.textStyleAddressPrimary(context),
                           ),
                           TextSpan(
                             text: getRawAsThemeAwareAmount(context, widget.amountRaw),
-                            style: AppStyles.textStyleAddressPrimary(context),
-                          ),
-                          TextSpan(
-                            text: getThemeAwareRawAccuracy(context, widget.amountRaw),
                             style: AppStyles.textStyleAddressPrimary(context),
                           ),
                           TextSpan(
