@@ -23,7 +23,7 @@ class Z {
     return _current!;
   }
 
-  static const ZDelegate delegate = ZDelegate();
+  static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<Z> load(Locale locale) {
     final name = (locale.countryCode?.isEmpty ?? false)
@@ -5786,8 +5786,8 @@ class Z {
   }
 }
 
-class ZDelegate extends LocalizationsDelegate<Z> {
-  const ZDelegate();
+class AppLocalizationDelegate extends LocalizationsDelegate<Z> {
+  const AppLocalizationDelegate();
 
   List<Locale> get supportedLocales {
     return const <Locale>[
@@ -5831,7 +5831,7 @@ class ZDelegate extends LocalizationsDelegate<Z> {
   @override
   Future<Z> load(Locale locale) => Z.load(locale);
   @override
-  bool shouldReload(ZDelegate old) => false;
+  bool shouldReload(AppLocalizationDelegate old) => false;
 
   bool _isSupported(Locale locale) {
     for (var supportedLocale in supportedLocales) {

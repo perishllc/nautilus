@@ -2566,6 +2566,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 );
                 await Sheets.showAppHeightFullSheet(
                   context: context,
+                  barrier: Colors.transparent,
                   widget: CheckoutSheet(
                     localCurrency: StateContainer.of(context).curCurrency,
                     address: StateContainer.of(context).wallet!.address,
@@ -2577,6 +2578,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               if (index == 0) {
                 await Sheets.showAppHeightFullSheet(
                   context: context,
+                  barrier: Colors.transparent,
                   widget: ShopSheet(
                     localCurrency: StateContainer.of(context).curCurrency,
                   ),

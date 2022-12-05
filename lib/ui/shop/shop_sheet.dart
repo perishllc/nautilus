@@ -48,8 +48,15 @@ class ShopSheetState extends State<ShopSheet> {
 
   @override
   Widget build(BuildContext context) {
+    double bottomMargin = 0;
+    // MediaQuery.of(context).size.height * 0.05;
+    if (Platform.isIOS) {
+      bottomMargin = 100;
+    } else {
+      bottomMargin = 55;
+    }
     return SafeArea(
-      minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.15, bottom: 55),
+      minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05, bottom: bottomMargin),
       child: Container(
         // padding: const EdgeInsets.only(left: 20, right: 20),
         decoration: BoxDecoration(
