@@ -48,12 +48,10 @@ class ShopSheetState extends State<ShopSheet> {
 
   @override
   Widget build(BuildContext context) {
-    double bottomMargin = 0;
-    // MediaQuery.of(context).size.height * 0.05;
+    double bottomMargin = 60;
+    // TODO: better calculation of bottom bar height
     if (Platform.isIOS) {
       bottomMargin = 100;
-    } else {
-      bottomMargin = 55;
     }
     return SafeArea(
       minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05, bottom: bottomMargin),
@@ -87,6 +85,38 @@ class ShopSheetState extends State<ShopSheet> {
                   ),
                 ),
 
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     UseCard(
+                //       image: "assets/logos/luckynano.png",
+                //       title: NonTranslatable.wenano,
+                //       onPress: () async {
+                //         await UIUtil.showChromeSafariWebview(context, "https://luckynano.com");
+                //       },
+                //     ),
+                //     UseCard(
+                //       image: "assets/logos/playnano.png",
+                //       title: NonTranslatable.cryptovision,
+                //       onPress: () async {
+                //         await UIUtil.showChromeSafariWebview(context, "https://playnano.online/?ref=nautilus");
+                //       },
+                //     ),
+                //   ],
+                // ),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Row(
+                    children: [
+                      Text(
+                        Z.of(context).getNano,
+                        style: AppStyles.textStyleHeader2Colored(context),
+                      ),
+                    ],
+                  ),
+                ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -101,17 +131,6 @@ class ShopSheetState extends State<ShopSheet> {
                   ],
                 ),
 
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Row(
-                    children: [
-                      Text(
-                        Z.of(context).getNano,
-                        style: AppStyles.textStyleHeader2Colored(context),
-                      ),
-                    ],
-                  ),
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

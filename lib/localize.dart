@@ -97,6 +97,14 @@ class NonTranslatable {
     return "onramper";
   }
 
+  static String get cryptovision {
+    return "cryptovision.live";
+  }
+
+  static String get wenano {
+    return "wenano.net";
+  }
+
   static String get promoLink {
     return "https://nautilus.io/promo";
   }

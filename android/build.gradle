@@ -10,10 +10,10 @@ buildscript {
 
     dependencies {
         // works
-        // classpath 'com.android.tools.build:gradle:4.2.0'
+        classpath 'com.android.tools.build:gradle:4.2.0'
         
-        // untested:
-        classpath 'com.android.tools.build:gradle:7.1.2'
+        // works on mac (ninja.exe error on windows):
+        // classpath 'com.android.tools.build:gradle:7.1.2'
 
         // works (but not in profile mode on windows)
         // classpath 'com.android.tools.build:gradle:7.2.1'
