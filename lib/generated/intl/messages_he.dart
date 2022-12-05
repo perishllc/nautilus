@@ -102,7 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "שגיאה: לא ניתן להגיע ל-Banch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("אזהרת חיבור"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("עֵסֶק"),
         "cancel": MessageLookupByLibrary.simpleMessage("בטל"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -217,6 +217,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("Disable Wallet Password"),
         "dismiss": MessageLookupByLibrary.simpleMessage("לפטר"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "אם אינך בטוח מה זה אומר, כנראה שאין לך זריעה לייבא ואתה יכול פשוט ללחוץ על המשך."),
+        "doYouHaveSeedHeader":
+            MessageLookupByLibrary.simpleMessage("יש לך זרע לייבא?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("שם תחום לא חוקי"),
         "donateButton": MessageLookupByLibrary.simpleMessage("לִתְרוֹם"),
@@ -340,6 +344,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "משהו השתבש במהלך הניסיון להעביר חסימה!"),
         "handoffSupportedMethodNotFound":
             MessageLookupByLibrary.simpleMessage("לא נמצאה שיטת מסירה נתמכת!"),
+        "haveSeedToImport": MessageLookupByLibrary.simpleMessage("יש לי זרע"),
         "hide": MessageLookupByLibrary.simpleMessage("הסתר"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("הסתר חשבון?"),
@@ -350,7 +355,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("הסתר חשבונות ריקים"),
         "home": MessageLookupByLibrary.simpleMessage("דף הבית"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("בית"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("לפני שעה"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
@@ -477,9 +482,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "בקשות תשלום, תזכירים והודעות לא יפעלו כראוי."),
         "notifications": MessageLookupByLibrary.simpleMessage("התראות"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("ניאניקון"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader":
+            MessageLookupByLibrary.simpleMessage("פרטי עסקה לא ברורים"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("עסקה לא ברורה"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "זו לא פרטיות אמיתית, אבל זה יקשה על הנמען לראות מי שלח לו כספים."),
         "off": MessageLookupByLibrary.simpleMessage("כבוי"),
         "ok": MessageLookupByLibrary.simpleMessage("בסדר"),
         "onStr": MessageLookupByLibrary.simpleMessage("פועל"),
@@ -545,6 +553,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "הגדר סיכה משנית למצב הכחשה סביר.\n\nאם הארנק שלך לא נעול באמצעות סיכה משנית זו, הזרע שלך יוחלף ב-hash של הזרע הקיים. זוהי תכונת אבטחה שנועדה לשמש במקרה שתיאלץ לפתוח את הארנק.\n\nסיכה זו תפעל כמו סיכה רגילה (נכונה) למעט בעת פתיחת הנעילה של הארנק שלך, כלומר מצב הכחשה סביר יופעל.\n\nהכספים שלך יאבדו עם כניסה למצב הכחשה סביר אם לא גיבית את ה-seed שלך!"),
         "preferences": MessageLookupByLibrary.simpleMessage("העדפות"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("פרטיות"),
+        "proSubRequiredHeader":
+            MessageLookupByLibrary.simpleMessage("נדרש מנוי ל-Nautilus Pro"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "תמורת NANO אחד בלבד לחודש, אתה יכול לפתוח את כל התכונות של Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("חינם NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("רכישת ננו"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
@@ -707,7 +719,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Check out Nautilus! A premier NANO mobile wallet!"),
         "shareText": MessageLookupByLibrary.simpleMessage("שתף טקסט"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("לִקְנוֹת"),
         "show": MessageLookupByLibrary.simpleMessage("הופעה"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("פרטי חשבון"),
         "showAccountQR":
@@ -735,6 +747,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("פיצול פרטי חשבון"),
         "splitBy": MessageLookupByLibrary.simpleMessage("פיצול לפי"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("הירשם"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("הירשם באמצעות Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("עזרה בתמיכה בפיתוח"),

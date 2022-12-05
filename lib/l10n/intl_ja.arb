@@ -270,7 +270,7 @@
     "type": "text",
     "description": "branch_connection_error_title"
   },
-  "businessButton": "",
+  "businessButton": "仕事",
   "@businessButton": {
     "type": "text",
     "description": "business_button"
@@ -654,6 +654,16 @@
   "@donateToSupport": {
     "type": "text",
     "description": "settings_support_donate"
+  },
+  "doYouHaveSeedBody": "これが何を意味するのかわからない場合は、おそらくインポートするシードがなく、そのまま [続行] を押すことができます。",
+  "@doYouHaveSeedBody": {
+    "type": "text",
+    "description": "do_have_seed_to_import_body"
+  },
+  "doYouHaveSeedHeader": "輸入する種子はありますか？",
+  "@doYouHaveSeedHeader": {
+    "type": "text",
+    "description": "do_have_seed_to_import"
   },
   "edit": "編集",
   "@edit": {
@@ -1060,6 +1070,11 @@
     "type": "text",
     "description": "handoff_method_not_found"
   },
+  "haveSeedToImport": "私は種を持っています",
+  "@haveSeedToImport": {
+    "type": "text",
+    "description": "have_seed_to_import"
+  },
   "hide": "隠す",
   "@hide": {
     "type": "text",
@@ -1090,7 +1105,7 @@
     "type": "text",
     "description": "home"
   },
-  "homeButton": "",
+  "homeButton": "家",
   "@homeButton": {
     "type": "text",
     "description": "home_button"
@@ -1520,17 +1535,17 @@
     "type": "text",
     "description": "nyanicon_settings"
   },
-  "obscureInfoHeader": "",
+  "obscureInfoHeader": "あいまいな取引情報",
   "@obscureInfoHeader": {
     "type": "text",
     "description": "obscure_tx_info"
   },
-  "obscureTransaction": "",
+  "obscureTransaction": "曖昧な取引",
   "@obscureTransaction": {
     "type": "text",
     "description": "obscure_tx"
   },
-  "obscureTransactionBody": "",
+  "obscureTransactionBody": "これは真のプライバシーではありませんが、誰が送金したかを受信者が確認するのが難しくなります.",
   "@obscureTransactionBody": {
     "type": "text",
     "description": "obscure_tx_body"
@@ -1749,6 +1764,16 @@
   "@promotionalLink": {
     "type": "text",
     "description": "promo_Link"
+  },
+  "proSubRequiredHeader": "Nautilus Pro サブスクリプションが必要",
+  "@proSubRequiredHeader": {
+    "type": "text",
+    "description": "pro_sub_required_header"
+  },
+  "proSubRequiredParagraph": "毎月わずか 1 NANO で、Nautilus Pro のすべての機能のロックを解除できます。",
+  "@proSubRequiredParagraph": {
+    "type": "text",
+    "description": "pro_sub_required_paragraph"
   },
   "purchaseNano": "ナノを購入",
   "@purchaseNano": {
@@ -2290,7 +2315,7 @@
     "type": "text",
     "description": "settings_share_text"
   },
-  "shopButton": "",
+  "shopButton": "店",
   "@shopButton": {
     "type": "text",
     "description": "shop_button"
@@ -2394,6 +2419,16 @@
   "@splitBy": {
     "type": "text",
     "description": "gift_card_split_by"
+  },
+  "subscribeButton": "申し込む",
+  "@subscribeButton": {
+    "type": "text",
+    "description": "subscribe_button"
+  },
+  "subscribeWithApple": "Apple Pay で購読する",
+  "@subscribeWithApple": {
+    "type": "text",
+    "description": "subscribe_apple_button"
   },
   "supportButton": "Support",
   "@supportButton": {

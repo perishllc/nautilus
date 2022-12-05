@@ -115,7 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Fout: kan Branch API niet bereiken"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Verbindingswaarschuwing"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Bedrijf"),
         "cancel": MessageLookupByLibrary.simpleMessage("Annuleer"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -235,6 +235,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("Wachtwoord uitschakelen"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Afwijzen"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Als je niet zeker weet wat dit betekent, heb je waarschijnlijk geen seed om te importeren en kun je gewoon doorgaan."),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "Heeft u een zaadje om te importeren?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Ongeldige domeinnaam"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Doneren"),
@@ -370,6 +374,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Er is iets misgegaan bij het overdragen van blokkering!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "Er is geen ondersteunde overdrachtsmethode gevonden!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("Ik heb een zaadje"),
         "hide": MessageLookupByLibrary.simpleMessage("Verstoppen"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Account verbergen?"),
@@ -380,7 +386,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Lege accounts verbergen"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Huis"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Een uur geleden"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Ik begrijp de risico\'s"),
@@ -518,9 +524,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Betalingsverzoeken, memo\'s en berichten werken niet correct."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notificaties"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Obscure transactie-info"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Duistere transactie"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Dit is GEEN echte privacy, maar het maakt het moeilijker voor de ontvanger om te zien wie hem geld heeft gestuurd."),
         "off": MessageLookupByLibrary.simpleMessage("Uit"),
         "ok": MessageLookupByLibrary.simpleMessage("Oké"),
         "onStr": MessageLookupByLibrary.simpleMessage("Aan"),
@@ -591,6 +600,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Stel een secundaire pin in voor de plausibele ontkenningsmodus.\n\nAls je portemonnee is ontgrendeld met deze secundaire pin, wordt je seed vervangen door een hash van de bestaande seed. Dit is een beveiligingsfunctie die bedoeld is om te worden gebruikt in het geval u gedwongen wordt uw portemonnee te openen.\n\nDeze pin zal werken als een normale (juiste) pin BEHALVE bij het ontgrendelen van uw portemonnee, wanneer de plausibele ontkenningsmodus wordt geactiveerd.\n\nJe geld GAAT VERLOREN bij het openen van de plausibele ontkenningsmodus als je geen back-up van je seed hebt gemaakt!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Voorkeuren"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacybeleid"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Nautilus Pro-abonnement vereist"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Voor slechts 1 NANO per maand kunt u alle functies van Nautilus Pro ontgrendelen."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("Gratis NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Koop Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
@@ -767,7 +780,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Probeer Nautilus! Een premium mobiele Nano wallet!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Tekst delen"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Winkel"),
         "show": MessageLookupByLibrary.simpleMessage("Show"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Account informatie"),
@@ -797,6 +810,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Factuurgegevens splitsen"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Gesplitst door"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonneren"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("Abonneer u via Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Help Ondersteuning Ontwikkeling"),

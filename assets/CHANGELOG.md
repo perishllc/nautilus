@@ -1,8 +1,12 @@
-## v0.7.1 - [2022-11-XX]
+## v0.7.1 - [2022-12-XX]
 #### Added
+- New revamped shop section
+- Nautilus Pro Subscription @ 1 nano / month
+- Obscured Payment mode (WIP) (requires Pro Subscription)
 #### Changed
 - Made it impossible to confirm a transaction before the send warning has a chance to show up
 - UI fixes in the set plausible pin menu
+- Nano.to usernames are now prefixed with '#' instead of '@' which will be reserved for on chain usernames
 #### Fixed
 - Even more QR code scanning bugs
 - Long standing scroll bar issues

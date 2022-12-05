@@ -111,7 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Грешка: не може да се достигне до Branch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Предупреждение за връзка"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Бизнес"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмени"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -231,6 +231,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("Премахни "),
         "dismiss": MessageLookupByLibrary.simpleMessage("Отхвърляне"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Ако не сте сигурни какво означава това, тогава най-вероятно нямате семе за импортиране и можете просто да натиснете продължи."),
+        "doYouHaveSeedHeader":
+            MessageLookupByLibrary.simpleMessage("Имате ли семена за внос?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Невалидно име на домейн"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Дарете"),
@@ -367,6 +371,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Нещо се обърка при опит за блокиране на прехвърлянето!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "Поддържан метод за прехвърляне не може да бъде намерен!"),
+        "haveSeedToImport": MessageLookupByLibrary.simpleMessage("Имам семка"),
         "hide": MessageLookupByLibrary.simpleMessage("Скрий"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Скрий Акаунт?"),
@@ -377,7 +382,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(
             "Скриване на празните акаунти"),
         "home": MessageLookupByLibrary.simpleMessage("У дома"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("У дома"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Преди час"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Разбирам рисковете"),
@@ -515,9 +520,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Заявки за плащане, бележки и съобщения няма да функционират правилно."),
         "notifications": MessageLookupByLibrary.simpleMessage("Известия"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Нианикон"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Неясна информация за транзакцията"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Неясна транзакция"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Това НЕ е истинска поверителност, но ще направи по-трудно за получателя да види кой му е изпратил средства."),
         "off": MessageLookupByLibrary.simpleMessage("Изкл."),
         "ok": MessageLookupByLibrary.simpleMessage("ОК"),
         "onStr": MessageLookupByLibrary.simpleMessage("Вкл."),
@@ -587,6 +595,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Предпочитания"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Декларация за Поверителност"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Изисква се абонамент за Nautilus Pro"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Само за 1 NANO на месец можете да отключите всички функции на Nautilus Pro."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Безплатен NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Покупка Нано"),
@@ -764,7 +776,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Виж Nautilus! Водещият NANO мобилен портфейл!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Споделяне на текст"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Магазин"),
         "show": MessageLookupByLibrary.simpleMessage("Покажи"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Информация за акаунта"),
@@ -797,6 +809,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Разделена информация за сметката"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Разделяне по"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Абонирай се"),
+        "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
+            "Абонирайте се чрез Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Помощ за поддръжка на развитието"),

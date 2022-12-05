@@ -99,7 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("오류: Branch API에 연결할 수 없습니다."),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("연결 경고"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("사업"),
         "cancel": MessageLookupByLibrary.simpleMessage("취소"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("보안문자"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -202,6 +202,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("Disable Wallet Password"),
         "dismiss": MessageLookupByLibrary.simpleMessage("기각하다"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "이것이 무엇을 의미하는지 잘 모르겠다면 가져올 시드가 없는 것이므로 계속을 누르면 됩니다."),
+        "doYouHaveSeedHeader":
+            MessageLookupByLibrary.simpleMessage("가져올 종자가 있습니까?"),
         "domainInvalid": MessageLookupByLibrary.simpleMessage("잘못된 도메인 이름"),
         "donateButton": MessageLookupByLibrary.simpleMessage("기부"),
         "donateToSupport": MessageLookupByLibrary.simpleMessage("프로젝트 지원"),
@@ -314,6 +318,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("차단을 핸드오프하는 동안 문제가 발생했습니다!"),
         "handoffSupportedMethodNotFound":
             MessageLookupByLibrary.simpleMessage("지원되는 핸드오프 방법을 찾을 수 없습니다!"),
+        "haveSeedToImport": MessageLookupByLibrary.simpleMessage("씨앗이 있어요"),
         "hide": MessageLookupByLibrary.simpleMessage("숨기기"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Hide Account?"),
@@ -323,7 +328,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("계정을 숨기시겠습니까?"),
         "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage("빈 계정 숨기기"),
         "home": MessageLookupByLibrary.simpleMessage("홈"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("집"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("한 시간 전에"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
@@ -446,9 +451,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "결제 요청, 메모, 메시지가 제대로 작동하지 않습니다."),
         "notifications": MessageLookupByLibrary.simpleMessage("알림"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("냐니콘"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage("모호한 거래 정보"),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage("모호한 거래"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "이것은 진정한 프라이버시가 아니지만 수신자가 누가 자금을 보냈는지 확인하기 어렵게 만듭니다."),
         "off": MessageLookupByLibrary.simpleMessage("끄기"),
         "ok": MessageLookupByLibrary.simpleMessage("오케이"),
         "onStr": MessageLookupByLibrary.simpleMessage("켜기"),
@@ -513,6 +519,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "그럴듯한 거부 모드에 대한 보조 핀을 설정합니다.\n\n이 보조 핀을 사용하여 지갑을 잠금 해제하면 시드가 기존 시드의 해시로 대체됩니다. 강제로 지갑을 열어야 하는 경우에 사용하기 위한 보안 기능입니다.\n\n이 핀은 지갑을 잠금 해제할 때를 제외하고 정상적인(정확한) 핀처럼 작동하며, 그럴듯한 거부 모드가 활성화됩니다.\n\n귀하의 시드를 백업하지 않은 경우 타당한 거부 모드에 들어가면 자금이 손실됩니다!"),
         "preferences": MessageLookupByLibrary.simpleMessage("환경 설정"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "proSubRequiredHeader":
+            MessageLookupByLibrary.simpleMessage("Nautilus Pro 구독 필요"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "매월 단 1NANO로 Nautilus Pro의 모든 기능을 잠금 해제할 수 있습니다."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("무료 나노"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("나노 구매"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
@@ -672,7 +682,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Nautilus을 확인하세요! Nano의 공식 Android 지갑!"),
         "shareText": MessageLookupByLibrary.simpleMessage("텍스트 공유"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("가게"),
         "show": MessageLookupByLibrary.simpleMessage("보여 주다"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("계정 정보"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage("계정 QR 코드 표시"),
@@ -695,6 +705,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("분할 청구서 정보"),
         "splitBy": MessageLookupByLibrary.simpleMessage("분할 기준"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("구독하다"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("Apple Pay를 통해 구독"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage("도움말 지원 개발"),
         "supportTheDeveloper": MessageLookupByLibrary.simpleMessage("개발자 지원"),

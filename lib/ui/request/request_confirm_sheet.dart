@@ -133,16 +133,16 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                       text: TextSpan(
                         text: "",
                         children: [
-                          TextSpan(
-                            text: getThemeAwareRawAccuracy(context, widget.amountRaw),
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
                           displayCurrencySymbol(
                             context,
                             AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
                             text: getRawAsThemeAwareAmount(context, widget.amountRaw),
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, widget.amountRaw),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(

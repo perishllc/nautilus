@@ -114,7 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Feil: kan ikke nå Branch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Advarsel om tilkobling"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Virksomhet"),
         "cancel": MessageLookupByLibrary.simpleMessage("Avbryt"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -230,6 +230,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword": MessageLookupByLibrary.simpleMessage(
             "Deaktiver lommebokens passord"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Avvis"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Hvis du ikke er sikker på hva dette betyr, har du sannsynligvis ikke et frø å importere og kan bare trykke fortsett."),
+        "doYouHaveSeedHeader":
+            MessageLookupByLibrary.simpleMessage("Har du et frø å importere?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Ugyldig domenenavn"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Donere"),
@@ -365,6 +369,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Noe gikk galt under forsøk på å overføre blokkering!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "En støttet overleveringsmetode ble ikke funnet!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("Jeg har et frø"),
         "hide": MessageLookupByLibrary.simpleMessage("Skjul"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Skjul konto?"),
@@ -375,7 +381,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Skjul tomme kontoer"),
         "home": MessageLookupByLibrary.simpleMessage("Hjem"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Hjem"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("En time siden"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Jeg forstår risikoene"),
@@ -513,9 +519,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Betalingsforespørsler, notater og meldinger vil ikke fungere ordentlig."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifikasjoner"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Uklar transaksjonsinformasjon"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Obskur transaksjon"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Dette er IKKE ekte personvern, men det vil gjøre det vanskeligere for mottakeren å se hvem som har sendt dem penger."),
         "off": MessageLookupByLibrary.simpleMessage("Deaktiver"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("Aktiver"),
@@ -587,6 +596,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Preferanser"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Personvernpolicy"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Nautilus Pro-abonnement kreves"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "For bare 1 NANO per måned kan du låse opp alle funksjonene til Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("Gratis NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Kjøp Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
@@ -760,7 +773,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Sjekk ut Nautilus! En ledende NANO mobil lommebok!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Del tekst"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Butikk"),
         "show": MessageLookupByLibrary.simpleMessage("Forestilling"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Kontoinformasjon"),
@@ -790,6 +803,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Del regningsinformasjon"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Del opp etter"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonnere"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("Abonner via Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Hjelp til å støtte utvikling"),

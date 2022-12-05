@@ -270,7 +270,7 @@
     "type": "text",
     "description": "branch_connection_error_title"
   },
-  "businessButton": "",
+  "businessButton": "Bisnis",
   "@businessButton": {
     "type": "text",
     "description": "business_button"
@@ -654,6 +654,16 @@
   "@donateToSupport": {
     "type": "text",
     "description": "settings_support_donate"
+  },
+  "doYouHaveSeedBody": "Jika Anda tidak yakin apa artinya ini, Anda mungkin tidak memiliki benih untuk diimpor dan cukup menekan lanjutkan.",
+  "@doYouHaveSeedBody": {
+    "type": "text",
+    "description": "do_have_seed_to_import_body"
+  },
+  "doYouHaveSeedHeader": "Apakah Anda memiliki benih untuk diimpor?",
+  "@doYouHaveSeedHeader": {
+    "type": "text",
+    "description": "do_have_seed_to_import"
   },
   "edit": "Mengedit",
   "@edit": {
@@ -1060,6 +1070,11 @@
     "type": "text",
     "description": "handoff_method_not_found"
   },
+  "haveSeedToImport": "Saya punya benih",
+  "@haveSeedToImport": {
+    "type": "text",
+    "description": "have_seed_to_import"
+  },
   "hide": "Sembunyikan",
   "@hide": {
     "type": "text",
@@ -1090,7 +1105,7 @@
     "type": "text",
     "description": "home"
   },
-  "homeButton": "",
+  "homeButton": "Rumah",
   "@homeButton": {
     "type": "text",
     "description": "home_button"
@@ -1520,17 +1535,17 @@
     "type": "text",
     "description": "nyanicon_settings"
   },
-  "obscureInfoHeader": "",
+  "obscureInfoHeader": "Info Transaksi Tidak Jelas",
   "@obscureInfoHeader": {
     "type": "text",
     "description": "obscure_tx_info"
   },
-  "obscureTransaction": "",
+  "obscureTransaction": "Transaksi Tidak Jelas",
   "@obscureTransaction": {
     "type": "text",
     "description": "obscure_tx"
   },
-  "obscureTransactionBody": "",
+  "obscureTransactionBody": "Ini BUKAN privasi sebenarnya, tetapi akan mempersulit penerima untuk melihat siapa yang mengirimi mereka dana.",
   "@obscureTransactionBody": {
     "type": "text",
     "description": "obscure_tx_body"
@@ -1749,6 +1764,16 @@
   "@promotionalLink": {
     "type": "text",
     "description": "promo_Link"
+  },
+  "proSubRequiredHeader": "Langganan Nautilus Pro Diperlukan",
+  "@proSubRequiredHeader": {
+    "type": "text",
+    "description": "pro_sub_required_header"
+  },
+  "proSubRequiredParagraph": "Hanya dengan 1 NANO per bulan, Anda dapat membuka kunci semua fitur Nautilus Pro.",
+  "@proSubRequiredParagraph": {
+    "type": "text",
+    "description": "pro_sub_required_paragraph"
   },
   "purchaseNano": "Pembelian Nano",
   "@purchaseNano": {
@@ -2290,7 +2315,7 @@
     "type": "text",
     "description": "settings_share_text"
   },
-  "shopButton": "",
+  "shopButton": "Toko",
   "@shopButton": {
     "type": "text",
     "description": "shop_button"
@@ -2394,6 +2419,16 @@
   "@splitBy": {
     "type": "text",
     "description": "gift_card_split_by"
+  },
+  "subscribeButton": "Langganan",
+  "@subscribeButton": {
+    "type": "text",
+    "description": "subscribe_button"
+  },
+  "subscribeWithApple": "Berlangganan melalui Apple Pay",
+  "@subscribeWithApple": {
+    "type": "text",
+    "description": "subscribe_apple_button"
   },
   "supportButton": "Support",
   "@supportButton": {

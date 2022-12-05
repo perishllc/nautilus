@@ -116,7 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Fehler: Verzweigungs-API kann nicht erreicht werden"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Verbindungswarnung"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Geschäft"),
         "cancel": MessageLookupByLibrary.simpleMessage("Abbrechen"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -238,6 +238,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword": MessageLookupByLibrary.simpleMessage(
             "Wallet-Passwort deaktivieren"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Schließen"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Wenn Sie sich nicht sicher sind, was das bedeutet, haben Sie wahrscheinlich keinen Seed zum Importieren und können einfach auf Weiter klicken."),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "Haben Sie einen Samen zum Importieren?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Ungültiger Domainname"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Spenden"),
@@ -379,6 +383,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Beim Versuch, die Sperre zu übergeben, ist etwas schief gelaufen!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "Eine unterstützte Übergabemethode konnte nicht gefunden werden!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("Ich habe einen Samen"),
         "hide": MessageLookupByLibrary.simpleMessage("Verstecken"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Konto verbergen?"),
@@ -389,7 +395,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Leere Konten ausblenden"),
         "home": MessageLookupByLibrary.simpleMessage("Zuhause"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Heim"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Vor einer Stunde"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Ich verstehe die Risiken"),
@@ -529,9 +535,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "notifications":
             MessageLookupByLibrary.simpleMessage("Benachrichtigungen"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Transaktionsinformationen verschleiern"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Obskure Transaktion"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Dies ist KEINE echte Privatsphäre, aber es wird für den Empfänger schwieriger zu sehen, wer ihm das Geld geschickt hat."),
         "off": MessageLookupByLibrary.simpleMessage("Aus"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("An"),
@@ -602,6 +611,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Legen Sie einen sekundären Pin für den plausiblen Deniability-Modus fest.\n\nWenn Ihre Brieftasche mit dieser sekundären PIN entsperrt wird, wird Ihr Seed durch einen Hash des vorhandenen Seeds ersetzt. Dies ist eine Sicherheitsfunktion, die verwendet werden soll, falls Sie gezwungen sind, Ihre Brieftasche zu öffnen.\n\nDiese PIN verhält sich wie eine normale (korrekte) PIN, AUSSER beim Entsperren Ihrer Brieftasche, wenn der Plausible Deniability-Modus aktiviert wird.\n\nIhr Geld WIRD VERLOREN, wenn Sie in den Plausible Deniability-Modus wechseln, wenn Sie Ihren Seed nicht gesichert haben!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Einstellungen"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Datenschutz"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Nautilus Pro-Abonnement erforderlich"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Für nur 1 NANO pro Monat können Sie alle Funktionen von Nautilus Pro freischalten."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Kostenlos Nano"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Nano kaufen"),
@@ -779,7 +792,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Probier mal Nautilus, Nanos offizielles Android-Wallet!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Text teilen"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Geschäft"),
         "show": MessageLookupByLibrary.simpleMessage("Zeigen"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Kontoinformation"),
@@ -811,6 +824,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Split-Rechnungsinformationen"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Geteilt durch"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonnieren"),
+        "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
+            "Abonnieren Sie über Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Helfen Sie mit, die Entwicklung zu unterstützen"),

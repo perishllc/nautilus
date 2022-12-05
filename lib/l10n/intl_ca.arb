@@ -270,7 +270,7 @@
     "type": "text",
     "description": "branch_connection_error_title"
   },
-  "businessButton": "",
+  "businessButton": "Negocis",
   "@businessButton": {
     "type": "text",
     "description": "business_button"
@@ -654,6 +654,16 @@
   "@donateToSupport": {
     "type": "text",
     "description": "settings_support_donate"
+  },
+  "doYouHaveSeedBody": "Si no esteu segur de què significa això, probablement no tingueu cap llavor per importar i només podeu prémer Continuar.",
+  "@doYouHaveSeedBody": {
+    "type": "text",
+    "description": "do_have_seed_to_import_body"
+  },
+  "doYouHaveSeedHeader": "Tens una llavor per importar?",
+  "@doYouHaveSeedHeader": {
+    "type": "text",
+    "description": "do_have_seed_to_import"
   },
   "edit": "Edit",
   "@edit": {
@@ -1060,6 +1070,11 @@
     "type": "text",
     "description": "handoff_method_not_found"
   },
+  "haveSeedToImport": "Tinc una llavor",
+  "@haveSeedToImport": {
+    "type": "text",
+    "description": "have_seed_to_import"
+  },
   "hide": "Hide",
   "@hide": {
     "type": "text",
@@ -1090,7 +1105,7 @@
     "type": "text",
     "description": "home"
   },
-  "homeButton": "",
+  "homeButton": "Casa",
   "@homeButton": {
     "type": "text",
     "description": "home_button"
@@ -1520,17 +1535,17 @@
     "type": "text",
     "description": "nyanicon_settings"
   },
-  "obscureInfoHeader": "",
+  "obscureInfoHeader": "Informació de transacció obscura",
   "@obscureInfoHeader": {
     "type": "text",
     "description": "obscure_tx_info"
   },
-  "obscureTransaction": "",
+  "obscureTransaction": "Transacció obscura",
   "@obscureTransaction": {
     "type": "text",
     "description": "obscure_tx"
   },
-  "obscureTransactionBody": "",
+  "obscureTransactionBody": "Aquesta NO és la veritable privadesa, però farà que sigui més difícil que el destinatari vegi qui els va enviar els fons.",
   "@obscureTransactionBody": {
     "type": "text",
     "description": "obscure_tx_body"
@@ -1749,6 +1764,16 @@
   "@promotionalLink": {
     "type": "text",
     "description": "promo_Link"
+  },
+  "proSubRequiredHeader": "Cal subscriure a Nautilus Pro",
+  "@proSubRequiredHeader": {
+    "type": "text",
+    "description": "pro_sub_required_header"
+  },
+  "proSubRequiredParagraph": "Per només 1 NANO al mes, podeu desbloquejar totes les funcions de Nautilus Pro.",
+  "@proSubRequiredParagraph": {
+    "type": "text",
+    "description": "pro_sub_required_paragraph"
   },
   "purchaseNano": "Purchase Nano",
   "@purchaseNano": {
@@ -2290,7 +2315,7 @@
     "type": "text",
     "description": "settings_share_text"
   },
-  "shopButton": "",
+  "shopButton": "Botiga",
   "@shopButton": {
     "type": "text",
     "description": "shop_button"
@@ -2394,6 +2419,16 @@
   "@splitBy": {
     "type": "text",
     "description": "gift_card_split_by"
+  },
+  "subscribeButton": "Subscriu-te",
+  "@subscribeButton": {
+    "type": "text",
+    "description": "subscribe_button"
+  },
+  "subscribeWithApple": "Subscriu-te mitjançant Apple Pay",
+  "@subscribeWithApple": {
+    "type": "text",
+    "description": "subscribe_apple_button"
   },
   "supportButton": "Support",
   "@supportButton": {

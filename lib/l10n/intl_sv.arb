@@ -270,7 +270,7 @@
     "type": "text",
     "description": "branch_connection_error_title"
   },
-  "businessButton": "",
+  "businessButton": "Företag",
   "@businessButton": {
     "type": "text",
     "description": "business_button"
@@ -654,6 +654,16 @@
   "@donateToSupport": {
     "type": "text",
     "description": "settings_support_donate"
+  },
+  "doYouHaveSeedBody": "Om du inte är säker på vad detta betyder så har du förmodligen inte ett frö att importera och kan bara trycka på fortsätt.",
+  "@doYouHaveSeedBody": {
+    "type": "text",
+    "description": "do_have_seed_to_import_body"
+  },
+  "doYouHaveSeedHeader": "Har du ett frö att importera?",
+  "@doYouHaveSeedHeader": {
+    "type": "text",
+    "description": "do_have_seed_to_import"
   },
   "edit": "Redigera",
   "@edit": {
@@ -1060,6 +1070,11 @@
     "type": "text",
     "description": "handoff_method_not_found"
   },
+  "haveSeedToImport": "Jag har ett frö",
+  "@haveSeedToImport": {
+    "type": "text",
+    "description": "have_seed_to_import"
+  },
   "hide": "Dölj",
   "@hide": {
     "type": "text",
@@ -1090,7 +1105,7 @@
     "type": "text",
     "description": "home"
   },
-  "homeButton": "",
+  "homeButton": "Hem",
   "@homeButton": {
     "type": "text",
     "description": "home_button"
@@ -1520,17 +1535,17 @@
     "type": "text",
     "description": "nyanicon_settings"
   },
-  "obscureInfoHeader": "",
+  "obscureInfoHeader": "Obskyr transaktionsinformation",
   "@obscureInfoHeader": {
     "type": "text",
     "description": "obscure_tx_info"
   },
-  "obscureTransaction": "",
+  "obscureTransaction": "Obskyr transaktion",
   "@obscureTransaction": {
     "type": "text",
     "description": "obscure_tx"
   },
-  "obscureTransactionBody": "",
+  "obscureTransactionBody": "Detta är INTE sant sekretess, men det kommer att göra det svårare för mottagaren att se vem som skickat pengar till dem.",
   "@obscureTransactionBody": {
     "type": "text",
     "description": "obscure_tx_body"
@@ -1749,6 +1764,16 @@
   "@promotionalLink": {
     "type": "text",
     "description": "promo_Link"
+  },
+  "proSubRequiredHeader": "Nautilus Pro-abonnemang krävs",
+  "@proSubRequiredHeader": {
+    "type": "text",
+    "description": "pro_sub_required_header"
+  },
+  "proSubRequiredParagraph": "För bara 1 NANO per månad kan du låsa upp alla funktionerna i Nautilus Pro.",
+  "@proSubRequiredParagraph": {
+    "type": "text",
+    "description": "pro_sub_required_paragraph"
   },
   "purchaseNano": "Köp Nano",
   "@purchaseNano": {
@@ -2290,7 +2315,7 @@
     "type": "text",
     "description": "settings_share_text"
   },
-  "shopButton": "",
+  "shopButton": "affär",
   "@shopButton": {
     "type": "text",
     "description": "shop_button"
@@ -2394,6 +2419,16 @@
   "@splitBy": {
     "type": "text",
     "description": "gift_card_split_by"
+  },
+  "subscribeButton": "Prenumerera",
+  "@subscribeButton": {
+    "type": "text",
+    "description": "subscribe_button"
+  },
+  "subscribeWithApple": "Prenumerera via Apple Pay",
+  "@subscribeWithApple": {
+    "type": "text",
+    "description": "subscribe_apple_button"
   },
   "supportButton": "Support",
   "@supportButton": {

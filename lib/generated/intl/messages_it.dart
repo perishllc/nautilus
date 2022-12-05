@@ -114,7 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Errore: impossibile raggiungere l\'API Branch"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Avviso di connessione"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Affare"),
         "cancel": MessageLookupByLibrary.simpleMessage("Annulla"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -235,6 +235,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword": MessageLookupByLibrary.simpleMessage(
             "Disabilita Password Portafoglio"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Licenziare"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Se non sei sicuro di cosa significhi, probabilmente non hai un seme da importare e puoi semplicemente premere continua."),
+        "doYouHaveSeedHeader":
+            MessageLookupByLibrary.simpleMessage("Hai un seme da importare?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Nome di dominio non valido"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Donare"),
@@ -373,6 +377,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Qualcosa è andato storto durante il tentativo di trasferimento del blocco!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "Impossibile trovare un metodo di trasferimento supportato!"),
+        "haveSeedToImport": MessageLookupByLibrary.simpleMessage("Ho un seme"),
         "hide": MessageLookupByLibrary.simpleMessage("nascondi"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Nascondere l\'Account?"),
@@ -383,7 +388,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Nascondi conti vuoti"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Casa"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Un\'ora fa"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Sono Consapevole dei Rischi"),
@@ -519,9 +524,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Richieste di pagamento, promemoria e messaggi non funzioneranno correttamente."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifiche"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Informazioni sulla transazione oscura"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Transazione oscura"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Questa NON è vera privacy, ma renderà più difficile per il destinatario vedere chi gli ha inviato i fondi."),
         "off": MessageLookupByLibrary.simpleMessage("Off"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("On"),
@@ -593,6 +601,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Preferenze"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Politica sulla Privacy"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Abbonamento Nautilus Pro richiesto"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Per solo 1 NANO al mese, puoi sbloccare tutte le funzionalità di Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("NANO libero"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Acquista Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
@@ -768,7 +780,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Dai un\'occhiata a Nautilus! Il portafoglio ufficiale di Nano per Android!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Condividi testo"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Negozio"),
         "show": MessageLookupByLibrary.simpleMessage("Mostrare"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Informazioni sull\'account"),
@@ -799,6 +811,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Dividi le informazioni sulla fattura"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dividi per"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("sottoscrivi"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("Abbonati tramite Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Aiuta a supportare lo sviluppo"),

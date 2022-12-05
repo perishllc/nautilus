@@ -112,7 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Eroare: nu se poate accesa Branch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Avertisment de conectare"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Afaceri"),
         "cancel": MessageLookupByLibrary.simpleMessage("Renunţare"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -232,6 +232,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword": MessageLookupByLibrary.simpleMessage(
             "Dezactivați parola portofelului"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Respinge"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Dacă nu sunteți sigur ce înseamnă acest lucru, atunci probabil că nu aveți o sămânță de importat și puteți doar să apăsați pe Continuare."),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "Aveți o sămânță de importat?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Nume de domeniu nevalid"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Donează"),
@@ -370,6 +374,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ceva a mers prost la încercarea de a transfera blocarea!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "O metodă de transfer acceptată nu a putut fi găsită!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("Am o sămânță"),
         "hide": MessageLookupByLibrary.simpleMessage("Ascunde"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Ascundere cont?"),
@@ -380,7 +386,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Ascunde conturile goale"),
         "home": MessageLookupByLibrary.simpleMessage("Acasă"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Acasă"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Acum o oră"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Înțeleg riscurile"),
@@ -517,9 +523,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Solicitările de plată, notele și mesajele nu vor funcționa corect."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notificări"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Informații obscure asupra tranzacției"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Tranzacție obscure"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Aceasta NU este confidențialitate adevărată, dar va fi mai greu pentru destinatar să vadă cine le-a trimis fondurile."),
         "off": MessageLookupByLibrary.simpleMessage("Dezactivate"),
         "ok": MessageLookupByLibrary.simpleMessage("Bine"),
         "onStr": MessageLookupByLibrary.simpleMessage("Activate"),
@@ -589,6 +598,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Preferințe"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage(
             "Politica de confidențialitate"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Este necesar un abonament Nautilus Pro"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Pentru doar 1 NANO pe lună, puteți debloca toate funcțiile Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("NANO gratuit"),
         "purchaseNano":
             MessageLookupByLibrary.simpleMessage("Achiziționați Nano"),
@@ -765,7 +778,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Încearcă Nautilus! Portofelul mobil NANO de talie mondială!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Partajați text"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Magazin"),
         "show": MessageLookupByLibrary.simpleMessage("Spectacol"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Informatii cont"),
@@ -797,6 +810,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Împărțiți informațiile facturii"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Split By"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonati-va"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("Abonați-vă prin Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Ajută la sprijinirea dezvoltării"),

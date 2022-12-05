@@ -109,7 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hata: Branch API\'ye ulaşılamıyor"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Bağlantı Uyarısı"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("İşletme"),
         "cancel": MessageLookupByLibrary.simpleMessage("İptal"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -228,6 +228,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("Şifreyi Kaldır"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Yoksay"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Bunun ne anlama geldiğinden emin değilseniz, muhtemelen içe aktarılacak bir tohumunuz yoktur ve sadece devam düğmesine basabilirsiniz."),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "İthal edilecek tohum var mı?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Geçersiz Alan Adı"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Bağış yapmak"),
@@ -359,6 +363,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Blok aktarmaya çalışırken bir şeyler ters gitti!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "Desteklenen bir aktarma yöntemi bulunamadı!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("benim bir tohumum var"),
         "hide": MessageLookupByLibrary.simpleMessage("Gizle"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Hesabı Gizle?"),
@@ -369,7 +375,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Boş Hesapları Gizle"),
         "home": MessageLookupByLibrary.simpleMessage("Ana Sayfa"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Ev"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Bir saat önce"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Risklerin Farkındayım"),
@@ -505,9 +511,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ödeme İstekleri, Notlar ve Mesajlar düzgün çalışmayacaktır."),
         "notifications": MessageLookupByLibrary.simpleMessage("Bildirimler"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Belirsiz İşlem Bilgileri"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Gizli İşlem"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Bu gerçek bir gizlilik DEĞİLDİR, ancak alıcının kendisine kimin para gönderdiğini görmesini zorlaştıracaktır."),
         "off": MessageLookupByLibrary.simpleMessage("Kapalı"),
         "ok": MessageLookupByLibrary.simpleMessage("Tamam"),
         "onStr": MessageLookupByLibrary.simpleMessage("Açık"),
@@ -576,6 +585,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Tercihler"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Gizlilik Politikası"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Nautilus Pro Aboneliği Gerekli"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Ayda sadece 1 NANO karşılığında Nautilus Pro\'nun tüm özelliklerinin kilidini açabilirsiniz."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Ücretsiz NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Satın al Nano"),
@@ -750,7 +763,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Nano\'nun resmi Android Cüzdanı Nautilus\'u denesene!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Metni Paylaş"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Mağaza"),
         "show": MessageLookupByLibrary.simpleMessage("Göstermek"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Hesap bilgisi"),
@@ -781,6 +794,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Bölünmüş Fatura Bilgisi"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Bölme Ölçütü"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Abone olmak"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("Apple Pay ile abone olun"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Destek Geliştirmeye Yardım"),

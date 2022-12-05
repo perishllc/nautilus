@@ -113,7 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Napaka: Branch API ni mogoč"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Opozorilo o povezavi"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Posel"),
         "cancel": MessageLookupByLibrary.simpleMessage("Prekliči"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -235,6 +235,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("Disable Wallet Password"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Zavrni"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Če niste prepričani, kaj to pomeni, verjetno nimate semena za uvoz in lahko samo pritisnete Nadaljuj."),
+        "doYouHaveSeedHeader":
+            MessageLookupByLibrary.simpleMessage("Ali imate seme za uvoz?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Neveljavno ime domene"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Donirajte"),
@@ -368,6 +372,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nekaj je šlo narobe med poskusom blokiranja predaje!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "Podprte metode predaje ni bilo mogoče najti!"),
+        "haveSeedToImport": MessageLookupByLibrary.simpleMessage("Imam seme"),
         "hide": MessageLookupByLibrary.simpleMessage("Skrij"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Skrij račun?"),
@@ -378,7 +383,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Skrij prazne račune"),
         "home": MessageLookupByLibrary.simpleMessage("Domov"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("domov"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Pred uro"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
@@ -513,9 +518,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Zahtevki za plačilo, beležke in sporočila ne bodo delovali pravilno."),
         "notifications": MessageLookupByLibrary.simpleMessage("Opozorila"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Nejasne informacije o transakciji"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Nejasna transakcija"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "To NI prava zasebnost, vendar bo prejemnik težje videl, kdo mu je poslal sredstva."),
         "off": MessageLookupByLibrary.simpleMessage("Izklopi"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("Vklopi"),
@@ -585,6 +593,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nastavite sekundarni pin za verjeten način zanikanja.\n\nČe je vaša denarnica odklenjena s tem sekundarnim zatičem, bo vaše seme nadomeščeno z zgoščeno vrednostjo obstoječega semena. To je varnostna funkcija, namenjena uporabi v primeru, da ste prisiljeni odpreti denarnico.\n\nTa zatič bo deloval kot običajen (pravilen) zatič, RAZEN pri odklepanju vaše denarnice, ko se bo aktiviral verjeten način zanikanja.\n\nVaša sredstva BODO IZGUBLJENA, ko vstopite v verjeten način zanikanja, če niste varnostno kopirali svojega semena!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Splošno"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Zasebnost"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Zahtevana je naročnina na Nautilus Pro"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Za samo 1 NANO na mesec lahko odklenete vse funkcije Nautilusa Pro."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Brezplačni NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Nakup Nano"),
@@ -760,7 +772,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Preveri Nautilus! Uradna mobilna Nano denarnica!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Delite besedilo"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Trgovina"),
         "show": MessageLookupByLibrary.simpleMessage("Prikaži"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Informacije o računu"),
@@ -792,6 +804,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Informacije o razdeljenem računu"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Razdeli po"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Naročite se"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("Naročite se prek Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Pomoč Podpora razvoju"),

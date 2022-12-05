@@ -114,7 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kļūda: nevar sasniegt Branch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Brīdinājums par savienojumu"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Bizness"),
         "cancel": MessageLookupByLibrary.simpleMessage("Atcelt"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -233,6 +233,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("Disable Wallet Password"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Dismiss"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Ja neesat pārliecināts, ko tas nozīmē, iespējams, jums nav sēklu, ko importēt, un varat vienkārši nospiest Turpināt."),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "Vai jums ir sēklas, ko importēt?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Invalid Domain Name"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Ziedot"),
@@ -369,6 +373,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mēģinot nodot bloku, radās problēma."),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "Nevarēja atrast atbalstītu nodošanas metodi!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("Man ir sēkla"),
         "hide": MessageLookupByLibrary.simpleMessage("Hide"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Paslēpt kontu?"),
@@ -379,7 +385,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Paslēpt tukšos kontus"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Mājas"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Pirms stundas"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
@@ -512,9 +518,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Maksājumu pieprasījumi, piezīmes un ziņojumi nedarbosies pareizi."),
         "notifications": MessageLookupByLibrary.simpleMessage("Paziņojumi"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Neskaidra informācija par darījumu"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Neskaidrs darījums"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Tas NAV īsts privātums, taču saņēmējam būs grūtāk redzēt, kas viņam ir nosūtījis līdzekļus."),
         "off": MessageLookupByLibrary.simpleMessage("Izslēgts"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("Ieslēgts"),
@@ -582,6 +591,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Preferences"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Privātuma politika"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Nepieciešams Nautilus Pro abonements"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Tikai par 1 NANO mēnesī varat atbloķēt visas Nautilus Pro funkcijas."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Bezmaksas NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Purchase Nano"),
@@ -757,7 +770,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Uzmet aci Nautilus! Izcils NANO viedais maks!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Kopīgot tekstu"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Veikals"),
         "show": MessageLookupByLibrary.simpleMessage("Rādīt"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Konta informācija"),
@@ -788,6 +801,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Dalīta rēķina informācija"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Sadalīt pēc"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonēt"),
+        "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
+            "Abonējiet, izmantojot Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Palīdzība Atbalsts attīstībai"),

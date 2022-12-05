@@ -183,8 +183,11 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
           }
           _addressStyle = AddressStyle.TEXT60;
         });
-        _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
-        if (_addressController!.text.isNotEmpty && _addressController!.text.length > 1 && !_addressController!.text.startsWith("nano_")) {
+        _addressController!.selection =
+            TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+        if (_addressController!.text.isNotEmpty &&
+            _addressController!.text.length > 1 &&
+            !_addressController!.text.startsWith("nano_")) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           if (_addressController!.text != formattedAddress) {
             setState(() {
@@ -294,7 +297,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
     });
 
     // Set initial currency format
-    _localCurrencyFormat = NumberFormat.currency(locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
+    _localCurrencyFormat = NumberFormat.currency(
+        locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
 
     qrWidget = widget.qrWidget;
   }
@@ -366,151 +370,184 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                   child: AppDialogs.infoButton(
                     context,
                     () {
-                      AppDialogs.showInfoDialog(context, AppLocalization.of(context).requestSheetInfoHeader, AppLocalization.of(context).requestSheetInfo);
+                      AppDialogs.showInfoDialog(context, AppLocalization.of(context).requestSheetInfoHeader,
+                          AppLocalization.of(context).requestSheetInfo);
                     },
                   ),
                 ),
               ],
             ),
 
+            const SizedBox(height: 5),
             // account / wallet name:
-            Container(
-              margin: const EdgeInsets.only(top: 10.0),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: '',
-                          children: [
-                            TextSpan(
-                              text: StateContainer.of(context).selectedAccount!.name,
-                              style: TextStyle(
-                                color: StateContainer.of(context).curTheme.text60,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "NunitoSans",
+            OutlinedButton(
+              onPressed: () async {
+                Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
+                setState(() {
+                  // Set copied style
+                  _addressCopied = true;
+                });
+                _addressCopiedTimer?.cancel();
+                _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
+                  if (!mounted) return;
+                  setState(() {
+                    _addressCopied = false;
+                  });
+                });
+                UIUtil.showSnackbar(AppLocalization.of(context).addressCopied, context, durationMs: 1500);
+              },
+              child: Column(
+                children: [
+                  const SizedBox(height: 5),
+
+                  Container(
+                    // margin: const EdgeInsets.only(top: 10.0),
+                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 2),
+
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                text: '',
+                                children: [
+                                  TextSpan(
+                                    text: StateContainer.of(context).selectedAccount!.name,
+                                    style: TextStyle(
+                                      color: StateContainer.of(context).curTheme.text60,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: "NunitoSans",
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 40,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text("|",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: StateContainer.of(context).curTheme.text30,
-                          )),
-                    ),
-                  ),
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: '',
-                          children: [
-                            TextSpan(
-                              text: StateContainer.of(context).wallet?.username ?? Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
-                              style: TextStyle(
-                                color: StateContainer.of(context).curTheme.text60,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "NunitoSans",
+                        SizedBox(
+                          width: 40,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text("|",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: StateContainer.of(context).curTheme.text30,
+                                )),
+                          ),
+                        ),
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: RichText(
+                              textAlign: TextAlign.start,
+                              text: TextSpan(
+                                text: '',
+                                children: [
+                                  TextSpan(
+                                    text: StateContainer.of(context).wallet?.username ??
+                                        Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
+                                    style: TextStyle(
+                                      color: StateContainer.of(context).curTheme.text60,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w700,
+                                      fontFamily: "NunitoSans",
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            // Balance Text
-            FutureBuilder(
-              future: sl.get<SharedPrefsUtil>().getPriceConversion(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.hasData && snapshot.data != null && snapshot.data != PriceConversion.HIDDEN) {
-                  return RichText(
-                    textAlign: TextAlign.start,
-                    text: TextSpan(
-                      text: '',
-                      children: [
-                        TextSpan(
-                          text: "(",
-                          style: TextStyle(
-                            color: StateContainer.of(context).curTheme.primary60,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w100,
-                            fontFamily: "NunitoSans",
-                          ),
-                        ),
-                        if (!_localCurrencyMode)
-                          TextSpan(
-                            text: getThemeAwareRawAccuracy(context, StateContainer.of(context).wallet!.accountBalance.toString()),
-                            style: TextStyle(
-                              color: StateContainer.of(context).curTheme.primary60,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "NunitoSans",
-                            ),
-                          ),
-                        if (!_localCurrencyMode)
-                          displayCurrencySymbol(
-                            context,
-                            TextStyle(
-                              color: StateContainer.of(context).curTheme.primary60,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "NunitoSans",
-                            ),
-                          ),
-                        TextSpan(
-                          text: _localCurrencyMode
-                              ? StateContainer.of(context)
-                                  .wallet!
-                                  .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale)
-                              : getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString()),
-                          style: TextStyle(
-                            color: StateContainer.of(context).curTheme.primary60,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: "NunitoSans",
-                          ),
-                        ),
-                        TextSpan(
-                          text: ")",
-                          style: TextStyle(
-                            color: StateContainer.of(context).curTheme.primary60,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w100,
-                            fontFamily: "NunitoSans",
                           ),
                         ),
                       ],
                     ),
-                  );
-                }
-                return const Text(
-                  "*******",
-                  style: TextStyle(
-                    color: Colors.transparent,
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w100,
-                    fontFamily: "NunitoSans",
                   ),
-                );
-              },
+                  // Balance Text
+                  FutureBuilder<PriceConversion>(
+                    future: sl.get<SharedPrefsUtil>().getPriceConversion(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData && snapshot.data != null && snapshot.data != PriceConversion.HIDDEN) {
+                        return RichText(
+                          textAlign: TextAlign.start,
+                          text: TextSpan(
+                            text: '',
+                            children: [
+                              TextSpan(
+                                text: "(",
+                                style: TextStyle(
+                                  color: StateContainer.of(context).curTheme.primary60,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w100,
+                                  fontFamily: "NunitoSans",
+                                ),
+                              ),
+                              if (!_localCurrencyMode)
+                                displayCurrencySymbol(
+                                  context,
+                                  TextStyle(
+                                    color: StateContainer.of(context).curTheme.primary60,
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "NunitoSans",
+                                  ),
+                                ),
+                              TextSpan(
+                                text: _localCurrencyMode
+                                    ? StateContainer.of(context).wallet!.getLocalCurrencyBalance(
+                                        context, StateContainer.of(context).curCurrency,
+                                        locale: StateContainer.of(context).currencyLocale)
+                                    : getRawAsThemeAwareFormattedAmount(
+                                        context, StateContainer.of(context).wallet!.accountBalance.toString()),
+                                style: TextStyle(
+                                  color: StateContainer.of(context).curTheme.primary60,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: "NunitoSans",
+                                ),
+                              ),
+                              if (!_localCurrencyMode)
+                                TextSpan(
+                                  text: getThemeAwareRawAccuracy(
+                                    context,
+                                    StateContainer.of(context).wallet!.accountBalance.toString(),
+                                  ),
+                                  style: TextStyle(
+                                    color: StateContainer.of(context).curTheme.primary60,
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "NunitoSans",
+                                  ),
+                                ),
+                              TextSpan(
+                                text: ")",
+                                style: TextStyle(
+                                  color: StateContainer.of(context).curTheme.primary60,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w100,
+                                  fontFamily: "NunitoSans",
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                      return const Text(
+                        "*******",
+                        style: TextStyle(
+                          color: Colors.transparent,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w100,
+                          fontFamily: "NunitoSans",
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 5),
+                ],
+              ),
             ),
             // A main container that holds everything
             Expanded(
@@ -563,8 +600,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                                     alignment: Alignment.topCenter,
                                     children: <Widget>[
                                       Container(
-                                        margin:
-                                            EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                        margin: EdgeInsets.only(
+                                            left: MediaQuery.of(context).size.width * 0.105,
+                                            right: MediaQuery.of(context).size.width * 0.105),
                                         alignment: Alignment.bottomCenter,
                                         constraints: const BoxConstraints(maxHeight: 160, minHeight: 0),
                                         // ********************************************* //
@@ -588,7 +626,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                                                       padding: EdgeInsets.zero,
                                                       itemCount: _users.length,
                                                       itemBuilder: (BuildContext context, int index) {
-                                                        return Misc.buildUserItem(context, _users[index], false, (User user) {
+                                                        return Misc.buildUserItem(context, _users[index], false,
+                                                            (User user) {
                                                           _addressController!.text = user.getDisplayName()!;
                                                           _addressFocusNode!.unfocus();
                                                           setState(() {
@@ -638,8 +677,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                                     alignment: Alignment.topCenter,
                                     children: <Widget>[
                                       Container(
-                                        margin:
-                                            EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                        margin: EdgeInsets.only(
+                                            left: MediaQuery.of(context).size.width * 0.105,
+                                            right: MediaQuery.of(context).size.width * 0.105),
                                         alignment: Alignment.bottomCenter,
                                         constraints: const BoxConstraints(maxHeight: 174, minHeight: 0),
                                       ),
@@ -748,7 +788,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 // ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, AppLocalization.of(context).request, Dimens.BUTTON_TOP_DIMENS,
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY, AppLocalization.of(context).request, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       final bool validRequest = await _validateRequest();
                       if (!mounted) return;
@@ -766,7 +807,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                       } else {
                         if (_localCurrencyMode) {
                           amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
-                              _localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text)));
+                              _localCurrencyFormat,
+                              convertLocalCurrencyToLocalizedCrypto(
+                                  context, _localCurrencyFormat, _amountController!.text)));
                         } else {
                           if (!mounted) return;
                           amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
@@ -780,6 +823,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
 
                       // verifies the input is a user in the db
                       if (_addressController!.text.startsWith("@") ||
+                          _addressController!.text.startsWith("#") ||
                           _addressController!.text.startsWith("★") ||
                           _addressController!.text.contains(".") ||
                           _addressController!.text.contains(r"$")) {
@@ -789,9 +833,11 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                           setState(() {
                             if (_addressController!.text.startsWith("★")) {
                               _addressValidationText = AppLocalization.of(context).contactInvalid;
-                            } else if (_addressController!.text.startsWith("@") || _addressController!.text.startsWith("#")) {
+                            } else if (_addressController!.text.startsWith("@") ||
+                                _addressController!.text.startsWith("#")) {
                               _addressValidationText = AppLocalization.of(context).usernameInvalid;
-                            } else if (_addressController!.text.contains(".") || _addressController!.text.contains(r"$")) {
+                            } else if (_addressController!.text.contains(".") ||
+                                _addressController!.text.contains(r"$")) {
                               _addressValidationText = AppLocalization.of(context).domainInvalid;
                             }
                           });
@@ -833,8 +879,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).showQR, Dimens.BUTTON_BOTTOM_DIMENS,
-                        onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, AppLocalization.of(context).showQR,
+                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                       final String formattedAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
                       String amountRaw;
                       if (_amountController!.text.isEmpty || _amountController!.text == "0") {
@@ -842,7 +888,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                       } else {
                         if (_localCurrencyMode) {
                           amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
-                              _localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text)));
+                              _localCurrencyFormat,
+                              convertLocalCurrencyToLocalizedCrypto(
+                                  context, _localCurrencyFormat, _amountController!.text)));
                         } else {
                           if (!mounted) return;
                           amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
@@ -875,9 +923,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
       String textField = _amountController!.text;
       String balance;
       if (_localCurrencyMode) {
-        balance = StateContainer.of(context)
-            .wallet!
-            .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
+        balance = StateContainer.of(context).wallet!.getLocalCurrencyBalance(
+            context, StateContainer.of(context).curCurrency,
+            locale: StateContainer.of(context).currencyLocale);
       } else {
         balance = getRawAsThemeAwareAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
       }
@@ -889,12 +937,20 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
         textField = textField.replaceAll(",", ".");
         final String sanitizedTextField = sanitizedAmount(_localCurrencyFormat, textField);
         final String sanitizedBalance = sanitizedAmount(_localCurrencyFormat, balance);
-        textFieldInt = (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
-        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
+        textFieldInt =
+            (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+                .toDouble()
+                .toInt();
+        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+            .toDouble()
+            .toInt();
       } else {
         textField = sanitizedAmount(_localCurrencyFormat, textField);
-        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
-        balanceInt = (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
+        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+            .toDouble()
+            .toInt();
+        balanceInt =
+            (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
       }
       return textFieldInt == balanceInt;
     } catch (e) {
@@ -913,7 +969,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
         cryptoAmountStr = _lastCryptoAmount;
       } else {
         _lastLocalCurrencyAmount = _amountController!.text;
-        _lastCryptoAmount = convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
+        _lastCryptoAmount =
+            convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
         cryptoAmountStr = _lastCryptoAmount;
       }
       setState(() {
@@ -951,14 +1008,17 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
     String? raw;
     if (_localCurrencyMode) {
       _lastLocalCurrencyAmount = _amountController!.text;
-      _lastCryptoAmount = sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
+      _lastCryptoAmount = sanitizedAmount(_localCurrencyFormat,
+          convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
       if (_lastCryptoAmount.isNotEmpty) {
         raw = NumberUtil.getAmountAsRaw(_lastCryptoAmount);
       }
     } else {
       raw = _amountController!.text.isNotEmpty
-          ? NumberUtil.getAmountAsRaw(
-              _amountController!.text.trim().replaceAll(_localCurrencyFormat.currencySymbol, "").replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, ""))
+          ? NumberUtil.getAmountAsRaw(_amountController!.text
+              .trim()
+              .replaceAll(_localCurrencyFormat.currencySymbol, "")
+              .replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, ""))
           : "";
     }
     paintQrCode(address: widget.address, amount: raw);
@@ -972,7 +1032,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
       data = "nano:${address!}";
     }
 
-    final Widget qr = SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: await UIUtil.getQRImage(context, data));
+    final Widget qr =
+        SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: await UIUtil.getQRImage(context, data));
     setState(() {
       qrWidget = qr;
     });
@@ -991,7 +1052,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Text("${AppLocalization.of(context).notificationInfo}\n", style: AppStyles.textStyleParagraph(context)),
+                child: Text("${AppLocalization.of(context).notificationInfo}\n",
+                    style: AppStyles.textStyleParagraph(context)),
               ),
               AppSimpleDialogOption(
                 onPressed: () {
@@ -1062,7 +1124,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${AppLocalization.of(context).needVerificationAlert}\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text("${AppLocalization.of(context).needVerificationAlert}\n\n",
+                    style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actions: <Widget>[
@@ -1113,7 +1176,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
     } else {
       String bananoAmount;
       if (_localCurrencyMode) {
-        bananoAmount = sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
+        bananoAmount = sanitizedAmount(_localCurrencyFormat,
+            convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
       } else {
         if (_rawAmount == null) {
           bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
@@ -1155,7 +1219,11 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
         _addressValidationText = AppLocalization.of(context).addressMissing;
         _pasteButtonVisible = true;
       });
-    } else if (_addressController!.text.isNotEmpty && !isFavorite && !isUser && !isDomain && !Address(_addressController!.text).isValid()) {
+    } else if (_addressController!.text.isNotEmpty &&
+        !isFavorite &&
+        !isUser &&
+        !isDomain &&
+        !Address(_addressController!.text).isValid()) {
       isValid = false;
       setState(() {
         _addressValidationText = AppLocalization.of(context).invalidAddress;
@@ -1185,7 +1253,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
 
       if (isValid) {
         // still valid && you have to have a nautilus username to send requests:
-        if (StateContainer.of(context).wallet!.user == null && StateContainer.of(context).wallet!.confirmationHeight < _REQUIRED_CONFIRMATION_HEIGHT) {
+        if (StateContainer.of(context).wallet!.user == null &&
+            StateContainer.of(context).wallet!.confirmationHeight < _REQUIRED_CONFIRMATION_HEIGHT) {
           isValid = false;
           await showNeedVerificationAlert();
         }
@@ -1234,13 +1303,16 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
       onChanged: (String text) {
         if (_localCurrencyMode == false && !text.contains(".") && text.isNotEmpty && text.length > 1) {
           // if the amount is larger than 133248297 set it to that number:
-          if (BigInt.parse(text.replaceAll(_localCurrencyFormat.currencySymbol, "").replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "")) >
+          if (BigInt.parse(text
+                  .replaceAll(_localCurrencyFormat.currencySymbol, "")
+                  .replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "")) >
               BigInt.parse("133248297")) {
             setState(() {
               // _amountController.text = "133248297";
               // prevent the user from entering more than 13324829
               _amountController!.text = _amountController!.text.substring(0, _amountController!.text.length - 1);
-              _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: _amountController!.text.length));
+              _amountController!.selection =
+                  TextSelection.fromPosition(TextPosition(offset: _amountController!.text.length));
             });
           }
         }
@@ -1307,7 +1379,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
   Widget getEnterAddressContainer() {
     return AppTextField(
         topMargin: 115,
-        padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+        padding:
+            _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
         // padding: EdgeInsets.zero,
         textAlign: TextAlign.center,
         // textAlign: (_isUser || _addressController.text.length == 0) ? TextAlign.center : TextAlign.start,
@@ -1412,7 +1485,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
           if (text.contains(" ")) {
             text = text.replaceAll(" ", "");
             _addressController!.text = text;
-            _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+            _addressController!.selection =
+                TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
           }
 
           if (text.isNotEmpty) {
@@ -1449,14 +1523,16 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
               _users = [];
             });
           } else if (isFavorite) {
-            final List<User> matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+            final List<User> matchedList =
+                await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
             final Set<String?> nicknames = {};
             matchedList.retainWhere((User x) => nicknames.add(x.nickname));
             setState(() {
               _users = matchedList;
             });
           } else if (isUser || isDomain) {
-            final List<User> matchedList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+            final List<User> matchedList =
+                await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
             setState(() {
               _users = matchedList;
             });

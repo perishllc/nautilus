@@ -179,10 +179,6 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
       text: TextSpan(
         text: '',
         children: [
-          TextSpan(
-            text: getThemeAwareRawAccuracy(context, price),
-            style: AppStyles.textStyleTransactionAmount(context),
-          ),
           displayCurrencySymbol(
             context,
             AppStyles.textStyleTransactionAmount(context),
@@ -192,6 +188,10 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
             style: AppStyles.textStyleTransactionAmount(
               context,
             ),
+          ),
+          TextSpan(
+            text: getThemeAwareRawAccuracy(context, price),
+            style: AppStyles.textStyleTransactionAmount(context),
           ),
         ],
       ),

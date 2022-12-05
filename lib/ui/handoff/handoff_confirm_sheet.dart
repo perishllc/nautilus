@@ -143,16 +143,16 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                       text: TextSpan(
                         text: "",
                         children: [
-                          TextSpan(
-                            text: getThemeAwareRawAccuracy(context, widget.payItem.amount),
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
                           displayCurrencySymbol(
                             context,
                             AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
                             text: getRawAsThemeAwareFormattedAmount(context, widget.payItem.amount),
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, widget.payItem.amount),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(

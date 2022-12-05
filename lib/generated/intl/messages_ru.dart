@@ -115,7 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ошибка: не удается получить доступ к Branch API"),
         "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(
             "Предупреждение о подключении"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Бизнес"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Капча"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -238,6 +238,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("Отключить пароль"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Отклонить"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Если вы не уверены, что это значит, то, вероятно, у вас нет сидов для импорта, и вы можете просто нажать «Продолжить»."),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "У вас есть семена для импорта?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Неверное доменное имя"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Пожертвовать"),
@@ -376,6 +380,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Что-то пошло не так при попытке передать блокировку!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "Поддерживаемый метод передачи обслуживания не найден!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("у меня есть семя"),
         "hide": MessageLookupByLibrary.simpleMessage("Скрыть"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Скрыть аккаунт?"),
@@ -386,7 +392,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Скрыть пустые аккаунты"),
         "home": MessageLookupByLibrary.simpleMessage("Главная"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Дом"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Час назад"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Я понимаю риски"),
@@ -522,9 +528,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Платежные запросы, заметки и сообщения не будут работать должным образом."),
         "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Ньяникон"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Неясная информация о транзакции"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Неясная транзакция"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Это НЕ настоящая конфиденциальность, но получателю будет сложнее увидеть, кто отправил ему средства."),
         "off": MessageLookupByLibrary.simpleMessage("Выкл."),
         "ok": MessageLookupByLibrary.simpleMessage("Ок"),
         "onStr": MessageLookupByLibrary.simpleMessage("Вкл."),
@@ -597,6 +606,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Установите вторичный контакт для правдоподобного режима отрицания.\n\nЕсли ваш кошелек разблокирован с помощью этого вторичного пин-кода, ваш сид будет заменен хэшем существующего сид-кода. Это функция безопасности, предназначенная для использования в случае, если вы будете вынуждены открыть свой кошелек.\n\nЭтот пин-код будет действовать как обычный (правильный) пин-код, ЗА ИСКЛЮЧЕНИЕМ разблокировки вашего кошелька, когда активируется режим правдоподобного отрицания.\n\nВаши средства БУДУТ ПОТЕРЯНЫ при входе в режим правдоподобного отрицания, если вы не создали резервную копию своего начального числа!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Предпочтения"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Политика"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Требуется подписка Nautilus Pro"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Всего за 1 NANO в месяц вы можете разблокировать все функции Nautilus Pro."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Бесплатно НАНО"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Приобрести нано"),
@@ -776,7 +789,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Оцените Nautilus! Лучший Android кошелёк Nano!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Поделиться текстом"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Магазин"),
         "show": MessageLookupByLibrary.simpleMessage("Показывать"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Информация об аккаунте"),
@@ -809,6 +822,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Информация о раздельном счете"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Разделить по"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Подписывайся"),
+        "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
+            "Оформить подписку через ApplePay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Помогите поддержать развитие"),

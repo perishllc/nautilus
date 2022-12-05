@@ -115,7 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Помилка: неможливо отримати доступ до Branch API"),
         "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage(
             "Попередження про підключення"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Бізнес"),
         "cancel": MessageLookupByLibrary.simpleMessage("Відмовитися"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -239,6 +239,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("Заборонити пароль гаманця"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Зрозуміло"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Якщо ви не впевнені, що це означає, можливо, у вас немає насіннєвого коду для імпорту, і ви можете просто натиснути «Продовжити»."),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "У вас є насіння для імпорту?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Некоректне доменне ім\'я"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Пожертвуйте"),
@@ -376,6 +380,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Під час блокування передачі сталася помилка!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "Не вдалося знайти підтримуваний метод передачі!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("У мене є насіння"),
         "hide": MessageLookupByLibrary.simpleMessage("Приховати"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Приховати гаманець?"),
@@ -386,7 +392,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(
             "Приховати порожні облікові записи"),
         "home": MessageLookupByLibrary.simpleMessage("Головна"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("додому"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Годину тому"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Я розумію ризики"),
@@ -525,9 +531,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Платіжні запити, нотатки та повідомлення не працюватимуть належним чином."),
         "notifications": MessageLookupByLibrary.simpleMessage("Повідомлення"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Няникон"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Невідома інформація про трансакцію"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Незрозуміла транзакція"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Це НЕ справжня конфіденційність, але одержувачу буде важче побачити, хто надіслав йому кошти."),
         "off": MessageLookupByLibrary.simpleMessage("Вимкнуто"),
         "ok": MessageLookupByLibrary.simpleMessage("Гаразд"),
         "onStr": MessageLookupByLibrary.simpleMessage("Увімкнуто"),
@@ -601,6 +610,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Преференції"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Політика приватності"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Потрібна підписка на Nautilus Pro"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Лише за 1 NANO на місяць ви можете розблокувати всі функції Nautilus Pro."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Безкоштовний NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Придбати Nano"),
@@ -780,7 +793,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Спробуйте Nautilus!  Найкращий мобільний гаманець для NANO!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Поділитися текстом"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Магазин"),
         "show": MessageLookupByLibrary.simpleMessage("Показати"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage(
             "Інформація про обліковий запис"),
@@ -814,6 +827,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Інформація про розділений рахунок"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Розділити за"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Підпишіться"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("Підпишіться через Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Допомога Підтримка розвитку"),

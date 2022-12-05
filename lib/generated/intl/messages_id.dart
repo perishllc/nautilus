@@ -111,7 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kesalahan: tidak dapat mencapai API Cabang"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Peringatan Koneksi"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Bisnis"),
         "cancel": MessageLookupByLibrary.simpleMessage("Batal"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -232,6 +232,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword": MessageLookupByLibrary.simpleMessage(
             "Nonaktifkan Kata Sandi Dompet"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Memberhentikan"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Jika Anda tidak yakin apa artinya ini, Anda mungkin tidak memiliki benih untuk diimpor dan cukup menekan lanjutkan."),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "Apakah Anda memiliki benih untuk diimpor?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Nama Domain Tidak Valid"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Menyumbangkan"),
@@ -368,6 +372,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Terjadi kesalahan saat mencoba melakukan handoff block!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "Metode handoff yang didukung tidak dapat ditemukan!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("Saya punya benih"),
         "hide": MessageLookupByLibrary.simpleMessage("Sembunyikan"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Sembunyikan Akun?"),
@@ -378,7 +384,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Sembunyikan Akun Kosong"),
         "home": MessageLookupByLibrary.simpleMessage("Rumah"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Rumah"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Satu jam yang lalu"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Saya memahami resiko"),
@@ -512,9 +518,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Permintaan Pembayaran, Memo, dan Pesan tidak akan berfungsi dengan baik."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifikasi"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Info Transaksi Tidak Jelas"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Transaksi Tidak Jelas"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Ini BUKAN privasi sebenarnya, tetapi akan mempersulit penerima untuk melihat siapa yang mengirimi mereka dana."),
         "off": MessageLookupByLibrary.simpleMessage("Mati"),
         "ok": MessageLookupByLibrary.simpleMessage("Oke"),
         "onStr": MessageLookupByLibrary.simpleMessage("Hidup"),
@@ -586,6 +595,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Preferensi"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Kebijakan Privasi"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Langganan Nautilus Pro Diperlukan"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Hanya dengan 1 NANO per bulan, Anda dapat membuka kunci semua fitur Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("NANO gratis"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Pembelian Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
@@ -759,7 +772,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Ayo Cek Nautilus! Nano\'s official Android Wallet!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Bagikan Teks"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Toko"),
         "show": MessageLookupByLibrary.simpleMessage("Menunjukkan"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("Info akun"),
         "showAccountQR":
@@ -791,6 +804,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Bagi Info Tagihan"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dibagi Oleh"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Langganan"),
+        "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
+            "Berlangganan melalui Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Bantuan Dukungan Pengembangan"),

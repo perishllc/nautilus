@@ -79,7 +79,8 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
 
   Future<Uint8List?> _capturePng() async {
     if (shareCardKey != null && shareCardKey!.currentContext != null) {
-      final RenderRepaintBoundary? boundary = shareCardKey!.currentContext!.findRenderObject() as RenderRepaintBoundary?;
+      final RenderRepaintBoundary? boundary =
+          shareCardKey!.currentContext!.findRenderObject() as RenderRepaintBoundary?;
       if (boundary == null) return null;
       final ui.Image image = await boundary.toImage(pixelRatio: 5.0);
       final ByteData byteData = (await image.toByteData(format: ui.ImageByteFormat.png))!;
@@ -124,7 +125,8 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
       }
     });
     // Set initial currency format
-    _localCurrencyFormat = NumberFormat.currency(locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
+    _localCurrencyFormat = NumberFormat.currency(
+        locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
 
     qrWidget = widget.qrWidget;
   }
@@ -180,8 +182,9 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                     padding: const EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
                     child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
                       final double availableWidth = constraints.maxWidth;
-                      final double availableHeight =
-                          (StateContainer.of(context).wallet?.username != null) ? (constraints.maxHeight - 70) : constraints.maxHeight;
+                      final double availableHeight = (StateContainer.of(context).wallet?.username != null)
+                          ? (constraints.maxHeight - 70)
+                          : constraints.maxHeight;
                       const double widthDivideFactor = 1.3;
                       final double computedMaxSize = math.min(availableWidth / widthDivideFactor, availableHeight);
                       return Center(
@@ -254,7 +257,8 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                                 width: computedMaxSize,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  border: Border.all(color: StateContainer.of(context).curTheme.primary!, width: computedMaxSize / 90),
+                                  border: Border.all(
+                                      color: StateContainer.of(context).curTheme.primary!, width: computedMaxSize / 90),
                                 ),
                               ),
                             ),
@@ -285,7 +289,8 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                                 height: computedMaxSize / 12,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
-                                  child: SvgPicture.asset("assets/logo.svg", color: StateContainer.of(context).curTheme.primary),
+                                  child: SvgPicture.asset("assets/logo.svg",
+                                      color: StateContainer.of(context).curTheme.primary),
                                 ),
                               ),
                             ),
@@ -305,22 +310,21 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                             context,
                             // Copy Address Button
                             _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                            _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
+                            _addressCopied
+                                ? AppLocalization.of(context).addressCopied
+                                : AppLocalization.of(context).copyAddress,
                             Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
                           Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
                           setState(() {
                             // Set copied style
                             _addressCopied = true;
                           });
-                          if (_addressCopiedTimer != null) {
-                            _addressCopiedTimer!.cancel();
-                          }
+                          _addressCopiedTimer?.cancel();
                           _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
-                            if (mounted) {
-                              setState(() {
-                                _addressCopied = false;
-                              });
-                            }
+                            if (!mounted) return;
+                            setState(() {
+                              _addressCopied = false;
+                            });
                           });
                         }),
                         AppButton.buildAppButton(
@@ -375,7 +379,8 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
         cryptoAmountStr = _lastCryptoAmount;
       } else {
         _lastLocalCurrencyAmount = _amountController!.text;
-        _lastCryptoAmount = convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
+        _lastCryptoAmount =
+            convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
         cryptoAmountStr = _lastCryptoAmount;
       }
       setState(() {
@@ -413,14 +418,17 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
     String? raw;
     if (_localCurrencyMode) {
       _lastLocalCurrencyAmount = _amountController!.text;
-      _lastCryptoAmount = sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
+      _lastCryptoAmount = sanitizedAmount(_localCurrencyFormat,
+          convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
       if (_lastCryptoAmount.isNotEmpty) {
         raw = NumberUtil.getAmountAsRaw(_lastCryptoAmount);
       }
     } else {
       raw = _amountController!.text.isNotEmpty
-          ? NumberUtil.getAmountAsRaw(
-              _amountController!.text.trim().replaceAll(_localCurrencyFormat.currencySymbol, "").replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, ""))
+          ? NumberUtil.getAmountAsRaw(_amountController!.text
+              .trim()
+              .replaceAll(_localCurrencyFormat.currencySymbol, "")
+              .replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, ""))
           : "";
     }
     paintQrCode(address: widget.address, amount: raw);
@@ -434,7 +442,8 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
       data = "nano:${address!}";
     }
 
-    final Widget qr = SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: await UIUtil.getQRImage(context, data));
+    final Widget qr =
+        SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: await UIUtil.getQRImage(context, data));
     setState(() {
       qrWidget = qr;
     });
@@ -464,13 +473,16 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
       onChanged: (String text) {
         if (_localCurrencyMode == false && !text.contains(".") && text.isNotEmpty && text.length > 1) {
           // if the amount is larger than 133248297 set it to that number:
-          if (BigInt.parse(text.replaceAll(_localCurrencyFormat.currencySymbol, "").replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "")) >
+          if (BigInt.parse(text
+                  .replaceAll(_localCurrencyFormat.currencySymbol, "")
+                  .replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "")) >
               BigInt.parse("133248297")) {
             setState(() {
               // _amountController.text = "133248297";
               // prevent the user from entering more than 13324829
               _amountController!.text = _amountController!.text.substring(0, _amountController!.text.length - 1);
-              _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: _amountController!.text.length));
+              _amountController!.selection =
+                  TextSelection.fromPosition(TextPosition(offset: _amountController!.text.length));
             });
           }
         }

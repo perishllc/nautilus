@@ -1365,6 +1365,26 @@ class AppLocalization {
     );
   }
 
+  /// `If you're not sure what this means then you probably don't have a seed to import and can just press continue.`
+  String get doYouHaveSeedBody {
+    return Intl.message(
+      'If you\'re not sure what this means then you probably don\'t have a seed to import and can just press continue.',
+      name: 'doYouHaveSeedBody',
+      desc: 'do_have_seed_to_import_body',
+      args: [],
+    );
+  }
+
+  /// `Do you have a seed to import?`
+  String get doYouHaveSeedHeader {
+    return Intl.message(
+      'Do you have a seed to import?',
+      name: 'doYouHaveSeedHeader',
+      desc: 'do_have_seed_to_import',
+      args: [],
+    );
+  }
+
   /// `Edit`
   String get edit {
     return Intl.message(
@@ -2176,6 +2196,16 @@ class AppLocalization {
     );
   }
 
+  /// `I have a seed`
+  String get haveSeedToImport {
+    return Intl.message(
+      'I have a seed',
+      name: 'haveSeedToImport',
+      desc: 'have_seed_to_import',
+      args: [],
+    );
+  }
+
   /// `Hide`
   String get hide {
     return Intl.message(
@@ -2402,36 +2432,6 @@ class AppLocalization {
       'I\'m Sure',
       name: 'imSure',
       desc: 'send_confirm_warning',
-      args: [],
-    );
-  }
-
-  /// `I have a seed`
-  String get haveSeedToImport {
-    return Intl.message(
-      'I have a seed',
-      name: 'haveSeedToImport',
-      desc: 'have_seed_to_import',
-      args: [],
-    );
-  }
-
-  /// `Do you have a seed to import?`
-  String get doYouHaveSeedHeader {
-    return Intl.message(
-      'Do you have a seed to import?',
-      name: 'doYouHaveSeedHeader',
-      desc: 'do_have_seed_to_import',
-      args: [],
-    );
-  }
-
-  /// `If you're not sure what this means then you probably don't have a seed to import and can just press continue.`
-  String get doYouHaveSeedBody {
-    return Intl.message(
-      'If you\'re not sure what this means then you probably don\'t have a seed to import and can just press continue.',
-      name: 'doYouHaveSeedBody',
-      desc: 'do_have_seed_to_import_body',
       args: [],
     );
   }
@@ -3588,6 +3588,26 @@ class AppLocalization {
       'Free NANO',
       name: 'promotionalLink',
       desc: 'promo_Link',
+      args: [],
+    );
+  }
+
+  /// `Nautilus Pro Subscription Required`
+  String get proSubRequiredHeader {
+    return Intl.message(
+      'Nautilus Pro Subscription Required',
+      name: 'proSubRequiredHeader',
+      desc: 'pro_sub_required_header',
+      args: [],
+    );
+  }
+
+  /// `For just 1 NANO per month, you can unlock all of the features of Nautilus Pro.`
+  String get proSubRequiredParagraph {
+    return Intl.message(
+      'For just 1 NANO per month, you can unlock all of the features of Nautilus Pro.',
+      name: 'proSubRequiredParagraph',
+      desc: 'pro_sub_required_paragraph',
       args: [],
     );
   }
@@ -4881,6 +4901,26 @@ class AppLocalization {
       'Split By',
       name: 'splitBy',
       desc: 'gift_card_split_by',
+      args: [],
+    );
+  }
+
+  /// `Subscribe`
+  String get subscribeButton {
+    return Intl.message(
+      'Subscribe',
+      name: 'subscribeButton',
+      desc: 'subscribe_button',
+      args: [],
+    );
+  }
+
+  /// `Subscribe via Apple Pay`
+  String get subscribeWithApple {
+    return Intl.message(
+      'Subscribe via Apple Pay',
+      name: 'subscribeWithApple',
+      desc: 'subscribe_apple_button',
       args: [],
     );
   }

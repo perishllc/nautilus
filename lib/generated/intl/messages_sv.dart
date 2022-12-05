@@ -116,7 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fel: kan inte nå Branch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Anslutningsvarning"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Företag"),
         "cancel": MessageLookupByLibrary.simpleMessage("Avbryt"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -236,6 +236,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("Avaktivera plånbokslösenord"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Avfärda"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Om du inte är säker på vad detta betyder så har du förmodligen inte ett frö att importera och kan bara trycka på fortsätt."),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "Har du ett frö att importera?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Ogiltigt domännamn"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Donera"),
@@ -369,6 +373,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Något gick fel när du försökte överlämna blockering!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "En överlämningsmetod som stöds kunde inte hittas!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("Jag har ett frö"),
         "hide": MessageLookupByLibrary.simpleMessage("Dölj"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Dölja konto?"),
@@ -379,7 +385,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Dölj tomma konton"),
         "home": MessageLookupByLibrary.simpleMessage("Hem"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Hem"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("En timme sedan"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Jag förstår riskerna"),
@@ -515,9 +521,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Betalningsförfrågningar, PM och meddelanden kommer inte att fungera korrekt."),
         "notifications": MessageLookupByLibrary.simpleMessage("Aviseringar"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Obskyr transaktionsinformation"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Obskyr transaktion"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Detta är INTE sant sekretess, men det kommer att göra det svårare för mottagaren att se vem som skickat pengar till dem."),
         "off": MessageLookupByLibrary.simpleMessage("Av"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("På"),
@@ -588,6 +597,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ställ in ett sekundärt stift för rimligt förnekarläge.\n\nOm din plånbok låses upp med denna sekundära stift, kommer ditt frö att ersättas med en hash av det befintliga fröet. Detta är en säkerhetsfunktion avsedd att användas i händelse av att du tvingas öppna din plånbok.\n\nDenna stift kommer att fungera som en vanlig (korrekt) stift UTOM när du låser upp din plånbok, vilket är då läget för rimlig förnekelse kommer att aktiveras.\n\nDina pengar KOMMER FÖRLORA när du går in i rimligt förnekarläge om du inte har säkerhetskopierat ditt frö!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Inställningar"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privatpolicy"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Nautilus Pro-abonnemang krävs"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "För bara 1 NANO per månad kan du låsa upp alla funktionerna i Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("Gratis NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Köp Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
@@ -763,7 +776,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Kolla in Nautilus! Nanos officiella Androidplånbok!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Dela text"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("affär"),
         "show": MessageLookupByLibrary.simpleMessage("Show"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Konto information"),
@@ -793,6 +806,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Dela fakturainformation"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dela av"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Prenumerera"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("Prenumerera via Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Hjälp att stödja utveckling"),

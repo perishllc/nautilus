@@ -222,6 +222,9 @@ dependencies:
   ed25519_hd_key: ^2.2.0
   libcrypto: ^0.2.1
 
+  # in app purchases:
+  in_app_purchase: ^3.0.8
+
 flutter_intl:
   enabled: true
   class_name: AppLocalization

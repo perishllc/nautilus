@@ -13,6 +13,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:intl/intl.dart';
 import 'package:keframe/keframe.dart';
 import 'package:logger/logger.dart';
@@ -187,7 +188,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   int _selectedIndex = 1;
 
-  bool _hasSub = false;
+  bool _isPro = false;
 
   Future<void> _switchToAccount(String account) async {
     final List<Account> accounts = await sl.get<DBHelper>().getAccounts(await StateContainer.of(context).getSeed());
@@ -213,11 +214,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   Future<void> getNotificationPermissions() async {
     bool notificationsAllowed = false;
     try {
-      final NotificationSettings _throwSettings =
-          await _firebaseMessaging.requestPermission(sound: true, badge: true, alert: true);
-      // might help on android 13?:
-      final NotificationSettings settings =
-          await _firebaseMessaging.getNotificationSettings(); // TODO: remove this line
+      final NotificationSettings settings = await _firebaseMessaging.requestPermission(
+        sound: true,
+        badge: true,
+        alert: true,
+        provisional: true,
+      );
       if (settings.alert == AppleNotificationSetting.enabled ||
           settings.badge == AppleNotificationSetting.enabled ||
           settings.sound == AppleNotificationSetting.enabled ||
@@ -368,16 +370,16 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                         text: "${AppLocalization.of(context).giftAmount}: ",
                         style: AppStyles.textStyleParagraph(context),
                         children: <InlineSpan>[
-                          TextSpan(
-                            text: getThemeAwareRawAccuracy(context, balance.toString()),
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
                           displayCurrencySymbol(
                             context,
                             AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
                             text: actualAmount,
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, balance.toString()),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                         ],
@@ -519,16 +521,16 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                         text: "${AppLocalization.of(context).giftAmount}: ",
                         style: AppStyles.textStyleParagraph(context),
                         children: [
-                          TextSpan(
-                            text: getThemeAwareRawAccuracy(context, balance.toString()),
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
                           displayCurrencySymbol(
                             context,
                             AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
                             text: actualAmount,
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, balance.toString()),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                         ],
@@ -667,16 +669,16 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                       text: "${AppLocalization.of(context).giftAmount}: ",
                       style: AppStyles.textStyleParagraph(context),
                       children: [
-                        TextSpan(
-                          text: getThemeAwareRawAccuracy(context, amountRaw),
-                          style: AppStyles.textStyleParagraphPrimary(context),
-                        ),
                         displayCurrencySymbol(
                           context,
                           AppStyles.textStyleParagraphPrimary(context),
                         ),
                         TextSpan(
                           text: supposedAmount,
+                          style: AppStyles.textStyleParagraphPrimary(context),
+                        ),
+                        TextSpan(
+                          text: getThemeAwareRawAccuracy(context, amountRaw),
                           style: AppStyles.textStyleParagraphPrimary(context),
                         ),
                       ],
@@ -878,7 +880,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
       // check for nautilus pro sub:
       if (!mounted) return;
-      _hasSub = await AppDialogs.proCheck(context, showDialog: false);
+      _isPro = await AppDialogs.proCheck(context, showDialog: false);
     });
     // confetti:
     _confettiControllerLeft = ConfettiController(duration: const Duration(milliseconds: 150));
@@ -1134,6 +1136,34 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   StreamSubscription<AccountChangedEvent>? _switchAccountSub;
   StreamSubscription<DeepLinkEvent>? _deepLinkEventSub;
   StreamSubscription<XMREvent>? _xmrSub;
+  // purchase sub:
+  StreamSubscription<List<PurchaseDetails>>? _subscription;
+
+  void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
+    purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
+      if (purchaseDetails.status == PurchaseStatus.pending) {
+        // _showPendingUI();
+      } else {
+        if (purchaseDetails.status == PurchaseStatus.error) {
+          // _handleError(purchaseDetails.error!);
+          UIUtil.showSnackbar(
+            /*AppLocalization.of(context)!.purchaseError*/ "There was an error handling the purchase request!",
+            context,
+          );
+        } else if (purchaseDetails.status == PurchaseStatus.purchased ||
+            purchaseDetails.status == PurchaseStatus.restored) {
+          log.e("PURCHASED: ${purchaseDetails.productID}");
+          // TODO: verify purchase:
+          const int monthInSecs = 2628000;
+          sl.get<SharedPrefsUtil>().setProStatus(relativeExpireTime: monthInSecs);
+          _isPro = true;
+        }
+        if (purchaseDetails.pendingCompletePurchase) {
+          await InAppPurchase.instance.completePurchase(purchaseDetails);
+        }
+      }
+    });
+  }
 
   void _registerBus() {
     _historySub = EventTaxiImpl.singleton().registerTo<HistoryHomeEvent>().listen((HistoryHomeEvent event) {
@@ -1227,39 +1257,32 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         }
       }
     });
+    final purchaseUpdated = InAppPurchase.instance.purchaseStream;
+    _subscription = purchaseUpdated.listen((purchaseDetailsList) {
+      _listenToPurchaseUpdated(purchaseDetailsList);
+    }, onDone: () {
+      _subscription?.cancel();
+    }, onError: (error) {
+      // handle error here.
+      log.v("Error listening to purchase updates: $error");
+    });
+    if (Platform.isIOS) {
+      InAppPurchase.instance.restorePurchases();
+    }
   }
 
   void _destroyBus() {
-    if (_historySub != null) {
-      _historySub!.cancel();
-    }
-    if (_contactModifiedSub != null) {
-      _contactModifiedSub!.cancel();
-    }
-    if (_blockedModifiedSub != null) {
-      _blockedModifiedSub!.cancel();
-    }
-    if (_disableLockSub != null) {
-      _disableLockSub!.cancel();
-    }
-    if (_switchAccountSub != null) {
-      _switchAccountSub!.cancel();
-    }
-    if (_confirmEventSub != null) {
-      _confirmEventSub!.cancel();
-    }
-    if (_txUpdatesSub != null) {
-      _txUpdatesSub!.cancel();
-    }
-    if (_solidsSub != null) {
-      _solidsSub!.cancel();
-    }
-    if (_unifiedSub != null) {
-      _unifiedSub!.cancel();
-    }
-    if (_xmrSub != null) {
-      _xmrSub!.cancel();
-    }
+    _historySub?.cancel();
+    _contactModifiedSub?.cancel();
+    _blockedModifiedSub?.cancel();
+    _disableLockSub?.cancel();
+    _switchAccountSub?.cancel();
+    _confirmEventSub?.cancel();
+    _txUpdatesSub?.cancel();
+    _solidsSub?.cancel();
+    _unifiedSub?.cancel();
+    _xmrSub?.cancel();
+    _subscription?.cancel();
   }
 
   @override

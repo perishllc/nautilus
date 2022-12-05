@@ -655,6 +655,16 @@
     "type": "text",
     "description": "settings_support_donate"
   },
+  "doYouHaveSeedBody": "If you're not sure what this means then you probably don't have a seed to import and can just press continue.",
+  "@doYouHaveSeedBody": {
+    "type": "text",
+    "description": "do_have_seed_to_import_body"
+  },
+  "doYouHaveSeedHeader": "Do you have a seed to import?",
+  "@doYouHaveSeedHeader": {
+    "type": "text",
+    "description": "do_have_seed_to_import"
+  },
   "edit": "Edit",
   "@edit": {
     "type": "text",
@@ -1060,6 +1070,11 @@
     "type": "text",
     "description": "handoff_method_not_found"
   },
+  "haveSeedToImport": "I have a seed",
+  "@haveSeedToImport": {
+    "type": "text",
+    "description": "have_seed_to_import"
+  },
   "hide": "Hide",
   "@hide": {
     "type": "text",
@@ -1174,21 +1189,6 @@
   "@imSure": {
     "type": "text",
     "description": "send_confirm_warning"
-  },
-  "haveSeedToImport": "I have a seed",
-  "@haveSeedToImport": {
-    "type": "text",
-    "description": "have_seed_to_import"
-  },
-  "doYouHaveSeedHeader": "Do you have a seed to import?",
-  "@doYouHaveSeedHeader": {
-    "type": "text",
-    "description": "do_have_seed_to_import"
-  },
-  "doYouHaveSeedBody": "If you're not sure what this means then you probably don't have a seed to import and can just press continue.",
-  "@doYouHaveSeedBody": {
-    "type": "text",
-    "description": "do_have_seed_to_import_body"
   },
   "instantly": "Instantly",
   "@instantly": {
@@ -1764,6 +1764,16 @@
   "@promotionalLink": {
     "type": "text",
     "description": "promo_Link"
+  },
+  "proSubRequiredHeader": "Nautilus Pro Subscription Required",
+  "@proSubRequiredHeader": {
+    "type": "text",
+    "description": "pro_sub_required_header"
+  },
+  "proSubRequiredParagraph": "For just 1 NANO per month, you can unlock all of the features of Nautilus Pro.",
+  "@proSubRequiredParagraph": {
+    "type": "text",
+    "description": "pro_sub_required_paragraph"
   },
   "purchaseNano": "Purchase Nano",
   "@purchaseNano": {
@@ -2409,6 +2419,16 @@
   "@splitBy": {
     "type": "text",
     "description": "gift_card_split_by"
+  },
+  "subscribeButton": "Subscribe",
+  "@subscribeButton": {
+    "type": "text",
+    "description": "subscribe_button"
+  },
+  "subscribeWithApple": "Subscribe via Apple Pay",
+  "@subscribeWithApple": {
+    "type": "text",
+    "description": "subscribe_apple_button"
   },
   "supportButton": "Support",
   "@supportButton": {

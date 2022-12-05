@@ -109,7 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ralat: tidak dapat mencapai API Cawangan"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Amaran Sambungan"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Perniagaan"),
         "cancel": MessageLookupByLibrary.simpleMessage("Batal"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -228,6 +228,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword": MessageLookupByLibrary.simpleMessage(
             "Lumpuhkan Kata Laluan Dompet"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Ketepikan"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Jika anda tidak pasti maksud ini, maka anda mungkin tidak mempunyai benih untuk diimport dan hanya boleh tekan teruskan."),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "Adakah anda mempunyai benih untuk diimport?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Nama Domain Tidak Sah"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Menderma"),
@@ -366,6 +370,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kesilapan telah berlaku semasa cuba menyerahkan sekatan!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "Kaedah penyerahan yang disokong tidak ditemui!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("Saya ada benih"),
         "hide": MessageLookupByLibrary.simpleMessage("Sembunyikan"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Sembunyikan Akaun?"),
@@ -376,7 +382,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Sembunyikan Akaun Kosong"),
         "home": MessageLookupByLibrary.simpleMessage("Rumah"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Rumah"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Satu jam yang lalu"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Saya Memahami Risiko"),
@@ -511,9 +517,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Permintaan Pembayaran, Memo dan Mesej tidak akan berfungsi dengan baik."),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifikasi"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader":
+            MessageLookupByLibrary.simpleMessage("Maklumat Transaksi Kabur"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Transaksi Tidak Jelas"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Ini BUKAN privasi sebenar, tetapi ia akan menyukarkan penerima untuk melihat siapa yang menghantar dana kepada mereka."),
         "off": MessageLookupByLibrary.simpleMessage("Off"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("On"),
@@ -584,6 +593,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tetapkan pin kedua untuk mod penafian yang munasabah.\n\nJika dompet anda dibuka kunci menggunakan pin kedua ini, benih anda akan digantikan dengan cincang benih sedia ada. Ini adalah ciri keselamatan yang bertujuan untuk digunakan sekiranya anda terpaksa membuka dompet anda.\n\nPin ini akan bertindak seperti pin biasa (betul) KECUALI apabila membuka kunci dompet anda, iaitu apabila mod penafian yang munasabah akan diaktifkan.\n\nDana anda AKAN HILANG apabila memasuki mod penafian yang munasabah jika anda belum membuat sandaran benih anda!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Keutamaan"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Dasar Privasi"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Langganan Nautilus Pro Diperlukan"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Dengan hanya 1 NANO sebulan, anda boleh membuka kunci semua ciri Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("NANO percuma"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Pembelian Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
@@ -757,7 +770,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Semakkan Nautilus! Dompet Android Nano yang rasmi"),
         "shareText": MessageLookupByLibrary.simpleMessage("Kongsi Teks"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("kedai"),
         "show": MessageLookupByLibrary.simpleMessage("Tunjukkan"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Maklumat akaun"),
@@ -788,6 +801,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Maklumat Bil Pisah"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dipisahkan Oleh"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Langgan"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("Langgan melalui Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Bantu Sokongan Pembangunan"),

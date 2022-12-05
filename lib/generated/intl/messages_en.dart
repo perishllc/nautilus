@@ -580,6 +580,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Set a secondary pin for plausible deniability mode.\n\nIf your wallet is unlocked using this secondary pin, your seed will be replaced with a hash of the existing seed. This is a security feature intended to be used in the event you are forced to open your wallet.\n\nThis pin will act like a normal (correct) pin EXCEPT when unlocking your wallet, which is when plausible deniability mode will activate.\n\nYour funds WILL BE LOST upon entering plausible deniability mode if you have not backed up your seed!"),
         "preferences": MessageLookupByLibrary.simpleMessage("Preferences"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Nautilus Pro Subscription Required"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "For just 1 NANO per month, you can unlock all of the features of Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("Free NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Purchase Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
@@ -775,6 +779,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Split Bill Info"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Split By"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Subscribe"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("Subscribe via Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Help Support Development"),

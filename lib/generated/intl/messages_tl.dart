@@ -115,7 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Error: hindi maabot ang Branch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Babala sa Koneksyon"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("negosyo"),
         "cancel": MessageLookupByLibrary.simpleMessage("Kanselahin"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -237,6 +237,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword": MessageLookupByLibrary.simpleMessage(
             "I-disable ang Wallet Password"),
         "dismiss": MessageLookupByLibrary.simpleMessage("I-dismiss"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Kung hindi ka sigurado kung ano ang ibig sabihin nito, malamang na wala kang isang binhi na ii-import at maaari mo lamang pindutin ang magpatuloy."),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "Mayroon ka bang binhing i-import?"),
         "domainInvalid": MessageLookupByLibrary.simpleMessage(
             "Di-wastong Pangalan ng Domain"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Mag-donate"),
@@ -377,6 +381,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nagkaproblema habang sinusubukang i-handoff block!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "Hindi mahanap ang isang sinusuportahang paraan ng handoff!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("Mayroon akong isang binhi"),
         "hide": MessageLookupByLibrary.simpleMessage("Itago"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Itago ang Account?"),
@@ -387,7 +393,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage(
             "Itago ang Mga Walang Lamang Account"),
         "home": MessageLookupByLibrary.simpleMessage("Tahanan"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Bahay"),
         "hourAgo":
             MessageLookupByLibrary.simpleMessage("Isang oras ang nakaraan"),
         "iUnderstandTheRisks":
@@ -528,9 +534,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hindi gagana nang maayos ang Mga Kahilingan sa Pagbabayad, Memo, at Mensahe."),
         "notifications": MessageLookupByLibrary.simpleMessage("Abiso"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Malabong Impormasyon sa Transaksyon"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Malabong Transaksyon"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "HINDI ito totoong privacy, ngunit mas magiging mahirap para sa tatanggap na makita kung sino ang nagpadala sa kanila ng mga pondo."),
         "off": MessageLookupByLibrary.simpleMessage("Off"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("On"),
@@ -603,6 +612,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Kagustuhan"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Patakaran sa privacy"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Kinakailangan ang Subscription sa Nautilus Pro"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Sa 1 NANO lang bawat buwan, maaari mong i-unlock ang lahat ng feature ng Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("Libreng NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Bumili ng Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
@@ -786,7 +799,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Tingnan ang Nautilus! Ang opisyal na Android Wallet ng Nano!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Ibahagi ang Teksto"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Mamili"),
         "show": MessageLookupByLibrary.simpleMessage("Ipakita"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Impormasyon ng Account"),
@@ -819,6 +832,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Impormasyon ng Split Bill"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Hatiin Ni"),
+        "subscribeButton":
+            MessageLookupByLibrary.simpleMessage("Mag-subscribe"),
+        "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
+            "Mag-subscribe sa pamamagitan ng Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Tulong sa Pag-unlad ng Suporta"),

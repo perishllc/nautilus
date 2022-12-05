@@ -112,7 +112,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Lỗi: không thể truy cập API chi nhánh"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Cảnh báo kết nối"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton":
+            MessageLookupByLibrary.simpleMessage("Việc kinh doanh"),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("mã ngẫu nhiên"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -232,6 +233,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("Vô hiệu hoá mật khẩu ví"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Nếu bạn không chắc điều này có nghĩa là gì thì có thể bạn không có hạt giống để nhập và chỉ có thể nhấn tiếp tục."),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "Bạn có hạt giống để nhập khẩu?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Tên miền không hợp lệ"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Quyên tặng"),
@@ -366,6 +371,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Đã xảy ra sự cố khi cố gắng xử lý khối!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "Không thể tìm thấy phương pháp chuyển giao được hỗ trợ!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("tôi có một hạt giống"),
         "hide": MessageLookupByLibrary.simpleMessage("Ẩn"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Ẩn tài khoản?"),
@@ -376,7 +383,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Ẩn tài khoản trống"),
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Nhà"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Một tiếng trước"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Tôi hiểu những rủi ro"),
@@ -512,9 +519,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Yêu cầu thanh toán, Bản ghi nhớ và Tin nhắn sẽ không hoạt động bình thường."),
         "notifications": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Thông tin giao dịch tối nghĩa"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Giao dịch tối nghĩa"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Đây KHÔNG phải là quyền riêng tư thực sự, nhưng nó sẽ khiến người nhận khó biết được ai đã gửi tiền cho họ."),
         "off": MessageLookupByLibrary.simpleMessage("Tắt"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("Bật"),
@@ -585,6 +595,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Tuỳ chọn"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Chính sách bảo mật"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Yêu cầu đăng ký Nautilus Pro"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Chỉ với 1 NANO mỗi tháng, bạn có thể mở khóa tất cả các tính năng của Nautilus Pro."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("NANO miễn phí"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Mua Nano"),
@@ -759,7 +773,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Thử ngay Nautilus! Ví Nano di động hàng đầu!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Chia sẻ văn bản"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Cửa hàng"),
         "show": MessageLookupByLibrary.simpleMessage("Trình diễn"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Thông tin tài khoản"),
@@ -792,6 +806,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Thông tin tách bạch hóa đơn"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Chia theo"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Đặt mua"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("Đăng ký qua Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Trợ giúp Hỗ trợ Phát triển"),

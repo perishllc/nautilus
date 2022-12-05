@@ -107,7 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "خطأ: لا يمكن الوصول إلى فرع API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("تحذير الاتصال"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("اعمال"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("كلمة التحقق"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -224,6 +224,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("تعطيل كلمة مرور المحفظة\n"),
         "dismiss": MessageLookupByLibrary.simpleMessage("رفض"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "إذا لم تكن متأكدًا مما يعنيه هذا ، فمن المحتمل أنه ليس لديك بذرة لاستيرادها ويمكنك فقط الضغط على متابعة."),
+        "doYouHaveSeedHeader":
+            MessageLookupByLibrary.simpleMessage("هل لديك بذرة لاستيرادها؟"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("اسم مجال غير صالح"),
         "donateButton": MessageLookupByLibrary.simpleMessage("يتبرع"),
@@ -351,6 +355,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "حدث خطأ ما أثناء محاولة تسليم المنع!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "تعذر العثور على طريقة تسليم معتمدة!"),
+        "haveSeedToImport": MessageLookupByLibrary.simpleMessage("لدي بذرة"),
         "hide": MessageLookupByLibrary.simpleMessage("هيدي"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("إخفاء الحساب؟"),
@@ -361,7 +366,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("إخفاء الحسابات الفارغة"),
         "home": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("مسكن"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("قبل ساعة"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("أنا أدرك المخاطر\n"),
@@ -496,9 +501,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "لن تعمل طلبات الدفع والمذكرات والرسائل بشكل صحيح."),
         "notifications": MessageLookupByLibrary.simpleMessage("تنبيهات"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("نيانيكون"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader":
+            MessageLookupByLibrary.simpleMessage("معلومات المعاملات الغامضة"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("معاملة غامضة"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "هذه ليست خصوصية حقيقية ، لكنها ستجعل من الصعب على المستلم معرفة من أرسل الأموال إليه."),
         "off": MessageLookupByLibrary.simpleMessage("غلق"),
         "ok": MessageLookupByLibrary.simpleMessage("طيب"),
         "onStr": MessageLookupByLibrary.simpleMessage("فتح"),
@@ -567,6 +575,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "قم بتعيين دبوس ثانوي لوضع الإنكار المعقول.\n\nإذا تم إلغاء قفل محفظتك باستخدام هذا الدبوس الثانوي ، فسيتم استبدال بذرتك بتجزئة من البذور الموجودة. هذه ميزة أمان مخصصة لاستخدامها في حالة إجبارك على فتح محفظتك.\n\nسيعمل هذا الدبوس مثل دبوس عادي (صحيح) باستثناء عند فتح محفظتك ، وهو الوقت الذي يتم فيه تنشيط وضع الإنكار المعقول.\n\nستفقد أموالك عند الدخول في وضع الإنكار المعقول إذا لم تقم بعمل نسخة احتياطية من البذور الخاصة بك!"),
         "preferences": MessageLookupByLibrary.simpleMessage("الاختيارات"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "الاشتراك في Nautilus Pro مطلوب"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "مقابل 1 NANO فقط شهريًا ، يمكنك فتح جميع ميزات Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("نانو مجاني"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("شراء نانو"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
@@ -738,7 +750,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "راجع نتريوم! محفظة نتريوم الرسمية للهاتف"),
         "shareText": MessageLookupByLibrary.simpleMessage("مشاركة النص"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("محل"),
         "show": MessageLookupByLibrary.simpleMessage("يعرض"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("معلومات الحساب"),
@@ -770,6 +782,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("تقسيم معلومات بيل"),
         "splitBy": MessageLookupByLibrary.simpleMessage("تقسيم حسب"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("الإشتراك"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("اشترك عبر Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("مساعدة في دعم التنمية"),

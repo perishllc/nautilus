@@ -116,7 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "ত্রুটি: শাখা API-এ পৌঁছানো যাচ্ছে না"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("সংযোগ সতর্কতা"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("ব্যবসা"),
         "cancel": MessageLookupByLibrary.simpleMessage("বাতিল"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("ক্যাপচা"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -237,6 +237,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword": MessageLookupByLibrary.simpleMessage(
             "ওয়ালেট পাসওয়ার্ড অক্ষম করুন"),
         "dismiss": MessageLookupByLibrary.simpleMessage("বরখাস্ত করা"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "আপনি যদি নিশ্চিত না হন যে এর মানে কি তাহলে আপনার কাছে সম্ভবত আমদানি করার জন্য কোনো বীজ নেই এবং শুধু চালিয়ে যেতে পারেন।"),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "আপনার কি আমদানি করার বীজ আছে?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("অকার্যকর ডোমেইন নাম"),
         "donateButton": MessageLookupByLibrary.simpleMessage("দান করুন"),
@@ -369,6 +373,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "হ্যান্ডঅফ ব্লক করার চেষ্টা করার সময় কিছু ভুল হয়েছে!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "একটি সমর্থিত হ্যান্ডঅফ পদ্ধতি খুঁজে পাওয়া যায়নি!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("আমার একটা বীজ আছে"),
         "hide": MessageLookupByLibrary.simpleMessage("লুকান"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("অ্যাকাউন্ট লুকান?"),
@@ -379,7 +385,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("খালি অ্যাকাউন্ট লুকান"),
         "home": MessageLookupByLibrary.simpleMessage("হোম"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("বাড়ি"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("এক ঘন্টা আগে"),
         "iUnderstandTheRisks": MessageLookupByLibrary.simpleMessage(
             "আমি ঝুঁকির কারণগুলি বুঝতে পারছি"),
@@ -517,9 +523,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "অর্থপ্রদানের অনুরোধ, মেমো এবং বার্তাগুলি সঠিকভাবে কাজ করবে না।"),
         "notifications": MessageLookupByLibrary.simpleMessage("বিজ্ঞপ্তিপত্র"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("নায়নিকন"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader":
+            MessageLookupByLibrary.simpleMessage("অস্পষ্ট লেনদেনের তথ্য"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("অস্পষ্ট লেনদেন"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "এটি সত্য গোপনীয়তা নয়, তবে এটি প্রাপকের পক্ষে কে তাদের তহবিল পাঠিয়েছে তা দেখতে আরও কঠিন করে তুলবে৷"),
         "off": MessageLookupByLibrary.simpleMessage("বন্ধ"),
         "ok": MessageLookupByLibrary.simpleMessage("আচ্ছা"),
         "onStr": MessageLookupByLibrary.simpleMessage("চালু"),
@@ -588,6 +597,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "যুক্তিযুক্ত অস্বীকারযোগ্যতা মোডের জন্য একটি গৌণ পিন সেট করুন।\n\nএই সেকেন্ডারি পিন ব্যবহার করে আপনার মানিব্যাগ আনলক করা থাকলে, আপনার বীজটি বিদ্যমান বীজের একটি হ্যাশ দিয়ে প্রতিস্থাপিত হবে। এটি এমন একটি নিরাপত্তা বৈশিষ্ট্য যা আপনাকে আপনার ওয়ালেট খুলতে বাধ্য করা হলে ব্যবহার করা হবে।\n\nএই পিনটি আপনার ওয়ালেট আনলক করার সময় ব্যতীত একটি সাধারণ (সঠিক) পিনের মতো কাজ করবে, যেটি যখন যুক্তিযুক্ত অস্বীকারযোগ্যতা মোড সক্রিয় হবে।\n\nআপনি যদি আপনার বীজ ব্যাক আপ না করে থাকেন তাহলে আপনার তহবিলগুলি যুক্তিসঙ্গত অস্বীকৃতি মোডে প্রবেশ করার পরে হারিয়ে যাবে!"),
         "preferences": MessageLookupByLibrary.simpleMessage("পছন্দ"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("গোপনীয়তা নীতি"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "নটিলাস প্রো সাবস্ক্রিপশন প্রয়োজন"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "প্রতি মাসে মাত্র 1 NANO এর জন্য, আপনি Nautilus Pro এর সমস্ত বৈশিষ্ট্য আনলক করতে পারেন।"),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("বিনামূল্যে ন্যানো"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("ন্যানো ক্রয়"),
@@ -767,7 +780,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Check out Nautilus! A premier NANO mobile wallet!"),
         "shareText": MessageLookupByLibrary.simpleMessage("টেক্সট শেয়ার করুন"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("দোকান"),
         "show": MessageLookupByLibrary.simpleMessage("দেখান"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("অ্যাকাউন্ট তথ্য"),
@@ -797,6 +810,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("বিভক্ত বিল তথ্য"),
         "splitBy": MessageLookupByLibrary.simpleMessage("দ্বারা বিভক্ত"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("সাবস্ক্রাইব"),
+        "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
+            "অ্যাপল পে এর মাধ্যমে সদস্যতা নিন"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("সাহায্য সমর্থন উন্নয়ন"),

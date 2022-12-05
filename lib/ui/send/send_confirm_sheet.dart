@@ -75,7 +75,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   late bool animationOpen;
   bool clicking = false;
   bool shownWarning = false;
-  bool obsfucationMode = false;
+  bool obscuredMode = false;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
 
@@ -202,16 +202,16 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         text: TextSpan(
                           text: "",
                           children: [
-                            TextSpan(
-                              text: getThemeAwareRawAccuracy(context, widget.amountRaw),
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
                             displayCurrencySymbol(
                               context,
                               AppStyles.textStyleParagraphPrimary(context),
                             ),
                             TextSpan(
                               text: getRawAsThemeAwareFormattedAmount(context, widget.amountRaw),
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                            TextSpan(
+                              text: getThemeAwareRawAccuracy(context, widget.amountRaw),
                               style: AppStyles.textStyleParagraphPrimary(context),
                             ),
                             TextSpan(
@@ -284,7 +284,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                           textAlign: TextAlign.center,
                         )),
 
-                  // obsfucation checkbox:
+                  // obscured checkbox:
                   if (widget.amountRaw != "0" && widget.link.isEmpty)
                     Container(
                       margin: const EdgeInsets.only(top: 15),
@@ -292,14 +292,14 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Checkbox(
-                            value: obsfucationMode,
+                            value: obscuredMode,
                             activeColor: StateContainer.of(context).curTheme.primary,
-                            onChanged: onObsfuscationChanged,
+                            onChanged: onObscuredChanged,
                           ),
                           const SizedBox(width: 10),
                           GestureDetector(
                             onTap: () {
-                              onObsfuscationChanged(!obsfucationMode);
+                              onObscuredChanged(!obscuredMode);
                             },
                             child: Text(
                               AppLocalization.of(context).obscureTransaction,
@@ -493,7 +493,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
     final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
     if (!isMessage) {
-      if (!obsfucationMode) {
+      if (!obscuredMode) {
         final String privKey = await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(),
             StateContainer.of(context).selectedAccount!.index!, derivationMethod);
         resp = await sl.get<AccountService>().requestSend(
@@ -508,7 +508,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         StateContainer.of(context).wallet!.frontier = resp.hash;
         StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
       } else {
-        sl.get<Logger>().v("OBSFUCATION MODE");
+        sl.get<Logger>().v("OBSCURED MODE");
 
         // random index between 1-4 billion:
         final int randomIndex = Random().nextInt(3000000000) + 1000000000;
@@ -748,7 +748,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     }
   }
 
-  Future<void> onObsfuscationChanged(bool? value) async {
+  Future<void> onObscuredChanged(bool? value) async {
     if (value == null) return;
     if (value) {
       if (!(await AppDialogs.proCheck(context))) {
@@ -756,7 +756,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       }
     }
     setState(() {
-      obsfucationMode = value;
+      obscuredMode = value;
     });
   }
 }

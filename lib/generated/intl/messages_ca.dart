@@ -110,7 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Error: no es pot accedir a l\'API Branch"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Avís de connexió"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Negocis"),
         "cancel": MessageLookupByLibrary.simpleMessage("Zrušit"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -230,6 +230,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("Vypnout heslo peněženky"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Zavrhnout"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Si no esteu segur de què significa això, probablement no tingueu cap llavor per importar i només podeu prémer Continuar."),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "Tens una llavor per importar?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Invalid Domain Name"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Donar"),
@@ -361,6 +365,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "S\'ha produït un error en intentar transferir el bloqueig!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "No s\'ha pogut trobar un mètode de lliurament compatible!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("Tinc una llavor"),
         "hide": MessageLookupByLibrary.simpleMessage("Hide"),
         "hideAccountHeader": MessageLookupByLibrary.simpleMessage("Skrýt účet"),
         "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -370,7 +376,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Amaga els comptes buits"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Casa"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Fa una hora"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Chápu rizika"),
@@ -507,9 +513,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Les sol·licituds de pagament, les notes i els missatges no funcionaran correctament."),
         "notifications": MessageLookupByLibrary.simpleMessage("Upozornění"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Informació de transacció obscura"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Transacció obscura"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Aquesta NO és la veritable privadesa, però farà que sigui més difícil que el destinatari vegi qui els va enviar els fons."),
         "off": MessageLookupByLibrary.simpleMessage("Off"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("On"),
@@ -580,6 +589,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Předvolby"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage(
             "Zásady ochrany osobních údajů"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Cal subscriure a Nautilus Pro"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Per només 1 NANO al mes, podeu desbloquejar totes les funcions de Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("NANO gratuït"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Purchase Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
@@ -756,7 +769,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Vyzkoušejte Nautilus! Špičková mobilní peněženka NANO!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Comparteix el text"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Botiga"),
         "show": MessageLookupByLibrary.simpleMessage("Espectacle"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Informació del compte"),
@@ -788,6 +801,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Informació de factura dividida"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dividit per"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Subscriu-te"),
+        "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
+            "Subscriu-te mitjançant Apple Pay"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Ajuda al desenvolupament"),

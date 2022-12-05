@@ -87,7 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorShortDesc":
             MessageLookupByLibrary.simpleMessage("錯誤：無法訪問分支 API"),
         "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage("連接警告"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("商業"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("驗證碼"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -179,6 +179,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("錢包密碼已解除"),
         "disableWalletPassword": MessageLookupByLibrary.simpleMessage("解除錢包密碼"),
         "dismiss": MessageLookupByLibrary.simpleMessage("解僱"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "如果您不確定這意味著什麼，那麼您可能沒有要導入的種子，可以按繼續。"),
+        "doYouHaveSeedHeader":
+            MessageLookupByLibrary.simpleMessage("你有種子要進口嗎？"),
         "domainInvalid": MessageLookupByLibrary.simpleMessage("無效的網域名稱"),
         "donateButton": MessageLookupByLibrary.simpleMessage("捐"),
         "donateToSupport": MessageLookupByLibrary.simpleMessage("支持項目"),
@@ -284,6 +288,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "handoffFailed": MessageLookupByLibrary.simpleMessage("嘗試切換塊時出現問題！"),
         "handoffSupportedMethodNotFound":
             MessageLookupByLibrary.simpleMessage("找不到受支持的切換方法！"),
+        "haveSeedToImport": MessageLookupByLibrary.simpleMessage("我有一顆種子"),
         "hide": MessageLookupByLibrary.simpleMessage("隱藏"),
         "hideAccountHeader": MessageLookupByLibrary.simpleMessage("隱藏帳戶？"),
         "hideAccountsConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -291,7 +296,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideAccountsHeader": MessageLookupByLibrary.simpleMessage("隱藏帳戶？"),
         "hideEmptyAccounts": MessageLookupByLibrary.simpleMessage("隱藏空賬戶"),
         "home": MessageLookupByLibrary.simpleMessage("首頁"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("家"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("一小時前"),
         "iUnderstandTheRisks": MessageLookupByLibrary.simpleMessage("我已理解風險"),
         "ignore": MessageLookupByLibrary.simpleMessage("忽略"),
@@ -399,9 +404,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("付款請求、備忘錄和消息將無法正常運行。"),
         "notifications": MessageLookupByLibrary.simpleMessage("通知"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("尼亞諾克"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage("模糊的交易信息"),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage("模糊交易"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "這不是真正的隱私，但它會讓收款人更難看到是誰給他們匯款的。"),
         "off": MessageLookupByLibrary.simpleMessage("關閉"),
         "ok": MessageLookupByLibrary.simpleMessage("好"),
         "onStr": MessageLookupByLibrary.simpleMessage("開啟"),
@@ -456,6 +462,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "為似是而非的否認模式設置輔助引腳。\n\n如果您的錢包使用此輔助密碼解鎖，您的種子將替換為現有種子的哈希值。這是一項安全功能，旨在在您被迫打開錢包的情況下使用。\n\n除了解鎖你的錢包時，這個密碼就像一個正常的（正確的）密碼，這是在合理的否認模式將激活的時候。\n\n如果您沒有備份您的種子，您的資金將在進入合理否認模式時丟失！"),
         "preferences": MessageLookupByLibrary.simpleMessage("個人偏好"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("隱私政策"),
+        "proSubRequiredHeader":
+            MessageLookupByLibrary.simpleMessage("需要訂閱 Nautilus Pro"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "每月只需 1 NANO，您就可以解鎖 Nautilus Pro 的所有功能。"),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("免費納米"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("購買納米"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage("二維條碼不含有效的地址"),
@@ -597,7 +607,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "請試試 Nautilus —— 針對行動裝置的 NANO 錢包！"),
         "shareText": MessageLookupByLibrary.simpleMessage("分享文字"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("店鋪"),
         "show": MessageLookupByLibrary.simpleMessage("節目"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("帳戶信息"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage("顯示賬戶二維碼"),
@@ -619,6 +629,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "一次發送一堆付款請求！例如，它可以很容易地在餐廳拆分賬單。"),
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage("拆分賬單信息"),
         "splitBy": MessageLookupByLibrary.simpleMessage("拆分依據"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("訂閱"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("通過 Apple Pay 訂閱"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage("幫助支持發展"),
         "supportTheDeveloper": MessageLookupByLibrary.simpleMessage("支持開發人員"),

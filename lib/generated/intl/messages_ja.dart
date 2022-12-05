@@ -98,7 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorShortDesc":
             MessageLookupByLibrary.simpleMessage("エラー: Branch API にアクセスできません"),
         "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage("接続警告"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("仕事"),
         "cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("キャプチャ"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -199,6 +199,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("ウォレットのパスワードを無効にする"),
         "dismiss": MessageLookupByLibrary.simpleMessage("却下"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "これが何を意味するのかわからない場合は、おそらくインポートするシードがなく、そのまま [続行] を押すことができます。"),
+        "doYouHaveSeedHeader":
+            MessageLookupByLibrary.simpleMessage("輸入する種子はありますか？"),
         "domainInvalid": MessageLookupByLibrary.simpleMessage("ドメイン名が無効です"),
         "donateButton": MessageLookupByLibrary.simpleMessage("寄付"),
         "donateToSupport": MessageLookupByLibrary.simpleMessage("プロジェクトを支援する"),
@@ -314,6 +318,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ブロックのハンドオフ中に問題が発生しました!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "サポートされているハンドオフ方法が見つかりませんでした!"),
+        "haveSeedToImport": MessageLookupByLibrary.simpleMessage("私は種を持っています"),
         "hide": MessageLookupByLibrary.simpleMessage("隠す"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("アカウントを非表示にしますか？"),
@@ -324,7 +329,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("空のアカウントを非表示"),
         "home": MessageLookupByLibrary.simpleMessage("ホーム"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("家"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("1時間前"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("リスクを理解しました。"),
@@ -444,9 +449,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "支払い請求、メモ、およびメッセージは正しく機能しません。"),
         "notifications": MessageLookupByLibrary.simpleMessage("通知"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("ニャニコン"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage("あいまいな取引情報"),
+        "obscureTransaction": MessageLookupByLibrary.simpleMessage("曖昧な取引"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "これは真のプライバシーではありませんが、誰が送金したかを受信者が確認するのが難しくなります."),
         "off": MessageLookupByLibrary.simpleMessage("オフ"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "onStr": MessageLookupByLibrary.simpleMessage("オン"),
@@ -508,6 +514,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "もっともらしい否認モードのセカンダリ ピンを設定します。\n\nこのセカンダリ PIN を使用してウォレットのロックを解除すると、シードは既存のシードのハッシュに置き換えられます。これは、ウォレットを開くことを余儀なくされた場合に使用するためのセキュリティ機能です。\n\nこのピンは、もっともらしい否認モードがアクティブになるウォレットのロックを解除する場合を除いて、通常の (正しい) ピンのように機能します。\n\nシードをバックアップしていない場合、もっともらしい否認モードに入ると、資金が失われます!"),
         "preferences": MessageLookupByLibrary.simpleMessage("設定"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("個人情報保護方針"),
+        "proSubRequiredHeader":
+            MessageLookupByLibrary.simpleMessage("Nautilus Pro サブスクリプションが必要"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "毎月わずか 1 NANO で、Nautilus Pro のすべての機能のロックを解除できます。"),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("フリーナノ"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("ナノを購入"),
         "qrInvalidAddress":
@@ -663,7 +673,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "優秀なナノモバイルウォレットであるナトリアムを使ってみましょう。"),
         "shareText": MessageLookupByLibrary.simpleMessage("テキストを共有"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("店"),
         "show": MessageLookupByLibrary.simpleMessage("見せる"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("アカウント情報"),
         "showAccountQR":
@@ -687,6 +697,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "一度にたくさんの支払いリクエストを送信してください！たとえば、レストランで請求書を簡単に分割できます。"),
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage("分割請求情報"),
         "splitBy": MessageLookupByLibrary.simpleMessage("分割"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("申し込む"),
+        "subscribeWithApple":
+            MessageLookupByLibrary.simpleMessage("Apple Pay で購読する"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("ヘルプ サポート開発"),

@@ -47,16 +47,16 @@ class _FundingMessageCardState extends State<FundingMessageCard> {
       text: TextSpan(
         text: "",
         children: [
-          TextSpan(
-            text: getThemeAwareRawAccuracy(context, amountRaw),
-            style: AppStyles.textStyleParagraphPrimary(context),
-          ),
           displayCurrencySymbol(
             context,
             AppStyles.textStyleParagraphPrimary(context),
           ),
           TextSpan(
             text: getRawAsThemeAwareFormattedAmount(context, amountRaw),
+            style: AppStyles.textStyleParagraphPrimary(context),
+          ),
+          TextSpan(
+            text: getThemeAwareRawAccuracy(context, amountRaw),
             style: AppStyles.textStyleParagraphPrimary(context),
           ),
         ],

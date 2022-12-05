@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:logger/logger.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:nautilus_wallet_flutter/app_icons.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
@@ -197,7 +201,7 @@ class AppDialogs {
 
     if (!showDialog) return false;
 
-    final bool res = await showAppDialog(
+    await showAppDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
@@ -206,15 +210,18 @@ class AppDialogs {
             borderRadius: BorderRadius.circular(15),
           ),
           title: Text(
-            "Nautilus Pro Subscription Required",
+            AppLocalization.of(context).proSubRequiredHeader,
             style: AppStyles.textStyleButtonPrimaryOutline(context),
           ),
-          content: Text("1 Nano a month", style: AppStyles.textStyleParagraph(context)),
+          content: Text(
+            AppLocalization.of(context).proSubRequiredParagraph,
+            style: AppStyles.textStyleParagraph(context),
+          ),
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                padding: const EdgeInsets.all(12),
+                // padding: const EdgeInsets.all(12),
               ),
               child: Container(
                 constraints: const BoxConstraints(maxWidth: 100),
@@ -224,27 +231,54 @@ class AppDialogs {
                   style: AppStyles.textStyleDialogButtonText(context),
                 ),
               ),
-              onPressed: () {
-                Navigator.of(context).pop(false);
+              onPressed: () async {
+                Navigator.of(context).pop();
               },
             ),
+            if (Platform.isIOS)
+              TextButton(
+                style: TextButton.styleFrom(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                ),
+                child: Container(
+                  constraints: const BoxConstraints(maxWidth: 100),
+                  child: Text(
+                    AppLocalization.of(context).subscribeWithApple,
+                    textAlign: TextAlign.center,
+                    style: AppStyles.textStyleDialogButtonText(context),
+                  ),
+                ),
+                onPressed: () async {
+                  final InAppPurchase _iap = InAppPurchase.instance;
+                  if (!(await _iap.isAvailable())) return;
+                  const Set<String> ids = <String>{"pro_sub_1_month_pass"};
+                  final ProductDetailsResponse response = await _iap.queryProductDetails(ids);
+                  if (response.notFoundIDs.isNotEmpty) {
+                    // Handle the error.
+                  }
+                  List<ProductDetails> products = response.productDetails;
+
+                  sl.get<Logger>().d("products: $products");
+
+                  // Navigator.of(context).pop();
+                },
+              ),
             TextButton(
               style: TextButton.styleFrom(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                padding: const EdgeInsets.all(12),
+                // padding: const EdgeInsets.all(12),
               ),
               child: Container(
                 constraints: const BoxConstraints(maxWidth: 100),
                 child: Text(
-                  "Subscribe",
+                  AppLocalization.of(context).subscribeButton,
                   textAlign: TextAlign.center,
                   style: AppStyles.textStyleDialogButtonText(context),
                 ),
               ),
               onPressed: () async {
-                Navigator.of(context).pop(false);
                 // Go to send with address
-                Future<void>.delayed(const Duration(milliseconds: 1000), () {
+                await Future<void>.delayed(const Duration(milliseconds: 1000), () {
                   Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
                   Sheets.showAppHeightNineSheet(
@@ -261,8 +295,8 @@ class AppDialogs {
           ],
         );
       },
-    ) as bool;
-    return res;
+    );
+    return false;
   }
 
   static Future<void> showInfoDialog(

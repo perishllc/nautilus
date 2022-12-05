@@ -113,7 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "त्रुटि: शाखा एपीआई तक नहीं पहुंच सकता"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("कनेक्शन चेतावनी"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("व्यवसाय"),
         "cancel": MessageLookupByLibrary.simpleMessage("रद्द करें"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("कॅप्चा"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -232,6 +232,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("वॉलेट पासवर्ड अक्षम करें"),
         "dismiss": MessageLookupByLibrary.simpleMessage("खारिज"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "यदि आप सुनिश्चित नहीं हैं कि इसका क्या अर्थ है तो आपके पास आयात करने के लिए बीज नहीं है और आप बस जारी रखें दबा सकते हैं।"),
+        "doYouHaveSeedHeader": MessageLookupByLibrary.simpleMessage(
+            "क्या आपके पास आयात करने के लिए बीज है?"),
         "domainInvalid": MessageLookupByLibrary.simpleMessage("अवैध डोमेन नाम"),
         "donateButton": MessageLookupByLibrary.simpleMessage("दान देना"),
         "donateToSupport":
@@ -362,6 +366,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "ब्लॉक को हैंडऑफ़ करने का प्रयास करते समय कुछ गलत हो गया!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "एक समर्थित हैंडऑफ़ विधि नहीं मिली!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("मेरे पास एक बीज है"),
         "hide": MessageLookupByLibrary.simpleMessage("छिपाएँ"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("खाता छुपाएं?"),
@@ -372,7 +378,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("खाली खाते छुपाएं"),
         "home": MessageLookupByLibrary.simpleMessage("होम"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("घर"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("एक घंटे पहले"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("मैं जोखिमो को समझता हूँ"),
@@ -505,9 +511,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "भुगतान अनुरोध, मेमो और संदेश ठीक से काम नहीं करेंगे।"),
         "notifications": MessageLookupByLibrary.simpleMessage("सूचनाएं"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("न्यैनिकॉन"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader":
+            MessageLookupByLibrary.simpleMessage("अस्पष्ट लेन-देन की जानकारी"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("अस्पष्ट लेन-देन"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "यह सच्ची गोपनीयता नहीं है, लेकिन इससे प्राप्तकर्ता के लिए यह देखना कठिन हो जाएगा कि किसने उन्हें धन भेजा है।"),
         "off": MessageLookupByLibrary.simpleMessage("बंद"),
         "ok": MessageLookupByLibrary.simpleMessage("ओके"),
         "onStr": MessageLookupByLibrary.simpleMessage("चालू"),
@@ -578,6 +587,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences":
             MessageLookupByLibrary.simpleMessage("पसंद | प्रेफरेन्सेस"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("गोपनीयता नीति"),
+        "proSubRequiredHeader":
+            MessageLookupByLibrary.simpleMessage("नॉटिलस प्रो सदस्यता आवश्यक"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "केवल 1 नैनो प्रति माह के लिए, आप Nautilus Pro की सभी विशेषताओं को अनलॉक कर सकते हैं।"),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("मुफ़्त नैनो"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("नैनो खरीदें"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
@@ -752,7 +765,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "नैट्रियम की जाँच करें! एक प्रमुख नैनो मोबाइल वॉलेट!"),
         "shareText": MessageLookupByLibrary.simpleMessage("पाठ साझा करें"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("दुकान"),
         "show": MessageLookupByLibrary.simpleMessage("प्रदर्शन"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("खाता जानकारी"),
         "showAccountQR":
@@ -783,6 +796,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("स्प्लिट बिल जानकारी"),
         "splitBy": MessageLookupByLibrary.simpleMessage("विभाजित करके"),
+        "subscribeButton":
+            MessageLookupByLibrary.simpleMessage("सदस्यता लेने के"),
+        "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
+            "ऐप्पल पे के माध्यम से सदस्यता लें"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("सहायता समर्थन विकास"),

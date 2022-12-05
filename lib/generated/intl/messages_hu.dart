@@ -114,7 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hiba: nem érhető el a Branch API"),
         "branchConnectErrorTitle":
             MessageLookupByLibrary.simpleMessage("Csatlakozási figyelmeztetés"),
-        "businessButton": MessageLookupByLibrary.simpleMessage(""),
+        "businessButton": MessageLookupByLibrary.simpleMessage("Üzleti"),
         "cancel": MessageLookupByLibrary.simpleMessage("Mégse"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
@@ -235,6 +235,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "disableWalletPassword":
             MessageLookupByLibrary.simpleMessage("Disable Wallet Password"),
         "dismiss": MessageLookupByLibrary.simpleMessage("Elutasítja"),
+        "doYouHaveSeedBody": MessageLookupByLibrary.simpleMessage(
+            "Ha nem biztos benne, hogy ez mit jelent, akkor valószínűleg nincs importálandó magja, és egyszerűen megnyomhatja a Folytatás gombot."),
+        "doYouHaveSeedHeader":
+            MessageLookupByLibrary.simpleMessage("Van importálandó vetőmagod?"),
         "domainInvalid":
             MessageLookupByLibrary.simpleMessage("Érvénytelen domain név"),
         "donateButton": MessageLookupByLibrary.simpleMessage("Adományoz"),
@@ -371,6 +375,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hiba történt a blokk átadása közben!"),
         "handoffSupportedMethodNotFound": MessageLookupByLibrary.simpleMessage(
             "Nem található támogatott átadási módszer!"),
+        "haveSeedToImport":
+            MessageLookupByLibrary.simpleMessage("van egy magom"),
         "hide": MessageLookupByLibrary.simpleMessage("elrejtése"),
         "hideAccountHeader":
             MessageLookupByLibrary.simpleMessage("Hide Account?"),
@@ -381,7 +387,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Üres fiókok elrejtése"),
         "home": MessageLookupByLibrary.simpleMessage("Otthon"),
-        "homeButton": MessageLookupByLibrary.simpleMessage(""),
+        "homeButton": MessageLookupByLibrary.simpleMessage("itthon"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Egy órája"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("I Understand the Risks"),
@@ -520,9 +526,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "A fizetési kérelmek, emlékeztetők és üzenetek nem működnek megfelelően."),
         "notifications": MessageLookupByLibrary.simpleMessage("Értesítések"),
         "nyanicon": MessageLookupByLibrary.simpleMessage("Nyanicon"),
-        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransaction": MessageLookupByLibrary.simpleMessage(""),
-        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(""),
+        "obscureInfoHeader": MessageLookupByLibrary.simpleMessage(
+            "Homályos tranzakciós információ"),
+        "obscureTransaction":
+            MessageLookupByLibrary.simpleMessage("Homályos tranzakció"),
+        "obscureTransactionBody": MessageLookupByLibrary.simpleMessage(
+            "Ez NEM valódi adatvédelem, de megnehezíti a címzett számára, hogy láthassa, ki küldte neki az összeget."),
         "off": MessageLookupByLibrary.simpleMessage("Ki"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "onStr": MessageLookupByLibrary.simpleMessage("Be"),
@@ -594,6 +603,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferences": MessageLookupByLibrary.simpleMessage("Preferenciák"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Adatvédelmi Szabályzat"),
+        "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(
+            "Nautilus Pro előfizetés szükséges"),
+        "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
+            "Mindössze havi 1 NANO-ért feloldhatja a Nautilus Pro összes funkcióját."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Ingyenes NANO"),
         "purchaseNano": MessageLookupByLibrary.simpleMessage("Vásárlás Nano"),
@@ -771,7 +784,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareNautilusText": MessageLookupByLibrary.simpleMessage(
             "Próbáld ki a Nautilusot, a Nano hivatalos Androidos tárcáját!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Szöveg megosztása"),
-        "shopButton": MessageLookupByLibrary.simpleMessage(""),
+        "shopButton": MessageLookupByLibrary.simpleMessage("Üzlet"),
         "show": MessageLookupByLibrary.simpleMessage("Előadás"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Számlainformáció"),
@@ -803,6 +816,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Split Bill Info"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Felosztás"),
+        "subscribeButton": MessageLookupByLibrary.simpleMessage("Iratkozz fel"),
+        "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
+            "Előfizetés az Apple Pay-en keresztül"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Segítség Támogatás Fejlesztés"),
