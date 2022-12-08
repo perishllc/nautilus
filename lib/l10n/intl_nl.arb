@@ -165,6 +165,11 @@
     "type": "text",
     "description": "auto_lock_header"
   },
+  "autoRenewSub": "Abonnement automatisch verlengen",
+  "@autoRenewSub": {
+    "type": "text",
+    "description": "auto_renew_sub"
+  },
   "backupConfirmButton": "Ik heb er een back-up van gemaakt",
   "@backupConfirmButton": {
     "type": "text",

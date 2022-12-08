@@ -1,7 +1,9 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, non_constant_identifier_names
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
+import 'dart:io';
 
 import 'package:ens_dart/ens_dart.dart';
 import 'package:flutter/foundation.dart';
@@ -11,7 +13,13 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:nautilus_wallet_flutter/generated/rust/username_registration.dart';
+import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
+import 'package:nautilus_wallet_flutter/model/db/user.dart';
+import 'package:nautilus_wallet_flutter/model/state_block.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
+import 'package:nautilus_wallet_flutter/network/model/request/process_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/account_info_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/block_info_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
@@ -19,11 +27,22 @@ import 'package:nautilus_wallet_flutter/network/model/response/process_response.
 import 'package:nautilus_wallet_flutter/network/model/response/receivable_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/receivable_response_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:nautilus_wallet_flutter/ui/send/send_xmr_sheet.dart';
 import 'package:nautilus_wallet_flutter/util/blake2b.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
 import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:web_socket_channel/io.dart';
+
+// rust libs:
+const String libbase = "nano_username_registration";
+final String path = Platform.isWindows ? "$libbase.dll" : "lib$libbase.so";
+final DynamicLibrary dylib = Platform.isIOS
+    ? DynamicLibrary.process()
+    : Platform.isMacOS
+        ? DynamicLibrary.executable()
+        : DynamicLibrary.open(path);
+final NanoUsernameRegistrationImpl api = NanoUsernameRegistrationImpl(dylib);
 
 late Web3Client _web3Client;
 late Ens ens;
@@ -32,14 +51,18 @@ Map? decodeJson(dynamic src) {
   return json.decode(src as String) as Map?;
 }
 
-// const String USERNAME_PREFIX = "username_registration_testing";
-const String USERNAME_PREFIX = "username_registration";
+// const String USERNAME_SPACE = "username registration";
 
 // UsernameService singleton
 class UsernameService {
+  String USERNAME_SPACE = "username_registration_v1.0.0";
+
   // Constructor
   UsernameService() {
     initCommunication();
+    if (kDebugMode) {
+      USERNAME_SPACE = "username_registration_test";
+    }
   }
 
   // Server Connection Strings
@@ -63,7 +86,6 @@ class UsernameService {
   static const String UD_ENDPOINT = "https://unstoppabledomains.g.alchemy.com/domains/";
   static const String ENS_RPC_ENDPOINT = "https://mainnet.infura.io/v3/";
   static const String ENS_WSS_ENDPOINT = "wss://mainnet.infura.io/ws/v3/";
-  // UD / ENS:
   static late Web3Client _web3Client;
   static late Ens ens;
 
@@ -71,8 +93,8 @@ class UsernameService {
 
   Future<void> initCommunication() async {
     // ENS:
-    String rpcUrl = "https://mainnet.infura.io/v3/${dotenv.env["INFURA_API_KEY"]!}";
-    String wsUrl = "wss://mainnet.infura.io/ws/v3/${dotenv.env["INFURA_API_KEY"]!}";
+    final String rpcUrl = "https://mainnet.infura.io/v3/${dotenv.env["INFURA_API_KEY"]!}";
+    final String wsUrl = "wss://mainnet.infura.io/ws/v3/${dotenv.env["INFURA_API_KEY"]!}";
 
     _web3Client = Web3Client(rpcUrl, http.Client(), socketConnector: () {
       return IOWebSocketChannel.connect(wsUrl).cast<String>();
@@ -81,8 +103,8 @@ class UsernameService {
   }
 
   Future<String?> checkUnstoppableDomain(String domain) async {
-    final http.Response response = await http.get(Uri.parse(UD_ENDPOINT + domain),
-        headers: {'Content-type': 'application/json', 'Authorization': 'Bearer ${dotenv.env["UD_API_KEY"]!}'});
+    final http.Response response =
+        await http.get(Uri.parse(UD_ENDPOINT + domain), headers: {'Content-type': 'application/json', 'Authorization': 'Bearer ${dotenv.env["UD_API_KEY"]!}'});
 
     if (response.statusCode != 200) {
       return null;
@@ -122,9 +144,8 @@ class UsernameService {
 
     // GET the SRV record using Cloudflare's DNS over HTTPS API:
 
-    final http.Response dnsSRVResp = await http.get(
-        Uri.parse("https://cloudflare-dns.com/dns-query?name=$tld&type=SRV"),
-        headers: {"Accept": "application/dns-json"});
+    final http.Response dnsSRVResp =
+        await http.get(Uri.parse("https://cloudflare-dns.com/dns-query?name=$tld&type=SRV"), headers: {"Accept": "application/dns-json"});
     if (dnsSRVResp.statusCode != 200) {
       return null;
     }
@@ -147,9 +168,8 @@ class UsernameService {
 
     // GET /v1/addresses?alias=alice$domain.tld&address_type=300
 
-    final http.Response response = await http.get(
-        Uri.parse("https://$resolvedDomain/v1/addresses?alias=$domain&address_type=300"),
-        headers: {"Accept": "application/json"});
+    final http.Response response =
+        await http.get(Uri.parse("https://$resolvedDomain/v1/addresses?alias=$domain&address_type=300"), headers: {"Accept": "application/json"});
     if (response.statusCode != 200) {
       return null;
     }
@@ -160,9 +180,9 @@ class UsernameService {
     return null;
   }
 
+  // NANO.TO:
   Future<dynamic> checkNanoToUsernameAvailability(String username) async {
-    final http.Response response = await http
-        .get(Uri.parse("$NANO_TO_USERNAME_LEASE_ENDPOINT/$username/lease"), headers: {"Accept": "application/json"});
+    final http.Response response = await http.get(Uri.parse("$NANO_TO_USERNAME_LEASE_ENDPOINT/$username/lease"), headers: {"Accept": "application/json"});
     final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
     return decoded;
   }
@@ -179,126 +199,49 @@ class UsernameService {
     return decoded;
   }
 
+  Future<List<User>?> fetchNanoToKnown(http.Client client) async {
+    http.Response response = await client.get(Uri.parse(NANO_TO_KNOWN_ENDPOINT));
+    // todo: use the compute function to run parseUsers in a separate isolate
+
+    final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
+    return parsed.map<User>((json) {
+      final User user = User.fromJson(json as Map<String, dynamic>);
+      user.type = UserTypes.NANO_TO;
+      user.nickname = null;
+      return user;
+    }).toList() as List<User>;
+  }
+
+  // END NANO.TO
+
   // ON CHAIN USERNAMES:
   // credit where credit is due to plasmapower:
 
-  Future<String?> getAddressFromUsername(String username) async {
-// To lookup the account of a username:
-// 1. Compute the account A2 which has the private key blake2b("username registration:" + username)
-// 2. If it has not been opened, it's unregistered
-// 3. If it has been opened, check if the rep field encodes the username. If so, the sender of the send which was received in the open block is the owner of the username. Otherwise, it's permanently unregistered.
-
-    final String a2PrivateKey =
-        NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode("username registration:$username"))));
-    final String a2Account = NanoUtil.privateKeyToPublicAddress(a2PrivateKey);
-
-    final AccountInfoResponse accountInfo = await sl.get<AccountService>().getAccountInfo(a2Account);
-
-    if (accountInfo.unopened) {
-      return null;
+  Future<void> registerOnchainUsername(BuildContext context, String username) async {
+    try {
+      await registerUsernameToAccountMap(context, username);
+    } catch (error) {
+      throw Exception("Error registering username to account map: $error");
     }
-
-    // account is opened:
-
-    return null;
   }
 
-  Future<String?> getUsernameFromAddress(String username) async {
-// To lookup the username of an account:
-// 1. Compute the account A3 which has the public key A + blake2b("username registration")*G
-// 2. If it has not been opened, this account does not have an associated username
-// 3. If it has been opened, its rep field encodes a username
-// 4. Important: lookup the account of that username. If it's unregistered or registered to a different account, this account is said to not have an associated username.
-// 5. If the username -> account mapping returns the A, then that username is the associated username of the account
-
-    return null;
-  }
-
-  Future<bool> checkUsernameAvailability(String username) async {
-    final String A2PrivateKey = NanoHelpers.byteToHex(blake2b(
-      NanoHelpers.stringToBytesUtf8(
-        "$USERNAME_PREFIX:$username",
-      ),
-    ));
-    final String A2PublicKey = NanoUtil.createPublicKey(A2PrivateKey);
-    final String A2Account = NanoUtil.privateKeyToPublicAddress(A2PrivateKey);
-
-    // check if the account has any blocks, if it does, it's taken:
-    final AccountInfoResponse accountInfo = await sl.get<AccountService>().getAccountInfo(A2Account);
-    if (accountInfo.unopened) {
-      return true;
-    }
-
-    return false;
-  }
-
-  // LOOKUP FUNCTIONS:
-  Future<String?> checkOnchainUsername(String username) async {
-    final String A2PrivateKey = NanoHelpers.byteToHex(blake2b(
-      NanoHelpers.stringToBytesUtf8(
-        "$USERNAME_PREFIX:$username",
-      ),
-    ));
-    final String A2PublicKey = NanoUtil.createPublicKey(A2PrivateKey);
-    final String A2Account = NanoUtil.privateKeyToPublicAddress(A2PrivateKey);
-
-    // check if the account has any blocks, if it does, it's taken:
-    final AccountInfoResponse accountInfo = await sl.get<AccountService>().getAccountInfo(A2Account);
-    print(accountInfo.frontier);
-
-    print("@@@@@@@@@@@@2");
-    print(A2Account);
-    if (accountInfo.unopened) {
-      return null;
-    }
-
-    // get the open block:
-    final String? openBlockHash = accountInfo.openBlock;
-    if (openBlockHash == null) {
-      return null;
-    }
-    final BlockInfoItem blockInfoItem = await sl.get<AccountService>().requestBlockInfo(openBlockHash);
-    if (blockInfoItem.confirmed != true) {
-      throw Exception("Failed to confirm open block!");
-    }
-
-    if (blockInfoItem.contents == null) {
-      throw Exception("Failed to get contents of open block!");
-    }
-
-    // check if the rep field encodes the username:
-    final Map<String, String?> openBlockContents = json.decode(blockInfoItem.contents!) as Map<String, String?>;
-    String rep = openBlockContents["representative"]!;
-    print("rep: $rep");
-
-    // check if the rep field encodes the username:
-    final String repDecodedUsername = "TODO: $rep";
-    if (repDecodedUsername != username) {
-      return null;
-    }
-
-    // the person who sent the open block to the account is the owner of the username:
-    final String? sender = openBlockContents["link_as_account"];
-    return sender;
-  }
-
-  Future<void> registerUsername(BuildContext context, String username) async {
+  Future<void> registerUsernameToAccountMap(BuildContext context, String username) async {
     // Suppose your private key is P, and your account is A.
     // Part 1 to registration: Register a username -> account mapping:
     // 1. Compute the account A2 which has the private key: blake2b("username registration:" + username)
 
-    final bool isAvailable = await checkUsernameAvailability(username);
+    final bool isAvailable = await checkOnchainUsernameAvailability(username);
     if (!isAvailable) {
       throw Exception("Username is already registered");
     }
 
     final String A2PrivateKey = NanoHelpers.byteToHex(blake2b(
       NanoHelpers.stringToBytesUtf8(
-        "$USERNAME_PREFIX:$username",
+        "$USERNAME_SPACE:$username",
       ),
     ));
-    final String A2PublicKey = NanoUtil.createPublicKey(A2PrivateKey);
-    final String A2Account = NanoUtil.privateKeyToPublicAddress(A2PrivateKey);
+    final String A2PublicKey = NanoUtil.privateKeyToPublic(A2PrivateKey);
+    final String A2Account = NanoUtil.privateKeyToAddress(A2PrivateKey);
 
     const String ONE_RAW = "1";
 
@@ -311,7 +254,7 @@ class UsernameService {
     );
 
     // send raw to A2:
-    ProcessResponse resp = await sl.get<AccountService>().requestSend(
+    final ProcessResponse resp = await sl.get<AccountService>().requestSend(
           StateContainer.of(context).wallet!.representative,
           StateContainer.of(context).wallet!.frontier,
           ONE_RAW,
@@ -321,17 +264,23 @@ class UsernameService {
           max: false,
         );
 
+    // TODO: check confirmation:
+    await Future<dynamic>.delayed(const Duration(milliseconds: 3000));
+
+    // update the wallet history:
+    await StateContainer.of(context).requestUpdate();
+
     // receive the open block on A2:
     Uint8List usernameEncodedBytes = NanoHelpers.stringToBytesUtf8(username);
     while (usernameEncodedBytes.length < 32) {
-      usernameEncodedBytes.add(0);
+      usernameEncodedBytes = Uint8List.fromList(usernameEncodedBytes.toList()..add(0));
     }
-    final String representativeEncodedUsername = NanoUtil.publicKeyToPublicAddress(
+    final String representativeEncodedUsername = NanoUtil.publicKeyToAddress(
       NanoHelpers.byteToHex(usernameEncodedBytes),
     );
 
     // Receive receivable blocks
-    final ReceivableResponse pr = await sl.get<AccountService>().getReceivable(A2Account, 10);
+    final ReceivableResponse pr = await sl.get<AccountService>().getReceivable(A2Account, 10, threshold: "0");
     final Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks!;
     String? receivedHash;
     for (final String hash in receivableBlocks.keys) {
@@ -356,14 +305,141 @@ class UsernameService {
     if (blockInfoItem.confirmed != true) {
       throw Exception("Failed to confirm open block P1!");
     }
+  }
 
+  Future<void> registerAccountToUsernameMap(BuildContext context, String username) async {
     // Part 2 to registration: Register an account -> username mapping:
     // 1. Prerequisite: verify that you have a confirmed username -> account mapping for this username
     // TODO:
+
+    final String? accountOwner = await checkOnchainUsername(username);
+    if (accountOwner != StateContainer.of(context).wallet!.address) {
+      throw Exception("Username mapping isn't already registered");
+    }
+
+    // final String A2PrivateKey = NanoHelpers.byteToHex(blake2b(
+    //   NanoHelpers.stringToBytesUtf8(
+    //     "$USERNAME_SPACE:$username",
+    //   ),
+    // ));
+    // final String A2Account = NanoUtil.privateKeyToAddress(A2PrivateKey);
+
     // 2. Compute the account A3 which has the expanded private key P + blake2b("username registration")*G where G is the ed25519 basepoint and P is assumed to be already expanded here
+    final String publicKey = NanoUtil.addressToPublicKey(StateContainer.of(context).wallet!.address!);
+    final U8Array32 publicKeyBytes = U8Array32(NanoHelpers.hexToBytes(publicKey));
+    final U8Array32? A3PublicKey = await api.publicKeyUsernameRegistration(namespace: USERNAME_SPACE, publicKey: publicKeyBytes);
+    final String A3Account = NanoUtil.publicKeyToAddress(NanoHelpers.byteToHex(Uint8List.fromList(A3PublicKey!.toList())));
 
     // 3. Send 1 raw from your account to A3
-    // 4. Receive the 1 raw as the open block on A3 which a representative field encoding your username in ASCII. You can sign this because you can compute A3's expanded private key given your own.
+    const String ONE_RAW = "1";
+
+    final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+    final String privKey = await NanoUtil.uniSeedToPrivate(
+      await StateContainer.of(context).getSeed(),
+      StateContainer.of(context).selectedAccount!.index!,
+      derivationMethod,
+    );
+    final ProcessResponse resp = await sl.get<AccountService>().requestSend(
+          StateContainer.of(context).wallet!.representative,
+          StateContainer.of(context).wallet!.frontier,
+          ONE_RAW,
+          A3Account,
+          StateContainer.of(context).wallet!.address,
+          privKey,
+          max: false,
+        );
+
+    // TODO: check confirmation:
+    await Future<dynamic>.delayed(const Duration(milliseconds: 3000));
+
+    // update the wallet history:
+    await StateContainer.of(context).requestUpdate();
+
+    // receive the open block on A3:
+    Uint8List usernameEncodedBytes = NanoHelpers.stringToBytesUtf8(username);
+    while (usernameEncodedBytes.length < 32) {
+      usernameEncodedBytes = Uint8List.fromList(usernameEncodedBytes.toList()..add(0));
+    }
+    final String representativeEncodedUsername = NanoUtil.publicKeyToAddress(
+      NanoHelpers.byteToHex(usernameEncodedBytes),
+    );
+
+    // 4. Receive the 1 raw as the open block on A3 which a representative field encoding your username in ASCII.
+    // You can sign this because you can compute A3's expanded private key given your own.
+
+    // Receive receivable blocks
+    final ReceivableResponse pr = await sl.get<AccountService>().getReceivable(A3Account, 10, threshold: "0");
+    final Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks!;
+    String? receivedHash;
+    for (final String hash in receivableBlocks.keys) {
+      final ReceivableResponseItem? item = receivableBlocks[hash];
+
+      String stateHash = NanoBlocks.computeStateHash(
+        NanoAccountType.NANO,
+        A3Account,
+        "0",
+        representativeEncodedUsername,
+        BigInt.parse(item!.amount!),
+        hash,
+      );
+
+      StateBlock stateBlock = StateBlock(
+        subtype: BlockTypes.OPEN,
+        account: A3Account,
+        previous: "0",
+        representative: representativeEncodedUsername,
+        balance: item.amount,
+        link: hash,
+      );
+
+      final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+      final String privKey = await NanoUtil.uniSeedToPrivate(
+        await StateContainer.of(context).getSeed(),
+        StateContainer.of(context).selectedAccount!.index!,
+        derivationMethod,
+      );
+
+      final U8Array32 privateKeyBytes = U8Array32(NanoHelpers.hexToBytes(privKey));
+
+      print("signing this state block hash: $stateHash");
+
+      final Uint8List stateHashBytes = NanoHelpers.hexToBytes(stateHash);
+
+      final signedStateHash = await api.signAsUsernameRegistration(
+        namespace: USERNAME_SPACE,
+        privateKey: privateKeyBytes,
+        message: stateHashBytes,
+      );
+
+      final Uint8List signedBytes = Uint8List.fromList(signedStateHash.toList());
+      final String signature = NanoHelpers.byteToHex(signedBytes);
+      stateBlock.signature = signature;
+
+      print(stateBlock.toJson());
+
+      // Process
+      final ProcessRequest processRequest = ProcessRequest(
+        block: json.encode(stateBlock.toJson()),
+        subtype: BlockTypes.OPEN,
+      );
+
+      final ProcessResponse resp = await sl.get<AccountService>().requestProcess(processRequest);
+
+      if (resp.hash != null) {
+        receivedHash = resp.hash;
+      } else {
+        throw Exception("Failed to open block");
+      }
+      // Hack that waits for blocks to be confirmed
+      await Future<dynamic>.delayed(const Duration(milliseconds: 500));
+      break;
+    }
+    // check confirmation on the block hash:
+    final BlockInfoItem blockInfoItem = await sl.get<AccountService>().requestBlockInfo(receivedHash);
+    if (blockInfoItem.confirmed != "true") {
+      throw Exception("Failed to confirm open block P1!");
+    }
+
     // You can re-register another username -> account mapping by repeating part 1
     // To change your account -> username mapping:
     // 1. Prerequisite: verify that you have a confirmed username -> account mapping for this username
@@ -371,5 +447,184 @@ class UsernameService {
     // 3. Prerequisite: this account must be open if you already have an existing account -> username mapping (if not, just do Part 2)
     // 4. Issue a change block on that account, with a new rep encoding your new username. You can compute A3's private key as previously mentioned.
     // ----------
+  }
+
+  // LOOKUP FUNCTIONS:
+  Future<bool> checkOnchainUsernameAvailability(String username) async {
+    final String A2PrivateKey = NanoHelpers.byteToHex(blake2b(
+      NanoHelpers.stringToBytesUtf8(
+        "$USERNAME_SPACE:$username",
+      ),
+    ));
+    final String A2PublicKey = NanoUtil.privateKeyToPublic(A2PrivateKey);
+    final String A2Account = NanoUtil.privateKeyToAddress(A2PrivateKey);
+
+    // check if the account has any blocks, if it does, it's taken:
+    final AccountInfoResponse accountInfo = await sl.get<AccountService>().getAccountInfo(A2Account);
+    if (accountInfo.unopened) {
+      return true;
+    }
+
+    return false;
+  }
+
+  Future<String?> checkOnchainUsername(String username) async {
+    final String A2PrivateKey = NanoHelpers.byteToHex(blake2b(
+      NanoHelpers.stringToBytesUtf8(
+        "$USERNAME_SPACE:$username",
+      ),
+    ));
+    final String A2Account = NanoUtil.privateKeyToAddress(A2PrivateKey);
+
+    // check if the account has any blocks, if it does, it's taken:
+    final AccountInfoResponse accountInfo = await sl.get<AccountService>().getAccountInfo(A2Account);
+
+    if (accountInfo.unopened) {
+      return null;
+    }
+
+    // get the open block:
+    final String? openBlockHash = accountInfo.openBlock;
+    if (openBlockHash == null) {
+      return null;
+    }
+
+    // - query the open block
+    // - query the block which is the open block's link
+    // - that last block's account is the sender
+
+    BlockInfoItem blockInfoItem = await sl.get<AccountService>().requestBlockInfo(openBlockHash);
+    if (blockInfoItem.confirmed != "true") {
+      throw Exception("Failed to confirm open block!");
+    }
+
+    if (blockInfoItem.contents == null) {
+      throw Exception("Failed to get contents of open block!");
+    }
+
+    // check if the rep field encodes the username:
+    final Map<String, dynamic> openBlockContents = json.decode(blockInfoItem.contents!) as Map<String, dynamic>;
+    final String linkHash = openBlockContents["link"]! as String;
+
+    blockInfoItem = await sl.get<AccountService>().requestBlockInfo(linkHash);
+
+    final Map<String, dynamic> sendBlockContents = json.decode(blockInfoItem.contents!) as Map<String, dynamic>;
+
+    final String usernameOwnerAddress = sendBlockContents["account"] as String;
+
+    return usernameOwnerAddress;
+
+    // // check if the rep field encodes the username:
+    // final String repDecodedUsername = "TODO: $rep";
+    // if (repDecodedUsername != username) {
+    //   return null;
+    // }
+
+    // // the person who sent the open block to the account is the owner of the username:
+    // final String? sender = openBlockContents["link_as_account"];
+    // return sender;
+  }
+
+  // get the username from an account:
+  Future<String?> checkOnchainAddress(String address) async {
+    // To lookup the username of an account:
+    // 1. Compute the account A3 which has the public key A + blake2b("username registration")*G
+
+    final String A2PublicKey = NanoUtil.addressToPublicKey(address);
+    // 2. Compute the account A3 which has the expanded private key P + blake2b("username registration")*G where G is the ed25519 basepoint and P is assumed to be already expanded here
+    final U8Array32 A2PublicKeyBytes = U8Array32(NanoHelpers.hexToBytes(A2PublicKey));
+    final U8Array32? A3PublicKey = await api.publicKeyUsernameRegistration(namespace: USERNAME_SPACE, publicKey: A2PublicKeyBytes);
+    final String A3Account = NanoUtil.publicKeyToAddress(NanoHelpers.byteToHex(Uint8List.fromList(A3PublicKey!.toList())));
+
+    // 2. If it has not been opened, this account does not have an associated username
+
+    // check if the account has any blocks, if it does, it's taken:
+    final AccountInfoResponse accountInfo = await sl.get<AccountService>().getAccountInfo(A3Account);
+
+    if (accountInfo.unopened) {
+      return null;
+    }
+
+    // get the open block:
+    final String? openBlockHash = accountInfo.openBlock;
+    if (openBlockHash == null) {
+      return null;
+    }
+
+    // 3. If it has been opened, its rep field encodes a username
+
+    // decode the rep username:
+    final BlockInfoItem blockInfoItem = await sl.get<AccountService>().requestBlockInfo(openBlockHash);
+    if (blockInfoItem.confirmed != "true") {
+      throw Exception("open block isn't confirmed!");
+    }
+
+    if (blockInfoItem.contents == null) {
+      throw Exception("Failed to get contents of open block!");
+    }
+
+    // check if the rep field encodes the username:
+    final Map<String, dynamic> openBlockContents = json.decode(blockInfoItem.contents!) as Map<String, dynamic>;
+    final String rep = openBlockContents["representative"] as String? ?? "";
+
+    Uint8List representativeEncodedUsernameBytes = NanoHelpers.hexToBytes(
+      NanoUtil.addressToPublicKey(rep),
+    );
+
+    // remove padded 0s:
+    while (representativeEncodedUsernameBytes.last == 0) {
+      representativeEncodedUsernameBytes = representativeEncodedUsernameBytes.sublist(0, representativeEncodedUsernameBytes.length - 1);
+    }
+
+    final String decodedRep = NanoHelpers.bytesToUtf8String(representativeEncodedUsernameBytes);
+
+    // 4. Important: lookup the account of that username. If it's unregistered or registered to a different account, this account is said to not have an associated username.
+    // 5. If the username -> account mapping returns the A, then that username is the associated username of the account
+    // now check the username -> account mapping to make sure it matches:
+
+    final String? usernameAddressOwner = await checkOnchainUsername(decodedRep);
+
+    if (usernameAddressOwner == address) {
+      return decodedRep;
+    }
+
+    return null;
+  }
+
+  // figure out what type of username, if any, this string is:
+  Future<User?> figureOutUsernameType(String username) async {
+    final String formattedAddress = SendSheetHelpers.stripPrefixes(username);
+    String? type;
+    // check if UD / ENS / opencap / onchain address:
+    String? address = await sl.get<UsernameService>().checkOnchainUsername(formattedAddress);
+    if (address != null) {
+      type = UserTypes.ONCHAIN;
+    } else if (username.contains(r"$")) {
+      // check if opencap address:
+      address = await sl.get<UsernameService>().checkOpencapDomain(formattedAddress);
+      if (address != null) {
+        type = UserTypes.OPENCAP;
+      }
+    } else if (username.contains(".")) {
+      // check if UD domain:
+      address = await sl.get<UsernameService>().checkUnstoppableDomain(formattedAddress);
+      if (address != null) {
+        type = UserTypes.UD;
+      } else {
+        // check if ENS domain:
+        address = await sl.get<UsernameService>().checkENSDomain(formattedAddress);
+        if (address != null) {
+          type = UserTypes.ENS;
+        }
+      }
+    }
+
+    // add to the db if missing:
+    if (type != null) {
+      final User user = User(username: formattedAddress, address: address, type: type, is_blocked: false);
+      await sl.get<DBHelper>().addUser(user);
+      return user;
+    }
+    return null;
   }
 }

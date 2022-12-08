@@ -1580,16 +1580,16 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         //   Navigator.of(context).pushNamed("/spend_nano");
         // }),
         // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        // AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).registerUsername, Icons.tag,
-        //     onPressed: () {
-        //   Navigator.of(context).pushNamed("/register_onchain_username");
-        // }),
-        // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).registerUsername, AppIcons.at,
             onPressed: () {
-          Navigator.of(context).pushNamed("/register_nano_to_username");
+          Navigator.of(context).pushNamed("/register_onchain_username");
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+        // AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).registerUsername, Icons.tag,
+        //     onPressed: () {
+        //   Navigator.of(context).pushNamed("/register_nano_to_username");
+        // }),
+        // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         // AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).createGiftCard, AppIcons.export_icon, onPressed: () {
         //   Navigator.of(context).pushNamed("/gift_paper_wallet");
         // }),

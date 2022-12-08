@@ -77,6 +77,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Automatikus importálás"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Automatikus Feloldás"),
+        "autoRenewSub": MessageLookupByLibrary.simpleMessage(
+            "Előfizetés automatikus megújítása"),
         "backupConfirmButton":
             MessageLookupByLibrary.simpleMessage("I\'ve Backed It Up"),
         "backupSecretPhrase":

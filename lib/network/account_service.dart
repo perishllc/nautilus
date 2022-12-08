@@ -76,12 +76,7 @@ class AccountService {
   // ignore_for_file: non_constant_identifier_names
   static String SERVER_ADDRESS_WS = "$WS_PROTO$BASE_SERVER_ADDRESS";
   static String SERVER_ADDRESS_HTTP = "$HTTP_PROTO$BASE_SERVER_ADDRESS/api";
-  static String SERVER_ADDRESS_ALERTS = "$HTTP_PROTO$BASE_SERVER_ADDRESS/alerts";
-  static String SERVER_ADDRESS_FUNDING = "$HTTP_PROTO$BASE_SERVER_ADDRESS/funding";
 
-  static const String NANO_TO_USERNAME_LEASE_ENDPOINT = "https://api.nano.to/";
-  static const String NANO_TO_KNOWN_ENDPOINT = "https://nano.to/known.json";
-  static const String XNO_TO_KNOWN_ENDPOINT = "https://xno.to/known.json";
 
   final Logger log = sl.get<Logger>();
 
@@ -719,37 +714,5 @@ class AccountService {
         ProcessRequest(block: json.encode(chgBlock.toJson()), subtype: BlockTypes.CHANGE);
 
     return requestProcess(processRequest);
-  }
-
-  Future<AlertResponseItem?> getAlert(String lang) async {
-    final http.Response response =
-        await http.get(Uri.parse("$SERVER_ADDRESS_ALERTS/$lang"), headers: {"Accept": "application/json"});
-    if (response.statusCode == 200) {
-      List<AlertResponseItem> alerts;
-      alerts = (json.decode(response.body) as List)
-          .map((i) => AlertResponseItem.fromJson(i as Map<String, dynamic>))
-          .toList();
-      if (alerts.isNotEmpty) {
-        if (alerts[0].active!) {
-          return alerts[0];
-        }
-      }
-    }
-    return null;
-  }
-
-  Future<List<FundingResponseItem>?> getFunding(String lang) async {
-    final http.Response response =
-        await http.get(Uri.parse("$SERVER_ADDRESS_FUNDING/$lang"), headers: {"Accept": "application/json"});
-    if (response.statusCode == 200) {
-      List<FundingResponseItem> alerts;
-      alerts = (json.decode(response.body) as List)
-          .map((i) => FundingResponseItem.fromJson(i as Map<String, dynamic>))
-          .toList();
-      if (alerts.isNotEmpty) {
-        return alerts;
-      }
-    }
-    return null;
   }
 }

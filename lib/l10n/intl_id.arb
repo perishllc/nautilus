@@ -165,6 +165,11 @@
     "type": "text",
     "description": "auto_lock_header"
   },
+  "autoRenewSub": "Langganan Perpanjangan Otomatis",
+  "@autoRenewSub": {
+    "type": "text",
+    "description": "auto_renew_sub"
+  },
   "backupConfirmButton": "Sudah Saya Simpan",
   "@backupConfirmButton": {
     "type": "text",

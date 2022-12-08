@@ -65,6 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "authenticating": MessageLookupByLibrary.simpleMessage("認証中"),
         "autoImport": MessageLookupByLibrary.simpleMessage("[自動インポート]"),
         "autoLockHeader": MessageLookupByLibrary.simpleMessage("自動的にロックする"),
+        "autoRenewSub": MessageLookupByLibrary.simpleMessage("サブスクリプションの自動更新"),
         "backupConfirmButton":
             MessageLookupByLibrary.simpleMessage("バックアップしました"),
         "backupSecretPhrase":

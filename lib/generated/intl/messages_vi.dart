@@ -71,6 +71,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "autoImport": MessageLookupByLibrary.simpleMessage("Tự động nhập"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Mở khoá tự động"),
+        "autoRenewSub":
+            MessageLookupByLibrary.simpleMessage("Tự động gia hạn đăng ký"),
         "backupConfirmButton":
             MessageLookupByLibrary.simpleMessage("Tôi đã sao lưu"),
         "backupSecretPhrase":

@@ -380,6 +380,16 @@ class Z {
     );
   }
 
+  /// `Auto Renew Subscription`
+  String get autoRenewSub {
+    return Intl.message(
+      'Auto Renew Subscription',
+      name: 'autoRenewSub',
+      desc: 'auto_renew_sub',
+      args: [],
+    );
+  }
+
   /// `I've Backed It Up`
   String get backupConfirmButton {
     return Intl.message(

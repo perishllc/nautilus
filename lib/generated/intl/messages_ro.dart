@@ -73,6 +73,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "autoImport": MessageLookupByLibrary.simpleMessage("Import automat"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Blocare automată"),
+        "autoRenewSub": MessageLookupByLibrary.simpleMessage(
+            "Reînnoire automată a abonamentului"),
         "backupConfirmButton":
             MessageLookupByLibrary.simpleMessage("Am pus-o într-un loc sigur"),
         "backupSecretPhrase":

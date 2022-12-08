@@ -13,6 +13,7 @@ AccountHistoryRequest _$AccountHistoryRequestFromJson(
       account: json['account'] as String?,
       count: json['count'] as int?,
       raw: json['raw'] as bool?,
+      head: json['head'] as String?,
     );
 
 Map<String, dynamic> _$AccountHistoryRequestToJson(
@@ -29,6 +30,7 @@ Map<String, dynamic> _$AccountHistoryRequestToJson(
   }
 
   writeNotNull('count', instance.count);
+  writeNotNull('head', instance.head);
   val['raw'] = instance.raw;
   return val;
 }

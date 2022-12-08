@@ -165,6 +165,11 @@
     "type": "text",
     "description": "auto_lock_header"
   },
+  "autoRenewSub": "Auto Baharu Langganan",
+  "@autoRenewSub": {
+    "type": "text",
+    "description": "auto_renew_sub"
+  },
   "backupConfirmButton": "Saya telah menyokongnya",
   "@backupConfirmButton": {
     "type": "text",

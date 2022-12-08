@@ -165,6 +165,11 @@
     "type": "text",
     "description": "auto_lock_header"
   },
+  "autoRenewSub": "التجديد التلقائي للاشتراك",
+  "@autoRenewSub": {
+    "type": "text",
+    "description": "auto_renew_sub"
+  },
   "backupConfirmButton": "لقد حفظت العبارة السرية",
   "@backupConfirmButton": {
     "type": "text",

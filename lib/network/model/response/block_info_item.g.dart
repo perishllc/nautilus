@@ -14,6 +14,7 @@ BlockInfoItem _$BlockInfoItemFromJson(Map<String, dynamic> json) =>
       receivable: json['receivable'] as String?,
       sourceAccount: json['source_account'] as String?,
       contents: json['contents'] as String?,
+      confirmed: json['confirmed'] as String?,
     );
 
 Map<String, dynamic> _$BlockInfoItemToJson(BlockInfoItem instance) =>
@@ -24,4 +25,5 @@ Map<String, dynamic> _$BlockInfoItemToJson(BlockInfoItem instance) =>
       'receivable': instance.receivable,
       'source_account': instance.sourceAccount,
       'contents': instance.contents,
+      'confirmed': instance.confirmed,
     };

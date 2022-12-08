@@ -79,6 +79,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Importation automatique"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Verrouiller automatiquement"),
+        "autoRenewSub": MessageLookupByLibrary.simpleMessage(
+            "Renouvellement automatique de l\'abonnement"),
         "backupConfirmButton":
             MessageLookupByLibrary.simpleMessage("J\'ai bien sauvegardé"),
         "backupSecretPhrase": MessageLookupByLibrary.simpleMessage(

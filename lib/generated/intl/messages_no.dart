@@ -75,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "autoImport": MessageLookupByLibrary.simpleMessage("Automatisk import"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Lås automatisk"),
+        "autoRenewSub": MessageLookupByLibrary.simpleMessage(
+            "Automatisk fornyelse av abonnement"),
         "backupConfirmButton": MessageLookupByLibrary.simpleMessage(
             "Jeg har laget en sikkerhetskopi"),
         "backupSecretPhrase": MessageLookupByLibrary.simpleMessage(

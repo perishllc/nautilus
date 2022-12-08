@@ -74,6 +74,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "autoImport": MessageLookupByLibrary.simpleMessage("Samodejni uvoz"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Samodejno zakleni"),
+        "autoRenewSub": MessageLookupByLibrary.simpleMessage(
+            "Samodejno podaljšanje naročnine"),
         "backupConfirmButton":
             MessageLookupByLibrary.simpleMessage("Varno shranjeno"),
         "backupSecretPhrase":

@@ -24,8 +24,7 @@ import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AppDialogs {
-  static void showConfirmDialog(
-      BuildContext context, String title, String content, String buttonText, Function onPressed,
+  static void showConfirmDialog(BuildContext context, String title, String content, String buttonText, Function onPressed,
       {String? cancelText, Function? cancelAction, bool barrierDismissible = true}) {
     cancelText ??= Z.of(context).cancel.toUpperCase();
 
@@ -146,156 +145,203 @@ class AppDialogs {
     return res;
   }
 
-  static Future<bool> proCheck(BuildContext context, {bool showDialog = true}) async {
-    // first check if pro is enabled
-    final bool isSubbed = await StateContainer.of(context).isSubscribed(context);
-    if (isSubbed) return true;
+  static Future<bool> proCheck(BuildContext context, {bool shouldShowDialog = true}) async {
+    // // first check if pro is enabled
+    // final bool isSubbed = await StateContainer.of(context).isSubscribed(context);
+    // if (isSubbed) return true;
 
-    // search through the wallet history to see if we paid to the pro address:
-    bool hasPaid = false;
-    bool lifetime = false;
-    int paidTimestamp = 0;
-    final List<AccountHistoryResponseItem>? history = StateContainer.of(context).wallet?.history;
-    if (history != null && history.isNotEmpty) {
-      for (final AccountHistoryResponseItem histItem in history) {
-        if (histItem.subtype == BlockTypes.SEND && histItem.account == MetadataService.PRO_PAYMENT_ADDRESS) {
-          if (BigInt.parse(histItem.amount!) >= BigInt.parse(MetadataService.PRO_PAYMENT_MONTHLY_COST)) {
-            if (BigInt.parse(histItem.amount!) >= BigInt.parse(MetadataService.PRO_PAYMENT_LIFETIME_COST)) {
-              lifetime = true;
-            }
-            hasPaid = true;
-            paidTimestamp = histItem.local_timestamp ?? 0;
-            break;
-          }
-        }
-      }
-    }
-    const int monthInSecs = 2628000;
-    final int nowInSecs = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    // // search through the wallet history to see if we paid to the pro address:
+    // bool hasPaid = false;
+    // bool lifetime = false;
+    // int paidTimestamp = 0;
+    // final List<AccountHistoryResponseItem>? history = StateContainer.of(context).wallet?.history;
+    // if (history != null && history.isNotEmpty) {
+    //   for (final AccountHistoryResponseItem histItem in history) {
+    //     if (histItem.subtype == BlockTypes.SEND && histItem.account == MetadataService.PRO_PAYMENT_ADDRESS) {
+    //       if (BigInt.parse(histItem.amount!) >= BigInt.parse(MetadataService.PRO_PAYMENT_MONTHLY_COST)) {
+    //         if (BigInt.parse(histItem.amount!) >= BigInt.parse(MetadataService.PRO_PAYMENT_LIFETIME_COST)) {
+    //           lifetime = true;
+    //         }
+    //         hasPaid = true;
+    //         paidTimestamp = histItem.local_timestamp ?? 0;
+    //         break;
+    //       }
+    //     }
+    //   }
+    // }
+    // const int monthInSecs = 2628000;
+    // final int nowInSecs = DateTime.now().millisecondsSinceEpoch ~/ 1000;
 
-    if (lifetime) {
-      final int farFuture = nowInSecs + (100 * 365 * 24 * 60 * 60);
-      sl.get<SharedPrefsUtil>().setProStatus(absoluteExpireTime: farFuture);
-      return true;
-    }
+    // if (lifetime) {
+    //   final int farFuture = nowInSecs + (100 * 365 * 24 * 60 * 60);
+    //   sl.get<SharedPrefsUtil>().setProStatus(absoluteExpireTime: farFuture);
+    //   return true;
+    // }
 
-    if (hasPaid) {
-      bool paymentWasRecent = false;
-      if (paidTimestamp > 0) {
-        final int monthFromPayment = paidTimestamp + monthInSecs;
-        // make sure the payment was made within the last month
-        if (nowInSecs - paidTimestamp < monthInSecs) {
-          sl.get<SharedPrefsUtil>().setProStatus(absoluteExpireTime: monthFromPayment);
-          paymentWasRecent = true;
-        }
-      } else {
-        // If we don't have a timestamp, we can't be sure if the payment was recent,
-        // so just set it to be a month from now:
-        sl.get<SharedPrefsUtil>().setProStatus(relativeExpireTime: monthInSecs);
-        paymentWasRecent = true;
-      }
-      if (paymentWasRecent) {
-        return true;
-      }
-    }
+    // if (hasPaid) {
+    //   bool paymentWasRecent = false;
+    //   if (paidTimestamp > 0) {
+    //     final int monthFromPayment = paidTimestamp + monthInSecs;
+    //     // make sure the payment was made within the last month
+    //     if (nowInSecs - paidTimestamp < monthInSecs) {
+    //       sl.get<SharedPrefsUtil>().setProStatus(absoluteExpireTime: monthFromPayment);
+    //       paymentWasRecent = true;
+    //     }
+    //   } else {
+    //     // If we don't have a timestamp, we can't be sure if the payment was recent,
+    //     // so just set it to be a month from now:
+    //     sl.get<SharedPrefsUtil>().setProStatus(relativeExpireTime: monthInSecs);
+    //     paymentWasRecent = true;
+    //   }
+    //   if (paymentWasRecent) {
+    //     return true;
+    //   }
+    // }
 
-    if (!showDialog) return false;
+    if (!shouldShowDialog) return false;
 
-    await showAppDialog(
+    bool recurring = false;
+    
+    showDialog(
       context: context,
       barrierDismissible: false,
+      useSafeArea: true,
       builder: (BuildContext context) {
-        return AppAlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          title: Text(
-            Z.of(context).proSubRequiredHeader,
-            style: AppStyles.textStyleButtonPrimaryOutline(context),
-          ),
-          content: Text(
-            Z.of(context).proSubRequiredParagraph,
-            style: AppStyles.textStyleParagraph(context),
-          ),
-          actions: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                // padding: const EdgeInsets.all(12),
-              ),
-              child: Container(
-                constraints: const BoxConstraints(maxWidth: 100),
-                child: Text(
-                  Z.of(context).noThanks,
-                  textAlign: TextAlign.center,
-                  style: AppStyles.textStyleDialogButtonText(context),
-                ),
-              ),
-              onPressed: () async {
-                Navigator.of(context).pop();
-              },
-            ),
-            if (Platform.isIOS)
-              TextButton(
-                style: TextButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                ),
-                child: Container(
-                  constraints: const BoxConstraints(maxWidth: 100),
-                  child: Text(
-                    Z.of(context).subscribeWithApple,
-                    textAlign: TextAlign.center,
-                    style: AppStyles.textStyleDialogButtonText(context),
-                  ),
-                ),
-                onPressed: () async {
-                  final InAppPurchase _iap = InAppPurchase.instance;
-                  if (!(await _iap.isAvailable())) return;
-                  const Set<String> ids = <String>{"pro_sub_1_month_pass"};
-                  final ProductDetailsResponse response = await _iap.queryProductDetails(ids);
-                  if (response.notFoundIDs.isNotEmpty) {
-                    // Handle the error.
-                  }
-                  List<ProductDetails> products = response.productDetails;
+        
+        return StatefulBuilder(
 
-                  sl.get<Logger>().d("products: $products");
+          builder: (BuildContext context, setState) {
 
-                  // Navigator.of(context).pop();
-                },
+            return AppAlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
               ),
-            TextButton(
-              style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                // padding: const EdgeInsets.all(12),
+              title: Text(
+                Z.of(context).proSubRequiredHeader,
+                style: AppStyles.textStyleButtonPrimaryOutline(context),
               ),
-              child: Container(
-                constraints: const BoxConstraints(maxWidth: 100),
-                child: Text(
-                  Z.of(context).subscribeButton,
-                  textAlign: TextAlign.center,
-                  style: AppStyles.textStyleDialogButtonText(context),
+
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                Text(
+                  Z.of(context).proSubRequiredParagraph,
+                  style: AppStyles.textStyleParagraph(context),
                 ),
-              ),
-              onPressed: () async {
-                // Go to send with address
-                await Future<void>.delayed(const Duration(milliseconds: 1000), () {
-                  Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
-
-                  Sheets.showAppHeightNineSheet(
-                    context: context,
-                    widget: SendSheet(
-                      localCurrency: StateContainer.of(context).curCurrency,
-                      address: MetadataService.PRO_PAYMENT_ADDRESS,
-                      quickSendAmount: MetadataService.PRO_PAYMENT_MONTHLY_COST,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Checkbox(
+                      value: recurring,
+                      activeColor: StateContainer.of(context).curTheme.primary,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          recurring = !recurring;
+                        });
+                      },
                     ),
-                  );
-                });
-              },
-            ),
-          ],
+                    const SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          recurring = !recurring;
+                        });
+                      },
+                      child: Text(
+                        Z.of(context).autoRenewSub,
+                        style: AppStyles.textStyleParagraph(context),
+                      ),
+                    ),
+                  ],
+                ),
+              ]),
+              actions: <Widget>[
+                TextButton(
+                  style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                    // padding: const EdgeInsets.all(12),
+                  ),
+                  child: Container(
+                    constraints: const BoxConstraints(maxWidth: 100),
+                    child: Text(
+                      Z.of(context).noThanks,
+                      textAlign: TextAlign.center,
+                      style: AppStyles.textStyleDialogButtonText(context),
+                    ),
+                  ),
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                if (Platform.isIOS)
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                    ),
+                    child: Container(
+                      constraints: const BoxConstraints(maxWidth: 100),
+                      child: Text(
+                        Z.of(context).subscribeWithApple,
+                        textAlign: TextAlign.center,
+                        style: AppStyles.textStyleDialogButtonText(context),
+                      ),
+                    ),
+                    onPressed: () async {
+                      final InAppPurchase _iap = InAppPurchase.instance;
+                      if (!(await _iap.isAvailable())) return;
+                      const Set<String> ids = <String>{"pro_sub_1_month_pass"};
+                      final ProductDetailsResponse response = await _iap.queryProductDetails(ids);
+                      if (response.notFoundIDs.isNotEmpty) {
+                        // Handle the error.
+                      }
+                      List<ProductDetails> products = response.productDetails;
+
+                      sl.get<Logger>().d("products: $products");
+
+                      // Navigator.of(context).pop();
+                    },
+                  ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                    // padding: const EdgeInsets.all(12),
+                  ),
+                  child: Container(
+                    constraints: const BoxConstraints(maxWidth: 100),
+                    child: Text(
+                      Z.of(context).subscribeButton,
+                      textAlign: TextAlign.center,
+                      style: AppStyles.textStyleDialogButtonText(context),
+                    ),
+                  ),
+                  onPressed: () async {
+                    // Go to send with address
+                    await Future<void>.delayed(const Duration(milliseconds: 1000), () {
+                      Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+
+                      Sheets.showAppHeightNineSheet(
+                        context: context,
+                        widget: SendSheet(
+                          localCurrency: StateContainer.of(context).curCurrency,
+                          address: MetadataService.PRO_PAYMENT_ADDRESS,
+                          quickSendAmount: MetadataService.PRO_PAYMENT_MONTHLY_COST,
+                        ),
+                      );
+                    });
+                  },
+                ),
+              ],
+            );
+          },
         );
       },
     );
+
+
+    if (recurring) {
+      await sl.get<SharedPrefsUtil>().setProRenewActive(true);
+    }
+
     return false;
   }
 
@@ -376,8 +422,7 @@ class AppDialogs {
     ]);
   }
 
-  static Widget infoButton(BuildContext context, void Function()? onPressed,
-      {IconData icon = AppIcons.info, Key? key}) {
+  static Widget infoButton(BuildContext context, void Function()? onPressed, {IconData icon = AppIcons.info, Key? key}) {
     // A container for the info button
     return SizedBox(
       width: 50,
@@ -447,8 +492,7 @@ class AppDialogs {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(Z.of(context).changeLog,
-                        textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
+                    child: Text(Z.of(context).changeLog, textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
                   ),
                   Container(
                     constraints: const BoxConstraints(minHeight: 300, maxHeight: 400),
@@ -541,8 +585,7 @@ class AppDialogs {
                       TextButton(
                         key: const Key("changelog_dismiss_button"),
                         onPressed: () => Navigator.of(context).pop(),
-                        child:
-                            Text(Z.of(context).dismiss, style: AppStyles.textStyleDialogOptions(context)),
+                        child: Text(Z.of(context).dismiss, style: AppStyles.textStyleDialogOptions(context)),
                       ),
                     ]),
                   ),
@@ -571,8 +614,7 @@ class AppDialogs {
                 AppDialogs.infoButton(
                   context,
                   () {
-                    AppDialogs.showInfoDialog(context, Z.of(context).trackingHeader,
-                        Z.of(context).trackingWarningBodyLong);
+                    AppDialogs.showInfoDialog(context, Z.of(context).trackingHeader, Z.of(context).trackingWarningBodyLong);
                   },
                 )
               ],

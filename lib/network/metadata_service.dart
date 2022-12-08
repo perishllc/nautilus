@@ -9,7 +9,9 @@ import 'package:nautilus_wallet_flutter/network/model/payment/payment_memo.dart'
 import 'package:nautilus_wallet_flutter/network/model/payment/payment_message.dart';
 import 'package:nautilus_wallet_flutter/network/model/payment/payment_request.dart';
 import 'package:nautilus_wallet_flutter/network/model/request_item.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
+import 'package:nautilus_wallet_flutter/network/model/response/funding_response_item.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 
 // MetadataService singleton
@@ -135,5 +137,41 @@ class MetadataService {
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error} ${response.details}");
     }
+  }
+
+
+  // metadata:
+
+
+  Future<AlertResponseItem?> getAlert(String lang) async {
+    final http.Response response =
+        await http.get(Uri.parse("$SERVER_ADDRESS_ALERTS/$lang"), headers: {"Accept": "application/json"});
+    if (response.statusCode == 200) {
+      List<AlertResponseItem> alerts;
+      alerts = (json.decode(response.body) as List)
+          .map((i) => AlertResponseItem.fromJson(i as Map<String, dynamic>))
+          .toList();
+      if (alerts.isNotEmpty) {
+        if (alerts[0].active!) {
+          return alerts[0];
+        }
+      }
+    }
+    return null;
+  }
+
+  Future<List<FundingResponseItem>?> getFunding(String lang) async {
+    final http.Response response =
+        await http.get(Uri.parse("$SERVER_ADDRESS_FUNDING/$lang"), headers: {"Accept": "application/json"});
+    if (response.statusCode == 200) {
+      List<FundingResponseItem> alerts;
+      alerts = (json.decode(response.body) as List)
+          .map((i) => FundingResponseItem.fromJson(i as Map<String, dynamic>))
+          .toList();
+      if (alerts.isNotEmpty) {
+        return alerts;
+      }
+    }
+    return null;
   }
 }

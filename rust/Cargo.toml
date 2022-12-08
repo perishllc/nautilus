@@ -1,0 +1,14 @@
+[package]
+name = "nano-username-registration"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["staticlib", "cdylib"]
+
+[dependencies]
+blake2 = "0.10.5"
+curve25519-dalek = "3.2.1"
+lazy_static = "1.4.0"
+rand = "0.8.5"
+flutter_rust_bridge = "1"

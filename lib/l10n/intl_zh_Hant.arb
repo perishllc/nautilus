@@ -165,6 +165,11 @@
     "type": "text",
     "description": "auto_lock_header"
   },
+  "autoRenewSub": "自動續訂",
+  "@autoRenewSub": {
+    "type": "text",
+    "description": "auto_renew_sub"
+  },
   "backupConfirmButton": "已備份",
   "@backupConfirmButton": {
     "type": "text",

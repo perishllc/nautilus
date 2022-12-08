@@ -233,6 +233,31 @@ class ShopSheetState extends State<ShopSheet> {
                     ),
                   ],
                 ),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Row(
+                    children: [
+                      Text(
+                        Z.of(context).useNano,
+                        style: AppStyles.textStyleHeader2Colored(context),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    UseCard(
+                      image: "assets/logos/wenano.png",
+                      title: NonTranslatable.wenano,
+                      onPress: () async {
+                        await UIUtil.showChromeSafariWebview(context, "https://wenano.net");
+                      },
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

@@ -73,6 +73,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("प्रमाणित कर रहा है"),
         "autoImport": MessageLookupByLibrary.simpleMessage("स्वतः आयात"),
         "autoLockHeader": MessageLookupByLibrary.simpleMessage("खुद ब खुद बंद"),
+        "autoRenewSub":
+            MessageLookupByLibrary.simpleMessage("स्वतः नवीनीकरण सदस्यता"),
         "backupConfirmButton":
             MessageLookupByLibrary.simpleMessage("मैंने इसका बैकअप कर लिया है"),
         "backupSecretPhrase":

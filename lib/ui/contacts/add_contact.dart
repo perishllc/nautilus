@@ -129,56 +129,17 @@ class _AddContactSheetState extends State<AddContactSheet> {
             _pasteButtonVisible = true;
           }
         });
+        // check if UD / ENS / opencap / onchain address:
         if (_addressController!.text.isNotEmpty && !_addressController!.text.contains("★")) {
-          final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
-          // check if in the username db:
-          String? address;
-          String? type;
-          final User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController!.text);
-          if (user != null) {
-            type = user.type;
-            if (_addressController!.text != user.getDisplayName()) {
-              setState(() {
-                _addressController!.text = user.getDisplayName()!;
-              });
-            }
-          } else {
-            // check if UD / ENS / opencap / onchain address:
-            address = await sl.get<UsernameService>().checkOnchainUsername(formattedAddress);
-            if (address != null) {
-              type = UserTypes.ONCHAIN;
-            } else if (_addressController!.text.contains(r"$")) {
-              // check if opencap address:
-              address = await sl.get<UsernameService>().checkOpencapDomain(formattedAddress);
-              if (address != null) {
-                type = UserTypes.OPENCAP;
-              }
-            } else if (_addressController!.text.contains(".")) {
-              // check if UD domain:
-              address = await sl.get<UsernameService>().checkUnstoppableDomain(formattedAddress);
-              if (address != null) {
-                type = UserTypes.UD;
-              } else {
-                // check if ENS domain:
-                address = await sl.get<UsernameService>().checkENSDomain(formattedAddress);
-                if (address != null) {
-                  type = UserTypes.ENS;
-                }
-              }
-            }
-          }
+          User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController!.text);
+          user ??= await sl.get<UsernameService>().figureOutUsernameType(_addressController!.text);
 
-          if (type != null) {
+          if (user != null) {
             setState(() {
+              _addressController!.text = user!.getDisplayName()!;
               _pasteButtonVisible = false;
               _addressStyle = AddressStyle.PRIMARY;
             });
-
-            if (address != null && user == null) {
-              // add to the db if missing:
-              final User user = User(username: formattedAddress, address: address, type: type, is_blocked: false);
-              await sl.get<DBHelper>().addUser(user);
-            }
           } else {
             setState(() {
               _addressStyle = AddressStyle.TEXT60;

@@ -76,6 +76,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "autoImport": MessageLookupByLibrary.simpleMessage("Auto Import"),
         "autoLockHeader":
             MessageLookupByLibrary.simpleMessage("Automātiski aizslēgt"),
+        "autoRenewSub": MessageLookupByLibrary.simpleMessage(
+            "Automātiski atjaunot abonementu"),
         "backupConfirmButton": MessageLookupByLibrary.simpleMessage(
             "Esmu izveidojis rezerves kopiju"),
         "backupSecretPhrase":

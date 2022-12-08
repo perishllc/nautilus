@@ -165,6 +165,11 @@
     "type": "text",
     "description": "auto_lock_header"
   },
+  "autoRenewSub": "स्वतः नवीनीकरण सदस्यता",
+  "@autoRenewSub": {
+    "type": "text",
+    "description": "auto_renew_sub"
+  },
   "backupConfirmButton": "मैंने इसका बैकअप कर लिया है",
   "@backupConfirmButton": {
     "type": "text",

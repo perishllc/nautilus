@@ -68,6 +68,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "authenticating": MessageLookupByLibrary.simpleMessage("المصادقة"),
         "autoImport": MessageLookupByLibrary.simpleMessage("استيراد تلقائي"),
         "autoLockHeader": MessageLookupByLibrary.simpleMessage("قفل آليً"),
+        "autoRenewSub":
+            MessageLookupByLibrary.simpleMessage("التجديد التلقائي للاشتراك"),
         "backupConfirmButton":
             MessageLookupByLibrary.simpleMessage("لقد حفظت العبارة السرية"),
         "backupSecretPhrase": MessageLookupByLibrary.simpleMessage(

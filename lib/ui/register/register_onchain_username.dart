@@ -48,10 +48,6 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
   final String _usernameHint = "";
   String _usernameValidationText = "";
   bool _showRegisterButton = false;
-  Map? _leaseDetails;
-  // int _leaseSelected = 0;
-  String? _leaseSelected = "2 Days";
-  int _leaseSelectedIndex = 0;
   // Used to replace address textfield with colorized TextSpan
   bool _usernameValidAndUnfocused = false;
 
@@ -65,102 +61,14 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
     // quickSendAmount = widget.quickSendAmount;
 
     // On username focus change
-    _usernameFocusNode!.addListener(() {
-    });
-  }
-
-  Widget getDropdown() {
-    final List<DropdownMenuItem<String>> dropdownItems = [];
-
-    if (_leaseDetails == null) {
-      return Container();
-    }
-
-    for (int i = 0; i < (_leaseDetails!["plans"] as List<dynamic>).length; i++) {
-      dropdownItems.add(DropdownMenuItem(
-        onTap: () => {
-          setState(() {
-            _usernameValidationText = "";
-          })
-        },
-        value: "${_leaseDetails!["plans"][i]["title"]}",
-        child: Text(
-          "${_leaseDetails!["plans"][i]["title"]}",
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ));
-    }
-
-    return Container(
-        margin: const EdgeInsetsDirectional.only(end: 25),
-        child: DropdownButton(
-          value: _leaseSelected,
-          items: dropdownItems,
-          onChanged: (String? value) {
-            setState(() {
-              _leaseSelected = value;
-            });
-          },
-        ));
-  }
-
-  Widget getPrice() {
-    if (_leaseDetails == null) {
-      return Container();
-    }
-
-    // go through the plans to find the one that matches the selected duration:
-    for (int i = 0; i < (_leaseDetails!["plans"] as List<dynamic>).length; i++) {
-      if (_leaseDetails!["plans"][i]["title"] == _leaseSelected) {
-        _leaseSelectedIndex = i;
-        break;
-      }
-    }
-
-    String? price;
-    if (_leaseDetails!["plans"][_leaseSelectedIndex]["value_raw"] != null) {
-      price = _leaseDetails!["plans"][_leaseSelectedIndex]["value_raw"] as String?;
-    } else {
-      return Container();
-    }
-
-    return RichText(
-      textAlign: TextAlign.start,
-      text: TextSpan(
-        text: '',
-        children: [
-          TextSpan(
-            text: getThemeAwareRawAccuracy(context, price),
-            style: AppStyles.textStyleTransactionAmount(context),
-          ),
-          displayCurrencySymbol(
-            context,
-            AppStyles.textStyleTransactionAmount(context),
-          ),
-          TextSpan(
-            text: getRawAsThemeAwareAmount(context, price),
-            style: AppStyles.textStyleTransactionAmount(
-              context,
-            ),
-          ),
-        ],
-      ),
-    );
-
-    // return Text(
-    //   "Price: ${_leaseDetails["plans"][selectedPlanIndex]["amount_raw"]}",
-    //   style: TextStyle(
-    //     fontSize: 14,
-    //     fontWeight: FontWeight.w600,
-    //   ),
-    // );
+    _usernameFocusNode!.addListener(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    bool _hasUsername = StateContainer.of(context).wallet!.username != null;
+    _hasUsername = false; // debug override
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
@@ -181,11 +89,12 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
                     children: <Widget>[
                       Stack(
                         children: <Widget>[
-                          if (StateContainer.of(context).wallet!.username == null)
+                          if (!_hasUsername)
                             Container(
                               alignment: Alignment.centerLeft,
                               height: 50,
                               width: 50,
+                              margin: const EdgeInsets.only(left: 10),
                               child: TextButton(
                                   style: TextButton.styleFrom(
                                     foregroundColor: StateContainer.of(context).curTheme.text15,
@@ -244,27 +153,27 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
                         ),
                       ),
 
-                      // if (StateContainer.of(context).wallet!.username != null)
-                      //   Column(
-                      //     children: <Widget>[
-                      //       // The paragraph describing we already have a username:
-                      //       Container(
-                      //         margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 45.0),
-                      //         alignment: Alignment.centerLeft,
-                      //         child: Column(
-                      //           children: <Widget>[
-                      //             AutoSizeText(
-                      //               Z.of(context).usernameAlreadyRegistered,
-                      //               style: AppStyles.textStyleParagraph(context),
-                      //               maxLines: 6,
-                      //               stepGranularity: 0.5,
-                      //             ),
-                      //           ],
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   )
-                      // else
+                      if (_hasUsername)
+                        Column(
+                          children: <Widget>[
+                            // The paragraph describing we already have a username:
+                            Container(
+                              margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 45.0),
+                              alignment: Alignment.centerLeft,
+                              child: Column(
+                                children: <Widget>[
+                                  AutoSizeText(
+                                    Z.of(context).usernameAlreadyRegistered,
+                                    style: AppStyles.textStyleParagraph(context),
+                                    maxLines: 6,
+                                    stepGranularity: 0.5,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      else
                         Column(
                           children: <Widget>[
                             Container(
@@ -303,118 +212,75 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
                   ),
                 ),
               ),
-              if (_showRegisterButton)
+              if (_hasUsername)
                 Container(
-                    margin: const EdgeInsetsDirectional.only(bottom: 50),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-                      getDropdown(),
-                      getPrice(),
-                    ])),
-              // if (StateContainer.of(context).wallet!.username != null)
-              //   Container(
-              //     margin: const EdgeInsetsDirectional.only(top: 10),
-              //     child: Row(
-              //       children: <Widget>[
-              //         AppButton.buildAppButton(
-              //           context,
-              //           AppButtonType.PRIMARY,
-              //           Z.of(context).close,
-              //           Dimens.BUTTON_TOP_DIMENS,
-              //           onPressed: () {
-              //             // go back:
-              //             Navigator.pop(context);
-              //           },
-              //         ),
-              //       ],
-              //     ),
-              //   )
-              // else
-                (!_showRegisterButton)
-                    ? // Check availability button
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).checkAvailability, Dimens.BUTTON_BOTTOM_DIMENS,
-                              onPressed: () async {
-                            final String username = _usernameController!.text.replaceAll("@", "");
-                            if (_usernameController!.text.isEmpty) {
-                              setState(() {
-                                _usernameValidationText = Z.of(context).usernameEmpty;
-                              });
-                              return;
-                            }
-                            final Map<String, dynamic> resp = await sl.get<UsernameService>().checkNanoToUsernameAvailability(username) as Map<String, dynamic>;
-                            if (resp == null) {
-                              setState(() {
-                                _usernameValidationText = Z.of(context).usernameError;
-                              });
-                              return;
-                            }
-                            if (resp["available"] == true) {
-                              setState(() {
-                                _leaseDetails = resp;
-                                _usernameValidationText = Z.of(context).usernameAvailable;
-                                _showRegisterButton = true;
-                              });
-                            } else if (resp["available"] == false) {
-                              setState(() {
-                                _usernameValidationText = Z.of(context).usernameUnavailable;
-                              });
-                            } else if (resp["message"] != null) {
-                              setState(() {
-                                _usernameValidationText = Z.of(context).usernameInvalid;
-                              });
-                            } else {
-                              setState(() {
-                                _usernameValidationText = Z.of(context).usernameError;
-                              });
-                            }
-                          }),
-                        ],
-                      )
-                    : // register username button
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).registerUsername, Dimens.BUTTON_BOTTOM_DIMENS,
-                              onPressed: () async {
-                            final String username = _usernameController!.text.replaceAll("@", "");
-
-                            String? price;
-                            if (_leaseDetails!["plans"][_leaseSelectedIndex]["value_raw"] != null) {
-                              price = _leaseDetails!["plans"][_leaseSelectedIndex]["value_raw"] as String?;
-                            } else {
-                              return Container();
-                            }
-
-                            final BigInt balanceRaw = StateContainer.of(context).wallet!.accountBalance;
-                            final BigInt sendAmount = BigInt.tryParse(price!)!;
-                            if (sendAmount > balanceRaw) {
-                              setState(() {
-                                _usernameValidationText = Z.of(context).insufficientBalance;
-                              });
-                            } else {
-                              final String? destination = _leaseDetails!["address"] as String?;
-                              if (destination == null) {
-                                return Container();
-                              }
-                              // build the transaction:
-                              Sheets.showAppHeightNineSheet(
-                                  context: context,
-                                  widget: RegisterOnchainConfirmSheet(
-                                    // localCurrency: StateContainer.of(context).curCurrency,
-                                    // contact: contact,
-                                    destination: destination,
-                                    // quickSendAmount: item.amount,
-                                    amountRaw: price,
-                                    username: username,
-                                    checkUrl: _leaseDetails!["check_url"] as String?,
-                                    leaseDuration: _leaseDetails!["plans"][_leaseSelectedIndex]["title"] as String?,
-                                  ));
-                            }
-                          }),
-                        ],
+                  margin: const EdgeInsetsDirectional.only(top: 10),
+                  child: Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                        context,
+                        AppButtonType.PRIMARY,
+                        Z.of(context).close,
+                        Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: () {
+                          // go back:
+                          Navigator.pop(context);
+                        },
                       ),
+                    ],
+                  ),
+                )
+              else if (!_showRegisterButton)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).checkAvailability, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                      final String username = _usernameController!.text.replaceAll("@", "");
+                      if (_usernameController!.text.isEmpty) {
+                        setState(() {
+                          _usernameValidationText = Z.of(context).usernameEmpty;
+                        });
+                        return;
+                      }
+                      final bool available = await sl.get<UsernameService>().checkOnchainUsernameAvailability(username);
+                      if (available) {
+                        setState(() {
+                          _usernameValidationText = Z.of(context).usernameAvailable;
+                          _showRegisterButton = true;
+                        });
+                        return;
+                      }
+                      setState(() {
+                        _usernameValidationText = Z.of(context).usernameUnavailable;
+                      });
+                    }),
+                  ],
+                )
+              else
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).registerUsername, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                      final String username = _usernameController!.text.replaceAll("@", "");
+
+                      final BigInt balanceRaw = StateContainer.of(context).wallet!.accountBalance;
+                      final BigInt sendAmount = BigInt.tryParse("1")!;
+                      if (sendAmount > balanceRaw) {
+                        setState(() {
+                          _usernameValidationText = Z.of(context).insufficientBalance;
+                        });
+                        return Container();
+                      }
+                      // build the transaction:
+                      Sheets.showAppHeightNineSheet(
+                        context: context,
+                        widget: RegisterOnchainConfirmSheet(
+                          username: username,
+                        ),
+                      );
+                    }),
+                  ],
+                ),
             ],
           ),
         ),

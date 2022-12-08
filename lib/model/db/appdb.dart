@@ -8,6 +8,8 @@ import 'package:nautilus_wallet_flutter/model/db/account.dart';
 import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
 import 'package:nautilus_wallet_flutter/model/db/user.dart';
 import 'package:nautilus_wallet_flutter/network/account_service.dart';
+import 'package:nautilus_wallet_flutter/network/metadata_service.dart';
+import 'package:nautilus_wallet_flutter/network/username_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
@@ -213,24 +215,8 @@ class DBHelper {
     return "nano_${lowerStripAddress(address)}";
   }
 
-  // List<User> formatUserList(List<User> users) {
-  //   for (int i = 0; i < users.length; i++) {
-  //     if (users[i].address != null) {
-  //       users[i].address = formatAddress(users[i].address!);
-  //     }
-  //   }
-  //   return users;
-  // }
-
-  // User formatUser(User user) {
-  //   if (user.address != null) {
-  //     user.address = formatAddress(user.address!);
-  //   }
-  //   return user;
-  // }
-
   Future<void> fetchNanoToUsernames() async {
-    final List<User>? users = await fetchNanoToKnown(http.Client());
+    final List<User>? users = await sl.get<UsernameService>().fetchNanoToKnown(http.Client());
     if (users == null) {
       return;
     }
@@ -241,23 +227,6 @@ class DBHelper {
     for (final User user in users) {
       await addOrReplaceUser(user);
     }
-  }
-
-  // A function that converts a response body into a list of Users
-  List<User>? parseNanoToUsers(String responseBody) {
-    final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-    return parsed.map<User>((json) {
-      final User user = User.fromJson(json as Map<String, dynamic>);
-      user.type = UserTypes.NANO_TO;
-      user.nickname = null;
-      return user;
-    }).toList() as List<User>;
-  }
-
-  Future<List<User>?> fetchNanoToKnown(http.Client client) async {
-    http.Response response = await client.get(Uri.parse(AccountService.NANO_TO_KNOWN_ENDPOINT));
-    // todo: use the compute function to run parseUsers in a separate isolate
-    return parseNanoToUsers(response.body);
   }
 
   // Contacts
@@ -546,6 +515,22 @@ class DBHelper {
     final Database dbClient = (await db)!;
     List<Map> list;
     list = await dbClient.rawQuery("SELECT * FROM Users WHERE lower(address) = '${formatAddress(address)}'");
+    // TODO: Handle multiple users with the same address
+    if (list.isNotEmpty) {
+      return User(
+          username: list[0]["username"] as String?,
+          address: list[0]["address"] as String?,
+          type: list[0]["type"] as String?,
+          last_updated: list[0]["last_updated"] as int?,
+          nickname: list[0]["nickname"] as String?);
+    }
+    return null;
+  }
+
+  Future<User?> isOnchainUsernameRecorded(String address) async {
+    final Database dbClient = (await db)!;
+    List<Map> list;
+    list = await dbClient.rawQuery("SELECT * FROM Users WHERE type = 'ONCHAIN' AND lower(address) = '${formatAddress(address)}'");
     // TODO: Handle multiple users with the same address
     if (list.isNotEmpty) {
       return User(

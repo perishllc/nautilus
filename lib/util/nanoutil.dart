@@ -18,20 +18,28 @@ class NanoUtil {
     return NanoHelpers.byteToHex(Ed25519Blake2b.derivePrivkey(NanoHelpers.hexToBytes(seed), index)!).toUpperCase();
   }
 
-  static String createPublicKey(String privateKey) {
+  static String seedToAddress(String seed, int index) {
+    return NanoAccounts.createAccount(NanoAccountType.NANO, privateKeyToPublic(seedToPrivate(seed, index)));
+  }
+
+  // static String createPublicKey(String privateKey) {
+  //   return NanoHelpers.byteToHex(Ed25519Blake2b.getPubkey(NanoHelpers.hexToBytes(privateKey))!);
+  // }
+
+  static String privateKeyToPublic(String privateKey) {
     return NanoHelpers.byteToHex(Ed25519Blake2b.getPubkey(NanoHelpers.hexToBytes(privateKey))!);
   }
 
-  static String seedToAddress(String seed, int index) {
-    return NanoAccounts.createAccount(NanoAccountType.NANO, createPublicKey(seedToPrivate(seed, index)));
+  static String addressToPublicKey(String publicAddress) {
+    return NanoAccounts.extractPublicKey(publicAddress);
   }
 
   // universal:
-  static String privateKeyToPublicAddress(String privateKey) {
-    return NanoAccounts.createAccount(NanoAccountType.NANO, createPublicKey(privateKey));
+  static String privateKeyToAddress(String privateKey) {
+    return NanoAccounts.createAccount(NanoAccountType.NANO, privateKeyToPublic(privateKey));
   }
 
-  static String publicKeyToPublicAddress(String publicKey) {
+  static String publicKeyToAddress(String publicKey) {
     return NanoAccounts.createAccount(NanoAccountType.NANO, publicKey);
   }
 
@@ -63,9 +71,8 @@ class NanoUtil {
   }
 
   static Future<String> hdSeedToAddress(String seed, int index) async {
-    return NanoAccounts.createAccount(NanoAccountType.NANO, createPublicKey(await hdSeedToPrivate(seed, index)));
+    return NanoAccounts.createAccount(NanoAccountType.NANO, privateKeyToPublic(await hdSeedToPrivate(seed, index)));
   }
-
 
   static Future<String> uniSeedToAddress(String seed, int index, String type) {
     if (type == "standard") {

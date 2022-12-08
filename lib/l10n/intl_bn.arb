@@ -165,6 +165,11 @@
     "type": "text",
     "description": "auto_lock_header"
   },
+  "autoRenewSub": "অটো রিনিউ সাবস্ক্রিপশন",
+  "@autoRenewSub": {
+    "type": "text",
+    "description": "auto_renew_sub"
+  },
   "backupConfirmButton": "আমি এটা ব্যাক আপ করেছি",
   "@backupConfirmButton": {
     "type": "text",

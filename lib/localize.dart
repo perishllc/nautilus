@@ -102,7 +102,7 @@ class NonTranslatable {
   }
 
   static String get wenano {
-    return "wenano.net";
+    return "WeNano";
   }
 
   static String get promoLink {

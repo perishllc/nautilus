@@ -26,10 +26,9 @@ class BlockInfoItem {
 
   @JsonKey(name: 'contents')
   String? contents;
-
-  // 2022:
+  
   @JsonKey(name: 'confirmed')
-  bool? confirmed;
+  String? confirmed;
 
   BlockInfoItem({this.blockAccount, this.amount, this.balance, this.receivable, this.sourceAccount, this.contents, this.confirmed});
 

@@ -50,6 +50,7 @@ import 'package:nautilus_wallet_flutter/network/model/response/receivable_respon
 import 'package:nautilus_wallet_flutter/network/model/response/receivable_response_item.dart';
 import 'package:nautilus_wallet_flutter/network/model/response/subscribe_response.dart';
 import 'package:nautilus_wallet_flutter/network/model/status_types.dart';
+import 'package:nautilus_wallet_flutter/network/username_service.dart';
 import 'package:nautilus_wallet_flutter/service_locator.dart';
 import 'package:nautilus_wallet_flutter/themes.dart';
 import 'package:nautilus_wallet_flutter/util/box.dart';
@@ -381,7 +382,7 @@ class StateContainerState extends State<StateContainer> {
           localeString = languageLocales[0].languageCode;
         }
       }
-      final AlertResponseItem? alert = await sl.get<AccountService>().getAlert(localeString);
+      final AlertResponseItem? alert = await sl.get<MetadataService>().getAlert(localeString);
       if (alert == null) {
         // updateActiveAlert(null, null);
         return;
@@ -417,7 +418,7 @@ class StateContainerState extends State<StateContainer> {
           localeString = languageLocales[0].languageCode;
         }
       }
-      final List<FundingResponseItem>? fundingAlerts = await sl.get<AccountService>().getFunding(localeString);
+      final List<FundingResponseItem>? fundingAlerts = await sl.get<MetadataService>().getFunding(localeString);
       updateFundingAlerts(fundingAlerts);
     } catch (e) {
       log.e("Error retrieving funding", e);
@@ -1029,6 +1030,25 @@ class StateContainerState extends State<StateContainer> {
         receivableRequests.remove(item.hash);
         log.d("Blocked send from address: ${item.source} because they're blocked");
         return null;
+      }
+    }
+
+    // if there's no user for this address, check if one exists on the block chain:
+
+    if (link_as_account != null) {
+      final String? checked = await sl.get<SharedPrefsUtil>().getWithExpiry(link_as_account) as String?;
+
+      if (/*checked == null &&*/ await sl.get<DBHelper>().isOnchainUsernameRecorded(link_as_account) == null) {
+        final String? onchainUsername = await sl.get<UsernameService>().checkOnchainAddress(link_as_account);
+        if (onchainUsername != null) {
+          // add to the db if missing:
+          final User user = User(username: onchainUsername, address: link_as_account, type: UserTypes.ONCHAIN, is_blocked: false);
+          await sl.get<DBHelper>().addUser(user);
+        } else {
+          // add some kind of timeout so we don't keep checking for the same username within a day:
+          const int dayInSeconds = 86400;
+          await sl.get<SharedPrefsUtil>().setWithExpiry(link_as_account, "1", dayInSeconds);
+        }
       }
     }
 

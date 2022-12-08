@@ -61,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "authenticating": MessageLookupByLibrary.simpleMessage("認證"),
         "autoImport": MessageLookupByLibrary.simpleMessage("自動匯入"),
         "autoLockHeader": MessageLookupByLibrary.simpleMessage("自動鎖定"),
+        "autoRenewSub": MessageLookupByLibrary.simpleMessage("自動續訂"),
         "backupConfirmButton": MessageLookupByLibrary.simpleMessage("已備份"),
         "backupSecretPhrase": MessageLookupByLibrary.simpleMessage("備份秘密詞語"),
         "backupSeed": MessageLookupByLibrary.simpleMessage("備份種子"),
