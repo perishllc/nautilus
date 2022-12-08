@@ -9,14 +9,14 @@ buildscript {
     }
 
     dependencies {
-        // works
-        classpath 'com.android.tools.build:gradle:4.2.0'
+        // works on windows
+        // classpath 'com.android.tools.build:gradle:4.2.0'
         
         // works on mac (ninja.exe error on windows):
         // classpath 'com.android.tools.build:gradle:7.1.2'
 
         // works (but not in profile mode on windows)
-        // classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath 'com.android.tools.build:gradle:7.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.3.10'
     }
