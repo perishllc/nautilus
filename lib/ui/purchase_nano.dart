@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/app_icons.dart';
 
 class PurchaseNanoScreen extends StatefulWidget {
   @override

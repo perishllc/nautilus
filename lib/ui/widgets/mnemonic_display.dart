@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/util/user_data_util.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/util/user_data_util.dart';
 
 /// A widget for displaying a mnemonic phrase
 class MnemonicDisplay extends StatefulWidget {

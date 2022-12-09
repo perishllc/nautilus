@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
-import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
-import 'package:nautilus_wallet_flutter/model/db/user.dart';
-import 'package:nautilus_wallet_flutter/network/metadata_service.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
-import 'package:nautilus_wallet_flutter/util/box.dart';
-import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/model/db/appdb.dart';
+import 'package:wallet_flutter/model/db/txdata.dart';
+import 'package:wallet_flutter/model/db/user.dart';
+import 'package:wallet_flutter/network/metadata_service.dart';
+import 'package:wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/ui/send/send_sheet.dart';
+import 'package:wallet_flutter/ui/util/routes.dart';
+import 'package:wallet_flutter/ui/util/ui_util.dart';
+import 'package:wallet_flutter/ui/widgets/animations.dart';
+import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:wallet_flutter/util/box.dart';
+import 'package:wallet_flutter/util/nanoutil.dart';
+import 'package:wallet_flutter/util/sharedprefsutil.dart';
 import 'package:uuid/uuid.dart';
 
 class CardActions {

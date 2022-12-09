@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/appstate_container.dart';
 
 /// Custom locale-specific uppercase/lowercase methods
 class CaseChange {

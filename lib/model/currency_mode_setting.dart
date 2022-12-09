@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/model/setting_item.dart';
+import 'package:wallet_flutter/model/setting_item.dart';
 
 enum CurrencyModeOptions { NANO, NYANO }
 

@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/bus/xmr_event.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:nautilus_wallet_flutter/util/xmr_util.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/bus/xmr_event.dart';
+import 'package:wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/util/sharedprefsutil.dart';
+import 'package:wallet_flutter/util/xmr_util.dart';
 // import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 

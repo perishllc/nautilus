@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:nautilus_wallet_flutter/network/model/response/account_balance_item.dart';
+import 'package:wallet_flutter/network/model/response/account_balance_item.dart';
 
 part 'accounts_balances_response.g.dart';
 

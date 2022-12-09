@@ -12,10 +12,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:logger/logger.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/firebase_options.dart';
-import 'package:nautilus_wallet_flutter/main.dart' as app;
-import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/firebase_options.dart';
+import 'package:wallet_flutter/main.dart' as app;
+import 'package:wallet_flutter/service_locator.dart';
 
 Future<void> pumpForSeconds(WidgetTester tester, int seconds) async {
   bool timerDone = false;

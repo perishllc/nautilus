@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/model/setting_item.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/model/setting_item.dart';
 
 enum MinRawOptions { ONE_NYANO, TEN_NYANO, HUNDRED_NYANO, THOUSAND_NYANO, TEN_THOUSAND_NYANO, HUNDRED_THOUSAND_NYANO, OFF }
 

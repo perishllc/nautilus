@@ -2,23 +2,23 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/appstate_container.dart';
 import 'package:event_taxi/event_taxi.dart';
-import 'package:nautilus_wallet_flutter/bus/blocked_modified_event.dart';
-import 'package:nautilus_wallet_flutter/bus/blocked_removed_event.dart';
+import 'package:wallet_flutter/bus/blocked_modified_event.dart';
+import 'package:wallet_flutter/bus/blocked_removed_event.dart';
 
-import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
-import 'package:nautilus_wallet_flutter/model/db/user.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/sheets.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:wallet_flutter/dimens.dart';
+import 'package:wallet_flutter/app_icons.dart';
+import 'package:wallet_flutter/model/db/user.dart';
+import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/model/db/appdb.dart';
+import 'package:wallet_flutter/ui/util/ui_util.dart';
+import 'package:wallet_flutter/ui/widgets/buttons.dart';
+import 'package:wallet_flutter/ui/widgets/dialog.dart';
+import 'package:wallet_flutter/ui/widgets/sheets.dart';
+import 'package:wallet_flutter/util/caseconverter.dart';
 
 // Contact Details Sheet
 class BlockedDetailsSheet {

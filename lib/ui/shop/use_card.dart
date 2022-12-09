@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/widgets/buttons.dart';
 
 const Color primaryColor = Color(0xFFF67952);
 const Color bgColor = Color(0xFFFBFBFD);

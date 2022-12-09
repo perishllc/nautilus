@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/model/setting_item.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/model/setting_item.dart';
 
 enum ContactsOptions { ON, OFF }
 

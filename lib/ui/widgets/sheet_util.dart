@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/ui/util/routes.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/ui/util/routes.dart';
 
 class Sheets {
   //App Ninty Height Sheet

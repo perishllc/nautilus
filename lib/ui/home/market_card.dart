@@ -6,14 +6,14 @@ import 'package:coingecko_api/coingecko_result.dart';
 import 'package:coingecko_api/data/market_chart_data.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/model/available_currency.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:wallet_flutter/app_icons.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/model/available_currency.dart';
+import 'package:wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/ui_util.dart';
+import 'package:wallet_flutter/util/sharedprefsutil.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 // ignore: must_be_immutable

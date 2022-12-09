@@ -5,19 +5,19 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/bus/contact_modified_event.dart';
-import 'package:nautilus_wallet_flutter/bus/payments_home_event.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/model/db/appdb.dart';
-import 'package:nautilus_wallet_flutter/model/vault.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/util/blake2b.dart';
-import 'package:nautilus_wallet_flutter/util/hapticutil.dart';
-import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:wallet_flutter/app_icons.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/bus/contact_modified_event.dart';
+import 'package:wallet_flutter/bus/payments_home_event.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/model/db/appdb.dart';
+import 'package:wallet_flutter/model/vault.dart';
+import 'package:wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/util/blake2b.dart';
+import 'package:wallet_flutter/util/hapticutil.dart';
+import 'package:wallet_flutter/util/nanoutil.dart';
+import 'package:wallet_flutter/util/sharedprefsutil.dart';
 
 enum PinOverlayType { NEW_PIN, ENTER_PIN }
 

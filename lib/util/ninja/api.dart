@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/util/ninja/ninja_node.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/util/ninja/ninja_node.dart';
+import 'package:wallet_flutter/util/sharedprefsutil.dart';
 
 class NinjaAPI {
   static const String API_URL = 'https://mynano.ninja/api';

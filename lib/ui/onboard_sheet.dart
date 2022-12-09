@@ -5,11 +5,11 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/ui/receive/share_card.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/dimens.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/ui/receive/share_card.dart';
+import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:share_plus/share_plus.dart';
 

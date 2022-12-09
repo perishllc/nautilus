@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:nautilus_wallet_flutter/model/address.dart';
+import 'package:wallet_flutter/model/address.dart';
 
 part 'txdata.g.dart';
 

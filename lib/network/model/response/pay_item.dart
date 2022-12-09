@@ -1,6 +1,6 @@
 import 'dart:core';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:nautilus_wallet_flutter/model/method.dart';
+import 'package:wallet_flutter/model/method.dart';
 
 part 'pay_item.g.dart';
 

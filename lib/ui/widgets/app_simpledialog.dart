@@ -6,7 +6,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/appstate_container.dart';
 
 // Examples can assume:
 // enum Department { treasury, state }

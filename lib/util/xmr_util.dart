@@ -1,5 +1,5 @@
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
-import 'package:nautilus_wallet_flutter/util/blake2b.dart';
+import 'package:wallet_flutter/util/blake2b.dart';
 
 class XmrUtil {
   static String changeEndianness(String input) {

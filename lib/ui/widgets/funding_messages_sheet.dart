@@ -2,16 +2,16 @@ import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/funding_response_item.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/draggable_scrollbar.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/funding_message_card.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/funding_specific_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/list_gradient.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/network/model/response/funding_response_item.dart';
+import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/widgets/draggable_scrollbar.dart';
+import 'package:wallet_flutter/ui/widgets/funding_message_card.dart';
+import 'package:wallet_flutter/ui/widgets/funding_specific_sheet.dart';
+import 'package:wallet_flutter/ui/widgets/list_gradient.dart';
+import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:wallet_flutter/util/caseconverter.dart';
 
 class FundingMessagesSheet extends StatefulWidget {
   const FundingMessagesSheet({this.alerts, this.hasDismissButton = true}) : super();

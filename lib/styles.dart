@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/themes.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/themes.dart';
 
 String getFontFamily(BuildContext context) {
   // is nyano?

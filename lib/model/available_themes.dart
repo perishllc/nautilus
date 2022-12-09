@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/themes.dart';
-import 'package:nautilus_wallet_flutter/model/setting_item.dart';
+import 'package:wallet_flutter/themes.dart';
+import 'package:wallet_flutter/model/setting_item.dart';
 
 enum ThemeOptions { NAUTILUS, TITANIUM, INDIUM, SUNSHINE, NEPTUNIUM, THORIUM, CARBON, PURPELIUM, MONOCHROME, MIDNIGHT, PERISHABLE }
 

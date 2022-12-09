@@ -4,16 +4,16 @@ import 'dart:io' as io;
 
 // for updating the database:
 import 'package:http/http.dart' as http;
-import 'package:nautilus_wallet_flutter/model/db/account.dart';
-import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
-import 'package:nautilus_wallet_flutter/model/db/user.dart';
-import 'package:nautilus_wallet_flutter/network/account_service.dart';
-import 'package:nautilus_wallet_flutter/network/metadata_service.dart';
-import 'package:nautilus_wallet_flutter/network/username_service.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
-import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:wallet_flutter/model/db/account.dart';
+import 'package:wallet_flutter/model/db/txdata.dart';
+import 'package:wallet_flutter/model/db/user.dart';
+import 'package:wallet_flutter/network/account_service.dart';
+import 'package:wallet_flutter/network/metadata_service.dart';
+import 'package:wallet_flutter/network/username_service.dart';
+import 'package:wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/ui/send/send_sheet.dart';
+import 'package:wallet_flutter/util/nanoutil.dart';
+import 'package:wallet_flutter/util/sharedprefsutil.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';

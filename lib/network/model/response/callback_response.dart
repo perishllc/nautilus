@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:nautilus_wallet_flutter/network/model/response/block_item.dart';
+import 'package:wallet_flutter/network/model/response/block_item.dart';
 
 part 'callback_response.g.dart';
 

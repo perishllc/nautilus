@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/model/natricon_option.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/dimens.dart';
+import 'package:wallet_flutter/ui/widgets/buttons.dart';
+import 'package:wallet_flutter/model/natricon_option.dart';
+import 'package:wallet_flutter/util/sharedprefsutil.dart';
+import 'package:wallet_flutter/service_locator.dart';
 
 class AvatarPage extends StatefulWidget {
   @override

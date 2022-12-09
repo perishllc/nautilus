@@ -4,16 +4,16 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/bus/xmr_event.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/util/formatters.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:wallet_flutter/app_icons.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/bus/xmr_event.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/ui_util.dart';
+import 'package:wallet_flutter/util/caseconverter.dart';
+import 'package:wallet_flutter/util/sharedprefsutil.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 // ignore: must_be_immutable

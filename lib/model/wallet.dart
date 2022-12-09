@@ -1,11 +1,11 @@
 import 'package:decimal/decimal.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:nautilus_wallet_flutter/model/available_currency.dart';
-import 'package:nautilus_wallet_flutter/model/db/txdata.dart';
-import 'package:nautilus_wallet_flutter/model/db/user.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/account_history_response_item.dart';
-import 'package:nautilus_wallet_flutter/util/numberutil.dart';
+import 'package:wallet_flutter/model/available_currency.dart';
+import 'package:wallet_flutter/model/db/txdata.dart';
+import 'package:wallet_flutter/model/db/user.dart';
+import 'package:wallet_flutter/network/model/response/account_history_response_item.dart';
+import 'package:wallet_flutter/util/numberutil.dart';
 
 /// Main wallet object that's passed around the app via state
 class AppWallet {

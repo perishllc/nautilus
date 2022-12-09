@@ -1,5 +1,5 @@
 // Represent user-account
-import 'package:nautilus_wallet_flutter/model/db/user.dart';
+import 'package:wallet_flutter/model/db/user.dart';
 
 class Account {
   int? id; // Primary Key

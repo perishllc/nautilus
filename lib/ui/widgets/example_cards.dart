@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/animations.dart';
+import 'package:wallet_flutter/app_icons.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/ui_util.dart';
+import 'package:wallet_flutter/ui/widgets/animations.dart';
 
 class ExampleCards {
   // Welcome Card

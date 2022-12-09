@@ -3,19 +3,19 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/model/db/user.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/send/send_sheet.dart';
-import 'package:nautilus_wallet_flutter/ui/util/ui_util.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/sheet_util.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/sheets.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
+import 'package:wallet_flutter/app_icons.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/dimens.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/model/db/user.dart';
+import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/send/send_sheet.dart';
+import 'package:wallet_flutter/ui/util/ui_util.dart';
+import 'package:wallet_flutter/ui/widgets/buttons.dart';
+import 'package:wallet_flutter/ui/widgets/dialog.dart';
+import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:wallet_flutter/ui/widgets/sheets.dart';
+import 'package:wallet_flutter/util/caseconverter.dart';
 
 // Contact Details Sheet
 class UserDetailsSheet {

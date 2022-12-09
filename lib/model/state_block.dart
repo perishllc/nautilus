@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
-import 'package:nautilus_wallet_flutter/network/model/block_types.dart';
+import 'package:wallet_flutter/network/model/block_types.dart';
 
 part 'state_block.g.dart';
 

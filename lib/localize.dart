@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/model/available_block_explorer.dart';
-import 'package:nautilus_wallet_flutter/model/available_language.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/model/available_block_explorer.dart';
+import 'package:wallet_flutter/model/available_language.dart';
 
 class ZsDelegate extends LocalizationsDelegate<Z> {
   const ZsDelegate(this.languageSetting);

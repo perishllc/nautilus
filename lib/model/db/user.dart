@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:nautilus_wallet_flutter/model/address.dart';
+import 'package:wallet_flutter/model/address.dart';
 import 'package:quiver/core.dart';
 
 part 'user.g.dart';

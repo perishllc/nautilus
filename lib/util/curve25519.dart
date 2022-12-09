@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:nautilus_wallet_flutter/util/blake2b.dart';
+import 'package:wallet_flutter/util/blake2b.dart';
 
 // floor(num num) {
 //   return num.floor();

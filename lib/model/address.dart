@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:core';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/auth_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/pay_item.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/network/model/response/auth_item.dart';
+import 'package:wallet_flutter/network/model/response/pay_item.dart';
+import 'package:wallet_flutter/service_locator.dart';
 
 // Object to represent an account address or address URI, and provide useful utilities
 

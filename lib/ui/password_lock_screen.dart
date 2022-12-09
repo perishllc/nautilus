@@ -3,21 +3,21 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
-import 'package:nautilus_wallet_flutter/app_icons.dart';
-import 'package:nautilus_wallet_flutter/appstate_container.dart';
-import 'package:nautilus_wallet_flutter/bus/fcm_update_event.dart';
-import 'package:nautilus_wallet_flutter/dimens.dart';
-import 'package:nautilus_wallet_flutter/generated/l10n.dart';
-import 'package:nautilus_wallet_flutter/model/vault.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
-import 'package:nautilus_wallet_flutter/styles.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/app_text_field.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/dialog.dart';
-import 'package:nautilus_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
-import 'package:nautilus_wallet_flutter/util/caseconverter.dart';
-import 'package:nautilus_wallet_flutter/util/nanoutil.dart';
-import 'package:nautilus_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:wallet_flutter/app_icons.dart';
+import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/bus/fcm_update_event.dart';
+import 'package:wallet_flutter/dimens.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/model/vault.dart';
+import 'package:wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
+import 'package:wallet_flutter/ui/widgets/buttons.dart';
+import 'package:wallet_flutter/ui/widgets/dialog.dart';
+import 'package:wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
+import 'package:wallet_flutter/util/caseconverter.dart';
+import 'package:wallet_flutter/util/nanoutil.dart';
+import 'package:wallet_flutter/util/sharedprefsutil.dart';
 
 class AppPasswordLockScreen extends StatefulWidget {
   @override

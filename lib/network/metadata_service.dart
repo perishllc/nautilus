@@ -3,16 +3,16 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
-import 'package:nautilus_wallet_flutter/network/model/base_request.dart';
-import 'package:nautilus_wallet_flutter/network/model/payment/payment_ack.dart';
-import 'package:nautilus_wallet_flutter/network/model/payment/payment_memo.dart';
-import 'package:nautilus_wallet_flutter/network/model/payment/payment_message.dart';
-import 'package:nautilus_wallet_flutter/network/model/payment/payment_request.dart';
-import 'package:nautilus_wallet_flutter/network/model/request_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/alerts_response_item.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/error_response.dart';
-import 'package:nautilus_wallet_flutter/network/model/response/funding_response_item.dart';
-import 'package:nautilus_wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/network/model/base_request.dart';
+import 'package:wallet_flutter/network/model/payment/payment_ack.dart';
+import 'package:wallet_flutter/network/model/payment/payment_memo.dart';
+import 'package:wallet_flutter/network/model/payment/payment_message.dart';
+import 'package:wallet_flutter/network/model/payment/payment_request.dart';
+import 'package:wallet_flutter/network/model/request_item.dart';
+import 'package:wallet_flutter/network/model/response/alerts_response_item.dart';
+import 'package:wallet_flutter/network/model/response/error_response.dart';
+import 'package:wallet_flutter/network/model/response/funding_response_item.dart';
+import 'package:wallet_flutter/service_locator.dart';
 
 // MetadataService singleton
 class MetadataService {

@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:flutter_sodium/flutter_sodium.dart';
-import 'package:nautilus_wallet_flutter/util/blake2b.dart';
+import 'package:wallet_flutter/util/blake2b.dart';
 import 'package:x25519/x25519.dart';
 
 String generateNonce(int length) {

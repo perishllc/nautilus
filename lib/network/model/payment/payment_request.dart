@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:nautilus_wallet_flutter/network/model/request/actions.dart';
-import 'package:nautilus_wallet_flutter/network/model/base_request.dart';
+import 'package:wallet_flutter/network/model/request/actions.dart';
+import 'package:wallet_flutter/network/model/base_request.dart';
 
 part 'payment_request.g.dart';
 
