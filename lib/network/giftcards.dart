@@ -11,6 +11,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/network/account_service.dart';
+import 'package:wallet_flutter/network/metadata_service.dart';
 import 'package:wallet_flutter/network/model/record_types.dart';
 import 'package:wallet_flutter/network/model/status_types.dart';
 import 'package:wallet_flutter/service_locator.dart';
@@ -141,7 +142,7 @@ class GiftCards {
         "error": "Something went wrong",
       };
     }
-    final http.Response response = await http.post(Uri.parse(AccountService.SERVER_ADDRESS_HTTP),
+    final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_GIFT),
         headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken},
         body: json.encode(
           {
@@ -171,7 +172,7 @@ class GiftCards {
     }
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
     final String runningVersion = packageInfo.version;
-    final http.Response response = await http.post(Uri.parse(AccountService.SERVER_ADDRESS_HTTP),
+    final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_GIFT),
         headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken, "app-version": runningVersion, "hcaptcha-token": hcaptchaToken ?? ""},
         body: json.encode(
           {

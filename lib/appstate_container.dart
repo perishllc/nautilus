@@ -283,23 +283,6 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
-  Future<void> checkAndUpdateNanoToUsernames([bool forceUpdate = false]) async {
-    final int currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-    try {
-      final int lastUpdatedUsers = int.parse(await sl.get<SharedPrefsUtil>().getLastNapiUsersCheck());
-
-      const int dayInSeconds = 60 * 60 * 24;
-
-      // update if more than a day old:
-      if (forceUpdate || currentTime - lastUpdatedUsers > dayInSeconds) {
-        await sl.get<DBHelper>().fetchNanoToUsernames();
-        await sl.get<SharedPrefsUtil>().setLastNapiUsersCheck(currentTime.toString());
-      }
-    } catch (e) {
-      log.e("Error checking and caching nano.to usernames: $e");
-    }
-  }
-
   Future<void> updateSolids() async {
     if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
       final List<TXData> solids = await sl.get<DBHelper>().getAccountSpecificSolids(wallet!.address);
@@ -515,8 +498,6 @@ class StateContainerState extends State<StateContainer> {
     });
     // Cache ninja API if we don't already have it
     checkAndCacheNinjaAPIResponse();
-    // make sure nano.to username database is up to date
-    checkAndUpdateNanoToUsernames();
     // Update alert
     checkAndUpdateAlerts();
     // Get funding alerts
@@ -1038,7 +1019,7 @@ class StateContainerState extends State<StateContainer> {
     if (link_as_account != null) {
       final String? checked = await sl.get<SharedPrefsUtil>().getWithExpiry(link_as_account) as String?;
 
-      if (/*checked == null &&*/ await sl.get<DBHelper>().isOnchainUsernameRecorded(link_as_account) == null) {
+      if (checked == null && await sl.get<DBHelper>().isOnchainUsernameRecorded(link_as_account) == null) {
         final String? onchainUsername = await sl.get<UsernameService>().checkOnchainAddress(link_as_account);
         if (onchainUsername != null) {
           // add to the db if missing:

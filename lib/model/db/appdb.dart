@@ -215,19 +215,19 @@ class DBHelper {
     return "nano_${lowerStripAddress(address)}";
   }
 
-  Future<void> fetchNanoToUsernames() async {
-    final List<User>? users = await sl.get<UsernameService>().fetchNanoToKnown(http.Client());
-    if (users == null) {
-      return;
-    }
+  // Future<void> fetchNanoToUsernames() async {
+  //   final List<User>? users = await sl.get<UsernameService>().fetchNanoToKnown(http.Client());
+  //   if (users == null) {
+  //     return;
+  //   }
 
-    // remove the old users list:
-    await removeNanoToUsers();
-    // add the new users:
-    for (final User user in users) {
-      await addOrReplaceUser(user);
-    }
-  }
+  //   // remove the old users list:
+  //   await removeNanoToUsers();
+  //   // add the new users:
+  //   for (final User user in users) {
+  //     await addOrReplaceUser(user);
+  //   }
+  // }
 
   // Contacts
   Future<List<User>> getContacts() async {

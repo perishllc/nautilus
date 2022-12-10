@@ -2491,9 +2491,24 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       ),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemSingleLine(
+                          context, Z.of(context).changeRepAuthenticate, Icons.hub,
+                          onPressed: () {
+                        Sheets.showAppHeightEightSheet(
+                            context: context, widget: const AppChangeRepresentativeSheet());
+                        if (!StateContainer.of(context).nanoNinjaUpdated) {
+                          NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? result) {
+                            if (result != null) {
+                              StateContainer.of(context).updateNinjaNodes(result);
+                            }
+                          });
+                        }
+                      }),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemSingleLine(
                           context, Z.of(context).changeRepAuthenticate, AppIcons.changerepresentative,
                           onPressed: () {
-                        AppChangeRepresentativeSheet().mainBottomSheet(context);
+                        Sheets.showAppHeightEightSheet(
+                            context: context, widget: const AppChangeRepresentativeSheet());
                         if (!StateContainer.of(context).nanoNinjaUpdated) {
                           NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? result) {
                             if (result != null) {
@@ -2528,13 +2543,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                             await sl.get<DBHelper>().nukeDatabase();
                           } catch (error) {
                             log.d("Error resetting database: $error");
-                          }
-
-                          // re-populate the users table
-                          try {
-                            await sl.get<DBHelper>().fetchNanoToUsernames();
-                          } catch (error) {
-                            log.d("Error fetching usernames: $error");
                           }
 
                           // delete preferences:

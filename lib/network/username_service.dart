@@ -6,6 +6,7 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:ens_dart/ens_dart.dart';
+import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -13,8 +14,11 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/bus/contact_modified_event.dart';
+import 'package:wallet_flutter/bus/payments_home_event.dart';
 import 'package:wallet_flutter/generated/rust/username_registration.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
+import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/model/db/user.dart';
 import 'package:wallet_flutter/model/state_block.dart';
 import 'package:wallet_flutter/network/account_service.dart';
@@ -210,6 +214,17 @@ class UsernameService {
       user.nickname = null;
       return user;
     }).toList() as List<User>;
+  }
+
+  Future<String?> checkNanoToUsername(String username) async {
+    final List<User>? users = await fetchNanoToKnown(http.Client());
+    if (users == null) return null;
+    for (final User user in users) {
+      if (user.username == username) {
+        return user.address;
+      }
+    }
+    return null;
   }
 
   // END NANO.TO
@@ -593,36 +608,45 @@ class UsernameService {
 
   // figure out what type of username, if any, this string is:
   Future<User?> figureOutUsernameType(String username) async {
-    final String formattedAddress = SendSheetHelpers.stripPrefixes(username);
+    final String strippedUsername = SendSheetHelpers.stripPrefixes(username);
     String? type;
     // check if UD / ENS / opencap / onchain address:
-    String? address = await sl.get<UsernameService>().checkOnchainUsername(formattedAddress);
+    String? address = await sl.get<UsernameService>().checkOnchainUsername(strippedUsername);
     if (address != null) {
       type = UserTypes.ONCHAIN;
     } else if (username.contains(r"$")) {
       // check if opencap address:
-      address = await sl.get<UsernameService>().checkOpencapDomain(formattedAddress);
+      address = await sl.get<UsernameService>().checkOpencapDomain(strippedUsername);
       if (address != null) {
         type = UserTypes.OPENCAP;
       }
     } else if (username.contains(".")) {
       // check if UD domain:
-      address = await sl.get<UsernameService>().checkUnstoppableDomain(formattedAddress);
+      address = await sl.get<UsernameService>().checkUnstoppableDomain(strippedUsername);
       if (address != null) {
         type = UserTypes.UD;
       } else {
         // check if ENS domain:
-        address = await sl.get<UsernameService>().checkENSDomain(formattedAddress);
+        address = await sl.get<UsernameService>().checkENSDomain(strippedUsername);
         if (address != null) {
           type = UserTypes.ENS;
         }
+      }
+    } else {
+      // check if nano.to address:
+      address = await sl.get<UsernameService>().checkNanoToUsername(strippedUsername);
+      if (address != null) {
+        type = UserTypes.NANO_TO;
       }
     }
 
     // add to the db if missing:
     if (type != null) {
-      final User user = User(username: formattedAddress, address: address, type: type, is_blocked: false);
+      final User user = User(username: strippedUsername, address: address, type: type, is_blocked: false);
       await sl.get<DBHelper>().addUser(user);
+      // force users list to update on the home page:
+      EventTaxiImpl.singleton().fire(ContactModifiedEvent());
+      EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: <TXData>[]));
       return user;
     }
     return null;

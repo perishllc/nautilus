@@ -34,17 +34,15 @@ import 'package:wallet_flutter/util/ninja/ninja_node.dart';
 import 'package:wallet_flutter/util/numberutil.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
 
-import 'changerepresentativemanualentry_sheet.dart';
-
-class AppChangeRepresentativeSheet extends StatefulWidget {
-  const AppChangeRepresentativeSheet() : super();
+class ChangeRpcSheet extends StatefulWidget {
+  const ChangeRpcSheet() : super();
 
   @override
   // ignore: library_private_types_in_public_api
-  _AppChangeRepresentativeSheetState createState() => _AppChangeRepresentativeSheetState();
+  _ChangeRpcSheetState createState() => _ChangeRpcSheetState();
 }
 
-class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSheet> {
+class _ChangeRpcSheetState extends State<ChangeRpcSheet> {
   // State variables
   bool _addressCopied = false;
   // Timer reference so we can cancel repeated events

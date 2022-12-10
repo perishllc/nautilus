@@ -850,9 +850,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           if (!mounted) return;
           await AppDialogs.showChangeLog(context);
           if (!mounted) return;
-
-          // also force a username update:
-          StateContainer.of(context).checkAndUpdateNanoToUsernames(true);
         }
       }
 
