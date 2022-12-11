@@ -1,7 +1,7 @@
 use blake2::{digest::Digest, Blake2b};
 use curve25519_dalek::{
     constants::ED25519_BASEPOINT_TABLE,
-    edwards::{CompressedEdwardsY, EdwardsPoint},
+    edwards::{CompressedEdwardsY},
     scalar::Scalar,
 };
 use rand::{rngs::OsRng, RngCore};

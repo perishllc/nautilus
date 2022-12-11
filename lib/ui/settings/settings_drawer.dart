@@ -52,6 +52,7 @@ import 'package:wallet_flutter/ui/settings/backupseed_sheet.dart';
 import 'package:wallet_flutter/ui/settings/blocked_widget.dart';
 import 'package:wallet_flutter/ui/settings/change_magic_password_sheet.dart';
 import 'package:wallet_flutter/ui/settings/change_magic_seed_sheet.dart';
+import 'package:wallet_flutter/ui/settings/change_node/change_node_sheet.dart';
 import 'package:wallet_flutter/ui/settings/changerepresentative_sheet.dart';
 import 'package:wallet_flutter/ui/settings/contacts_widget.dart';
 import 'package:wallet_flutter/ui/settings/set_pin_sheet.dart';
@@ -2494,7 +2495,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                           context, Z.of(context).changeRepAuthenticate, Icons.hub,
                           onPressed: () {
                         Sheets.showAppHeightEightSheet(
-                            context: context, widget: const AppChangeRepresentativeSheet());
+                            context: context, widget: ChangeNodeSheet());
                         if (!StateContainer.of(context).nanoNinjaUpdated) {
                           NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? result) {
                             if (result != null) {
