@@ -1,18 +1,21 @@
 brew install ninja rustup-init llvm
 rustup-init -y
 source "$HOME/.cargo/env"
-cargo install cargo-xcode
-cargo install cargo-ndk
-cargo install flutter_rust_bridge_codegen
+cargo install cargo-lipo cargo-xcode cargo-ndk flutter_rust_bridge_codegen cbindgen
 rustup target add \
     aarch64-linux-android \
-    armv7-linux-androideabi
+    armv7-linux-androideabi \
+    aarch64-apple-ios \
+    x86_64-apple-ios \
+    aarch64-apple-ios-sim
 
-flutter_rust_bridge_codegen --rust-input rust/src/username_registration.rs \
---dart-output lib/generated/rust/username_registration.dart --skip-deps-check
-flutter_rust_bridge_codegen --rust-input rust/src/counter.rs \
---dart-output lib/generated/rust/counter.dart --skip-deps-check
+flutter_rust_bridge_codegen --skip-deps-check --rust-input rust/src/username_registration.rs \
+--dart-output lib/generated/rust/username_registration.dart -c ios/Runner/username_registration.h
+flutter_rust_bridge_codegen --skip-deps-check --rust-input rust/src/counter.rs \
+--dart-output lib/generated/rust/counter.dart -c ios/Runner/counter.h
 cd rust
+cargo lipo
+cp target/universal/debug/libperish.a ../ios/Runner
 cargo ndk -t arm64-v8a -t armeabi-v7a -o ../android/app/src/main/jniLibs build
 cd ..
 

@@ -244,6 +244,8 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
 
       Sheets.showAppHeightNineSheet(context: context, closeOnTap: true, removeUntilHome: true, widget: RegisterOnchainCompleteSheet(username: widget.username));
     } catch (e) {
+
+      print(e.toString());
       // Send failed
       if (animationOpen) {
         Navigator.of(context).pop();

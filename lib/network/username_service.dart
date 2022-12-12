@@ -303,12 +303,12 @@ class UsernameService {
         throw Exception("Failed to open block");
       }
       // Hack that waits for blocks to be confirmed
-      await Future<dynamic>.delayed(const Duration(milliseconds: 300));
+      await Future<dynamic>.delayed(const Duration(milliseconds: 3000));
     }
     // check confirmation on the block hash:
     final BlockInfoItem blockInfoItem = await sl.get<AccountService>().requestBlockInfo(receivedHash);
-    if (blockInfoItem.confirmed != true) {
-      throw Exception("Failed to confirm open block P1!");
+    if (blockInfoItem.confirmed != "true") {
+      throw Exception("Failed to confirm open block P1! (user -> account map)");
     }
   }
 
@@ -442,7 +442,7 @@ class UsernameService {
     // check confirmation on the block hash:
     final BlockInfoItem blockInfoItem = await sl.get<AccountService>().requestBlockInfo(receivedHash);
     if (blockInfoItem.confirmed != "true") {
-      throw Exception("Failed to confirm open block P1!");
+      throw Exception("Failed to confirm open block P1! (account -> username map)");
     }
 
     // You can re-register another username -> account mapping by repeating part 1
