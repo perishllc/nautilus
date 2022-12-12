@@ -46,7 +46,7 @@ final DynamicLibrary dylib = Platform.isIOS
     : Platform.isMacOS
         ? DynamicLibrary.executable()
         : DynamicLibrary.open(path);
-final PerishLibImpl api = PerishLibImpl(dylib);
+final PerishImpl api = PerishImpl(dylib);
 
 late Web3Client _web3Client;
 late Ens ens;
