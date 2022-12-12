@@ -1,5 +1,5 @@
 [package]
-name = "perish-lib"
+name = "perish"
 version = "0.1.0"
 edition = "2021"
 
