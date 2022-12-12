@@ -15,11 +15,9 @@ flutter_rust_bridge_codegen --skip-deps-check --rust-input rust/src/username_reg
 
 cd rust
 cargo lipo
-cp target/universal/debug/libperish.a ../ios/Runner
+# cp target/universal/debug/libperish.a ../ios/Runner
 cargo ndk -t arm64-v8a -t armeabi-v7a -o ../android/app/src/main/jniLibs build
 cd ..
-
-# flutter_rust_bridge_codegen --rust-input rust/src/counter.rs --dart-output lib/generated/rust/counter.dart --skip-deps-check
 
 touch .env
 echo "ONRAMPER_API_KEY=$ONRAMPER_API_KEY" >> .env
