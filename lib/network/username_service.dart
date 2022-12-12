@@ -16,7 +16,7 @@ import 'package:logger/logger.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/contact_modified_event.dart';
 import 'package:wallet_flutter/bus/payments_home_event.dart';
-import 'package:wallet_flutter/generated/rust/username_registration.dart';
+import 'package:wallet_flutter/generated/rust/generated_bridge.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/model/db/user.dart';
@@ -39,14 +39,14 @@ import 'package:web3dart/web3dart.dart';
 import 'package:web_socket_channel/io.dart';
 
 // rust libs:
-const String libbase = "nano_username_registration";
+const String libbase = "perish_lib";
 final String path = Platform.isWindows ? "$libbase.dll" : "lib$libbase.so";
 final DynamicLibrary dylib = Platform.isIOS
     ? DynamicLibrary.process()
     : Platform.isMacOS
         ? DynamicLibrary.executable()
         : DynamicLibrary.open(path);
-final NanoUsernameRegistrationImpl api = NanoUsernameRegistrationImpl(dylib);
+final PerishLibImpl api = PerishLibImpl(dylib);
 
 late Web3Client _web3Client;
 late Ens ens;
