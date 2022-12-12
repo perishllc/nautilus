@@ -16,7 +16,7 @@ import 'package:logger/logger.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/contact_modified_event.dart';
 import 'package:wallet_flutter/bus/payments_home_event.dart';
-import 'package:wallet_flutter/generated/rust/generated_bridge.dart';
+import 'package:wallet_flutter/generated/rust/username_registration.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/model/db/user.dart';

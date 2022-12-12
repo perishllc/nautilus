@@ -10,7 +10,19 @@ import 'package:meta/meta.dart';
 import 'package:meta/meta.dart';
 import 'dart:ffi' as ffi;
 
-abstract class Perish {}
+abstract class Perish {
+  Future<int> getCounter({dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kGetCounterConstMeta;
+
+  Future<int> increment({dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kIncrementConstMeta;
+
+  Future<int> decrement({dynamic hint});
+
+  FlutterRustBridgeTaskConstMeta get kDecrementConstMeta;
+}
 
 class PerishImpl implements Perish {
   final PerishPlatform _platform;
@@ -21,11 +33,62 @@ class PerishImpl implements Perish {
   factory PerishImpl.wasm(FutureOr<WasmModule> module) =>
       PerishImpl(module as ExternalLibrary);
   PerishImpl.raw(this._platform);
+  Future<int> getCounter({dynamic hint}) {
+    return _platform.executeNormal(FlutterRustBridgeTask(
+      callFfi: (port_) => _platform.inner.wire_get_counter(port_),
+      parseSuccessData: _wire2api_u64,
+      constMeta: kGetCounterConstMeta,
+      argValues: [],
+      hint: hint,
+    ));
+  }
+
+  FlutterRustBridgeTaskConstMeta get kGetCounterConstMeta =>
+      const FlutterRustBridgeTaskConstMeta(
+        debugName: "get_counter",
+        argNames: [],
+      );
+
+  Future<int> increment({dynamic hint}) {
+    return _platform.executeNormal(FlutterRustBridgeTask(
+      callFfi: (port_) => _platform.inner.wire_increment(port_),
+      parseSuccessData: _wire2api_u64,
+      constMeta: kIncrementConstMeta,
+      argValues: [],
+      hint: hint,
+    ));
+  }
+
+  FlutterRustBridgeTaskConstMeta get kIncrementConstMeta =>
+      const FlutterRustBridgeTaskConstMeta(
+        debugName: "increment",
+        argNames: [],
+      );
+
+  Future<int> decrement({dynamic hint}) {
+    return _platform.executeNormal(FlutterRustBridgeTask(
+      callFfi: (port_) => _platform.inner.wire_decrement(port_),
+      parseSuccessData: _wire2api_u64,
+      constMeta: kDecrementConstMeta,
+      argValues: [],
+      hint: hint,
+    ));
+  }
+
+  FlutterRustBridgeTaskConstMeta get kDecrementConstMeta =>
+      const FlutterRustBridgeTaskConstMeta(
+        debugName: "decrement",
+        argNames: [],
+      );
+
   void dispose() {
     _platform.dispose();
   }
 // Section: wire2api
 
+  int _wire2api_u64(dynamic raw) {
+    return castInt(raw);
+  }
 }
 
 // Section: api2wire
@@ -137,6 +200,48 @@ class PerishWire implements FlutterRustBridgeWireBase {
           'init_frb_dart_api_dl');
   late final _init_frb_dart_api_dl = _init_frb_dart_api_dlPtr
       .asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+
+  void wire_get_counter(
+    int port_,
+  ) {
+    return _wire_get_counter(
+      port_,
+    );
+  }
+
+  late final _wire_get_counterPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>(
+          'wire_get_counter');
+  late final _wire_get_counter =
+      _wire_get_counterPtr.asFunction<void Function(int)>();
+
+  void wire_increment(
+    int port_,
+  ) {
+    return _wire_increment(
+      port_,
+    );
+  }
+
+  late final _wire_incrementPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>(
+          'wire_increment');
+  late final _wire_increment =
+      _wire_incrementPtr.asFunction<void Function(int)>();
+
+  void wire_decrement(
+    int port_,
+  ) {
+    return _wire_decrement(
+      port_,
+    );
+  }
+
+  late final _wire_decrementPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>(
+          'wire_decrement');
+  late final _wire_decrement =
+      _wire_decrementPtr.asFunction<void Function(int)>();
 
   void free_WireSyncReturnStruct(
     WireSyncReturnStruct val,

@@ -8,7 +8,10 @@ rustup target add \
     aarch64-linux-android \
     armv7-linux-androideabi
 
-flutter_rust_bridge_codegen --rust-input rust/src/lib.rs --dart-output lib/generated/rust/generated_bridge.dart --skip-deps-check
+flutter_rust_bridge_codegen --rust-input rust/src/username_registration.rs \
+--dart-output lib/generated/rust/username_registration.dart --skip-deps-check
+flutter_rust_bridge_codegen --rust-input rust/src/counter.rs \
+--dart-output lib/generated/rust/counter.dart --skip-deps-check
 cd rust
 cargo ndk -t arm64-v8a -t armeabi-v7a -o ../android/app/src/main/jniLibs build
 cd ..
