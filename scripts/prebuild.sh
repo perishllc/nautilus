@@ -8,11 +8,15 @@ rustup target add \
     aarch64-apple-ios \
     x86_64-apple-ios \
     aarch64-apple-ios-sim
+flutter pub get
+# flutter_rust_bridge_codegen --skip-deps-check --rust-input rust/src/username_registration.rs \
+# --dart-output lib/generated/rust/username_registration.dart -c ios/Runner/username_registration.h
+# flutter_rust_bridge_codegen --skip-deps-check --rust-input rust/src/counter.rs \
+# --dart-output lib/generated/rust/counter.dart -c ios/Runner/counter.h
 
 flutter_rust_bridge_codegen --skip-deps-check --rust-input rust/src/username_registration.rs \
---dart-output lib/generated/rust/username_registration.dart -c ios/Runner/username_registration.h
-flutter_rust_bridge_codegen --skip-deps-check --rust-input rust/src/counter.rs \
---dart-output lib/generated/rust/counter.dart -c ios/Runner/counter.h
+--dart-output lib/generated/rust/username_registration.dart -c ios/Runner/Generated/username_bridge.h
+
 cd rust
 cargo lipo
 cp target/universal/debug/libperish.a ../ios/Runner
