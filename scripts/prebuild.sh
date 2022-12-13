@@ -10,8 +10,27 @@ rustup target add \
     aarch64-apple-ios-sim
 flutter pub get
 
-flutter_rust_bridge_codegen --skip-deps-check --rust-input rust/src/username_registration.rs \
---dart-output lib/generated/rust/username_registration.dart -c ios/Runner/Generated/username_bridge.h
+# problem with c-output not being separate files:
+# flutter_rust_bridge_codegen --skip-deps-check \
+# --rust-input rust/src/username_registration.rs rust/src/counter.rs \
+# --dart-output lib/generated/rust/username_registration.dart lib/generated/rust/counter.dart \
+# --rust-output rust/src/username_registration_bridge.rs rust/src/counter_bridge.rs \
+# --class-name UsernameRegistration Counter \
+# --c-output ios/Runner/Generated/username_bridge.h ios/Runner/Generated/counter.h
+
+# flutter_rust_bridge_codegen --skip-deps-check \
+# --rust-input rust/src/counter.rs \
+# --dart-output lib/generated/rust/counter.dart \
+# --c-output ios/Runner/Generated/counter.h \
+# --rust-output rust/src/counter_generated.rs \
+# --class-name Counter
+
+flutter_rust_bridge_codegen --skip-deps-check \
+--rust-input rust/src/username_registration.rs \
+--dart-output lib/generated/rust/username_registration.dart \
+--c-output ios/Runner/Generated/username_registration.h \
+--rust-output rust/src/username_registration_generated.rs \
+--class-name UsernameRegistration
 
 cd rust
 cargo lipo

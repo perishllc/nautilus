@@ -88,7 +88,6 @@ build/**
 # Translations
 lib/l10n/*.json
 bin/settings.py
-lib/generated/rust/*
 
 # Fastlane
 android/fastlane/report.xml
@@ -100,3 +99,8 @@ ios/fastlane/metadata/trade_representative_contact_information
 
 # CI/CD
 .env
+
+# rust:
+lib/generated/rust/*
+rust/src/*generated
+ios/Runner/Generated/*
