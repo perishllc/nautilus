@@ -1,2 +1,3 @@
 target/
-src/*generated
+src/*generated.rs
+src/*generated.io.rs
