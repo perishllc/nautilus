@@ -55,6 +55,11 @@
     "type": "text",
     "description": "favorite_add_button"
   },
+  "addNode": "Magdagdag ng Node",
+  "@addNode": {
+    "type": "text",
+    "description": "Add a new node"
+  },
   "address": "Address",
   "@address": {
     "type": "text",
@@ -304,6 +309,11 @@
   "@changeLog": {
     "type": "text",
     "description": "change_log_header"
+  },
+  "changeNode": "Baguhin ang Node",
+  "@changeNode": {
+    "type": "text",
+    "description": "change node"
   },
   "changePassword": "Palitan ANG password",
   "@changePassword": {
@@ -620,6 +630,16 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteNodeConfirmation": "Sigurado ka bang gusto mong tanggalin ang node na ito?\n\nMaaari mo itong muling idagdag anumang oras sa ibang pagkakataon sa pamamagitan ng pag-tap sa \"Magdagdag ng Node\" na button",
+  "@deleteNodeConfirmation": {
+    "type": "text",
+    "description": "delete node confirmation info"
+  },
+  "deleteNodeHeader": "Tanggalin ang Node?",
+  "@deleteNodeHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "deleteRequest": "Delete this request",
   "@deleteRequest": {
     "type": "text",
@@ -715,6 +735,11 @@
     "type": "text",
     "description": "enter_height_hint"
   },
+  "enterHttpUrl": "Ilagay ang HTTP URL",
+  "@enterHttpUrl": {
+    "type": "text",
+    "description": "change_node_http_hint"
+  },
   "enterMemo": "Ipasok ang Mensahe",
   "@enterMemo": {
     "type": "text",
@@ -724,6 +749,11 @@
   "@enterMoneroAddress": {
     "type": "text",
     "description": "enter_xmr_address"
+  },
+  "enterNodeName": "Ipasok ang Pangalan ng Node",
+  "@enterNodeName": {
+    "type": "text",
+    "description": "change_node_name_hint"
   },
   "enterPasswordHint": "Ilagay ang password",
   "@enterPasswordHint": {
@@ -744,6 +774,11 @@
   "@enterUserOrAddress": {
     "type": "text",
     "description": "enter_user_address"
+  },
+  "enterWsUrl": "Ipasok ang WebSocket URL",
+  "@enterWsUrl": {
+    "type": "text",
+    "description": "change_node_ws_hint"
   },
   "errorProcessingGiftCard": "Nagkaroon ng error habang pinoproseso ang gift card na ito, maaaring hindi ito wasto, nag-expire, o walang laman.",
   "@errorProcessingGiftCard": {
@@ -1459,6 +1494,16 @@
   "@noContactsImport": {
     "type": "text",
     "description": "contact_import_none"
+  },
+  "node": "Node",
+  "@node": {
+    "type": "text",
+    "description": "Node header"
+  },
+  "nodes": "Mga node",
+  "@nodes": {
+    "type": "text",
+    "description": "Nodes header"
   },
   "nodeStatus": "Katayuan ng Node",
   "@nodeStatus": {

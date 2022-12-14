@@ -55,6 +55,11 @@
     "type": "text",
     "description": "favorite_add_button"
   },
+  "addNode": "Afegeix un node",
+  "@addNode": {
+    "type": "text",
+    "description": "Add a new node"
+  },
   "address": "adreça",
   "@address": {
     "type": "text",
@@ -304,6 +309,11 @@
   "@changeLog": {
     "type": "text",
     "description": "change_log_header"
+  },
+  "changeNode": "Canvia el node",
+  "@changeNode": {
+    "type": "text",
+    "description": "change node"
   },
   "changePassword": "Canvia la contrasenya",
   "@changePassword": {
@@ -620,6 +630,16 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteNodeConfirmation": "Esteu segur que voleu suprimir aquest node?\n\nSempre el podeu tornar a afegir més tard tocant el botó \"Afegeix un node\".",
+  "@deleteNodeConfirmation": {
+    "type": "text",
+    "description": "delete node confirmation info"
+  },
+  "deleteNodeHeader": "Vols suprimir el node?",
+  "@deleteNodeHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "deleteRequest": "Delete this request",
   "@deleteRequest": {
     "type": "text",
@@ -715,6 +735,11 @@
     "type": "text",
     "description": "enter_height_hint"
   },
+  "enterHttpUrl": "Introduïu l'URL HTTP",
+  "@enterHttpUrl": {
+    "type": "text",
+    "description": "change_node_http_hint"
+  },
   "enterMemo": "Enter Message",
   "@enterMemo": {
     "type": "text",
@@ -724,6 +749,11 @@
   "@enterMoneroAddress": {
     "type": "text",
     "description": "enter_xmr_address"
+  },
+  "enterNodeName": "Introduïu el nom del node",
+  "@enterNodeName": {
+    "type": "text",
+    "description": "change_node_name_hint"
   },
   "enterPasswordHint": "Zadejte vaše heslo",
   "@enterPasswordHint": {
@@ -744,6 +774,11 @@
   "@enterUserOrAddress": {
     "type": "text",
     "description": "enter_user_address"
+  },
+  "enterWsUrl": "Introduïu l'URL de WebSocket",
+  "@enterWsUrl": {
+    "type": "text",
+    "description": "change_node_ws_hint"
   },
   "errorProcessingGiftCard": "S'ha produït un error en processar aquesta targeta de regal, és possible que no sigui vàlida, caducada o buida.",
   "@errorProcessingGiftCard": {
@@ -1459,6 +1494,16 @@
   "@noContactsImport": {
     "type": "text",
     "description": "contact_import_none"
+  },
+  "node": "Node",
+  "@node": {
+    "type": "text",
+    "description": "Node header"
+  },
+  "nodes": "Nodes",
+  "@nodes": {
+    "type": "text",
+    "description": "Nodes header"
   },
   "nodeStatus": "Node Status",
   "@nodeStatus": {

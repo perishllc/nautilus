@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Blocați un utilizator"),
         "addContact": MessageLookupByLibrary.simpleMessage("Adaugă contact"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Adauga Favorite"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Adăugați nod"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Adăugați un utilizator"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -122,6 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Schimbă valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Schimbare jurnal"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Schimbați nodul"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Schimbaţi parola"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -225,6 +227,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Contul nr. %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Șterge"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Sigur doriți să ștergeți acest nod?\n\nPuteți oricând să-l adăugați din nou mai târziu atingând butonul „Adăugați nod”."),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Ștergeți nodul?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -258,10 +264,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Introduceți nota cadou"),
         "enterHeight":
             MessageLookupByLibrary.simpleMessage("Introduceți înălțimea"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Introduceți adresa URL HTTP"),
         "enterMemo":
             MessageLookupByLibrary.simpleMessage("Introduceţi mesajul"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Introduceți adresa XMR"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Introduceți Numele nodului"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Introduceți parola"),
         "enterSplitAmount":
@@ -270,6 +280,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Introduceți Utilizator sau Adresă"),
         "enterUsername": MessageLookupByLibrary.simpleMessage(
             "Introduceți un nume de utilizator"),
+        "enterWsUrl": MessageLookupByLibrary.simpleMessage(
+            "Introduceți URL-ul WebSocket"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "A apărut o eroare la procesarea acestui card cadou, este posibil să nu fie valid, să fie expirat sau gol."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -506,7 +518,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Nu există tranzacții de exportat."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Nodul"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Starea nodului"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Noduri"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Nici unul"),
         "notSent": MessageLookupByLibrary.simpleMessage("nu a fost trimis"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

@@ -55,6 +55,11 @@
     "type": "text",
     "description": "favorite_add_button"
   },
+  "addNode": "添加節點",
+  "@addNode": {
+    "type": "text",
+    "description": "Add a new node"
+  },
   "address": "地址",
   "@address": {
     "type": "text",
@@ -304,6 +309,11 @@
   "@changeLog": {
     "type": "text",
     "description": "change_log_header"
+  },
+  "changeNode": "改變節點",
+  "@changeNode": {
+    "type": "text",
+    "description": "change node"
   },
   "changePassword": "更改密碼",
   "@changePassword": {
@@ -620,6 +630,16 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteNodeConfirmation": "您確定要刪除此節點嗎？\n\n您以後隨時可以通過點擊“添加節點”按鈕重新添加它",
+  "@deleteNodeConfirmation": {
+    "type": "text",
+    "description": "delete node confirmation info"
+  },
+  "deleteNodeHeader": "刪除節點？",
+  "@deleteNodeHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "deleteRequest": "Delete this request",
   "@deleteRequest": {
     "type": "text",
@@ -715,6 +735,11 @@
     "type": "text",
     "description": "enter_height_hint"
   },
+  "enterHttpUrl": "輸入 HTTP 網址",
+  "@enterHttpUrl": {
+    "type": "text",
+    "description": "change_node_http_hint"
+  },
   "enterMemo": "輸入訊息",
   "@enterMemo": {
     "type": "text",
@@ -724,6 +749,11 @@
   "@enterMoneroAddress": {
     "type": "text",
     "description": "enter_xmr_address"
+  },
+  "enterNodeName": "輸入節點名稱",
+  "@enterNodeName": {
+    "type": "text",
+    "description": "change_node_name_hint"
   },
   "enterPasswordHint": "輸入您的密碼",
   "@enterPasswordHint": {
@@ -744,6 +774,11 @@
   "@enterUserOrAddress": {
     "type": "text",
     "description": "enter_user_address"
+  },
+  "enterWsUrl": "輸入 WebSocket 網址",
+  "@enterWsUrl": {
+    "type": "text",
+    "description": "change_node_ws_hint"
   },
   "errorProcessingGiftCard": "處理此禮品卡時出錯，它可能無效、過期或為空。",
   "@errorProcessingGiftCard": {
@@ -1459,6 +1494,16 @@
   "@noContactsImport": {
     "type": "text",
     "description": "contact_import_none"
+  },
+  "node": "節點",
+  "@node": {
+    "type": "text",
+    "description": "Node header"
+  },
+  "nodes": "節點",
+  "@nodes": {
+    "type": "text",
+    "description": "Nodes header"
   },
   "nodeStatus": "節點狀態",
   "@nodeStatus": {

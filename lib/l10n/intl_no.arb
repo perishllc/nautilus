@@ -55,6 +55,11 @@
     "type": "text",
     "description": "favorite_add_button"
   },
+  "addNode": "Legg til node",
+  "@addNode": {
+    "type": "text",
+    "description": "Add a new node"
+  },
   "address": "Adresse",
   "@address": {
     "type": "text",
@@ -304,6 +309,11 @@
   "@changeLog": {
     "type": "text",
     "description": "change_log_header"
+  },
+  "changeNode": "Endre node",
+  "@changeNode": {
+    "type": "text",
+    "description": "change node"
   },
   "changePassword": "Bytt passord",
   "@changePassword": {
@@ -620,6 +630,16 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteNodeConfirmation": "Er du sikker på at du vil slette denne noden?\n\nDu kan alltid legge den til på nytt senere ved å trykke på \"Legg til node\"-knappen",
+  "@deleteNodeConfirmation": {
+    "type": "text",
+    "description": "delete node confirmation info"
+  },
+  "deleteNodeHeader": "Slett node?",
+  "@deleteNodeHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "deleteRequest": "Delete this request",
   "@deleteRequest": {
     "type": "text",
@@ -715,6 +735,11 @@
     "type": "text",
     "description": "enter_height_hint"
   },
+  "enterHttpUrl": "Skriv inn HTTP URL",
+  "@enterHttpUrl": {
+    "type": "text",
+    "description": "change_node_http_hint"
+  },
   "enterMemo": "Skriv inn melding",
   "@enterMemo": {
     "type": "text",
@@ -724,6 +749,11 @@
   "@enterMoneroAddress": {
     "type": "text",
     "description": "enter_xmr_address"
+  },
+  "enterNodeName": "Skriv inn nodenavn",
+  "@enterNodeName": {
+    "type": "text",
+    "description": "change_node_name_hint"
   },
   "enterPasswordHint": "Tast inn ditt passord",
   "@enterPasswordHint": {
@@ -744,6 +774,11 @@
   "@enterUserOrAddress": {
     "type": "text",
     "description": "enter_user_address"
+  },
+  "enterWsUrl": "Skriv inn WebSocket URL",
+  "@enterWsUrl": {
+    "type": "text",
+    "description": "change_node_ws_hint"
   },
   "errorProcessingGiftCard": "Det oppsto en feil under behandlingen av dette gavekortet. Det kan være at det ikke er gyldig, utløpt eller tomt.",
   "@errorProcessingGiftCard": {
@@ -1459,6 +1494,16 @@
   "@noContactsImport": {
     "type": "text",
     "description": "contact_import_none"
+  },
+  "node": "Node",
+  "@node": {
+    "type": "text",
+    "description": "Node header"
+  },
+  "nodes": "Noder",
+  "@nodes": {
+    "type": "text",
+    "description": "Nodes header"
   },
   "nodeStatus": "Node Status",
   "@nodeStatus": {

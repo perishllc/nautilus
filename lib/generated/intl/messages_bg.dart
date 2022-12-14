@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Блокиране на потребител"),
         "addContact": MessageLookupByLibrary.simpleMessage("Добави Контакт"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Добави Любими"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Добавете възел"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Добавяне на потребител"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -121,6 +122,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Смени Валута"),
         "changeLog":
             MessageLookupByLibrary.simpleMessage("Промяна на дневника"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Промяна на възела"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Промяна на паролата"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -224,6 +226,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Акаунт %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Изтриване"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Сигурни ли сте, че искате да изтриете този възел?\n\nВинаги можете да го добавите отново по-късно, като докоснете бутона „Добавяне на възел“."),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Изтриване на възел?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -256,9 +262,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Въведете бележка за подарък"),
         "enterHeight":
             MessageLookupByLibrary.simpleMessage("Въведете височина"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Въведете HTTP URL"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Въведете съобщение"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Въведете XMR адрес"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Въведете име на възел"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Въведи паролата"),
         "enterSplitAmount":
@@ -267,6 +277,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Въведете потребител или адрес"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Въведете потребителско име"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("Въведете URL на WebSocket"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Възникна грешка при обработката на тази карта за подарък, тя може да не е валидна, с изтекъл срок на валидност или празна."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -503,7 +515,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Няма транзакции за експортиране."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Възел"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Статус на възела"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Възли"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Нито един"),
         "notSent": MessageLookupByLibrary.simpleMessage("не е изпратено"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

@@ -55,6 +55,11 @@
     "type": "text",
     "description": "favorite_add_button"
   },
+  "addNode": "Düğüm Ekle",
+  "@addNode": {
+    "type": "text",
+    "description": "Add a new node"
+  },
   "address": "Adres",
   "@address": {
     "type": "text",
@@ -304,6 +309,11 @@
   "@changeLog": {
     "type": "text",
     "description": "change_log_header"
+  },
+  "changeNode": "Düğümü Değiştir",
+  "@changeNode": {
+    "type": "text",
+    "description": "change node"
   },
   "changePassword": "Şifre değiştir",
   "@changePassword": {
@@ -620,6 +630,16 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteNodeConfirmation": "Bu düğümü silmek istediğinizden emin misiniz?\n\n\"Düğüm Ekle\" düğmesine dokunarak istediğiniz zaman yeniden ekleyebilirsiniz.",
+  "@deleteNodeConfirmation": {
+    "type": "text",
+    "description": "delete node confirmation info"
+  },
+  "deleteNodeHeader": "Düğüm silinsin mi?",
+  "@deleteNodeHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "deleteRequest": "Delete this request",
   "@deleteRequest": {
     "type": "text",
@@ -715,6 +735,11 @@
     "type": "text",
     "description": "enter_height_hint"
   },
+  "enterHttpUrl": "HTTP URL'sini girin",
+  "@enterHttpUrl": {
+    "type": "text",
+    "description": "change_node_http_hint"
+  },
   "enterMemo": "Mesaj Girin",
   "@enterMemo": {
     "type": "text",
@@ -724,6 +749,11 @@
   "@enterMoneroAddress": {
     "type": "text",
     "description": "enter_xmr_address"
+  },
+  "enterNodeName": "Düğüm Adını Girin",
+  "@enterNodeName": {
+    "type": "text",
+    "description": "change_node_name_hint"
   },
   "enterPasswordHint": "Şifreni gir",
   "@enterPasswordHint": {
@@ -744,6 +774,11 @@
   "@enterUserOrAddress": {
     "type": "text",
     "description": "enter_user_address"
+  },
+  "enterWsUrl": "WebSocket URL'sini girin",
+  "@enterWsUrl": {
+    "type": "text",
+    "description": "change_node_ws_hint"
   },
   "errorProcessingGiftCard": "Bu hediye kartı işlenirken bir hata oluştu, geçerli olmayabilir, süresi dolmuş veya boş olabilir.",
   "@errorProcessingGiftCard": {
@@ -1459,6 +1494,16 @@
   "@noContactsImport": {
     "type": "text",
     "description": "contact_import_none"
+  },
+  "node": "düğüm",
+  "@node": {
+    "type": "text",
+    "description": "Node header"
+  },
+  "nodes": "Düğümler",
+  "@nodes": {
+    "type": "text",
+    "description": "Nodes header"
   },
   "nodeStatus": "Düğüm Durumu",
   "@nodeStatus": {

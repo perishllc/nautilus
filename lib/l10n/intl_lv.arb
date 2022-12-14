@@ -55,6 +55,11 @@
     "type": "text",
     "description": "favorite_add_button"
   },
+  "addNode": "Pievienot mezglu",
+  "@addNode": {
+    "type": "text",
+    "description": "Add a new node"
+  },
   "address": "Adrese",
   "@address": {
     "type": "text",
@@ -304,6 +309,11 @@
   "@changeLog": {
     "type": "text",
     "description": "change_log_header"
+  },
+  "changeNode": "Mainīt mezglu",
+  "@changeNode": {
+    "type": "text",
+    "description": "change node"
   },
   "changePassword": "Mainīt paroli",
   "@changePassword": {
@@ -620,6 +630,16 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteNodeConfirmation": "Vai tiešām vēlaties dzēst šo mezglu?\n\nJūs vienmēr varat to atkārtoti pievienot vēlāk, pieskaroties pogai \"Pievienot mezglu\".",
+  "@deleteNodeConfirmation": {
+    "type": "text",
+    "description": "delete node confirmation info"
+  },
+  "deleteNodeHeader": "Vai dzēst mezglu?",
+  "@deleteNodeHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "deleteRequest": "Delete this request",
   "@deleteRequest": {
     "type": "text",
@@ -715,6 +735,11 @@
     "type": "text",
     "description": "enter_height_hint"
   },
+  "enterHttpUrl": "Ievadiet HTTP URL",
+  "@enterHttpUrl": {
+    "type": "text",
+    "description": "change_node_http_hint"
+  },
   "enterMemo": "Enter Message",
   "@enterMemo": {
     "type": "text",
@@ -724,6 +749,11 @@
   "@enterMoneroAddress": {
     "type": "text",
     "description": "enter_xmr_address"
+  },
+  "enterNodeName": "Ievadiet mezgla nosaukumu",
+  "@enterNodeName": {
+    "type": "text",
+    "description": "change_node_name_hint"
   },
   "enterPasswordHint": "Enter your password",
   "@enterPasswordHint": {
@@ -744,6 +774,11 @@
   "@enterUserOrAddress": {
     "type": "text",
     "description": "enter_user_address"
+  },
+  "enterWsUrl": "Ievadiet WebSocket URL",
+  "@enterWsUrl": {
+    "type": "text",
+    "description": "change_node_ws_hint"
   },
   "errorProcessingGiftCard": "Apstrādājot šo dāvanu karti, radās kļūda. Tā var nebūt derīga, beidzies derīguma termiņš vai tā ir tukša.",
   "@errorProcessingGiftCard": {
@@ -1459,6 +1494,16 @@
   "@noContactsImport": {
     "type": "text",
     "description": "contact_import_none"
+  },
+  "node": "Mezgls",
+  "@node": {
+    "type": "text",
+    "description": "Node header"
+  },
+  "nodes": "Mezgli",
+  "@nodes": {
+    "type": "text",
+    "description": "Nodes header"
   },
   "nodeStatus": "Node Status",
   "@nodeStatus": {

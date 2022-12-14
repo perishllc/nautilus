@@ -20,16 +20,6 @@
     "type": "text",
     "description": "Accounts header"
   },
-  "nodes": "Nodes",
-  "@nodes": {
-    "type": "text",
-    "description": "Nodes header"
-  },
-  "node": "Node",
-  "@node": {
-    "type": "text",
-    "description": "Node header"
-  },
   "ackBackedUp": "Are you sure that you've backed up your secret phrase or seed?",
   "@ackBackedUp": {
     "type": "text",
@@ -44,16 +34,6 @@
   "@addAccount": {
     "type": "text",
     "description": "Default new account name - e.g. Account 1"
-  },
-  "addNode": "Add Node",
-  "@addNode": {
-    "type": "text",
-    "description": "Add a new node"
-  },
-  "changeNode": "Change Node",
-  "@changeNode": {
-    "type": "text",
-    "description": "change node"
   },
   "addAddress": "Add an Address",
   "@addAddress": {
@@ -75,6 +55,11 @@
     "type": "text",
     "description": "favorite_add_button"
   },
+  "addNode": "Add Node",
+  "@addNode": {
+    "type": "text",
+    "description": "Add a new node"
+  },
   "address": "Address",
   "@address": {
     "type": "text",
@@ -89,21 +74,6 @@
   "@addressHint": {
     "type": "text",
     "description": "send_address_hint"
-  },
-  "enterNodeName": "Enter Node Name",
-  "@enterNodeName": {
-    "type": "text",
-    "description": "change_node_name_hint"
-  },
-  "enterHttpUrl": "Enter HTTP URL",
-  "@enterHttpUrl": {
-    "type": "text",
-    "description": "change_node_http_hint"
-  },
-  "enterWsUrl": "Enter WebSocket URL",
-  "@enterWsUrl": {
-    "type": "text",
-    "description": "change_node_ws_hint"
   },
   "addressMissing": "Please enter an Address",
   "@addressMissing": {
@@ -339,6 +309,11 @@
   "@changeLog": {
     "type": "text",
     "description": "change_log_header"
+  },
+  "changeNode": "Change Node",
+  "@changeNode": {
+    "type": "text",
+    "description": "change node"
   },
   "changePassword": "Change Password",
   "@changePassword": {
@@ -655,6 +630,16 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteNodeConfirmation": "Are you sure you want to delete this node?\n\nYou can always re-add it later by tapping the \"Add Node\" button",
+  "@deleteNodeConfirmation": {
+    "type": "text",
+    "description": "delete node confirmation info"
+  },
+  "deleteNodeHeader": "Delete Node?",
+  "@deleteNodeHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "deleteRequest": "Delete this request",
   "@deleteRequest": {
     "type": "text",
@@ -750,6 +735,11 @@
     "type": "text",
     "description": "enter_height_hint"
   },
+  "enterHttpUrl": "Enter HTTP URL",
+  "@enterHttpUrl": {
+    "type": "text",
+    "description": "change_node_http_hint"
+  },
   "enterMemo": "Enter Message",
   "@enterMemo": {
     "type": "text",
@@ -759,6 +749,11 @@
   "@enterMoneroAddress": {
     "type": "text",
     "description": "enter_xmr_address"
+  },
+  "enterNodeName": "Enter Node Name",
+  "@enterNodeName": {
+    "type": "text",
+    "description": "change_node_name_hint"
   },
   "enterPasswordHint": "Enter your password",
   "@enterPasswordHint": {
@@ -779,6 +774,11 @@
   "@enterUserOrAddress": {
     "type": "text",
     "description": "enter_user_address"
+  },
+  "enterWsUrl": "Enter WebSocket URL",
+  "@enterWsUrl": {
+    "type": "text",
+    "description": "change_node_ws_hint"
   },
   "errorProcessingGiftCard": "There was an error while processing this gift card, it may be invalid, expired, or empty.\n\nAdditionally, you may need to update the app to the latest version in order to redeem this gift.",
   "@errorProcessingGiftCard": {
@@ -1140,16 +1140,6 @@
     "type": "text",
     "description": "hide_empty_accounts"
   },
-  "deleteNodeHeader": "Delete Node?",
-  "@deleteNodeHeader": {
-    "type": "text",
-    "description": "Confirmation dialog header"
-  },
-  "deleteNodeConfirmation": "Are you sure you want to delete this node?\n\nYou can always re-add it later by tapping the \"Add Node\" button",
-  "@deleteNodeConfirmation": {
-    "type": "text",
-    "description": "delete node confirmation info"
-  },
   "home": "Home",
   "@home": {
     "type": "text",
@@ -1504,6 +1494,16 @@
   "@noContactsImport": {
     "type": "text",
     "description": "contact_import_none"
+  },
+  "node": "Node",
+  "@node": {
+    "type": "text",
+    "description": "Node header"
+  },
+  "nodes": "Nodes",
+  "@nodes": {
+    "type": "text",
+    "description": "Nodes header"
   },
   "nodeStatus": "Node Status",
   "@nodeStatus": {

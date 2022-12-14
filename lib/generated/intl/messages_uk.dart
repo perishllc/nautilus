@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Блокування користувача"),
         "addContact": MessageLookupByLibrary.simpleMessage("Додати контакт"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Додати Улюблене"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Додати вузол"),
         "addUser": MessageLookupByLibrary.simpleMessage("Додати користувача"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Додати обліковий запис лише для перегляду"),
@@ -125,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Змінити валюту"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Журнал змін"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Змінити вузол"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Змінити пароль"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -232,6 +234,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Гаманець %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Вилучити"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Ви впевнені, що хочете видалити цей вузол?\n\nВи завжди можете повторно додати його пізніше, натиснувши кнопку «Додати вузол»."),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Видалити вузол?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -263,10 +269,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Введіть подарункову записку"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Введіть висоту"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Введіть HTTP URL"),
         "enterMemo":
             MessageLookupByLibrary.simpleMessage("Введіть повідомлення"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Введіть адресу XMR"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Введіть назву вузла"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Введіть пароль"),
         "enterSplitAmount":
@@ -275,6 +285,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Введіть користувача або адресу"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Введіть ім\'я користувача"),
+        "enterWsUrl": MessageLookupByLibrary.simpleMessage(
+            "Введіть URL-адресу WebSocket"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Під час обробки цієї подарункової картки сталася помилка. Можливо, вона недійсна, термін дії закінчився або порожня."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -514,7 +526,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Немає транзакцій для експорту."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Вузол"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Статус вузла"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Вузли"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Жодного"),
         "notSent": MessageLookupByLibrary.simpleMessage("не надіслано"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

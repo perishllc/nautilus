@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("Block a User"),
         "addContact": MessageLookupByLibrary.simpleMessage("Přidat kontakt"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Add Favorite"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Afegeix un node"),
         "addUser": MessageLookupByLibrary.simpleMessage("Afegeix un usuari"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Afegeix un compte només de rellotge"),
@@ -119,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Per evitar l\'abús, us demanem que resolgueu un captcha per reclamar la targeta regal a la pàgina següent."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Změna měny"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Change Log"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Canvia el node"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Canvia la contrasenya"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -223,6 +225,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Účet %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Esteu segur que voleu suprimir aquest node?\n\nSempre el podeu tornar a afegir més tard tocant el botó \"Afegeix un node\"."),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Vols suprimir el node?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -256,9 +262,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
         "enterHeight":
             MessageLookupByLibrary.simpleMessage("Introduïu l\'alçada"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Introduïu l\'URL HTTP"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Enter Message"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Introduïu l\'adreça XMR"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Introduïu el nom del node"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Zadejte vaše heslo"),
         "enterSplitAmount":
@@ -267,6 +277,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter User or Address"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Enter a username"),
+        "enterWsUrl": MessageLookupByLibrary.simpleMessage(
+            "Introduïu l\'URL de WebSocket"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "S\'ha produït un error en processar aquesta targeta de regal, és possible que no sigui vàlida, caducada o buida."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -496,7 +508,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "No hi ha transaccions per exportar."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Node"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Node Status"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Nodes"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Cap"),
         "notSent": MessageLookupByLibrary.simpleMessage("not sent"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

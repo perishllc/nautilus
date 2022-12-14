@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("उपयोगकर्ता को अवरोधित करें"),
         "addContact": MessageLookupByLibrary.simpleMessage("संपर्क डालें"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("पसंदीदा जोड़ें"),
+        "addNode": MessageLookupByLibrary.simpleMessage("नोड जोड़ें"),
         "addUser": MessageLookupByLibrary.simpleMessage("एक उपयोगकर्ता जोड़ें"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "केवल देखने के लिए खाता जोड़ें"),
@@ -122,6 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "दुरुपयोग को रोकने के लिए, हम चाहते हैं कि आप अगले पृष्ठ पर उपहार कार्ड का दावा करने के लिए एक कैप्चा हल करें।"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("मुद्रा बदलें"),
         "changeLog": MessageLookupByLibrary.simpleMessage("लॉग बदलें"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("नोड बदलें"),
         "changePassword": MessageLookupByLibrary.simpleMessage("पासवर्ड बदलें"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "अपना मौजूदा पासवर्ड बदलें। यदि आप अपना वर्तमान पासवर्ड नहीं जानते हैं, तो बस अपना सर्वश्रेष्ठ अनुमान लगाएं क्योंकि वास्तव में इसे बदलने की आवश्यकता नहीं है (चूंकि आप पहले से लॉग इन हैं), लेकिन यह हमें मौजूदा बैकअप प्रविष्टि को हटाने देता है।"),
@@ -225,6 +227,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("खाता %1"),
         "delete": MessageLookupByLibrary.simpleMessage("मिटाएँ"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "क्या आप वाकई इस नोड को हटाना चाहते हैं?\n\nआप \"नोड जोड़ें\" बटन पर टैप करके इसे बाद में कभी भी पुनः जोड़ सकते हैं"),
+        "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("नोड हटाएं?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -255,9 +260,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("गिफ़्ट नोट दर्ज करें"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("ऊंचाई दर्ज करें"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("एचटीटीपी यूआरएल डालें"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("संदेश दाखिल करें"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("एक्सएमआर पता दर्ज करें"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("नोड नाम दर्ज करें"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("अपना पासवर्ड डालें"),
         "enterSplitAmount":
@@ -266,6 +275,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("उपयोगकर्ता या पता दर्ज करें"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("उपयोगकर्ता नाम दर्ज करें"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("वेबसाकेट URL दर्ज करें"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "इस उपहार कार्ड को संसाधित करते समय एक त्रुटि हुई थी, हो सकता है कि यह मान्य, समाप्त या खाली न हो।"),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -494,7 +505,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "निर्यात करने के लिए कोई लेनदेन नहीं है।"),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("नोड"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("नोड स्थिति"),
+        "nodes": MessageLookupByLibrary.simpleMessage("नोड्स"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("कोई भी नहीं"),
         "notSent": MessageLookupByLibrary.simpleMessage("नहीं भेजा गया"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

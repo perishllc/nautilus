@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact":
             MessageLookupByLibrary.simpleMessage("Pievienot kontaktu"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Add Favorite"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Pievienot mezglu"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Pievienojiet lietotāju"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -123,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Lai novērstu ļaunprātīgu izmantošanu, mēs pieprasām jums atrisināt captcha, lai nākamajā lapā varētu pieprasīt dāvanu karti."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Mainīt valūtu"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Change Log"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Mainīt mezglu"),
         "changePassword": MessageLookupByLibrary.simpleMessage("Mainīt paroli"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "Mainiet savu esošo paroli. Ja nezināt savu pašreizējo paroli, vienkārši uzminējiet, jo tā faktiski nav jāmaina (jo jūs jau esat pieteicies), taču tas ļauj mums izdzēst esošo rezerves ierakstu."),
@@ -226,6 +228,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Konts %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Vai tiešām vēlaties dzēst šo mezglu?\n\nJūs vienmēr varat to atkārtoti pievienot vēlāk, pieskaroties pogai \"Pievienot mezglu\"."),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Vai dzēst mezglu?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -259,9 +265,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
         "enterHeight":
             MessageLookupByLibrary.simpleMessage("Ievadiet augstumu"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Ievadiet HTTP URL"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Enter Message"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Ievadiet XMR adresi"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Ievadiet mezgla nosaukumu"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "enterSplitAmount":
@@ -270,6 +280,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter User or Address"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Enter a username"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("Ievadiet WebSocket URL"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Apstrādājot šo dāvanu karti, radās kļūda. Tā var nebūt derīga, beidzies derīguma termiņš vai tā ir tukša."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -501,7 +513,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport":
             MessageLookupByLibrary.simpleMessage("Nav eksportējamu darījumu."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Mezgls"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Node Status"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Mezgli"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Nav"),
         "notSent": MessageLookupByLibrary.simpleMessage("not sent"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

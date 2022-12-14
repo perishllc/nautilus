@@ -90,26 +90,6 @@ class Z {
     );
   }
 
-  /// `Nodes`
-  String get nodes {
-    return Intl.message(
-      'Nodes',
-      name: 'nodes',
-      desc: 'Nodes header',
-      args: [],
-    );
-  }
-
-  /// `Node`
-  String get node {
-    return Intl.message(
-      'Node',
-      name: 'node',
-      desc: 'Node header',
-      args: [],
-    );
-  }
-
   /// `Are you sure that you've backed up your secret phrase or seed?`
   String get ackBackedUp {
     return Intl.message(
@@ -136,26 +116,6 @@ class Z {
       'Add Account',
       name: 'addAccount',
       desc: 'Default new account name - e.g. Account 1',
-      args: [],
-    );
-  }
-
-  /// `Add Node`
-  String get addNode {
-    return Intl.message(
-      'Add Node',
-      name: 'addNode',
-      desc: 'Add a new node',
-      args: [],
-    );
-  }
-
-  /// `Change Node`
-  String get changeNode {
-    return Intl.message(
-      'Change Node',
-      name: 'changeNode',
-      desc: 'change node',
       args: [],
     );
   }
@@ -200,6 +160,16 @@ class Z {
     );
   }
 
+  /// `Add Node`
+  String get addNode {
+    return Intl.message(
+      'Add Node',
+      name: 'addNode',
+      desc: 'Add a new node',
+      args: [],
+    );
+  }
+
   /// `Address`
   String get address {
     return Intl.message(
@@ -226,36 +196,6 @@ class Z {
       'Enter Address',
       name: 'addressHint',
       desc: 'send_address_hint',
-      args: [],
-    );
-  }
-
-  /// `Enter Node Name`
-  String get enterNodeName {
-    return Intl.message(
-      'Enter Node Name',
-      name: 'enterNodeName',
-      desc: 'change_node_name_hint',
-      args: [],
-    );
-  }
-
-  /// `Enter HTTP URL`
-  String get enterHttpUrl {
-    return Intl.message(
-      'Enter HTTP URL',
-      name: 'enterHttpUrl',
-      desc: 'change_node_http_hint',
-      args: [],
-    );
-  }
-
-  /// `Enter WebSocket URL`
-  String get enterWsUrl {
-    return Intl.message(
-      'Enter WebSocket URL',
-      name: 'enterWsUrl',
-      desc: 'change_node_ws_hint',
       args: [],
     );
   }
@@ -726,6 +666,16 @@ class Z {
       'Change Log',
       name: 'changeLog',
       desc: 'change_log_header',
+      args: [],
+    );
+  }
+
+  /// `Change Node`
+  String get changeNode {
+    return Intl.message(
+      'Change Node',
+      name: 'changeNode',
+      desc: 'change node',
       args: [],
     );
   }
@@ -1365,6 +1315,26 @@ class Z {
     );
   }
 
+  /// `Are you sure you want to delete this node?\n\nYou can always re-add it later by tapping the "Add Node" button`
+  String get deleteNodeConfirmation {
+    return Intl.message(
+      'Are you sure you want to delete this node?\n\nYou can always re-add it later by tapping the "Add Node" button',
+      name: 'deleteNodeConfirmation',
+      desc: 'delete node confirmation info',
+      args: [],
+    );
+  }
+
+  /// `Delete Node?`
+  String get deleteNodeHeader {
+    return Intl.message(
+      'Delete Node?',
+      name: 'deleteNodeHeader',
+      desc: 'Confirmation dialog header',
+      args: [],
+    );
+  }
+
   /// `Delete this request`
   String get deleteRequest {
     return Intl.message(
@@ -1555,6 +1525,16 @@ class Z {
     );
   }
 
+  /// `Enter HTTP URL`
+  String get enterHttpUrl {
+    return Intl.message(
+      'Enter HTTP URL',
+      name: 'enterHttpUrl',
+      desc: 'change_node_http_hint',
+      args: [],
+    );
+  }
+
   /// `Enter Message`
   String get enterMemo {
     return Intl.message(
@@ -1571,6 +1551,16 @@ class Z {
       'Enter XMR Address',
       name: 'enterMoneroAddress',
       desc: 'enter_xmr_address',
+      args: [],
+    );
+  }
+
+  /// `Enter Node Name`
+  String get enterNodeName {
+    return Intl.message(
+      'Enter Node Name',
+      name: 'enterNodeName',
+      desc: 'change_node_name_hint',
       args: [],
     );
   }
@@ -1611,6 +1601,16 @@ class Z {
       'Enter User or Address',
       name: 'enterUserOrAddress',
       desc: 'enter_user_address',
+      args: [],
+    );
+  }
+
+  /// `Enter WebSocket URL`
+  String get enterWsUrl {
+    return Intl.message(
+      'Enter WebSocket URL',
+      name: 'enterWsUrl',
+      desc: 'change_node_ws_hint',
       args: [],
     );
   }
@@ -2336,26 +2336,6 @@ class Z {
     );
   }
 
-  /// `Delete Node?`
-  String get deleteNodeHeader {
-    return Intl.message(
-      'Delete Node?',
-      name: 'deleteNodeHeader',
-      desc: 'Confirmation dialog header',
-      args: [],
-    );
-  }
-
-  /// `Are you sure you want to delete this node?\n\nYou can always re-add it later by tapping the "Add Node" button`
-  String get deleteNodeConfirmation {
-    return Intl.message(
-      'Are you sure you want to delete this node?\n\nYou can always re-add it later by tapping the "Add Node" button',
-      name: 'deleteNodeConfirmation',
-      desc: 'delete node confirmation info',
-      args: [],
-    );
-  }
-
   /// `Home`
   String get home {
     return Intl.message(
@@ -3064,6 +3044,26 @@ class Z {
       'No new contacts to import.',
       name: 'noContactsImport',
       desc: 'contact_import_none',
+      args: [],
+    );
+  }
+
+  /// `Node`
+  String get node {
+    return Intl.message(
+      'Node',
+      name: 'node',
+      desc: 'Node header',
+      args: [],
+    );
+  }
+
+  /// `Nodes`
+  String get nodes {
+    return Intl.message(
+      'Nodes',
+      name: 'nodes',
+      desc: 'Nodes header',
       args: [],
     );
   }

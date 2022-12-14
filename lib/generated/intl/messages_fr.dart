@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ajouter un contact"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Ajouter un favori"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Ajouter un nœud"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Ajouter un utilisateur"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -130,6 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Changer de devise"),
         "changeLog":
             MessageLookupByLibrary.simpleMessage("Journal des modifications"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Changer de nœud"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Changer le mot de passe"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -236,6 +238,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Compte %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Supprimer"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Voulez-vous vraiment supprimer ce nœud ?\n\nVous pouvez toujours le rajouter plus tard en appuyant sur le bouton \"Ajouter un nœud\""),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Supprimer le nœud ?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -270,9 +276,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Entrez la note cadeau"),
         "enterHeight":
             MessageLookupByLibrary.simpleMessage("Entrez la hauteur"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Entrez l\'URL HTTP"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Entrez un message"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Entrez l\'adresse XMR"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Entrez le nom du nœud"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Entrez votre mot de passe"),
         "enterSplitAmount": MessageLookupByLibrary.simpleMessage(
@@ -281,6 +291,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Entrez l\'utilisateur ou l\'adresse"),
         "enterUsername": MessageLookupByLibrary.simpleMessage(
             "Entrez un nom d\'utilisateur"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("Entrez l\'URL WebSocket"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Une erreur s\'est produite lors du traitement de cette carte-cadeau, elle n\'est peut-être pas valide, expirée ou vide."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -518,7 +530,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Il n\'y a aucune transaction à exporter."),
         "noThanks": MessageLookupByLibrary.simpleMessage("Non merci"),
+        "node": MessageLookupByLibrary.simpleMessage("Nœud"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("État du nœud"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Nœuds"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Aucun"),
         "notSent": MessageLookupByLibrary.simpleMessage("non envoyé"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

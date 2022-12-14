@@ -55,6 +55,11 @@
     "type": "text",
     "description": "favorite_add_button"
   },
+  "addNode": "নোড যোগ করুন",
+  "@addNode": {
+    "type": "text",
+    "description": "Add a new node"
+  },
   "address": "ঠিকানা",
   "@address": {
     "type": "text",
@@ -304,6 +309,11 @@
   "@changeLog": {
     "type": "text",
     "description": "change_log_header"
+  },
+  "changeNode": "নোড পরিবর্তন করুন",
+  "@changeNode": {
+    "type": "text",
+    "description": "change node"
   },
   "changePassword": "পাসওয়ার্ড পরিবর্তন করুন",
   "@changePassword": {
@@ -620,6 +630,16 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteNodeConfirmation": "আপনি কি নিশ্চিত আপনি এই নোড মুছে ফেলতে চান?\n\nআপনি \"অ্যাড নোড\" বোতামে আলতো চাপ দিয়ে পরে এটিকে সর্বদা পুনরায় যোগ করতে পারেন৷",
+  "@deleteNodeConfirmation": {
+    "type": "text",
+    "description": "delete node confirmation info"
+  },
+  "deleteNodeHeader": "নোড মুছে দিন?",
+  "@deleteNodeHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "deleteRequest": "Delete this request",
   "@deleteRequest": {
     "type": "text",
@@ -715,6 +735,11 @@
     "type": "text",
     "description": "enter_height_hint"
   },
+  "enterHttpUrl": "HTTP URL লিখুন",
+  "@enterHttpUrl": {
+    "type": "text",
+    "description": "change_node_http_hint"
+  },
   "enterMemo": "বার্তা লিখুন",
   "@enterMemo": {
     "type": "text",
@@ -724,6 +749,11 @@
   "@enterMoneroAddress": {
     "type": "text",
     "description": "enter_xmr_address"
+  },
+  "enterNodeName": "নোডের নাম লিখুন",
+  "@enterNodeName": {
+    "type": "text",
+    "description": "change_node_name_hint"
   },
   "enterPasswordHint": "আপনার পাসওয়ার্ড লিখুন",
   "@enterPasswordHint": {
@@ -744,6 +774,11 @@
   "@enterUserOrAddress": {
     "type": "text",
     "description": "enter_user_address"
+  },
+  "enterWsUrl": "WebSocket URL লিখুন",
+  "@enterWsUrl": {
+    "type": "text",
+    "description": "change_node_ws_hint"
   },
   "errorProcessingGiftCard": "এই উপহার কার্ড প্রক্রিয়া করার সময় একটি ত্রুটি ছিল, এটি বৈধ, মেয়াদ শেষ বা খালি নাও হতে পারে৷",
   "@errorProcessingGiftCard": {
@@ -1459,6 +1494,16 @@
   "@noContactsImport": {
     "type": "text",
     "description": "contact_import_none"
+  },
+  "node": "নোড",
+  "@node": {
+    "type": "text",
+    "description": "Node header"
+  },
+  "nodes": "নোডস",
+  "@nodes": {
+    "type": "text",
+    "description": "Nodes header"
   },
   "nodeStatus": "নোডের অবস্থা",
   "@nodeStatus": {

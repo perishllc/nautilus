@@ -34,6 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("사용자 차단"),
         "addContact": MessageLookupByLibrary.simpleMessage("연락처 추가"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("즐겨찾기 추가"),
+        "addNode": MessageLookupByLibrary.simpleMessage("노드 추가"),
         "addUser": MessageLookupByLibrary.simpleMessage("사용자 추가"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("보기 전용 계정 추가"),
@@ -107,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "남용을 방지하기 위해 다음 페이지에서 기프트 카드를 청구하려면 보안 문자를 해결해야 합니다."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("통화 변경"),
         "changeLog": MessageLookupByLibrary.simpleMessage("변경 로그"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("노드 변경"),
         "changePassword": MessageLookupByLibrary.simpleMessage("비밀번호 변경"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "기존 비밀번호를 변경합니다. 현재 비밀번호를 모르는 경우 실제로 비밀번호를 변경할 필요는 없지만(이미 로그인되어 있으므로) 기존 백업 항목을 삭제할 수 있으므로 최선을 다해 추측하십시오."),
@@ -194,6 +196,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("삭제"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "이 노드를 삭제하시겠습니까?\n\n\"노드 추가\" 버튼을 탭하여 나중에 언제든지 다시 추가할 수 있습니다."),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("노드를 삭제하시겠습니까?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -220,14 +226,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterEmail": MessageLookupByLibrary.simpleMessage("이메일 입력"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("기프트 노트 입력"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("키 입력"),
+        "enterHttpUrl": MessageLookupByLibrary.simpleMessage("HTTP URL 입력"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("메시지 입력"),
         "enterMoneroAddress": MessageLookupByLibrary.simpleMessage("XMR 주소 입력"),
+        "enterNodeName": MessageLookupByLibrary.simpleMessage("노드 이름 입력"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "enterSplitAmount": MessageLookupByLibrary.simpleMessage("분할 금액 입력"),
         "enterUserOrAddress":
             MessageLookupByLibrary.simpleMessage("사용자 또는 주소 입력"),
         "enterUsername": MessageLookupByLibrary.simpleMessage("사용자 이름 입력"),
+        "enterWsUrl": MessageLookupByLibrary.simpleMessage("WebSocket URL 입력"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "이 기프트 카드를 처리하는 동안 오류가 발생했습니다. 유효하지 않거나 만료되었거나 비어 있을 수 있습니다."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -434,7 +443,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSkipButton": MessageLookupByLibrary.simpleMessage("No, Skip"),
         "noTXDataExport": MessageLookupByLibrary.simpleMessage("내보낼 거래가 없습니다."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("마디"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("노드 상태"),
+        "nodes": MessageLookupByLibrary.simpleMessage("노드"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("없음"),
         "notSent": MessageLookupByLibrary.simpleMessage("보내지 않음"),
         "notificationBody":

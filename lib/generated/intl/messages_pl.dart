@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Blokowanie użytkownika"),
         "addContact": MessageLookupByLibrary.simpleMessage("Dodaj Kontakt"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Dodaj Ulubione"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Dodaj węzeł"),
         "addUser": MessageLookupByLibrary.simpleMessage("Dodaj użytkownika"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Dodaj konto tylko do oglądania"),
@@ -120,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Aby zapobiec nadużyciom, wymagamy rozwiązania captcha w celu odebrania karty podarunkowej na następnej stronie."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Zmień walutę"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Dziennik zmian"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Zmień węzeł"),
         "changePassword": MessageLookupByLibrary.simpleMessage("Zmień hasło"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "Zmień swoje dotychczasowe hasło. Jeśli nie znasz swojego aktualnego hasła, po prostu zgadnij, ponieważ w rzeczywistości nie jest wymagane jego zmienianie (ponieważ jesteś już zalogowany), ale pozwala nam to usunąć istniejący wpis kopii zapasowej."),
@@ -221,6 +223,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Konto %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Usuń"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Czy na pewno chcesz usunąć ten węzeł?\n\nZawsze możesz dodać go ponownie później, dotykając przycisku „Dodaj węzeł”."),
+        "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("Usuń węzeł?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -252,9 +257,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("Wpisz upominek"),
         "enterHeight":
             MessageLookupByLibrary.simpleMessage("Wprowadź wysokość"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Wprowadź adres URL HTTP"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Wprowadź wiadomość"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Wprowadź adres XMR"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Wprowadź nazwę węzła"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Wpisz swoje hasło"),
         "enterSplitAmount":
@@ -263,6 +272,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Wprowadź użytkownika lub adres"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Wprowadź nazwę użytkownika"),
+        "enterWsUrl": MessageLookupByLibrary.simpleMessage(
+            "Wprowadź adres URL protokołu WebSocket"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Wystąpił błąd podczas przetwarzania tej karty podarunkowej, może być nieważna, nieważna lub pusta."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -498,7 +509,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Nie ma transakcji do wyeksportowania."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Węzeł"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Status węzła"),
+        "nodes": MessageLookupByLibrary.simpleMessage("węzły"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Nic"),
         "notSent": MessageLookupByLibrary.simpleMessage("nie wysłane"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

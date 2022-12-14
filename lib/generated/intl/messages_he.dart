@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("חסימת משתמש"),
         "addContact": MessageLookupByLibrary.simpleMessage("הוסף איש קשר"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("הוסף מועדף"),
+        "addNode": MessageLookupByLibrary.simpleMessage("הוסף Node"),
         "addUser": MessageLookupByLibrary.simpleMessage("הוסף משתמש"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("הוסף חשבון צפייה בלבד"),
@@ -112,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("שנה מטבע חליפין"),
         "changeLog": MessageLookupByLibrary.simpleMessage("שינוי יומן"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("שנה צומת"),
         "changePassword": MessageLookupByLibrary.simpleMessage("שנה סיסמא"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "שנה את הסיסמה הקיימת שלך. אם אינך יודע את הסיסמה הנוכחית שלך, פשוט בצע את הניחוש הטוב ביותר שלך, כי למעשה אין צורך לשנות אותה (מכיוון שאתה כבר מחובר), אך היא מאפשרת לנו למחוק את ערך הגיבוי הקיים."),
@@ -210,6 +212,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("חשבון %1"),
         "delete": MessageLookupByLibrary.simpleMessage("מחיקה"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "האם אתה בטוח שברצונך למחוק את הצומת הזה?\n\nאתה תמיד יכול להוסיף אותו מחדש מאוחר יותר על ידי הקשה על כפתור \"הוסף צומת\"."),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("למחוק את הצומת?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -238,9 +244,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterEmail": MessageLookupByLibrary.simpleMessage("הזן אימייל"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("הזן הערת מתנה"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("הזן גובה"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("הזן כתובת URL של HTTP"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("הזן הודעה"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("הזן כתובת XMR"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("הזן את שם הצומת"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "enterSplitAmount":
@@ -248,6 +258,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterUserOrAddress":
             MessageLookupByLibrary.simpleMessage("הזן משתמש או כתובת"),
         "enterUsername": MessageLookupByLibrary.simpleMessage("הזן שם משתמש"),
+        "enterWsUrl": MessageLookupByLibrary.simpleMessage(
+            "הזן את כתובת האתר של WebSocket"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "אירעה שגיאה במהלך עיבוד כרטיס המתנה הזה, ייתכן שהוא אינו תקף, פג תוקפו או ריק."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -465,7 +477,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport":
             MessageLookupByLibrary.simpleMessage("אין עסקאות לייצא."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("צוֹמֶת"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("מצב צומת"),
+        "nodes": MessageLookupByLibrary.simpleMessage("צמתים"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("אף אחד"),
         "notSent": MessageLookupByLibrary.simpleMessage("לא נשלח"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

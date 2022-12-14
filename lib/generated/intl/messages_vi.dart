@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("Chặn người dùng"),
         "addContact": MessageLookupByLibrary.simpleMessage("Thêm liên hệ"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Thêm yêu thích"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Thêm nút"),
         "addUser": MessageLookupByLibrary.simpleMessage("Thêm người dùng"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Thêm tài khoản chỉ xem"),
@@ -123,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Đổi loại tiền pháp định"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Thay đổi Nhật ký"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Thay đổi nút"),
         "changePassword": MessageLookupByLibrary.simpleMessage("Đổi mật khẩu"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "Thay đổi mật khẩu hiện có của bạn. Nếu bạn không biết mật khẩu hiện tại của mình, chỉ cần phỏng đoán chính xác nhất vì thực tế không bắt buộc phải thay đổi mật khẩu (vì bạn đã đăng nhập), nhưng nó cho phép chúng tôi xóa mục sao lưu hiện có."),
@@ -226,6 +228,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Tài khoản %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Xoá"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn muốn xóa nút này không?\n\nBạn luôn có thể thêm lại sau bằng cách nhấn vào nút \"Thêm nút\""),
+        "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("Xóa nút?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -255,9 +260,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Nhập Ghi Chú Quà Tặng"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Nhập chiều cao"),
+        "enterHttpUrl": MessageLookupByLibrary.simpleMessage("Nhập URL HTTP"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Nhập tin nhắn"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Nhập địa chỉ XMR"),
+        "enterNodeName": MessageLookupByLibrary.simpleMessage("Nhập tên nút"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Nhập mật khẩu"),
         "enterSplitAmount":
@@ -266,6 +273,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nhập Người dùng hoặc Địa chỉ"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Nhập tên người dùng"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("Nhập URL WebSocket"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Đã xảy ra lỗi khi xử lý thẻ quà tặng này, thẻ này có thể không hợp lệ, hết hạn hoặc trống."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -502,7 +511,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Không có giao dịch nào để xuất."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Nút"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Trạng thái nút"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Điểm giao"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Không có"),
         "notSent": MessageLookupByLibrary.simpleMessage("chưa được gửi"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

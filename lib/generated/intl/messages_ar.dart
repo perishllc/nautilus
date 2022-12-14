@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("حظر مستخدم"),
         "addContact": MessageLookupByLibrary.simpleMessage("إضافة جهة الاتصال"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("إضافة المفضلة"),
+        "addNode": MessageLookupByLibrary.simpleMessage("أضف العقدة"),
         "addUser": MessageLookupByLibrary.simpleMessage("أضف مستخدم"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("أضف حساب المشاهدة فقط"),
@@ -116,6 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "من أجل منع إساءة الاستخدام ، نطلب منك حل captcha للمطالبة ببطاقة الهدايا في الصفحة التالية."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("تغيير العملة"),
         "changeLog": MessageLookupByLibrary.simpleMessage("سجل التغيير"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("تغيير العقدة"),
         "changePassword": MessageLookupByLibrary.simpleMessage("غير كلمة السر"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "غيّر كلمة مرورك الحالية. إذا كنت لا تعرف كلمة مرورك الحالية ، فما عليك سوى تخمين أفضل ما لديك لأنه ليس مطلوبًا في الواقع تغييرها (نظرًا لأنك قمت بتسجيل الدخول بالفعل) ، ولكنها تتيح لنا حذف إدخال النسخ الاحتياطي الحالي."),
@@ -217,6 +219,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("الحساب %1"),
         "delete": MessageLookupByLibrary.simpleMessage("حذف"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد أنك تريد حذف هذه العقدة؟\n\nيمكنك دائمًا إعادة إضافته لاحقًا بالنقر فوق الزر \"إضافة عقدة\""),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("هل تريد حذف العقدة؟"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -247,9 +253,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("أدخل ملاحظة الهدية"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("أدخل الارتفاع"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("أدخل عنوان HTTP URL"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("أدخل رسالة"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("أدخل عنوان XMR"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("أدخل اسم العقدة"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("ادخل رقمك ادخل رقمك\n"),
         "enterSplitAmount":
@@ -258,6 +268,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أدخل المستخدم أو العنوان"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("أدخل اسم مستخدم"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("أدخل عنوان URL WebSocket"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "حدث خطأ أثناء معالجة بطاقة الهدايا هذه ، فقد لا تكون صالحة أو منتهية الصلاحية أو فارغة."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -484,7 +496,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport":
             MessageLookupByLibrary.simpleMessage("لا توجد معاملات للتصدير."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("العقدة"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("حالة العقدة"),
+        "nodes": MessageLookupByLibrary.simpleMessage("العقد"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("لا أحد"),
         "notSent": MessageLookupByLibrary.simpleMessage("لم يتم إرسالها"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

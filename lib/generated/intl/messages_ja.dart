@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("ユーザーをブロックする"),
         "addContact": MessageLookupByLibrary.simpleMessage("連絡先を追加する"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("お気に入りを追加"),
+        "addNode": MessageLookupByLibrary.simpleMessage("ノードを追加"),
         "addUser": MessageLookupByLibrary.simpleMessage("ユーザーを追加"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("視聴専用アカウントを追加"),
@@ -106,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "悪用を防ぐため、次のページでギフト カードを受け取るにはキャプチャを解決する必要があります。"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("通貨を変更する"),
         "changeLog": MessageLookupByLibrary.simpleMessage("変更ログ"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("ノードの変更"),
         "changePassword": MessageLookupByLibrary.simpleMessage("パスワードを変更する"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "既存のパスワードを変更します。現在のパスワードがわからない場合は、(すでにログインしているため) 実際には変更する必要がないため、できるだけ推測してください。ただし、既存のバックアップ エントリを削除することはできます。"),
@@ -191,6 +193,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("アカウント％1"),
         "delete": MessageLookupByLibrary.simpleMessage("削除"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "このノードを削除してもよろしいですか?\n\n「ノードの追加」ボタンをタップすると、後でいつでも再追加できます"),
+        "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("ノードを削除しますか?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -218,14 +223,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterEmail": MessageLookupByLibrary.simpleMessage("メールアドレスを入力して"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("ギフトメモを入力"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("高さを入力してください"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("HTTP URL を入力してください"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("メッセージを入力してください"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("XMR アドレスを入力してください"),
+        "enterNodeName": MessageLookupByLibrary.simpleMessage("ノード名を入力"),
         "enterPasswordHint": MessageLookupByLibrary.simpleMessage("パスワードを入力する"),
         "enterSplitAmount": MessageLookupByLibrary.simpleMessage("分割金額を入力"),
         "enterUserOrAddress":
             MessageLookupByLibrary.simpleMessage("ユーザーまたは住所を入力"),
         "enterUsername": MessageLookupByLibrary.simpleMessage("ユーザー名を入力"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("WebSocket URL を入力してください"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "このギフト カードの処理中にエラーが発生しました。有効でないか、有効期限が切れているか、空である可能性があります。"),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -432,7 +442,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport":
             MessageLookupByLibrary.simpleMessage("エクスポートするトランザクションはありません。"),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("ノード"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("ノードステータス"),
+        "nodes": MessageLookupByLibrary.simpleMessage("ノード"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("なし"),
         "notSent": MessageLookupByLibrary.simpleMessage("未送信"),
         "notificationBody":

@@ -55,6 +55,11 @@
     "type": "text",
     "description": "favorite_add_button"
   },
+  "addNode": "أضف العقدة",
+  "@addNode": {
+    "type": "text",
+    "description": "Add a new node"
+  },
   "address": "تبوك",
   "@address": {
     "type": "text",
@@ -304,6 +309,11 @@
   "@changeLog": {
     "type": "text",
     "description": "change_log_header"
+  },
+  "changeNode": "تغيير العقدة",
+  "@changeNode": {
+    "type": "text",
+    "description": "change node"
   },
   "changePassword": "غير كلمة السر",
   "@changePassword": {
@@ -620,6 +630,16 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteNodeConfirmation": "هل أنت متأكد أنك تريد حذف هذه العقدة؟\n\nيمكنك دائمًا إعادة إضافته لاحقًا بالنقر فوق الزر \"إضافة عقدة\"",
+  "@deleteNodeConfirmation": {
+    "type": "text",
+    "description": "delete node confirmation info"
+  },
+  "deleteNodeHeader": "هل تريد حذف العقدة؟",
+  "@deleteNodeHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "deleteRequest": "Delete this request",
   "@deleteRequest": {
     "type": "text",
@@ -715,6 +735,11 @@
     "type": "text",
     "description": "enter_height_hint"
   },
+  "enterHttpUrl": "أدخل عنوان HTTP URL",
+  "@enterHttpUrl": {
+    "type": "text",
+    "description": "change_node_http_hint"
+  },
   "enterMemo": "أدخل رسالة",
   "@enterMemo": {
     "type": "text",
@@ -724,6 +749,11 @@
   "@enterMoneroAddress": {
     "type": "text",
     "description": "enter_xmr_address"
+  },
+  "enterNodeName": "أدخل اسم العقدة",
+  "@enterNodeName": {
+    "type": "text",
+    "description": "change_node_name_hint"
   },
   "enterPasswordHint": "ادخل رقمك ادخل رقمك\n",
   "@enterPasswordHint": {
@@ -744,6 +774,11 @@
   "@enterUserOrAddress": {
     "type": "text",
     "description": "enter_user_address"
+  },
+  "enterWsUrl": "أدخل عنوان URL WebSocket",
+  "@enterWsUrl": {
+    "type": "text",
+    "description": "change_node_ws_hint"
   },
   "errorProcessingGiftCard": "حدث خطأ أثناء معالجة بطاقة الهدايا هذه ، فقد لا تكون صالحة أو منتهية الصلاحية أو فارغة.",
   "@errorProcessingGiftCard": {
@@ -1459,6 +1494,16 @@
   "@noContactsImport": {
     "type": "text",
     "description": "contact_import_none"
+  },
+  "node": "العقدة",
+  "@node": {
+    "type": "text",
+    "description": "Node header"
+  },
+  "nodes": "العقد",
+  "@nodes": {
+    "type": "text",
+    "description": "Nodes header"
   },
   "nodeStatus": "حالة العقدة",
   "@nodeStatus": {

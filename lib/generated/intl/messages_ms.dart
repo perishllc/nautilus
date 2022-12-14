@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("Sekat Pengguna"),
         "addContact": MessageLookupByLibrary.simpleMessage("Tambah Kenalan"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Tambah Kegemaran"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Tambah Nod"),
         "addUser": MessageLookupByLibrary.simpleMessage("Tambah Pengguna"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Tambah Akaun Tontonan Sahaja"),
@@ -119,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Tukar Mata Wang"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Perubahan Log"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Tukar Nod"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Tukar kata laluan"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -221,6 +223,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Akaun %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Padam"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Adakah anda pasti mahu memadamkan nod ini?\n\nAnda sentiasa boleh menambahkannya semula kemudian dengan mengetik butang \"Tambah Nod\"."),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Padamkan Nod?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -253,9 +259,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Masukkan Nota Hadiah"),
         "enterHeight":
             MessageLookupByLibrary.simpleMessage("Masukkan Ketinggian"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Masukkan URL HTTP"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Masukkan Mesej"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Masukkan Alamat XMR"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Masukkan Nama Nod"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Masukkan kata laluan anda"),
         "enterSplitAmount":
@@ -264,6 +274,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Masukkan Pengguna atau Alamat"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Masukkan nama pengguna"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("Masukkan URL WebSocket"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Terdapat ralat semasa memproses kad hadiah ini, ia mungkin tidak sah, tamat tempoh atau kosong."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -500,7 +512,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Tiada urus niaga untuk dieksport."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Nod"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Status Nod"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Nod"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("tiada"),
         "notSent": MessageLookupByLibrary.simpleMessage("tidak dihantar"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

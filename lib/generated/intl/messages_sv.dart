@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Lägg till kontakt"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Lägg till favorit"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Lägg till nod"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Lägg till en användare"),
         "addWatchOnlyAccount":
@@ -125,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "För att förhindra missbruk kräver vi att du löser en captcha för att göra anspråk på presentkortet på nästa sida."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Ändra valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Ändra logg"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Byt nod"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Ändra lösenord"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -229,6 +231,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Konto %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Ta bort"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Är du säker på att du vill ta bort den här noden?\n\nDu kan alltid lägga till den igen senare genom att trycka på knappen \"Lägg till nod\"."),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Radera knutpunkt?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -260,9 +266,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Ange presentanteckning"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Ange höjd"),
+        "enterHttpUrl": MessageLookupByLibrary.simpleMessage("Ange HTTP URL"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Ange meddelande"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Ange XMR-adress"),
+        "enterNodeName": MessageLookupByLibrary.simpleMessage("Ange nodnamn"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Ange ditt lösenord"),
         "enterSplitAmount":
@@ -271,6 +279,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ange användare eller adress"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Ange ett användarnamn"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("Ange WebSocket URL"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Det uppstod ett fel när det här presentkortet bearbetades, det kanske inte är giltigt, har löpt ut eller är tomt."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -504,7 +514,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Det finns inga transaktioner att exportera."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Nod"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Nod Status"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Knutpunkter"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Ingen"),
         "notSent": MessageLookupByLibrary.simpleMessage("inte skickat"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

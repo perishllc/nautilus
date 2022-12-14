@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Legg til kontakt"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Legg til favoritt"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Legg til node"),
         "addUser": MessageLookupByLibrary.simpleMessage("Legg til en bruker"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Legg til kun overvåkningskonto"),
@@ -123,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "For å forhindre misbruk krever vi at du løser en captcha for å kunne kreve gavekortet på neste side."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Endre valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Endre logg"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Endre node"),
         "changePassword": MessageLookupByLibrary.simpleMessage("Bytt passord"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "Endre ditt eksisterende passord. Hvis du ikke kjenner det nåværende passordet ditt, gjør du bare din beste gjetning ettersom det faktisk ikke er nødvendig å endre det (siden du allerede er logget på), men det lar oss slette den eksisterende sikkerhetskopioppføringen."),
@@ -223,6 +225,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Konto %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Slett"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Er du sikker på at du vil slette denne noden?\n\nDu kan alltid legge den til på nytt senere ved å trykke på \"Legg til node\"-knappen"),
+        "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("Slett node?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -254,9 +259,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Skriv inn gavebrev"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Skriv inn Høyde"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Skriv inn HTTP URL"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Skriv inn melding"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Skriv inn XMR-adresse"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Skriv inn nodenavn"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Tast inn ditt passord"),
         "enterSplitAmount":
@@ -265,6 +274,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Skriv inn bruker eller adresse"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Skriv inn et brukernavn"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("Skriv inn WebSocket URL"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Det oppsto en feil under behandlingen av dette gavekortet. Det kan være at det ikke er gyldig, utløpt eller tomt."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -502,7 +513,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Det er ingen transaksjoner å eksportere."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Node"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Node Status"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Noder"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Ingen"),
         "notSent": MessageLookupByLibrary.simpleMessage("ikke sendt"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

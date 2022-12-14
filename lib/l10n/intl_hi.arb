@@ -55,6 +55,11 @@
     "type": "text",
     "description": "favorite_add_button"
   },
+  "addNode": "नोड जोड़ें",
+  "@addNode": {
+    "type": "text",
+    "description": "Add a new node"
+  },
   "address": "पता",
   "@address": {
     "type": "text",
@@ -304,6 +309,11 @@
   "@changeLog": {
     "type": "text",
     "description": "change_log_header"
+  },
+  "changeNode": "नोड बदलें",
+  "@changeNode": {
+    "type": "text",
+    "description": "change node"
   },
   "changePassword": "पासवर्ड बदलें",
   "@changePassword": {
@@ -620,6 +630,16 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteNodeConfirmation": "क्या आप वाकई इस नोड को हटाना चाहते हैं?\n\nआप \"नोड जोड़ें\" बटन पर टैप करके इसे बाद में कभी भी पुनः जोड़ सकते हैं",
+  "@deleteNodeConfirmation": {
+    "type": "text",
+    "description": "delete node confirmation info"
+  },
+  "deleteNodeHeader": "नोड हटाएं?",
+  "@deleteNodeHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "deleteRequest": "Delete this request",
   "@deleteRequest": {
     "type": "text",
@@ -715,6 +735,11 @@
     "type": "text",
     "description": "enter_height_hint"
   },
+  "enterHttpUrl": "एचटीटीपी यूआरएल डालें",
+  "@enterHttpUrl": {
+    "type": "text",
+    "description": "change_node_http_hint"
+  },
   "enterMemo": "संदेश दाखिल करें",
   "@enterMemo": {
     "type": "text",
@@ -724,6 +749,11 @@
   "@enterMoneroAddress": {
     "type": "text",
     "description": "enter_xmr_address"
+  },
+  "enterNodeName": "नोड नाम दर्ज करें",
+  "@enterNodeName": {
+    "type": "text",
+    "description": "change_node_name_hint"
   },
   "enterPasswordHint": "अपना पासवर्ड डालें",
   "@enterPasswordHint": {
@@ -744,6 +774,11 @@
   "@enterUserOrAddress": {
     "type": "text",
     "description": "enter_user_address"
+  },
+  "enterWsUrl": "वेबसाकेट URL दर्ज करें",
+  "@enterWsUrl": {
+    "type": "text",
+    "description": "change_node_ws_hint"
   },
   "errorProcessingGiftCard": "इस उपहार कार्ड को संसाधित करते समय एक त्रुटि हुई थी, हो सकता है कि यह मान्य, समाप्त या खाली न हो।",
   "@errorProcessingGiftCard": {
@@ -1459,6 +1494,16 @@
   "@noContactsImport": {
     "type": "text",
     "description": "contact_import_none"
+  },
+  "node": "नोड",
+  "@node": {
+    "type": "text",
+    "description": "Node header"
+  },
+  "nodes": "नोड्स",
+  "@nodes": {
+    "type": "text",
+    "description": "Nodes header"
   },
   "nodeStatus": "नोड स्थिति",
   "@nodeStatus": {

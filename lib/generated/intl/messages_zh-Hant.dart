@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("封鎖使用者"),
         "addContact": MessageLookupByLibrary.simpleMessage("新增聯絡人"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("加入我的最愛"),
+        "addNode": MessageLookupByLibrary.simpleMessage("添加節點"),
         "addUser": MessageLookupByLibrary.simpleMessage("添加用戶"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage("添加僅觀看帳戶"),
         "addWatchOnlyAccountError":
@@ -95,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "為了防止濫用，我們要求您解決驗證碼才能在下一頁領取禮品卡。"),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("變更貨幣單位"),
         "changeLog": MessageLookupByLibrary.simpleMessage("更改日誌"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("改變節點"),
         "changePassword": MessageLookupByLibrary.simpleMessage("更改密碼"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "更改現有密碼。如果您不知道當前密碼，請做出最佳猜測，因為實際上不需要更改它（因為您已經登錄），但它確實讓我們刪除了現有的備份條目。"),
@@ -172,6 +174,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("看看鸚鵡螺！我用這個鏈接給你發了一些 nano："),
         "defaultNewAccountName": MessageLookupByLibrary.simpleMessage("帳戶 %1"),
         "delete": MessageLookupByLibrary.simpleMessage("刪除"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "您確定要刪除此節點嗎？\n\n您以後隨時可以通過點擊“添加節點”按鈕重新添加它"),
+        "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("刪除節點？"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -197,12 +202,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterEmail": MessageLookupByLibrary.simpleMessage("輸入電子郵件"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("輸入禮品備註"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("輸入高度"),
+        "enterHttpUrl": MessageLookupByLibrary.simpleMessage("輸入 HTTP 網址"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("輸入訊息"),
         "enterMoneroAddress": MessageLookupByLibrary.simpleMessage("輸入 XMR 地址"),
+        "enterNodeName": MessageLookupByLibrary.simpleMessage("輸入節點名稱"),
         "enterPasswordHint": MessageLookupByLibrary.simpleMessage("輸入您的密碼"),
         "enterSplitAmount": MessageLookupByLibrary.simpleMessage("輸入分割金額"),
         "enterUserOrAddress": MessageLookupByLibrary.simpleMessage("輸入使用者或地址"),
         "enterUsername": MessageLookupByLibrary.simpleMessage("輸入使用者名稱"),
+        "enterWsUrl": MessageLookupByLibrary.simpleMessage("輸入 WebSocket 網址"),
         "errorProcessingGiftCard":
             MessageLookupByLibrary.simpleMessage("處理此禮品卡時出錯，它可能無效、過期或為空。"),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -389,7 +397,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noSkipButton": MessageLookupByLibrary.simpleMessage("不用，略過"),
         "noTXDataExport": MessageLookupByLibrary.simpleMessage("沒有要導出的交易。"),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("節點"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("節點狀態"),
+        "nodes": MessageLookupByLibrary.simpleMessage("節點"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("沒有任何"),
         "notSent": MessageLookupByLibrary.simpleMessage("未傳送"),
         "notificationBody": MessageLookupByLibrary.simpleMessage("查看交易明細"),

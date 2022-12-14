@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("একটি ব্যবহারকারী ব্লক করুন"),
         "addContact": MessageLookupByLibrary.simpleMessage("কন্টাক্ট সংরক্ষণ"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("প্রিয় যোগ করো"),
+        "addNode": MessageLookupByLibrary.simpleMessage("নোড যোগ করুন"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("একটি ব্যবহারকারী যোগ করুন"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -126,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("মুদ্রা পরিবর্তন"),
         "changeLog": MessageLookupByLibrary.simpleMessage("লগ পরিবর্তন করুন"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("নোড পরিবর্তন করুন"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("পাসওয়ার্ড পরিবর্তন করুন"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -230,6 +232,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("অ্যাকাউন্ট %1"),
         "delete": MessageLookupByLibrary.simpleMessage("মুছে ফেলুন"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "আপনি কি নিশ্চিত আপনি এই নোড মুছে ফেলতে চান?\n\nআপনি \"অ্যাড নোড\" বোতামে আলতো চাপ দিয়ে পরে এটিকে সর্বদা পুনরায় যোগ করতে পারেন৷"),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("নোড মুছে দিন?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -261,9 +267,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("উপহার নোট লিখুন"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("উচ্চতা লিখুন"),
+        "enterHttpUrl": MessageLookupByLibrary.simpleMessage("HTTP URL লিখুন"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("বার্তা লিখুন"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("XMR ঠিকানা লিখুন"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("নোডের নাম লিখুন"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("আপনার পাসওয়ার্ড লিখুন"),
         "enterSplitAmount":
@@ -272,6 +281,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ব্যবহারকারী বা ঠিকানা লিখুন"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("একটি ইউজারনেম লিখুন"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("WebSocket URL লিখুন"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "এই উপহার কার্ড প্রক্রিয়া করার সময় একটি ত্রুটি ছিল, এটি বৈধ, মেয়াদ শেষ বা খালি নাও হতে পারে৷"),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -506,7 +517,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport":
             MessageLookupByLibrary.simpleMessage("রপ্তানির কোনো লেনদেন নেই।"),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("নোড"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("নোডের অবস্থা"),
+        "nodes": MessageLookupByLibrary.simpleMessage("নোডস"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("কোনোটিই নয়"),
         "notSent": MessageLookupByLibrary.simpleMessage("পাঠানো হয়নি"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

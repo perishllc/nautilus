@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bloquear a un usuario"),
         "addContact": MessageLookupByLibrary.simpleMessage("Añadir Contacto"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Añadir favorito"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Agregar nodo"),
         "addUser": MessageLookupByLibrary.simpleMessage("Agregar un usuario"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Añadir Cuenta de sólo ver"),
@@ -126,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cambiar moneda"),
         "changeLog":
             MessageLookupByLibrary.simpleMessage("Registro de cambios"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Cambiar nodo"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Cambia la contraseña"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -229,6 +231,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Cuenta %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Borrar"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "¿Está seguro de que desea eliminar este nodo?\n\nSiempre puede volver a agregarlo más tarde tocando el botón \"Agregar nodo\""),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("¿Eliminar nodo?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -264,9 +270,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Introduce la nota de regalo"),
         "enterHeight":
             MessageLookupByLibrary.simpleMessage("Introducir altura"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Introduzca la URL HTTP"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Introducir mensaje"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Ingrese la dirección XMR"),
+        "enterNodeName": MessageLookupByLibrary.simpleMessage(
+            "Introduzca el nombre del nodo"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Ingrese su contraseña"),
         "enterSplitAmount": MessageLookupByLibrary.simpleMessage(
@@ -275,6 +285,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Introduzca el usuario o la dirección"),
         "enterUsername": MessageLookupByLibrary.simpleMessage(
             "Introduzca un nombre de usuario"),
+        "enterWsUrl": MessageLookupByLibrary.simpleMessage(
+            "Introduzca la URL de WebSocket"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Hubo un error al procesar esta tarjeta de regalo, es posible que no sea válida, esté vencida o esté vacía."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -512,7 +524,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "No hay transacciones para exportar."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Gracias"),
+        "node": MessageLookupByLibrary.simpleMessage("Nodo"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Estado del nodo"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Nodos"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Ninguna"),
         "notSent": MessageLookupByLibrary.simpleMessage("no enviado"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

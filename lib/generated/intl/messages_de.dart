@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Neuer Kontakt"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Favorit hinzufügen"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Knoten hinzufügen"),
         "addUser": MessageLookupByLibrary.simpleMessage(
             "Fügen Sie einen Benutzer hinzu"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -126,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Währung ändern"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Protokoll ändern"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Knoten ändern"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Passwort ändern"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -231,6 +233,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Name des neuen Kontos %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Löschen"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Möchten Sie diesen Knoten wirklich löschen?\n\nSie können ihn später jederzeit wieder hinzufügen, indem Sie auf die Schaltfläche „Knoten hinzufügen“ tippen"),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Knoten löschen?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -263,10 +269,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Geschenknotiz eingeben"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Höhe eingeben"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("HTTP-URL eingeben"),
         "enterMemo":
             MessageLookupByLibrary.simpleMessage("Nachricht eintragen"),
         "enterMoneroAddress": MessageLookupByLibrary.simpleMessage(
             "Geben Sie die XMR-Adresse ein"),
+        "enterNodeName": MessageLookupByLibrary.simpleMessage(
+            "Geben Sie den Knotennamen ein"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Passwort eingeben"),
         "enterSplitAmount":
@@ -275,6 +285,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Benutzer oder Adresse eingeben"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Gib einen Nutzernamen ein"),
+        "enterWsUrl": MessageLookupByLibrary.simpleMessage(
+            "Geben Sie die WebSocket-URL ein"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Bei der Verarbeitung dieser Geschenkkarte ist ein Fehler aufgetreten. Sie ist möglicherweise ungültig, abgelaufen oder leer."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -516,8 +528,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Es gibt keine zu exportierenden Transaktionen."),
         "noThanks": MessageLookupByLibrary.simpleMessage("Nein danke"),
+        "node": MessageLookupByLibrary.simpleMessage("Knoten"),
         "nodeStatus":
             MessageLookupByLibrary.simpleMessage("Status des Knotens"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Knoten"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Keiner"),
         "notSent": MessageLookupByLibrary.simpleMessage("nicht gesendet"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

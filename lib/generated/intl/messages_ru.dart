@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Добавить Контакт"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Добавить избранное"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Добавить узел"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Добавить пользователя"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -125,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Сменить Валюту"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Журнал изменений"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Изменить узел"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Изменить пароль"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -231,6 +233,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Счёт %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Вы уверены, что хотите удалить этот узел?\n\nВы всегда можете повторно добавить его позже, нажав кнопку «Добавить узел»."),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Удалить узел?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -263,9 +269,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage(
             "Введите примечание к подарку"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Введите рост"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Введите URL-адрес HTTP"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Введите сообщение"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Введите XMR-адрес"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Введите имя узла"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Введите свой пароль"),
         "enterSplitAmount":
@@ -274,6 +284,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Введите пользователя или адрес"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Введите имя пользователя"),
+        "enterWsUrl": MessageLookupByLibrary.simpleMessage(
+            "Введите URL-адрес веб-сокета"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "При обработке этой подарочной карты произошла ошибка. Возможно, она недействительна, просрочена или пуста."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -511,7 +523,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Нет транзакций для экспорта."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Узел"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Статус узла"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Узлы"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Никто"),
         "notSent": MessageLookupByLibrary.simpleMessage("не отправлено"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

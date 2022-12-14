@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Contact toevoegen"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Favoriet toevoegen"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Knooppunt toevoegen"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Een gebruiker toevoegen"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -125,6 +126,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Verander valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Logboek wijzigen"),
+        "changeNode":
+            MessageLookupByLibrary.simpleMessage("Knooppunt wijzigen"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Verander wachtwoord"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -228,6 +231,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Verwijderen"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Weet u zeker dat u dit knooppunt wilt verwijderen?\n\nJe kunt het later altijd opnieuw toevoegen door op de knop \"Knooppunt toevoegen\" te tikken"),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Knooppunt verwijderen?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -259,9 +266,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Cadeaubon invoeren"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Voer Hoogte in"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Voer de HTTP-URL in"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Bericht invoeren"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Voer XMR-adres in"),
+        "enterNodeName": MessageLookupByLibrary.simpleMessage(
+            "Voer de naam van het knooppunt in"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Voer je wachtwoord in"),
         "enterSplitAmount":
@@ -270,6 +281,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Voer een gebruiker of adres in"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Voer een gebruikersnaam in"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("Voer WebSocket-URL in"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Er is een fout opgetreden bij het verwerken van deze cadeaubon, deze is mogelijk niet geldig, verlopen of leeg."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -507,7 +520,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Er zijn geen transacties om te exporteren."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Knooppunt"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Knoopstatus"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Knooppunten"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Geen"),
         "notSent": MessageLookupByLibrary.simpleMessage("niet verzonden"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Adicionar Contato"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Adicionar favorito"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Adicionar nó"),
         "addUser": MessageLookupByLibrary.simpleMessage("Adicionar um usuário"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Adicionar conta somente para assistir"),
@@ -126,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Alterar moeda"),
         "changeLog":
             MessageLookupByLibrary.simpleMessage("Registro de alterações"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Alterar nó"),
         "changePassword": MessageLookupByLibrary.simpleMessage("Mudar senha"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "Altere sua senha existente. Se você não souber sua senha atual, apenas faça o seu melhor palpite, pois não é realmente necessário alterá-la (já que você já está logado), mas nos permite excluir a entrada de backup existente."),
@@ -228,6 +230,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Conta %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Excluir"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Tem certeza de que deseja excluir este nó?\n\nVocê sempre pode adicioná-lo novamente mais tarde tocando no botão \"Adicionar nó\""),
+        "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("Excluir nó?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -260,9 +265,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Insira a nota de presente"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Insira a Altura"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Insira o URL HTTP"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Digitar mensagem"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Digite o endereço XMR"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Digite o nome do nó"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Digite sua senha"),
         "enterSplitAmount":
@@ -271,6 +280,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Inserir usuário ou endereço"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Digite um nome de usuário"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("Insira o URL do WebSocket"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Ocorreu um erro ao processar este vale-presente. Ele pode não ser válido, expirado ou vazio."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -506,7 +517,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Não há transações para exportar."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Nó"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Status do nó"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Nós"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Nenhum"),
         "notSent": MessageLookupByLibrary.simpleMessage("não enviado"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

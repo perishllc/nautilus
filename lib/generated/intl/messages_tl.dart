@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Mag-add ng kontak"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Magdagdag ng Paboritong"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Magdagdag ng Node"),
         "addUser": MessageLookupByLibrary.simpleMessage("Magdagdag ng User"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Magdagdag ng Watch Only Account"),
@@ -125,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Palitan ang Currency"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Baguhin ang Log"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Baguhin ang Node"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Palitan ANG password"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -230,6 +232,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Tanggalin"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Sigurado ka bang gusto mong tanggalin ang node na ito?\n\nMaaari mo itong muling idagdag anumang oras sa ibang pagkakataon sa pamamagitan ng pag-tap sa \"Magdagdag ng Node\" na button"),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Tanggalin ang Node?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -263,9 +269,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Ipasok ang Tala ng Regalo"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Ipasok ang Taas"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Ilagay ang HTTP URL"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Ipasok ang Mensahe"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Ipasok ang XMR Address"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Ipasok ang Pangalan ng Node"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Ilagay ang password"),
         "enterSplitAmount":
@@ -274,6 +284,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ipasok ang User o Address"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Magpasok ng username"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("Ipasok ang WebSocket URL"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Nagkaroon ng error habang pinoproseso ang gift card na ito, maaaring hindi ito wasto, nag-expire, o walang laman."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -517,7 +529,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Walang mga transaksyong ie-export."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Node"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Katayuan ng Node"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Mga node"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("wala"),
         "notSent": MessageLookupByLibrary.simpleMessage("hindi ipinadala"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

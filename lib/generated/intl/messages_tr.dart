@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bir Kullanıcıyı Engelleme"),
         "addContact": MessageLookupByLibrary.simpleMessage("Kişi Ekle"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Favori Ekle"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Düğüm Ekle"),
         "addUser": MessageLookupByLibrary.simpleMessage("Kullanıcı Ekle"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Yalnızca İzleme Hesabı Ekle"),
@@ -118,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kötüye kullanımı önlemek için, bir sonraki sayfada hediye kartını talep etmek için bir captcha çözmenizi istiyoruz."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Para Birimi"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Girişi değiştir"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Düğümü Değiştir"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Şifre değiştir"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -221,6 +223,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Hesap %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Sil"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Bu düğümü silmek istediğinizden emin misiniz?\n\n\"Düğüm Ekle\" düğmesine dokunarak istediğiniz zaman yeniden ekleyebilirsiniz."),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Düğüm silinsin mi?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -252,9 +258,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Hediye Notunu Girin"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Yüksekliği Girin"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("HTTP URL\'sini girin"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Mesaj Girin"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("XMR Adresini Girin"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Düğüm Adını Girin"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Şifreni gir"),
         "enterSplitAmount":
@@ -263,6 +273,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Kullanıcı veya Adres Girin"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Bir kullanıcı adı girin"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("WebSocket URL\'sini girin"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Bu hediye kartı işlenirken bir hata oluştu, geçerli olmayabilir, süresi dolmuş veya boş olabilir."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -494,7 +506,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport":
             MessageLookupByLibrary.simpleMessage("Dışa aktarılacak işlem yok."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("düğüm"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Düğüm Durumu"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Düğümler"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Hiçbiri"),
         "notSent": MessageLookupByLibrary.simpleMessage("gönderilmedi"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

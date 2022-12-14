@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Kontakt Hozzáadása"),
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Kedvenc hozzáadása"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Csomópont hozzáadása"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Felhasználó hozzáadása"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -124,6 +125,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Valuta Megváltoztatása"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Változási napló"),
+        "changeNode":
+            MessageLookupByLibrary.simpleMessage("Csomópont módosítása"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Jelszó módosítása"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -228,6 +231,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Törlés"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Biztosan törli ezt a csomópontot?\n\nKésőbb bármikor újra hozzáadhatja a \"Csomópont hozzáadása\" gombra koppintva"),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Csomópont törlése?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -263,10 +270,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Adja meg az ajándékjegyet"),
         "enterHeight":
             MessageLookupByLibrary.simpleMessage("Írja be a magasságot"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Írja be a HTTP URL-t"),
         "enterMemo":
             MessageLookupByLibrary.simpleMessage("Írja be az üzenetet"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Írja be az XMR-címet"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Írja be a csomópont nevét"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "enterSplitAmount": MessageLookupByLibrary.simpleMessage(
@@ -275,6 +286,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Felhasználó vagy cím megadása"),
         "enterUsername": MessageLookupByLibrary.simpleMessage(
             "Adjon meg egy felhasználónevet"),
+        "enterWsUrl": MessageLookupByLibrary.simpleMessage(
+            "Írja be a WebSocket URL-címét"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Hiba történt az ajándékutalvány feldolgozása közben. Lehet, hogy nem érvényes, lejárt vagy üres."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -508,8 +521,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Nincsenek exportálandó tranzakciók."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Csomópont"),
         "nodeStatus":
             MessageLookupByLibrary.simpleMessage("Csomópont állapota"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Csomópontok"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Egyik sem"),
         "notSent": MessageLookupByLibrary.simpleMessage("nem küldött"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

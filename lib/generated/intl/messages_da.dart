@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("Bloker en bruger"),
         "addContact": MessageLookupByLibrary.simpleMessage("Přidat kontakt"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Tilføj favorit"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Tilføj node"),
         "addUser": MessageLookupByLibrary.simpleMessage("Tilføj en bruger"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Tilføj kun Watch-konto"),
@@ -119,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "For at forhindre misbrug kræver vi, at du løser en captcha for at gøre krav på gavekortet på næste side."),
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Změna měny"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Skift log"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Skift node"),
         "changePassword": MessageLookupByLibrary.simpleMessage("Skift kodeord"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "Skift din eksisterende adgangskode. Hvis du ikke kender din nuværende adgangskode, skal du bare gætte, da det faktisk ikke er nødvendigt at ændre det (da du allerede er logget ind), men det lader os slette den eksisterende sikkerhedskopi."),
@@ -221,6 +223,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Účet %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Slet"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Er du sikker på, at du vil slette denne node?\n\nDu kan altid tilføje det igen senere ved at trykke på knappen \"Tilføj node\"."),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Vil du slette node?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -252,9 +258,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Indtast gave note"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Indtast Højde"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Indtast HTTP URL"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Indtast Besked"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Indtast XMR-adresse"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Indtast nodenavn"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Zadejte vaše heslo"),
         "enterSplitAmount":
@@ -263,6 +273,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Indtast bruger eller adresse"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Indtast et brugernavn"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("Indtast WebSocket URL"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Der opstod en fejl under behandlingen af dette gavekort. Det er muligvis ikke gyldigt, udløbet eller tomt."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -496,7 +508,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "Der er ingen transaktioner at eksportere."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Node"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Node Status"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Noder"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Ingen"),
         "notSent": MessageLookupByLibrary.simpleMessage("ikke sendt"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(

@@ -37,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Blokiraj uporabnika"),
         "addContact": MessageLookupByLibrary.simpleMessage("Dodaj stik"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Dodaj Favorite"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Dodaj vozlišče"),
         "addUser": MessageLookupByLibrary.simpleMessage("Dodajte uporabnika"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Dodaj račun samo za ogled"),
@@ -123,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Spremeni valuto"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Spremeni dnevnik"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Spremeni vozlišče"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Spremeni geslo"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -228,6 +230,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Račun %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Izbriši"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Ali ste prepričani, da želite izbrisati to vozlišče?\n\nPozneje ga lahko kadar koli znova dodate tako, da tapnete gumb »Dodaj vozlišče«."),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Želite izbrisati vozlišče?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -259,9 +265,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Vnesite darilno opombo"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Vnesite višino"),
+        "enterHttpUrl":
+            MessageLookupByLibrary.simpleMessage("Vnesite URL HTTP"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Vnesite sporočilo"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Vnesite naslov XMR"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Vnesite ime vozlišča"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "enterSplitAmount":
@@ -270,6 +280,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vnesite uporabnika ali naslov"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Vnesite uporabniško ime"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("Vnesite URL WebSocket"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Med obdelavo te darilne kartice je prišlo do napake. Morda ni veljavna, je potekla ali je prazna."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
@@ -501,7 +513,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport":
             MessageLookupByLibrary.simpleMessage("Ni transakcij za izvoz."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Vozlišče"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Stanje vozlišča"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Vozlišča"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("Noben"),
         "notSent": MessageLookupByLibrary.simpleMessage("ni poslano"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
