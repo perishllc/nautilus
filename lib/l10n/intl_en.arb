@@ -90,6 +90,21 @@
     "type": "text",
     "description": "send_address_hint"
   },
+  "enterNodeName": "Enter Node Name",
+  "@enterNodeName": {
+    "type": "text",
+    "description": "change_node_name_hint"
+  },
+  "enterHttpUrl": "Enter HTTP URL",
+  "@enterHttpUrl": {
+    "type": "text",
+    "description": "change_node_http_hint"
+  },
+  "enterWsUrl": "Enter WebSocket URL",
+  "@enterWsUrl": {
+    "type": "text",
+    "description": "change_node_ws_hint"
+  },
   "addressMissing": "Please enter an Address",
   "@addressMissing": {
     "type": "text",

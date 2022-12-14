@@ -179,8 +179,8 @@ class DBHelper {
         index: 1,
         name: "Natrium Node",
         selected: false,
-        http_url: "https://testapp.natrium.io/api",
-        ws_url: "wss://testapp.natrium.io",
+        http_url: "https://app.natrium.io/api",
+        ws_url: "wss://app.natrium.io",
       ),
       dbClient: db,
     );
@@ -233,8 +233,8 @@ class DBHelper {
           index: 1,
           name: "Natrium Node",
           selected: false,
-          http_url: "https://testapp.natrium.io/api",
-          ws_url: "wss://testapp.natrium.io",
+          http_url: "https://app.natrium.io/api",
+          ws_url: "wss://app.natrium.io",
         ),
         dbClient: db,
       );
@@ -322,7 +322,7 @@ class DBHelper {
       await txn.rawUpdate('UPDATE Nodes set selected = false');
       // Get access increment count
       final List<Map> list = await txn.rawQuery('SELECT * FROM Nodes');
-      await txn.rawUpdate('UPDATE Nodes set selected = ? WHERE node_index = ?', [true, node.index]);
+      await txn.rawUpdate('UPDATE Nodes set selected = ? WHERE node_index = ?', [1, node.index]);
     });
   }
 
@@ -362,7 +362,7 @@ class DBHelper {
     return dbClient.rawUpdate('UPDATE Nodes SET name = ? WHERE node_index = ?', [name, node.index]);
   }
 
-  Future<Node?> addNode(Node inputNode, {String? nameBuilder}) async {
+  Future<Node?> addNode(Node inputNode) async {
     final Database dbClient = (await db)!;
     Node? node;
     await dbClient.transaction((Transaction txn) async {
@@ -377,10 +377,9 @@ class DBHelper {
         nextIndex++;
       }
       final int nextID = nextIndex + 1;
-      final String nextName = nameBuilder!.replaceAll("%1", nextID.toString());
       node = Node(
         index: nextIndex,
-        name: nextName,
+        name: inputNode.name,
         selected: false,
         http_url: inputNode.http_url,
         ws_url: inputNode.ws_url,

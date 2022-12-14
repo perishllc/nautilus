@@ -257,9 +257,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Enter Height"),
+        "enterHttpUrl": MessageLookupByLibrary.simpleMessage("Enter HTTP URL"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("Enter Message"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Enter XMR Address"),
+        "enterNodeName":
+            MessageLookupByLibrary.simpleMessage("Enter Node Name"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
         "enterSplitAmount":
@@ -268,6 +271,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter User or Address"),
         "enterUsername":
             MessageLookupByLibrary.simpleMessage("Enter a username"),
+        "enterWsUrl":
+            MessageLookupByLibrary.simpleMessage("Enter WebSocket URL"),
         "errorProcessingGiftCard": MessageLookupByLibrary.simpleMessage(
             "There was an error while processing this gift card, it may be invalid, expired, or empty.\n\nAdditionally, you may need to update the app to the latest version in order to redeem this gift."),
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),

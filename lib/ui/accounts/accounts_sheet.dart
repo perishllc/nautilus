@@ -356,7 +356,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                       context,
                       AppButtonType.PRIMARY,
                       Z.of(context).addAccount,
-                      Dimens.BUTTON_BOTTOM_DIMENS,
+                      Dimens.BUTTON_TOP_DIMENS,
                       disabled: _addingAccount,
                       onPressed: () {
                         if (!_addingAccount) {

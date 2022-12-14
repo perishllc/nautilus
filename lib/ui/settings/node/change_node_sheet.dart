@@ -12,6 +12,7 @@ import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/node.dart';
+import 'package:wallet_flutter/network/account_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/settings/node/add_node_sheet.dart';
@@ -69,10 +70,10 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
         if (event.node!.selected) {
           Future<void>.delayed(const Duration(milliseconds: 50), () {
             setState(() {
-              widget.nodes
-                  .where((Node a) => a.index == StateContainer.of(context).selectedAccount!.index)
-                  .forEach((Node node) {
+              widget.nodes.where((Node a) => a.index == StateContainer.of(context).selectedAccount!.index).forEach((Node node) async {
                 node.selected = true;
+                await sl.get<DBHelper>().changeNode(node);
+                await sl.get<AccountService>().updateNode();
               });
             });
           });
@@ -116,6 +117,10 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
     }
     await sl.get<DBHelper>().changeNode(node);
     EventTaxiImpl.singleton().fire(NodeChangedEvent(node: node, delayPop: true));
+    await sl.get<AccountService>().updateNode();
+    setState(() {
+      _nodeIsChanging = false;
+    });
   }
 
   @override
@@ -227,7 +232,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
                       context,
                       AppButtonType.PRIMARY,
                       Z.of(context).addNode,
-                      Dimens.BUTTON_BOTTOM_DIMENS,
+                      Dimens.BUTTON_TOP_DIMENS,
                       disabled: _addingNode,
                       onPressed: () async {
                         if (!_addingNode) {
@@ -247,12 +252,9 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
                             return;
                           }
 
-                          sl
-                              .get<DBHelper>()
-                              .addNode(node, nameBuilder: Z.of(context).defaultNewAccountName)
-                              .then((Node? newNode) {
+                          sl.get<DBHelper>().addNode(node).then((Node? newNode) {
                             if (newNode == null) {
-                              sl.get<Logger>().d("Error adding account: node was null");
+                              sl.get<Logger>().d("Error adding node: node was null");
                               return;
                             }
                             widget.nodes.add(newNode);
@@ -364,9 +366,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
                                         margin: EdgeInsets.zero,
                                         child: Icon(
                                           Icons.hub,
-                                          color: node.selected
-                                              ? StateContainer.of(context).curTheme.success
-                                              : StateContainer.of(context).curTheme.primary,
+                                          color: node.selected ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary,
                                           size: 30,
                                         ),
                                       ),
@@ -408,7 +408,8 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
                                         minFontSize: 8.0,
                                         stepGranularity: 0.1,
                                         maxLines: 2,
-                                      ),],
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -464,8 +465,8 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
           icon: Icons.delete,
           label: Z.of(context).delete,
           onPressed: (BuildContext context) {
-            AppDialogs.showConfirmDialog(context, Z.of(context).deleteNodeHeader, Z.of(context).deleteNodeConfirmation,
-                CaseChange.toUpperCase(Z.of(context).yes, context), () async {
+            AppDialogs.showConfirmDialog(
+                context, Z.of(context).deleteNodeHeader, Z.of(context).deleteNodeConfirmation, CaseChange.toUpperCase(Z.of(context).yes, context), () async {
               await Future<dynamic>.delayed(const Duration(milliseconds: 250));
               // Remove account
               await sl.get<DBHelper>().deleteNode(node);

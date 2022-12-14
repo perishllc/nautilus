@@ -230,6 +230,36 @@ class Z {
     );
   }
 
+  /// `Enter Node Name`
+  String get enterNodeName {
+    return Intl.message(
+      'Enter Node Name',
+      name: 'enterNodeName',
+      desc: 'change_node_name_hint',
+      args: [],
+    );
+  }
+
+  /// `Enter HTTP URL`
+  String get enterHttpUrl {
+    return Intl.message(
+      'Enter HTTP URL',
+      name: 'enterHttpUrl',
+      desc: 'change_node_http_hint',
+      args: [],
+    );
+  }
+
+  /// `Enter WebSocket URL`
+  String get enterWsUrl {
+    return Intl.message(
+      'Enter WebSocket URL',
+      name: 'enterWsUrl',
+      desc: 'change_node_ws_hint',
+      args: [],
+    );
+  }
+
   /// `Please enter an Address`
   String get addressMissing {
     return Intl.message(

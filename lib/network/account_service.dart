@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
@@ -63,19 +65,25 @@ class AccountService {
     _lock = Lock();
 
     () async {
-      Node node = await sl.get<DBHelper>().getSelectedNode();
-      HTTP_URL = node.http_url;
-      WS_URL = node.ws_url;
-      print(HTTP_URL);
-      print(WS_URL);
-      initCommunication(unsuspend: true);
+      await updateNode();
     }();
+  }
+
+  Future<void> updateNode() async {
+    final Node node = await sl.get<DBHelper>().getSelectedNode();
+    HTTP_URL = node.http_url;
+    WS_URL = node.ws_url;
+    // reset vars:
+    _isConnected = false;
+    _isConnecting = false;
+    suspended = false;
+    initCommunication(unsuspend: true);
   }
 
   // Server Connection Strings
   // static const String DEV_SERVER_ADDRESS = "node-local.perish.co:5076";
   static const String DEV_SERVER_ADDRESS = "35.139.167.170:5076";
-  // overriden by shared prefs!:
+  // overriden!:
   String HTTP_URL = "https://nautilus.perish.co/api";
   String WS_URL = "wss://nautilus.perish.co";
 

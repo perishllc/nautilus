@@ -32,320 +32,249 @@ class AddNodeSheet extends StatefulWidget {
 }
 
 class AddNodeSheetState extends State<AddNodeSheet> {
-  late FocusNode _nameFocusNode;
-  FocusNode? _addressFocusNode;
-  TextEditingController? _nameController;
-  TextEditingController? _addressController;
+  FocusNode _nameFocusNode = FocusNode();
+  FocusNode _httpFocusNode = FocusNode();
+  FocusNode _wsFocusNode = FocusNode();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _httpController = TextEditingController();
+  TextEditingController _wsController = TextEditingController();
 
-  // State variables
-  bool? _addressValid;
-  bool _pasteButtonVisible = true;
-  bool _clearButton = false;
-  late bool _addressValidAndUnfocused;
-  String? _addressHint;
-  late String _addressValidationText;
-  String? _correspondingNickname;
-  String? _correspondingUsername;
-  String? _correspondingAddress;
-  String? _userType;
-  AddressStyle? _addressStyle;
-  late List<User> _users;
-  // Set to true when a username is being entered
-  bool _isUser = false;
+  // bool _clearNameButton = false;
+  bool _clearHttpButton = false;
+  bool _clearWsButton = false;
 
-  // on on focus:
-  Future<void> onUnfocus() async {
-    setState(() {
-      _addressHint = null;
-      _users = <User>[];
-      if (Address(_addressController!.text).isValid()) {
-        _addressValidAndUnfocused = true;
-      }
-      if (_addressController!.text.isEmpty) {
-        _pasteButtonVisible = true;
-      }
-    });
-    // check if UD / ENS / opencap / onchain address:
-    if (_addressController!.text.isNotEmpty) {
-      User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController!.text);
-      user ??= await sl.get<UsernameService>().figureOutUsernameType(_addressController!.text);
+  // bool _pasteNameButton = true;
+  bool _pasteHttpButton = true;
+  bool _pasteWsButton = true;
 
-      if (user != null) {
-        setState(() {
-          _addressController!.text = user!.getDisplayName()!;
-          _pasteButtonVisible = false;
-          _addressStyle = AddressStyle.PRIMARY;
-        });
-      } else {
-        setState(() {
-          _addressStyle = AddressStyle.TEXT60;
-        });
-      }
-    }
-  }
+  String _nameValidationText = "";
+  String _httpValidationText = "";
+  String _wsValidationText = "";
+
+  // late bool _addressValidAndUnfocused;
+  // String? _addressHint;
+  // late String _addressValidationText;
+  // AddressStyle? _addressStyle;
 
   @override
   void initState() {
     super.initState();
-    // Text field initialization
-    _nameFocusNode = FocusNode();
-    _addressFocusNode = FocusNode();
-    _nameController = TextEditingController();
-    _addressController = TextEditingController();
-    // State initializationrue;
-    _addressValid = false;
-    _pasteButtonVisible = true;
-    _addressValidAndUnfocused = false;
-    _addressValidationText = "";
-    _users = <User>[];
-    // Add focus listeners
-    // On address focus change
-    _addressFocusNode!.addListener(() async {
-      if (_addressFocusNode!.hasFocus) {
-        setState(() {
-          _addressHint = "";
-          _addressValidationText = "";
-          _addressStyle = AddressStyle.TEXT60;
-          _addressValidAndUnfocused = false;
-          _pasteButtonVisible = true;
-          if (_addressController!.text.isNotEmpty) {
-            _clearButton = true;
-          } else {
-            _clearButton = false;
-          }
-        });
-        _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
-        if (_addressController!.text.isNotEmpty && !_addressController!.text.startsWith("nano_")) {
-          final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
-          if (_addressController!.text != formattedAddress) {
-            setState(() {
-              _addressController!.text = formattedAddress;
-            });
-          }
-          final List<User> userList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(formattedAddress);
-          setState(() {
-            _users = userList;
-          });
-        }
-
-        if (_addressController!.text.isEmpty) {
-          setState(() {
-            _users = <User>[];
-          });
-        }
-      } else {
-        await onUnfocus();
-      }
-    });
+    // // State initializationrue;
+    // _addressValid = false;
+    // _pasteButtonVisible = true;
+    // _addressValidAndUnfocused = false;
+    // _addressValidationText = "";
+    // _users = <User>[];
+    // // Add focus listeners
+    // // On address focus change
+    // _addressFocusNode!.addListener(() async {
+    // });
   }
 
-  /// Return true if textfield should be shown, false if colorized should be shown
-  bool _shouldShowTextField() {
-    if (widget.address != null) {
-      return false;
-    } else if (_addressValidAndUnfocused) {
-      return false;
-    }
-    return true;
-  }
+  // /// Return true if textfield should be shown, false if colorized should be shown
+  // bool _shouldShowTextField() {
+  //   if (widget.address != null) {
+  //     return false;
+  //   } else if (_addressValidAndUnfocused) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
-  //************ Enter Address Container Method ************//
-  //*******************************************************//
-  Widget getEnterAddressContainer() {
+  Widget getEnterNameContainer() {
     return AppTextField(
-      topMargin: 124,
-      padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+      topMargin: 20,
+      // padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
       textAlign: TextAlign.center,
-      focusNode: _addressFocusNode,
-      controller: _addressController,
+      focusNode: _nameFocusNode,
+      controller: _nameController,
       cursorColor: StateContainer.of(context).curTheme.primary,
-      inputFormatters: [
-        if (_isUser) LengthLimitingTextInputFormatter(20) else LengthLimitingTextInputFormatter(65),
-      ],
-      textInputAction: TextInputAction.done,
+      inputFormatters: [LengthLimitingTextInputFormatter(20)],
+      textInputAction: TextInputAction.next,
       maxLines: null,
       autocorrect: false,
-      hintText: _addressHint ?? Z.of(context).enterUserOrAddress,
-      prefixButton: TextFieldButton(
-          icon: AppIcons.scan,
-          onPressed: () async {
-            UIUtil.cancelLockEvent();
-            final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
-            if (!mounted) return;
-            if (scanResult == null) {
-              UIUtil.showSnackbar(Z.of(context).qrInvalidAddress, context);
-            } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
-              setState(() {
-                _addressController!.text = scanResult;
-                _addressValidationText = "";
-                _addressValid = true;
-                _addressValidAndUnfocused = true;
-              });
-              _addressFocusNode!.unfocus();
-            }
-          }),
+      hintText: Z.of(context).enterNodeName,
       fadePrefixOnCondition: true,
-      prefixShowFirstCondition: _pasteButtonVisible,
-      suffixButton: TextFieldButton(
-        icon: _clearButton ? AppIcons.clear : AppIcons.paste,
-        onPressed: () async {
-          if (_clearButton) {
-            setState(() {
-              _isUser = false;
-              _addressValidationText = "";
-              _pasteButtonVisible = true;
-              _clearButton = false;
-              _addressController!.text = "";
-              _users = <User>[];
-            });
-            return;
-          }
-
-          final String? data = await UserDataUtil.getClipboardText(DataType.ADDRESS);
-          if (data == null) {
-            return;
-          }
-          final Address address = Address(data);
-          if (address.isValid()) {
-            sl.get<DBHelper>().getUserOrContactWithAddress(address.address!).then((User? user) {
-              if (user == null) {
-                setState(() {
-                  _isUser = false;
-                  _addressValid = true;
-                  _addressValidationText = "";
-                  _addressStyle = AddressStyle.TEXT90;
-                  _pasteButtonVisible = true;
-                  _clearButton = true;
-                  _addressController!.text = address.address!;
-                  _addressFocusNode!.unfocus();
-                  _addressValidAndUnfocused = true;
-                });
-              } else {
-                // Is a user
-                setState(() {
-                  _addressController!.text = user.getDisplayName()!;
-                  _addressFocusNode!.unfocus();
-                  _users = [];
-                  _isUser = true;
-                  _addressValid = true;
-                  _addressValidationText = "";
-                  _addressStyle = AddressStyle.PRIMARY;
-                  _pasteButtonVisible = true;
-                  _clearButton = true;
-                });
-              }
-              onUnfocus();
-            });
-          }
-        },
-      ),
-      fadeSuffixOnCondition: true,
-      suffixShowFirstCondition: _pasteButtonVisible,
-      style: _addressStyle == AddressStyle.TEXT60
-          ? AppStyles.textStyleAddressText60(context)
-          : _addressStyle == AddressStyle.TEXT90
-              ? AppStyles.textStyleAddressText90(context)
-              : AppStyles.textStyleAddressPrimary(context),
+      // prefixShowFirstCondition: _pasteHttpButton,
+      // fadeSuffixOnCondition: true,
+      // suffixShowFirstCondition: _pasteHttpButton,
+      // style: _addressStyle == AddressStyle.TEXT60
+      //     ? AppStyles.textStyleAddressText60(context)
+      //     : _addressStyle == AddressStyle.TEXT90
+      //         ? AppStyles.textStyleAddressText90(context)
+      //         : AppStyles.textStyleAddressPrimary(context),
+      style: AppStyles.textStyleAddressText90(context),
       onChanged: (String text) async {
-        bool isUser = false;
-        final bool isDomain = text.contains(".") || text.contains(r"$");
-        final bool isFavorite = text.startsWith("★");
-        final bool isNano = text.startsWith("nano_");
-
         // prevent spaces:
         if (text.contains(" ")) {
           text = text.replaceAll(" ", "");
-          _addressController!.text = text;
-          _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+          _httpController.text = text;
+          _httpController.selection = TextSelection.fromPosition(TextPosition(
+            offset: _httpController.text.length,
+          ));
+        }
+
+        // Always reset the error message to be less annoying
+        if (_nameValidationText.isNotEmpty) {
+          setState(() {
+            _nameValidationText = "";
+          });
+        }
+      },
+    );
+  }
+
+  Widget getEnterHttpContainer() {
+    return AppTextField(
+      topMargin: 20,
+      // padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+      textAlign: TextAlign.center,
+      focusNode: _httpFocusNode,
+      controller: _httpController,
+      cursorColor: StateContainer.of(context).curTheme.primary,
+      inputFormatters: [LengthLimitingTextInputFormatter(20)],
+      textInputAction: TextInputAction.next,
+      maxLines: null,
+      autocorrect: false,
+      hintText: Z.of(context).enterHttpUrl,
+      fadePrefixOnCondition: true,
+      prefixShowFirstCondition: _pasteHttpButton,
+      suffixButton: TextFieldButton(
+        icon: _clearHttpButton ? AppIcons.clear : AppIcons.paste,
+        onPressed: () async {
+          if (_clearHttpButton) {
+            setState(() {
+              _pasteHttpButton = true;
+              _clearHttpButton = false;
+              _httpController.text = "";
+            });
+            return;
+          }
+
+          final String? data = await UserDataUtil.getClipboardText(DataType.RAW);
+          if (data == null) {
+            return;
+          }
+          setState(() {
+            _httpController.text = data;
+            _clearHttpButton = true;
+          });
+        },
+      ),
+      fadeSuffixOnCondition: true,
+      suffixShowFirstCondition: _pasteHttpButton,
+      // style: _addressStyle == AddressStyle.TEXT60
+      //     ? AppStyles.textStyleAddressText60(context)
+      //     : _addressStyle == AddressStyle.TEXT90
+      //         ? AppStyles.textStyleAddressText90(context)
+      //         : AppStyles.textStyleAddressPrimary(context),
+      style: AppStyles.textStyleAddressText90(context),
+      onChanged: (String text) async {
+        // prevent spaces:
+        if (text.contains(" ")) {
+          text = text.replaceAll(" ", "");
+          _httpController.text = text;
+          _httpController.selection = TextSelection.fromPosition(TextPosition(
+            offset: _httpController.text.length,
+          ));
         }
 
         if (text.isNotEmpty) {
           setState(() {
-            _pasteButtonVisible = true;
-            _clearButton = true;
+            _pasteHttpButton = true;
+            _clearHttpButton = true;
           });
         } else {
           setState(() {
-            _pasteButtonVisible = true;
-            _clearButton = false;
+            _pasteHttpButton = true;
+            _clearHttpButton = false;
           });
         }
 
-        if (text.isNotEmpty && !isUser && !isNano) {
-          isUser = true;
-        }
-
-        if (text.isNotEmpty && text.startsWith("nano_")) {
-          isUser = false;
-        }
-
-        if (text.isNotEmpty && text.contains(".")) {
-          isUser = false;
-        }
-
-        // check if it's a real nano address:
-        // bool isUser = !text.startsWith("nano_") && !text.startsWith("★");
-        if (text.isEmpty) {
-          setState(() {
-            _isUser = false;
-            _users = [];
-          });
-        } else if (isFavorite) {
-          final List<User> matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
-          setState(() {
-            _users = matchedList;
-          });
-        } else if (isUser || isDomain) {
-          final List<User> matchedList = await sl.get<DBHelper>().getUserSuggestionsWithUsernameLike(SendSheetHelpers.stripPrefixes(text));
-          setState(() {
-            _users = matchedList;
-          });
-        } else {
-          setState(() {
-            _isUser = false;
-            _users = [];
-          });
-        }
         // Always reset the error message to be less annoying
-        if (_addressValidationText.isNotEmpty) {
+        if (_httpValidationText.isNotEmpty) {
           setState(() {
-            _addressValidationText = "";
-          });
-        }
-        if (isNano && Address(text).isValid()) {
-          _addressFocusNode!.unfocus();
-          setState(() {
-            _addressStyle = AddressStyle.TEXT90;
-            _addressValidationText = "";
-            _pasteButtonVisible = false;
-          });
-        } else {
-          setState(() {
-            _addressStyle = AddressStyle.TEXT60;
-          });
-        }
-
-        if ((isUser || isFavorite) != _isUser) {
-          setState(() {
-            _isUser = isUser || isFavorite;
+            _httpValidationText = "";
           });
         }
       },
-      overrideTextFieldWidget: !_shouldShowTextField()
-          ? GestureDetector(
-              onTap: () {
-                if (widget.address != null) {
-                  return;
-                }
-                setState(() {
-                  _addressValidAndUnfocused = false;
-                });
-                Future.delayed(const Duration(milliseconds: 50), () {
-                  FocusScope.of(context).requestFocus(_addressFocusNode);
-                });
-              },
-              child: UIUtil.threeLineAddressText(context, widget.address != null ? widget.address! : _addressController!.text))
-          : null,
+    );
+  }
+
+  Widget getEnterWsContainer() {
+    return AppTextField(
+      topMargin: 20,
+      // padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+      textAlign: TextAlign.center,
+      focusNode: _wsFocusNode,
+      controller: _wsController,
+      cursorColor: StateContainer.of(context).curTheme.primary,
+      inputFormatters: [LengthLimitingTextInputFormatter(20)],
+      textInputAction: TextInputAction.done,
+      maxLines: null,
+      autocorrect: false,
+      hintText: Z.of(context).enterWsUrl,
+      fadePrefixOnCondition: true,
+      prefixShowFirstCondition: _pasteWsButton,
+      suffixButton: TextFieldButton(
+        icon: _clearWsButton ? AppIcons.clear : AppIcons.paste,
+        onPressed: () async {
+          if (_clearWsButton) {
+            setState(() {
+              _pasteWsButton = true;
+              _clearWsButton = false;
+              _wsController.text = "";
+            });
+            return;
+          }
+
+          final String? data = await UserDataUtil.getClipboardText(DataType.RAW);
+          if (data == null) {
+            return;
+          }
+          setState(() {
+            _wsController.text = data;
+            _clearWsButton = true;
+          });
+        },
+      ),
+      fadeSuffixOnCondition: true,
+      suffixShowFirstCondition: _pasteWsButton,
+      // style: _addressStyle == AddressStyle.TEXT60
+      //     ? AppStyles.textStyleAddressText60(context)
+      //     : _addressStyle == AddressStyle.TEXT90
+      //         ? AppStyles.textStyleAddressText90(context)
+      //         : AppStyles.textStyleAddressPrimary(context),
+      style: AppStyles.textStyleAddressText90(context),
+      onChanged: (String text) async {
+        // prevent spaces:
+        if (text.contains(" ")) {
+          text = text.replaceAll(" ", "");
+          _wsController.text = text;
+          _wsController.selection = TextSelection.fromPosition(TextPosition(
+            offset: _wsController.text.length,
+          ));
+        }
+
+        if (text.isNotEmpty) {
+          setState(() {
+            _pasteWsButton = true;
+            _clearWsButton = true;
+          });
+        } else {
+          setState(() {
+            _pasteWsButton = true;
+            _clearWsButton = false;
+          });
+        }
+
+        // Always reset the error message to be less annoying
+        if (_wsValidationText.isNotEmpty) {
+          setState(() {
+            _wsValidationText = "";
+          });
+        }
+      },
     );
   }
 
@@ -383,7 +312,7 @@ class AddNodeSheetState extends State<AddNodeSheet> {
                       ),
                     ),
                     AutoSizeText(
-                      CaseChange.toUpperCase(Z.of(context).addAccount, context),
+                      CaseChange.toUpperCase(Z.of(context).addNode, context),
                       style: AppStyles.textStyleHeader(context),
                       textAlign: TextAlign.center,
                       maxLines: 1,
@@ -407,8 +336,9 @@ class AddNodeSheetState extends State<AddNodeSheet> {
                   GestureDetector(
                     onTap: () {
                       // Clear focus of our fields when tapped in this empty space
-                      _addressFocusNode!.unfocus();
                       _nameFocusNode.unfocus();
+                      _httpFocusNode.unfocus();
+                      _wsFocusNode.unfocus();
                     },
                     child: Container(
                       color: Colors.transparent,
@@ -428,61 +358,14 @@ class AddNodeSheetState extends State<AddNodeSheet> {
                                 child: Stack(
                                   alignment: Alignment.topCenter,
                                   children: <Widget>[
-                                    Container(
-                                      margin:
-                                          EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                                      alignment: Alignment.bottomCenter,
-                                      constraints: const BoxConstraints(maxHeight: 174, minHeight: 0),
-                                      // ********************************************* //
-                                      // ********* The pop-up Contacts List ********* //
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(25),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(25),
-                                            color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                          ),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(25),
-                                            ),
-                                            margin: const EdgeInsets.only(bottom: 50),
-                                            child: _users.isEmpty
-                                                ? const SizedBox()
-                                                : ListView.builder(
-                                                    shrinkWrap: true,
-                                                    padding: EdgeInsets.zero,
-                                                    itemCount: _users.length,
-                                                    itemBuilder: (BuildContext context, int index) {
-                                                      return Misc.buildUserItem(context, _users[index], true, (User user) {
-                                                        _addressController!.text = user.getDisplayName(ignoreNickname: true)!;
-                                                        _addressFocusNode!.unfocus();
-                                                        setState(() {
-                                                          _isUser = true;
-                                                          _pasteButtonVisible = false;
-                                                          _addressStyle = AddressStyle.PRIMARY;
-                                                          _addressValidationText = "";
-                                                        });
-                                                      });
-                                                    },
-                                                  ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                    // ******* Enter Address Container ******* //
-                                    getEnterAddressContainer(),
-                                    // ******* Enter Address Container End ******* //
+                                    getEnterNameContainer(),
                                   ],
                                 ),
                               ),
-
-                              // ******* Enter Address Error Container ******* //
                               Container(
                                 alignment: AlignmentDirectional.center,
                                 margin: const EdgeInsets.only(top: 3),
-                                child: Text(_addressValidationText,
+                                child: Text(_nameValidationText,
                                     style: TextStyle(
                                       fontSize: 14.0,
                                       color: StateContainer.of(context).curTheme.primary,
@@ -490,7 +373,46 @@ class AddNodeSheetState extends State<AddNodeSheet> {
                                       fontWeight: FontWeight.w600,
                                     )),
                               ),
-                              // ******* Enter Address Error Container End ******* //
+                              Container(
+                                alignment: Alignment.topCenter,
+                                child: Stack(
+                                  alignment: Alignment.topCenter,
+                                  children: <Widget>[
+                                    getEnterHttpContainer(),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                alignment: AlignmentDirectional.center,
+                                margin: const EdgeInsets.only(top: 3),
+                                child: Text(_httpValidationText,
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      color: StateContainer.of(context).curTheme.primary,
+                                      fontFamily: "NunitoSans",
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                              ),
+                              Container(
+                                alignment: Alignment.topCenter,
+                                child: Stack(
+                                  alignment: Alignment.topCenter,
+                                  children: <Widget>[
+                                    getEnterWsContainer(),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                alignment: AlignmentDirectional.center,
+                                margin: const EdgeInsets.only(top: 3),
+                                child: Text(_wsValidationText,
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      color: StateContainer.of(context).curTheme.primary,
+                                      fontFamily: "NunitoSans",
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                              ),
                             ],
                           ),
                         ],
@@ -508,18 +430,19 @@ class AddNodeSheetState extends State<AddNodeSheet> {
                 children: <Widget>[
                   // Add Contact Button
                   AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).addAccount, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
-                    if (await validateForm()) {
-                      final Node node = Node(
-                        name: _nameController!.text,
-                        http_url: "http",
-                        ws_url: "ws",
-                        selected: false,
-                      );
-
-                      Navigator.of(context).pop(node);
+                    if (!await validateForm()) {
+                      return;
                     }
+                    final Node node = Node(
+                      name: _nameController.text,
+                      http_url: _httpController.text,
+                      ws_url: _wsController.text,
+                      selected: false,
+                    );
+                    Navigator.of(context).pop(node);
+
                     // if (await validateForm()) {
-                    //   final String formAddress = widget.address ?? _addressController!.text;
+                    //   final String formAddress = widget.address ?? _httpController!.text;
                     //   // if we're given an address with corresponding username, just block:
                     //   if (_correspondingUsername != null) {
                     //     Navigator.of(context).pop(formAddress);
@@ -550,84 +473,7 @@ class AddNodeSheetState extends State<AddNodeSheet> {
 
   Future<bool> validateForm() async {
     bool isValid = true;
-    // Address Validations
-    // Don't validate address if it came pre-filled in
-    final String formAddress = widget.address != null ? widget.address! : _addressController!.text;
-    final String formattedAddress = SendSheetHelpers.stripPrefixes(formAddress);
 
-    // if (widget.address == null) {
-    if (formAddress.isEmpty) {
-      isValid = false;
-      setState(() {
-        _addressValidationText = Z.of(context).addressOrUserMissing;
-      });
-    } else if (formAddress.startsWith("nano_")) {
-      // we're dealing with an address:
-
-      if (!Address(formAddress).isValid()) {
-        isValid = false;
-        setState(() {
-          _addressValidationText = Z.of(context).invalidAddress;
-        });
-      }
-
-      _addressFocusNode!.unfocus();
-      final bool blockedExists = await sl.get<DBHelper>().blockedExistsWithAddress(formAddress);
-      if (blockedExists) {
-        isValid = false;
-        setState(() {
-          _addressValidationText = Z.of(context).blockedExists;
-        });
-      } else {
-        // get the corresponding username if it exists:
-        final String? username = await sl.get<DBHelper>().getUsernameWithAddress(formAddress);
-        if (username != null) {
-          setState(() {
-            _correspondingUsername = username;
-          });
-        }
-      }
-    } else {
-      // we're dealing with a username:
-      final bool blockedExists = await sl.get<DBHelper>().blockedExistsWithUsername(formattedAddress);
-      if (blockedExists) {
-        isValid = false;
-        setState(() {
-          _addressValidationText = Z.of(context).blockedExists;
-        });
-      } else {
-        // check if there's a corresponding address:
-        final User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController!.text);
-        if (user != null) {
-          setState(() {
-            _userType = user.type;
-            if (user.address != null) {
-              _correspondingAddress = user.address;
-            }
-            if (user.nickname != null) {
-              _correspondingNickname = user.nickname;
-            }
-          });
-        } else {
-          isValid = false;
-          setState(() {
-            _addressValidationText = Z.of(context).userNotFound;
-          });
-        }
-      }
-      // }
-      // reset corresponding username if invalid:
-      if (isValid == false && _correspondingUsername != null) {
-        setState(() {
-          _correspondingUsername = null;
-        });
-      }
-      if (isValid == false && _correspondingAddress != null) {
-        setState(() {
-          _correspondingAddress = null;
-        });
-      }
-    }
     return isValid;
   }
 }
