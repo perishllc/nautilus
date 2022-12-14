@@ -16,7 +16,7 @@ class AuthService {
   static String HTTP_PROTO = "https://";
   static String WS_PROTO = "wss://";
 
-  static String RPC_URL = "nautilus.perish.co";
+  static String HTTP_URL = "nautilus.perish.co";
   static String WS_URL = "nautilus.perish.co";
 
   // auth:

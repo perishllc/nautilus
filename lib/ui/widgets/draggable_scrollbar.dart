@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -48,6 +49,7 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
   bool _isDragInProcess = false;
   bool _visible = false;
   bool _invisibleTimerQueued = false;
+  double _scrollbarSquish = 0;
 
   bool hideAfterDuration = true;
   double lastViewMaxScrollExtent = -1;
@@ -307,6 +309,30 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
             });
           }
         }
+
+        
+        // scroll bar squish:
+        if (Platform.isIOS) {
+          double offset = 0;
+          final double maxSquish = widget.scrollbarHeight - 10;
+          if (_viewOffset < 0) {
+            offset = -_viewOffset;
+            offset = offset.clamp(0, maxSquish);
+            setState(() {
+              _scrollbarSquish = offset;
+            });
+          } else if (_viewOffset > viewMaxScrollExtent) {
+            offset = _viewOffset - viewMaxScrollExtent;
+            offset = offset.clamp(0, maxSquish);
+            setState(() {
+              _scrollbarSquish = offset;
+              _barOffsetTop += offset;
+            });
+          } else {
+            _scrollbarSquish = 0;
+          }
+        }
+
         return;
       }
 
@@ -388,7 +414,7 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
                   color: widget.showTouchArea ? Colors.blue : null,
                 ),
                 width: widget.scrollbarInvisibleWidth,
-                height: widget.scrollbarHeight,
+                height: widget.scrollbarHeight - _scrollbarSquish,
                 // padding: EdgeInsets.only(left: 20.0, top: 10.0, bottom: 10.0),
                 margin: EdgeInsets.only(
                     top: _barOffsetTop >= 0 ? _barOffsetTop : 0, bottom: _barOffsetBottom >= 0 ? _barOffsetBottom : 0),

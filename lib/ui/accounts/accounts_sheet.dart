@@ -565,6 +565,15 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                                     TextSpan(
                                       text: "",
                                       children: [
+                                        TextSpan(
+                                          text: getThemeAwareRawAccuracy(
+                                              context, isEmpty(account.balance) ? "0" : account.balance),
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                              fontFamily: "NunitoSans",
+                                              fontWeight: FontWeight.w900,
+                                              color: StateContainer.of(context).curTheme.text),
+                                        ),
                                         if (account.balance != null)
                                           displayCurrencySymbol(
                                             context,
@@ -587,15 +596,6 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                                             fontWeight: FontWeight.w900,
                                             color: StateContainer.of(context).curTheme.text,
                                           ),
-                                        ),
-                                        TextSpan(
-                                          text: getThemeAwareRawAccuracy(
-                                              context, isEmpty(account.balance) ? "0" : account.balance),
-                                          style: TextStyle(
-                                              fontSize: 16.0,
-                                              fontFamily: "NunitoSans",
-                                              fontWeight: FontWeight.w900,
-                                              color: StateContainer.of(context).curTheme.text),
                                         ),
                                       ],
                                     ),

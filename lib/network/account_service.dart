@@ -11,6 +11,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
+import 'package:wallet_flutter/model/db/node.dart';
 import 'package:wallet_flutter/model/db/user.dart';
 import 'package:wallet_flutter/model/state_block.dart';
 import 'package:wallet_flutter/network/model/base_request.dart';
@@ -62,9 +63,10 @@ class AccountService {
     _lock = Lock();
 
     () async {
-      RPC_URL = await sl.get<SharedPrefsUtil>().getRpcUrl();
-      WS_URL = await sl.get<SharedPrefsUtil>().getWsUrl();
-      print(RPC_URL);
+      Node node = await sl.get<DBHelper>().getSelectedNode();
+      HTTP_URL = node.http_url;
+      WS_URL = node.ws_url;
+      print(HTTP_URL);
       print(WS_URL);
       initCommunication(unsuspend: true);
     }();
@@ -74,7 +76,7 @@ class AccountService {
   // static const String DEV_SERVER_ADDRESS = "node-local.perish.co:5076";
   static const String DEV_SERVER_ADDRESS = "35.139.167.170:5076";
   // overriden by shared prefs!:
-  String RPC_URL = "https://nautilus.perish.co/api";
+  String HTTP_URL = "https://nautilus.perish.co/api";
   String WS_URL = "wss://nautilus.perish.co";
 
   final Logger log = sl.get<Logger>();
@@ -377,7 +379,7 @@ class AccountService {
   // HTTP API
 
   Future<dynamic> makeHttpRequest(BaseRequest request) async {
-    final http.Response response = await http.post(Uri.parse(RPC_URL), headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
+    final http.Response response = await http.post(Uri.parse(HTTP_URL), headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
 
     if (response.statusCode != 200) {
       return null;

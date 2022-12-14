@@ -11,6 +11,10 @@ import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
 import 'package:magic_sdk/magic_sdk.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:quiver/strings.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/contacts_setting_change_event.dart';
@@ -30,6 +34,7 @@ import 'package:wallet_flutter/model/contacts_setting.dart';
 import 'package:wallet_flutter/model/currency_mode_setting.dart';
 import 'package:wallet_flutter/model/db/account.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
+import 'package:wallet_flutter/model/db/node.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/model/db/user.dart';
 import 'package:wallet_flutter/model/device_lock_timeout.dart';
@@ -52,9 +57,9 @@ import 'package:wallet_flutter/ui/settings/backupseed_sheet.dart';
 import 'package:wallet_flutter/ui/settings/blocked_widget.dart';
 import 'package:wallet_flutter/ui/settings/change_magic_password_sheet.dart';
 import 'package:wallet_flutter/ui/settings/change_magic_seed_sheet.dart';
-import 'package:wallet_flutter/ui/settings/change_node/change_node_sheet.dart';
 import 'package:wallet_flutter/ui/settings/changerepresentative_sheet.dart';
 import 'package:wallet_flutter/ui/settings/contacts_widget.dart';
+import 'package:wallet_flutter/ui/settings/node/change_node_sheet.dart';
 import 'package:wallet_flutter/ui/settings/set_pin_sheet.dart';
 import 'package:wallet_flutter/ui/settings/set_plausible_pin_sheet.dart';
 import 'package:wallet_flutter/ui/settings/settings_list_item.dart';
@@ -83,10 +88,6 @@ import 'package:wallet_flutter/util/nanoutil.dart';
 import 'package:wallet_flutter/util/ninja/api.dart';
 import 'package:wallet_flutter/util/ninja/ninja_node.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:quiver/strings.dart';
-import 'package:share_plus/share_plus.dart';
 
 class SettingsSheet extends StatefulWidget {
   @override
@@ -707,8 +708,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                 AppDialogs.infoButton(
                   context,
                   () {
-                    AppDialogs.showInfoDialog(context, Z.of(context).unopenedWarningHeader,
-                        Z.of(context).unopenedWarningInfo);
+                    AppDialogs.showInfoDialog(
+                        context, Z.of(context).unopenedWarningHeader, Z.of(context).unopenedWarningInfo);
                   },
                 )
               ],
@@ -769,8 +770,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                 AppDialogs.infoButton(
                   context,
                   () {
-                    AppDialogs.showInfoDialog(context, Z.of(context).showMoneroHeader,
-                        Z.of(context).showMoneroInfo);
+                    AppDialogs.showInfoDialog(context, Z.of(context).showMoneroHeader, Z.of(context).showMoneroInfo);
                   },
                 )
               ],
@@ -945,8 +945,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                 AppDialogs.infoButton(
                   context,
                   () {
-                    AppDialogs.showInfoDialog(context, Z.of(context).receiveMinimumHeader,
-                        Z.of(context).receiveMinimumInfo);
+                    AppDialogs.showInfoDialog(
+                        context, Z.of(context).receiveMinimumHeader, Z.of(context).receiveMinimumInfo);
                   },
                 )
               ],
@@ -981,8 +981,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                 AppDialogs.infoButton(
                   context,
                   () {
-                    AppDialogs.showInfoDialog(context, Z.of(context).currencyModeHeader,
-                        Z.of(context).currencyModeInfo);
+                    AppDialogs.showInfoDialog(
+                        context, Z.of(context).currencyModeHeader, Z.of(context).currencyModeInfo);
                   },
                 )
               ],
@@ -1181,8 +1181,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                 style: AppStyles.textStyleDialogHeader(context),
               ),
               AppDialogs.infoButton(context, () {
-                AppDialogs.showInfoDialog(context, Z.of(context).blockExplorerHeader,
-                    Z.of(context).blockExplorerInfo);
+                AppDialogs.showInfoDialog(context, Z.of(context).blockExplorerHeader, Z.of(context).blockExplorerInfo);
               }),
             ]),
             children: _buildExplorerOptions(),
@@ -1549,12 +1548,17 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
               },
             ),
           ),
-        Container(
-          margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
-          child: Text(Z.of(context).featured,
-              style: TextStyle(
-                  fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
-        ),
+        // Container(
+        //   margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
+        //   child: Text(
+        //     Z.of(context).featured,
+        //     style: TextStyle(
+        //       fontSize: 16.0,
+        //       fontWeight: FontWeight.w100,
+        //       color: StateContainer.of(context).curTheme.text60,
+        //     ),
+        //   ),
+        // ),
         // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         // AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).home, AppIcons.home, onPressed: () {
         //   Navigator.of(context).pushNamed("/home_transition");
@@ -1563,7 +1567,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         // AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).payments, AppIcons.money_bill_alt, onPressed: () {
         //   Navigator.of(context).pushNamed("/payments_page");
         // }),
-        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+        // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         // AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).useNano, AppIcons.coins,
         //     onPressed: () async {
         //   // Navigator.of(context).pushNamed("/purchase_nano");
@@ -1581,11 +1585,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         //   Navigator.of(context).pushNamed("/spend_nano");
         // }),
         // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).registerUsername, AppIcons.at,
-            onPressed: () {
-          Navigator.of(context).pushNamed("/register_onchain_username");
-        }),
-        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+        // AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).registerUsername, AppIcons.at,
+        //     onPressed: () {
+        //   Navigator.of(context).pushNamed("/register_onchain_username");
+        // }),
+        // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         // AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).registerUsername, Icons.tag,
         //     onPressed: () {
         //   Navigator.of(context).pushNamed("/register_nano_to_username");
@@ -1612,8 +1616,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).language,
             StateContainer.of(context).curLanguage, AppIcons.language, _languageDialog),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).notifications,
-            _curNotificiationSetting, AppIcons.notifications, _notificationsDialog),
+        AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).notifications, _curNotificiationSetting,
+            AppIcons.notifications, _notificationsDialog),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemDoubleLine(
             context, Z.of(context).themeHeader, _curThemeSetting, AppIcons.theme, _themeDialog),
@@ -1626,8 +1630,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           _explorerDialog,
         ),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemSingleLine(
-            context, Z.of(context).securityHeader, AppIcons.security, onPressed: () {
+        AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).securityHeader, AppIcons.security,
+            onPressed: () {
           setState(() {
             _securityOpen = true;
           });
@@ -1641,8 +1645,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                   fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
         ),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemSingleLine(
-            context, Z.of(context).contactsHeader, AppIcons.contact, onPressed: () async {
+        AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).contactsHeader, AppIcons.contact,
+            onPressed: () async {
           // check if contacts have been asked before:
           // reloading prefs to be sure we get the latest value:
           await sl.get<SharedPrefsUtil>().reload();
@@ -1664,8 +1668,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           _blockedController!.forward();
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemSingleLine(
-            context, Z.of(context).backupSecretPhrase, AppIcons.backupseed, onPressed: () async {
+        AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).backupSecretPhrase, AppIcons.backupseed,
+            onPressed: () async {
           // Authenticate
           final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
           final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
@@ -1707,8 +1711,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           }
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemSingleLine(
-            context, Z.of(context).settingsTransfer, AppIcons.transferfunds, onPressed: () {
+        AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).settingsTransfer, AppIcons.transferfunds,
+            onPressed: () {
           AppTransferOverviewSheet().mainBottomSheet(context);
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
@@ -1720,23 +1724,19 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           _shareController.forward();
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemSingleLine(
-            context, Z.of(context).moreSettings, AppIcons.more_horiz, onPressed: () async {
+        AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).moreSettings, AppIcons.more_horiz,
+            onPressed: () async {
           setState(() {
             _moreSettingsOpen = true;
           });
           _moreSettingsController.forward();
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).logout, AppIcons.logout,
-            onPressed: () {
+        AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).logout, AppIcons.logout, onPressed: () {
           AppDialogs.showConfirmDialog(context, CaseChange.toUpperCase(Z.of(context).warning, context),
               Z.of(context).logoutDetail, Z.of(context).logoutAction.toUpperCase(), () {
             // Show another confirm dialog
-            AppDialogs.showConfirmDialog(
-                context,
-                Z.of(context).logoutAreYouSure,
-                Z.of(context).logoutReassurance,
+            AppDialogs.showConfirmDialog(context, Z.of(context).logoutAreYouSure, Z.of(context).logoutReassurance,
                 CaseChange.toUpperCase(Z.of(context).yes, context), () async {
               // prevent interaction while logging out:
               AppAnimation.animationLauncher(context, AnimationType.GENERIC);
@@ -2249,14 +2249,14 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       // Authentication Method
                       if (_hasBiometrics) Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       if (_hasBiometrics)
-                        AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).authMethod,
-                            _curAuthMethod, AppIcons.fingerprint, _authMethodDialog),
+                        AppSettings.buildSettingsListItemDoubleLine(
+                            context, Z.of(context).authMethod, _curAuthMethod, AppIcons.fingerprint, _authMethodDialog),
                       // Authenticate on Launch
                       if (StateContainer.of(context).encryptedSecret == null)
                         Column(children: <Widget>[
                           Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                          AppSettings.buildSettingsListItemDoubleLine(context,
-                              Z.of(context).lockAppSetting, _curUnlockSetting, AppIcons.lock, _lockDialog,
+                          AppSettings.buildSettingsListItemDoubleLine(
+                              context, Z.of(context).lockAppSetting, _curUnlockSetting, AppIcons.lock, _lockDialog,
                               disabled: authLaunchDisabled),
                         ]),
                       // Authentication Timer
@@ -2290,8 +2290,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       Column(children: <Widget>[
                         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                         AppSettings.buildSettingsListItemSingleLine(
-                            context, Z.of(context).setPlausibleDeniabilityPin, AppIcons.walletpassword,
-                            onPressed: () {
+                            context, Z.of(context).setPlausibleDeniabilityPin, AppIcons.walletpassword, onPressed: () {
                           Sheets.showAppHeightNineSheet(context: context, widget: SetPlausiblePinSheet());
                         },
                             disabled: _curAuthMethod.method != AuthMethod.PIN ||
@@ -2308,16 +2307,15 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                         Column(children: <Widget>[
                           Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                           AppSettings.buildSettingsListItemSingleLine(
-                              context, Z.of(context).changePassword, AppIcons.walletpassword,
-                              onPressed: () {
+                              context, Z.of(context).changePassword, AppIcons.walletpassword, onPressed: () {
                             Sheets.showAppHeightNineSheet(context: context, widget: ChangeMagicPasswordSheet());
                           }, disabled: false),
                         ]),
                       if (_loggedInWithMagic)
                         Column(children: <Widget>[
                           Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                          AppSettings.buildSettingsListItemSingleLine(
-                              context, Z.of(context).changeSeed, Icons.vpn_key, onPressed: () {
+                          AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).changeSeed, Icons.vpn_key,
+                              onPressed: () {
                             Sheets.showAppHeightNineSheet(context: context, widget: ChangeMagicSeedSheet());
                           }, disabled: false),
                         ]),
@@ -2463,12 +2461,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       // AppSettings.buildSettingsListItemDoubleLine(
                       //     context, Z.of(context).showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                      AppSettings.buildSettingsListItemDoubleLine(
-                          context,
-                          Z.of(context).showUnopenedWarning,
-                          _curUnopenedWarningSetting,
-                          AppIcons.warning,
-                          _unopenedWarningDialog),
+                      AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).showUnopenedWarning,
+                          _curUnopenedWarningSetting, AppIcons.warning, _unopenedWarningDialog),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).showFunding,
                           _curFundingSetting, AppIcons.money_bill_wave, _fundingDialog),
@@ -2491,25 +2485,18 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                                 color: StateContainer.of(context).curTheme.text60)),
                       ),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                      AppSettings.buildSettingsListItemSingleLine(
-                          context, Z.of(context).changeRepAuthenticate, Icons.hub,
-                          onPressed: () {
-                        Sheets.showAppHeightEightSheet(
-                            context: context, widget: ChangeNodeSheet());
-                        if (!StateContainer.of(context).nanoNinjaUpdated) {
-                          NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? result) {
-                            if (result != null) {
-                              StateContainer.of(context).updateNinjaNodes(result);
-                            }
-                          });
-                        }
+                      AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).changeNode, Icons.hub,
+                          onPressed: () async {
+                        final List<Node> nodes = await sl.get<DBHelper>().getNodes();
+                        Sheets.showAppHeightNineSheet(
+                          context: context,
+                          widget: ChangeNodeSheet(nodes: nodes),
+                        );
                       }),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemSingleLine(
-                          context, Z.of(context).changeRepAuthenticate, AppIcons.changerepresentative,
-                          onPressed: () {
-                        Sheets.showAppHeightEightSheet(
-                            context: context, widget: const AppChangeRepresentativeSheet());
+                          context, Z.of(context).changeRepAuthenticate, AppIcons.changerepresentative, onPressed: () {
+                        Sheets.showAppHeightEightSheet(context: context, widget: const AppChangeRepresentativeSheet());
                         if (!StateContainer.of(context).nanoNinjaUpdated) {
                           NinjaAPI.getVerifiedNodes().then((List<NinjaNode>? result) {
                             if (result != null) {
@@ -2539,49 +2526,9 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                           // sleep to flex the animation a bit:
                           await Future<dynamic>.delayed(const Duration(milliseconds: 500));
 
-                          // Delete the database
-                          try {
-                            await sl.get<DBHelper>().nukeDatabase();
-                          } catch (error) {
-                            log.d("Error resetting database: $error");
-                          }
-
-                          // delete preferences:
-                          await sl.get<SharedPrefsUtil>().deleteAll();
-
-                          // add the donations contact:
-                          await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
-                          final User donationsContact = User(
-                              nickname: "NautilusDonations",
-                              address: "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579",
-                              username: "nautilus",
-                              type: UserTypes.CONTACT);
-                          await sl.get<DBHelper>().saveContact(donationsContact);
-
-                          // set the "has asked for contacts" flag so it doesn't ask again:
-                          await sl.get<SharedPrefsUtil>().setContactsOn(false);
-
-                          // re-add account index 0 and switch the account to it:
                           if (!mounted) return;
-                          final String seed = await StateContainer.of(context).getSeed();
-                          if (!mounted) return;
-                          await NanoUtil().loginAccount(seed, context);
-                          if (!mounted) return;
-                          await StateContainer.of(context).resetRecentlyUsedAccounts();
-                          final Account? mainAccount = await sl.get<DBHelper>().getSelectedAccount(seed);
-                          if (!mounted) return;
-                          StateContainer.of(context).updateWallet(account: mainAccount!);
-                          // force users list to update on the home page:
-                          EventTaxiImpl.singleton().fire(ContactModifiedEvent());
-                          EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: <TXData>[]));
 
-                          StateContainer.of(context).updateUnified(true);
-                          EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
-
-                          // EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: mainAccount));
-                          // if (animationOpen && mounted) {
-                          //   Navigator.of(context).pop();
-                          // }
+                          await StateContainer.of(context).resetApp(context);
                         }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
                       }),
                     ],
@@ -2709,8 +2656,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     ),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemSingleLine(
-                        context, Z.of(context).copyWalletAddressToClipboard, AppIcons.content_copy,
-                        onPressed: () {
+                        context, Z.of(context).copyWalletAddressToClipboard, AppIcons.content_copy, onPressed: () {
                       Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
                       UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
                     }),
@@ -2869,10 +2815,9 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                               color: StateContainer.of(context).curTheme.text60)),
                     ),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemSingleLine(
-                        context, Z.of(context).shareText, AppIcons.share, onPressed: () {
-                      Share.share(
-                          "${Z.of(context).shareNautilusText} ${NonTranslatable.genericStoreLink}");
+                    AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).shareText, AppIcons.share,
+                        onPressed: () {
+                      Share.share("${Z.of(context).shareNautilusText} ${NonTranslatable.genericStoreLink}");
                     }),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     Container(
@@ -2884,8 +2829,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                               color: StateContainer.of(context).curTheme.text60)),
                     ),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemSingleLine(
-                        context, Z.of(context).promotionalLink, AppIcons.qrcode, onPressed: () async {
+                    AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).promotionalLink, AppIcons.qrcode,
+                        onPressed: () async {
                       final Widget qrWidget = SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: await UIUtil.getQRImage(context, NonTranslatable.promoLink));

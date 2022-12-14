@@ -8,12 +8,16 @@ part of 'node.dart';
 
 Node _$NodeFromJson(Map<String, dynamic> json) => Node(
       name: json['name'] as String,
-      rpc_url: json['rpc_url'] as String,
+      http_url: json['http_url'] as String,
       ws_url: json['ws_url'] as String,
+      selected: json['selected'] as bool,
+      index: json['index'] as int,
     );
 
 Map<String, dynamic> _$NodeToJson(Node instance) => <String, dynamic>{
       'name': instance.name,
-      'rpc_url': instance.rpc_url,
+      'index': instance.index,
+      'http_url': instance.http_url,
       'ws_url': instance.ws_url,
+      'selected': instance.selected,
     };

@@ -90,6 +90,26 @@ class Z {
     );
   }
 
+  /// `Nodes`
+  String get nodes {
+    return Intl.message(
+      'Nodes',
+      name: 'nodes',
+      desc: 'Nodes header',
+      args: [],
+    );
+  }
+
+  /// `Node`
+  String get node {
+    return Intl.message(
+      'Node',
+      name: 'node',
+      desc: 'Node header',
+      args: [],
+    );
+  }
+
   /// `Are you sure that you've backed up your secret phrase or seed?`
   String get ackBackedUp {
     return Intl.message(
@@ -116,6 +136,26 @@ class Z {
       'Add Account',
       name: 'addAccount',
       desc: 'Default new account name - e.g. Account 1',
+      args: [],
+    );
+  }
+
+  /// `Add Node`
+  String get addNode {
+    return Intl.message(
+      'Add Node',
+      name: 'addNode',
+      desc: 'Add a new node',
+      args: [],
+    );
+  }
+
+  /// `Change Node`
+  String get changeNode {
+    return Intl.message(
+      'Change Node',
+      name: 'changeNode',
+      desc: 'change node',
       args: [],
     );
   }
@@ -2262,6 +2302,26 @@ class Z {
       'Hide Empty Accounts',
       name: 'hideEmptyAccounts',
       desc: 'hide_empty_accounts',
+      args: [],
+    );
+  }
+
+  /// `Delete Node?`
+  String get deleteNodeHeader {
+    return Intl.message(
+      'Delete Node?',
+      name: 'deleteNodeHeader',
+      desc: 'Confirmation dialog header',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this node?\n\nYou can always re-add it later by tapping the "Add Node" button`
+  String get deleteNodeConfirmation {
+    return Intl.message(
+      'Are you sure you want to delete this node?\n\nYou can always re-add it later by tapping the "Add Node" button',
+      name: 'deleteNodeConfirmation',
+      desc: 'delete node confirmation info',
       args: [],
     );
   }

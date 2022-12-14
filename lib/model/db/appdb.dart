@@ -1,28 +1,23 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io' as io;
 
-// for updating the database:
-import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:wallet_flutter/model/db/account.dart';
+import 'package:wallet_flutter/model/db/node.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/model/db/user.dart';
-import 'package:wallet_flutter/network/account_service.dart';
-import 'package:wallet_flutter/network/metadata_service.dart';
-import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/util/nanoutil.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:sqflite/sqflite.dart';
 
 class DBHelper {
   DBHelper() {
     _nanoUtil = NanoUtil();
   }
-  static const int DB_VERSION = 8;
+  static const int DB_VERSION = 9;
   static const String CONTACTS_SQL = """
         CREATE TABLE Contacts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -58,7 +53,7 @@ class DBHelper {
         CREATE TABLE Accounts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT, 
-        acct_index INTEGER, 
+        acct_index INTEGER,
         selected INTEGER,
         watch_only BOOLEAN,
         last_accessed INTEGER,
@@ -94,8 +89,10 @@ class DBHelper {
   static const String NODES_SQL = """
         CREATE TABLE Nodes( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        node_index INTEGER,
         name TEXT,
-        rpc_url TEXT,
+        selected BOOLEAN,
+        http_url TEXT,
         ws_url TEXT)""";
   static const String USER_ADD_BLOCKED_COLUMN_SQL = """
     ALTER TABLE Users ADD is_blocked BOOLEAN
@@ -142,7 +139,12 @@ class DBHelper {
   Future<Database> initDb() async {
     final io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
     final String path = join(documentsDirectory.path, "nautilus.db");
-    final Database theDb = await openDatabase(path, version: DB_VERSION, onCreate: _onCreate, onUpgrade: _onUpgrade);
+    final Database theDb = await openDatabase(
+      path,
+      version: DB_VERSION,
+      onCreate: _onCreate,
+      onUpgrade: _onUpgrade,
+    );
     return theDb;
   }
 
@@ -156,6 +158,32 @@ class DBHelper {
     await db.execute(BLOCKED_SQL);
     await db.execute(TX_DATA_SQL);
     await db.execute(NODES_SQL);
+
+    // add default nodes
+    // await addNewMainNode();
+    // https://nautilus.perish.co/api", "wss://nautilus.perish.co"
+
+    // add default nodes:
+    await addCustomNode(
+      Node(
+        index: 0,
+        name: "Perish Node",
+        selected: true,
+        http_url: "https://nautilus.perish.co/api",
+        ws_url: "wss://nautilus.perish.co",
+      ),
+      dbClient: db,
+    );
+    await addCustomNode(
+      Node(
+        index: 1,
+        name: "Natrium Node",
+        selected: false,
+        http_url: "https://testapp.natrium.io/api",
+        ws_url: "wss://testapp.natrium.io",
+      ),
+      dbClient: db,
+    );
   }
 
   // ignore: avoid_void_async
@@ -189,6 +217,28 @@ class DBHelper {
       // add watch_only column to accounts table:
       await db.execute(ACCOUNTS_ADD_WATCH_ONLY_COLUMN_SQL);
     }
+    if (oldVersion == 8) {
+      await addCustomNode(
+        Node(
+          index: 0,
+          name: "Perish Node",
+          selected: true,
+          http_url: "https://nautilus.perish.co/api",
+          ws_url: "wss://nautilus.perish.co",
+        ),
+        dbClient: db,
+      );
+      await addCustomNode(
+        Node(
+          index: 1,
+          name: "Natrium Node",
+          selected: false,
+          http_url: "https://testapp.natrium.io/api",
+          ws_url: "wss://testapp.natrium.io",
+        ),
+        dbClient: db,
+      );
+    }
   }
 
   Future<void> nukeDatabase() async {
@@ -200,15 +250,9 @@ class DBHelper {
     await dbClient.execute("DROP TABLE IF EXISTS Reps");
     await dbClient.execute("DROP TABLE IF EXISTS Accounts");
     await dbClient.execute("DROP TABLE IF EXISTS Transactions");
+    await dbClient.execute("DROP TABLE IF EXISTS Nodes");
 
-    // re-create the tables
-    await dbClient.execute(CONTACTS_SQL);
-    await dbClient.execute(USERS_SQL);
-    await dbClient.execute(REPS_SQL);
-    await dbClient.execute(ACCOUNTS_SQL);
-    await dbClient.execute(BLOCKED_SQL);
-    await dbClient.execute(TX_DATA_SQL);
-    await dbClient.execute(NODES_SQL);
+    _onCreate(dbClient, DB_VERSION);
   }
 
   String lowerStripAddress(String address) {
@@ -236,6 +280,121 @@ class DBHelper {
   //     await addOrReplaceUser(user);
   //   }
   // }
+
+  // NODES:
+
+  // Nodes
+  Future<List<Node>> getNodes() async {
+    final Database dbClient = (await db)!;
+    final List<Map> list = await dbClient.rawQuery('SELECT * FROM Nodes');
+    final List<Node> nodes = [];
+    for (int i = 0; i < list.length; i++) {
+      nodes.add(
+        Node(
+          name: list[i]["name"] as String,
+          index: list[i]["node_index"] as int,
+          http_url: list[i]["http_url"] as String,
+          ws_url: list[i]["ws_url"] as String,
+          selected: list[i]["selected"] == 1,
+        ),
+      );
+    }
+    return nodes;
+  }
+
+  Future<Node> getSelectedNode() async {
+    final Database dbClient = (await db)!;
+    final List<Map> list = await dbClient.rawQuery('SELECT * FROM Nodes where selected = 1');
+    final Node node = Node(
+      id: list[0]["id"] as int?,
+      name: list[0]["name"] as String,
+      index: list[0]["node_index"] as int,
+      selected: true,
+      http_url: list[0]["http_url"] as String,
+      ws_url: list[0]["ws_url"] as String,
+    );
+    return node;
+  }
+
+  Future<void> changeNode(Node node) async {
+    final Database dbClient = (await db)!;
+    return dbClient.transaction((Transaction txn) async {
+      await txn.rawUpdate('UPDATE Nodes set selected = false');
+      // Get access increment count
+      final List<Map> list = await txn.rawQuery('SELECT * FROM Nodes');
+      await txn.rawUpdate('UPDATE Nodes set selected = ? WHERE node_index = ?', [true, node.index]);
+    });
+  }
+
+  Future<Node?> addCustomNode(Node node, {Database? dbClient}) async {
+    dbClient ??= (await db)!;
+    await dbClient.transaction((Transaction txn) async {
+      await txn.rawInsert('INSERT INTO Nodes (name, node_index, selected, http_url, ws_url) values(?, ?, ?, ?, ?)', [
+        node.name,
+        node.index,
+        if (node.selected) 1 else 0,
+        node.http_url,
+        node.ws_url,
+      ]);
+    });
+    return node;
+  }
+
+  Future<int> deleteNode(Node node) async {
+    final Database dbClient = (await db)!;
+    return dbClient.rawDelete('DELETE FROM Nodes WHERE node_index = ?', [node.index]);
+  }
+
+  Future<int> saveNode(Node node) async {
+    final Database dbClient = (await db)!;
+    return dbClient
+        .rawInsert('INSERT INTO Nodes (name, node_index, selected, http_url, ws_url) values(?, ?, ?, ?, ?)', [
+      node.name,
+      node.index,
+      if (node.selected) 1 else 0,
+      node.http_url,
+      node.ws_url,
+    ]);
+  }
+
+  Future<int> changeNodeName(Node node, String name) async {
+    final Database dbClient = (await db)!;
+    return dbClient.rawUpdate('UPDATE Nodes SET name = ? WHERE node_index = ?', [name, node.index]);
+  }
+
+  Future<Node?> addNode(Node inputNode, {String? nameBuilder}) async {
+    final Database dbClient = (await db)!;
+    Node? node;
+    await dbClient.transaction((Transaction txn) async {
+      int nextIndex = 0;
+      int? curIndex;
+      final List<Map> nodes = await txn.rawQuery('SELECT * from Nodes WHERE node_index >= 0 ORDER BY node_index ASC');
+      for (int i = 0; i < nodes.length; i++) {
+        curIndex = nodes[i]["node_index"] as int?;
+        if (curIndex != nextIndex) {
+          break;
+        }
+        nextIndex++;
+      }
+      final int nextID = nextIndex + 1;
+      final String nextName = nameBuilder!.replaceAll("%1", nextID.toString());
+      node = Node(
+        index: nextIndex,
+        name: nextName,
+        selected: false,
+        http_url: inputNode.http_url,
+        ws_url: inputNode.ws_url,
+      );
+      await txn.rawInsert('INSERT INTO Nodes (name, node_index, selected, http_url, ws_url) values(?, ?, ?, ?, ?)', [
+        node!.name,
+        node!.index,
+        if (node!.selected) 1 else 0,
+        node!.http_url,
+        node!.ws_url,
+      ]);
+    });
+    return node;
+  }
 
   // Contacts
   Future<List<User>> getContacts() async {
@@ -413,26 +572,6 @@ class DBHelper {
     }
     return users;
   }
-
-  // Future<List<User>> getUserSuggestionsWithNameLike(String pattern) async {
-  //   final Database dbClient = (await db)!;
-  //   final List<Map> list = await dbClient.rawQuery("SELECT * FROM Users WHERE username LIKE '%$pattern%' ORDER BY LOWER(username)");
-  //   final List<User> users = [];
-  //   const int maxSuggestions = 5;
-  //   final int length = list.length;
-  //   // dart doesn't support function overloading so I can't import dart:math for the min() function
-  //   // which is why I'm doing this
-  //   final int minned = (maxSuggestions <= list.length) ? maxSuggestions : list.length;
-  //   for (int i = 0; i < minned; i++) {
-  //     users.add(User(
-  //         username: list[i]["username"] as String?,
-  //         nickname: list[i]["nickname"] as String?,
-  //         address: list[i]["address"] as String?,
-  //         type: list[i]["type"] as String?,
-  //         last_updated: list[i]["last_updated"] as int?));
-  //   }
-  //   return users;
-  // }
 
   Future<List<User>> getUserContactSuggestionsWithNameLike(String pattern) async {
     final Database dbClient = (await db)!;
@@ -654,11 +793,12 @@ class DBHelper {
     final List<User> users = [];
     for (int i = 0; i < list.length; i++) {
       users.add(User(
-          username: list[i]["username"] as String?,
-          address: list[i]["address"] as String?,
-          nickname: list[i]["nickname"] as String?,
-          type: list[i]["type"] as String?,
-          is_blocked: list[i]["is_blocked"] == 1));
+        username: list[i]["username"] as String?,
+        address: list[i]["address"] as String?,
+        nickname: list[i]["nickname"] as String?,
+        type: list[i]["type"] as String?,
+        is_blocked: list[i]["is_blocked"] == 1,
+      ));
     }
     return users;
   }

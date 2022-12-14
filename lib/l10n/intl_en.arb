@@ -20,6 +20,16 @@
     "type": "text",
     "description": "Accounts header"
   },
+  "nodes": "Nodes",
+  "@nodes": {
+    "type": "text",
+    "description": "Nodes header"
+  },
+  "node": "Node",
+  "@node": {
+    "type": "text",
+    "description": "Node header"
+  },
   "ackBackedUp": "Are you sure that you've backed up your secret phrase or seed?",
   "@ackBackedUp": {
     "type": "text",
@@ -34,6 +44,16 @@
   "@addAccount": {
     "type": "text",
     "description": "Default new account name - e.g. Account 1"
+  },
+  "addNode": "Add Node",
+  "@addNode": {
+    "type": "text",
+    "description": "Add a new node"
+  },
+  "changeNode": "Change Node",
+  "@changeNode": {
+    "type": "text",
+    "description": "change node"
   },
   "addAddress": "Add an Address",
   "@addAddress": {
@@ -1104,6 +1124,16 @@
   "@hideEmptyAccounts": {
     "type": "text",
     "description": "hide_empty_accounts"
+  },
+  "deleteNodeHeader": "Delete Node?",
+  "@deleteNodeHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "deleteNodeConfirmation": "Are you sure you want to delete this node?\n\nYou can always re-add it later by tapping the \"Add Node\" button",
+  "@deleteNodeConfirmation": {
+    "type": "text",
+    "description": "delete node confirmation info"
   },
   "home": "Home",
   "@home": {

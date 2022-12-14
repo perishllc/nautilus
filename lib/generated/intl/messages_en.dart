@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addBlocked": MessageLookupByLibrary.simpleMessage("Block a User"),
         "addContact": MessageLookupByLibrary.simpleMessage("Add Contact"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Add Favorite"),
+        "addNode": MessageLookupByLibrary.simpleMessage("Add Node"),
         "addUser": MessageLookupByLibrary.simpleMessage("Add a User"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Add Watch Only Account"),
@@ -118,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency":
             MessageLookupByLibrary.simpleMessage("Change Currency"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Change Log"),
+        "changeNode": MessageLookupByLibrary.simpleMessage("Change Node"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -220,6 +222,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete this node?\n\nYou can always re-add it later by tapping the \"Add Node\" button"),
+        "deleteNodeHeader":
+            MessageLookupByLibrary.simpleMessage("Delete Node?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
         "disablePasswordSheetHeader":
@@ -489,7 +495,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "noTXDataExport": MessageLookupByLibrary.simpleMessage(
             "There\'s no transactions to export."),
         "noThanks": MessageLookupByLibrary.simpleMessage("No Thanks"),
+        "node": MessageLookupByLibrary.simpleMessage("Node"),
         "nodeStatus": MessageLookupByLibrary.simpleMessage("Node Status"),
+        "nodes": MessageLookupByLibrary.simpleMessage("Nodes"),
         "noneMethod": MessageLookupByLibrary.simpleMessage("None"),
         "notSent": MessageLookupByLibrary.simpleMessage("not sent"),
         "notificationBody": MessageLookupByLibrary.simpleMessage(
