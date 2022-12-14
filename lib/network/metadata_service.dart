@@ -26,10 +26,6 @@ class MetadataService {
   // meta:
   static String META_SERVER = "https://meta.perish.co";
 
-  static String BASE_SERVER_ADDRESS = "nautilus.perish.co";
-  static String HTTP_PROTO = "https://";
-  static String WS_PROTO = "wss://";
-
   // ignore_for_file: non_constant_identifier_names
   // static String SERVER_ADDRESS_HTTP = "$HTTP_PROTO$META_SERVER/api";
   static String SERVER_ADDRESS_PAYMENTS = "$META_SERVER/payments";
@@ -50,12 +46,17 @@ class MetadataService {
     if (response.statusCode != 200) {
       return null;
     }
-    final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
-    if (decoded.containsKey("error")) {
-      return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
-    }
+    try {
+      final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
+      if (decoded.containsKey("error")) {
+        return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
+      }
 
-    return decoded;
+      return decoded;
+    } catch (e) {
+      log.e("Error decoding notifications response: ${response.body}");
+      return null;
+    }
   }
 
   // /* Send Request */
@@ -139,9 +140,7 @@ class MetadataService {
     }
   }
 
-
   // metadata:
-
 
   Future<AlertResponseItem?> getAlert(String lang) async {
     final http.Response response =
