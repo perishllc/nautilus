@@ -104,3 +104,4 @@ ios/fastlane/metadata/trade_representative_contact_information
 lib/generated/rust/*
 rust/src/*generated
 ios/Runner/Generated/*
+android/app/src/main/jniLibs/*
