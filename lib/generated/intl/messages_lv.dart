@@ -491,6 +491,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings":
             MessageLookupByLibrary.simpleMessage("Vairāk iestatījumu"),
+        "nameEmpty":
+            MessageLookupByLibrary.simpleMessage("Lūdzu, ievadiet Vārdu"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
         "nautilusWallet": MessageLookupByLibrary.simpleMessage("Nautilus maks"),
         "nearby": MessageLookupByLibrary.simpleMessage("Tuvumā"),
@@ -904,6 +906,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("unpaid"),
         "unread": MessageLookupByLibrary.simpleMessage("unread"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
+        "urlEmpty": MessageLookupByLibrary.simpleMessage("Lūdzu, ievadiet URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("Izmantojiet NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),

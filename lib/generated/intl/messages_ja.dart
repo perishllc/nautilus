@@ -421,6 +421,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage("月額サーバー費用"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings": MessageLookupByLibrary.simpleMessage("その他の設定"),
+        "nameEmpty": MessageLookupByLibrary.simpleMessage("名前を入力してください"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
         "nautilusWallet": MessageLookupByLibrary.simpleMessage("ノーチラス ウォレット"),
         "nearby": MessageLookupByLibrary.simpleMessage("近く"),
@@ -787,6 +788,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("未払い"),
         "unread": MessageLookupByLibrary.simpleMessage("未読です"),
         "uptime": MessageLookupByLibrary.simpleMessage("稼働時間"),
+        "urlEmpty": MessageLookupByLibrary.simpleMessage("URL を入力してください"),
         "useNano": MessageLookupByLibrary.simpleMessage("NANOを使う"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),

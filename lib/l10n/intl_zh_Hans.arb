@@ -1440,6 +1440,11 @@
     "type": "text",
     "description": "settings_more"
   },
+  "nameEmpty": "请输入姓名",
+  "@nameEmpty": {
+    "type": "text",
+    "description": "name_empty"
+  },
   "natricon": "Natricon",
   "@natricon": {
     "type": "text",
@@ -2724,6 +2729,11 @@
   "@uptime": {
     "type": "text",
     "description": "Rep uptime"
+  },
+  "urlEmpty": "请输入网址",
+  "@urlEmpty": {
+    "type": "text",
+    "description": "url_empty"
   },
   "useNano": "使用纳米",
   "@useNano": {

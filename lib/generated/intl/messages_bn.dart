@@ -494,6 +494,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("মাসিক সার্ভার খরচ"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings": MessageLookupByLibrary.simpleMessage("আরো কৌশল"),
+        "nameEmpty":
+            MessageLookupByLibrary.simpleMessage("একটি নাম লিখুন দয়া করে"),
         "natricon": MessageLookupByLibrary.simpleMessage("নাট্রিকন"),
         "nautilusWallet":
             MessageLookupByLibrary.simpleMessage("নটিলাস ওয়ালেট"),
@@ -910,6 +912,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("অবৈতনিক"),
         "unread": MessageLookupByLibrary.simpleMessage("অপঠিত"),
         "uptime": MessageLookupByLibrary.simpleMessage("আপটাইম"),
+        "urlEmpty": MessageLookupByLibrary.simpleMessage("একটি URL লিখুন"),
         "useNano": MessageLookupByLibrary.simpleMessage("NANO ব্যবহার করুন"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),

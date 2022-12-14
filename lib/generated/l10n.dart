@@ -2938,6 +2938,16 @@ class Z {
     );
   }
 
+  /// `Please enter a Name`
+  String get nameEmpty {
+    return Intl.message(
+      'Please enter a Name',
+      name: 'nameEmpty',
+      desc: 'name_empty',
+      args: [],
+    );
+  }
+
   /// `Natricon`
   String get natricon {
     return Intl.message(
@@ -5511,6 +5521,16 @@ class Z {
       'Uptime',
       name: 'uptime',
       desc: 'Rep uptime',
+      args: [],
+    );
+  }
+
+  /// `Please enter a URL`
+  String get urlEmpty {
+    return Intl.message(
+      'Please enter a URL',
+      name: 'urlEmpty',
+      desc: 'url_empty',
       args: [],
     );
   }

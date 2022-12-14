@@ -1440,6 +1440,11 @@
     "type": "text",
     "description": "settings_more"
   },
+  "nameEmpty": "Bitte geben Sie einen Namen ein",
+  "@nameEmpty": {
+    "type": "text",
+    "description": "name_empty"
+  },
   "natricon": "Natricon",
   "@natricon": {
     "type": "text",
@@ -2724,6 +2729,11 @@
   "@uptime": {
     "type": "text",
     "description": "Rep uptime"
+  },
+  "urlEmpty": "Bitte geben Sie eine URL ein",
+  "@urlEmpty": {
+    "type": "text",
+    "description": "url_empty"
   },
   "useNano": "NANO verwenden",
   "@useNano": {

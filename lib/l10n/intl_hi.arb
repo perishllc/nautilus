@@ -1440,6 +1440,11 @@
     "type": "text",
     "description": "settings_more"
   },
+  "nameEmpty": "कृपया एक नाम दर्ज करें",
+  "@nameEmpty": {
+    "type": "text",
+    "description": "name_empty"
+  },
   "natricon": "नैट्रिकोन",
   "@natricon": {
     "type": "text",
@@ -2724,6 +2729,11 @@
   "@uptime": {
     "type": "text",
     "description": "Rep uptime"
+  },
+  "urlEmpty": "कृपया एक यूआरएल दर्ज करें",
+  "@urlEmpty": {
+    "type": "text",
+    "description": "url_empty"
   },
   "useNano": "नैनो का प्रयोग करें",
   "@useNano": {

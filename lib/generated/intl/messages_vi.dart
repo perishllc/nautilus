@@ -489,6 +489,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chi phí máy chủ hàng tháng"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings": MessageLookupByLibrary.simpleMessage("Cài đặt khác"),
+        "nameEmpty": MessageLookupByLibrary.simpleMessage("Vui lòng nhập tên"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
         "nautilusWallet": MessageLookupByLibrary.simpleMessage("Ví Nautilus"),
         "nearby": MessageLookupByLibrary.simpleMessage("Lân cận"),
@@ -904,6 +905,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("chưa đọc"),
         "uptime": MessageLookupByLibrary.simpleMessage(
             "Thời gian hoạt động (uptime)"),
+        "urlEmpty":
+            MessageLookupByLibrary.simpleMessage("Vui lòng nhập một URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("Sử dụng NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),

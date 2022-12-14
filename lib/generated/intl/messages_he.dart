@@ -455,6 +455,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("עלויות שרת חודשיות"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings": MessageLookupByLibrary.simpleMessage("הגדרות נוספות"),
+        "nameEmpty": MessageLookupByLibrary.simpleMessage("נא להזין שם"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
         "nautilusWallet": MessageLookupByLibrary.simpleMessage("ארנק נאוטילוס"),
         "nearby": MessageLookupByLibrary.simpleMessage("סָמוּך"),
@@ -842,6 +843,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("ללא תשלום"),
         "unread": MessageLookupByLibrary.simpleMessage("שלא נקראו"),
         "uptime": MessageLookupByLibrary.simpleMessage("זמן אונליין"),
+        "urlEmpty": MessageLookupByLibrary.simpleMessage("נא להזין כתובת URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("השתמש ב-NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),

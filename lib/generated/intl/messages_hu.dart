@@ -498,6 +498,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings":
             MessageLookupByLibrary.simpleMessage("További beállítások"),
+        "nameEmpty":
+            MessageLookupByLibrary.simpleMessage("Kérjük, adjon meg egy nevet"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
         "nautilusWallet":
             MessageLookupByLibrary.simpleMessage("Nautilus pénztárca"),
@@ -917,6 +919,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("kifizetetlen"),
         "unread": MessageLookupByLibrary.simpleMessage("olvasatlan"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
+        "urlEmpty":
+            MessageLookupByLibrary.simpleMessage("Kérjük, adjon meg egy URL-t"),
         "useNano": MessageLookupByLibrary.simpleMessage("Használj NANO-t"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),

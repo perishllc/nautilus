@@ -483,6 +483,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Aylık Sunucu Maliyetleri"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings": MessageLookupByLibrary.simpleMessage("Daha fazla ayar"),
+        "nameEmpty":
+            MessageLookupByLibrary.simpleMessage("Lütfen bir Ad girin"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
         "nautilusWallet":
             MessageLookupByLibrary.simpleMessage("Nautilus Cüzdanı"),
@@ -895,6 +897,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("ödenmemiş"),
         "unread": MessageLookupByLibrary.simpleMessage("okunmamış"),
         "uptime": MessageLookupByLibrary.simpleMessage("Çevrimiçi"),
+        "urlEmpty":
+            MessageLookupByLibrary.simpleMessage("Lütfen bir URL girin"),
         "useNano": MessageLookupByLibrary.simpleMessage("NANO kullan"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),

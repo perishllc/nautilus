@@ -1440,6 +1440,11 @@
     "type": "text",
     "description": "settings_more"
   },
+  "nameEmpty": "Пожалуйста, введите имя",
+  "@nameEmpty": {
+    "type": "text",
+    "description": "name_empty"
+  },
   "natricon": "Natricon",
   "@natricon": {
     "type": "text",
@@ -2724,6 +2729,11 @@
   "@uptime": {
     "type": "text",
     "description": "Rep uptime"
+  },
+  "urlEmpty": "Пожалуйста, введите URL",
+  "@urlEmpty": {
+    "type": "text",
+    "description": "url_empty"
   },
   "useNano": "Используйте НАНО",
   "@useNano": {

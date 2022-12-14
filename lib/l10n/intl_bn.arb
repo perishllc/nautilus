@@ -1440,6 +1440,11 @@
     "type": "text",
     "description": "settings_more"
   },
+  "nameEmpty": "একটি নাম লিখুন দয়া করে",
+  "@nameEmpty": {
+    "type": "text",
+    "description": "name_empty"
+  },
   "natricon": "নাট্রিকন",
   "@natricon": {
     "type": "text",
@@ -2724,6 +2729,11 @@
   "@uptime": {
     "type": "text",
     "description": "Rep uptime"
+  },
+  "urlEmpty": "একটি URL লিখুন",
+  "@urlEmpty": {
+    "type": "text",
+    "description": "url_empty"
   },
   "useNano": "NANO ব্যবহার করুন",
   "@useNano": {

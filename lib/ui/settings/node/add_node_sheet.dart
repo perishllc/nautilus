@@ -474,6 +474,39 @@ class AddNodeSheetState extends State<AddNodeSheet> {
   Future<bool> validateForm() async {
     bool isValid = true;
 
+    if (_nameController.text.isEmpty) {
+      setState(() {
+        _nameValidationText = Z.of(context).nameEmpty;
+      });
+      isValid = false;
+    } else {
+      setState(() {
+        _nameValidationText = "";
+      });
+    }
+
+    if (_httpController.text.isEmpty) {
+      setState(() {
+        _httpValidationText = Z.of(context).urlEmpty;
+      });
+      isValid = false;
+    } else {
+      setState(() {
+        _httpValidationText = "";
+      });
+    }
+
+    if (_wsController.text.isEmpty) {
+      setState(() {
+        _wsValidationText = Z.of(context).urlEmpty;
+      });
+      isValid = false;
+    } else {
+      setState(() {
+        _wsValidationText = "";
+      });
+    }
+
     return isValid;
   }
 }

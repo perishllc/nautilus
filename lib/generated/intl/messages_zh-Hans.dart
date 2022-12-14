@@ -379,6 +379,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage("每月服务器成本"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings": MessageLookupByLibrary.simpleMessage("更多设置"),
+        "nameEmpty": MessageLookupByLibrary.simpleMessage("请输入姓名"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
         "nautilusWallet": MessageLookupByLibrary.simpleMessage("鹦鹉螺钱包"),
         "nearby": MessageLookupByLibrary.simpleMessage("附近"),
@@ -713,6 +714,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("未付款"),
         "unread": MessageLookupByLibrary.simpleMessage("未读"),
         "uptime": MessageLookupByLibrary.simpleMessage("上线时间"),
+        "urlEmpty": MessageLookupByLibrary.simpleMessage("请输入网址"),
         "useNano": MessageLookupByLibrary.simpleMessage("使用纳米"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),

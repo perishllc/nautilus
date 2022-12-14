@@ -474,6 +474,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings":
             MessageLookupByLibrary.simpleMessage("المزيد من الإعدادات"),
+        "nameEmpty": MessageLookupByLibrary.simpleMessage("الرجاء إدخال اسم"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
         "nautilusWallet": MessageLookupByLibrary.simpleMessage("محفظة نوتيلوس"),
         "nearby": MessageLookupByLibrary.simpleMessage("مجاور"),
@@ -878,6 +879,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("غير مدفوع"),
         "unread": MessageLookupByLibrary.simpleMessage("غير مقروء"),
         "uptime": MessageLookupByLibrary.simpleMessage("مدة التشغيل"),
+        "urlEmpty":
+            MessageLookupByLibrary.simpleMessage("الرجاء إدخال عنوان URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("استخدم NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),

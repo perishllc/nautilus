@@ -423,6 +423,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage("월간 서버 비용"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings": MessageLookupByLibrary.simpleMessage("자세한 설정"),
+        "nameEmpty": MessageLookupByLibrary.simpleMessage("이름을 입력하세요"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
         "nautilusWallet": MessageLookupByLibrary.simpleMessage("노틸러스 지갑"),
         "nearby": MessageLookupByLibrary.simpleMessage("가까운"),
@@ -794,6 +795,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unpaid": MessageLookupByLibrary.simpleMessage("무급"),
         "unread": MessageLookupByLibrary.simpleMessage("읽히지 않는"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
+        "urlEmpty": MessageLookupByLibrary.simpleMessage("URL을 입력하세요."),
         "useNano": MessageLookupByLibrary.simpleMessage("나노를 사용"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
