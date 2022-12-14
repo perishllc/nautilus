@@ -217,28 +217,29 @@ class DBHelper {
       // add watch_only column to accounts table:
       await db.execute(ACCOUNTS_ADD_WATCH_ONLY_COLUMN_SQL);
     }
-    // if (oldVersion == 8) {
-    //   await addCustomNode(
-    //     Node(
-    //       index: 0,
-    //       name: "Perish Node",
-    //       selected: true,
-    //       http_url: "https://nautilus.perish.co/api",
-    //       ws_url: "wss://nautilus.perish.co",
-    //     ),
-    //     dbClient: db,
-    //   );
-    //   await addCustomNode(
-    //     Node(
-    //       index: 1,
-    //       name: "Natrium Node",
-    //       selected: false,
-    //       http_url: "https://app.natrium.io/api",
-    //       ws_url: "wss://app.natrium.io",
-    //     ),
-    //     dbClient: db,
-    //   );
-    // }
+    if (oldVersion == 8) {
+      await db.execute(NODES_SQL);
+      await addCustomNode(
+        Node(
+          index: 0,
+          name: "Perish Node",
+          selected: true,
+          http_url: "https://nautilus.perish.co/api",
+          ws_url: "wss://nautilus.perish.co",
+        ),
+        dbClient: db,
+      );
+      await addCustomNode(
+        Node(
+          index: 1,
+          name: "Natrium Node",
+          selected: false,
+          http_url: "https://app.natrium.io/api",
+          ws_url: "wss://app.natrium.io",
+        ),
+        dbClient: db,
+      );
+    }
   }
 
   Future<void> nukeDatabase() async {
