@@ -1,3 +1,6 @@
+## v0.7.2 - [2022-12-16]
+#### Fixed
+- Hotfixes
 ## v0.7.1 - [2022-12-15]
 #### Added
 - New revamped shop section
