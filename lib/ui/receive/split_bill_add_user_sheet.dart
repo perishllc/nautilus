@@ -8,7 +8,6 @@ import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/user.dart';
-import 'package:wallet_flutter/network/account_service.dart';
 import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';

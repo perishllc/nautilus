@@ -1,33 +1,19 @@
-import 'dart:async';
 import 'dart:io';
-import 'dart:math' as math;
-import 'dart:ui' as ui;
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
-import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/styles.dart';
-import 'package:wallet_flutter/ui/receive/share_card.dart';
 import 'package:wallet_flutter/ui/shop/use_card.dart';
-import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
-import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
-import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/draggable_scrollbar.dart';
-import 'package:wallet_flutter/util/numberutil.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:quiver/strings.dart';
-import 'package:share_plus/share_plus.dart';
 
 class ShopSheet extends StatefulWidget {
   const ShopSheet({required this.localCurrency}) : super();

@@ -352,136 +352,151 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 });
                 UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
               },
-              child: Column(
-                children: [
-                  const SizedBox(height: 5),
-                  Container(
-                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 2),
-                    child: Column(
-                      children: <Widget>[
-                        Align(
-                          alignment: Alignment.center,
-                          child: RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                              text: '',
-                              children: [
-                                TextSpan(
-                                  text: StateContainer.of(context).selectedAccount!.name,
-                                  style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.text60,
-                                    fontSize: AppFontSizes.small,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: "NunitoSans",
-                                  ),
+              child: Container(
+                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 2),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Icon(
+                        AppIcons.content_copy,
+                        size: 24,
+                        color: StateContainer.of(context).curTheme.primary,
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        const SizedBox(height: 5),
+                        Column(
+                          children: <Widget>[
+                            Align(
+                              alignment: Alignment.center,
+                              child: RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                  text: '',
+                                  children: [
+                                    TextSpan(
+                                      text: StateContainer.of(context).selectedAccount!.name,
+                                      style: TextStyle(
+                                        color: StateContainer.of(context).curTheme.text60,
+                                        fontSize: AppFontSizes.small,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: "NunitoSans",
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: RichText(
-                            textAlign: TextAlign.start,
-                            text: TextSpan(
-                              text: '',
-                              children: [
-                                TextSpan(
-                                  text: StateContainer.of(context).wallet?.username ?? Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
-                                  style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.text60,
-                                    fontSize: AppFontSizes.small,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: "NunitoSans",
-                                  ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: RichText(
+                                textAlign: TextAlign.start,
+                                text: TextSpan(
+                                  text: '',
+                                  children: [
+                                    TextSpan(
+                                      text: StateContainer.of(context).wallet?.username ??
+                                          Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
+                                      style: TextStyle(
+                                        color: StateContainer.of(context).curTheme.text60,
+                                        fontSize: AppFontSizes.small,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: "NunitoSans",
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
+                        FutureBuilder<PriceConversion>(
+                          future: sl.get<SharedPrefsUtil>().getPriceConversion(),
+                          builder: (BuildContext context, AsyncSnapshot snapshot) {
+                            if (snapshot.hasData && snapshot.data != null && snapshot.data != PriceConversion.HIDDEN) {
+                              return RichText(
+                                textAlign: TextAlign.start,
+                                text: TextSpan(
+                                  text: '',
+                                  children: [
+                                    TextSpan(
+                                      text: "(",
+                                      style: TextStyle(
+                                        color: StateContainer.of(context).curTheme.primary60,
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w100,
+                                        fontFamily: "NunitoSans",
+                                      ),
+                                    ),
+                                    if (!_localCurrencyMode)
+                                      TextSpan(
+                                        text: getThemeAwareRawAccuracy(
+                                          context,
+                                          StateContainer.of(context).wallet!.accountBalance.toString(),
+                                        ),
+                                        style: TextStyle(
+                                          color: StateContainer.of(context).curTheme.primary60,
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: "NunitoSans",
+                                        ),
+                                      ),
+                                    if (!_localCurrencyMode)
+                                      displayCurrencySymbol(
+                                        context,
+                                        TextStyle(
+                                          color: StateContainer.of(context).curTheme.primary60,
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: "NunitoSans",
+                                        ),
+                                      ),
+                                    TextSpan(
+                                      text: _localCurrencyMode
+                                          ? StateContainer.of(context).wallet!.getLocalCurrencyBalance(
+                                              context, StateContainer.of(context).curCurrency,
+                                              locale: StateContainer.of(context).currencyLocale)
+                                          : getRawAsThemeAwareFormattedAmount(
+                                              context, StateContainer.of(context).wallet!.accountBalance.toString()),
+                                      style: TextStyle(
+                                        color: StateContainer.of(context).curTheme.primary60,
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: "NunitoSans",
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: ")",
+                                      style: TextStyle(
+                                        color: StateContainer.of(context).curTheme.primary60,
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w100,
+                                        fontFamily: "NunitoSans",
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                            return const Text(
+                              "*******",
+                              style: TextStyle(
+                                color: Colors.transparent,
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w100,
+                                fontFamily: "NunitoSans",
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 5),
                       ],
                     ),
-                  ),
-                  // Balance Text
-                  FutureBuilder<PriceConversion>(
-                    future: sl.get<SharedPrefsUtil>().getPriceConversion(),
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      if (snapshot.hasData && snapshot.data != null && snapshot.data != PriceConversion.HIDDEN) {
-                        return RichText(
-                          textAlign: TextAlign.start,
-                          text: TextSpan(
-                            text: '',
-                            children: [
-                              TextSpan(
-                                text: "(",
-                                style: TextStyle(
-                                  color: StateContainer.of(context).curTheme.primary60,
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w100,
-                                  fontFamily: "NunitoSans",
-                                ),
-                              ),
-                              if (!_localCurrencyMode)
-                                TextSpan(
-                                  text: getThemeAwareRawAccuracy(
-                                    context,
-                                    StateContainer.of(context).wallet!.accountBalance.toString(),
-                                  ),
-                                  style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.primary60,
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: "NunitoSans",
-                                  ),
-                                ),
-                              if (!_localCurrencyMode)
-                                displayCurrencySymbol(
-                                  context,
-                                  TextStyle(
-                                    color: StateContainer.of(context).curTheme.primary60,
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: "NunitoSans",
-                                  ),
-                                ),
-                              TextSpan(
-                                text: _localCurrencyMode
-                                    ? StateContainer.of(context).wallet!.getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency,
-                                        locale: StateContainer.of(context).currencyLocale)
-                                    : getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString()),
-                                style: TextStyle(
-                                  color: StateContainer.of(context).curTheme.primary60,
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: "NunitoSans",
-                                ),
-                              ),
-                              TextSpan(
-                                text: ")",
-                                style: TextStyle(
-                                  color: StateContainer.of(context).curTheme.primary60,
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w100,
-                                  fontFamily: "NunitoSans",
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }
-                      return const Text(
-                        "*******",
-                        style: TextStyle(
-                          color: Colors.transparent,
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.w100,
-                          fontFamily: "NunitoSans",
-                        ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 5),
-                ],
+                  ],
+                ),
               ),
             ),
             // A main container that holds everything
@@ -512,7 +527,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
 
                                 // ******* Enter Amount Error Container ******* //
                                 Container(
-                                  alignment: const AlignmentDirectional(0, 0),
+                                  alignment: AlignmentDirectional.center,
                                   margin: const EdgeInsets.only(top: 3),
                                   child: Text(_amountValidationText,
                                       style: TextStyle(

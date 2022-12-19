@@ -1,3 +1,9 @@
+## v0.7.3 - [2022-12-25]
+#### Added
+#### Changed
+- UI updates on the send / receive sheets
+#### Fixed
+- Update node url character limit
 ## v0.7.2 - [2022-12-16]
 #### Fixed
 - Hotfixes

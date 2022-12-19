@@ -8,7 +8,7 @@ publish_to: "none"
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.7.2
+version: 0.7.3
 
 environment:
   sdk: ">=2.18.2 <3.0.0"

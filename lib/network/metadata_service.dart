@@ -8,7 +8,6 @@ import 'package:wallet_flutter/network/model/payment/payment_ack.dart';
 import 'package:wallet_flutter/network/model/payment/payment_memo.dart';
 import 'package:wallet_flutter/network/model/payment/payment_message.dart';
 import 'package:wallet_flutter/network/model/payment/payment_request.dart';
-import 'package:wallet_flutter/network/model/request_item.dart';
 import 'package:wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:wallet_flutter/network/model/response/error_response.dart';
 import 'package:wallet_flutter/network/model/response/funding_response_item.dart';
@@ -54,7 +53,7 @@ class MetadataService {
 
       return decoded;
     } catch (e) {
-      log.e("Error decoding notifications response: ${response.body}");
+      log.e("Error decoding notifications response: ${response.body} $e");
       return null;
     }
   }

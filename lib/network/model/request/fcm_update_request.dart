@@ -1,11 +1,18 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wallet_flutter/network/model/request/actions.dart';
 import 'package:wallet_flutter/network/model/base_request.dart';
+import 'package:wallet_flutter/network/model/request/actions.dart';
 
 part 'fcm_update_request.g.dart';
 
 @JsonSerializable()
 class FcmUpdateRequest extends BaseRequest {
+
+  FcmUpdateRequest({this.account, this.fcmToken, this.enabled}) : super() {
+    action = Actions.FCM_UPDATE;
+  }
+
+  factory FcmUpdateRequest.fromJson(Map<String, dynamic> json) => _$FcmUpdateRequestFromJson(json);
+
   @JsonKey(name:'action')
   String? action;
 
@@ -17,14 +24,5 @@ class FcmUpdateRequest extends BaseRequest {
 
   @JsonKey(name:'enabled')
   bool? enabled;
-
-  FcmUpdateRequest({required String? account, required String? fcmToken, required bool? enabled}) : super() {
-    this.action = Actions.FCM_UPDATE;
-    this.account = account;
-    this.fcmToken = fcmToken;
-    this.enabled = enabled;
-  }
-
-  factory FcmUpdateRequest.fromJson(Map<String, dynamic> json) => _$FcmUpdateRequestFromJson(json);
   Map<String, dynamic> toJson() => _$FcmUpdateRequestToJson(this);
 }

@@ -5,19 +5,10 @@ import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
-import 'package:wallet_flutter/model/address.dart';
-import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/node.dart';
-import 'package:wallet_flutter/model/db/user.dart';
-import 'package:wallet_flutter/network/account_service.dart';
-import 'package:wallet_flutter/network/username_service.dart';
-import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
-import 'package:wallet_flutter/ui/send/send_sheet.dart';
-import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
-import 'package:wallet_flutter/ui/widgets/misc.dart';
 import 'package:wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/user_data_util.dart';
@@ -89,7 +80,7 @@ class AddNodeSheetState extends State<AddNodeSheet> {
       focusNode: _nameFocusNode,
       controller: _nameController,
       cursorColor: StateContainer.of(context).curTheme.primary,
-      inputFormatters: [LengthLimitingTextInputFormatter(20)],
+      inputFormatters: [LengthLimitingTextInputFormatter(60)],
       textInputAction: TextInputAction.next,
       maxLines: null,
       autocorrect: false,
@@ -132,7 +123,7 @@ class AddNodeSheetState extends State<AddNodeSheet> {
       focusNode: _httpFocusNode,
       controller: _httpController,
       cursorColor: StateContainer.of(context).curTheme.primary,
-      inputFormatters: [LengthLimitingTextInputFormatter(20)],
+      inputFormatters: [LengthLimitingTextInputFormatter(60)],
       textInputAction: TextInputAction.next,
       maxLines: null,
       autocorrect: false,
@@ -209,7 +200,7 @@ class AddNodeSheetState extends State<AddNodeSheet> {
       focusNode: _wsFocusNode,
       controller: _wsController,
       cursorColor: StateContainer.of(context).curTheme.primary,
-      inputFormatters: [LengthLimitingTextInputFormatter(20)],
+      inputFormatters: [LengthLimitingTextInputFormatter(60)],
       textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
