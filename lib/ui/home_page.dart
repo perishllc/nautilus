@@ -46,7 +46,6 @@ import 'package:wallet_flutter/network/model/response/alerts_response_item.dart'
 import 'package:wallet_flutter/network/model/response/auth_item.dart';
 import 'package:wallet_flutter/network/model/response/pay_item.dart';
 import 'package:wallet_flutter/network/model/status_types.dart';
-import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/auth/auth_confirm_sheet.dart';
