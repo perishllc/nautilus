@@ -67,7 +67,7 @@ dependencies:
   fl_chart: ^0.55.2
 
   # Device-specific info
-  device_info_plus: ^7.0.1
+  device_info_plus: ^8.0.0
   android_id: ^0.0.7
 
   # JSON Serialization
