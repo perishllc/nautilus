@@ -52,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Please enter a Username or Address"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Share Address"),
+        "advanced": MessageLookupByLibrary.simpleMessage("Advanced"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliases"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Split Amount can\'t be greater than gift balance"),
@@ -796,6 +797,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Split Bill Info"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Split By"),
+        "subsButton": MessageLookupByLibrary.simpleMessage("Subscriptions"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Subscribe"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Subscribe via Apple Pay"),

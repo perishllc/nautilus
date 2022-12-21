@@ -620,6 +620,16 @@ class Z {
     );
   }
 
+  /// `Subscriptions`
+  String get subsButton {
+    return Intl.message(
+      'Subscriptions',
+      name: 'subsButton',
+      desc: 'subs_button',
+      args: [],
+    );
+  }
+
   /// `Cancel`
   String get cancel {
     return Intl.message(
@@ -3678,6 +3688,16 @@ class Z {
       'Preferences',
       name: 'preferences',
       desc: 'settings_preferences_header',
+      args: [],
+    );
+  }
+
+  /// `Advanced`
+  String get advanced {
+    return Intl.message(
+      'Advanced',
+      name: 'advanced',
+      desc: 'settings_advanced_header',
       args: [],
     );
   }

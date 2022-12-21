@@ -285,6 +285,11 @@
     "type": "text",
     "description": "business_button"
   },
+  "subsButton": "Subscriptions",
+  "@subsButton": {
+    "type": "text",
+    "description": "subs_button"
+  },
   "cancel": "Cancel",
   "@cancel": {
     "type": "text",
@@ -1809,6 +1814,11 @@
   "@preferences": {
     "type": "text",
     "description": "settings_preferences_header"
+  },
+  "advanced": "Advanced",
+  "@advanced": {
+    "type": "text",
+    "description": "settings_advanced_header"
   },
   "privacyPolicy": "Privacy Policy",
   "@privacyPolicy": {

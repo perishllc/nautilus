@@ -20,7 +20,6 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/contacts_setting_change_event.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/bus/notification_setting_change_event.dart';
-import 'package:wallet_flutter/bus/payments_home_event.dart';
 import 'package:wallet_flutter/bus/xmr_event.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/localize.dart';
@@ -36,7 +35,6 @@ import 'package:wallet_flutter/model/db/account.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/node.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
-import 'package:wallet_flutter/model/db/user.dart';
 import 'package:wallet_flutter/model/device_lock_timeout.dart';
 import 'package:wallet_flutter/model/device_unlock_option.dart';
 import 'package:wallet_flutter/model/funding_setting.dart';
@@ -53,16 +51,16 @@ import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:wallet_flutter/ui/accounts/accounts_sheet.dart';
 import 'package:wallet_flutter/ui/onboard_sheet.dart';
-import 'package:wallet_flutter/ui/settings/backupseed_sheet.dart';
-import 'package:wallet_flutter/ui/settings/blocked_widget.dart';
-import 'package:wallet_flutter/ui/settings/change_magic_password_sheet.dart';
-import 'package:wallet_flutter/ui/settings/change_magic_seed_sheet.dart';
-import 'package:wallet_flutter/ui/settings/changerepresentative_sheet.dart';
-import 'package:wallet_flutter/ui/settings/contacts_widget.dart';
+import 'package:wallet_flutter/ui/settings/backup/backupseed_sheet.dart';
+import 'package:wallet_flutter/ui/settings/magic/change_magic_password_sheet.dart';
+import 'package:wallet_flutter/ui/settings/magic/change_magic_seed_sheet.dart';
 import 'package:wallet_flutter/ui/settings/node/change_node_sheet.dart';
-import 'package:wallet_flutter/ui/settings/set_pin_sheet.dart';
-import 'package:wallet_flutter/ui/settings/set_plausible_pin_sheet.dart';
+import 'package:wallet_flutter/ui/settings/password/set_pin_sheet.dart';
+import 'package:wallet_flutter/ui/settings/password/set_plausible_pin_sheet.dart';
+import 'package:wallet_flutter/ui/settings/rep/changerepresentative_sheet.dart';
 import 'package:wallet_flutter/ui/settings/settings_list_item.dart';
+import 'package:wallet_flutter/ui/settings/users/blocked_widget.dart';
+import 'package:wallet_flutter/ui/settings/users/contacts_widget.dart';
 import 'package:wallet_flutter/ui/transfer/transfer_complete_sheet.dart';
 import 'package:wallet_flutter/ui/transfer/transfer_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
@@ -84,7 +82,6 @@ import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:wallet_flutter/util/biometrics.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/hapticutil.dart';
-import 'package:wallet_flutter/util/nanoutil.dart';
 import 'package:wallet_flutter/util/ninja/api.dart';
 import 'package:wallet_flutter/util/ninja/ninja_node.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
@@ -1724,7 +1721,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           _shareController.forward();
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).moreSettings, AppIcons.more_horiz,
+        AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).moreSettings, AppIcons.settings,
             onPressed: () async {
           setState(() {
             _moreSettingsOpen = true;
@@ -2055,6 +2052,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                           Container(
                             height: 36,
                             width: 36,
+                            // height: 48,
+                            // width: 48,
                             margin: const EdgeInsets.symmetric(horizontal: 6.0),
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
@@ -2082,11 +2081,26 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                                       context: context, widget: AppAccountsSheet(accounts: accounts));
                                 }
                               },
-                              child: Icon(AppIcons.accountswitcher,
-                                  size: 36,
+                              child: Container(
+                                padding: const EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  border: Border.all(
+                                    width: 2,
+                                    color: StateContainer.of(context).curTheme.primary ?? Colors.transparent,
+                                  ),
+                                ),
+                                child: Icon(
+                                  Icons.manage_accounts,
+                                  size: 24,
+                                  // AppIcons.accountswitcher,
+                                  // size: 36,
+
                                   color: _loadingAccounts
                                       ? StateContainer.of(context).curTheme.primary60
-                                      : StateContainer.of(context).curTheme.primary),
+                                      : StateContainer.of(context).curTheme.primary,
+                                ),
+                              ),
                             ),
                           ),
                         ],
@@ -2444,37 +2458,50 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                         margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                         child: Text(Z.of(context).preferences,
                             style: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w100,
-                                color: StateContainer.of(context).curTheme.text60)),
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w100,
+                              color: StateContainer.of(context).curTheme.text60,
+                            )),
+                      ),
+
+                      // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      // AppSettings.buildSettingsListItemDoubleLine(
+                      //     context, Z.of(context).showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).showUnopenedWarning,
+                          _curUnopenedWarningSetting, Icons.warning, _unopenedWarningDialog),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemDoubleLine(
+                          context, Z.of(context).showFunding, _curFundingSetting, Icons.flag, _fundingDialog),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).trackingHeader,
+                          _curTrackingSetting, Icons.query_stats, _showTrackingDialog),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+
+                      Container(
+                        margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
+                        child: Text(Z.of(context).advanced,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w100,
+                              color: StateContainer.of(context).curTheme.text60,
+                            )),
                       ),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).showMoneroHeader,
-                          _curXmrEnabledSetting, AppIcons.money_bill_alt, _showMoneroDialog),
+                          _curXmrEnabledSetting, Icons.toll, _showMoneroDialog),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemDoubleLine(
                           context, Z.of(context).setXMRRestoreHeight, null, AppIcons.backupseed,
                           overrideSubtitle: _curXmrRestoreHeight.toString(), () async {
                         Sheets.showAppHeightEightSheet(context: context, widget: SetXMRRestoreHeightSheet());
                       }),
-                      // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                      // AppSettings.buildSettingsListItemDoubleLine(
-                      //     context, Z.of(context).showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
-                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                      AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).showUnopenedWarning,
-                          _curUnopenedWarningSetting, AppIcons.warning, _unopenedWarningDialog),
-                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                      AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).showFunding,
-                          _curFundingSetting, AppIcons.money_bill_wave, _fundingDialog),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).currencyMode,
                           _curCurrencyModeSetting, AppIcons.currency, _currencyModeDialog),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).receiveMinimum,
                           _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
-                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                      AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).trackingHeader,
-                          _curTrackingSetting, AppIcons.security, _showTrackingDialog),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       Container(
                         margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),

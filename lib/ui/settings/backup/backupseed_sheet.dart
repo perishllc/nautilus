@@ -8,7 +8,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/styles.dart';
-import 'package:wallet_flutter/ui/settings/backupseed_qr_sheet.dart';
+import 'package:wallet_flutter/ui/settings/backup/backupseed_qr_sheet.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/mnemonic_display.dart';

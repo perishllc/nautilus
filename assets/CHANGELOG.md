@@ -2,6 +2,7 @@
 #### Added
 #### Changed
 - UI updates on the send / receive sheets
+- Updated more settings menu / icons
 #### Fixed
 - Update node url character limit
 ## v0.7.2 - [2022-12-16]

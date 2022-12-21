@@ -17,7 +17,7 @@ class DBHelper {
   DBHelper() {
     _nanoUtil = NanoUtil();
   }
-  static const int DB_VERSION = 9;
+  static const int DB_VERSION = 10;
   static const String CONTACTS_SQL = """
         CREATE TABLE Contacts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -94,6 +94,14 @@ class DBHelper {
         selected BOOLEAN,
         http_url TEXT,
         ws_url TEXT)""";
+  static const String SUBS_SQL = """
+        CREATE TABLE Subscriptions( 
+        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        name TEXT,
+        active BOOLEAN,
+        day_of_month INTEGER,
+        address TEXT,
+        amount TEXT)""";
   static const String USER_ADD_BLOCKED_COLUMN_SQL = """
     ALTER TABLE Users ADD is_blocked BOOLEAN
     """;
@@ -158,6 +166,7 @@ class DBHelper {
     await db.execute(BLOCKED_SQL);
     await db.execute(TX_DATA_SQL);
     await db.execute(NODES_SQL);
+    await db.execute(SUBS_SQL);
 
     // add default nodes
     // await addNewMainNode();
@@ -240,6 +249,9 @@ class DBHelper {
         dbClient: db,
       );
     }
+    if (oldVersion == 9) {
+      await db.execute(SUBS_SQL);
+    }
   }
 
   Future<void> nukeDatabase() async {
@@ -252,6 +264,7 @@ class DBHelper {
     await dbClient.execute("DROP TABLE IF EXISTS Accounts");
     await dbClient.execute("DROP TABLE IF EXISTS Transactions");
     await dbClient.execute("DROP TABLE IF EXISTS Nodes");
+    await dbClient.execute("DROP TABLE IF EXISTS Subscriptions");
 
     _onCreate(dbClient, DB_VERSION);
   }
@@ -267,20 +280,6 @@ class DBHelper {
     // nano mode:
     return "nano_${lowerStripAddress(address)}";
   }
-
-  // Future<void> fetchNanoToUsernames() async {
-  //   final List<User>? users = await sl.get<UsernameService>().fetchNanoToKnown(http.Client());
-  //   if (users == null) {
-  //     return;
-  //   }
-
-  //   // remove the old users list:
-  //   await removeNanoToUsers();
-  //   // add the new users:
-  //   for (final User user in users) {
-  //     await addOrReplaceUser(user);
-  //   }
-  // }
 
   // NODES:
 
