@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Please Enter a Username or Address"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Sdílet adresu"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliases"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "L\'import dividit no pot ser superior al saldo del regal"),
@@ -487,8 +488,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Més configuració"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("Introduïu un nom"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet":
-            MessageLookupByLibrary.simpleMessage("Cartera Nautilus"),
         "nearby": MessageLookupByLibrary.simpleMessage("A prop"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "This feature requires you to have a longer transaction history in order to prevent spam.\n\nAlternatively, you can show a QR code for someone to scan."),
@@ -781,10 +780,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareLink": MessageLookupByLibrary.simpleMessage("Share Link"),
         "shareMessage":
             MessageLookupByLibrary.simpleMessage("Comparteix missatge"),
-        "shareNautilus":
-            MessageLookupByLibrary.simpleMessage("Sdílet Nautilus"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "Vyzkoušejte Nautilus! Špičková mobilní peněženka NANO!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Comparteix el text"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Botiga"),
         "show": MessageLookupByLibrary.simpleMessage("Espectacle"),
@@ -818,6 +813,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Informació de factura dividida"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dividit per"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Subscriu-te"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Subscriu-te mitjançant Apple Pay"),
@@ -905,8 +901,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Provozuschopnost"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Introduïu un URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("Utilitzeu NANO"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Usuari ja afegit!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User not found!"),

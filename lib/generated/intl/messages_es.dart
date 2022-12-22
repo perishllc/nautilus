@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Introduzca un nombre de usuario o una dirección"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Compartir"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("Alias"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "El monto dividido no puede ser mayor que el saldo del regalo"),
@@ -504,8 +505,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty":
             MessageLookupByLibrary.simpleMessage("Por favor ingrese un Nombre"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet":
-            MessageLookupByLibrary.simpleMessage("Monedero Nautilus"),
         "nearby": MessageLookupByLibrary.simpleMessage("Cercano"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Esta función requiere que tengas un historial de transacciones más largo para evitar el spam.\n\nTambién puedes mostrar un código QR para que alguien lo escanee."),
@@ -806,10 +805,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareLink": MessageLookupByLibrary.simpleMessage("Compartir Enlace"),
         "shareMessage":
             MessageLookupByLibrary.simpleMessage("Compartir Mensaje"),
-        "shareNautilus":
-            MessageLookupByLibrary.simpleMessage("Compartir Nautilus"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "¡Eche un vistazo a Nautilus, la billetera oficial de Nano para Android!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Compartir texto"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Comercio"),
         "show": MessageLookupByLibrary.simpleMessage("Mostrar"),
@@ -843,6 +838,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Información de factura dividida"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dividir por"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Suscribir"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Suscríbete a través de Apple Pay"),
@@ -932,8 +928,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Por favor ingrese una URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("Usa NANO"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("¡Usuario ya agregado!"),
         "userNotFound":

@@ -58,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Ange ett användarnamn eller adress"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Dela"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("Alias"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Delat belopp kan inte vara större än gåvobalansen"),
@@ -494,8 +495,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty":
             MessageLookupByLibrary.simpleMessage("Vänligen ange ett namn"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natrikon"),
-        "nautilusWallet":
-            MessageLookupByLibrary.simpleMessage("Nautilus plånbok"),
         "nearby": MessageLookupByLibrary.simpleMessage("Närliggande"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Den här funktionen kräver att du har en längre transaktionshistorik för att förhindra skräppost.\n\nAlternativt kan du visa en QR-kod för någon att skanna."),
@@ -788,9 +787,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("Dela med sig"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Dela länk"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Dela meddelande"),
-        "shareNautilus": MessageLookupByLibrary.simpleMessage("Dela Nautilus"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "Kolla in Nautilus! Nanos officiella Androidplånbok!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Dela text"),
         "shopButton": MessageLookupByLibrary.simpleMessage("affär"),
         "show": MessageLookupByLibrary.simpleMessage("Show"),
@@ -822,6 +818,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Dela fakturainformation"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dela av"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Prenumerera"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Prenumerera via Apple Pay"),
@@ -907,8 +904,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Upptid"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Ange en URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("Använd NANO"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
             "Användaren har redan lagts till!"),
         "userNotFound":

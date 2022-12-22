@@ -58,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Mangyaring Magpasok ng Username o Address"),
         "addressShare": MessageLookupByLibrary.simpleMessage("I-share"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliases"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Ang Hati na Halaga ay hindi maaaring mas malaki kaysa sa balanse ng regalo"),
@@ -508,8 +509,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty": MessageLookupByLibrary.simpleMessage(
             "Mangyaring magpasok ng isang Pangalan"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet":
-            MessageLookupByLibrary.simpleMessage("Nautilus Wallet"),
         "nearby": MessageLookupByLibrary.simpleMessage("Malapit"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Ang tampok na ito ay nangangailangan sa iyo na magkaroon ng mas mahabang kasaysayan ng transaksyon upang maiwasan ang spam.\n\nBilang kahalili, maaari kang magpakita ng isang QR code para ma-scan ng isang tao."),
@@ -812,10 +811,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareLink": MessageLookupByLibrary.simpleMessage("Ibahagi ang Link"),
         "shareMessage":
             MessageLookupByLibrary.simpleMessage("Ibahagi ang Mensahe"),
-        "shareNautilus":
-            MessageLookupByLibrary.simpleMessage("I-share ang Nautilus"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "Tingnan ang Nautilus! Ang opisyal na Android Wallet ng Nano!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Ibahagi ang Teksto"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Mamili"),
         "show": MessageLookupByLibrary.simpleMessage("Ipakita"),
@@ -850,6 +845,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Impormasyon ng Split Bill"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Hatiin Ni"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton":
             MessageLookupByLibrary.simpleMessage("Mag-subscribe"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
@@ -939,8 +935,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "urlEmpty": MessageLookupByLibrary.simpleMessage(
             "Mangyaring magpasok ng isang URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("Gumamit ng NANO"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Naidagdag na ang user!"),
         "userNotFound":

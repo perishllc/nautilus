@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing":
             MessageLookupByLibrary.simpleMessage("사용자 이름 또는 주소를 입력하세요"),
         "addressShare": MessageLookupByLibrary.simpleMessage("공유"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("별칭"),
         "amountGiftGreaterError":
             MessageLookupByLibrary.simpleMessage("분할 금액은 선물 잔액보다 클 수 없습니다."),
@@ -425,7 +426,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "moreSettings": MessageLookupByLibrary.simpleMessage("자세한 설정"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("이름을 입력하세요"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage("노틸러스 지갑"),
         "nearby": MessageLookupByLibrary.simpleMessage("가까운"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "이 기능을 사용하려면 스팸을 방지하기 위해 거래 내역이 더 길어야 합니다.\n\n다른 사람이 스캔할 수 있도록 QR 코드를 보여줄 수도 있습니다."),
@@ -691,9 +691,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("공유하다"),
         "shareLink": MessageLookupByLibrary.simpleMessage("공유 링크"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("메시지 공유"),
-        "shareNautilus": MessageLookupByLibrary.simpleMessage("Nautilus 공유 "),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "Nautilus을 확인하세요! Nano의 공식 Android 지갑!"),
         "shareText": MessageLookupByLibrary.simpleMessage("텍스트 공유"),
         "shopButton": MessageLookupByLibrary.simpleMessage("가게"),
         "show": MessageLookupByLibrary.simpleMessage("보여 주다"),
@@ -718,6 +715,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("분할 청구서 정보"),
         "splitBy": MessageLookupByLibrary.simpleMessage("분할 기준"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("구독하다"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Apple Pay를 통해 구독"),
@@ -797,8 +795,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("URL을 입력하세요."),
         "useNano": MessageLookupByLibrary.simpleMessage("나노를 사용"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("사용자가 이미 추가되었습니다!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("사용자를 찾을 수 없습니다!"),

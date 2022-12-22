@@ -110,6 +110,11 @@
     "type": "text",
     "description": "watch_only_add_success"
   },
+  "advanced": "",
+  "@advanced": {
+    "type": "text",
+    "description": "settings_advanced_header"
+  },
   "aliases": "Aliases",
   "@aliases": {
     "type": "text",
@@ -2474,6 +2479,11 @@
   "@splitBy": {
     "type": "text",
     "description": "gift_card_split_by"
+  },
+  "subsButton": "",
+  "@subsButton": {
+    "type": "text",
+    "description": "subs_button"
   },
   "subscribeButton": "Se inscrever",
   "@subscribeButton": {

@@ -110,6 +110,11 @@
     "type": "text",
     "description": "watch_only_add_success"
   },
+  "advanced": "Advanced",
+  "@advanced": {
+    "type": "text",
+    "description": "settings_advanced_header"
+  },
   "aliases": "Aliases",
   "@aliases": {
     "type": "text",
@@ -285,11 +290,6 @@
     "type": "text",
     "description": "business_button"
   },
-  "subsButton": "Subscriptions",
-  "@subsButton": {
-    "type": "text",
-    "description": "subs_button"
-  },
   "cancel": "Cancel",
   "@cancel": {
     "type": "text",
@@ -403,7 +403,7 @@
   "connectingHeader": "Connecting",
   "@connectingHeader": {
     "type": "text",
-    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
+    "description": "A header to let the user now that the app is currently connecting to (or loading) live chat."
   },
   "connectionWarning": "Can't Connect",
   "@connectionWarning": {
@@ -620,7 +620,7 @@
     "type": "text",
     "description": "Default account name"
   },
-  "defaultGiftMessage": "Check out Nautilus! I sent you some nano with this link:",
+  "defaultGiftMessage": "Check out %1! I sent you some nano with this link:",
   "@defaultGiftMessage": {
     "type": "text",
     "description": "default_gift_message"
@@ -800,7 +800,7 @@
     "type": "text",
     "description": "example_card_from"
   },
-  "exampleCardIntro": "Welcome to Nautilus. Once you receive NANO, transactions will show up like this:",
+  "exampleCardIntro": "Welcome to %1. Once you receive %2, transactions will show up like this:",
   "@exampleCardIntro": {
     "type": "text",
     "description": "example_card_intro"
@@ -920,12 +920,12 @@
     "type": "text",
     "description": "failed_message"
   },
-  "fallbackHeader": "Nautilus Disconnected",
+  "fallbackHeader": "%1 Disconnected",
   "@fallbackHeader": {
     "type": "text",
     "description": "fallback_connected"
   },
-  "fallbackInfo": "Nautilus Servers appear to be disconnected, Sending and Receiving (without memos) should still be operational but payment requests may not go through\n\n Come back later or restart the app to try again",
+  "fallbackInfo": "%1 Servers appear to be disconnected, Sending and Receiving (without memos) should still be operational but payment requests may not go through\n\n Come back later or restart the app to try again",
   "@fallbackInfo": {
     "type": "text",
     "description": "fallback_info"
@@ -1055,7 +1055,7 @@
     "type": "text",
     "description": "gift_from"
   },
-  "giftInfo": "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing Nautilus!\n\nIf the recipient is already a Nautilus user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a split amount to distribute from the gift card rather than the entire balance.",
+  "giftInfo": "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing %1!\n\nIf the recipient is already a %1 user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a split amount to distribute from the gift card rather than the entire balance.",
   "@giftInfo": {
     "type": "text",
     "description": "Description for gift card creation"
@@ -1275,7 +1275,7 @@
     "type": "text",
     "description": "An error indicating a pin has been entered incorrectly"
   },
-  "iosFundingMessage": "Due to iOS App Store guidelines and restrictions, we can't link you to our donations page. If you'd like to support the project, consider sending to the nautilus node's address.",
+  "iosFundingMessage": "Due to iOS App Store guidelines and restrictions, we can't link you to our donations page. If you'd like to support the project, consider sending to the %1 node's address.",
   "@iosFundingMessage": {
     "type": "text",
     "description": "ios_funding_message"
@@ -1340,7 +1340,7 @@
     "type": "text",
     "description": "settings_logout_warning_title"
   },
-  "logoutDetail": "Logging out will remove your seed and all Nautilus-related data from this device. If your seed is not backed up, you will never be able to access your funds again",
+  "logoutDetail": "Logging out will remove your seed and all %1-related data from this device. If your seed is not backed up, you will never be able to access your funds again",
   "@logoutDetail": {
     "type": "text",
     "description": "settings_logout_alert_message"
@@ -1455,10 +1455,10 @@
     "type": "text",
     "description": "natricon_settings"
   },
-  "nautilusWallet": "Nautilus Wallet",
-  "@nautilusWallet": {
+  "appWallet": "%1 Wallet",
+  "@appWallet": {
     "type": "text",
-    "description": "nautilus_wallet"
+    "description": "app_wallet"
   },
   "nearby": "Nearby",
   "@nearby": {
@@ -1540,7 +1540,7 @@
     "type": "text",
     "description": "no_thanks_app_button"
   },
-  "notificationBody": "Open Nautilus to view this transaction",
+  "notificationBody": "Open %1 to view this transaction",
   "@notificationBody": {
     "type": "text",
     "description": "notification_body"
@@ -1680,10 +1680,10 @@
     "type": "text",
     "description": "An error indicating the password is incorrect"
   },
-  "passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open Nautilus anymore.",
+  "passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open %1 anymore.",
   "@passwordNoLongerRequiredToOpenParagraph": {
     "type": "text",
-    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
+    "description": "An info paragraph that tells the user a password will no longer be needed to open the app"
   },
   "passwordNumber": "Password must contain at least 1 number",
   "@passwordNumber": {
@@ -1705,15 +1705,15 @@
     "type": "text",
     "description": "An error indicating the password is too short"
   },
-  "passwordWarning": "This password will be required to open Nautilus.",
+  "passwordWarning": "This password will be required to open %1.",
   "@passwordWarning": {
     "type": "text",
     "description": "A paragraph that warns the user to not lose their password."
   },
-  "passwordWillBeRequiredToOpenParagraph": "This password will be required to open Nautilus.",
+  "passwordWillBeRequiredToOpenParagraph": "This password will be required to open %1.",
   "@passwordWillBeRequiredToOpenParagraph": {
     "type": "text",
-    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
+    "description": "A paragraph that tells the users that the created password will be required to open the app."
   },
   "pay": "Pay",
   "@pay": {
@@ -1815,11 +1815,6 @@
     "type": "text",
     "description": "settings_preferences_header"
   },
-  "advanced": "Advanced",
-  "@advanced": {
-    "type": "text",
-    "description": "settings_advanced_header"
-  },
   "privacyPolicy": "Privacy Policy",
   "@privacyPolicy": {
     "type": "text",
@@ -1830,12 +1825,12 @@
     "type": "text",
     "description": "promo_Link"
   },
-  "proSubRequiredHeader": "Nautilus Pro Subscription Required",
+  "proSubRequiredHeader": "%1 Pro Subscription Required",
   "@proSubRequiredHeader": {
     "type": "text",
     "description": "pro_sub_required_header"
   },
-  "proSubRequiredParagraph": "For just 1 NANO per month, you can unlock all of the features of Nautilus Pro.",
+  "proSubRequiredParagraph": "For just %3 %2 per month, you can unlock all of the features of %1 Pro.",
   "@proSubRequiredParagraph": {
     "type": "text",
     "description": "pro_sub_required_paragraph"
@@ -2035,7 +2030,7 @@
     "type": "text",
     "description": "requested_from"
   },
-  "requestError": "Request Failed: This user doesn't appear to have Nautilus installed, or has notifications disabled.",
+  "requestError": "Request Failed: This user doesn't appear to have %1 installed, or has notifications disabled.",
   "@requestError": {
     "type": "text",
     "description": "request_generic_error"
@@ -2065,7 +2060,7 @@
     "type": "text",
     "description": "request_sent_again"
   },
-  "requestSheetInfo": "Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users, but you can use them for your own record keeping even if the recipient doesn't use nautilus.",
+  "requestSheetInfo": "Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other %1 users, but you can use them for your own record keeping even if the recipient doesn't use %1.",
   "@requestSheetInfo": {
     "type": "text",
     "description": "request_sheet_info"
@@ -2075,10 +2070,10 @@
     "type": "text",
     "description": "request_sheet_info_header"
   },
-  "requireAPasswordToOpenHeader": "Require a password to open Nautilus?",
+  "requireAPasswordToOpenHeader": "Require a password to open %1?",
   "@requireAPasswordToOpenHeader": {
     "type": "text",
-    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
+    "description": "A paragraph that asks the users if they would like a password to be required to open the app."
   },
   "requireCaptcha": "Require CAPTCHA to claim gift card",
   "@requireCaptcha": {
@@ -2240,7 +2235,7 @@
     "type": "text",
     "description": "send_sending"
   },
-  "sendMemoError": "Sending memo with transaction failed, they may not be a Nautilus user.",
+  "sendMemoError": "Sending memo with transaction failed, they may not be a %1 user.",
   "@sendMemoError": {
     "type": "text",
     "description": "send_memo_error"
@@ -2260,7 +2255,7 @@
     "type": "text",
     "description": "split_bill_send_requests"
   },
-  "sendSheetInfo": "Send or Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other nautilus users.\n\nYou don't need to have a username in order to send or receive payment requests, and you can use them for your own record keeping even if they don't use nautilus.",
+  "sendSheetInfo": "Send or Request a payment, with End to End Encrypted messages!\n\nPayment requests, memos, and messages will only be receivable by other %1 users.\n\nYou don't need to have a username in order to send or receive payment requests, and you can use them for your own record keeping even if they don't use %1.",
   "@sendSheetInfo": {
     "type": "text",
     "description": "send_sheet_info"
@@ -2353,7 +2348,7 @@
   "share": "Share",
   "@share": {
     "type": "text",
-    "description": "nautilus_share"
+    "description": "app_share"
   },
   "shareLink": "Share Link",
   "@shareLink": {
@@ -2365,13 +2360,13 @@
     "type": "text",
     "description": "share_message"
   },
-  "shareNautilus": "Share Nautilus",
-  "@shareNautilus": {
+  "shareApp": "Share %1",
+  "@shareApp": {
     "type": "text",
     "description": "settings_share"
   },
-  "shareNautilusText": "Check out Nautilus! A premier NANO mobile wallet!",
-  "@shareNautilusText": {
+  "shareAppText": "Check out %1! A premier NANO mobile wallet!",
+  "@shareAppText": {
     "type": "text",
     "description": "share_extra"
   },
@@ -2484,6 +2479,11 @@
   "@splitBy": {
     "type": "text",
     "description": "gift_card_split_by"
+  },
+  "subsButton": "Subscriptions",
+  "@subsButton": {
+    "type": "text",
+    "description": "subs_button"
   },
   "subscribeButton": "Subscribe",
   "@subscribeButton": {
@@ -2610,12 +2610,12 @@
     "type": "text",
     "description": "transfer_close_text"
   },
-  "transferComplete": "%1 %2 successfully transferred to your Nautilus Wallet.\n",
+  "transferComplete": "%1 %2 successfully transferred to your %1 Wallet.\n",
   "@transferComplete": {
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferConfirmInfo": "A wallet with a balance of %1 NANO has been detected.\n",
+  "transferConfirmInfo": "A wallet with a balance of %1 %2 has been detected.\n",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"
@@ -2640,12 +2640,12 @@
     "type": "text",
     "description": "transfer_header"
   },
-  "transferIntro": "This process will transfer the funds from a paper wallet to your Nautilus wallet.\n\nTap the \"%1\" button to start.",
+  "transferIntro": "This process will transfer the funds from a paper wallet to your %1 wallet.\n\nTap the \"%1\" button to start.",
   "@transferIntro": {
     "type": "text",
     "description": "transfer_intro"
   },
-  "transferIntroShort": "This process will transfer the funds from a paper wallet to your Nautilus wallet.",
+  "transferIntroShort": "This process will transfer the funds from a paper wallet to your %1 wallet.",
   "@transferIntroShort": {
     "type": "text",
     "description": "transfer_intro_short"
@@ -2695,12 +2695,12 @@
     "type": "text",
     "description": "unlocktxt"
   },
-  "unlockBiometrics": "Authenticate to Unlock Nautilus",
+  "unlockBiometrics": "Authenticate to Unlock %1",
   "@unlockBiometrics": {
     "type": "text",
     "description": "unlock_bio"
   },
-  "unlockPin": "Enter PIN to Unlock Nautilus",
+  "unlockPin": "Enter PIN to Unlock %1",
   "@unlockPin": {
     "type": "text",
     "description": "unlock_pin"
@@ -2750,10 +2750,10 @@
     "type": "text",
     "description": "use_nano"
   },
-  "useNautilusRep": "Use Nautilus Rep",
-  "@useNautilusRep": {
+  "useAppRep": "Use %1 Rep",
+  "@useAppRep": {
     "type": "text",
-    "description": "use nautilus node as rep"
+    "description": "use app node as rep"
   },
   "userAlreadyAddedError": "User already added!",
   "@userAlreadyAddedError": {
@@ -2780,7 +2780,7 @@
     "type": "text",
     "description": "username_unknown_error"
   },
-  "usernameInfo": "Pick out a unique @username to make it easy for friends and family to find you!\n\nHaving a Nautilus username updates the UI globally to reflect your new handle.",
+  "usernameInfo": "Pick out a unique @username to make it easy for friends and family to find you!\n\nHaving a %1 username updates the UI globally to reflect your new handle.",
   "@usernameInfo": {
     "type": "text",
     "description": "Description for username registration"
@@ -2795,7 +2795,7 @@
     "type": "text",
     "description": "username_unavailable"
   },
-  "usernameWarning": "Nautilus usernames are a centralized service provided by Nano.to",
+  "usernameWarning": "%1 usernames are a centralized service provided by Nano.to",
   "@usernameWarning": {
     "type": "text",
     "description": "Username centralization warning"
@@ -2855,12 +2855,12 @@
     "type": "text",
     "description": "intro_welcome_title"
   },
-  "welcomeTextLogin": "Welcome to Nautilus. Choose an option to get started or pick a theme using the icon below.",
+  "welcomeTextLogin": "Welcome to %1. Choose an option to get started or pick a theme using the icon below.",
   "@welcomeTextLogin": {
     "type": "text",
     "description": "intro_welcome_login"
   },
-  "welcomeTextUpdated": "Welcome to Nautilus. To start, create a new wallet or import an existing one.",
+  "welcomeTextUpdated": "Welcome to %1. To start, create a new wallet or import an existing one.",
   "@welcomeTextUpdated": {
     "type": "text",
     "description": "intro_welcome_title"

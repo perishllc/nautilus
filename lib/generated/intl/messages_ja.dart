@@ -50,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing":
             MessageLookupByLibrary.simpleMessage("ユーザー名またはアドレスを入力してください"),
         "addressShare": MessageLookupByLibrary.simpleMessage("アドレスを共有する"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("エイリアス"),
         "amountGiftGreaterError":
             MessageLookupByLibrary.simpleMessage("分割金額はギフト残高より大きくすることはできません"),
@@ -423,7 +424,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "moreSettings": MessageLookupByLibrary.simpleMessage("その他の設定"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("名前を入力してください"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage("ノーチラス ウォレット"),
         "nearby": MessageLookupByLibrary.simpleMessage("近く"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "この機能では、スパムを防ぐために、より長い取引履歴が必要です。\n\nまたは、誰かがスキャンできるように QR コードを表示することもできます。"),
@@ -683,9 +683,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("シェア"),
         "shareLink": MessageLookupByLibrary.simpleMessage("共有リンク"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("メッセージを共有"),
-        "shareNautilus": MessageLookupByLibrary.simpleMessage("Nautilusを共有する"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "優秀なナノモバイルウォレットであるナトリアムを使ってみましょう。"),
         "shareText": MessageLookupByLibrary.simpleMessage("テキストを共有"),
         "shopButton": MessageLookupByLibrary.simpleMessage("店"),
         "show": MessageLookupByLibrary.simpleMessage("見せる"),
@@ -711,6 +708,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "一度にたくさんの支払いリクエストを送信してください！たとえば、レストランで請求書を簡単に分割できます。"),
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage("分割請求情報"),
         "splitBy": MessageLookupByLibrary.simpleMessage("分割"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("申し込む"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Apple Pay で購読する"),
@@ -790,8 +788,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("稼働時間"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("URL を入力してください"),
         "useNano": MessageLookupByLibrary.simpleMessage("NANOを使う"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("ユーザーはすでに追加されています!"),
         "userNotFound":

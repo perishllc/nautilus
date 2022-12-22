@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Vui lòng nhập tên người dùng hoặc địa chỉ"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Chia sẻ địa chỉ"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("Bí danh"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Số tiền Chia tách không được lớn hơn số dư quà tặng"),
@@ -491,7 +492,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "moreSettings": MessageLookupByLibrary.simpleMessage("Cài đặt khác"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("Vui lòng nhập tên"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage("Ví Nautilus"),
         "nearby": MessageLookupByLibrary.simpleMessage("Lân cận"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Tính năng này yêu cầu bạn phải có lịch sử giao dịch dài hơn để ngăn chặn thư rác.\n\nNgoài ra, bạn có thể hiển thị mã QR để ai đó quét."),
@@ -782,10 +782,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareLink": MessageLookupByLibrary.simpleMessage("Chia sẻ liên kết"),
         "shareMessage":
             MessageLookupByLibrary.simpleMessage("Chia sẻ tin nhắn"),
-        "shareNautilus":
-            MessageLookupByLibrary.simpleMessage("Chia sẻ Nautilus"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "Thử ngay Nautilus! Ví Nano di động hàng đầu!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Chia sẻ văn bản"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Cửa hàng"),
         "show": MessageLookupByLibrary.simpleMessage("Trình diễn"),
@@ -820,6 +816,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Thông tin tách bạch hóa đơn"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Chia theo"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Đặt mua"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Đăng ký qua Apple Pay"),
@@ -908,8 +905,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Vui lòng nhập một URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("Sử dụng NANO"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Người dùng đã được thêm!"),
         "userNotFound":

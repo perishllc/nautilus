@@ -54,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Vnesite uporabniško ime ali naslov"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Deli naslov"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("Vzdevki"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Razdeljeni znesek ne sme biti večji od darilnega stanja"),
@@ -492,8 +493,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "moreSettings": MessageLookupByLibrary.simpleMessage("Več nastavitev"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("Vnesite ime"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet":
-            MessageLookupByLibrary.simpleMessage("Denarnica Nautilus"),
         "nearby": MessageLookupByLibrary.simpleMessage("V bližini"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Ta funkcija zahteva daljšo zgodovino transakcij, da preprečite neželeno pošto.\n\nLahko pa prikažete tudi QR kodo, ki jo lahko nekdo skenira."),
@@ -785,9 +784,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("Deliti"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Delite povezavo"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Deli sporočilo"),
-        "shareNautilus": MessageLookupByLibrary.simpleMessage("Deli Nautilus"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "Preveri Nautilus! Uradna mobilna Nano denarnica!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Delite besedilo"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Trgovina"),
         "show": MessageLookupByLibrary.simpleMessage("Prikaži"),
@@ -821,6 +817,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Informacije o razdeljenem računu"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Razdeli po"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Naročite se"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Naročite se prek Apple Pay"),
@@ -908,8 +905,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("prisotnost"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Vnesite URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("Uporabite NANO"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Uporabnik je že dodan!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(

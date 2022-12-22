@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Lütfen Kullanıcı Adı veya Adres Giriniz"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Paylaş"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("Takma adlar"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Bölünmüş Tutar, hediye bakiyesinden fazla olamaz"),
@@ -486,8 +487,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty":
             MessageLookupByLibrary.simpleMessage("Lütfen bir Ad girin"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet":
-            MessageLookupByLibrary.simpleMessage("Nautilus Cüzdanı"),
         "nearby": MessageLookupByLibrary.simpleMessage("Yakında"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Bu özellik, istenmeyen postaları önlemek için daha uzun bir işlem geçmişine sahip olmanızı gerektirir.\n\nAlternatif olarak, birinin taraması için bir QR kodu gösterebilirsiniz."),
@@ -776,10 +775,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("Paylaşmak"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Link Paylaş"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Mesajı Paylaş"),
-        "shareNautilus":
-            MessageLookupByLibrary.simpleMessage("Nautilus\'u Paylaş"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "Nano\'nun resmi Android Cüzdanı Nautilus\'u denesene!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Metni Paylaş"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Mağaza"),
         "show": MessageLookupByLibrary.simpleMessage("Göstermek"),
@@ -812,6 +807,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Bölünmüş Fatura Bilgisi"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Bölme Ölçütü"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abone olmak"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Apple Pay ile abone olun"),
@@ -900,8 +896,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Lütfen bir URL girin"),
         "useNano": MessageLookupByLibrary.simpleMessage("NANO kullan"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Kullanıcı zaten eklendi!"),
         "userNotFound":

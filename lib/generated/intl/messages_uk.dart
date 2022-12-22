@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Будь ласка, введіть ім\'я користувача або адресу"),
         "addressShare":
             MessageLookupByLibrary.simpleMessage("Поділитися адресою"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("Псевдоніми"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Розділена сума не може перевищувати баланс подарунку"),
@@ -506,8 +507,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty":
             MessageLookupByLibrary.simpleMessage("Будь ласка, введіть ім\'я"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet":
-            MessageLookupByLibrary.simpleMessage("Гаманець Nautilus"),
         "nearby": MessageLookupByLibrary.simpleMessage("Поруч"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Ця функція вимагає, щоб у вас була довша історія транзакцій, щоб запобігти спаму.\n\nКрім того, ви можете показати QR-код комусь для сканування."),
@@ -806,10 +805,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Поділитися посиланням"),
         "shareMessage":
             MessageLookupByLibrary.simpleMessage("Поділитися повідомленням"),
-        "shareNautilus":
-            MessageLookupByLibrary.simpleMessage("Поділитися Nautilus"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "Спробуйте Nautilus!  Найкращий мобільний гаманець для NANO!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Поділитися текстом"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Магазин"),
         "show": MessageLookupByLibrary.simpleMessage("Показати"),
@@ -845,6 +840,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Інформація про розділений рахунок"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Розділити за"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Підпишіться"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Підпишіться через Apple Pay"),
@@ -934,8 +930,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Будь ласка, введіть URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("Використовуйте NANO"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Користувача вже додано!"),
         "userNotFound":

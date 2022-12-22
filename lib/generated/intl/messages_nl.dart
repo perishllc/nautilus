@@ -58,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Voer een gebruikersnaam of adres in"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Deel"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliassen"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Gesplitst bedrag kan niet groter zijn dan het cadeausaldo"),
@@ -499,8 +500,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Meer instellingen"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("Voer een naam in"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet":
-            MessageLookupByLibrary.simpleMessage("Nautilus Portemonnee"),
         "nearby": MessageLookupByLibrary.simpleMessage("In de buurt"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Voor deze functie moet u een langere transactiegeschiedenis hebben om spam te voorkomen.\n\nAls alternatief kunt u een QR-code weergeven die iemand kan scannen."),
@@ -794,9 +793,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("Deel"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Link delen"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Bericht delen"),
-        "shareNautilus": MessageLookupByLibrary.simpleMessage("Deel Nautilus"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "Probeer Nautilus! Een premium mobiele Nano wallet!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Tekst delen"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Winkel"),
         "show": MessageLookupByLibrary.simpleMessage("Show"),
@@ -828,6 +824,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Factuurgegevens splitsen"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Gesplitst door"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonneren"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Abonneer u via Apple Pay"),
@@ -916,8 +913,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Tijd online"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Voer een URL in"),
         "useNano": MessageLookupByLibrary.simpleMessage("Gebruik NANO"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Gebruiker al toegevoegd!"),
         "userNotFound":

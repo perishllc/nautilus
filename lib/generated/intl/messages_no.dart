@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Skriv inn et brukernavn eller adresse"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Del adresse"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliaser"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Delt beløp kan ikke være større enn gavesaldoen"),
@@ -493,8 +494,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty":
             MessageLookupByLibrary.simpleMessage("Vennligst skriv inn et navn"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet":
-            MessageLookupByLibrary.simpleMessage("Nautilus lommebok"),
         "nearby": MessageLookupByLibrary.simpleMessage("I nærheten"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Denne funksjonen krever at du har en lengre transaksjonshistorikk for å forhindre spam.\n\nAlternativt kan du vise en QR-kode for noen å skanne."),
@@ -786,9 +785,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("Dele"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Del Link"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Del melding"),
-        "shareNautilus": MessageLookupByLibrary.simpleMessage("Del Nautilus"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "Sjekk ut Nautilus! En ledende NANO mobil lommebok!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Del tekst"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Butikk"),
         "show": MessageLookupByLibrary.simpleMessage("Forestilling"),
@@ -820,6 +816,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Del regningsinformasjon"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Del opp etter"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonnere"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Abonner via Apple Pay"),
@@ -904,8 +901,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Vennligst skriv inn en URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("Bruk NANO"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Bruker allerede lagt til!"),
         "userNotFound":

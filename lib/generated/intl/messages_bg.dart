@@ -54,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Моля, въведете потребителско име или адрес"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Сподели Адрес"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("Псевдоними"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Разделената сума не може да бъде по-голяма от баланса на подаръка"),
@@ -494,8 +495,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "moreSettings": MessageLookupByLibrary.simpleMessage("Още настройки"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("Моля, въведете име"),
         "natricon": MessageLookupByLibrary.simpleMessage("Натрикона"),
-        "nautilusWallet":
-            MessageLookupByLibrary.simpleMessage("Портфейл Nautilus"),
         "nearby": MessageLookupByLibrary.simpleMessage("Наблизо"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Тази функция изисква да имате по-дълга история на транзакциите, за да предотвратите спам.\n\nКато алтернатива можете да покажете QR код, който някой да сканира."),
@@ -788,10 +787,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Споделяне на връзка"),
         "shareMessage":
             MessageLookupByLibrary.simpleMessage("Споделете съобщение"),
-        "shareNautilus":
-            MessageLookupByLibrary.simpleMessage("Сподели Nautilus"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "Виж Nautilus! Водещият NANO мобилен портфейл!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Споделяне на текст"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Магазин"),
         "show": MessageLookupByLibrary.simpleMessage("Покажи"),
@@ -826,6 +821,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Разделена информация за сметката"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Разделяне по"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Абонирай се"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Абонирайте се чрез Apple Pay"),
@@ -914,8 +910,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Ъптайм"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Моля, въведете URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("Използвайте NANO"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
             "Потребителят вече е добавен!"),
         "userNotFound":

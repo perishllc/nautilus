@@ -48,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing":
             MessageLookupByLibrary.simpleMessage("请输入用户名或地址"),
         "addressShare": MessageLookupByLibrary.simpleMessage("分享地址"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("别名"),
         "amountGiftGreaterError":
             MessageLookupByLibrary.simpleMessage("分割金额不能大于礼物余额"),
@@ -381,7 +382,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "moreSettings": MessageLookupByLibrary.simpleMessage("更多设置"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("请输入姓名"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage("鹦鹉螺钱包"),
         "nearby": MessageLookupByLibrary.simpleMessage("附近"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "此功能要求您具有更长的交易历史记录，以防止垃圾邮件。\n\n或者，您可以显示二维码供他人扫描。"),
@@ -616,9 +616,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("分享"),
         "shareLink": MessageLookupByLibrary.simpleMessage("分享链接"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("分享讯息"),
-        "shareNautilus": MessageLookupByLibrary.simpleMessage("分享Nautilus"),
-        "shareNautilusText":
-            MessageLookupByLibrary.simpleMessage("来试试Nautilus！ 一个卓越的NANO手机钱包！"),
         "shareText": MessageLookupByLibrary.simpleMessage("分享文字"),
         "shopButton": MessageLookupByLibrary.simpleMessage("店铺"),
         "show": MessageLookupByLibrary.simpleMessage("节目"),
@@ -642,6 +639,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "一次发送一堆付款请求！例如，它可以很容易地在餐厅拆分账单。"),
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage("拆分账单信息"),
         "splitBy": MessageLookupByLibrary.simpleMessage("拆分依据"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("订阅"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("通过 Apple Pay 订阅"),
@@ -716,8 +714,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("上线时间"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("请输入网址"),
         "useNano": MessageLookupByLibrary.simpleMessage("使用纳米"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage("用户已添加！"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("找不到用户！"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

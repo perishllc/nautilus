@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Please Enter a Username or Address"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Kopīgot adresi"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliases"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Dalītā summa nevar būt lielāka par dāvanas atlikumu"),
@@ -494,7 +495,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty":
             MessageLookupByLibrary.simpleMessage("Lūdzu, ievadiet Vārdu"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage("Nautilus maks"),
         "nearby": MessageLookupByLibrary.simpleMessage("Tuvumā"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "This feature requires you to have a longer transaction history in order to prevent spam.\n\nAlternatively, you can show a QR code for someone to scan."),
@@ -783,10 +783,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("Dalīties"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Share Link"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Kopīgot ziņu"),
-        "shareNautilus":
-            MessageLookupByLibrary.simpleMessage("Dalīties ar Nautilus"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "Uzmet aci Nautilus! Izcils NANO viedais maks!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Kopīgot tekstu"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Veikals"),
         "show": MessageLookupByLibrary.simpleMessage("Rādīt"),
@@ -819,6 +815,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Dalīta rēķina informācija"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Sadalīt pēc"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonēt"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Abonējiet, izmantojot Apple Pay"),
@@ -908,8 +905,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Lūdzu, ievadiet URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("Izmantojiet NANO"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
             "Lietotājs jau ir pievienots!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User not found!"),

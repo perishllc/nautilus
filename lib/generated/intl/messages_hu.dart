@@ -58,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Kérjük, adja meg felhasználónevét vagy címét"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Megosztás"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("Álnevek"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "A megosztott összeg nem lehet nagyobb, mint az ajándékegyenleg"),
@@ -501,8 +502,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty":
             MessageLookupByLibrary.simpleMessage("Kérjük, adjon meg egy nevet"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet":
-            MessageLookupByLibrary.simpleMessage("Nautilus pénztárca"),
         "nearby": MessageLookupByLibrary.simpleMessage("Közeli"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Ez a funkció megköveteli, hogy hosszabb tranzakciós előzményekkel rendelkezzen a spam megelőzése érdekében.\n\nAlternatív megoldásként, megmutathat egy QR-kódot, amelyet valaki beolvashat."),
@@ -798,10 +797,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareLink": MessageLookupByLibrary.simpleMessage("Link megosztása"),
         "shareMessage":
             MessageLookupByLibrary.simpleMessage("Üzenet megosztása"),
-        "shareNautilus":
-            MessageLookupByLibrary.simpleMessage("Oszd meg a Nautilusot"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "Próbáld ki a Nautilusot, a Nano hivatalos Androidos tárcáját!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Szöveg megosztása"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Üzlet"),
         "show": MessageLookupByLibrary.simpleMessage("Előadás"),
@@ -835,6 +830,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Split Bill Info"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Felosztás"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Iratkozz fel"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Előfizetés az Apple Pay-en keresztül"),
@@ -922,8 +918,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Kérjük, adjon meg egy URL-t"),
         "useNano": MessageLookupByLibrary.simpleMessage("Használj NANO-t"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Felhasználó már hozzáadva!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(

@@ -54,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "कृपया उपयोगकर्ता नाम या पता दर्ज करें"),
         "addressShare": MessageLookupByLibrary.simpleMessage("शेयर करें"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("फर्जी नाम"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "विभाजित राशि उपहार शेष राशि से अधिक नहीं हो सकती"),
@@ -486,7 +487,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty":
             MessageLookupByLibrary.simpleMessage("कृपया एक नाम दर्ज करें"),
         "natricon": MessageLookupByLibrary.simpleMessage("नैट्रिकोन"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage("नॉटिलस वॉलेट"),
         "nearby": MessageLookupByLibrary.simpleMessage("पास ही"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "स्पैम को रोकने के लिए इस सुविधा के लिए आपके पास एक लंबा लेनदेन इतिहास होना आवश्यक है।\n\nवैकल्पिक रूप से, आप किसी व्यक्ति को स्कैन करने के लिए QR कोड दिखा सकते हैं।"),
@@ -778,9 +778,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("शेयर करना"),
         "shareLink": MessageLookupByLibrary.simpleMessage("लिंक शेयर करें"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("संदेश साझा करें"),
-        "shareNautilus": MessageLookupByLibrary.simpleMessage("शेयर नैट्रियम"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "नैट्रियम की जाँच करें! एक प्रमुख नैनो मोबाइल वॉलेट!"),
         "shareText": MessageLookupByLibrary.simpleMessage("पाठ साझा करें"),
         "shopButton": MessageLookupByLibrary.simpleMessage("दुकान"),
         "show": MessageLookupByLibrary.simpleMessage("प्रदर्शन"),
@@ -813,6 +810,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("स्प्लिट बिल जानकारी"),
         "splitBy": MessageLookupByLibrary.simpleMessage("विभाजित करके"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton":
             MessageLookupByLibrary.simpleMessage("सदस्यता लेने के"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
@@ -902,8 +900,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("कृपया एक यूआरएल दर्ज करें"),
         "useNano": MessageLookupByLibrary.simpleMessage("नैनो का प्रयोग करें"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
             "उपयोगकर्ता पहले ही जोड़ा जा चुका है!"),
         "userNotFound":

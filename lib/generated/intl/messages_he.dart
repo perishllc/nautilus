@@ -51,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing":
             MessageLookupByLibrary.simpleMessage("אנא הזן שם משתמש או כתובת"),
         "addressShare": MessageLookupByLibrary.simpleMessage("שתף"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("כינויים"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "הסכום המפוצל לא יכול להיות גדול מיתרת המתנה"),
@@ -457,7 +458,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "moreSettings": MessageLookupByLibrary.simpleMessage("הגדרות נוספות"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("נא להזין שם"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage("ארנק נאוטילוס"),
         "nearby": MessageLookupByLibrary.simpleMessage("סָמוּך"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "תכונה זו דורשת ממך היסטוריית עסקאות ארוכה יותר כדי למנוע דואר זבל.\n\nלחלופין, אתה יכול להציג קוד QR עבור מישהו לסרוק."),
@@ -732,9 +732,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("לַחֲלוֹק"),
         "shareLink": MessageLookupByLibrary.simpleMessage("שתף קישור"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("שתף הודעה"),
-        "shareNautilus": MessageLookupByLibrary.simpleMessage("Share Nautilus"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "Check out Nautilus! A premier NANO mobile wallet!"),
         "shareText": MessageLookupByLibrary.simpleMessage("שתף טקסט"),
         "shopButton": MessageLookupByLibrary.simpleMessage("לִקְנוֹת"),
         "show": MessageLookupByLibrary.simpleMessage("הופעה"),
@@ -764,6 +761,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("פיצול פרטי חשבון"),
         "splitBy": MessageLookupByLibrary.simpleMessage("פיצול לפי"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("הירשם"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("הירשם באמצעות Apple Pay"),
@@ -845,8 +843,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("זמן אונליין"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("נא להזין כתובת URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("השתמש ב-NANO"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("משתמש כבר נוסף!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("המשתמש לא נמצא!"),

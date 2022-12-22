@@ -52,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "الرجاء إدخال اسم مستخدم أو عنوان"),
         "addressShare": MessageLookupByLibrary.simpleMessage("أنشر العنوان"),
+        "advanced": MessageLookupByLibrary.simpleMessage(""),
         "aliases": MessageLookupByLibrary.simpleMessage("الأسماء المستعارة"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "لا يمكن أن يكون مبلغ الانقسام أكبر من رصيد الهدية"),
@@ -476,7 +477,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("المزيد من الإعدادات"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("الرجاء إدخال اسم"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
-        "nautilusWallet": MessageLookupByLibrary.simpleMessage("محفظة نوتيلوس"),
         "nearby": MessageLookupByLibrary.simpleMessage("مجاور"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "تتطلب هذه الميزة أن يكون لديك سجل معاملات أطول لمنع البريد العشوائي.\n\nبدلاً من ذلك، يمكنك إظهار رمز الاستجابة السريعة لشخص ما للمسح الضوئي."),
@@ -763,9 +763,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("يشارك"),
         "shareLink": MessageLookupByLibrary.simpleMessage("مشاركة الرابط"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("مشاركة الرسالة"),
-        "shareNautilus": MessageLookupByLibrary.simpleMessage("شارك نتريوم"),
-        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
-            "راجع نتريوم! محفظة نتريوم الرسمية للهاتف"),
         "shareText": MessageLookupByLibrary.simpleMessage("مشاركة النص"),
         "shopButton": MessageLookupByLibrary.simpleMessage("محل"),
         "show": MessageLookupByLibrary.simpleMessage("يعرض"),
@@ -799,6 +796,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("تقسيم معلومات بيل"),
         "splitBy": MessageLookupByLibrary.simpleMessage("تقسيم حسب"),
+        "subsButton": MessageLookupByLibrary.simpleMessage(""),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("الإشتراك"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("اشترك عبر Apple Pay"),
@@ -882,8 +880,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("الرجاء إدخال عنوان URL"),
         "useNano": MessageLookupByLibrary.simpleMessage("استخدم NANO"),
-        "useNautilusRep":
-            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("تمت إضافة المستخدم بالفعل!"),
         "userNotFound":
