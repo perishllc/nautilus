@@ -113,7 +113,7 @@ class AppState extends State<App> {
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       child: MaterialApp(
         debugShowCheckedModeBanner: kDebugMode,
-        title: "Nautilus",
+        title: NonTranslatable.appName,
         // theme: ThemeData(
         //   dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
         //   primaryColor: StateContainer.of(context).curTheme.primary,
