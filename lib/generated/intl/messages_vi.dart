@@ -309,7 +309,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Tiền gas"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("Trao đổi NANO"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Nhập mật khẩu hiện tại"),
         "existingPinHint":
@@ -351,7 +350,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Biểu ngữ tài trợ"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Kinh phí"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Nhận NANO"),
         "giftAlert":
             MessageLookupByLibrary.simpleMessage("Anh có một món quà!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Quà Tặng Rỗng"),
@@ -615,7 +613,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Chỉ với 1 NANO mỗi tháng, bạn có thể mở khóa tất cả các tính năng của Nautilus Pro."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("NANO miễn phí"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Mua Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "Mã QR không chứa điểm đến hợp lệ"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -807,7 +804,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Đơn giản"),
         "social": MessageLookupByLibrary.simpleMessage("Xã hội"),
         "someone": MessageLookupByLibrary.simpleMessage("người nào"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Tiêu NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Hóa đơn tách"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Chia một hóa đơn"),
@@ -904,7 +900,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Thời gian hoạt động (uptime)"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Vui lòng nhập một URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Sử dụng NANO"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Người dùng đã được thêm!"),
         "userNotFound":

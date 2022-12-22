@@ -242,7 +242,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("氣, 錢"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("交換納米"),
         "existingPasswordHint": MessageLookupByLibrary.simpleMessage("輸入當前密碼"),
         "existingPinHint": MessageLookupByLibrary.simpleMessage("輸入當前引腳"),
         "exit": MessageLookupByLibrary.simpleMessage("退出"),
@@ -271,7 +270,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fulfilled": MessageLookupByLibrary.simpleMessage("履行"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage("資金橫幅"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("資金"),
-        "getNano": MessageLookupByLibrary.simpleMessage("獲取納米"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("你有禮物！"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("空, 禮物"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("禮品金額"),
@@ -479,7 +477,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "每月只需 1 NANO，您就可以解鎖 Nautilus Pro 的所有功能。"),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("免費納米"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("購買納米"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage("二維條碼不含有效的地址"),
         "qrInvalidPermissions":
             MessageLookupByLibrary.simpleMessage("請允許相機權限來掃描二維條碼"),
@@ -631,7 +628,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("單面"),
         "social": MessageLookupByLibrary.simpleMessage("社會的"),
         "someone": MessageLookupByLibrary.simpleMessage("某人"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("花費 NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("拆分賬單"),
         "splitBillHeader": MessageLookupByLibrary.simpleMessage("拆分賬單"),
         "splitBillInfo": MessageLookupByLibrary.simpleMessage(
@@ -712,7 +708,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("未讀"),
         "uptime": MessageLookupByLibrary.simpleMessage("上線時間"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("請輸入網址"),
-        "useNano": MessageLookupByLibrary.simpleMessage("使用納米"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage("用戶已添加！"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("找不到用戶！"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

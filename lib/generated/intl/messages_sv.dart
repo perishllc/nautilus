@@ -315,7 +315,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas pengar"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("Byt NANO"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Skriv in nuvarande lösenord"),
         "existingPinHint":
@@ -355,7 +354,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Finansieringsbanner"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finansiering"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Skaffa NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Du har en gåva!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Tom gåva"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Gåva belopp"),
@@ -617,7 +615,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "För bara 1 NANO per månad kan du låsa upp alla funktionerna i Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("Gratis NANO"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Köp Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR-koden innehåller inte en giltig destination"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -809,7 +806,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "social": MessageLookupByLibrary.simpleMessage("Social"),
         "someone": MessageLookupByLibrary.simpleMessage("någon"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Spendera NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Dela en räkning"),
@@ -903,7 +899,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("oläst"),
         "uptime": MessageLookupByLibrary.simpleMessage("Upptid"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Ange en URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Använd NANO"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
             "Användaren har redan lagts till!"),
         "userNotFound":

@@ -102,7 +102,7 @@ class IntroNewExistingPageState extends State<IntroNewExistingPage> {
                                 width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
                                 height: 100,
                                 child: TextLiquidFill(
-                                  text: CaseChange.toUpperCase(NonTranslatable.nautilus, context),
+                                  text: CaseChange.toUpperCase(NonTranslatable.appName, context),
                                   waveColor: primaryColor ?? NautilusTheme.nautilusBlue,
                                   boxBackgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
                                   textStyle: const TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold, color: Colors.white),

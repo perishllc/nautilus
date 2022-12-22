@@ -317,8 +317,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("গ্যাস টাকা"),
-        "exchangeNano":
-            MessageLookupByLibrary.simpleMessage("ন্যানো বিনিময় করুন"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("বর্তমান পাসওয়ার্ড লিখুন"),
         "existingPinHint":
@@ -356,7 +354,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("ফান্ডিং ব্যানার"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("অর্থায়ন"),
-        "getNano": MessageLookupByLibrary.simpleMessage("NANO পান"),
         "giftAlert":
             MessageLookupByLibrary.simpleMessage("তোমার কাছে একটা উপহার আছে!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("ফাঁকা উপহার"),
@@ -619,7 +616,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "প্রতি মাসে মাত্র 1 NANO এর জন্য, আপনি Nautilus Pro এর সমস্ত বৈশিষ্ট্য আনলক করতে পারেন।"),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("বিনামূল্যে ন্যানো"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("ন্যানো ক্রয়"),
         "qrInvalidAddress":
             MessageLookupByLibrary.simpleMessage("QR কোডে কোন বৈধ গন্তব্য নেই"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -814,7 +810,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("সিমপ্লেক্স"),
         "social": MessageLookupByLibrary.simpleMessage("সামাজিক"),
         "someone": MessageLookupByLibrary.simpleMessage("কেউ"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("NANO খরচ করুন"),
         "splitBill": MessageLookupByLibrary.simpleMessage("বিভক্ত বিল"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("বিভক্ত একটি বিল"),
@@ -910,7 +905,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("অপঠিত"),
         "uptime": MessageLookupByLibrary.simpleMessage("আপটাইম"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("একটি URL লিখুন"),
-        "useNano": MessageLookupByLibrary.simpleMessage("NANO ব্যবহার করুন"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
             "ব্যবহারকারী ইতিমধ্যে যোগ করা হয়েছে!"),
         "userNotFound":

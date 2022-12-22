@@ -320,10 +320,10 @@ class Z {
     );
   }
 
-  /// `We noticed you clicked on a link that contains some nano, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no.`
+  /// `We noticed you clicked on a link that contains some %2, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no.`
   String get askSkipSetup {
     return Intl.message(
-      'We noticed you clicked on a link that contains some nano, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no.',
+      'We noticed you clicked on a link that contains some %2, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no.',
       name: 'askSkipSetup',
       desc: 'prompt_skip_setup',
       args: [],
@@ -1295,10 +1295,10 @@ class Z {
     );
   }
 
-  /// `Check out %1! I sent you some nano with this link:`
+  /// `Check out %1! I sent you some %2 with this link:`
   String get defaultGiftMessage {
     return Intl.message(
-      'Check out %1! I sent you some nano with this link:',
+      'Check out %1! I sent you some %2 with this link:',
       name: 'defaultGiftMessage',
       desc: 'default_gift_message',
       args: [],
@@ -1825,12 +1825,12 @@ class Z {
     );
   }
 
-  /// `Exchange NANO`
-  String get exchangeNano {
+  /// `Exchange %2`
+  String get exchangeCurrency {
     return Intl.message(
-      'Exchange NANO',
-      name: 'exchangeNano',
-      desc: 'exchange_nano',
+      'Exchange %2',
+      name: 'exchangeCurrency',
+      desc: 'exchange_currency',
       args: [],
     );
   }
@@ -2086,12 +2086,12 @@ class Z {
     );
   }
 
-  /// `Get NANO`
-  String get getNano {
+  /// `Get %2`
+  String get getCurrency {
     return Intl.message(
-      'Get NANO',
-      name: 'getNano',
-      desc: 'get_nano',
+      'Get %2',
+      name: 'getCurrency',
+      desc: 'get_currency',
       args: [],
     );
   }
@@ -2166,10 +2166,10 @@ class Z {
     );
   }
 
-  /// `Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing %1!\n\nIf the recipient is already a %1 user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a split amount to distribute from the gift card rather than the entire balance.`
+  /// `Load a Digital Gift Card with %2! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing %1!\n\nIf the recipient is already a %1 user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a split amount to distribute from the gift card rather than the entire balance.`
   String get giftInfo {
     return Intl.message(
-      'Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing %1!\n\nIf the recipient is already a %1 user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a split amount to distribute from the gift card rather than the entire balance.',
+      'Load a Digital Gift Card with %2! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing %1!\n\nIf the recipient is already a %1 user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a split amount to distribute from the gift card rather than the entire balance.',
       name: 'giftInfo',
       desc: 'Description for gift card creation',
       args: [],
@@ -2396,40 +2396,40 @@ class Z {
     );
   }
 
-  /// `The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?`
+  /// `The link you clicked contains some %2, would you like to import it to this wallet, or refund it to whoever sent it?`
   String get importGift {
     return Intl.message(
-      'The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?',
+      'The link you clicked contains some %2, would you like to import it to this wallet, or refund it to whoever sent it?',
       name: 'importGift',
       desc: 'import_gift',
       args: [],
     );
   }
 
-  /// `Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.`
+  /// `Unfortunately the link you clicked that contained some %2 appears to be empty, but you can still see the amount and associated message.`
   String get importGiftEmpty {
     return Intl.message(
-      'Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.',
+      'Unfortunately the link you clicked that contained some %2 appears to be empty, but you can still see the amount and associated message.',
       name: 'importGiftEmpty',
       desc: 'import_gift_empty',
       args: [],
     );
   }
 
-  /// `It looks like you clicked a link that contains some NANO, in order to receive these funds we just need for you to finish setting up your wallet.`
+  /// `It looks like you clicked a link that contains some %2, in order to receive these funds we just need for you to finish setting up your wallet.`
   String get importGiftIntro {
     return Intl.message(
-      'It looks like you clicked a link that contains some NANO, in order to receive these funds we just need for you to finish setting up your wallet.',
+      'It looks like you clicked a link that contains some %2, in order to receive these funds we just need for you to finish setting up your wallet.',
       name: 'importGiftIntro',
       desc: 'import_gift_intro',
       args: [],
     );
   }
 
-  /// `The link you clicked contains some NANO, would you like to import it to this wallet?`
+  /// `The link you clicked contains some %2, would you like to import it to this wallet?`
   String get importGiftv2 {
     return Intl.message(
-      'The link you clicked contains some NANO, would you like to import it to this wallet?',
+      'The link you clicked contains some %2, would you like to import it to this wallet?',
       name: 'importGiftv2',
       desc: 'import_gift_v2',
       args: [],
@@ -3008,10 +3008,10 @@ class Z {
     );
   }
 
-  /// `This is your new account. Once you receive NANO, transactions will show up like this:`
+  /// `This is your new account. Once you receive %2, transactions will show up like this:`
   String get newAccountIntro {
     return Intl.message(
-      'This is your new account. Once you receive NANO, transactions will show up like this:',
+      'This is your new account. Once you receive %2, transactions will show up like this:',
       name: 'newAccountIntro',
       desc: 'Alternate account intro card',
       args: [],
@@ -3702,10 +3702,10 @@ class Z {
     );
   }
 
-  /// `Free NANO`
+  /// `Free %2`
   String get promotionalLink {
     return Intl.message(
-      'Free NANO',
+      'Free %2',
       name: 'promotionalLink',
       desc: 'promo_Link',
       args: [],
@@ -3732,12 +3732,12 @@ class Z {
     );
   }
 
-  /// `Purchase Nano`
-  String get purchaseNano {
+  /// `Purchase %2`
+  String get purchaseCurrency {
     return Intl.message(
-      'Purchase Nano',
-      name: 'purchaseNano',
-      desc: 'purchase_nano',
+      'Purchase %2',
+      name: 'purchaseCurrency',
+      desc: 'purchase_currency',
       args: [],
     );
   }
@@ -4294,10 +4294,10 @@ class Z {
     );
   }
 
-  /// `Scan a Nano \naddress QR code`
+  /// `Scan a %2 \naddress QR code`
   String get scanInstructions {
     return Intl.message(
-      'Scan a Nano \naddress QR code',
+      'Scan a %2 \naddress QR code',
       name: 'scanInstructions',
       desc: 'scan_send_instruction_label',
       args: [],
@@ -4795,10 +4795,10 @@ class Z {
     );
   }
 
-  /// `Check out %1! A premier NANO mobile wallet!`
+  /// `Check out %1! A premier %2 mobile wallet!`
   String get shareAppText {
     return Intl.message(
-      'Check out %1! A premier NANO mobile wallet!',
+      'Check out %1! A premier %2 mobile wallet!',
       name: 'shareAppText',
       desc: 'share_extra',
       args: [],
@@ -4965,12 +4965,12 @@ class Z {
     );
   }
 
-  /// `Spend NANO`
-  String get spendNano {
+  /// `Spend %2`
+  String get spendCurrency {
     return Intl.message(
-      'Spend NANO',
-      name: 'spendNano',
-      desc: 'spend_nano',
+      'Spend %2',
+      name: 'spendCurrency',
+      desc: 'spend_currency',
       args: [],
     );
   }
@@ -5115,10 +5115,10 @@ class Z {
     );
   }
 
-  /// `Monero is a privacy-focused cryptocurrency that makes it very hard or even impossible to trace transactions. Meanwhile NANO is a payments-focused cryptocurrency that is fast and fee-less. Together they provide some of the most useful aspects of cryptocurrencies!\n\nUse this page to easily swap your NANO for XMR!`
+  /// `Monero is a privacy-focused cryptocurrency that makes it very hard or even impossible to trace transactions. Meanwhile %2 is a payments-focused cryptocurrency that is fast and fee-less. Together they provide some of the most useful aspects of cryptocurrencies!\n\nUse this page to easily swap your %2 for XMR!`
   String get swapXMRInfo {
     return Intl.message(
-      'Monero is a privacy-focused cryptocurrency that makes it very hard or even impossible to trace transactions. Meanwhile NANO is a payments-focused cryptocurrency that is fast and fee-less. Together they provide some of the most useful aspects of cryptocurrencies!\n\nUse this page to easily swap your NANO for XMR!',
+      'Monero is a privacy-focused cryptocurrency that makes it very hard or even impossible to trace transactions. Meanwhile %2 is a payments-focused cryptocurrency that is fast and fee-less. Together they provide some of the most useful aspects of cryptocurrencies!\n\nUse this page to easily swap your %2 for XMR!',
       name: 'swapXMRInfo',
       desc: 'swap_xmr_header',
       args: [],
@@ -5385,10 +5385,10 @@ class Z {
     );
   }
 
-  /// `This seed does not have any NANO on it`
+  /// `This seed does not have any %2 on it`
   String get transferNoFunds {
     return Intl.message(
-      'This seed does not have any NANO on it',
+      'This seed does not have any %2 on it',
       name: 'transferNoFunds',
       desc: 'transfer_no_funds_toast',
       args: [],
@@ -5405,10 +5405,10 @@ class Z {
     );
   }
 
-  /// `Scan a Nano \nseed or private key`
+  /// `Scan a %2 \nseed or private key`
   String get transferQrScanHint {
     return Intl.message(
-      'Scan a Nano \nseed or private key',
+      'Scan a %2 \nseed or private key',
       name: 'transferQrScanHint',
       desc: 'transfer_qr_scan_hint',
       args: [],
@@ -5555,12 +5555,12 @@ class Z {
     );
   }
 
-  /// `Use NANO`
-  String get useNano {
+  /// `Use %2`
+  String get useCurrency {
     return Intl.message(
-      'Use NANO',
-      name: 'useNano',
-      desc: 'use_nano',
+      'Use %2',
+      name: 'useCurrency',
+      desc: 'use_currency',
       args: [],
     );
   }

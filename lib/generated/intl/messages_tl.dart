@@ -321,7 +321,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas Pera"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("Palitan ng NANO"),
         "existingPasswordHint": MessageLookupByLibrary.simpleMessage(
             "Ipasok ang kasalukuyang password"),
         "existingPinHint":
@@ -363,7 +362,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Banner ng Pagpopondo"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Pagpopondo"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Kumuha ng NANO"),
         "giftAlert":
             MessageLookupByLibrary.simpleMessage("Mayroon kang regalo!"),
         "giftAlertEmpty":
@@ -634,7 +632,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "Sa 1 NANO lang bawat buwan, maaari mong i-unlock ang lahat ng feature ng Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("Libreng NANO"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Bumili ng Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code ay walang wasto na destinasyon"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -836,7 +833,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "social": MessageLookupByLibrary.simpleMessage("Sosyal"),
         "someone": MessageLookupByLibrary.simpleMessage("isang tao"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Gumastos ng NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Hatiin ang Isang Bill"),
@@ -934,7 +930,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage(
             "Mangyaring magpasok ng isang URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Gumamit ng NANO"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Naidagdag na ang user!"),
         "userNotFound":

@@ -320,7 +320,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Газовые деньги"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("Обмен НАНО"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Введите текущий пароль"),
         "existingPinHint":
@@ -362,7 +361,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Баннер финансирования"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Финансирование"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Получить НАНО"),
         "giftAlert":
             MessageLookupByLibrary.simpleMessage("У тебя есть подарок!"),
         "giftAlertEmpty":
@@ -629,7 +627,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Всего за 1 NANO в месяц вы можете разблокировать все функции Nautilus Pro."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Бесплатно НАНО"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Приобрести нано"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR-не содержит действительный адрес"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -826,7 +823,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Симплекс"),
         "social": MessageLookupByLibrary.simpleMessage("Социальное"),
         "someone": MessageLookupByLibrary.simpleMessage("кто то"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Потратить НАНО"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Разделить счет"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Разделить счет"),
@@ -922,7 +918,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Онлайн время"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Пожалуйста, введите URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Используйте НАНО"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Пользователь уже добавлен!"),
         "userNotFound":

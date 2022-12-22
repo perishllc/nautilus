@@ -316,7 +316,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Dinheiro do gás"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("Troca NANO"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Digite a senha atual"),
         "existingPinHint":
@@ -357,7 +356,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Banner de financiamento"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Financiamento"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Obter NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Você tem um dom!"),
         "giftAlertEmpty":
             MessageLookupByLibrary.simpleMessage("Presente vazio"),
@@ -622,7 +620,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "Por apenas 1 NANO por mês, você pode desbloquear todos os recursos do Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("NANO grátis"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Compre o Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "O código QR não contém um destino válido"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -816,7 +813,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "social": MessageLookupByLibrary.simpleMessage("Social"),
         "someone": MessageLookupByLibrary.simpleMessage("alguém"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Gaste NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Conta dividida"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Dividir uma conta"),
@@ -911,7 +907,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("não lida"),
         "uptime": MessageLookupByLibrary.simpleMessage("tempo online"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Insira um URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Usar NANO"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Usuário já adicionado!"),
         "userNotFound":

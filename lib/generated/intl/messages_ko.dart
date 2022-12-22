@@ -269,7 +269,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("가스 머니"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("거래소 나노"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("현재 비밀번호를 입력하세요"),
         "existingPinHint": MessageLookupByLibrary.simpleMessage("현재 핀 입력"),
@@ -300,7 +299,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fulfilled": MessageLookupByLibrary.simpleMessage("성취됩니다"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage("펀딩 배너"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("자금 조달"),
-        "getNano": MessageLookupByLibrary.simpleMessage("나노를 얻으십시오"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("선물이 있어요!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("빈 선물"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("기프트 금액"),
@@ -537,7 +535,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "매월 단 1NANO로 Nautilus Pro의 모든 기능을 잠금 해제할 수 있습니다."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("무료 나노"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("나노 구매"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -707,7 +704,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("심플렉스"),
         "social": MessageLookupByLibrary.simpleMessage("사회의"),
         "someone": MessageLookupByLibrary.simpleMessage("누구"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("나노를 쓰다"),
         "splitBill": MessageLookupByLibrary.simpleMessage("분할 청구서"),
         "splitBillHeader": MessageLookupByLibrary.simpleMessage("분할 청구서"),
         "splitBillInfo": MessageLookupByLibrary.simpleMessage(
@@ -794,7 +790,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("읽히지 않는"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("URL을 입력하세요."),
-        "useNano": MessageLookupByLibrary.simpleMessage("나노를 사용"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("사용자가 이미 추가되었습니다!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("사용자를 찾을 수 없습니다!"),

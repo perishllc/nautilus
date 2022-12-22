@@ -315,8 +315,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas Money"),
-        "exchangeNano":
-            MessageLookupByLibrary.simpleMessage("Apmainīties ar NANO"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Ievadiet pašreizējo paroli"),
         "existingPinHint":
@@ -358,7 +356,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Finansēšanas reklāmkarogs"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finansējums"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Iegūstiet NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("You have a gift!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Empty Gift"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Gift Amount"),
@@ -615,7 +612,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tikai par 1 NANO mēnesī varat atbloķēt visas Nautilus Pro funkcijas."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Bezmaksas NANO"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Purchase Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -806,7 +802,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "social": MessageLookupByLibrary.simpleMessage("Sociālie"),
         "someone": MessageLookupByLibrary.simpleMessage("kāds"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Tērē NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Sadalīts Bils"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Sadaliet rēķinu"),
@@ -904,7 +899,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("unread"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Lūdzu, ievadiet URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Izmantojiet NANO"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
             "Lietotājs jau ir pievienots!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User not found!"),

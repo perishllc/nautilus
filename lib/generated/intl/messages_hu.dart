@@ -321,7 +321,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gáz Pénz"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("Csere NANO"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Írd be a jelenlegi jelszót"),
         "existingPinHint": MessageLookupByLibrary.simpleMessage(
@@ -361,7 +360,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(
             "Finanszírozási szalaghirdetés"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finanszírozás"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Szerezd meg a NANO-t"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Van egy ajándékod!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Üres ajándék"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Ajándék összege"),
@@ -627,7 +625,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mindössze havi 1 NANO-ért feloldhatja a Nautilus Pro összes funkcióját."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Ingyenes NANO"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Vásárlás Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -822,7 +819,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "social": MessageLookupByLibrary.simpleMessage("Társadalmi"),
         "someone": MessageLookupByLibrary.simpleMessage("valaki"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Töltsön NANO-t"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),
         "splitBillHeader": MessageLookupByLibrary.simpleMessage("Split A Bill"),
         "splitBillInfo": MessageLookupByLibrary.simpleMessage(
@@ -917,7 +913,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Kérjük, adjon meg egy URL-t"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Használj NANO-t"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Felhasználó már hozzáadva!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(

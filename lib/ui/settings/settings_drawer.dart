@@ -1713,7 +1713,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           AppTransferOverviewSheet().mainBottomSheet(context);
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).shareNautilus, AppIcons.share,
+        AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).shareApp.replaceAll("%1", NonTranslatable.appName), AppIcons.share,
             onPressed: () {
           setState(() {
             _shareOpen = true;
@@ -2844,7 +2844,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).shareText, AppIcons.share,
                         onPressed: () {
-                      Share.share("${Z.of(context).shareNautilusText} ${NonTranslatable.genericStoreLink}");
+                      Share.share("${Z.of(context).shareAppText.replaceAll("%1", NonTranslatable.appName)} ${NonTranslatable.genericStoreLink}");
                     }),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     Container(

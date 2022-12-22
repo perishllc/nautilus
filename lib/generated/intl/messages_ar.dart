@@ -303,7 +303,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("أموال الغاز"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("صرف نانو"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("إدخل كلمة السر الحالية"),
         "existingPinHint": MessageLookupByLibrary.simpleMessage(
@@ -340,7 +339,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("لافتة التمويل"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("التمويل"),
-        "getNano": MessageLookupByLibrary.simpleMessage("احصل على NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("لديك هدية!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("هدية فارغة"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("مبلغ الهدية"),
@@ -597,7 +595,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "مقابل 1 NANO فقط شهريًا ، يمكنك فتح جميع ميزات Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("نانو مجاني"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("شراء نانو"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "لا يحتوي رمز الاستجابة السريعة على وجهة صالحة\n"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -787,7 +784,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("البسيط"),
         "social": MessageLookupByLibrary.simpleMessage("اجتماعي"),
         "someone": MessageLookupByLibrary.simpleMessage("شخصا ما"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("أنفق نانو"),
         "splitBill": MessageLookupByLibrary.simpleMessage("سبليت بيل"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("تقسيم مشروع قانون"),
@@ -879,7 +875,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("مدة التشغيل"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("الرجاء إدخال عنوان URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("استخدم NANO"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("تمت إضافة المستخدم بالفعل!"),
         "userNotFound":

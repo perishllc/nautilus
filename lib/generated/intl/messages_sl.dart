@@ -316,7 +316,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Plinski denar"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("Menjava NANO"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Vnesite trenutno geslo"),
         "existingPinHint":
@@ -356,7 +355,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Banner za financiranje"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("financiranje"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Pridobite NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Imate darilo!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Prazno darilo"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Znesek darila"),
@@ -615,7 +613,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Za samo 1 NANO na mesec lahko odklenete vse funkcije Nautilusa Pro."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Brezplačni NANO"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Nakup Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -808,7 +805,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simpleks"),
         "social": MessageLookupByLibrary.simpleMessage("Socialno"),
         "someone": MessageLookupByLibrary.simpleMessage("nekdo"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Porabite NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Razdeljeni račun"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Razdeli račun"),
@@ -904,7 +900,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("neprebrano"),
         "uptime": MessageLookupByLibrary.simpleMessage("prisotnost"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Vnesite URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Uporabite NANO"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Uporabnik je že dodan!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(

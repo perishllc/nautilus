@@ -117,8 +117,12 @@ class NonTranslatable {
     return "https://nautilus.io/hcaptcha";
   }
 
-  static String get nautilus {
+  static String get appName {
     return "Nautilus";
+  }
+
+  static String get currencyName {
+    return "Nano";
   }
 
   static String get nano {

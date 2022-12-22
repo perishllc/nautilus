@@ -308,7 +308,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gaz Para"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("NANO değişimi"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Güncel şifrenizi giriniz"),
         "existingPinHint":
@@ -348,7 +347,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Finansman Afişi"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finansman"),
-        "getNano": MessageLookupByLibrary.simpleMessage("NANO\'yu edinin"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Bir yeteneğin var!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Boş Hediye"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Hediye Miktarı"),
@@ -608,7 +606,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ayda sadece 1 NANO karşılığında Nautilus Pro\'nun tüm özelliklerinin kilidini açabilirsiniz."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Ücretsiz NANO"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Satın al Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR kodu geçerli bir adres içermiyor"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -799,7 +796,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simpleks"),
         "social": MessageLookupByLibrary.simpleMessage("Sosyal"),
         "someone": MessageLookupByLibrary.simpleMessage("birisi"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("NANO harca"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Faturayı Böl"),
         "splitBillHeader": MessageLookupByLibrary.simpleMessage("Fatura Böl"),
         "splitBillInfo": MessageLookupByLibrary.simpleMessage(
@@ -895,7 +891,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Çevrimiçi"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Lütfen bir URL girin"),
-        "useNano": MessageLookupByLibrary.simpleMessage("NANO kullan"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Kullanıcı zaten eklendi!"),
         "userNotFound":

@@ -135,7 +135,7 @@
     "type": "text",
     "description": "home_asked_cta"
   },
-  "askSkipSetup": "We noticed you clicked on a link that contains some nano, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no.",
+  "askSkipSetup": "We noticed you clicked on a link that contains some %2, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no.",
   "@askSkipSetup": {
     "type": "text",
     "description": "prompt_skip_setup"
@@ -620,7 +620,7 @@
     "type": "text",
     "description": "Default account name"
   },
-  "defaultGiftMessage": "Check out %1! I sent you some nano with this link:",
+  "defaultGiftMessage": "Check out %1! I sent you some %2 with this link:",
   "@defaultGiftMessage": {
     "type": "text",
     "description": "default_gift_message"
@@ -885,10 +885,10 @@
     "type": "text",
     "description": "example_rec_recipient_message"
   },
-  "exchangeNano": "Exchange NANO",
-  "@exchangeNano": {
+  "exchangeCurrency": "Exchange %2",
+  "@exchangeCurrency": {
     "type": "text",
-    "description": "exchange_nano"
+    "description": "exchange_currency"
   },
   "existingPasswordHint": "Enter current password",
   "@existingPasswordHint": {
@@ -1015,10 +1015,10 @@
     "type": "text",
     "description": "funding_header"
   },
-  "getNano": "Get NANO",
-  "@getNano": {
+  "getCurrency": "Get %2",
+  "@getCurrency": {
     "type": "text",
-    "description": "get_nano"
+    "description": "get_currency"
   },
   "giftAlert": "You have a gift!",
   "@giftAlert": {
@@ -1055,7 +1055,7 @@
     "type": "text",
     "description": "gift_from"
   },
-  "giftInfo": "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing %1!\n\nIf the recipient is already a %1 user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a split amount to distribute from the gift card rather than the entire balance.",
+  "giftInfo": "Load a Digital Gift Card with %2! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you'll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing %1!\n\nIf the recipient is already a %1 user they'll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a split amount to distribute from the gift card rather than the entire balance.",
   "@giftInfo": {
     "type": "text",
     "description": "Description for gift card creation"
@@ -1170,22 +1170,22 @@
     "type": "text",
     "description": "Generic import"
   },
-  "importGift": "The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?",
+  "importGift": "The link you clicked contains some %2, would you like to import it to this wallet, or refund it to whoever sent it?",
   "@importGift": {
     "type": "text",
     "description": "import_gift"
   },
-  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some %2 appears to be empty, but you can still see the amount and associated message.",
   "@importGiftEmpty": {
     "type": "text",
     "description": "import_gift_empty"
   },
-  "importGiftIntro": "It looks like you clicked a link that contains some NANO, in order to receive these funds we just need for you to finish setting up your wallet.",
+  "importGiftIntro": "It looks like you clicked a link that contains some %2, in order to receive these funds we just need for you to finish setting up your wallet.",
   "@importGiftIntro": {
     "type": "text",
     "description": "import_gift_intro"
   },
-  "importGiftv2": "The link you clicked contains some NANO, would you like to import it to this wallet?",
+  "importGiftv2": "The link you clicked contains some %2, would you like to import it to this wallet?",
   "@importGiftv2": {
     "type": "text",
     "description": "import_gift_v2"
@@ -1475,7 +1475,7 @@
     "type": "text",
     "description": "verification_needed_header"
   },
-  "newAccountIntro": "This is your new account. Once you receive NANO, transactions will show up like this:",
+  "newAccountIntro": "This is your new account. Once you receive %2, transactions will show up like this:",
   "@newAccountIntro": {
     "type": "text",
     "description": "Alternate account intro card"
@@ -1820,7 +1820,7 @@
     "type": "text",
     "description": "settings_privacy_policy"
   },
-  "promotionalLink": "Free NANO",
+  "promotionalLink": "Free %2",
   "@promotionalLink": {
     "type": "text",
     "description": "promo_Link"
@@ -1835,10 +1835,10 @@
     "type": "text",
     "description": "pro_sub_required_paragraph"
   },
-  "purchaseNano": "Purchase Nano",
-  "@purchaseNano": {
+  "purchaseCurrency": "Purchase %2",
+  "@purchaseCurrency": {
     "type": "text",
-    "description": "purchase_nano"
+    "description": "purchase_currency"
   },
   "qrInvalidAddress": "QR code does not contain a valid destination",
   "@qrInvalidAddress": {
@@ -2115,7 +2115,7 @@
     "type": "text",
     "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
   },
-  "scanInstructions": "Scan a Nano \naddress QR code",
+  "scanInstructions": "Scan a %2 \naddress QR code",
   "@scanInstructions": {
     "type": "text",
     "description": "scan_send_instruction_label"
@@ -2365,7 +2365,7 @@
     "type": "text",
     "description": "settings_share"
   },
-  "shareAppText": "Check out %1! A premier NANO mobile wallet!",
+  "shareAppText": "Check out %1! A premier %2 mobile wallet!",
   "@shareAppText": {
     "type": "text",
     "description": "share_extra"
@@ -2450,10 +2450,10 @@
     "type": "text",
     "description": "send_someone"
   },
-  "spendNano": "Spend NANO",
-  "@spendNano": {
+  "spendCurrency": "Spend %2",
+  "@spendCurrency": {
     "type": "text",
-    "description": "spend_nano"
+    "description": "spend_currency"
   },
   "splitBill": "Split Bill",
   "@splitBill": {
@@ -2525,7 +2525,7 @@
     "type": "text",
     "description": "swap_xmr_header"
   },
-  "swapXMRInfo": "Monero is a privacy-focused cryptocurrency that makes it very hard or even impossible to trace transactions. Meanwhile NANO is a payments-focused cryptocurrency that is fast and fee-less. Together they provide some of the most useful aspects of cryptocurrencies!\n\nUse this page to easily swap your NANO for XMR!",
+  "swapXMRInfo": "Monero is a privacy-focused cryptocurrency that makes it very hard or even impossible to trace transactions. Meanwhile %2 is a payments-focused cryptocurrency that is fast and fee-less. Together they provide some of the most useful aspects of cryptocurrencies!\n\nUse this page to easily swap your %2 for XMR!",
   "@swapXMRInfo": {
     "type": "text",
     "description": "swap_xmr_header"
@@ -2660,7 +2660,7 @@
     "type": "text",
     "description": "transfer_hint"
   },
-  "transferNoFunds": "This seed does not have any NANO on it",
+  "transferNoFunds": "This seed does not have any %2 on it",
   "@transferNoFunds": {
     "type": "text",
     "description": "transfer_no_funds_toast"
@@ -2670,7 +2670,7 @@
     "type": "text",
     "description": "transfer_qr_scan_error"
   },
-  "transferQrScanHint": "Scan a Nano \nseed or private key",
+  "transferQrScanHint": "Scan a %2 \nseed or private key",
   "@transferQrScanHint": {
     "type": "text",
     "description": "transfer_qr_scan_hint"
@@ -2745,10 +2745,10 @@
     "type": "text",
     "description": "url_empty"
   },
-  "useNano": "Use NANO",
-  "@useNano": {
+  "useCurrency": "Use %2",
+  "@useCurrency": {
     "type": "text",
-    "description": "use_nano"
+    "description": "use_currency"
   },
   "useAppRep": "Use %1 Rep",
   "@useAppRep": {

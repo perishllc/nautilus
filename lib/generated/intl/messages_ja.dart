@@ -268,7 +268,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("ガスマネー"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("交換ナノ"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("現在のパスワードを入力してください"),
         "existingPinHint":
@@ -301,7 +300,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("ファンディング バナー"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("資金調達"),
-        "getNano": MessageLookupByLibrary.simpleMessage("ナノを入手"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("おまえには贈り物がある！"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("空のギフト"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("ギフト金額"),
@@ -533,7 +531,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "毎月わずか 1 NANO で、Nautilus Pro のすべての機能のロックを解除できます。"),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("フリーナノ"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("ナノを購入"),
         "qrInvalidAddress":
             MessageLookupByLibrary.simpleMessage("QRコードに正しい送金先が含まれていません。"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -701,7 +698,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("シンプレックス"),
         "social": MessageLookupByLibrary.simpleMessage("社交"),
         "someone": MessageLookupByLibrary.simpleMessage("誰か"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("NANOを使う"),
         "splitBill": MessageLookupByLibrary.simpleMessage("分割請求"),
         "splitBillHeader": MessageLookupByLibrary.simpleMessage("請求書を分割する"),
         "splitBillInfo": MessageLookupByLibrary.simpleMessage(
@@ -787,7 +783,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("未読です"),
         "uptime": MessageLookupByLibrary.simpleMessage("稼働時間"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("URL を入力してください"),
-        "useNano": MessageLookupByLibrary.simpleMessage("NANOを使う"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("ユーザーはすでに追加されています!"),
         "userNotFound":

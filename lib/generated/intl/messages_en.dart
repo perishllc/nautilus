@@ -60,7 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please enter an Amount"),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 Wallet"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
-            "We noticed you clicked on a link that contains some nano, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no."),
+            "We noticed you clicked on a link that contains some %2, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no."),
         "askTracking": MessageLookupByLibrary.simpleMessage(
             "We\'re about to ask for the \"tracking\" permission, this is used *strictly* for attributing links / referrals, and minor analytics (things like number of installs, what app version, etc.) We believe you are entitled to your privacy and are not interested in any of your personal data, we just need the permission in order for link attributions to work correctly."),
         "asked": MessageLookupByLibrary.simpleMessage("Asked"),
@@ -220,7 +220,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Main Account"),
         "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
-            "Check out %1! I sent you some nano with this link:"),
+            "Check out %1! I sent you some %2 with this link:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
@@ -307,7 +307,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas Money"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("Exchange NANO"),
+        "exchangeCurrency": MessageLookupByLibrary.simpleMessage("Exchange %2"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter current password"),
         "existingPinHint":
@@ -347,7 +347,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Funding Banner"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Funding"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Get NANO"),
+        "getCurrency": MessageLookupByLibrary.simpleMessage("Get %2"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("You have a gift!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Empty Gift"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Gift Amount"),
@@ -359,7 +359,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gift Sheet Info"),
         "giftFrom": MessageLookupByLibrary.simpleMessage("Gift From"),
         "giftInfo": MessageLookupByLibrary.simpleMessage(
-            "Load a Digital Gift Card with NANO! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing %1!\n\nIf the recipient is already a %1 user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a split amount to distribute from the gift card rather than the entire balance."),
+            "Load a Digital Gift Card with %2! Set an amount, and an optional message for the recipient to see when they open it!\n\nOnce created, you\'ll get a link that you can send to anyone, which when opened will automatically distribute the funds to the recipient after installing %1!\n\nIf the recipient is already a %1 user they\'ll get a prompt to transfer the funds into their account upon opening the link\n\nYou can also set a split amount to distribute from the gift card rather than the entire balance."),
         "giftMessage": MessageLookupByLibrary.simpleMessage("Gift Message"),
         "giftProcessError": MessageLookupByLibrary.simpleMessage(
             "There was an error while processing this gift card. Maybe check your connection and try clicking the gift link again."),
@@ -397,13 +397,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "imSure": MessageLookupByLibrary.simpleMessage("I\'m Sure"),
         "import": MessageLookupByLibrary.simpleMessage("Import"),
         "importGift": MessageLookupByLibrary.simpleMessage(
-            "The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?"),
+            "The link you clicked contains some %2, would you like to import it to this wallet, or refund it to whoever sent it?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
-            "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
+            "Unfortunately the link you clicked that contained some %2 appears to be empty, but you can still see the amount and associated message."),
         "importGiftIntro": MessageLookupByLibrary.simpleMessage(
-            "It looks like you clicked a link that contains some NANO, in order to receive these funds we just need for you to finish setting up your wallet."),
+            "It looks like you clicked a link that contains some %2, in order to receive these funds we just need for you to finish setting up your wallet."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
-            "The link you clicked contains some NANO, would you like to import it to this wallet?"),
+            "The link you clicked contains some %2, would you like to import it to this wallet?"),
         "importHD": MessageLookupByLibrary.simpleMessage("Import HD"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Import Secret Phrase"),
@@ -488,7 +488,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "needVerificationAlertHeader":
             MessageLookupByLibrary.simpleMessage("Verification Needed"),
         "newAccountIntro": MessageLookupByLibrary.simpleMessage(
-            "This is your new account. Once you receive NANO, transactions will show up like this:"),
+            "This is your new account. Once you receive %2, transactions will show up like this:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("New Wallet"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
@@ -601,8 +601,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "%1 Pro Subscription Required"),
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "For just %3 %2 per month, you can unlock all of the features of %1 Pro."),
-        "promotionalLink": MessageLookupByLibrary.simpleMessage("Free NANO"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Purchase Nano"),
+        "promotionalLink": MessageLookupByLibrary.simpleMessage("Free %2"),
+        "purchaseCurrency": MessageLookupByLibrary.simpleMessage("Purchase %2"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -690,8 +690,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding."),
-        "scanInstructions": MessageLookupByLibrary.simpleMessage(
-            "Scan a Nano \naddress QR code"),
+        "scanInstructions":
+            MessageLookupByLibrary.simpleMessage("Scan a %2 \naddress QR code"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Scan NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Scan QR Code"),
         "searchHint":
@@ -764,7 +764,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("Share"),
         "shareApp": MessageLookupByLibrary.simpleMessage("Share %1"),
         "shareAppText": MessageLookupByLibrary.simpleMessage(
-            "Check out %1! A premier NANO mobile wallet!"),
+            "Check out %1! A premier %2 mobile wallet!"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Share Link"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Share Message"),
         "shareText": MessageLookupByLibrary.simpleMessage("Share Text"),
@@ -788,7 +788,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "social": MessageLookupByLibrary.simpleMessage("Social"),
         "someone": MessageLookupByLibrary.simpleMessage("someone"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Spend NANO"),
+        "spendCurrency": MessageLookupByLibrary.simpleMessage("Spend %2"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),
         "splitBillHeader": MessageLookupByLibrary.simpleMessage("Split A Bill"),
         "splitBillInfo": MessageLookupByLibrary.simpleMessage(
@@ -808,7 +808,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "swapXMR": MessageLookupByLibrary.simpleMessage("Swap XMR"),
         "swapXMRHeader": MessageLookupByLibrary.simpleMessage("Swap Monero"),
         "swapXMRInfo": MessageLookupByLibrary.simpleMessage(
-            "Monero is a privacy-focused cryptocurrency that makes it very hard or even impossible to trace transactions. Meanwhile NANO is a payments-focused cryptocurrency that is fast and fee-less. Together they provide some of the most useful aspects of cryptocurrencies!\n\nUse this page to easily swap your NANO for XMR!"),
+            "Monero is a privacy-focused cryptocurrency that makes it very hard or even impossible to trace transactions. Meanwhile %2 is a payments-focused cryptocurrency that is fast and fee-less. Together they provide some of the most useful aspects of cryptocurrencies!\n\nUse this page to easily swap your %2 for XMR!"),
         "swapping": MessageLookupByLibrary.simpleMessage("Swapping"),
         "switchToSeed": MessageLookupByLibrary.simpleMessage("Switch to Seed"),
         "systemDefault": MessageLookupByLibrary.simpleMessage("System Default"),
@@ -854,11 +854,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferManualHint": MessageLookupByLibrary.simpleMessage(
             "Please enter the seed below."),
         "transferNoFunds": MessageLookupByLibrary.simpleMessage(
-            "This seed does not have any NANO on it"),
+            "This seed does not have any %2 on it"),
         "transferQrScanError": MessageLookupByLibrary.simpleMessage(
             "This QR code does not contain a valid seed."),
         "transferQrScanHint": MessageLookupByLibrary.simpleMessage(
-            "Scan a Nano \nseed or private key"),
+            "Scan a %2 \nseed or private key"),
         "unacknowledged":
             MessageLookupByLibrary.simpleMessage("unacknowledged"),
         "unconfirmed": MessageLookupByLibrary.simpleMessage("unconfirmed"),
@@ -881,7 +881,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Please enter a URL"),
         "useAppRep": MessageLookupByLibrary.simpleMessage("Use %1 Rep"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Use NANO"),
+        "useCurrency": MessageLookupByLibrary.simpleMessage("Use %2"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("User already added!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User not found!"),

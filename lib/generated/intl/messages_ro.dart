@@ -318,7 +318,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Bani de gaz"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("Schimbă NANO"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Introduceti parola curenta"),
         "existingPinHint":
@@ -359,7 +358,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Banner de finanțare"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finanțarea"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Ia NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Ai un cadou!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Cadou gol"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Suma cadou"),
@@ -620,8 +618,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "Pentru doar 1 NANO pe lună, puteți debloca toate funcțiile Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("NANO gratuit"),
-        "purchaseNano":
-            MessageLookupByLibrary.simpleMessage("Achiziționați Nano"),
         "qrInvalidAddress":
             MessageLookupByLibrary.simpleMessage("Codul QR este invalid"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -815,7 +811,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "social": MessageLookupByLibrary.simpleMessage("Social"),
         "someone": MessageLookupByLibrary.simpleMessage("cineva"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Cheltuiește NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Bill împărțit"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Împărțiți o factură"),
@@ -914,7 +909,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Timp de funcționare"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage(
             "Vă rugăm să introduceți o adresă URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Folosește NANO"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Utilizator deja adăugat!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(

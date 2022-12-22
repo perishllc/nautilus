@@ -328,7 +328,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Argent pour l\'essence"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("Échange NANO"),
         "existingPasswordHint": MessageLookupByLibrary.simpleMessage(
             "Entrer le mot de passe actuel"),
         "existingPinHint":
@@ -370,7 +369,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Bannière de donation"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Donation"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Obtenez NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Tu as un cadeau !"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Cadeau vide"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Montant du cadeau"),
@@ -634,7 +632,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "Pour seulement 1 NANO par mois, vous pouvez débloquer toutes les fonctionnalités de Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("NANO gratuit"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Acheter Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "Le code QR ne contient pas de destinataire valide"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -833,7 +830,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "social": MessageLookupByLibrary.simpleMessage("Social"),
         "someone": MessageLookupByLibrary.simpleMessage("quelqu\'un"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Dépensez NANO"),
         "splitBill":
             MessageLookupByLibrary.simpleMessage("Facture fractionnée"),
         "splitBillHeader":
@@ -930,7 +926,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Disponibilité"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Veuillez entrer une URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Utiliser NANO"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Utilisateur déjà ajouté !"),
         "userNotFound":

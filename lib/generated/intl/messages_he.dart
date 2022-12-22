@@ -293,7 +293,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("כסף גז"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("החלף NANO"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("הכנס סיסמא נוכחית"),
         "existingPinHint":
@@ -329,7 +328,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("באנר מימון"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("מימון"),
-        "getNano": MessageLookupByLibrary.simpleMessage("קבל NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("יש לך כישרון!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("מתנה ריקה"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("סכום מתנה"),
@@ -575,7 +573,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "תמורת NANO אחד בלבד לחודש, אתה יכול לפתוח את כל התכונות של Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("חינם NANO"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("רכישת ננו"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -753,7 +750,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("סימפלקס"),
         "social": MessageLookupByLibrary.simpleMessage("חֶברָתִי"),
         "someone": MessageLookupByLibrary.simpleMessage("מִישֶׁהוּ"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("להוציא ננו"),
         "splitBill": MessageLookupByLibrary.simpleMessage("ביל מפוצל"),
         "splitBillHeader": MessageLookupByLibrary.simpleMessage("פיצול שטר"),
         "splitBillInfo": MessageLookupByLibrary.simpleMessage(
@@ -842,7 +838,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("שלא נקראו"),
         "uptime": MessageLookupByLibrary.simpleMessage("זמן אונליין"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("נא להזין כתובת URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("השתמש ב-NANO"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("משתמש כבר נוסף!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("המשתמש לא נמצא!"),

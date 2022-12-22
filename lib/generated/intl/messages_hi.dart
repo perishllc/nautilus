@@ -311,7 +311,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("गैस मनी"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("एक्सचेंज नैनो"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("वर्तमान पासवर्ड डालें"),
         "existingPinHint":
@@ -349,7 +348,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("फंडिंग बैनर"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("अनुदान"),
-        "getNano": MessageLookupByLibrary.simpleMessage("नैनो प्राप्त करें"),
         "giftAlert":
             MessageLookupByLibrary.simpleMessage("आपके पास एक उपहार है!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("खाली गिफ्ट"),
@@ -609,7 +607,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "केवल 1 नैनो प्रति माह के लिए, आप Nautilus Pro की सभी विशेषताओं को अनलॉक कर सकते हैं।"),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("मुफ़्त नैनो"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("नैनो खरीदें"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "क्यूआर कोड में मान्य गंतव्य नहीं है"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -801,7 +798,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("सिंप्लेक्स"),
         "social": MessageLookupByLibrary.simpleMessage("सामाजिक"),
         "someone": MessageLookupByLibrary.simpleMessage("कोई तो"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("नैनो खर्च करें"),
         "splitBill": MessageLookupByLibrary.simpleMessage("स्प्लिट बिल"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("स्प्लिट ए बिल"),
@@ -899,7 +895,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("सक्रिय रहने की अवधि"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("कृपया एक यूआरएल दर्ज करें"),
-        "useNano": MessageLookupByLibrary.simpleMessage("नैनो का प्रयोग करें"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
             "उपयोगकर्ता पहले ही जोड़ा जा चुका है!"),
         "userNotFound":

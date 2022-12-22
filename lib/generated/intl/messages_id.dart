@@ -314,7 +314,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Uang Gas"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("Tukarkan NANO"),
         "existingPasswordHint": MessageLookupByLibrary.simpleMessage(
             "Masukkan kata sandi saat ini"),
         "existingPinHint":
@@ -356,7 +355,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Spanduk Pendanaan"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Pendanaan"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Dapatkan NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Kau punya hadiah!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Hadiah Kosong"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Jumlah Hadiah"),
@@ -616,7 +614,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "Hanya dengan 1 NANO per bulan, Anda dapat membuka kunci semua fitur Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("NANO gratis"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Pembelian Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "Kode QR tidak berisikan alamat yang benar"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -807,7 +804,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simpleks"),
         "social": MessageLookupByLibrary.simpleMessage("Sosial"),
         "someone": MessageLookupByLibrary.simpleMessage("seseorang"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Habiskan NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Pisahkan Tagihan"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Pisahkan Tagihan"),
@@ -903,7 +899,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("belum dibaca"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Masukkan URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Gunakan NANO"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Pengguna sudah ditambahkan!"),
         "userNotFound":

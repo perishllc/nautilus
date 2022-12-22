@@ -11,6 +11,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/authentication_method.dart';
 import 'package:wallet_flutter/model/vault.dart';
 import 'package:wallet_flutter/model/wallet.dart';
@@ -446,7 +447,7 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                             AppButton.buildAppButton(
                               context,
                               AppButtonType.PRIMARY,
-                              Z.of(context).useNautilusRep,
+                              Z.of(context).useAppRep.replaceAll("%1", NonTranslatable.appName),
                               Dimens.BUTTON_TOP_DIMENS,
                               onPressed: () async {
                                 if (!NanoAccounts.isValid(NanoAccountType.NANO, AppWallet.nautilusRepresentative)) {

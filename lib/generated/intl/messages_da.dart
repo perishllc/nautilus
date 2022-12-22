@@ -309,7 +309,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas Penge"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("Byt NANO"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Indsæt nuværende kodeord"),
         "existingPinHint":
@@ -350,7 +349,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Finansieringsbanner"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finansiering"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Få NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Du har en gave!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Tom gave"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Gave Beløb"),
@@ -612,7 +610,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "For kun 1 NANO om måneden kan du låse op for alle funktionerne i Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("Gratis NANO"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Køb Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR kód neobsahuje platnou destinaci."),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -802,7 +799,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "social": MessageLookupByLibrary.simpleMessage("Social"),
         "someone": MessageLookupByLibrary.simpleMessage("nogen"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Brug NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Del en regning"),
@@ -898,7 +894,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Provozuschopnost"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Indtast venligst en URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Brug NANO"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
             "Brugeren er allerede tilføjet!"),
         "userNotFound":

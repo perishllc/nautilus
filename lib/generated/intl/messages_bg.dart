@@ -313,7 +313,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Газови пари"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("Разменете NANO"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Въведете текущата парола"),
         "existingPinHint":
@@ -354,7 +353,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Банер за финансиране"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Финансиране"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Вземете NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Имаш дарба!"),
         "giftAlertEmpty":
             MessageLookupByLibrary.simpleMessage("Празен Подарък"),
@@ -617,7 +615,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Само за 1 NANO на месец можете да отключите всички функции на Nautilus Pro."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Безплатен NANO"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Покупка Нано"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR кода не съдържа валидна дестинация "),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -812,7 +809,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Симплекс"),
         "social": MessageLookupByLibrary.simpleMessage("Социални"),
         "someone": MessageLookupByLibrary.simpleMessage("някой"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Прекарайте NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Разделен Бил"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Разделяне на сметка"),
@@ -909,7 +905,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("непрочетени"),
         "uptime": MessageLookupByLibrary.simpleMessage("Ъптайм"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Моля, въведете URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Използвайте NANO"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
             "Потребителят вече е добавен!"),
         "userNotFound":

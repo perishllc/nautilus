@@ -312,7 +312,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas Money"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("Intercanvi NANO"),
         "existingPasswordHint": MessageLookupByLibrary.simpleMessage(
             "Introduïu la contrasenya actual"),
         "existingPinHint":
@@ -350,7 +349,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Banner de finançament"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finançament"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Aconsegueix NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("You have a gift!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Empty Gift"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Gift Amount"),
@@ -610,7 +608,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "Per només 1 NANO al mes, podeu desbloquejar totes les funcions de Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("NANO gratuït"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Purchase Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR kód neobsahuje platnou destinaci."),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -804,7 +801,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "social": MessageLookupByLibrary.simpleMessage("Social"),
         "someone": MessageLookupByLibrary.simpleMessage("algú"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Gasta NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Bill dividit"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Dividir una factura"),
@@ -900,7 +896,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("unread"),
         "uptime": MessageLookupByLibrary.simpleMessage("Provozuschopnost"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Introduïu un URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Utilitzeu NANO"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Usuari ja afegit!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User not found!"),

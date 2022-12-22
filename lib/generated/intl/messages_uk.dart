@@ -321,7 +321,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Газові гроші"),
-        "exchangeNano": MessageLookupByLibrary.simpleMessage("Обмін NANO"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Введіть поточний пароль"),
         "existingPinHint":
@@ -363,7 +362,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Банер фінансування"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Фінансування"),
-        "getNano": MessageLookupByLibrary.simpleMessage("Отримати NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("У вас є подарунок!"),
         "giftAlertEmpty":
             MessageLookupByLibrary.simpleMessage("Порожній подарунок"),
@@ -633,7 +631,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Лише за 1 NANO на місяць ви можете розблокувати всі функції Nautilus Pro."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Безкоштовний NANO"),
-        "purchaseNano": MessageLookupByLibrary.simpleMessage("Придбати Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR код не містить правильного адресата"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -830,7 +827,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Симплекс"),
         "social": MessageLookupByLibrary.simpleMessage("Соціальний"),
         "someone": MessageLookupByLibrary.simpleMessage("хтось"),
-        "spendNano": MessageLookupByLibrary.simpleMessage("Витрати НАНО"),
         "splitBill":
             MessageLookupByLibrary.simpleMessage("Розділений законопроект"),
         "splitBillHeader":
@@ -929,7 +925,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Час в мережі"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Будь ласка, введіть URL"),
-        "useNano": MessageLookupByLibrary.simpleMessage("Використовуйте NANO"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Користувача вже додано!"),
         "userNotFound":
