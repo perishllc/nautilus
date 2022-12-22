@@ -52,12 +52,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "الرجاء إدخال اسم مستخدم أو عنوان"),
         "addressShare": MessageLookupByLibrary.simpleMessage("أنشر العنوان"),
-        "advanced": MessageLookupByLibrary.simpleMessage(""),
+        "advanced": MessageLookupByLibrary.simpleMessage("متقدم"),
         "aliases": MessageLookupByLibrary.simpleMessage("الأسماء المستعارة"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "لا يمكن أن يكون مبلغ الانقسام أكبر من رصيد الهدية"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("يرجى إدخال المبلغ"),
+        "appWallet": MessageLookupByLibrary.simpleMessage("٪ 1 محفظة"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "لاحظنا أنك نقرت على رابط يحتوي على بعض النانو ، هل ترغب في تخطي عملية الإعداد؟ يمكنك دائمًا تغيير الأشياء لاحقًا.\n\n ومع ذلك ، إذا كان لديك بذرة موجودة تريد استيرادها ، فيجب عليك تحديد لا."),
         "askTracking": MessageLookupByLibrary.simpleMessage(
@@ -303,6 +304,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("أموال الغاز"),
+        "exchangeCurrency": MessageLookupByLibrary.simpleMessage("تبادل٪ 2"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("صرف نانو"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("إدخل كلمة السر الحالية"),
         "existingPinHint": MessageLookupByLibrary.simpleMessage(
@@ -339,6 +342,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("لافتة التمويل"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("التمويل"),
+        "getCurrency": MessageLookupByLibrary.simpleMessage("احصل على٪ 2"),
+        "getNano": MessageLookupByLibrary.simpleMessage("احصل على NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("لديك هدية!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("هدية فارغة"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("مبلغ الهدية"),
@@ -475,6 +480,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("المزيد من الإعدادات"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("الرجاء إدخال اسم"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet": MessageLookupByLibrary.simpleMessage("محفظة نوتيلوس"),
         "nearby": MessageLookupByLibrary.simpleMessage("مجاور"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "تتطلب هذه الميزة أن يكون لديك سجل معاملات أطول لمنع البريد العشوائي.\n\nبدلاً من ذلك، يمكنك إظهار رمز الاستجابة السريعة لشخص ما للمسح الضوئي."),
@@ -595,6 +601,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "مقابل 1 NANO فقط شهريًا ، يمكنك فتح جميع ميزات Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("نانو مجاني"),
+        "purchaseCurrency": MessageLookupByLibrary.simpleMessage("شراء٪ 2"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("شراء نانو"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "لا يحتوي رمز الاستجابة السريعة على وجهة صالحة\n"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -758,8 +766,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("تحميل من المحفظة الورقية"),
         "share": MessageLookupByLibrary.simpleMessage("يشارك"),
+        "shareApp": MessageLookupByLibrary.simpleMessage("مشاركة٪ 1"),
+        "shareAppText": MessageLookupByLibrary.simpleMessage(
+            "سحب٪ 1! محفظة هاتف نانو متميزة!"),
         "shareLink": MessageLookupByLibrary.simpleMessage("مشاركة الرابط"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("مشاركة الرسالة"),
+        "shareNautilus": MessageLookupByLibrary.simpleMessage("شارك نتريوم"),
+        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
+            "راجع نتريوم! محفظة نتريوم الرسمية للهاتف"),
         "shareText": MessageLookupByLibrary.simpleMessage("مشاركة النص"),
         "shopButton": MessageLookupByLibrary.simpleMessage("محل"),
         "show": MessageLookupByLibrary.simpleMessage("يعرض"),
@@ -784,6 +798,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("البسيط"),
         "social": MessageLookupByLibrary.simpleMessage("اجتماعي"),
         "someone": MessageLookupByLibrary.simpleMessage("شخصا ما"),
+        "spendCurrency": MessageLookupByLibrary.simpleMessage("أنفق٪ 2"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("أنفق نانو"),
         "splitBill": MessageLookupByLibrary.simpleMessage("سبليت بيل"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("تقسيم مشروع قانون"),
@@ -792,7 +808,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("تقسيم معلومات بيل"),
         "splitBy": MessageLookupByLibrary.simpleMessage("تقسيم حسب"),
-        "subsButton": MessageLookupByLibrary.simpleMessage(""),
+        "subsButton": MessageLookupByLibrary.simpleMessage("الاشتراكات"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("الإشتراك"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("اشترك عبر Apple Pay"),
@@ -875,6 +891,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("مدة التشغيل"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("الرجاء إدخال عنوان URL"),
+        "useAppRep": MessageLookupByLibrary.simpleMessage("استخدم٪ 1 Rep"),
+        "useCurrency": MessageLookupByLibrary.simpleMessage("استخدم٪ 2"),
+        "useNano": MessageLookupByLibrary.simpleMessage("استخدم NANO"),
+        "useNautilusRep":
+            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("تمت إضافة المستخدم بالفعل!"),
         "userNotFound":

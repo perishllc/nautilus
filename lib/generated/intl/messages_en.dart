@@ -308,6 +308,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas Money"),
         "exchangeCurrency": MessageLookupByLibrary.simpleMessage("Exchange %2"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Exchange NANO"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter current password"),
         "existingPinHint":
@@ -348,6 +349,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Funding Banner"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Funding"),
         "getCurrency": MessageLookupByLibrary.simpleMessage("Get %2"),
+        "getNano": MessageLookupByLibrary.simpleMessage("Get NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("You have a gift!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Empty Gift"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Gift Amount"),
@@ -482,6 +484,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty":
             MessageLookupByLibrary.simpleMessage("Please enter a Name"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet":
+            MessageLookupByLibrary.simpleMessage("Nautilus Wallet"),
         "nearby": MessageLookupByLibrary.simpleMessage("Nearby"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "This feature requires you to have a longer transaction history in order to prevent spam.\n\nAlternatively, you can show a QR code for someone to scan."),
@@ -603,6 +607,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "For just %3 %2 per month, you can unlock all of the features of %1 Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("Free %2"),
         "purchaseCurrency": MessageLookupByLibrary.simpleMessage("Purchase %2"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("Purchase Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR code does not contain a valid destination"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -767,6 +772,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Check out %1! A premier %2 mobile wallet!"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Share Link"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Share Message"),
+        "shareNautilus": MessageLookupByLibrary.simpleMessage("Share Nautilus"),
+        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
+            "Check out Nautilus! A premier NANO mobile wallet!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Share Text"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Shop"),
         "show": MessageLookupByLibrary.simpleMessage("Show"),
@@ -789,6 +797,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "social": MessageLookupByLibrary.simpleMessage("Social"),
         "someone": MessageLookupByLibrary.simpleMessage("someone"),
         "spendCurrency": MessageLookupByLibrary.simpleMessage("Spend %2"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("Spend NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Split Bill"),
         "splitBillHeader": MessageLookupByLibrary.simpleMessage("Split A Bill"),
         "splitBillInfo": MessageLookupByLibrary.simpleMessage(
@@ -882,6 +891,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Please enter a URL"),
         "useAppRep": MessageLookupByLibrary.simpleMessage("Use %1 Rep"),
         "useCurrency": MessageLookupByLibrary.simpleMessage("Use %2"),
+        "useNano": MessageLookupByLibrary.simpleMessage("Use NANO"),
+        "useNautilusRep":
+            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("User already added!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("User not found!"),

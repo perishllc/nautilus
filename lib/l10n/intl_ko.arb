@@ -110,7 +110,7 @@
     "type": "text",
     "description": "watch_only_add_success"
   },
-  "advanced": "",
+  "advanced": "고급의",
   "@advanced": {
     "type": "text",
     "description": "settings_advanced_header"
@@ -129,6 +129,11 @@
   "@amountMissing": {
     "type": "text",
     "description": "send_enter_amount"
+  },
+  "appWallet": "%1 지갑",
+  "@appWallet": {
+    "type": "text",
+    "description": "app_wallet"
   },
   "asked": "질문",
   "@asked": {
@@ -885,6 +890,11 @@
     "type": "text",
     "description": "example_rec_recipient_message"
   },
+  "exchangeCurrency": "교환 %2",
+  "@exchangeCurrency": {
+    "type": "text",
+    "description": "exchange_currency"
+  },
   "exchangeNano": "거래소 나노",
   "@exchangeNano": {
     "type": "text",
@@ -1014,6 +1024,11 @@
   "@fundingHeader": {
     "type": "text",
     "description": "funding_header"
+  },
+  "getCurrency": "%2 가져오기",
+  "@getCurrency": {
+    "type": "text",
+    "description": "get_currency"
   },
   "getNano": "나노를 얻으십시오",
   "@getNano": {
@@ -1835,6 +1850,11 @@
     "type": "text",
     "description": "pro_sub_required_paragraph"
   },
+  "purchaseCurrency": "구매 %2",
+  "@purchaseCurrency": {
+    "type": "text",
+    "description": "purchase_currency"
+  },
   "purchaseNano": "나노 구매",
   "@purchaseNano": {
     "type": "text",
@@ -2350,6 +2370,16 @@
     "type": "text",
     "description": "nautilus_share"
   },
+  "shareApp": "공유 %1",
+  "@shareApp": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareAppText": "%1을(를) 확인하십시오! 최고의 NANO 모바일 지갑!",
+  "@shareAppText": {
+    "type": "text",
+    "description": "share_extra"
+  },
   "shareLink": "공유 링크",
   "@shareLink": {
     "type": "text",
@@ -2450,6 +2480,11 @@
     "type": "text",
     "description": "send_someone"
   },
+  "spendCurrency": "지출 %2",
+  "@spendCurrency": {
+    "type": "text",
+    "description": "spend_currency"
+  },
   "spendNano": "나노를 쓰다",
   "@spendNano": {
     "type": "text",
@@ -2480,7 +2515,7 @@
     "type": "text",
     "description": "gift_card_split_by"
   },
-  "subsButton": "",
+  "subsButton": "구독",
   "@subsButton": {
     "type": "text",
     "description": "subs_button"
@@ -2744,6 +2779,16 @@
   "@urlEmpty": {
     "type": "text",
     "description": "url_empty"
+  },
+  "useAppRep": "%1 담당자 사용",
+  "@useAppRep": {
+    "type": "text",
+    "description": "use app node as rep"
+  },
+  "useCurrency": "%2 사용",
+  "@useCurrency": {
+    "type": "text",
+    "description": "use_currency"
   },
   "useNano": "나노를 사용",
   "@useNano": {

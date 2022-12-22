@@ -110,7 +110,7 @@
     "type": "text",
     "description": "watch_only_add_success"
   },
-  "advanced": "",
+  "advanced": "Canggih",
   "@advanced": {
     "type": "text",
     "description": "settings_advanced_header"
@@ -129,6 +129,11 @@
   "@amountMissing": {
     "type": "text",
     "description": "send_enter_amount"
+  },
+  "appWallet": "%1 Dompet",
+  "@appWallet": {
+    "type": "text",
+    "description": "app_wallet"
   },
   "asked": "Ditanya",
   "@asked": {
@@ -885,6 +890,11 @@
     "type": "text",
     "description": "example_rec_recipient_message"
   },
+  "exchangeCurrency": "Tukar %2",
+  "@exchangeCurrency": {
+    "type": "text",
+    "description": "exchange_currency"
+  },
   "exchangeNano": "Tukarkan NANO",
   "@exchangeNano": {
     "type": "text",
@@ -1014,6 +1024,11 @@
   "@fundingHeader": {
     "type": "text",
     "description": "funding_header"
+  },
+  "getCurrency": "Dapatkan %2",
+  "@getCurrency": {
+    "type": "text",
+    "description": "get_currency"
   },
   "getNano": "Dapatkan NANO",
   "@getNano": {
@@ -1835,6 +1850,11 @@
     "type": "text",
     "description": "pro_sub_required_paragraph"
   },
+  "purchaseCurrency": "Beli %2",
+  "@purchaseCurrency": {
+    "type": "text",
+    "description": "purchase_currency"
+  },
   "purchaseNano": "Pembelian Nano",
   "@purchaseNano": {
     "type": "text",
@@ -2350,6 +2370,16 @@
     "type": "text",
     "description": "nautilus_share"
   },
+  "shareApp": "Bagikan %1",
+  "@shareApp": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareAppText": "Lihat %1! Dompet seluler NANO utama!",
+  "@shareAppText": {
+    "type": "text",
+    "description": "share_extra"
+  },
   "shareLink": "Bagikan Tautan",
   "@shareLink": {
     "type": "text",
@@ -2450,6 +2480,11 @@
     "type": "text",
     "description": "send_someone"
   },
+  "spendCurrency": "Habiskan %2",
+  "@spendCurrency": {
+    "type": "text",
+    "description": "spend_currency"
+  },
   "spendNano": "Habiskan NANO",
   "@spendNano": {
     "type": "text",
@@ -2480,7 +2515,7 @@
     "type": "text",
     "description": "gift_card_split_by"
   },
-  "subsButton": "",
+  "subsButton": "Langganan",
   "@subsButton": {
     "type": "text",
     "description": "subs_button"
@@ -2744,6 +2779,16 @@
   "@urlEmpty": {
     "type": "text",
     "description": "url_empty"
+  },
+  "useAppRep": "Gunakan %1 Rep",
+  "@useAppRep": {
+    "type": "text",
+    "description": "use app node as rep"
+  },
+  "useCurrency": "Gunakan %2",
+  "@useCurrency": {
+    "type": "text",
+    "description": "use_currency"
   },
   "useNano": "Gunakan NANO",
   "@useNano": {

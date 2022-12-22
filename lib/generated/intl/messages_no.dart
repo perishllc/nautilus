@@ -57,12 +57,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Skriv inn et brukernavn eller adresse"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Del adresse"),
-        "advanced": MessageLookupByLibrary.simpleMessage(""),
+        "advanced": MessageLookupByLibrary.simpleMessage("Avansert"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliaser"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Delt beløp kan ikke være større enn gavesaldoen"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Vennligst tast inn et beløp"),
+        "appWallet": MessageLookupByLibrary.simpleMessage("%1 Lommebok"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Vi la merke til at du klikket på en lenke som inneholder noe nano, vil du hoppe over konfigurasjonsprosessen? Du kan alltid endre ting senere.\n\n Hvis du imidlertid har et eksisterende frø som du vil importere, bør du velge nei."),
         "askTracking": MessageLookupByLibrary.simpleMessage(
@@ -310,6 +311,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gass Penger"),
+        "exchangeCurrency": MessageLookupByLibrary.simpleMessage("Bytt %2"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Bytt NANO"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Skriv inn nåværende passord"),
         "existingPinHint":
@@ -351,6 +354,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Finansieringsbanner"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finansiering"),
+        "getCurrency": MessageLookupByLibrary.simpleMessage("Få %2"),
+        "getNano": MessageLookupByLibrary.simpleMessage("Skaff deg NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Du har en gave!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Tom gave"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Gavebeløp"),
@@ -492,6 +497,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty":
             MessageLookupByLibrary.simpleMessage("Vennligst skriv inn et navn"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet":
+            MessageLookupByLibrary.simpleMessage("Nautilus lommebok"),
         "nearby": MessageLookupByLibrary.simpleMessage("I nærheten"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Denne funksjonen krever at du har en lengre transaksjonshistorikk for å forhindre spam.\n\nAlternativt kan du vise en QR-kode for noen å skanne."),
@@ -615,6 +622,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "For bare 1 NANO per måned kan du låse opp alle funksjonene til Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("Gratis NANO"),
+        "purchaseCurrency": MessageLookupByLibrary.simpleMessage("Kjøp %2"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("Kjøp Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR-koden inneholder ikke en gyldig adresse"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -780,8 +789,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Last fra papirlommebok"),
         "share": MessageLookupByLibrary.simpleMessage("Dele"),
+        "shareApp": MessageLookupByLibrary.simpleMessage("Del %1"),
+        "shareAppText": MessageLookupByLibrary.simpleMessage(
+            "Sjekk ut %1! En førsteklasses NANO-mobillommebok!"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Del Link"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Del melding"),
+        "shareNautilus": MessageLookupByLibrary.simpleMessage("Del Nautilus"),
+        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
+            "Sjekk ut Nautilus! En ledende NANO mobil lommebok!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Del tekst"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Butikk"),
         "show": MessageLookupByLibrary.simpleMessage("Forestilling"),
@@ -804,6 +819,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "social": MessageLookupByLibrary.simpleMessage("Sosial"),
         "someone": MessageLookupByLibrary.simpleMessage("noen"),
+        "spendCurrency": MessageLookupByLibrary.simpleMessage("Bruk %2"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("Bruk NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Delt regning"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Del en regning"),
@@ -812,7 +829,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Del regningsinformasjon"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Del opp etter"),
-        "subsButton": MessageLookupByLibrary.simpleMessage(""),
+        "subsButton": MessageLookupByLibrary.simpleMessage("Abonnementer"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonnere"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Abonner via Apple Pay"),
@@ -896,6 +913,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Tid online"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Vennligst skriv inn en URL"),
+        "useAppRep": MessageLookupByLibrary.simpleMessage("Bruk %1 rep"),
+        "useCurrency": MessageLookupByLibrary.simpleMessage("Bruk %2"),
+        "useNano": MessageLookupByLibrary.simpleMessage("Bruk NANO"),
+        "useNautilusRep":
+            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Bruker allerede lagt til!"),
         "userNotFound":

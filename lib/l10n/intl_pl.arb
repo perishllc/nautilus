@@ -110,7 +110,7 @@
     "type": "text",
     "description": "watch_only_add_success"
   },
-  "advanced": "",
+  "advanced": "Zaawansowany",
   "@advanced": {
     "type": "text",
     "description": "settings_advanced_header"
@@ -129,6 +129,11 @@
   "@amountMissing": {
     "type": "text",
     "description": "send_enter_amount"
+  },
+  "appWallet": "Portfel %1",
+  "@appWallet": {
+    "type": "text",
+    "description": "app_wallet"
   },
   "asked": "Zapytany",
   "@asked": {
@@ -885,6 +890,11 @@
     "type": "text",
     "description": "example_rec_recipient_message"
   },
+  "exchangeCurrency": "Wymiana %2",
+  "@exchangeCurrency": {
+    "type": "text",
+    "description": "exchange_currency"
+  },
   "exchangeNano": "Wymiana NANO",
   "@exchangeNano": {
     "type": "text",
@@ -1014,6 +1024,11 @@
   "@fundingHeader": {
     "type": "text",
     "description": "funding_header"
+  },
+  "getCurrency": "Uzyskaj %2",
+  "@getCurrency": {
+    "type": "text",
+    "description": "get_currency"
   },
   "getNano": "Zdobądź NANO",
   "@getNano": {
@@ -1835,6 +1850,11 @@
     "type": "text",
     "description": "pro_sub_required_paragraph"
   },
+  "purchaseCurrency": "Kup %2",
+  "@purchaseCurrency": {
+    "type": "text",
+    "description": "purchase_currency"
+  },
   "purchaseNano": "Zakup Nano",
   "@purchaseNano": {
     "type": "text",
@@ -2350,6 +2370,16 @@
     "type": "text",
     "description": "nautilus_share"
   },
+  "shareApp": "Udostępnij %1",
+  "@shareApp": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareAppText": "Sprawdź %1! Najlepszy mobilny portfel NANO!",
+  "@shareAppText": {
+    "type": "text",
+    "description": "share_extra"
+  },
   "shareLink": "Udostępnij link",
   "@shareLink": {
     "type": "text",
@@ -2450,6 +2480,11 @@
     "type": "text",
     "description": "send_someone"
   },
+  "spendCurrency": "Wydaj %2",
+  "@spendCurrency": {
+    "type": "text",
+    "description": "spend_currency"
+  },
   "spendNano": "Wydaj NANO",
   "@spendNano": {
     "type": "text",
@@ -2480,7 +2515,7 @@
     "type": "text",
     "description": "gift_card_split_by"
   },
-  "subsButton": "",
+  "subsButton": "Abonamenty",
   "@subsButton": {
     "type": "text",
     "description": "subs_button"
@@ -2744,6 +2779,16 @@
   "@urlEmpty": {
     "type": "text",
     "description": "url_empty"
+  },
+  "useAppRep": "Użyj %1 rep",
+  "@useAppRep": {
+    "type": "text",
+    "description": "use app node as rep"
+  },
+  "useCurrency": "Użyj %2",
+  "@useCurrency": {
+    "type": "text",
+    "description": "use_currency"
   },
   "useNano": "Użyj NANO",
   "@useNano": {

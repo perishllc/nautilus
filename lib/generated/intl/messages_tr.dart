@@ -53,12 +53,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Lütfen Kullanıcı Adı veya Adres Giriniz"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Paylaş"),
-        "advanced": MessageLookupByLibrary.simpleMessage(""),
+        "advanced": MessageLookupByLibrary.simpleMessage("Gelişmiş"),
         "aliases": MessageLookupByLibrary.simpleMessage("Takma adlar"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Bölünmüş Tutar, hediye bakiyesinden fazla olamaz"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Lütfen bir miktar girin"),
+        "appWallet": MessageLookupByLibrary.simpleMessage("%1 Cüzdan"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Biraz nano içeren bir bağlantıya tıkladığınızı fark ettik, kurulum sürecini atlamak ister misiniz? İşleri daha sonra her zaman değiştirebilirsiniz.\n\n Ancak içe aktarmak istediğiniz mevcut bir tohumunuz varsa, hayır\'ı seçmelisiniz."),
         "askTracking": MessageLookupByLibrary.simpleMessage(
@@ -308,6 +309,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gaz Para"),
+        "exchangeCurrency": MessageLookupByLibrary.simpleMessage("%2 takas"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("NANO değişimi"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Güncel şifrenizi giriniz"),
         "existingPinHint":
@@ -347,6 +350,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Finansman Afişi"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finansman"),
+        "getCurrency": MessageLookupByLibrary.simpleMessage("%2\'yi al"),
+        "getNano": MessageLookupByLibrary.simpleMessage("NANO\'yu edinin"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Bir yeteneğin var!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Boş Hediye"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Hediye Miktarı"),
@@ -485,6 +490,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty":
             MessageLookupByLibrary.simpleMessage("Lütfen bir Ad girin"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet":
+            MessageLookupByLibrary.simpleMessage("Nautilus Cüzdanı"),
         "nearby": MessageLookupByLibrary.simpleMessage("Yakında"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Bu özellik, istenmeyen postaları önlemek için daha uzun bir işlem geçmişine sahip olmanızı gerektirir.\n\nAlternatif olarak, birinin taraması için bir QR kodu gösterebilirsiniz."),
@@ -606,6 +613,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ayda sadece 1 NANO karşılığında Nautilus Pro\'nun tüm özelliklerinin kilidini açabilirsiniz."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Ücretsiz NANO"),
+        "purchaseCurrency": MessageLookupByLibrary.simpleMessage("%2 satın al"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("Satın al Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR kodu geçerli bir adres içermiyor"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -770,8 +779,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Bakiye Transferi"),
         "share": MessageLookupByLibrary.simpleMessage("Paylaşmak"),
+        "shareApp": MessageLookupByLibrary.simpleMessage("%1 paylaş"),
+        "shareAppText": MessageLookupByLibrary.simpleMessage(
+            "%1\'e göz atın! Birinci sınıf bir NANO mobil cüzdan!"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Link Paylaş"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Mesajı Paylaş"),
+        "shareNautilus":
+            MessageLookupByLibrary.simpleMessage("Nautilus\'u Paylaş"),
+        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
+            "Nano\'nun resmi Android Cüzdanı Nautilus\'u denesene!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Metni Paylaş"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Mağaza"),
         "show": MessageLookupByLibrary.simpleMessage("Göstermek"),
@@ -796,6 +812,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simpleks"),
         "social": MessageLookupByLibrary.simpleMessage("Sosyal"),
         "someone": MessageLookupByLibrary.simpleMessage("birisi"),
+        "spendCurrency": MessageLookupByLibrary.simpleMessage("%2 harca"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("NANO harca"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Faturayı Böl"),
         "splitBillHeader": MessageLookupByLibrary.simpleMessage("Fatura Böl"),
         "splitBillInfo": MessageLookupByLibrary.simpleMessage(
@@ -803,7 +821,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Bölünmüş Fatura Bilgisi"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Bölme Ölçütü"),
-        "subsButton": MessageLookupByLibrary.simpleMessage(""),
+        "subsButton": MessageLookupByLibrary.simpleMessage("Abonelikler"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abone olmak"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Apple Pay ile abone olun"),
@@ -891,6 +909,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Çevrimiçi"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Lütfen bir URL girin"),
+        "useAppRep": MessageLookupByLibrary.simpleMessage("%1 Temsilci Kullan"),
+        "useCurrency": MessageLookupByLibrary.simpleMessage("%2 kullan"),
+        "useNano": MessageLookupByLibrary.simpleMessage("NANO kullan"),
+        "useNautilusRep":
+            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Kullanıcı zaten eklendi!"),
         "userNotFound":

@@ -56,12 +56,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Пожалуйста, введите имя пользователя или адрес"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Отправить"),
-        "advanced": MessageLookupByLibrary.simpleMessage(""),
+        "advanced": MessageLookupByLibrary.simpleMessage("Передовой"),
         "aliases": MessageLookupByLibrary.simpleMessage("Псевдонимы"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Сумма разделения не может превышать баланс подарка"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Пожалуйста введите сумму"),
+        "appWallet": MessageLookupByLibrary.simpleMessage("%1 кошелек"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Мы заметили, что вы нажали на ссылку, содержащую нано. Хотите пропустить процесс установки? Вы всегда можете изменить ситуацию позже.\n\n Однако, если у вас есть семя, которое вы хотите импортировать, вам следует выбрать нет."),
         "askTracking": MessageLookupByLibrary.simpleMessage(
@@ -320,6 +321,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Газовые деньги"),
+        "exchangeCurrency": MessageLookupByLibrary.simpleMessage("Обмен %2"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Обмен НАНО"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Введите текущий пароль"),
         "existingPinHint":
@@ -361,6 +364,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Баннер финансирования"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Финансирование"),
+        "getCurrency": MessageLookupByLibrary.simpleMessage("Получить %2"),
+        "getNano": MessageLookupByLibrary.simpleMessage("Получить НАНО"),
         "giftAlert":
             MessageLookupByLibrary.simpleMessage("У тебя есть подарок!"),
         "giftAlertEmpty":
@@ -502,6 +507,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty":
             MessageLookupByLibrary.simpleMessage("Пожалуйста, введите имя"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet":
+            MessageLookupByLibrary.simpleMessage("Кошелек Наутилус"),
         "nearby": MessageLookupByLibrary.simpleMessage("Рядом, поблизости"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Эта функция требует более длительной истории транзакций, чтобы предотвратить спам.\n\nКроме того, вы можете показать QR-код для сканирования."),
@@ -627,6 +634,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Всего за 1 NANO в месяц вы можете разблокировать все функции Nautilus Pro."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Бесплатно НАНО"),
+        "purchaseCurrency": MessageLookupByLibrary.simpleMessage("Купить %2"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("Приобрести нано"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR-не содержит действительный адрес"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -795,9 +804,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Загрузить с Paper кошелька"),
         "share": MessageLookupByLibrary.simpleMessage("Делиться"),
+        "shareApp": MessageLookupByLibrary.simpleMessage("Поделиться %1"),
+        "shareAppText": MessageLookupByLibrary.simpleMessage(
+            "Проверьте %1! Первоклассный мобильный кошелек NANO!"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Поделиться ссылкой"),
         "shareMessage":
             MessageLookupByLibrary.simpleMessage("Поделиться сообщением"),
+        "shareNautilus":
+            MessageLookupByLibrary.simpleMessage("Поделиться Nautilus"),
+        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
+            "Оцените Nautilus! Лучший Android кошелёк Nano!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Поделиться текстом"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Магазин"),
         "show": MessageLookupByLibrary.simpleMessage("Показывать"),
@@ -823,6 +839,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Симплекс"),
         "social": MessageLookupByLibrary.simpleMessage("Социальное"),
         "someone": MessageLookupByLibrary.simpleMessage("кто то"),
+        "spendCurrency": MessageLookupByLibrary.simpleMessage("Потратить %2"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("Потратить НАНО"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Разделить счет"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Разделить счет"),
@@ -831,7 +849,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Информация о раздельном счете"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Разделить по"),
-        "subsButton": MessageLookupByLibrary.simpleMessage(""),
+        "subsButton": MessageLookupByLibrary.simpleMessage("Подписки"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Подписывайся"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Оформить подписку через ApplePay"),
@@ -918,6 +936,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Онлайн время"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Пожалуйста, введите URL"),
+        "useAppRep":
+            MessageLookupByLibrary.simpleMessage("Используйте %1 репутацию"),
+        "useCurrency": MessageLookupByLibrary.simpleMessage("Использовать %2"),
+        "useNano": MessageLookupByLibrary.simpleMessage("Используйте НАНО"),
+        "useNautilusRep":
+            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Пользователь уже добавлен!"),
         "userNotFound":

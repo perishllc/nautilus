@@ -130,6 +130,11 @@
     "type": "text",
     "description": "send_enter_amount"
   },
+  "appWallet": "%1 Wallet",
+  "@appWallet": {
+    "type": "text",
+    "description": "app_wallet"
+  },
   "asked": "Asked",
   "@asked": {
     "type": "text",
@@ -403,7 +408,7 @@
   "connectingHeader": "Connecting",
   "@connectingHeader": {
     "type": "text",
-    "description": "A header to let the user now that the app is currently connecting to (or loading) live chat."
+    "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
   },
   "connectionWarning": "Can't Connect",
   "@connectionWarning": {
@@ -890,6 +895,11 @@
     "type": "text",
     "description": "exchange_currency"
   },
+  "exchangeNano": "Exchange NANO",
+  "@exchangeNano": {
+    "type": "text",
+    "description": "exchange_nano"
+  },
   "existingPasswordHint": "Enter current password",
   "@existingPasswordHint": {
     "type": "text",
@@ -1019,6 +1029,11 @@
   "@getCurrency": {
     "type": "text",
     "description": "get_currency"
+  },
+  "getNano": "Get NANO",
+  "@getNano": {
+    "type": "text",
+    "description": "get_nano"
   },
   "giftAlert": "You have a gift!",
   "@giftAlert": {
@@ -1455,10 +1470,10 @@
     "type": "text",
     "description": "natricon_settings"
   },
-  "appWallet": "%1 Wallet",
-  "@appWallet": {
+  "nautilusWallet": "Nautilus Wallet",
+  "@nautilusWallet": {
     "type": "text",
-    "description": "app_wallet"
+    "description": "nautilus_wallet"
   },
   "nearby": "Nearby",
   "@nearby": {
@@ -1683,7 +1698,7 @@
   "passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open %1 anymore.",
   "@passwordNoLongerRequiredToOpenParagraph": {
     "type": "text",
-    "description": "An info paragraph that tells the user a password will no longer be needed to open the app"
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Nautilus"
   },
   "passwordNumber": "Password must contain at least 1 number",
   "@passwordNumber": {
@@ -1713,7 +1728,7 @@
   "passwordWillBeRequiredToOpenParagraph": "This password will be required to open %1.",
   "@passwordWillBeRequiredToOpenParagraph": {
     "type": "text",
-    "description": "A paragraph that tells the users that the created password will be required to open the app."
+    "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
   },
   "pay": "Pay",
   "@pay": {
@@ -1839,6 +1854,11 @@
   "@purchaseCurrency": {
     "type": "text",
     "description": "purchase_currency"
+  },
+  "purchaseNano": "Purchase Nano",
+  "@purchaseNano": {
+    "type": "text",
+    "description": "purchase_nano"
   },
   "qrInvalidAddress": "QR code does not contain a valid destination",
   "@qrInvalidAddress": {
@@ -2073,7 +2093,7 @@
   "requireAPasswordToOpenHeader": "Require a password to open %1?",
   "@requireAPasswordToOpenHeader": {
     "type": "text",
-    "description": "A paragraph that asks the users if they would like a password to be required to open the app."
+    "description": "A paragraph that asks the users if they would like a password to be required to open Nautilus."
   },
   "requireCaptcha": "Require CAPTCHA to claim gift card",
   "@requireCaptcha": {
@@ -2348,7 +2368,17 @@
   "share": "Share",
   "@share": {
     "type": "text",
-    "description": "app_share"
+    "description": "nautilus_share"
+  },
+  "shareApp": "Share %1",
+  "@shareApp": {
+    "type": "text",
+    "description": "settings_share"
+  },
+  "shareAppText": "Check out %1! A premier %2 mobile wallet!",
+  "@shareAppText": {
+    "type": "text",
+    "description": "share_extra"
   },
   "shareLink": "Share Link",
   "@shareLink": {
@@ -2360,13 +2390,13 @@
     "type": "text",
     "description": "share_message"
   },
-  "shareApp": "Share %1",
-  "@shareApp": {
+  "shareNautilus": "Share Nautilus",
+  "@shareNautilus": {
     "type": "text",
     "description": "settings_share"
   },
-  "shareAppText": "Check out %1! A premier %2 mobile wallet!",
-  "@shareAppText": {
+  "shareNautilusText": "Check out Nautilus! A premier NANO mobile wallet!",
+  "@shareNautilusText": {
     "type": "text",
     "description": "share_extra"
   },
@@ -2454,6 +2484,11 @@
   "@spendCurrency": {
     "type": "text",
     "description": "spend_currency"
+  },
+  "spendNano": "Spend NANO",
+  "@spendNano": {
+    "type": "text",
+    "description": "spend_nano"
   },
   "splitBill": "Split Bill",
   "@splitBill": {
@@ -2745,15 +2780,25 @@
     "type": "text",
     "description": "url_empty"
   },
+  "useAppRep": "Use %1 Rep",
+  "@useAppRep": {
+    "type": "text",
+    "description": "use app node as rep"
+  },
   "useCurrency": "Use %2",
   "@useCurrency": {
     "type": "text",
     "description": "use_currency"
   },
-  "useAppRep": "Use %1 Rep",
-  "@useAppRep": {
+  "useNano": "Use NANO",
+  "@useNano": {
     "type": "text",
-    "description": "use app node as rep"
+    "description": "use_nano"
+  },
+  "useNautilusRep": "Use Nautilus Rep",
+  "@useNautilusRep": {
+    "type": "text",
+    "description": "use nautilus node as rep"
   },
   "userAlreadyAddedError": "User already added!",
   "@userAlreadyAddedError": {

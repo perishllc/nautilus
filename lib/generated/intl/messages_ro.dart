@@ -55,12 +55,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Introduceți un nume de utilizator sau o adresă"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Share"),
-        "advanced": MessageLookupByLibrary.simpleMessage(""),
+        "advanced": MessageLookupByLibrary.simpleMessage("Avansat"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliasuri"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Suma împărțită nu poate fi mai mare decât soldul cadou"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Introduceți o sumă"),
+        "appWallet": MessageLookupByLibrary.simpleMessage("%1 Portofel"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Am observat că ați dat clic pe un link care conține niște nano, doriți să săriți peste procesul de configurare? Poți oricând să schimbi lucrurile mai târziu.\n\n Dacă aveți o sămânță existentă pe care doriți să o importați, ar trebui să selectați nu."),
         "askTracking": MessageLookupByLibrary.simpleMessage(
@@ -318,6 +319,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Bani de gaz"),
+        "exchangeCurrency": MessageLookupByLibrary.simpleMessage("Schimb %2"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Schimbă NANO"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Introduceti parola curenta"),
         "existingPinHint":
@@ -358,6 +361,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Banner de finanțare"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finanțarea"),
+        "getCurrency": MessageLookupByLibrary.simpleMessage("Obțineți %2"),
+        "getNano": MessageLookupByLibrary.simpleMessage("Ia NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Ai un cadou!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Cadou gol"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Suma cadou"),
@@ -497,6 +502,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty": MessageLookupByLibrary.simpleMessage(
             "Vă rugăm să introduceți un Nume"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet":
+            MessageLookupByLibrary.simpleMessage("Portofel Nautilus"),
         "nearby": MessageLookupByLibrary.simpleMessage("Din apropiere"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Această caracteristică necesită să aveți un istoric de tranzacții mai lung pentru a preveni spamul.\n\nAlternativ, puteți afișa un cod QR pentru ca cineva să scaneze."),
@@ -618,6 +625,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "Pentru doar 1 NANO pe lună, puteți debloca toate funcțiile Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("NANO gratuit"),
+        "purchaseCurrency":
+            MessageLookupByLibrary.simpleMessage("Cumpărați %2"),
+        "purchaseNano":
+            MessageLookupByLibrary.simpleMessage("Achiziționați Nano"),
         "qrInvalidAddress":
             MessageLookupByLibrary.simpleMessage("Codul QR este invalid"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -784,9 +795,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Încarcă din Paper Wallet"),
         "share": MessageLookupByLibrary.simpleMessage("Acțiune"),
+        "shareApp": MessageLookupByLibrary.simpleMessage("Distribuie %1"),
+        "shareAppText": MessageLookupByLibrary.simpleMessage(
+            "Verificați %1! Un portofel mobil NANO de prim rang!"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Distribuiți linkul"),
         "shareMessage":
             MessageLookupByLibrary.simpleMessage("Partajați mesajul"),
+        "shareNautilus": MessageLookupByLibrary.simpleMessage("Share Nautilus"),
+        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
+            "Încearcă Nautilus! Portofelul mobil NANO de talie mondială!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Partajați text"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Magazin"),
         "show": MessageLookupByLibrary.simpleMessage("Spectacol"),
@@ -811,6 +828,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "social": MessageLookupByLibrary.simpleMessage("Social"),
         "someone": MessageLookupByLibrary.simpleMessage("cineva"),
+        "spendCurrency": MessageLookupByLibrary.simpleMessage("Cheltuiește %2"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("Cheltuiește NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Bill împărțit"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Împărțiți o factură"),
@@ -819,7 +838,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Împărțiți informațiile facturii"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Split By"),
-        "subsButton": MessageLookupByLibrary.simpleMessage(""),
+        "subsButton": MessageLookupByLibrary.simpleMessage("Abonamente"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonati-va"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Abonați-vă prin Apple Pay"),
@@ -909,6 +928,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Timp de funcționare"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage(
             "Vă rugăm să introduceți o adresă URL"),
+        "useAppRep": MessageLookupByLibrary.simpleMessage("Utilizați %1 Rep"),
+        "useCurrency": MessageLookupByLibrary.simpleMessage("Folosiți %2"),
+        "useNano": MessageLookupByLibrary.simpleMessage("Folosește NANO"),
+        "useNautilusRep":
+            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Utilizator deja adăugat!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(

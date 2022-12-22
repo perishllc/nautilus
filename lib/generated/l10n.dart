@@ -310,6 +310,16 @@ class Z {
     );
   }
 
+  /// `%1 Wallet`
+  String get appWallet {
+    return Intl.message(
+      '%1 Wallet',
+      name: 'appWallet',
+      desc: 'app_wallet',
+      args: [],
+    );
+  }
+
   /// `Asked`
   String get asked {
     return Intl.message(
@@ -858,7 +868,7 @@ class Z {
       'Connecting',
       name: 'connectingHeader',
       desc:
-          'A header to let the user now that the app is currently connecting to (or loading) live chat.',
+          'A header to let the user now that Nautilus is currently connecting to (or loading) live chat.',
       args: [],
     );
   }
@@ -1835,6 +1845,16 @@ class Z {
     );
   }
 
+  /// `Exchange NANO`
+  String get exchangeNano {
+    return Intl.message(
+      'Exchange NANO',
+      name: 'exchangeNano',
+      desc: 'exchange_nano',
+      args: [],
+    );
+  }
+
   /// `Enter current password`
   String get existingPasswordHint {
     return Intl.message(
@@ -2092,6 +2112,16 @@ class Z {
       'Get %2',
       name: 'getCurrency',
       desc: 'get_currency',
+      args: [],
+    );
+  }
+
+  /// `Get NANO`
+  String get getNano {
+    return Intl.message(
+      'Get NANO',
+      name: 'getNano',
+      desc: 'get_nano',
       args: [],
     );
   }
@@ -2968,12 +2998,12 @@ class Z {
     );
   }
 
-  /// `%1 Wallet`
-  String get appWallet {
+  /// `Nautilus Wallet`
+  String get nautilusWallet {
     return Intl.message(
-      '%1 Wallet',
-      name: 'appWallet',
-      desc: 'app_wallet',
+      'Nautilus Wallet',
+      name: 'nautilusWallet',
+      desc: 'nautilus_wallet',
       args: [],
     );
   }
@@ -3425,7 +3455,7 @@ class Z {
       'You will not need a password to open %1 anymore.',
       name: 'passwordNoLongerRequiredToOpenParagraph',
       desc:
-          'An info paragraph that tells the user a password will no longer be needed to open the app',
+          'An info paragraph that tells the user a password will no longer be needed to open Nautilus',
       args: [],
     );
   }
@@ -3486,7 +3516,7 @@ class Z {
       'This password will be required to open %1.',
       name: 'passwordWillBeRequiredToOpenParagraph',
       desc:
-          'A paragraph that tells the users that the created password will be required to open the app.',
+          'A paragraph that tells the users that the created password will be required to open Nautilus.',
       args: [],
     );
   }
@@ -3738,6 +3768,16 @@ class Z {
       'Purchase %2',
       name: 'purchaseCurrency',
       desc: 'purchase_currency',
+      args: [],
+    );
+  }
+
+  /// `Purchase Nano`
+  String get purchaseNano {
+    return Intl.message(
+      'Purchase Nano',
+      name: 'purchaseNano',
+      desc: 'purchase_nano',
       args: [],
     );
   }
@@ -4208,7 +4248,7 @@ class Z {
       'Require a password to open %1?',
       name: 'requireAPasswordToOpenHeader',
       desc:
-          'A paragraph that asks the users if they would like a password to be required to open the app.',
+          'A paragraph that asks the users if they would like a password to be required to open Nautilus.',
       args: [],
     );
   }
@@ -4760,7 +4800,27 @@ class Z {
     return Intl.message(
       'Share',
       name: 'share',
-      desc: 'app_share',
+      desc: 'nautilus_share',
+      args: [],
+    );
+  }
+
+  /// `Share %1`
+  String get shareApp {
+    return Intl.message(
+      'Share %1',
+      name: 'shareApp',
+      desc: 'settings_share',
+      args: [],
+    );
+  }
+
+  /// `Check out %1! A premier %2 mobile wallet!`
+  String get shareAppText {
+    return Intl.message(
+      'Check out %1! A premier %2 mobile wallet!',
+      name: 'shareAppText',
+      desc: 'share_extra',
       args: [],
     );
   }
@@ -4785,21 +4845,21 @@ class Z {
     );
   }
 
-  /// `Share %1`
-  String get shareApp {
+  /// `Share Nautilus`
+  String get shareNautilus {
     return Intl.message(
-      'Share %1',
-      name: 'shareApp',
+      'Share Nautilus',
+      name: 'shareNautilus',
       desc: 'settings_share',
       args: [],
     );
   }
 
-  /// `Check out %1! A premier %2 mobile wallet!`
-  String get shareAppText {
+  /// `Check out Nautilus! A premier NANO mobile wallet!`
+  String get shareNautilusText {
     return Intl.message(
-      'Check out %1! A premier %2 mobile wallet!',
-      name: 'shareAppText',
+      'Check out Nautilus! A premier NANO mobile wallet!',
+      name: 'shareNautilusText',
       desc: 'share_extra',
       args: [],
     );
@@ -4971,6 +5031,16 @@ class Z {
       'Spend %2',
       name: 'spendCurrency',
       desc: 'spend_currency',
+      args: [],
+    );
+  }
+
+  /// `Spend NANO`
+  String get spendNano {
+    return Intl.message(
+      'Spend NANO',
+      name: 'spendNano',
+      desc: 'spend_nano',
       args: [],
     );
   }
@@ -5555,6 +5625,16 @@ class Z {
     );
   }
 
+  /// `Use %1 Rep`
+  String get useAppRep {
+    return Intl.message(
+      'Use %1 Rep',
+      name: 'useAppRep',
+      desc: 'use app node as rep',
+      args: [],
+    );
+  }
+
   /// `Use %2`
   String get useCurrency {
     return Intl.message(
@@ -5565,12 +5645,22 @@ class Z {
     );
   }
 
-  /// `Use %1 Rep`
-  String get useAppRep {
+  /// `Use NANO`
+  String get useNano {
     return Intl.message(
-      'Use %1 Rep',
-      name: 'useAppRep',
-      desc: 'use app node as rep',
+      'Use NANO',
+      name: 'useNano',
+      desc: 'use_nano',
+      args: [],
+    );
+  }
+
+  /// `Use Nautilus Rep`
+  String get useNautilusRep {
+    return Intl.message(
+      'Use Nautilus Rep',
+      name: 'useNautilusRep',
+      desc: 'use nautilus node as rep',
       args: [],
     );
   }

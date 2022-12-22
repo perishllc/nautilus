@@ -48,11 +48,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing":
             MessageLookupByLibrary.simpleMessage("请输入用户名或地址"),
         "addressShare": MessageLookupByLibrary.simpleMessage("分享地址"),
-        "advanced": MessageLookupByLibrary.simpleMessage(""),
+        "advanced": MessageLookupByLibrary.simpleMessage("先进的"),
         "aliases": MessageLookupByLibrary.simpleMessage("别名"),
         "amountGiftGreaterError":
             MessageLookupByLibrary.simpleMessage("分割金额不能大于礼物余额"),
         "amountMissing": MessageLookupByLibrary.simpleMessage("请输入金额"),
+        "appWallet": MessageLookupByLibrary.simpleMessage("%1 钱包"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "我们注意到您单击了包含一些 nano 的链接，您想跳过设置过程吗？你以后总是可以改变的。\n\n 但是，如果您有要导入的现有种子，则应选择否。"),
         "askTracking": MessageLookupByLibrary.simpleMessage(
@@ -242,6 +243,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("煤气钱"),
+        "exchangeCurrency": MessageLookupByLibrary.simpleMessage("交换 %2"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("交换纳米"),
         "existingPasswordHint": MessageLookupByLibrary.simpleMessage("输入当前密码"),
         "existingPinHint": MessageLookupByLibrary.simpleMessage("输入当前引脚"),
         "exit": MessageLookupByLibrary.simpleMessage("退出"),
@@ -270,6 +273,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fulfilled": MessageLookupByLibrary.simpleMessage("完成"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage("资金横幅"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("资金"),
+        "getCurrency": MessageLookupByLibrary.simpleMessage("获取 %2"),
+        "getNano": MessageLookupByLibrary.simpleMessage("获取纳米"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("你有天赋！"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("空礼物"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("礼物金额"),
@@ -380,6 +385,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "moreSettings": MessageLookupByLibrary.simpleMessage("更多设置"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("请输入姓名"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet": MessageLookupByLibrary.simpleMessage("鹦鹉螺钱包"),
         "nearby": MessageLookupByLibrary.simpleMessage("附近"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "此功能要求您具有更长的交易历史记录，以防止垃圾邮件。\n\n或者，您可以显示二维码供他人扫描。"),
@@ -477,6 +483,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "每月只需 1 NANO，您就可以解锁 Nautilus Pro 的所有功能。"),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("免费纳米"),
+        "purchaseCurrency": MessageLookupByLibrary.simpleMessage("购买 %2"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("购买 Nano"),
         "qrInvalidAddress":
             MessageLookupByLibrary.simpleMessage("二维码不包含一个有效的地址"),
         "qrInvalidPermissions":
@@ -611,8 +619,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("设置"),
         "settingsTransfer": MessageLookupByLibrary.simpleMessage("用纸钱包充值"),
         "share": MessageLookupByLibrary.simpleMessage("分享"),
+        "shareApp": MessageLookupByLibrary.simpleMessage("共享 %1"),
+        "shareAppText":
+            MessageLookupByLibrary.simpleMessage("检查 %1！首屈一指的 NANO 手机钱包！"),
         "shareLink": MessageLookupByLibrary.simpleMessage("分享链接"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("分享讯息"),
+        "shareNautilus": MessageLookupByLibrary.simpleMessage("分享Nautilus"),
+        "shareNautilusText":
+            MessageLookupByLibrary.simpleMessage("来试试Nautilus！ 一个卓越的NANO手机钱包！"),
         "shareText": MessageLookupByLibrary.simpleMessage("分享文字"),
         "shopButton": MessageLookupByLibrary.simpleMessage("店铺"),
         "show": MessageLookupByLibrary.simpleMessage("节目"),
@@ -629,13 +643,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "social": MessageLookupByLibrary.simpleMessage("社会的"),
         "someone": MessageLookupByLibrary.simpleMessage("某人"),
+        "spendCurrency": MessageLookupByLibrary.simpleMessage("花费 %2"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("花费 NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("拆分账单"),
         "splitBillHeader": MessageLookupByLibrary.simpleMessage("拆分账单"),
         "splitBillInfo": MessageLookupByLibrary.simpleMessage(
             "一次发送一堆付款请求！例如，它可以很容易地在餐厅拆分账单。"),
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage("拆分账单信息"),
         "splitBy": MessageLookupByLibrary.simpleMessage("拆分依据"),
-        "subsButton": MessageLookupByLibrary.simpleMessage(""),
+        "subsButton": MessageLookupByLibrary.simpleMessage("订阅"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("订阅"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("通过 Apple Pay 订阅"),
@@ -709,6 +725,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("未读"),
         "uptime": MessageLookupByLibrary.simpleMessage("上线时间"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("请输入网址"),
+        "useAppRep": MessageLookupByLibrary.simpleMessage("使用 %1 代表"),
+        "useCurrency": MessageLookupByLibrary.simpleMessage("使用 %2"),
+        "useNano": MessageLookupByLibrary.simpleMessage("使用纳米"),
+        "useNautilusRep":
+            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage("用户已添加！"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("找不到用户！"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(

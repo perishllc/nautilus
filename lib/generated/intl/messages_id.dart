@@ -55,12 +55,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Harap Masukkan Nama Pengguna atau Alamat"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Bagikan"),
-        "advanced": MessageLookupByLibrary.simpleMessage(""),
+        "advanced": MessageLookupByLibrary.simpleMessage("Canggih"),
         "aliases": MessageLookupByLibrary.simpleMessage("Alias"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Jumlah Split tidak boleh lebih besar dari saldo hadiah"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Masukkan jumlah"),
+        "appWallet": MessageLookupByLibrary.simpleMessage("%1 Dompet"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Kami melihat Anda mengeklik tautan yang berisi beberapa nano, apakah Anda ingin melewati proses penyiapan? Anda selalu dapat mengubah banyak hal nanti.\n\n Jika Anda memiliki benih yang ingin Anda impor, Anda harus memilih no."),
         "askTracking": MessageLookupByLibrary.simpleMessage(
@@ -314,6 +315,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Uang Gas"),
+        "exchangeCurrency": MessageLookupByLibrary.simpleMessage("Tukar %2"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("Tukarkan NANO"),
         "existingPasswordHint": MessageLookupByLibrary.simpleMessage(
             "Masukkan kata sandi saat ini"),
         "existingPinHint":
@@ -355,6 +358,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Spanduk Pendanaan"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Pendanaan"),
+        "getCurrency": MessageLookupByLibrary.simpleMessage("Dapatkan %2"),
+        "getNano": MessageLookupByLibrary.simpleMessage("Dapatkan NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Kau punya hadiah!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("Hadiah Kosong"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("Jumlah Hadiah"),
@@ -491,6 +496,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty":
             MessageLookupByLibrary.simpleMessage("Silakan masukkan Nama"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet":
+            MessageLookupByLibrary.simpleMessage("Dompet Nautilus"),
         "nearby": MessageLookupByLibrary.simpleMessage("Di dekat sini"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Fitur ini mengharuskan Anda memiliki riwayat transaksi yang lebih panjang untuk mencegah spam.\n\nAtau, Anda dapat menampilkan kode QR untuk dipindai seseorang."),
@@ -614,6 +621,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "Hanya dengan 1 NANO per bulan, Anda dapat membuka kunci semua fitur Nautilus Pro."),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("NANO gratis"),
+        "purchaseCurrency": MessageLookupByLibrary.simpleMessage("Beli %2"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("Pembelian Nano"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "Kode QR tidak berisikan alamat yang benar"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -778,8 +787,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Muat dari Dompet Kertas"),
         "share": MessageLookupByLibrary.simpleMessage("Membagikan"),
+        "shareApp": MessageLookupByLibrary.simpleMessage("Bagikan %1"),
+        "shareAppText": MessageLookupByLibrary.simpleMessage(
+            "Lihat %1! Dompet seluler NANO utama!"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Bagikan Tautan"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("Bagikan Pesan"),
+        "shareNautilus":
+            MessageLookupByLibrary.simpleMessage("Bagikan Nautilus"),
+        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
+            "Ayo Cek Nautilus! Nano\'s official Android Wallet!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Bagikan Teks"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Toko"),
         "show": MessageLookupByLibrary.simpleMessage("Menunjukkan"),
@@ -804,6 +820,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simpleks"),
         "social": MessageLookupByLibrary.simpleMessage("Sosial"),
         "someone": MessageLookupByLibrary.simpleMessage("seseorang"),
+        "spendCurrency": MessageLookupByLibrary.simpleMessage("Habiskan %2"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("Habiskan NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Pisahkan Tagihan"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Pisahkan Tagihan"),
@@ -812,7 +830,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("Bagi Info Tagihan"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dibagi Oleh"),
-        "subsButton": MessageLookupByLibrary.simpleMessage(""),
+        "subsButton": MessageLookupByLibrary.simpleMessage("Langganan"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Langganan"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Berlangganan melalui Apple Pay"),
@@ -899,6 +917,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("belum dibaca"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Masukkan URL"),
+        "useAppRep": MessageLookupByLibrary.simpleMessage("Gunakan %1 Rep"),
+        "useCurrency": MessageLookupByLibrary.simpleMessage("Gunakan %2"),
+        "useNano": MessageLookupByLibrary.simpleMessage("Gunakan NANO"),
+        "useNautilusRep":
+            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError":
             MessageLookupByLibrary.simpleMessage("Pengguna sudah ditambahkan!"),
         "userNotFound":

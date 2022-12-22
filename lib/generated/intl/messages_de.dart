@@ -58,12 +58,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "Bitte gib einen Nutzernamen oder eine Adresse ein"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Teilen"),
-        "advanced": MessageLookupByLibrary.simpleMessage(""),
+        "advanced": MessageLookupByLibrary.simpleMessage("Fortschrittlich"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliase"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Der Aufteilungsbetrag darf nicht größer als das Geschenkguthaben sein"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Bitte Betrag eingeben"),
+        "appWallet": MessageLookupByLibrary.simpleMessage("%1 Geldbörse"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Wir haben festgestellt, dass Sie auf einen Link geklickt haben, der Nano enthält. Möchten Sie den Einrichtungsvorgang überspringen? Sie können die Dinge später immer noch ändern.\n\n Wenn Sie jedoch einen vorhandenen Seed haben, den Sie importieren möchten, sollten Sie Nein auswählen."),
         "askTracking": MessageLookupByLibrary.simpleMessage(
@@ -321,6 +322,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Gas-Geld"),
+        "exchangeCurrency":
+            MessageLookupByLibrary.simpleMessage("Austausch %2"),
+        "exchangeNano":
+            MessageLookupByLibrary.simpleMessage("Nano austauschen"),
         "existingPasswordHint": MessageLookupByLibrary.simpleMessage(
             "Gib dein aktuelles Passwort ein"),
         "existingPinHint": MessageLookupByLibrary.simpleMessage(
@@ -363,6 +368,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Finanzierungsbanner"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finanzierung"),
+        "getCurrency":
+            MessageLookupByLibrary.simpleMessage("Holen Sie sich %2"),
+        "getNano": MessageLookupByLibrary.simpleMessage("Holen Sie sich Nano"),
         "giftAlert":
             MessageLookupByLibrary.simpleMessage("Du hast eine Geschenk!"),
         "giftAlertEmpty":
@@ -506,6 +514,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty": MessageLookupByLibrary.simpleMessage(
             "Bitte geben Sie einen Namen ein"),
         "natricon": MessageLookupByLibrary.simpleMessage("Natricon"),
+        "nautilusWallet":
+            MessageLookupByLibrary.simpleMessage("Nautilus-Geldbörse"),
         "nearby": MessageLookupByLibrary.simpleMessage("In der Nähe"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "Diese Funktion erfordert einen längeren Transaktionsverlauf, um Spam zu verhindern.\n\nAlternativ können Sie einen QR-Code anzeigen, den jemand scannen kann."),
@@ -631,6 +641,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Für nur 1 NANO pro Monat können Sie alle Funktionen von Nautilus Pro freischalten."),
         "promotionalLink":
             MessageLookupByLibrary.simpleMessage("Kostenlos Nano"),
+        "purchaseCurrency":
+            MessageLookupByLibrary.simpleMessage("Kaufen Sie %2"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("Nano kaufen"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "QR-Code enthält kein gültiges Ziel"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -797,9 +810,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer": MessageLookupByLibrary.simpleMessage(
             "Von Paper Wallet importieren"),
         "share": MessageLookupByLibrary.simpleMessage("Teilen"),
+        "shareApp": MessageLookupByLibrary.simpleMessage("Anteil %1"),
+        "shareAppText": MessageLookupByLibrary.simpleMessage(
+            "Schauen Sie sich %1 an! Eine erstklassige mobile NANO-Brieftasche!"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Link teilen"),
         "shareMessage":
             MessageLookupByLibrary.simpleMessage("Nachricht teilen"),
+        "shareNautilus":
+            MessageLookupByLibrary.simpleMessage("Nautilus teilen"),
+        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
+            "Probier mal Nautilus, Nanos offizielles Android-Wallet!"),
         "shareText": MessageLookupByLibrary.simpleMessage("Text teilen"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Geschäft"),
         "show": MessageLookupByLibrary.simpleMessage("Zeigen"),
@@ -824,6 +844,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "social": MessageLookupByLibrary.simpleMessage("Sozial"),
         "someone": MessageLookupByLibrary.simpleMessage("jemand"),
+        "spendCurrency":
+            MessageLookupByLibrary.simpleMessage("Verbringen Sie %2"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("NANO ausgeben"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Geteilte Rechnung"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("Eine Rechnung teilen"),
@@ -832,7 +855,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage(
             "Split-Rechnungsinformationen"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Geteilt durch"),
-        "subsButton": MessageLookupByLibrary.simpleMessage(""),
+        "subsButton": MessageLookupByLibrary.simpleMessage("Abonnements"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonnieren"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Abonnieren Sie über Apple Pay"),
@@ -921,6 +944,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("Verfügbarkeit"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage(
             "Bitte geben Sie eine URL ein"),
+        "useAppRep":
+            MessageLookupByLibrary.simpleMessage("Verwenden Sie %1 Rep"),
+        "useCurrency": MessageLookupByLibrary.simpleMessage("Verwenden Sie %2"),
+        "useNano": MessageLookupByLibrary.simpleMessage("NANO verwenden"),
+        "useNautilusRep":
+            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
             "Benutzer bereits hinzugefügt!"),
         "userNotFound": MessageLookupByLibrary.simpleMessage(

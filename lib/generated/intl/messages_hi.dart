@@ -54,12 +54,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing": MessageLookupByLibrary.simpleMessage(
             "कृपया उपयोगकर्ता नाम या पता दर्ज करें"),
         "addressShare": MessageLookupByLibrary.simpleMessage("शेयर करें"),
-        "advanced": MessageLookupByLibrary.simpleMessage(""),
+        "advanced": MessageLookupByLibrary.simpleMessage("विकसित"),
         "aliases": MessageLookupByLibrary.simpleMessage("फर्जी नाम"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "विभाजित राशि उपहार शेष राशि से अधिक नहीं हो सकती"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("कृपया राशि दर्ज करें"),
+        "appWallet": MessageLookupByLibrary.simpleMessage("% 1 बटुआ"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "हमने देखा है कि आपने एक लिंक पर क्लिक किया है जिसमें कुछ नैनो है, क्या आप सेटअप प्रक्रिया को छोड़ना चाहेंगे? आप बाद में कभी भी चीजें बदल सकते हैं।\n\n यदि आपके पास एक मौजूदा बीज है जिसे आप आयात करना चाहते हैं, तो आपको नहीं का चयन करना चाहिए।"),
         "askTracking": MessageLookupByLibrary.simpleMessage(
@@ -311,6 +312,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("गैस मनी"),
+        "exchangeCurrency": MessageLookupByLibrary.simpleMessage("एक्सचेंज% 2"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("एक्सचेंज नैनो"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("वर्तमान पासवर्ड डालें"),
         "existingPinHint":
@@ -348,6 +351,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("फंडिंग बैनर"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("अनुदान"),
+        "getCurrency": MessageLookupByLibrary.simpleMessage("% 2 प्राप्त करें"),
+        "getNano": MessageLookupByLibrary.simpleMessage("नैनो प्राप्त करें"),
         "giftAlert":
             MessageLookupByLibrary.simpleMessage("आपके पास एक उपहार है!"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("खाली गिफ्ट"),
@@ -485,6 +490,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameEmpty":
             MessageLookupByLibrary.simpleMessage("कृपया एक नाम दर्ज करें"),
         "natricon": MessageLookupByLibrary.simpleMessage("नैट्रिकोन"),
+        "nautilusWallet": MessageLookupByLibrary.simpleMessage("नॉटिलस वॉलेट"),
         "nearby": MessageLookupByLibrary.simpleMessage("पास ही"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "स्पैम को रोकने के लिए इस सुविधा के लिए आपके पास एक लंबा लेनदेन इतिहास होना आवश्यक है।\n\nवैकल्पिक रूप से, आप किसी व्यक्ति को स्कैन करने के लिए QR कोड दिखा सकते हैं।"),
@@ -607,6 +613,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "केवल 1 नैनो प्रति माह के लिए, आप Nautilus Pro की सभी विशेषताओं को अनलॉक कर सकते हैं।"),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("मुफ़्त नैनो"),
+        "purchaseCurrency": MessageLookupByLibrary.simpleMessage("खरीद% 2"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("नैनो खरीदें"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage(
             "क्यूआर कोड में मान्य गंतव्य नहीं है"),
         "qrInvalidPermissions": MessageLookupByLibrary.simpleMessage(
@@ -773,8 +781,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("पेपर वॉलेट से लोड करें"),
         "share": MessageLookupByLibrary.simpleMessage("शेयर करना"),
+        "shareApp": MessageLookupByLibrary.simpleMessage("शेयर% 1"),
+        "shareAppText": MessageLookupByLibrary.simpleMessage(
+            "चेक आउट % 1! एक प्रमुख नैनो मोबाइल वॉलेट!"),
         "shareLink": MessageLookupByLibrary.simpleMessage("लिंक शेयर करें"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("संदेश साझा करें"),
+        "shareNautilus": MessageLookupByLibrary.simpleMessage("शेयर नैट्रियम"),
+        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
+            "नैट्रियम की जाँच करें! एक प्रमुख नैनो मोबाइल वॉलेट!"),
         "shareText": MessageLookupByLibrary.simpleMessage("पाठ साझा करें"),
         "shopButton": MessageLookupByLibrary.simpleMessage("दुकान"),
         "show": MessageLookupByLibrary.simpleMessage("प्रदर्शन"),
@@ -798,6 +812,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("सिंप्लेक्स"),
         "social": MessageLookupByLibrary.simpleMessage("सामाजिक"),
         "someone": MessageLookupByLibrary.simpleMessage("कोई तो"),
+        "spendCurrency": MessageLookupByLibrary.simpleMessage("खर्च % 2"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("नैनो खर्च करें"),
         "splitBill": MessageLookupByLibrary.simpleMessage("स्प्लिट बिल"),
         "splitBillHeader":
             MessageLookupByLibrary.simpleMessage("स्प्लिट ए बिल"),
@@ -806,7 +822,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader":
             MessageLookupByLibrary.simpleMessage("स्प्लिट बिल जानकारी"),
         "splitBy": MessageLookupByLibrary.simpleMessage("विभाजित करके"),
-        "subsButton": MessageLookupByLibrary.simpleMessage(""),
+        "subsButton": MessageLookupByLibrary.simpleMessage("सदस्यता"),
         "subscribeButton":
             MessageLookupByLibrary.simpleMessage("सदस्यता लेने के"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
@@ -895,6 +911,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "uptime": MessageLookupByLibrary.simpleMessage("सक्रिय रहने की अवधि"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("कृपया एक यूआरएल दर्ज करें"),
+        "useAppRep": MessageLookupByLibrary.simpleMessage(
+            "% 1 प्रतिनिधि का प्रयोग करें"),
+        "useCurrency":
+            MessageLookupByLibrary.simpleMessage("% 2 का प्रयोग करें"),
+        "useNano": MessageLookupByLibrary.simpleMessage("नैनो का प्रयोग करें"),
+        "useNautilusRep":
+            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage(
             "उपयोगकर्ता पहले ही जोड़ा जा चुका है!"),
         "userNotFound":

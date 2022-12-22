@@ -47,11 +47,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressOrUserMissing":
             MessageLookupByLibrary.simpleMessage("請輸入使用者名稱或地址"),
         "addressShare": MessageLookupByLibrary.simpleMessage("分享地址"),
-        "advanced": MessageLookupByLibrary.simpleMessage(""),
+        "advanced": MessageLookupByLibrary.simpleMessage("先進的"),
         "aliases": MessageLookupByLibrary.simpleMessage("別名"),
         "amountGiftGreaterError":
             MessageLookupByLibrary.simpleMessage("分割金額不能大於禮物餘額"),
         "amountMissing": MessageLookupByLibrary.simpleMessage("請輸入金額"),
+        "appWallet": MessageLookupByLibrary.simpleMessage("%1 錢包"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "我們注意到您單擊了包含一些 nano 的鏈接，您想跳過設置過程嗎？你以後總是可以改變的。\n\n 但是，如果您有要導入的現有種子，則應選擇否。"),
         "askTracking": MessageLookupByLibrary.simpleMessage(
@@ -242,6 +243,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("氣, 錢"),
+        "exchangeCurrency": MessageLookupByLibrary.simpleMessage("交換 %2"),
+        "exchangeNano": MessageLookupByLibrary.simpleMessage("交換納米"),
         "existingPasswordHint": MessageLookupByLibrary.simpleMessage("輸入當前密碼"),
         "existingPinHint": MessageLookupByLibrary.simpleMessage("輸入當前引腳"),
         "exit": MessageLookupByLibrary.simpleMessage("退出"),
@@ -270,6 +273,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fulfilled": MessageLookupByLibrary.simpleMessage("履行"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage("資金橫幅"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("資金"),
+        "getCurrency": MessageLookupByLibrary.simpleMessage("獲取 %2"),
+        "getNano": MessageLookupByLibrary.simpleMessage("獲取納米"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("你有禮物！"),
         "giftAlertEmpty": MessageLookupByLibrary.simpleMessage("空, 禮物"),
         "giftAmount": MessageLookupByLibrary.simpleMessage("禮品金額"),
@@ -380,6 +385,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "moreSettings": MessageLookupByLibrary.simpleMessage("更多設置"),
         "nameEmpty": MessageLookupByLibrary.simpleMessage("請輸入姓名"),
         "natricon": MessageLookupByLibrary.simpleMessage("卡通圖示"),
+        "nautilusWallet": MessageLookupByLibrary.simpleMessage("鸚鵡螺錢包"),
         "nearby": MessageLookupByLibrary.simpleMessage("附近"),
         "needVerificationAlert": MessageLookupByLibrary.simpleMessage(
             "此功能要求您擁有更長的交易歷史記錄，以防止垃圾郵件。\n\n或者，您可以顯示 QR 碼供某人掃描。"),
@@ -477,6 +483,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "proSubRequiredParagraph": MessageLookupByLibrary.simpleMessage(
             "每月只需 1 NANO，您就可以解鎖 Nautilus Pro 的所有功能。"),
         "promotionalLink": MessageLookupByLibrary.simpleMessage("免費納米"),
+        "purchaseCurrency": MessageLookupByLibrary.simpleMessage("購買 %2"),
+        "purchaseNano": MessageLookupByLibrary.simpleMessage("購買納米"),
         "qrInvalidAddress": MessageLookupByLibrary.simpleMessage("二維條碼不含有效的地址"),
         "qrInvalidPermissions":
             MessageLookupByLibrary.simpleMessage("請允許相機權限來掃描二維條碼"),
@@ -610,8 +618,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsHeader": MessageLookupByLibrary.simpleMessage("設定"),
         "settingsTransfer": MessageLookupByLibrary.simpleMessage("透過紙錢包儲值"),
         "share": MessageLookupByLibrary.simpleMessage("分享"),
+        "shareApp": MessageLookupByLibrary.simpleMessage("分享 %1"),
+        "shareAppText":
+            MessageLookupByLibrary.simpleMessage("檢查 %1！首屈一指的 NANO 手機錢包！"),
         "shareLink": MessageLookupByLibrary.simpleMessage("分享連結"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("分享訊息"),
+        "shareNautilus": MessageLookupByLibrary.simpleMessage("分享 Nautilus"),
+        "shareNautilusText": MessageLookupByLibrary.simpleMessage(
+            "請試試 Nautilus —— 針對行動裝置的 NANO 錢包！"),
         "shareText": MessageLookupByLibrary.simpleMessage("分享文字"),
         "shopButton": MessageLookupByLibrary.simpleMessage("店鋪"),
         "show": MessageLookupByLibrary.simpleMessage("節目"),
@@ -628,13 +642,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("單面"),
         "social": MessageLookupByLibrary.simpleMessage("社會的"),
         "someone": MessageLookupByLibrary.simpleMessage("某人"),
+        "spendCurrency": MessageLookupByLibrary.simpleMessage("花費 %2"),
+        "spendNano": MessageLookupByLibrary.simpleMessage("花費 NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("拆分賬單"),
         "splitBillHeader": MessageLookupByLibrary.simpleMessage("拆分賬單"),
         "splitBillInfo": MessageLookupByLibrary.simpleMessage(
             "一次發送一堆付款請求！例如，它可以很容易地在餐廳拆分賬單。"),
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage("拆分賬單信息"),
         "splitBy": MessageLookupByLibrary.simpleMessage("拆分依據"),
-        "subsButton": MessageLookupByLibrary.simpleMessage(""),
+        "subsButton": MessageLookupByLibrary.simpleMessage("訂閱"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("訂閱"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("通過 Apple Pay 訂閱"),
@@ -708,6 +724,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "unread": MessageLookupByLibrary.simpleMessage("未讀"),
         "uptime": MessageLookupByLibrary.simpleMessage("上線時間"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("請輸入網址"),
+        "useAppRep": MessageLookupByLibrary.simpleMessage("使用 %1 代表"),
+        "useCurrency": MessageLookupByLibrary.simpleMessage("使用 %2"),
+        "useNano": MessageLookupByLibrary.simpleMessage("使用納米"),
+        "useNautilusRep":
+            MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),
         "userAlreadyAddedError": MessageLookupByLibrary.simpleMessage("用戶已添加！"),
         "userNotFound": MessageLookupByLibrary.simpleMessage("找不到用戶！"),
         "usernameAlreadyRegistered": MessageLookupByLibrary.simpleMessage(
