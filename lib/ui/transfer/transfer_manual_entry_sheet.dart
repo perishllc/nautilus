@@ -7,6 +7,7 @@ import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -128,7 +129,8 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                               fadeSuffixOnCondition: true,
                               suffixShowFirstCondition: !NanoUtil.isValidSeed(_seedInputController!.text),
                               keyboardType: TextInputType.text,
-                              style: seedIsValid ? AppStyles.textStyleSeed(context) : AppStyles.textStyleSeedGray(context),
+                              style:
+                                  seedIsValid ? AppStyles.textStyleSeed(context) : AppStyles.textStyleSeedGray(context),
                               onChanged: (String text) {
                                 // Always reset the error message to be less annoying
                                 setState(() {
@@ -172,7 +174,9 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                      constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.13, maxWidth: MediaQuery.of(context).size.width * 0.6),
+                      constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height * 0.13,
+                          maxWidth: MediaQuery.of(context).size.width * 0.6),
                       // child: Stack(
                       //   children: <Widget>[
                       //     Center(
@@ -190,7 +194,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                       alignment: AlignmentDirectional.centerStart,
                       margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
                       child: AutoSizeText(
-                        Z.of(context).transferIntroShort,
+                        Z.of(context).transferIntroShort.replaceAll("%1", NonTranslatable.appName),
                         style: AppStyles.textStyleParagraph(context),
                         textAlign: TextAlign.start,
                         maxLines: 4,

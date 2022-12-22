@@ -20,6 +20,7 @@ import 'package:wallet_flutter/bus/fcm_update_event.dart';
 import 'package:wallet_flutter/bus/notification_setting_change_event.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
@@ -803,8 +804,8 @@ class SendSheetState extends State<SendSheet> {
                   child: AppDialogs.infoButton(
                     context,
                     () {
-                      AppDialogs.showInfoDialog(
-                          context, Z.of(context).sendSheetInfoHeader, Z.of(context).sendSheetInfo);
+                      AppDialogs.showInfoDialog(context, Z.of(context).sendSheetInfoHeader,
+                          Z.of(context).sendSheetInfo.replaceAll("%1", NonTranslatable.appName));
                     },
                   ),
                 ),

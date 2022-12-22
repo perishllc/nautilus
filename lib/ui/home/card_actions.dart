@@ -3,6 +3,7 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/model/db/user.dart';
@@ -164,7 +165,7 @@ class CardActions {
       // remove from the database:
       await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       // show error:
-      UIUtil.showSnackbar(Z.of(context).sendMemoError, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).sendMemoError.replaceAll("%1", NonTranslatable.appName), context, durationMs: 5000);
     } else {
       // delete the old memo by uuid:
       await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
@@ -239,7 +240,7 @@ class CardActions {
       // remove failed txdata from the database:
       await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       // show error:
-      UIUtil.showSnackbar(Z.of(context).sendMemoError, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).sendMemoError.replaceAll("%1", NonTranslatable.appName), context, durationMs: 5000);
     } else {
       // delete the old request by uuid:
       await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);

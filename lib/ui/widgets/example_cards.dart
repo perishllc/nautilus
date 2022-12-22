@@ -3,6 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/animations.dart';
@@ -12,7 +13,7 @@ class ExampleCards {
   static TextSpan _getExampleHeaderSpan(BuildContext context, [bool xmr = false]) {
     String workingStr;
     if (StateContainer.of(context).selectedAccount == null || StateContainer.of(context).selectedAccount!.index == 0) {
-      workingStr = Z.of(context).exampleCardIntro;
+      workingStr = Z.of(context).exampleCardIntro.replaceAll("%1", NonTranslatable.appName).replaceAll("%2", NonTranslatable.currencyName);
     } else {
       workingStr = Z.of(context).newAccountIntro;
     }

@@ -6,6 +6,7 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/vault.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
@@ -76,7 +77,7 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                   Container(
                     margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
-                      Z.of(context).passwordNoLongerRequiredToOpenParagraph,
+                      Z.of(context).passwordNoLongerRequiredToOpenParagraph.replaceAll("%1", NonTranslatable.appName),
                       style: AppStyles.textStyleParagraph(context),
                       maxLines: 5,
                       stepGranularity: 0.5,

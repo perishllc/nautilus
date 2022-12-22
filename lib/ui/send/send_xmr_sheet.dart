@@ -16,6 +16,7 @@ import 'package:wallet_flutter/bus/notification_setting_change_event.dart';
 import 'package:wallet_flutter/bus/xmr_event.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
@@ -179,8 +180,11 @@ class SendXMRSheetState extends State<SendXMRSheet> {
             _clearButton = false;
           }
         });
-        _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
-        if (_addressController!.text.isNotEmpty && _addressController!.text.length > 1 && !_addressController!.text.startsWith("nano_")) {
+        _addressController!.selection =
+            TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+        if (_addressController!.text.isNotEmpty &&
+            _addressController!.text.length > 1 &&
+            !_addressController!.text.startsWith("nano_")) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           if (_addressController!.text != formattedAddress) {
             setState(() {
@@ -233,7 +237,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
     });
 
     // Set initial currency format
-    _localCurrencyFormat = NumberFormat.currency(locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
+    _localCurrencyFormat = NumberFormat.currency(
+        locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
     // Set quick send amount
     if (quickSendAmount != null && quickSendAmount!.isNotEmpty && quickSendAmount != "0") {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -390,14 +395,15 @@ class SendXMRSheetState extends State<SendXMRSheet> {
           return AlertDialog(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
-              Z.of(context).fallbackHeader,
+              Z.of(context).fallbackHeader.replaceAll("%1", NonTranslatable.appName),
               style: AppStyles.textStyleDialogHeader(context),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${Z.of(context).fallbackInfo}\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text("${Z.of(context).fallbackInfo.replaceAll("%1", NonTranslatable.appName)}\n\n",
+                    style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actions: <Widget>[
@@ -430,7 +436,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         receive = ReceiveSheet(
           localCurrency: StateContainer.of(context).curCurrency,
           address: StateContainer.of(context).wallet!.address,
-          qrWidget: SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List())),
+          qrWidget: SizedBox(
+              width: MediaQuery.of(context).size.width / 2.675, child: Image.memory(byteData!.buffer.asUint8List())),
         );
       });
     });
@@ -497,7 +504,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                   child: AppDialogs.infoButton(
                     context,
                     () {
-                      AppDialogs.showInfoDialog(context, Z.of(context).sendSheetInfoHeader, Z.of(context).sendSheetInfo);
+                      AppDialogs.showInfoDialog(context, Z.of(context).sendSheetInfoHeader,
+                          Z.of(context).sendSheetInfo.replaceAll("%1", NonTranslatable.appName));
                     },
                   ),
                 ),
@@ -550,7 +558,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                           text: '',
                           children: [
                             TextSpan(
-                              text: StateContainer.of(context).wallet?.username ?? Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
+                              text: StateContainer.of(context).wallet?.username ??
+                                  Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
                               style: TextStyle(
                                 color: StateContainer.of(context).curTheme.text60,
                                 fontSize: 16.0,
@@ -597,9 +606,9 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                           ),
                         TextSpan(
                           text: _localCurrencyMode
-                              ? StateContainer.of(context)
-                                  .wallet!
-                                  .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale)
+                              ? StateContainer.of(context).wallet!.getLocalCurrencyBalance(
+                                  context, StateContainer.of(context).curCurrency,
+                                  locale: StateContainer.of(context).currencyLocale)
                               : "${getXMRRawAsThemeAwareAmount(context, StateContainer.of(context).xmrBalance)} XMR",
                           style: TextStyle(
                             color: StateContainer.of(context).curTheme.primary60,
@@ -759,7 +768,9 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                 Row(
                   children: <Widget>[
                     // Send Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).send, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY, Z.of(context).send, Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: () async {
                       final bool validRequest = await _validateRequest();
 
                       if (!validRequest || !mounted) {
@@ -776,7 +787,9 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                       } else {
                         if (_localCurrencyMode) {
                           amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
-                              _localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text)));
+                              _localCurrencyFormat,
+                              convertLocalCurrencyToLocalizedCrypto(
+                                  context, _localCurrencyFormat, _amountController!.text)));
                         } else {
                           amountRaw = NumberUtil.getXMRAmountAsRaw(formattedAmount);
                         }
@@ -789,7 +802,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
                         amountRaw = StateContainer.of(context).xmrBalance;
                       }
 
-                      EventTaxiImpl.singleton().fire(XMREvent(type: "xmr_get_fee", message: "$formattedAddress:$amountRaw"));
+                      EventTaxiImpl.singleton()
+                          .fire(XMREvent(type: "xmr_get_fee", message: "$formattedAddress:$amountRaw"));
                       Future<dynamic>.delayed(const Duration(milliseconds: 2000));
                       Sheets.showAppHeightNineSheet(
                           context: context,
@@ -818,9 +832,9 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       String textField = _amountController!.text;
       String balance;
       if (_localCurrencyMode) {
-        balance = StateContainer.of(context)
-            .wallet!
-            .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
+        balance = StateContainer.of(context).wallet!.getLocalCurrencyBalance(
+            context, StateContainer.of(context).curCurrency,
+            locale: StateContainer.of(context).currencyLocale);
       } else {
         balance = getRawAsThemeAwareAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
       }
@@ -832,12 +846,20 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         textField = textField.replaceAll(",", ".");
         final String sanitizedTextField = sanitizedAmount(_localCurrencyFormat, textField);
         final String sanitizedBalance = sanitizedAmount(_localCurrencyFormat, balance);
-        textFieldInt = (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
-        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
+        textFieldInt =
+            (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+                .toDouble()
+                .toInt();
+        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+            .toDouble()
+            .toInt();
       } else {
         textField = sanitizedAmount(_localCurrencyFormat, textField);
-        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
-        balanceInt = (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
+        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+            .toDouble()
+            .toInt();
+        balanceInt =
+            (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
       }
       return textFieldInt == balanceInt;
     } catch (e) {
@@ -862,7 +884,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         cryptoAmountStr = _lastCryptoAmount;
       } else {
         _lastLocalCurrencyAmount = _amountController!.text;
-        _lastCryptoAmount = convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
+        _lastCryptoAmount =
+            convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
         cryptoAmountStr = _lastCryptoAmount;
       }
       setState(() {
@@ -895,6 +918,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       });
     }
   }
+
   /// Validate form data to see if valid
   /// @returns true if valid, false otherwise
   Future<bool> _validateRequest() async {
@@ -911,7 +935,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
     } else {
       String bananoAmount;
       if (_localCurrencyMode) {
-        bananoAmount = sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
+        bananoAmount = sanitizedAmount(_localCurrencyFormat,
+            convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
       } else {
         bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
       }
@@ -948,7 +973,10 @@ class SendXMRSheetState extends State<SendXMRSheet> {
     final bool isDomain = _addressController!.text.contains(".") || _addressController!.text.contains(r"$");
     final bool isNano = _addressController!.text.startsWith("nano_");
     // final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
-    if (_addressController!.text.isNotEmpty && !isFavorite && !isUser && !isDomain && /*!Address(_addressController!.text).isValid()*/ false) {
+    if (_addressController!.text.isNotEmpty &&
+        !isFavorite &&
+        !isUser &&
+        !isDomain && /*!Address(_addressController!.text).isValid()*/ false) {
       isValid = false;
       setState(() {
         _addressValidationText = Z.of(context).invalidAddress;
@@ -1075,12 +1103,13 @@ class SendXMRSheetState extends State<SendXMRSheet> {
               _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
             });
           } else {
-            String localAmount = StateContainer.of(context)
-                .wallet!
-                .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
+            String localAmount = StateContainer.of(context).wallet!.getLocalCurrencyBalance(
+                context, StateContainer.of(context).curCurrency,
+                locale: StateContainer.of(context).currencyLocale);
             localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
             localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.DECIMAL_SEP, ".");
-            localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
+            localAmount =
+                NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
             setState(() {
               _amountValidationText = "";
               _amountController!.text = _localCurrencyFormat.currencySymbol + localAmount;
@@ -1108,7 +1137,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
   Widget getEnterAddressContainer() {
     return AppTextField(
       topMargin: 115,
-      padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+      padding:
+          _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
       // padding: EdgeInsets.zero,
       textAlign: TextAlign.center,
       // textAlign: (_isUser || _addressController.text.length == 0) ? TextAlign.center : TextAlign.start,
@@ -1215,7 +1245,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         if (text.contains(" ")) {
           text = text.replaceAll(" ", "");
           _addressController!.text = text;
-          _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+          _addressController!.selection =
+              TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         }
 
         if (text.isNotEmpty) {
@@ -1252,7 +1283,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
             _users = [];
           });
         } else if (isFavorite) {
-          final List<User> matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+          final List<User> matchedList =
+              await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
           final Set<String?> nicknames = <String?>{};
           matchedList.retainWhere((User x) => nicknames.add(x.nickname));
           setState(() {
@@ -1260,7 +1292,8 @@ class SendXMRSheetState extends State<SendXMRSheet> {
             _users = matchedList;
           });
         } else if (isUser || isDomain) {
-          final List<User> matchedList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+          final List<User> matchedList =
+              await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
           setState(() {
             _isFavorite = false;
             _users = matchedList;

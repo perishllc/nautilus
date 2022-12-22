@@ -2645,7 +2645,7 @@
     "type": "text",
     "description": "transfer_close_text"
   },
-  "transferComplete": "%1 %2 successfully transferred to your %1 Wallet.\n",
+  "transferComplete": "%1 %2 successfully transferred to your %3 Wallet.\n",
   "@transferComplete": {
     "type": "text",
     "description": "transfer_complete_text"
@@ -2675,7 +2675,7 @@
     "type": "text",
     "description": "transfer_header"
   },
-  "transferIntro": "This process will transfer the funds from a paper wallet to your %1 wallet.\n\nTap the \"%1\" button to start.",
+  "transferIntro": "This process will transfer the funds from a paper wallet to your %2 wallet.\n\nTap the \"%1\" button to start.",
   "@transferIntro": {
     "type": "text",
     "description": "transfer_intro"

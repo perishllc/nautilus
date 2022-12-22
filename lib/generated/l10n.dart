@@ -5355,10 +5355,10 @@ class Z {
     );
   }
 
-  /// `%1 %2 successfully transferred to your %1 Wallet.\n`
+  /// `%1 %2 successfully transferred to your %3 Wallet.\n`
   String get transferComplete {
     return Intl.message(
-      '%1 %2 successfully transferred to your %1 Wallet.\n',
+      '%1 %2 successfully transferred to your %3 Wallet.\n',
       name: 'transferComplete',
       desc: 'transfer_complete_text',
       args: [],
@@ -5415,10 +5415,10 @@ class Z {
     );
   }
 
-  /// `This process will transfer the funds from a paper wallet to your %1 wallet.\n\nTap the "%1" button to start.`
+  /// `This process will transfer the funds from a paper wallet to your %2 wallet.\n\nTap the "%1" button to start.`
   String get transferIntro {
     return Intl.message(
-      'This process will transfer the funds from a paper wallet to your %1 wallet.\n\nTap the "%1" button to start.',
+      'This process will transfer the funds from a paper wallet to your %2 wallet.\n\nTap the "%1" button to start.',
       name: 'transferIntro',
       desc: 'transfer_intro',
       args: [],

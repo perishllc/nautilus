@@ -8,6 +8,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/fcm_update_event.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/authentication_method.dart';
 import 'package:wallet_flutter/model/vault.dart';
 import 'package:wallet_flutter/service_locator.dart';
@@ -40,7 +41,8 @@ class _AppLockScreenState extends State<AppLockScreen> {
     }
     StateContainer.of(context).requestUpdate();
     final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
-    Navigator.of(context).pushNamedAndRemoveUntil('/home_transition', (Route<dynamic> route) => false, arguments: conversion);
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/home_transition', (Route<dynamic> route) => false, arguments: conversion);
   }
 
   Widget _buildPinScreen(BuildContext context, String? expectedPin, [String? plausiblePin]) {
@@ -48,7 +50,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
         isUnlockAction: true,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: Z.of(context).unlockPin,
+        description: Z.of(context).unlockPin.replaceAll("%1", NonTranslatable.appName),
         pinScreenBackgroundColor: StateContainer.of(context).curTheme.backgroundDark);
   }
 
@@ -128,7 +130,9 @@ class _AppLockScreenState extends State<AppLockScreen> {
   }
 
   Future<void> authenticateWithBiometrics() async {
-    final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, Z.of(context).unlockBiometrics);
+    final bool authenticated = await sl
+        .get<BiometricUtil>()
+        .authenticateWithBiometrics(context, Z.of(context).unlockBiometrics.replaceAll("%1", NonTranslatable.appName));
     if (authenticated) {
       _goHome();
     } else {
@@ -232,16 +236,23 @@ class _AppLockScreenState extends State<AppLockScreen> {
                             style: TextButton.styleFrom(
                               foregroundColor: StateContainer.of(context).curTheme.text15,
                               padding: const EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
+                              shape:
+                                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
                               // highlightColor: StateContainer.of(context).curTheme.text15,
                               // splashColor: StateContainer.of(context).curTheme.text30,
                             ),
                             onPressed: () {
-                              AppDialogs.showConfirmDialog(context, CaseChange.toUpperCase(Z.of(context).warning, context),
-                                  Z.of(context).logoutDetail, Z.of(context).logoutAction.toUpperCase(), () {
+                              AppDialogs.showConfirmDialog(
+                                  context,
+                                  CaseChange.toUpperCase(Z.of(context).warning, context),
+                                  Z.of(context).logoutDetail..replaceAll("%1", NonTranslatable.appName),
+                                  Z.of(context).logoutAction.toUpperCase(), () {
                                 // Show another confirm dialog
-                                AppDialogs.showConfirmDialog(context, Z.of(context).logoutAreYouSure,
-                                    Z.of(context).logoutReassurance, CaseChange.toUpperCase(Z.of(context).yes, context), () {
+                                AppDialogs.showConfirmDialog(
+                                    context,
+                                    Z.of(context).logoutAreYouSure,
+                                    Z.of(context).logoutReassurance,
+                                    CaseChange.toUpperCase(Z.of(context).yes, context), () {
                                   // Unsubscribe from notifications
                                   sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((_) {
                                     FirebaseMessaging.instance.getToken().then((String? fcmToken) {
@@ -250,7 +261,8 @@ class _AppLockScreenState extends State<AppLockScreen> {
                                       sl.get<Vault>().deleteAll().then((_) {
                                         sl.get<SharedPrefsUtil>().deleteAll().then((void result) {
                                           StateContainer.of(context).logOut();
-                                          Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+                                          Navigator.of(context)
+                                              .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
                                         });
                                       });
                                     });
@@ -308,8 +320,10 @@ class _AppLockScreenState extends State<AppLockScreen> {
                       Row(
                         children: <Widget>[
                           AppButton.buildAppButton(
-                              context, AppButtonType.PRIMARY, _lockedOut ? _countDownTxt : Z.of(context).unlock, Dimens.BUTTON_BOTTOM_DIMENS,
-                              onPressed: () {
+                              context,
+                              AppButtonType.PRIMARY,
+                              _lockedOut ? _countDownTxt : Z.of(context).unlock,
+                              Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                             if (!_lockedOut) {
                               _authenticate(transitions: true);
                             }

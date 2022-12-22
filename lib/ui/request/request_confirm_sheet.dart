@@ -8,6 +8,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/authentication_method.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
@@ -340,7 +341,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         await StateContainer.of(context).updateUnified(true);
         // go to home and show error:
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-        UIUtil.showSnackbar(Z.of(context).requestError, context, durationMs: 5500);
+        UIUtil.showSnackbar(Z.of(context).requestError.replaceAll("%1", NonTranslatable.appName), context, durationMs: 5500);
       } else {
         sl.get<Logger>().v("request succeeded");
 
@@ -382,7 +383,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         Navigator.of(context).pop();
       }
       sendFailed = true;
-      UIUtil.showSnackbar(Z.of(context).requestError, context, durationMs: 3500);
+      UIUtil.showSnackbar(Z.of(context).requestError.replaceAll("%1", NonTranslatable.appName), context, durationMs: 3500);
       Navigator.of(context).pop();
     }
   }

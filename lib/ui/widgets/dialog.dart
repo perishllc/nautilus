@@ -9,6 +9,7 @@ import 'package:markdown/markdown.dart' as md;
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/network/metadata_service.dart';
 import 'package:wallet_flutter/network/model/block_types.dart';
 import 'package:wallet_flutter/network/model/response/account_history_response_item.dart';
@@ -217,7 +218,7 @@ class AppDialogs {
                 borderRadius: BorderRadius.circular(15),
               ),
               title: Text(
-                Z.of(context).proSubRequiredHeader,
+                Z.of(context).proSubRequiredHeader.replaceAll("%1", NonTranslatable.appName),
                 style: AppStyles.textStyleButtonPrimaryOutline(context),
               ),
 
@@ -225,7 +226,7 @@ class AppDialogs {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                 Text(
-                  Z.of(context).proSubRequiredParagraph,
+                  Z.of(context).proSubRequiredParagraph.replaceAll("%1", NonTranslatable.appName),
                   style: AppStyles.textStyleParagraph(context),
                 ),
                 Row(

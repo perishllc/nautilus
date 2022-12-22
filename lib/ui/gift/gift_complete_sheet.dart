@@ -7,6 +7,7 @@ import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/gift/gift_qr_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
@@ -18,7 +19,14 @@ import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:share_plus/share_plus.dart';
 
 class GenerateCompleteSheet extends StatefulWidget {
-  const GenerateCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount, this.link = "", this.walletSeed = "", this.memo = ""})
+  const GenerateCompleteSheet(
+      {this.amountRaw,
+      this.destination,
+      this.contactName,
+      this.localAmount,
+      this.link = "",
+      this.walletSeed = "",
+      this.memo = ""})
       : super();
 
   final String? amountRaw;
@@ -84,7 +92,8 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
   @override
   Widget build(BuildContext context) {
     if (widget.link.isNotEmpty && _messageController.text.isEmpty) {
-      _messageController.text = "${Z.of(context).defaultGiftMessage} ${widget.link}";
+      _messageController.text =
+          "${Z.of(context).defaultGiftMessage.replaceAll("%1", NonTranslatable.appName).replaceAll("%2", NonTranslatable.currencyName)} ${widget.link}";
     }
     return SafeArea(
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
@@ -147,7 +156,10 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                       // Container for the Amount Text
                       Container(
                         margin: EdgeInsets.only(
-                            top: 10.0, bottom: 10, left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                            top: 10.0,
+                            bottom: 10,
+                            left: MediaQuery.of(context).size.width * 0.105,
+                            right: MediaQuery.of(context).size.width * 0.105),
                         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                         width: double.infinity,
                         decoration: BoxDecoration(
@@ -243,8 +255,11 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
                         AppButtonType.PRIMARY,
                         Z.of(context).showLinkOptions,
                         Dimens.BUTTON_BOTTOM_EXCEPTION_DIMENS, onPressed: () async {
-                      final Widget qrWidget = SizedBox(width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, widget.link));
-                      Sheets.showAppHeightEightSheet(context: context, widget: GiftQRSheet(link: widget.link, qrWidget: qrWidget));
+                      final Widget qrWidget = SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: await UIUtil.getQRImage(context, widget.link));
+                      Sheets.showAppHeightEightSheet(
+                          context: context, widget: GiftQRSheet(link: widget.link, qrWidget: qrWidget));
                     }),
                   ],
                 ),

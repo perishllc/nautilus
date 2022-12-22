@@ -11,6 +11,7 @@ import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/gift/gift_confirm_sheet.dart';
@@ -291,7 +292,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                     //   stepGranularity: 0.5,
                     // ),
                     child: Text(
-                      Z.of(context).giftInfo,
+                      Z.of(context).giftInfo.replaceAll("%1", NonTranslatable.appName),
                       style: AppStyles.textStyleParagraph(context),
                     ),
                     // ),

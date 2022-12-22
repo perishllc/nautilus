@@ -10,6 +10,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/wallet.dart';
 import 'package:wallet_flutter/network/account_service.dart';
 import 'package:wallet_flutter/network/model/response/account_balance_item.dart';
@@ -149,9 +150,11 @@ class AppTransferOverviewSheet {
                                 alignment: AlignmentDirectional.centerStart,
                                 margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
                                 child: AutoSizeText(
-                                  Z.of(context)
+                                  Z
+                                      .of(context)
                                       .transferIntro
-                                      .replaceAll("%1", Z.of(context).scanQrCode),
+                                      .replaceAll("%1", Z.of(context).scanQrCode)
+                                      .replaceAll("%2", NonTranslatable.appName),
                                   style: AppStyles.textStyleParagraph(context),
                                   textAlign: TextAlign.start,
                                   maxLines: 6,

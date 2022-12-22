@@ -5,6 +5,7 @@ import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/vault.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
@@ -84,7 +85,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                   Container(
                     margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
-                      Z.of(context).passwordWillBeRequiredToOpenParagraph,
+                      Z.of(context).passwordWillBeRequiredToOpenParagraph.replaceAll("%1", NonTranslatable.appName),
                       style: AppStyles.textStyleParagraph(context),
                       maxLines: 5,
                       stepGranularity: 0.5,
@@ -92,7 +93,7 @@ class _SetPasswordSheetState extends State<SetPasswordSheet> {
                   ),
                   Expanded(
                       child: KeyboardAvoider(
-                          duration: Duration(milliseconds: 0),
+                          duration: Duration.zero,
                           autoScroll: true,
                           focusPadding: 40,
                           child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[

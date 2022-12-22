@@ -17,6 +17,7 @@ import 'package:wallet_flutter/bus/fcm_update_event.dart';
 import 'package:wallet_flutter/bus/notification_setting_change_event.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/model/db/user.dart';
@@ -278,7 +279,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                       AppDialogs.showInfoDialog(
                         context,
                         Z.of(context).giftCardInfoHeader,
-                        Z.of(context).giftInfo,
+                        Z.of(context).giftInfo.replaceAll("%1", NonTranslatable.appName),
                         scrollable: true,
                       );
                     },

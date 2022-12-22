@@ -8,6 +8,7 @@ import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/network/account_service.dart';
 import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
@@ -282,7 +283,7 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                         child: Column(
                           children: <Widget>[
                             AutoSizeText(
-                              Z.of(context).usernameInfo,
+                              Z.of(context).usernameInfo.replaceAll("%1", NonTranslatable.appName),
                               style: AppStyles.textStyleParagraph(context),
                               maxLines: 6,
                               stepGranularity: 0.5,
@@ -290,7 +291,7 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                             Container(
                               margin: const EdgeInsetsDirectional.only(top: 15),
                               child: AutoSizeText(
-                                Z.of(context).usernameWarning,
+                                Z.of(context).usernameWarning.replaceAll("%1", NonTranslatable.appName),
                                 style: AppStyles.textStyleParagraphPrimary(context),
                                 maxLines: 2,
                                 // maxFontSize: 14,

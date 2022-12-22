@@ -6,6 +6,7 @@ import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/vault.dart';
 import 'package:wallet_flutter/service_locator.dart';
@@ -104,7 +105,7 @@ class _IntroPasswordState extends State<IntroPassword> {
                         margin: EdgeInsetsDirectional.only(
                             start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                         child: AutoSizeText(
-                          Z.of(context).passwordWillBeRequiredToOpenParagraph,
+                          Z.of(context).passwordWillBeRequiredToOpenParagraph.replaceAll("%1", NonTranslatable.appName),
                           style: AppStyles.textStyleParagraph(context),
                           maxLines: 5,
                           stepGranularity: 0.5,

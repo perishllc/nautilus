@@ -844,7 +844,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferClose": MessageLookupByLibrary.simpleMessage(
             "Tap anywhere to close the window."),
         "transferComplete": MessageLookupByLibrary.simpleMessage(
-            "%1 %2 successfully transferred to your %1 Wallet.\n"),
+            "%1 %2 successfully transferred to your %3 Wallet.\n"),
         "transferConfirmInfo": MessageLookupByLibrary.simpleMessage(
             "A wallet with a balance of %1 %2 has been detected.\n"),
         "transferConfirmInfoSecond": MessageLookupByLibrary.simpleMessage(
@@ -856,7 +856,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferHeader":
             MessageLookupByLibrary.simpleMessage("Transfer Funds"),
         "transferIntro": MessageLookupByLibrary.simpleMessage(
-            "This process will transfer the funds from a paper wallet to your %1 wallet.\n\nTap the \"%1\" button to start."),
+            "This process will transfer the funds from a paper wallet to your %2 wallet.\n\nTap the \"%1\" button to start."),
         "transferIntroShort": MessageLookupByLibrary.simpleMessage(
             "This process will transfer the funds from a paper wallet to your %1 wallet."),
         "transferLoading": MessageLookupByLibrary.simpleMessage("Transferring"),

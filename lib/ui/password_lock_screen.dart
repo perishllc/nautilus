@@ -8,6 +8,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/fcm_update_event.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/vault.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
@@ -68,7 +69,7 @@ class _AppPasswordLockScreenState extends State<AppPasswordLockScreen> {
                         ),
                         onPressed: () {
                           AppDialogs.showConfirmDialog(context, CaseChange.toUpperCase(Z.of(context).warning, context),
-                              Z.of(context).logoutDetail, Z.of(context).logoutAction.toUpperCase(), () {
+                              Z.of(context).logoutDetail.replaceAll("%1", NonTranslatable.appName), Z.of(context).logoutAction.toUpperCase(), () {
                             // Show another confirm dialog
                             AppDialogs.showConfirmDialog(context, Z.of(context).logoutAreYouSure, Z.of(context).logoutReassurance,
                                 CaseChange.toUpperCase(Z.of(context).yes, context), () {

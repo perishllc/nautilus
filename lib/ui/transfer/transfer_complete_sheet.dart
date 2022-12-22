@@ -3,6 +3,7 @@ import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/sheets.dart';
@@ -35,11 +36,14 @@ class AppTransferCompleteSheet {
                           // Success tick (icon)
                           Container(
                             margin: const EdgeInsets.only(bottom: 30),
-                            child: Icon(AppIcons.success, size: 100, color: StateContainer.of(context).curTheme.success),
+                            child:
+                                Icon(AppIcons.success, size: 100, color: StateContainer.of(context).curTheme.success),
                           ),
                           Container(
                             margin: const EdgeInsets.only(bottom: 20),
-                            constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height * 0.2, maxWidth: MediaQuery.of(context).size.width * 0.6),
+                            constraints: BoxConstraints(
+                                maxHeight: MediaQuery.of(context).size.height * 0.2,
+                                maxWidth: MediaQuery.of(context).size.width * 0.6),
                             // child: Stack(
                             //   children: <Widget>[
                             //     Center(
@@ -57,7 +61,12 @@ class AppTransferCompleteSheet {
                               alignment: AlignmentDirectional.centerStart,
                               margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 60),
                               child: Text(
-                                Z.of(context).transferComplete.replaceAll("%1", transferAmount).replaceAll("%2", StateContainer.of(context).currencyMode),
+                                Z
+                                    .of(context)
+                                    .transferComplete
+                                    .replaceAll("%1", transferAmount)
+                                    .replaceAll("%2", StateContainer.of(context).currencyMode)
+                                    .replaceAll("%3", NonTranslatable.appName),
                                 style: AppStyles.textStyleParagraphSuccess(context),
                                 textAlign: TextAlign.start,
                               )),

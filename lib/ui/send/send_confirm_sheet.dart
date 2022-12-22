@@ -10,6 +10,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/authentication_method.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
@@ -683,7 +684,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
     if (memoSendFailed) {
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-      UIUtil.showSnackbar(Z.of(context).sendMemoError, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).sendMemoError.replaceAll("%1", NonTranslatable.appName), context, durationMs: 5000);
     } else {
       if (widget.link.isEmpty) {
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));

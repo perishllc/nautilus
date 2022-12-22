@@ -9,6 +9,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/vault.dart';
 import 'package:wallet_flutter/model/wallet.dart';
 import 'package:wallet_flutter/network/account_service.dart';
@@ -98,7 +99,11 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                     Container(
                         margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 60),
                         child: Text(
-                          Z.of(context).transferConfirmInfo.replaceAll("%1", getThemeAwareAccuracyAmount(context, totalToTransfer.toString())),
+                          Z
+                              .of(context)
+                              .transferConfirmInfo
+                              .replaceAll("%1", getThemeAwareAccuracyAmount(context, totalToTransfer.toString()))
+                              .replaceAll("%2", NonTranslatable.currencyName),
                           style: AppStyles.textStyleParagraphPrimary(context),
                           textAlign: TextAlign.start,
                         )),
@@ -126,10 +131,13 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                   children: <Widget>[
                     // Send Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(Z.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
-                        onPressed: () async {
+                        context,
+                        AppButtonType.PRIMARY,
+                        CaseChange.toUpperCase(Z.of(context).confirm, context),
+                        Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       animationOpen = true;
-                      AppAnimation.animationLauncher(context, AnimationType.TRANSFER_TRANSFERRING, onPoppedCallback: () => animationOpen = false);
+                      AppAnimation.animationLauncher(context, AnimationType.TRANSFER_TRANSFERRING,
+                          onPoppedCallback: () => animationOpen = false);
                       await processWallets();
                     }),
                   ],
@@ -137,8 +145,8 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                 Row(
                   children: <Widget>[
                     // Scan QR Code Button
-                    AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).cancel.toUpperCase(), Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).cancel.toUpperCase(),
+                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
                   ],
@@ -154,7 +162,8 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
   Future<String> _getPrivKey(int index) async {
     String? seed;
     if (StateContainer.of(context).encryptedSecret != null) {
-      seed = NanoHelpers.byteToHex(NanoCrypt.decrypt(StateContainer.of(context).encryptedSecret, await sl.get<Vault>().getSessionKey()));
+      seed = NanoHelpers.byteToHex(
+          NanoCrypt.decrypt(StateContainer.of(context).encryptedSecret, await sl.get<Vault>().getSessionKey()));
     } else {
       seed = await sl.get<Vault>().getSeed();
     }
@@ -178,15 +187,15 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         for (final String hash in receivableBlocks.keys) {
           final ReceivableResponseItem? item = receivableBlocks[hash];
           if (balanceItem.frontier != null) {
-            final ProcessResponse resp = await sl
-                .get<AccountService>()
-                .requestReceive(AppWallet.defaultRepresentative, balanceItem.frontier, item!.amount, hash, account, balanceItem.privKey);
+            final ProcessResponse resp = await sl.get<AccountService>().requestReceive(AppWallet.defaultRepresentative,
+                balanceItem.frontier, item!.amount, hash, account, balanceItem.privKey);
             if (resp.hash != null) {
               balanceItem.frontier = resp.hash;
               totalTransferred += BigInt.parse(item.amount!);
             }
           } else {
-            final ProcessResponse resp = await sl.get<AccountService>().requestOpen(item!.amount, hash, account, balanceItem.privKey);
+            final ProcessResponse resp =
+                await sl.get<AccountService>().requestOpen(item!.amount, hash, account, balanceItem.privKey);
             if (resp.hash != null) {
               balanceItem.frontier = resp.hash;
               totalTransferred += BigInt.parse(item.amount!);
@@ -197,9 +206,9 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         }
         // Process send from this account
         resp = await sl.get<AccountService>().getAccountInfo(account);
-        final ProcessResponse sendResp = await sl
-            .get<AccountService>()
-            .requestSend(AppWallet.defaultRepresentative, resp.frontier, resp.balance, state!.wallet!.address, account, balanceItem.privKey, max: true);
+        final ProcessResponse sendResp = await sl.get<AccountService>().requestSend(AppWallet.defaultRepresentative,
+            resp.frontier, resp.balance, state!.wallet!.address, account, balanceItem.privKey,
+            max: true);
         if (sendResp.hash != null) {
           totalTransferred += BigInt.parse(balanceItem.balance!);
         }
@@ -217,13 +226,19 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
     try {
       state!.lockCallback();
       // Receive all new blocks to our own account
-      final ReceivableResponse pr = await sl.get<AccountService>().getReceivable(state!.wallet!.address, 20, includeActive: true);
+      final ReceivableResponse pr =
+          await sl.get<AccountService>().getReceivable(state!.wallet!.address, 20, includeActive: true);
       final Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks!;
       for (final String hash in receivableBlocks.keys) {
         final ReceivableResponseItem? item = receivableBlocks[hash];
         if (state!.wallet!.openBlock != null) {
-          final ProcessResponse resp = await sl.get<AccountService>().requestReceive(state!.wallet!.representative, state!.wallet!.frontier, item!.amount, hash,
-              state!.wallet!.address, await _getPrivKey(state!.selectedAccount!.index!));
+          final ProcessResponse resp = await sl.get<AccountService>().requestReceive(
+              state!.wallet!.representative,
+              state!.wallet!.frontier,
+              item!.amount,
+              hash,
+              state!.wallet!.address,
+              await _getPrivKey(state!.selectedAccount!.index!));
           if (resp.hash != null) {
             state!.wallet!.frontier = resp.hash;
           }
@@ -268,15 +283,15 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         for (final String hash in receivableBlocks.keys) {
           final ReceivableResponseItem? item = receivableBlocks[hash];
           if (balanceItem.frontier != null) {
-            final ProcessResponse resp = await sl
-                .get<AccountService>()
-                .requestReceive(AppWallet.defaultRepresentative, balanceItem.frontier, item!.amount, hash, account, balanceItem.privKey);
+            final ProcessResponse resp = await sl.get<AccountService>().requestReceive(AppWallet.defaultRepresentative,
+                balanceItem.frontier, item!.amount, hash, account, balanceItem.privKey);
             if (resp.hash != null) {
               balanceItem.frontier = resp.hash;
               totalTransferred += BigInt.parse(item.amount!);
             }
           } else {
-            final ProcessResponse resp = await sl.get<AccountService>().requestOpen(item!.amount, hash, account, balanceItem.privKey);
+            final ProcessResponse resp =
+                await sl.get<AccountService>().requestOpen(item!.amount, hash, account, balanceItem.privKey);
             if (resp.hash != null) {
               balanceItem.frontier = resp.hash;
               totalTransferred += BigInt.parse(item.amount!);
@@ -287,9 +302,9 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         }
         // Process send from this account
         resp = await sl.get<AccountService>().getAccountInfo(account);
-        final ProcessResponse sendResp = await sl
-            .get<AccountService>()
-            .requestSend(AppWallet.defaultRepresentative, resp.frontier, resp.balance, address, account, balanceItem.privKey, max: true);
+        final ProcessResponse sendResp = await sl.get<AccountService>().requestSend(
+            AppWallet.defaultRepresentative, resp.frontier, resp.balance, address, account, balanceItem.privKey,
+            max: true);
         if (sendResp.hash != null) {
           totalTransferred += BigInt.parse(balanceItem.balance!);
         }
@@ -301,32 +316,32 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
       // state.unlockCallback();
     }
     // try {
-      // state.lockCallback();
-      // Receive all new blocks to our own account? doesn't seem to work:
-      // if (state != null) {
-      //   throw Exception("state is null, can't receive own blocks");
-      // }
-      // final ReceivableResponse pr = await sl.get<AccountService>().getReceivable(state!.wallet!.address, 20, includeActive: true);
-      // final Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks!;
-      // for (final String hash in receivableBlocks.keys) {
-      //   final ReceivableResponseItem? item = receivableBlocks[hash];
-      //   if (state!.wallet!.openBlock != null) {
-      //     final ProcessResponse resp = await sl.get<AccountService>().requestReceive(state!.wallet!.representative, state!.wallet!.frontier, item!.amount, hash,
-      //         state!.wallet!.address, await _getPrivKey(state!.selectedAccount!.index!));
-      //     if (resp.hash != null) {
-      //       state!.wallet!.frontier = resp.hash;
-      //     }
-      //   } else {
-      //     final ProcessResponse resp = await sl.get<AccountService>().requestOpen(
-      //         item!.amount, hash, state!.wallet!.address, await _getPrivKey(state!.selectedAccount!.index!),
-      //         representative: state!.wallet!.representative);
-      //     if (resp.hash != null) {
-      //       state!.wallet!.frontier = resp.hash;
-      //       state!.wallet!.openBlock = resp.hash;
-      //     }
-      //   }
-      // }
-      // state!.requestUpdate();
+    // state.lockCallback();
+    // Receive all new blocks to our own account? doesn't seem to work:
+    // if (state != null) {
+    //   throw Exception("state is null, can't receive own blocks");
+    // }
+    // final ReceivableResponse pr = await sl.get<AccountService>().getReceivable(state!.wallet!.address, 20, includeActive: true);
+    // final Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks!;
+    // for (final String hash in receivableBlocks.keys) {
+    //   final ReceivableResponseItem? item = receivableBlocks[hash];
+    //   if (state!.wallet!.openBlock != null) {
+    //     final ProcessResponse resp = await sl.get<AccountService>().requestReceive(state!.wallet!.representative, state!.wallet!.frontier, item!.amount, hash,
+    //         state!.wallet!.address, await _getPrivKey(state!.selectedAccount!.index!));
+    //     if (resp.hash != null) {
+    //       state!.wallet!.frontier = resp.hash;
+    //     }
+    //   } else {
+    //     final ProcessResponse resp = await sl.get<AccountService>().requestOpen(
+    //         item!.amount, hash, state!.wallet!.address, await _getPrivKey(state!.selectedAccount!.index!),
+    //         representative: state!.wallet!.representative);
+    //     if (resp.hash != null) {
+    //       state!.wallet!.frontier = resp.hash;
+    //       state!.wallet!.openBlock = resp.hash;
+    //     }
+    //   }
+    // }
+    // state!.requestUpdate();
     // } catch (error) {
     //   // Less-important error
     //   sl.get<Logger>().e("Error processing wallet", error);
@@ -386,15 +401,15 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         for (final String hash in receivableBlocks.keys) {
           final ReceivableResponseItem? item = receivableBlocks[hash];
           if (balanceItem.frontier != null) {
-            final ProcessResponse resp = await sl
-                .get<AccountService>()
-                .requestReceive(AppWallet.defaultRepresentative, balanceItem.frontier, item!.amount, hash, account, balanceItem.privKey);
+            final ProcessResponse resp = await sl.get<AccountService>().requestReceive(AppWallet.defaultRepresentative,
+                balanceItem.frontier, item!.amount, hash, account, balanceItem.privKey);
             if (resp.hash != null) {
               balanceItem.frontier = resp.hash;
               totalTransferred += BigInt.parse(item.amount!);
             }
           } else {
-            final ProcessResponse resp = await sl.get<AccountService>().requestOpen(item!.amount, hash, account, balanceItem.privKey);
+            final ProcessResponse resp =
+                await sl.get<AccountService>().requestOpen(item!.amount, hash, account, balanceItem.privKey);
             if (resp.hash != null) {
               balanceItem.frontier = resp.hash;
               totalTransferred += BigInt.parse(item.amount!);
@@ -405,9 +420,9 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         }
         // Process send from this account
         resp = await sl.get<AccountService>().getAccountInfo(account);
-        final ProcessResponse sendResp = await sl
-            .get<AccountService>()
-            .requestSend(AppWallet.defaultRepresentative, resp.frontier, resp.balance, address, account, balanceItem.privKey, max: true);
+        final ProcessResponse sendResp = await sl.get<AccountService>().requestSend(
+            AppWallet.defaultRepresentative, resp.frontier, resp.balance, address, account, balanceItem.privKey,
+            max: true);
         if (sendResp.hash != null) {
           totalTransferred += BigInt.parse(balanceItem.balance!);
         }

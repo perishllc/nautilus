@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/network/model/response/funding_response_item.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/widgets/draggable_scrollbar.dart';
@@ -157,7 +158,7 @@ class _FundingMessagesSheetState extends State<FundingMessagesSheet> {
             end: 12,
             bottom: 20,
           ),
-          child: Text(Z.of(context).iosFundingMessage),
+          child: Text(Z.of(context).iosFundingMessage.replaceAll("%1", NonTranslatable.appName)),
         ),
       );
     }
