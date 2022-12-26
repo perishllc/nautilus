@@ -30,6 +30,7 @@ import 'package:wallet_flutter/ui/receive/split_bill_sheet.dart';
 import 'package:wallet_flutter/ui/request/request_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_simpledialog.dart';
@@ -297,16 +298,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 // Container for the header, address and balance text
                 Column(
                   children: <Widget>[
-                    // Sheet handle
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                    ),
+                    Handlebars.horizontal(context),
                     Container(
                       margin: const EdgeInsets.only(top: 15.0),
                       constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),

@@ -14,6 +14,7 @@ import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/node.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';
@@ -64,16 +65,7 @@ class NodeDetailsSheet {
                         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
                         child: Column(
                           children: <Widget>[
-                            // Sheet handle
-                            Container(
-                              margin: const EdgeInsets.only(top: 10, bottom: 0),
-                              height: 5,
-                              width: MediaQuery.of(context).size.width * 0.15,
-                              decoration: BoxDecoration(
-                                color: StateContainer.of(context).curTheme.text20,
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                            ),
+                            Handlebars.horizontal(context),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +90,8 @@ class NodeDetailsSheet {
                                               AppDialogs.showConfirmDialog(
                                                   context,
                                                   Z.of(context).hideAccountHeader,
-                                                  Z.of(context)
+                                                  Z
+                                                      .of(context)
                                                       .removeAccountText
                                                       .replaceAll("%1", Z.of(context).addNode),
                                                   CaseChange.toUpperCase(Z.of(context).yes, context), () {
@@ -109,9 +102,7 @@ class NodeDetailsSheet {
                                                       .fire(NodeModifiedEvent(node: node, deleted: true));
                                                   Navigator.of(context).pop();
                                                 });
-                                              },
-                                                  cancelText:
-                                                      CaseChange.toUpperCase(Z.of(context).no, context));
+                                              }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
                                             },
                                             child: Icon(AppIcons.trashcan,
                                                 size: 24, color: StateContainer.of(context).curTheme.text),

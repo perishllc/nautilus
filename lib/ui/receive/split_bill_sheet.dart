@@ -18,6 +18,7 @@ import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/receive/split_bill_add_user_sheet.dart';
 import 'package:wallet_flutter/ui/request/request_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -94,16 +95,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                     constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                     child: Column(
                       children: <Widget>[
-                        // Sheet handle
-                        Container(
-                          margin: const EdgeInsets.only(top: 10),
-                          height: 5,
-                          width: MediaQuery.of(context).size.width * 0.15,
-                          decoration: BoxDecoration(
-                            color: StateContainer.of(context).curTheme.text20,
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                        ),
+                        Handlebars.horizontal(context),
                         Container(
                           margin: const EdgeInsets.only(top: 15.0),
                           constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
@@ -129,8 +121,8 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                     child: AppDialogs.infoButton(
                       context,
                       () {
-                        AppDialogs.showInfoDialog(context, Z.of(context).splitBillInfoHeader,
-                            Z.of(context).splitBillInfo);
+                        AppDialogs.showInfoDialog(
+                            context, Z.of(context).splitBillInfoHeader, Z.of(context).splitBillInfo);
                       },
                     ),
                   ),
@@ -444,16 +436,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                   ),
                 ),
               ),
-              // handle bars:
-              Container(
-                width: 4,
-                height: 90,
-                margin: const EdgeInsets.only(right: 20),
-                decoration: BoxDecoration(
-                  color: StateContainer.of(context).curTheme.text45,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
+              Handlebars.vertical(context, height: 90),
             ],
           ),
         ),

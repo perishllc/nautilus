@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -14,6 +13,7 @@ import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/ui/gift/gift_qr_sheet.dart';
 import 'package:wallet_flutter/ui/home/card_actions.dart';
 import 'package:wallet_flutter/ui/users/add_blocked.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -102,21 +102,16 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
           children: <Widget>[
             Column(
               children: <Widget>[
-                // Sheet handle
-                Container(
+                Handlebars.horizontal(
+                  context,
                   margin: const EdgeInsets.only(top: 10, bottom: 24),
-                  height: 5,
-                  width: MediaQuery.of(context).size.width * 0.15,
-                  decoration: BoxDecoration(
-                    color: StateContainer.of(context).curTheme.text20,
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
                 ),
                 // A row for View Details button
                 if (!isGiftLoad && !txDetails.is_message)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).viewTX, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY, Z.of(context).viewTX, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         await UIUtil.showBlockExplorerWebview(context, txDetails.block);
                       }),
@@ -183,7 +178,8 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 if (isUnfulfilledPayableRequest)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).payRequest, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).payRequest, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () {
                         Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
@@ -196,7 +192,8 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 if (txDetails.is_request && StateContainer.of(context).wallet!.address != txDetails.from_address)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).blockUser, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).blockUser, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () {
                         Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
@@ -213,8 +210,8 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 if (isUnacknowledgedSendableRequest)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).sendRequestAgain, Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () async {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).sendRequestAgain,
+                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                         // send the request again:
                         CardActions.resendRequest(context, txDetails);
                       }),
@@ -238,7 +235,8 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 if (txDetails.is_request)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).deleteRequest, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).deleteRequest, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () {
                         Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
                         sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
@@ -257,10 +255,14 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           AppButtonType.PRIMARY,
                           Z.of(context).showLinkOptions,
                           Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () async {
-                        final Widget qrWidget = SizedBox(width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, sharableLink!));
-                        Sheets.showAppHeightEightSheet(context: context, widget: GiftQRSheet(link: sharableLink, qrWidget: qrWidget));
+                        final Widget qrWidget = SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: await UIUtil.getQRImage(context, sharableLink!));
+                        Sheets.showAppHeightEightSheet(
+                            context: context, widget: GiftQRSheet(link: sharableLink, qrWidget: qrWidget));
                       }),
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).viewTX, Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY, Z.of(context).viewTX, Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
                           onPressed: () async {
                         await UIUtil.showBlockExplorerWebview(context, txDetails.block);
                       }),

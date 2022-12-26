@@ -10,6 +10,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
@@ -45,16 +46,7 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
-            // Sheet handle
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              height: 5,
-              width: MediaQuery.of(context).size.width * 0.15,
-              decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text20,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
+            Handlebars.horizontal(context),
             // The main widget that holds the header, text fields, and submit button
             Expanded(
               child: Column(
@@ -103,7 +95,8 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
                   ),
                   // The paragraph
                   Container(
-                    margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
+                    margin: EdgeInsetsDirectional.only(
+                        start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
                       Z.of(context).changeSeedParagraph,
                       style: AppStyles.textStyleParagraph(context),
@@ -141,7 +134,9 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16.0,
-                                color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
+                                color: passwordsMatch
+                                    ? StateContainer.of(context).curTheme.primary
+                                    : StateContainer.of(context).curTheme.text,
                                 fontFamily: "NunitoSans",
                               ),
                             ),
@@ -167,7 +162,8 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).changeSeed, Dimens.BUTTON_TOP_DIMENS,
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY, Z.of(context).changeSeed, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       await submitAndEncrypt();
                     }),
@@ -175,7 +171,8 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                       Navigator.pop(context);
                     }),
@@ -218,7 +215,8 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
     }
 
     // make sure password contains an uppercase and lowercase letter:
-    if (!confirmPasswordController!.text.contains(RegExp(r"[a-z]")) || !confirmPasswordController!.text.contains(RegExp(r"[A-Z]"))) {
+    if (!confirmPasswordController!.text.contains(RegExp(r"[a-z]")) ||
+        !confirmPasswordController!.text.contains(RegExp(r"[A-Z]"))) {
       setState(() {
         passwordError = Z.of(context).passwordCapitalLetter;
       });
@@ -236,11 +234,13 @@ class _ChangeMagicSeedSheetState extends State<ChangeMagicSeedSheet> {
     final String issuer = claim["iss"] as String;
 
     // get identifier:
-    final String hashedPassword = NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
+    final String hashedPassword =
+        NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
     final String fullIdentifier = "$issuer:$hashedPassword";
 
     if (!mounted) return;
 
-    Navigator.of(context).pushNamed("/intro_import", arguments: <String, String>{"fullIdentifier": fullIdentifier, "password": confirmPasswordController!.text});
+    Navigator.of(context).pushNamed("/intro_import",
+        arguments: <String, String>{"fullIdentifier": fullIdentifier, "password": confirmPasswordController!.text});
   }
 }

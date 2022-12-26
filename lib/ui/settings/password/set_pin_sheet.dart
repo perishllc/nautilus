@@ -8,6 +8,7 @@ import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/vault.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -47,16 +48,7 @@ class _SetPinSheetState extends State<SetPinSheet> {
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
-            // Sheet handle
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              height: 5,
-              width: MediaQuery.of(context).size.width * 0.15,
-              decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text20,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
+            Handlebars.horizontal(context),
             // The main widget that holds the header, text fields, and submit button
             Expanded(
               child: Column(
@@ -105,7 +97,8 @@ class _SetPinSheetState extends State<SetPinSheet> {
                   ),
                   // The paragraph
                   Container(
-                    margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
+                    margin: EdgeInsetsDirectional.only(
+                        start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
                       Z.of(context).setPinParagraph,
                       style: AppStyles.textStyleParagraph(context),
@@ -143,7 +136,9 @@ class _SetPinSheetState extends State<SetPinSheet> {
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16.0,
-                                color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
+                                color: passwordsMatch
+                                    ? StateContainer.of(context).curTheme.primary
+                                    : StateContainer.of(context).curTheme.text,
                                 fontFamily: "NunitoSans",
                               ),
                               onSubmitted: (text) {
@@ -174,7 +169,9 @@ class _SetPinSheetState extends State<SetPinSheet> {
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16.0,
-                                color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
+                                color: passwordsMatch
+                                    ? StateContainer.of(context).curTheme.primary
+                                    : StateContainer.of(context).curTheme.text,
                                 fontFamily: "NunitoSans",
                               ),
                             ),
@@ -200,14 +197,17 @@ class _SetPinSheetState extends State<SetPinSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).changePin, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY, Z.of(context).changePin, Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: () async {
                       await submitAndEncrypt();
                     }),
                   ],
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                       Navigator.pop(context);
                     }),

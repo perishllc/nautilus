@@ -12,6 +12,7 @@ import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -112,7 +113,8 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
             _clearButton = false;
           }
         });
-        _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+        _addressController!.selection =
+            TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         if (_addressController!.text.isNotEmpty && !_addressController!.text.startsWith("nano_")) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           if (_addressController!.text != formattedAddress) {
@@ -152,7 +154,8 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
   Widget getEnterAddressContainer() {
     return AppTextField(
       topMargin: 124,
-      padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+      padding:
+          _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
       textAlign: TextAlign.center,
       focusNode: _addressFocusNode,
       controller: _addressController,
@@ -254,7 +257,8 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
         if (text.contains(" ")) {
           text = text.replaceAll(" ", "");
           _addressController!.text = text;
-          _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+          _addressController!.selection =
+              TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         }
 
         if (text.isNotEmpty) {
@@ -289,12 +293,14 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
             _users = [];
           });
         } else if (isFavorite) {
-          final List<User> matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+          final List<User> matchedList =
+              await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
           setState(() {
             _users = matchedList;
           });
         } else if (isUser || isDomain) {
-          final List<User> matchedList = await sl.get<DBHelper>().getUserSuggestionsWithUsernameLike(SendSheetHelpers.stripPrefixes(text));
+          final List<User> matchedList =
+              await sl.get<DBHelper>().getUserSuggestionsWithUsernameLike(SendSheetHelpers.stripPrefixes(text));
           setState(() {
             _users = matchedList;
           });
@@ -342,7 +348,8 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
                   FocusScope.of(context).requestFocus(_addressFocusNode);
                 });
               },
-              child: UIUtil.threeLineAddressText(context, widget.address != null ? widget.address! : _addressController!.text))
+              child: UIUtil.threeLineAddressText(
+                  context, widget.address != null ? widget.address! : _addressController!.text))
           : null,
     );
   }
@@ -370,15 +377,9 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
                 constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                 child: Column(
                   children: <Widget>[
-                    // Sheet handle
-                    Container(
+                    Handlebars.horizontal(
+                      context,
                       margin: const EdgeInsets.only(top: 10, bottom: 15),
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
                     ),
                     AutoSizeText(
                       CaseChange.toUpperCase(Z.of(context).addAccount, context),
@@ -427,8 +428,9 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
                                   alignment: Alignment.topCenter,
                                   children: <Widget>[
                                     Container(
-                                      margin:
-                                          EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                      margin: EdgeInsets.only(
+                                          left: MediaQuery.of(context).size.width * 0.105,
+                                          right: MediaQuery.of(context).size.width * 0.105),
                                       alignment: Alignment.bottomCenter,
                                       constraints: const BoxConstraints(maxHeight: 174, minHeight: 0),
                                       // ********************************************* //
@@ -452,8 +454,10 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
                                                     padding: EdgeInsets.zero,
                                                     itemCount: _users.length,
                                                     itemBuilder: (BuildContext context, int index) {
-                                                      return Misc.buildUserItem(context, _users[index], true, (User user) {
-                                                        _addressController!.text = user.getDisplayName(ignoreNickname: true)!;
+                                                      return Misc.buildUserItem(context, _users[index], true,
+                                                          (User user) {
+                                                        _addressController!.text =
+                                                            user.getDisplayName(ignoreNickname: true)!;
                                                         _addressFocusNode!.unfocus();
                                                         setState(() {
                                                           _isUser = true;
@@ -505,7 +509,9 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
               Row(
                 children: <Widget>[
                   // Add Contact Button
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).addAccount, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                  AppButton.buildAppButton(
+                      context, AppButtonType.PRIMARY, Z.of(context).addAccount, Dimens.BUTTON_TOP_DIMENS,
+                      onPressed: () async {
                     if (await validateForm()) {
                       User user;
                       final String formAddress = widget.address ?? _addressController!.text;
@@ -553,7 +559,9 @@ class SplitBillAddUserSheetState extends State<SplitBillAddUserSheet> {
               Row(
                 children: <Widget>[
                   // Close Button
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                  AppButton.buildAppButton(
+                      context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                      onPressed: () {
                     Navigator.of(context).pop();
                   }),
                 ],

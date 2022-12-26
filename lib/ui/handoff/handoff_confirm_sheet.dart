@@ -19,6 +19,7 @@ import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/handoff/handoff_complete_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/animations.dart';
@@ -102,16 +103,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
-            // Sheet handle
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              height: 5,
-              width: MediaQuery.of(context).size.width * 0.15,
-              decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text20,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
+            Handlebars.horizontal(context),
             //The main widget that holds the text fields, "SENDING" and "TO" texts
             Expanded(
               child: Column(

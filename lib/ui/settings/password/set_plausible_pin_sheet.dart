@@ -8,6 +8,7 @@ import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/vault.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -47,16 +48,7 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
-            // Sheet handle
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              height: 5,
-              width: MediaQuery.of(context).size.width * 0.15,
-              decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text20,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
+            Handlebars.horizontal(context),
             // The main widget that holds the header, text fields, and submit button
             Expanded(
               child: Column(
@@ -91,8 +83,8 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                           child: AppDialogs.infoButton(
                             context,
                             () {
-                              AppDialogs.showInfoDialog(context, Z.of(context).plausibleInfoHeader,
-                                  Z.of(context).plausibleSheetInfo);
+                              AppDialogs.showInfoDialog(
+                                  context, Z.of(context).plausibleInfoHeader, Z.of(context).plausibleSheetInfo);
                             },
                           ),
                         ),
@@ -236,8 +228,9 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close,
-                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () {
                       Navigator.pop(context);
                     }),
                   ],

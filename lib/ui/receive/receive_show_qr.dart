@@ -14,6 +14,7 @@ import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/ui/receive/share_card.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -142,17 +143,8 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
             },
             child: Column(
               children: <Widget>[
-                // Sheet handle
                 Center(
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    height: 5,
-                    width: MediaQuery.of(context).size.width * 0.15,
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.text20,
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                  ),
+                  child: Handlebars.horizontal(context),
                 ),
                 // Column for Enter Amount container + Enter Amount Error container WIP
                 Column(
@@ -310,9 +302,7 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                             context,
                             // Copy Address Button
                             _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                            _addressCopied
-                                ? Z.of(context).addressCopied
-                                : Z.of(context).copyAddress,
+                            _addressCopied ? Z.of(context).addressCopied : Z.of(context).copyAddress,
                             Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
                           Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
                           setState(() {

@@ -18,6 +18,7 @@ import 'package:wallet_flutter/network/model/response/process_response.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/animations.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -95,16 +96,7 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
-            // Sheet handle
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              height: 5,
-              width: MediaQuery.of(context).size.width * 0.15,
-              decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text20,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
+            Handlebars.horizontal(context),
             //The main widget that holds the text fields, "SENDING" and "TO" texts
             Expanded(
               child: Column(
@@ -124,7 +116,9 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                   ),
                   // Container for the amount text
                   Container(
-                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                    margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.105,
+                        right: MediaQuery.of(context).size.width * 0.105),
                     padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -177,7 +171,9 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                   if (widget.splitAmountRaw.isNotEmpty)
                     // Container for the split amount text
                     Container(
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.105,
+                          right: MediaQuery.of(context).size.width * 0.105),
                       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -228,7 +224,9 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                   if (widget.memo.isNotEmpty)
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                        margin: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.105,
+                            right: MediaQuery.of(context).size.width * 0.105),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: StateContainer.of(context).curTheme.backgroundDarkest,
@@ -251,8 +249,10 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(Z.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
-                        onPressed: () async {
+                        context,
+                        AppButtonType.PRIMARY,
+                        CaseChange.toUpperCase(Z.of(context).confirm, context),
+                        Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
@@ -261,7 +261,8 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                           if (!mounted) return;
                           final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
                               context,
-                              Z.of(context)
+                              Z
+                                  .of(context)
                                   .sendAmountConfirm
                                   .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
                                   .replaceAll("%2", StateContainer.of(context).currencyMode));
@@ -284,7 +285,10 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(Z.of(context).cancel, context),
+                    AppButton.buildAppButton(
+                        context,
+                        AppButtonType.PRIMARY_OUTLINE,
+                        CaseChange.toUpperCase(Z.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -365,7 +369,8 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
             widget.amountRaw,
             widget.destination,
             StateContainer.of(context).wallet!.address,
-            NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
+            NanoUtil.seedToPrivate(
+                await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
             max: widget.maxSend);
         StateContainer.of(context).wallet!.frontier = resp.hash;
         StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
@@ -402,7 +407,8 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: Z.of(context)
+        description: Z
+            .of(context)
             .sendAmountConfirm
             .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
             .replaceAll("%2", StateContainer.of(context).currencyMode),

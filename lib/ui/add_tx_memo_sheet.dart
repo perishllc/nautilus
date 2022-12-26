@@ -1,4 +1,3 @@
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,14 +7,13 @@ import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 
 class AddMemoSheet extends StatefulWidget {
   const AddMemoSheet({Key? key}) : super(key: key);
-
-  
 
   @override
   _AddMemoSheetState createState() => _AddMemoSheetState();
@@ -54,15 +52,9 @@ class _AddMemoSheetState extends State<AddMemoSheet> {
                 constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                 child: Column(
                   children: <Widget>[
-                    // Sheet handle
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      height: 5,
+                    Handlebars.horizontal(
+                      context,
                       width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 15.0),

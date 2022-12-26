@@ -3400,7 +3400,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 ),
               ),
             ),
-            // handle bars:
             if (slideEnabled)
               Handlebars.vertical(context),
           ],

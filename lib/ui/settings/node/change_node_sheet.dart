@@ -17,6 +17,7 @@ import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/settings/node/add_node_sheet.dart';
 import 'package:wallet_flutter/ui/settings/node/node_details_sheet.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';
 import 'package:wallet_flutter/ui/widgets/draggable_scrollbar.dart';
@@ -70,7 +71,9 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
         if (event.node!.selected) {
           Future<void>.delayed(const Duration(milliseconds: 50), () {
             setState(() {
-              widget.nodes.where((Node a) => a.index == StateContainer.of(context).selectedAccount!.index).forEach((Node node) async {
+              widget.nodes
+                  .where((Node a) => a.index == StateContainer.of(context).selectedAccount!.index)
+                  .forEach((Node node) async {
                 node.selected = true;
                 await sl.get<DBHelper>().changeNode(node);
                 await sl.get<AccountService>().updateNode();
@@ -144,16 +147,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
                   ),
                   Column(
                     children: <Widget>[
-                      // Sheet handle
-                      Container(
-                        margin: const EdgeInsets.only(top: 10),
-                        height: 5,
-                        width: MediaQuery.of(context).size.width * 0.15,
-                        decoration: BoxDecoration(
-                          color: StateContainer.of(context).curTheme.text20,
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                      ),
+                      Handlebars.horizontal(context),
                       Container(
                         margin: const EdgeInsets.only(top: 15.0),
                         constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
@@ -366,7 +360,9 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
                                         margin: EdgeInsets.zero,
                                         child: Icon(
                                           Icons.hub,
-                                          color: node.selected ? StateContainer.of(context).curTheme.success : StateContainer.of(context).curTheme.primary,
+                                          color: node.selected
+                                              ? StateContainer.of(context).curTheme.success
+                                              : StateContainer.of(context).curTheme.primary,
                                           size: 30,
                                         ),
                                       ),
@@ -418,16 +414,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
                         ),
                       ),
                     ),
-                    // handle bars:
-                    Container(
-                      width: 4,
-                      height: 30,
-                      margin: const EdgeInsets.only(right: 20),
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text45,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
+                    Handlebars.vertical(context),
                   ],
                 ),
               ),
@@ -465,8 +452,8 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
           icon: Icons.delete,
           label: Z.of(context).delete,
           onPressed: (BuildContext context) {
-            AppDialogs.showConfirmDialog(
-                context, Z.of(context).deleteNodeHeader, Z.of(context).deleteNodeConfirmation, CaseChange.toUpperCase(Z.of(context).yes, context), () async {
+            AppDialogs.showConfirmDialog(context, Z.of(context).deleteNodeHeader, Z.of(context).deleteNodeConfirmation,
+                CaseChange.toUpperCase(Z.of(context).yes, context), () async {
               await Future<dynamic>.delayed(const Duration(milliseconds: 250));
               // Remove account
               await sl.get<DBHelper>().deleteNode(node);

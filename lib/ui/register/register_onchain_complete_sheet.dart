@@ -5,6 +5,7 @@ import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
@@ -29,16 +30,7 @@ class _RegisterOnchainCompleteSheetState extends State<RegisterOnchainCompleteSh
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
-            // Sheet handle
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              height: 5,
-              width: MediaQuery.of(context).size.width * 0.15,
-              decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text20,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
+            Handlebars.horizontal(context),
             //A main container that holds the amount, address and "SENT TO" texts
             Expanded(
               child: Column(
@@ -124,7 +116,10 @@ class _RegisterOnchainCompleteSheetState extends State<RegisterOnchainCompleteSh
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(Z.of(context).close, context),
+                    AppButton.buildAppButton(
+                        context,
+                        AppButtonType.SUCCESS_OUTLINE,
+                        CaseChange.toUpperCase(Z.of(context).close, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),

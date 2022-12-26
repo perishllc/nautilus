@@ -14,6 +14,7 @@ import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';
@@ -145,16 +146,7 @@ class BlockedDetailsSheet {
                 minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
                 child: Column(
                   children: <Widget>[
-                    // Sheet handle
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                    ),
+                    Handlebars.horizontal(context),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,9 +169,7 @@ class BlockedDetailsSheet {
                               AppDialogs.showConfirmDialog(
                                   context,
                                   Z.of(context).removeBlocked,
-                                  Z.of(context)
-                                      .removeBlockedConfirmation
-                                      .replaceAll('%1', blocked.getDisplayName()!),
+                                  Z.of(context).removeBlockedConfirmation.replaceAll('%1', blocked.getDisplayName()!),
                                   CaseChange.toUpperCase(Z.of(context).yes, context), () {
                                 sl.get<DBHelper>().unblockUser(blocked).then((bool deleted) {
                                   if (deleted) {
@@ -187,9 +177,7 @@ class BlockedDetailsSheet {
                                     EventTaxiImpl.singleton().fire(BlockedRemovedEvent(user: blocked));
                                     EventTaxiImpl.singleton().fire(BlockedModifiedEvent(user: blocked));
                                     UIUtil.showSnackbar(
-                                        Z.of(context)
-                                            .blockedRemoved
-                                            .replaceAll("%1", blocked.getDisplayName()!),
+                                        Z.of(context).blockedRemoved.replaceAll("%1", blocked.getDisplayName()!),
                                         context);
                                     Navigator.of(context).pop();
                                   } else {
@@ -352,8 +340,8 @@ class BlockedDetailsSheet {
                         Row(
                           children: <Widget>[
                             // Close Button
-                            AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                                Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                            AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close,
+                                Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                               Navigator.pop(context);
                             }),
                           ],

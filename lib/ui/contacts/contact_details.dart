@@ -14,6 +14,7 @@ import 'package:wallet_flutter/model/db/user.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';
@@ -123,16 +124,7 @@ class ContactDetailsSheet {
                 minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
                 child: Column(
                   children: <Widget>[
-                    // Sheet handle
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                    ),
+                    Handlebars.horizontal(context),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,

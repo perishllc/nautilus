@@ -28,6 +28,7 @@ import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
@@ -143,7 +144,8 @@ class SendGiftSheetState extends State<SendGiftSheet> {
     });
 
     // Set initial currency format
-    _localCurrencyFormat = NumberFormat.currency(locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
+    _localCurrencyFormat = NumberFormat.currency(
+        locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
     // Set quick send amount
     if (quickSendAmount != null && quickSendAmount!.isNotEmpty && quickSendAmount != "0") {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -242,16 +244,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                 // Container for the header, address and balance text
                 Column(
                   children: <Widget>[
-                    // Sheet handle
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                    ),
+                    Handlebars.horizontal(context),
                     Container(
                       margin: const EdgeInsets.only(top: 15.0),
                       constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
@@ -334,7 +327,8 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                           text: '',
                           children: <InlineSpan>[
                             TextSpan(
-                              text: StateContainer.of(context).wallet?.username ?? Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
+                              text: StateContainer.of(context).wallet?.username ??
+                                  Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
                               style: TextStyle(
                                 color: StateContainer.of(context).curTheme.text60,
                                 fontSize: 16.0,
@@ -371,7 +365,8 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                         ),
                         if (!_localCurrencyMode)
                           TextSpan(
-                            text: getThemeAwareRawAccuracy(context, StateContainer.of(context).wallet!.accountBalance.toString()),
+                            text: getThemeAwareRawAccuracy(
+                                context, StateContainer.of(context).wallet!.accountBalance.toString()),
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.primary60,
                               fontSize: 14.0,
@@ -391,10 +386,11 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                           ),
                         TextSpan(
                           text: _localCurrencyMode
-                              ? StateContainer.of(context)
-                                  .wallet!
-                                  .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale)
-                              : getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString()),
+                              ? StateContainer.of(context).wallet!.getLocalCurrencyBalance(
+                                  context, StateContainer.of(context).curCurrency,
+                                  locale: StateContainer.of(context).currencyLocale)
+                              : getRawAsThemeAwareFormattedAmount(
+                                  context, StateContainer.of(context).wallet!.accountBalance.toString()),
                           style: TextStyle(
                             color: StateContainer.of(context).curTheme.primary60,
                             fontSize: 14.0,
@@ -475,8 +471,9 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                                     alignment: Alignment.topCenter,
                                     children: <Widget>[
                                       Container(
-                                        margin:
-                                            EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                        margin: EdgeInsets.only(
+                                            left: MediaQuery.of(context).size.width * 0.105,
+                                            right: MediaQuery.of(context).size.width * 0.105),
                                         alignment: Alignment.bottomCenter,
                                         constraints: const BoxConstraints(maxHeight: 174, minHeight: 0),
                                       ),
@@ -520,7 +517,8 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                 Row(
                   children: <Widget>[
                     // Send Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).createGiftCard, Dimens.BUTTON_TOP_DIMENS,
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY, Z.of(context).createGiftCard, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       final bool validRequest = await _validateRequest();
 
@@ -538,7 +536,9 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                       } else {
                         if (_localCurrencyMode) {
                           amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
-                              _localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text)));
+                              _localCurrencyFormat,
+                              convertLocalCurrencyToLocalizedCrypto(
+                                  context, _localCurrencyFormat, _amountController!.text)));
                         } else {
                           if (_rawAmount != null) {
                             amountRaw = _rawAmount!;
@@ -610,9 +610,9 @@ class SendGiftSheetState extends State<SendGiftSheet> {
       String textField = _amountController!.text;
       String balance;
       if (_localCurrencyMode) {
-        balance = StateContainer.of(context)
-            .wallet!
-            .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
+        balance = StateContainer.of(context).wallet!.getLocalCurrencyBalance(
+            context, StateContainer.of(context).curCurrency,
+            locale: StateContainer.of(context).currencyLocale);
       } else {
         balance = getRawAsThemeAwareAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
       }
@@ -624,12 +624,20 @@ class SendGiftSheetState extends State<SendGiftSheet> {
         textField = textField.replaceAll(",", ".");
         final String sanitizedTextField = sanitizedAmount(_localCurrencyFormat, textField);
         final String sanitizedBalance = sanitizedAmount(_localCurrencyFormat, balance);
-        textFieldInt = (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
-        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
+        textFieldInt =
+            (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+                .toDouble()
+                .toInt();
+        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+            .toDouble()
+            .toInt();
       } else {
         textField = sanitizedAmount(_localCurrencyFormat, textField);
-        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
-        balanceInt = (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
+        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+            .toDouble()
+            .toInt();
+        balanceInt =
+            (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
       }
       return textFieldInt == balanceInt;
     } catch (e) {
@@ -648,7 +656,8 @@ class SendGiftSheetState extends State<SendGiftSheet> {
         cryptoAmountStr = _lastCryptoAmount;
       } else {
         _lastLocalCurrencyAmount = _amountController!.text;
-        _lastCryptoAmount = convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
+        _lastCryptoAmount =
+            convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
         cryptoAmountStr = _lastCryptoAmount;
       }
       setState(() {
@@ -697,7 +706,8 @@ class SendGiftSheetState extends State<SendGiftSheet> {
     } else {
       String bananoAmount;
       if (_localCurrencyMode) {
-        bananoAmount = sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
+        bananoAmount = sanitizedAmount(_localCurrencyFormat,
+            convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
       } else {
         if (_rawAmount == null) {
           bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
@@ -812,16 +822,18 @@ class SendGiftSheetState extends State<SendGiftSheet> {
           if (!_localCurrencyMode) {
             setState(() {
               _amountValidationText = "";
-              _amountController!.text = getRawAsThemeAwareFormattedAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
+              _amountController!.text = getRawAsThemeAwareFormattedAmount(
+                  context, StateContainer.of(context).wallet!.accountBalance.toString());
               _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
             });
           } else {
-            String localAmount = StateContainer.of(context)
-                .wallet!
-                .getLocalCurrencyBalance(context, StateContainer.of(context).curCurrency, locale: StateContainer.of(context).currencyLocale);
+            String localAmount = StateContainer.of(context).wallet!.getLocalCurrencyBalance(
+                context, StateContainer.of(context).curCurrency,
+                locale: StateContainer.of(context).currencyLocale);
             localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
             localAmount = localAmount.replaceAll(_localCurrencyFormat.symbols.DECIMAL_SEP, ".");
-            localAmount = NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
+            localAmount =
+                NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
             setState(() {
               _amountValidationText = "";
               _amountController!.text = _localCurrencyFormat.currencySymbol + localAmount;

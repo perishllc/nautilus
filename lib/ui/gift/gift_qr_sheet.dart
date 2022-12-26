@@ -9,6 +9,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/ui/receive/share_card.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:share_plus/share_plus.dart';
@@ -84,19 +85,9 @@ class GiftQRSheetState extends State<GiftQRSheet> {
                   width: 60,
                   height: 60,
                 ),
-                //Container for the address text and sheet handle
                 Column(
                   children: <Widget>[
-                    // Sheet handle
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                    ),
+                    Handlebars.horizontal(context),
                   ],
                 ),
                 //Empty SizedBox
@@ -112,7 +103,9 @@ class GiftQRSheetState extends State<GiftQRSheet> {
                 padding: const EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
                 child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
                   final double availableWidth = constraints.maxWidth;
-                  final double availableHeight = (StateContainer.of(context).wallet?.username != null) ? (constraints.maxHeight - 70) : constraints.maxHeight;
+                  final double availableHeight = (StateContainer.of(context).wallet?.username != null)
+                      ? (constraints.maxHeight - 70)
+                      : constraints.maxHeight;
                   const double widthDivideFactor = 1.3;
                   final double computedMaxSize = math.min(availableWidth / widthDivideFactor, availableHeight);
                   return Center(
@@ -185,7 +178,8 @@ class GiftQRSheetState extends State<GiftQRSheet> {
                             width: computedMaxSize,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(color: StateContainer.of(context).curTheme.primary!, width: computedMaxSize / 90),
+                              border: Border.all(
+                                  color: StateContainer.of(context).curTheme.primary!, width: computedMaxSize / 90),
                             ),
                           ),
                         ),
@@ -216,7 +210,8 @@ class GiftQRSheetState extends State<GiftQRSheet> {
                             height: computedMaxSize / 12,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
-                              child: SvgPicture.asset("assets/logo.svg", color: StateContainer.of(context).curTheme.primary),
+                              child: SvgPicture.asset("assets/logo.svg",
+                                  color: StateContainer.of(context).curTheme.primary),
                             ),
                           ),
                         ),

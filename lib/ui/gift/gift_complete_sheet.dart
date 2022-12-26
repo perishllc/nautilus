@@ -11,6 +11,7 @@ import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/gift/gift_qr_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -99,17 +100,7 @@ class GenerateCompleteSheetState extends State<GenerateCompleteSheet> {
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
-            // Sheet handle
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              height: 5,
-              width: MediaQuery.of(context).size.width * 0.15,
-              decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text20,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
-
+            Handlebars.horizontal(context),
             // Success tick (icon)
             GestureDetector(
               onTap: () {

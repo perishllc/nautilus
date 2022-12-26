@@ -3,6 +3,7 @@ import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 
@@ -26,15 +27,9 @@ class _AuthCompleteSheetState extends State<AuthCompleteSheet> {
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
-            // Sheet handle
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              height: 5,
+            Handlebars.horizontal(
+              context,
               width: MediaQuery.of(context).size.width * 0.15,
-              decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text20,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
             ),
             //A main container that holds the amount, address and "SENT TO" texts
             Expanded(
@@ -74,7 +69,10 @@ class _AuthCompleteSheetState extends State<AuthCompleteSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(Z.of(context).close, context),
+                    AppButton.buildAppButton(
+                        context,
+                        AppButtonType.SUCCESS_OUTLINE,
+                        CaseChange.toUpperCase(Z.of(context).close, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),

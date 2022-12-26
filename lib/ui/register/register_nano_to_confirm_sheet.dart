@@ -16,6 +16,7 @@ import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/send/send_complete_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/animations.dart';
@@ -89,7 +90,8 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
 
   void _showSendingAnimation(BuildContext context) {
     animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.REGISTER_USERNAME, onPoppedCallback: () => animationOpen = false);
+    AppAnimation.animationLauncher(context, AnimationType.REGISTER_USERNAME,
+        onPoppedCallback: () => animationOpen = false);
   }
 
   @override
@@ -98,16 +100,8 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
-            // Sheet handle
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              height: 5,
-              width: MediaQuery.of(context).size.width * 0.15,
-              decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text20,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
+            Handlebars.horizontal(context),
+
             //The main widget that holds the text fields, "SENDING" and "TO" texts
             Expanded(
               child: Column(
@@ -128,13 +122,16 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
                   // Address text
                   Container(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.105,
+                          right: MediaQuery.of(context).size.width * 0.105),
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.address!, contactName: "@${widget.username!}")),
+                      child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.address!,
+                          contactName: "@${widget.username!}")),
 
                   // "FOR" text
                   Container(
@@ -150,7 +147,9 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
                   ),
                   // Container for the amount text
                   Container(
-                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                    margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.105,
+                        right: MediaQuery.of(context).size.width * 0.105),
                     padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -197,8 +196,10 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(Z.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
-                        onPressed: () async {
+                        context,
+                        AppButtonType.PRIMARY,
+                        CaseChange.toUpperCase(Z.of(context).confirm, context),
+                        Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
@@ -207,7 +208,8 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
                         try {
                           final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
                               context,
-                              Z.of(context)
+                              Z
+                                  .of(context)
                                   .sendAmountConfirm
                                   .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
                                   .replaceAll("%2", StateContainer.of(context).currencyMode));
@@ -230,7 +232,10 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(Z.of(context).cancel, context),
+                    AppButton.buildAppButton(
+                        context,
+                        AppButtonType.PRIMARY_OUTLINE,
+                        CaseChange.toUpperCase(Z.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -247,11 +252,16 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
       _showSendingAnimation(context);
 
       final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
-      final String privKey =
-          await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!, derivationMethod);
+      final String privKey = await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(),
+          StateContainer.of(context).selectedAccount!.index!, derivationMethod);
 
-      final ProcessResponse resp = await sl.get<AccountService>().requestSend(StateContainer.of(context).wallet!.representative,
-          StateContainer.of(context).wallet!.frontier, widget.amountRaw, widget.destination, StateContainer.of(context).wallet!.address, privKey,
+      final ProcessResponse resp = await sl.get<AccountService>().requestSend(
+          StateContainer.of(context).wallet!.representative,
+          StateContainer.of(context).wallet!.frontier,
+          widget.amountRaw,
+          widget.destination,
+          StateContainer.of(context).wallet!.address,
+          privKey,
           max: widget.maxSend);
       StateContainer.of(context).wallet!.frontier = resp.hash;
       StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
@@ -303,7 +313,8 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
           context: context,
           closeOnTap: true,
           removeUntilHome: true,
-          widget: SendCompleteSheet(amountRaw: widget.amountRaw, destination: widget.destination, localAmount: widget.localCurrency));
+          widget: SendCompleteSheet(
+              amountRaw: widget.amountRaw, destination: widget.destination, localAmount: widget.localCurrency));
     } catch (e) {
       // Send failed
       if (animationOpen) {
@@ -323,7 +334,8 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: Z.of(context)
+        description: Z
+            .of(context)
             .sendAmountConfirm
             .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
             .replaceAll("%2", StateContainer.of(context).currencyMode),

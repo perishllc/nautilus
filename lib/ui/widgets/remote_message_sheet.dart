@@ -13,6 +13,7 @@ import 'package:wallet_flutter/model/notification_setting.dart';
 import 'package:wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';
@@ -113,19 +114,9 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                   width: 60,
                   height: 10,
                 ),
-                //Container for the address text and sheet handle
                 Column(
                   children: <Widget>[
-                    // Sheet handle
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                    ),
+                    Handlebars.horizontal(context),
                     // Container(
                     //   margin: const EdgeInsets.only(top: 15.0),
                     //   constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
@@ -220,8 +211,9 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                 if (widget.alert!.link != null)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).readMore,
-                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY, Z.of(context).readMore, Dimens.BUTTON_TOP_DIMENS,
+                          onPressed: () async {
                         final Uri uri = Uri.parse(widget.alert!.link!);
                         if (await canLaunchUrl(uri)) {
                           await launchUrl(uri);
@@ -234,10 +226,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                 if (widget.alert?.id == 4042)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY,
-                          Z.of(context).enableNotifications,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).enableNotifications,
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                         final bool enabledNotifications = await showNotificationDialog();
                         if (!mounted) return;
@@ -253,8 +242,9 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                 if (widget.alert?.id == 4043)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY,
-                          Z.of(context).enableTracking, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY, Z.of(context).enableTracking, Dimens.BUTTON_BOTTOM_DIMENS,
+                          onPressed: () async {
                         bool? trackingEnabled;
                         if (Platform.isIOS) {
                           final TrackingStatus status = await AppTrackingTransparency.requestTrackingAuthorization();
@@ -281,8 +271,9 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                 if (widget.hasDismissButton && widget.alert!.dismissable)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                          Z.of(context).dismiss, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).dismiss, Dimens.BUTTON_BOTTOM_DIMENS,
+                          onPressed: () {
                         sl.get<SharedPrefsUtil>().dismissAlertForWeek(widget.alert!);
                         StateContainer.of(context).removeActiveOrSettingsAlert(widget.alert, null);
                         if (widget.alert?.priority == "high") {
@@ -295,8 +286,9 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                 else
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                          Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                          onPressed: () {
                         Navigator.pop(context);
                       }),
                     ],

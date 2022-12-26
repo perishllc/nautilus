@@ -22,6 +22,7 @@ import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:wallet_flutter/ui/accounts/add_watch_only_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';
@@ -227,15 +228,9 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                   ),
                   Column(
                     children: <Widget>[
-                      // Sheet handle
-                      Container(
-                        margin: const EdgeInsets.only(top: 10),
-                        height: 5,
+                      Handlebars.horizontal(
+                        context,
                         width: MediaQuery.of(context).size.width * 0.15,
-                        decoration: BoxDecoration(
-                          color: StateContainer.of(context).curTheme.text20,
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 15.0),
@@ -612,16 +607,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                         ),
                       ),
                     ),
-                    // handle bars:
-                    Container(
-                      width: 4,
-                      height: 30,
-                      margin: const EdgeInsets.only(right: 20),
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text45,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
+                    Handlebars.vertical(context),
                   ],
                 ),
               ),

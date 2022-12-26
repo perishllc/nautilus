@@ -15,6 +15,7 @@ import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/ui/receive/share_card.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -120,7 +121,8 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
       }
     });
     // Set initial currency format
-    _localCurrencyFormat = NumberFormat.currency(locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
+    _localCurrencyFormat = NumberFormat.currency(
+        locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
 
     qrWidget = widget.qrWidget;
   }
@@ -136,17 +138,8 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
             },
             child: Column(
               children: <Widget>[
-                // Sheet handle
                 Center(
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    height: 5,
-                    width: MediaQuery.of(context).size.width * 0.15,
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.text20,
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                  ),
+                  child: Handlebars.horizontal(context),
                 ),
                 // Column for Enter Amount container + Enter Amount Error container WIP
                 // Column(
@@ -176,8 +169,9 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
                     padding: const EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
                     child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
                       final double availableWidth = constraints.maxWidth;
-                      final double availableHeight =
-                          (StateContainer.of(context).wallet?.username != null) ? (constraints.maxHeight - 70) : constraints.maxHeight;
+                      final double availableHeight = (StateContainer.of(context).wallet?.username != null)
+                          ? (constraints.maxHeight - 70)
+                          : constraints.maxHeight;
                       const double widthDivideFactor = 1.3;
                       final double computedMaxSize = Math.min(availableWidth / widthDivideFactor, availableHeight);
                       return Center(
@@ -250,7 +244,8 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
                                 width: computedMaxSize,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  border: Border.all(color: StateContainer.of(context).curTheme.primary!, width: computedMaxSize / 90),
+                                  border: Border.all(
+                                      color: StateContainer.of(context).curTheme.primary!, width: computedMaxSize / 90),
                                 ),
                               ),
                             ),
@@ -281,7 +276,8 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
                                 height: computedMaxSize / 12,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
-                                  child: SvgPicture.asset("assets/logo.svg", color: StateContainer.of(context).curTheme.primary),
+                                  child: SvgPicture.asset("assets/logo.svg",
+                                      color: StateContainer.of(context).curTheme.primary),
                                 ),
                               ),
                             ),
@@ -371,7 +367,8 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
         cryptoAmountStr = _lastCryptoAmount;
       } else {
         _lastLocalCurrencyAmount = _amountController!.text;
-        _lastCryptoAmount = convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
+        _lastCryptoAmount =
+            convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
         cryptoAmountStr = _lastCryptoAmount;
       }
       setState(() {
@@ -409,14 +406,17 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
     String? raw;
     if (_localCurrencyMode) {
       _lastLocalCurrencyAmount = _amountController!.text;
-      _lastCryptoAmount = sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
+      _lastCryptoAmount = sanitizedAmount(_localCurrencyFormat,
+          convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
       if (_lastCryptoAmount.isNotEmpty) {
         raw = NumberUtil.getAmountAsRaw(_lastCryptoAmount);
       }
     } else {
       raw = _amountController!.text.isNotEmpty
-          ? NumberUtil.getAmountAsRaw(
-              _amountController!.text.trim().replaceAll(_localCurrencyFormat.currencySymbol, "").replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, ""))
+          ? NumberUtil.getAmountAsRaw(_amountController!.text
+              .trim()
+              .replaceAll(_localCurrencyFormat.currencySymbol, "")
+              .replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, ""))
           : "";
     }
     paintQrCode(address: widget.address, amount: raw);
@@ -430,7 +430,8 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
       data = "nano:${address!}";
     }
 
-    final Widget qr = SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: await UIUtil.getQRImage(context, data));
+    final Widget qr =
+        SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: await UIUtil.getQRImage(context, data));
     setState(() {
       qrWidget = qr;
     });
@@ -460,13 +461,16 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
       onChanged: (String text) {
         if (_localCurrencyMode == false && !text.contains(".") && text.isNotEmpty && text.length > 1) {
           // if the amount is larger than 133248297 set it to that number:
-          if (BigInt.parse(text.replaceAll(_localCurrencyFormat.currencySymbol, "").replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "")) >
+          if (BigInt.parse(text
+                  .replaceAll(_localCurrencyFormat.currencySymbol, "")
+                  .replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "")) >
               BigInt.parse("133248297")) {
             setState(() {
               // _amountController.text = "133248297";
               // prevent the user from entering more than 13324829
               _amountController!.text = _amountController!.text.substring(0, _amountController!.text.length - 1);
-              _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: _amountController!.text.length));
+              _amountController!.selection =
+                  TextSelection.fromPosition(TextPosition(offset: _amountController!.text.length));
             });
           }
         }
@@ -485,7 +489,7 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
       hintText: _amountHint == null ? "" : Z.of(context).enterAmount,
       prefixButton: _rawAmount == null
           ? TextFieldButton(
-            padding: EdgeInsets.zero,
+              padding: EdgeInsets.zero,
               widget: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,

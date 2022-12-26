@@ -10,6 +10,7 @@ import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/vault.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -38,20 +39,11 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
   Widget build(BuildContext context) {
     return TapOutsideUnfocus(
         child: LayoutBuilder(
-      builder: (context, constraints) => SafeArea(
+      builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
-            // Sheet handle
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              height: 5,
-              width: MediaQuery.of(context).size.width * 0.15,
-              decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text20,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
+            Handlebars.horizontal(context),
             // The main widget that holds the header, text fields, and submit button
             Expanded(
               child: Column(
@@ -75,7 +67,8 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
                   ),
                   // The paragraph
                   Container(
-                    margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
+                    margin: EdgeInsetsDirectional.only(
+                        start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
                       Z.of(context).passwordNoLongerRequiredToOpenParagraph.replaceAll("%1", NonTranslatable.appName),
                       style: AppStyles.textStyleParagraph(context),
@@ -137,15 +130,16 @@ class _DisablePasswordSheetState extends State<DisablePasswordSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).disablePasswordSheetHeader, Dimens.BUTTON_TOP_DIMENS,
-                        onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).disablePasswordSheetHeader,
+                        Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       await submitAndDecrypt();
                     }),
                   ],
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                       Navigator.pop(context);
                     }),

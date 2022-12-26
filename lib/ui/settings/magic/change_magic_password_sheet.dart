@@ -13,6 +13,7 @@ import 'package:wallet_flutter/model/vault.dart';
 import 'package:wallet_flutter/network/auth_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -52,16 +53,7 @@ class _ChangeMagicPasswordSheetState extends State<ChangeMagicPasswordSheet> {
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
-            // Sheet handle
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              height: 5,
-              width: MediaQuery.of(context).size.width * 0.15,
-              decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text20,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
+            Handlebars.horizontal(context),
             // The main widget that holds the header, text fields, and submit button
             Expanded(
               child: Column(
@@ -110,7 +102,8 @@ class _ChangeMagicPasswordSheetState extends State<ChangeMagicPasswordSheet> {
                   ),
                   // The paragraph
                   Container(
-                    margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
+                    margin: EdgeInsetsDirectional.only(
+                        start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 16.0),
                     child: AutoSizeText(
                       Z.of(context).changePasswordParagraph,
                       style: AppStyles.textStyleParagraph(context),
@@ -148,7 +141,9 @@ class _ChangeMagicPasswordSheetState extends State<ChangeMagicPasswordSheet> {
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16.0,
-                                color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
+                                color: passwordsMatch
+                                    ? StateContainer.of(context).curTheme.primary
+                                    : StateContainer.of(context).curTheme.text,
                                 fontFamily: "NunitoSans",
                               ),
                               onSubmitted: (text) {
@@ -179,7 +174,9 @@ class _ChangeMagicPasswordSheetState extends State<ChangeMagicPasswordSheet> {
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16.0,
-                                color: passwordsMatch ? StateContainer.of(context).curTheme.primary : StateContainer.of(context).curTheme.text,
+                                color: passwordsMatch
+                                    ? StateContainer.of(context).curTheme.primary
+                                    : StateContainer.of(context).curTheme.text,
                                 fontFamily: "NunitoSans",
                               ),
                             ),
@@ -205,7 +202,8 @@ class _ChangeMagicPasswordSheetState extends State<ChangeMagicPasswordSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).changePassword, Dimens.BUTTON_TOP_DIMENS,
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY, Z.of(context).changePassword, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       await submitAndEncrypt();
                     }),
@@ -213,7 +211,8 @@ class _ChangeMagicPasswordSheetState extends State<ChangeMagicPasswordSheet> {
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                       Navigator.pop(context);
                     }),
@@ -256,7 +255,8 @@ class _ChangeMagicPasswordSheetState extends State<ChangeMagicPasswordSheet> {
     }
 
     // make sure password contains an uppercase and lowercase letter:
-    if (!confirmPasswordController!.text.contains(RegExp(r"[a-z]")) || !confirmPasswordController!.text.contains(RegExp(r"[A-Z]"))) {
+    if (!confirmPasswordController!.text.contains(RegExp(r"[a-z]")) ||
+        !confirmPasswordController!.text.contains(RegExp(r"[A-Z]"))) {
       setState(() {
         passwordError = Z.of(context).passwordCapitalLetter;
       });
@@ -274,7 +274,8 @@ class _ChangeMagicPasswordSheetState extends State<ChangeMagicPasswordSheet> {
     final String issuer = claim["iss"] as String;
 
     // check if the current identifier exists:
-    final String oldHashedPassword = NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(createPasswordController!.text))));
+    final String oldHashedPassword =
+        NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(createPasswordController!.text))));
     final String oldFullIdentifier = "$issuer:$oldHashedPassword";
     final bool oldIdentifierExists = await sl.get<AuthService>().entryExists(oldFullIdentifier);
 
@@ -292,7 +293,8 @@ class _ChangeMagicPasswordSheetState extends State<ChangeMagicPasswordSheet> {
     //   identifier: "${identifier}${hashedPassword}",
     //   encrypted_seed: encryptedSeed,
     // }
-    final String hashedPassword = NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
+    final String hashedPassword =
+        NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
     final String fullIdentifier = "$issuer:$hashedPassword";
     await sl.get<AuthService>().setEncryptedSeed(fullIdentifier, encryptedSeed);
 
@@ -302,7 +304,7 @@ class _ChangeMagicPasswordSheetState extends State<ChangeMagicPasswordSheet> {
       });
       return;
     }
-    
+
     if (!mounted) return;
     UIUtil.showSnackbar(Z.of(context).setPasswordSuccess, context);
     Navigator.pop(context);

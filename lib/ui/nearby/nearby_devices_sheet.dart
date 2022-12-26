@@ -7,6 +7,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 
@@ -111,16 +112,7 @@ class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
                 constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                 child: Column(
                   children: <Widget>[
-                    // Sheet handle
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                    ),
+                    Handlebars.horizontal(context),
                     Container(
                       margin: const EdgeInsets.only(top: 15.0),
                       constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),

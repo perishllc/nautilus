@@ -17,6 +17,7 @@ import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/register/register_onchain_complete_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_complete_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/animations.dart';
@@ -74,7 +75,8 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
 
   void _showSendingAnimation(BuildContext context) {
     animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.REGISTER_USERNAME, onPoppedCallback: () => animationOpen = false);
+    AppAnimation.animationLauncher(context, AnimationType.REGISTER_USERNAME,
+        onPoppedCallback: () => animationOpen = false);
   }
 
   @override
@@ -83,16 +85,7 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
-            // Sheet handle
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              height: 5,
-              width: MediaQuery.of(context).size.width * 0.15,
-              decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text20,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
+            Handlebars.horizontal(context),
             //The main widget that holds the text fields, "SENDING" and "TO" texts
             Expanded(
               child: Column(
@@ -113,13 +106,16 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
                   // Address text
                   Container(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.105,
+                          right: MediaQuery.of(context).size.width * 0.105),
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.address!, contactName: "@${widget.username!}")),
+                      child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.address!,
+                          contactName: "@${widget.username!}")),
 
                   // "FOR" text
                   // Container(
@@ -181,8 +177,11 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
                 Row(
                   children: <Widget>[
                     // CONFIRM Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, CaseChange.toUpperCase(Z.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
-                        onPressed: () async {
+                    AppButton.buildAppButton(
+                        context,
+                        AppButtonType.PRIMARY,
+                        CaseChange.toUpperCase(Z.of(context).confirm, context),
+                        Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
@@ -213,8 +212,10 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
                   children: <Widget>[
                     // CANCEL Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(Z.of(context).cancel, context), Dimens.BUTTON_BOTTOM_DIMENS,
-                        onPressed: () {
+                        context,
+                        AppButtonType.PRIMARY_OUTLINE,
+                        CaseChange.toUpperCase(Z.of(context).cancel, context),
+                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
                   ],
@@ -242,9 +243,12 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
       // await StateContainer.of(context).requestUpdate();
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
 
-      Sheets.showAppHeightNineSheet(context: context, closeOnTap: true, removeUntilHome: true, widget: RegisterOnchainCompleteSheet(username: widget.username));
+      Sheets.showAppHeightNineSheet(
+          context: context,
+          closeOnTap: true,
+          removeUntilHome: true,
+          widget: RegisterOnchainCompleteSheet(username: widget.username));
     } catch (e) {
-
       print(e.toString());
       // Send failed
       if (animationOpen) {

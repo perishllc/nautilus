@@ -5,6 +5,7 @@ import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/network/model/response/funding_response_item.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/list_gradient.dart';
@@ -38,19 +39,9 @@ class _FundingSpecificSheetState extends State<FundingSpecificSheet> {
                   width: 60,
                   height: 60,
                 ),
-                //Container for the address text and sheet handle
                 Column(
                   children: <Widget>[
-                    // Sheet handle
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                    ),
+                    Handlebars.horizontal(context),
                     // Container(
                     //   margin: const EdgeInsets.only(top: 15.0),
                     //   constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
@@ -116,8 +107,11 @@ class _FundingSpecificSheetState extends State<FundingSpecificSheet> {
                             Container(
                               margin: const EdgeInsetsDirectional.only(top: 16, bottom: 2),
                               child: Text(
-                                widget.alert.longDescription != null ? widget.alert.longDescription! : widget.alert.shortDescription!,
-                                style: AppStyles.remoteMessageCardShortDescription(context).copyWith(fontSize: AppFontSizes.medium),
+                                widget.alert.longDescription != null
+                                    ? widget.alert.longDescription!
+                                    : widget.alert.shortDescription!,
+                                style: AppStyles.remoteMessageCardShortDescription(context)
+                                    .copyWith(fontSize: AppFontSizes.medium),
                               ),
                             ),
                         ],
@@ -142,7 +136,8 @@ class _FundingSpecificSheetState extends State<FundingSpecificSheet> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).donateButton, Dimens.BUTTON_TOP_DIMENS,
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY, Z.of(context).donateButton, Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                       // Go to send with address
                       Future.delayed(const Duration(milliseconds: 1000), () async {
@@ -160,7 +155,8 @@ class _FundingSpecificSheetState extends State<FundingSpecificSheet> {
                 ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                       Navigator.pop(context);
                     }),

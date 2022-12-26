@@ -16,6 +16,7 @@ import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -83,7 +84,8 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
             _clearButton = false;
           }
         });
-        _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+        _addressController!.selection =
+            TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         if (_addressController!.text.isNotEmpty && !_addressController!.text.startsWith("nano_")) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           if (_addressController!.text != formattedAddress) {
@@ -114,11 +116,7 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
           }
         });
         // check if UD / ENS / opencap / onchain address:
-        if (_addressController!.text.isNotEmpty) {
-
-          
-
-        }
+        if (_addressController!.text.isNotEmpty) {}
       }
     });
   }
@@ -138,7 +136,8 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
   Widget getEnterAddressContainer() {
     return AppTextField(
       topMargin: 124,
-      padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+      padding:
+          _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
       textAlign: TextAlign.center,
       focusNode: _addressFocusNode,
       controller: _addressController,
@@ -218,7 +217,8 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
         if (text.contains(" ")) {
           text = text.replaceAll(" ", "");
           _addressController!.text = text;
-          _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+          _addressController!.selection =
+              TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         }
 
         if (text.isNotEmpty) {
@@ -253,12 +253,14 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
             _users = [];
           });
         } else if (isFavorite) {
-          final List<User> matchedList = await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+          final List<User> matchedList =
+              await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
           setState(() {
             _users = matchedList;
           });
         } else if (isUser || isDomain) {
-          final List<User> matchedList = await sl.get<DBHelper>().getUserSuggestionsWithUsernameLike(SendSheetHelpers.stripPrefixes(text));
+          final List<User> matchedList =
+              await sl.get<DBHelper>().getUserSuggestionsWithUsernameLike(SendSheetHelpers.stripPrefixes(text));
           setState(() {
             _users = matchedList;
           });
@@ -306,7 +308,8 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
                   FocusScope.of(context).requestFocus(_addressFocusNode);
                 });
               },
-              child: UIUtil.threeLineAddressText(context, widget.address != null ? widget.address! : _addressController!.text))
+              child: UIUtil.threeLineAddressText(
+                  context, widget.address != null ? widget.address! : _addressController!.text))
           : null,
     );
   }
@@ -334,15 +337,9 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
                 constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                 child: Column(
                   children: <Widget>[
-                    // Sheet handle
-                    Container(
+                    Handlebars.horizontal(
+                      context,
                       margin: const EdgeInsets.only(top: 10, bottom: 15),
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
                     ),
                     AutoSizeText(
                       CaseChange.toUpperCase(Z.of(context).addBlocked, context),
@@ -391,8 +388,9 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
                                   alignment: Alignment.topCenter,
                                   children: <Widget>[
                                     Container(
-                                      margin:
-                                          EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                      margin: EdgeInsets.only(
+                                          left: MediaQuery.of(context).size.width * 0.105,
+                                          right: MediaQuery.of(context).size.width * 0.105),
                                       alignment: Alignment.bottomCenter,
                                       constraints: const BoxConstraints(maxHeight: 174, minHeight: 0),
                                       // ********************************************* //
@@ -416,8 +414,10 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
                                                     padding: EdgeInsets.zero,
                                                     itemCount: _users.length,
                                                     itemBuilder: (BuildContext context, int index) {
-                                                      return Misc.buildUserItem(context, _users[index], true, (User user) {
-                                                        _addressController!.text = user.getDisplayName(ignoreNickname: true)!;
+                                                      return Misc.buildUserItem(context, _users[index], true,
+                                                          (User user) {
+                                                        _addressController!.text =
+                                                            user.getDisplayName(ignoreNickname: true)!;
                                                         _addressFocusNode!.unfocus();
                                                         setState(() {
                                                           _isUser = true;
@@ -469,18 +469,22 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
               Row(
                 children: <Widget>[
                   // Add Contact Button
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).blockUser, Dimens.BUTTON_TOP_DIMENS,
+                  AppButton.buildAppButton(
+                      context, AppButtonType.PRIMARY, Z.of(context).blockUser, Dimens.BUTTON_TOP_DIMENS,
                       onPressed: () async {
                     if (await validateForm()) {
                       User newBlocked;
                       final String formAddress = widget.address ?? _addressController!.text;
                       // if we're given an address with corresponding username, just block:
                       if (_correspondingUsername != null) {
-                        newBlocked = User(nickname: _correspondingNickname, address: formAddress, username: _correspondingUsername);
+                        newBlocked = User(
+                            nickname: _correspondingNickname, address: formAddress, username: _correspondingUsername);
                         await sl.get<DBHelper>().blockUser(newBlocked);
                       } else if (_correspondingAddress != null) {
-                        newBlocked =
-                            User(nickname: _correspondingNickname, address: _correspondingAddress, username: SendSheetHelpers.stripPrefixes(formAddress));
+                        newBlocked = User(
+                            nickname: _correspondingNickname,
+                            address: _correspondingAddress,
+                            username: SendSheetHelpers.stripPrefixes(formAddress));
                         await sl.get<DBHelper>().blockUser(newBlocked);
                       } else {
                         // just an address:
@@ -489,7 +493,8 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
                       }
                       EventTaxiImpl.singleton().fire(BlockedAddedEvent(user: newBlocked));
                       if (!mounted) return;
-                      UIUtil.showSnackbar(Z.of(context).blockedAdded.replaceAll("%1", newBlocked.getDisplayName()!), context);
+                      UIUtil.showSnackbar(
+                          Z.of(context).blockedAdded.replaceAll("%1", newBlocked.getDisplayName()!), context);
                       EventTaxiImpl.singleton().fire(BlockedModifiedEvent(user: newBlocked));
                       Navigator.of(context).pop();
                     }
@@ -499,7 +504,8 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
               Row(
                 children: <Widget>[
                   // Close Button
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                  AppButton.buildAppButton(
+                      context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
                       onPressed: () {
                     Navigator.pop(context);
                   }),

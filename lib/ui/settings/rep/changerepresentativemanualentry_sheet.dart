@@ -19,6 +19,7 @@ import 'package:wallet_flutter/network/account_service.dart';
 import 'package:wallet_flutter/network/model/response/process_response.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/animations.dart';
@@ -63,7 +64,8 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
           _showChangeRepHint = false;
           _addressValidAndUnfocused = false;
         });
-        widget.repController.selection = TextSelection.fromPosition(TextPosition(offset: widget.repController.text.length));
+        widget.repController.selection =
+            TextSelection.fromPosition(TextPosition(offset: widget.repController.text.length));
       } else {
         setState(() {
           _showChangeRepHint = true;
@@ -116,16 +118,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                       //Container for the header
                       Column(
                         children: <Widget>[
-                          // Sheet handle
-                          Container(
-                            margin: const EdgeInsets.only(top: 10),
-                            height: 5,
-                            width: MediaQuery.of(context).size.width * 0.15,
-                            decoration: BoxDecoration(
-                              color: StateContainer.of(context).curTheme.text20,
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                          ),
+                          Handlebars.horizontal(context),
                           Container(
                             margin: const EdgeInsets.only(top: 15),
                             constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
@@ -155,7 +148,9 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                           // New representative
                           AppTextField(
                             topMargin: MediaQuery.of(context).size.height * 0.05,
-                            padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+                            padding: _addressValidAndUnfocused
+                                ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0)
+                                : EdgeInsets.zero,
                             focusNode: _repFocusNode,
                             controller: widget.repController,
                             textAlign: TextAlign.center,
@@ -170,7 +165,8 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                               icon: AppIcons.scan,
                               onPressed: () async {
                                 UIUtil.cancelLockEvent();
-                                final String? result = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
+                                final String? result =
+                                    await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
                                 if (result == null) {
                                   return;
                                 }
@@ -216,7 +212,9 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                             fadeSuffixOnCondition: true,
                             suffixShowFirstCondition: _showPasteButton,
                             keyboardType: TextInputType.text,
-                            style: _repAddressValid ? AppStyles.textStyleAddressText90(context) : AppStyles.textStyleAddressText60(context),
+                            style: _repAddressValid
+                                ? AppStyles.textStyleAddressText90(context)
+                                : AppStyles.textStyleAddressText60(context),
                             onChanged: (String text) {
                               if (Address(text).isValid()) {
                                 _repFocusNode!.unfocus();
@@ -269,8 +267,9 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                               final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                               if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                                 try {
-                                  final bool authenticated =
-                                      await sl.get<BiometricUtil>().authenticateWithBiometrics(context, Z.of(context).changeRepAuthenticate);
+                                  final bool authenticated = await sl
+                                      .get<BiometricUtil>()
+                                      .authenticateWithBiometrics(context, Z.of(context).changeRepAuthenticate);
                                   if (authenticated) {
                                     sl.get<HapticUtil>().fingerprintSucess();
                                     EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE_MANUAL));
@@ -319,10 +318,14 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
     } else {
       try {
         final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
-        final String privKey =
-            await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!, derivationMethod);
-        final ProcessResponse resp = await sl.get<AccountService>().requestChange(StateContainer.of(context).wallet!.address, widget.repController.text,
-            StateContainer.of(context).wallet!.frontier, StateContainer.of(context).wallet!.accountBalance.toString(), privKey);
+        final String privKey = await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(),
+            StateContainer.of(context).selectedAccount!.index!, derivationMethod);
+        final ProcessResponse resp = await sl.get<AccountService>().requestChange(
+            StateContainer.of(context).wallet!.address,
+            widget.repController.text,
+            StateContainer.of(context).wallet!.frontier,
+            StateContainer.of(context).wallet!.accountBalance.toString(),
+            privKey);
         StateContainer.of(context).wallet!.representative = widget.repController.text;
         StateContainer.of(context).wallet!.frontier = resp.hash;
         UIUtil.showSnackbar(Z.of(context).changeRepSucces, context);

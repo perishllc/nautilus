@@ -21,6 +21,7 @@ import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/request/request_complete_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/animations.dart';
@@ -36,7 +37,9 @@ import 'package:wallet_flutter/util/sharedprefsutil.dart';
 import 'package:uuid/uuid.dart';
 
 class RequestConfirmSheet extends StatefulWidget {
-  const RequestConfirmSheet({required this.amountRaw, required this.destination, this.contactName, this.localCurrency, this.memo}) : super();
+  const RequestConfirmSheet(
+      {required this.amountRaw, required this.destination, this.contactName, this.localCurrency, this.memo})
+      : super();
 
   final String amountRaw;
   final String destination;
@@ -92,16 +95,7 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
-            // Sheet handle
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              height: 5,
-              width: MediaQuery.of(context).size.width * 0.15,
-              decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text20,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
+            Handlebars.horizontal(context),
             //The main widget that holds the text fields, "SENDING" and "TO" texts
             Expanded(
               child: Column(
@@ -121,7 +115,9 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                   ),
                   // Container for the amount text
                   Container(
-                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                    margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.105,
+                        right: MediaQuery.of(context).size.width * 0.105),
                     padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -171,7 +167,9 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                   // Address text
                   Container(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.105,
+                          right: MediaQuery.of(context).size.width * 0.105),
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
@@ -193,7 +191,9 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                   if (widget.memo != null && widget.memo!.isNotEmpty)
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                        margin: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.105,
+                            right: MediaQuery.of(context).size.width * 0.105),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: StateContainer.of(context).curTheme.backgroundDarkest,
@@ -216,8 +216,10 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(Z.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
-                        onPressed: () async {
+                        context,
+                        AppButtonType.PRIMARY,
+                        CaseChange.toUpperCase(Z.of(context).confirm, context),
+                        Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       if (clicking) return;
                       clicking = true;
                       // Authenticate
@@ -228,7 +230,8 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                         try {
                           final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
                               context,
-                              Z.of(context)
+                              Z
+                                  .of(context)
                                   .requestAmountConfirm
                                   .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
                                   .replaceAll("%2", StateContainer.of(context).currencyMode));
@@ -252,7 +255,10 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(Z.of(context).cancel, context),
+                    AppButton.buildAppButton(
+                        context,
+                        AppButtonType.PRIMARY_OUTLINE,
+                        CaseChange.toUpperCase(Z.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -282,7 +288,8 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
       final String signature = NanoSignatures.signBlock(nonceHex, privKey);
       // check validity locally:
       final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-      final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+      final bool isValid =
+          NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
       if (!isValid) {
         throw Exception("Invalid signature?!");
       }
@@ -290,9 +297,12 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
       const Uuid uuid = Uuid();
       final String localUuid = "LOCAL:${uuid.v4()}";
       // current block height:
-      final int currentBlockHeightInList =
-          StateContainer.of(context).wallet!.history.isNotEmpty ? (StateContainer.of(context).wallet!.history[0].height! + 1) : 1;
-      final String? lastBlockHash = StateContainer.of(context).wallet!.history.isNotEmpty ? StateContainer.of(context).wallet!.history[0].hash : null;
+      final int currentBlockHeightInList = StateContainer.of(context).wallet!.history.isNotEmpty
+          ? (StateContainer.of(context).wallet!.history[0].height! + 1)
+          : 1;
+      final String? lastBlockHash = StateContainer.of(context).wallet!.history.isNotEmpty
+          ? StateContainer.of(context).wallet!.history[0].hash
+          : null;
 
       // create a local txData for the request:
       final TXData newRequestTXData = TXData(
@@ -320,9 +330,8 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
           encryptedMemo = Box.encrypt(widget.memo!, widget.destination, privKey);
         }
 
-        await sl
-            .get<MetadataService>()
-            .requestPayment(widget.destination, widget.amountRaw, StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
+        await sl.get<MetadataService>().requestPayment(widget.destination, widget.amountRaw,
+            StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
       } catch (e) {
         sl.get<Logger>().e("payment request failed: ${e.toString()}");
         sendFailed = true;
@@ -341,7 +350,8 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         await StateContainer.of(context).updateUnified(true);
         // go to home and show error:
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-        UIUtil.showSnackbar(Z.of(context).requestError.replaceAll("%1", NonTranslatable.appName), context, durationMs: 5500);
+        UIUtil.showSnackbar(Z.of(context).requestError.replaceAll("%1", NonTranslatable.appName), context,
+            durationMs: 5500);
       } else {
         sl.get<Logger>().v("request succeeded");
 
@@ -383,7 +393,8 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         Navigator.of(context).pop();
       }
       sendFailed = true;
-      UIUtil.showSnackbar(Z.of(context).requestError.replaceAll("%1", NonTranslatable.appName), context, durationMs: 3500);
+      UIUtil.showSnackbar(Z.of(context).requestError.replaceAll("%1", NonTranslatable.appName), context,
+          durationMs: 3500);
       Navigator.of(context).pop();
     }
   }
@@ -397,7 +408,8 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: Z.of(context)
+        description: Z
+            .of(context)
             .sendAmountConfirm
             .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
             .replaceAll("%2", StateContainer.of(context).currencyMode),

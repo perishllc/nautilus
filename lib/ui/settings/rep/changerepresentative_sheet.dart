@@ -19,6 +19,7 @@ import 'package:wallet_flutter/network/account_service.dart';
 import 'package:wallet_flutter/network/model/response/process_response.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/animations.dart';
@@ -135,7 +136,9 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
             // if (!mounted) return;
             if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
               try {
-                final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, Z.of(context).changeRepAuthenticate);
+                final bool authenticated = await sl
+                    .get<BiometricUtil>()
+                    .authenticateWithBiometrics(context, Z.of(context).changeRepAuthenticate);
                 if (authenticated) {
                   sl.get<HapticUtil>().fingerprintSucess();
                   EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
@@ -164,8 +167,11 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                     children: <Widget>[
                       Text(
                         _sanitizeAlias(rep.alias),
-                        style:
-                            TextStyle(color: StateContainer.of(context).curTheme.text, fontWeight: FontWeight.w700, fontSize: 18.0, fontFamily: 'Nunito Sans'),
+                        style: TextStyle(
+                            color: StateContainer.of(context).curTheme.text,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18.0,
+                            fontFamily: 'Nunito Sans'),
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 7),
@@ -185,12 +191,18 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               TextSpan(
                                 text: NumberUtil.getPercentOfTotalSupply(rep.votingWeight!),
                                 style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.primary, fontWeight: FontWeight.w700, fontSize: 14.0, fontFamily: 'Nunito Sans'),
+                                    color: StateContainer.of(context).curTheme.primary,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14.0,
+                                    fontFamily: 'Nunito Sans'),
                               ),
                               TextSpan(
                                 text: "%",
                                 style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.primary, fontWeight: FontWeight.w700, fontSize: 14.0, fontFamily: 'Nunito Sans'),
+                                    color: StateContainer.of(context).curTheme.primary,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14.0,
+                                    fontFamily: 'Nunito Sans'),
                               ),
                             ],
                           ),
@@ -205,17 +217,26 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               TextSpan(
                                 text: "${Z.of(context).uptime}: ",
                                 style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.text, fontWeight: FontWeight.w100, fontSize: 14.0, fontFamily: 'Nunito Sans'),
+                                    color: StateContainer.of(context).curTheme.text,
+                                    fontWeight: FontWeight.w100,
+                                    fontSize: 14.0,
+                                    fontFamily: 'Nunito Sans'),
                               ),
                               TextSpan(
                                 text: rep.uptime!.toStringAsFixed(2),
                                 style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.primary, fontWeight: FontWeight.w700, fontSize: 14.0, fontFamily: 'Nunito Sans'),
+                                    color: StateContainer.of(context).curTheme.primary,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14.0,
+                                    fontFamily: 'Nunito Sans'),
                               ),
                               TextSpan(
                                 text: "%",
                                 style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.primary, fontWeight: FontWeight.w700, fontSize: 14.0, fontFamily: 'Nunito Sans'),
+                                    color: StateContainer.of(context).curTheme.primary,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14.0,
+                                    fontFamily: 'Nunito Sans'),
                               ),
                             ],
                           ),
@@ -282,10 +303,14 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
     } else {
       try {
         final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
-        final String privKey =
-            await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!, derivationMethod);
-        final ProcessResponse resp = await sl.get<AccountService>().requestChange(StateContainer.of(context).wallet!.address, _rep.account,
-            StateContainer.of(context).wallet!.frontier, StateContainer.of(context).wallet!.accountBalance.toString(), privKey);
+        final String privKey = await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(),
+            StateContainer.of(context).selectedAccount!.index!, derivationMethod);
+        final ProcessResponse resp = await sl.get<AccountService>().requestChange(
+            StateContainer.of(context).wallet!.address,
+            _rep.account,
+            StateContainer.of(context).wallet!.frontier,
+            StateContainer.of(context).wallet!.accountBalance.toString(),
+            privKey);
         StateContainer.of(context).wallet!.representative = _rep.account!;
         StateContainer.of(context).wallet!.frontier = resp.hash;
         UIUtil.showSnackbar(Z.of(context).changeRepSucces, context);
@@ -306,6 +331,7 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
     _registerBus();
   }
 
+  @override
   Widget build(BuildContext context) {
     return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
       return WillPopScope(
@@ -328,16 +354,7 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                         //Container for the header
                         Column(
                           children: <Widget>[
-                            // Sheet handle
-                            Container(
-                              margin: const EdgeInsets.only(top: 10),
-                              height: 5,
-                              width: MediaQuery.of(context).size.width * 0.15,
-                              decoration: BoxDecoration(
-                                color: StateContainer.of(context).curTheme.text20,
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
-                            ),
+                            Handlebars.horizontal(context),
                             Container(
                               margin: const EdgeInsets.only(top: 15),
                               constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
@@ -377,7 +394,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                     //A expanded section for current representative and new representative fields
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.only(top: smallScreen(context) ? 20 : 35, bottom: smallScreen(context) ? 20 : 35),
+                        margin: EdgeInsets.only(
+                            top: smallScreen(context) ? 20 : 35, bottom: smallScreen(context) ? 20 : 35),
                         child: Stack(children: <Widget>[
                           Container(
                             color: Colors.transparent,
@@ -388,7 +406,9 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                             children: <Widget>[
                               // Currently represented by text
                               Container(
-                                  margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                  margin: EdgeInsets.only(
+                                      left: MediaQuery.of(context).size.width * 0.105,
+                                      right: MediaQuery.of(context).size.width * 0.105),
                                   child: Text(
                                     Z.of(context).currentlyRepresented,
                                     style: AppStyles.textStyleParagraph(context),
@@ -396,7 +416,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               // Current representative
                               GestureDetector(
                                 onTap: () {
-                                  Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.representative));
+                                  Clipboard.setData(
+                                      ClipboardData(text: StateContainer.of(context).wallet!.representative));
                                   setState(() {
                                     _addressCopied = true;
                                   });
@@ -412,14 +433,19 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                                 child: Container(
                                   width: double.infinity,
                                   margin: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105, top: 10),
+                                      left: MediaQuery.of(context).size.width * 0.105,
+                                      right: MediaQuery.of(context).size.width * 0.105,
+                                      top: 10),
                                   padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                                   decoration: BoxDecoration(
                                     color: StateContainer.of(context).curTheme.backgroundDarkest,
                                     borderRadius: BorderRadius.circular(25),
                                   ),
-                                  child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.representative,
-                                      type: _addressCopied ? ThreeLineAddressTextType.SUCCESS_FULL : ThreeLineAddressTextType.PRIMARY),
+                                  child: UIUtil.threeLineAddressText(
+                                      context, StateContainer.of(context).wallet!.representative,
+                                      type: _addressCopied
+                                          ? ThreeLineAddressTextType.SUCCESS_FULL
+                                          : ThreeLineAddressTextType.PRIMARY),
                                 ),
                               ),
                               // Address Copied text container
@@ -459,8 +485,9 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                                 final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                                 if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                                   try {
-                                    final bool authenticated =
-                                        await sl.get<BiometricUtil>().authenticateWithBiometrics(context, Z.of(context).changeRepAuthenticate);
+                                    final bool authenticated = await sl
+                                        .get<BiometricUtil>()
+                                        .authenticateWithBiometrics(context, Z.of(context).changeRepAuthenticate);
                                     if (authenticated) {
                                       sl.get<HapticUtil>().fingerprintSucess();
                                       EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
@@ -504,7 +531,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               Z.of(context).manualEntry,
                               Dimens.BUTTON_BOTTOM_DIMENS,
                               onPressed: () {
-                                Sheets.showAppHeightEightSheet(context: context, widget: ChangeRepManualSheet(TextEditingController()));
+                                Sheets.showAppHeightEightSheet(
+                                    context: context, widget: ChangeRepManualSheet(TextEditingController()));
                               },
                             ),
                           ],

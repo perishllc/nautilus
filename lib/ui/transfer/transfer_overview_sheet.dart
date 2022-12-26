@@ -23,6 +23,7 @@ import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/transfer/transfer_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/transfer/transfer_manual_entry_sheet.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/animations.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -89,16 +90,7 @@ class AppTransferOverviewSheet {
                             ),
                             Column(
                               children: <Widget>[
-                                // Sheet handle
-                                Container(
-                                  margin: const EdgeInsets.only(top: 10),
-                                  height: 5,
-                                  width: MediaQuery.of(context).size.width * 0.15,
-                                  decoration: BoxDecoration(
-                                    color: StateContainer.of(context).curTheme.text20,
-                                    borderRadius: BorderRadius.circular(5.0),
-                                  ),
-                                ),
+                                Handlebars.horizontal(context),
                                 // The header
                                 Container(
                                   margin: const EdgeInsets.only(top: 15.0),

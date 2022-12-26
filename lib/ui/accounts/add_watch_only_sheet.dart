@@ -18,6 +18,7 @@ import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -109,7 +110,8 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
           _pasteButtonVisible = true;
           _addressStyle = AddressStyle.TEXT60;
         });
-        _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+        _addressController!.selection =
+            TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         if (_addressController!.text.isNotEmpty && !_addressController!.text.startsWith("nano_")) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           if (_addressController!.text != formattedAddress) {
@@ -167,7 +169,8 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
   }
 
   void _registerBus() {
-    _accountModifiedSub = EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((AccountModifiedEvent event) {
+    _accountModifiedSub =
+        EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((AccountModifiedEvent event) {
       if (event.deleted) {
         // if (event.account!.selected) {
         //   Future.delayed(const Duration(milliseconds: 50), () {
@@ -225,7 +228,8 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
   Widget getEnterAddressContainer() {
     return AppTextField(
       topMargin: 115,
-      padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+      padding:
+          _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
       textAlign: TextAlign.center,
       focusNode: _addressFocusNode,
       controller: _addressController,
@@ -298,7 +302,8 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
         if (text.contains(" ")) {
           text = text.replaceAll(" ", "");
           _addressController!.text = text;
-          _addressController!.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+          _addressController!.selection =
+              TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         }
 
         if (text.isNotEmpty) {
@@ -333,7 +338,8 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
             _users = [];
           });
         } else if (isUser || isDomain) {
-          final List<User> matchedList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+          final List<User> matchedList =
+              await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
           setState(() {
             _users = matchedList;
           });
@@ -488,15 +494,9 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
                 constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                 child: Column(
                   children: <Widget>[
-                    // Sheet handle
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      height: 5,
+                    Handlebars.horizontal(
+                      context,
                       width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 15.0),
@@ -593,7 +593,8 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
                                       children: <Widget>[
                                         Container(
                                           margin: EdgeInsets.only(
-                                              left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                              left: MediaQuery.of(context).size.width * 0.105,
+                                              right: MediaQuery.of(context).size.width * 0.105),
                                           alignment: Alignment.bottomCenter,
                                           constraints: const BoxConstraints(maxHeight: 160, minHeight: 0),
                                           // ********************************************* //
@@ -617,8 +618,10 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
                                                         padding: EdgeInsets.zero,
                                                         itemCount: _users.length,
                                                         itemBuilder: (BuildContext context, int index) {
-                                                          return Misc.buildUserItem(context, _users[index], true, (User user) {
-                                                            _addressController!.text = user.getDisplayName(ignoreNickname: true)!;
+                                                          return Misc.buildUserItem(context, _users[index], true,
+                                                              (User user) {
+                                                            _addressController!.text =
+                                                                user.getDisplayName(ignoreNickname: true)!;
                                                             _addressFocusNode!.unfocus();
                                                             setState(() {
                                                               _isUser = true;
@@ -683,7 +686,8 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
                         if (_correspondingUsername != null) {
                           newAccount = await sl.get<DBHelper>().addWatchOnlyAccount(formattedNickname, formAddress);
                         } else if (_correspondingAddress != null) {
-                          newAccount = await sl.get<DBHelper>().addWatchOnlyAccount(formattedNickname, _correspondingAddress!);
+                          newAccount =
+                              await sl.get<DBHelper>().addWatchOnlyAccount(formattedNickname, _correspondingAddress!);
                         } else {
                           // just an address:
                           newAccount = await sl.get<DBHelper>().addWatchOnlyAccount(formattedNickname, formAddress);

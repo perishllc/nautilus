@@ -15,6 +15,7 @@ import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -66,15 +67,9 @@ class AccountDetailsSheet {
                         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
                         child: Column(
                           children: <Widget>[
-                            // Sheet handle
-                            Container(
-                              margin: const EdgeInsets.only(top: 10, bottom: 0),
-                              height: 5,
+                            Handlebars.horizontal(
+                              context,
                               width: MediaQuery.of(context).size.width * 0.15,
-                              decoration: BoxDecoration(
-                                color: StateContainer.of(context).curTheme.text20,
-                                borderRadius: BorderRadius.circular(5.0),
-                              ),
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,7 +95,8 @@ class AccountDetailsSheet {
                                               AppDialogs.showConfirmDialog(
                                                   context,
                                                   Z.of(context).hideAccountHeader,
-                                                  Z.of(context)
+                                                  Z
+                                                      .of(context)
                                                       .removeAccountText
                                                       .replaceAll("%1", Z.of(context).addAccount),
                                                   CaseChange.toUpperCase(Z.of(context).yes, context), () {
@@ -111,9 +107,7 @@ class AccountDetailsSheet {
                                                       .fire(AccountModifiedEvent(account: account, deleted: true));
                                                   Navigator.of(context).pop();
                                                 });
-                                              },
-                                                  cancelText:
-                                                      CaseChange.toUpperCase(Z.of(context).no, context));
+                                              }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
                                             },
                                             child: Icon(AppIcons.trashcan,
                                                 size: 24, color: StateContainer.of(context).curTheme.text),
@@ -229,9 +223,7 @@ class AccountDetailsSheet {
                                         context,
                                         // Share Address Button
                                         _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                                        _addressCopied
-                                            ? Z.of(context).addressCopied
-                                            : Z.of(context).copyAddress,
+                                        _addressCopied ? Z.of(context).addressCopied : Z.of(context).copyAddress,
                                         Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                                       Clipboard.setData(ClipboardData(text: account.address));
                                       setState(() {

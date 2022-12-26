@@ -9,6 +9,7 @@ import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/settings/backup/backupseed_qr_sheet.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/mnemonic_display.dart';
@@ -75,19 +76,10 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       const SizedBox(width: 60, height: 60),
-                      // Sheet handle and Header
+                      // Header
                       Column(
                         children: <Widget>[
-                          // Header text
-                          Container(
-                            margin: const EdgeInsets.only(top: 10),
-                            height: 5,
-                            width: MediaQuery.of(context).size.width * 0.15,
-                            decoration: BoxDecoration(
-                              color: StateContainer.of(context).curTheme.text20,
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                          ),
+                          Handlebars.horizontal(context),
                           //A container for the header
                           Container(
                             margin: const EdgeInsets.only(top: 15.0),
@@ -95,7 +87,8 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                             child: Column(
                               children: <Widget>[
                                 AutoSizeText(
-                                  CaseChange.toUpperCase(showMnemonic ? Z.of(context).secretPhrase : Z.of(context).seed, context),
+                                  CaseChange.toUpperCase(
+                                      showMnemonic ? Z.of(context).secretPhrase : Z.of(context).seed, context),
                                   style: AppStyles.textStyleHeader(context),
                                   maxLines: 1,
                                   stepGranularity: 0.1,
@@ -125,7 +118,8 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                                 showMnemonic = !showMnemonic;
                               });
                             },
-                            child: Icon(showMnemonic ? AppIcons.seed : Icons.vpn_key, size: 24, color: StateContainer.of(context).curTheme.text),
+                            child: Icon(showMnemonic ? AppIcons.seed : Icons.vpn_key,
+                                size: 24, color: StateContainer.of(context).curTheme.text),
                           ),
                         )
                       else
@@ -247,7 +241,8 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                       AppButtonType.PRIMARY_OUTLINE,
                       Z.of(context).showQR,
                       Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
-                    final Widget qrWidget = SizedBox(width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, _seed!));
+                    final Widget qrWidget = SizedBox(
+                        width: MediaQuery.of(context).size.width, child: await UIUtil.getQRImage(context, _seed!));
                     Sheets.showAppHeightEightSheet(
                         context: context,
                         widget: BackupSeedQRSheet(

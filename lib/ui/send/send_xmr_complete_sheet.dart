@@ -5,12 +5,15 @@ import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 
 class SendXMRCompleteSheet extends StatefulWidget {
-  const SendXMRCompleteSheet({required this.amountRaw, required this.destination, this.contactName, this.localAmount, this.memo = ""}) : super();
+  const SendXMRCompleteSheet(
+      {required this.amountRaw, required this.destination, this.contactName, this.localAmount, this.memo = ""})
+      : super();
   final String amountRaw;
   final String destination;
   final String? contactName;
@@ -33,16 +36,7 @@ class _SendXMRCompleteSheetState extends State<SendXMRCompleteSheet> {
         minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
-            // Sheet handle
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              height: 5,
-              width: MediaQuery.of(context).size.width * 0.15,
-              decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text20,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
+            Handlebars.horizontal(context),
             //A main container that holds the amount, address and "SENT TO" texts
             Expanded(
               child: Column(
@@ -58,7 +52,9 @@ class _SendXMRCompleteSheetState extends State<SendXMRCompleteSheet> {
                   if (widget.amountRaw == "0" && widget.memo.isNotEmpty)
                     Container(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                        margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                        margin: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width * 0.105,
+                            right: MediaQuery.of(context).size.width * 0.105),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           color: StateContainer.of(context).curTheme.backgroundDarkest,
@@ -71,7 +67,9 @@ class _SendXMRCompleteSheetState extends State<SendXMRCompleteSheet> {
                         ))
                   else
                     Container(
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.105,
+                          right: MediaQuery.of(context).size.width * 0.105),
                       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -127,13 +125,16 @@ class _SendXMRCompleteSheetState extends State<SendXMRCompleteSheet> {
                   // The container for the address
                   Container(
                       padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.105,
+                          right: MediaQuery.of(context).size.width * 0.105),
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, widget.destination, type: ThreeLineAddressTextType.SUCCESS, contactName: widget.contactName)),
+                      child: UIUtil.threeLineAddressText(context, widget.destination,
+                          type: ThreeLineAddressTextType.SUCCESS, contactName: widget.contactName)),
                 ],
               ),
             ),
@@ -144,8 +145,10 @@ class _SendXMRCompleteSheetState extends State<SendXMRCompleteSheet> {
                 Row(
                   children: <Widget>[
                     AppButton.buildAppButton(
-                        context, AppButtonType.SUCCESS_OUTLINE, CaseChange.toUpperCase(Z.of(context).close, context), Dimens.BUTTON_BOTTOM_DIMENS,
-                        onPressed: () {
+                        context,
+                        AppButtonType.SUCCESS_OUTLINE,
+                        CaseChange.toUpperCase(Z.of(context).close, context),
+                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
                   ],

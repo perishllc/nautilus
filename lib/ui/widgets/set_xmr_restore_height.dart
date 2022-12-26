@@ -7,6 +7,7 @@ import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
@@ -75,15 +76,9 @@ class _SetXMRRestoreHeightSheetState extends State<SetXMRRestoreHeightSheet> {
                 constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                 child: Column(
                   children: <Widget>[
-                    // Sheet handle
-                    Container(
+                    Handlebars.horizontal(
+                      context,
                       margin: const EdgeInsets.only(top: 10, bottom: 15),
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
                     ),
                     AutoSizeText(
                       CaseChange.toUpperCase(Z.of(context).setRestoreHeight, context),
@@ -176,8 +171,7 @@ class _SetXMRRestoreHeightSheetState extends State<SetXMRRestoreHeightSheet> {
               Row(
                 children: <Widget>[
                   // Set Restore Height Button
-                  AppButton.buildAppButton(
-                      context, AppButtonType.PRIMARY, Z.of(context).set, Dimens.BUTTON_TOP_DIMENS,
+                  AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).set, Dimens.BUTTON_TOP_DIMENS,
                       onPressed: () async {
                     if (!await validateForm()) {
                       return;
@@ -194,8 +188,9 @@ class _SetXMRRestoreHeightSheetState extends State<SetXMRRestoreHeightSheet> {
               Row(
                 children: <Widget>[
                   // Close Button
-                  AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close,
-                      Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                  AppButton.buildAppButton(
+                      context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                      onPressed: () {
                     Navigator.pop(context);
                   }),
                 ],

@@ -7,6 +7,7 @@ import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/network/model/response/funding_response_item.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:wallet_flutter/ui/widgets/funding_message_card.dart';
 import 'package:wallet_flutter/ui/widgets/funding_specific_sheet.dart';
@@ -42,19 +43,9 @@ class _FundingMessagesSheetState extends State<FundingMessagesSheet> {
                   width: 60,
                   height: 60,
                 ),
-                // Container for the address text and sheet handle
                 Column(
                   children: <Widget>[
-                    // Sheet handle
-                    Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.15,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.text20,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                    ),
+                    Handlebars.horizontal(context),
                     Container(
                       margin: const EdgeInsets.only(top: 15.0),
                       constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
