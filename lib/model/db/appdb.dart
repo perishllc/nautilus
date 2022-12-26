@@ -8,6 +8,7 @@ import 'package:wallet_flutter/model/db/account.dart';
 import 'package:wallet_flutter/model/db/node.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/model/db/user.dart';
+import 'package:wallet_flutter/model/db/subscription.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/util/nanoutil.dart';
@@ -101,7 +102,7 @@ class DBHelper {
         active BOOLEAN,
         day_of_month INTEGER,
         address TEXT,
-        amount TEXT)""";
+        amount_raw TEXT)""";
   static const String USER_ADD_BLOCKED_COLUMN_SQL = """
     ALTER TABLE Users ADD is_blocked BOOLEAN
     """;
@@ -173,7 +174,7 @@ class DBHelper {
     // https://nautilus.perish.co/api", "wss://nautilus.perish.co"
 
     // add default nodes:
-    await addCustomNode(
+    await saveNode(
       Node(
         index: 0,
         name: "Perish Node",
@@ -183,7 +184,7 @@ class DBHelper {
       ),
       dbClient: db,
     );
-    await addCustomNode(
+    await saveNode(
       Node(
         index: 1,
         name: "Natrium Node",
@@ -228,7 +229,7 @@ class DBHelper {
     }
     if (oldVersion == 8) {
       await db.execute(NODES_SQL);
-      await addCustomNode(
+      await saveNode(
         Node(
           index: 0,
           name: "Perish Node",
@@ -238,7 +239,7 @@ class DBHelper {
         ),
         dbClient: db,
       );
-      await addCustomNode(
+      await saveNode(
         Node(
           index: 1,
           name: "Natrium Node",
@@ -326,7 +327,7 @@ class DBHelper {
     });
   }
 
-  Future<Node?> addCustomNode(Node node, {Database? dbClient}) async {
+  Future<Node?> saveNode(Node node, {Database? dbClient}) async {
     dbClient ??= (await db)!;
     await dbClient.transaction((Transaction txn) async {
       await txn.rawInsert('INSERT INTO Nodes (name, node_index, selected, http_url, ws_url) values(?, ?, ?, ?, ?)', [
@@ -343,18 +344,6 @@ class DBHelper {
   Future<int> deleteNode(Node node) async {
     final Database dbClient = (await db)!;
     return dbClient.rawDelete('DELETE FROM Nodes WHERE node_index = ?', [node.index]);
-  }
-
-  Future<int> saveNode(Node node) async {
-    final Database dbClient = (await db)!;
-    return dbClient
-        .rawInsert('INSERT INTO Nodes (name, node_index, selected, http_url, ws_url) values(?, ?, ?, ?, ?)', [
-      node.name,
-      node.index,
-      if (node.selected) 1 else 0,
-      node.http_url,
-      node.ws_url,
-    ]);
   }
 
   Future<int> changeNodeName(Node node, String name) async {
@@ -393,6 +382,51 @@ class DBHelper {
       ]);
     });
     return node;
+  }
+
+  // subscriptions:
+  Future<List<Subscription>> getSubscriptions() async {
+    final Database dbClient = (await db)!;
+    final List<Map> list = await dbClient.rawQuery('SELECT * FROM Subscriptions');
+    final List<Subscription> subs = [];
+    for (int i = 0; i < list.length; i++) {
+      subs.add(
+        Subscription(
+          name: list[i]["name"] as String,
+          index: list[i]["node_index"] as int,
+          address: list[i]["address"] as String,
+          amount_raw: list[i]["amount_raw"] as String,
+          active: list[i]["active"] == 1,
+          day_of_month: list[i]["day_of_month"] as int,
+        ),
+      );
+    }
+    return subs;
+  }
+
+  Future<Subscription?> saveSubscription(Subscription sub, {Database? dbClient}) async {
+    dbClient ??= (await db)!;
+    await dbClient.transaction((Transaction txn) async {
+      await txn.rawInsert('INSERT INTO Subscriptions (name, sub_index, active, address, amount_raw, day_of_month) values(?, ?, ?, ?, ?, ?)', [
+        sub.name,
+        sub.index,
+        if (sub.active) 1 else 0,
+        sub.address,
+        sub.amount_raw,
+        sub.day_of_month,
+      ]);
+    });
+    return sub;
+  }
+
+  Future<int> deleteSubscription(Subscription sub) async {
+    final Database dbClient = (await db)!;
+    return dbClient.rawDelete('DELETE FROM Subscriptions WHERE sub_index = ?', [sub.index]);
+  }
+
+  Future<int> changeSubscriptionName(Subscription sub, String name) async {
+    final Database dbClient = (await db)!;
+    return dbClient.rawUpdate('UPDATE Subscriptions SET name = ? WHERE sub_index = ?', [name, sub.index]);
   }
 
   // Contacts

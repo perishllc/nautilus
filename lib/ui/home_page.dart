@@ -3401,15 +3401,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             ),
             // handle bars:
             if (slideEnabled)
-              Container(
-                width: 4,
-                height: 30,
-                margin: const EdgeInsets.only(right: 22),
-                decoration: BoxDecoration(
-                  color: StateContainer.of(context).curTheme.text45,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
+              Handlebars.vertical(context),
           ],
         ),
       ),
