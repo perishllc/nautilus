@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
@@ -68,21 +69,8 @@ class SubsSheetState extends State<SubsSheet> {
   void _registerBus() {
     _nodeModifiedSub = EventTaxiImpl.singleton().registerTo<NodeModifiedEvent>().listen((NodeModifiedEvent event) {
       if (event.deleted) {
-        if (event.node!.selected) {
-          Future<void>.delayed(const Duration(milliseconds: 50), () {
-            setState(() {
-              widget.nodes
-                  .where((Node a) => a.index == StateContainer.of(context).selectedAccount!.index)
-                  .forEach((Node node) async {
-                node.selected = true;
-                await sl.get<DBHelper>().changeNode(node);
-                await sl.get<AccountService>().updateNode();
-              });
-            });
-          });
-        }
         setState(() {
-          widget.nodes.removeWhere((Node a) => a.index == event.node!.index);
+          widget.nodes.removeWhere((Node a) => a.id == event.node!.id);
         });
       } else if (event.created && event.node != null) {
         setState(() {
@@ -91,9 +79,9 @@ class SubsSheetState extends State<SubsSheet> {
       } else {
         // Name change
         setState(() {
-          widget.nodes.removeWhere((Node a) => a.index == event.node!.index);
+          widget.nodes.removeWhere((Node a) => a.id == event.node!.id);
           widget.nodes.add(event.node!);
-          widget.nodes.sort((Node a, Node b) => a.index.compareTo(b.index));
+          widget.nodes.sort((Node a, Node b) => a.id!.compareTo(b.id!));
         });
       }
     });
@@ -105,32 +93,19 @@ class SubsSheetState extends State<SubsSheet> {
     }
   }
 
-  Future<void> _changeNode(Node node, StateSetter setState) async {
-    // Change account
-    for (final Node acc in widget.nodes) {
-      if (acc.selected) {
-        setState(() {
-          acc.selected = false;
-        });
-      } else if (node.index == acc.index) {
-        setState(() {
-          acc.selected = true;
-        });
-      }
-    }
-    await sl.get<DBHelper>().changeNode(node);
-    EventTaxiImpl.singleton().fire(NodeChangedEvent(node: node, delayPop: true));
-    await sl.get<AccountService>().updateNode();
-    setState(() {
-      _nodeIsChanging = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    double bottomMargin = 60;
+    // TODO: better calculation of bottom bar height
+    if (Platform.isIOS) {
+      bottomMargin = 100;
+    }
     return SafeArea(
-        minimum: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height * 0.035,
+      minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05, bottom: bottomMargin),
+      child: Container(
+        decoration: BoxDecoration(
+          color: StateContainer.of(context).curTheme.backgroundDark,
+          borderRadius: const BorderRadius.all(Radius.circular(15)),
         ),
         child: SizedBox(
           width: double.infinity,
@@ -246,7 +221,7 @@ class SubsSheetState extends State<SubsSheet> {
                             return;
                           }
 
-                          sl.get<DBHelper>().addNode(node).then((Node? newNode) {
+                          sl.get<DBHelper>().saveNode(node).then((Node? newNode) {
                             if (newNode == null) {
                               sl.get<Logger>().d("Error adding node: node was null");
                               return;
@@ -254,16 +229,16 @@ class SubsSheetState extends State<SubsSheet> {
                             widget.nodes.add(newNode);
                             setState(() {
                               _addingNode = false;
-                              widget.nodes.sort((Node a, Node b) => a.index.compareTo(b.index));
+                              widget.nodes.sort((Node a, Node b) => a.id!.compareTo(b.id!));
                               // Scroll if list is full
                               if (expandedKey.currentContext != null) {
                                 final RenderBox? box = expandedKey.currentContext!.findRenderObject() as RenderBox?;
                                 if (box == null) return;
                                 if (widget.nodes.length * 72.0 >= box.size.height) {
                                   _scrollController.animateTo(
-                                    newNode.index * 72.0 > _scrollController.position.maxScrollExtent
+                                    newNode.id! * 72.0 > _scrollController.position.maxScrollExtent
                                         ? _scrollController.position.maxScrollExtent + 72.0
-                                        : newNode.index * 72.0,
+                                        : newNode.id! * 72.0,
                                     curve: Curves.easeOut,
                                     duration: const Duration(milliseconds: 200),
                                   );
@@ -292,7 +267,9 @@ class SubsSheetState extends State<SubsSheet> {
               ),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   Widget _buildNodeListItem(BuildContext context, Node node, StateSetter setState) {
@@ -325,7 +302,7 @@ class SubsSheetState extends State<SubsSheet> {
                     setState(() {
                       _nodeIsChanging = true;
                     });
-                    _changeNode(node, setState);
+                    // _changeNode(node, setState);
                   }
                 }
               },
@@ -442,7 +419,7 @@ class SubsSheetState extends State<SubsSheet> {
           await Slidable.of(context)!.close();
         }));
 
-    if (node.index > 0) {
+    if (node.id! > 0) {
       actions.add(
         SlidableAction(
           autoClose: false,
@@ -459,7 +436,7 @@ class SubsSheetState extends State<SubsSheet> {
               await sl.get<DBHelper>().deleteNode(node);
               EventTaxiImpl.singleton().fire(NodeModifiedEvent(node: node, deleted: true));
               setState(() {
-                widget.nodes.removeWhere((Node acc) => acc.index == node.index);
+                widget.nodes.removeWhere((Node acc) => acc.id == node.id);
               });
               if (!mounted) return;
               await Slidable.of(context)!.close();
@@ -472,7 +449,7 @@ class SubsSheetState extends State<SubsSheet> {
     return ActionPane(
       // motion: const DrawerMotion(),
       motion: const ScrollMotion(),
-      extentRatio: (node.index > 0) ? 0.5 : 0.25,
+      extentRatio: (node.id! > 0) ? 0.5 : 0.25,
       children: actions,
     );
   }

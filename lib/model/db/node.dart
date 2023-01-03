@@ -10,8 +10,6 @@ class Node {
   int? id;
   @JsonKey(name: 'name')
   String name;
-  @JsonKey(name: 'index')
-  int index;
   @JsonKey(name: 'http_url')
   String http_url;
   @JsonKey(name: 'ws_url')
@@ -19,7 +17,7 @@ class Node {
   @JsonKey(name: 'selected')
   bool selected;
 
-  Node({required this.name, required this.http_url, required this.ws_url, required this.selected, this.id, this.index = 0});
+  Node({required this.name, required this.http_url, required this.ws_url, required this.selected, this.id});
 
   factory Node.fromJson(Map<String, dynamic> json) => _$NodeFromJson(json);
   Map<String, dynamic> toJson() => _$NodeToJson(this);

@@ -72,7 +72,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
           Future<void>.delayed(const Duration(milliseconds: 50), () {
             setState(() {
               widget.nodes
-                  .where((Node a) => a.index == StateContainer.of(context).selectedAccount!.index)
+                  .where((Node a) => a.id == StateContainer.of(context).selectedAccount!.id)
                   .forEach((Node node) async {
                 node.selected = true;
                 await sl.get<DBHelper>().changeNode(node);
@@ -82,7 +82,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
           });
         }
         setState(() {
-          widget.nodes.removeWhere((Node a) => a.index == event.node!.index);
+          widget.nodes.removeWhere((Node a) => a.id == event.node!.id);
         });
       } else if (event.created && event.node != null) {
         setState(() {
@@ -91,9 +91,9 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
       } else {
         // Name change
         setState(() {
-          widget.nodes.removeWhere((Node a) => a.index == event.node!.index);
+          widget.nodes.removeWhere((Node a) => a.id == event.node!.id);
           widget.nodes.add(event.node!);
-          widget.nodes.sort((Node a, Node b) => a.index.compareTo(b.index));
+          widget.nodes.sort((Node a, Node b) => a.id!.compareTo(b.id!));
         });
       }
     });
@@ -112,7 +112,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
         setState(() {
           acc.selected = false;
         });
-      } else if (node.index == acc.index) {
+      } else if (node.id == acc.id) {
         setState(() {
           acc.selected = true;
         });
@@ -246,7 +246,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
                             return;
                           }
 
-                          sl.get<DBHelper>().addNode(node).then((Node? newNode) {
+                          sl.get<DBHelper>().saveNode(node).then((Node? newNode) {
                             if (newNode == null) {
                               sl.get<Logger>().d("Error adding node: node was null");
                               return;
@@ -254,16 +254,16 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
                             widget.nodes.add(newNode);
                             setState(() {
                               _addingNode = false;
-                              widget.nodes.sort((Node a, Node b) => a.index.compareTo(b.index));
+                              widget.nodes.sort((Node a, Node b) => a.id!.compareTo(b.id!));
                               // Scroll if list is full
                               if (expandedKey.currentContext != null) {
                                 final RenderBox? box = expandedKey.currentContext!.findRenderObject() as RenderBox?;
                                 if (box == null) return;
                                 if (widget.nodes.length * 72.0 >= box.size.height) {
                                   _scrollController.animateTo(
-                                    newNode.index * 72.0 > _scrollController.position.maxScrollExtent
+                                    newNode.id! * 72.0 > _scrollController.position.maxScrollExtent
                                         ? _scrollController.position.maxScrollExtent + 72.0
-                                        : newNode.index * 72.0,
+                                        : newNode.id! * 72.0,
                                     curve: Curves.easeOut,
                                     duration: const Duration(milliseconds: 200),
                                   );
@@ -442,7 +442,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
           await Slidable.of(context)!.close();
         }));
 
-    if (node.index > 0) {
+    if (node.id! > 0) {
       actions.add(
         SlidableAction(
           autoClose: false,
@@ -459,7 +459,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
               await sl.get<DBHelper>().deleteNode(node);
               EventTaxiImpl.singleton().fire(NodeModifiedEvent(node: node, deleted: true));
               setState(() {
-                widget.nodes.removeWhere((Node acc) => acc.index == node.index);
+                widget.nodes.removeWhere((Node acc) => acc.id == node.id);
               });
               if (!mounted) return;
               await Slidable.of(context)!.close();
@@ -472,7 +472,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
     return ActionPane(
       // motion: const DrawerMotion(),
       motion: const ScrollMotion(),
-      extentRatio: (node.index > 0) ? 0.5 : 0.25,
+      extentRatio: (node.id! > 0) ? 0.5 : 0.25,
       children: actions,
     );
   }

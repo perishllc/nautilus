@@ -42,7 +42,6 @@ class ShopSheetState extends State<ShopSheet> {
     return SafeArea(
       minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05, bottom: bottomMargin),
       child: Container(
-        // padding: const EdgeInsets.only(left: 20, right: 20),
         decoration: BoxDecoration(
           color: StateContainer.of(context).curTheme.backgroundDark,
           borderRadius: const BorderRadius.all(Radius.circular(15)),
@@ -91,18 +90,6 @@ class ShopSheetState extends State<ShopSheet> {
                 //   ],
                 // ),
 
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Row(
-                    children: [
-                      Text(
-                        Z.of(context).getNano,
-                        style: AppStyles.textStyleHeader2Colored(context),
-                      ),
-                    ],
-                  ),
-                ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -115,6 +102,18 @@ class ShopSheetState extends State<ShopSheet> {
                       },
                     ),
                   ],
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Row(
+                    children: [
+                      Text(
+                        Z.of(context).getNano,
+                        style: AppStyles.textStyleHeader2Colored(context),
+                      ),
+                    ],
+                  ),
                 ),
 
                 Row(

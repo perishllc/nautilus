@@ -150,6 +150,7 @@ dependencies:
   firebase_core: ^2.2.0
   firebase_analytics: ^10.0.5
   firebase_app_check: ^0.1.1+3
+  flutter_local_notifications: ^13.0.0
 
   # windows plugins / ffi:
   sqflite_common_ffi: ^2.1.1

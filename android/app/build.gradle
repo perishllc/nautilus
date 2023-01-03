@@ -48,6 +48,8 @@ android {
     }
 
     compileOptions {
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -95,6 +97,12 @@ dependencies {
 
     // barcode scanning:
     implementation 'com.google.mlkit:barcode-scanning:17.0.2'
+
+    // local notifications:
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+    // todo: may not be necessary (https://github.com/flutter/flutter/issues/110658)
+    implementation 'androidx.window:window:1.1.0-alpha04'
+    // implementation 'androidx.window:window-java:1.1.0-alpha04'
 
     // required for all Android apps
     // implementation 'io.branch.sdk.android:library:'

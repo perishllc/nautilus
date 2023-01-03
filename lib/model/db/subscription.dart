@@ -10,16 +10,16 @@ class Subscription {
   int? id;
   @JsonKey(name: 'name')
   String name;
-  @JsonKey(name: 'index')
-  int index;
   @JsonKey(name: 'active')
   bool active;
   @JsonKey(name: 'amount_raw')
   String amount_raw;
   @JsonKey(name: 'address')
   String address;
-  @JsonKey(name: 'day_of_month')
-  int day_of_month;
+  @JsonKey(name: 'timestamp')
+  int timestamp;
+  @JsonKey(name: 'frequency')
+  String frequency;
 
   Subscription({
     required this.name,
@@ -27,8 +27,8 @@ class Subscription {
     required this.amount_raw,
     required this.address,
     this.id,
-    this.index = 0,
-    this.day_of_month = 0,
+    required this.timestamp,
+    required this.frequency,
   });
 
   // factory Subscription.fromJson(Map<String, dynamic> json) => _$SubscriptionFromJson(json);

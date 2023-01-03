@@ -24,7 +24,8 @@ class DBHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT, 
         address TEXT, 
-        monkey_path TEXT)""";
+        monkey_path TEXT
+        )""";
   static const String USERS_SQL = """
         CREATE TABLE Users(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -33,13 +34,15 @@ class DBHelper {
         nickname TEXT,
         address TEXT,
         is_blocked BOOLEAN,
-        type TEXT)""";
+        type TEXT
+        )""";
   static const String BLOCKED_SQL = """
         CREATE TABLE Blocked( 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
         username TEXT,
-        address TEXT)""";
+        address TEXT
+        )""";
   static const String REPS_SQL = """
         CREATE TABLE Reps( 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -60,7 +63,8 @@ class DBHelper {
         last_accessed INTEGER,
         private_key TEXT,
         balance TEXT,
-        address TEXT)""";
+        address TEXT
+        )""";
   static const String TX_DATA_SQL = """
         CREATE TABLE Transactions( 
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -86,23 +90,26 @@ class DBHelper {
         record_type TEXT,
         sub_type TEXT,
         metadata TEXT,
-        status TEXT)""";
+        status TEXT
+        )""";
   static const String NODES_SQL = """
         CREATE TABLE Nodes( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        node_index INTEGER,
         name TEXT,
         selected BOOLEAN,
         http_url TEXT,
-        ws_url TEXT)""";
+        ws_url TEXT
+        )""";
   static const String SUBS_SQL = """
         CREATE TABLE Subscriptions( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT,
         active BOOLEAN,
-        day_of_month INTEGER,
+        timestamp INTEGER,
+        frequency TEXT,
         address TEXT,
-        amount_raw TEXT)""";
+        amount_raw TEXT
+        )""";
   static const String USER_ADD_BLOCKED_COLUMN_SQL = """
     ALTER TABLE Users ADD is_blocked BOOLEAN
     """;
@@ -131,6 +138,11 @@ class DBHelper {
     """;
   static const String ACCOUNTS_ADD_WATCH_ONLY_COLUMN_SQL = """
     ALTER TABLE Accounts ADD watch_only BOOLEAN
+    """;
+
+  // TODO: prerelease
+  static const String NODES_REMOVE_INDEX_SQL = """
+    ALTER TABLE Nodes REMOVE node_index INTEGER
     """;
 
   static Database? _db;
@@ -176,7 +188,6 @@ class DBHelper {
     // add default nodes:
     await saveNode(
       Node(
-        index: 0,
         name: "Perish Node",
         selected: true,
         http_url: "https://nautilus.perish.co/api",
@@ -186,7 +197,6 @@ class DBHelper {
     );
     await saveNode(
       Node(
-        index: 1,
         name: "Natrium Node",
         selected: false,
         http_url: "https://app.natrium.io/api",
@@ -231,7 +241,6 @@ class DBHelper {
       await db.execute(NODES_SQL);
       await saveNode(
         Node(
-          index: 0,
           name: "Perish Node",
           selected: true,
           http_url: "https://nautilus.perish.co/api",
@@ -241,7 +250,6 @@ class DBHelper {
       );
       await saveNode(
         Node(
-          index: 1,
           name: "Natrium Node",
           selected: false,
           http_url: "https://app.natrium.io/api",
@@ -293,7 +301,6 @@ class DBHelper {
       nodes.add(
         Node(
           name: list[i]["name"] as String,
-          index: list[i]["node_index"] as int,
           http_url: list[i]["http_url"] as String,
           ws_url: list[i]["ws_url"] as String,
           selected: list[i]["selected"] == 1,
@@ -309,7 +316,6 @@ class DBHelper {
     final Node node = Node(
       id: list[0]["id"] as int?,
       name: list[0]["name"] as String,
-      index: list[0]["node_index"] as int,
       selected: true,
       http_url: list[0]["http_url"] as String,
       ws_url: list[0]["ws_url"] as String,
@@ -323,16 +329,17 @@ class DBHelper {
       await txn.rawUpdate('UPDATE Nodes set selected = false');
       // Get access increment count
       final List<Map> list = await txn.rawQuery('SELECT * FROM Nodes');
-      await txn.rawUpdate('UPDATE Nodes set selected = ? WHERE node_index = ?', [1, node.index]);
+      await txn.rawUpdate('UPDATE Nodes set selected = ? WHERE node_index = ?', [1, node.id]);
     });
   }
 
+  // TODO: prerelease: test if null id works here:
   Future<Node?> saveNode(Node node, {Database? dbClient}) async {
     dbClient ??= (await db)!;
     await dbClient.transaction((Transaction txn) async {
-      await txn.rawInsert('INSERT INTO Nodes (name, node_index, selected, http_url, ws_url) values(?, ?, ?, ?, ?)', [
+      await txn.rawInsert('INSERT INTO Nodes (name, id, selected, http_url, ws_url) values(?, ?, ?, ?, ?)', [
         node.name,
-        node.index,
+        node.id,
         if (node.selected) 1 else 0,
         node.http_url,
         node.ws_url,
@@ -343,45 +350,12 @@ class DBHelper {
 
   Future<int> deleteNode(Node node) async {
     final Database dbClient = (await db)!;
-    return dbClient.rawDelete('DELETE FROM Nodes WHERE node_index = ?', [node.index]);
+    return dbClient.rawDelete('DELETE FROM Nodes WHERE id = ?', [node.id]);
   }
 
   Future<int> changeNodeName(Node node, String name) async {
     final Database dbClient = (await db)!;
-    return dbClient.rawUpdate('UPDATE Nodes SET name = ? WHERE node_index = ?', [name, node.index]);
-  }
-
-  Future<Node?> addNode(Node inputNode) async {
-    final Database dbClient = (await db)!;
-    Node? node;
-    await dbClient.transaction((Transaction txn) async {
-      int nextIndex = 0;
-      int? curIndex;
-      final List<Map> nodes = await txn.rawQuery('SELECT * from Nodes WHERE node_index >= 0 ORDER BY node_index ASC');
-      for (int i = 0; i < nodes.length; i++) {
-        curIndex = nodes[i]["node_index"] as int?;
-        if (curIndex != nextIndex) {
-          break;
-        }
-        nextIndex++;
-      }
-      final int nextID = nextIndex + 1;
-      node = Node(
-        index: nextIndex,
-        name: inputNode.name,
-        selected: false,
-        http_url: inputNode.http_url,
-        ws_url: inputNode.ws_url,
-      );
-      await txn.rawInsert('INSERT INTO Nodes (name, node_index, selected, http_url, ws_url) values(?, ?, ?, ?, ?)', [
-        node!.name,
-        node!.index,
-        if (node!.selected) 1 else 0,
-        node!.http_url,
-        node!.ws_url,
-      ]);
-    });
-    return node;
+    return dbClient.rawUpdate('UPDATE Nodes SET name = ? WHERE id = ?', [name, node.id]);
   }
 
   // subscriptions:
@@ -393,11 +367,11 @@ class DBHelper {
       subs.add(
         Subscription(
           name: list[i]["name"] as String,
-          index: list[i]["node_index"] as int,
           address: list[i]["address"] as String,
           amount_raw: list[i]["amount_raw"] as String,
+          timestamp: list[i]["timestamp"] as int,
+          frequency: list[i]["frequency"] as String,
           active: list[i]["active"] == 1,
-          day_of_month: list[i]["day_of_month"] as int,
         ),
       );
     }
@@ -407,13 +381,13 @@ class DBHelper {
   Future<Subscription?> saveSubscription(Subscription sub, {Database? dbClient}) async {
     dbClient ??= (await db)!;
     await dbClient.transaction((Transaction txn) async {
-      await txn.rawInsert('INSERT INTO Subscriptions (name, sub_index, active, address, amount_raw, day_of_month) values(?, ?, ?, ?, ?, ?)', [
+      await txn.rawInsert('INSERT INTO Subscriptions (name, active, address, amount_raw, timestamp, frequency) values(?, ?, ?, ?, ?, ?, ?)', [
         sub.name,
-        sub.index,
         if (sub.active) 1 else 0,
         sub.address,
         sub.amount_raw,
-        sub.day_of_month,
+        sub.timestamp,
+        sub.frequency,
       ]);
     });
     return sub;
@@ -421,12 +395,12 @@ class DBHelper {
 
   Future<int> deleteSubscription(Subscription sub) async {
     final Database dbClient = (await db)!;
-    return dbClient.rawDelete('DELETE FROM Subscriptions WHERE sub_index = ?', [sub.index]);
+    return dbClient.rawDelete('DELETE FROM Subscriptions WHERE id = ?', [sub.id]);
   }
 
   Future<int> changeSubscriptionName(Subscription sub, String name) async {
     final Database dbClient = (await db)!;
-    return dbClient.rawUpdate('UPDATE Subscriptions SET name = ? WHERE sub_index = ?', [name, sub.index]);
+    return dbClient.rawUpdate('UPDATE Subscriptions SET name = ? WHERE id = ?', [name, sub.id]);
   }
 
   // Contacts

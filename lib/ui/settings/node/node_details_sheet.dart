@@ -75,7 +75,7 @@ class NodeDetailsSheet {
                                     width: 50,
                                     height: 50,
                                     margin: const EdgeInsetsDirectional.only(top: 18.0, start: 10.0),
-                                    child: node.index == 0
+                                    child: node.id == 0
                                         ? const SizedBox()
                                         : TextButton(
                                             style: TextButton.styleFrom(
