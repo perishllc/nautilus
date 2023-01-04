@@ -37,6 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Add Contact"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Add Favorite"),
         "addNode": MessageLookupByLibrary.simpleMessage("Add Node"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Add Subscription"),
         "addUser": MessageLookupByLibrary.simpleMessage("Add a User"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Add Watch Only Account"),
@@ -263,6 +265,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Enter Message"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Enter XMR Address"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Enter Name"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("Enter Node Name"),
         "enterPasswordHint":
@@ -809,6 +812,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Subscribe"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Subscribe via Apple Pay"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("Subscribing"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Help Support Development"),

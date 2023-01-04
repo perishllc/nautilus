@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
@@ -27,6 +28,7 @@ import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_confirm_sheet.dart';
+import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
@@ -53,13 +55,13 @@ enum AddressStyle { TEXT60, TEXT90, PRIMARY }
 class SendGiftSheetState extends State<SendGiftSheet> {
   final Logger log = sl.get<Logger>();
 
-  FocusNode? _amountFocusNode;
-  FocusNode? _memoFocusNode;
-  TextEditingController? _amountController;
-  TextEditingController? _memoController;
+  FocusNode _amountFocusNode = FocusNode();
+  FocusNode _memoFocusNode = FocusNode();
+  TextEditingController _amountController = TextEditingController();
+  TextEditingController _memoController = TextEditingController();
 
   // States
-  AddressStyle? _addressStyle;
+  AddressStyle _addressStyle = AddressStyle.TEXT60;
   String? _amountHint;
   String? _addressHint;
   String? _memoHint;
@@ -67,8 +69,8 @@ class SendGiftSheetState extends State<SendGiftSheet> {
   String _addressValidationText = "";
   String _memoValidationText = "";
   String? quickSendAmount = "";
-  late List<User> _users;
-  bool? animationOpen;
+  List<User> _users = [];
+  bool animationOpen = false;
   // Used to replace address textfield with colorized TextSpan
   bool _addressValidAndUnfocused = false;
   // Set to true when a username is being entered
@@ -88,17 +90,13 @@ class SendGiftSheetState extends State<SendGiftSheet> {
   ReceiveSheet? receive;
 
   String? _rawAmount;
+  
+  bool _addressCopied = false;
+  Timer? _addressCopiedTimer;
 
   @override
   void initState() {
     super.initState();
-    _amountFocusNode = FocusNode();
-    _memoFocusNode = FocusNode();
-    _amountController = TextEditingController();
-    _memoController = TextEditingController();
-    _addressStyle = AddressStyle.TEXT60;
-    _users = [];
-    animationOpen = false;
 
     // _amountHint = Z.of(context).enterAmount;
     // _addressHint = Z.of(context).enterUserOrAddress;
@@ -235,12 +233,10 @@ class SendGiftSheetState extends State<SendGiftSheet> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                //Empty SizedBox
                 const SizedBox(
                   width: 60,
                   height: 60,
                 ),
-
                 // Container for the header, address and balance text
                 Column(
                   children: <Widget>[
@@ -281,146 +277,169 @@ class SendGiftSheetState extends State<SendGiftSheet> {
               ],
             ),
 
-            Container(
-              margin: const EdgeInsets.only(top: 10.0),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: '',
-                          children: <InlineSpan>[
-                            TextSpan(
-                              text: StateContainer.of(context).selectedAccount!.name,
-                              style: TextStyle(
-                                color: StateContainer.of(context).curTheme.text60,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "NunitoSans",
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 40,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text("|",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: StateContainer.of(context).curTheme.text30,
-                          )),
-                    ),
-                  ),
-                  Expanded(
-                    child: Align(
+            const SizedBox(height: 5),
+            // account / wallet name:
+            OutlinedButton(
+              onPressed: () async {
+                Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
+                setState(() {
+                  _addressCopied = true;
+                });
+                _addressCopiedTimer?.cancel();
+                _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
+                  if (!mounted) return;
+                  setState(() {
+                    _addressCopied = false;
+                  });
+                });
+                UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
+              },
+              child: Container(
+                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 2),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Align(
                       alignment: Alignment.centerLeft,
-                      child: RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: '',
-                          children: <InlineSpan>[
-                            TextSpan(
-                              text: StateContainer.of(context).wallet?.username ??
-                                  Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
-                              style: TextStyle(
-                                color: StateContainer.of(context).curTheme.text60,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "NunitoSans",
+                      child: Icon(
+                        AppIcons.content_copy,
+                        size: 24,
+                        color: StateContainer.of(context).curTheme.primary,
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        const SizedBox(height: 5),
+                        Column(
+                          children: <Widget>[
+                            Align(
+                              alignment: Alignment.center,
+                              child: RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                  text: '',
+                                  children: [
+                                    TextSpan(
+                                      text: StateContainer.of(context).selectedAccount!.name,
+                                      style: TextStyle(
+                                        color: StateContainer.of(context).curTheme.text60,
+                                        fontSize: AppFontSizes.small,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: "NunitoSans",
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: RichText(
+                                textAlign: TextAlign.start,
+                                text: TextSpan(
+                                  text: '',
+                                  children: [
+                                    TextSpan(
+                                      text: StateContainer.of(context).wallet?.username ??
+                                          Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
+                                      style: TextStyle(
+                                        color: StateContainer.of(context).curTheme.text60,
+                                        fontSize: AppFontSizes.small,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: "NunitoSans",
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            // Balance Text
-            FutureBuilder<PriceConversion>(
-              future: sl.get<SharedPrefsUtil>().getPriceConversion(),
-              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                if (snapshot.hasData && snapshot.data != null && snapshot.data != PriceConversion.HIDDEN) {
-                  return RichText(
-                    textAlign: TextAlign.start,
-                    text: TextSpan(
-                      text: '',
-                      children: [
-                        TextSpan(
-                          text: "(",
-                          style: TextStyle(
-                            color: StateContainer.of(context).curTheme.primary60,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w100,
-                            fontFamily: "NunitoSans",
-                          ),
+                        FutureBuilder<PriceConversion>(
+                          future: sl.get<SharedPrefsUtil>().getPriceConversion(),
+                          builder: (BuildContext context, AsyncSnapshot snapshot) {
+                            if (snapshot.hasData && snapshot.data != null && snapshot.data != PriceConversion.HIDDEN) {
+                              return RichText(
+                                textAlign: TextAlign.start,
+                                text: TextSpan(
+                                  text: '',
+                                  children: [
+                                    TextSpan(
+                                      text: "(",
+                                      style: TextStyle(
+                                        color: StateContainer.of(context).curTheme.primary60,
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w100,
+                                        fontFamily: "NunitoSans",
+                                      ),
+                                    ),
+                                    if (!_localCurrencyMode)
+                                      TextSpan(
+                                        text: getThemeAwareRawAccuracy(
+                                          context,
+                                          StateContainer.of(context).wallet!.accountBalance.toString(),
+                                        ),
+                                        style: TextStyle(
+                                          color: StateContainer.of(context).curTheme.primary60,
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: "NunitoSans",
+                                        ),
+                                      ),
+                                    if (!_localCurrencyMode)
+                                      displayCurrencySymbol(
+                                        context,
+                                        TextStyle(
+                                          color: StateContainer.of(context).curTheme.primary60,
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: "NunitoSans",
+                                        ),
+                                      ),
+                                    TextSpan(
+                                      text: _localCurrencyMode
+                                          ? StateContainer.of(context).wallet!.getLocalCurrencyBalance(
+                                              context, StateContainer.of(context).curCurrency,
+                                              locale: StateContainer.of(context).currencyLocale)
+                                          : getRawAsThemeAwareFormattedAmount(
+                                              context, StateContainer.of(context).wallet!.accountBalance.toString()),
+                                      style: TextStyle(
+                                        color: StateContainer.of(context).curTheme.primary60,
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: "NunitoSans",
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: ")",
+                                      style: TextStyle(
+                                        color: StateContainer.of(context).curTheme.primary60,
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.w100,
+                                        fontFamily: "NunitoSans",
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                            return const Text(
+                              "*******",
+                              style: TextStyle(
+                                color: Colors.transparent,
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w100,
+                                fontFamily: "NunitoSans",
+                              ),
+                            );
+                          },
                         ),
-                        if (!_localCurrencyMode)
-                          TextSpan(
-                            text: getThemeAwareRawAccuracy(
-                                context, StateContainer.of(context).wallet!.accountBalance.toString()),
-                            style: TextStyle(
-                              color: StateContainer.of(context).curTheme.primary60,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "NunitoSans",
-                            ),
-                          ),
-                        if (!_localCurrencyMode)
-                          displayCurrencySymbol(
-                            context,
-                            TextStyle(
-                              color: StateContainer.of(context).curTheme.primary60,
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "NunitoSans",
-                            ),
-                          ),
-                        TextSpan(
-                          text: _localCurrencyMode
-                              ? StateContainer.of(context).wallet!.getLocalCurrencyBalance(
-                                  context, StateContainer.of(context).curCurrency,
-                                  locale: StateContainer.of(context).currencyLocale)
-                              : getRawAsThemeAwareFormattedAmount(
-                                  context, StateContainer.of(context).wallet!.accountBalance.toString()),
-                          style: TextStyle(
-                            color: StateContainer.of(context).curTheme.primary60,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: "NunitoSans",
-                          ),
-                        ),
-                        TextSpan(
-                          text: ")",
-                          style: TextStyle(
-                            color: StateContainer.of(context).curTheme.primary60,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w100,
-                            fontFamily: "NunitoSans",
-                          ),
-                        ),
+                        const SizedBox(height: 5),
                       ],
                     ),
-                  );
-                }
-                return const Text(
-                  "*******",
-                  style: TextStyle(
-                    color: Colors.transparent,
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w100,
-                    fontFamily: "NunitoSans",
-                  ),
-                );
-              },
+                  ],
+                ),
+              ),
             ),
             // A main container that holds everything
             Expanded(
@@ -645,52 +664,6 @@ class SendGiftSheetState extends State<SendGiftSheet> {
     }
   }
 
-  void toggleLocalCurrency() {
-    // Keep a cache of previous amounts because, it's kinda nice to see approx what nano is worth
-    // this way you can tap button and tap back and not end up with X.9993451 NANO
-    if (_localCurrencyMode) {
-      // Switching to crypto-mode
-      String cryptoAmountStr;
-      // Check out previous state
-      if (_amountController!.text == _lastLocalCurrencyAmount) {
-        cryptoAmountStr = _lastCryptoAmount;
-      } else {
-        _lastLocalCurrencyAmount = _amountController!.text;
-        _lastCryptoAmount =
-            convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
-        cryptoAmountStr = _lastCryptoAmount;
-      }
-      setState(() {
-        _localCurrencyMode = false;
-      });
-      Future<void>.delayed(const Duration(milliseconds: 50), () {
-        _amountController!.text = cryptoAmountStr;
-        _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: cryptoAmountStr.length));
-      });
-    } else {
-      // Switching to local-currency mode
-      String localAmountStr;
-      // Check our previous state
-      if (_amountController!.text == _lastCryptoAmount) {
-        localAmountStr = _lastLocalCurrencyAmount;
-        if (!_lastLocalCurrencyAmount.startsWith(_localCurrencyFormat.currencySymbol)) {
-          _lastLocalCurrencyAmount = _localCurrencyFormat.currencySymbol + _lastLocalCurrencyAmount;
-        }
-      } else {
-        _lastCryptoAmount = _amountController!.text;
-        _lastLocalCurrencyAmount = convertCryptoToLocalCurrency(context, _localCurrencyFormat, _amountController!.text);
-        localAmountStr = _lastLocalCurrencyAmount;
-      }
-      setState(() {
-        _localCurrencyMode = true;
-      });
-      Future<void>.delayed(const Duration(milliseconds: 50), () {
-        _amountController!.text = localAmountStr;
-        _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: localAmountStr.length));
-      });
-    }
-  }
-
   /// Validate form data to see if valid
   /// @returns true if valid, false otherwise
   Future<bool> _validateRequest() async {
@@ -809,7 +782,20 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                 ],
               ),
               onPressed: () {
-                toggleLocalCurrency();
+                final List<String> stateVars = SendSheetHelpers.toggleLocalCurrency(
+                  setState,
+                  context,
+                  _amountController,
+                  _localCurrencyMode,
+                  _localCurrencyFormat,
+                  _lastLocalCurrencyAmount,
+                  _lastCryptoAmount,
+                );
+                setState(() {
+                  _localCurrencyMode = !_localCurrencyMode;
+                  _lastCryptoAmount = stateVars[0];
+                  _lastLocalCurrencyAmount = stateVars[1];
+                });
               },
             )
           : null,

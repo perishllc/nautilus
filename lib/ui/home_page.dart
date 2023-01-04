@@ -31,6 +31,7 @@ import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/db/account.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
+import 'package:wallet_flutter/model/db/subscription.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/model/db/user.dart';
 import 'package:wallet_flutter/model/list_model.dart';
@@ -46,6 +47,7 @@ import 'package:wallet_flutter/network/model/response/alerts_response_item.dart'
 import 'package:wallet_flutter/network/model/response/auth_item.dart';
 import 'package:wallet_flutter/network/model/response/pay_item.dart';
 import 'package:wallet_flutter/network/model/status_types.dart';
+import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/auth/auth_confirm_sheet.dart';
@@ -204,7 +206,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   /// Notification includes which account its for, automatically switch to it if they're entering app from notification
   Future<void> _chooseCorrectAccountFromNotification(dynamic message) async {
     if (message.containsKey("account") as bool) {
-      final String? account = message['account'] as String?;
+      final String? account = message["account"] as String?;
       if (account != null) {
         await _switchToAccount(account);
       }
@@ -874,6 +876,14 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       // add donations contact:
       _addSampleContact();
 
+      // check account for a username:
+      if (StateContainer.of(context).wallet?.address != null && mounted) {
+        await sl.get<UsernameService>().checkAddressDebounced(
+              context,
+              StateContainer.of(context).wallet!.address!,
+            );
+      }
+      
       // check for nautilus pro sub:
       if (!mounted) return;
       _isPro = await AppDialogs.proCheck(context, shouldShowDialog: false);
@@ -2566,11 +2576,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             if (index != HOME_INDEX) {
               switch (index) {
                 case SUBS_INDEX:
+                  final List<Subscription> subs = await sl.get<DBHelper>().getSubscriptions();
                   await Sheets.showAppHeightFullSheet(
                     context: context,
                     barrier: Colors.transparent,
-                    widget: const SubsSheet(
-                      nodes: [],
+                    widget: SubsSheet(
+                      subs: subs,
                     ),
                   );
                   break;
@@ -3400,8 +3411,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 ),
               ),
             ),
-            if (slideEnabled)
-              Handlebars.vertical(context),
+            if (slideEnabled) Handlebars.vertical(context),
           ],
         ),
       ),

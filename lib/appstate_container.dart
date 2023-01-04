@@ -642,6 +642,13 @@ class StateContainerState extends State<StateContainer> {
         });
         updateRecentlyUsedAccounts();
       }
+      // check account for a username:
+      if (StateContainer.of(context).wallet?.address != null && mounted) {
+        sl.get<UsernameService>().checkAddressDebounced(
+              context,
+              StateContainer.of(context).wallet!.address!,
+            );
+      }
     });
     // Deep link has been updated
     _deepLinkSub = linkStream.listen((String? link) {
@@ -752,6 +759,13 @@ class StateContainerState extends State<StateContainer> {
     selectedAccount = account;
     updateRecentlyUsedAccounts();
     // get user if it exists:
+    // check address for a username:
+    if (mounted) {
+      await sl.get<UsernameService>().checkAddressDebounced(
+            context,
+            account.address!,
+          );
+    }
     // TODO: make username a setting if there are multiple:
     final User? user = await sl.get<DBHelper>().getUserWithAddress(account.address!);
     String? walletUsername;
@@ -1066,33 +1080,8 @@ class StateContainerState extends State<StateContainer> {
 
     // if there's no user for this address, check if one exists on the block chain:
 
-    if (link_as_account != null) {
-      final String? checked = await sl.get<SharedPrefsUtil>().getWithExpiry(link_as_account) as String?;
-
-      if (checked == null) {
-        // check if we already have a record for this address:
-        User? user = await sl.get<DBHelper>().getUserWithAddress(link_as_account);
-        // adds to the db if found:
-        user ??= await sl.get<UsernameService>().figureOutUsernameType(link_as_account);
-      } else {
-        // add some kind of timeout so we don't keep checking for the same username within a day:
-        const int dayInSeconds = 86400;
-        await sl.get<SharedPrefsUtil>().setWithExpiry(link_as_account, "1", dayInSeconds);
-      }
-
-      // if (checked == null && await sl.get<DBHelper>().isOnchainUsernameRecorded(link_as_account) == null) {
-      //   final String? onchainUsername = await sl.get<UsernameService>().checkOnchainAddress(link_as_account);
-      //   if (onchainUsername != null) {
-      //     // add to the db if missing:
-      //     final User user =
-      //         User(username: onchainUsername, address: link_as_account, type: UserTypes.ONCHAIN, is_blocked: false);
-      //     await sl.get<DBHelper>().addUser(user);
-      //   } else {
-      //     // add some kind of timeout so we don't keep checking for the same username within a day:
-      //     const int dayInSeconds = 86400;
-      //     await sl.get<SharedPrefsUtil>().setWithExpiry(link_as_account, "1", dayInSeconds);
-      //   }
-      // }
+    if (link_as_account != null && mounted) {
+      await sl.get<UsernameService>().checkAddressDebounced(context, link_as_account);
     }
 
     if (wallet!.watchOnly && link_as_account != null && link_as_account == wallet!.address) {

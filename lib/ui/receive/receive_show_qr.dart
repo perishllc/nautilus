@@ -13,6 +13,7 @@ import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/ui/receive/share_card.dart';
+import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
@@ -62,13 +63,13 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
   // Address copied items
   // Current state references
   bool _showShareCard = false;
-  late bool _addressCopied;
+  bool _addressCopied = false;
   // Timer reference so we can cancel repeated events
   Timer? _addressCopiedTimer;
 
-  FocusNode? _amountFocusNode;
+  FocusNode _amountFocusNode = FocusNode();
   String? _rawAmount;
-  TextEditingController? _amountController;
+  TextEditingController _amountController = TextEditingController();
   late NumberFormat _localCurrencyFormat;
   bool _localCurrencyMode = false;
   String _amountValidationText = "";
@@ -99,23 +100,19 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
     // Create our SVG-heavy things in the constructor because they are slower operations
     // Share card initialization
     shareCardKey = GlobalKey();
-    _showShareCard = false;
-
-    _amountFocusNode = FocusNode();
-    _amountController = TextEditingController();
 
     if (isNotEmpty(widget.amountRaw) && widget.amountRaw != "0") {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         setState(() {
-          _amountController!.text = getRawAsThemeAwareAmount(context, widget.amountRaw);
+          _amountController.text = getRawAsThemeAwareAmount(context, widget.amountRaw);
           redrawQrCode();
         });
       });
     }
 
     // On amount focus change
-    _amountFocusNode!.addListener(() {
-      if (_amountFocusNode!.hasFocus) {
+    _amountFocusNode.addListener(() {
+      if (_amountFocusNode.hasFocus) {
         setState(() {
           _amountHint = "";
         });
@@ -139,7 +136,7 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
         child: GestureDetector(
             onTap: () {
               // Clear focus of our fields when tapped in this empty space
-              _amountFocusNode!.unfocus();
+              _amountFocusNode.unfocus();
             },
             child: Column(
               children: <Widget>[
@@ -358,64 +355,18 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
             )));
   }
 
-  void toggleLocalCurrency() {
-    // Keep a cache of previous amounts because, it's kinda nice to see approx what nano is worth
-    // this way you can tap button and tap back and not end up with X.9993451 NANO
-    if (_localCurrencyMode) {
-      // Switching to crypto-mode
-      String cryptoAmountStr;
-      // Check out previous state
-      if (_amountController!.text == _lastLocalCurrencyAmount) {
-        cryptoAmountStr = _lastCryptoAmount;
-      } else {
-        _lastLocalCurrencyAmount = _amountController!.text;
-        _lastCryptoAmount =
-            convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text);
-        cryptoAmountStr = _lastCryptoAmount;
-      }
-      setState(() {
-        _localCurrencyMode = false;
-      });
-      Future<void>.delayed(const Duration(milliseconds: 50), () {
-        _amountController!.text = cryptoAmountStr;
-        _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: cryptoAmountStr.length));
-      });
-    } else {
-      // Switching to local-currency mode
-      String localAmountStr;
-      // Check our previous state
-      if (_amountController!.text == _lastCryptoAmount) {
-        localAmountStr = _lastLocalCurrencyAmount;
-        if (!_lastLocalCurrencyAmount.startsWith(_localCurrencyFormat.currencySymbol)) {
-          _lastLocalCurrencyAmount = _localCurrencyFormat.currencySymbol + _lastLocalCurrencyAmount;
-        }
-      } else {
-        _lastCryptoAmount = _amountController!.text;
-        _lastLocalCurrencyAmount = convertCryptoToLocalCurrency(context, _localCurrencyFormat, _amountController!.text);
-        localAmountStr = _lastLocalCurrencyAmount;
-      }
-      setState(() {
-        _localCurrencyMode = true;
-      });
-      Future<void>.delayed(const Duration(milliseconds: 50), () {
-        _amountController!.text = localAmountStr;
-        _amountController!.selection = TextSelection.fromPosition(TextPosition(offset: localAmountStr.length));
-      });
-    }
-  }
-
   void redrawQrCode() {
     String? raw;
     if (_localCurrencyMode) {
-      _lastLocalCurrencyAmount = _amountController!.text;
+      _lastLocalCurrencyAmount = _amountController.text;
       _lastCryptoAmount = sanitizedAmount(_localCurrencyFormat,
-          convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
+          convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController.text));
       if (_lastCryptoAmount.isNotEmpty) {
         raw = NumberUtil.getAmountAsRaw(_lastCryptoAmount);
       }
     } else {
-      raw = _amountController!.text.isNotEmpty
-          ? NumberUtil.getAmountAsRaw(_amountController!.text
+      raw = _amountController.text.isNotEmpty
+          ? NumberUtil.getAmountAsRaw(_amountController.text
               .trim()
               .replaceAll(_localCurrencyFormat.currencySymbol, "")
               .replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, ""))
@@ -470,9 +421,9 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
             setState(() {
               // _amountController.text = "133248297";
               // prevent the user from entering more than 13324829
-              _amountController!.text = _amountController!.text.substring(0, _amountController!.text.length - 1);
-              _amountController!.selection =
-                  TextSelection.fromPosition(TextPosition(offset: _amountController!.text.length));
+              _amountController.text = _amountController.text.substring(0, _amountController.text.length - 1);
+              _amountController.selection =
+                  TextSelection.fromPosition(TextPosition(offset: _amountController.text.length));
             });
           }
         }
@@ -517,7 +468,20 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
           ],
         ),
         onPressed: () {
-          toggleLocalCurrency();
+          final List<String> stateVars = SendSheetHelpers.toggleLocalCurrency(
+            setState,
+            context,
+            _amountController,
+            _localCurrencyMode,
+            _localCurrencyFormat,
+            _lastLocalCurrencyAmount,
+            _lastCryptoAmount,
+          );
+          setState(() {
+            _localCurrencyMode = !_localCurrencyMode;
+            _lastCryptoAmount = stateVars[0];
+            _lastLocalCurrencyAmount = stateVars[1];
+          });
         },
       ),
       fadeSuffixOnCondition: true,

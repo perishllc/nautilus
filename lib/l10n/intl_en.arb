@@ -60,6 +60,16 @@
     "type": "text",
     "description": "Add a new node"
   },
+  "addSubscription": "Add Subscription",
+  "@addSubscription": {
+    "type": "text",
+    "description": "Add a new subscription"
+  },
+  "subscribing": "Subscribing",
+  "@subscribing": {
+    "type": "text",
+    "description": "sub_confirm"
+  },
   "address": "Address",
   "@address": {
     "type": "text",
@@ -764,6 +774,11 @@
   "@enterNodeName": {
     "type": "text",
     "description": "change_node_name_hint"
+  },
+  "enterName": "Enter Name",
+  "@enterName": {
+    "type": "text",
+    "description": "add_sub_name_hint"
   },
   "enterPasswordHint": "Enter your password",
   "@enterPasswordHint": {

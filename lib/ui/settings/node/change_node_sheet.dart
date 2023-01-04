@@ -42,7 +42,6 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
   final ScrollController _scrollController = ScrollController();
 
   StreamSubscription<NodeModifiedEvent>? _nodeModifiedSub;
-  late bool _nodeIsChanging;
 
   Future<bool> _onWillPop() async {
     if (_nodeModifiedSub != null) {
@@ -56,7 +55,6 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
     super.initState();
     _registerBus();
     _addingNode = false;
-    _nodeIsChanging = false;
   }
 
   @override
@@ -122,7 +120,6 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
     EventTaxiImpl.singleton().fire(NodeChangedEvent(node: node, delayPop: true));
     await sl.get<AccountService>().updateNode();
     setState(() {
-      _nodeIsChanging = false;
     });
   }
 
@@ -234,7 +231,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
                             _addingNode = true;
                           });
 
-                          final Node? node = await Sheets.showAppHeightEightSheet(
+                          Node? node = await Sheets.showAppHeightEightSheet(
                             context: context,
                             widget: const AddNodeSheet(),
                           ) as Node?;
@@ -245,6 +242,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
                             });
                             return;
                           }
+                          node.id = widget.nodes.length;
 
                           sl.get<DBHelper>().saveNode(node).then((Node? newNode) {
                             if (newNode == null) {
@@ -318,16 +316,8 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
               // highlightColor: StateContainer.of(context).curTheme.text15,
               // splashColor: StateContainer.of(context).curTheme.text15,
               // padding: EdgeInsets.all(0.0),
-              onPressed: () {
-                if (!_nodeIsChanging) {
-                  // Change account
-                  if (!node.selected) {
-                    setState(() {
-                      _nodeIsChanging = true;
-                    });
-                    _changeNode(node, setState);
-                  }
-                }
+              onPressed: () async {
+                await _changeNode(node, setState);
               },
               child: SizedBox(
                 height: 70.0,
@@ -335,12 +325,12 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    // Selected indicator
-                    Container(
-                      height: 70,
-                      width: 6,
-                      color: node.selected ? StateContainer.of(context).curTheme.primary : Colors.transparent,
-                    ),
+                    // // Selected indicator
+                    // Container(
+                    //   height: 70,
+                    //   width: 6,
+                    //   color: node.selected ? StateContainer.of(context).curTheme.primary : Colors.transparent,
+                    // ),
                     // Icon, Account Name, Address and Amount
                     Expanded(
                       child: Container(

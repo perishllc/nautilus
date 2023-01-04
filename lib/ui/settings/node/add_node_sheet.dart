@@ -414,9 +414,9 @@ class AddNodeSheetState extends State<AddNodeSheet> {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  // Add Contact Button
+                  // Add Node Button
                   AppButton.buildAppButton(
-                      context, AppButtonType.PRIMARY, Z.of(context).addAccount, Dimens.BUTTON_TOP_DIMENS,
+                      context, AppButtonType.PRIMARY, Z.of(context).addNode, Dimens.BUTTON_TOP_DIMENS,
                       onPressed: () async {
                     if (!await validateForm()) {
                       return;

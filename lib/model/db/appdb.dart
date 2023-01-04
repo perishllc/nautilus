@@ -181,29 +181,8 @@ class DBHelper {
     await db.execute(NODES_SQL);
     await db.execute(SUBS_SQL);
 
-    // add default nodes
-    // await addNewMainNode();
-    // https://nautilus.perish.co/api", "wss://nautilus.perish.co"
-
     // add default nodes:
-    await saveNode(
-      Node(
-        name: "Perish Node",
-        selected: true,
-        http_url: "https://nautilus.perish.co/api",
-        ws_url: "wss://nautilus.perish.co",
-      ),
-      dbClient: db,
-    );
-    await saveNode(
-      Node(
-        name: "Natrium Node",
-        selected: false,
-        http_url: "https://app.natrium.io/api",
-        ws_url: "wss://app.natrium.io",
-      ),
-      dbClient: db,
-    );
+    await _addDefaultNodes(dbClient: db);
   }
 
   // ignore: avoid_void_async
@@ -239,28 +218,35 @@ class DBHelper {
     }
     if (oldVersion == 8) {
       await db.execute(NODES_SQL);
-      await saveNode(
-        Node(
-          name: "Perish Node",
-          selected: true,
-          http_url: "https://nautilus.perish.co/api",
-          ws_url: "wss://nautilus.perish.co",
-        ),
-        dbClient: db,
-      );
-      await saveNode(
-        Node(
-          name: "Natrium Node",
-          selected: false,
-          http_url: "https://app.natrium.io/api",
-          ws_url: "wss://app.natrium.io",
-        ),
-        dbClient: db,
-      );
+      await _addDefaultNodes(dbClient: db);
     }
     if (oldVersion == 9) {
       await db.execute(SUBS_SQL);
     }
+  }
+
+  Future<void> _addDefaultNodes({Database? dbClient}) async {
+    // add default nodes:
+    await saveNode(
+      Node(
+        id: 0,
+        name: "Perish Node",
+        selected: true,
+        http_url: "https://nautilus.perish.co/api",
+        ws_url: "wss://nautilus.perish.co",
+      ),
+      dbClient: dbClient,
+    );
+    await saveNode(
+      Node(
+        id: 1,
+        name: "Natrium Node",
+        selected: false,
+        http_url: "https://app.natrium.io/api",
+        ws_url: "wss://app.natrium.io",
+      ),
+      dbClient: dbClient,
+    );
   }
 
   Future<void> nukeDatabase() async {
@@ -295,11 +281,12 @@ class DBHelper {
   // Nodes
   Future<List<Node>> getNodes() async {
     final Database dbClient = (await db)!;
-    final List<Map> list = await dbClient.rawQuery('SELECT * FROM Nodes');
+    final List<Map> list = await dbClient.rawQuery("SELECT * FROM Nodes");
     final List<Node> nodes = [];
     for (int i = 0; i < list.length; i++) {
       nodes.add(
         Node(
+          id: list[i]["id"] as int? ?? 0,
           name: list[i]["name"] as String,
           http_url: list[i]["http_url"] as String,
           ws_url: list[i]["ws_url"] as String,
@@ -312,7 +299,7 @@ class DBHelper {
 
   Future<Node> getSelectedNode() async {
     final Database dbClient = (await db)!;
-    final List<Map> list = await dbClient.rawQuery('SELECT * FROM Nodes where selected = 1');
+    final List<Map> list = await dbClient.rawQuery("SELECT * FROM Nodes where selected = 1");
     final Node node = Node(
       id: list[0]["id"] as int?,
       name: list[0]["name"] as String,
@@ -329,7 +316,7 @@ class DBHelper {
       await txn.rawUpdate('UPDATE Nodes set selected = false');
       // Get access increment count
       final List<Map> list = await txn.rawQuery('SELECT * FROM Nodes');
-      await txn.rawUpdate('UPDATE Nodes set selected = ? WHERE node_index = ?', [1, node.id]);
+      await txn.rawUpdate('UPDATE Nodes set selected = ? WHERE id = ?', [1, node.id]);
     });
   }
 
@@ -381,14 +368,16 @@ class DBHelper {
   Future<Subscription?> saveSubscription(Subscription sub, {Database? dbClient}) async {
     dbClient ??= (await db)!;
     await dbClient.transaction((Transaction txn) async {
-      await txn.rawInsert('INSERT INTO Subscriptions (name, active, address, amount_raw, timestamp, frequency) values(?, ?, ?, ?, ?, ?, ?)', [
-        sub.name,
-        if (sub.active) 1 else 0,
-        sub.address,
-        sub.amount_raw,
-        sub.timestamp,
-        sub.frequency,
-      ]);
+      await txn.rawInsert(
+          'INSERT INTO Subscriptions (name, active, address, amount_raw, timestamp, frequency) values(?, ?, ?, ?, ?, ?, ?)',
+          [
+            sub.name,
+            if (sub.active) 1 else 0,
+            sub.address,
+            sub.amount_raw,
+            sub.timestamp,
+            sub.frequency,
+          ]);
     });
     return sub;
   }

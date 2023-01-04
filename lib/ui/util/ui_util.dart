@@ -443,7 +443,7 @@ class UIUtil {
         crossPlatform: InAppWebViewOptions(
           javaScriptEnabled: true,
           cacheEnabled: true,
-          resourceCustomSchemes: ["nano", "nanopay", "nanoauth", "nautilus"],
+          resourceCustomSchemes: ["nano", "nanopay", "nanoauth", "nanosub", "nautilus"],
           useShouldOverrideUrlLoading: true,
         ),
       ),

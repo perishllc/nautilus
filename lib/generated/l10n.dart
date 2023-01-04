@@ -170,6 +170,26 @@ class Z {
     );
   }
 
+  /// `Add Subscription`
+  String get addSubscription {
+    return Intl.message(
+      'Add Subscription',
+      name: 'addSubscription',
+      desc: 'Add a new subscription',
+      args: [],
+    );
+  }
+
+  /// `Subscribing`
+  String get subscribing {
+    return Intl.message(
+      'Subscribing',
+      name: 'subscribing',
+      desc: 'sub_confirm',
+      args: [],
+    );
+  }
+
   /// `Address`
   String get address {
     return Intl.message(
@@ -1581,6 +1601,16 @@ class Z {
       'Enter Node Name',
       name: 'enterNodeName',
       desc: 'change_node_name_hint',
+      args: [],
+    );
+  }
+
+  /// `Enter Name`
+  String get enterName {
+    return Intl.message(
+      'Enter Name',
+      name: 'enterName',
+      desc: 'add_sub_name_hint',
       args: [],
     );
   }

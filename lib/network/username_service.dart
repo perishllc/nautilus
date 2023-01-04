@@ -97,8 +97,8 @@ class UsernameService {
   }
 
   Future<String?> checkUnstoppableDomain(String domain) async {
-    final http.Response response =
-        await http.get(Uri.parse(UD_ENDPOINT + domain), headers: {'Content-type': 'application/json', 'Authorization': 'Bearer ${dotenv.env["UD_API_KEY"]!}'});
+    final http.Response response = await http.get(Uri.parse(UD_ENDPOINT + domain),
+        headers: {'Content-type': 'application/json', 'Authorization': 'Bearer ${dotenv.env["UD_API_KEY"]!}'});
 
     if (response.statusCode != 200) {
       return null;
@@ -138,8 +138,9 @@ class UsernameService {
 
     // GET the SRV record using Cloudflare's DNS over HTTPS API:
 
-    final http.Response dnsSRVResp =
-        await http.get(Uri.parse("https://cloudflare-dns.com/dns-query?name=$tld&type=SRV"), headers: {"Accept": "application/dns-json"});
+    final http.Response dnsSRVResp = await http.get(
+        Uri.parse("https://cloudflare-dns.com/dns-query?name=$tld&type=SRV"),
+        headers: {"Accept": "application/dns-json"});
     if (dnsSRVResp.statusCode != 200) {
       return null;
     }
@@ -162,8 +163,9 @@ class UsernameService {
 
     // GET /v1/addresses?alias=alice$domain.tld&address_type=300
 
-    final http.Response response =
-        await http.get(Uri.parse("https://$resolvedDomain/v1/addresses?alias=$domain&address_type=300"), headers: {"Accept": "application/json"});
+    final http.Response response = await http.get(
+        Uri.parse("https://$resolvedDomain/v1/addresses?alias=$domain&address_type=300"),
+        headers: {"Accept": "application/json"});
     if (response.statusCode != 200) {
       return null;
     }
@@ -176,7 +178,8 @@ class UsernameService {
 
   // NANO.TO:
   Future<dynamic> checkNanoToUsernameAvailability(String username) async {
-    final http.Response response = await http.get(Uri.parse("$NANO_TO_USERNAME_LEASE_ENDPOINT/$username/lease"), headers: {"Accept": "application/json"});
+    final http.Response response = await http
+        .get(Uri.parse("$NANO_TO_USERNAME_LEASE_ENDPOINT/$username/lease"), headers: {"Accept": "application/json"});
     final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
     return decoded;
   }
@@ -212,6 +215,17 @@ class UsernameService {
     for (final User user in users) {
       if (user.username == username) {
         return user.address;
+      }
+    }
+    return null;
+  }
+
+  Future<String?> checkNanoToAddress(String address) async {
+    final List<User>? users = await fetchNanoToKnown(http.Client());
+    if (users == null) return null;
+    for (final User user in users) {
+      if (user.address == address) {
+        return user.username;
       }
     }
     return null;
@@ -332,8 +346,10 @@ class UsernameService {
     // 2. Compute the account A3 which has the expanded private key P + blake2b("username registration")*G where G is the ed25519 basepoint and P is assumed to be already expanded here
     final String publicKey = NanoUtil.addressToPublicKey(StateContainer.of(context).wallet!.address!);
     final U8Array32 publicKeyBytes = U8Array32(NanoHelpers.hexToBytes(publicKey));
-    final U8Array32? A3PublicKey = await api.publicKeyUsernameRegistration(namespace: USERNAME_SPACE, publicKey: publicKeyBytes);
-    final String A3Account = NanoUtil.publicKeyToAddress(NanoHelpers.byteToHex(Uint8List.fromList(A3PublicKey!.toList())));
+    final U8Array32? A3PublicKey =
+        await api.publicKeyUsernameRegistration(namespace: USERNAME_SPACE, publicKey: publicKeyBytes);
+    final String A3Account =
+        NanoUtil.publicKeyToAddress(NanoHelpers.byteToHex(Uint8List.fromList(A3PublicKey!.toList())));
 
     // 3. Send 1 raw from your account to A3
     const String ONE_RAW = "1";
@@ -538,8 +554,10 @@ class UsernameService {
     final String A2PublicKey = NanoUtil.addressToPublicKey(address);
     // 2. Compute the account A3 which has the expanded private key P + blake2b("username registration")*G where G is the ed25519 basepoint and P is assumed to be already expanded here
     final U8Array32 A2PublicKeyBytes = U8Array32(NanoHelpers.hexToBytes(A2PublicKey));
-    final U8Array32? A3PublicKey = await api.publicKeyUsernameRegistration(namespace: USERNAME_SPACE, publicKey: A2PublicKeyBytes);
-    final String A3Account = NanoUtil.publicKeyToAddress(NanoHelpers.byteToHex(Uint8List.fromList(A3PublicKey!.toList())));
+    final U8Array32? A3PublicKey =
+        await api.publicKeyUsernameRegistration(namespace: USERNAME_SPACE, publicKey: A2PublicKeyBytes);
+    final String A3Account =
+        NanoUtil.publicKeyToAddress(NanoHelpers.byteToHex(Uint8List.fromList(A3PublicKey!.toList())));
 
     // 2. If it has not been opened, this account does not have an associated username
 
@@ -578,7 +596,8 @@ class UsernameService {
 
     // remove padded 0s:
     while (representativeEncodedUsernameBytes.last == 0) {
-      representativeEncodedUsernameBytes = representativeEncodedUsernameBytes.sublist(0, representativeEncodedUsernameBytes.length - 1);
+      representativeEncodedUsernameBytes =
+          representativeEncodedUsernameBytes.sublist(0, representativeEncodedUsernameBytes.length - 1);
     }
 
     final String decodedRep = NanoHelpers.bytesToUtf8String(representativeEncodedUsernameBytes);
@@ -640,5 +659,46 @@ class UsernameService {
       return user;
     }
     return null;
+  }
+
+  Future<User?> figureOutIfAddressHasName(String address) async {
+    String? type;
+    // check if onchain address:
+    String? username = await sl.get<UsernameService>().checkOnchainAddress(address);
+    if (username != null) {
+      type = UserTypes.ONCHAIN;
+    } else {
+      // check if nano.to address:
+      username = await sl.get<UsernameService>().checkNanoToAddress(address);
+      if (address != null) {
+        type = UserTypes.NANO_TO;
+      }
+    }
+
+    // add to the db if missing:
+    if (type != null) {
+      final String strippedUsername = SendSheetHelpers.stripPrefixes(username!);
+      final User user = User(username: strippedUsername, address: address, type: type, is_blocked: false);
+      await sl.get<DBHelper>().addUser(user);
+      // force users list to update on the home page:
+      EventTaxiImpl.singleton().fire(ContactModifiedEvent());
+      EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: <TXData>[]));
+      return user;
+    }
+    return null;
+  }
+
+  Future<void> checkAddressDebounced(BuildContext context, String address) async {
+    final String? checked = await sl.get<SharedPrefsUtil>().getWithExpiry(address) as String?;
+    if (checked == null) {
+      // check if we already have a record for this address:
+      User? user = await sl.get<DBHelper>().getUserWithAddress(address);
+      // adds to the db if found:
+      user ??= await sl.get<UsernameService>().figureOutIfAddressHasName(address);
+    } else {
+      // add some kind of timeout so we don't keep checking for the same username within a day:
+      const int dayInSeconds = 86400;
+      await sl.get<SharedPrefsUtil>().setWithExpiry(address, "1", dayInSeconds);
+    }
   }
 }
