@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Accounts"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Are you sure that you\'ve backed up your secret phrase or seed?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Activate Subscription"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Active Message"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Add Account"),
@@ -117,6 +119,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Connection Warning"),
         "businessButton": MessageLookupByLibrary.simpleMessage("Business"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "cancelSub":
+            MessageLookupByLibrary.simpleMessage("Cancel Subscription"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "In order to prevent abuse, we require you to solve a quick captcha on the next page to claim this gift card."),
@@ -232,6 +236,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Delete Node?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete this subscription?\n\nYou can always re-add it later by tapping the \"Add Subscription\" button"),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Delete Subscription?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Disable"),
         "disablePasswordSuccess":
@@ -812,6 +820,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Subscribe"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Subscribe via Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Subscribed"),
         "subscribing": MessageLookupByLibrary.simpleMessage("Subscribing"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
@@ -918,6 +927,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "%1 usernames are a centralized service provided by Nano.to"),
         "using": MessageLookupByLibrary.simpleMessage("Using"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("View Details"),
+        "viewPaymentHistory":
+            MessageLookupByLibrary.simpleMessage("View Payment History"),
         "viewTX": MessageLookupByLibrary.simpleMessage("View Transaction"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Voting Weight"),
         "warning": MessageLookupByLibrary.simpleMessage("Warning"),

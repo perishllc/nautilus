@@ -13,10 +13,14 @@ class ExampleCards {
   static TextSpan _getExampleHeaderSpan(BuildContext context, [bool xmr = false]) {
     String workingStr;
     if (StateContainer.of(context).selectedAccount == null || StateContainer.of(context).selectedAccount!.index == 0) {
-      workingStr = Z.of(context).exampleCardIntro.replaceAll("%1", NonTranslatable.appName).replaceAll("%2", NonTranslatable.currencyName);
+      workingStr = Z.of(context).exampleCardIntro;
     } else {
       workingStr = Z.of(context).newAccountIntro;
     }
+    workingStr = workingStr
+        .replaceAll("%1", NonTranslatable.appName)
+        .replaceAll("%2", NonTranslatable.currencyName.toUpperCase());
+    
     if (!workingStr.contains("NANO") && !workingStr.contains("XMR")) {
       return TextSpan(
         text: workingStr,
@@ -27,7 +31,7 @@ class ExampleCards {
     final String word = xmr ? "XMR" : "NANO";
 
     // Colorize NANO/XMR
-    final List<String> splitStr = workingStr.split("NANO");
+    final List<String> splitStr = workingStr.split(NonTranslatable.currencyName.toUpperCase());
     if (splitStr.length != 2) {
       return TextSpan(
         text: workingStr,
@@ -68,7 +72,8 @@ class ExampleCards {
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
+                borderRadius:
+                    const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
                 boxShadow: <BoxShadow>[StateContainer.of(context).curTheme.boxShadow!],
               ),
@@ -85,7 +90,8 @@ class ExampleCards {
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+                borderRadius:
+                    const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
               ),
             ),
@@ -110,7 +116,8 @@ class ExampleCards {
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
+                borderRadius:
+                    const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
                 boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
               ),
@@ -129,7 +136,8 @@ class ExampleCards {
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+                borderRadius:
+                    const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
               ),
             ),
@@ -140,7 +148,8 @@ class ExampleCards {
   } // Welcome Card End
 
   // Loading Transaction Card
-  static Widget loadingTransactionCard(BuildContext context, double opacity, String type, String amount, String address) {
+  static Widget loadingTransactionCard(
+      BuildContext context, double opacity, String type, String amount, String address) {
     String text;
     IconData icon;
     Color? iconColor;
@@ -182,7 +191,9 @@ class ExampleCards {
                     // Transaction Icon
                     Opacity(
                       opacity: opacity,
-                      child: Container(margin: const EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
+                      child: Container(
+                          margin: const EdgeInsetsDirectional.only(end: 16.0),
+                          child: Icon(icon, color: iconColor, size: 20)),
                     ),
                     SizedBox(
                       width: UIUtil.getDrawerAwareScreenWidth(context) / 4,
@@ -348,7 +359,9 @@ class ExampleCards {
                     // Transaction Icon
                     Opacity(
                       opacity: opacity,
-                      child: Container(margin: const EdgeInsetsDirectional.only(end: 16.0), child: Icon(icon, color: iconColor, size: 20)),
+                      child: Container(
+                          margin: const EdgeInsetsDirectional.only(end: 16.0),
+                          child: Icon(icon, color: iconColor, size: 20)),
                     ),
                     SizedBox(
                       width: UIUtil.getDrawerAwareScreenWidth(context) / 4,
@@ -497,7 +510,8 @@ class ExampleCards {
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
+                borderRadius:
+                    const BorderRadius.only(topLeft: Radius.circular(10.0), bottomLeft: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
                 boxShadow: [StateContainer.of(context).curTheme.boxShadow!],
               ),
@@ -517,7 +531,8 @@ class ExampleCards {
             Container(
               width: 7.0,
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
+                borderRadius:
+                    const BorderRadius.only(topRight: Radius.circular(10.0), bottomRight: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
               ),
             ),

@@ -883,10 +883,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               StateContainer.of(context).wallet!.address!,
             );
       }
-      
+
       // check for nautilus pro sub:
       if (!mounted) return;
       _isPro = await AppDialogs.proCheck(context, shouldShowDialog: false);
+
+      // check on subscriptions:
     });
     // confetti:
     _confettiControllerLeft = ConfettiController(duration: const Duration(milliseconds: 150));
@@ -2577,7 +2579,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               switch (index) {
                 case SUBS_INDEX:
                   final List<Subscription> subs = await sl.get<DBHelper>().getSubscriptions();
-                  await Sheets.showAppHeightFullSheet(
+                  await Sheets.showAppHeightNineSheet(
                     context: context,
                     barrier: Colors.transparent,
                     widget: SubsSheet(
@@ -2586,7 +2588,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                   );
                   break;
                 case SHOP_INDEX:
-                  await Sheets.showAppHeightFullSheet(
+                  await Sheets.showAppHeightNineSheet(
                     context: context,
                     barrier: Colors.transparent,
                     widget: ShopSheet(
@@ -2600,7 +2602,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                     width: MediaQuery.of(context).size.width,
                     child: await UIUtil.getQRImage(context, data),
                   );
-                  await Sheets.showAppHeightFullSheet(
+                  await Sheets.showAppHeightNineSheet(
                     context: context,
                     barrier: Colors.transparent,
                     widget: CheckoutSheet(
@@ -3194,7 +3196,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 ),
                 onPressed: () {
                   Sheets.showAppHeightEightSheet(
-                      context: context, widget: PaymentDetailsSheet(txDetails: txDetails), animationDurationMs: 175);
+                    context: context,
+                    widget: PaymentDetailsSheet(txDetails: txDetails),
+                    animationDurationMs: 175,
+                  );
                 },
                 child: Center(
                   // ignore: avoid_unnecessary_containers

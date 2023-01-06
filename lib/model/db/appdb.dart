@@ -105,7 +105,6 @@ class DBHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT,
         active BOOLEAN,
-        timestamp INTEGER,
         frequency TEXT,
         address TEXT,
         amount_raw TEXT
@@ -356,7 +355,6 @@ class DBHelper {
           name: list[i]["name"] as String,
           address: list[i]["address"] as String,
           amount_raw: list[i]["amount_raw"] as String,
-          timestamp: list[i]["timestamp"] as int,
           frequency: list[i]["frequency"] as String,
           active: list[i]["active"] == 1,
         ),
@@ -369,13 +367,12 @@ class DBHelper {
     dbClient ??= (await db)!;
     await dbClient.transaction((Transaction txn) async {
       await txn.rawInsert(
-          'INSERT INTO Subscriptions (name, active, address, amount_raw, timestamp, frequency) values(?, ?, ?, ?, ?, ?, ?)',
+          'INSERT INTO Subscriptions (name, active, address, amount_raw, frequency) values(?, ?, ?, ?, ?)',
           [
             sub.name,
             if (sub.active) 1 else 0,
             sub.address,
             sub.amount_raw,
-            sub.timestamp,
             sub.frequency,
           ]);
     });

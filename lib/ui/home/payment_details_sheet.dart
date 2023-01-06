@@ -12,6 +12,7 @@ import 'package:wallet_flutter/network/model/status_types.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/ui/gift/gift_qr_sheet.dart';
 import 'package:wallet_flutter/ui/home/card_actions.dart';
+import 'package:wallet_flutter/ui/subs/payment_history.dart';
 import 'package:wallet_flutter/ui/users/add_blocked.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
@@ -114,6 +115,20 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           context, AppButtonType.PRIMARY, Z.of(context).viewTX, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
                         await UIUtil.showBlockExplorerWebview(context, txDetails.block);
+                      }),
+                    ],
+                  ),
+                if (!isGiftLoad && !txDetails.is_message && addressToCopy != null)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).viewPaymentHistory, Dimens.BUTTON_TOP_DIMENS,
+                          onPressed: () async {
+                        Sheets.showAppHeightEightSheet(
+                          context: context,
+                          widget: PaymentHistorySheet(address: addressToCopy!),
+                          animationDurationMs: 175,
+                        );
                       }),
                     ],
                   ),

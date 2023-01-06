@@ -4,15 +4,18 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:wallet_flutter/network/model/response/auth_item.dart';
 import 'package:wallet_flutter/network/model/response/pay_item.dart';
+import 'package:wallet_flutter/network/model/response/sub_item.dart';
 import 'package:wallet_flutter/service_locator.dart';
 
 // Object to represent an account address or address URI, and provide useful utilities
 
 dynamic uriParser(String value) {
   String? finAmount;
-  final String? finAddress = NanoAccounts.findAccountInString(NanoAccountType.NANO, value.toLowerCase().replaceAll("\n", ""));
+  final String? finAddress =
+      NanoAccounts.findAccountInString(NanoAccountType.NANO, value.toLowerCase().replaceAll("\n", ""));
   PayItem? finPayItem;
   AuthItem? finAuthItem;
+  SubItem? finSubItem;
 
   final List<String> split = value.split(":");
   if (split.length > 1) {
@@ -27,15 +30,15 @@ dynamic uriParser(String value) {
       }
 
       if (uri.scheme == "nanopay") {
-        String encodedHandoff = split[1];
-        encodedHandoff = encodedHandoff.replaceAll(RegExp(r"\s+\b|\b\s"), "");
+        String encodedItem = split[1];
+        encodedItem = encodedItem.replaceAll(RegExp(r"\s+\b|\b\s"), "");
         // attempt to recover from bad base64 encoding:
-        if (encodedHandoff.length % 4 != 0) {
-          encodedHandoff += "=" * (4 - encodedHandoff.length % 4);
+        if (encodedItem.length % 4 != 0) {
+          encodedItem += "=" * (4 - encodedItem.length % 4);
         }
-        final String decodedHandoff = utf8.decode(base64Url.decode(encodedHandoff));
+        final String decodedItem = utf8.decode(base64Url.decode(encodedItem));
         try {
-          finPayItem = PayItem.fromJson(jsonDecode(decodedHandoff) as Map<String, dynamic>);
+          finPayItem = PayItem.fromJson(jsonDecode(decodedItem) as Map<String, dynamic>);
         } catch (error) {
           sl.get<Logger>().e(error);
         }
@@ -43,16 +46,48 @@ dynamic uriParser(String value) {
 
       if (uri.queryParameters["pay"] != null) {
         // base64 decode the string:
-        String? encodedHandoff = uri.queryParameters["pay"];
-        if (encodedHandoff == null) return;
-        encodedHandoff = encodedHandoff.replaceAll(RegExp(r"\s+\b|\b\s"), "");
+        String? encodedItem = uri.queryParameters["pay"];
+        if (encodedItem == null) return;
+        encodedItem = encodedItem.replaceAll(RegExp(r"\s+\b|\b\s"), "");
         // attempt to recover from bad base64 encoding:
-        if (encodedHandoff.length % 4 != 0) {
-          encodedHandoff += "=" * (4 - encodedHandoff.length % 4);
+        if (encodedItem.length % 4 != 0) {
+          encodedItem += "=" * (4 - encodedItem.length % 4);
         }
-        final String decodedHandoff = utf8.decode(base64Url.decode(encodedHandoff));
+        final String decodedItem = utf8.decode(base64Url.decode(encodedItem));
         try {
-          finPayItem = PayItem.fromJson(jsonDecode(decodedHandoff) as Map<String, dynamic>);
+          finPayItem = PayItem.fromJson(jsonDecode(decodedItem) as Map<String, dynamic>);
+        } catch (error) {
+          sl.get<Logger>().e(error);
+        }
+      }
+
+      if (uri.scheme == "nanosub") {
+        String encodedItem = split[1];
+        encodedItem = encodedItem.replaceAll(RegExp(r"\s+\b|\b\s"), "");
+        // attempt to recover from bad base64 encoding:
+        if (encodedItem.length % 4 != 0) {
+          encodedItem += "=" * (4 - encodedItem.length % 4);
+        }
+        final String decodedItem = utf8.decode(base64Url.decode(encodedItem));
+        try {
+          finSubItem = SubItem.fromJson(jsonDecode(decodedItem) as Map<String, dynamic>);
+        } catch (error) {
+          sl.get<Logger>().e(error);
+        }
+      }
+
+      if (uri.queryParameters["sub"] != null) {
+        // base64 decode the string:
+        String? encodedItem = uri.queryParameters["sub"];
+        if (encodedItem == null) return;
+        encodedItem = encodedItem.replaceAll(RegExp(r"\s+\b|\b\s"), "");
+        // attempt to recover from bad base64 encoding:
+        if (encodedItem.length % 4 != 0) {
+          encodedItem += "=" * (4 - encodedItem.length % 4);
+        }
+        final String decodedItem = utf8.decode(base64Url.decode(encodedItem));
+        try {
+          finSubItem = SubItem.fromJson(jsonDecode(decodedItem) as Map<String, dynamic>);
         } catch (error) {
           sl.get<Logger>().e(error);
         }
@@ -102,6 +137,9 @@ dynamic uriParser(String value) {
     }
     if (finAuthItem != null) {
       return finAuthItem;
+    }
+    if (finSubItem != null) {
+      return finSubItem;
     }
   }
 

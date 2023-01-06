@@ -1,11 +1,15 @@
 ## v0.7.3 - [2022-12-25]
 #### Added
+- Subscriptions menu
+- Long press the share nautilus button for a QR code for easy onboarding (promo link)
 #### Changed
 - UI updates on the send / receive sheets
 - Updated more settings menu / icons
+- Improved send / receive sheet UX / field focus
 #### Fixed
 - Update node url character limit
 - Split bill currency fixes
+- Scrollbar jitter fixes
 ## v0.7.2 - [2022-12-16]
 #### Fixed
 - Hotfixes

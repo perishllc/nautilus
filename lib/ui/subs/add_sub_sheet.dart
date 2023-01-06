@@ -7,6 +7,7 @@ import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
@@ -17,12 +18,14 @@ import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
+import 'package:wallet_flutter/ui/subs/sub_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/misc.dart';
+import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/numberutil.dart';
@@ -92,11 +95,10 @@ class AddSubSheetState extends State<AddSubSheet> {
             _clearButton = false;
           }
         });
-        _addressController.selection =
-            TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+        _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
         if (_addressController.text.isNotEmpty &&
             _addressController.text.length > 1 &&
-            !_addressController.text.startsWith("nano_")) {
+            SendSheetHelpers.isSpecialAddress(_addressController.text)) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
           if (_addressController.text != formattedAddress) {
             setState(() {
@@ -118,10 +120,10 @@ class AddSubSheetState extends State<AddSubSheet> {
         setState(() {
           // _addressHint = Z.of(context).enterUserOrAddress;
           _users = [];
-          if (Address(_addressController!.text).isValid()) {
+          if (Address(_addressController.text).isValid()) {
             _addressValidAndUnfocused = true;
           }
-          if (_addressController!.text.isEmpty) {
+          if (_addressController.text.isEmpty) {
             _pasteButtonVisible = true;
           }
         });
@@ -215,7 +217,7 @@ class AddSubSheetState extends State<AddSubSheet> {
   //*******************************************************//
   Widget getEnterAmountContainer() {
     double margin = 20;
-    if (_addressController.text.startsWith("nano_")) {
+    if (_addressController.text.startsWith(NonTranslatable.currencyPrefix)) {
       if (_addressController.text.length > 24) {
         margin += 15;
       }
@@ -247,7 +249,7 @@ class AddSubSheetState extends State<AddSubSheet> {
           _amountValidationText = "";
         });
       },
-      textInputAction: TextInputAction.next,
+      textInputAction: TextInputAction.done,
       maxLines: null,
       autocorrect: false,
       hintText: Z.of(context).enterAmount,
@@ -301,12 +303,12 @@ class AddSubSheetState extends State<AddSubSheet> {
       // suffixShowFirstCondition: !_isMaxSend(),
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       textAlign: TextAlign.center,
-      onSubmitted: (String text) {
-        FocusScope.of(context).unfocus();
-        if (!Address(_addressController!.text).isValid()) {
-          FocusScope.of(context).requestFocus(_addressFocusNode);
-        }
-      },
+      // onSubmitted: (String text) {
+      //   FocusScope.of(context).unfocus();
+      //   if (!Address(_addressController.text).isValid()) {
+      //     FocusScope.of(context).requestFocus(_addressFocusNode);
+      //   }
+      // },
     );
   } //************ Enter Address Container Method End ************//
 
@@ -326,7 +328,7 @@ class AddSubSheetState extends State<AddSubSheet> {
         inputFormatters: [
           if (_isUser) LengthLimitingTextInputFormatter(20) else LengthLimitingTextInputFormatter(65),
         ],
-        textInputAction: TextInputAction.done,
+        textInputAction: TextInputAction.next,
         maxLines: null,
         autocorrect: false,
         hintText: Z.of(context).enterUserOrAddress,
@@ -366,15 +368,15 @@ class AddSubSheetState extends State<AddSubSheet> {
                       _addressStyle = AddressStyle.TEXT90;
                       _pasteButtonVisible = true;
                       _clearButton = true;
-                      _addressController!.text = address.address!;
-                      _addressFocusNode!.unfocus();
+                      _addressController.text = address.address!;
+                      _addressFocusNode.unfocus();
                       _addressValidAndUnfocused = true;
                     });
                   } else {
                     // Is a user
                     setState(() {
-                      _addressController!.text = user.getDisplayName()!;
-                      _addressFocusNode!.unfocus();
+                      _addressController.text = user.getDisplayName()!;
+                      _addressFocusNode.unfocus();
                       _users = [];
                       _isUser = true;
                       _addressValidationText = "";
@@ -404,9 +406,9 @@ class AddSubSheetState extends State<AddSubSheet> {
           // prevent spaces:
           if (text.contains(" ")) {
             text = text.replaceAll(" ", "");
-            _addressController!.text = text;
-            _addressController!.selection =
-                TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
+            _addressController.text = text;
+            _addressController.selection =
+                TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
           }
 
           if (text.isNotEmpty) {
@@ -467,7 +469,7 @@ class AddSubSheetState extends State<AddSubSheet> {
             });
           }
           if (isNano && Address(text).isValid()) {
-            _addressFocusNode!.unfocus();
+            _addressFocusNode.unfocus();
             setState(() {
               _addressStyle = AddressStyle.TEXT90;
               _addressValidationText = "";
@@ -486,11 +488,10 @@ class AddSubSheetState extends State<AddSubSheet> {
           }
         },
         onSubmitted: (String text) {
-          // if (_memoController!.text.isEmpty) {
-          //   FocusScope.of(context).nextFocus();
-          // } else {
-          //   FocusScope.of(context).unfocus();
-          // }
+          FocusScope.of(context).unfocus();
+          if (_amountController.text.isEmpty) {
+            FocusScope.of(context).requestFocus(_amountFocusNode);
+          }
         },
         overrideTextFieldWidget: _addressValidAndUnfocused
             ? GestureDetector(
@@ -502,7 +503,7 @@ class AddSubSheetState extends State<AddSubSheet> {
                     FocusScope.of(context).requestFocus(_addressFocusNode);
                   });
                 },
-                child: UIUtil.threeLineAddressText(context, _addressController!.text))
+                child: UIUtil.threeLineAddressText(context, _addressController.text))
             : null);
   } //************ Enter Address Container Method End ************//
 
@@ -696,18 +697,6 @@ class AddSubSheetState extends State<AddSubSheet> {
                                         fontWeight: FontWeight.w600,
                                       )),
                                 ),
-
-                                Container(
-                                  alignment: AlignmentDirectional.center,
-                                  margin: const EdgeInsets.only(top: 3),
-                                  child: Text(_addressValidationText,
-                                      style: TextStyle(
-                                        fontSize: 14.0,
-                                        color: StateContainer.of(context).curTheme.primary,
-                                        fontFamily: "NunitoSans",
-                                        fontWeight: FontWeight.w600,
-                                      )),
-                                ),
                               ],
                             ),
                           ],
@@ -739,14 +728,32 @@ class AddSubSheetState extends State<AddSubSheet> {
                       _localCurrencyMode,
                     );
 
+                    late String finalAddress;
+
+                    if (SendSheetHelpers.isSpecialAddress(_addressController.text)) {
+                      // Need to make sure its a valid contact or user
+                      final User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
+                      if (user == null) {
+                        setState(() {
+                          _addressValidationText =
+                              SendSheetHelpers.getInvalidAddressMessage(context, _addressController.text);
+                        });
+                        return;
+                      } else {
+                        finalAddress = user.address!;
+                      }
+                    } else {
+                      finalAddress = _addressController.text;
+                    }
+
                     final Subscription sub = Subscription(
                       name: _nameController.text,
                       amount_raw: amountRaw,
                       frequency: "",
-                      address: _addressController.text,
-                      active: true,
-                      timestamp: 0,
+                      address: finalAddress,
+                      active: false,
                     );
+                    if (!mounted) return;
                     Navigator.of(context).pop(sub);
 
                     // if (await validateForm()) {
@@ -784,6 +791,7 @@ class AddSubSheetState extends State<AddSubSheet> {
   Future<bool> validateForm() async {
     bool isValid = true;
 
+    // validate name
     if (_nameController.text.isEmpty) {
       setState(() {
         _nameValidationText = Z.of(context).nameEmpty;
@@ -795,9 +803,10 @@ class AddSubSheetState extends State<AddSubSheet> {
       });
     }
 
-    if (_amountController.text.isEmpty) {
+    // validate amount
+    if (_amountController.text.isEmpty || _amountController.text == "0") {
       setState(() {
-        _amountValidationText = Z.of(context).urlEmpty;
+        _amountValidationText = Z.of(context).amountMissing;
       });
       isValid = false;
     } else {
@@ -806,15 +815,32 @@ class AddSubSheetState extends State<AddSubSheet> {
       });
     }
 
-    if (_addressController.text.isEmpty) {
-      setState(() {
-        _addressValidationText = Z.of(context).urlEmpty;
-      });
+    // validate address
+    final bool isUser = _addressController.text.startsWith("@") || _addressController.text.startsWith("#");
+    final bool isFavorite = _addressController.text.startsWith("★");
+    final bool isDomain = _addressController.text.contains(".") || _addressController.text.contains(r"$");
+    if (_addressController.text.trim().isEmpty) {
       isValid = false;
-    } else {
+      setState(() {
+        _addressValidationText = Z.of(context).addressMissing;
+        _pasteButtonVisible = true;
+      });
+    } else if (_addressController.text.isNotEmpty &&
+        !isFavorite &&
+        !isUser &&
+        !isDomain &&
+        !Address(_addressController.text).isValid()) {
+      isValid = false;
+      setState(() {
+        _addressValidationText = Z.of(context).invalidAddress;
+        _pasteButtonVisible = true;
+      });
+    } else if (!isUser && !isFavorite) {
       setState(() {
         _addressValidationText = "";
+        _pasteButtonVisible = false;
       });
+      _addressFocusNode.unfocus();
     }
 
     return isValid;

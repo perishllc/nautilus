@@ -110,6 +110,26 @@ class Z {
     );
   }
 
+  /// `Activate Subscription`
+  String get activateSub {
+    return Intl.message(
+      'Activate Subscription',
+      name: 'activateSub',
+      desc: 'activate_subscription',
+      args: [],
+    );
+  }
+
+  /// `Cancel Subscription`
+  String get cancelSub {
+    return Intl.message(
+      'Cancel Subscription',
+      name: 'cancelSub',
+      desc: 'cancel_subscription',
+      args: [],
+    );
+  }
+
   /// `Add Account`
   String get addAccount {
     return Intl.message(
@@ -1370,6 +1390,26 @@ class Z {
     return Intl.message(
       'Delete Node?',
       name: 'deleteNodeHeader',
+      desc: 'Confirmation dialog header',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this subscription?\n\nYou can always re-add it later by tapping the "Add Subscription" button`
+  String get deleteSubConfirmation {
+    return Intl.message(
+      'Are you sure you want to delete this subscription?\n\nYou can always re-add it later by tapping the "Add Subscription" button',
+      name: 'deleteSubConfirmation',
+      desc: 'delete sub confirmation info',
+      args: [],
+    );
+  }
+
+  /// `Delete Subscription?`
+  String get deleteSubHeader {
+    return Intl.message(
+      'Delete Subscription?',
+      name: 'deleteSubHeader',
       desc: 'Confirmation dialog header',
       args: [],
     );
@@ -5145,6 +5185,16 @@ class Z {
     );
   }
 
+  /// `Subscribed`
+  String get subscribed {
+    return Intl.message(
+      'Subscribed',
+      name: 'subscribed',
+      desc: 'subscribed_text',
+      args: [],
+    );
+  }
+
   /// `Subscribe via Apple Pay`
   String get subscribeWithApple {
     return Intl.message(
@@ -5821,6 +5871,16 @@ class Z {
       'View Transaction',
       name: 'viewTX',
       desc: 'transaction_transaction',
+      args: [],
+    );
+  }
+
+  /// `View Payment History`
+  String get viewPaymentHistory {
+    return Intl.message(
+      'View Payment History',
+      name: 'viewPaymentHistory',
+      desc: 'view_payment_history',
       args: [],
     );
   }

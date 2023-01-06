@@ -15,12 +15,13 @@ import 'package:wallet_flutter/ui/auth/auth_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/handoff/handoff_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
-import 'package:wallet_flutter/ui/send/send_xmr_sheet.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:wallet_flutter/util/hapticutil.dart';
 import 'package:wallet_flutter/util/user_data_util.dart';
+
+import 'send/send_xmr_sheet.dart';
 
 class AppPopupButton extends StatefulWidget {
   const AppPopupButton({required this.moneroEnabled, this.enabled = true}) : super();
@@ -81,70 +82,21 @@ class AppPopupButtonState extends State<AppPopupButton> {
       if (amountBigInt != null && sufficientBalance) {
         // Go to confirm sheet
         Sheets.showAppHeightNineSheet(
-            context: context, widget: SendConfirmSheet(amountRaw: address.amount!, destination: address.address!, contactName: user?.getDisplayName()));
+            context: context,
+            widget: SendConfirmSheet(
+                amountRaw: address.amount!, destination: address.address!, contactName: user?.getDisplayName()));
       } else {
         // Go to send sheet
         Sheets.showAppHeightNineSheet(
             context: context,
-            widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, user: user, address: address.address, quickSendAmount: address.amount));
+            widget: SendSheet(
+                localCurrency: StateContainer.of(context).curCurrency,
+                user: user,
+                address: address.address,
+                quickSendAmount: address.amount));
       }
-    } else if (scanResult is PayItem) {
-      // block handoff item:
-      final PayItem payItem = scanResult;
-
-      // See if this address belongs to a contact or username
-      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(payItem.account);
-
-      if (!mounted) return;
-
-      // check if the user has enough balance to send this amount:
-      // If balance is insufficient show error:
-      final BigInt? amountBigInt = BigInt.tryParse(payItem.amount);
-      if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
-        UIUtil.showSnackbar(Z.of(context).insufficientBalance, context);
-        return;
-      }
-
-      // if payItem.exact is false, we should allow the user to change the amount to send to >= amount
-      if (!payItem.exact && mounted) {
-        // TODO:
-        sl.get<Logger>().e("PayItem exact is false: unsupported handoff flow!");
-        return;
-      }
-
-      // Go to confirm sheet:
-      Sheets.showAppHeightNineSheet(
-          context: context,
-          widget: HandoffConfirmSheet(
-            payItem: payItem,
-            destination: user?.address ?? payItem.account,
-            contactName: user?.getDisplayName(),
-          ));
-    } else if (scanResult is AuthItem) {
-      // handle auth handoff:
-      final AuthItem authItem = scanResult;
-      // See if this address belongs to a contact or username
-      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(authItem.account);
-
-      // Go to confirm sheet:
-      Sheets.showAppHeightNineSheet(
-          context: context,
-          widget: AuthConfirmSheet(
-            authItem: authItem,
-            destination: user?.address ?? authItem.account,
-            contactName: user?.getDisplayName(),
-          ));
     } else {
-      try {
-        setState(() {
-          StateContainer.of(context).initialDeepLink = scanResult as String?;
-        });
-      } catch (error) {
-        // pass
-      }
-
-      // something went wrong, show generic error:
-      UIUtil.showSnackbar(Z.of(context).qrUnknownError, context);
+      SendSheetHelpers.handleScanResult(context, scanResult);
     }
   }
 
@@ -175,14 +127,16 @@ class AppPopupButtonState extends State<AppPopupButton> {
         ),
         // Send Button
         GestureDetector(
-          onVerticalDragStart: (StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet!.accountBalance > BigInt.zero*/)
+          onVerticalDragStart: (StateContainer.of(context).wallet !=
+                  null /*&& StateContainer.of(context).wallet!.accountBalance > BigInt.zero*/)
               ? (DragStartDetails value) {
                   setState(() {
                     popupColor = StateContainer.of(context).curTheme.primary;
                   });
                 }
               : (DragStartDetails value) {},
-          onVerticalDragEnd: (StateContainer.of(context).wallet != null /*&& StateContainer.of(context).wallet!.accountBalance > BigInt.zero*/)
+          onVerticalDragEnd: (StateContainer.of(context).wallet !=
+                  null /*&& StateContainer.of(context).wallet!.accountBalance > BigInt.zero*/)
               ? (DragEndDetails value) {
                   isSendButtonColorPrimary = true;
                   firstTime = true;
@@ -198,7 +152,8 @@ class AppPopupButtonState extends State<AppPopupButton> {
                   });
                 }
               : (DragEndDetails value) {},
-          onVerticalDragUpdate: (StateContainer.of(context).wallet != null /* && StateContainer.of(context).wallet!.accountBalance > BigInt.zero*/)
+          onVerticalDragUpdate: (StateContainer.of(context).wallet !=
+                  null /* && StateContainer.of(context).wallet!.accountBalance > BigInt.zero*/)
               ? (DragUpdateDetails dragUpdateDetails) {
                   if (dragUpdateDetails.localPosition.dy < -60) {
                     isScrolledUpEnough = true;
@@ -252,16 +207,19 @@ class AppPopupButtonState extends State<AppPopupButton> {
                         ? StateContainer.of(context).curTheme.primary
                         : StateContainer.of(context).curTheme.success
                     : StateContainer.of(context).curTheme.primary60,
-                foregroundColor:
-                    StateContainer.of(context).wallet != null && widget.enabled ? StateContainer.of(context).curTheme.background40 : Colors.transparent,
+                foregroundColor: StateContainer.of(context).wallet != null && widget.enabled
+                    ? StateContainer.of(context).curTheme.background40
+                    : Colors.transparent,
               ),
               onPressed: () {
                 if (widget.moneroEnabled) {
-                  Sheets.showAppHeightNineSheet(context: context, widget: SendXMRSheet(localCurrency: StateContainer.of(context).curCurrency));
+                  Sheets.showAppHeightNineSheet(
+                      context: context, widget: SendXMRSheet(localCurrency: StateContainer.of(context).curCurrency));
                   return;
                 }
                 if (StateContainer.of(context).wallet != null && !disableSend) {
-                  Sheets.showAppHeightNineSheet(context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency));
+                  Sheets.showAppHeightNineSheet(
+                      context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency));
                 }
                 if (disableSend) {
                   UIUtil.showSnackbar(Z.of(context).watchOnlySendDisabled, context);

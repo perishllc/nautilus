@@ -177,11 +177,10 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
           }
           _addressStyle = AddressStyle.TEXT60;
         });
-        _addressController.selection =
-            TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
+        _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
         if (_addressController.text.isNotEmpty &&
             _addressController.text.length > 1 &&
-            !_addressController.text.startsWith("nano_")) {
+            SendSheetHelpers.isSpecialAddress(_addressController.text)) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
           if (_addressController.text != formattedAddress) {
             setState(() {
@@ -570,6 +569,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                                                             (User user) {
                                                           _addressController.text = user.getDisplayName()!;
                                                           _addressFocusNode.unfocus();
+                                                          if (_amountController.text.isEmpty) {
+                                                            FocusScope.of(context).requestFocus(_amountFocusNode);
+                                                          }
                                                           setState(() {
                                                             _isUser = true;
                                                             _showContactButton = false;
@@ -762,24 +764,13 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                       }
 
                       // verifies the input is a user in the db
-                      if (_addressController.text.startsWith("@") ||
-                          _addressController.text.startsWith("#") ||
-                          _addressController.text.startsWith("★") ||
-                          _addressController.text.contains(".") ||
-                          _addressController.text.contains(r"$")) {
+                      if (SendSheetHelpers.isSpecialAddress(_addressController.text)) {
                         // Need to make sure its a valid contact or user
                         final User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
                         if (user == null) {
                           setState(() {
-                            if (_addressController.text.startsWith("★")) {
-                              _addressValidationText = Z.of(context).contactInvalid;
-                            } else if (_addressController.text.startsWith("@") ||
-                                _addressController.text.startsWith("#")) {
-                              _addressValidationText = Z.of(context).usernameInvalid;
-                            } else if (_addressController.text.contains(".") ||
-                                _addressController.text.contains(r"$")) {
-                              _addressValidationText = Z.of(context).domainInvalid;
-                            }
+                            _addressValidationText =
+                                SendSheetHelpers.getInvalidAddressMessage(context, _addressController.text);
                           });
                         } else {
                           Sheets.showAppHeightNineSheet(
@@ -1104,7 +1095,6 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
     final bool isUser = _addressController.text.startsWith("@") || _addressController.text.startsWith("#");
     final bool isFavorite = _addressController.text.startsWith("★");
     final bool isDomain = _addressController.text.contains(".") || _addressController.text.contains(r"$");
-    final bool isNano = _addressController.text.startsWith("nano_");
     // final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
     if (_addressController.text.trim().isEmpty) {
       isValid = false;
@@ -1167,7 +1157,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
   //*******************************************************//
   Widget getEnterAmountContainer() {
     double margin = 200;
-    if (_addressController.text.startsWith("nano_")) {
+    if (_addressController.text.startsWith(NonTranslatable.currencyPrefix)) {
       if (_addressController.text.length > 24) {
         margin += 15;
       }
@@ -1274,7 +1264,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
       keyboardType: const TextInputType.numberWithOptions(decimal: true),
       textAlign: TextAlign.center,
       onSubmitted: (String text) {
-        FocusScope.of(context).unfocus();
+        if (_addressController.text.isEmpty) {
+          FocusScope.of(context).requestFocus(_addressFocusNode);
+        }
       },
     );
   } //************ Enter Amount Container Method End ************//
@@ -1498,7 +1490,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
   //*******************************************************//
   Widget getEnterMemoContainer() {
     double margin = 285;
-    if (_addressController.text.startsWith("nano_")) {
+    if (_addressController.text.startsWith(NonTranslatable.currencyPrefix)) {
       if (_addressController.text.length > 24) {
         margin += 10;
       }

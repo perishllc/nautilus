@@ -357,15 +357,16 @@ class DraggableScrollbarState extends State<DraggableScrollbar> {
 
       // glue scroll bar to the top / bottom on overscroll (android only):
     } else if (notification is OverscrollNotification) {
-      if (_barOffsetTop > barMinScrollExtent && notification.overscroll < 0) {
-        setState(() {
-          _barOffsetTop = barMinScrollExtent;
-        });
-      } else if (_barOffsetTop < barMaxScrollExtent && notification.overscroll > 0) {
-        setState(() {
-          _barOffsetTop = barMaxScrollExtent;
-        });
-      }
+      // turned off because not reliable / causes jitter 01/04/23:
+      // if (_barOffsetTop > barMinScrollExtent && notification.overscroll < 0) {
+      //   setState(() {
+      //     _barOffsetTop = barMinScrollExtent;
+      //   });
+      // } else if (_barOffsetTop < barMaxScrollExtent && notification.overscroll > 0) {
+      //   setState(() {
+      //     _barOffsetTop = barMaxScrollExtent;
+      //   });
+      // }
     }
 
     /*else if (notification is OverscrollNotification) {

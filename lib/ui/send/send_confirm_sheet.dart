@@ -278,45 +278,45 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         )),
 
                   // obscured checkbox:
-                  // if (widget.amountRaw != "0" && widget.link.isEmpty)
-                  //   Container(
-                  //     margin: const EdgeInsets.only(top: 15),
-                  //     child: Row(
-                  //       mainAxisAlignment: MainAxisAlignment.center,
-                  //       children: <Widget>[
-                  //         Checkbox(
-                  //           value: obscuredMode,
-                  //           activeColor: StateContainer.of(context).curTheme.primary,
-                  //           onChanged: onObscuredChanged,
-                  //         ),
-                  //         const SizedBox(width: 10),
-                  //         GestureDetector(
-                  //           onTap: () {
-                  //             onObscuredChanged(!obscuredMode);
-                  //           },
-                  //           child: Text(
-                  //             Z.of(context).obscureTransaction,
-                  //             style: AppStyles.textStyleParagraph(context),
-                  //           ),
-                  //         ),
-                  //         Container(
-                  //           width: 60,
-                  //           height: 60,
-                  //           alignment: Alignment.center,
-                  //           child: AppDialogs.infoButton(
-                  //             context,
-                  //             () {
-                  //               AppDialogs.showInfoDialog(
-                  //                 context,
-                  //                 Z.of(context).obscureInfoHeader,
-                  //                 Z.of(context).obscureTransactionBody,
-                  //               );
-                  //             },
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
+                  if (widget.amountRaw != "0" && widget.link.isEmpty)
+                    Container(
+                      margin: const EdgeInsets.only(top: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Checkbox(
+                            value: obscuredMode,
+                            activeColor: StateContainer.of(context).curTheme.primary,
+                            onChanged: onObscuredChanged,
+                          ),
+                          const SizedBox(width: 10),
+                          GestureDetector(
+                            onTap: () {
+                              onObscuredChanged(!obscuredMode);
+                            },
+                            child: Text(
+                              Z.of(context).obscureTransaction,
+                              style: AppStyles.textStyleParagraph(context),
+                            ),
+                          ),
+                          Container(
+                            width: 60,
+                            height: 60,
+                            alignment: Alignment.center,
+                            child: AppDialogs.infoButton(
+                              context,
+                              () {
+                                AppDialogs.showInfoDialog(
+                                  context,
+                                  Z.of(context).obscureInfoHeader,
+                                  Z.of(context).obscureTransactionBody,
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                 ],
               ),
             ),

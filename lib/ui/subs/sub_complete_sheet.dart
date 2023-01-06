@@ -49,7 +49,7 @@ class _SubCompleteSheetState extends State<SubCompleteSheet> {
                       children: <Widget>[
                         // "SENT TO" text
                         Text(
-                          CaseChange.toUpperCase(Z.of(context).sentTo, context),
+                          CaseChange.toUpperCase(Z.of(context).subscribed, context),
                           style: TextStyle(
                             fontSize: 28.0,
                             fontWeight: FontWeight.w700,

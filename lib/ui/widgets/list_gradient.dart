@@ -40,23 +40,33 @@ class ListGradientState extends State<ListGradient> {
     }
 
     final List<Color> colors = <Color>[widget.color, widget.color.withOpacity(0)];
-
-    return Align(
-      alignment: alignment,
-      child: Container(
-        height: widget.height,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            // colors: <Color>[
-            //   StateContainer.of(context).curTheme.background00!,
-            //   StateContainer.of(context).curTheme.background!
-            // ],
-            colors: colors,
-            // begin: const AlignmentDirectional(0.5, 1.0),
-            // end: const AlignmentDirectional(0.5, -1.0),
-            begin: begin,
-            end: end,
+    Offset offset = Offset.zero;
+    // fix for wierd transparent sliver bug with gradients:
+    // ignore: use_if_null_to_convert_nulls_to_bools
+    if (widget.top == true) {
+      offset = const Offset(0, -1);
+    } else if (widget.top == false) {
+      offset = const Offset(0, 1);
+    }
+    return Transform.translate(
+      offset: offset,
+      child: Align(
+        alignment: alignment,
+        child: Container(
+          height: widget.height,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              // colors: <Color>[
+              //   StateContainer.of(context).curTheme.background00!,
+              //   StateContainer.of(context).curTheme.background!
+              // ],
+              colors: colors,
+              // begin: const AlignmentDirectional(0.5, 1.0),
+              // end: const AlignmentDirectional(0.5, -1.0),
+              begin: begin,
+              end: end,
+            ),
           ),
         ),
       ),

@@ -31,6 +31,7 @@ import 'package:wallet_flutter/network/model/response/process_response.dart';
 import 'package:wallet_flutter/network/model/response/receivable_response.dart';
 import 'package:wallet_flutter/network/model/response/receivable_response_item.dart';
 import 'package:wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_xmr_sheet.dart';
 import 'package:wallet_flutter/util/blake2b.dart';
 import 'package:wallet_flutter/util/nanoutil.dart';
@@ -619,30 +620,44 @@ class UsernameService {
   Future<User?> figureOutUsernameType(String username) async {
     final String strippedUsername = SendSheetHelpers.stripPrefixes(username);
     String? type;
-    // check if UD / ENS / opencap / onchain address:
-    String? address = await sl.get<UsernameService>().checkOnchainUsername(strippedUsername);
-    if (address != null) {
-      type = UserTypes.ONCHAIN;
-    } else if (username.contains(r"$")) {
-      // check if opencap address:
-      address = await sl.get<UsernameService>().checkOpencapDomain(strippedUsername);
+    String? address;
+
+    // check onchain username:
+    if (address == null) {
+      address = await sl.get<UsernameService>().checkOnchainUsername(strippedUsername);
       if (address != null) {
-        type = UserTypes.OPENCAP;
+        type = UserTypes.ONCHAIN;
       }
-    } else if (username.contains(".")) {
-      // check if UD domain:
-      address = await sl.get<UsernameService>().checkUnstoppableDomain(strippedUsername);
-      if (address != null) {
-        type = UserTypes.UD;
-      } else {
-        // check if ENS domain:
-        address = await sl.get<UsernameService>().checkENSDomain(strippedUsername);
+    }
+
+    // check if opencap address:
+    if (address == null) {
+      if (username.contains(r"$")) {
+        address = await sl.get<UsernameService>().checkOpencapDomain(strippedUsername);
         if (address != null) {
-          type = UserTypes.ENS;
+          type = UserTypes.OPENCAP;
         }
       }
-    } else {
-      // check if nano.to address:
+    }
+
+    // check if UD domain:
+    if (address == null) {
+      if (username.contains(".")) {
+        address = await sl.get<UsernameService>().checkUnstoppableDomain(strippedUsername);
+        if (address != null) {
+          type = UserTypes.UD;
+        } else {
+          // check if ENS domain:
+          address = await sl.get<UsernameService>().checkENSDomain(strippedUsername);
+          if (address != null) {
+            type = UserTypes.ENS;
+          }
+        }
+      }
+    }
+
+    // check if nano.to username:
+    if (address == null) {
       address = await sl.get<UsernameService>().checkNanoToUsername(strippedUsername);
       if (address != null) {
         type = UserTypes.NANO_TO;
@@ -663,14 +678,20 @@ class UsernameService {
 
   Future<User?> figureOutIfAddressHasName(String address) async {
     String? type;
+    String? username;
+
     // check if onchain address:
-    String? username = await sl.get<UsernameService>().checkOnchainAddress(address);
-    if (username != null) {
-      type = UserTypes.ONCHAIN;
-    } else {
-      // check if nano.to address:
+    if (username == null) {
+      username = await sl.get<UsernameService>().checkOnchainAddress(address);
+      if (username != null) {
+        type = UserTypes.ONCHAIN;
+      }
+    }
+
+    // check if nano.to address:
+    if (username == null) {
       username = await sl.get<UsernameService>().checkNanoToAddress(address);
-      if (address != null) {
+      if (username != null) {
         type = UserTypes.NANO_TO;
       }
     }

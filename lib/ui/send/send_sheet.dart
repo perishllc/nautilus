@@ -24,11 +24,13 @@ import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
+import 'package:wallet_flutter/model/db/subscription.dart';
 import 'package:wallet_flutter/model/db/user.dart';
 import 'package:wallet_flutter/model/notification_setting.dart';
 import 'package:wallet_flutter/network/account_service.dart';
 import 'package:wallet_flutter/network/model/response/auth_item.dart';
 import 'package:wallet_flutter/network/model/response/pay_item.dart';
+import 'package:wallet_flutter/network/model/response/sub_item.dart';
 import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
@@ -38,6 +40,7 @@ import 'package:wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:wallet_flutter/ui/scan/scan_screen.dart';
 import 'package:wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_gift.dart';
+import 'package:wallet_flutter/ui/subs/sub_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
@@ -156,107 +159,83 @@ mixin SendSheetHelpers {
     return amountRaw;
   }
 
-  // static Future<void> addressFocusNodeListener(
-  //     FocusNode _addressFocusNode, TextEditingController _addressController) async {
-  //   if (_addressFocusNode.hasFocus) {
-  //     setState(() {
-  //       _addressHint = "";
-  //       _addressValidationText = "";
-  //       _addressValidAndUnfocused = false;
-  //       _pasteButtonVisible = true;
-  //       _addressStyle = AddressStyle.TEXT60;
-  //       if (_addressController!.text.isNotEmpty) {
-  //         _clearButton = true;
-  //       } else {
-  //         _clearButton = false;
-  //       }
-  //     });
-  //     _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
-  //     if (_addressController.text.isNotEmpty &&
-  //         _addressController.text.length > 1 &&
-  //         !_addressController!.text.startsWith("nano_")) {
-  //       final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
-  //       if (_addressController.text != formattedAddress) {
-  //         setState(() {
-  //           _addressController.text = formattedAddress;
-  //         });
-  //       }
-  //       final List<User> userList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(formattedAddress);
-  //       setState(() {
-  //         _users = userList;
-  //       });
-  //     }
+  static String getInvalidAddressMessage(BuildContext context, String address) {
+    if (address.startsWith("★")) {
+      return Z.of(context).contactInvalid;
+    } else if (address.startsWith("@") || address.startsWith("#")) {
+      return Z.of(context).usernameInvalid;
+    } else if (address.contains(".") || address.contains(r"$")) {
+      return Z.of(context).domainInvalid;
+    } else {
+      return Z.of(context).invalidAddress;
+    }
+  }
 
-  //     if (_addressController!.text.isEmpty) {
-  //       setState(() {
-  //         _users = [];
-  //       });
-  //     }
-  //   } else {
-  //     _addressHint = Z.of(context).enterUserOrAddress;
-  //     _users = [];
-  //     if (Address(_addressController!.text).isValid()) {
-  //       _addressValidAndUnfocused = true;
-  //     }
-  //     if (_addressController!.text.isEmpty) {
-  //       _pasteButtonVisible = true;
-  //     }
+  static Future<void> handleScanResult(BuildContext context, dynamic scanResult) async {
+    if (scanResult is PayItem) {
+      // block handoff item:
+      final PayItem payItem = scanResult;
 
-  //     if (SendSheetHelpers.stripPrefixes(_addressController!.text).isEmpty) {
-  //       // setState(() {
-  //       _addressController!.text = "";
-  //       // });
-  //       return;
-  //     }
-  //     if (_addressController!.text.isNotEmpty && !_addressController!.text.contains("★")) {
-  //       final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
-  //       // check if in the username db:
-  //       String? address;
-  //       String? type;
-  //       final User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController!.text);
-  //       if (user != null) {
-  //         type = user.type;
-  //         if (_addressController.text != user.getDisplayName()) {
-  //           _addressController.text = user.getDisplayName()!;
-  //         }
-  //       } else {
-  //         // check if UD / ENS / opencap address
-  //         if (_addressController!.text.contains(r"$")) {
-  //           // check if opencap address:
-  //           address = await sl.get<UsernameService>().checkOpencapDomain(formattedAddress);
-  //           if (address != null) {
-  //             type = UserTypes.OPENCAP;
-  //           }
-  //         } else if (_addressController!.text.contains(".")) {
-  //           // check if UD domain:
-  //           address = await sl.get<UsernameService>().checkUnstoppableDomain(formattedAddress);
-  //           if (address != null) {
-  //             type = UserTypes.UD;
-  //           } else {
-  //             // check if ENS domain:
-  //             address = await sl.get<UsernameService>().checkENSDomain(formattedAddress);
-  //             if (address != null) {
-  //               type = UserTypes.ENS;
-  //             }
-  //           }
-  //         }
-  //       }
+      // See if this address belongs to a contact or username
+      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(payItem.account);
 
-  //       if (type != null) {
-  //         _pasteButtonVisible = false;
-  //         _addressStyle = AddressStyle.PRIMARY;
+      // check if the user has enough balance to send this amount:
+      // If balance is insufficient show error:
+      final BigInt? amountBigInt = BigInt.tryParse(payItem.amount);
+      // ignore: use_build_context_synchronously
+      if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
+        // ignore: use_build_context_synchronously
+        UIUtil.showSnackbar(Z.of(context).insufficientBalance, context);
+        return;
+      }
 
-  //         if (address != null && user == null) {
-  //           // add to the db if missing:
-  //           final User user = User(username: formattedAddress, address: address, type: type, is_blocked: false);
-  //           await sl.get<DBHelper>().addUser(user);
-  //         }
-  //       } else {
-  //         _addressStyle = AddressStyle.TEXT60;
-  //       }
-  //     }
-  //   }
-  // }
+      // Go to confirm sheet:
+      Sheets.showAppHeightNineSheet(
+          context: context,
+          widget: HandoffConfirmSheet(
+            payItem: payItem,
+            destination: user?.address ?? payItem.account,
+            contactName: user?.getDisplayName(),
+          ));
+    } else if (scanResult is AuthItem) {
+      // handle auth handoff:
+      final AuthItem authItem = scanResult;
+      // See if this address belongs to a contact or username
+      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(authItem.account);
+
+      // Go to confirm sheet:
+      Sheets.showAppHeightNineSheet(
+          context: context,
+          widget: AuthConfirmSheet(
+            authItem: authItem,
+            destination: user?.address ?? authItem.account,
+            contactName: user?.getDisplayName(),
+          ));
+    } else if (scanResult is SubItem) {
+      Sheets.showAppHeightNineSheet(
+          context: context,
+          widget: SubConfirmSheet(
+            sub: Subscription(
+              address: scanResult.account,
+              amount_raw: scanResult.amount,
+              name: scanResult.label,
+              frequency: scanResult.frequency,
+              active: false,
+            ),
+          ));
+    }
+  }
+
+  static bool isSpecialAddress(String address) {
+    if (address.startsWith("@") ||
+        address.startsWith("#") ||
+        address.startsWith("★") ||
+        address.contains(".") ||
+        address.contains(r"$")) {
+      return true;
+    }
+    return false;
+  }
 }
 
 class SendSheetState extends State<SendSheet> {
@@ -310,10 +289,6 @@ class SendSheetState extends State<SendSheet> {
     super.initState();
     quickSendAmount = widget.quickSendAmount;
     animationOpen = false;
-
-    // _amountHint = Z.of(context).enterAmount;
-    // _addressHint = Z.of(context).enterUserOrAddress;
-    // _memoHint = Z.of(context).enterMemo;
 
     if (widget.user != null) {
       // Setup initial state for contact pre-filled
@@ -371,7 +346,7 @@ class SendSheetState extends State<SendSheet> {
         _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
         if (_addressController.text.isNotEmpty &&
             _addressController.text.length > 1 &&
-            !_addressController.text.startsWith("nano_")) {
+            SendSheetHelpers.isSpecialAddress(_addressController.text)) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
           if (_addressController.text != formattedAddress) {
             setState(() {
@@ -724,54 +699,8 @@ class SendSheetState extends State<SendSheet> {
                 maxSend: _isMaxSend(),
                 localCurrency: _localCurrencyMode ? _amountController.text : null));
       }
-    } else if (scanResult is PayItem) {
-      // block handoff item:
-      final PayItem payItem = scanResult;
-
-      // See if this address belongs to a contact or username
-      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(payItem.account);
-      if (!mounted) return;
-
-      // check if the user has enough balance to send this amount:
-      // If balance is insufficient show error:
-      final BigInt? amountBigInt = BigInt.tryParse(payItem.amount);
-      if (StateContainer.of(context).wallet!.accountBalance < amountBigInt!) {
-        UIUtil.showSnackbar(Z.of(context).insufficientBalance, context);
-        return;
-      }
-
-      // if payItem.exact is false, we should allow the user to change the amount to send to >= amount
-      if (!payItem.exact && mounted) {
-        // TODO:
-        log.d("payItem exact is false: unsupported handoff flow!");
-        return;
-      }
-
-      // Go to confirm sheet:
-      Sheets.showAppHeightNineSheet(
-          context: context,
-          widget: HandoffConfirmSheet(
-            payItem: payItem,
-            destination: user?.address ?? payItem.account,
-            contactName: user?.getDisplayName(),
-          ));
-    } else if (scanResult is AuthItem) {
-      // handle auth handoff:
-      final AuthItem authItem = scanResult;
-      // See if this address belongs to a contact or username
-      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(authItem.account);
-
-      // Go to confirm sheet:
-      Sheets.showAppHeightNineSheet(
-          context: context,
-          widget: AuthConfirmSheet(
-            authItem: authItem,
-            destination: user?.address ?? authItem.account,
-            contactName: user?.getDisplayName(),
-          ));
     } else {
-      // something went wrong, show generic error:
-      UIUtil.showSnackbar(Z.of(context).qrUnknownError, context);
+      SendSheetHelpers.handleScanResult(context, scanResult);
     }
   }
 
@@ -1129,6 +1058,9 @@ class SendSheetState extends State<SendSheet> {
                                                             (User user) {
                                                           _addressController.text = user.getDisplayName()!;
                                                           _addressFocusNode.unfocus();
+                                                          if (_amountController.text.isEmpty) {
+                                                            FocusScope.of(context).requestFocus(_amountFocusNode);
+                                                          }
                                                           setState(() {
                                                             _isUser = true;
                                                             _pasteButtonVisible = false;
@@ -1261,43 +1193,40 @@ class SendSheetState extends State<SendSheet> {
                       }
 
                       // verifies the input is a user in the db
-                      if (!_addressController.text.startsWith("nano_") && _addressController.text.isNotEmpty) {
+                      if (SendSheetHelpers.isSpecialAddress(_addressController.text)) {
                         // Need to make sure its a valid contact or user
                         final User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
                         if (user == null) {
                           setState(() {
-                            if (_addressController.text.startsWith("★")) {
-                              _addressValidationText = Z.of(context).contactInvalid;
-                            } else if (_addressController.text.startsWith("@") ||
-                                _addressController.text.startsWith("#")) {
-                              _addressValidationText = Z.of(context).usernameInvalid;
-                            } else if (_addressController.text.contains(".") ||
-                                _addressController.text.contains(r"$")) {
-                              _addressValidationText = Z.of(context).domainInvalid;
-                            }
+                            _addressValidationText =
+                                SendSheetHelpers.getInvalidAddressMessage(context, _addressController.text);
                           });
                         } else {
                           Sheets.showAppHeightNineSheet(
-                              context: context,
-                              widget: SendConfirmSheet(
-                                  amountRaw: amountRaw,
-                                  destination: user.address!,
-                                  contactName: user.getDisplayName(),
-                                  maxSend: isMaxSend,
-                                  localCurrency: _localCurrencyMode ? _amountController.text : null,
-                                  memo: _memoController.text));
+                            context: context,
+                            widget: SendConfirmSheet(
+                              amountRaw: amountRaw,
+                              destination: user.address!,
+                              contactName: user.getDisplayName(),
+                              maxSend: isMaxSend,
+                              localCurrency: _localCurrencyMode ? _amountController.text : null,
+                              memo: _memoController.text,
+                            ),
+                          );
                         }
                       } else {
                         Sheets.showAppHeightNineSheet(
-                            context: context,
-                            widget: SendConfirmSheet(
-                                amountRaw: amountRaw,
-                                destination: formattedAddress,
-                                maxSend: isMaxSend,
-                                link: "",
-                                paperWalletSeed: "",
-                                localCurrency: _localCurrencyMode ? _amountController.text : null,
-                                memo: _memoController.text));
+                          context: context,
+                          widget: SendConfirmSheet(
+                            amountRaw: amountRaw,
+                            destination: formattedAddress,
+                            maxSend: isMaxSend,
+                            link: "",
+                            paperWalletSeed: "",
+                            localCurrency: _localCurrencyMode ? _amountController.text : null,
+                            memo: _memoController.text,
+                          ),
+                        );
                       }
                     }),
                   ],
@@ -1521,7 +1450,6 @@ class SendSheetState extends State<SendSheet> {
     final bool isUser = _addressController.text.startsWith("@") || _addressController.text.startsWith("#");
     final bool isFavorite = _addressController.text.startsWith("★");
     final bool isDomain = _addressController.text.contains(".") || _addressController.text.contains(r"$");
-    final bool isNano = _addressController.text.startsWith("nano_");
     if (_addressController.text.trim().isEmpty) {
       isValid = false;
       setState(() {
@@ -1568,7 +1496,7 @@ class SendSheetState extends State<SendSheet> {
   //*******************************************************//
   Widget getEnterAmountContainer() {
     double margin = 200;
-    if (_addressController.text.startsWith("nano_")) {
+    if (_addressController.text.startsWith(NonTranslatable.currencyPrefix)) {
       if (_addressController.text.length > 24) {
         margin += 15;
       }
@@ -1689,7 +1617,7 @@ class SendSheetState extends State<SendSheet> {
       textAlign: TextAlign.center,
       onSubmitted: (String text) {
         FocusScope.of(context).unfocus();
-        if (!Address(_addressController.text).isValid()) {
+        if (_addressController.text.isEmpty) {
           FocusScope.of(context).requestFocus(_addressFocusNode);
         }
       },
@@ -1872,10 +1800,9 @@ class SendSheetState extends State<SendSheet> {
           }
         },
         onSubmitted: (String text) {
-          if (_memoController.text.isEmpty) {
-            FocusScope.of(context).nextFocus();
-          } else {
-            FocusScope.of(context).unfocus();
+          FocusScope.of(context).unfocus();
+          if (_amountController.text.isEmpty) {
+            FocusScope.of(context).requestFocus(_amountFocusNode);
           }
         },
         overrideTextFieldWidget: _addressValidAndUnfocused
@@ -1896,7 +1823,7 @@ class SendSheetState extends State<SendSheet> {
   //*******************************************************//
   Widget getEnterMemoContainer() {
     double margin = 285;
-    if (_addressController.text.startsWith("nano_")) {
+    if (_addressController.text.startsWith(NonTranslatable.currencyPrefix)) {
       if (_addressController.text.length > 24) {
         margin += 10;
       }

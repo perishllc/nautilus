@@ -188,7 +188,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
                           scrollbarTopMargin: 20.0,
                           scrollbarBottomMargin: 12.0,
                           child: ListView.builder(
-                            // padding: const EdgeInsets.symmetric(vertical: 20),
+                            padding: const EdgeInsets.symmetric(vertical: 20),
                             // padding: const EdgeInsets.only(right: 2),
                             itemCount: widget.nodes.length,
                             controller: _scrollController,

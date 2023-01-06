@@ -316,8 +316,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                           scrollbarTopMargin: 20.0,
                           scrollbarBottomMargin: 12.0,
                           child: ListView.builder(
-                            // padding: const EdgeInsets.symmetric(vertical: 20),
-                            // padding: const EdgeInsets.only(right: 2),
+                            padding: const EdgeInsets.symmetric(vertical: 20),
                             itemCount: widget.accounts.length,
                             controller: _scrollController,
                             itemBuilder: (BuildContext context, int index) {

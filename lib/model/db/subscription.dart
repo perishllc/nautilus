@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:quiver/core.dart';
 
-// part 'subscription.g.dart';
+part 'subscription.g.dart';
 
 @JsonSerializable()
 class Subscription {
@@ -16,8 +16,6 @@ class Subscription {
   String amount_raw;
   @JsonKey(name: 'address')
   String address;
-  @JsonKey(name: 'timestamp')
-  int timestamp;
   @JsonKey(name: 'frequency')
   String frequency;
 
@@ -27,7 +25,6 @@ class Subscription {
     required this.amount_raw,
     required this.address,
     this.id,
-    required this.timestamp,
     required this.frequency,
   });
 

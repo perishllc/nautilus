@@ -30,6 +30,16 @@
     "type": "text",
     "description": "active_message"
   },
+  "activateSub": "Activate Subscription",
+  "@activateSub": {
+    "type": "text",
+    "description": "activate_subscription"
+  },
+  "cancelSub": "Cancel Subscription",
+  "@cancelSub": {
+    "type": "text",
+    "description": "cancel_subscription"
+  },
   "addAccount": "Add Account",
   "@addAccount": {
     "type": "text",
@@ -657,6 +667,16 @@
   },
   "deleteNodeHeader": "Delete Node?",
   "@deleteNodeHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "deleteSubConfirmation": "Are you sure you want to delete this subscription?\n\nYou can always re-add it later by tapping the \"Add Subscription\" button",
+  "@deleteSubConfirmation": {
+    "type": "text",
+    "description": "delete sub confirmation info"
+  },
+  "deleteSubHeader": "Delete Subscription?",
+  "@deleteSubHeader": {
     "type": "text",
     "description": "Confirmation dialog header"
   },
@@ -2540,6 +2560,11 @@
     "type": "text",
     "description": "subscribe_button"
   },
+  "subscribed": "Subscribed",
+  "@subscribed": {
+    "type": "text",
+    "description": "subscribed_text"
+  },
   "subscribeWithApple": "Subscribe via Apple Pay",
   "@subscribeWithApple": {
     "type": "text",
@@ -2879,6 +2904,11 @@
   "@viewTX": {
     "type": "text",
     "description": "transaction_transaction"
+  },
+  "viewPaymentHistory": "View Payment History",
+  "@viewPaymentHistory": {
+    "type": "text",
+    "description": "view_payment_history"
   },
   "votingWeight": "Voting Weight",
   "@votingWeight": {

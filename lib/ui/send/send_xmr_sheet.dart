@@ -27,6 +27,7 @@ import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/receive/receive_sheet.dart';
+import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_xmr_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
@@ -56,12 +57,6 @@ class SendXMRSheet extends StatefulWidget {
 }
 
 enum AddressStyle { TEXT60, TEXT90, PRIMARY }
-
-mixin SendSheetHelpers {
-  static String stripPrefixes(String addressText) {
-    return addressText.replaceAll("@", "").replaceAll("★", "");
-  }
-}
 
 class SendXMRSheetState extends State<SendXMRSheet> {
   final Logger log = sl.get<Logger>();

@@ -20,6 +20,7 @@ import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/auth/auth_complete_sheet.dart';
 import 'package:wallet_flutter/ui/subs/sub_complete_sheet.dart';
+import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
@@ -105,30 +106,6 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
                       ],
                     ),
                   ),
-                  if (widget.sub.label.isNotEmpty)
-                    Container(
-                      margin: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width * 0.105,
-                          right: MediaQuery.of(context).size.width * 0.105),
-                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          text: "",
-                          children: [
-                            TextSpan(
-                              text: widget.authItem.label,
-                              style: AppStyles.textStyleParagraphPrimary(context),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                   if (widget.sub.name.isNotEmpty)
                     Container(
                       margin: EdgeInsets.only(
@@ -146,33 +123,57 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
                           text: "",
                           children: [
                             TextSpan(
-                              text: widget.authItem.message,
+                              text: widget.sub.name,
                               style: AppStyles.textStyleParagraphPrimary(context),
                             ),
                           ],
                         ),
                       ),
                     ),
-                  if (widget.authItem.nonce.isNotEmpty)
-                    Container(
-                      margin: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width * 0.105,
-                          right: MediaQuery.of(context).size.width * 0.105),
-                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      // Amount text
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          text: widget.authItem.nonce,
-                          style: AppStyles.textStyleParagraphPrimary(context),
-                        ),
-                      ),
-                    ),
+                  // if (widget.sub.name.isNotEmpty)
+                  //   Container(
+                  //     margin: EdgeInsets.only(
+                  //         left: MediaQuery.of(context).size.width * 0.105,
+                  //         right: MediaQuery.of(context).size.width * 0.105),
+                  //     padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  //     width: double.infinity,
+                  //     decoration: BoxDecoration(
+                  //       color: StateContainer.of(context).curTheme.backgroundDarkest,
+                  //       borderRadius: BorderRadius.circular(50),
+                  //     ),
+                  //     child: RichText(
+                  //       textAlign: TextAlign.center,
+                  //       text: TextSpan(
+                  //         text: "",
+                  //         children: [
+                  //           TextSpan(
+                  //             text: widget.sub.message,
+                  //             style: AppStyles.textStyleParagraphPrimary(context),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // if (widget.authItem.nonce.isNotEmpty)
+                  //   Container(
+                  //     margin: EdgeInsets.only(
+                  //         left: MediaQuery.of(context).size.width * 0.105,
+                  //         right: MediaQuery.of(context).size.width * 0.105),
+                  //     padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                  //     width: double.infinity,
+                  //     decoration: BoxDecoration(
+                  //       color: StateContainer.of(context).curTheme.backgroundDarkest,
+                  //       borderRadius: BorderRadius.circular(50),
+                  //     ),
+                  //     // Amount text
+                  //     child: RichText(
+                  //       textAlign: TextAlign.center,
+                  //       text: TextSpan(
+                  //         text: widget.authItem.nonce,
+                  //         style: AppStyles.textStyleParagraphPrimary(context),
+                  //       ),
+                  //     ),
+                  //   ),
 
                   // "FOR" text
                   Container(
@@ -186,18 +187,57 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
                       ],
                     ),
                   ),
-                  // Address text
                   Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                      margin: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width * 0.105,
-                          right: MediaQuery.of(context).size.width * 0.105),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
-                        borderRadius: BorderRadius.circular(25),
+                    margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.105,
+                        right: MediaQuery.of(context).size.width * 0.105),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: StateContainer.of(context).curTheme.backgroundDarkest,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    // Amount text
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        text: "",
+                        children: [
+                          TextSpan(
+                            text: getThemeAwareRawAccuracy(context, widget.sub.amount_raw),
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          displayCurrencySymbol(
+                            context,
+                            AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          TextSpan(
+                            text: getRawAsThemeAwareFormattedAmount(context, widget.sub.amount_raw),
+                            style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                          // TextSpan(
+                          //   text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
+                          //   style: AppStyles.textStyleParagraphPrimary(context).copyWith(
+                          //     color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
+                          //   ),
+                          // ),
+                        ],
                       ),
-                      child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
+                    ),
+                  ),
+                  // Address text
+                  // Container(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                  //   margin: EdgeInsets.only(
+                  //       left: MediaQuery.of(context).size.width * 0.105,
+                  //       right: MediaQuery.of(context).size.width * 0.105),
+                  //   width: double.infinity,
+                  //   decoration: BoxDecoration(
+                  //     color: StateContainer.of(context).curTheme.backgroundDarkest,
+                  //     borderRadius: BorderRadius.circular(25),
+                  //   ),
+                  //   child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName),
+                  // ),
                 ],
               ),
             ),
@@ -267,14 +307,34 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
       _showAnimation(context, AnimationType.GENERIC);
 
       // save the subscription to the database:
-
       await sl.get<DBHelper>().saveSubscription(widget.sub);
 
-      // Show complete
+      // Send the subscription amount:
+      bool payNow = false;
+      if (payNow) {
+        final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+        final String privKey = await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(),
+            StateContainer.of(context).selectedAccount!.index!, derivationMethod);
+        var resp = await sl.get<AccountService>().requestSend(
+              StateContainer.of(context).wallet!.representative,
+              StateContainer.of(context).wallet!.frontier,
+              widget.sub.amount_raw,
+              widget.sub.address,
+              StateContainer.of(context).wallet!.address,
+              privKey,
+              max: false,
+            );
+        if (!mounted) return;
+        StateContainer.of(context).wallet!.frontier = resp.hash;
+        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(
+          widget.sub.amount_raw,
+        );
+      }
 
+      // Show complete
       if (!mounted) return;
 
-      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+      Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
       Sheets.showAppHeightNineSheet(
         context: context,
         closeOnTap: true,

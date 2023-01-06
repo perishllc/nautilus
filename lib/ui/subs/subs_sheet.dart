@@ -5,22 +5,19 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:logger/logger.dart';
 import 'package:wallet_flutter/appstate_container.dart';
-import 'package:wallet_flutter/bus/node_changed_event.dart';
-import 'package:wallet_flutter/bus/node_modified_event.dart';
 import 'package:wallet_flutter/bus/sub_modified_event.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
-import 'package:wallet_flutter/model/db/node.dart';
 import 'package:wallet_flutter/model/db/subscription.dart';
-import 'package:wallet_flutter/network/account_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
-import 'package:wallet_flutter/ui/settings/node/add_node_sheet.dart';
-import 'package:wallet_flutter/ui/settings/node/node_details_sheet.dart';
 import 'package:wallet_flutter/ui/subs/add_sub_sheet.dart';
+import 'package:wallet_flutter/ui/subs/sub_confirm_sheet.dart';
+import 'package:wallet_flutter/ui/subs/sub_details_sheet.dart';
+import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';
@@ -99,13 +96,15 @@ class SubsSheetState extends State<SubsSheet> {
 
   @override
   Widget build(BuildContext context) {
-    double bottomMargin = 60;
-    // TODO: better calculation of bottom bar height
-    if (Platform.isIOS) {
-      bottomMargin = 100;
-    }
+    // double bottomMargin = 60;
+    // // TODO: better calculation of bottom bar height
+    // if (Platform.isIOS) {
+    //   bottomMargin = 100;
+    // }
     return SafeArea(
-      minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05, bottom: bottomMargin),
+      minimum: EdgeInsets.only(
+        bottom: MediaQuery.of(context).size.height * 0.035,
+      ),
       child: Container(
         decoration: BoxDecoration(
           color: StateContainer.of(context).curTheme.backgroundDark,
@@ -126,7 +125,10 @@ class SubsSheetState extends State<SubsSheet> {
                   ),
                   Column(
                     children: <Widget>[
-                      Handlebars.horizontal(context),
+                      Handlebars.horizontal(
+                        context,
+                        width: MediaQuery.of(context).size.width * 0.15,
+                      ),
                       Container(
                         margin: const EdgeInsets.only(top: 15.0),
                         constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
@@ -170,8 +172,7 @@ class SubsSheetState extends State<SubsSheet> {
                           scrollbarTopMargin: 20.0,
                           scrollbarBottomMargin: 12.0,
                           child: ListView.builder(
-                            // padding: const EdgeInsets.symmetric(vertical: 20),
-                            // padding: const EdgeInsets.only(right: 2),
+                            padding: const EdgeInsets.symmetric(vertical: 20),
                             itemCount: widget.subs.length,
                             controller: _scrollController,
                             itemBuilder: (BuildContext context, int index) {
@@ -225,6 +226,14 @@ class SubsSheetState extends State<SubsSheet> {
                           });
                           return;
                         }
+                        await Sheets.showAppHeightNineSheet(
+                          context: context,
+                          widget: SubConfirmSheet(sub: sub),
+                        );
+                        if (!mounted) return;
+                        setState(() {
+                          _addingNode = false;
+                        });
 
                         // sl.get<DBHelper>().saveNode(node).then((Node? newNode) {
                         //   if (newNode == null) {
@@ -252,20 +261,6 @@ class SubsSheetState extends State<SubsSheet> {
                         //   });
                         // });
                       }
-                    },
-                  ),
-                ],
-              ),
-              // Close button
-              Row(
-                children: <Widget>[
-                  AppButton.buildAppButton(
-                    context,
-                    AppButtonType.PRIMARY_OUTLINE,
-                    Z.of(context).close,
-                    Dimens.BUTTON_BOTTOM_DIMENS,
-                    onPressed: () {
-                      Navigator.pop(context);
                     },
                   ),
                 ],
@@ -301,7 +296,11 @@ class SubsSheetState extends State<SubsSheet> {
               // splashColor: StateContainer.of(context).curTheme.text15,
               // padding: EdgeInsets.all(0.0),
               onPressed: () {
-                // todo: payment_history
+                Sheets.showAppHeightEightSheet(
+                  context: context,
+                  widget: SubDetailsSheet(sub: sub),
+                  animationDurationMs: 175,
+                );
               },
               child: SizedBox(
                 height: 70.0,
@@ -333,10 +332,10 @@ class SubsSheetState extends State<SubsSheet> {
                                       child: Container(
                                         margin: EdgeInsets.zero,
                                         child: Icon(
-                                          Icons.hub,
+                                          sub.active ? Icons.paid : Icons.money_off,
                                           color: sub.active
                                               ? StateContainer.of(context).curTheme.success
-                                              : StateContainer.of(context).curTheme.primary,
+                                              : StateContainer.of(context).curTheme.error,
                                           size: 30,
                                         ),
                                       ),
@@ -366,9 +365,8 @@ class SubsSheetState extends State<SubsSheet> {
                                         maxLines: 1,
                                         textAlign: TextAlign.start,
                                       ),
-                                      // http_url + ws_url
                                       AutoSizeText(
-                                        "${sub.amount_raw}\n${sub.address}",
+                                        Address(sub.address).getShortString() ?? "",
                                         style: TextStyle(
                                           fontFamily: "OverpassMono",
                                           fontWeight: FontWeight.w100,
@@ -377,7 +375,27 @@ class SubsSheetState extends State<SubsSheet> {
                                         ),
                                         minFontSize: 8.0,
                                         stepGranularity: 0.1,
-                                        maxLines: 2,
+                                        maxLines: 1,
+                                      ),
+                                      RichText(
+                                        textAlign: TextAlign.center,
+                                        text: TextSpan(
+                                          text: "",
+                                          children: <InlineSpan>[
+                                            TextSpan(
+                                              text: getThemeAwareRawAccuracy(context, sub.amount_raw),
+                                              style: AppStyles.textStyleParagraphPrimary(context),
+                                            ),
+                                            displayCurrencySymbol(
+                                              context,
+                                              AppStyles.textStyleParagraphPrimary(context),
+                                            ),
+                                            TextSpan(
+                                              text: getRawAsThemeAwareFormattedAmount(context, sub.amount_raw),
+                                              style: AppStyles.textStyleParagraphPrimary(context),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -412,8 +430,11 @@ class SubsSheetState extends State<SubsSheet> {
         onPressed: (BuildContext context) async {
           await Future<dynamic>.delayed(const Duration(milliseconds: 250));
           if (!mounted) return;
-          // todo: 0.7.3
-          // NodeDetailsSheet(sub).mainBottomSheet(context);
+          // Sheets.showAppHeightEightSheet(
+          //   context: context,
+          //   widget: SubDetailsSheet(sub: sub),
+          //   animationDurationMs: 175,
+          // );
           await Slidable.of(context)!.close();
         }));
 
@@ -426,7 +447,7 @@ class SubsSheetState extends State<SubsSheet> {
         icon: Icons.delete,
         label: Z.of(context).delete,
         onPressed: (BuildContext context) {
-          AppDialogs.showConfirmDialog(context, Z.of(context).deleteNodeHeader, Z.of(context).deleteNodeConfirmation,
+          AppDialogs.showConfirmDialog(context, Z.of(context).deleteSubHeader, Z.of(context).deleteSubConfirmation,
               CaseChange.toUpperCase(Z.of(context).yes, context), () async {
             await Future<dynamic>.delayed(const Duration(milliseconds: 250));
             // Remove account

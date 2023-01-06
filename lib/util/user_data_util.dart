@@ -7,8 +7,10 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/address.dart';
+import 'package:wallet_flutter/model/db/subscription.dart';
 import 'package:wallet_flutter/network/model/response/auth_item.dart';
 import 'package:wallet_flutter/network/model/response/pay_item.dart';
+import 'package:wallet_flutter/network/model/response/sub_item.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/ui/scan/scan_screen.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
@@ -65,6 +67,8 @@ class UserDataUtil {
       } else if (fin is PayItem && fin.isValid()) {
         return fin;
       } else if (fin is AuthItem && fin.isValid()) {
+        return fin;
+      } else if (fin is SubItem && fin.isValid()) {
         return fin;
       }
     }

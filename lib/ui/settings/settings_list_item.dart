@@ -153,7 +153,7 @@ class AppSettings {
 
   //Settings item without any dropdown option but rather a direct functionality
   static Widget buildSettingsListItemSingleLine(BuildContext context, String heading, IconData settingIcon,
-      {Function? onPressed, bool disabled = false, Widget? iconOverride}) {
+      {Function? onPressed, Function? onLongPress, bool disabled = false, Widget? iconOverride}) {
     return IgnorePointer(
       ignoring: disabled,
       child: TextButton(
@@ -163,6 +163,14 @@ class AppSettings {
           // splashColor: StateContainer.of(context).curTheme.text15,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
         ),
+        onLongPress: () {
+          if (onLongPress != null) {
+            // ignore: avoid_dynamic_calls
+            onLongPress();
+          } else {
+            return;
+          }
+        },
         onPressed: () {
           if (onPressed != null) {
             // ignore: avoid_dynamic_calls

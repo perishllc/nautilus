@@ -1715,10 +1715,27 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(
             context, Z.of(context).shareApp.replaceAll("%1", NonTranslatable.appName), AppIcons.share, onPressed: () {
-          setState(() {
-            _shareOpen = true;
-          });
-          _shareController.forward();
+          // setState(() {
+          //   _shareOpen = true;
+          // });
+          // _shareController.forward();
+          Share.share(
+              "${Z.of(context).shareAppText.replaceAll("%1", NonTranslatable.appName).replaceAll("%2", NonTranslatable.currencyName)} ${NonTranslatable.genericStoreLink}");
+        }, onLongPress: () async {
+          final Widget qrWidget = SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: await UIUtil.getQRImage(
+              context,
+              NonTranslatable.promoLink,
+            ),
+          );
+          Sheets.showAppHeightNineSheet(
+            context: context,
+            widget: OnboardSheet(
+              link: NonTranslatable.promoLink,
+              qrWidget: qrWidget,
+            ),
+          );
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).moreSettings, AppIcons.settings,
@@ -2163,7 +2180,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                   DraggableScrollbar(
                     controller: _scrollController,
                     scrollbarTopMargin: 20.0,
-                    scrollbarBottomMargin: 0.0,
+                    scrollbarBottomMargin: 0,
                     scrollbarColor: StateContainer.of(context).curTheme.primary,
                     child: _buildSettingsList(),
                   ),
@@ -2848,7 +2865,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).shareText, AppIcons.share,
                         onPressed: () {
                       Share.share(
-                          "${Z.of(context).shareAppText.replaceAll("%1", NonTranslatable.appName)} ${NonTranslatable.genericStoreLink}");
+                          "${Z.of(context).shareAppText.replaceAll("%1", NonTranslatable.appName).replaceAll("%2", NonTranslatable.currencyName)} ${NonTranslatable.genericStoreLink}");
                     }),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     Container(
@@ -2860,13 +2877,15 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                               color: StateContainer.of(context).curTheme.text60)),
                     ),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                    AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).promotionalLink, AppIcons.qrcode,
-                        onPressed: () async {
+                    AppSettings.buildSettingsListItemSingleLine(
+                        context,
+                        Z.of(context).promotionalLink.replaceAll("%2", NonTranslatable.currencyName),
+                        AppIcons.qrcode, onPressed: () async {
                       final Widget qrWidget = SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: await UIUtil.getQRImage(
                             context,
-                            NonTranslatable.promoLink.replaceAll("%2", NonTranslatable.currencyName),
+                            NonTranslatable.promoLink,
                           ));
                       Sheets.showAppHeightNineSheet(
                           context: context,
