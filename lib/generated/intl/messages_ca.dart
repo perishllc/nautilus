@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Účty"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Jste si jisti, že jste zálohovali svou tajnou frázi nebo semínko?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Activa la subscripció"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktivní zpráva"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Přidat účet"),
@@ -39,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Přidat kontakt"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Add Favorite"),
         "addNode": MessageLookupByLibrary.simpleMessage("Afegeix un node"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Afegeix una subscripció"),
         "addUser": MessageLookupByLibrary.simpleMessage("Afegeix un usuari"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Afegeix un compte només de rellotge"),
@@ -117,6 +121,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Avís de connexió"),
         "businessButton": MessageLookupByLibrary.simpleMessage("Negocis"),
         "cancel": MessageLookupByLibrary.simpleMessage("Zrušit"),
+        "cancelSub":
+            MessageLookupByLibrary.simpleMessage("Cancel·la la subscripció"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "Per evitar l\'abús, us demanem que resolgueu un captcha per reclamar la targeta regal a la pàgina següent."),
@@ -233,6 +239,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vols suprimir el node?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Esteu segur que voleu suprimir aquesta subscripció?\n\nSempre el podeu tornar a afegir més tard tocant el botó \"Afegeix una subscripció\"."),
+        "deleteSubHeader": MessageLookupByLibrary.simpleMessage(
+            "Vols suprimir la subscripció?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Vypnout"),
         "disablePasswordSuccess":
@@ -269,6 +279,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Enter Message"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Introduïu l\'adreça XMR"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Introduïu el nom"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("Introduïu el nom del node"),
         "enterPasswordHint":
@@ -711,6 +722,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC":
             MessageLookupByLibrary.simpleMessage("Enviar mitjançant NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Oskenovat QR kód"),
+        "schedule": MessageLookupByLibrary.simpleMessage("Horari"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Search for anything"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -832,6 +844,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Subscriu-te"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Subscriu-te mitjançant Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Subscrit"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("Subscripció"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Ajuda al desenvolupament"),
@@ -940,6 +954,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nautilus usernames are a centralized service provided by Nano.to"),
         "using": MessageLookupByLibrary.simpleMessage("Utilitzant"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Zobrazit detaily"),
+        "viewPaymentHistory": MessageLookupByLibrary.simpleMessage(
+            "Visualitza l\'historial de pagaments"),
         "viewTX":
             MessageLookupByLibrary.simpleMessage("Visualitza la transacció"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Hlasovací síla"),

@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Accounts"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Weet je zeker dat je een back-up hebt gemaakt van jouw geheime zin of seed?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Abonnement activeren"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Actief bericht"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Account toevoegen"),
@@ -41,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Favoriet toevoegen"),
         "addNode": MessageLookupByLibrary.simpleMessage("Knooppunt toevoegen"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Abonnement toevoegen"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Een gebruiker toevoegen"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -122,6 +126,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Verbindingswaarschuwing"),
         "businessButton": MessageLookupByLibrary.simpleMessage("Bedrijf"),
         "cancel": MessageLookupByLibrary.simpleMessage("Annuleer"),
+        "cancelSub":
+            MessageLookupByLibrary.simpleMessage("Annuleer abonnement"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "Om misbruik te voorkomen, vragen we je om een captcha op te lossen om de cadeaubon op de volgende pagina te claimen."),
@@ -239,6 +245,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Knooppunt verwijderen?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Weet u zeker dat u dit abonnement wilt verwijderen?\n\nJe kunt het later altijd opnieuw toevoegen door op de knop \"Abonnement toevoegen\" te tikken"),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Abonnement verwijderen?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Uitschakelen"),
         "disablePasswordSuccess":
@@ -273,6 +283,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Bericht invoeren"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Voer XMR-adres in"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Voer naam in"),
         "enterNodeName": MessageLookupByLibrary.simpleMessage(
             "Voer de naam van het knooppunt in"),
         "enterPasswordHint":
@@ -724,6 +735,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Scan een Nano\nadres QR code"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Verzenden via NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Scan QR Code"),
+        "schedule": MessageLookupByLibrary.simpleMessage("Schema"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Zoek naar alles"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "In het volgende scherm zie je jouw geheime zin. Het is een wachtwoord voor toegang tot jouw saldo. Het is cruciaal dat je er een back-up van maakt en het nooit met iemand deelt."),
@@ -841,6 +853,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonneren"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Abonneer u via Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Geabonneerd"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("Abonneren"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Help Ondersteuning Ontwikkeling"),
@@ -952,6 +966,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nautilus-gebruikersnamen zijn een gecentraliseerde dienst van Nano.to"),
         "using": MessageLookupByLibrary.simpleMessage("Gebruik makend van"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Bekijk details"),
+        "viewPaymentHistory": MessageLookupByLibrary.simpleMessage(
+            "Betalingsgeschiedenis bekijken"),
         "viewTX": MessageLookupByLibrary.simpleMessage("Transactie bekijken"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Stemgewicht"),
         "warning": MessageLookupByLibrary.simpleMessage("WAARSCHUWING"),

@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("アカウント"),
         "ackBackedUp":
             MessageLookupByLibrary.simpleMessage("シークレットフレーズやシードをバックアップしましたか？"),
+        "activateSub": MessageLookupByLibrary.simpleMessage("サブスクリプションを有効にする"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("アクティブメッセージ"),
         "addAccount": MessageLookupByLibrary.simpleMessage("アカウントを追加する"),
@@ -36,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("連絡先を追加する"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("お気に入りを追加"),
         "addNode": MessageLookupByLibrary.simpleMessage("ノードを追加"),
+        "addSubscription": MessageLookupByLibrary.simpleMessage("サブスクリプションを追加"),
         "addUser": MessageLookupByLibrary.simpleMessage("ユーザーを追加"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("視聴専用アカウントを追加"),
@@ -104,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage("接続警告"),
         "businessButton": MessageLookupByLibrary.simpleMessage("仕事"),
         "cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("サブスクリプションをキャンセルする"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("キャプチャ"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "悪用を防ぐため、次のページでギフト カードを受け取るにはキャプチャを解決する必要があります。"),
@@ -200,6 +203,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("ノードを削除しますか?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "このサブスクリプションを削除してもよろしいですか?\n\n「サブスクリプションを追加」ボタンをタップすると、後でいつでも再追加できます"),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("サブスクリプションを削除しますか?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("無効にする"),
         "disablePasswordSuccess":
@@ -230,6 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("メッセージを入力してください"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("XMR アドレスを入力してください"),
+        "enterName": MessageLookupByLibrary.simpleMessage("名前を入力"),
         "enterNodeName": MessageLookupByLibrary.simpleMessage("ノード名を入力"),
         "enterPasswordHint": MessageLookupByLibrary.simpleMessage("パスワードを入力する"),
         "enterSplitAmount": MessageLookupByLibrary.simpleMessage("分割金額を入力"),
@@ -624,6 +632,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ナノ \n アドレスのQRコードをスキャンします"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("NFC経由で送信"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("QRコードをスキャン"),
+        "schedule": MessageLookupByLibrary.simpleMessage("スケジュール"),
         "searchHint": MessageLookupByLibrary.simpleMessage("何でも検索"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "次の画面で、シークレットフレーズが表示されます。資金にアクセスするためのパスワードです。バックアップして、誰とも共有しないでください。"),
@@ -724,6 +733,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("申し込む"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Apple Pay で購読する"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("購読済み"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("購読する"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("ヘルプ サポート開発"),
@@ -823,6 +834,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nautilusユーザー名は、Nano.toが提供する集中型サービスです"),
         "using": MessageLookupByLibrary.simpleMessage("使用する"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("詳細を表示する"),
+        "viewPaymentHistory": MessageLookupByLibrary.simpleMessage("支払い履歴を見る"),
         "viewTX": MessageLookupByLibrary.simpleMessage("取引を見る"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("投票ウェイト"),
         "warning": MessageLookupByLibrary.simpleMessage("警告"),

@@ -25,6 +25,11 @@
     "type": "text",
     "description": "Ack backed up"
   },
+  "activateSub": "Aktifkan Langganan",
+  "@activateSub": {
+    "type": "text",
+    "description": "activate_subscription"
+  },
   "activeMessageHeader": "Pesan Aktif",
   "@activeMessageHeader": {
     "type": "text",
@@ -89,6 +94,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addSubscription": "Tambahkan Langganan",
+  "@addSubscription": {
+    "type": "text",
+    "description": "Add a new subscription"
   },
   "addUser": "Tambahkan Pengguna",
   "@addUser": {
@@ -299,6 +309,11 @@
   "@cancel": {
     "type": "text",
     "description": "dialog_cancel"
+  },
+  "cancelSub": "Batalkan Langganan",
+  "@cancelSub": {
+    "type": "text",
+    "description": "cancel_subscription"
   },
   "captchaWarning": "captcha",
   "@captchaWarning": {
@@ -655,6 +670,16 @@
     "type": "text",
     "description": "delete_request"
   },
+  "deleteSubConfirmation": "Yakin ingin menghapus langganan ini?\n\nAnda selalu dapat menambahkannya kembali nanti dengan mengetuk tombol \"Tambah Langganan\".",
+  "@deleteSubConfirmation": {
+    "type": "text",
+    "description": "delete sub confirmation info"
+  },
+  "deleteSubHeader": "Hapus Langganan?",
+  "@deleteSubHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Nonaktifkan",
   "@disablePasswordSheetHeader": {
     "type": "text",
@@ -759,6 +784,11 @@
   "@enterMoneroAddress": {
     "type": "text",
     "description": "enter_xmr_address"
+  },
+  "enterName": "Masukkan nama",
+  "@enterName": {
+    "type": "text",
+    "description": "add_sub_name_hint"
   },
   "enterNodeName": "Masukkan Nama Node",
   "@enterNodeName": {
@@ -2150,6 +2180,11 @@
     "type": "text",
     "description": "send_scan_qr"
   },
+  "schedule": "Jadwal",
+  "@schedule": {
+    "type": "text",
+    "description": "subs_schedule"
+  },
   "searchHint": "Cari apa saja",
   "@searchHint": {
     "type": "text",
@@ -2525,10 +2560,20 @@
     "type": "text",
     "description": "subscribe_button"
   },
+  "subscribed": "Berlangganan",
+  "@subscribed": {
+    "type": "text",
+    "description": "subscribed_text"
+  },
   "subscribeWithApple": "Berlangganan melalui Apple Pay",
   "@subscribeWithApple": {
     "type": "text",
     "description": "subscribe_apple_button"
+  },
+  "subscribing": "Berlangganan",
+  "@subscribing": {
+    "type": "text",
+    "description": "sub_confirm"
   },
   "supportButton": "Support",
   "@supportButton": {
@@ -2859,6 +2904,11 @@
   "@viewDetails": {
     "type": "text",
     "description": "transaction_details"
+  },
+  "viewPaymentHistory": "Lihat Riwayat Pembayaran",
+  "@viewPaymentHistory": {
+    "type": "text",
+    "description": "view_payment_history"
   },
   "viewTX": "Lihat Transaksi",
   "@viewTX": {

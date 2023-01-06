@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Kontoer"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Er du sikker på at du har sikkerhetskopiert din Tilknytningskode eller Seed?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Aktiver abonnement"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktiv melding"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Legg til konto"),
@@ -41,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Legg til favoritt"),
         "addNode": MessageLookupByLibrary.simpleMessage("Legg til node"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Legg til abonnement"),
         "addUser": MessageLookupByLibrary.simpleMessage("Legg til en bruker"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Legg til kun overvåkningskonto"),
@@ -121,6 +125,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Advarsel om tilkobling"),
         "businessButton": MessageLookupByLibrary.simpleMessage("Virksomhet"),
         "cancel": MessageLookupByLibrary.simpleMessage("Avbryt"),
+        "cancelSub":
+            MessageLookupByLibrary.simpleMessage("Avbestille abonnementet"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "For å forhindre misbruk krever vi at du løser en captcha for å kunne kreve gavekortet på neste side."),
@@ -232,6 +238,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("Slett node?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Er du sikker på at du vil slette dette abonnementet?\n\nDu kan alltid legge den til på nytt senere ved å trykke på \"Legg til abonnement\"-knappen"),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Vil du slette abonnementet?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Deaktiver"),
         "disablePasswordSuccess": MessageLookupByLibrary.simpleMessage(
@@ -266,6 +276,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Skriv inn melding"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Skriv inn XMR-adresse"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Skriv inn navn"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("Skriv inn nodenavn"),
         "enterPasswordHint":
@@ -717,6 +728,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Scan en NANO \nadresse QR-kode"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Send via NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Scan QR-kode"),
+        "schedule": MessageLookupByLibrary.simpleMessage("Rute"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Søk etter hva som helst"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -833,6 +845,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonnere"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Abonner via Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Abonner"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("Abonner"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Hjelp til å støtte utvikling"),
@@ -940,6 +954,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nautilus brukernavn er en sentralisert tjeneste levert av nano.to"),
         "using": MessageLookupByLibrary.simpleMessage("Ved hjelp av"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Vis detaljer"),
+        "viewPaymentHistory":
+            MessageLookupByLibrary.simpleMessage("Se betalingshistorikk"),
         "viewTX": MessageLookupByLibrary.simpleMessage("Se transaksjonen"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Stemmevekt"),
         "warning": MessageLookupByLibrary.simpleMessage("Advarsel"),

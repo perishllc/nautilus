@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Účty"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Jste si jisti, že jste zálohovali svou tajnou frázi nebo semínko?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Aktiver abonnement"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktivní zpráva"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Přidat účet"),
@@ -38,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Přidat kontakt"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Tilføj favorit"),
         "addNode": MessageLookupByLibrary.simpleMessage("Tilføj node"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Tilføj abonnement"),
         "addUser": MessageLookupByLibrary.simpleMessage("Tilføj en bruger"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Tilføj kun Watch-konto"),
@@ -117,6 +121,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Advarsel om forbindelse"),
         "businessButton": MessageLookupByLibrary.simpleMessage("Forretning"),
         "cancel": MessageLookupByLibrary.simpleMessage("Zrušit"),
+        "cancelSub":
+            MessageLookupByLibrary.simpleMessage("Annuller abonnement"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "For at forhindre misbrug kræver vi, at du løser en captcha for at gøre krav på gavekortet på næste side."),
@@ -231,6 +237,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vil du slette node?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Er du sikker på, at du vil slette dette abonnement?\n\nDu kan altid tilføje det igen senere ved at trykke på knappen \"Tilføj abonnement\"."),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Vil du slette abonnement?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Vypnout"),
         "disablePasswordSuccess":
@@ -265,6 +275,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Indtast Besked"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Indtast XMR-adresse"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Indtast navn"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("Indtast nodenavn"),
         "enterPasswordHint":
@@ -713,6 +724,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Naskenujte QR kód Nano \n adresy"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Send via NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Oskenovat QR kód"),
+        "schedule": MessageLookupByLibrary.simpleMessage("Tidsplan"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Søg efter noget"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "Na další obrazovce uvidíte svoji tajnou frázi. Jedná se o heslo pro přístup k vašim finančním prostředkům. Je zásadní, abyste jej zálohovali a nikdy s nikým nesdíleli."),
@@ -830,6 +842,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonner"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Abonner via Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Abonneret"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("Abonner"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Hjælp med at støtte udvikling"),
@@ -940,6 +954,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nautilus brugernavne er en centraliseret tjeneste leveret af Nano.to"),
         "using": MessageLookupByLibrary.simpleMessage("Ved brug af"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Zobrazit detaily"),
+        "viewPaymentHistory":
+            MessageLookupByLibrary.simpleMessage("Se betalingshistorik"),
         "viewTX": MessageLookupByLibrary.simpleMessage("Se transaktion"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Hlasovací síla"),
         "warning": MessageLookupByLibrary.simpleMessage("Varování"),

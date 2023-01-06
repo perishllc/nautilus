@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Comptes"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Êtes-vous sûr de bien avoir sauvegardé votre phrase secrète ou clé privée?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Activer l\'abonnement"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Message actif"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Ajouter un compte"),
@@ -42,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Ajouter un favori"),
         "addNode": MessageLookupByLibrary.simpleMessage("Ajouter un nœud"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Ajouter un abonnement"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Ajouter un utilisateur"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -126,6 +130,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Avertissement de connexion"),
         "businessButton": MessageLookupByLibrary.simpleMessage("Entreprise"),
         "cancel": MessageLookupByLibrary.simpleMessage("Annuler"),
+        "cancelSub":
+            MessageLookupByLibrary.simpleMessage("Annuler l\'abonnement"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "Afin d\'éviter les abus, nous vous demandons de résoudre un captcha afin de réclamer la carte-cadeau sur la page suivante."),
@@ -246,6 +252,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Supprimer le nœud ?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Voulez-vous vraiment supprimer cet abonnement ?\n\nVous pouvez toujours le rajouter plus tard en appuyant sur le bouton \"Ajouter un abonnement\""),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Supprimer l\'abonnement ?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Désactiver"),
         "disablePasswordSuccess":
@@ -283,6 +293,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Entrez un message"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Entrez l\'adresse XMR"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Entrez le nom"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("Entrez le nom du nœud"),
         "enterPasswordHint":
@@ -736,6 +747,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("Envoyer par NFC"),
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("Scanner le Code QR"),
+        "schedule": MessageLookupByLibrary.simpleMessage("Programme"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Rechercher n\'importe quoi"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -861,6 +873,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("S\'abonner"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Abonnez-vous via Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Abonné"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("Abonnement"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Aidez le développement de l\'app"),
@@ -972,6 +986,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Les noms d\'utilisateur Nautilus sont un service centralisé fourni par Nano.to"),
         "using": MessageLookupByLibrary.simpleMessage("Utilisant"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Détails"),
+        "viewPaymentHistory": MessageLookupByLibrary.simpleMessage(
+            "Afficher l\'historique des paiements"),
         "viewTX":
             MessageLookupByLibrary.simpleMessage("Afficher la transaction"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Pondération"),

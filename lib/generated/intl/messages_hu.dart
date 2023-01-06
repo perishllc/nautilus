@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Accounts"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Are you sure that you\'ve backed up your secret phrase or seed?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Aktiválja az előfizetést"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktív üzenet"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Add Account"),
@@ -42,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Kedvenc hozzáadása"),
         "addNode": MessageLookupByLibrary.simpleMessage("Csomópont hozzáadása"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Előfizetés hozzáadása"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Felhasználó hozzáadása"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -121,6 +125,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Csatlakozási figyelmeztetés"),
         "businessButton": MessageLookupByLibrary.simpleMessage("Üzleti"),
         "cancel": MessageLookupByLibrary.simpleMessage("Mégse"),
+        "cancelSub":
+            MessageLookupByLibrary.simpleMessage("Feliratkozás visszavonása"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "A visszaélések megelőzése érdekében meg kell oldania a captcha kódot, hogy a következő oldalon igényelje az ajándékutalványt."),
@@ -239,6 +245,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Csomópont törlése?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Biztosan törli ezt az előfizetést?\n\nKésőbb bármikor újra felveheti az „Előfizetés hozzáadása” gombra koppintva"),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Törli az előfizetést?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Disable"),
         "disablePasswordSuccess":
@@ -278,6 +288,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Írja be az üzenetet"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Írja be az XMR-címet"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Írja be a nevet"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("Írja be a csomópont nevét"),
         "enterPasswordHint":
@@ -733,6 +744,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Küldés NFC-n keresztül"),
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("Olvasd be a QR Kódot"),
+        "schedule": MessageLookupByLibrary.simpleMessage("Menetrend"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Bármit kereshet"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "In the next screen, you will see your secret phrase. It is a password to access your funds. It is crucial that you back it up and never share it with anyone."),
@@ -850,6 +862,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Iratkozz fel"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Előfizetés az Apple Pay-en keresztül"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Előfizetve"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("Előfizetés"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Segítség Támogatás Fejlesztés"),
@@ -961,6 +975,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "using": MessageLookupByLibrary.simpleMessage("Használata"),
         "viewDetails":
             MessageLookupByLibrary.simpleMessage("Részletek Mutatása"),
+        "viewPaymentHistory": MessageLookupByLibrary.simpleMessage(
+            "Fizetési előzmények megtekintése"),
         "viewTX":
             MessageLookupByLibrary.simpleMessage("Tranzakció megtekintése"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Voting Weight"),

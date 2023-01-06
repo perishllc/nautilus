@@ -25,6 +25,11 @@
     "type": "text",
     "description": "Ack backed up"
   },
+  "activateSub": "Aktivizējiet abonementu",
+  "@activateSub": {
+    "type": "text",
+    "description": "activate_subscription"
+  },
   "activeMessageHeader": "Active Message",
   "@activeMessageHeader": {
     "type": "text",
@@ -89,6 +94,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addSubscription": "Pievienot abonementu",
+  "@addSubscription": {
+    "type": "text",
+    "description": "Add a new subscription"
   },
   "addUser": "Pievienojiet lietotāju",
   "@addUser": {
@@ -299,6 +309,11 @@
   "@cancel": {
     "type": "text",
     "description": "dialog_cancel"
+  },
+  "cancelSub": "Anulēt abonementu",
+  "@cancelSub": {
+    "type": "text",
+    "description": "cancel_subscription"
   },
   "captchaWarning": "Captcha",
   "@captchaWarning": {
@@ -655,6 +670,16 @@
     "type": "text",
     "description": "delete_request"
   },
+  "deleteSubConfirmation": "Vai tiešām vēlaties dzēst šo abonementu?\n\nJūs vienmēr varat to atkārtoti pievienot vēlāk, pieskaroties pogai \"Pievienot abonementu\".",
+  "@deleteSubConfirmation": {
+    "type": "text",
+    "description": "delete sub confirmation info"
+  },
+  "deleteSubHeader": "Vai dzēst abonementu?",
+  "@deleteSubHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Disable",
   "@disablePasswordSheetHeader": {
     "type": "text",
@@ -759,6 +784,11 @@
   "@enterMoneroAddress": {
     "type": "text",
     "description": "enter_xmr_address"
+  },
+  "enterName": "Ievadiet Vārdu",
+  "@enterName": {
+    "type": "text",
+    "description": "add_sub_name_hint"
   },
   "enterNodeName": "Ievadiet mezgla nosaukumu",
   "@enterNodeName": {
@@ -2150,6 +2180,11 @@
     "type": "text",
     "description": "send_scan_qr"
   },
+  "schedule": "Grafiks",
+  "@schedule": {
+    "type": "text",
+    "description": "subs_schedule"
+  },
   "searchHint": "Search for anything",
   "@searchHint": {
     "type": "text",
@@ -2525,10 +2560,20 @@
     "type": "text",
     "description": "subscribe_button"
   },
+  "subscribed": "Abonēts",
+  "@subscribed": {
+    "type": "text",
+    "description": "subscribed_text"
+  },
   "subscribeWithApple": "Abonējiet, izmantojot Apple Pay",
   "@subscribeWithApple": {
     "type": "text",
     "description": "subscribe_apple_button"
+  },
+  "subscribing": "Abonēšana",
+  "@subscribing": {
+    "type": "text",
+    "description": "sub_confirm"
   },
   "supportButton": "Support",
   "@supportButton": {
@@ -2859,6 +2904,11 @@
   "@viewDetails": {
     "type": "text",
     "description": "transaction_details"
+  },
+  "viewPaymentHistory": "Skatīt maksājumu vēsturi",
+  "@viewPaymentHistory": {
+    "type": "text",
+    "description": "view_payment_history"
   },
   "viewTX": "Skatīt darījumu",
   "@viewTX": {

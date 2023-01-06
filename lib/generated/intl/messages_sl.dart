@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Računi"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Ste prepričani, da ste varno shranili vaš skrivni niz ali zasebni ključ?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Aktiviraj naročnino"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktivno sporočilo"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Dodaj račun"),
@@ -38,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Dodaj stik"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Dodaj Favorite"),
         "addNode": MessageLookupByLibrary.simpleMessage("Dodaj vozlišče"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Dodaj naročnino"),
         "addUser": MessageLookupByLibrary.simpleMessage("Dodajte uporabnika"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Dodaj račun samo za ogled"),
@@ -120,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Opozorilo o povezavi"),
         "businessButton": MessageLookupByLibrary.simpleMessage("Posel"),
         "cancel": MessageLookupByLibrary.simpleMessage("Prekliči"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("Prekliči naročnino"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "Da bi preprečili zlorabo, zahtevamo, da rešite captcha, da prevzamete darilno kartico na naslednji strani."),
@@ -238,6 +243,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Želite izbrisati vozlišče?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Ali ste prepričani, da želite izbrisati to naročnino?\n\nPozneje ga lahko kadar koli znova dodate tako, da tapnete gumb »Dodaj naročnino«."),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Želite izbrisati naročnino?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Disable"),
         "disablePasswordSuccess":
@@ -272,6 +281,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Vnesite sporočilo"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Vnesite naslov XMR"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Vnesite ime"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("Vnesite ime vozlišča"),
         "enterPasswordHint":
@@ -716,6 +726,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Zajemi Nano \nnaslov QR kodo"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Pošlji prek NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Zajemi QR kodo"),
+        "schedule": MessageLookupByLibrary.simpleMessage("Urnik"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Poiščite karkoli"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "Na naslednjem zaslonu boste videli vaš skrivni niz. Ta niz je geslo za dostop do vašega računa. Nujno je, da ga varno shranite in ne delite z nikomur."),
@@ -834,6 +845,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Naročite se"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Naročite se prek Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Naročen"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("Naročanje"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Pomoč Podpora razvoju"),
@@ -944,6 +957,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Uporabniška imena Nautilus so centralizirana storitev, ki jo ponuja Nano.to"),
         "using": MessageLookupByLibrary.simpleMessage("Uporaba"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Podrobnosti"),
+        "viewPaymentHistory":
+            MessageLookupByLibrary.simpleMessage("Oglejte si zgodovino plačil"),
         "viewTX": MessageLookupByLibrary.simpleMessage("Ogled transakcije"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("teža glasovanja"),
         "warning": MessageLookupByLibrary.simpleMessage("Opozorilo"),

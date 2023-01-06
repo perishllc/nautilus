@@ -27,9 +27,9 @@ import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 
 class SubsSheet extends StatefulWidget {
-  const SubsSheet({super.key, required this.subs});
+  SubsSheet({super.key, required this.subs});
 
-  final List<Subscription> subs;
+  List<Subscription> subs;
 
   @override
   SubsSheetState createState() => SubsSheetState();
@@ -78,12 +78,19 @@ class SubsSheetState extends State<SubsSheet> {
           widget.subs.add(event.sub!);
         });
       } else {
-        // Name change
-        setState(() {
-          widget.subs.removeWhere((Subscription a) => a.id == event.sub!.id);
-          widget.subs.add(event.sub!);
-          widget.subs.sort((Subscription a, Subscription b) => a.id!.compareTo(b.id!));
+        // update subs list:
+        // backlog: not very efficient since we'll be reloading everything from disk,
+        // but not worth the effort to optimize this imo
+        sl.get<DBHelper>().getSubscriptions().then((List<Subscription> subs) {
+          setState(() {
+            widget.subs = subs;
+          });
         });
+        // setState(() {
+          // widget.subs.removeWhere((Subscription a) => a.id == event.sub!.id);
+          // widget.subs.add(event.sub!);
+          // widget.subs.sort((Subscription a, Subscription b) => a.id!.compareTo(b.id!));
+        // });
       }
     });
   }

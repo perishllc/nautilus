@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("账户"),
         "ackBackedUp":
             MessageLookupByLibrary.simpleMessage("您确定已经将您的种子或秘密词语备份了吗？"),
+        "activateSub": MessageLookupByLibrary.simpleMessage("激活订阅"),
         "activeMessageHeader": MessageLookupByLibrary.simpleMessage("活动消息"),
         "addAccount": MessageLookupByLibrary.simpleMessage("添加账户"),
         "addAddress": MessageLookupByLibrary.simpleMessage("添加地址"),
@@ -35,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("添加联系人"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("添加收藏夹"),
         "addNode": MessageLookupByLibrary.simpleMessage("添加节点"),
+        "addSubscription": MessageLookupByLibrary.simpleMessage("添加订阅"),
         "addUser": MessageLookupByLibrary.simpleMessage("添加用户"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage("添加仅观看帐户"),
         "addWatchOnlyAccountError":
@@ -94,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage("连接警告"),
         "businessButton": MessageLookupByLibrary.simpleMessage("商业"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("取消订阅"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("验证码"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "为了防止滥用，我们要求您解决验证码才能在下一页领取礼品卡。"),
@@ -181,6 +184,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("删除节点？"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "您确定要删除此订阅吗？\n\n您以后随时可以通过点击“添加订阅”按钮重新添加它"),
+        "deleteSubHeader": MessageLookupByLibrary.simpleMessage("删除订阅？"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("解除"),
         "disablePasswordSuccess":
@@ -207,6 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterHttpUrl": MessageLookupByLibrary.simpleMessage("输入 HTTP 网址"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("输入消息"),
         "enterMoneroAddress": MessageLookupByLibrary.simpleMessage("输入 XMR 地址"),
+        "enterName": MessageLookupByLibrary.simpleMessage("输入名字"),
         "enterNodeName": MessageLookupByLibrary.simpleMessage("输入节点名称"),
         "enterPasswordHint": MessageLookupByLibrary.simpleMessage("输入您的密码"),
         "enterSplitAmount": MessageLookupByLibrary.simpleMessage("输入分割金额"),
@@ -565,6 +572,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanInstructions": MessageLookupByLibrary.simpleMessage("扫描NANO二维码地址"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("通过 NFC 发送"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("扫描二维码"),
+        "schedule": MessageLookupByLibrary.simpleMessage("日程"),
         "searchHint": MessageLookupByLibrary.simpleMessage("搜索任何东西"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "您将会看到您的秘密词语，它是存取您的币的密匙。您要确保把它备份好，并且不要和任何人分享。"),
@@ -655,6 +663,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("订阅"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("通过 Apple Pay 订阅"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("已订阅"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("订阅中"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage("帮助支持发展"),
         "supportTheDeveloper": MessageLookupByLibrary.simpleMessage("支持开发者"),
@@ -745,6 +755,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("鹦鹉螺用户名是由 nano.to 提供的集中式服务"),
         "using": MessageLookupByLibrary.simpleMessage("使用"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("查看详情"),
+        "viewPaymentHistory": MessageLookupByLibrary.simpleMessage("查看付款记录"),
         "viewTX": MessageLookupByLibrary.simpleMessage("查看交易"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("投票比重"),
         "warning": MessageLookupByLibrary.simpleMessage("警告"),

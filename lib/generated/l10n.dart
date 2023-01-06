@@ -100,16 +100,6 @@ class Z {
     );
   }
 
-  /// `Active Message`
-  String get activeMessageHeader {
-    return Intl.message(
-      'Active Message',
-      name: 'activeMessageHeader',
-      desc: 'active_message',
-      args: [],
-    );
-  }
-
   /// `Activate Subscription`
   String get activateSub {
     return Intl.message(
@@ -120,12 +110,12 @@ class Z {
     );
   }
 
-  /// `Cancel Subscription`
-  String get cancelSub {
+  /// `Active Message`
+  String get activeMessageHeader {
     return Intl.message(
-      'Cancel Subscription',
-      name: 'cancelSub',
-      desc: 'cancel_subscription',
+      'Active Message',
+      name: 'activeMessageHeader',
+      desc: 'active_message',
       args: [],
     );
   }
@@ -190,26 +180,6 @@ class Z {
     );
   }
 
-  /// `Add Subscription`
-  String get addSubscription {
-    return Intl.message(
-      'Add Subscription',
-      name: 'addSubscription',
-      desc: 'Add a new subscription',
-      args: [],
-    );
-  }
-
-  /// `Subscribing`
-  String get subscribing {
-    return Intl.message(
-      'Subscribing',
-      name: 'subscribing',
-      desc: 'sub_confirm',
-      args: [],
-    );
-  }
-
   /// `Address`
   String get address {
     return Intl.message(
@@ -266,6 +236,16 @@ class Z {
       'Share Address',
       name: 'addressShare',
       desc: 'receive_share_cta',
+      args: [],
+    );
+  }
+
+  /// `Add Subscription`
+  String get addSubscription {
+    return Intl.message(
+      'Add Subscription',
+      name: 'addSubscription',
+      desc: 'Add a new subscription',
       args: [],
     );
   }
@@ -686,6 +666,16 @@ class Z {
       'Cancel',
       name: 'cancel',
       desc: 'dialog_cancel',
+      args: [],
+    );
+  }
+
+  /// `Cancel Subscription`
+  String get cancelSub {
+    return Intl.message(
+      'Cancel Subscription',
+      name: 'cancelSub',
+      desc: 'cancel_subscription',
       args: [],
     );
   }
@@ -1395,6 +1385,16 @@ class Z {
     );
   }
 
+  /// `Delete this request`
+  String get deleteRequest {
+    return Intl.message(
+      'Delete this request',
+      name: 'deleteRequest',
+      desc: 'delete_request',
+      args: [],
+    );
+  }
+
   /// `Are you sure you want to delete this subscription?\n\nYou can always re-add it later by tapping the "Add Subscription" button`
   String get deleteSubConfirmation {
     return Intl.message(
@@ -1411,16 +1411,6 @@ class Z {
       'Delete Subscription?',
       name: 'deleteSubHeader',
       desc: 'Confirmation dialog header',
-      args: [],
-    );
-  }
-
-  /// `Delete this request`
-  String get deleteRequest {
-    return Intl.message(
-      'Delete this request',
-      name: 'deleteRequest',
-      desc: 'delete_request',
       args: [],
     );
   }
@@ -1635,22 +1625,22 @@ class Z {
     );
   }
 
-  /// `Enter Node Name`
-  String get enterNodeName {
-    return Intl.message(
-      'Enter Node Name',
-      name: 'enterNodeName',
-      desc: 'change_node_name_hint',
-      args: [],
-    );
-  }
-
   /// `Enter Name`
   String get enterName {
     return Intl.message(
       'Enter Name',
       name: 'enterName',
       desc: 'add_sub_name_hint',
+      args: [],
+    );
+  }
+
+  /// `Enter Node Name`
+  String get enterNodeName {
+    return Intl.message(
+      'Enter Node Name',
+      name: 'enterNodeName',
+      desc: 'change_node_name_hint',
       args: [],
     );
   }
@@ -4434,6 +4424,16 @@ class Z {
     );
   }
 
+  /// `Schedule`
+  String get schedule {
+    return Intl.message(
+      'Schedule',
+      name: 'schedule',
+      desc: 'subs_schedule',
+      args: [],
+    );
+  }
+
   /// `Search for anything`
   String get searchHint {
     return Intl.message(
@@ -5205,6 +5205,16 @@ class Z {
     );
   }
 
+  /// `Subscribing`
+  String get subscribing {
+    return Intl.message(
+      'Subscribing',
+      name: 'subscribing',
+      desc: 'sub_confirm',
+      args: [],
+    );
+  }
+
   /// `Support`
   String get supportButton {
     return Intl.message(
@@ -5865,22 +5875,22 @@ class Z {
     );
   }
 
-  /// `View Transaction`
-  String get viewTX {
-    return Intl.message(
-      'View Transaction',
-      name: 'viewTX',
-      desc: 'transaction_transaction',
-      args: [],
-    );
-  }
-
   /// `View Payment History`
   String get viewPaymentHistory {
     return Intl.message(
       'View Payment History',
       name: 'viewPaymentHistory',
       desc: 'view_payment_history',
+      args: [],
+    );
+  }
+
+  /// `View Transaction`
+  String get viewTX {
+    return Intl.message(
+      'View Transaction',
+      name: 'viewTX',
+      desc: 'transaction_transaction',
       args: [],
     );
   }

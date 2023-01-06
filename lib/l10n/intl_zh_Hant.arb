@@ -25,6 +25,11 @@
     "type": "text",
     "description": "Ack backed up"
   },
+  "activateSub": "激活訂閱",
+  "@activateSub": {
+    "type": "text",
+    "description": "activate_subscription"
+  },
   "activeMessageHeader": "作用中訊息",
   "@activeMessageHeader": {
     "type": "text",
@@ -89,6 +94,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addSubscription": "添加訂閱",
+  "@addSubscription": {
+    "type": "text",
+    "description": "Add a new subscription"
   },
   "addUser": "添加用戶",
   "@addUser": {
@@ -299,6 +309,11 @@
   "@cancel": {
     "type": "text",
     "description": "dialog_cancel"
+  },
+  "cancelSub": "取消訂閱",
+  "@cancelSub": {
+    "type": "text",
+    "description": "cancel_subscription"
   },
   "captchaWarning": "驗證碼",
   "@captchaWarning": {
@@ -655,6 +670,16 @@
     "type": "text",
     "description": "delete_request"
   },
+  "deleteSubConfirmation": "您確定要刪除此訂閱嗎？\n\n您以後隨時可以通過點擊“添加訂閱”按鈕重新添加它",
+  "@deleteSubConfirmation": {
+    "type": "text",
+    "description": "delete sub confirmation info"
+  },
+  "deleteSubHeader": "刪除訂閱？",
+  "@deleteSubHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "解除",
   "@disablePasswordSheetHeader": {
     "type": "text",
@@ -759,6 +784,11 @@
   "@enterMoneroAddress": {
     "type": "text",
     "description": "enter_xmr_address"
+  },
+  "enterName": "輸入名字",
+  "@enterName": {
+    "type": "text",
+    "description": "add_sub_name_hint"
   },
   "enterNodeName": "輸入節點名稱",
   "@enterNodeName": {
@@ -2150,6 +2180,11 @@
     "type": "text",
     "description": "send_scan_qr"
   },
+  "schedule": "日程",
+  "@schedule": {
+    "type": "text",
+    "description": "subs_schedule"
+  },
   "searchHint": "搜尋任何東西",
   "@searchHint": {
     "type": "text",
@@ -2525,10 +2560,20 @@
     "type": "text",
     "description": "subscribe_button"
   },
+  "subscribed": "已訂閱",
+  "@subscribed": {
+    "type": "text",
+    "description": "subscribed_text"
+  },
   "subscribeWithApple": "通過 Apple Pay 訂閱",
   "@subscribeWithApple": {
     "type": "text",
     "description": "subscribe_apple_button"
+  },
+  "subscribing": "訂閱中",
+  "@subscribing": {
+    "type": "text",
+    "description": "sub_confirm"
   },
   "supportButton": "Support",
   "@supportButton": {
@@ -2859,6 +2904,11 @@
   "@viewDetails": {
     "type": "text",
     "description": "transaction_details"
+  },
+  "viewPaymentHistory": "查看付款記錄",
+  "@viewPaymentHistory": {
+    "type": "text",
+    "description": "view_payment_history"
   },
   "viewTX": "查看交易",
   "@viewTX": {

@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Mga Account"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Sigurado ka ba na naback-up mo ang iyong secret phrase or seed?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("I-activate ang Subscription"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktibong Mensahe"),
         "addAccount":
@@ -41,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Magdagdag ng Paboritong"),
         "addNode": MessageLookupByLibrary.simpleMessage("Magdagdag ng Node"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Magdagdag ng Subscription"),
         "addUser": MessageLookupByLibrary.simpleMessage("Magdagdag ng User"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Magdagdag ng Watch Only Account"),
@@ -122,6 +126,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Babala sa Koneksyon"),
         "businessButton": MessageLookupByLibrary.simpleMessage("negosyo"),
         "cancel": MessageLookupByLibrary.simpleMessage("Kanselahin"),
+        "cancelSub":
+            MessageLookupByLibrary.simpleMessage("Ikansela ang subskripsyon"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "Upang maiwasan ang pang-aabuso, hinihiling namin sa iyo na lutasin ang isang captcha upang ma-claim ang gift card sa susunod na pahina."),
@@ -240,6 +246,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tanggalin ang Node?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Sigurado ka bang gusto mong tanggalin ang subscription na ito?\n\nMaaari mo itong muling idagdag anumang oras sa ibang pagkakataon sa pamamagitan ng pag-tap sa button na \"Magdagdag ng Subscription.\""),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Tanggalin ang Subscription?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Disable"),
         "disablePasswordSuccess":
@@ -276,6 +286,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Ipasok ang Mensahe"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Ipasok ang XMR Address"),
+        "enterName":
+            MessageLookupByLibrary.simpleMessage("Ilagay ang pangalan"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("Ipasok ang Pangalan ng Node"),
         "enterPasswordHint":
@@ -740,6 +752,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ipadala sa pamamagitan ng NFC"),
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("I-scan ang QR Code"),
+        "schedule": MessageLookupByLibrary.simpleMessage("Iskedyul"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Maghanap ng anumang bagay"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -865,6 +878,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mag-subscribe"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Mag-subscribe sa pamamagitan ng Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Naka-subscribe"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("Nagsu-subscribe"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Tulong sa Pag-unlad ng Suporta"),
@@ -977,6 +992,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "using": MessageLookupByLibrary.simpleMessage("Gamit"),
         "viewDetails":
             MessageLookupByLibrary.simpleMessage("Tingnan ang detalye"),
+        "viewPaymentHistory": MessageLookupByLibrary.simpleMessage(
+            "Tingnan ang History ng Pagbabayad"),
         "viewTX":
             MessageLookupByLibrary.simpleMessage("Tingnan ang Transaksyon"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Timbang ng boto"),

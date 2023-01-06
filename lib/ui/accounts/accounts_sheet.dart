@@ -630,7 +630,10 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
         onPressed: (BuildContext context) async {
           await Future<dynamic>.delayed(const Duration(milliseconds: 250));
           if (!mounted) return;
-          AccountDetailsSheet(account).mainBottomSheet(context);
+          Sheets.showAppHeightNineSheet(
+            context: context,
+            widget: AccountDetailsSheet(account: account),
+          );
           await Slidable.of(context)!.close();
         }));
 

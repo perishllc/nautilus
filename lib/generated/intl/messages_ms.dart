@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Akaun"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Adakah anda pasti bahawa anda telah menyokong frasa atau benih rahsia anda?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Aktifkan Langganan"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Mesej Aktif"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Tambah akaun"),
@@ -38,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Tambah Kenalan"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Tambah Kegemaran"),
         "addNode": MessageLookupByLibrary.simpleMessage("Tambah Nod"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Tambah Langganan"),
         "addUser": MessageLookupByLibrary.simpleMessage("Tambah Pengguna"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Tambah Akaun Tontonan Sahaja"),
@@ -116,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Amaran Sambungan"),
         "businessButton": MessageLookupByLibrary.simpleMessage("Perniagaan"),
         "cancel": MessageLookupByLibrary.simpleMessage("Batal"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("Batalkan Langganan"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "Untuk mengelakkan penyalahgunaan, kami memerlukan anda menyelesaikan captcha untuk menuntut kad hadiah pada halaman seterusnya."),
@@ -231,6 +236,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Padamkan Nod?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Adakah anda pasti mahu memadamkan langganan ini?\n\nAnda sentiasa boleh menambahkannya semula kemudian dengan mengetik butang \"Tambah Langganan\"."),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Padamkan Langganan?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Lumpuhkan"),
         "disablePasswordSuccess": MessageLookupByLibrary.simpleMessage(
@@ -266,6 +275,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Masukkan Mesej"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Masukkan Alamat XMR"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Masukkan Nama"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("Masukkan Nama Nod"),
         "enterPasswordHint":
@@ -713,6 +723,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Imbaskan Kod QR\n Alamat Nano anda"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Hantar melalui NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Imbaskan Kod QR"),
+        "schedule": MessageLookupByLibrary.simpleMessage("Jadual"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Cari apa-apa"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "Dalam skrin seterusnya, anda akan melihat frasa rahsia anda. Ia adalah kata laluan untuk mengakses dana anda. Adalah penting bahawa anda menyokongnya dan tidak pernah berkongsi dengan sesiapa sahaja."),
@@ -831,6 +842,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Langgan"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Langgan melalui Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Dilanggan"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("melanggan"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Bantu Sokongan Pembangunan"),
@@ -941,6 +954,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nama pengguna Nautilus adalah perkhidmatan terpusat yang disediakan oleh Nano.to"),
         "using": MessageLookupByLibrary.simpleMessage("menggunakan"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Lihat Butiran"),
+        "viewPaymentHistory":
+            MessageLookupByLibrary.simpleMessage("Lihat Sejarah Pembayaran"),
         "viewTX": MessageLookupByLibrary.simpleMessage("Lihat Transaksi"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Berat Mengundi"),
         "warning": MessageLookupByLibrary.simpleMessage("AMARAN"),

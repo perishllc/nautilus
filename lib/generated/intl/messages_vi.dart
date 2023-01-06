@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Các tài khoản"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn rằng đã sao lưu cụm từ bí mật hoặc hạt giống của bạn?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Kích hoạt đăng ký"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("TIn nhắn đang hoạt động"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Thêm tài khoản"),
@@ -37,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Thêm liên hệ"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Thêm yêu thích"),
         "addNode": MessageLookupByLibrary.simpleMessage("Thêm nút"),
+        "addSubscription": MessageLookupByLibrary.simpleMessage("Thêm đăng ký"),
         "addUser": MessageLookupByLibrary.simpleMessage("Thêm người dùng"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Thêm tài khoản chỉ xem"),
@@ -120,6 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "businessButton":
             MessageLookupByLibrary.simpleMessage("Việc kinh doanh"),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("Hủy đăng ký"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("mã ngẫu nhiên"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "Để ngăn chặn việc lạm dụng, chúng tôi yêu cầu bạn giải mã xác thực để yêu cầu thẻ quà tặng trên trang tiếp theo."),
@@ -235,6 +239,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("Xóa nút?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn muốn xóa đăng ký này?\n\nBạn luôn có thể thêm lại nó sau bằng cách nhấn vào nút \"Thêm đăng ký\""),
+        "deleteSubHeader": MessageLookupByLibrary.simpleMessage("Xóa đăng ký?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Vô hiệu hoá"),
         "disablePasswordSuccess":
@@ -266,6 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Nhập tin nhắn"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Nhập địa chỉ XMR"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Nhập tên"),
         "enterNodeName": MessageLookupByLibrary.simpleMessage("Nhập tên nút"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Nhập mật khẩu"),
@@ -712,6 +720,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Quét \nmã QR địa chỉ Banano"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Gửi qua NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Quét mã QR"),
+        "schedule": MessageLookupByLibrary.simpleMessage("Lịch trình"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Tìm bất cứ điều gì"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -833,6 +842,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Đặt mua"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Đăng ký qua Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("đã đăng ký"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("đăng ký"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Trợ giúp Hỗ trợ Phát triển"),
@@ -945,6 +956,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tên người dùng Nautilus là một dịch vụ tập trung được cung cấp bởi Nano.to"),
         "using": MessageLookupByLibrary.simpleMessage("Sử dụng"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Xem chi tiết"),
+        "viewPaymentHistory":
+            MessageLookupByLibrary.simpleMessage("Xem lịch sử thanh toán"),
         "viewTX": MessageLookupByLibrary.simpleMessage("Xem giao dịch"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Lượng bỏ phiếu"),
         "warning": MessageLookupByLibrary.simpleMessage("CẢNH BÁO!"),

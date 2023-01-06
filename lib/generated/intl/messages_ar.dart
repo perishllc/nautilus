@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("الحسابات"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد من أنك قمت بنسخ نسخة احتياطية من العبارة السرية أو مفتاحك الخاص؟"),
+        "activateSub": MessageLookupByLibrary.simpleMessage("تفعيل الاشتراك"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("رسالة نشطة"),
         "addAccount": MessageLookupByLibrary.simpleMessage("إضافة حساب"),
@@ -37,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("إضافة جهة الاتصال"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("إضافة المفضلة"),
         "addNode": MessageLookupByLibrary.simpleMessage("أضف العقدة"),
+        "addSubscription": MessageLookupByLibrary.simpleMessage("إضافة اشتراك"),
         "addUser": MessageLookupByLibrary.simpleMessage("أضف مستخدم"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("أضف حساب المشاهدة فقط"),
@@ -114,6 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تحذير الاتصال"),
         "businessButton": MessageLookupByLibrary.simpleMessage("اعمال"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("إلغاء الاشتراك"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("كلمة التحقق"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "من أجل منع إساءة الاستخدام ، نطلب منك حل captcha للمطالبة ببطاقة الهدايا في الصفحة التالية."),
@@ -227,6 +230,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("هل تريد حذف العقدة؟"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد أنك تريد حذف هذا الاشتراك؟\n\nيمكنك دائمًا إعادة إضافته لاحقًا بالنقر فوق الزر \"إضافة اشتراك\""),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("حذف الاشتراك؟"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("تعطيل"),
         "disablePasswordSuccess":
@@ -260,6 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("أدخل رسالة"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("أدخل عنوان XMR"),
+        "enterName": MessageLookupByLibrary.simpleMessage("أدخل الاسم"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("أدخل اسم العقدة"),
         "enterPasswordHint":
@@ -694,6 +702,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("إرسال عبر NFC"),
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("مسح رمز الاستجابة السريعة"),
+        "schedule": MessageLookupByLibrary.simpleMessage("برنامج"),
         "searchHint": MessageLookupByLibrary.simpleMessage("ابحث عن أي شيء"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "في الشاشة التالية ، سترى العبارة السرية الخاصة بك. إنها كلمة مرور للوصول إلى أموالك. من الأهمية أن تقوم بنسخه احتياطيًا وأن لا تشاركه أبدًا مع أي شخص."),
@@ -812,6 +821,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("الإشتراك"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("اشترك عبر Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("مشترك"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("الاشتراك"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("مساعدة في دعم التنمية"),
@@ -918,6 +929,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "أسماء مستخدمي Nautilus هي خدمة مركزية تقدمها Nano.to"),
         "using": MessageLookupByLibrary.simpleMessage("استخدام"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("عرض التفاصيل"),
+        "viewPaymentHistory":
+            MessageLookupByLibrary.simpleMessage("عرض تاريخ الدفع"),
         "viewTX": MessageLookupByLibrary.simpleMessage("عرض الصفقة"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("وزن التصويت"),
         "warning": MessageLookupByLibrary.simpleMessage("تحذير"),

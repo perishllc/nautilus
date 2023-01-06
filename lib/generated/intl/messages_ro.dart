@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Conturi"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Sunteți sigur/ă că ați salvat formula secretă ori seed-ul portofelului?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Activați abonamentul"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Mesaj activ"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Adăugare cont"),
@@ -39,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Adaugă contact"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Adauga Favorite"),
         "addNode": MessageLookupByLibrary.simpleMessage("Adăugați nod"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Adăugați abonament"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Adăugați un utilizator"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -119,6 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Avertisment de conectare"),
         "businessButton": MessageLookupByLibrary.simpleMessage("Afaceri"),
         "cancel": MessageLookupByLibrary.simpleMessage("Renunţare"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("Anuleaza abonarea"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "Pentru a preveni abuzul, vă solicităm să rezolvați un captcha pentru a revendica cardul cadou pe pagina următoare."),
@@ -235,6 +240,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ștergeți nodul?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Sigur doriți să ștergeți acest abonament?\n\nPuteți oricând să-l adăugați din nou mai târziu atingând butonul „Adăugați abonament”."),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Ștergeți abonamentul?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Dezactivare"),
         "disablePasswordSuccess":
@@ -272,6 +281,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Introduceţi mesajul"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Introduceți adresa XMR"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Introdu numele"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("Introduceți Numele nodului"),
         "enterPasswordHint":
@@ -725,6 +735,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Scanează o adresă NANO de tip cod QR"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Trimite prin NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Scanare cod QR"),
+        "schedule": MessageLookupByLibrary.simpleMessage("Programa"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Caută orice"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "În continuare, veți vedea formula secretă a portofelului. Aceasta este o parolă care permite accesul la fonduri. Este vital să fie notată într-un caiet și să nu fie arătată vreodată nimănui."),
@@ -842,6 +853,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonati-va"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Abonați-vă prin Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Abonat"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("Abonarea"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Ajută la sprijinirea dezvoltării"),
@@ -955,6 +968,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Numele de utilizator Nautilus sunt un serviciu centralizat furnizat de Nano.to"),
         "using": MessageLookupByLibrary.simpleMessage("Folosind"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Detalii"),
+        "viewPaymentHistory":
+            MessageLookupByLibrary.simpleMessage("Vedeți Istoricul plăților"),
         "viewTX":
             MessageLookupByLibrary.simpleMessage("Vizualizați tranzacția"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Putere de vot"),

@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Акаунти"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Сигурни ли сте, че имате копие на тайната си фраза или Seed?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Активиране на абонамента"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Активно съобщение"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Добави Акаунт"),
@@ -38,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Добави Контакт"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Добави Любими"),
         "addNode": MessageLookupByLibrary.simpleMessage("Добавете възел"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Добавяне на абонамент"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Добавяне на потребител"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -118,6 +122,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Предупреждение за връзка"),
         "businessButton": MessageLookupByLibrary.simpleMessage("Бизнес"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмени"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("Отказ от абонамент"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "За да предотвратим злоупотреба, изискваме от вас да разрешите captcha, за да поискате картата за подарък на следващата страница."),
@@ -234,6 +239,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Изтриване на възел?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Сигурни ли сте, че искате да изтриете този абонамент?\n\nВинаги можете да го добавите отново по-късно, като докоснете бутона „Добавяне на абонамент“."),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Изтриване на абонамент?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Деактивирай"),
         "disablePasswordSuccess":
@@ -269,6 +278,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Въведете съобщение"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Въведете XMR адрес"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Въведи име"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("Въведете име на възел"),
         "enterPasswordHint":
@@ -720,6 +730,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Сканирай Nano адрес или QR-код"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Изпращане чрез NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Сканирай QR-код"),
+        "schedule": MessageLookupByLibrary.simpleMessage("График"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Търсете каквото и да е"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -840,6 +851,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Абонирай се"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Абонирайте се чрез Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Абониран"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("Абониране"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Помощ за поддръжка на развитието"),
@@ -951,6 +964,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Потребителските имена на Nautilus са централизирана услуга, предоставяна от Nano.to"),
         "using": MessageLookupByLibrary.simpleMessage("Използвайки"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Виж Детайли"),
+        "viewPaymentHistory": MessageLookupByLibrary.simpleMessage(
+            "Преглед на хронологията на плащанията"),
         "viewTX":
             MessageLookupByLibrary.simpleMessage("Преглед на транзакцията"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Гласова Тежест"),

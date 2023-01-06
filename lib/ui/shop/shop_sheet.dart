@@ -11,9 +11,11 @@ import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/themes.dart';
 import 'package:wallet_flutter/ui/shop/use_card.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
+import 'package:wallet_flutter/ui/widgets/dialog.dart';
 import 'package:wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 
 class ShopSheet extends StatefulWidget {
@@ -46,27 +48,41 @@ class ShopSheetState extends State<ShopSheet> {
         ),
         child: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.only(top: 15, bottom: 20),
-              constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
-              child: Row(
-                children: [
-                  Column(
-                    children: <Widget>[
-                      Handlebars.horizontal(
-                        context,
-                        margin: const EdgeInsets.only(top: 10, bottom: 15),
-                      ),
-                      AutoSizeText(
-                        Z.of(context).useNano,
-                        style: AppStyles.textStyleHeader(context),
-                        maxLines: 1,
-                        stepGranularity: 0.1,
-                      ),
-                    ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 60,
+                  height: 60,
+                  child: AppDialogs.infoButton(
+                    context,
+                    () {
+                      Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
+                      UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
+                    },
+                    icon: AppIcons.content_copy,
                   ),
-                ],
-              ),
+                ),
+                Column(
+                  children: <Widget>[
+                    Handlebars.horizontal(
+                      context,
+                      margin: const EdgeInsets.only(top: 10, bottom: 15),
+                    ),
+                    AutoSizeText(
+                      Z.of(context).shopButton.toUpperCase(),
+                      style: AppStyles.textStyleHeader(context),
+                      maxLines: 1,
+                      stepGranularity: 0.1,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  width: 60,
+                  height: 60,
+                ),
+              ],
             ),
             Expanded(
               child: DraggableScrollbar(
@@ -97,19 +113,19 @@ class ShopSheetState extends State<ShopSheet> {
                       //   ],
                       // ),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          UseCard(
-                            icon: AppIcons.content_copy,
-                            title: Z.of(context).copyWalletAddressToClipboard,
-                            onPress: () async {
-                              Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
-                              UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
-                            },
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+                      //     UseCard(
+                      //       icon: AppIcons.content_copy,
+                      //       title: Z.of(context).copyWalletAddressToClipboard,
+                      //       onPress: () async {
+                      //         Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
+                      //         UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
+                      //       },
+                      //     ),
+                      //   ],
+                      // ),
 
                       Padding(
                         padding: const EdgeInsets.only(left: 20),

@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cron_form_field/cron_expression.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -30,6 +31,7 @@ import 'package:wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/numberutil.dart';
 import 'package:wallet_flutter/util/user_data_util.dart';
+import 'package:cron_form_field/cron_form_field.dart';
 
 class AddSubSheet extends StatefulWidget {
   const AddSubSheet({required this.localCurrency}) : super();
@@ -68,6 +70,11 @@ class AddSubSheetState extends State<AddSubSheet> {
 
   String _lastLocalCurrencyAmount = "";
   String _lastCryptoAmount = "";
+
+  TextEditingController _cronController = TextEditingController();
+  String _valueChanged = '';
+  String _valueToValidate = '';
+  String _valueSaved = '';
 
   @override
   void initState() {
@@ -181,8 +188,7 @@ class AddSubSheetState extends State<AddSubSheet> {
 
   Widget getEnterNameContainer() {
     return AppTextField(
-      topMargin: 20,
-      // padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+      topMargin: 30,
       textAlign: TextAlign.center,
       focusNode: _nameFocusNode,
       controller: _nameController,
@@ -216,7 +222,7 @@ class AddSubSheetState extends State<AddSubSheet> {
   //************ Enter Amount Container Method ************//
   //*******************************************************//
   Widget getEnterAmountContainer() {
-    double margin = 20;
+    double margin = 200;
     if (_addressController.text.startsWith(NonTranslatable.currencyPrefix)) {
       if (_addressController.text.length > 24) {
         margin += 15;
@@ -554,160 +560,181 @@ class AddSubSheetState extends State<AddSubSheet> {
           Expanded(
             child: Container(
               margin: const EdgeInsets.only(top: 5, bottom: 5),
-              child: Stack(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: () {
-                      // Clear focus of our fields when tapped in this empty space
-                      _nameFocusNode.unfocus();
-                      _amountFocusNode.unfocus();
-                      _addressFocusNode.unfocus();
-                    },
-                    child: Container(
-                      color: Colors.transparent,
-                      constraints: const BoxConstraints.expand(),
-                      child: const SizedBox.expand(),
-                    ),
-                  ),
-                  KeyboardAvoider(
-                    duration: Duration.zero,
-                    autoScroll: true,
-                    focusPadding: 40,
-                    child: Column(
-                      children: <Widget>[
-                        Stack(
-                          children: <Widget>[
-                            // Column for Enter Address container + Enter Address Error container
-                            Column(
-                              children: <Widget>[
-                                Container(
-                                  alignment: Alignment.topCenter,
-                                  child: Stack(
-                                    alignment: Alignment.topCenter,
-                                    children: <Widget>[
-                                      getEnterNameContainer(),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  alignment: AlignmentDirectional.center,
-                                  margin: const EdgeInsets.only(top: 3),
-                                  child: Text(_nameValidationText,
-                                      style: TextStyle(
-                                        fontSize: 14.0,
-                                        color: StateContainer.of(context).curTheme.primary,
-                                        fontFamily: "NunitoSans",
-                                        fontWeight: FontWeight.w600,
-                                      )),
-                                ),
+              child: GestureDetector(
+                onTap: () {
+                  // Clear focus of our fields when tapped in this empty space
+                  _nameFocusNode.unfocus();
+                  _amountFocusNode.unfocus();
+                  _addressFocusNode.unfocus();
+                },
+                child: KeyboardAvoider(
+                  duration: Duration.zero,
+                  autoScroll: true,
+                  focusPadding: 40,
+                  child: Column(
+                    children: <Widget>[
+                      Stack(
+                        children: <Widget>[
+                          // Column for Enter Name container + Enter Name Error container
+                          Column(
+                            children: [
+                              getEnterNameContainer(),
+                              Container(
+                                alignment: AlignmentDirectional.center,
+                                margin: const EdgeInsets.only(top: 3),
+                                child: Text(_nameValidationText,
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      color: StateContainer.of(context).curTheme.primary,
+                                      fontFamily: "NunitoSans",
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                              ),
+                            ],
+                          ),
 
-                                // Column for Enter Address container + Enter Address Error container
-                                Column(
+                          // Column for Enter Address container + Enter Address Error container
+                          Column(
+                            children: <Widget>[
+                              Container(
+                                alignment: Alignment.topCenter,
+                                child: Stack(
+                                  alignment: Alignment.topCenter,
                                   children: <Widget>[
                                     Container(
-                                      alignment: Alignment.topCenter,
-                                      child: Stack(
-                                        alignment: Alignment.topCenter,
-                                        children: <Widget>[
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                left: MediaQuery.of(context).size.width * 0.105,
-                                                right: MediaQuery.of(context).size.width * 0.105),
-                                            alignment: Alignment.bottomCenter,
-                                            constraints: const BoxConstraints(maxHeight: 160, minHeight: 0),
-                                            // ********************************************* //
-                                            // ********* The pop-up Contacts List ********* //
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(25),
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(25),
-                                                  color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                                ),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(25),
-                                                  ),
-                                                  margin: const EdgeInsets.only(bottom: 10),
-                                                  child: _users.isEmpty
-                                                      ? const SizedBox()
-                                                      : ListView.builder(
-                                                          shrinkWrap: true,
-                                                          padding: EdgeInsets.zero,
-                                                          itemCount: _users.length,
-                                                          itemBuilder: (BuildContext context, int index) {
-                                                            return Misc.buildUserItem(context, _users[index], false,
-                                                                (User user) {
-                                                              _addressController.text = user.getDisplayName()!;
-                                                              _addressFocusNode.unfocus();
-                                                              setState(() {
-                                                                _isUser = true;
-                                                                _pasteButtonVisible = false;
-                                                                _addressStyle = AddressStyle.PRIMARY;
-                                                                _addressValidationText = "";
-                                                              });
-                                                            });
-                                                          },
-                                                        ),
-                                                ),
-                                              ),
-                                            ),
+                                      margin: EdgeInsets.only(
+                                          left: MediaQuery.of(context).size.width * 0.105,
+                                          right: MediaQuery.of(context).size.width * 0.105),
+                                      alignment: Alignment.bottomCenter,
+                                      constraints: const BoxConstraints(maxHeight: 160, minHeight: 0),
+                                      // ********************************************* //
+                                      // ********* The pop-up Contacts List ********* //
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(25),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(25),
+                                            color: StateContainer.of(context).curTheme.backgroundDarkest,
                                           ),
-
-                                          // ******* Enter Address Container ******* //
-                                          getEnterAddressContainer(),
-                                          // ******* Enter Address Container End ******* //
-                                        ],
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(25),
+                                            ),
+                                            margin: const EdgeInsets.only(bottom: 50),
+                                            child: _users.isEmpty
+                                                ? const SizedBox()
+                                                : ListView.builder(
+                                                    shrinkWrap: true,
+                                                    padding: EdgeInsets.zero,
+                                                    itemCount: _users.length,
+                                                    itemBuilder: (BuildContext context, int index) {
+                                                      return Misc.buildUserItem(context, _users[index], true,
+                                                          (User user) {
+                                                        _addressController!.text =
+                                                            user.getDisplayName(ignoreNickname: true)!;
+                                                        _addressFocusNode!.unfocus();
+                                                        setState(() {
+                                                          _isUser = true;
+                                                          _pasteButtonVisible = false;
+                                                          _addressStyle = AddressStyle.PRIMARY;
+                                                          _addressValidationText = "";
+                                                        });
+                                                      });
+                                                    },
+                                                  ),
+                                          ),
+                                        ),
                                       ),
                                     ),
 
-                                    // ******* Enter Address Error Container ******* //
-                                    Container(
-                                      alignment: AlignmentDirectional.center,
-                                      margin: const EdgeInsets.only(top: 3),
-                                      child: Text(_addressValidationText,
-                                          style: TextStyle(
-                                            fontSize: 14.0,
-                                            color: StateContainer.of(context).curTheme.primary,
-                                            fontFamily: "NunitoSans",
-                                            fontWeight: FontWeight.w600,
-                                          )),
-                                    ),
-                                    // ******* Enter Address Error Container End ******* //
+                                    // ******* Enter Address Container ******* //
+                                    getEnterAddressContainer(),
+                                    // ******* Enter Address Container End ******* //
                                   ],
                                 ),
+                              ),
 
-                                Container(
+                              // Enter Address Error Container
+                              Container(
+                                margin: const EdgeInsets.only(top: 5, bottom: 5),
+                                child: Text(_addressValidationText,
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      color: StateContainer.of(context).curTheme.primary,
+                                      fontFamily: "NunitoSans",
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                              ),
+                            ],
+                          ),
+                          // const Text(
+                          //   'CronFormField data readable value:',
+                          //   style: TextStyle(fontWeight: FontWeight.bold),
+                          // ),
+
+                          // Column for Enter Amount container + Enter Amount Error container
+                          Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.topCenter,
+                                child: Stack(
                                   alignment: Alignment.topCenter,
-                                  child: Stack(
-                                    alignment: Alignment.topCenter,
-                                    children: <Widget>[
-                                      getEnterAmountContainer(),
-                                    ],
-                                  ),
+                                  children: <Widget>[
+                                    getEnterAmountContainer(),
+                                  ],
                                 ),
-                                Container(
-                                  alignment: AlignmentDirectional.center,
-                                  margin: const EdgeInsets.only(top: 3),
-                                  child: Text(_amountValidationText,
-                                      style: TextStyle(
-                                        fontSize: 14.0,
-                                        color: StateContainer.of(context).curTheme.primary,
-                                        fontFamily: "NunitoSans",
-                                        fontWeight: FontWeight.w600,
-                                      )),
+                              ),
+                              Container(
+                                alignment: AlignmentDirectional.center,
+                                margin: const EdgeInsets.only(top: 3),
+                                child: Text(_amountValidationText,
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      color: StateContainer.of(context).curTheme.primary,
+                                      fontFamily: "NunitoSans",
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                              ),
+                            ],
+                          ),
+
+                          // frequency container:
+                          Column(
+                            children: [
+                              Container(
+                                alignment: Alignment.topCenter,
+                                margin: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width * 0.105,
+                                  right: MediaQuery.of(context).size.width * 0.105,
+                                  top: 300,
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                                child: CronFormField(
+                                  // controller: _cronController,
+                                  initialValue: "0 0 1 * *", // the first of every month
+                                  labelText: Z.of(context).schedule,
+                                  onChanged: (String val) => setState(() => _valueChanged = val),
+                                  validator: (String? val) {
+                                    setState(() => _valueToValidate = val ?? '');
+                                    return null;
+                                  },
+                                  onSaved: (String? val) => setState(() => _valueSaved = val ?? ''),
+                                  // outputFormat: CronExpressionOutputFormat.AUTO,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Text(CronExpression.fromString(_valueChanged).toReadableString()),
+                              const SizedBox(height: 30),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
+
           //A column with "Add Contact" and "Close" buttons
           Column(
             children: <Widget>[

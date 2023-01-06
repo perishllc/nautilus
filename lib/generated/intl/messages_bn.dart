@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("অ্যাকাউন্টস"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "আপনি কি নিশ্চিত যে আপনি আপনার গোপন বাক্যাংশ বা সীড  ব্যাক আপ করেছেন?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("সদস্যতা সক্রিয় করুন"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("সক্রিয় বার্তা"),
         "addAccount":
@@ -41,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("কন্টাক্ট সংরক্ষণ"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("প্রিয় যোগ করো"),
         "addNode": MessageLookupByLibrary.simpleMessage("নোড যোগ করুন"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("সদস্যতা যোগ করুন"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("একটি ব্যবহারকারী যোগ করুন"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -123,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("সংযোগ সতর্কতা"),
         "businessButton": MessageLookupByLibrary.simpleMessage("ব্যবসা"),
         "cancel": MessageLookupByLibrary.simpleMessage("বাতিল"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("সদস্যতা বাতিল করুন"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("ক্যাপচা"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "অপব্যবহার প্রতিরোধ করার জন্য, পরবর্তী পৃষ্ঠায় উপহার কার্ড দাবি করার জন্য আপনাকে একটি ক্যাপচা সমাধান করতে হবে।"),
@@ -240,6 +245,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("নোড মুছে দিন?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "আপনি কি এই সদস্যতা মুছে ফেলার বিষয়ে নিশ্চিত?\n\nআপনি \"সাবস্ক্রিপশন যোগ করুন\" বোতামে আলতো চাপ দিয়ে পরে এটিকে সর্বদা পুনরায় যোগ করতে পারেন৷"),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("সদস্যতা মুছবেন?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("নিষ্ক্রিয়"),
         "disablePasswordSuccess": MessageLookupByLibrary.simpleMessage(
@@ -273,6 +282,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("বার্তা লিখুন"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("XMR ঠিকানা লিখুন"),
+        "enterName": MessageLookupByLibrary.simpleMessage("রত"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("নোডের নাম লিখুন"),
         "enterPasswordHint":
@@ -723,6 +733,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("NFC এর মাধ্যমে পাঠান"),
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("QR কোড স্ক্যান করুন"),
+        "schedule": MessageLookupByLibrary.simpleMessage("সময়সূচী"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "যেকোনো কিছুর জন্য অনুসন্ধান করুন"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -840,6 +851,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("সাবস্ক্রাইব"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "অ্যাপল পে এর মাধ্যমে সদস্যতা নিন"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("সদস্যতা"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("সদস্যতা"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("সাহায্য সমর্থন উন্নয়ন"),
@@ -951,6 +964,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "নটিলাস ইউজারনেম হল Nano.To দ্বারা সরবরাহিত একটি কেন্দ্রীভূত পরিষেবা"),
         "using": MessageLookupByLibrary.simpleMessage("ব্যবহার"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("বিস্তারিত দেখুন"),
+        "viewPaymentHistory":
+            MessageLookupByLibrary.simpleMessage("পেমেন্ট ইতিহাস দেখুন"),
         "viewTX": MessageLookupByLibrary.simpleMessage("লেনদেন দেখুন"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("ভোটের ওজন"),
         "warning": MessageLookupByLibrary.simpleMessage("সতর্কতাসূচক"),

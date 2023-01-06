@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Accounts"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Are you sure that you\'ve backed up your secret phrase or seed?"),
+        "activateSub": MessageLookupByLibrary.simpleMessage("구독 활성화"),
         "activeMessageHeader": MessageLookupByLibrary.simpleMessage("액티브 메시지"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Add Account"),
         "addAddress": MessageLookupByLibrary.simpleMessage("주소 추가"),
@@ -35,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("연락처 추가"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("즐겨찾기 추가"),
         "addNode": MessageLookupByLibrary.simpleMessage("노드 추가"),
+        "addSubscription": MessageLookupByLibrary.simpleMessage("구독 추가"),
         "addUser": MessageLookupByLibrary.simpleMessage("사용자 추가"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("보기 전용 계정 추가"),
@@ -105,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("연결 경고"),
         "businessButton": MessageLookupByLibrary.simpleMessage("사업"),
         "cancel": MessageLookupByLibrary.simpleMessage("취소"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("구독 취소"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("보안문자"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "남용을 방지하기 위해 다음 페이지에서 기프트 카드를 청구하려면 보안 문자를 해결해야 합니다."),
@@ -204,6 +207,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("노드를 삭제하시겠습니까?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "이 구독을 삭제하시겠습니까?\n\n\"구독 추가\" 버튼을 탭하여 나중에 언제든지 다시 추가할 수 있습니다."),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("구독을 삭제하시겠습니까?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Disable"),
         "disablePasswordSuccess":
@@ -231,6 +238,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterHttpUrl": MessageLookupByLibrary.simpleMessage("HTTP URL 입력"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("메시지 입력"),
         "enterMoneroAddress": MessageLookupByLibrary.simpleMessage("XMR 주소 입력"),
+        "enterName": MessageLookupByLibrary.simpleMessage("이름을 입력하시오"),
         "enterNodeName": MessageLookupByLibrary.simpleMessage("노드 이름 입력"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Enter your password"),
@@ -628,6 +636,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nano QR 코드 주소를 스캔하하세요"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("NFC를 통해 보내기"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("QR 코드를 스캔하세요"),
+        "schedule": MessageLookupByLibrary.simpleMessage("일정"),
         "searchHint": MessageLookupByLibrary.simpleMessage("무엇이든 검색"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "In the next screen, you will see your secret phrase. It is a password to access your funds. It is crucial that you back it up and never share it with anyone."),
@@ -731,6 +740,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("구독하다"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Apple Pay를 통해 구독"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("구독"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("구독하기"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage("도움말 지원 개발"),
         "supportTheDeveloper": MessageLookupByLibrary.simpleMessage("개발자 지원"),
@@ -829,6 +840,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "노틸러스 사용자 이름은 Nano.to에서 제공하는 중앙 집중식 서비스입니다."),
         "using": MessageLookupByLibrary.simpleMessage("사용"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("세부 정보보기"),
+        "viewPaymentHistory": MessageLookupByLibrary.simpleMessage("결제 내역 보기"),
         "viewTX": MessageLookupByLibrary.simpleMessage("거래 보기"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Voting Weight"),
         "warning": MessageLookupByLibrary.simpleMessage("경고"),

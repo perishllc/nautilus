@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Счета"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Вы уверены, что у вас есть копия вашей секретной фразы или Seed?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Активировать подписку"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Активное сообщение"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Добавить аккаунт"),
@@ -39,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Добавить избранное"),
         "addNode": MessageLookupByLibrary.simpleMessage("Добавить узел"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Добавить подписку"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Добавить пользователя"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -122,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Предупреждение о подключении"),
         "businessButton": MessageLookupByLibrary.simpleMessage("Бизнес"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("Отменить подписку"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Капча"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "Во избежание злоупотреблений мы требуем, чтобы вы разгадали капчу, чтобы получить подарочную карту на следующей странице."),
@@ -241,6 +246,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Удалить узел?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Вы уверены, что хотите удалить эту подписку?\n\nВы всегда можете повторно добавить ее позже, нажав кнопку «Добавить подписку»."),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Удалить подписку?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Отключить"),
         "disablePasswordSuccess":
@@ -276,6 +285,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Введите сообщение"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Введите XMR-адрес"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Введите имя"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("Введите имя узла"),
         "enterPasswordHint":
@@ -732,6 +742,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("Отправить через NFC"),
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("Сканировать QR-код"),
+        "schedule": MessageLookupByLibrary.simpleMessage("График"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Ищите что угодно"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "На следующем экране вы увидите свою секретную фразу. Это пароль для доступа к вашим средствам. Крайне важно, чтобы вы создали резервную копию и никогда не передавали ее никому."),
@@ -853,6 +864,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Подписывайся"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Оформить подписку через ApplePay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Подписан"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("Подписка"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Помогите поддержать развитие"),
@@ -965,6 +978,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "using": MessageLookupByLibrary.simpleMessage("С использованием"),
         "viewDetails":
             MessageLookupByLibrary.simpleMessage("Посмотреть Детали"),
+        "viewPaymentHistory":
+            MessageLookupByLibrary.simpleMessage("Просмотр истории платежей"),
         "viewTX": MessageLookupByLibrary.simpleMessage("Посмотреть транзакцию"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Вес голосования"),
         "warning": MessageLookupByLibrary.simpleMessage("Предупреждение"),

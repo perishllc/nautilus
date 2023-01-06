@@ -1902,8 +1902,10 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                                     height: 45,
                                   ),
                                   onPressed: () {
-                                    AccountDetailsSheet(StateContainer.of(context).selectedAccount!)
-                                        .mainBottomSheet(context);
+                                    Sheets.showAppHeightNineSheet(
+                                      context: context,
+                                      widget: AccountDetailsSheet(account: StateContainer.of(context).selectedAccount!),
+                                    );
                                   },
                                 ),
                               ),
@@ -2137,7 +2139,10 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                         // splashColor: StateContainer.of(context).curTheme.text30,
                       ),
                       onPressed: () {
-                        AccountDetailsSheet(StateContainer.of(context).selectedAccount!).mainBottomSheet(context);
+                        Sheets.showAppHeightNineSheet(
+                          context: context,
+                          widget: AccountDetailsSheet(account: StateContainer.of(context).selectedAccount!),
+                        );
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,

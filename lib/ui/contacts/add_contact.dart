@@ -401,6 +401,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
                     children: <Widget>[
                       Stack(
                         children: <Widget>[
+                          // Enter Name Container
                           Column(
                             children: <Widget>[
                               // Enter Name Container

@@ -104,7 +104,11 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
   }
 
   Future<void> _changeNode(Node node, StateSetter setState) async {
-    // Change account
+    // don't unselect if already selected
+    if (node.selected) {
+      return;
+    }
+    // Change node
     for (final Node acc in widget.nodes) {
       if (acc.selected) {
         setState(() {
@@ -119,8 +123,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
     await sl.get<DBHelper>().changeNode(node);
     EventTaxiImpl.singleton().fire(NodeChangedEvent(node: node, delayPop: true));
     await sl.get<AccountService>().updateNode();
-    setState(() {
-    });
+    setState(() {});
   }
 
   @override
@@ -428,7 +431,10 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
         onPressed: (BuildContext context) async {
           await Future<dynamic>.delayed(const Duration(milliseconds: 250));
           if (!mounted) return;
-          NodeDetailsSheet(node).mainBottomSheet(context);
+          Sheets.showAppHeightNineSheet(
+            context: context,
+            widget: NodeDetailsSheet(node: node),
+          );
           await Slidable.of(context)!.close();
         }));
 

@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "accountNameMissing": MessageLookupByLibrary.simpleMessage("選擇一個帳戶名稱"),
         "accounts": MessageLookupByLibrary.simpleMessage("帳戶"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage("確定已備份您的種子或秘密詞語嗎？"),
+        "activateSub": MessageLookupByLibrary.simpleMessage("激活訂閱"),
         "activeMessageHeader": MessageLookupByLibrary.simpleMessage("作用中訊息"),
         "addAccount": MessageLookupByLibrary.simpleMessage("新增帳戶"),
         "addAddress": MessageLookupByLibrary.simpleMessage("添加地址"),
@@ -34,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("新增聯絡人"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("加入我的最愛"),
         "addNode": MessageLookupByLibrary.simpleMessage("添加節點"),
+        "addSubscription": MessageLookupByLibrary.simpleMessage("添加訂閱"),
         "addUser": MessageLookupByLibrary.simpleMessage("添加用戶"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage("添加僅觀看帳戶"),
         "addWatchOnlyAccountError":
@@ -93,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "branchConnectErrorTitle": MessageLookupByLibrary.simpleMessage("連接警告"),
         "businessButton": MessageLookupByLibrary.simpleMessage("商業"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("取消訂閱"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("驗證碼"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "為了防止濫用，我們要求您解決驗證碼才能在下一頁領取禮品卡。"),
@@ -181,6 +184,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("刪除節點？"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "您確定要刪除此訂閱嗎？\n\n您以後隨時可以通過點擊“添加訂閱”按鈕重新添加它"),
+        "deleteSubHeader": MessageLookupByLibrary.simpleMessage("刪除訂閱？"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("解除"),
         "disablePasswordSuccess":
@@ -207,6 +213,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterHttpUrl": MessageLookupByLibrary.simpleMessage("輸入 HTTP 網址"),
         "enterMemo": MessageLookupByLibrary.simpleMessage("輸入訊息"),
         "enterMoneroAddress": MessageLookupByLibrary.simpleMessage("輸入 XMR 地址"),
+        "enterName": MessageLookupByLibrary.simpleMessage("輸入名字"),
         "enterNodeName": MessageLookupByLibrary.simpleMessage("輸入節點名稱"),
         "enterPasswordHint": MessageLookupByLibrary.simpleMessage("輸入您的密碼"),
         "enterSplitAmount": MessageLookupByLibrary.simpleMessage("輸入分割金額"),
@@ -562,6 +569,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("掃描 NANO 二維條碼地址"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("通過 NFC 發送"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("掃描二維條碼"),
+        "schedule": MessageLookupByLibrary.simpleMessage("日程"),
         "searchHint": MessageLookupByLibrary.simpleMessage("搜尋任何東西"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "您將看到您的秘密詞語，秘密詞語是存取您資產的密碼。務必確認您將其備份，不與他人分享。"),
@@ -654,6 +662,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("訂閱"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("通過 Apple Pay 訂閱"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("已訂閱"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("訂閱中"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage("幫助支持發展"),
         "supportTheDeveloper": MessageLookupByLibrary.simpleMessage("支持開發人員"),
@@ -744,6 +754,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nautilus 用戶名是 Nano.by 提供的集中式服務"),
         "using": MessageLookupByLibrary.simpleMessage("使用"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("更多資訊"),
+        "viewPaymentHistory": MessageLookupByLibrary.simpleMessage("查看付款記錄"),
         "viewTX": MessageLookupByLibrary.simpleMessage("查看交易"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("投票比重"),
         "warning": MessageLookupByLibrary.simpleMessage("警告"),

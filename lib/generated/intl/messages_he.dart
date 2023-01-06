@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("חשבונות"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Are you sure that you\'ve backed up your secret phrase or seed?"),
+        "activateSub": MessageLookupByLibrary.simpleMessage("הפעל מנוי"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("הודעה פעילה"),
         "addAccount": MessageLookupByLibrary.simpleMessage("הוסף חשבון"),
@@ -37,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("הוסף איש קשר"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("הוסף מועדף"),
         "addNode": MessageLookupByLibrary.simpleMessage("הוסף Node"),
+        "addSubscription": MessageLookupByLibrary.simpleMessage("הוסף מנוי"),
         "addUser": MessageLookupByLibrary.simpleMessage("הוסף משתמש"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("הוסף חשבון צפייה בלבד"),
@@ -109,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("אזהרת חיבור"),
         "businessButton": MessageLookupByLibrary.simpleMessage("עֵסֶק"),
         "cancel": MessageLookupByLibrary.simpleMessage("בטל"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("בטל רישום"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "על מנת למנוע שימוש לרעה, אנו דורשים ממך לפתור קפטצ\'ה על מנת לתבוע את כרטיס המתנה בעמוד הבא."),
@@ -220,6 +223,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("למחוק את הצומת?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "האם אתה בטוח שברצונך למחוק את המנוי הזה?\n\nאתה תמיד יכול להוסיף אותו מחדש מאוחר יותר על ידי הקשה על כפתור \"הוסף מנוי\"."),
+        "deleteSubHeader": MessageLookupByLibrary.simpleMessage("למחוק מנוי?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Disable"),
         "disablePasswordSuccess":
@@ -251,6 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("הזן הודעה"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("הזן כתובת XMR"),
+        "enterName": MessageLookupByLibrary.simpleMessage("הכנס שם"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("הזן את שם הצומת"),
         "enterPasswordHint":
@@ -666,6 +673,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("סרוק כתובת ברקוד \n של נאנו"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("שלח דרך NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("סרוק ברקוד"),
+        "schedule": MessageLookupByLibrary.simpleMessage("לוח זמנים"),
         "searchHint": MessageLookupByLibrary.simpleMessage("חפש כל דבר"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "In the next screen, you will see your secret phrase. It is a password to access your funds. It is crucial that you back it up and never share it with anyone."),
@@ -777,6 +785,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("הירשם"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("הירשם באמצעות Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("נרשם"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("מנוי"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("עזרה בתמיכה בפיתוח"),
@@ -879,6 +889,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "שמות משתמש של נאוטילוס הם שירות מרכזי המסופק על ידי nano.to"),
         "using": MessageLookupByLibrary.simpleMessage("באמצעות"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("ראה פרטים"),
+        "viewPaymentHistory":
+            MessageLookupByLibrary.simpleMessage("הצג היסטוריית תשלומים"),
         "viewTX": MessageLookupByLibrary.simpleMessage("הצג עסקה"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("משקל הצבעה"),
         "warning": MessageLookupByLibrary.simpleMessage("Warning"),

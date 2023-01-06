@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Konti"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Vai esat drošs ka izveidojāt rezerves kopiju slepenajai frāzei vai privātajai atslēgai?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Aktivizējiet abonementu"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Active Message"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Pievienot kontu"),
@@ -40,6 +42,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pievienot kontaktu"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Add Favorite"),
         "addNode": MessageLookupByLibrary.simpleMessage("Pievienot mezglu"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Pievienot abonementu"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Pievienojiet lietotāju"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
@@ -121,6 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Brīdinājums par savienojumu"),
         "businessButton": MessageLookupByLibrary.simpleMessage("Bizness"),
         "cancel": MessageLookupByLibrary.simpleMessage("Atcelt"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("Anulēt abonementu"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "Lai novērstu ļaunprātīgu izmantošanu, mēs pieprasām jums atrisināt captcha, lai nākamajā lapā varētu pieprasīt dāvanu karti."),
@@ -236,6 +241,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vai dzēst mezglu?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Vai tiešām vēlaties dzēst šo abonementu?\n\nJūs vienmēr varat to atkārtoti pievienot vēlāk, pieskaroties pogai \"Pievienot abonementu\"."),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Vai dzēst abonementu?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Disable"),
         "disablePasswordSuccess":
@@ -272,6 +281,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Enter Message"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Ievadiet XMR adresi"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Ievadiet Vārdu"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("Ievadiet mezgla nosaukumu"),
         "enterPasswordHint":
@@ -714,6 +724,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC":
             MessageLookupByLibrary.simpleMessage("Sūtīt, izmantojot NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Skenēt QR kodu"),
+        "schedule": MessageLookupByLibrary.simpleMessage("Grafiks"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Search for anything"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -832,6 +843,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonēt"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Abonējiet, izmantojot Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Abonēts"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("Abonēšana"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment": MessageLookupByLibrary.simpleMessage(
             "Palīdzība Atbalsts attīstībai"),
@@ -942,6 +955,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nautilus usernames are a centralized service provided by Nano.to"),
         "using": MessageLookupByLibrary.simpleMessage("Izmantojot"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Apskatīt detaļas"),
+        "viewPaymentHistory":
+            MessageLookupByLibrary.simpleMessage("Skatīt maksājumu vēsturi"),
         "viewTX": MessageLookupByLibrary.simpleMessage("Skatīt darījumu"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Voting Weight"),
         "warning": MessageLookupByLibrary.simpleMessage("Brīdinājums"),

@@ -839,11 +839,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       if (!mounted) return;
 
       // Setup notifications
-      // skip if we just opened a gift card:
-      if (!StateContainer.of(context).introSkiped) {
-        await getNotificationPermissions();
-      }
 
+      // get notification permissions:
+      await getNotificationPermissions();
+
+      // check if we have tracking permissions:
       await getTrackingPermissions();
 
       if (!mounted) return;
@@ -851,7 +851,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       // show changelog?
 
       // don't show the changelog on first launch:
-      if (!StateContainer.of(context).introSkiped && !isFirstLaunch) {
+      if (!isFirstLaunch) {
         final PackageInfo packageInfo = await PackageInfo.fromPlatform();
         final String runningVersion = packageInfo.version;
         final String lastVersion = await sl.get<SharedPrefsUtil>().getAppVersion();
@@ -2138,13 +2138,14 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       } else {
         // Go to send with address
         Sheets.showAppHeightNineSheet(
-            context: context,
-            widget: SendSheet(
-              localCurrency: StateContainer.of(context).curCurrency,
-              user: user,
-              address: address.address,
-              quickSendAmount: amount,
-            ));
+          context: context,
+          widget: SendSheet(
+            localCurrency: StateContainer.of(context).curCurrency,
+            user: user,
+            address: address.address,
+            quickSendAmount: amount,
+          ),
+        );
       }
     } else if (result is PayItem) {
       // handle block handoff:
@@ -2293,7 +2294,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                       children: <Widget>[
                         const CustomMonero(),
                         Container(
-                            width: 2, height: 2, color: StateContainer.of(context).curTheme.background?.withOpacity(1)),
+                          width: 2,
+                          height: 2,
+                          color: StateContainer.of(context).curTheme.background?.withOpacity(1),
+                        ),
                       ],
                     ),
 
@@ -2501,7 +2505,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                   confettiController: _confettiControllerRight,
                   blastDirection: -2 * pi / 3,
                   emissionFrequency: 0.02,
-                  // numberOfParticles: 30,
                   numberOfParticles: 40,
                   maxBlastForce: 60,
                   minBlastForce: 10,

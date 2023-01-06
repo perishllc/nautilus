@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("खाते"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "क्या आप सुनिश्चित हैं कि आपने अपने गुप्त वाक्यांश या सीड का बैकअप ले लिया है?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("सदस्यता सक्रिय करें"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("सक्रिय संदेश"),
         "addAccount": MessageLookupByLibrary.simpleMessage("खाता जोड़ो"),
@@ -38,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("संपर्क डालें"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("पसंदीदा जोड़ें"),
         "addNode": MessageLookupByLibrary.simpleMessage("नोड जोड़ें"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("सदस्यता जोड़ें"),
         "addUser": MessageLookupByLibrary.simpleMessage("एक उपयोगकर्ता जोड़ें"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "केवल देखने के लिए खाता जोड़ें"),
@@ -120,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("कनेक्शन चेतावनी"),
         "businessButton": MessageLookupByLibrary.simpleMessage("व्यवसाय"),
         "cancel": MessageLookupByLibrary.simpleMessage("रद्द करें"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("सदस्यता रद्द"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("कॅप्चा"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "दुरुपयोग को रोकने के लिए, हम चाहते हैं कि आप अगले पृष्ठ पर उपहार कार्ड का दावा करने के लिए एक कैप्चा हल करें।"),
@@ -234,6 +239,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("नोड हटाएं?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "क्या आप वाकई इस सदस्यता को हटाना चाहते हैं?\n\nआप \"सदस्यता जोड़ें\" बटन पर टैप करके इसे बाद में कभी भी पुनः जोड़ सकते हैं"),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("सदस्यता हटाएं?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("अक्षम"),
         "disablePasswordSuccess": MessageLookupByLibrary.simpleMessage(
@@ -267,6 +276,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("संदेश दाखिल करें"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("एक्सएमआर पता दर्ज करें"),
+        "enterName": MessageLookupByLibrary.simpleMessage("नाम दर्ज"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("नोड नाम दर्ज करें"),
         "enterPasswordHint":
@@ -710,6 +720,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("एनएफसी के माध्यम से भेजें"),
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("क्यूआर कोड स्कैन करें"),
+        "schedule": MessageLookupByLibrary.simpleMessage("अनुसूची"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("किसी भी चीज़ की खोज करें"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -827,6 +838,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("सदस्यता लेने के"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "ऐप्पल पे के माध्यम से सदस्यता लें"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("सदस्यता लिया"),
+        "subscribing":
+            MessageLookupByLibrary.simpleMessage("सदस्यता ली जा रही"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("सहायता समर्थन विकास"),
@@ -941,6 +955,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "using": MessageLookupByLibrary.simpleMessage("का उपयोग करते हुए"),
         "viewDetails":
             MessageLookupByLibrary.simpleMessage("अधिक जानकारी देखें"),
+        "viewPaymentHistory":
+            MessageLookupByLibrary.simpleMessage("भुगतान इतिहास देखें"),
         "viewTX": MessageLookupByLibrary.simpleMessage("लेन-देन देखें"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("मतदान भार"),
         "warning": MessageLookupByLibrary.simpleMessage("चेतावनी !"),

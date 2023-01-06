@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Konton"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Är du säker på att du har sparat ner din hemliga fras eller seed?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Aktivera prenumeration"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktivt Meddelande"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Lägg till konto"),
@@ -41,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addFavorite":
             MessageLookupByLibrary.simpleMessage("Lägg till favorit"),
         "addNode": MessageLookupByLibrary.simpleMessage("Lägg till nod"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Lägg till prenumeration"),
         "addUser":
             MessageLookupByLibrary.simpleMessage("Lägg till en användare"),
         "addWatchOnlyAccount":
@@ -123,6 +127,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Anslutningsvarning"),
         "businessButton": MessageLookupByLibrary.simpleMessage("Företag"),
         "cancel": MessageLookupByLibrary.simpleMessage("Avbryt"),
+        "cancelSub":
+            MessageLookupByLibrary.simpleMessage("Avsluta prenumeration"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "För att förhindra missbruk kräver vi att du löser en captcha för att göra anspråk på presentkortet på nästa sida."),
@@ -239,6 +245,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Radera knutpunkt?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Är du säker på att du vill ta bort den här prenumerationen?\n\nDu kan alltid lägga till den igen senare genom att trycka på knappen \"Lägg till prenumeration\"."),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Ta bort prenumeration?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Avaktivera"),
         "disablePasswordSuccess":
@@ -272,6 +282,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Ange meddelande"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Ange XMR-adress"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Skriv namn"),
         "enterNodeName": MessageLookupByLibrary.simpleMessage("Ange nodnamn"),
         "enterPasswordHint":
             MessageLookupByLibrary.simpleMessage("Ange ditt lösenord"),
@@ -717,6 +728,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Skanna en Nano\nadress QR-kod"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Skicka via NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Skanna QR-kod"),
+        "schedule": MessageLookupByLibrary.simpleMessage("Schema"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Sök efter vad som helst"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -835,6 +847,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Prenumerera"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Prenumerera via Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Prenumererade"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("Prenumererar"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Hjälp att stödja utveckling"),
@@ -943,6 +957,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nautilus användarnamn är en centraliserad tjänst som tillhandahålls av Nano.to"),
         "using": MessageLookupByLibrary.simpleMessage("Använder sig av"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Visa detaljer"),
+        "viewPaymentHistory":
+            MessageLookupByLibrary.simpleMessage("Visa betalningshistorik"),
         "viewTX": MessageLookupByLibrary.simpleMessage("Visa transaktion"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Röstvikt"),
         "warning": MessageLookupByLibrary.simpleMessage("Varning"),

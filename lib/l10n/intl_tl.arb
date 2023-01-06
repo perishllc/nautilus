@@ -25,6 +25,11 @@
     "type": "text",
     "description": "Ack backed up"
   },
+  "activateSub": "I-activate ang Subscription",
+  "@activateSub": {
+    "type": "text",
+    "description": "activate_subscription"
+  },
   "activeMessageHeader": "Aktibong Mensahe",
   "@activeMessageHeader": {
     "type": "text",
@@ -89,6 +94,11 @@
   "@addressShare": {
     "type": "text",
     "description": "receive_share_cta"
+  },
+  "addSubscription": "Magdagdag ng Subscription",
+  "@addSubscription": {
+    "type": "text",
+    "description": "Add a new subscription"
   },
   "addUser": "Magdagdag ng User",
   "@addUser": {
@@ -299,6 +309,11 @@
   "@cancel": {
     "type": "text",
     "description": "dialog_cancel"
+  },
+  "cancelSub": "Ikansela ang subskripsyon",
+  "@cancelSub": {
+    "type": "text",
+    "description": "cancel_subscription"
   },
   "captchaWarning": "Captcha",
   "@captchaWarning": {
@@ -655,6 +670,16 @@
     "type": "text",
     "description": "delete_request"
   },
+  "deleteSubConfirmation": "Sigurado ka bang gusto mong tanggalin ang subscription na ito?\n\nMaaari mo itong muling idagdag anumang oras sa ibang pagkakataon sa pamamagitan ng pag-tap sa button na \"Magdagdag ng Subscription.\"",
+  "@deleteSubConfirmation": {
+    "type": "text",
+    "description": "delete sub confirmation info"
+  },
+  "deleteSubHeader": "Tanggalin ang Subscription?",
+  "@deleteSubHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Disable",
   "@disablePasswordSheetHeader": {
     "type": "text",
@@ -759,6 +784,11 @@
   "@enterMoneroAddress": {
     "type": "text",
     "description": "enter_xmr_address"
+  },
+  "enterName": "Ilagay ang pangalan",
+  "@enterName": {
+    "type": "text",
+    "description": "add_sub_name_hint"
   },
   "enterNodeName": "Ipasok ang Pangalan ng Node",
   "@enterNodeName": {
@@ -2150,6 +2180,11 @@
     "type": "text",
     "description": "send_scan_qr"
   },
+  "schedule": "Iskedyul",
+  "@schedule": {
+    "type": "text",
+    "description": "subs_schedule"
+  },
   "searchHint": "Maghanap ng anumang bagay",
   "@searchHint": {
     "type": "text",
@@ -2525,10 +2560,20 @@
     "type": "text",
     "description": "subscribe_button"
   },
+  "subscribed": "Naka-subscribe",
+  "@subscribed": {
+    "type": "text",
+    "description": "subscribed_text"
+  },
   "subscribeWithApple": "Mag-subscribe sa pamamagitan ng Apple Pay",
   "@subscribeWithApple": {
     "type": "text",
     "description": "subscribe_apple_button"
+  },
+  "subscribing": "Nagsu-subscribe",
+  "@subscribing": {
+    "type": "text",
+    "description": "sub_confirm"
   },
   "supportButton": "Support",
   "@supportButton": {
@@ -2859,6 +2904,11 @@
   "@viewDetails": {
     "type": "text",
     "description": "transaction_details"
+  },
+  "viewPaymentHistory": "Tingnan ang History ng Pagbabayad",
+  "@viewPaymentHistory": {
+    "type": "text",
+    "description": "view_payment_history"
   },
   "viewTX": "Tingnan ang Transaksyon",
   "@viewTX": {

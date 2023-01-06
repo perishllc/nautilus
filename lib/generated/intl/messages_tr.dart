@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Hesaplar"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Gizli cümleni veya seedini yedeklediğine emin misin?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Aboneliği Etkinleştir"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Aktif Mesaj"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Hesap Ekle"),
@@ -38,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Kişi Ekle"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Favori Ekle"),
         "addNode": MessageLookupByLibrary.simpleMessage("Düğüm Ekle"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Abonelik Ekle"),
         "addUser": MessageLookupByLibrary.simpleMessage("Kullanıcı Ekle"),
         "addWatchOnlyAccount":
             MessageLookupByLibrary.simpleMessage("Yalnızca İzleme Hesabı Ekle"),
@@ -116,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bağlantı Uyarısı"),
         "businessButton": MessageLookupByLibrary.simpleMessage("İşletme"),
         "cancel": MessageLookupByLibrary.simpleMessage("İptal"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("Aboneliği iptal et"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "Kötüye kullanımı önlemek için, bir sonraki sayfada hediye kartını talep etmek için bir captcha çözmenizi istiyoruz."),
@@ -231,6 +236,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Düğüm silinsin mi?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Bu aboneliği silmek istediğinizden emin misiniz?\n\n\"Abonelik Ekle\" düğmesine dokunarak istediğiniz zaman yeniden ekleyebilirsiniz."),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Abonelik Silinsin mi?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Kaldır"),
         "disablePasswordSuccess":
@@ -265,6 +274,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterMemo": MessageLookupByLibrary.simpleMessage("Mesaj Girin"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("XMR Adresini Girin"),
+        "enterName": MessageLookupByLibrary.simpleMessage("İsim giriniz"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("Düğüm Adını Girin"),
         "enterPasswordHint":
@@ -707,6 +717,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nano Adresi\'nin \n QR Kodu\'nu tarayın"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("NFC ile gönder"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("QR Kodu Tara"),
+        "schedule": MessageLookupByLibrary.simpleMessage("Takvim"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Herhangi bir şey arayın"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -825,6 +836,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abone olmak"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Apple Pay ile abone olun"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Abone olundu"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("abone olmak"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Destek Geliştirmeye Yardım"),
@@ -936,6 +949,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nautilus kullanıcı adları Nano.to tarafından sağlanan merkezi bir hizmettir"),
         "using": MessageLookupByLibrary.simpleMessage("kullanma"),
         "viewDetails": MessageLookupByLibrary.simpleMessage("Ayrıntılar"),
+        "viewPaymentHistory":
+            MessageLookupByLibrary.simpleMessage("Ödeme Geçmişini Görüntüle"),
         "viewTX": MessageLookupByLibrary.simpleMessage("İşlemi Görüntüle"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Oy Ağırlığı"),
         "warning": MessageLookupByLibrary.simpleMessage("UYARI"),

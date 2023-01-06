@@ -105,6 +105,7 @@ class DBHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT,
         active BOOLEAN,
+        autopay BOOLEAN,
         frequency TEXT,
         address TEXT,
         amount_raw TEXT
@@ -352,11 +353,13 @@ class DBHelper {
     for (int i = 0; i < list.length; i++) {
       subs.add(
         Subscription(
+          id: list[i]["id"] as int? ?? 0,
           name: list[i]["name"] as String,
           address: list[i]["address"] as String,
           amount_raw: list[i]["amount_raw"] as String,
           frequency: list[i]["frequency"] as String,
           active: list[i]["active"] == 1,
+          autopay: list[i]["autopay"] == 1,
         ),
       );
     }
@@ -367,10 +370,11 @@ class DBHelper {
     dbClient ??= (await db)!;
     await dbClient.transaction((Transaction txn) async {
       await txn.rawInsert(
-          'INSERT INTO Subscriptions (name, active, address, amount_raw, frequency) values(?, ?, ?, ?, ?)',
+          'INSERT INTO Subscriptions (name, active, autopay, address, amount_raw, frequency) values(?, ?, ?, ?, ?, ?)',
           [
             sub.name,
             if (sub.active) 1 else 0,
+            if (sub.autopay) 1 else 0,
             sub.address,
             sub.amount_raw,
             sub.frequency,
@@ -387,6 +391,18 @@ class DBHelper {
   Future<int> changeSubscriptionName(Subscription sub, String name) async {
     final Database dbClient = (await db)!;
     return dbClient.rawUpdate('UPDATE Subscriptions SET name = ? WHERE id = ?', [name, sub.id]);
+  }
+
+  Future<int> toggleSubscriptionActive(Subscription sub) async {
+    final Database dbClient = (await db)!;
+    final int active = sub.active ? 0 : 1;
+    return dbClient.rawUpdate('UPDATE Subscriptions SET active = ? WHERE id = ?', [active, sub.id]);
+  }
+
+  Future<int> toggleSubscriptionAutopay(Subscription sub) async {
+    final Database dbClient = (await db)!;
+    final int active = sub.autopay ? 0 : 1;
+    return dbClient.rawUpdate('UPDATE Subscriptions SET autopay = ? WHERE id = ?', [active, sub.id]);
   }
 
   // Contacts

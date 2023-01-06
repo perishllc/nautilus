@@ -30,6 +30,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "accounts": MessageLookupByLibrary.simpleMessage("Гаманці"),
         "ackBackedUp": MessageLookupByLibrary.simpleMessage(
             "Ви впевнені, що ви зробили резервну копію вашої секретної фрази або seed?"),
+        "activateSub":
+            MessageLookupByLibrary.simpleMessage("Активувати підписку"),
         "activeMessageHeader":
             MessageLookupByLibrary.simpleMessage("Активне повідомлення"),
         "addAccount": MessageLookupByLibrary.simpleMessage("Додати гаманець"),
@@ -39,6 +41,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addContact": MessageLookupByLibrary.simpleMessage("Додати контакт"),
         "addFavorite": MessageLookupByLibrary.simpleMessage("Додати Улюблене"),
         "addNode": MessageLookupByLibrary.simpleMessage("Додати вузол"),
+        "addSubscription":
+            MessageLookupByLibrary.simpleMessage("Додати підписку"),
         "addUser": MessageLookupByLibrary.simpleMessage("Додати користувача"),
         "addWatchOnlyAccount": MessageLookupByLibrary.simpleMessage(
             "Додати обліковий запис лише для перегляду"),
@@ -122,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Попередження про підключення"),
         "businessButton": MessageLookupByLibrary.simpleMessage("Бізнес"),
         "cancel": MessageLookupByLibrary.simpleMessage("Відмовитися"),
+        "cancelSub": MessageLookupByLibrary.simpleMessage("Скасувати підписку"),
         "captchaWarning": MessageLookupByLibrary.simpleMessage("Captcha"),
         "captchaWarningBody": MessageLookupByLibrary.simpleMessage(
             "Щоб запобігти зловживанням, ми вимагаємо, щоб ви ввели капчу, щоб отримати подарункову картку на наступній сторінці."),
@@ -242,6 +247,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Видалити вузол?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Ви впевнені, що хочете видалити цю підписку?\n\nВи завжди можете повторно додати його пізніше, натиснувши кнопку «Додати підписку»."),
+        "deleteSubHeader":
+            MessageLookupByLibrary.simpleMessage("Видалити підписку?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Вимкнути"),
         "disablePasswordSuccess":
@@ -277,6 +286,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Введіть повідомлення"),
         "enterMoneroAddress":
             MessageLookupByLibrary.simpleMessage("Введіть адресу XMR"),
+        "enterName": MessageLookupByLibrary.simpleMessage("Введіть ім\'я"),
         "enterNodeName":
             MessageLookupByLibrary.simpleMessage("Введіть назву вузла"),
         "enterPasswordHint":
@@ -734,6 +744,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Сканувати QR код \n NANO адреси"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Надіслати через NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Сканувати QR код"),
+        "schedule": MessageLookupByLibrary.simpleMessage("розклад"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Шукати що-небудь"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "На наступному екрані ви побачите секретну фразу. Це пароль для доступа до ваших коштів. Це НАДЗВИЧАЙНО важливо зробити резервну копію фрази і ніколи не ділитися нею ні з ким."),
@@ -858,6 +869,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Підпишіться"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Підпишіться через Apple Pay"),
+        "subscribed": MessageLookupByLibrary.simpleMessage("Підписався"),
+        "subscribing": MessageLookupByLibrary.simpleMessage("Підписка"),
         "supportButton": MessageLookupByLibrary.simpleMessage("Support"),
         "supportDevelopment":
             MessageLookupByLibrary.simpleMessage("Допомога Підтримка розвитку"),
@@ -973,6 +986,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "using": MessageLookupByLibrary.simpleMessage("Використання"),
         "viewDetails":
             MessageLookupByLibrary.simpleMessage("Переглянути деталі"),
+        "viewPaymentHistory": MessageLookupByLibrary.simpleMessage(
+            "Переглянути історію платежів"),
         "viewTX":
             MessageLookupByLibrary.simpleMessage("Переглянути трансакцію"),
         "votingWeight": MessageLookupByLibrary.simpleMessage("Сила голосу"),

@@ -90,7 +90,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
   ReceiveSheet? receive;
 
   String? _rawAmount;
-  
+
   bool _addressCopied = false;
   Timer? _addressCopiedTimer;
 
@@ -268,7 +268,11 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                       AppDialogs.showInfoDialog(
                         context,
                         Z.of(context).giftCardInfoHeader,
-                        Z.of(context).giftInfo.replaceAll("%1", NonTranslatable.appName),
+                        Z
+                            .of(context)
+                            .giftInfo
+                            .replaceAll("%1", NonTranslatable.appName)
+                            .replaceAll("%2", NonTranslatable.currencyName),
                         scrollable: true,
                       );
                     },
