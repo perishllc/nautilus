@@ -1860,14 +1860,14 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                                   height: 45,
                                   alignment: AlignmentDirectional.centerStart,
                                   child: Icon(
-                                    StateContainer.of(context).wallet!.watchOnly
+                                    (StateContainer.of(context).wallet?.watchOnly ?? false)
                                         ? AppIcons.search
                                         : AppIcons.accountwallet,
                                     color: StateContainer.of(context).curTheme.success,
                                     size: 45,
                                   )),
                             ),
-                            if (!StateContainer.of(context).wallet!.watchOnly)
+                            if (!(StateContainer.of(context).wallet?.watchOnly ?? false))
                               Center(
                                 child: Container(
                                   width: 60,
@@ -2161,7 +2161,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                           // Main account address
                           Text(
                             StateContainer.of(context).wallet?.username ??
-                                Address(StateContainer.of(context).wallet!.address).getShortFirstPart() ??
+                                Address(StateContainer.of(context).wallet?.address).getShortFirstPart() ??
                                 "",
                             style: TextStyle(
                               fontFamily: "OverpassMono",

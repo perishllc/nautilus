@@ -260,7 +260,7 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
 
                       if (!mounted) return;
 
-                      final String authText = Z.of(context).authConfirm;
+                      final String authText = Z.of(context).subscribing;
 
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         try {

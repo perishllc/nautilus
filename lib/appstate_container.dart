@@ -760,12 +760,18 @@ class StateContainerState extends State<StateContainer> {
     updateRecentlyUsedAccounts();
     // get user if it exists:
     // check address for a username:
+
     if (mounted) {
-      await sl.get<UsernameService>().checkAddressDebounced(
-            context,
-            account.address!,
-          );
+      try {
+        await sl.get<UsernameService>().checkAddressDebounced(
+              context,
+              account.address!,
+            );
+      } catch (e) {
+        log.v("couldn't check address for username: $e");
+      }
     }
+
     // TODO: make username a setting if there are multiple:
     final User? user = await sl.get<DBHelper>().getUserWithAddress(account.address!);
     String? walletUsername;

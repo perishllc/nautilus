@@ -1144,6 +1144,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   StreamSubscription<AccountChangedEvent>? _switchAccountSub;
   StreamSubscription<DeepLinkEvent>? _deepLinkEventSub;
   StreamSubscription<XMREvent>? _xmrSub;
+  StreamSubscription<ConnStatusEvent>? _connectionSub;
   // purchase sub:
   StreamSubscription<List<PurchaseDetails>>? _subscription;
 
@@ -1265,8 +1266,16 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         }
       }
     });
-    final purchaseUpdated = InAppPurchase.instance.purchaseStream;
-    _subscription = purchaseUpdated.listen((purchaseDetailsList) {
+    // listen to connection events:
+    _connectionSub = EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((ConnStatusEvent event) {
+      if (event.status == ConnectionStatus.CONNECTED) {
+        showConnectionWarning(false);
+      } else if (event.status == ConnectionStatus.DISCONNECTED) {
+        showConnectionWarning(true);
+      }
+    });
+    final Stream<List<PurchaseDetails>> purchaseUpdated = InAppPurchase.instance.purchaseStream;
+    _subscription = purchaseUpdated.listen((List<PurchaseDetails> purchaseDetailsList) {
       _listenToPurchaseUpdated(purchaseDetailsList);
     }, onDone: () {
       _subscription?.cancel();
@@ -1291,6 +1300,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     _unifiedSub?.cancel();
     _xmrSub?.cancel();
     _subscription?.cancel();
+    _connectionSub?.cancel();
   }
 
   @override

@@ -164,7 +164,8 @@ class AccountDetailsSheetState extends State<AccountDetailsSheet> {
                                   text: getRawAsThemeAwareFormattedAmount(
                                       context,
                                       widget.account.balance ??
-                                          StateContainer.of(context).wallet!.accountBalance.toString()),
+                                          StateContainer.of(context).wallet?.accountBalance.toString() ??
+                                          "0"),
                                   style: TextStyle(
                                     color: StateContainer.of(context).curTheme.primary60,
                                     fontSize: 14.0,
