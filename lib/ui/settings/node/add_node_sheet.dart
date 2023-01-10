@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
@@ -190,6 +191,12 @@ class AddNodeSheetState extends State<AddNodeSheet> {
           });
         }
       },
+      onSubmitted: (String text) {
+        FocusScope.of(context).unfocus();
+        if (_wsController.text.isEmpty) {
+          FocusScope.of(context).requestFocus(_wsFocusNode);
+        }
+      },
     );
   }
 
@@ -332,78 +339,83 @@ class AddNodeSheetState extends State<AddNodeSheet> {
                       child: const SizedBox.expand(),
                     ),
                   ),
-                  Column(
-                    children: <Widget>[
-                      Stack(
-                        children: <Widget>[
-                          // Column for Enter Address container + Enter Address Error container
-                          Column(
-                            children: <Widget>[
-                              Container(
-                                alignment: Alignment.topCenter,
-                                child: Stack(
+                  KeyboardAvoider(
+                    duration: Duration.zero,
+                    autoScroll: true,
+                    focusPadding: 40,
+                    child: Column(
+                      children: <Widget>[
+                        Stack(
+                          children: <Widget>[
+                            // Column for Enter Address container + Enter Address Error container
+                            Column(
+                              children: <Widget>[
+                                Container(
                                   alignment: Alignment.topCenter,
-                                  children: <Widget>[
-                                    getEnterNameContainer(),
-                                  ],
+                                  child: Stack(
+                                    alignment: Alignment.topCenter,
+                                    children: <Widget>[
+                                      getEnterNameContainer(),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                alignment: AlignmentDirectional.center,
-                                margin: const EdgeInsets.only(top: 3),
-                                child: Text(_nameValidationText,
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: StateContainer.of(context).curTheme.primary,
-                                      fontFamily: "NunitoSans",
-                                      fontWeight: FontWeight.w600,
-                                    )),
-                              ),
-                              Container(
-                                alignment: Alignment.topCenter,
-                                child: Stack(
+                                Container(
+                                  alignment: AlignmentDirectional.center,
+                                  margin: const EdgeInsets.only(top: 3),
+                                  child: Text(_nameValidationText,
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: StateContainer.of(context).curTheme.primary,
+                                        fontFamily: "NunitoSans",
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                ),
+                                Container(
                                   alignment: Alignment.topCenter,
-                                  children: <Widget>[
-                                    getEnterHttpContainer(),
-                                  ],
+                                  child: Stack(
+                                    alignment: Alignment.topCenter,
+                                    children: <Widget>[
+                                      getEnterHttpContainer(),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                alignment: AlignmentDirectional.center,
-                                margin: const EdgeInsets.only(top: 3),
-                                child: Text(_httpValidationText,
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: StateContainer.of(context).curTheme.primary,
-                                      fontFamily: "NunitoSans",
-                                      fontWeight: FontWeight.w600,
-                                    )),
-                              ),
-                              Container(
-                                alignment: Alignment.topCenter,
-                                child: Stack(
+                                Container(
+                                  alignment: AlignmentDirectional.center,
+                                  margin: const EdgeInsets.only(top: 3),
+                                  child: Text(_httpValidationText,
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: StateContainer.of(context).curTheme.primary,
+                                        fontFamily: "NunitoSans",
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                ),
+                                Container(
                                   alignment: Alignment.topCenter,
-                                  children: <Widget>[
-                                    getEnterWsContainer(),
-                                  ],
+                                  child: Stack(
+                                    alignment: Alignment.topCenter,
+                                    children: <Widget>[
+                                      getEnterWsContainer(),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                alignment: AlignmentDirectional.center,
-                                margin: const EdgeInsets.only(top: 3),
-                                child: Text(_wsValidationText,
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: StateContainer.of(context).curTheme.primary,
-                                      fontFamily: "NunitoSans",
-                                      fontWeight: FontWeight.w600,
-                                    )),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
+                                Container(
+                                  alignment: AlignmentDirectional.center,
+                                  margin: const EdgeInsets.only(top: 3),
+                                  child: Text(_wsValidationText,
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: StateContainer.of(context).curTheme.primary,
+                                        fontFamily: "NunitoSans",
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

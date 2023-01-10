@@ -774,7 +774,12 @@ class StateContainerState extends State<StateContainer> {
     }
     setState(() {
       wallet = AppWallet(
-          address: account.address, user: user, username: walletUsername, watchOnly: watchOnly, loading: true);
+        address: account.address,
+        user: user,
+        username: walletUsername,
+        watchOnly: watchOnly,
+        loading: true,
+      );
       requestUpdate();
       updateSolids();
     });
