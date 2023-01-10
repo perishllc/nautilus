@@ -12,25 +12,21 @@ import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
-import 'package:wallet_flutter/model/db/node.dart';
 import 'package:wallet_flutter/model/db/subscription.dart';
 import 'package:wallet_flutter/model/db/user.dart';
 import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
-import 'package:wallet_flutter/ui/subs/sub_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/misc.dart';
-import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/numberutil.dart';
-import 'package:wallet_flutter/util/user_data_util.dart';
 import 'package:cron_form_field/cron_form_field.dart';
 
 class AddSubSheet extends StatefulWidget {

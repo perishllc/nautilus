@@ -415,13 +415,16 @@ class AccountService {
 
   Future<dynamic> makeHttpRequest(BaseRequest request) async {
     await initUrls();
-    final http.Response response = await http.post(Uri.parse(HTTP_URL),
-        headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
+    final http.Response response = await http.post(
+      Uri.parse(HTTP_URL),
+      headers: {'Content-type': 'application/json'},
+      body: json.encode(request.toJson()),
+    );
 
     if (response.statusCode != 200) {
       return null;
     }
-    final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
+    final Map<dynamic, dynamic> decoded = json.decode(response.body) as Map<dynamic, dynamic>;
     if (decoded.containsKey("error")) {
       return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
     }
