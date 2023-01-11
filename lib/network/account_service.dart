@@ -8,6 +8,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
@@ -15,6 +16,7 @@ import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/node.dart';
 import 'package:wallet_flutter/model/db/user.dart';
+import 'package:wallet_flutter/model/db/work_source.dart';
 import 'package:wallet_flutter/model/state_block.dart';
 import 'package:wallet_flutter/network/model/base_request.dart';
 import 'package:wallet_flutter/network/model/block_types.dart';
@@ -42,6 +44,7 @@ import 'package:wallet_flutter/network/model/response/process_response.dart';
 import 'package:wallet_flutter/network/model/response/receivable_response.dart';
 import 'package:wallet_flutter/network/model/response/subscribe_response.dart';
 import 'package:wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/util/nanoutil.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:synchronized/synchronized.dart';
@@ -500,37 +503,28 @@ class AccountService {
     return AccountsBalancesResponse.fromJson(response);
   }
 
-  Future<ProcessResponse> requestProcess(ProcessRequest request) async {
-    final dynamic response = await makeHttpRequest(request);
-    if (response is ErrorResponse) {
-      throw Exception("Received error ${response.error} ${response.details}");
-    }
-    final ProcessResponse item = ProcessResponse.fromJson(response as Map<String, dynamic>);
-    return item;
-  }
-
-  Future<dynamic> createSwapToXMR({
-    String? amountRaw,
-    String? xmrAddress,
-  }) async {
-    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    final String runningVersion = packageInfo.version;
-    final http.Response response = await http.post(Uri.parse("https://api.nanswap.com/v1/create-order"),
-        headers: {"Accept": "application/json", "nanswap-api-key": dotenv.env["NANSWAP_API_KEY"]!},
-        body: json.encode(
-          <String, String?>{
-            "from": "XNO",
-            "to": "XMR",
-            "amount": amountRaw,
-            "toAddress": xmrAddress,
-          },
-        ));
-    if (response.statusCode == 200) {
-      return jsonDecode(response.body);
-    } else {
-      return {"error": "something went wrong: ${response.body}"};
-    }
-  }
+  // Future<dynamic> createSwapToXMR({
+  //   String? amountRaw,
+  //   String? xmrAddress,
+  // }) async {
+  //   final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  //   final String runningVersion = packageInfo.version;
+  //   final http.Response response = await http.post(Uri.parse("https://api.nanswap.com/v1/create-order"),
+  //       headers: {"Accept": "application/json", "nanswap-api-key": dotenv.env["NANSWAP_API_KEY"]!},
+  //       body: json.encode(
+  //         <String, String?>{
+  //           "from": "XNO",
+  //           "to": "XMR",
+  //           "amount": amountRaw,
+  //           "toAddress": xmrAddress,
+  //         },
+  //       ));
+  //   if (response.statusCode == 200) {
+  //     return jsonDecode(response.body);
+  //   } else {
+  //     return {"error": "something went wrong: ${response.body}"};
+  //   }
+  // }
 
   // Future<HandoffResponse?> requestHandoff(String URI, HandoffReplyRequest request) async {
   //   final http.Response response = await http.post(Uri.parse(URI), headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
@@ -548,84 +542,20 @@ class AccountService {
   //   return item;
   // }
 
-  Future<ProcessResponse> requestReceive(
-      String? representative, String? previous, String? balance, String? link, String? account, String? privKey) async {
-    final StateBlock receiveBlock = StateBlock(
-      subtype: BlockTypes.RECEIVE,
-      previous: previous,
-      representative: representative,
-      balance: balance,
-      link: link,
-      account: account,
-      privKey: privKey,
-    );
-
-    // db query to check if username for this address exists:
-    try {
-      User? user = await sl.get<DBHelper>().getUserWithAddress(account!);
-      bool shouldUpdate = false;
-      if (user != null && user.type == UserTypes.ONCHAIN) {
-        int weekAgo = 0;
-        if (user.last_updated == null || user.last_updated! < weekAgo) {
-          // user is out of date, update:
-          shouldUpdate = true;
-        }
-      } else if (user == null) {
-        shouldUpdate = true;
-      }
-
-      if (shouldUpdate) {
-        // check for username here:
-      }
-    } catch (error) {
-      log.e("Error processing receive username $error");
-    }
-
-    final BlockInfoItem previousInfo = await requestBlockInfo(previous);
-    final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
-
-    // Update data on our next receivable request
-    receiveBlock.representative = previousBlock.representative;
-    receiveBlock.setBalance(previousBlock.balance);
-    await receiveBlock.sign(privKey);
-
-    // Process
-    final ProcessRequest processRequest =
-        ProcessRequest(block: json.encode(receiveBlock.toJson()), subtype: BlockTypes.RECEIVE);
-
-    return requestProcess(processRequest);
-  }
-
-  Future<ProcessResponse> requestSend(
-      String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,
-      {bool max = false}) async {
-    final StateBlock sendBlock = StateBlock(
-        subtype: BlockTypes.SEND,
-        previous: previous,
-        representative: representative,
-        balance: max ? "0" : sendAmount,
-        link: link,
-        account: account,
-        privKey: privKey);
-
-    final BlockInfoItem previousInfo = await requestBlockInfo(previous);
-    final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
-
-    // Update data on our next receivable request
-    sendBlock.representative = previousBlock.representative;
-    sendBlock.setBalance(previousBlock.balance);
-    await sendBlock.sign(privKey);
-
-    // Process
-    final ProcessRequest processRequest =
-        ProcessRequest(block: json.encode(sendBlock.toJson()), subtype: BlockTypes.SEND);
-
-    return requestProcess(processRequest);
-  }
-
-  Future<HandoffResponse> requestHandoffHTTP(String URI, String? representative, String? previous, String? sendAmount,
-      String? link, String? account, String? privKey,
-      {bool max = false, String? work, String? label, String? message, Map<String, String?>? metadata}) async {
+  Future<HandoffResponse> requestHandoffHTTP(
+    String URI,
+    String? representative,
+    String? previous,
+    String? sendAmount,
+    String? link,
+    String? account,
+    String? privKey, {
+    bool max = false,
+    String? work,
+    String? label,
+    String? message,
+    Map<String, String?>? metadata,
+  }) async {
     final StateBlock sendBlock = StateBlock(
         subtype: BlockTypes.SEND,
         previous: previous,
@@ -702,6 +632,165 @@ class AccountService {
 
   // Future<HandoffWorkResponse> requestWork(String url, String hash) async {
   // }
+
+  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  // NEEDS PoW
+  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+  Future<String?> requestWork(String url, String hash) async {
+    return http
+        .post(Uri.parse(url), headers: {'Content-type': 'application/json'}, body: json.encode({"hash": hash}))
+        .then((http.Response response) {
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> decoded = json.decode(response.body) as Map<String, dynamic>;
+        if (decoded.containsKey("error")) {
+          final ErrorResponse err = ErrorResponse.fromJson(decoded);
+          throw Exception("Received error ${err.error} ${err.details}");
+        }
+        return decoded["work"] as String?;
+      } else {
+        throw Exception("Received error ${response.statusCode}");
+      }
+    });
+  }
+
+  // Future<ProcessResponse> requestProcess(ProcessRequest request) async {
+  //   // // check if the request needs PoW:
+  //   // try {
+  //   //   final StateBlock requestBlock = StateBlock.fromJson(json.decode(request.block!) as Map<String, dynamic>);
+  //   //   final String subtype = request.subtype ?? BlockTypes.SEND;
+  //   //   log.d(requestBlock.hash);
+  //   //   String? workHash = requestBlock.previous;
+  //   //   if (requestBlock.previous == "0" ||
+  //   //       requestBlock.previous == "0000000000000000000000000000000000000000000000000000000000000000") {
+  //   //     workHash = NanoUtil.addressToPublicKey(requestBlock.account!);
+  //   //   }
+
+  //   //   if (requestBlock.work == null && workHash != null) {
+  //   //     // needs work:
+  //   //     final WorkSource ws = await sl.get<DBHelper>().getSelectedWorkSource();
+
+  //   //     switch (ws.type) {
+  //   //       case WorkSourceTypes.NODE:
+  //   //         // rely on the node to handle PoW:
+  //   //         break;
+  //   //       case WorkSourceTypes.LOCAL:
+  //   //         // TODO: Local work
+  //   //         break;
+  //   //       case WorkSourceTypes.URL:
+  //   //         final String? work = await requestWork(ws.url!, requestBlock.hash!);
+  //   //         log.d("hash: ${requestBlock.hash} @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+  //   //         // final String? work = await requestWork("http://workers.perish.co:5555", workHash);
+  //   //         log.d("work: $work @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+  //   //         requestBlock.work = work;
+  //   //         break;
+  //   //     }
+  //   //   }
+
+  //   //   requestBlock.hash = null;
+
+  //   //   request.block = json.encode(requestBlock.toJson());
+  //   // } catch (e) {
+  //   //   throw Exception("Error trying to add PoW to block: $e");
+  //   // }
+
+  //   // print("request: ${json.encode(request.toJson())}");
+
+  //   final dynamic response = await makeHttpRequest(request);
+  //   if (response is ErrorResponse) {
+  //     throw Exception("Received error ${response.error} ${response.details}");
+  //   }
+  //   final ProcessResponse item = ProcessResponse.fromJson(response as Map<String, dynamic>);
+  //   return item;
+  // }
+
+  Future<ProcessResponse> requestProcess(ProcessRequest request) async {
+    final dynamic response = await makeHttpRequest(request);
+    if (response is ErrorResponse) {
+      throw Exception("Received error ${response.error} ${response.details}");
+    }
+    final ProcessResponse item = ProcessResponse.fromJson(response as Map<String, dynamic>);
+    return item;
+  }
+
+  Future<ProcessResponse> requestReceive(
+      String? representative, String? previous, String? balance, String? link, String? account, String? privKey) async {
+    final StateBlock receiveBlock = StateBlock(
+      subtype: BlockTypes.RECEIVE,
+      previous: previous,
+      representative: representative,
+      balance: balance,
+      link: link,
+      account: account,
+      privKey: privKey,
+    );
+
+    // checked elsewhere and not needed here, I think:
+    // // db query to check if username for this address exists:
+    // try {
+    //   User? user = await sl.get<DBHelper>().getUserWithAddress(account!);
+    //   bool shouldUpdate = false;
+    //   if (user != null && user.type == UserTypes.ONCHAIN) {
+    //     int weekAgo = 0;
+    //     if (user.last_updated == null || user.last_updated! < weekAgo) {
+    //       // user is out of date, update:
+    //       shouldUpdate = true;
+    //     }
+    //   } else if (user == null) {
+    //     shouldUpdate = true;
+    //   }
+
+    //   if (shouldUpdate) {
+    //     // check for username here:
+    //   }
+    // } catch (error) {
+    //   log.e("Error processing receive username $error");
+    // }
+
+    final BlockInfoItem previousInfo = await requestBlockInfo(previous);
+    final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
+
+    // Update data on our next receivable request
+    receiveBlock.representative = previousBlock.representative;
+    receiveBlock.setBalance(previousBlock.balance);
+    await receiveBlock.sign(privKey);
+
+    // Process
+    final ProcessRequest processRequest =
+        ProcessRequest(block: json.encode(receiveBlock.toJson()), subtype: BlockTypes.RECEIVE);
+
+    return requestProcess(processRequest);
+  }
+
+  Future<ProcessResponse> requestSend(
+      String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,
+      {bool max = false}) async {
+    final StateBlock sendBlock = StateBlock(
+      subtype: BlockTypes.SEND,
+      previous: previous,
+      representative: representative,
+      balance: max ? "0" : sendAmount,
+      link: link,
+      account: account,
+      privKey: privKey,
+    );
+
+    final BlockInfoItem previousInfo = await requestBlockInfo(previous);
+    final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
+
+    // Update data on our next receivable request
+    sendBlock.representative = previousBlock.representative;
+    sendBlock.setBalance(previousBlock.balance);
+    await sendBlock.sign(privKey);
+
+    // Process
+    final ProcessRequest processRequest = ProcessRequest(
+      block: json.encode(sendBlock.toJson()),
+      subtype: BlockTypes.SEND,
+    );
+
+    return requestProcess(processRequest);
+  }
 
   Future<ProcessResponse> requestOpen(String? balance, String? link, String? account, String? privKey,
       {String? representative}) async {

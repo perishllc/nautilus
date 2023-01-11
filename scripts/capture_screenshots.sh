@@ -1,3 +1,4 @@
+#!/bin/bash
 flutter drive --profile --driver=test/integration_test/capture_screenshots_test.dart --target=test/integration_test/capture_screenshots.dart
 
 # --use-application-binary

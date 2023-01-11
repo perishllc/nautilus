@@ -65,6 +65,11 @@
     "type": "text",
     "description": "Add a new node"
   },
+  "addWorkSource": "Add Work Source",
+  "@addWorkSource": {
+    "type": "text",
+    "description": "Add work source"
+  },
   "address": "Address",
   "@address": {
     "type": "text",
@@ -339,6 +344,21 @@
   "@changeNode": {
     "type": "text",
     "description": "change node"
+  },
+  "changePow": "Change PoW",
+  "@changePow": {
+    "type": "text",
+    "description": "change pow"
+  },
+  "changePowSource": "Change PoW Source",
+  "@changePowSource": {
+    "type": "text",
+    "description": "change pow source"
+  },
+  "pow": "PoW",
+  "@pow": {
+    "type": "text",
+    "description": "pow"
   },
   "changePassword": "Change Password",
   "@changePassword": {

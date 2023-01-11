@@ -355,22 +355,22 @@ class SwapXMRScreenState extends State<SwapXMRScreen> {
                             sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, formattedAmount)))
                         : getThemeAwareAmountAsRaw(context, formattedAmount);
 
-                    // start a swap for monero:
+                    // // start a swap for monero:
 
-                    final Map resp = await sl.get<AccountService>().createSwapToXMR(amountRaw: amountRaw, xmrAddress: xmrAddress) as Map;
-                    if (!resp.containsKey("payInAddress")) {
-                      print("Error creating swap: ${resp["error"]}");
-                      return;
-                    }
+                    // final Map resp = await sl.get<AccountService>().createSwapToXMR(amountRaw: amountRaw, xmrAddress: xmrAddress) as Map;
+                    // if (!resp.containsKey("payInAddress")) {
+                    //   print("Error creating swap: ${resp["error"]}");
+                    //   return;
+                    // }
 
-                    String payInAddress = resp["payInAddress"] as String;
+                    // String payInAddress = resp["payInAddress"] as String;
 
-                    Sheets.showAppHeightNineSheet(
-                        context: context,
-                        widget: SwapXMRConfirmSheet(
-                          destination: payInAddress,
-                          amountRaw: amountRaw,
-                        ));
+                    // Sheets.showAppHeightNineSheet(
+                    //     context: context,
+                    //     widget: SwapXMRConfirmSheet(
+                    //       destination: payInAddress,
+                    //       amountRaw: amountRaw,
+                    //     ));
                   }),
                 ],
               ),

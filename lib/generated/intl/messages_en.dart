@@ -48,6 +48,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Error adding Watch Only Account: Account was null"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Successfully created watch only account!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("Add Work Source"),
         "address": MessageLookupByLibrary.simpleMessage("Address"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("Address Copied"),
         "addressHint": MessageLookupByLibrary.simpleMessage("Enter Address"),
@@ -134,6 +136,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Change your existing password. If you don\'t know your current password, just make your best guess as it\'s not actually required to change it (since you are already logged in), but it does let us delete the existing backup entry."),
         "changePin": MessageLookupByLibrary.simpleMessage("Change Pin"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("Set pin"),
+        "changePow": MessageLookupByLibrary.simpleMessage("Change PoW"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("Change PoW Source"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Change Representative"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Change"),
@@ -610,6 +615,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Plausible Deniability Info"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Set a secondary pin for plausible deniability mode.\n\nIf your wallet is unlocked using this secondary pin, your seed will be replaced with a hash of the existing seed. This is a security feature intended to be used in the event you are forced to open your wallet.\n\nThis pin will act like a normal (correct) pin EXCEPT when unlocking your wallet, which is when plausible deniability mode will activate.\n\nYour funds WILL BE LOST upon entering plausible deniability mode if you have not backed up your seed!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("Preferences"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(

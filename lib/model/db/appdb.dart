@@ -9,6 +9,7 @@ import 'package:wallet_flutter/model/db/node.dart';
 import 'package:wallet_flutter/model/db/subscription.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/model/db/user.dart';
+import 'package:wallet_flutter/model/db/work_source.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/util/nanoutil.dart';
@@ -100,6 +101,14 @@ class DBHelper {
         http_url TEXT,
         ws_url TEXT
         )""";
+  static const String WORK_SOURCE = """
+        CREATE TABLE WorkSources( 
+        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        name TEXT,
+        selected BOOLEAN,
+        type TEXT,
+        url TEXT
+        )""";
   static const String SUBS_SQL = """
         CREATE TABLE Subscriptions( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -180,9 +189,13 @@ class DBHelper {
     await db.execute(TX_DATA_SQL);
     await db.execute(NODES_SQL);
     await db.execute(SUBS_SQL);
+    await db.execute(WORK_SOURCE);
 
     // add default nodes:
     await _addDefaultNodes(dbClient: db);
+
+    // add default work sources:
+    await _addDefaultWorkSources(dbClient: db);
   }
 
   // ignore: avoid_void_async
@@ -222,6 +235,8 @@ class DBHelper {
     }
     if (oldVersion == 9) {
       await db.execute(SUBS_SQL);
+      await db.execute(WORK_SOURCE);
+      await _addDefaultWorkSources(dbClient: db);
     }
   }
 
@@ -249,6 +264,37 @@ class DBHelper {
     );
   }
 
+  Future<void> _addDefaultWorkSources({Database? dbClient}) async {
+    // await saveWorkSource(
+    //   WorkSource(
+    //     id: 1,
+    //     name: "None",
+    //     selected: false,
+    //     type: WorkSourceTypes.NONE,
+    //   ),
+    //   dbClient: dbClient,
+    // );
+    await saveWorkSource(
+      WorkSource(
+        id: 0,
+        name: "Use Node",
+        selected: true,
+        type: WorkSourceTypes.NODE,
+      ),
+      dbClient: dbClient,
+    );
+    await saveWorkSource(
+      WorkSource(
+        id: 1,
+        name: "nano.to",
+        selected: false,
+        type: WorkSourceTypes.URL,
+        url: "https://pow.nano.to",
+      ),
+      dbClient: dbClient,
+    );
+  }
+
   Future<void> nukeDatabase() async {
     final Database dbClient = (await db)!;
     // remove the tables:
@@ -260,6 +306,7 @@ class DBHelper {
     await dbClient.execute("DROP TABLE IF EXISTS Transactions");
     await dbClient.execute("DROP TABLE IF EXISTS Nodes");
     await dbClient.execute("DROP TABLE IF EXISTS Subscriptions");
+    await dbClient.execute("DROP TABLE IF EXISTS WorkSources");
 
     _onCreate(dbClient, DB_VERSION);
   }
@@ -343,6 +390,73 @@ class DBHelper {
   Future<int> changeNodeName(Node node, String name) async {
     final Database dbClient = (await db)!;
     return dbClient.rawUpdate('UPDATE Nodes SET name = ? WHERE id = ?', [name, node.id]);
+  }
+
+  // Work sources:
+
+  Future<List<WorkSource>> getWorkSources() async {
+    final Database dbClient = (await db)!;
+    final List<Map> list = await dbClient.rawQuery("SELECT * FROM WorkSources");
+    final List<WorkSource> workSources = [];
+    for (int i = 0; i < list.length; i++) {
+      workSources.add(
+        WorkSource(
+          id: list[i]["id"] as int? ?? 0,
+          name: list[i]["name"] as String,
+          url: list[i]["url"] as String?,
+          type: list[i]["type"] as String,
+          selected: list[i]["selected"] == 1,
+        ),
+      );
+    }
+    return workSources;
+  }
+
+  Future<WorkSource> getSelectedWorkSource() async {
+    final Database dbClient = (await db)!;
+    final List<Map> list = await dbClient.rawQuery("SELECT * FROM WorkSources where selected = 1");
+    final WorkSource ws = WorkSource(
+      id: list[0]["id"] as int?,
+      name: list[0]["name"] as String,
+      selected: true,
+      url: list[0]["url"] as String?,
+      type: list[0]["type"] as String,
+    );
+    return ws;
+  }
+
+  Future<void> changeWorkSource(WorkSource ws) async {
+    final Database dbClient = (await db)!;
+    return dbClient.transaction((Transaction txn) async {
+      await txn.rawUpdate('UPDATE WorkSources set selected = false');
+      // Get access increment count
+      final List<Map> list = await txn.rawQuery('SELECT * FROM Nodes');
+      await txn.rawUpdate('UPDATE WorkSources set selected = ? WHERE id = ?', [1, ws.id]);
+    });
+  }
+
+  Future<WorkSource?> saveWorkSource(WorkSource ws, {Database? dbClient}) async {
+    dbClient ??= (await db)!;
+    await dbClient.transaction((Transaction txn) async {
+      await txn.rawInsert('INSERT INTO WorkSources (name, id, selected, url, type) values(?, ?, ?, ?, ?)', [
+        ws.name,
+        ws.id,
+        if (ws.selected) 1 else 0,
+        ws.url,
+        ws.type,
+      ]);
+    });
+    return ws;
+  }
+
+  Future<int> deleteWorkSource(WorkSource ws) async {
+    final Database dbClient = (await db)!;
+    return dbClient.rawDelete('DELETE FROM WorkSources WHERE id = ?', [ws.id]);
+  }
+
+  Future<int> changeWorkSourceName(WorkSource ws, String name) async {
+    final Database dbClient = (await db)!;
+    return dbClient.rawUpdate('UPDATE WorkSources SET name = ? WHERE id = ?', [name, ws.id]);
   }
 
   // subscriptions:

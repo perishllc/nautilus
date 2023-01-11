@@ -1,3 +1,4 @@
+#!/bin/bash
 flutter clean
 # build / cache
 rm -rf ./build

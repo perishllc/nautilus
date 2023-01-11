@@ -7,6 +7,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/db/node.dart';
+import 'package:wallet_flutter/model/db/work_source.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
@@ -15,22 +16,20 @@ import 'package:wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/user_data_util.dart';
 
-class AddNodeSheet extends StatefulWidget {
-  const AddNodeSheet({this.address}) : super();
+class AddWorkSourceSheet extends StatefulWidget {
+  const AddWorkSourceSheet({this.address}) : super();
 
   final String? address;
 
   @override
-  AddNodeSheetState createState() => AddNodeSheetState();
+  AddWorkSourceSheetState createState() => AddWorkSourceSheetState();
 }
 
-class AddNodeSheetState extends State<AddNodeSheet> {
+class AddWorkSourceSheetState extends State<AddWorkSourceSheet> {
   FocusNode _nameFocusNode = FocusNode();
   FocusNode _httpFocusNode = FocusNode();
-  FocusNode _wsFocusNode = FocusNode();
   TextEditingController _nameController = TextEditingController();
   TextEditingController _httpController = TextEditingController();
-  TextEditingController _wsController = TextEditingController();
 
   // bool _clearNameButton = false;
   bool _clearHttpButton = false;
@@ -38,11 +37,9 @@ class AddNodeSheetState extends State<AddNodeSheet> {
 
   // bool _pasteNameButton = true;
   bool _pasteHttpButton = true;
-  bool _pasteWsButton = true;
 
   String _nameValidationText = "";
   String _httpValidationText = "";
-  String _wsValidationText = "";
 
   // late bool _addressValidAndUnfocused;
   // String? _addressHint;
@@ -184,86 +181,6 @@ class AddNodeSheetState extends State<AddNodeSheet> {
       },
       onSubmitted: (String text) {
         FocusScope.of(context).unfocus();
-        if (_wsController.text.isEmpty) {
-          FocusScope.of(context).requestFocus(_wsFocusNode);
-        }
-      },
-    );
-  }
-
-  Widget getEnterWsContainer() {
-    return AppTextField(
-      topMargin: 20,
-      // padding: _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
-      textAlign: TextAlign.center,
-      focusNode: _wsFocusNode,
-      controller: _wsController,
-      cursorColor: StateContainer.of(context).curTheme.primary,
-      inputFormatters: [LengthLimitingTextInputFormatter(60)],
-      textInputAction: TextInputAction.done,
-      maxLines: null,
-      autocorrect: false,
-      hintText: Z.of(context).enterWsUrl,
-      fadePrefixOnCondition: true,
-      prefixShowFirstCondition: _pasteWsButton,
-      suffixButton: TextFieldButton(
-        icon: _clearWsButton ? AppIcons.clear : AppIcons.paste,
-        onPressed: () async {
-          if (_clearWsButton) {
-            setState(() {
-              _pasteWsButton = true;
-              _clearWsButton = false;
-              _wsController.text = "";
-            });
-            return;
-          }
-
-          final String? data = await UserDataUtil.getClipboardText(DataType.RAW);
-          if (data == null) {
-            return;
-          }
-          setState(() {
-            _wsController.text = data;
-            _clearWsButton = true;
-          });
-        },
-      ),
-      fadeSuffixOnCondition: true,
-      suffixShowFirstCondition: _pasteWsButton,
-      // style: _addressStyle == AddressStyle.TEXT60
-      //     ? AppStyles.textStyleAddressText60(context)
-      //     : _addressStyle == AddressStyle.TEXT90
-      //         ? AppStyles.textStyleAddressText90(context)
-      //         : AppStyles.textStyleAddressPrimary(context),
-      style: AppStyles.textStyleAddressText90(context),
-      onChanged: (String text) async {
-        // prevent spaces:
-        if (text.contains(" ")) {
-          text = text.replaceAll(" ", "");
-          _wsController.text = text;
-          _wsController.selection = TextSelection.fromPosition(TextPosition(
-            offset: _wsController.text.length,
-          ));
-        }
-
-        if (text.isNotEmpty) {
-          setState(() {
-            _pasteWsButton = true;
-            _clearWsButton = true;
-          });
-        } else {
-          setState(() {
-            _pasteWsButton = true;
-            _clearWsButton = false;
-          });
-        }
-
-        // Always reset the error message to be less annoying
-        if (_wsValidationText.isNotEmpty) {
-          setState(() {
-            _wsValidationText = "";
-          });
-        }
       },
     );
   }
@@ -322,7 +239,6 @@ class AddNodeSheetState extends State<AddNodeSheet> {
                       // Clear focus of our fields when tapped in this empty space
                       _nameFocusNode.unfocus();
                       _httpFocusNode.unfocus();
-                      _wsFocusNode.unfocus();
                     },
                     child: Container(
                       color: Colors.transparent,
@@ -381,26 +297,6 @@ class AddNodeSheetState extends State<AddNodeSheet> {
                                         fontWeight: FontWeight.w600,
                                       )),
                                 ),
-                                Container(
-                                  alignment: Alignment.topCenter,
-                                  child: Stack(
-                                    alignment: Alignment.topCenter,
-                                    children: <Widget>[
-                                      getEnterWsContainer(),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  alignment: AlignmentDirectional.center,
-                                  margin: const EdgeInsets.only(top: 3),
-                                  child: Text(_wsValidationText,
-                                      style: TextStyle(
-                                        fontSize: 14.0,
-                                        color: StateContainer.of(context).curTheme.primary,
-                                        fontFamily: "NunitoSans",
-                                        fontWeight: FontWeight.w600,
-                                      )),
-                                ),
                               ],
                             ),
                           ],
@@ -424,10 +320,10 @@ class AddNodeSheetState extends State<AddNodeSheet> {
                     if (!await validateForm()) {
                       return;
                     }
-                    final Node node = Node(
+                    final WorkSource node = WorkSource(
                       name: _nameController.text,
-                      http_url: _httpController.text,
-                      ws_url: _wsController.text,
+                      url: _httpController.text,
+                      type: WorkSourceTypes.URL,
                       selected: false,
                     );
                     Navigator.of(context).pop(node);
@@ -486,17 +382,6 @@ class AddNodeSheetState extends State<AddNodeSheet> {
     } else {
       setState(() {
         _httpValidationText = "";
-      });
-    }
-
-    if (_wsController.text.isEmpty) {
-      setState(() {
-        _wsValidationText = Z.of(context).urlEmpty;
-      });
-      isValid = false;
-    } else {
-      setState(() {
-        _wsValidationText = "";
       });
     }
 

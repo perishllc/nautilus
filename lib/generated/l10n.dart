@@ -180,6 +180,16 @@ class Z {
     );
   }
 
+  /// `Add Work Source`
+  String get addWorkSource {
+    return Intl.message(
+      'Add Work Source',
+      name: 'addWorkSource',
+      desc: 'Add work source',
+      args: [],
+    );
+  }
+
   /// `Address`
   String get address {
     return Intl.message(
@@ -726,6 +736,36 @@ class Z {
       'Change Node',
       name: 'changeNode',
       desc: 'change node',
+      args: [],
+    );
+  }
+
+  /// `Change PoW`
+  String get changePow {
+    return Intl.message(
+      'Change PoW',
+      name: 'changePow',
+      desc: 'change pow',
+      args: [],
+    );
+  }
+
+  /// `Change PoW Source`
+  String get changePowSource {
+    return Intl.message(
+      'Change PoW Source',
+      name: 'changePowSource',
+      desc: 'change pow source',
+      args: [],
+    );
+  }
+
+  /// `PoW`
+  String get pow {
+    return Intl.message(
+      'PoW',
+      name: 'pow',
+      desc: 'pow',
       args: [],
     );
   }

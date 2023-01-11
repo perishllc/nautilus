@@ -1,3 +1,4 @@
+#!/bin/bash
 brew install ninja rustup-init llvm
 rustup-init -y
 source "$HOME/.cargo/env"

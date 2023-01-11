@@ -64,21 +64,17 @@ class StateBlock {
   /// and update it later before signing
   StateBlock(
       {String? subtype,
-      required String? previous,
-      required String? representative,
+      this.previous,
+      this.representative,
       required String? balance,
-      required String? link,
-      required String? account,
+      this.link,
+      this.account,
       this.work,
       this.privKey,
       this.localCurrencyValue}) {
-    this.link = link;
     subType = subtype;
     type = BlockTypes.STATE;
     work = work;
-    this.previous = previous;
-    this.account = account;
-    this.representative = representative;
     if (subtype == BlockTypes.SEND || subtype == BlockTypes.RECEIVE) {
       sendAmount = balance;
     } else {

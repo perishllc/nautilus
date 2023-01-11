@@ -445,6 +445,7 @@ class UsernameService {
         subtype: BlockTypes.OPEN,
       );
 
+      // signing is special so we can't use the regular open method here:
       final ProcessResponse resp = await sl.get<AccountService>().requestProcess(processRequest);
 
       if (resp.hash != null) {
