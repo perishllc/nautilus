@@ -1028,6 +1028,15 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
+  void stopLoading() {
+    requestUpdate();
+    setState(() {
+      wallet!.loading = false;
+      sl.get<AccountService>().pop();
+      sl.get<AccountService>().processQueue();
+    });
+  }
+
   /// Handle callback response
   /// Typically this means we need to pocket transactions
   Future<void> handleCallbackResponse(CallbackResponse? resp) async {
@@ -1274,162 +1283,165 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> requestUpdate({bool receivable = true}) async {
-    if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
-      final String? uuid = await sl.get<SharedPrefsUtil>().getUuid();
-      String? fcmToken;
-      bool? notificationsEnabled;
-      try {
-        fcmToken = await FirebaseMessaging.instance.getToken();
-        notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
-      } catch (e) {
-        fcmToken = null;
-        notificationsEnabled = false;
-      }
-      sl.get<AccountService>().clearQueue();
-      sl.get<AccountService>().queueRequest(SubscribeRequest(
+    if (wallet == null || wallet?.address == null || !Address(wallet!.address).isValid()) {
+      return;
+    }
+    
+    final String? uuid = await sl.get<SharedPrefsUtil>().getUuid();
+    String? fcmToken;
+    bool? notificationsEnabled;
+    try {
+      fcmToken = await FirebaseMessaging.instance.getToken();
+      notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
+    } catch (e) {
+      fcmToken = null;
+      notificationsEnabled = false;
+    }
+    sl.get<AccountService>().clearQueue();
+    sl.get<AccountService>().queueRequest(SubscribeRequest(
           account: wallet!.address,
           currency: curCurrency.getIso4217Code(),
           uuid: uuid,
           fcmToken: fcmToken,
-          notificationEnabled: notificationsEnabled));
+          notificationEnabled: notificationsEnabled,
+        ));
+    sl.get<AccountService>().processQueue();
+    // Request account history
+
+    // Choose correct blockCount to minimize bandwidth
+    // This can still be improved because history excludes change/open, blockCount doesn't
+    // Get largest count we have + 5 (just a safe-buffer)
+    int count = 500;
+    if (wallet!.history != null && wallet!.history.length > 1) {
+      count = 50;
+    }
+    try {
+      final AccountHistoryResponse resp =
+          await sl.get<AccountService>().requestAccountHistory(wallet!.address, count: count, raw: true);
+      _requestBalances();
+      bool postedToHome = false;
+      // Iterate list in reverse (oldest to newest block)
+      for (final AccountHistoryResponseItem item in resp.history!) {
+        // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
+        if (!wallet!.history.contains(item)) {
+          const int startIndex = 0; // Index to start inserting into the list
+          int lastIndex = resp.history!.indexWhere((AccountHistoryResponseItem item) => wallet!.history.contains(
+              item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
+          lastIndex = lastIndex <= 0 ? resp.history!.length : lastIndex;
+          setState(() {
+            wallet!.history.insertAll(0, resp.history!.getRange(startIndex, lastIndex));
+            // Send list to home screen
+            EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
+          });
+          if ((lastIndex - startIndex) > MAX_SEQUENTIAL_UPDATES) {
+            await updateUnified(true);
+          } else {
+            await updateUnified(false);
+          }
+          postedToHome = true;
+          break;
+        }
+      }
+      setState(() {
+        wallet!.historyLoading = false;
+      });
+      // just in case we didn't post to home screen
+      if (!postedToHome) {
+        EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
+        await updateUnified(false);
+      }
+
+      sl.get<AccountService>().pop();
       sl.get<AccountService>().processQueue();
-      // Request account history
+      // Receive receivables
+      if (receivable) {
+        receivableRequests.clear();
+        final ReceivableResponse receivableResp = await sl
+            .get<AccountService>()
+            .getReceivable(wallet!.address, max(wallet!.blockCount ?? 0, 10), threshold: receiveThreshold);
 
-      // Choose correct blockCount to minimize bandwidth
-      // This can still be improved because history excludes change/open, blockCount doesn't
-      // Get largest count we have + 5 (just a safe-buffer)
-      int count = 500;
-      if (wallet!.history != null && wallet!.history.length > 1) {
-        count = 50;
-      }
-      try {
-        final AccountHistoryResponse resp =
-            await sl.get<AccountService>().requestAccountHistory(wallet!.address, count: count, raw: true);
-        _requestBalances();
-        bool postedToHome = false;
-        // Iterate list in reverse (oldest to newest block)
-        for (final AccountHistoryResponseItem item in resp.history!) {
-          // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
-          if (!wallet!.history.contains(item)) {
-            const int startIndex = 0; // Index to start inserting into the list
-            int lastIndex = resp.history!.indexWhere((AccountHistoryResponseItem item) => wallet!.history.contains(
-                item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
-            lastIndex = lastIndex <= 0 ? resp.history!.length : lastIndex;
+        // remove any receivables in the wallet history that are not in the receivable response:
+        if (wallet!.watchOnly) {
+          // check for duplicates in the wallet history:
+          final List<String?> receivableHashes =
+              receivableResp.blocks!.values.map((ReceivableResponseItem block) => block.hash).toList();
+          final List<AccountHistoryResponseItem> toRemove = [];
+          for (final AccountHistoryResponseItem histItem in wallet!.history) {
+            if (histItem.type == BlockTypes.RECEIVE) {
+              if (!receivableHashes.contains(histItem.hash)) {
+                toRemove.add(histItem);
+              }
+            }
+          }
+          if (toRemove.isNotEmpty) {
             setState(() {
-              wallet!.history.insertAll(0, resp.history!.getRange(startIndex, lastIndex));
-              // Send list to home screen
-              EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
+              toRemove.forEach(wallet!.history.remove);
             });
-            if ((lastIndex - startIndex) > MAX_SEQUENTIAL_UPDATES) {
-              await updateUnified(true);
-            } else {
-              await updateUnified(false);
-            }
-            postedToHome = true;
-            break;
+            EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
+            await updateUnified(false);
           }
         }
-        setState(() {
-          wallet!.historyLoading = false;
-        });
-        // just in case we didn't post to home screen
-        if (!postedToHome) {
-          EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
-          await updateUnified(false);
-        }
 
-        sl.get<AccountService>().pop();
-        sl.get<AccountService>().processQueue();
-        // Receive receivables
-        if (receivable) {
-          receivableRequests.clear();
-          final ReceivableResponse receivableResp = await sl
-              .get<AccountService>()
-              .getReceivable(wallet!.address, max(wallet!.blockCount ?? 0, 10), threshold: receiveThreshold);
+        // don't process receives for watch-only accounts:
+        if (!wallet!.watchOnly) {
+          // for unfulfilled payments:
+          final List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
 
-          // remove any receivables in the wallet history that are not in the receivable response:
-          if (wallet!.watchOnly) {
-            // check for duplicates in the wallet history:
-            final List<String?> receivableHashes =
-                receivableResp.blocks!.values.map((ReceivableResponseItem block) => block.hash).toList();
-            final List<AccountHistoryResponseItem> toRemove = [];
-            for (final AccountHistoryResponseItem histItem in wallet!.history) {
-              if (histItem.type == BlockTypes.RECEIVE) {
-                if (!receivableHashes.contains(histItem.hash)) {
-                  toRemove.add(histItem);
+          // Initiate receive/open request for each receivable
+          for (final String hash in receivableResp.blocks!.keys) {
+            final ReceivableResponseItem? receivableResponseItem = receivableResp.blocks![hash];
+            receivableResponseItem?.hash = hash;
+            final String? receivedHash = await handleReceivableItem(receivableResponseItem);
+            if (receivedHash != null) {
+              // payments:
+              // check to see if this fulfills a payment request:
+
+              for (int i = 0; i < unfulfilledPayments.length; i++) {
+                final TXData txData = unfulfilledPayments[i];
+                // check destination of this request is where we're sending to:
+                // check to make sure we made the request:
+                // check to make sure the amounts are the same:
+                if (txData.from_address == wallet!.address &&
+                    txData.to_address == receivableResponseItem!.source &&
+                    txData.amount_raw == receivableResponseItem.amount &&
+                    txData.is_fulfilled == false) {
+                  // this is the payment we're fulfilling
+                  // update the TXData to be fulfilled
+                  await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
+                  // update the ui to reflect the change in the db:
+                  await updateSolids();
+                  await updateUnified(true);
+                  break;
                 }
               }
-            }
-            if (toRemove.isNotEmpty) {
-              setState(() {
-                toRemove.forEach(wallet!.history.remove);
-              });
-              EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
-              await updateUnified(false);
-            }
-          }
 
-          // don't process receives for watch-only accounts:
-          if (!wallet!.watchOnly) {
-            // for unfulfilled payments:
-            final List<TXData> unfulfilledPayments = await sl.get<DBHelper>().getUnfulfilledTXs();
-
-            // Initiate receive/open request for each receivable
-            for (final String hash in receivableResp.blocks!.keys) {
-              final ReceivableResponseItem? receivableResponseItem = receivableResp.blocks![hash];
-              receivableResponseItem?.hash = hash;
-              final String? receivedHash = await handleReceivableItem(receivableResponseItem);
-              if (receivedHash != null) {
-                // payments:
-                // check to see if this fulfills a payment request:
-
-                for (int i = 0; i < unfulfilledPayments.length; i++) {
-                  final TXData txData = unfulfilledPayments[i];
-                  // check destination of this request is where we're sending to:
-                  // check to make sure we made the request:
-                  // check to make sure the amounts are the same:
-                  if (txData.from_address == wallet!.address &&
-                      txData.to_address == receivableResponseItem!.source &&
-                      txData.amount_raw == receivableResponseItem.amount &&
-                      txData.is_fulfilled == false) {
-                    // this is the payment we're fulfilling
-                    // update the TXData to be fulfilled
-                    await sl.get<DBHelper>().changeTXFulfillmentStatus(txData.uuid, true);
-                    // update the ui to reflect the change in the db:
-                    await updateSolids();
-                    await updateUnified(true);
-                    break;
-                  }
-                }
-
-                final AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
-                    type: BlockTypes.STATE,
-                    subtype: BlockTypes.RECEIVE,
-                    account: receivableResponseItem!.source,
-                    amount: receivableResponseItem.amount,
-                    hash: receivedHash,
-                    link: receivableResponseItem.hash,
-                    local_timestamp: DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond);
-                if (!wallet!.history.contains(histItem)) {
-                  setState(() {
-                    // TODO: not necessarily the best way to handle this, should get real height:
-                    histItem.height = wallet!.confirmationHeight + 1;
-                    wallet!.confirmationHeight += 1;
-                    wallet!.history.insert(0, histItem);
-                    wallet!.accountBalance += BigInt.parse(receivableResponseItem.amount!);
-                    // Send list to home screen
-                    EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
-                    updateUnified(false);
-                  });
-                }
+              final AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
+                  type: BlockTypes.STATE,
+                  subtype: BlockTypes.RECEIVE,
+                  account: receivableResponseItem!.source,
+                  amount: receivableResponseItem.amount,
+                  hash: receivedHash,
+                  link: receivableResponseItem.hash,
+                  local_timestamp: DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond);
+              if (!wallet!.history.contains(histItem)) {
+                setState(() {
+                  // TODO: not necessarily the best way to handle this, should get real height:
+                  histItem.height = wallet!.confirmationHeight + 1;
+                  wallet!.confirmationHeight += 1;
+                  wallet!.history.insert(0, histItem);
+                  wallet!.accountBalance += BigInt.parse(receivableResponseItem.amount!);
+                  // Send list to home screen
+                  EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet!.history));
+                  updateUnified(false);
+                });
               }
             }
           }
         }
-      } catch (e) {
-        // TODO handle account history error
-        log.e("account_history e", e);
       }
+    } catch (e) {
+      // TODO handle account history error
+      log.e("account_history e", e);
     }
   }
 

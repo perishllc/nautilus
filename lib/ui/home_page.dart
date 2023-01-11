@@ -34,6 +34,7 @@ import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/subscription.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/model/db/user.dart';
+import 'package:wallet_flutter/model/db/work_source.dart';
 import 'package:wallet_flutter/model/list_model.dart';
 import 'package:wallet_flutter/network/account_service.dart';
 import 'package:wallet_flutter/network/giftcards.dart';
@@ -888,7 +889,13 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       if (!mounted) return;
       _isPro = await AppDialogs.proCheck(context, shouldShowDialog: false);
 
+      final ws = await sl.get<DBHelper>().getSelectedWorkSource();
+      if (ws.type == WorkSourceTypes.URL) {
+        StateContainer.of(context).stopLoading();
+      }
+
       // check on subscriptions:
+      // todo:
     });
     // confetti:
     _confettiControllerLeft = ConfettiController(duration: const Duration(milliseconds: 150));

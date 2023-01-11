@@ -654,57 +654,45 @@ class AccountService {
     });
   }
 
-  // Future<ProcessResponse> requestProcess(ProcessRequest request) async {
-  //   // // check if the request needs PoW:
-  //   // try {
-  //   //   final StateBlock requestBlock = StateBlock.fromJson(json.decode(request.block!) as Map<String, dynamic>);
-  //   //   final String subtype = request.subtype ?? BlockTypes.SEND;
-  //   //   log.d(requestBlock.hash);
-  //   //   String? workHash = requestBlock.previous;
-  //   //   if (requestBlock.previous == "0" ||
-  //   //       requestBlock.previous == "0000000000000000000000000000000000000000000000000000000000000000") {
-  //   //     workHash = NanoUtil.addressToPublicKey(requestBlock.account!);
-  //   //   }
-
-  //   //   if (requestBlock.work == null && workHash != null) {
-  //   //     // needs work:
-  //   //     final WorkSource ws = await sl.get<DBHelper>().getSelectedWorkSource();
-
-  //   //     switch (ws.type) {
-  //   //       case WorkSourceTypes.NODE:
-  //   //         // rely on the node to handle PoW:
-  //   //         break;
-  //   //       case WorkSourceTypes.LOCAL:
-  //   //         // TODO: Local work
-  //   //         break;
-  //   //       case WorkSourceTypes.URL:
-  //   //         final String? work = await requestWork(ws.url!, requestBlock.hash!);
-  //   //         log.d("hash: ${requestBlock.hash} @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-  //   //         // final String? work = await requestWork("http://workers.perish.co:5555", workHash);
-  //   //         log.d("work: $work @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-  //   //         requestBlock.work = work;
-  //   //         break;
-  //   //     }
-  //   //   }
-
-  //   //   requestBlock.hash = null;
-
-  //   //   request.block = json.encode(requestBlock.toJson());
-  //   // } catch (e) {
-  //   //   throw Exception("Error trying to add PoW to block: $e");
-  //   // }
-
-  //   // print("request: ${json.encode(request.toJson())}");
-
-  //   final dynamic response = await makeHttpRequest(request);
-  //   if (response is ErrorResponse) {
-  //     throw Exception("Received error ${response.error} ${response.details}");
-  //   }
-  //   final ProcessResponse item = ProcessResponse.fromJson(response as Map<String, dynamic>);
-  //   return item;
-  // }
-
   Future<ProcessResponse> requestProcess(ProcessRequest request) async {
+    // check if the request needs PoW:
+    try {
+      final StateBlock requestBlock = StateBlock.fromJson(json.decode(request.block!) as Map<String, dynamic>);
+      final String subtype = request.subtype ?? BlockTypes.SEND;
+      log.d(requestBlock.hash);
+      String? workHash = requestBlock.previous;
+      if (requestBlock.previous == "0" ||
+          requestBlock.previous == "0000000000000000000000000000000000000000000000000000000000000000") {
+        workHash = NanoUtil.addressToPublicKey(requestBlock.account!);
+      }
+
+      if (requestBlock.work == null && workHash != null) {
+        // needs work:
+        final WorkSource ws = await sl.get<DBHelper>().getSelectedWorkSource();
+
+        switch (ws.type) {
+          case WorkSourceTypes.NODE:
+            // rely on the node to handle PoW:
+            break;
+          case WorkSourceTypes.LOCAL:
+            // TODO: Local work
+            break;
+          case WorkSourceTypes.URL:
+            final String? work = await requestWork(ws.url!, workHash);
+            requestBlock.work = work;
+            break;
+        }
+      }
+
+      requestBlock.hash = null;
+
+      request.block = json.encode(requestBlock.toJson());
+    } catch (e) {
+      throw Exception("Error trying to add PoW to block: $e");
+    }
+
+    print("request: ${json.encode(request.toJson())}");
+
     final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error} ${response.details}");
@@ -712,6 +700,15 @@ class AccountService {
     final ProcessResponse item = ProcessResponse.fromJson(response as Map<String, dynamic>);
     return item;
   }
+
+  // Future<ProcessResponse> requestProcess(ProcessRequest request) async {
+  //   final dynamic response = await makeHttpRequest(request);
+  //   if (response is ErrorResponse) {
+  //     throw Exception("Received error ${response.error} ${response.details}");
+  //   }
+  //   final ProcessResponse item = ProcessResponse.fromJson(response as Map<String, dynamic>);
+  //   return item;
+  // }
 
   Future<ProcessResponse> requestReceive(
       String? representative, String? previous, String? balance, String? link, String? account, String? privKey) async {
