@@ -242,7 +242,7 @@ flutter_intl:
 
 dependency_overrides:
   ffi: ^2.0.1
-  web3dart: 2.0.0
+  # web3dart: 2.0.0
   # analyzer: ^4.1.0
   # dart_style: ^2.2.3
   # flutter_launcher_icons:
