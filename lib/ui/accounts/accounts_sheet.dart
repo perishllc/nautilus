@@ -76,7 +76,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
     // Handle balances event
     for (final Account account in widget.accounts) {
       resp.balances!.forEach((String address, AccountBalanceItem balance) {
-        address = address.replaceAll("xrb_", "nano_");
+        address = address;
         final String combinedBalance =
             (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.receivable!)!).toString();
         if (account.address == address && combinedBalance != account.balance) {

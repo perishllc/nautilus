@@ -1032,6 +1032,7 @@ class StateContainerState extends State<StateContainer> {
     requestUpdate();
     setState(() {
       wallet!.loading = false;
+      wallet!.confirmationHeight = 9999; // todo: fix this:
       sl.get<AccountService>().pop();
       sl.get<AccountService>().processQueue();
     });
@@ -1286,7 +1287,7 @@ class StateContainerState extends State<StateContainer> {
     if (wallet == null || wallet?.address == null || !Address(wallet!.address).isValid()) {
       return;
     }
-    
+
     final String? uuid = await sl.get<SharedPrefsUtil>().getUuid();
     String? fcmToken;
     bool? notificationsEnabled;
@@ -1391,6 +1392,10 @@ class StateContainerState extends State<StateContainer> {
           for (final String hash in receivableResp.blocks!.keys) {
             final ReceivableResponseItem? receivableResponseItem = receivableResp.blocks![hash];
             receivableResponseItem?.hash = hash;
+            // check the source block address for a username:
+            if (receivableResponseItem?.source != null && mounted) {
+              await sl.get<UsernameService>().checkAddressDebounced(context, receivableResponseItem!.source!);
+            }
             final String? receivedHash = await handleReceivableItem(receivableResponseItem);
             if (receivedHash != null) {
               // payments:

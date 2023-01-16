@@ -180,7 +180,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
             TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
         if (_addressController!.text.isNotEmpty &&
             _addressController!.text.length > 1 &&
-            !_addressController!.text.startsWith("nano_")) {
+            !_addressController!.text.startsWith(NonTranslatable.currencyPrefix)) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           if (_addressController!.text != formattedAddress) {
             setState(() {
@@ -958,7 +958,6 @@ class SendXMRSheetState extends State<SendXMRSheet> {
     final bool isUser = _addressController!.text.startsWith("@") || _addressController!.text.startsWith("#");
     final bool isFavorite = _addressController!.text.startsWith("★");
     final bool isDomain = _addressController!.text.contains(".") || _addressController!.text.contains(r"$");
-    final bool isNano = _addressController!.text.startsWith("nano_");
     // final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
     if (_addressController!.text.isNotEmpty &&
         !isFavorite &&
@@ -1226,7 +1225,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         bool isUser = false;
         final bool isDomain = text.contains(".") || text.contains(r"$");
         final bool isFavorite = text.startsWith("★");
-        final bool isNano = text.startsWith("nano_");
+        final bool isNano = text.startsWith(NonTranslatable.currencyPrefix);
 
         // prevent spaces:
         if (text.contains(" ")) {
@@ -1254,7 +1253,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
           isUser = true;
         }
 
-        if (text.isNotEmpty && text.startsWith("nano_")) {
+        if (text.isNotEmpty && text.startsWith(NonTranslatable.currencyPrefix)) {
           isUser = false;
         }
 
@@ -1263,7 +1262,6 @@ class SendXMRSheetState extends State<SendXMRSheet> {
         }
 
         // check if it's a real nano address:
-        // bool isUser = !text.startsWith("nano_") && !text.startsWith("★");
         if (text.isEmpty) {
           setState(() {
             _isUser = false;
@@ -1343,7 +1341,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
   //*******************************************************//
   Widget getEnterMemoContainer() {
     double margin = 200;
-    if (_addressController!.text.startsWith("nano_")) {
+    if (_addressController!.text.startsWith(NonTranslatable.currencyPrefix)) {
       if (_addressController!.text.length > 24) {
         margin = 217;
       }

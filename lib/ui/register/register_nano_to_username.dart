@@ -66,48 +66,6 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
 
     // On username focus change
     _usernameFocusNode!.addListener(() {
-      // if (_usernameFocusNode.hasFocus) {
-      //   setState(() {
-      //     // _addressHint = null;
-      //     // _addressValidAndUnfocused = false;
-      //   });
-      //   _requestAddressController.selection = TextSelection.fromPosition(TextPosition(offset: _requestAddressController.text.length));
-      //   if (_requestAddressController.text.length > 0 && !_requestAddressController.text.startsWith("nano_")) {
-      //     if (_requestAddressController.text.startsWith("@")) {
-      //       sl.get<DBHelper>().getUsersWithNameLike(_requestAddressController.text.substring(1)).then((userList) {
-      //         setState(() {
-      //           _users = userList;
-      //         });
-      //       });
-      //     } else if (_requestAddressController.text.startsWith("★")) {
-      //       sl.get<DBHelper>().getContactsWithNameLike(_requestAddressController.text.substring(1)).then((userList) {
-      //         setState(() {
-      //           _users = userList;
-      //         });
-      //       });
-      //     }
-      //   }
-
-      //   if (_requestAddressController.text.length == 0) {
-      //     setState(() {
-      //       _users = [];
-      //     });
-      //   }
-      // } else {
-      //   setState(() {
-      //     _addressHint = "";
-      //     _users = [];
-      //     if (Address(_requestAddressController.text).isValid()) {
-      //       _addressValidAndUnfocused = true;
-      //     }
-      //   });
-      //   if (_requestAddressController.text.trim() == "@" || _requestAddressController.text.trim() == "★") {
-      //     _requestAddressController.text = "";
-      //     setState(() {
-      //       _showContactButton = true;
-      //     });
-      //   }
-      // }
     });
     // Set initial state of copy button
     // _addressCopied = false;
@@ -215,7 +173,8 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
-          minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
+          minimum: EdgeInsets.only(
+              bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
           child: Column(
             children: <Widget>[
               //A widget that holds the header, the paragraph, the seed, "seed copied" text and the back button
@@ -244,7 +203,8 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
+                                  child:
+                                      Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                             ),
 
                           // Safety icon
@@ -278,7 +238,8 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                       ),
                       // The paragraph
                       Container(
-                        margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
+                        margin: EdgeInsetsDirectional.only(
+                            start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
                         alignment: Alignment.centerLeft,
                         child: Column(
                           children: <Widget>[
@@ -307,7 +268,10 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                           children: <Widget>[
                             // The paragraph describing we already have a username:
                             Container(
-                              margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 45.0),
+                              margin: EdgeInsetsDirectional.only(
+                                  start: smallScreen(context) ? 30 : 40,
+                                  end: smallScreen(context) ? 30 : 40,
+                                  top: 45.0),
                               alignment: Alignment.centerLeft,
                               child: Column(
                                 children: <Widget>[
@@ -331,7 +295,9 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                                 alignment: Alignment.topCenter,
                                 children: <Widget>[
                                   Container(
-                                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                    margin: EdgeInsets.only(
+                                        left: MediaQuery.of(context).size.width * 0.105,
+                                        right: MediaQuery.of(context).size.width * 0.105),
                                     alignment: Alignment.bottomCenter,
                                   ),
 
@@ -392,8 +358,8 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                     Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).checkAvailability, Dimens.BUTTON_BOTTOM_DIMENS,
-                              onPressed: () async {
+                          AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).checkAvailability,
+                              Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                             final String username = _usernameController!.text.replaceAll("@", "");
                             if (_usernameController!.text.isEmpty) {
                               setState(() {
@@ -401,7 +367,9 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                               });
                               return;
                             }
-                            final Map<String, dynamic> resp = await sl.get<UsernameService>().checkNanoToUsernameAvailability(username) as Map<String, dynamic>;
+                            final Map<String, dynamic> resp = await sl
+                                .get<UsernameService>()
+                                .checkNanoToUsernameAvailability(username) as Map<String, dynamic>;
                             if (resp == null) {
                               setState(() {
                                 _usernameValidationText = Z.of(context).usernameError;
@@ -434,8 +402,8 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
                     Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).registerUsername, Dimens.BUTTON_BOTTOM_DIMENS,
-                              onPressed: () async {
+                          AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).registerUsername,
+                              Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                             final String username = _usernameController!.text.replaceAll("@", "");
 
                             String? price;
@@ -485,7 +453,8 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
   Widget getEnterAddressContainer() {
     return AppTextField(
         topMargin: MediaQuery.of(context).size.height * 0.05,
-        padding: _usernameValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+        padding:
+            _usernameValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
         textAlign: TextAlign.center,
         focusNode: _usernameFocusNode,
         controller: _usernameController,
@@ -504,13 +473,14 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
         onChanged: (String text) {
           final bool isUser = text.startsWith("@");
           final bool isFavorite = text.startsWith("★");
-          final bool isNano = text.startsWith("nano_");
+          final bool isNano = text.startsWith(NonTranslatable.currencyPrefix);
 
           // prevent spaces:
           if (text.contains(" ")) {
             text = text.replaceAll(" ", "");
             _usernameController!.text = text;
-            _usernameController!.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
+            _usernameController!.selection =
+                TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
           }
 
           if (text.isNotEmpty) {
@@ -526,48 +496,19 @@ class _RegisterNanoToUsernameScreenState extends State<RegisterNanoToUsernameScr
           if (text.isNotEmpty && !isUser && !isNano && !isFavorite) {
             // add @ to the beginning of the string:
             _usernameController!.text = "@$text";
-            _usernameController!.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
+            _usernameController!.selection =
+                TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
           }
 
           if (text.isNotEmpty && text.startsWith("@nano_")) {
             setState(() {
               // remove the @ from the beginning of the string:
-              _usernameController!.text = text.replaceFirst("@nano_", "nano_");
-              _usernameController!.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
+              _usernameController!.text =
+                  text.replaceFirst("@${NonTranslatable.currencyPrefix}", NonTranslatable.currencyPrefix);
+              _usernameController!.selection =
+                  TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
             });
           }
-
-          // check if it's a real nano address:
-          // bool isUser = !text.startsWith("nano_") && !text.startsWith("★");
-          // if (text.length == 0) {
-          //   setState(() {
-          //     _isUser = false;
-          //     _users = [];
-          //   });
-          // } else if (isUser) {
-          //   setState(() {
-          //     _isUser = true;
-          //   });
-          //   sl.get<DBHelper>().getUserSuggestionsWithNameLike(text.substring(1)).then((matchedList) {
-          //     setState(() {
-          //       _users = matchedList;
-          //     });
-          //   });
-          // } else if (isFavorite) {
-          //   setState(() {
-          //     _isUser = true;
-          //   });
-          //   sl.get<DBHelper>().getContactsWithNameLike(text.substring(1)).then((matchedList) {
-          //     setState(() {
-          //       _users = matchedList;
-          //     });
-          //   });
-          // } else {
-          //   setState(() {
-          //     _isUser = false;
-          //     _users = [];
-          //   });
-          // }
           // Always reset the error message to be less annoying
           setState(() {
             _showRegisterButton = false;

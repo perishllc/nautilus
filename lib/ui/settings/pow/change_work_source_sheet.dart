@@ -1,23 +1,17 @@
 import 'dart:async';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:logger/logger.dart';
 import 'package:wallet_flutter/appstate_container.dart';
-import 'package:wallet_flutter/bus/node_changed_event.dart';
 import 'package:wallet_flutter/bus/node_modified_event.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
-import 'package:wallet_flutter/model/db/node.dart';
 import 'package:wallet_flutter/model/db/work_source.dart';
-import 'package:wallet_flutter/network/account_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
-import 'package:wallet_flutter/ui/settings/node/add_node_sheet.dart';
-import 'package:wallet_flutter/ui/settings/node/node_details_sheet.dart';
 import 'package:wallet_flutter/ui/settings/pow/add_work_source_sheet.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -387,19 +381,19 @@ class ChangePowSheetState extends State<ChangePowSheet> {
                                         maxLines: 1,
                                         textAlign: TextAlign.start,
                                       ),
-                                      // type
-                                      AutoSizeText(
-                                        ws.type,
-                                        style: TextStyle(
-                                          fontFamily: "OverpassMono",
-                                          fontWeight: FontWeight.w100,
-                                          fontSize: 14.0,
-                                          color: StateContainer.of(context).curTheme.text60,
-                                        ),
-                                        minFontSize: 8.0,
-                                        stepGranularity: 0.1,
-                                        maxLines: 2,
-                                      ),
+                                      // // type
+                                      // AutoSizeText(
+                                      //   ws.type,
+                                      //   style: TextStyle(
+                                      //     fontFamily: "OverpassMono",
+                                      //     fontWeight: FontWeight.w100,
+                                      //     fontSize: 14.0,
+                                      //     color: StateContainer.of(context).curTheme.text60,
+                                      //   ),
+                                      //   minFontSize: 8.0,
+                                      //   stepGranularity: 0.1,
+                                      //   maxLines: 2,
+                                      // ),
                                       if (ws.type == WorkSourceTypes.URL)
                                         AutoSizeText(
                                           "${ws.url}",

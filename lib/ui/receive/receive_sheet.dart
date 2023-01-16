@@ -1377,7 +1377,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
           bool isUser = false;
           final bool isDomain = text.contains(".") || text.contains(r"$");
           final bool isFavorite = text.startsWith("★");
-          final bool isNano = text.startsWith("nano_");
+          final bool isNano = text.startsWith(NonTranslatable.currencyPrefix);
 
           // prevent spaces:
           if (text.contains(" ")) {
@@ -1405,7 +1405,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
             isUser = true;
           }
 
-          if (text.isNotEmpty && text.startsWith("nano_")) {
+          if (text.isNotEmpty && text.startsWith(NonTranslatable.currencyPrefix)) {
             isUser = false;
           }
 
@@ -1414,7 +1414,6 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
           }
 
           // check if it's a real nano address:
-          // bool isUser = !text.startsWith("nano_") && !text.startsWith("★");
           if (text.isEmpty) {
             setState(() {
               _isUser = false;

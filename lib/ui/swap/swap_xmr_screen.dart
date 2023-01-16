@@ -10,6 +10,7 @@ import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/network/account_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
@@ -585,7 +586,7 @@ class SwapXMRScreenState extends State<SwapXMRScreen> {
         bool isUser = false;
         final bool isDomain = text.contains(".") || text.contains(r"$");
         final bool isFavorite = text.startsWith("★");
-        final bool isNano = text.startsWith("nano_");
+        final bool isNano = text.startsWith(NonTranslatable.currencyPrefix);
 
         // prevent spaces:
         if (text.contains(" ")) {

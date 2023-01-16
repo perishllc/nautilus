@@ -1369,16 +1369,15 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
     final List<int> unconfirmedUpdate = <int>[];
     final List<int> confirmedUpdate = <int>[];
-    for (int i = 0; i < _historyListMap[StateContainer.of(context).wallet!.address]!.length; i++) {
-      if ((_historyListMap[StateContainer.of(context).wallet!.address]![i].confirmed == null ||
-              _historyListMap[StateContainer.of(context).wallet!.address]![i].confirmed!) &&
-          _historyListMap[StateContainer.of(context).wallet!.address]![i].height != null &&
-          confirmationHeight! < _historyListMap[StateContainer.of(context).wallet!.address]![i].height!) {
+    final List<AccountHistoryResponseItem> histListMap = _historyListMap[StateContainer.of(context).wallet!.address]!;
+    for (int i = 0; i < histListMap.length; i++) {
+      if ((histListMap[i].confirmed == null || histListMap[i].confirmed!) &&
+          histListMap[i].height != null &&
+          confirmationHeight! < histListMap[i].height!) {
         unconfirmedUpdate.add(i);
-      } else if ((_historyListMap[StateContainer.of(context).wallet!.address]![i].confirmed == null ||
-              !_historyListMap[StateContainer.of(context).wallet!.address]![i].confirmed!) &&
-          _historyListMap[StateContainer.of(context).wallet!.address]![i].height != null &&
-          confirmationHeight! >= _historyListMap[StateContainer.of(context).wallet!.address]![i].height!) {
+      } else if ((histListMap[i].confirmed == null || !histListMap[i].confirmed!) &&
+          histListMap[i].height != null &&
+          confirmationHeight! >= histListMap[i].height!) {
         confirmedUpdate.add(i);
       }
     }
@@ -1669,7 +1668,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
         // check if there's a username:
         for (final User user in _users) {
-          if (user.address == account.replaceAll("xrb_", "nano_")) {
+          if (user.address == account) {
             displayName = user.getDisplayName()!;
             break;
           }
@@ -1955,7 +1954,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
         // check if there's a username:
         for (final User user in _users.reversed) {
-          if (user.address == account.replaceAll("xrb_", "nano_")) {
+          if (user.address == account) {
             displayName = user.getDisplayName()!;
             break;
           }
@@ -3569,7 +3568,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
     // check if there's a username:
     for (final User user in _users) {
-      if (user.address == account.replaceAll("xrb_", "nano_")) {
+      if (user.address == account) {
         displayName = user.getDisplayName()!;
         break;
       }
@@ -3612,7 +3611,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     String displayName = "${account.substring(0, 9)}\n...${account.substring(account.length - 6)}";
     // // check if there's a username:
     for (final User user in _users) {
-      if (user.address == account.replaceAll("xrb_", "nano_")) {
+      if (user.address == account) {
         displayName = user.getDisplayName()!;
         break;
       }

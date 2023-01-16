@@ -1,7 +1,8 @@
-## v0.7.3 - [2022-12-25]
+## v0.7.3 - [2023-01-20]
 #### Added
 - Subscriptions menu
 - Long press the share nautilus button for a QR code for easy onboarding (promo link)
+- Ability to change PoW Source
 #### Changed
 - UI updates on the send / receive sheets
 - Updated more settings menu / icons

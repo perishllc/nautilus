@@ -76,7 +76,8 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
-          minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
+          minimum: EdgeInsets.only(
+              bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
           child: Column(
             children: <Widget>[
               //A widget that holds the header, the paragraph, the seed, "seed copied" text and the back button
@@ -106,7 +107,8 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
+                                  child:
+                                      Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
                             ),
 
                           // Safety icon
@@ -140,7 +142,8 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
                       ),
                       // The paragraph
                       Container(
-                        margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
+                        margin: EdgeInsetsDirectional.only(
+                            start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
                         alignment: Alignment.centerLeft,
                         child: Column(
                           children: <Widget>[
@@ -159,7 +162,10 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
                           children: <Widget>[
                             // The paragraph describing we already have a username:
                             Container(
-                              margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 45.0),
+                              margin: EdgeInsetsDirectional.only(
+                                  start: smallScreen(context) ? 30 : 40,
+                                  end: smallScreen(context) ? 30 : 40,
+                                  top: 45.0),
                               alignment: Alignment.centerLeft,
                               child: Column(
                                 children: <Widget>[
@@ -183,7 +189,9 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
                                 alignment: Alignment.topCenter,
                                 children: <Widget>[
                                   Container(
-                                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                                    margin: EdgeInsets.only(
+                                        left: MediaQuery.of(context).size.width * 0.105,
+                                        right: MediaQuery.of(context).size.width * 0.105),
                                     alignment: Alignment.bottomCenter,
                                   ),
 
@@ -235,7 +243,9 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).checkAvailability, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY, Z.of(context).checkAvailability, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () async {
                       final String username = _usernameController!.text.replaceAll("@", "");
                       if (_usernameController!.text.isEmpty) {
                         setState(() {
@@ -261,7 +271,9 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).registerUsername, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                    AppButton.buildAppButton(
+                        context, AppButtonType.PRIMARY, Z.of(context).registerUsername, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () async {
                       final String username = _usernameController!.text.replaceAll("@", "");
 
                       final BigInt balanceRaw = StateContainer.of(context).wallet!.accountBalance;
@@ -294,7 +306,8 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
   Widget getEnterAddressContainer() {
     return AppTextField(
         topMargin: MediaQuery.of(context).size.height * 0.05,
-        padding: _usernameValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+        padding:
+            _usernameValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
         textAlign: TextAlign.center,
         focusNode: _usernameFocusNode,
         controller: _usernameController,
@@ -313,13 +326,14 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
         onChanged: (String text) {
           final bool isUser = text.startsWith("@");
           final bool isFavorite = text.startsWith("★");
-          final bool isNano = text.startsWith("nano_");
+          final bool isNano = text.startsWith(NonTranslatable.currencyPrefix);
 
           // prevent spaces:
           if (text.contains(" ")) {
             text = text.replaceAll(" ", "");
             _usernameController!.text = text;
-            _usernameController!.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
+            _usernameController!.selection =
+                TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
           }
 
           if (text.isNotEmpty) {
@@ -335,48 +349,19 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
           if (text.isNotEmpty && !isUser && !isNano && !isFavorite) {
             // add @ to the beginning of the string:
             _usernameController!.text = "@$text";
-            _usernameController!.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
+            _usernameController!.selection =
+                TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
           }
 
-          if (text.isNotEmpty && text.startsWith("@nano_")) {
+          if (text.isNotEmpty && text.startsWith("@${NonTranslatable.currencyPrefix}")) {
             setState(() {
               // remove the @ from the beginning of the string:
-              _usernameController!.text = text.replaceFirst("@nano_", "nano_");
-              _usernameController!.selection = TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
+              _usernameController!.text = text.replaceFirst("@${NonTranslatable.currencyPrefix}", NonTranslatable.currencyPrefix);
+              _usernameController!.selection =
+                  TextSelection.fromPosition(TextPosition(offset: _usernameController!.text.length));
             });
           }
-
-          // check if it's a real nano address:
-          // bool isUser = !text.startsWith("nano_") && !text.startsWith("★");
-          // if (text.length == 0) {
-          //   setState(() {
-          //     _isUser = false;
-          //     _users = [];
-          //   });
-          // } else if (isUser) {
-          //   setState(() {
-          //     _isUser = true;
-          //   });
-          //   sl.get<DBHelper>().getUserSuggestionsWithNameLike(text.substring(1)).then((matchedList) {
-          //     setState(() {
-          //       _users = matchedList;
-          //     });
-          //   });
-          // } else if (isFavorite) {
-          //   setState(() {
-          //     _isUser = true;
-          //   });
-          //   sl.get<DBHelper>().getContactsWithNameLike(text.substring(1)).then((matchedList) {
-          //     setState(() {
-          //       _users = matchedList;
-          //     });
-          //   });
-          // } else {
-          //   setState(() {
-          //     _isUser = false;
-          //     _users = [];
-          //   });
-          // }
+          
           // Always reset the error message to be less annoying
           setState(() {
             _showRegisterButton = false;

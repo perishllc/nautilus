@@ -691,7 +691,7 @@ class AccountService {
       throw Exception("Error trying to add PoW to block: $e");
     }
 
-    print("request: ${json.encode(request.toJson())}");
+    // print("request: ${json.encode(request.toJson())}");
 
     final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {

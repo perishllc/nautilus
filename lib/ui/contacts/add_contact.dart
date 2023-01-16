@@ -9,6 +9,7 @@ import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/bus/tx_update_event.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/user.dart';
@@ -102,7 +103,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
         });
         _addressController!.selection =
             TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
-        if (_addressController!.text.isNotEmpty && !_addressController!.text.startsWith("nano_")) {
+        if (_addressController!.text.isNotEmpty && !_addressController!.text.startsWith(NonTranslatable.currencyPrefix)) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
           if (_addressController!.text != formattedAddress) {
             setState(() {
@@ -243,7 +244,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
         bool isUser = false;
         final bool isDomain = text.contains(".") || text.contains(r"$");
         final bool isFavorite = text.startsWith("★");
-        final bool isNano = text.startsWith("nano_");
+        final bool isNano = text.startsWith(NonTranslatable.currencyPrefix);
 
         // prevent spaces:
         if (text.contains(" ")) {
@@ -269,7 +270,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
           isUser = true;
         }
 
-        if (text.isNotEmpty && text.startsWith("nano_")) {
+        if (text.isNotEmpty && text.startsWith(NonTranslatable.currencyPrefix)) {
           isUser = false;
         }
 
@@ -278,7 +279,6 @@ class _AddContactSheetState extends State<AddContactSheet> {
         }
 
         // check if it's a real nano address:
-        // bool isUser = !text.startsWith("nano_") && !text.startsWith("★");
         if (text.isEmpty) {
           setState(() {
             _isUser = false;
@@ -608,7 +608,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
       setState(() {
         _addressValidationText = Z.of(context).addressOrUserMissing;
       });
-    } else if (formAddress.startsWith("nano_")) {
+    } else if (formAddress.startsWith(NonTranslatable.currencyPrefix)) {
       // we're dealing with an address:
 
       if (!Address(formAddress).isValid()) {

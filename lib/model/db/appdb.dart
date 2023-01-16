@@ -148,12 +148,7 @@ class DBHelper {
   static const String ACCOUNTS_ADD_WATCH_ONLY_COLUMN_SQL = """
     ALTER TABLE Accounts ADD watch_only BOOLEAN
     """;
-
-  // TODO: prerelease
-  static const String NODES_REMOVE_INDEX_SQL = """
-    ALTER TABLE Nodes REMOVE node_index INTEGER
-    """;
-
+  
   static Database? _db;
 
   NanoUtil? _nanoUtil;
@@ -312,7 +307,7 @@ class DBHelper {
   }
 
   String lowerStripAddress(String address) {
-    return address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "");
+    return address.toLowerCase().replaceAll("xrb_", "").replaceAll("nano_", "").replaceAll("ban_", "");
   }
 
   String? formatAddress(String? address) {
@@ -367,7 +362,6 @@ class DBHelper {
     });
   }
 
-  // TODO: prerelease: test if null id works here:
   Future<Node?> saveNode(Node node, {Database? dbClient}) async {
     dbClient ??= (await db)!;
     await dbClient.transaction((Transaction txn) async {
@@ -1108,18 +1102,6 @@ class DBHelper {
 
   Future<int> addTXData(TXData txData) async {
     final Database dbClient = (await db)!;
-    // id INTEGER PRIMARY KEY AUTOINCREMENT,
-    // from_address TEXT,
-    // to_address TEXT,
-    // amount_raw TEXT,
-    // is_request BOOLEAN,
-    // request_time TEXT,
-    // is_fulfilled BOOLEAN,
-    // fulfillment_time TEXT,
-    // block TEXT,
-    // memo TEXT,
-    // uuid TEXT,
-    // return await dbClient.rawInsert('INSERT INTO Transactions (username, address) values(?, ?)', [txData.username, user.address.replaceAll("xrb_", "nano_")]);
     // check if txData already exists:
     final TXData? existingTXData = await getTXDataByUUID(txData.uuid!);
     if (existingTXData != null) {

@@ -711,7 +711,9 @@ class UsernameService {
   }
 
   Future<void> checkAddressDebounced(BuildContext context, String address) async {
+    log.d("checking address: $address");
     final String? checked = await sl.get<SharedPrefsUtil>().getWithExpiry(address) as String?;
+    print(checked);
     if (checked == null) {
       // check if we already have a record for this address:
       User? user = await sl.get<DBHelper>().getUserWithAddress(address);
