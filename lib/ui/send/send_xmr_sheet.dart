@@ -253,75 +253,7 @@ class SendXMRSheetState extends State<SendXMRSheet> {
       }
     });
   }
-
-  Future<bool> showNotificationDialog() async {
-    final NotificationOptions? option = await showDialog<NotificationOptions>(
-        context: context,
-        barrierColor: StateContainer.of(context).curTheme.barrier,
-        builder: (BuildContext context) {
-          return AppSimpleDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            title: Text(
-              Z.of(context).notifications,
-              style: AppStyles.textStyleDialogHeader(context),
-            ),
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Text("${Z.of(context).notificationInfo}\n", style: AppStyles.textStyleParagraph(context)),
-              ),
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, NotificationOptions.ON);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    Z.of(context).onStr,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, NotificationOptions.OFF);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    Z.of(context).off,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-            ],
-          );
-        });
-
-    if (option == null) {
-      return false;
-    }
-
-    if (option == NotificationOptions.ON) {
-      sl.get<SharedPrefsUtil>().setNotificationsOn(true).then((void result) {
-        EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: true));
-        FirebaseMessaging.instance.requestPermission();
-        FirebaseMessaging.instance.getToken().then((String? fcmToken) {
-          EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
-        });
-      });
-      return true;
-    } else {
-      sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((void result) {
-        EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: false));
-        FirebaseMessaging.instance.getToken().then((String? fcmToken) {
-          EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
-        });
-      });
-      return false;
-    }
-  }
-
+  
   Future<bool> showNeedVerificationAlert() async {
     switch (await showDialog<int>(
         context: context,

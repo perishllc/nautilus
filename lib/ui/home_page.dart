@@ -95,6 +95,8 @@ import 'package:rate_my_app/rate_my_app.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:substring_highlight/substring_highlight.dart';
+// import 'package:awesome_notifications/awesome_notifications.dart';
+// import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 
 // ignore: must_be_immutable
 class AppHomePage extends StatefulWidget {
@@ -223,6 +225,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         alert: true,
         provisional: true,
       );
+      // await AwesomeNotifications().requestPermissionToSendNotifications(
+      //   sound: true,
+      //   badge: true,
+      //   alert: true,
+      //   provisional: true,
+      // );
       if (settings.alert == AppleNotificationSetting.enabled ||
           settings.badge == AppleNotificationSetting.enabled ||
           settings.sound == AppleNotificationSetting.enabled ||
@@ -3609,7 +3617,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     // final String displayName = txDetails.getShortestString(isRecipient) ?? "";
     final String account = txDetails.getAccount(isRecipient);
     String displayName = "${account.substring(0, 9)}\n...${account.substring(account.length - 6)}";
-    // // check if there's a username:
+    // check if there's a username:
     for (final User user in _users) {
       if (user.address == account) {
         displayName = user.getDisplayName()!;
