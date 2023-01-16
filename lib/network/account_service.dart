@@ -659,7 +659,6 @@ class AccountService {
     try {
       final StateBlock requestBlock = StateBlock.fromJson(json.decode(request.block!) as Map<String, dynamic>);
       final String subtype = request.subtype ?? BlockTypes.SEND;
-      log.d(requestBlock.hash);
       String? workHash = requestBlock.previous;
       if (requestBlock.previous == "0" ||
           requestBlock.previous == "0000000000000000000000000000000000000000000000000000000000000000") {

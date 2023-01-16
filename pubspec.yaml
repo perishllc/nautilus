@@ -146,11 +146,14 @@ dependencies:
   oktoast: ^3.3.1
 
   # Push notifications
-  firebase_messaging: ^14.0.4
+  # firebase_messaging: ^14.0.4
   firebase_core: ^2.2.0
   firebase_analytics: ^10.0.5
   firebase_app_check: ^0.1.1+3
-  flutter_local_notifications: ^13.0.0
+  # flutter_local_notifications: ^13.0.0
+  # firebase_core: ^1.24.1
+  awesome_notifications: ^0.7.4
+  awesome_notifications_fcm: ^0.7.4
 
   # windows plugins / ffi:
   sqflite_common_ffi: ^2.1.1

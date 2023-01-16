@@ -6,6 +6,7 @@ import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/subscription.dart';
+import 'package:wallet_flutter/network/subscription_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/ui/subs/payment_history.dart';
@@ -78,9 +79,10 @@ class SubDetailsSheetState extends State<SubDetailsSheet> {
                       widget.sub.active ? Z.of(context).cancelSub : Z.of(context).activateSub,
                       Dimens.BUTTON_BOTTOM_DIMENS,
                       onPressed: () async {
-                        await sl.get<DBHelper>().toggleSubscriptionActive(widget.sub);
-                        // trigger reload:
-                        EventTaxiImpl.singleton().fire(SubModifiedEvent());
+                        if (await sl.get<SubscriptionService>().toggleSubscriptionActive(context, widget.sub)) {
+                          // trigger reload:
+                          EventTaxiImpl.singleton().fire(SubModifiedEvent());
+                        }
                         if (!mounted) return;
                         Navigator.of(context).pop();
                       },
