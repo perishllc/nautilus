@@ -46,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "خطأ في إضافة حساب المشاهدة فقط: الحساب كان فارغًا"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "تم إنشاء حساب المشاهدة فقط بنجاح!"),
+        "addWorkSource": MessageLookupByLibrary.simpleMessage("أضف مصدر العمل"),
         "address": MessageLookupByLibrary.simpleMessage("تبوك"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("تم نسخ العنوان"),
         "addressHint": MessageLookupByLibrary.simpleMessage("أدخل العنوان\n"),
@@ -128,6 +129,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "غيّر كلمة مرورك الحالية. إذا كنت لا تعرف كلمة مرورك الحالية ، فما عليك سوى تخمين أفضل ما لديك لأنه ليس مطلوبًا في الواقع تغييرها (نظرًا لأنك قمت بتسجيل الدخول بالفعل) ، ولكنها تتيح لنا حذف إدخال النسخ الاحتياطي الحالي."),
         "changePin": MessageLookupByLibrary.simpleMessage("تغيير الدبوس"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("تعيين دبوس"),
+        "changePow": MessageLookupByLibrary.simpleMessage("تغيير إثبات العمل"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("تغيير مصدر إثبات العمل"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("تغير المندوب"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("تغير"),
@@ -259,6 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAmount": MessageLookupByLibrary.simpleMessage("أدخل المبلغ"),
         "enterEmail":
             MessageLookupByLibrary.simpleMessage("أدخل البريد الإلكتروني"),
+        "enterFrequency": MessageLookupByLibrary.simpleMessage("أدخل التردد"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("أدخل ملاحظة الهدية"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("أدخل الارتفاع"),
@@ -345,6 +350,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("قبل ثوان"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "المصادقة على نسخ المفتاح الخاص."),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("الرجاء إدخال التردد"),
         "from": MessageLookupByLibrary.simpleMessage("من"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("الوفاء"),
         "fundingBannerHeader":
@@ -429,6 +436,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "قم بعمل نسخة احتياطية من بذورك!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("العنوان المدخل غير صحيح"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("التردد غير صحيح"),
         "invalidHeight":
             MessageLookupByLibrary.simpleMessage("ارتفاع غير صالح"),
         "invalidPassword":
@@ -498,6 +507,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "هذا هو حسابك الجديد بمجرد تلقي NANO ، ستظهر المعاملات كما يلي:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("محفظة جديدة"),
         "nextButton": MessageLookupByLibrary.simpleMessage("التالى"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("الدفعة التالية"),
         "no": MessageLookupByLibrary.simpleMessage("لا"),
         "noContactsExport":
             MessageLookupByLibrary.simpleMessage("لا توجد جهات الاتصال للنقل"),
@@ -572,6 +582,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("كلمة المرور غير مطابقة\n"),
         "pay": MessageLookupByLibrary.simpleMessage("الدفع"),
         "payRequest": MessageLookupByLibrary.simpleMessage("ادفع هذا الطلب"),
+        "paymentHistory": MessageLookupByLibrary.simpleMessage("تاريخ الدفع"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "طلب شخص ما الدفع منك! تحقق من صفحة المدفوعات لمزيد من المعلومات."),
         "payments": MessageLookupByLibrary.simpleMessage("المدفوعات"),
@@ -602,6 +613,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("معلومات الإنكار المعقولة"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "قم بتعيين دبوس ثانوي لوضع الإنكار المعقول.\n\nإذا تم إلغاء قفل محفظتك باستخدام هذا الدبوس الثانوي ، فسيتم استبدال بذرتك بتجزئة من البذور الموجودة. هذه ميزة أمان مخصصة لاستخدامها في حالة إجبارك على فتح محفظتك.\n\nسيعمل هذا الدبوس مثل دبوس عادي (صحيح) باستثناء عند فتح محفظتك ، وهو الوقت الذي يتم فيه تنشيط وضع الإنكار المعقول.\n\nستفقد أموالك عند الدخول في وضع الإنكار المعقول إذا لم تقم بعمل نسخة احتياطية من البذور الخاصة بك!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("الاختيارات"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
         "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(

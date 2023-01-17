@@ -65,11 +65,6 @@
     "type": "text",
     "description": "Add a new node"
   },
-  "addWorkSource": "Add Work Source",
-  "@addWorkSource": {
-    "type": "text",
-    "description": "Add work source"
-  },
   "address": "Address",
   "@address": {
     "type": "text",
@@ -124,6 +119,11 @@
   "@addWatchOnlyAccountSuccess": {
     "type": "text",
     "description": "watch_only_add_success"
+  },
+  "addWorkSource": "Add Work Source",
+  "@addWorkSource": {
+    "type": "text",
+    "description": "Add work source"
   },
   "advanced": "Advanced",
   "@advanced": {
@@ -345,21 +345,6 @@
     "type": "text",
     "description": "change node"
   },
-  "changePow": "Change PoW",
-  "@changePow": {
-    "type": "text",
-    "description": "change pow"
-  },
-  "changePowSource": "Change PoW Source",
-  "@changePowSource": {
-    "type": "text",
-    "description": "change pow source"
-  },
-  "pow": "PoW",
-  "@pow": {
-    "type": "text",
-    "description": "pow"
-  },
   "changePassword": "Change Password",
   "@changePassword": {
     "type": "text",
@@ -379,6 +364,16 @@
   "@changePinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to set a pin"
+  },
+  "changePow": "Change PoW",
+  "@changePow": {
+    "type": "text",
+    "description": "change pow"
+  },
+  "changePowSource": "Change PoW Source",
+  "@changePowSource": {
+    "type": "text",
+    "description": "change pow source"
   },
   "changeRepAuthenticate": "Change Representative",
   "@changeRepAuthenticate": {
@@ -780,6 +775,11 @@
     "type": "text",
     "description": "enter_email"
   },
+  "enterFrequency": "Enter Frequency",
+  "@enterFrequency": {
+    "type": "text",
+    "description": "add_sub_frequency_hint"
+  },
   "enterGiftMemo": "Enter Gift Note",
   "@enterGiftMemo": {
     "type": "text",
@@ -809,11 +809,6 @@
   "@enterName": {
     "type": "text",
     "description": "add_sub_name_hint"
-  },
-  "enterFrequency": "Enter Frequency",
-  "@enterFrequency": {
-    "type": "text",
-    "description": "add_sub_frequency_hint"
   },
   "enterNodeName": "Enter Node Name",
   "@enterNodeName": {
@@ -1059,6 +1054,11 @@
   "@fingerprintSeedBackup": {
     "type": "text",
     "description": "settings_fingerprint_title"
+  },
+  "frequencyEmpty": "Please enter a Frequency",
+  "@frequencyEmpty": {
+    "type": "text",
+    "description": "frequency_empty"
   },
   "from": "From",
   "@from": {
@@ -1330,6 +1330,11 @@
     "type": "text",
     "description": "send_invalid_address"
   },
+  "invalidFrequency": "Frequency Invalid",
+  "@invalidFrequency": {
+    "type": "text",
+    "description": "invalid_frequency"
+  },
   "invalidHeight": "Invalid Height",
   "@invalidHeight": {
     "type": "text",
@@ -1519,16 +1524,6 @@
   "@nameEmpty": {
     "type": "text",
     "description": "name_empty"
-  },
-  "frequencyEmpty": "Please enter a Frequency",
-  "@frequencyEmpty": {
-    "type": "text",
-    "description": "frequency_empty"
-  },
-  "invalidFrequency": "Frequency Invalid",
-  "@invalidFrequency": {
-    "type": "text",
-    "description": "invalid_frequency"
   },
   "natricon": "Natricon",
   "@natricon": {
@@ -1805,6 +1800,11 @@
     "type": "text",
     "description": "home_pay_slidable"
   },
+  "paymentHistory": "Payment History",
+  "@paymentHistory": {
+    "type": "text",
+    "description": "payment_history"
+  },
   "paymentRequestMessage": "Someone has requested payment from you! check the payments page for more info.",
   "@paymentRequestMessage": {
     "type": "text",
@@ -1894,6 +1894,11 @@
   "@plausibleSheetInfo": {
     "type": "text",
     "description": "plausible_sheet_info"
+  },
+  "pow": "PoW",
+  "@pow": {
+    "type": "text",
+    "description": "pow"
   },
   "preferences": "Preferences",
   "@preferences": {

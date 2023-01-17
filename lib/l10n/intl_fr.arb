@@ -120,6 +120,11 @@
     "type": "text",
     "description": "watch_only_add_success"
   },
+  "addWorkSource": "Ajouter une source de travail",
+  "@addWorkSource": {
+    "type": "text",
+    "description": "Add work source"
+  },
   "advanced": "Avancé",
   "@advanced": {
     "type": "text",
@@ -359,6 +364,16 @@
   "@changePinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to set a pin"
+  },
+  "changePow": "Changer de mot de passe",
+  "@changePow": {
+    "type": "text",
+    "description": "change pow"
+  },
+  "changePowSource": "Changer la source de PoW",
+  "@changePowSource": {
+    "type": "text",
+    "description": "change pow source"
   },
   "changeRepAuthenticate": "Changer le représentant",
   "@changeRepAuthenticate": {
@@ -760,6 +775,11 @@
     "type": "text",
     "description": "enter_email"
   },
+  "enterFrequency": "Entrez la fréquence",
+  "@enterFrequency": {
+    "type": "text",
+    "description": "add_sub_frequency_hint"
+  },
   "enterGiftMemo": "Entrez la note cadeau",
   "@enterGiftMemo": {
     "type": "text",
@@ -1035,6 +1055,11 @@
     "type": "text",
     "description": "settings_fingerprint_title"
   },
+  "frequencyEmpty": "Veuillez saisir une fréquence",
+  "@frequencyEmpty": {
+    "type": "text",
+    "description": "frequency_empty"
+  },
   "from": "À partir",
   "@from": {
     "type": "text",
@@ -1305,6 +1330,11 @@
     "type": "text",
     "description": "send_invalid_address"
   },
+  "invalidFrequency": "Fréquence invalide",
+  "@invalidFrequency": {
+    "type": "text",
+    "description": "invalid_frequency"
+  },
   "invalidHeight": "Hauteur invalide",
   "@invalidHeight": {
     "type": "text",
@@ -1534,6 +1564,11 @@
   "@nextButton": {
     "type": "text",
     "description": "A button that goes to the next screen."
+  },
+  "nextPayment": "Prochain paiement",
+  "@nextPayment": {
+    "type": "text",
+    "description": "next_payment"
   },
   "no": "Non",
   "@no": {
@@ -1765,6 +1800,11 @@
     "type": "text",
     "description": "home_pay_slidable"
   },
+  "paymentHistory": "historique de paiement",
+  "@paymentHistory": {
+    "type": "text",
+    "description": "payment_history"
+  },
   "paymentRequestMessage": "Quelqu'un vous a demandé de payer ! consultez la page des paiements pour plus d'informations.",
   "@paymentRequestMessage": {
     "type": "text",
@@ -1854,6 +1894,11 @@
   "@plausibleSheetInfo": {
     "type": "text",
     "description": "plausible_sheet_info"
+  },
+  "pow": "PoW",
+  "@pow": {
+    "type": "text",
+    "description": "pow"
   },
   "preferences": "Préférences",
   "@preferences": {

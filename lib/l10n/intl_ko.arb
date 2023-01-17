@@ -120,6 +120,11 @@
     "type": "text",
     "description": "watch_only_add_success"
   },
+  "addWorkSource": "작업 소스 추가",
+  "@addWorkSource": {
+    "type": "text",
+    "description": "Add work source"
+  },
   "advanced": "고급의",
   "@advanced": {
     "type": "text",
@@ -359,6 +364,16 @@
   "@changePinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to set a pin"
+  },
+  "changePow": "작업 증명 변경",
+  "@changePow": {
+    "type": "text",
+    "description": "change pow"
+  },
+  "changePowSource": "PoW 소스 변경",
+  "@changePowSource": {
+    "type": "text",
+    "description": "change pow source"
   },
   "changeRepAuthenticate": "대리인 변경",
   "@changeRepAuthenticate": {
@@ -760,6 +775,11 @@
     "type": "text",
     "description": "enter_email"
   },
+  "enterFrequency": "빈도 입력",
+  "@enterFrequency": {
+    "type": "text",
+    "description": "add_sub_frequency_hint"
+  },
   "enterGiftMemo": "기프트 노트 입력",
   "@enterGiftMemo": {
     "type": "text",
@@ -1035,6 +1055,11 @@
     "type": "text",
     "description": "settings_fingerprint_title"
   },
+  "frequencyEmpty": "빈도를 입력하세요.",
+  "@frequencyEmpty": {
+    "type": "text",
+    "description": "frequency_empty"
+  },
   "from": "보낸 사람",
   "@from": {
     "type": "text",
@@ -1305,6 +1330,11 @@
     "type": "text",
     "description": "send_invalid_address"
   },
+  "invalidFrequency": "주파수 무효",
+  "@invalidFrequency": {
+    "type": "text",
+    "description": "invalid_frequency"
+  },
   "invalidHeight": "잘못된 높이",
   "@invalidHeight": {
     "type": "text",
@@ -1534,6 +1564,11 @@
   "@nextButton": {
     "type": "text",
     "description": "A button that goes to the next screen."
+  },
+  "nextPayment": "다음 결제",
+  "@nextPayment": {
+    "type": "text",
+    "description": "next_payment"
   },
   "no": "아니요",
   "@no": {
@@ -1765,6 +1800,11 @@
     "type": "text",
     "description": "home_pay_slidable"
   },
+  "paymentHistory": "지불 내역",
+  "@paymentHistory": {
+    "type": "text",
+    "description": "payment_history"
+  },
   "paymentRequestMessage": "누군가 결제를 요청했습니다!자세한 내용은 결제 페이지를 확인하세요.",
   "@paymentRequestMessage": {
     "type": "text",
@@ -1854,6 +1894,11 @@
   "@plausibleSheetInfo": {
     "type": "text",
     "description": "plausible_sheet_info"
+  },
+  "pow": "작업증명",
+  "@pow": {
+    "type": "text",
+    "description": "pow"
   },
   "preferences": "환경 설정",
   "@preferences": {

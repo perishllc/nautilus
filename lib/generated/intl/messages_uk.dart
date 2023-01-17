@@ -50,6 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Помилка додавання облікового запису лише для перегляду: обліковий запис був нульовим"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Успішно створено обліковий запис лише для перегляду!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("Додати джерело роботи"),
         "address": MessageLookupByLibrary.simpleMessage("Адреса"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Адресу скопійовано"),
@@ -141,6 +143,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePin": MessageLookupByLibrary.simpleMessage("Змінити PIN-код"),
         "changePinHint":
             MessageLookupByLibrary.simpleMessage("Встановити шпильку"),
+        "changePow": MessageLookupByLibrary.simpleMessage("Змінити PoW"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("Змінити джерело PoW"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Зміна представника"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Зміна"),
@@ -277,6 +282,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("Введіть адресу"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Введіть суму"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("Введіть Email"),
+        "enterFrequency":
+            MessageLookupByLibrary.simpleMessage("Введіть частоту"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Введіть подарункову записку"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Введіть висоту"),
@@ -370,6 +377,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Кілька секунд тому"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Введіть пароль для створення резервної копії."),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("Будь ласка, введіть частоту"),
         "from": MessageLookupByLibrary.simpleMessage("Від"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("виконано"),
         "fundingBannerHeader":
@@ -458,6 +467,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Зробіть резервну копію свого насіння!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Введено невірну адресу"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Недійсна частота"),
         "invalidHeight":
             MessageLookupByLibrary.simpleMessage("Недійсна висота"),
         "invalidPassword":
@@ -531,6 +542,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Це ваш новий гаманець. Як тільки ви отримаєте NANO, трансакції буде показано отак:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Новий гаманець"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Далі"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("Наступний платіж"),
         "no": MessageLookupByLibrary.simpleMessage("Ні"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "Немає контактів для експорту."),
@@ -607,6 +619,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pay": MessageLookupByLibrary.simpleMessage("Оплатити"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Сплатити цей запит"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("Історія платежів"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Хтось запросив у вас оплату! перегляньте сторінку платежів для отримання додаткової інформації."),
         "payments": MessageLookupByLibrary.simpleMessage("Платежі"),
@@ -639,6 +653,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Правдоподібна інформація про заперечення"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Встановіть вторинний пін для правдоподібного режиму заперечення.\n\nЯкщо ваш гаманець розблоковано за допомогою цього додаткового пін-коду, ваш початковий код буде замінено хешем існуючого початкового коду. Це функція безпеки, призначена для використання у випадку, якщо ви змушені відкрити свій гаманець.\n\nЦей пін-код діятиме як звичайний (правильний) пін-код, КРІМ під час розблокування вашого гаманця, коли активується правдоподібний режим заперечення.\n\nВаші кошти БУДУТЬ ВТРАЧЕНІ після переходу в режим правдоподібної відмови, якщо ви не створили резервну копію початкового коду!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("Преференції"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Політика приватності"),

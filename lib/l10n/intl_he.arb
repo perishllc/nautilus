@@ -120,6 +120,11 @@
     "type": "text",
     "description": "watch_only_add_success"
   },
+  "addWorkSource": "הוסף מקור עבודה",
+  "@addWorkSource": {
+    "type": "text",
+    "description": "Add work source"
+  },
   "advanced": "מִתקַדֵם",
   "@advanced": {
     "type": "text",
@@ -359,6 +364,16 @@
   "@changePinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to set a pin"
+  },
+  "changePow": "שנה PoW",
+  "@changePow": {
+    "type": "text",
+    "description": "change pow"
+  },
+  "changePowSource": "שנה מקור PoW",
+  "@changePowSource": {
+    "type": "text",
+    "description": "change pow source"
   },
   "changeRepAuthenticate": "שנה נציג",
   "@changeRepAuthenticate": {
@@ -760,6 +775,11 @@
     "type": "text",
     "description": "enter_email"
   },
+  "enterFrequency": "הזן תדר",
+  "@enterFrequency": {
+    "type": "text",
+    "description": "add_sub_frequency_hint"
+  },
   "enterGiftMemo": "הזן הערת מתנה",
   "@enterGiftMemo": {
     "type": "text",
@@ -1035,6 +1055,11 @@
     "type": "text",
     "description": "settings_fingerprint_title"
   },
+  "frequencyEmpty": "נא להזין תדירות",
+  "@frequencyEmpty": {
+    "type": "text",
+    "description": "frequency_empty"
+  },
   "from": "מ",
   "@from": {
     "type": "text",
@@ -1305,6 +1330,11 @@
     "type": "text",
     "description": "send_invalid_address"
   },
+  "invalidFrequency": "תדר לא חוקי",
+  "@invalidFrequency": {
+    "type": "text",
+    "description": "invalid_frequency"
+  },
   "invalidHeight": "גובה לא חוקי",
   "@invalidHeight": {
     "type": "text",
@@ -1534,6 +1564,11 @@
   "@nextButton": {
     "type": "text",
     "description": "A button that goes to the next screen."
+  },
+  "nextPayment": "התשלום הבא",
+  "@nextPayment": {
+    "type": "text",
+    "description": "next_payment"
   },
   "no": "לא",
   "@no": {
@@ -1765,6 +1800,11 @@
     "type": "text",
     "description": "home_pay_slidable"
   },
+  "paymentHistory": "היסטוריית תשלומים",
+  "@paymentHistory": {
+    "type": "text",
+    "description": "payment_history"
+  },
   "paymentRequestMessage": "מישהו ביקש ממך תשלום! בדוק את דף התשלומים לקבלת מידע נוסף.",
   "@paymentRequestMessage": {
     "type": "text",
@@ -1854,6 +1894,11 @@
   "@plausibleSheetInfo": {
     "type": "text",
     "description": "plausible_sheet_info"
+  },
+  "pow": "PoW",
+  "@pow": {
+    "type": "text",
+    "description": "pow"
   },
   "preferences": "העדפות",
   "@preferences": {

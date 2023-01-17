@@ -52,6 +52,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pievienojot tikai skatīšanās kontu, radās kļūda: konts bija nulle"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Veiksmīgi izveidots tikai pulksteņa konts!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("Pievienot darba avotu"),
         "address": MessageLookupByLibrary.simpleMessage("Adrese"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Adrese nokopēta"),
@@ -137,6 +139,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mainiet savu esošo paroli. Ja nezināt savu pašreizējo paroli, vienkārši uzminējiet, jo tā faktiski nav jāmaina (jo jūs jau esat pieteicies), taču tas ļauj mums izdzēst esošo rezerves ierakstu."),
         "changePin": MessageLookupByLibrary.simpleMessage("Mainīt Pin"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("Iestatīt tapu"),
+        "changePow": MessageLookupByLibrary.simpleMessage("Mainīt PoW"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("Mainiet PoW avotu"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Mainīt pārstāvi"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Mainīt"),
@@ -272,6 +277,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAmount":
             MessageLookupByLibrary.simpleMessage("Ievadiet daudzumu"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("Ievadiet e-pastu"),
+        "enterFrequency":
+            MessageLookupByLibrary.simpleMessage("Ievadiet frekvenci"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
         "enterHeight":
@@ -365,6 +372,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pirms dažām sekundēm"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Autorizējieties, lai kopētu sēklu."),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("Lūdzu, ievadiet frekvenci"),
         "from": MessageLookupByLibrary.simpleMessage("From"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("fulfilled"),
         "fundingBannerHeader":
@@ -450,6 +459,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Dublējiet savu sēklu!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Ievadītā adrese nav derīga"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Frekvence nav derīga"),
         "invalidHeight":
             MessageLookupByLibrary.simpleMessage("Nederīgs augstums"),
         "invalidPassword":
@@ -518,6 +529,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Šis ir jūsu jaunais konts. Tiklīdz saņemsiet NANO, transakcijas būs redzamas šādi:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Jauns maks"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
+        "nextPayment":
+            MessageLookupByLibrary.simpleMessage("Nākamais maksājums"),
         "no": MessageLookupByLibrary.simpleMessage("Nē"),
         "noContactsExport":
             MessageLookupByLibrary.simpleMessage("Nav kontaktu ko eksportēt."),
@@ -592,6 +605,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Passwords do not match"),
         "pay": MessageLookupByLibrary.simpleMessage("Pay"),
         "payRequest": MessageLookupByLibrary.simpleMessage("Pay this request"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("Maksājumu vēsture"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Someone has requested payment from you! check the payments page for more info."),
         "payments": MessageLookupByLibrary.simpleMessage("Payments"),
@@ -620,6 +635,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Informācija par ticamu noliegumu"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Iestatiet sekundāro tapu ticamam noraidīšanas režīmam.\n\nJa jūsu maks tiek atbloķēts, izmantojot šo sekundāro tapu, jūsu sēkla tiks aizstāta ar esošās sēklas jaucējkrānu. Šis ir drošības līdzeklis, kas paredzēts lietošanai, ja esat spiests atvērt maku.\n\nŠī spraudīte darbosies kā parasta (pareiza) piespraude, IZŅEMOT, kad atbloķēsiet maku, kad aktivizēsies ticamā atteikuma režīms.\n\nJūsu līdzekļi TIKS ZAUDĒTI, ieejot ticamā noraidīšanas režīmā, ja neesat veicis sākotnējo dublējumu!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("Preferences"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Privātuma politika"),

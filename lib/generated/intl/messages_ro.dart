@@ -51,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Eroare la adăugarea contului numai pentru vizionare: contul a fost nul"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Cont doar pentru ceas creat cu succes!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("Adăugați sursa de lucru"),
         "address": MessageLookupByLibrary.simpleMessage("Abordare"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("Adresă copiată"),
         "addressHint": MessageLookupByLibrary.simpleMessage("Introdu adresa"),
@@ -137,6 +139,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Schimbați parola existentă. Dacă nu vă cunoașteți parola actuală, ghiciți-vă, deoarece nu este necesar să o schimbați (din moment ce sunteți deja autentificat), dar ne permite să ștergem intrarea de rezervă existentă."),
         "changePin": MessageLookupByLibrary.simpleMessage("Schimba pin-ul"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("Setați pinul"),
+        "changePow": MessageLookupByLibrary.simpleMessage("Schimbați PoW"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("Schimbați sursa PoW"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Schimbă reprezentantul"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Schimbă"),
@@ -271,6 +276,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAmount": MessageLookupByLibrary.simpleMessage("Introdu suma"),
         "enterEmail":
             MessageLookupByLibrary.simpleMessage("Introduceți adresa de email"),
+        "enterFrequency":
+            MessageLookupByLibrary.simpleMessage("Introduceți Frecvența"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Introduceți nota cadou"),
         "enterHeight":
@@ -366,6 +373,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Acum câteva secunde"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Confirmați cu amprenta pentru a copia seed-ul."),
+        "frequencyEmpty": MessageLookupByLibrary.simpleMessage(
+            "Vă rugăm să introduceți o Frecvență"),
         "from": MessageLookupByLibrary.simpleMessage("De la"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("îndeplinit"),
         "fundingBannerHeader":
@@ -452,6 +461,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fă-ți o rezervă de semințe!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Adresa introdusă este invalidă"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Frecvență invalidă"),
         "invalidHeight":
             MessageLookupByLibrary.simpleMessage("Înălțime nevalidă"),
         "invalidPassword":
@@ -523,6 +534,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Acesta este noul tău cont! Odată ce primești NANO, tranzacțiile vor arată astfel:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Portofel nou"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Continuă"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("Următoarea plată"),
         "no": MessageLookupByLibrary.simpleMessage("Nu"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "Nu există contacte pentru exportare"),
@@ -598,6 +610,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pay": MessageLookupByLibrary.simpleMessage("Plătiți"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Plătiți această solicitare"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("istoria platilor"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Cineva a solicitat plata de la tine! verificați pagina de plăți pentru mai multe informații."),
         "payments": MessageLookupByLibrary.simpleMessage("Plăți"),
@@ -627,6 +641,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Informații plauzibile privind negarea"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Setați un pin secundar pentru modul de negație plauzibil.\n\nDacă portofelul tău este deblocat folosind acest cod secundar, sămânța ta va fi înlocuită cu un hash din sămânța existentă. Aceasta este o caracteristică de securitate destinată a fi utilizată în cazul în care sunteți forțat să vă deschideți portofelul.\n\nAcest pin va acționa ca un cod normal (corec) CU EXCEPȚIA când vă deblocați portofelul, care este momentul în care modul de negație plauzibil se va activa.\n\nFondurile dvs. VOR FI PIERDUTE la intrarea în modul de negație plauzibil dacă nu v-ați făcut o copie de rezervă!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("Preferințe"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage(
             "Politica de confidențialitate"),

@@ -120,6 +120,11 @@
     "type": "text",
     "description": "watch_only_add_success"
   },
+  "addWorkSource": "添加工作來源",
+  "@addWorkSource": {
+    "type": "text",
+    "description": "Add work source"
+  },
   "advanced": "先進的",
   "@advanced": {
     "type": "text",
@@ -359,6 +364,16 @@
   "@changePinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to set a pin"
+  },
+  "changePow": "改變工作量證明",
+  "@changePow": {
+    "type": "text",
+    "description": "change pow"
+  },
+  "changePowSource": "更改 PoW 源",
+  "@changePowSource": {
+    "type": "text",
+    "description": "change pow source"
   },
   "changeRepAuthenticate": "變更代表",
   "@changeRepAuthenticate": {
@@ -760,6 +775,11 @@
     "type": "text",
     "description": "enter_email"
   },
+  "enterFrequency": "輸入頻率",
+  "@enterFrequency": {
+    "type": "text",
+    "description": "add_sub_frequency_hint"
+  },
   "enterGiftMemo": "輸入禮品備註",
   "@enterGiftMemo": {
     "type": "text",
@@ -1035,6 +1055,11 @@
     "type": "text",
     "description": "settings_fingerprint_title"
   },
+  "frequencyEmpty": "請輸入頻率",
+  "@frequencyEmpty": {
+    "type": "text",
+    "description": "frequency_empty"
+  },
   "from": "從",
   "@from": {
     "type": "text",
@@ -1305,6 +1330,11 @@
     "type": "text",
     "description": "send_invalid_address"
   },
+  "invalidFrequency": "頻率無效",
+  "@invalidFrequency": {
+    "type": "text",
+    "description": "invalid_frequency"
+  },
   "invalidHeight": "無效高度",
   "@invalidHeight": {
     "type": "text",
@@ -1534,6 +1564,11 @@
   "@nextButton": {
     "type": "text",
     "description": "A button that goes to the next screen."
+  },
+  "nextPayment": "下次付款",
+  "@nextPayment": {
+    "type": "text",
+    "description": "next_payment"
   },
   "no": "不要",
   "@no": {
@@ -1765,6 +1800,11 @@
     "type": "text",
     "description": "home_pay_slidable"
   },
+  "paymentHistory": "支付歷史",
+  "@paymentHistory": {
+    "type": "text",
+    "description": "payment_history"
+  },
   "paymentRequestMessage": "有人要求您付款！查看付款頁面以獲取更多信息。",
   "@paymentRequestMessage": {
     "type": "text",
@@ -1854,6 +1894,11 @@
   "@plausibleSheetInfo": {
     "type": "text",
     "description": "plausible_sheet_info"
+  },
+  "pow": "工作量證明",
+  "@pow": {
+    "type": "text",
+    "description": "pow"
   },
   "preferences": "個人偏好",
   "@preferences": {

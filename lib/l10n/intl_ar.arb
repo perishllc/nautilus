@@ -120,6 +120,11 @@
     "type": "text",
     "description": "watch_only_add_success"
   },
+  "addWorkSource": "أضف مصدر العمل",
+  "@addWorkSource": {
+    "type": "text",
+    "description": "Add work source"
+  },
   "advanced": "متقدم",
   "@advanced": {
     "type": "text",
@@ -359,6 +364,16 @@
   "@changePinHint": {
     "type": "text",
     "description": "A text field hint that tells the user to set a pin"
+  },
+  "changePow": "تغيير إثبات العمل",
+  "@changePow": {
+    "type": "text",
+    "description": "change pow"
+  },
+  "changePowSource": "تغيير مصدر إثبات العمل",
+  "@changePowSource": {
+    "type": "text",
+    "description": "change pow source"
   },
   "changeRepAuthenticate": "تغير المندوب",
   "@changeRepAuthenticate": {
@@ -760,6 +775,11 @@
     "type": "text",
     "description": "enter_email"
   },
+  "enterFrequency": "أدخل التردد",
+  "@enterFrequency": {
+    "type": "text",
+    "description": "add_sub_frequency_hint"
+  },
   "enterGiftMemo": "أدخل ملاحظة الهدية",
   "@enterGiftMemo": {
     "type": "text",
@@ -1035,6 +1055,11 @@
     "type": "text",
     "description": "settings_fingerprint_title"
   },
+  "frequencyEmpty": "الرجاء إدخال التردد",
+  "@frequencyEmpty": {
+    "type": "text",
+    "description": "frequency_empty"
+  },
   "from": "من",
   "@from": {
     "type": "text",
@@ -1305,6 +1330,11 @@
     "type": "text",
     "description": "send_invalid_address"
   },
+  "invalidFrequency": "التردد غير صحيح",
+  "@invalidFrequency": {
+    "type": "text",
+    "description": "invalid_frequency"
+  },
   "invalidHeight": "ارتفاع غير صالح",
   "@invalidHeight": {
     "type": "text",
@@ -1534,6 +1564,11 @@
   "@nextButton": {
     "type": "text",
     "description": "A button that goes to the next screen."
+  },
+  "nextPayment": "الدفعة التالية",
+  "@nextPayment": {
+    "type": "text",
+    "description": "next_payment"
   },
   "no": "لا",
   "@no": {
@@ -1765,6 +1800,11 @@
     "type": "text",
     "description": "home_pay_slidable"
   },
+  "paymentHistory": "تاريخ الدفع",
+  "@paymentHistory": {
+    "type": "text",
+    "description": "payment_history"
+  },
   "paymentRequestMessage": "طلب شخص ما الدفع منك! تحقق من صفحة المدفوعات لمزيد من المعلومات.",
   "@paymentRequestMessage": {
     "type": "text",
@@ -1854,6 +1894,11 @@
   "@plausibleSheetInfo": {
     "type": "text",
     "description": "plausible_sheet_info"
+  },
+  "pow": "PoW",
+  "@pow": {
+    "type": "text",
+    "description": "pow"
   },
   "preferences": "الاختيارات",
   "@preferences": {

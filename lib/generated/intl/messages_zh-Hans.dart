@@ -43,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("添加仅观看帐户时出错：帐户为空"),
         "addWatchOnlyAccountSuccess":
             MessageLookupByLibrary.simpleMessage("已成功创建仅限观看的帐户！"),
+        "addWorkSource": MessageLookupByLibrary.simpleMessage("添加工作来源"),
         "address": MessageLookupByLibrary.simpleMessage("地址"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("地址已复制"),
         "addressHint": MessageLookupByLibrary.simpleMessage("输入地址"),
@@ -108,6 +109,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "更改现有密码。如果您不知道当前密码，请做出最佳猜测，因为实际上不需要更改它（因为您已经登录），但它确实让我们删除了现有的备份条目。"),
         "changePin": MessageLookupByLibrary.simpleMessage("更改引脚"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("设置引脚"),
+        "changePow": MessageLookupByLibrary.simpleMessage("改变工作量证明"),
+        "changePowSource": MessageLookupByLibrary.simpleMessage("更改 PoW 源"),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage("更改代表"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("更改"),
         "changeRepHint": MessageLookupByLibrary.simpleMessage("输入新代表"),
@@ -208,6 +211,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("输入地址"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("输入金额"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("输入电子邮件"),
+        "enterFrequency": MessageLookupByLibrary.simpleMessage("输入频率"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("输入礼品备注"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("输入高度"),
         "enterHttpUrl": MessageLookupByLibrary.simpleMessage("输入 HTTP 网址"),
@@ -276,6 +280,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("几秒钟前"),
         "fingerprintSeedBackup":
             MessageLookupByLibrary.simpleMessage("确认指纹，备份钱包种子。"),
+        "frequencyEmpty": MessageLookupByLibrary.simpleMessage("请输入频率"),
         "from": MessageLookupByLibrary.simpleMessage("来自"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("完成"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage("资金横幅"),
@@ -346,6 +351,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "introSkippedWarningHeader":
             MessageLookupByLibrary.simpleMessage("备份你的种子！"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage("无效的目标地址"),
+        "invalidFrequency": MessageLookupByLibrary.simpleMessage("频率无效"),
         "invalidHeight": MessageLookupByLibrary.simpleMessage("无效高度"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("无效密码"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("无效引脚"),
@@ -402,6 +408,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "这是您的新账户。当您收到 NANO 时, 交易会如下出现："),
         "newWallet": MessageLookupByLibrary.simpleMessage("创建新钱包"),
         "nextButton": MessageLookupByLibrary.simpleMessage("继续"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("下次付款"),
         "no": MessageLookupByLibrary.simpleMessage("否认"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage("没有要导出的联系人"),
         "noContactsImport": MessageLookupByLibrary.simpleMessage("找不到要导入的联系人"),
@@ -462,6 +469,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordsDontMatch": MessageLookupByLibrary.simpleMessage("密码不匹配"),
         "pay": MessageLookupByLibrary.simpleMessage("付钱"),
         "payRequest": MessageLookupByLibrary.simpleMessage("支付此申请"),
+        "paymentHistory": MessageLookupByLibrary.simpleMessage("支付历史"),
         "paymentRequestMessage":
             MessageLookupByLibrary.simpleMessage("有人要求你付款！查看付款页面了解更多信息。"),
         "payments": MessageLookupByLibrary.simpleMessage("付款"),
@@ -483,6 +491,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("似是而非的否认信息"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "为似是而非的否认模式设置辅助引脚。\n\n如果您的钱包使用此辅助密码解锁，您的种子将替换为现有种子的哈希值。这是一项安全功能，旨在在您被迫打开钱包的情况下使用。\n\n除了解锁你的钱包时，这个密码就像一个正常的（正确的）密码，这是在合理的否认模式将激活的时候。\n\n如果您没有备份您的种子，您的资金将在进入合理否认模式时丢失！"),
+        "pow": MessageLookupByLibrary.simpleMessage("工作量证明"),
         "preferences": MessageLookupByLibrary.simpleMessage("偏好"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("隐私政策"),
         "proSubRequiredHeader":

@@ -96,6 +96,7 @@ class AppIcons {
   static const IconData qrcode = IconData(0xf029, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData gift = IconData(0xf06b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData money_bill = IconData(0xf0d6, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData envelope = IconData(0xf0e0, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData clipboard = IconData(0xf328, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData money_bill_alt = IconData(0xf3d1, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData coins = IconData(0xf51e, fontFamily: _kFontFam, fontPackage: _kFontPkg);

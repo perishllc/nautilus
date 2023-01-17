@@ -53,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Det gick inte att lägga till Watch Only-konto: Kontot var null"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Bevakningskonto har skapats framgångsrikt!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("Lägg till arbetskälla"),
         "address": MessageLookupByLibrary.simpleMessage("Adress"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Adress kopierad"),
@@ -141,6 +143,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ändra ditt befintliga lösenord. Om du inte känner till ditt nuvarande lösenord, gör bara din bästa gissning eftersom det faktiskt inte krävs för att ändra det (eftersom du redan är inloggad), men det låter oss ta bort den befintliga backup-posten."),
         "changePin": MessageLookupByLibrary.simpleMessage("Byt stift"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("Sätt stift"),
+        "changePow": MessageLookupByLibrary.simpleMessage("Ändra PoW"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("Ändra PoW-källa"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Byt representant"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Ändra"),
@@ -275,6 +280,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("Ange adress"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Ange belopp"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("Skriv in e-mail"),
+        "enterFrequency": MessageLookupByLibrary.simpleMessage("Ange frekvens"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Ange presentanteckning"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Ange höjd"),
@@ -363,6 +369,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Några sekunder sedan"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Bekräfta fingeravtryck för att säkerhetskopiera plånboks-seed."),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("Vänligen ange en frekvens"),
         "from": MessageLookupByLibrary.simpleMessage("Från"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("uppfyllt"),
         "fundingBannerHeader":
@@ -450,6 +458,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Säkerhetskopiera ditt frö!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Ogiltig mottagaradress"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Frekvens ogiltig"),
         "invalidHeight": MessageLookupByLibrary.simpleMessage("Ogiltig höjd"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Ogiltigt lösenord"),
@@ -520,6 +530,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Det här är ditt nya konto. Så snart du tar emot NANO, kommer transaktioner att se ut så här:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Ny plånbok"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Nästa"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("Nästa betalning"),
         "no": MessageLookupByLibrary.simpleMessage("Nej"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "Det finns inga kontakter att exportera"),
@@ -595,6 +606,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pay": MessageLookupByLibrary.simpleMessage("Betala"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Betala denna begäran"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("Betalningshistorik"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Någon har begärt betalning från dig! kolla betalningssidan för mer info."),
         "payments": MessageLookupByLibrary.simpleMessage("Betalningar"),
@@ -626,6 +639,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Plausible Deniability Info"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Ställ in ett sekundärt stift för rimligt förnekarläge.\n\nOm din plånbok låses upp med denna sekundära stift, kommer ditt frö att ersättas med en hash av det befintliga fröet. Detta är en säkerhetsfunktion avsedd att användas i händelse av att du tvingas öppna din plånbok.\n\nDenna stift kommer att fungera som en vanlig (korrekt) stift UTOM när du låser upp din plånbok, vilket är då läget för rimlig förnekelse kommer att aktiveras.\n\nDina pengar KOMMER FÖRLORA när du går in i rimligt förnekarläge om du inte har säkerhetskopierat ditt frö!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("Inställningar"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privatpolicy"),
         "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(

@@ -389,7 +389,7 @@ class AppDialogs {
   }
 
   static Widget infoButton(BuildContext context, void Function()? onPressed,
-      {IconData icon = AppIcons.info, Key? key}) {
+      {IconData icon = AppIcons.info, Color? color, Key? key}) {
     // A container for the info button
     return SizedBox(
       width: 50,
@@ -405,7 +405,7 @@ class AppDialogs {
           tapTargetSize: MaterialTapTargetSize.padded,
         ),
         onPressed: onPressed,
-        child: Icon(icon, size: 24, color: StateContainer.of(context).curTheme.text),
+        child: Icon(icon, size: 24, color: color ?? StateContainer.of(context).curTheme.text),
       ),
     );
   }

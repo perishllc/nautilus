@@ -50,6 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "S\'ha produït un error en afegir el compte de només vigilància: el compte era nul"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "S\'ha creat correctament el compte només de rellotge!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("Afegeix una font de treball"),
         "address": MessageLookupByLibrary.simpleMessage("adreça"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Adresa zkopírována"),
@@ -135,6 +137,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Canvia la teva contrasenya existent. Si no coneixeu la vostra contrasenya actual, només heu d\'endevinar, ja que en realitat no cal canviar-la (ja que ja heu iniciat sessió), però ens permet suprimir l\'entrada de còpia de seguretat existent."),
         "changePin": MessageLookupByLibrary.simpleMessage("Canvia el PIN"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("Posa el pin"),
+        "changePow": MessageLookupByLibrary.simpleMessage("Canvia PoW"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("Canvia la font de PoW"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Změnit zástupce"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Změnit"),
@@ -270,6 +275,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAmount": MessageLookupByLibrary.simpleMessage("Zadejte částku"),
         "enterEmail": MessageLookupByLibrary.simpleMessage(
             "Introduïu el correu electrònic"),
+        "enterFrequency":
+            MessageLookupByLibrary.simpleMessage("Introduïu la freqüència"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
         "enterHeight":
@@ -359,6 +366,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("Fa uns segons"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Ověřte se pro zálohu semínka."),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("Introduïu una freqüència"),
         "from": MessageLookupByLibrary.simpleMessage("From"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("fulfilled"),
         "fundingBannerHeader":
@@ -445,6 +454,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Fes una còpia de seguretat de la teva llavor!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Zadaná adresa není platná"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Freqüència no vàlida"),
         "invalidHeight":
             MessageLookupByLibrary.simpleMessage("Alçada no vàlida"),
         "invalidPassword":
@@ -514,6 +525,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Toto je váš nový účet. Jakmile obdržíte NANO, transakce se zobrazí takto:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Nová peněženka"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Další"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("Següent pagament"),
         "no": MessageLookupByLibrary.simpleMessage("Ne"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "Neexistují žádné kontakty k exportu."),
@@ -589,6 +601,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Heslo se neshoduje"),
         "pay": MessageLookupByLibrary.simpleMessage("Pay"),
         "payRequest": MessageLookupByLibrary.simpleMessage("Pay this request"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("Historial de pagaments"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Someone has requested payment from you! check the payments page for more info."),
         "payments": MessageLookupByLibrary.simpleMessage("Payments"),
@@ -619,6 +633,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Informació de negació plausible"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Estableix un pin secundari per al mode de denegació plausible.\n\nSi la vostra cartera es desbloqueja amb aquest pin secundari, la vostra llavor es substituirà per un hash de la llavor existent. Aquesta és una funció de seguretat destinada a utilitzar-se en cas que se us obligui a obrir la cartera.\n\nAquest pin actuarà com un pin normal (correcte) EXCEPTE en desbloquejar la cartera, que és quan s\'activarà el mode de denegació plausible.\n\nEls vostres fons ES PERDRÀN en entrar en mode de denegació plausible si no heu fet una còpia de seguretat de la vostra llavor!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("Předvolby"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage(
             "Zásady ochrany osobních údajů"),

@@ -52,6 +52,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Error sa pagdaragdag ng Watch Only Account: Null ang account"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Matagumpay na nagawa ang watch only na account!"),
+        "addWorkSource": MessageLookupByLibrary.simpleMessage(
+            "Magdagdag ng Pinagmulan ng Trabaho"),
         "address": MessageLookupByLibrary.simpleMessage("Address"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Ang Address ay nakopya"),
@@ -141,6 +143,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Baguhin ang iyong umiiral na password. Kung hindi mo alam ang iyong kasalukuyang password, hulaan na lang ang iyong pinakamahusay dahil hindi naman talaga kailangan na baguhin ito (dahil naka-log in ka na), ngunit hinahayaan kami nitong tanggalin ang kasalukuyang backup na entry."),
         "changePin": MessageLookupByLibrary.simpleMessage("Baguhin ang Pin"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("Itakda ang pin"),
+        "changePow": MessageLookupByLibrary.simpleMessage("Baguhin ang PoW"),
+        "changePowSource": MessageLookupByLibrary.simpleMessage(
+            "Baguhin ang Pinagmulan ng PoW"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Palitan ang Representative"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Palitan"),
@@ -278,6 +283,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAmount":
             MessageLookupByLibrary.simpleMessage("Ilagay ang Amount"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("Ipasok ang Email"),
+        "enterFrequency":
+            MessageLookupByLibrary.simpleMessage("Ipasok ang Dalas"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Ipasok ang Tala ng Regalo"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Ipasok ang Taas"),
@@ -372,6 +379,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ilang segundo ang nakalipas"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Kumpirmahin ang fingerprint para i-back up ang wallet seed."),
+        "frequencyEmpty": MessageLookupByLibrary.simpleMessage(
+            "Mangyaring maglagay ng Dalas"),
         "from": MessageLookupByLibrary.simpleMessage("Mula"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("natupad"),
         "fundingBannerHeader":
@@ -462,6 +471,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I-backup ang iyong binhi!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Hindi wasto ang Destination Address"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Di-wasto ang Dalas"),
         "invalidHeight":
             MessageLookupByLibrary.simpleMessage("Di-wastong Taas"),
         "invalidPassword":
@@ -535,6 +546,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ito ang iyong bagong account. Pag nakareceive ka ng NANO, ganito ang makikita mo:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Bagong Wallet"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Susunod"),
+        "nextPayment":
+            MessageLookupByLibrary.simpleMessage("Susunod na Pagbabayad"),
         "no": MessageLookupByLibrary.simpleMessage("Hindi"),
         "noContactsExport":
             MessageLookupByLibrary.simpleMessage("Walang kontak na ma-export"),
@@ -612,6 +625,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pay": MessageLookupByLibrary.simpleMessage("Magbayad"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Bayaran ang hiling na ito"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("Kasaysayan ng pagbabayad"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "May isang tao na humiling ng pagbabayad mula sa iyo! tingnan ang pahina ng mga pagbabayad para sa karagdagang impormasyon."),
         "payments": MessageLookupByLibrary.simpleMessage("Mga Pagbabayad"),
@@ -643,6 +658,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Posibleng Pagkakaila na Impormasyon"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Magtakda ng pangalawang pin para sa posibleng deniability mode.\n\nKung ang iyong wallet ay na-unlock gamit ang pangalawang pin na ito, ang iyong binhi ay papalitan ng isang hash ng umiiral na binhi. Ito ay isang tampok na panseguridad na nilalayon na gamitin kung sakaling mapilitan kang buksan ang iyong wallet.\n\nAng pin na ito ay gagana bilang isang normal (tama) na pin MALIBAN kapag ina-unlock ang iyong wallet, na kung saan ay mag-a-activate ang plausible deniability mode.\n\nMAWAWALA ang iyong mga pondo sa pagpasok sa moda ng mapagkakatiwalaang deniability kung hindi mo pa nai-back up ang iyong binhi!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("Kagustuhan"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Patakaran sa privacy"),

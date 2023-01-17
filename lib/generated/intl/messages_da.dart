@@ -49,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Fejl ved tilføjelse af Watch Only-konto: Kontoen var null"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Der er oprettet kun ur-konto!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("Tilføj arbejdskilde"),
         "address": MessageLookupByLibrary.simpleMessage("Adresse"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Adresa zkopírována"),
@@ -134,6 +136,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Skift din eksisterende adgangskode. Hvis du ikke kender din nuværende adgangskode, skal du bare gætte, da det faktisk ikke er nødvendigt at ændre det (da du allerede er logget ind), men det lader os slette den eksisterende sikkerhedskopi."),
         "changePin": MessageLookupByLibrary.simpleMessage("Skift pin"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("Sæt pin"),
+        "changePow": MessageLookupByLibrary.simpleMessage("Skift PoW"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("Skift PoW-kilde"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Změnit zástupce"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Změnit"),
@@ -267,6 +272,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("Zadejte adresu"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Zadejte částku"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("Indtast e-mail"),
+        "enterFrequency":
+            MessageLookupByLibrary.simpleMessage("Indtast frekvens"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Indtast gave note"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Indtast Højde"),
@@ -359,6 +366,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("For et par sekunder siden"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Ověřte se pro zálohu semínka."),
+        "frequencyEmpty": MessageLookupByLibrary.simpleMessage(
+            "Indtast venligst en frekvens"),
         "from": MessageLookupByLibrary.simpleMessage("Fra"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("opfyldt"),
         "fundingBannerHeader":
@@ -445,6 +454,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sikkerhedskopier dit frø!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Zadaná adresa není platná"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Frekvens ugyldig"),
         "invalidHeight": MessageLookupByLibrary.simpleMessage("Ugyldig højde"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Neplatné heslo"),
@@ -515,6 +526,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Toto je váš nový účet. Jakmile obdržíte NANO, transakce se zobrazí takto:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Nová peněženka"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Další"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("Næste betaling"),
         "no": MessageLookupByLibrary.simpleMessage("Ne"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "Neexistují žádné kontakty k exportu."),
@@ -591,6 +603,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pay": MessageLookupByLibrary.simpleMessage("Betal"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Betal denne anmodning"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("Betalingshistorik"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Nogen har anmodet om betaling fra dig! tjek betalingssiden for mere info."),
         "payments": MessageLookupByLibrary.simpleMessage("Betalinger"),
@@ -621,6 +635,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Plausible Deniability Info"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Indstil en sekundær pin for plausibel benægtelsestilstand.\n\nHvis din tegnebog låses op ved hjælp af denne sekundære pin, vil dit frø blive erstattet med en hash af det eksisterende frø. Dette er en sikkerhedsfunktion beregnet til at blive brugt i tilfælde af, at du bliver tvunget til at åbne din tegnebog.\n\nDenne pin vil fungere som en normal (korrekt) pin, UNDTAGET når du låser din tegnebog op, hvilket er når plausibel benægtelsestilstand aktiveres.\n\nDine midler VIL TABE, når du går ind i plausibel deniability-tilstand, hvis du ikke har sikkerhedskopieret dit seed!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("Předvolby"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage(
             "Zásady ochrany osobních údajů"),

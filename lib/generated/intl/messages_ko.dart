@@ -44,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("감시 전용 계정 추가 오류: 계정이 null임"),
         "addWatchOnlyAccountSuccess":
             MessageLookupByLibrary.simpleMessage("보기 전용 계정이 생성되었습니다!"),
+        "addWorkSource": MessageLookupByLibrary.simpleMessage("작업 소스 추가"),
         "address": MessageLookupByLibrary.simpleMessage("주소"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("주소가 복사되었습니다 "),
         "addressHint": MessageLookupByLibrary.simpleMessage("주소를 입력하세요"),
@@ -119,6 +120,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "기존 비밀번호를 변경합니다. 현재 비밀번호를 모르는 경우 실제로 비밀번호를 변경할 필요는 없지만(이미 로그인되어 있으므로) 기존 백업 항목을 삭제할 수 있으므로 최선을 다해 추측하십시오."),
         "changePin": MessageLookupByLibrary.simpleMessage("핀 변경"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("핀 설정"),
+        "changePow": MessageLookupByLibrary.simpleMessage("작업 증명 변경"),
+        "changePowSource": MessageLookupByLibrary.simpleMessage("PoW 소스 변경"),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage("대리인 변경"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("바꾸기"),
         "changeRepHint": MessageLookupByLibrary.simpleMessage("새로운 대리인을 입력하세요"),
@@ -233,6 +236,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("주소 입력"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("금액을 입력하세요"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("이메일 입력"),
+        "enterFrequency": MessageLookupByLibrary.simpleMessage("빈도 입력"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("기프트 노트 입력"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("키 입력"),
         "enterHttpUrl": MessageLookupByLibrary.simpleMessage("HTTP URL 입력"),
@@ -306,6 +310,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("몇 초 전에"),
         "fingerprintSeedBackup":
             MessageLookupByLibrary.simpleMessage("지문을 확인하여 시드 지갑를 백업하세요"),
+        "frequencyEmpty": MessageLookupByLibrary.simpleMessage("빈도를 입력하세요."),
         "from": MessageLookupByLibrary.simpleMessage("보낸 사람"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("성취됩니다"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage("펀딩 배너"),
@@ -385,6 +390,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("당신의 씨앗을 백업하십시오!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("목적지 주소가 잘못되었습니다"),
+        "invalidFrequency": MessageLookupByLibrary.simpleMessage("주파수 무효"),
         "invalidHeight": MessageLookupByLibrary.simpleMessage("잘못된 높이"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Invalid Password"),
@@ -447,6 +453,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "This is your new account. Once you receive NANO, transactions will show up like this:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("새 지갑"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("다음 결제"),
         "no": MessageLookupByLibrary.simpleMessage("아니요"),
         "noContactsExport":
             MessageLookupByLibrary.simpleMessage("내보낼 연락처가 존재하지 않습니다."),
@@ -515,6 +522,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Passwords do not match"),
         "pay": MessageLookupByLibrary.simpleMessage("유료"),
         "payRequest": MessageLookupByLibrary.simpleMessage("이 요청 지불"),
+        "paymentHistory": MessageLookupByLibrary.simpleMessage("지불 내역"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "누군가 결제를 요청했습니다!자세한 내용은 결제 페이지를 확인하세요."),
         "payments": MessageLookupByLibrary.simpleMessage("결제"),
@@ -542,6 +550,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("그럴듯한 부인 정보"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "그럴듯한 거부 모드에 대한 보조 핀을 설정합니다.\n\n이 보조 핀을 사용하여 지갑을 잠금 해제하면 시드가 기존 시드의 해시로 대체됩니다. 강제로 지갑을 열어야 하는 경우에 사용하기 위한 보안 기능입니다.\n\n이 핀은 지갑을 잠금 해제할 때를 제외하고 정상적인(정확한) 핀처럼 작동하며, 그럴듯한 거부 모드가 활성화됩니다.\n\n귀하의 시드를 백업하지 않은 경우 타당한 거부 모드에 들어가면 자금이 손실됩니다!"),
+        "pow": MessageLookupByLibrary.simpleMessage("작업증명"),
         "preferences": MessageLookupByLibrary.simpleMessage("환경 설정"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "proSubRequiredHeader":

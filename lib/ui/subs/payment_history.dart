@@ -72,16 +72,16 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
     super.dispose();
   }
 
-  void _registerBus() {
-  }
+  void _registerBus() {}
 
-  void _destroyBus() {
-  }
+  void _destroyBus() {}
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+      minimum: EdgeInsets.only(
+        bottom: MediaQuery.of(context).size.height * 0.035,
+      ),
       child: Container(
         decoration: BoxDecoration(
           color: StateContainer.of(context).curTheme.backgroundDark,
@@ -102,13 +102,17 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
                   ),
                   Column(
                     children: <Widget>[
+                      Handlebars.horizontal(
+                        context,
+                        width: MediaQuery.of(context).size.width * 0.15,
+                      ),
                       Container(
                         margin: const EdgeInsets.only(top: 15.0),
                         constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                         child: Column(
                           children: <Widget>[
                             AutoSizeText(
-                              CaseChange.toUpperCase(Z.of(context).subsButton, context),
+                              CaseChange.toUpperCase(Z.of(context).paymentHistory, context),
                               style: AppStyles.textStyleHeader(context),
                               maxLines: 1,
                               stepGranularity: 0.1,
@@ -128,7 +132,6 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
                   ),
                 ],
               ),
-
               // A list containing accounts
               Expanded(
                   key: expandedKey,
@@ -412,8 +415,7 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
         foregroundColor: StateContainer.of(context).curTheme.error60,
         icon: Icons.delete,
         label: Z.of(context).delete,
-        onPressed: (BuildContext context) {
-        },
+        onPressed: (BuildContext context) {},
       ),
     );
 

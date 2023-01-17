@@ -49,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ralat menambah Akaun Tonton Sahaja: Akaun adalah batal"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Berjaya membuat akaun jam tangan sahaja!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("Tambah Sumber Kerja"),
         "address": MessageLookupByLibrary.simpleMessage("Alamat"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Alamat disalinkan"),
@@ -134,6 +136,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tukar kata laluan sedia ada anda. Jika anda tidak mengetahui kata laluan semasa anda, cuma buat tekaan terbaik anda kerana ia sebenarnya tidak diperlukan untuk menukarnya (memandangkan anda sudah log masuk), tetapi ia membenarkan kami memadamkan entri sandaran yang sedia ada."),
         "changePin": MessageLookupByLibrary.simpleMessage("Tukar Pin"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("Tetapkan pin"),
+        "changePow": MessageLookupByLibrary.simpleMessage("Tukar PoW"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("Tukar Sumber PoW"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Tukar Wakil"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Ubah"),
@@ -266,6 +271,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("Masukan Alamat"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Masukan Amaun"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("Masukkan email"),
+        "enterFrequency":
+            MessageLookupByLibrary.simpleMessage("Masukkan Kekerapan"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Masukkan Nota Hadiah"),
         "enterHeight":
@@ -361,6 +368,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Beberapa saat yang lalu"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Konfirm cap jari untuk menyandarkan benih dompet."),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("Sila masukkan Frekuensi"),
         "from": MessageLookupByLibrary.simpleMessage("Dari"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("dipenuhi"),
         "fundingBannerHeader":
@@ -447,6 +456,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sandarkan benih anda!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Alamat destinasi tidak sah"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Kekerapan Tidak Sah"),
         "invalidHeight":
             MessageLookupByLibrary.simpleMessage("Ketinggian Tidak Sah"),
         "invalidPassword":
@@ -516,6 +527,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ini adalah akaun baru anda. Sebaik sahaja anda menerima NANO, transaksi akan muncul seperti ini:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Dompet Baru"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Seterusnya"),
+        "nextPayment":
+            MessageLookupByLibrary.simpleMessage("Pembayaran Seterusnya"),
         "no": MessageLookupByLibrary.simpleMessage("Tidak"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "Tidak ada kontak yg bisa di ekspor"),
@@ -591,6 +604,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pay": MessageLookupByLibrary.simpleMessage("Bayar"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Bayar permintaan ini"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("sejarah pembayaran"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Seseorang telah meminta pembayaran daripada anda! semak halaman pembayaran untuk maklumat lanjut."),
         "payments": MessageLookupByLibrary.simpleMessage("Bayaran"),
@@ -622,6 +637,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Maklumat Penafian Yang Boleh Dipercayai"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Tetapkan pin kedua untuk mod penafian yang munasabah.\n\nJika dompet anda dibuka kunci menggunakan pin kedua ini, benih anda akan digantikan dengan cincang benih sedia ada. Ini adalah ciri keselamatan yang bertujuan untuk digunakan sekiranya anda terpaksa membuka dompet anda.\n\nPin ini akan bertindak seperti pin biasa (betul) KECUALI apabila membuka kunci dompet anda, iaitu apabila mod penafian yang munasabah akan diaktifkan.\n\nDana anda AKAN HILANG apabila memasuki mod penafian yang munasabah jika anda belum membuat sandaran benih anda!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("Keutamaan"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Dasar Privasi"),
         "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(

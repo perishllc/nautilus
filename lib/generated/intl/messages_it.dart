@@ -51,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Errore durante l\'aggiunta dell\'account di sola visualizzazione: l\'account era nullo"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Account di solo orologio creato con successo!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("Aggiungi fonte di lavoro"),
         "address": MessageLookupByLibrary.simpleMessage("Indirizzo"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("Copiato"),
         "addressHint":
@@ -139,6 +141,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Cambia la tua password esistente. Se non conosci la tua password attuale, fai la tua ipotesi migliore in quanto non è effettivamente necessario cambiarla (poiché hai già effettuato l\'accesso), ma ci consente di eliminare la voce di backup esistente."),
         "changePin": MessageLookupByLibrary.simpleMessage("Cambia pin"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("Imposta spilla"),
+        "changePow": MessageLookupByLibrary.simpleMessage("Cambia PoW"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("Cambia sorgente PoW"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Cambia Rappresentante"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Cambia"),
@@ -277,6 +282,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Inserisci Importo"),
         "enterEmail":
             MessageLookupByLibrary.simpleMessage("Inserisci l\'email"),
+        "enterFrequency":
+            MessageLookupByLibrary.simpleMessage("Inserisci Frequenza"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Inserisci la nota regalo"),
         "enterHeight":
@@ -369,6 +376,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Qualche secondo fa"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Conferma l\'impronta per salvare il seed."),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("Inserisci una frequenza"),
         "from": MessageLookupByLibrary.simpleMessage("Da"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("soddisfatto"),
         "fundingBannerHeader":
@@ -454,6 +463,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fai il backup del tuo seme!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Indirizzo invalido"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Frequenza non valida"),
         "invalidHeight":
             MessageLookupByLibrary.simpleMessage("Altezza non valida"),
         "invalidPassword":
@@ -524,6 +535,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Questo è il tuo nuovo account. Una volta ricevuti NANO, le transazioni appariranno così:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Nuovo"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Avanti"),
+        "nextPayment":
+            MessageLookupByLibrary.simpleMessage("Prossimo pagamento"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "Non ci sono contatti da esportare"),
@@ -600,6 +613,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pay": MessageLookupByLibrary.simpleMessage("Paga"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Paga questa richiesta"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("Storico dei pagamenti"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Qualcuno ha richiesto il pagamento da te! controlla la pagina dei pagamenti per maggiori informazioni."),
         "payments": MessageLookupByLibrary.simpleMessage("Pagamenti"),
@@ -630,6 +645,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Informazioni plausibili sulla negazione"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Imposta un pin secondario per la modalità di negazione plausibile.\n\nSe il tuo portafoglio viene sbloccato utilizzando questo pin secondario, il tuo seme verrà sostituito con un hash del seme esistente. Questa è una funzione di sicurezza destinata ad essere utilizzata nel caso in cui tu sia costretto ad aprire il tuo portafoglio.\n\nQuesto pin agirà come un pin normale (corretto) TRANNE quando sblocchi il tuo portafoglio, che è quando si attiverà la modalità di negazione plausibile.\n\nI tuoi fondi SARANNO PERSI entrando in modalità di negazione plausibile se non hai eseguito il backup del tuo seme!"),
+        "pow": MessageLookupByLibrary.simpleMessage("Pow"),
         "preferences": MessageLookupByLibrary.simpleMessage("Preferenze"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Politica sulla Privacy"),

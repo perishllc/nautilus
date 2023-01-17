@@ -22,7 +22,7 @@ import 'package:wallet_flutter/util/sharedprefsutil.dart';
 class SubscriptionService {
   // Constructor
   SubscriptionService() {
-    initSubs();
+    initNotifications();
   }
 
   AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -41,9 +41,7 @@ class SubscriptionService {
 
   final Logger log = sl.get<Logger>();
 
-  Future<void> initSubs() async {
-    // cancel all existing subscriptions:
-    await flutterLocalNotificationsPlugin.cancelAll();
+  Future<void> initNotifications() async {
 
     // initialize timezones:
     tz.initializeTimeZones();
@@ -63,6 +61,13 @@ class SubscriptionService {
       onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
     );
 
+    scheduleNotifications();
+  }
+
+  Future<void> scheduleNotifications() async {
+    // cancel all existing subscriptions:
+    await flutterLocalNotificationsPlugin.cancelAll();
+
     // go through all subscriptions and set up notifications:
     final List<Subscription> subs = await sl.get<DBHelper>().getSubscriptions();
     for (final Subscription sub in subs) {
@@ -70,32 +75,27 @@ class SubscriptionService {
       if (!sub.active) {
         continue;
       }
-      // ignore: use_build_context_synchronously
       await scheduleSubNotification(sub);
     }
   }
 
   Future<void> checkAreSubscriptionsPaid(List<AccountHistoryResponseItem> history) async {
-    // if (StateContainer.of(context).wallet?.history == null) {
-    //   return;
-    // }
 
     // get all subscriptions:
     final List<Subscription> subs = await sl.get<DBHelper>().getSubscriptions();
     for (final Subscription sub in subs) {
-      // only check active subscriptions:
-      if (!sub.active) {
-        continue;
-      }
       // ignore: use_build_context_synchronously
       final bool isPaid = await checkSubPaid(history, sub);
-      log.d("Subscription ${sub.id} is paid: $isPaid");
+      log.d("Subscription ${sub.name} is paid: $isPaid");
       if (isPaid != sub.paid) {
-        // make sure the tag matched the real state:
+        // make sure the tag matches the real state:
         await sl.get<DBHelper>().toggleSubscriptionPaid(sub);
       }
     }
     EventTaxiImpl.singleton().fire(SubsChangedEvent(subs: await sl.get<DBHelper>().getSubscriptions()));
+
+    // update scheduled notifications:
+    scheduleNotifications();
   }
 
   Future<bool> toggleSubscriptionActive(BuildContext context, Subscription sub) async {
@@ -128,20 +128,17 @@ class SubscriptionService {
       channelDescription: "Subscription Reminder Notifications",
       importance: Importance.max,
       priority: Priority.high,
-      ticker: 'ticker',
+      ticker: "ticker",
     );
-    // await flutterLocalNotificationsPlugin
-    //     .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-    //     ?.createNotificationChannel(channel);
 
-    const NotificationDetails notificationDetails = NotificationDetails(android: androidNotificationDetails);
+    const DarwinNotificationDetails darwinNotificationDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentSound: true,
+      presentBadge: true,
+    );
+
+
     try {
-      // await flutterLocalNotificationsPlugin.show(
-      //   0,
-      //   'plain title',
-      //   'plain body',
-      //   notificationDetails,
-      // );
       final tz.TZDateTime tzdatetime = tz.TZDateTime.from(DateTime.now().add(const Duration(seconds: 10)), tz.local);
       await flutterLocalNotificationsPlugin.zonedSchedule(
         0,
@@ -150,6 +147,7 @@ class SubscriptionService {
         tzdatetime,
         const NotificationDetails(
           android: androidNotificationDetails,
+          iOS: darwinNotificationDetails,
         ),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
@@ -177,6 +175,13 @@ class SubscriptionService {
             paidTimestamp = histItem.local_timestamp ?? 0;
             break;
           }
+          // todo: optimize:
+          // if (histItem.local_timestamp != null) {
+          //   // if the timestamp is earlier than the last payment time then we can stop searching:
+          //   if (histItem.local_timestamp! < TODO) {
+          //     break;
+          //   }
+          // }
         }
       }
     }

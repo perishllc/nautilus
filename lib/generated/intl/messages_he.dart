@@ -46,6 +46,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "שגיאה בהוספת חשבון צפייה בלבד: החשבון היה ריק"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "חשבון צפייה בלבד נוצר בהצלחה!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("הוסף מקור עבודה"),
         "address": MessageLookupByLibrary.simpleMessage("כתובת"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("כתובת הועתקה"),
         "addressHint": MessageLookupByLibrary.simpleMessage("הזן כתובת"),
@@ -124,6 +126,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "שנה את הסיסמה הקיימת שלך. אם אינך יודע את הסיסמה הנוכחית שלך, פשוט בצע את הניחוש הטוב ביותר שלך, כי למעשה אין צורך לשנות אותה (מכיוון שאתה כבר מחובר), אך היא מאפשרת לנו למחוק את ערך הגיבוי הקיים."),
         "changePin": MessageLookupByLibrary.simpleMessage("שנה סיכה"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("הגדר סיכה"),
+        "changePow": MessageLookupByLibrary.simpleMessage("שנה PoW"),
+        "changePowSource": MessageLookupByLibrary.simpleMessage("שנה מקור PoW"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("שנה נציג"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("שנה"),
@@ -250,6 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("הכנס כתובת"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("הכנס כמות"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("הזן אימייל"),
+        "enterFrequency": MessageLookupByLibrary.simpleMessage("הזן תדר"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("הזן הערת מתנה"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("הזן גובה"),
         "enterHttpUrl":
@@ -333,6 +338,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("לפני כמה שניות"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "אשר טביעות אצבע בכדי לגבות סיד."),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("נא להזין תדירות"),
         "from": MessageLookupByLibrary.simpleMessage("מ"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("התגשם"),
         "fundingBannerHeader":
@@ -416,6 +423,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("גבה את הזרע שלך!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("כתובת יעד אינה תקינה"),
+        "invalidFrequency": MessageLookupByLibrary.simpleMessage("תדר לא חוקי"),
         "invalidHeight": MessageLookupByLibrary.simpleMessage("גובה לא חוקי"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Invalid Password"),
@@ -478,6 +486,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "זה החשבון החדש שלך. ברגע שתקבל נאנו, הטראנזקציות יראו כך:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("ארנק חדש"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("התשלום הבא"),
         "no": MessageLookupByLibrary.simpleMessage("לא"),
         "noContactsExport":
             MessageLookupByLibrary.simpleMessage("לא קיימים אנשי קשר לייצא"),
@@ -552,6 +561,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Passwords do not match"),
         "pay": MessageLookupByLibrary.simpleMessage("לשלם"),
         "payRequest": MessageLookupByLibrary.simpleMessage("שלם בקשה זו"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("היסטוריית תשלומים"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "מישהו ביקש ממך תשלום! בדוק את דף התשלומים לקבלת מידע נוסף."),
         "payments": MessageLookupByLibrary.simpleMessage("תשלומים"),
@@ -579,6 +590,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("מידע סביר על הכחשה"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "הגדר סיכה משנית למצב הכחשה סביר.\n\nאם הארנק שלך לא נעול באמצעות סיכה משנית זו, הזרע שלך יוחלף ב-hash של הזרע הקיים. זוהי תכונת אבטחה שנועדה לשמש במקרה שתיאלץ לפתוח את הארנק.\n\nסיכה זו תפעל כמו סיכה רגילה (נכונה) למעט בעת פתיחת הנעילה של הארנק שלך, כלומר מצב הכחשה סביר יופעל.\n\nהכספים שלך יאבדו עם כניסה למצב הכחשה סביר אם לא גיבית את ה-seed שלך!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("העדפות"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("פרטיות"),
         "proSubRequiredHeader":

@@ -52,6 +52,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Feil ved å legge til kun overvåkningskonto: Kontoen var null"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Vellykket opprettet klokkekonto!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("Legg til arbeidskilde"),
         "address": MessageLookupByLibrary.simpleMessage("Adresse"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Adresse kopiert"),
@@ -138,6 +140,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Endre ditt eksisterende passord. Hvis du ikke kjenner det nåværende passordet ditt, gjør du bare din beste gjetning ettersom det faktisk ikke er nødvendig å endre det (siden du allerede er logget på), men det lar oss slette den eksisterende sikkerhetskopioppføringen."),
         "changePin": MessageLookupByLibrary.simpleMessage("Bytt pinne"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("Sett pinne"),
+        "changePow": MessageLookupByLibrary.simpleMessage("Endre PoW"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("Endre PoW-kilde"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Endre representant"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Endre"),
@@ -268,6 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("Angi adresse"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Tast inn beløp"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("Skriv inn e-post"),
+        "enterFrequency": MessageLookupByLibrary.simpleMessage("Angi frekvens"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Skriv inn gavebrev"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Skriv inn Høyde"),
@@ -360,6 +366,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Noen få sekunder siden"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Verifiser for å sikkerhetskopiere Seed."),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("Angi en frekvens"),
         "from": MessageLookupByLibrary.simpleMessage("Fra"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("oppfylt"),
         "fundingBannerHeader":
@@ -447,6 +455,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ta sikkerhetskopi av frøet ditt!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Den angitte adressen er ugyldig"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Frekvens ugyldig"),
         "invalidHeight": MessageLookupByLibrary.simpleMessage("Ugyldig høyde"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Ugyldig passord"),
@@ -519,6 +529,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Dette er din nye konto. Når du mottar NANO vises transaksjoner slik:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Ny lommebok"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Neste"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("Neste betaling"),
         "no": MessageLookupByLibrary.simpleMessage("Nei"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "Det er ingen kontakter å eksportere."),
@@ -594,6 +605,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pay": MessageLookupByLibrary.simpleMessage("Betale"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Betal denne forespørselen"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("betalingshistorikk"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Noen har bedt om betaling fra deg! sjekk betalingssiden for mer info."),
         "payments": MessageLookupByLibrary.simpleMessage("Betalinger"),
@@ -625,6 +638,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Plausible Deniability Info"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Angi en sekundær pinne for plausible deniability-modus.\n\nHvis lommeboken din låses opp med denne sekundære pinnen, vil frøet ditt bli erstattet med en hash av det eksisterende frøet. Dette er en sikkerhetsfunksjon som skal brukes i tilfelle du blir tvunget til å åpne lommeboken.\n\nDenne pinnen vil fungere som en vanlig (riktig) pin, UNNTATT når du låser opp lommeboken din, som er når modusen for plausibel benektelse vil aktiveres.\n\nDine midler VIL GÅ TAP når du går inn i plausible deniability-modus hvis du ikke har sikkerhetskopiert frøet ditt!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("Preferanser"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Personvernpolicy"),

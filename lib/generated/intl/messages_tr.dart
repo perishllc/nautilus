@@ -49,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Yalnızca İzleme Hesabı eklenirken hata oluştu: Hesap boştu"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Yalnızca izleme hesabı başarıyla oluşturuldu!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("İş Kaynağı Ekle"),
         "address": MessageLookupByLibrary.simpleMessage("Adres"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("Kopyalandı"),
         "addressHint": MessageLookupByLibrary.simpleMessage("Adres Gir"),
@@ -133,6 +135,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mevcut şifrenizi değiştirin. Mevcut şifrenizi bilmiyorsanız, en iyi tahmininizi yapın çünkü aslında şifrenizi değiştirmeniz gerekmemektedir (zaten oturum açmış olduğunuz için), ancak mevcut yedekleme girişini silmemize izin vermektedir."),
         "changePin": MessageLookupByLibrary.simpleMessage("Pin\'i değiştir"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("PIN ayarla"),
+        "changePow": MessageLookupByLibrary.simpleMessage("PoW\'u değiştir"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("PoW Kaynağını Değiştir"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Temsilci Değiştir"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Değiştir"),
@@ -266,6 +271,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("Adres Gir"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Miktar Gir"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("E-posta Girin"),
+        "enterFrequency": MessageLookupByLibrary.simpleMessage("Frekans Girin"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Hediye Notunu Girin"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Yüksekliği Girin"),
@@ -355,6 +361,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bir kaç saniye önce"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Seed\'i yedeklemek için parmak izini onaylayın."),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("Lütfen bir Sıklık girin"),
         "from": MessageLookupByLibrary.simpleMessage("Nereden"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("yerine getirildi"),
         "fundingBannerHeader":
@@ -440,6 +448,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tohumunu yedekle!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Geçersiz bir adres girdiniz"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Frekans Geçersiz"),
         "invalidHeight":
             MessageLookupByLibrary.simpleMessage("Geçersiz Yükseklik"),
         "invalidPassword":
@@ -511,6 +521,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bu senin yeni hesabın. Hesabına NANO geldiğinde işlemlerin aşağıdaki gibi görünecek."),
         "newWallet": MessageLookupByLibrary.simpleMessage("Yeni Cüzdan"),
         "nextButton": MessageLookupByLibrary.simpleMessage("İleri"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("Sonraki ödeme"),
         "no": MessageLookupByLibrary.simpleMessage("Hayır"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "Dışa aktarılabilecek bir kişi bulunamadı"),
@@ -585,6 +596,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Şifreler eşleşmiyor"),
         "pay": MessageLookupByLibrary.simpleMessage("Öde"),
         "payRequest": MessageLookupByLibrary.simpleMessage("Bu talebi öde"),
+        "paymentHistory": MessageLookupByLibrary.simpleMessage("ödeme geçmişi"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Birisi sizden ödeme talep etti! Daha fazla bilgi için ödemeler sayfasını kontrol edin."),
         "payments": MessageLookupByLibrary.simpleMessage("Ödemeler"),
@@ -614,6 +626,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Makul Reddedilebilirlik Bilgisi"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Makul reddedilebilirlik modu için ikincil bir pim ayarlayın.\n\nCüzdanınızın kilidi bu ikincil pin kullanılarak açılırsa, tohumunuz mevcut tohumdan bir hash ile değiştirilir. Bu, cüzdanınızı açmaya zorlanmanız durumunda kullanılmak üzere tasarlanmış bir güvenlik özelliğidir.\n\nBu pin, makul reddedilebilirlik modu etkinleştirildiğinde cüzdanınızın kilidini açarken DIŞINDA normal (doğru) bir pin gibi davranacaktır.\n\nTohumunuzu yedeklemediyseniz, makul reddedilebilirlik moduna girdiğinizde paranız KAYBOLACAKTIR!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("Tercihler"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Gizlilik Politikası"),

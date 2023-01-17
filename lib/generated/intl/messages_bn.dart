@@ -53,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "শুধুমাত্র দেখার অ্যাকাউন্ট যোগ করার সময় ত্রুটি: অ্যাকাউন্টটি শূন্য ছিল"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "শুধুমাত্র ঘড়ির অ্যাকাউন্ট সফলভাবে তৈরি করা হয়েছে!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("কাজের উৎস যোগ করুন"),
         "address": MessageLookupByLibrary.simpleMessage("ঠিকানা"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("ঠিকানা কপি করা হয়েছে"),
@@ -141,6 +143,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "আপনার বিদ্যমান পাসওয়ার্ড পরিবর্তন করুন. আপনি যদি আপনার বর্তমান পাসওয়ার্ডটি না জানেন, তবে আপনার সেরা অনুমান করুন কারণ এটি পরিবর্তন করার প্রয়োজন নেই (যেহেতু আপনি ইতিমধ্যেই লগ ইন করেছেন), তবে এটি আমাদের বিদ্যমান ব্যাকআপ এন্ট্রি মুছে দিতে দেয়।"),
         "changePin": MessageLookupByLibrary.simpleMessage("পিন পরিবর্তন করুন"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("পিন সেট করুন"),
+        "changePow": MessageLookupByLibrary.simpleMessage("PoW পরিবর্তন করুন"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("PoW উত্স পরিবর্তন করুন"),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage(
             "রিপ্রেজেন্টেটিভ পরিবর্তন করুন"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("পরিবর্তন"),
@@ -275,6 +280,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("ঠিকানা লিখুন"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("পরিমান লিখুন"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("ইমেইল প্রদান করুন"),
+        "enterFrequency":
+            MessageLookupByLibrary.simpleMessage("ফ্রিকোয়েন্সি লিখুন"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("উপহার নোট লিখুন"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("উচ্চতা লিখুন"),
@@ -363,6 +370,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("কয়েক সেকেন্ড আগে"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "ব্যাকআপ সীড প্রমাণীকরণ করুন।"),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("একটি ফ্রিকোয়েন্সি লিখুন"),
         "from": MessageLookupByLibrary.simpleMessage("থেকে"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("পূর্ণ"),
         "fundingBannerHeader":
@@ -450,6 +459,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("আপনার বীজ ব্যাকআপ!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("এই ঠিকানাটি অবৈধ"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("ফ্রিকোয়েন্সি অবৈধ"),
         "invalidHeight": MessageLookupByLibrary.simpleMessage("অবৈধ উচ্চতা"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("ভুল পাসওয়ার্ড"),
@@ -522,6 +533,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "এটি আপনার নতুন অ্যাকাউন্ট। একবার আপনি ন্যানো পেয়ে গেলে, লেনদেন এইভাবে দেখাবে:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("নুতন ওয়ালেট"),
         "nextButton": MessageLookupByLibrary.simpleMessage("পরবর্তী"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("পরবর্তী পেমেন্ট"),
         "no": MessageLookupByLibrary.simpleMessage("না"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "পরিবহন করার জন্য কোন কন্টাক্ট নেই"),
@@ -597,6 +609,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pay": MessageLookupByLibrary.simpleMessage("পে"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("এই অনুরোধটি পরিশোধ করুন"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("অর্থ প্রদান ইতিহাস"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "কেউ আপনার কাছ থেকে অর্থ প্রদানের অনুরোধ করেছে! আরও তথ্যের জন্য পেমেন্ট পেজ চেক করুন।"),
         "payments": MessageLookupByLibrary.simpleMessage("পেমেন্টস"),
@@ -626,6 +640,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "যুক্তিসঙ্গত অস্বীকারযোগ্যতা তথ্য"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "যুক্তিযুক্ত অস্বীকারযোগ্যতা মোডের জন্য একটি গৌণ পিন সেট করুন।\n\nএই সেকেন্ডারি পিন ব্যবহার করে আপনার মানিব্যাগ আনলক করা থাকলে, আপনার বীজটি বিদ্যমান বীজের একটি হ্যাশ দিয়ে প্রতিস্থাপিত হবে। এটি এমন একটি নিরাপত্তা বৈশিষ্ট্য যা আপনাকে আপনার ওয়ালেট খুলতে বাধ্য করা হলে ব্যবহার করা হবে।\n\nএই পিনটি আপনার ওয়ালেট আনলক করার সময় ব্যতীত একটি সাধারণ (সঠিক) পিনের মতো কাজ করবে, যেটি যখন যুক্তিযুক্ত অস্বীকারযোগ্যতা মোড সক্রিয় হবে।\n\nআপনি যদি আপনার বীজ ব্যাক আপ না করে থাকেন তাহলে আপনার তহবিলগুলি যুক্তিসঙ্গত অস্বীকৃতি মোডে প্রবেশ করার পরে হারিয়ে যাবে!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("পছন্দ"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("গোপনীয়তা নীতি"),
         "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(

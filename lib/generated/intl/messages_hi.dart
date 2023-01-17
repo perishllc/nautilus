@@ -49,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "केवल देखने के लिए खाता जोड़ने में त्रुटि: खाता खाली था"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "केवल देखने के लिए खाता सफलतापूर्वक बनाया गया!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("कार्य स्रोत जोड़ें"),
         "address": MessageLookupByLibrary.simpleMessage("पता"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("पता कॉपी हो गया है"),
@@ -136,6 +138,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "अपना मौजूदा पासवर्ड बदलें। यदि आप अपना वर्तमान पासवर्ड नहीं जानते हैं, तो बस अपना सर्वश्रेष्ठ अनुमान लगाएं क्योंकि वास्तव में इसे बदलने की आवश्यकता नहीं है (चूंकि आप पहले से लॉग इन हैं), लेकिन यह हमें मौजूदा बैकअप प्रविष्टि को हटाने देता है।"),
         "changePin": MessageLookupByLibrary.simpleMessage("पिन बदलें"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("पिन सेट करें"),
+        "changePow": MessageLookupByLibrary.simpleMessage("पीओडब्ल्यू बदलें"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("पीओडब्ल्यू स्रोत बदलें"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("प्रतिनिधि बदलें"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("बदलें"),
@@ -268,6 +273,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("पता दर्ज करें"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("राशि दर्ज करें"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("ईमेल दर्ज करें"),
+        "enterFrequency":
+            MessageLookupByLibrary.simpleMessage("आवृत्ति दर्ज करें"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("गिफ़्ट नोट दर्ज करें"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("ऊंचाई दर्ज करें"),
@@ -356,6 +363,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("कुछ सेकंड पहले"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "उंगली के निशान की सहायता से सीड बैकअप करें।"),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("कृपया एक आवृत्ति दर्ज करें"),
         "from": MessageLookupByLibrary.simpleMessage("से"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("पूरा"),
         "fundingBannerHeader":
@@ -441,6 +450,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("अपने बीज का बैकअप लें!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("गलत गंतव्य पता"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("फ्रीक्वेंसी अमान्य"),
         "invalidHeight": MessageLookupByLibrary.simpleMessage("अमान्य ऊंचाई"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("अवैध पासवर्ड"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("अमान्य पिन"),
@@ -510,6 +521,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "यह आपका नया खाता है। एक बार जब आप नैनो प्राप्त कर लेते हैं, तो लेनदेन इस तरह दिखाई देंगे:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("नया वॉलेट"),
         "nextButton": MessageLookupByLibrary.simpleMessage("अगला"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("अगला भुगतान"),
         "no": MessageLookupByLibrary.simpleMessage("नहीं"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "निर्यात करने के लिए कोई संपर्क नहीं हैं।"),
@@ -585,6 +597,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pay": MessageLookupByLibrary.simpleMessage("पे"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("इस अनुरोध का भुगतान करें"),
+        "paymentHistory": MessageLookupByLibrary.simpleMessage("भुगतान इतिहास"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "किसी ने आपसे भुगतान का अनुरोध किया है! अधिक जानकारी के लिए भुगतान पृष्ठ देखें।"),
         "payments": MessageLookupByLibrary.simpleMessage("पेमेंट्स"),
@@ -615,6 +628,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("प्रशंसनीय इनकार जानकारी"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "प्रशंसनीय इनकार मोड के लिए एक द्वितीयक पिन सेट करें।\n\nयदि आपका वॉलेट इस सेकेंडरी पिन का उपयोग करके अनलॉक किया गया है, तो आपके बीज को मौजूदा बीज के हैश से बदल दिया जाएगा। यह एक सुरक्षा सुविधा है जिसका उपयोग उस स्थिति में किया जाना है जब आपको अपना बटुआ खोलने के लिए मजबूर किया जाता है।\n\nयह पिन आपके वॉलेट को अनलॉक करते समय एक सामान्य (सही) पिन की तरह काम करेगा, जो तब होगा जब प्रशंसनीय इनकार मोड सक्रिय हो जाएगा।\n\nयदि आपने अपने बीज का बैकअप नहीं लिया है, तो प्रशंसनीय इनकार मोड में प्रवेश करने पर आपका धन नष्ट हो जाएगा!"),
+        "pow": MessageLookupByLibrary.simpleMessage("पाउ"),
         "preferences":
             MessageLookupByLibrary.simpleMessage("पसंद | प्रेफरेन्सेस"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("गोपनीयता नीति"),

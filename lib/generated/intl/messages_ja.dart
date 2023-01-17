@@ -45,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Watch Only アカウントの追加エラー: アカウントが null でした"),
         "addWatchOnlyAccountSuccess":
             MessageLookupByLibrary.simpleMessage("時計専用アカウントが正常に作成されました。"),
+        "addWorkSource": MessageLookupByLibrary.simpleMessage("作業ソースを追加"),
         "address": MessageLookupByLibrary.simpleMessage("住所"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("アドレスをコピーしました"),
         "addressHint": MessageLookupByLibrary.simpleMessage("アドレスを入力"),
@@ -118,6 +119,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "既存のパスワードを変更します。現在のパスワードがわからない場合は、(すでにログインしているため) 実際には変更する必要がないため、できるだけ推測してください。ただし、既存のバックアップ エントリを削除することはできます。"),
         "changePin": MessageLookupByLibrary.simpleMessage("ピンの変更"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("セットピン"),
+        "changePow": MessageLookupByLibrary.simpleMessage("PoWを変更"),
+        "changePowSource": MessageLookupByLibrary.simpleMessage("PoW ソースの変更"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("代理人を変更する"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("変更する"),
@@ -230,6 +233,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("アドレスを入力する"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("金額を入力する"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("メールアドレスを入力して"),
+        "enterFrequency": MessageLookupByLibrary.simpleMessage("頻度を入力してください"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("ギフトメモを入力"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("高さを入力してください"),
         "enterHttpUrl":
@@ -306,6 +310,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("数秒前"),
         "fingerprintSeedBackup":
             MessageLookupByLibrary.simpleMessage("シードをバックアップする認証を行います。"),
+        "frequencyEmpty": MessageLookupByLibrary.simpleMessage("頻度を入力してください"),
         "from": MessageLookupByLibrary.simpleMessage("から"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("成就しました"),
         "fundingBannerHeader":
@@ -385,6 +390,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "introSkippedWarningHeader":
             MessageLookupByLibrary.simpleMessage("シードをバックアップしてください！"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage("入力したアドレスが無効です"),
+        "invalidFrequency": MessageLookupByLibrary.simpleMessage("頻度が無効です"),
         "invalidHeight": MessageLookupByLibrary.simpleMessage("無効な高さ"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("パスワードが無効です"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("無効なピン"),
@@ -445,6 +451,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "これは新しいアカウントです。 ナノを受け取ると、トランザクションは次のように表示されます。"),
         "newWallet": MessageLookupByLibrary.simpleMessage("新しいウォレットを作成する"),
         "nextButton": MessageLookupByLibrary.simpleMessage("次へ"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("次回のお支払い"),
         "no": MessageLookupByLibrary.simpleMessage("いいえ"),
         "noContactsExport":
             MessageLookupByLibrary.simpleMessage("エクスポートする連絡先はありません。"),
@@ -513,6 +520,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("パスワードが一致しません"),
         "pay": MessageLookupByLibrary.simpleMessage("支払う"),
         "payRequest": MessageLookupByLibrary.simpleMessage("このリクエストを支払う"),
+        "paymentHistory": MessageLookupByLibrary.simpleMessage("支払歴"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "誰かがあなたに支払いを要求しました！詳細については、支払いページを確認してください。"),
         "payments": MessageLookupByLibrary.simpleMessage("ペイメント"),
@@ -538,6 +546,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("もっともらしい否認情報"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "もっともらしい否認モードのセカンダリ ピンを設定します。\n\nこのセカンダリ PIN を使用してウォレットのロックを解除すると、シードは既存のシードのハッシュに置き換えられます。これは、ウォレットを開くことを余儀なくされた場合に使用するためのセキュリティ機能です。\n\nこのピンは、もっともらしい否認モードがアクティブになるウォレットのロックを解除する場合を除いて、通常の (正しい) ピンのように機能します。\n\nシードをバックアップしていない場合、もっともらしい否認モードに入ると、資金が失われます!"),
+        "pow": MessageLookupByLibrary.simpleMessage("捕虜"),
         "preferences": MessageLookupByLibrary.simpleMessage("設定"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("個人情報保護方針"),
         "proSubRequiredHeader":

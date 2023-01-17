@@ -54,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Erreur lors de l\'ajout du compte Watch Only : le compte était nul"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Compte Watch Only créé avec succès !"),
+        "addWorkSource": MessageLookupByLibrary.simpleMessage(
+            "Ajouter une source de travail"),
         "address": MessageLookupByLibrary.simpleMessage("Adresse"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("Adresse copiée"),
         "addressHint":
@@ -147,6 +149,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePin": MessageLookupByLibrary.simpleMessage("Changer d\'épingle"),
         "changePinHint":
             MessageLookupByLibrary.simpleMessage("Définir la broche"),
+        "changePow":
+            MessageLookupByLibrary.simpleMessage("Changer de mot de passe"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("Changer la source de PoW"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Changer le représentant"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Changer"),
@@ -284,6 +290,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAmount":
             MessageLookupByLibrary.simpleMessage("Saisir le montant"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("Entrez l\'e-mail"),
+        "enterFrequency":
+            MessageLookupByLibrary.simpleMessage("Entrez la fréquence"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Entrez la note cadeau"),
         "enterHeight":
@@ -378,6 +386,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Il ya quelques secondes"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Confirmer l’empreinte digitale pour sauvegarder la clé privée."),
+        "frequencyEmpty": MessageLookupByLibrary.simpleMessage(
+            "Veuillez saisir une fréquence"),
         "from": MessageLookupByLibrary.simpleMessage("À partir"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("accomplie"),
         "fundingBannerHeader":
@@ -464,6 +474,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sauvegardez votre graine !"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Adresse du destinataire invalide"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Fréquence invalide"),
         "invalidHeight":
             MessageLookupByLibrary.simpleMessage("Hauteur invalide"),
         "invalidPassword":
@@ -536,6 +548,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ceci est votre nouveau compte. Lorsque vous recevrez des NANO, les transactions apparaîtront comme ci-dessous.:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Nouveau"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Suivant"),
+        "nextPayment":
+            MessageLookupByLibrary.simpleMessage("Prochain paiement"),
         "no": MessageLookupByLibrary.simpleMessage("Non"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "Il n’y a pas de contacts à exporter"),
@@ -612,6 +626,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pay": MessageLookupByLibrary.simpleMessage("Payer"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Payer cette demande"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("historique de paiement"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Quelqu\'un vous a demandé de payer ! consultez la page des paiements pour plus d\'informations."),
         "payments": MessageLookupByLibrary.simpleMessage("Paiements"),
@@ -642,6 +658,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Informations de déni plausibles"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Définissez une broche secondaire pour le mode de déni plausible.\n\nSi votre portefeuille est déverrouillé à l\'aide de cette broche secondaire, votre graine sera remplacée par un hachage de la graine existante. Il s\'agit d\'une fonctionnalité de sécurité destinée à être utilisée dans le cas où vous seriez obligé d\'ouvrir votre portefeuille.\n\nCette broche agira comme une broche normale (correcte) SAUF lors du déverrouillage de votre portefeuille, c\'est-à-dire lorsque le mode de déni plausible s\'activera.\n\nVos fonds SERONT PERDUS en entrant en mode de déni plausible si vous n\'avez pas sauvegardé votre graine !"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("Préférences"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage(
             "Politique de confidentialité"),

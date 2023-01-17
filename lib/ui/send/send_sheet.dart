@@ -770,7 +770,9 @@ class SendSheetState extends State<SendSheet> {
                             localCurrency: widget.localCurrency,
                           ));
                     },
-                    icon: AppIcons.gift,
+                    // icon: AppIcons.gift,
+                    icon: AppIcons.envelope,
+                    color: StateContainer.of(context).curTheme.error,
                     key: const Key("gift_button"),
                   ),
                 ),

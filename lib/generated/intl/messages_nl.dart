@@ -53,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Fout bij toevoegen van Watch Only-account: account was null"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Alleen horloge-account aangemaakt!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("Werkbron toevoegen"),
         "address": MessageLookupByLibrary.simpleMessage("Adres"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Adres gekopieerd"),
@@ -142,6 +144,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Wijzig uw bestaande wachtwoord. Als je je huidige wachtwoord niet weet, doe dan gewoon je best, want het is niet echt nodig om het te wijzigen (omdat je al bent ingelogd), maar het laat ons wel de bestaande back-upvermelding verwijderen."),
         "changePin": MessageLookupByLibrary.simpleMessage("Verander pincode"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("Pin instellen"),
+        "changePow": MessageLookupByLibrary.simpleMessage("PoW wijzigen"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("Verander de PoW-bron"),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage(
             "Verander van vertegenwoordiger"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Verander"),
@@ -275,6 +280,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("Vul adres in"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Vul bedrag in"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("Voer email in"),
+        "enterFrequency":
+            MessageLookupByLibrary.simpleMessage("Voer Frequentie in"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Cadeaubon invoeren"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Voer Hoogte in"),
@@ -367,6 +374,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Een paar seconden geleden"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Bevestig je vingerafdruk om een back-up te maken."),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("Voer een Frequentie in"),
         "from": MessageLookupByLibrary.simpleMessage("Van"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("vervuld"),
         "fundingBannerHeader":
@@ -454,6 +463,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Maak een back-up van je zaad!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Ongeldige ontvanger"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Frequentie ongeldig"),
         "invalidHeight":
             MessageLookupByLibrary.simpleMessage("Ongeldige hoogte"),
         "invalidPassword":
@@ -525,6 +536,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Dit is jouw nieuwe account. Zodra je NANO ontvangt, zullen transacties op deze manier verschijnen:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Nieuwe wallet"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Volgende"),
+        "nextPayment":
+            MessageLookupByLibrary.simpleMessage("Volgende betaling"),
         "no": MessageLookupByLibrary.simpleMessage("Nee"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "Er zijn geen contacten aanwezig om te verwijderen"),
@@ -600,6 +613,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pay": MessageLookupByLibrary.simpleMessage("Betalen"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Betaal dit verzoek"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("Betaalgeschiedenis"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Iemand heeft u om betaling gevraagd! kijk op de betaalpagina voor meer informatie."),
         "payments": MessageLookupByLibrary.simpleMessage("Betalingen"),
@@ -631,6 +646,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Plausibele ontkenningsinformatie"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Stel een secundaire pin in voor de plausibele ontkenningsmodus.\n\nAls je portemonnee is ontgrendeld met deze secundaire pin, wordt je seed vervangen door een hash van de bestaande seed. Dit is een beveiligingsfunctie die bedoeld is om te worden gebruikt in het geval u gedwongen wordt uw portemonnee te openen.\n\nDeze pin zal werken als een normale (juiste) pin BEHALVE bij het ontgrendelen van uw portemonnee, wanneer de plausibele ontkenningsmodus wordt geactiveerd.\n\nJe geld GAAT VERLOREN bij het openen van de plausibele ontkenningsmodus als je geen back-up van je seed hebt gemaakt!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("Voorkeuren"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Privacybeleid"),
         "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(

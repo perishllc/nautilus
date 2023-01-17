@@ -54,6 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Hiba a Csak figyelő fiók hozzáadásakor: A fiók érvénytelen volt"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Sikeresen létrehozta a csak nézhető fiókot!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("Munkaforrás hozzáadása"),
         "address": MessageLookupByLibrary.simpleMessage("Cím"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("Cím Másolva"),
         "addressHint": MessageLookupByLibrary.simpleMessage("Adja meg a címet"),
@@ -142,6 +144,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePin": MessageLookupByLibrary.simpleMessage("Pin módosítása"),
         "changePinHint":
             MessageLookupByLibrary.simpleMessage("Állítsa be a tűt"),
+        "changePow": MessageLookupByLibrary.simpleMessage("PoW módosítása"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("PoW-forrás módosítása"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Képviselő Megváltoztatása"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Megváltoztat"),
@@ -278,6 +283,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Küldött Mennyiség"),
         "enterEmail":
             MessageLookupByLibrary.simpleMessage("Írja be az e-mail címet"),
+        "enterFrequency":
+            MessageLookupByLibrary.simpleMessage("Adja meg a frekvenciát"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Adja meg az ajándékjegyet"),
         "enterHeight":
@@ -369,6 +376,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("Pár másodperce"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Erősítsd meg az ujjlenyomatoddal, hogy szeretnéd elmenteni a seeded."),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("Adjon meg egy gyakoriságot"),
         "from": MessageLookupByLibrary.simpleMessage("tól től"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("teljesítette"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(
@@ -455,6 +464,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "introSkippedWarningHeader": MessageLookupByLibrary.simpleMessage(
             "Készítsen biztonsági másolatot a magról!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage("Helytelen Cím"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Érvénytelen gyakoriság"),
         "invalidHeight":
             MessageLookupByLibrary.simpleMessage("Érvénytelen magasság"),
         "invalidPassword":
@@ -528,6 +539,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "This is your new account. Once you receive NANO, transactions will show up like this:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Új Tárca"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
+        "nextPayment":
+            MessageLookupByLibrary.simpleMessage("Következő fizetés"),
         "no": MessageLookupByLibrary.simpleMessage("Nem"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "Nincsenek exportálható kontaktok"),
@@ -604,6 +617,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pay": MessageLookupByLibrary.simpleMessage("Fizessen"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Fizesse ezt a kérelmet"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("Fizetési előzmények"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Valaki kért fizetést tőled! további információkért nézze meg a fizetési oldalt."),
         "payments": MessageLookupByLibrary.simpleMessage("Fizetések"),
@@ -635,6 +650,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Valószínű tagadhatósági információ"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Állítson be egy másodlagos tűt a valószínű letiltási módhoz.\n\nHa a pénztárcáját ezzel a másodlagos tűvel oldja fel, a magot a meglévő mag hash-ére cseréljük. Ez egy biztonsági funkció arra az esetre, ha kénytelen lenne kinyitni a pénztárcáját.\n\nEz a gombostű normál (helyes) tűként fog működni, KIVÉVE amikor feloldja a pénztárcáját, amikor a valószínű letiltási mód aktiválódik.\n\nAz Ön pénzeszközei ELVESZIK, amikor a valószínű tagadhatósági módba lép, ha nem készített biztonsági másolatot a magról!"),
+        "pow": MessageLookupByLibrary.simpleMessage("Hadifogoly"),
         "preferences": MessageLookupByLibrary.simpleMessage("Preferenciák"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Adatvédelmi Szabályzat"),

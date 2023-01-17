@@ -49,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Napaka pri dodajanju računa samo za ogled: račun je bil ničelni"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Uspešno ustvarjen račun samo za gledanje!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("Dodaj delovni vir"),
         "address": MessageLookupByLibrary.simpleMessage("Naslov"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Naslov skopiran"),
@@ -139,6 +141,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePin": MessageLookupByLibrary.simpleMessage("Spremeni PIN"),
         "changePinHint":
             MessageLookupByLibrary.simpleMessage("Nastavite žebljiček"),
+        "changePow": MessageLookupByLibrary.simpleMessage("Spremeni PoW"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("Spremenite vir PoW"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Zamenjaj predstavnika"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Zamenjaj"),
@@ -273,6 +278,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("Vnesite naslov"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Vnesite znesek"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("Vnesite e-pošto"),
+        "enterFrequency":
+            MessageLookupByLibrary.simpleMessage("Vnesite frekvenco"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Vnesite darilno opombo"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Vnesite višino"),
@@ -363,6 +370,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pred nekaj sekundami"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Avtenticiraj za shranitev ključa."),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("Vnesite frekvenco"),
         "from": MessageLookupByLibrary.simpleMessage("Od"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("izpolnjeno"),
         "fundingBannerHeader":
@@ -448,6 +457,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Varnostno kopirajte svoje seme!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Naslov je neveljaven"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Neveljavna frekvenca"),
         "invalidHeight":
             MessageLookupByLibrary.simpleMessage("Neveljavna višina"),
         "invalidPassword":
@@ -517,6 +528,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "To je vaš nov račun. Ko boste prejeli NANO, bodo transakcije prikazane takole:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Nova denarnica"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
+        "nextPayment":
+            MessageLookupByLibrary.simpleMessage("Naslednje plačilo"),
         "no": MessageLookupByLibrary.simpleMessage("Ne"),
         "noContactsExport":
             MessageLookupByLibrary.simpleMessage("Ni stikov za izvoz."),
@@ -593,6 +606,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pay": MessageLookupByLibrary.simpleMessage("Plačajte"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Plačajte to zahtevo"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("Zgodovina plačil"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Nekdo je od vas zahteval plačilo! preverite stran za plačila za več informacij."),
         "payments": MessageLookupByLibrary.simpleMessage("Plačila"),
@@ -622,6 +637,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Verjetne informacije o zanikanju"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Nastavite sekundarni pin za verjeten način zanikanja.\n\nČe je vaša denarnica odklenjena s tem sekundarnim zatičem, bo vaše seme nadomeščeno z zgoščeno vrednostjo obstoječega semena. To je varnostna funkcija, namenjena uporabi v primeru, da ste prisiljeni odpreti denarnico.\n\nTa zatič bo deloval kot običajen (pravilen) zatič, RAZEN pri odklepanju vaše denarnice, ko se bo aktiviral verjeten način zanikanja.\n\nVaša sredstva BODO IZGUBLJENA, ko vstopite v verjeten način zanikanja, če niste varnostno kopirali svojega semena!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("Splošno"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("Zasebnost"),
         "proSubRequiredHeader": MessageLookupByLibrary.simpleMessage(

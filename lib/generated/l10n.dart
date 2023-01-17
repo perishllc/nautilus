@@ -180,16 +180,6 @@ class Z {
     );
   }
 
-  /// `Add Work Source`
-  String get addWorkSource {
-    return Intl.message(
-      'Add Work Source',
-      name: 'addWorkSource',
-      desc: 'Add work source',
-      args: [],
-    );
-  }
-
   /// `Address`
   String get address {
     return Intl.message(
@@ -296,6 +286,16 @@ class Z {
       'Successfully created watch only account!',
       name: 'addWatchOnlyAccountSuccess',
       desc: 'watch_only_add_success',
+      args: [],
+    );
+  }
+
+  /// `Add Work Source`
+  String get addWorkSource {
+    return Intl.message(
+      'Add Work Source',
+      name: 'addWorkSource',
+      desc: 'Add work source',
       args: [],
     );
   }
@@ -740,36 +740,6 @@ class Z {
     );
   }
 
-  /// `Change PoW`
-  String get changePow {
-    return Intl.message(
-      'Change PoW',
-      name: 'changePow',
-      desc: 'change pow',
-      args: [],
-    );
-  }
-
-  /// `Change PoW Source`
-  String get changePowSource {
-    return Intl.message(
-      'Change PoW Source',
-      name: 'changePowSource',
-      desc: 'change pow source',
-      args: [],
-    );
-  }
-
-  /// `PoW`
-  String get pow {
-    return Intl.message(
-      'PoW',
-      name: 'pow',
-      desc: 'pow',
-      args: [],
-    );
-  }
-
   /// `Change Password`
   String get changePassword {
     return Intl.message(
@@ -807,6 +777,26 @@ class Z {
       'Set pin',
       name: 'changePinHint',
       desc: 'A text field hint that tells the user to set a pin',
+      args: [],
+    );
+  }
+
+  /// `Change PoW`
+  String get changePow {
+    return Intl.message(
+      'Change PoW',
+      name: 'changePow',
+      desc: 'change pow',
+      args: [],
+    );
+  }
+
+  /// `Change PoW Source`
+  String get changePowSource {
+    return Intl.message(
+      'Change PoW Source',
+      name: 'changePowSource',
+      desc: 'change pow source',
       args: [],
     );
   }
@@ -1615,6 +1605,16 @@ class Z {
     );
   }
 
+  /// `Enter Frequency`
+  String get enterFrequency {
+    return Intl.message(
+      'Enter Frequency',
+      name: 'enterFrequency',
+      desc: 'add_sub_frequency_hint',
+      args: [],
+    );
+  }
+
   /// `Enter Gift Note`
   String get enterGiftMemo {
     return Intl.message(
@@ -1671,16 +1671,6 @@ class Z {
       'Enter Name',
       name: 'enterName',
       desc: 'add_sub_name_hint',
-      args: [],
-    );
-  }
-
-  /// `Enter Frequency`
-  String get enterFrequency {
-    return Intl.message(
-      'Enter Frequency',
-      name: 'enterFrequency',
-      desc: 'add_sub_frequency_hint',
       args: [],
     );
   }
@@ -2172,6 +2162,16 @@ class Z {
       'Authenticate to backup seed.',
       name: 'fingerprintSeedBackup',
       desc: 'settings_fingerprint_title',
+      args: [],
+    );
+  }
+
+  /// `Please enter a Frequency`
+  String get frequencyEmpty {
+    return Intl.message(
+      'Please enter a Frequency',
+      name: 'frequencyEmpty',
+      desc: 'frequency_empty',
       args: [],
     );
   }
@@ -2716,6 +2716,16 @@ class Z {
     );
   }
 
+  /// `Frequency Invalid`
+  String get invalidFrequency {
+    return Intl.message(
+      'Frequency Invalid',
+      name: 'invalidFrequency',
+      desc: 'invalid_frequency',
+      args: [],
+    );
+  }
+
   /// `Invalid Height`
   String get invalidHeight {
     return Intl.message(
@@ -3094,26 +3104,6 @@ class Z {
       'Please enter a Name',
       name: 'nameEmpty',
       desc: 'name_empty',
-      args: [],
-    );
-  }
-
-  /// `Please enter a Frequency`
-  String get frequencyEmpty {
-    return Intl.message(
-      'Please enter a Frequency',
-      name: 'frequencyEmpty',
-      desc: 'frequency_empty',
-      args: [],
-    );
-  }
-
-  /// `Frequency Invalid`
-  String get invalidFrequency {
-    return Intl.message(
-      'Frequency Invalid',
-      name: 'invalidFrequency',
-      desc: 'invalid_frequency',
       args: [],
     );
   }
@@ -3671,6 +3661,16 @@ class Z {
     );
   }
 
+  /// `Payment History`
+  String get paymentHistory {
+    return Intl.message(
+      'Payment History',
+      name: 'paymentHistory',
+      desc: 'payment_history',
+      args: [],
+    );
+  }
+
   /// `Someone has requested payment from you! check the payments page for more info.`
   String get paymentRequestMessage {
     return Intl.message(
@@ -3848,6 +3848,16 @@ class Z {
       'Set a secondary pin for plausible deniability mode.\n\nIf your wallet is unlocked using this secondary pin, your seed will be replaced with a hash of the existing seed. This is a security feature intended to be used in the event you are forced to open your wallet.\n\nThis pin will act like a normal (correct) pin EXCEPT when unlocking your wallet, which is when plausible deniability mode will activate.\n\nYour funds WILL BE LOST upon entering plausible deniability mode if you have not backed up your seed!',
       name: 'plausibleSheetInfo',
       desc: 'plausible_sheet_info',
+      args: [],
+    );
+  }
+
+  /// `PoW`
+  String get pow {
+    return Intl.message(
+      'PoW',
+      name: 'pow',
+      desc: 'pow',
       args: [],
     );
   }

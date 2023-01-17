@@ -47,6 +47,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Lỗi khi thêm Tài khoản Chỉ Xem: Tài khoản không có giá trị"),
         "addWatchOnlyAccountSuccess": MessageLookupByLibrary.simpleMessage(
             "Đã tạo thành công tài khoản chỉ xem!"),
+        "addWorkSource":
+            MessageLookupByLibrary.simpleMessage("Thêm nguồn công việc"),
         "address": MessageLookupByLibrary.simpleMessage("Địa chỉ nhà"),
         "addressCopied":
             MessageLookupByLibrary.simpleMessage("Đã sao chép địa chỉ"),
@@ -136,6 +138,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Thay đổi mật khẩu hiện có của bạn. Nếu bạn không biết mật khẩu hiện tại của mình, chỉ cần phỏng đoán chính xác nhất vì thực tế không bắt buộc phải thay đổi mật khẩu (vì bạn đã đăng nhập), nhưng nó cho phép chúng tôi xóa mục sao lưu hiện có."),
         "changePin": MessageLookupByLibrary.simpleMessage("Thay đổi pin"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("Đặt ghim"),
+        "changePow": MessageLookupByLibrary.simpleMessage("Thay đổi PoW"),
+        "changePowSource":
+            MessageLookupByLibrary.simpleMessage("Thay đổi nguồn PoW"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Thay đổi đại diện"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Thay đổi"),
@@ -266,6 +271,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("Nhập địa chỉ"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Nhập số lượng"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("Nhập Email"),
+        "enterFrequency": MessageLookupByLibrary.simpleMessage("Nhập tần suất"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Nhập Ghi Chú Quà Tặng"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Nhập chiều cao"),
@@ -356,6 +362,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("Vài giây trước"),
         "fingerprintSeedBackup":
             MessageLookupByLibrary.simpleMessage("Xác minh để xem hạt giống."),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("Vui lòng nhập Tần suất"),
         "from": MessageLookupByLibrary.simpleMessage("Từ"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("hoàn thành"),
         "fundingBannerHeader":
@@ -443,6 +451,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sao lưu hạt giống của bạn!"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage(
             "Địa chỉ đã nhập không hợp lệ"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Tần suất không hợp lệ"),
         "invalidHeight":
             MessageLookupByLibrary.simpleMessage("Chiều cao không hợp lệ"),
         "invalidPassword":
@@ -513,6 +523,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Đây là tài khoản mới của bạn. Khi bạn nhận Nano, giao dịch sẽ được hiển thị như sau:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("Tạo ví mới"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Tiếp theo"),
+        "nextPayment":
+            MessageLookupByLibrary.simpleMessage("Thanh toán tiếp theo"),
         "no": MessageLookupByLibrary.simpleMessage("Không"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "Không có liên hệ nào để xuất ra."),
@@ -587,6 +599,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mật khẩu không khớp"),
         "pay": MessageLookupByLibrary.simpleMessage("Thanh toán"),
         "payRequest": MessageLookupByLibrary.simpleMessage("Trả yêu cầu này"),
+        "paymentHistory":
+            MessageLookupByLibrary.simpleMessage("Lịch sử thanh toán"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Ai đó đã yêu cầu thanh toán từ bạn! kiểm tra trang thanh toán để biết thêm thông tin."),
         "payments": MessageLookupByLibrary.simpleMessage("Thanh toán"),
@@ -618,6 +632,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thông tin từ chối hợp lý"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "Đặt chân phụ cho chế độ từ chối hợp lý.\n\nNếu ví của bạn được mở khóa bằng cách sử dụng mã pin phụ này, hạt giống của bạn sẽ được thay thế bằng một mã băm của hạt giống hiện có. Đây là một tính năng bảo mật nhằm mục đích sử dụng trong trường hợp bạn buộc phải mở ví của mình.\n\nGhim này sẽ hoạt động giống như một ghim bình thường (đúng) NGOẠI TRỪ khi mở khóa ví của bạn, đó là khi chế độ từ chối hợp lý sẽ kích hoạt.\n\nTiền của bạn SẼ BỊ MẤT khi vào chế độ từ chối hợp lý nếu bạn chưa sao lưu hạt giống của mình!"),
+        "pow": MessageLookupByLibrary.simpleMessage("PoW"),
         "preferences": MessageLookupByLibrary.simpleMessage("Tuỳ chọn"),
         "privacyPolicy":
             MessageLookupByLibrary.simpleMessage("Chính sách bảo mật"),

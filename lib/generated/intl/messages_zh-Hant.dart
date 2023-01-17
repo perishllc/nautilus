@@ -42,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("添加僅觀看帳戶時出錯：帳戶為空"),
         "addWatchOnlyAccountSuccess":
             MessageLookupByLibrary.simpleMessage("已成功創建僅限觀看的帳戶！"),
+        "addWorkSource": MessageLookupByLibrary.simpleMessage("添加工作來源"),
         "address": MessageLookupByLibrary.simpleMessage("地址"),
         "addressCopied": MessageLookupByLibrary.simpleMessage("地址已複製"),
         "addressHint": MessageLookupByLibrary.simpleMessage("輸入地址"),
@@ -107,6 +108,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "更改現有密碼。如果您不知道當前密碼，請做出最佳猜測，因為實際上不需要更改它（因為您已經登錄），但它確實讓我們刪除了現有的備份條目。"),
         "changePin": MessageLookupByLibrary.simpleMessage("更改引腳"),
         "changePinHint": MessageLookupByLibrary.simpleMessage("設置引腳"),
+        "changePow": MessageLookupByLibrary.simpleMessage("改變工作量證明"),
+        "changePowSource": MessageLookupByLibrary.simpleMessage("更改 PoW 源"),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage("變更代表"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("變更"),
         "changeRepHint": MessageLookupByLibrary.simpleMessage("輸入新代表"),
@@ -208,6 +211,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("輸入地址"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("輸入金額"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("輸入電子郵件"),
+        "enterFrequency": MessageLookupByLibrary.simpleMessage("輸入頻率"),
         "enterGiftMemo": MessageLookupByLibrary.simpleMessage("輸入禮品備註"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("輸入高度"),
         "enterHttpUrl": MessageLookupByLibrary.simpleMessage("輸入 HTTP 網址"),
@@ -276,6 +280,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fewSecondsAgo": MessageLookupByLibrary.simpleMessage("幾秒鐘前"),
         "fingerprintSeedBackup":
             MessageLookupByLibrary.simpleMessage("確認指紋或 Face ID，備份錢包種子。"),
+        "frequencyEmpty": MessageLookupByLibrary.simpleMessage("請輸入頻率"),
         "from": MessageLookupByLibrary.simpleMessage("從"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("履行"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage("資金橫幅"),
@@ -346,6 +351,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "introSkippedWarningHeader":
             MessageLookupByLibrary.simpleMessage("備份你的種子！"),
         "invalidAddress": MessageLookupByLibrary.simpleMessage("無效的目標地址"),
+        "invalidFrequency": MessageLookupByLibrary.simpleMessage("頻率無效"),
         "invalidHeight": MessageLookupByLibrary.simpleMessage("無效高度"),
         "invalidPassword": MessageLookupByLibrary.simpleMessage("無效的密碼"),
         "invalidPin": MessageLookupByLibrary.simpleMessage("無效引腳"),
@@ -402,6 +408,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "這是您的新帳戶。當您收到 NANO 時，交易會顯示如下："),
         "newWallet": MessageLookupByLibrary.simpleMessage("建立新錢包"),
         "nextButton": MessageLookupByLibrary.simpleMessage("繼續"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("下次付款"),
         "no": MessageLookupByLibrary.simpleMessage("不要"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage("沒有可匯出的聯絡人"),
         "noContactsImport": MessageLookupByLibrary.simpleMessage("沒有可匯入的聯絡人"),
@@ -461,6 +468,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordsDontMatch": MessageLookupByLibrary.simpleMessage("密碼不匹配"),
         "pay": MessageLookupByLibrary.simpleMessage("支付"),
         "payRequest": MessageLookupByLibrary.simpleMessage("支付此請求"),
+        "paymentHistory": MessageLookupByLibrary.simpleMessage("支付歷史"),
         "paymentRequestMessage":
             MessageLookupByLibrary.simpleMessage("有人要求您付款！查看付款頁面以獲取更多信息。"),
         "payments": MessageLookupByLibrary.simpleMessage("付款"),
@@ -483,6 +491,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("似是而非的否認信息"),
         "plausibleSheetInfo": MessageLookupByLibrary.simpleMessage(
             "為似是而非的否認模式設置輔助引腳。\n\n如果您的錢包使用此輔助密碼解鎖，您的種子將替換為現有種子的哈希值。這是一項安全功能，旨在在您被迫打開錢包的情況下使用。\n\n除了解鎖你的錢包時，這個密碼就像一個正常的（正確的）密碼，這是在合理的否認模式將激活的時候。\n\n如果您沒有備份您的種子，您的資金將在進入合理否認模式時丟失！"),
+        "pow": MessageLookupByLibrary.simpleMessage("工作量證明"),
         "preferences": MessageLookupByLibrary.simpleMessage("個人偏好"),
         "privacyPolicy": MessageLookupByLibrary.simpleMessage("隱私政策"),
         "proSubRequiredHeader":
