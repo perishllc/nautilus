@@ -291,13 +291,19 @@ class SubsSheetState extends State<SubsSheet> {
     Color? subColor = StateContainer.of(context).curTheme.success;
 
     if (sub.active) {
-      if (sub.paid) {
-        subColor = StateContainer.of(context).curTheme.success;
-      } else {
-        subColor = StateContainer.of(context).curTheme.warning;
-      }
+      subColor = StateContainer.of(context).curTheme.success;
+      // if (sub.paid) {
+      //   subColor = StateContainer.of(context).curTheme.success;
+      // } else {
+      //   subColor = StateContainer.of(context).curTheme.warning;
+      // }
     } else {
       subColor = StateContainer.of(context).curTheme.error;
+      // if (sub.paid) {
+      //   subColor = StateContainer.of(context).curTheme.warning;
+      // } else {
+      //   subColor = StateContainer.of(context).curTheme.error;
+      // }
     }
 
     return Column(
@@ -330,7 +336,7 @@ class SubsSheetState extends State<SubsSheet> {
                 );
               },
               child: SizedBox(
-                height: 90.0,
+                height: 75,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -390,42 +396,34 @@ class SubsSheetState extends State<SubsSheet> {
                                         maxLines: 1,
                                         textAlign: TextAlign.start,
                                       ),
-                                      AutoSizeText(
-                                        Address(sub.address).getShortString() ?? "",
-                                        style: TextStyle(
-                                          fontFamily: "OverpassMono",
-                                          fontWeight: FontWeight.w100,
-                                          fontSize: 14.0,
-                                          color: StateContainer.of(context).curTheme.text60,
-                                        ),
-                                        minFontSize: 8.0,
-                                        stepGranularity: 0.1,
-                                        maxLines: 1,
-                                      ),
                                       Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           RichText(
-                                            textAlign: TextAlign.center,
-                                            text: TextSpan(
-                                              text: "",
-                                              children: <InlineSpan>[
-                                                TextSpan(
-                                                  text: getThemeAwareRawAccuracy(context, sub.amount_raw),
-                                                  style: AppStyles.textStyleParagraphPrimary(context),
-                                                ),
-                                                displayCurrencySymbol(
-                                                  context,
-                                                  AppStyles.textStyleParagraphPrimary(context),
-                                                ),
-                                                TextSpan(
-                                                  text: getRawAsThemeAwareFormattedAmount(context, sub.amount_raw),
-                                                  style: AppStyles.textStyleParagraphPrimary(context),
-                                                ),
-                                              ],
+                                              textAlign: TextAlign.start,
+                                              text: TextSpan(
+                                                text: "",
+                                                children: <InlineSpan>[
+                                                  TextSpan(
+                                                    text: getThemeAwareRawAccuracy(context, sub.amount_raw),
+                                                    style: AppStyles.textStyleParagraphPrimary(context),
+                                                  ),
+                                                  displayCurrencySymbol(
+                                                    context,
+                                                    AppStyles.textStyleParagraphPrimary(context),
+                                                  ),
+                                                  TextSpan(
+                                                    text: getRawAsThemeAwareFormattedAmount(context, sub.amount_raw),
+                                                    style: AppStyles.textStyleParagraphPrimary(context),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
+                                          
                                           Container(
-                                            margin: const EdgeInsetsDirectional.only(start: 10),
+                                            // width: 100,
+                                            margin: const EdgeInsetsDirectional.only(start: 10, end: 10),
+                                            alignment: Alignment.centerLeft,
                                             child: TransactionStateTag(
                                               transactionState: sub.paid
                                                   ? TransactionStateOptions.PAID
@@ -434,19 +432,49 @@ class SubsSheetState extends State<SubsSheet> {
                                           )
                                         ],
                                       ),
+                                      // AutoSizeText(
+                                      //   Address(sub.address).getShortString() ?? "",
+                                      //   style: TextStyle(
+                                      //     fontFamily: "OverpassMono",
+                                      //     fontWeight: FontWeight.w100,
+                                      //     fontSize: 14.0,
+                                      //     color: StateContainer.of(context).curTheme.text60,
+                                      //   ),
+                                      //   minFontSize: 8.0,
+                                      //   stepGranularity: 0.1,
+                                      //   maxLines: 1,
+                                      // ),
+
                                       // display next payment time:
-                                      AutoSizeText(
-                                        "${Z.of(context).nextPayment}: ${getCardTime(nextPaymentTime.millisecondsSinceEpoch ~/ 1000)}",
-                                        style: TextStyle(
-                                          fontFamily: "OverpassMono",
-                                          fontWeight: FontWeight.w100,
-                                          fontSize: 14.0,
-                                          color: StateContainer.of(context).curTheme.warning,
+                                      if (sub.active)
+                                        Row(
+                                          children: [
+                                            AutoSizeText(
+                                              "${Z.of(context).nextPayment}: ",
+                                              style: TextStyle(
+                                                fontFamily: "OverpassMono",
+                                                fontWeight: FontWeight.w100,
+                                                fontSize: 14.0,
+                                                color: StateContainer.of(context).curTheme.text60,
+                                              ),
+                                              minFontSize: 8.0,
+                                              stepGranularity: 0.1,
+                                              maxLines: 1,
+                                            ),
+                                            AutoSizeText(
+                                              "${getCardTime(nextPaymentTime.millisecondsSinceEpoch ~/ 1000)}",
+                                              style: TextStyle(
+                                                fontFamily: "OverpassMono",
+                                                fontWeight: FontWeight.w100,
+                                                fontSize: 14.0,
+                                                color: StateContainer.of(context).curTheme.success,
+                                              ),
+                                              minFontSize: 8.0,
+                                              stepGranularity: 0.1,
+                                              maxLines: 1,
+                                            ),
+                                          ],
                                         ),
-                                        minFontSize: 8.0,
-                                        stepGranularity: 0.1,
-                                        maxLines: 1,
-                                      ),
                                     ],
                                   ),
                                 ),

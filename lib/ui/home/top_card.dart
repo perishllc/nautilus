@@ -252,7 +252,7 @@ class TopCardState extends State<TopCard> with AutomaticKeepAliveClientMixin<Top
           });
           sl.get<SharedPrefsUtil>().setPriceConversion(PriceConversion.NONE);
         } else if (_priceConversion == PriceConversion.NONE) {
-          // Cyclce to hidden
+          // Cycle to hidden
           setState(() {
             _priceConversion = PriceConversion.HIDDEN;
             mainCardHeight = 64;

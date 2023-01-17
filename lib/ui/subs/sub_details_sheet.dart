@@ -11,6 +11,7 @@ import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/ui/subs/payment_history.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
+import 'package:wallet_flutter/ui/util/routes.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 
@@ -47,6 +48,7 @@ class SubDetailsSheetState extends State<SubDetailsSheet> {
                       AppButton.buildAppButton(
                           context, AppButtonType.PRIMARY, Z.of(context).pay, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
+                        Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
                         Sheets.showAppHeightNineSheet(
                           context: context,
                           animationDurationMs: 175,
@@ -64,6 +66,7 @@ class SubDetailsSheetState extends State<SubDetailsSheet> {
                   children: <Widget>[
                     AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).viewPaymentHistory,
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                      // Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
                       Sheets.showAppHeightEightSheet(
                         context: context,
                         widget: PaymentHistorySheet(address: widget.sub.address),
@@ -80,7 +83,7 @@ class SubDetailsSheetState extends State<SubDetailsSheet> {
                       widget.sub.active ? Z.of(context).cancelSub : Z.of(context).activateSub,
                       Dimens.BUTTON_BOTTOM_DIMENS,
                       onPressed: () async {
-                        await sl.get<SubscriptionService>().testNotification(context);
+                        if (!mounted) return;
                         if (await sl.get<SubscriptionService>().toggleSubscriptionActive(context, widget.sub)) {
                           // trigger reload:
                           EventTaxiImpl.singleton().fire(SubModifiedEvent());
