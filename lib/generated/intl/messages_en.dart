@@ -517,6 +517,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "This is your new account. Once you receive %2, transactions will show up like this:"),
         "newWallet": MessageLookupByLibrary.simpleMessage("New Wallet"),
         "nextButton": MessageLookupByLibrary.simpleMessage("Next"),
+        "nextPayment": MessageLookupByLibrary.simpleMessage("Next Payment"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "noContactsExport": MessageLookupByLibrary.simpleMessage(
             "There\'s no contacts to export."),

@@ -6,6 +6,7 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
+import 'package:wallet_flutter/bus/subs_changed_event.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/authentication_method.dart';
@@ -131,6 +132,21 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
                         ),
                       ),
                     ),
+
+                  // Address text
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                    margin: EdgeInsets.only(
+                        top: 30,
+                        left: MediaQuery.of(context).size.width * 0.105,
+                        right: MediaQuery.of(context).size.width * 0.105),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: StateContainer.of(context).curTheme.backgroundDarkest,
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: UIUtil.threeLineAddressText(context, widget.sub.address),
+                  ),
                   // if (widget.sub.name.isNotEmpty)
                   //   Container(
                   //     margin: EdgeInsets.only(
@@ -178,7 +194,7 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
 
                   // "FOR" text
                   Container(
-                    margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                    margin: const EdgeInsets.only(top: 30, bottom: 10),
                     child: Column(
                       children: <Widget>[
                         Text(
@@ -226,19 +242,6 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
                       ),
                     ),
                   ),
-                  // Address text
-                  // Container(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                  //   margin: EdgeInsets.only(
-                  //       left: MediaQuery.of(context).size.width * 0.105,
-                  //       right: MediaQuery.of(context).size.width * 0.105),
-                  //   width: double.infinity,
-                  //   decoration: BoxDecoration(
-                  //     color: StateContainer.of(context).curTheme.backgroundDarkest,
-                  //     borderRadius: BorderRadius.circular(25),
-                  //   ),
-                  //   child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName),
-                  // ),
                 ],
               ),
             ),
@@ -318,6 +321,8 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
 
       // save the subscription to the database:
       await sl.get<DBHelper>().saveSubscription(widget.sub);
+
+      EventTaxiImpl.singleton().fire(SubsChangedEvent(subs: await sl.get<DBHelper>().getSubscriptions()));
 
       // Send the subscription amount:
       // bool payNow = false;

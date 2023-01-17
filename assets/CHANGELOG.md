@@ -7,6 +7,7 @@
 - UI updates on the send / receive sheets
 - Updated more settings menu / icons
 - Improved send / receive sheet UX / field focus
+- Get price data from coingecko directly instead of relying on the backend
 #### Fixed
 - Update node url character limit
 - Split bill currency fixes

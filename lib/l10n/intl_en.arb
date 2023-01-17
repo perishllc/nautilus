@@ -1570,6 +1570,11 @@
     "type": "text",
     "description": "A button that goes to the next screen."
   },
+  "nextPayment": "Next Payment",
+  "@nextPayment": {
+    "type": "text",
+    "description": "next_payment"
+  },
   "no": "No",
   "@no": {
     "type": "text",

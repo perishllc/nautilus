@@ -1,8 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:coingecko_api/coingecko_api.dart';
+import 'package:coingecko_api/data/price_info.dart';
+import 'package:coingecko_api/coingecko_result.dart';
+import 'package:cron/cron.dart';
+import 'package:event_taxi/event_taxi.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
+import 'package:wallet_flutter/bus/price_event.dart';
+import 'package:wallet_flutter/localize.dart';
+import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/network/model/base_request.dart';
 import 'package:wallet_flutter/network/model/payment/payment_ack.dart';
 import 'package:wallet_flutter/network/model/payment/payment_memo.dart';
@@ -11,12 +19,23 @@ import 'package:wallet_flutter/network/model/payment/payment_request.dart';
 import 'package:wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:wallet_flutter/network/model/response/error_response.dart';
 import 'package:wallet_flutter/network/model/response/funding_response_item.dart';
+import 'package:wallet_flutter/network/model/response/price_response.dart';
 import 'package:wallet_flutter/service_locator.dart';
 
 // MetadataService singleton
 class MetadataService {
+  CoinGeckoApi CGApi = CoinGeckoApi();
+  AvailableCurrency _currency = AvailableCurrency(AvailableCurrencyEnum.USD);
+
   // Constructor
-  MetadataService();
+  MetadataService() {
+    // get price data every 5 minutes:
+    final Cron cron = Cron();
+    cron.schedule(Schedule.parse('*/5 * * * *'), () async {
+      getPriceData();
+    });
+    getPriceData();
+  }
 
   // meta:
   static String META_SERVER = "https://meta.perish.co";
@@ -31,6 +50,21 @@ class MetadataService {
   final Logger log = sl.get<Logger>();
 
   Future<void> initCommunication() async {}
+
+  Future<void> getPriceData() async {
+    // Price info sent from server
+    // nano / banano:
+    final String cryptoId = NonTranslatable.currencyName.toLowerCase();
+    final CoinGeckoResult<List<PriceInfo>> results = await CGApi.simple.listPrices(
+      ids: [cryptoId],
+      vsCurrencies: [_currency.getIso4217Code()],
+    );
+    if (!results.isError) {
+      final double? price = results.data[0].getPriceIn(_currency.getIso4217Code());
+      final PriceResponse resp = PriceResponse(currency: _currency.getIso4217Code(), price: price);
+      EventTaxiImpl.singleton().fire(PriceEvent(response: resp));
+    }
+  }
 
   // HTTP API
 
@@ -167,5 +201,11 @@ class MetadataService {
       }
     }
     return null;
+  }
+
+  void setCurrency(AvailableCurrency currency) {
+    _currency = currency;
+    // update the price data
+    getPriceData();
   }
 }

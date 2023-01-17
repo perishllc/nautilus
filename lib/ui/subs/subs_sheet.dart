@@ -288,6 +288,18 @@ class SubsSheetState extends State<SubsSheet> {
     } catch (e) {
       nextPaymentTime = DateTime.now();
     }
+    Color? subColor = StateContainer.of(context).curTheme.success;
+
+    if (sub.active) {
+      if (sub.paid) {
+        subColor = StateContainer.of(context).curTheme.success;
+      } else {
+        subColor = StateContainer.of(context).curTheme.warning;
+      }
+    } else {
+      subColor = StateContainer.of(context).curTheme.error;
+    }
+
     return Column(
       children: <Widget>[
         Divider(
@@ -348,9 +360,7 @@ class SubsSheetState extends State<SubsSheet> {
                                         margin: EdgeInsets.zero,
                                         child: Icon(
                                           sub.active ? Icons.paid : Icons.money_off,
-                                          color: sub.active
-                                              ? StateContainer.of(context).curTheme.success
-                                              : StateContainer.of(context).curTheme.error,
+                                          color: subColor,
                                           size: 30,
                                         ),
                                       ),
@@ -426,7 +436,7 @@ class SubsSheetState extends State<SubsSheet> {
                                       ),
                                       // display next payment time:
                                       AutoSizeText(
-                                        getCardTime(nextPaymentTime.millisecondsSinceEpoch ~/ 1000),
+                                        "${Z.of(context).nextPayment}: ${getCardTime(nextPaymentTime.millisecondsSinceEpoch ~/ 1000)}",
                                         style: TextStyle(
                                           fontFamily: "OverpassMono",
                                           fontWeight: FontWeight.w100,
@@ -460,23 +470,23 @@ class SubsSheetState extends State<SubsSheet> {
   ActionPane _getSlideActionsForSub(BuildContext context, Subscription sub, StateSetter setState) {
     final List<Widget> actions = <Widget>[];
 
-    actions.add(SlidableAction(
-        autoClose: false,
-        borderRadius: BorderRadius.circular(5.0),
-        backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
-        foregroundColor: StateContainer.of(context).curTheme.primary,
-        icon: Icons.edit,
-        label: Z.of(context).edit,
-        onPressed: (BuildContext context) async {
-          await Future<dynamic>.delayed(const Duration(milliseconds: 250));
-          if (!mounted) return;
-          // Sheets.showAppHeightEightSheet(
-          //   context: context,
-          //   widget: SubDetailsSheet(sub: sub),
-          //   animationDurationMs: 175,
-          // );
-          await Slidable.of(context)!.close();
-        }));
+    // actions.add(SlidableAction(
+    //     autoClose: false,
+    //     borderRadius: BorderRadius.circular(5.0),
+    //     backgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
+    //     foregroundColor: StateContainer.of(context).curTheme.primary,
+    //     icon: Icons.edit,
+    //     label: Z.of(context).edit,
+    //     onPressed: (BuildContext context) async {
+    //       await Future<dynamic>.delayed(const Duration(milliseconds: 250));
+    //       if (!mounted) return;
+    //       // Sheets.showAppHeightEightSheet(
+    //       //   context: context,
+    //       //   widget: SubDetailsSheet(sub: sub),
+    //       //   animationDurationMs: 175,
+    //       // );
+    //       await Slidable.of(context)!.close();
+    //     }));
 
     actions.add(
       SlidableAction(
@@ -505,7 +515,7 @@ class SubsSheetState extends State<SubsSheet> {
 
     return ActionPane(
       motion: const ScrollMotion(),
-      extentRatio: 0.5,
+      extentRatio: 0.25,
       children: actions,
     );
   }

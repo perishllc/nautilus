@@ -1,19 +1,22 @@
 import 'dart:async';
 
+import 'package:easy_cron/easy_cron.dart';
+import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:logger/logger.dart';
+// ignore: depend_on_referenced_packages
+import 'package:timezone/timezone.dart' as tz;
+import 'package:timezone/data/latest.dart' as tz;
 import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/bus/subs_changed_event.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/subscription.dart';
 import 'package:wallet_flutter/network/model/block_types.dart';
 import 'package:wallet_flutter/network/model/response/account_history_response_item.dart';
 import 'package:wallet_flutter/service_locator.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
-import 'package:easy_cron/easy_cron.dart';
-import 'package:timezone/data/latest_all.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 
 // SubscriptionService singleton
 class SubscriptionService {
@@ -42,6 +45,9 @@ class SubscriptionService {
     // cancel all existing subscriptions:
     await flutterLocalNotificationsPlugin.cancelAll();
 
+    // initialize timezones:
+    tz.initializeTimeZones();
+
     // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -69,10 +75,10 @@ class SubscriptionService {
     }
   }
 
-  Future<void> checkAreSubscriptionsPaid(BuildContext context) async {
-    if (StateContainer.of(context).wallet?.history == null) {
-      return;
-    }
+  Future<void> checkAreSubscriptionsPaid(List<AccountHistoryResponseItem> history) async {
+    // if (StateContainer.of(context).wallet?.history == null) {
+    //   return;
+    // }
 
     // get all subscriptions:
     final List<Subscription> subs = await sl.get<DBHelper>().getSubscriptions();
@@ -82,13 +88,14 @@ class SubscriptionService {
         continue;
       }
       // ignore: use_build_context_synchronously
-      final bool isPaid = await checkSubPaid(context, sub);
+      final bool isPaid = await checkSubPaid(history, sub);
       log.d("Subscription ${sub.id} is paid: $isPaid");
       if (isPaid != sub.paid) {
-        // if not paid then deactivate the subscription:
+        // make sure the tag matched the real state:
         await sl.get<DBHelper>().toggleSubscriptionPaid(sub);
       }
     }
+    EventTaxiImpl.singleton().fire(SubsChangedEvent(subs: await sl.get<DBHelper>().getSubscriptions()));
   }
 
   Future<bool> toggleSubscriptionActive(BuildContext context, Subscription sub) async {
@@ -129,11 +136,23 @@ class SubscriptionService {
 
     const NotificationDetails notificationDetails = NotificationDetails(android: androidNotificationDetails);
     try {
-      await flutterLocalNotificationsPlugin.show(
+      // await flutterLocalNotificationsPlugin.show(
+      //   0,
+      //   'plain title',
+      //   'plain body',
+      //   notificationDetails,
+      // );
+      final tz.TZDateTime tzdatetime = tz.TZDateTime.from(DateTime.now().add(const Duration(seconds: 10)), tz.local);
+      await flutterLocalNotificationsPlugin.zonedSchedule(
         0,
-        'plain title',
-        'plain body',
-        notificationDetails,
+        "Subscription Reminder",
+        "Your subscription is due",
+        tzdatetime,
+        const NotificationDetails(
+          android: androidNotificationDetails,
+        ),
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       );
     } catch (e) {
       log.e(e);
@@ -141,7 +160,7 @@ class SubscriptionService {
   }
 
   // check whether a subscription has been paid:
-  Future<bool> checkSubPaid(BuildContext context, Subscription sub) async {
+  Future<bool> checkSubPaid(List<AccountHistoryResponseItem> history, Subscription sub) async {
     // first check if sub is active:
     if (!sub.active) {
       return false;
@@ -150,8 +169,7 @@ class SubscriptionService {
     // search through the wallet history to see if we paid to the address:
     bool hasPaid = false;
     int paidTimestamp = 0;
-    final List<AccountHistoryResponseItem>? history = StateContainer.of(context).wallet?.history;
-    if (history != null && history.isNotEmpty) {
+    if (history.isNotEmpty) {
       for (final AccountHistoryResponseItem histItem in history) {
         if (histItem.subtype == BlockTypes.SEND && histItem.account == sub.address) {
           if (BigInt.parse(histItem.amount!) >= BigInt.parse(sub.amount_raw)) {
@@ -194,8 +212,7 @@ class SubscriptionService {
   void onDidReceiveNotificationResponse(NotificationResponse details) {}
 
   Future<void> scheduleSubNotification(Subscription sub) async {
-    UnixCronParser cronParser = UnixCronParser();
-    final DateTime subTime = cronParser.parse(sub.frequency).next().time;
+    final DateTime subTime = UnixCronParser().parse(sub.frequency).next().time;
     final tz.TZDateTime tzdatetime = tz.TZDateTime.from(subTime, tz.local);
 
     const AndroidNotificationDetails androidNotificationDetails = AndroidNotificationDetails(
@@ -204,16 +221,23 @@ class SubscriptionService {
       channelDescription: "Subscription Reminder Notifications",
       importance: Importance.max,
       priority: Priority.high,
-      ticker: 'ticker',
+      ticker: "ticker",
+    );
+
+    const DarwinNotificationDetails darwinNotificationDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentSound: true,
+      presentBadge: true,
     );
 
     await flutterLocalNotificationsPlugin.zonedSchedule(
       sub.id ?? 0,
       "Subscription Reminder",
       "Your subscription for ${sub.name} is due",
-      tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+      tzdatetime,
       const NotificationDetails(
         android: androidNotificationDetails,
+        iOS: darwinNotificationDetails,
       ),
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,

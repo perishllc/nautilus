@@ -3198,6 +3198,16 @@ class Z {
     );
   }
 
+  /// `Next Payment`
+  String get nextPayment {
+    return Intl.message(
+      'Next Payment',
+      name: 'nextPayment',
+      desc: 'next_payment',
+      args: [],
+    );
+  }
+
   /// `No`
   String get no {
     return Intl.message(

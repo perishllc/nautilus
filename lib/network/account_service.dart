@@ -273,9 +273,7 @@ class AccountService {
         throw Exception("Invalid JSON received");
       }
       // Determine response type
-      if (msg.containsKey("uuid") ||
-          (msg.containsKey("frontier") && msg.containsKey("representative_block")) ||
-          msg.containsKey("error") && msg.containsKey("currency")) {
+      if (msg.containsKey("uuid") || (msg.containsKey("frontier") && msg.containsKey("representative_block"))) {
         // Subscribe response
         final SubscribeResponse resp = await compute(subscribeResponseFromJson, msg);
         // Post to callbacks

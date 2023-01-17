@@ -1094,10 +1094,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     if (selection != null) {
       sl.get<SharedPrefsUtil>().setCurrency(AvailableCurrency(selection)).then((void result) {
         if (StateContainer.of(context).curCurrency.currency != selection) {
-          setState(() {
-            StateContainer.of(context).curCurrency = AvailableCurrency(selection);
-          });
-          StateContainer.of(context).requestSubscribe();
+          StateContainer.of(context).updateCurrency(AvailableCurrency(selection));
         }
       });
     }

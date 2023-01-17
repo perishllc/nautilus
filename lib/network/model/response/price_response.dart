@@ -10,6 +10,10 @@ double? _toDouble(v) {
 
 @JsonSerializable()
 class PriceResponse {
+  PriceResponse({this.currency, this.price});
+
+  factory PriceResponse.fromJson(Map<String, dynamic> json) => _$PriceResponseFromJson(json);
+
   @JsonKey(name: 'currency')
   String? currency;
 
@@ -18,9 +22,5 @@ class PriceResponse {
 
   @JsonKey(name: 'xmr', fromJson: _toDouble)
   double? xmrPrice;
-
-  PriceResponse();
-
-  factory PriceResponse.fromJson(Map<String, dynamic> json) => _$PriceResponseFromJson(json);
   Map<String, dynamic> toJson() => _$PriceResponseToJson(this);
 }

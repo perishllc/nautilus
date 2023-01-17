@@ -20,6 +20,7 @@ import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/ui/subs/sub_confirm_sheet.dart';
+import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
 import 'package:wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:wallet_flutter/ui/widgets/draggable_scrollbar.dart';
@@ -185,35 +186,35 @@ class AppDialogs {
               ),
               content: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
                 Text(
-                  Z.of(context).proSubRequiredParagraph.replaceAll("%1", NonTranslatable.appName),
+                  Z.of(context).proSubRequiredParagraph.replaceAll("%1", NonTranslatable.appName).replaceAll("%2", NonTranslatable.currencyName).replaceAll("%3", getRawAsThemeAwareFormattedAmount(context, SubscriptionService.PRO_PAYMENT_MONTHLY_COST)),
                   style: AppStyles.textStyleParagraph(context),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Checkbox(
-                      value: recurring,
-                      activeColor: StateContainer.of(context).curTheme.primary,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          recurring = !recurring;
-                        });
-                      },
-                    ),
-                    const SizedBox(width: 10),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          recurring = !recurring;
-                        });
-                      },
-                      child: Text(
-                        Z.of(context).autoRenewSub,
-                        style: AppStyles.textStyleParagraph(context),
-                      ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: <Widget>[
+                //     Checkbox(
+                //       value: recurring,
+                //       activeColor: StateContainer.of(context).curTheme.primary,
+                //       onChanged: (bool? value) {
+                //         setState(() {
+                //           recurring = !recurring;
+                //         });
+                //       },
+                //     ),
+                //     const SizedBox(width: 10),
+                //     GestureDetector(
+                //       onTap: () {
+                //         setState(() {
+                //           recurring = !recurring;
+                //         });
+                //       },
+                //       child: Text(
+                //         Z.of(context).autoRenewSub,
+                //         style: AppStyles.textStyleParagraph(context),
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ]),
               actions: <Widget>[
                 TextButton(
