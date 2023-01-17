@@ -114,6 +114,7 @@ class DBHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT,
         active BOOLEAN,
+        paid BOOLEAN,
         autopay BOOLEAN,
         frequency TEXT,
         address TEXT,
@@ -467,6 +468,7 @@ class DBHelper {
           amount_raw: list[i]["amount_raw"] as String,
           frequency: list[i]["frequency"] as String,
           active: list[i]["active"] == 1,
+          paid: list[i]["paid"] == 1,
           autopay: list[i]["autopay"] == 1,
         ),
       );
@@ -478,10 +480,11 @@ class DBHelper {
     dbClient ??= (await db)!;
     await dbClient.transaction((Transaction txn) async {
       await txn.rawInsert(
-          'INSERT INTO Subscriptions (name, active, autopay, address, amount_raw, frequency) values(?, ?, ?, ?, ?, ?)',
+          'INSERT INTO Subscriptions (name, active, paid, autopay, address, amount_raw, frequency) values(?, ?, ?, ?, ?, ?, ?)',
           [
             sub.name,
             if (sub.active) 1 else 0,
+            if (sub.paid) 1 else 0,
             if (sub.autopay) 1 else 0,
             sub.address,
             sub.amount_raw,
@@ -505,6 +508,12 @@ class DBHelper {
     final Database dbClient = (await db)!;
     final int active = sub.active ? 0 : 1;
     return dbClient.rawUpdate('UPDATE Subscriptions SET active = ? WHERE id = ?', [active, sub.id]);
+  }
+
+  Future<int> toggleSubscriptionPaid(Subscription sub) async {
+    final Database dbClient = (await db)!;
+    final int paid = sub.paid ? 0 : 1;
+    return dbClient.rawUpdate('UPDATE Subscriptions SET paid = ? WHERE id = ?', [paid, sub.id]);
   }
 
   Future<int> toggleSubscriptionAutopay(Subscription sub) async {

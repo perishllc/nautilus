@@ -41,23 +41,24 @@ class SubDetailsSheetState extends State<SubDetailsSheet> {
                   margin: const EdgeInsets.only(top: 10, bottom: 24),
                 ),
                 // A row for pay button
-                Row(
-                  children: <Widget>[
-                    AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, Z.of(context).pay, Dimens.BUTTON_TOP_DIMENS,
-                        onPressed: () async {
-                      Sheets.showAppHeightNineSheet(
-                        context: context,
-                        animationDurationMs: 175,
-                        widget: SendSheet(
-                          localCurrency: StateContainer.of(context).curCurrency,
-                          address: widget.sub.address,
-                          quickSendAmount: widget.sub.amount_raw,
-                        ),
-                      );
-                    }),
-                  ],
-                ),
+                if (!widget.sub.paid)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY, Z.of(context).pay, Dimens.BUTTON_TOP_DIMENS,
+                          onPressed: () async {
+                        Sheets.showAppHeightNineSheet(
+                          context: context,
+                          animationDurationMs: 175,
+                          widget: SendSheet(
+                            localCurrency: StateContainer.of(context).curCurrency,
+                            address: widget.sub.address,
+                            quickSendAmount: widget.sub.amount_raw,
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
                 // A row for View Details button
                 Row(
                   children: <Widget>[
@@ -79,6 +80,7 @@ class SubDetailsSheetState extends State<SubDetailsSheet> {
                       widget.sub.active ? Z.of(context).cancelSub : Z.of(context).activateSub,
                       Dimens.BUTTON_BOTTOM_DIMENS,
                       onPressed: () async {
+                        await sl.get<SubscriptionService>().testNotification(context);
                         if (await sl.get<SubscriptionService>().toggleSubscriptionActive(context, widget.sub)) {
                           // trigger reload:
                           EventTaxiImpl.singleton().fire(SubModifiedEvent());

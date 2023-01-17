@@ -50,6 +50,7 @@ import 'package:wallet_flutter/network/model/response/receivable_response.dart';
 import 'package:wallet_flutter/network/model/response/receivable_response_item.dart';
 import 'package:wallet_flutter/network/model/response/subscribe_response.dart';
 import 'package:wallet_flutter/network/model/status_types.dart';
+import 'package:wallet_flutter/network/subscription_service.dart';
 import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/themes.dart';
@@ -214,18 +215,6 @@ class StateContainerState extends State<StateContainer> {
       nyaniconNonce[address] = nonce.toString();
     });
   }
-
-  // void updateActiveAlert(AlertResponseItem? active, AlertResponseItem? settingsAlert) {
-  //   setState(() {
-  //     activeAlert = active;
-  //     if (settingsAlert != null) {
-  //       this.settingsAlert = settingsAlert;
-  //     } else {
-  //       this.settingsAlert = null;
-  //       activeAlertIsRead = true;
-  //     }
-  //   });
-  // }
 
   void addActiveOrSettingsAlert(AlertResponseItem? active, AlertResponseItem? settingsAlert) {
     setState(() {
@@ -1008,6 +997,10 @@ class StateContainerState extends State<StateContainer> {
       sl.get<SharedPrefsUtil>().setUuid(response.uuid!);
     }
     EventTaxiImpl.singleton().fire(ConfirmationHeightChangedEvent(confirmationHeight: response.confirmationHeight));
+
+    // check subscriptions:
+    sl.get<SubscriptionService>().checkAreSubscriptionsPaid(context);
+
     setState(() {
       wallet!.loading = false;
       wallet!.frontier = response.frontier;
@@ -1288,25 +1281,8 @@ class StateContainerState extends State<StateContainer> {
       return;
     }
 
-    final String? uuid = await sl.get<SharedPrefsUtil>().getUuid();
-    String? fcmToken;
-    bool? notificationsEnabled;
-    try {
-      fcmToken = await FirebaseMessaging.instance.getToken();
-      notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
-    } catch (e) {
-      fcmToken = null;
-      notificationsEnabled = false;
-    }
-    sl.get<AccountService>().clearQueue();
-    sl.get<AccountService>().queueRequest(SubscribeRequest(
-          account: wallet!.address,
-          currency: curCurrency.getIso4217Code(),
-          uuid: uuid,
-          fcmToken: fcmToken,
-          notificationEnabled: notificationsEnabled,
-        ));
-    sl.get<AccountService>().processQueue();
+    await requestSubscribe();
+
     // Request account history
 
     // Choose correct blockCount to minimize bandwidth
@@ -1451,26 +1427,31 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> requestSubscribe() async {
-    if (wallet != null && wallet!.address != null && Address(wallet!.address).isValid()) {
-      final String? uuid = await sl.get<SharedPrefsUtil>().getUuid();
-      String? fcmToken;
-      bool? notificationsEnabled;
-      try {
-        fcmToken = await FirebaseMessaging.instance.getToken();
-        notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
-      } catch (e) {
-        fcmToken = null;
-        notificationsEnabled = false;
-      }
-      sl.get<AccountService>().removeSubscribeHistoryReceivableFromQueue();
-      sl.get<AccountService>().queueRequest(SubscribeRequest(
-          account: wallet!.address,
-          currency: curCurrency.getIso4217Code(),
-          uuid: uuid,
-          fcmToken: fcmToken,
-          notificationEnabled: notificationsEnabled));
-      sl.get<AccountService>().processQueue();
+    if (wallet?.address == null || !Address(wallet!.address).isValid()) {
+      return;
     }
+
+    final String? uuid = await sl.get<SharedPrefsUtil>().getUuid();
+    String? fcmToken;
+    bool? notificationsEnabled;
+    try {
+      fcmToken = await FirebaseMessaging.instance.getToken();
+      notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
+    } catch (e) {
+      fcmToken = null;
+      notificationsEnabled = false;
+    }
+    sl.get<AccountService>().clearQueue();
+    sl.get<AccountService>().queueRequest(
+          SubscribeRequest(
+            account: wallet!.address,
+            currency: curCurrency.getIso4217Code(),
+            uuid: uuid,
+            fcmToken: fcmToken,
+            notificationEnabled: notificationsEnabled,
+          ),
+        );
+    sl.get<AccountService>().processQueue();
   }
 
   Future<String> decryptMessageCurrentAccount(String memoEnc, String? fromAddress, String? toAddress) async {

@@ -14,6 +14,8 @@ class Subscription {
   bool active;
   @JsonKey(name: 'autopay')
   bool autopay;
+  @JsonKey(name: 'paid')
+  bool paid;
   @JsonKey(name: 'amount_raw')
   String amount_raw;
   @JsonKey(name: 'address')
@@ -25,6 +27,7 @@ class Subscription {
     required this.name,
     this.active = false,
     this.autopay = false,
+    this.paid = false,
     required this.amount_raw,
     required this.address,
     this.id,

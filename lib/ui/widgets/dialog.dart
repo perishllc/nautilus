@@ -10,6 +10,7 @@ import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/localize.dart';
+import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/subscription.dart';
 import 'package:wallet_flutter/network/metadata_service.dart';
 import 'package:wallet_flutter/network/model/block_types.dart';
@@ -151,55 +152,15 @@ class AppDialogs {
   }
 
   static Future<bool> proCheck(BuildContext context, {bool shouldShowDialog = true}) async {
-    // first check if pro is enabled
-    final bool isSubbed = await sl.get<SharedPrefsUtil>().getProStatus();
-    if (isSubbed) return true;
+    // get all subscriptions:
+    final List<Subscription> subs = await sl.get<DBHelper>().getSubscriptions();
 
-    // search through the wallet history to see if we paid to the pro address:
-    bool hasPaid = false;
-    bool lifetime = false;
-    int paidTimestamp = 0;
-    final List<AccountHistoryResponseItem>? history = StateContainer.of(context).wallet?.history;
-    if (history != null && history.isNotEmpty) {
-      for (final AccountHistoryResponseItem histItem in history) {
-        if (histItem.subtype == BlockTypes.SEND && histItem.account == SubscriptionService.PRO_PAYMENT_ADDRESS) {
-          if (BigInt.parse(histItem.amount!) >= BigInt.parse(SubscriptionService.PRO_PAYMENT_MONTHLY_COST)) {
-            if (BigInt.parse(histItem.amount!) >= BigInt.parse(SubscriptionService.PRO_PAYMENT_LIFETIME_COST)) {
-              lifetime = true;
-            }
-            hasPaid = true;
-            paidTimestamp = histItem.local_timestamp ?? 0;
-            break;
-          }
-        }
-      }
-    }
-    const int monthInSecs = 2628000;
-    final int nowInSecs = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-
-    if (lifetime) {
-      final int farFuture = nowInSecs + (100 * 365 * 24 * 60 * 60);
-      sl.get<SharedPrefsUtil>().setProStatus(absoluteExpireTime: farFuture);
-      return true;
-    }
-
-    if (hasPaid) {
-      bool paymentWasRecent = false;
-      if (paidTimestamp > 0) {
-        final int monthFromPayment = paidTimestamp + monthInSecs;
-        // make sure the payment was made within the last month
-        if (nowInSecs - paidTimestamp < monthInSecs) {
-          sl.get<SharedPrefsUtil>().setProStatus(absoluteExpireTime: monthFromPayment);
-          paymentWasRecent = true;
-        }
-      } else {
-        // If we don't have a timestamp, we can't be sure if the payment was recent,
-        // so just set it to be a month from now:
-        sl.get<SharedPrefsUtil>().setProStatus(relativeExpireTime: monthInSecs);
-        paymentWasRecent = true;
-      }
-      if (paymentWasRecent) {
-        return true;
+    // check if we have a valid subscription to pro:
+    for (final Subscription sub in subs) {
+      if (sub.name == "${NonTranslatable.appName} Pro" && sub.address == SubscriptionService.PRO_PAYMENT_ADDRESS) {
+        // if they pay anything at all, it's good enough for me
+        // not worth the effort to lock things down, if they pay, they pay
+        if (sub.paid) return true;
       }
     }
 
@@ -318,14 +279,16 @@ class AppDialogs {
                     await Future<void>.delayed(const Duration(milliseconds: 1000), () {
                       Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
+                      final int dayOfMonth = DateTime.now().day;
+                      final String frequency = "0 0 $dayOfMonth * *";
                       Sheets.showAppHeightNineSheet(
                         context: context,
                         widget: SubConfirmSheet(
                           sub: Subscription(
                             address: SubscriptionService.PRO_PAYMENT_ADDRESS,
                             amount_raw: SubscriptionService.PRO_PAYMENT_MONTHLY_COST,
-                            frequency: "",
-                            name: "Nautilus Pro Monthly",
+                            frequency: frequency,
+                            name: "${NonTranslatable.appName} Pro",
                             active: true,
                           ),
                         ),

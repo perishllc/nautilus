@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_cron/easy_cron.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -24,6 +25,7 @@ import 'package:wallet_flutter/ui/widgets/dialog.dart';
 import 'package:wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:wallet_flutter/ui/widgets/transaction_state_tag.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 
 class SubsSheet extends StatefulWidget {
@@ -87,9 +89,9 @@ class SubsSheetState extends State<SubsSheet> {
           });
         });
         // setState(() {
-          // widget.subs.removeWhere((Subscription a) => a.id == event.sub!.id);
-          // widget.subs.add(event.sub!);
-          // widget.subs.sort((Subscription a, Subscription b) => a.id!.compareTo(b.id!));
+        // widget.subs.removeWhere((Subscription a) => a.id == event.sub!.id);
+        // widget.subs.add(event.sub!);
+        // widget.subs.sort((Subscription a, Subscription b) => a.id!.compareTo(b.id!));
         // });
       }
     });
@@ -280,6 +282,12 @@ class SubsSheetState extends State<SubsSheet> {
   }
 
   Widget _buildSubListItem(BuildContext context, Subscription sub, StateSetter setState) {
+    DateTime nextPaymentTime;
+    try {
+      nextPaymentTime = UnixCronParser().parse(sub.frequency).next().time;
+    } catch (e) {
+      nextPaymentTime = DateTime.now();
+    }
     return Column(
       children: <Widget>[
         Divider(
@@ -310,7 +318,7 @@ class SubsSheetState extends State<SubsSheet> {
                 );
               },
               child: SizedBox(
-                height: 70.0,
+                height: 90.0,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -384,25 +392,50 @@ class SubsSheetState extends State<SubsSheet> {
                                         stepGranularity: 0.1,
                                         maxLines: 1,
                                       ),
-                                      RichText(
-                                        textAlign: TextAlign.center,
-                                        text: TextSpan(
-                                          text: "",
-                                          children: <InlineSpan>[
-                                            TextSpan(
-                                              text: getThemeAwareRawAccuracy(context, sub.amount_raw),
-                                              style: AppStyles.textStyleParagraphPrimary(context),
+                                      Row(
+                                        children: [
+                                          RichText(
+                                            textAlign: TextAlign.center,
+                                            text: TextSpan(
+                                              text: "",
+                                              children: <InlineSpan>[
+                                                TextSpan(
+                                                  text: getThemeAwareRawAccuracy(context, sub.amount_raw),
+                                                  style: AppStyles.textStyleParagraphPrimary(context),
+                                                ),
+                                                displayCurrencySymbol(
+                                                  context,
+                                                  AppStyles.textStyleParagraphPrimary(context),
+                                                ),
+                                                TextSpan(
+                                                  text: getRawAsThemeAwareFormattedAmount(context, sub.amount_raw),
+                                                  style: AppStyles.textStyleParagraphPrimary(context),
+                                                ),
+                                              ],
                                             ),
-                                            displayCurrencySymbol(
-                                              context,
-                                              AppStyles.textStyleParagraphPrimary(context),
+                                          ),
+                                          Container(
+                                            margin: const EdgeInsetsDirectional.only(start: 10),
+                                            child: TransactionStateTag(
+                                              transactionState: sub.paid
+                                                  ? TransactionStateOptions.PAID
+                                                  : TransactionStateOptions.UNPAID,
                                             ),
-                                            TextSpan(
-                                              text: getRawAsThemeAwareFormattedAmount(context, sub.amount_raw),
-                                              style: AppStyles.textStyleParagraphPrimary(context),
-                                            ),
-                                          ],
+                                          )
+                                        ],
+                                      ),
+                                      // display next payment time:
+                                      AutoSizeText(
+                                        getCardTime(nextPaymentTime.millisecondsSinceEpoch ~/ 1000),
+                                        style: TextStyle(
+                                          fontFamily: "OverpassMono",
+                                          fontWeight: FontWeight.w100,
+                                          fontSize: 14.0,
+                                          color: StateContainer.of(context).curTheme.warning,
                                         ),
+                                        minFontSize: 8.0,
+                                        stepGranularity: 0.1,
+                                        maxLines: 1,
                                       ),
                                     ],
                                   ),

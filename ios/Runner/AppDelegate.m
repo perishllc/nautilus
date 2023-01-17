@@ -1,11 +1,17 @@
 #include "AppDelegate.h"
 #include "GeneratedPluginRegistrant.h"
 #import "Runner-Swift.h"
+// This is required for calling FlutterLocalNotificationsPlugin.setPluginRegistrantCallback method.
+#import <FlutterLocalNotificationsPlugin.h>
 
 @implementation AppDelegate
 
-- (void)lc_setAlternateIconName:(NSString*)iconName
-{
+
+void registerPlugins(NSObject<FlutterPluginRegistry>* registry) {
+    [GeneratedPluginRegistrant registerWithRegistry:registry];
+}
+
+- (void)lc_setAlternateIconName:(NSString*)iconName {
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(supportsAlternateIcons)] &&
         [[UIApplication sharedApplication] supportsAlternateIcons])
     {
@@ -42,19 +48,6 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
                                            details:nil]);
                 return;
             }
-//            if ([@"nautilus" isEqualToString:icon ]) {
-//                [self lc_setAlternateIconName:nil];
-//            } else if ([@"titanium" isEqualToString:icon]) {
-//                [self lc_setAlternateIconName:@"titanium"];
-//            } else if ([@"indium" isEqualToString:icon]) {
-//                [self lc_setAlternateIconName:@"indium"];
-//            } else if ([@"neptunium" isEqualToString:icon]) {
-//                [self lc_setAlternateIconName:@"neptunium"];
-//            } else if ([@"thorium" isEqualToString:icon]) {
-//                [self lc_setAlternateIconName:@"thorium"];
-//            } else if ([@"carbon" isEqualToString:icon]) {
-//                [self lc_setAlternateIconName:@"carbon"];
-//            }
         } else if ([@"setSecureClipboardItem" isEqualToString:call.method]) {
             NSDictionary *arguments = [call arguments];
             NSString *value = arguments[@"value"];
@@ -65,7 +58,12 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     }];
     
     [GeneratedPluginRegistrant registerWithRegistry:self];
+    // flutter_local_notifications:
+    [FlutterLocalNotificationsPlugin setPluginRegistrantCallback:registerPlugins];
+
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
+
+
 
 @end

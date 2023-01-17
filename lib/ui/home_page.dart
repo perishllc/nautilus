@@ -48,6 +48,7 @@ import 'package:wallet_flutter/network/model/response/alerts_response_item.dart'
 import 'package:wallet_flutter/network/model/response/auth_item.dart';
 import 'package:wallet_flutter/network/model/response/pay_item.dart';
 import 'package:wallet_flutter/network/model/status_types.dart';
+import 'package:wallet_flutter/network/subscription_service.dart';
 import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
@@ -95,8 +96,6 @@ import 'package:rate_my_app/rate_my_app.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:substring_highlight/substring_highlight.dart';
-// import 'package:awesome_notifications/awesome_notifications.dart';
-// import 'package:awesome_notifications_fcm/awesome_notifications_fcm.dart';
 
 // ignore: must_be_immutable
 class AppHomePage extends StatefulWidget {
@@ -178,7 +177,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     minLaunches: 5,
     remindDays: 7,
     remindLaunches: 5,
-    googlePlayIdentifier: 'co.perish.nautiluswallet',
+    googlePlayIdentifier: "co.perish.nautiluswallet",
     appStoreIdentifier: '1615775960',
   );
 
@@ -903,7 +902,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       }
 
       // check on subscriptions:
-      // todo:
+      // must be done post-load since we need to check history:
+      if (!mounted) return;
+      Future<void>.delayed(const Duration(seconds: 5), () async {
+        if (!mounted) return;
+        await sl.get<SubscriptionService>().checkAreSubscriptionsPaid(context);
+      });
     });
     // confetti:
     _confettiControllerLeft = ConfettiController(duration: const Duration(milliseconds: 150));

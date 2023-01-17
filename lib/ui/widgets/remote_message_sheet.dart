@@ -13,6 +13,7 @@ import 'package:wallet_flutter/model/notification_setting.dart';
 import 'package:wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -32,71 +33,6 @@ class RemoteMessageSheet extends StatefulWidget {
 }
 
 class RemoteMessageSheetState extends State<RemoteMessageSheet> {
-  Future<bool> showNotificationDialog() async {
-    final NotificationOptions? option = await showDialog<NotificationOptions>(
-        context: context,
-        barrierColor: StateContainer.of(context).curTheme.barrier,
-        builder: (BuildContext context) {
-          return AppSimpleDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            title: Text(
-              Z.of(context).notifications,
-              style: AppStyles.textStyleDialogHeader(context),
-            ),
-            children: <Widget>[
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, NotificationOptions.ON);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    Z.of(context).onStr,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, NotificationOptions.OFF);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Text(
-                    Z.of(context).off,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-            ],
-          );
-        });
-
-    if (option == null) {
-      return false;
-    }
-
-    if (option == NotificationOptions.ON) {
-      sl.get<SharedPrefsUtil>().setNotificationsOn(true).then((void result) {
-        EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: true));
-        FirebaseMessaging.instance.requestPermission();
-        FirebaseMessaging.instance.getToken().then((String? fcmToken) {
-          EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
-        });
-      });
-      return true;
-    } else {
-      sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((void result) {
-        EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: false));
-        FirebaseMessaging.instance.getToken().then((String? fcmToken) {
-          EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
-        });
-      });
-      return false;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -228,7 +164,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                     children: <Widget>[
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).enableNotifications,
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
-                        final bool enabledNotifications = await showNotificationDialog();
+                        final bool enabledNotifications = await SendSheetHelpers.showNotificationDialog(context);
                         if (!mounted) return;
                         // remove the alert:
                         if (enabledNotifications) {

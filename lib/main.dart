@@ -75,7 +75,7 @@ Future<void> main() async {
     webRecaptchaSiteKey: dotenv.env["CAPTCHA_SITE_KEY"],
   );
   FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
-
+  
   if (!kReleaseMode) {
     // we have to stall for whatever reason in debug mode
     // otherwise the app doesn't start properly (black screen)

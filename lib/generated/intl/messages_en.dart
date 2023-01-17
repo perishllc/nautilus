@@ -271,6 +271,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterAddress": MessageLookupByLibrary.simpleMessage("Enter Address"),
         "enterAmount": MessageLookupByLibrary.simpleMessage("Enter Amount"),
         "enterEmail": MessageLookupByLibrary.simpleMessage("Enter Email"),
+        "enterFrequency":
+            MessageLookupByLibrary.simpleMessage("Enter Frequency"),
         "enterGiftMemo":
             MessageLookupByLibrary.simpleMessage("Enter Gift Note"),
         "enterHeight": MessageLookupByLibrary.simpleMessage("Enter Height"),
@@ -359,6 +361,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("A few seconds ago"),
         "fingerprintSeedBackup": MessageLookupByLibrary.simpleMessage(
             "Authenticate to backup seed."),
+        "frequencyEmpty":
+            MessageLookupByLibrary.simpleMessage("Please enter a Frequency"),
         "from": MessageLookupByLibrary.simpleMessage("From"),
         "fulfilled": MessageLookupByLibrary.simpleMessage("fulfilled"),
         "fundingBannerHeader":
@@ -444,6 +448,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Backup your seed!"),
         "invalidAddress":
             MessageLookupByLibrary.simpleMessage("Address entered was invalid"),
+        "invalidFrequency":
+            MessageLookupByLibrary.simpleMessage("Frequency Invalid"),
         "invalidHeight": MessageLookupByLibrary.simpleMessage("Invalid Height"),
         "invalidPassword":
             MessageLookupByLibrary.simpleMessage("Invalid Password"),

@@ -1675,6 +1675,16 @@ class Z {
     );
   }
 
+  /// `Enter Frequency`
+  String get enterFrequency {
+    return Intl.message(
+      'Enter Frequency',
+      name: 'enterFrequency',
+      desc: 'add_sub_frequency_hint',
+      args: [],
+    );
+  }
+
   /// `Enter Node Name`
   String get enterNodeName {
     return Intl.message(
@@ -3084,6 +3094,26 @@ class Z {
       'Please enter a Name',
       name: 'nameEmpty',
       desc: 'name_empty',
+      args: [],
+    );
+  }
+
+  /// `Please enter a Frequency`
+  String get frequencyEmpty {
+    return Intl.message(
+      'Please enter a Frequency',
+      name: 'frequencyEmpty',
+      desc: 'frequency_empty',
+      args: [],
+    );
+  }
+
+  /// `Frequency Invalid`
+  String get invalidFrequency {
+    return Intl.message(
+      'Frequency Invalid',
+      name: 'invalidFrequency',
+      desc: 'invalid_frequency',
       args: [],
     );
   }

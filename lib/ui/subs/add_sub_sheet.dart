@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cron_form_field/cron_expression.dart';
+import 'package:easy_cron/easy_cron.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -39,12 +40,14 @@ class AddSubSheet extends StatefulWidget {
 }
 
 class AddSubSheetState extends State<AddSubSheet> {
-  FocusNode _nameFocusNode = FocusNode();
-  FocusNode _amountFocusNode = FocusNode();
-  FocusNode _addressFocusNode = FocusNode();
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _addressController = TextEditingController();
-  TextEditingController _amountController = TextEditingController();
+  final FocusNode _nameFocusNode = FocusNode();
+  final FocusNode _amountFocusNode = FocusNode();
+  final FocusNode _addressFocusNode = FocusNode();
+  final FocusNode _frequencyFocusNode = FocusNode();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
+  final TextEditingController _frequencyController = TextEditingController();
 
   List<User> _users = [];
   bool? animationOpen;
@@ -59,6 +62,7 @@ class AddSubSheetState extends State<AddSubSheet> {
   String _nameValidationText = "";
   String _amountValidationText = "";
   String _addressValidationText = "";
+  String _frequencyValidationText = "";
 
   bool _localCurrencyMode = false;
   late NumberFormat _localCurrencyFormat;
@@ -67,10 +71,10 @@ class AddSubSheetState extends State<AddSubSheet> {
   String _lastLocalCurrencyAmount = "";
   String _lastCryptoAmount = "";
 
-  TextEditingController _cronController = TextEditingController();
-  String _valueChanged = '';
-  String _valueToValidate = '';
-  String _valueSaved = '';
+  final TextEditingController _cronController = TextEditingController();
+  final String _valueChanged = '';
+  final String _valueToValidate = '';
+  final String _valueSaved = '';
 
   @override
   void initState() {
@@ -508,6 +512,40 @@ class AddSubSheetState extends State<AddSubSheet> {
             : null);
   } //************ Enter Address Container Method End ************//
 
+  Widget getEnterFrequencyContainer() {
+    double margin = 280;
+    if (_addressController.text.startsWith(NonTranslatable.currencyPrefix)) {
+      if (_addressController.text.length > 24) {
+        margin += 15;
+      }
+      if (_addressController.text.length > 48) {
+        margin += 20;
+      }
+    }
+    return AppTextField(
+      topMargin: margin,
+      textAlign: TextAlign.center,
+      focusNode: _frequencyFocusNode,
+      controller: _frequencyController,
+      cursorColor: StateContainer.of(context).curTheme.primary,
+      inputFormatters: [LengthLimitingTextInputFormatter(60)],
+      textInputAction: TextInputAction.done,
+      maxLines: null,
+      autocorrect: false,
+      hintText: Z.of(context).enterFrequency,
+      fadePrefixOnCondition: true,
+      style: AppStyles.textStyleAddressText90(context),
+      onChanged: (String text) async {
+        // Always reset the error message to be less annoying
+        if (_frequencyValidationText.isNotEmpty) {
+          setState(() {
+            _frequencyValidationText = "";
+          });
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return TapOutsideUnfocus(
@@ -561,6 +599,7 @@ class AddSubSheetState extends State<AddSubSheet> {
                   _nameFocusNode.unfocus();
                   _amountFocusNode.unfocus();
                   _addressFocusNode.unfocus();
+                  _frequencyFocusNode.unfocus();
                 },
                 child: KeyboardAvoider(
                   duration: Duration.zero,
@@ -693,32 +732,50 @@ class AddSubSheetState extends State<AddSubSheet> {
                             ],
                           ),
 
-                          // frequency container:
+                          // // frequency container:
+                          // Column(
+                          //   children: [
+                          //     Container(
+                          //       alignment: Alignment.topCenter,
+                          //       margin: EdgeInsets.only(
+                          //         left: MediaQuery.of(context).size.width * 0.105,
+                          //         right: MediaQuery.of(context).size.width * 0.105,
+                          //         top: 300,
+                          //       ),
+                          //       child: CronFormField(
+                          //         // controller: _cronController,
+                          //         initialValue: "0 0 1 * *", // the first of every month
+                          //         labelText: Z.of(context).schedule,
+                          //         onChanged: (String val) => setState(() => _valueChanged = val),
+                          //         validator: (String? val) {
+                          //           setState(() => _valueToValidate = val ?? '');
+                          //           return null;
+                          //         },
+                          //         onSaved: (String? val) => setState(() => _valueSaved = val ?? ''),
+                          //         // outputFormat: CronExpressionOutputFormat.AUTO,
+                          //       ),
+                          //     ),
+                          //     const SizedBox(height: 10),
+                          //     Text(CronExpression.fromString(_valueChanged).toReadableString()),
+                          //     const SizedBox(height: 30),
+                          //   ],
+                          // ),
+
+                          // Column for frequency container + frequency Error container
                           Column(
                             children: [
+                              getEnterFrequencyContainer(),
                               Container(
-                                alignment: Alignment.topCenter,
-                                margin: EdgeInsets.only(
-                                  left: MediaQuery.of(context).size.width * 0.105,
-                                  right: MediaQuery.of(context).size.width * 0.105,
-                                  top: 300,
-                                ),
-                                child: CronFormField(
-                                  // controller: _cronController,
-                                  initialValue: "0 0 1 * *", // the first of every month
-                                  labelText: Z.of(context).schedule,
-                                  onChanged: (String val) => setState(() => _valueChanged = val),
-                                  validator: (String? val) {
-                                    setState(() => _valueToValidate = val ?? '');
-                                    return null;
-                                  },
-                                  onSaved: (String? val) => setState(() => _valueSaved = val ?? ''),
-                                  // outputFormat: CronExpressionOutputFormat.AUTO,
-                                ),
+                                alignment: AlignmentDirectional.center,
+                                margin: const EdgeInsets.only(top: 3),
+                                child: Text(_frequencyValidationText,
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      color: StateContainer.of(context).curTheme.primary,
+                                      fontFamily: "NunitoSans",
+                                      fontWeight: FontWeight.w600,
+                                    )),
                               ),
-                              const SizedBox(height: 10),
-                              Text(CronExpression.fromString(_valueChanged).toReadableString()),
-                              const SizedBox(height: 30),
                             ],
                           ),
                         ],
@@ -771,9 +828,9 @@ class AddSubSheetState extends State<AddSubSheet> {
                     final Subscription sub = Subscription(
                       name: _nameController.text,
                       amount_raw: amountRaw,
-                      frequency: "",
+                      frequency: _frequencyController.text,
                       address: finalAddress,
-                      active: false,
+                      active: true,
                     );
                     if (!mounted) return;
                     Navigator.of(context).pop(sub);
@@ -863,6 +920,29 @@ class AddSubSheetState extends State<AddSubSheet> {
         _pasteButtonVisible = false;
       });
       _addressFocusNode.unfocus();
+    }
+
+    // validate frequency
+    if (_frequencyController.text.isEmpty) {
+      setState(() {
+        _frequencyValidationText = Z.of(context).frequencyEmpty;
+      });
+      isValid = false;
+    } else {
+      try {
+        UnixCronParser().parse(_frequencyController.text);
+      } catch (e) {
+        setState(() {
+          _frequencyValidationText = Z.of(context).invalidFrequency;
+        });
+        isValid = false;
+      }
+    }
+
+    if (isValid) {
+      setState(() {
+        _frequencyValidationText = "";
+      });
     }
 
     return isValid;

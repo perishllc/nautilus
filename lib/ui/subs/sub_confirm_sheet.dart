@@ -19,6 +19,7 @@ import 'package:wallet_flutter/network/model/response/handoff_response.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/auth/auth_complete_sheet.dart';
+import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/ui/subs/sub_complete_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
@@ -254,6 +255,16 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
                         AppButtonType.PRIMARY,
                         CaseChange.toUpperCase(Z.of(context).confirm, context),
                         Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                      // make sure notifications are enabled:
+                      final bool notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
+                      if (!notificationsEnabled) {
+                        if (!mounted) return;
+                        final bool notificationTurnedOn = await SendSheetHelpers.showNotificationDialog(context);
+                        if (!notificationTurnedOn) {
+                          return;
+                        }
+                      }
+
                       // Authenticate
                       final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
@@ -301,7 +312,6 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
   }
 
   Future<void> _doSend() async {
-    final bool memoSendFailed = false;
     String? poppedError;
     try {
       _showAnimation(context, AnimationType.GENERIC);
@@ -310,26 +320,26 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
       await sl.get<DBHelper>().saveSubscription(widget.sub);
 
       // Send the subscription amount:
-      bool payNow = false;
-      if (payNow) {
-        final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
-        final String privKey = await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(),
-            StateContainer.of(context).selectedAccount!.index!, derivationMethod);
-        var resp = await sl.get<AccountService>().requestSend(
-              StateContainer.of(context).wallet!.representative,
-              StateContainer.of(context).wallet!.frontier,
-              widget.sub.amount_raw,
-              widget.sub.address,
-              StateContainer.of(context).wallet!.address,
-              privKey,
-              max: false,
-            );
-        if (!mounted) return;
-        StateContainer.of(context).wallet!.frontier = resp.hash;
-        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(
-          widget.sub.amount_raw,
-        );
-      }
+      // bool payNow = false;
+      // if (payNow) {
+      //   final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+      //   final String privKey = await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(),
+      //       StateContainer.of(context).selectedAccount!.index!, derivationMethod);
+      //   var resp = await sl.get<AccountService>().requestSend(
+      //         StateContainer.of(context).wallet!.representative,
+      //         StateContainer.of(context).wallet!.frontier,
+      //         widget.sub.amount_raw,
+      //         widget.sub.address,
+      //         StateContainer.of(context).wallet!.address,
+      //         privKey,
+      //         max: false,
+      //       );
+      //   if (!mounted) return;
+      //   StateContainer.of(context).wallet!.frontier = resp.hash;
+      //   StateContainer.of(context).wallet!.accountBalance += BigInt.parse(
+      //     widget.sub.amount_raw,
+      //   );
+      // }
 
       // Show complete
       if (!mounted) return;

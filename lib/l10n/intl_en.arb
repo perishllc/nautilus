@@ -810,6 +810,11 @@
     "type": "text",
     "description": "add_sub_name_hint"
   },
+  "enterFrequency": "Enter Frequency",
+  "@enterFrequency": {
+    "type": "text",
+    "description": "add_sub_frequency_hint"
+  },
   "enterNodeName": "Enter Node Name",
   "@enterNodeName": {
     "type": "text",
@@ -1514,6 +1519,16 @@
   "@nameEmpty": {
     "type": "text",
     "description": "name_empty"
+  },
+  "frequencyEmpty": "Please enter a Frequency",
+  "@frequencyEmpty": {
+    "type": "text",
+    "description": "frequency_empty"
+  },
+  "invalidFrequency": "Frequency Invalid",
+  "@invalidFrequency": {
+    "type": "text",
+    "description": "invalid_frequency"
   },
   "natricon": "Natricon",
   "@natricon": {
