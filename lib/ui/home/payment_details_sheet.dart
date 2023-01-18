@@ -124,9 +124,10 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                       AppButton.buildAppButton(
                           context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).viewPaymentHistory, Dimens.BUTTON_TOP_DIMENS,
                           onPressed: () async {
+                            // var history = await sl.get<DBHelper>().getPaymentHistory(addressToCopy!);
                         Sheets.showAppHeightEightSheet(
                           context: context,
-                          widget: PaymentHistorySheet(address: addressToCopy!),
+                          widget: PaymentHistorySheet(history: [],),
                           animationDurationMs: 175,
                         );
                       }),

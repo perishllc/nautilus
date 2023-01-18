@@ -320,7 +320,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                             itemCount: widget.accounts.length,
                             controller: _scrollController,
                             itemBuilder: (BuildContext context, int index) {
-                              return _buildAccountListItem(context, widget.accounts[index], setState);
+                              return _buildAccountListItem(context, widget.accounts[index], setState, index);
                             },
                           ),
                         ),
@@ -413,7 +413,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
         ));
   }
 
-  Widget _buildAccountListItem(BuildContext context, Account account, StateSetter setState) {
+  Widget _buildAccountListItem(BuildContext context, Account account, StateSetter setState, int index) {
     // get username if it exists:
     String? userOrAddress;
     if (account.user != null) {
@@ -613,6 +613,11 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
             ),
           ),
         ),
+        if (index == widget.accounts.length - 1)
+          Divider(
+            height: 2,
+            color: StateContainer.of(context).curTheme.text15,
+          ),
       ],
     );
   }

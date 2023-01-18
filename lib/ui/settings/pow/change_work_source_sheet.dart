@@ -191,7 +191,7 @@ class ChangePowSheetState extends State<ChangePowSheet> {
                             itemCount: widget.workSources.length,
                             controller: _scrollController,
                             itemBuilder: (BuildContext context, int index) {
-                              return _buildListItem(context, widget.workSources[index], setState);
+                              return _buildListItem(context, widget.workSources[index], setState, index);
                             },
                           ),
                         ),
@@ -292,7 +292,7 @@ class ChangePowSheetState extends State<ChangePowSheet> {
         ));
   }
 
-  Widget _buildListItem(BuildContext context, WorkSource ws, StateSetter setState) {
+  Widget _buildListItem(BuildContext context, WorkSource ws, StateSetter setState, int index) {
     return Column(
       children: <Widget>[
         Divider(
@@ -423,6 +423,11 @@ class ChangePowSheetState extends State<ChangePowSheet> {
             ),
           ),
         ),
+        if (index == widget.workSources.length - 1)
+          Divider(
+            height: 2,
+            color: StateContainer.of(context).curTheme.text15,
+          ),
       ],
     );
   }

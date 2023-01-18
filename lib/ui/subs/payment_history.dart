@@ -17,6 +17,7 @@ import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/node.dart';
 import 'package:wallet_flutter/model/db/subscription.dart';
 import 'package:wallet_flutter/network/account_service.dart';
+import 'package:wallet_flutter/network/model/response/account_history_response_item.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/settings/node/add_node_sheet.dart';
@@ -33,9 +34,9 @@ import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 
 class PaymentHistorySheet extends StatefulWidget {
-  const PaymentHistorySheet({super.key, required this.address});
+  const PaymentHistorySheet({super.key, required this.history});
 
-  final String address;
+  final List<AccountHistoryResponseItem> history;
 
   @override
   PaymentHistorySheetState createState() => PaymentHistorySheetState();
@@ -152,7 +153,7 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
                       //       itemCount: widget.subs.length,
                       //       controller: _scrollController,
                       //       itemBuilder: (BuildContext context, int index) {
-                      //         return _buildSubListItem(context, widget.subs[index], setState);
+                      //         return _buildListItem(context, widget.subs[index], setState, index);
                       //       },
                       //     ),
                       //   ),
@@ -240,7 +241,7 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
     );
   }
 
-  Widget _buildSubListItem(BuildContext context, Subscription sub, StateSetter setState) {
+  Widget _buildListItem(BuildContext context, Subscription sub, StateSetter setState, int index) {
     return Column(
       children: <Widget>[
         Divider(
@@ -382,6 +383,11 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
             ),
           ),
         ),
+        if (index == widget.history.length - 1)
+          Divider(
+            height: 2,
+            color: StateContainer.of(context).curTheme.text15,
+          ),
       ],
     );
   }

@@ -196,7 +196,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
                             itemCount: widget.nodes.length,
                             controller: _scrollController,
                             itemBuilder: (BuildContext context, int index) {
-                              return _buildNodeListItem(context, widget.nodes[index], setState);
+                              return _buildNodeListItem(context, widget.nodes[index], setState, index);
                             },
                           ),
                         ),
@@ -296,7 +296,7 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
         ));
   }
 
-  Widget _buildNodeListItem(BuildContext context, Node node, StateSetter setState) {
+  Widget _buildNodeListItem(BuildContext context, Node node, StateSetter setState, int index) {
     return Column(
       children: <Widget>[
         Divider(
@@ -414,6 +414,11 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
             ),
           ),
         ),
+        if (index == widget.nodes.length - 1)
+          Divider(
+            height: 2,
+            color: StateContainer.of(context).curTheme.text15,
+          ),
       ],
     );
   }

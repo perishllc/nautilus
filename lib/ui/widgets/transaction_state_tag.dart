@@ -41,14 +41,14 @@ class TransactionStateTag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsetsDirectional.fromSTEB(6, 2, 6, 2),
-      child: Text(
-        getStateText(context, this.transactionState),
-        style: AppStyles.tagText(context),
-      ),
+      padding: const EdgeInsetsDirectional.fromSTEB(6, 2, 6, 2),
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.text10,
         borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        getStateText(context, transactionState),
+        style: AppStyles.tagText(context),
       ),
     );
   }

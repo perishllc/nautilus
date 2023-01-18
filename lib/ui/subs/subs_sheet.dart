@@ -185,7 +185,7 @@ class SubsSheetState extends State<SubsSheet> {
                             itemCount: widget.subs.length,
                             controller: _scrollController,
                             itemBuilder: (BuildContext context, int index) {
-                              return _buildSubListItem(context, widget.subs[index], setState);
+                              return _buildSubListItem(context, widget.subs[index], setState, index);
                             },
                           ),
                         ),
@@ -281,7 +281,7 @@ class SubsSheetState extends State<SubsSheet> {
     );
   }
 
-  Widget _buildSubListItem(BuildContext context, Subscription sub, StateSetter setState) {
+  Widget _buildSubListItem(BuildContext context, Subscription sub, StateSetter setState, int index) {
     DateTime nextPaymentTime;
     try {
       nextPaymentTime = UnixCronParser().parse(sub.frequency).next().time;
@@ -341,147 +341,153 @@ class SubsSheetState extends State<SubsSheet> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    // Selected indicator
-                    // Container(
-                    //   height: 70,
-                    //   width: 6,
-                    //   color: sub.active ? StateContainer.of(context).curTheme.primary : Colors.transparent,
-                    // ),
                     // Icon, Account Name, Address and Amount
                     Expanded(
-                      child: Container(
-                        margin: const EdgeInsetsDirectional.only(start: 20, end: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(
+                            width: 65,
+                            child: Stack(
                               children: <Widget>[
-                                Stack(
-                                  children: <Widget>[
-                                    Center(
-                                      child: Container(
-                                        margin: EdgeInsets.zero,
-                                        child: Icon(
-                                          sub.active ? Icons.paid : Icons.money_off,
-                                          color: subColor,
-                                          size: 30,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                // Account name and address
                                 Container(
-                                  width: (MediaQuery.of(context).size.width - 116) * 0.9,
-                                  // width: (MediaQuery.of(context).size.width - 200),
-                                  margin: const EdgeInsetsDirectional.only(start: 20),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      // Account name
-                                      AutoSizeText(
-                                        sub.name,
-                                        style: TextStyle(
-                                          fontFamily: "NunitoSans",
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16.0,
-                                          color: StateContainer.of(context).curTheme.text,
-                                        ),
-                                        minFontSize: 8.0,
-                                        stepGranularity: 1,
-                                        maxLines: 1,
-                                        textAlign: TextAlign.start,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          RichText(
-                                              textAlign: TextAlign.start,
-                                              text: TextSpan(
-                                                text: "",
-                                                children: <InlineSpan>[
-                                                  TextSpan(
-                                                    text: getThemeAwareRawAccuracy(context, sub.amount_raw),
-                                                    style: AppStyles.textStyleParagraphPrimary(context),
-                                                  ),
-                                                  displayCurrencySymbol(
-                                                    context,
-                                                    AppStyles.textStyleParagraphPrimary(context),
-                                                  ),
-                                                  TextSpan(
-                                                    text: getRawAsThemeAwareFormattedAmount(context, sub.amount_raw),
-                                                    style: AppStyles.textStyleParagraphPrimary(context),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          
-                                          Container(
-                                            // width: 100,
-                                            margin: const EdgeInsetsDirectional.only(start: 10, end: 10),
-                                            alignment: Alignment.centerLeft,
-                                            child: TransactionStateTag(
-                                              transactionState: sub.paid
-                                                  ? TransactionStateOptions.PAID
-                                                  : TransactionStateOptions.UNPAID,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      // AutoSizeText(
-                                      //   Address(sub.address).getShortString() ?? "",
-                                      //   style: TextStyle(
-                                      //     fontFamily: "OverpassMono",
-                                      //     fontWeight: FontWeight.w100,
-                                      //     fontSize: 14.0,
-                                      //     color: StateContainer.of(context).curTheme.text60,
-                                      //   ),
-                                      //   minFontSize: 8.0,
-                                      //   stepGranularity: 0.1,
-                                      //   maxLines: 1,
-                                      // ),
-
-                                      // display next payment time:
-                                      if (sub.active)
-                                        Row(
-                                          children: [
-                                            AutoSizeText(
-                                              "${Z.of(context).nextPayment}: ",
-                                              style: TextStyle(
-                                                fontFamily: "OverpassMono",
-                                                fontWeight: FontWeight.w100,
-                                                fontSize: 14.0,
-                                                color: StateContainer.of(context).curTheme.text60,
-                                              ),
-                                              minFontSize: 8.0,
-                                              stepGranularity: 0.1,
-                                              maxLines: 1,
-                                            ),
-                                            AutoSizeText(
-                                              "${getCardTime(nextPaymentTime.millisecondsSinceEpoch ~/ 1000)}",
-                                              style: TextStyle(
-                                                fontFamily: "OverpassMono",
-                                                fontWeight: FontWeight.w100,
-                                                fontSize: 14.0,
-                                                color: StateContainer.of(context).curTheme.success,
-                                              ),
-                                              minFontSize: 8.0,
-                                              stepGranularity: 0.1,
-                                              maxLines: 1,
-                                            ),
-                                          ],
-                                        ),
-                                    ],
+                                  alignment: Alignment.topCenter,
+                                  margin: const EdgeInsetsDirectional.only(top: 8),
+                                  child: Icon(
+                                    sub.active ? Icons.paid : Icons.money_off,
+                                    color: subColor,
+                                    size: 30,
+                                  ),
+                                ),
+                                Container(
+                                  margin: const EdgeInsetsDirectional.only(bottom: 8),
+                                  alignment: Alignment.bottomCenter,
+                                  child: TransactionStateTag(
+                                    transactionState:
+                                        sub.paid ? TransactionStateOptions.PAID : TransactionStateOptions.UNPAID,
                                   ),
                                 ),
                               ],
                             ),
-                          ],
-                        ),
+                          ),
+                          // Account name and address
+
+                          Expanded(
+                            child: Container(
+                              // width: MediaQuery.of(context).size.width - 140,
+                              // width: (MediaQuery.of(context).size.width - 200),
+                              margin: const EdgeInsetsDirectional.only(start: 20, end: 20),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  // Account name
+                                  AutoSizeText(
+                                    sub.name,
+                                    style: TextStyle(
+                                      fontFamily: "NunitoSans",
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16.0,
+                                      color: StateContainer.of(context).curTheme.text,
+                                    ),
+                                    minFontSize: 8.0,
+                                    stepGranularity: 1,
+                                    maxLines: 1,
+                                    textAlign: TextAlign.start,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      RichText(
+                                        text: TextSpan(
+                                          text: "Amount:",
+                                          style: TextStyle(
+                                            fontFamily: "OverpassMono",
+                                            fontWeight: FontWeight.w100,
+                                            fontSize: AppFontSizes.small,
+                                            color: StateContainer.of(context).curTheme.text60,
+                                          ),
+                                        ),
+                                      ),
+                                      RichText(
+                                        textAlign: TextAlign.start,
+                                        text: TextSpan(
+                                          text: "",
+                                          children: <InlineSpan>[
+                                            TextSpan(
+                                              text: getThemeAwareRawAccuracy(context, sub.amount_raw),
+                                              style: AppStyles.textStyleParagraphPrimary(context),
+                                            ),
+                                            displayCurrencySymbol(
+                                              context,
+                                              AppStyles.textStyleParagraphPrimary(context),
+                                            ),
+                                            TextSpan(
+                                              text: getRawAsThemeAwareFormattedAmount(context, sub.amount_raw),
+                                              style: AppStyles.textStyleParagraphPrimary(context),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  // AutoSizeText(
+                                  //   Address(sub.address).getShortString() ?? "",
+                                  //   style: TextStyle(
+                                  //     fontFamily: "OverpassMono",
+                                  //     fontWeight: FontWeight.w100,
+                                  //     fontSize: 14.0,
+                                  //     color: StateContainer.of(context).curTheme.text60,
+                                  //   ),
+                                  //   minFontSize: 8.0,
+                                  //   stepGranularity: 0.1,
+                                  //   maxLines: 1,
+                                  // ),
+
+                                  // display next payment time:
+                                  if (sub.active)
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        RichText(
+                                          text: TextSpan(
+                                            text: "${Z.of(context).nextPayment}: ",
+                                            style: TextStyle(
+                                              fontFamily: "OverpassMono",
+                                              fontWeight: FontWeight.w100,
+                                              fontSize: AppFontSizes.small,
+                                              color: StateContainer.of(context).curTheme.text60,
+                                            ),
+                                          ),
+                                        ),
+                                        RichText(
+                                          text: TextSpan(
+                                            text: getCardTime(nextPaymentTime.millisecondsSinceEpoch ~/ 1000),
+                                            style: TextStyle(
+                                              fontFamily: "OverpassMono",
+                                              fontWeight: FontWeight.w100,
+                                              fontSize: AppFontSizes.small,
+                                              color: StateContainer.of(context).curTheme.success,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+
+                                  // Container(
+                                  //   // margin: const EdgeInsetsDirectional.only(start: 10, end: 10),
+                                  //   alignment: Alignment.centerLeft,
+                                  //   child: TransactionStateTag(
+                                  //     transactionState:
+                                  //         sub.paid ? TransactionStateOptions.PAID : TransactionStateOptions.UNPAID,
+                                  //   ),
+                                  // ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Handlebars.vertical(context),
@@ -491,6 +497,11 @@ class SubsSheetState extends State<SubsSheet> {
             ),
           ),
         ),
+        if (index == widget.subs.length - 1)
+          Divider(
+            height: 2,
+            color: StateContainer.of(context).curTheme.text15,
+          ),
       ],
     );
   }
