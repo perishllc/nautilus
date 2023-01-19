@@ -192,7 +192,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   bool _xmrSRDisabled = true;
   String _currentMode = "nano";
 
-  int _selectedIndex = 2;
+  int _selectedIndex = 1;
 
   bool _isPro = false;
   List<Subscription> _subscriptions = [];
@@ -2578,12 +2578,18 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           topLeft: Radius.circular(32),
         ),
         child: BottomNavigationBar(
-          type: BottomNavigationBarType.shifting,
+          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          type: BottomNavigationBarType.fixed,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: const Icon(Icons.shopping_bag),
               label: Z.of(context).shopButton,
               backgroundColor: StateContainer.of(context).curTheme.warning,
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.home),
+              label: Z.of(context).homeButton,
+              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
             ),
             BottomNavigationBarItem(
               icon: Badge(
@@ -2596,11 +2602,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               label: Z.of(context).subsButton,
               backgroundColor: StateContainer.of(context).curTheme.warning,
             ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.home),
-              label: Z.of(context).homeButton,
-              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-            ),
             // BottomNavigationBarItem(
             //   icon: const Icon(Icons.business),
             //   label: Z.of(context).businessButton,
@@ -2611,9 +2612,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           selectedItemColor: StateContainer.of(context).curTheme.primary,
           unselectedItemColor: StateContainer.of(context).curTheme.text,
           onTap: (int index) async {
-            const int HOME_INDEX = 2;
+            const int HOME_INDEX = 1;
             const int SHOP_INDEX = 0;
-            const int SUBS_INDEX = 1;
+            const int SUBS_INDEX = 2;
             const int BUSINESS_INDEX = 3;
 
             // special case for when you double tap home, scroll to the top:
