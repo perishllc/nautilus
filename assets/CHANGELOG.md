@@ -1,3 +1,8 @@
+## v0.7.4 - [2023-02-XX]
+#### Added
+- Checkout menu
+#### Changed
+#### Fixed
 ## v0.7.3 - [2023-01-20]
 #### Added
 - Subscriptions menu

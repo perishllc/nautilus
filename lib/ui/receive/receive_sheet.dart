@@ -252,7 +252,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
 
     // Set initial currency format
     _localCurrencyFormat = NumberFormat.currency(
-        locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
+      locale: widget.localCurrency.getLocale().toString(),
+      symbol: widget.localCurrency.getCurrencySymbol(),
+    );
 
     qrWidget = widget.qrWidget;
   }
@@ -829,13 +831,14 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                         }
                       }
                       Sheets.showAppHeightEightSheet(
-                          context: context,
-                          widget: ReceiveShowQRSheet(
-                            localCurrency: widget.localCurrency,
-                            address: widget.address,
-                            qrWidget: widget.qrWidget,
-                            amountRaw: amountRaw,
-                          ));
+                        context: context,
+                        widget: ReceiveShowQRSheet(
+                          localCurrency: widget.localCurrency,
+                          address: widget.address,
+                          qrWidget: widget.qrWidget,
+                          amountRaw: amountRaw,
+                        ),
+                      );
                     }),
                   ],
                 ),
@@ -913,7 +916,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
   Future<void> paintQrCode({String? address, String? amount}) async {
     late String data;
     if (isNotEmpty(amount)) {
-      data = "${NonTranslatable.currencyUriPrefix}:${address!}?amount:${amount!}";
+      data = "${NonTranslatable.currencyUriPrefix}:${address!}?amount=${amount!}";
     } else {
       data = "${NonTranslatable.currencyUriPrefix}:${address!}";
     }

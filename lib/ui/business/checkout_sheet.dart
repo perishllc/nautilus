@@ -136,230 +136,232 @@ class CheckoutSheetState extends State<CheckoutSheet> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
-        child: GestureDetector(
-            onTap: () {
-              // Clear focus of our fields when tapped in this empty space
-              _amountFocusNode!.unfocus();
-            },
-            child: Column(
+      minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
+      child: GestureDetector(
+        onTap: () {
+          // Clear focus of our fields when tapped in this empty space
+          _amountFocusNode!.unfocus();
+        },
+        child: Column(
+          children: <Widget>[
+            Center(
+              child: Handlebars.horizontal(context),
+            ),
+            // Column for Enter Amount container + Enter Amount Error container WIP
+            Column(
               children: <Widget>[
-                Center(
-                  child: Handlebars.horizontal(context),
-                ),
-                // Column for Enter Amount container + Enter Amount Error container WIP
-                Column(
-                  children: <Widget>[
-                    // ******* Enter Amount Container ******* //
-                    getEnterAmountContainer(),
-                    // ******* Enter Amount Container End ******* //
+                // ******* Enter Amount Container ******* //
+                getEnterAmountContainer(),
+                // ******* Enter Amount Container End ******* //
 
-                    // ******* Enter Amount Error Container ******* //
-                    Container(
-                      alignment: AlignmentDirectional.center,
-                      margin: const EdgeInsets.only(top: 3),
-                      child: Text(_amountValidationText,
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            color: StateContainer.of(context).curTheme.primary,
-                            fontFamily: "NunitoSans",
-                            fontWeight: FontWeight.w600,
-                          )),
-                    ),
-                    // ******* Enter Amount Error Container End ******* //
-                  ],
+                // ******* Enter Amount Error Container ******* //
+                Container(
+                  alignment: AlignmentDirectional.center,
+                  margin: const EdgeInsets.only(top: 3),
+                  child: Text(_amountValidationText,
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        color: StateContainer.of(context).curTheme.primary,
+                        fontFamily: "NunitoSans",
+                        fontWeight: FontWeight.w600,
+                      )),
                 ),
-                // QR which takes all the available space left from the buttons & address text
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
-                    child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-                      final double availableWidth = constraints.maxWidth;
-                      final double availableHeight = (StateContainer.of(context).wallet?.username != null)
-                          ? (constraints.maxHeight - 70)
-                          : constraints.maxHeight;
-                      const double widthDivideFactor = 1.3;
-                      final double computedMaxSize = math.min(availableWidth / widthDivideFactor, availableHeight);
-                      return Center(
-                        child: Stack(
-                          children: <Widget>[
-                            if (_showShareCard)
-                              Container(
-                                alignment: AlignmentDirectional.center,
-                                child: AppShareCard(
-                                  shareCardKey,
-                                  Center(
-                                    child: Transform.translate(
-                                      offset: Offset.zero,
-                                      child: ClipOval(
-                                        child: Container(
-                                          color: Colors.white,
-                                          height: computedMaxSize,
-                                          width: computedMaxSize,
-                                          child: qrWidget,
-                                        ),
-                                      ),
+                // ******* Enter Amount Error Container End ******* //
+              ],
+            ),
+            // QR which takes all the available space left from the buttons & address text
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
+                child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+                  final double availableWidth = constraints.maxWidth;
+                  final double availableHeight = (StateContainer.of(context).wallet?.username != null)
+                      ? (constraints.maxHeight - 70)
+                      : constraints.maxHeight;
+                  const double widthDivideFactor = 1.3;
+                  final double computedMaxSize = math.min(availableWidth / widthDivideFactor, availableHeight);
+                  return Center(
+                    child: Stack(
+                      children: <Widget>[
+                        if (_showShareCard)
+                          Container(
+                            alignment: AlignmentDirectional.center,
+                            child: AppShareCard(
+                              shareCardKey,
+                              Center(
+                                child: Transform.translate(
+                                  offset: Offset.zero,
+                                  child: ClipOval(
+                                    child: Container(
+                                      color: Colors.white,
+                                      height: computedMaxSize,
+                                      width: computedMaxSize,
+                                      child: qrWidget,
                                     ),
                                   ),
-                                  const Image(image: AssetImage("assets/logo.png")),
                                 ),
                               ),
-                            // This is for hiding the share card
-                            Center(
-                              child: Container(
-                                width: 260,
-                                height: 150,
-                                color: StateContainer.of(context).curTheme.backgroundDark,
-                              ),
+                              const Image(image: AssetImage("assets/logo.png")),
                             ),
-                            // Background/border part the QR
-                            // Center(
-                            //   child: SizedBox(
-                            //     width: computedMaxSize / 1.07,
-                            //     height: computedMaxSize / 1.07,
-                            //     child: SvgPicture.asset('legacy_assets/QR.svg'),
-                            //   ),
-                            // ),
-
-                            // Background/border part the QR:
-                            Center(
-                              child: ClipOval(
-                                child: Container(
-                                  color: Colors.white,
-                                  height: computedMaxSize,
-                                  width: computedMaxSize,
-                                  child: qrWidget,
-                                ),
-                              ),
-                            ),
-
-                            // Actual QR part of the QR
-                            Center(
-                              child: Container(
-                                color: Colors.white,
-                                padding: EdgeInsets.all(computedMaxSize / 51),
-                                height: computedMaxSize / 1.53,
-                                width: computedMaxSize / 1.53,
-                                child: qrWidget,
-                              ),
-                            ),
-
-                            // Outer ring
-                            Center(
-                              child: Container(
-                                width: computedMaxSize,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                      color: StateContainer.of(context).curTheme.primary!, width: computedMaxSize / 90),
-                                ),
-                              ),
-                            ),
-                            // Logo Background White
-                            Center(
-                              child: Container(
-                                width: computedMaxSize / 5.5,
-                                height: computedMaxSize / 5.5,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            // Logo Background Primary
-                            Center(
-                              child: Container(
-                                width: computedMaxSize / 6.5,
-                                height: computedMaxSize / 6.5,
-                                decoration: const BoxDecoration(
-                                  color: /*StateContainer.of(context).curTheme.primary*/ Colors.black,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: SizedBox(
-                                height: computedMaxSize / 12,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: SvgPicture.asset("assets/logo.svg",
-                                      color: StateContainer.of(context).curTheme.primary),
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
+                        // This is for hiding the share card
+                        Center(
+                          child: Container(
+                            width: 260,
+                            height: 150,
+                            color: StateContainer.of(context).curTheme.backgroundDark,
+                          ),
                         ),
-                      );
-                    }),
-                  ),
-                ),
+                        // Background/border part the QR
+                        // Center(
+                        //   child: SizedBox(
+                        //     width: computedMaxSize / 1.07,
+                        //     height: computedMaxSize / 1.07,
+                        //     child: SvgPicture.asset('legacy_assets/QR.svg'),
+                        //   ),
+                        // ),
 
-                //A column with Copy Address and Share Address buttons
-                Column(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        AppButton.buildAppButton(
-                            context,
-                            // Copy Address Button
-                            _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                            _addressCopied ? Z.of(context).addressCopied : Z.of(context).copyAddress,
-                            Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
-                          Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
-                          setState(() {
-                            // Set copied style
-                            _addressCopied = true;
-                          });
-                          if (_addressCopiedTimer != null) {
-                            _addressCopiedTimer!.cancel();
-                          }
-                          _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
-                            if (mounted) {
-                              setState(() {
-                                _addressCopied = false;
-                              });
-                            }
-                          });
-                        }),
-                        AppButton.buildAppButton(
-                            context,
-                            // Share Address Button
-                            AppButtonType.PRIMARY_OUTLINE,
-                            Z.of(context).addressShare,
-                            Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
-                            disabled: _showShareCard, onPressed: () {
-                          final String receiveCardFileName = "share_${StateContainer.of(context).wallet!.address}.png";
-                          getApplicationDocumentsDirectory().then((Directory directory) {
-                            final String filePath = "${directory.path}/$receiveCardFileName";
-                            final File f = File(filePath);
-                            setState(() {
-                              _showShareCard = true;
-                            });
-                            Future.delayed(const Duration(milliseconds: 50), () {
-                              if (_showShareCard) {
-                                _capturePng().then((Uint8List? byteData) {
-                                  if (byteData != null) {
-                                    f.writeAsBytes(byteData).then((File file) {
-                                      UIUtil.cancelLockEvent();
-                                      Share.shareFiles([filePath], text: StateContainer.of(context).wallet!.address);
-                                    });
-                                  } else {
-                                    // TODO - show a something went wrong message
-                                  }
-                                  setState(() {
-                                    _showShareCard = false;
-                                  });
-                                });
-                              }
-                            });
-                          });
-                        }),
+                        // Background/border part the QR:
+                        Center(
+                          child: ClipOval(
+                            child: Container(
+                              color: Colors.white,
+                              height: computedMaxSize,
+                              width: computedMaxSize,
+                              child: qrWidget,
+                            ),
+                          ),
+                        ),
+
+                        // Actual QR part of the QR
+                        Center(
+                          child: Container(
+                            color: Colors.white,
+                            padding: EdgeInsets.all(computedMaxSize / 51),
+                            height: computedMaxSize / 1.53,
+                            width: computedMaxSize / 1.53,
+                            child: qrWidget,
+                          ),
+                        ),
+
+                        // Outer ring
+                        Center(
+                          child: Container(
+                            width: computedMaxSize,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  color: StateContainer.of(context).curTheme.primary!, width: computedMaxSize / 90),
+                            ),
+                          ),
+                        ),
+                        // Logo Background White
+                        Center(
+                          child: Container(
+                            width: computedMaxSize / 5.5,
+                            height: computedMaxSize / 5.5,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        // Logo Background Primary
+                        Center(
+                          child: Container(
+                            width: computedMaxSize / 6.5,
+                            height: computedMaxSize / 6.5,
+                            decoration: const BoxDecoration(
+                              color: /*StateContainer.of(context).curTheme.primary*/ Colors.black,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                        Center(
+                          child: SizedBox(
+                            height: computedMaxSize / 12,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: SvgPicture.asset("assets/logo.svg",
+                                  color: StateContainer.of(context).curTheme.primary),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
+                  );
+                }),
+              ),
+            ),
+
+            //A column with Copy Address and Share Address buttons
+            Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(
+                        context,
+                        // Copy Address Button
+                        _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                        _addressCopied ? Z.of(context).addressCopied : Z.of(context).copyAddress,
+                        Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
+                      Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
+                      setState(() {
+                        // Set copied style
+                        _addressCopied = true;
+                      });
+                      if (_addressCopiedTimer != null) {
+                        _addressCopiedTimer!.cancel();
+                      }
+                      _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
+                        if (mounted) {
+                          setState(() {
+                            _addressCopied = false;
+                          });
+                        }
+                      });
+                    }),
+                    AppButton.buildAppButton(
+                        context,
+                        // Share Address Button
+                        AppButtonType.PRIMARY_OUTLINE,
+                        Z.of(context).addressShare,
+                        Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
+                        disabled: _showShareCard, onPressed: () {
+                      final String receiveCardFileName = "share_${StateContainer.of(context).wallet!.address}.png";
+                      getApplicationDocumentsDirectory().then((Directory directory) {
+                        final String filePath = "${directory.path}/$receiveCardFileName";
+                        final File f = File(filePath);
+                        setState(() {
+                          _showShareCard = true;
+                        });
+                        Future.delayed(const Duration(milliseconds: 50), () {
+                          if (_showShareCard) {
+                            _capturePng().then((Uint8List? byteData) {
+                              if (byteData != null) {
+                                f.writeAsBytes(byteData).then((File file) {
+                                  UIUtil.cancelLockEvent();
+                                  Share.shareFiles([filePath], text: StateContainer.of(context).wallet!.address);
+                                });
+                              } else {
+                                // TODO - show a something went wrong message
+                              }
+                              setState(() {
+                                _showShareCard = false;
+                              });
+                            });
+                          }
+                        });
+                      });
+                    }),
                   ],
                 ),
               ],
-            )));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void toggleLocalCurrency() {
@@ -431,7 +433,7 @@ class CheckoutSheetState extends State<CheckoutSheet> {
   Future<void> paintQrCode({String? address, String? amount}) async {
     late String data;
     if (isNotEmpty(amount)) {
-      data = "${NonTranslatable.currencyUriPrefix}:${address!}?amount:${amount!}";
+      data = "${NonTranslatable.currencyUriPrefix}:${address!}?amount=${amount!}";
     } else {
       data = "${NonTranslatable.currencyUriPrefix}:${address!}";
     }

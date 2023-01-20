@@ -380,7 +380,7 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
   Future<void> paintQrCode({String? address, String? amount}) async {
     late String data;
     if (isNotEmpty(amount)) {
-      data = "${NonTranslatable.currencyUriPrefix}:${address!}?amount:${amount!}";
+      data = "${NonTranslatable.currencyUriPrefix}:${address!}?amount=${amount!}";
     } else {
       data = "${NonTranslatable.currencyUriPrefix}:${address!}";
     }

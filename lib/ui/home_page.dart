@@ -2603,11 +2603,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               label: Z.of(context).subsButton,
               backgroundColor: StateContainer.of(context).curTheme.warning,
             ),
-            // BottomNavigationBarItem(
-            //   icon: const Icon(Icons.business),
-            //   label: Z.of(context).businessButton,
-            //   backgroundColor: StateContainer.of(context).curTheme.warning,
-            // ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.business),
+              label: Z.of(context).businessButton,
+              backgroundColor: StateContainer.of(context).curTheme.warning,
+            ),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: StateContainer.of(context).curTheme.primary,
