@@ -25,14 +25,6 @@ class SubscriptionService {
     initNotifications();
   }
 
-  AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'high_importance_channel', // id
-    'High Importance Notifications', // title
-    description: 'This channel is used for important notifications.', // description
-    importance: Importance.high,
-    playSound: true,
-  );
-
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   static const String PRO_PAYMENT_ADDRESS = "nano_35n1a3fbbar5imzmsyrfxaeqwgkgkd7autbjxon9btfbui5ys86g8kmpbjte";
@@ -42,13 +34,12 @@ class SubscriptionService {
   final Logger log = sl.get<Logger>();
 
   Future<void> initNotifications() async {
-
     // initialize timezones:
     tz.initializeTimeZones();
 
     // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings("ic_stat_logo_transparent");
     final DarwinInitializationSettings initializationSettingsDarwin =
         DarwinInitializationSettings(onDidReceiveLocalNotification: onDidReceiveLocalNotification);
     final InitializationSettings initializationSettings = InitializationSettings(
@@ -60,6 +51,8 @@ class SubscriptionService {
       initializationSettings,
       onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
     );
+
+    setupChineseNewYearNotification();
 
     scheduleNotifications();
   }
@@ -77,10 +70,12 @@ class SubscriptionService {
       }
       await scheduleSubNotification(sub);
     }
+
+    // chinese new year notification:
+    setupChineseNewYearNotification();
   }
 
   Future<void> checkAreSubscriptionsPaid(List<AccountHistoryResponseItem> history) async {
-
     // get all subscriptions:
     final List<Subscription> subs = await sl.get<DBHelper>().getSubscriptions();
     for (final Subscription sub in subs) {
@@ -124,7 +119,7 @@ class SubscriptionService {
   Future<void> testNotification(BuildContext context) async {
     const AndroidNotificationDetails androidNotificationDetails = AndroidNotificationDetails(
       "subscriptions_channel",
-      "subscriptions",
+      "Subscriptions",
       channelDescription: "Subscription Reminder Notifications",
       importance: Importance.max,
       priority: Priority.high,
@@ -137,13 +132,57 @@ class SubscriptionService {
       presentBadge: true,
     );
 
-
     try {
       final tz.TZDateTime tzdatetime = tz.TZDateTime.from(DateTime.now().add(const Duration(seconds: 10)), tz.local);
       await flutterLocalNotificationsPlugin.zonedSchedule(
         0,
         "Subscription Reminder",
         "Your subscription is due",
+        tzdatetime,
+        const NotificationDetails(
+          android: androidNotificationDetails,
+          iOS: darwinNotificationDetails,
+        ),
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+      );
+    } catch (e) {
+      log.e(e);
+    }
+  }
+
+  Future<void> setupChineseNewYearNotification() async {
+    const AndroidNotificationDetails androidNotificationDetails = AndroidNotificationDetails(
+      "events_channel",
+      "Events",
+      channelDescription: "Events Notifications",
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: "ticker",
+      styleInformation: BigTextStyleInformation(
+"""
+As one of the biggest traditions to celebrate Chinese New Year, many people gift money in red envelopes. That’s why, for the coming week, you’ll be able to digitally gift a red envelope filled with nano to the ones you love!
+
+Simply click "send" and select the red envelope in the top left corner to share some nano with your friends, family, colleagues, or even a stranger on the internet!
+
+Have a happy Chinese New Year!
+""",
+      ),
+    );
+
+    const DarwinNotificationDetails darwinNotificationDetails = DarwinNotificationDetails(
+      presentAlert: true,
+      presentSound: true,
+      presentBadge: true,
+    );
+
+    try {
+      final DateTime chineseNewYear = DateTime(2022, 1, 22, 8);
+      final tz.TZDateTime tzdatetime = tz.TZDateTime.from(chineseNewYear, tz.local);
+      await flutterLocalNotificationsPlugin.zonedSchedule(
+        2023,
+        "Happy Chinese New Year!",
+        "",
         tzdatetime,
         const NotificationDetails(
           android: androidNotificationDetails,
@@ -222,7 +261,7 @@ class SubscriptionService {
 
     const AndroidNotificationDetails androidNotificationDetails = AndroidNotificationDetails(
       "subscriptions_channel",
-      "subscriptions",
+      "Subscriptions",
       channelDescription: "Subscription Reminder Notifications",
       importance: Importance.max,
       priority: Priority.high,

@@ -1728,7 +1728,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
               NonTranslatable.promoLink,
             ),
           );
-          Sheets.showAppHeightNineSheet(
+          Sheets.showAppHeightEightSheet(
             context: context,
             widget: OnboardSheet(
               link: NonTranslatable.promoLink,

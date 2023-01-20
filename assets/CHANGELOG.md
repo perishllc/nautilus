@@ -3,6 +3,7 @@
 - Subscriptions menu
 - Long press the share nautilus button for a QR code for easy onboarding (promo link)
 - Ability to change PoW Source
+- Icon for notifications updated
 #### Changed
 - UI updates on the send / receive sheets
 - Updated more settings menu / icons

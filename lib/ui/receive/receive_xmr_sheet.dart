@@ -413,21 +413,6 @@ class ReceiveXMRSheetState extends State<ReceiveXMRSheet> {
         ),
       ],
       onChanged: (String text) {
-        if (_localCurrencyMode == false && !text.contains(".") && text.isNotEmpty && text.length > 1) {
-          // if the amount is larger than 133248297 set it to that number:
-          if (BigInt.parse(text
-                  .replaceAll(_localCurrencyFormat.currencySymbol, "")
-                  .replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "")) >
-              BigInt.parse("133248297")) {
-            setState(() {
-              // _amountController.text = "133248297";
-              // prevent the user from entering more than 13324829
-              _amountController!.text = _amountController!.text.substring(0, _amountController!.text.length - 1);
-              _amountController!.selection =
-                  TextSelection.fromPosition(TextPosition(offset: _amountController!.text.length));
-            });
-          }
-        }
         // Always reset the error message to be less annoying
         setState(() {
           _amountValidationText = "";

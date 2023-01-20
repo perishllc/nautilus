@@ -23,13 +23,11 @@
     <!-- android:enableOnBackInvokedCallback="true" -->
     <application android:usesCleartextTraffic="true" android:name=".MultidexApplication" android:label="Nautilus" android:icon="@mipmap/ic_launcher" android:allowBackup="false">
         <meta-data android:name="flutterEmbedding" android:value="2" />
-        <!-- <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_status_bar" /> -->
 
         <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
      See README(https://goo.gl/l4GJaQ) for more. -->
-        <!-- <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/ic_stat_ic_notification" /> -->
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/ic_stat_logo_transparent" />
+        
         <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
       notification message. See README(https://goo.gl/6BKBk7) for more. -->
         <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/colorAccent" />
