@@ -135,6 +135,11 @@
     "type": "text",
     "description": "card_details_aliases"
   },
+  "amount": "Jumlah",
+  "@amount": {
+    "type": "text",
+    "description": "amount_subs"
+  },
   "amountGiftGreaterError": "Jumlah Pisahan tidak boleh lebih besar daripada baki hadiah",
   "@amountGiftGreaterError": {
     "type": "text",

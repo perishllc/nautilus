@@ -61,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("Paylaş"),
         "advanced": MessageLookupByLibrary.simpleMessage("Gelişmiş"),
         "aliases": MessageLookupByLibrary.simpleMessage("Takma adlar"),
+        "amount": MessageLookupByLibrary.simpleMessage("Miktar"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Bölünmüş Tutar, hediye bakiyesinden fazla olamaz"),
         "amountMissing":

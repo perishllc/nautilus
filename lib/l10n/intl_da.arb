@@ -135,6 +135,11 @@
     "type": "text",
     "description": "card_details_aliases"
   },
+  "amount": "Beløb",
+  "@amount": {
+    "type": "text",
+    "description": "amount_subs"
+  },
   "amountGiftGreaterError": "Opdelt beløb kan ikke være større end gavesaldoen",
   "@amountGiftGreaterError": {
     "type": "text",

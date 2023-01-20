@@ -135,6 +135,11 @@
     "type": "text",
     "description": "card_details_aliases"
   },
+  "amount": "Сума",
+  "@amount": {
+    "type": "text",
+    "description": "amount_subs"
+  },
   "amountGiftGreaterError": "Розділена сума не може перевищувати баланс подарунку",
   "@amountGiftGreaterError": {
     "type": "text",

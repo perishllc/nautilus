@@ -62,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("Sdílet adresu"),
         "advanced": MessageLookupByLibrary.simpleMessage("Fremskreden"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliasser"),
+        "amount": MessageLookupByLibrary.simpleMessage("Beløb"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Opdelt beløb kan ikke være større end gavesaldoen"),
         "amountMissing":

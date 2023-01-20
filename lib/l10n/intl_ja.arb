@@ -135,6 +135,11 @@
     "type": "text",
     "description": "card_details_aliases"
   },
+  "amount": "額",
+  "@amount": {
+    "type": "text",
+    "description": "amount_subs"
+  },
   "amountGiftGreaterError": "分割金額はギフト残高より大きくすることはできません",
   "@amountGiftGreaterError": {
     "type": "text",

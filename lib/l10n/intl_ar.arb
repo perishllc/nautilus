@@ -135,6 +135,11 @@
     "type": "text",
     "description": "card_details_aliases"
   },
+  "amount": "مقدار",
+  "@amount": {
+    "type": "text",
+    "description": "amount_subs"
+  },
   "amountGiftGreaterError": "لا يمكن أن يكون مبلغ الانقسام أكبر من رصيد الهدية",
   "@amountGiftGreaterError": {
     "type": "text",

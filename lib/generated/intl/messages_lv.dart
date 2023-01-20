@@ -65,6 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("Kopīgot adresi"),
         "advanced": MessageLookupByLibrary.simpleMessage("Papildu"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliases"),
+        "amount": MessageLookupByLibrary.simpleMessage("Summa"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Dalītā summa nevar būt lielāka par dāvanas atlikumu"),
         "amountMissing":

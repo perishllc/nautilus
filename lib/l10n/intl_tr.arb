@@ -135,6 +135,11 @@
     "type": "text",
     "description": "card_details_aliases"
   },
+  "amount": "Miktar",
+  "@amount": {
+    "type": "text",
+    "description": "amount_subs"
+  },
   "amountGiftGreaterError": "Bölünmüş Tutar, hediye bakiyesinden fazla olamaz",
   "@amountGiftGreaterError": {
     "type": "text",

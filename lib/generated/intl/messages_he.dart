@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("שתף"),
         "advanced": MessageLookupByLibrary.simpleMessage("מִתקַדֵם"),
         "aliases": MessageLookupByLibrary.simpleMessage("כינויים"),
+        "amount": MessageLookupByLibrary.simpleMessage("כמות"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "הסכום המפוצל לא יכול להיות גדול מיתרת המתנה"),
         "amountMissing": MessageLookupByLibrary.simpleMessage("הזן סכום"),

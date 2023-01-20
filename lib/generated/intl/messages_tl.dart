@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("I-share"),
         "advanced": MessageLookupByLibrary.simpleMessage("Advanced"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliases"),
+        "amount": MessageLookupByLibrary.simpleMessage("Halaga"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Ang Hati na Halaga ay hindi maaaring mas malaki kaysa sa balanse ng regalo"),
         "amountMissing": MessageLookupByLibrary.simpleMessage(

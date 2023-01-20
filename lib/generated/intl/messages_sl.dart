@@ -62,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("Deli naslov"),
         "advanced": MessageLookupByLibrary.simpleMessage("Napredno"),
         "aliases": MessageLookupByLibrary.simpleMessage("Vzdevki"),
+        "amount": MessageLookupByLibrary.simpleMessage("Znesek"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Razdeljeni znesek ne sme biti večji od darilnega stanja"),
         "amountMissing":

@@ -135,6 +135,11 @@
     "type": "text",
     "description": "card_details_aliases"
   },
+  "amount": "Montante",
+  "@amount": {
+    "type": "text",
+    "description": "amount_subs"
+  },
   "amountGiftGreaterError": "O valor da divisão não pode ser maior que o saldo do presente",
   "@amountGiftGreaterError": {
     "type": "text",

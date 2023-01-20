@@ -401,7 +401,7 @@ class SubsSheetState extends State<SubsSheet> {
                                     children: [
                                       RichText(
                                         text: TextSpan(
-                                          text: "Amount:",
+                                          text: "${Z.of(context).amount}: ",
                                           style: TextStyle(
                                             fontFamily: "OverpassMono",
                                             fontWeight: FontWeight.w100,

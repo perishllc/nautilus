@@ -60,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("Share Address"),
         "advanced": MessageLookupByLibrary.simpleMessage("Advanced"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliases"),
+        "amount": MessageLookupByLibrary.simpleMessage("Amount"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Split Amount can\'t be greater than gift balance"),
         "amountMissing":

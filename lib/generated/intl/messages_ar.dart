@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("أنشر العنوان"),
         "advanced": MessageLookupByLibrary.simpleMessage("متقدم"),
         "aliases": MessageLookupByLibrary.simpleMessage("الأسماء المستعارة"),
+        "amount": MessageLookupByLibrary.simpleMessage("مقدار"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "لا يمكن أن يكون مبلغ الانقسام أكبر من رصيد الهدية"),
         "amountMissing":

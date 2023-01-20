@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("Share"),
         "advanced": MessageLookupByLibrary.simpleMessage("Avansat"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliasuri"),
+        "amount": MessageLookupByLibrary.simpleMessage("Cantitate"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Suma împărțită nu poate fi mai mare decât soldul cadou"),
         "amountMissing":

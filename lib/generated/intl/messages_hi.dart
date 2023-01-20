@@ -62,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("शेयर करें"),
         "advanced": MessageLookupByLibrary.simpleMessage("विकसित"),
         "aliases": MessageLookupByLibrary.simpleMessage("फर्जी नाम"),
+        "amount": MessageLookupByLibrary.simpleMessage("मात्रा"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "विभाजित राशि उपहार शेष राशि से अधिक नहीं हो सकती"),
         "amountMissing":

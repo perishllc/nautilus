@@ -67,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ঠিকানা শেয়ার করুন"),
         "advanced": MessageLookupByLibrary.simpleMessage("উন্নত"),
         "aliases": MessageLookupByLibrary.simpleMessage("ছদ্মনাম"),
+        "amount": MessageLookupByLibrary.simpleMessage("পরিমাণ"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "বিভক্ত পরিমাণ উপহার ব্যালেন্সের চেয়ে বেশি হতে পারে না"),
         "amountMissing":

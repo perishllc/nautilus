@@ -135,6 +135,11 @@
     "type": "text",
     "description": "card_details_aliases"
   },
+  "amount": "मात्रा",
+  "@amount": {
+    "type": "text",
+    "description": "amount_subs"
+  },
   "amountGiftGreaterError": "विभाजित राशि उपहार शेष राशि से अधिक नहीं हो सकती",
   "@amountGiftGreaterError": {
     "type": "text",

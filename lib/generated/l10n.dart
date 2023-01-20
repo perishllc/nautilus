@@ -320,6 +320,16 @@ class Z {
     );
   }
 
+  /// `Amount`
+  String get amount {
+    return Intl.message(
+      'Amount',
+      name: 'amount',
+      desc: 'amount_subs',
+      args: [],
+    );
+  }
+
   /// `Split Amount can't be greater than gift balance`
   String get amountGiftGreaterError {
     return Intl.message(

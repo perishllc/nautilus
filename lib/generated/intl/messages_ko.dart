@@ -54,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("공유"),
         "advanced": MessageLookupByLibrary.simpleMessage("고급의"),
         "aliases": MessageLookupByLibrary.simpleMessage("별칭"),
+        "amount": MessageLookupByLibrary.simpleMessage("양"),
         "amountGiftGreaterError":
             MessageLookupByLibrary.simpleMessage("분할 금액은 선물 잔액보다 클 수 없습니다."),
         "amountMissing": MessageLookupByLibrary.simpleMessage("금액을 입력하세요"),

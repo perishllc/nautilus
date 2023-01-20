@@ -64,6 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("Condividi"),
         "advanced": MessageLookupByLibrary.simpleMessage("Avanzate"),
         "aliases": MessageLookupByLibrary.simpleMessage("Alias"),
+        "amount": MessageLookupByLibrary.simpleMessage("Quantità"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "L\'importo diviso non può essere maggiore del saldo del regalo"),
         "amountMissing":

@@ -52,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("分享地址"),
         "advanced": MessageLookupByLibrary.simpleMessage("先進的"),
         "aliases": MessageLookupByLibrary.simpleMessage("別名"),
+        "amount": MessageLookupByLibrary.simpleMessage("數量"),
         "amountGiftGreaterError":
             MessageLookupByLibrary.simpleMessage("分割金額不能大於禮物餘額"),
         "amountMissing": MessageLookupByLibrary.simpleMessage("請輸入金額"),

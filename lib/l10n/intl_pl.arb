@@ -135,6 +135,11 @@
     "type": "text",
     "description": "card_details_aliases"
   },
+  "amount": "Ilość",
+  "@amount": {
+    "type": "text",
+    "description": "amount_subs"
+  },
   "amountGiftGreaterError": "Podzielona kwota nie może być większa niż saldo prezentu",
   "@amountGiftGreaterError": {
     "type": "text",

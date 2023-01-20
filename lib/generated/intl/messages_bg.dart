@@ -62,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("Сподели Адрес"),
         "advanced": MessageLookupByLibrary.simpleMessage("Разширено"),
         "aliases": MessageLookupByLibrary.simpleMessage("Псевдоними"),
+        "amount": MessageLookupByLibrary.simpleMessage("Количество"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Разделената сума не може да бъде по-голяма от баланса на подаръка"),
         "amountMissing":

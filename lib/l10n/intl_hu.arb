@@ -135,6 +135,11 @@
     "type": "text",
     "description": "card_details_aliases"
   },
+  "amount": "Összeg",
+  "@amount": {
+    "type": "text",
+    "description": "amount_subs"
+  },
   "amountGiftGreaterError": "A megosztott összeg nem lehet nagyobb, mint az ajándékegyenleg",
   "@amountGiftGreaterError": {
     "type": "text",

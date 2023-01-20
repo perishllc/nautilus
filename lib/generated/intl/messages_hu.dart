@@ -66,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("Megosztás"),
         "advanced": MessageLookupByLibrary.simpleMessage("Fejlett"),
         "aliases": MessageLookupByLibrary.simpleMessage("Álnevek"),
+        "amount": MessageLookupByLibrary.simpleMessage("Összeg"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "A megosztott összeg nem lehet nagyobb, mint az ajándékegyenleg"),
         "amountMissing":

@@ -60,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("Chia sẻ địa chỉ"),
         "advanced": MessageLookupByLibrary.simpleMessage("Nâng cao"),
         "aliases": MessageLookupByLibrary.simpleMessage("Bí danh"),
+        "amount": MessageLookupByLibrary.simpleMessage("Số lượng"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Số tiền Chia tách không được lớn hơn số dư quà tặng"),
         "amountMissing":

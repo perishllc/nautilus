@@ -135,6 +135,11 @@
     "type": "text",
     "description": "card_details_aliases"
   },
+  "amount": "Beløp",
+  "@amount": {
+    "type": "text",
+    "description": "amount_subs"
+  },
   "amountGiftGreaterError": "Delt beløp kan ikke være større enn gavesaldoen",
   "@amountGiftGreaterError": {
     "type": "text",

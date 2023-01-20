@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("Sdílet adresu"),
         "advanced": MessageLookupByLibrary.simpleMessage("Avançat"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliases"),
+        "amount": MessageLookupByLibrary.simpleMessage("Import"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "L\'import dividit no pot ser superior al saldo del regal"),
         "amountMissing":

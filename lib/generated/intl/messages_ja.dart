@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare": MessageLookupByLibrary.simpleMessage("アドレスを共有する"),
         "advanced": MessageLookupByLibrary.simpleMessage("高度"),
         "aliases": MessageLookupByLibrary.simpleMessage("エイリアス"),
+        "amount": MessageLookupByLibrary.simpleMessage("額"),
         "amountGiftGreaterError":
             MessageLookupByLibrary.simpleMessage("分割金額はギフト残高より大きくすることはできません"),
         "amountMissing": MessageLookupByLibrary.simpleMessage("金額を入力してください"),

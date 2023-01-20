@@ -135,6 +135,11 @@
     "type": "text",
     "description": "card_details_aliases"
   },
+  "amount": "Quantità",
+  "@amount": {
+    "type": "text",
+    "description": "amount_subs"
+  },
   "amountGiftGreaterError": "L'importo diviso non può essere maggiore del saldo del regalo",
   "@amountGiftGreaterError": {
     "type": "text",
