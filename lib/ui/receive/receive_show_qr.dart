@@ -11,6 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/ui/receive/share_card.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
@@ -378,9 +379,9 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
   Future<void> paintQrCode({String? address, String? amount}) async {
     late String data;
     if (isNotEmpty(amount)) {
-      data = "nano:${address!}?amount:${amount!}";
+      data = "${NonTranslatable.currencyUriPrefix}:${address!}?amount:${amount!}";
     } else {
-      data = "nano:${address!}";
+      data = "${NonTranslatable.currencyUriPrefix}:${address!}";
     }
 
     final Widget qr =

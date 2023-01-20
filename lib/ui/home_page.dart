@@ -55,6 +55,7 @@ import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/auth/auth_confirm_sheet.dart';
+import 'package:wallet_flutter/ui/business/calc_sheet.dart';
 import 'package:wallet_flutter/ui/business/checkout_sheet.dart';
 import 'package:wallet_flutter/ui/handoff/handoff_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/home/card_actions.dart';
@@ -2446,7 +2447,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                             return;
                           }
 
-                          final String data = "nano:${StateContainer.of(context).wallet!.address}";
+                          final String data = "${NonTranslatable.currencyUriPrefix}:${StateContainer.of(context).wallet!.address}";
                           final Widget qrWidget = SizedBox(
                             width: MediaQuery.of(context).size.width,
                             child: await UIUtil.getQRImage(context, data),
@@ -2653,18 +2654,18 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                   );
                   break;
                 case BUSINESS_INDEX:
-                  final String data = "nano:${StateContainer.of(context).wallet!.address}";
-                  final Widget qrWidget = SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: await UIUtil.getQRImage(context, data),
-                  );
+                  // final String data = "${NonTranslatable.currencyUriPrefix}:${StateContainer.of(context).wallet!.address}";
+                  // final Widget qrWidget = SizedBox(
+                  //   width: MediaQuery.of(context).size.width,
+                  //   child: await UIUtil.getQRImage(context, data),
+                  // );
                   await Sheets.showAppHeightNineSheet(
                     context: context,
                     barrier: Colors.transparent,
-                    widget: CheckoutSheet(
+                    widget: CalcSheet(
                       localCurrency: StateContainer.of(context).curCurrency,
                       address: StateContainer.of(context).wallet!.address,
-                      qrWidget: qrWidget,
+                      // qrWidget: qrWidget,
                     ),
                   );
                   break;

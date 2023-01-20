@@ -913,9 +913,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
   Future<void> paintQrCode({String? address, String? amount}) async {
     late String data;
     if (isNotEmpty(amount)) {
-      data = "nano:${address!}?amount:${amount!}";
+      data = "${NonTranslatable.currencyUriPrefix}:${address!}?amount:${amount!}";
     } else {
-      data = "nano:${address!}";
+      data = "${NonTranslatable.currencyUriPrefix}:${address!}";
     }
 
     final Widget qr =
