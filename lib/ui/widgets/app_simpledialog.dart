@@ -72,7 +72,8 @@ class Dialog extends StatelessWidget {
   }
 
   // TODO(johnsonmh): Update default dialog border radius to 4.0 to match material spec.
-  static const RoundedRectangleBorder _defaultDialogShape = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0)));
+  static const RoundedRectangleBorder _defaultDialogShape =
+      RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0)));
   @override
   Widget build(BuildContext context) {
     final DialogTheme dialogTheme = DialogTheme.of(context);
@@ -88,7 +89,9 @@ class Dialog extends StatelessWidget {
         context: context,
         child: Center(
           child: ConstrainedBox(
-            constraints: BoxConstraints(minWidth: 280.0, maxHeight: _getHeight(context) < 667 ? _getHeight(context) * 0.75 : _getHeight(context) * 0.65),
+            constraints: BoxConstraints(
+                minWidth: 280.0,
+                maxHeight: _getHeight(context) < 667 ? _getHeight(context) * 0.75 : _getHeight(context) * 0.65),
             child: Material(
               elevation: 24.0,
               color: _getColor(context),
@@ -365,10 +368,18 @@ class AppSimpleDialogOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      // borderRadius: BorderRadius.circular(25),
-      child: Padding(padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0), child: child),
+    // return InkWell(
+    //   onTap: onPressed,
+    //   // borderRadius: BorderRadius.circular(25),
+    //   child: Padding(padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0), child: child),
+    // );
+    return TextButton(
+      style: TextButton.styleFrom(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        padding: const EdgeInsets.all(12),
+      ),
+      onPressed: onPressed,
+      child: child ?? const SizedBox(),
     );
   }
 }
@@ -566,7 +577,8 @@ class AppSimpleDialog extends StatelessWidget {
   }
 }
 
-Widget _buildMaterialDialogTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+Widget _buildMaterialDialogTransitions(
+    BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
   return FadeTransition(
     opacity: CurvedAnimation(
       parent: animation,

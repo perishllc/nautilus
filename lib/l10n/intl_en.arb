@@ -1035,6 +1035,16 @@
     "type": "text",
     "description": "featured"
   },
+  "todayAt": "Today at",
+  "@todayAt": {
+    "type": "text",
+    "description": "history_today_at"
+  },
+  "yesterdayAt": "Yesterday at",
+  "@yesterdayAt": {
+    "type": "text",
+    "description": "history_yesterday_at"
+  },
   "fewDaysAgo": "A few days ago",
   "@fewDaysAgo": {
     "type": "text",

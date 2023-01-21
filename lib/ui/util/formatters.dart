@@ -475,6 +475,7 @@ String getThemeCurrencyMode(BuildContext context) {
 // String CARD_TIME_FORMAT = "MMM d, h:mm a";
 // ignore: non_constant_identifier_names
 String CARD_TIME_FORMAT = "MMM dd, HH:mm";
+String CARD_HOUR_TIME_FORMAT = "HH:mm";
 String getTimeAgoString(BuildContext context, int epochTime) {
   String timeStr = DateFormat(CARD_TIME_FORMAT).format(DateTime.fromMillisecondsSinceEpoch(epochTime * 1000));
 
@@ -489,28 +490,48 @@ String getTimeAgoString(BuildContext context, int epochTime) {
   if (diff < 60) {
     // a few seconds ago
     timeStr = Z.of(context).fewSecondsAgo;
-  } else if (diff < 120) {
-    // a minute ago
-    timeStr = Z.of(context).minuteAgo;
-  } else if (diff < 3600) {
-    // 2-60 minutes ago
-    timeStr = Z.of(context).fewMinutesAgo;
-  } else if (diff < 7200) {
-    // 1-2 hours ago
-    timeStr = Z.of(context).hourAgo;
   } else if (diff < 86400) {
-    // 2-24 hours ago
-    timeStr = Z.of(context).fewHoursAgo;
-  } else if (diff < 172800) {
-    // 24-48 hours ago
-    timeStr = Z.of(context).dayAgo;
-  } else if (diff < 604800) {
-    // 2-7 days ago
-    timeStr = Z.of(context).fewDaysAgo;
-  } else if (diff < 1209600) {
-    // 1-2 weeks ago
-    timeStr = Z.of(context).weekAgo;
+    // check if it's today or yesterday
+    final DateTime nowDate = DateTime.now();
+    final DateTime epochDate = DateTime.fromMillisecondsSinceEpoch(epochTime * 1000);
+    if (nowDate.day == epochDate.day && nowDate.month == epochDate.month) {
+      // today at: xx:xx
+      timeStr =
+          "${Z.of(context).todayAt} ${DateFormat(CARD_HOUR_TIME_FORMAT).format(DateTime.fromMillisecondsSinceEpoch(epochTime * 1000))}";
+    } else if (nowDate.day - 1 == epochDate.day && nowDate.month == epochDate.month) {
+      // yesterday at: xx:xx
+      timeStr =
+          "${Z.of(context).yesterdayAt} ${DateFormat(CARD_HOUR_TIME_FORMAT).format(DateTime.fromMillisecondsSinceEpoch(epochTime * 1000))}";
+    }
+    // today at: xx:xx
+    // timeStr = "Today at ${DateFormat("HH:mm").format(DateTime.fromMillisecondsSinceEpoch(epochTime * 1000))}";
   }
+
+  // if (diff < 60) {
+  //   // a few seconds ago
+  //   timeStr = Z.of(context).fewSecondsAgo;
+  // } else if (diff < 120) {
+  //   // a minute ago
+  //   timeStr = Z.of(context).minuteAgo;
+  // } else if (diff < 3600) {
+  //   // 2-60 minutes ago
+  //   timeStr = Z.of(context).fewMinutesAgo;
+  // } else if (diff < 7200) {
+  //   // 1-2 hours ago
+  //   timeStr = Z.of(context).hourAgo;
+  // } else if (diff < 86400) {
+  //   // 2-24 hours ago
+  //   timeStr = Z.of(context).fewHoursAgo;
+  // } else if (diff < 172800) {
+  //   // 24-48 hours ago
+  //   timeStr = Z.of(context).dayAgo;
+  // } else if (diff < 604800) {
+  //   // 2-7 days ago
+  //   timeStr = Z.of(context).fewDaysAgo;
+  // } else if (diff < 1209600) {
+  //   // 1-2 weeks ago
+  //   timeStr = Z.of(context).weekAgo;
+  // }
 
   return timeStr;
 }

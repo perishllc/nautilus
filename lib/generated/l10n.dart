@@ -2126,6 +2126,26 @@ class Z {
     );
   }
 
+  /// `Today at`
+  String get todayAt {
+    return Intl.message(
+      'Today at',
+      name: 'todayAt',
+      desc: 'history_today_at',
+      args: [],
+    );
+  }
+
+  /// `Yesterday at`
+  String get yesterdayAt {
+    return Intl.message(
+      'Yesterday at',
+      name: 'yesterdayAt',
+      desc: 'history_yesterday_at',
+      args: [],
+    );
+  }
+
   /// `A few days ago`
   String get fewDaysAgo {
     return Intl.message(

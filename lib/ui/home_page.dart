@@ -359,7 +359,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Text("${Z.of(context).importGift}\n\n", style: AppStyles.textStyleParagraph(context)),
+                    Text("${Z.of(context).importGift.replaceAll("%2", NonTranslatable.currencyName)}\n\n",
+                        style: AppStyles.textStyleParagraph(context)),
                     RichText(
                       textAlign: TextAlign.start,
                       text: TextSpan(
@@ -656,7 +657,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Text("${Z.of(context).importGiftEmpty}\n\n", style: AppStyles.textStyleParagraph(context)),
+                  Text("${Z.of(context).importGiftEmpty.replaceAll("%2", NonTranslatable.currencyName)}\n\n", style: AppStyles.textStyleParagraph(context)),
                   RichText(
                     textAlign: TextAlign.start,
                     text: TextSpan(
@@ -2447,7 +2448,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                             return;
                           }
 
-                          final String data = "${NonTranslatable.currencyUriPrefix}:${StateContainer.of(context).wallet!.address}";
+                          final String data =
+                              "${NonTranslatable.currencyUriPrefix}:${StateContainer.of(context).wallet!.address}";
                           final Widget qrWidget = SizedBox(
                             width: MediaQuery.of(context).size.width,
                             child: await UIUtil.getQRImage(context, data),

@@ -190,10 +190,11 @@ class AppTransferOverviewSheet {
                               Dimens.BUTTON_BOTTOM_DIMENS,
                               onPressed: () {
                                 Sheets.showAppHeightNineSheet(
-                                    context: context,
-                                    widget: TransferManualEntrySheet(
-                                      validSeedCallback: manualEntryCallback,
-                                    ));
+                                  context: context,
+                                  widget: TransferManualEntrySheet(
+                                    validSeedCallback: manualEntryCallback,
+                                  ),
+                                );
                               },
                             ),
                           ],
@@ -223,8 +224,8 @@ class AppTransferOverviewSheet {
       }
       final List<String> accountsToRemove = [];
       resp.balances!.forEach((String account, AccountBalanceItem balItem) {
-        final BigInt balance = BigInt.parse(balItem.balance!);
-        final BigInt receivable = BigInt.parse(balItem.receivable!);
+        final BigInt balance = BigInt.parse(balItem.balance ?? "0");
+        final BigInt receivable = BigInt.parse(balItem.receivable ?? "0");
         if (balance + receivable == BigInt.zero) {
           accountsToRemove.add(account);
         } else {
@@ -235,7 +236,7 @@ class AppTransferOverviewSheet {
       });
       accountsToRemove.forEach(privKeyBalanceMap.remove);
       if (privKeyBalanceMap.isEmpty) {
-        UIUtil.showSnackbar(Z.of(context).transferNoFunds, context);
+        UIUtil.showSnackbar(Z.of(context).transferNoFunds.replaceAll("%2", NonTranslatable.currencyName), context);
         return;
       }
       // Go to confirmation screen
@@ -255,14 +256,15 @@ class AppTransferOverviewSheet {
     final List<String> accounts = await getAccountsFromSeed(context, seed);
     try {
       final AccountsBalancesResponse resp = await sl.get<AccountService>().requestAccountsBalances(accounts);
+
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
       final List<String> accountsToRemove = [];
       BigInt totalBalance = BigInt.zero;
       resp.balances!.forEach((String account, AccountBalanceItem balItem) {
-        final BigInt balance = BigInt.parse(balItem.balance!);
-        final BigInt receivable = BigInt.parse(balItem.receivable!);
+        final BigInt balance = BigInt.parse(balItem.balance ?? "0");
+        final BigInt receivable = BigInt.parse(balItem.receivable ?? "0");
         if (balance + receivable == BigInt.zero) {
           accountsToRemove.add(account);
         } else {
@@ -274,7 +276,6 @@ class AppTransferOverviewSheet {
       });
       accountsToRemove.forEach(privKeyBalanceMap.remove);
       if (privKeyBalanceMap.isEmpty) {
-        // return null;
         return BigInt.zero;
       }
 

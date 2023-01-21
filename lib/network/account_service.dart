@@ -7,15 +7,14 @@ import 'dart:convert';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:synchronized/synchronized.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/node.dart';
-import 'package:wallet_flutter/model/db/user.dart';
 import 'package:wallet_flutter/model/db/work_source.dart';
 import 'package:wallet_flutter/model/state_block.dart';
 import 'package:wallet_flutter/network/model/base_request.dart';
@@ -33,11 +32,9 @@ import 'package:wallet_flutter/network/model/request_item.dart';
 import 'package:wallet_flutter/network/model/response/account_history_response.dart';
 import 'package:wallet_flutter/network/model/response/account_info_response.dart';
 import 'package:wallet_flutter/network/model/response/accounts_balances_response.dart';
-import 'package:wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:wallet_flutter/network/model/response/block_info_item.dart';
 import 'package:wallet_flutter/network/model/response/callback_response.dart';
 import 'package:wallet_flutter/network/model/response/error_response.dart';
-import 'package:wallet_flutter/network/model/response/funding_response_item.dart';
 import 'package:wallet_flutter/network/model/response/handoff_response.dart';
 import 'package:wallet_flutter/network/model/response/price_response.dart';
 import 'package:wallet_flutter/network/model/response/process_response.dart';
@@ -46,8 +43,6 @@ import 'package:wallet_flutter/network/model/response/subscribe_response.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/util/nanoutil.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:synchronized/synchronized.dart';
 import 'package:web_socket_channel/io.dart';
 
 // late Web3Client _web3Client;
@@ -498,6 +493,7 @@ class AccountService {
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error} ${response.details}");
     }
+    log.e("AccountsBalancesResponse: ${response}");
     return AccountsBalancesResponse.fromJson(response);
   }
 

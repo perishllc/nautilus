@@ -6,9 +6,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:logger/logger.dart';
 // ignore: depend_on_referenced_packages
-import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:wallet_flutter/appstate_container.dart';
+// ignore: depend_on_referenced_packages
+import 'package:timezone/timezone.dart' as tz;
 import 'package:wallet_flutter/bus/subs_changed_event.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/subscription.dart';
@@ -81,7 +81,6 @@ class SubscriptionService {
     for (final Subscription sub in subs) {
       // ignore: use_build_context_synchronously
       final bool isPaid = await checkSubPaid(history, sub);
-      log.d("Subscription ${sub.name} is paid: $isPaid");
       if (isPaid != sub.paid) {
         // make sure the tag matches the real state:
         await sl.get<DBHelper>().toggleSubscriptionPaid(sub);
