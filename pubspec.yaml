@@ -119,7 +119,7 @@ dependencies:
   pretty_qr_code: ^2.0.2
   dotted_border: ^2.0.0+2
   image_picker: ^0.8.6
-  mobile_scanner: ^3.0.0-beta.1
+  mobile_scanner: ^3.0.0-beta.4
   # mobile_scanner: 3.0.0-beta.1
   # Share files
   share_plus: ^6.2.0

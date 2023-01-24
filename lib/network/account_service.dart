@@ -493,7 +493,6 @@ class AccountService {
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error} ${response.details}");
     }
-    log.e("AccountsBalancesResponse: ${response}");
     return AccountsBalancesResponse.fromJson(response);
   }
 

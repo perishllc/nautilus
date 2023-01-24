@@ -176,10 +176,10 @@ Have a happy Chinese New Year!
     );
 
     try {
-      final DateTime chineseNewYear = DateTime(2023, 1, 22, 8);
+      final DateTime chineseNewYear = DateTime(2024, 1, 22, 8);
       final tz.TZDateTime tzdatetime = tz.TZDateTime.from(chineseNewYear, tz.local);
       await flutterLocalNotificationsPlugin.zonedSchedule(
-        2023,
+        2024,
         "Happy Chinese New Year!",
         "",
         tzdatetime,

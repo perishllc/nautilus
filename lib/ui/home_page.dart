@@ -49,6 +49,7 @@ import 'package:wallet_flutter/network/model/response/accounts_balances_response
 import 'package:wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:wallet_flutter/network/model/response/auth_item.dart';
 import 'package:wallet_flutter/network/model/response/pay_item.dart';
+import 'package:wallet_flutter/network/model/response/sub_item.dart';
 import 'package:wallet_flutter/network/model/status_types.dart';
 import 'package:wallet_flutter/network/subscription_service.dart';
 import 'package:wallet_flutter/network/username_service.dart';
@@ -68,6 +69,7 @@ import 'package:wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/ui/settings/settings_drawer.dart';
 import 'package:wallet_flutter/ui/shop/shop_sheet.dart';
+import 'package:wallet_flutter/ui/subs/sub_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/subs/subs_sheet.dart';
 import 'package:wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
@@ -657,7 +659,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Text("${Z.of(context).importGiftEmpty.replaceAll("%2", NonTranslatable.currencyName)}\n\n", style: AppStyles.textStyleParagraph(context)),
+                  Text("${Z.of(context).importGiftEmpty.replaceAll("%2", NonTranslatable.currencyName)}\n\n",
+                      style: AppStyles.textStyleParagraph(context)),
                   RichText(
                     textAlign: TextAlign.start,
                     text: TextSpan(
@@ -2143,14 +2146,14 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
     if (!mounted) return;
 
-    final dynamic result = uriParser(link);
+    final dynamic scanResult = uriParser(link);
 
-    if (result == null) {
+    if (scanResult == null) {
       return;
     }
 
-    if (result is Address && result.isValid()) {
-      final Address address = result;
+    if (scanResult is Address && scanResult.isValid()) {
+      final Address address = scanResult;
       String? amount;
       bool sufficientBalance = false;
       if (address.amount != null) {
@@ -2189,9 +2192,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           ),
         );
       }
-    } else if (result is PayItem) {
+    } else if (scanResult is PayItem) {
       // handle block handoff:
-      final PayItem payItem = result;
+      final PayItem payItem = scanResult;
       // See if this address belongs to a contact or username
       final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(payItem.account);
 
@@ -2218,9 +2221,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             destination: user?.address ?? payItem.account,
             contactName: user?.getDisplayName(),
           ));
-    } else if (result is AuthItem) {
+    } else if (scanResult is AuthItem) {
       // handle auth handoff:
-      final AuthItem authItem = result;
+      final AuthItem authItem = scanResult;
       // See if this address belongs to a contact or username
       final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(authItem.account);
 
@@ -2231,6 +2234,19 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           authItem: authItem,
           destination: user?.address ?? authItem.account,
           contactName: user?.getDisplayName(),
+        ),
+      );
+    } else if (scanResult is SubItem) {
+      Sheets.showAppHeightNineSheet(
+        context: context,
+        widget: SubConfirmSheet(
+          sub: Subscription(
+            address: scanResult.account,
+            amount_raw: scanResult.amount,
+            name: scanResult.label,
+            frequency: scanResult.frequency,
+            active: false,
+          ),
         ),
       );
     }

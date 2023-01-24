@@ -3,6 +3,7 @@
 - Checkout menu
 #### Changed
 #### Fixed
+- Sub links
 ## v0.7.3 - [2023-01-20]
 #### Added
 - Subscriptions menu
