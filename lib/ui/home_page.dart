@@ -1219,7 +1219,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     });
     _solidsSub = EventTaxiImpl.singleton().registerTo<PaymentsHomeEvent>().listen((PaymentsHomeEvent event) {
       final List<TXData>? newSolids = event.items;
-      if (newSolids == null || _solidsListMap[StateContainer.of(context).wallet!.address] == null) {
+      if (newSolids == null || _solidsListMap[StateContainer.of(context).wallet?.address ?? ""] == null) {
         return;
       }
       setState(() {

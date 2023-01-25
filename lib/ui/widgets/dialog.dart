@@ -5,20 +5,18 @@ import 'package:flutter/material.dart' as material;
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:logger/logger.dart';
+// ignore: depend_on_referenced_packages
 import 'package:markdown/markdown.dart' as md;
+import 'package:url_launcher/url_launcher.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/subscription.dart';
-import 'package:wallet_flutter/network/metadata_service.dart';
-import 'package:wallet_flutter/network/model/block_types.dart';
-import 'package:wallet_flutter/network/model/response/account_history_response_item.dart';
 import 'package:wallet_flutter/network/subscription_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
-import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/ui/subs/sub_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
@@ -26,8 +24,6 @@ import 'package:wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:wallet_flutter/ui/widgets/funding_messages_sheet.dart';
 import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
-import 'package:wallet_flutter/util/sharedprefsutil.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AppDialogs {
   static void showConfirmDialog(
@@ -303,10 +299,6 @@ class AppDialogs {
         );
       },
     );
-
-    if (recurring) {
-      await sl.get<SharedPrefsUtil>().setProRenewActive(true);
-    }
 
     return false;
   }

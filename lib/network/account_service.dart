@@ -316,7 +316,7 @@ class AccountService {
           }
           requestItem.isProcessing = true;
           final String requestJson = await compute(encodeRequestItem, requestItem.request);
-          //log.d("Sending: $requestJson");
+          // log.d("Sending: $requestJson");
           await _send(requestJson);
         } else if (DateTime.now().difference(requestItem.expireDt!).inSeconds > RequestItem.EXPIRE_TIME_S) {
           pop();
@@ -328,10 +328,6 @@ class AccountService {
 
   // Queue Utilities
   bool queueContainsRequestWithHash(String hash) {
-    // if (_requestQueue != null || _requestQueue!.length == 0) {
-    //   return false;
-    // }
-    // NATRIUM fix:
     if (_requestQueue == null || _requestQueue!.isEmpty) {
       return false;
     }
@@ -349,7 +345,6 @@ class AccountService {
   }
 
   bool queueContainsOpenBlock() {
-    // NATRIUM fix:
     if (_requestQueue == null || _requestQueue!.isEmpty) {
       return false;
     }
@@ -713,28 +708,6 @@ class AccountService {
       account: account,
       privKey: privKey,
     );
-
-    // checked elsewhere and not needed here, I think:
-    // // db query to check if username for this address exists:
-    // try {
-    //   User? user = await sl.get<DBHelper>().getUserWithAddress(account!);
-    //   bool shouldUpdate = false;
-    //   if (user != null && user.type == UserTypes.ONCHAIN) {
-    //     int weekAgo = 0;
-    //     if (user.last_updated == null || user.last_updated! < weekAgo) {
-    //       // user is out of date, update:
-    //       shouldUpdate = true;
-    //     }
-    //   } else if (user == null) {
-    //     shouldUpdate = true;
-    //   }
-
-    //   if (shouldUpdate) {
-    //     // check for username here:
-    //   }
-    // } catch (error) {
-    //   log.e("Error processing receive username $error");
-    // }
 
     final BlockInfoItem previousInfo = await requestBlockInfo(previous);
     final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);

@@ -88,13 +88,6 @@ class MetadataService {
     }
   }
 
-  // /* Send Request */
-  // Future<void> sendRequest(BaseRequest request) async {
-  //   // We don't care about order or server response in these requests
-  //   //log.d("sending ${json.encode(request.toJson())}");
-  //   _send(await compute(encodeRequestItem, request));
-  // }
-
   Future<dynamic> makePaymentsRequest(BaseRequest request) async {
     final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_PAYMENTS),
         headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
