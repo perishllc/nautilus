@@ -356,7 +356,7 @@ class DBHelper {
   Future<void> changeNode(Node node) async {
     final Database dbClient = (await db)!;
     return dbClient.transaction((Transaction txn) async {
-      await txn.rawUpdate('UPDATE Nodes set selected = false');
+      await txn.rawUpdate('UPDATE Nodes set selected = 0');
       // Get access increment count
       final List<Map> list = await txn.rawQuery('SELECT * FROM Nodes');
       await txn.rawUpdate('UPDATE Nodes set selected = ? WHERE id = ?', [1, node.id]);
@@ -423,7 +423,7 @@ class DBHelper {
   Future<void> changeWorkSource(WorkSource ws) async {
     final Database dbClient = (await db)!;
     return dbClient.transaction((Transaction txn) async {
-      await txn.rawUpdate('UPDATE WorkSources set selected = false');
+      await txn.rawUpdate('UPDATE WorkSources set selected = 0');
       // Get access increment count
       final List<Map> list = await txn.rawQuery('SELECT * FROM Nodes');
       await txn.rawUpdate('UPDATE WorkSources set selected = ? WHERE id = ?', [1, ws.id]);

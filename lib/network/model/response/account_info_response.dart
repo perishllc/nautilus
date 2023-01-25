@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 
-
 part 'account_info_response.g.dart';
 
 int? _toInt(String? v) => v == null ? 0 : int.tryParse(v);
@@ -22,10 +21,21 @@ class AccountInfoResponse {
   @JsonKey(name: 'block_count', fromJson: _toInt)
   int? blockCount;
 
+  @JsonKey(name: 'confirmation_height', fromJson: _toInt)
+  int? confirmationHeight;
+
   @JsonKey(ignore: true)
   bool unopened;
 
-  AccountInfoResponse({this.frontier, this.openBlock, this.representativeBlock, this.balance, this.blockCount, this.unopened = false}) : super();
+  AccountInfoResponse(
+      {this.frontier,
+      this.openBlock,
+      this.representativeBlock,
+      this.balance,
+      this.blockCount,
+      this.unopened = false,
+      this.confirmationHeight})
+      : super();
 
   factory AccountInfoResponse.fromJson(Map<String, dynamic> json) => _$AccountInfoResponseFromJson(json);
   Map<String, dynamic> toJson() => _$AccountInfoResponseToJson(this);

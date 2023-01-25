@@ -75,7 +75,7 @@ Future<void> main() async {
     webRecaptchaSiteKey: dotenv.env["CAPTCHA_SITE_KEY"],
   );
   FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
-  
+
   if (!kReleaseMode) {
     // we have to stall for whatever reason in debug mode
     // otherwise the app doesn't start properly (black screen)
@@ -143,7 +143,9 @@ class AppState extends State<App> {
           GlobalWidgetsLocalizations.delegate
         ],
 
-        locale: StateContainer.of(context).curLanguage.language == AvailableLanguage.DEFAULT ? null : StateContainer.of(context).curLanguage.getLocale(),
+        locale: StateContainer.of(context).curLanguage.language == AvailableLanguage.DEFAULT
+            ? null
+            : StateContainer.of(context).curLanguage.getLocale(),
         // supportedLocales: Z.delegate.supportedLocales,
         supportedLocales: const <Locale>[
           Locale('en', 'US'), // English
@@ -343,7 +345,8 @@ class AppState extends State<App> {
               );
             case '/avatar_page':
               return PageRouteBuilder(
-                  pageBuilder: (BuildContext context, Animation<double> animationIn, Animation<double> animationOut) => AvatarPage(),
+                  pageBuilder: (BuildContext context, Animation<double> animationIn, Animation<double> animationOut) =>
+                      AvatarPage(),
                   settings: settings,
                   opaque: false);
             case '/avatar_change_page':
@@ -437,6 +440,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       if (!(await sl.get<SharedPrefsUtil>().getHasSeenRootWarning()) && await FlutterJailbreakDetection.jailbroken) {
         if (!mounted) return;
         AppDialogs.showConfirmDialog(
+            barrierDismissible: false,
             context,
             CaseChange.toUpperCase(Z.of(context).warning, context),
             Z.of(context).rootWarning,

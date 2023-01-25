@@ -784,6 +784,7 @@ class StateContainerState extends State<StateContainer> {
         watchOnly: watchOnly,
         loading: true,
       );
+      getAccountInfo();
       requestUpdate();
       updateSolids();
     });
@@ -1028,16 +1029,6 @@ class StateContainerState extends State<StateContainer> {
       if (response.price != null) {
         wallet!.localCurrencyPrice = response.price.toString();
       }
-      sl.get<AccountService>().pop();
-      sl.get<AccountService>().processQueue();
-    });
-  }
-
-  void stopLoading() {
-    requestUpdate();
-    setState(() {
-      wallet!.loading = false;
-      wallet!.confirmationHeight = 9999; // todo: fix this:
       sl.get<AccountService>().pop();
       sl.get<AccountService>().processQueue();
     });
@@ -1288,6 +1279,36 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
+  // one time request required to render history correctly:
+  Future<void> getAccountInfo() async {
+    if (wallet == null || wallet?.address == null || !Address(wallet!.address).isValid()) {
+      return;
+    }
+
+    // get account info:
+    final AccountInfoResponse accountResp = await sl.get<AccountService>().getAccountInfo(wallet!.address!);
+    final int confirmationHeight = accountResp.confirmationHeight ?? 0;
+    final int blockCount = accountResp.blockCount ?? 0;
+    
+    setState(() {
+      wallet!.loading = false;
+      wallet!.confirmationHeight = confirmationHeight;
+      wallet!.blockCount = blockCount;
+      wallet!.frontier = accountResp.frontier;
+      wallet!.representativeBlock = accountResp.representativeBlock;
+      wallet!.openBlock = accountResp.openBlock;
+      wallet!.blockCount = accountResp.blockCount;
+      wallet!.confirmationHeight = accountResp.confirmationHeight ?? 0;
+      if (accountResp.balance == null) {
+        wallet!.accountBalance = BigInt.from(0);
+      } else {
+        wallet!.accountBalance = BigInt.tryParse(accountResp.balance!)!;
+      }
+      // TODO:
+      // wallet!.representative = accountResp.representative ?? AppWallet.defaultRepresentative;
+    });
+  }
+
   Future<void> requestUpdate({bool receivable = true}) async {
     if (wallet == null || wallet?.address == null || !Address(wallet!.address).isValid()) {
       return;
@@ -1349,9 +1370,11 @@ class StateContainerState extends State<StateContainer> {
       // Receive receivables
       if (receivable) {
         receivableRequests.clear();
-        final ReceivableResponse receivableResp = await sl
-            .get<AccountService>()
-            .getReceivable(wallet!.address, max(wallet!.blockCount ?? 0, 10), threshold: receiveThreshold);
+        final ReceivableResponse receivableResp = await sl.get<AccountService>().getReceivable(
+              wallet!.address,
+              max(wallet!.blockCount ?? 0, 10),
+              threshold: receiveThreshold,
+            );
 
         // remove any receivables in the wallet history that are not in the receivable response:
         if (wallet!.watchOnly) {

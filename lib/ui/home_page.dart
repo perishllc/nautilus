@@ -904,12 +904,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       if (!mounted) return;
       _isPro = await AppDialogs.proCheck(context, shouldShowDialog: false);
 
-      final ws = await sl.get<DBHelper>().getSelectedWorkSource();
-      if (ws.type == WorkSourceTypes.URL) {
-        if (!mounted) return;
-        StateContainer.of(context).stopLoading();
-      }
-
       // check on subscriptions:
       // must be done post-load since we need to check history:
       if (!mounted) return;
@@ -1318,9 +1312,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       InAppPurchase.instance.restorePurchases();
     }
     _subscriptionsSub = EventTaxiImpl.singleton().registerTo<SubsChangedEvent>().listen((SubsChangedEvent event) {
-      setState(() {
-        _subscriptions = event.subs ?? [];
-      });
+      if (mounted) {
+        setState(() {
+          _subscriptions = event.subs ?? <Subscription>[];
+        });
+      }
     });
   }
 

@@ -4,6 +4,8 @@
 #### Changed
 #### Fixed
 - Sub links
+- QR code scanning
+- Custom node send/receive
 ## v0.7.3 - [2023-01-20]
 #### Added
 - Subscriptions menu

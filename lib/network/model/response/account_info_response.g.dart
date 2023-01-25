@@ -13,6 +13,7 @@ AccountInfoResponse _$AccountInfoResponseFromJson(Map<String, dynamic> json) =>
       representativeBlock: json['representative_block'] as String?,
       balance: json['balance'] as String?,
       blockCount: _toInt(json['block_count'] as String?),
+      confirmationHeight: _toInt(json['confirmation_height'] as String?),
     );
 
 Map<String, dynamic> _$AccountInfoResponseToJson(
@@ -23,4 +24,5 @@ Map<String, dynamic> _$AccountInfoResponseToJson(
       'representative_block': instance.representativeBlock,
       'balance': instance.balance,
       'block_count': instance.blockCount,
+      'confirmation_height': instance.confirmationHeight,
     };
