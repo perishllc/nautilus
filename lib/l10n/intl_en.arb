@@ -1420,6 +1420,11 @@
     "type": "text",
     "description": "settings_logout"
   },
+  "deleteAccount": "Delete Account",
+  "@deleteAccount": {
+    "type": "text",
+    "description": "settings_delete_account"
+  },
   "logoutAction": "Delete Seed and Logout",
   "@logoutAction": {
     "type": "text",

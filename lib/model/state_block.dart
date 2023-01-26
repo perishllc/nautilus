@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:wallet_flutter/network/model/block_types.dart';
 
 part 'state_block.g.dart';
@@ -41,6 +41,12 @@ class StateBlock {
   @JsonKey(name: 'work', includeIfNull: false)
   String? work;
 
+
+  // new 1/25/23:
+  @JsonKey(name: 'link_as_account', includeIfNull: false)
+  String? linkAsAccount;
+  // end new
+
   @JsonKey(ignore: true)
   String? hash;
 
@@ -62,16 +68,17 @@ class StateBlock {
   /// then balance should be send amount (not balance after send).
   /// This is by design of this app, where we get previous balance in a server request
   /// and update it later before signing
-  StateBlock(
-      {String? subtype,
-      this.previous,
-      this.representative,
-      required String? balance,
-      this.link,
-      this.account,
-      this.work,
-      this.privKey,
-      this.localCurrencyValue}) {
+  StateBlock({
+    String? subtype,
+    this.previous,
+    this.representative,
+    required String? balance,
+    this.link,
+    this.account,
+    this.work,
+    this.privKey,
+    this.localCurrencyValue,
+  }) {
     subType = subtype;
     type = BlockTypes.STATE;
     work = work;
@@ -108,7 +115,8 @@ class StateBlock {
     if (balance == null) {
       return null;
     }
-    hash = NanoBlocks.computeStateHash(NanoAccountType.NANO, account!, previous!, representative!, BigInt.parse(balance!), link!);
+    hash = NanoBlocks.computeStateHash(
+        NanoAccountType.NANO, account!, previous!, representative!, BigInt.parse(balance!), link!);
     signature = NanoSignatures.signBlock(hash!, privateKey!);
     return signature;
   }

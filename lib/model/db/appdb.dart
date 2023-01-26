@@ -261,20 +261,11 @@ class DBHelper {
   }
 
   Future<void> _addDefaultWorkSources({Database? dbClient}) async {
-    // await saveWorkSource(
-    //   WorkSource(
-    //     id: 1,
-    //     name: "None",
-    //     selected: false,
-    //     type: WorkSourceTypes.NONE,
-    //   ),
-    //   dbClient: dbClient,
-    // );
     await saveWorkSource(
       WorkSource(
         id: 0,
-        name: "Use Node",
-        selected: true,
+        name: "Use Node (none)",
+        selected: false,
         type: WorkSourceTypes.NODE,
       ),
       dbClient: dbClient,
@@ -282,6 +273,16 @@ class DBHelper {
     await saveWorkSource(
       WorkSource(
         id: 1,
+        name: "Perish Workers",
+        selected: true,
+        type: WorkSourceTypes.URL,
+        url: "http://workers.perish.co:5555",
+      ),
+      dbClient: dbClient,
+    );
+    await saveWorkSource(
+      WorkSource(
+        id: 2,
         name: "nano.to",
         selected: false,
         type: WorkSourceTypes.URL,

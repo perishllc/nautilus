@@ -14,9 +14,9 @@ SubscribeRequest _$SubscribeRequestFromJson(Map<String, dynamic> json) =>
       ack: json['ack'] as bool? ?? true,
       fcmToken: json['fcm_token_v2'] as String?,
       notificationEnabled: json['notification_enabled'] as bool?,
-      option: json['option'] == null
+      options: json['options'] == null
           ? null
-          : SubscribeOption.fromJson(json['option'] as Map<String, dynamic>),
+          : SubscribeOption.fromJson(json['options'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SubscribeRequestToJson(SubscribeRequest instance) {
@@ -35,6 +35,6 @@ Map<String, dynamic> _$SubscribeRequestToJson(SubscribeRequest instance) {
   writeNotNull('ack', instance.ack);
   writeNotNull('fcm_token_v2', instance.fcmToken);
   writeNotNull('notification_enabled', instance.notificationEnabled);
-  writeNotNull('option', instance.option);
+  writeNotNull('options', instance.options);
   return val;
 }

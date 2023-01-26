@@ -236,6 +236,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete Account"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete this node?\n\nYou can always re-add it later by tapping the \"Add Node\" button"),
         "deleteNodeHeader":

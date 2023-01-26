@@ -55,14 +55,18 @@ class MetadataService {
     // Price info sent from server
     // nano / banano:
     final String cryptoId = NonTranslatable.currencyName.toLowerCase();
-    final CoinGeckoResult<List<PriceInfo>> results = await CGApi.simple.listPrices(
-      ids: [cryptoId],
-      vsCurrencies: [_currency.getIso4217Code()],
-    );
-    if (!results.isError) {
-      final double? price = results.data[0].getPriceIn(_currency.getIso4217Code());
-      final PriceResponse resp = PriceResponse(currency: _currency.getIso4217Code(), price: price);
-      EventTaxiImpl.singleton().fire(PriceEvent(response: resp));
+    try {
+      final CoinGeckoResult<List<PriceInfo>> results = await CGApi.simple.listPrices(
+        ids: [cryptoId],
+        vsCurrencies: [_currency.getIso4217Code()],
+      );
+      if (!results.isError) {
+        final double? price = results.data[0].getPriceIn(_currency.getIso4217Code());
+        final PriceResponse resp = PriceResponse(currency: _currency.getIso4217Code(), price: price);
+        EventTaxiImpl.singleton().fire(PriceEvent(response: resp));
+      }
+    } catch (e) {
+      log.e("Error getting price data: $e");
     }
   }
 
@@ -75,6 +79,7 @@ class MetadataService {
     if (response.statusCode != 200) {
       return null;
     }
+
     try {
       final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
       if (decoded.containsKey("error")) {

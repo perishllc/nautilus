@@ -8,31 +8,19 @@ part of 'subscribe_response.dart';
 
 SubscribeResponse _$SubscribeResponseFromJson(Map<String, dynamic> json) =>
     SubscribeResponse()
-      ..frontier = json['frontier'] as String?
-      ..openBlock = json['open_block'] as String?
-      ..representativeBlock = json['representative_block'] as String?
-      ..representative = json['representative'] as String?
-      ..balance = json['balance'] as String?
-      ..blockCount = _toInt(json['block_count'] as String?)
-      ..receivable = json['receivable'] as String?
-      ..uuid = json['uuid'] as String?
-      ..price = _toDouble(json['price'])
-      ..xmrPrice = _toDouble(json['xmr'])
-      ..receivableCount = json['receivable_count'] as int?
-      ..confirmationHeight = _toInt(json['confirmation_height'] as String?);
+      ..account = json['account'] as String?
+      ..amount = json['amount'] as String?
+      ..hash = json['hash'] as String?
+      ..confirmationType = json['confirmation_type'] as String?
+      ..block = json['block'] == null
+          ? null
+          : StateBlock.fromJson(json['block'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$SubscribeResponseToJson(SubscribeResponse instance) =>
     <String, dynamic>{
-      'frontier': instance.frontier,
-      'open_block': instance.openBlock,
-      'representative_block': instance.representativeBlock,
-      'representative': instance.representative,
-      'balance': instance.balance,
-      'block_count': instance.blockCount,
-      'receivable': instance.receivable,
-      'uuid': instance.uuid,
-      'price': instance.price,
-      'xmr': instance.xmrPrice,
-      'receivable_count': instance.receivableCount,
-      'confirmation_height': instance.confirmationHeight,
+      'account': instance.account,
+      'amount': instance.amount,
+      'hash': instance.hash,
+      'confirmation_type': instance.confirmationType,
+      'block': instance.block,
     };

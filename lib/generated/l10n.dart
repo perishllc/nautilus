@@ -2897,6 +2897,16 @@ class Z {
     );
   }
 
+  /// `Delete Account`
+  String get deleteAccount {
+    return Intl.message(
+      'Delete Account',
+      name: 'deleteAccount',
+      desc: 'settings_delete_account',
+      args: [],
+    );
+  }
+
   /// `Delete Seed and Logout`
   String get logoutAction {
     return Intl.message(

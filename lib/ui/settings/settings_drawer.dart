@@ -1754,37 +1754,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
             // Show another confirm dialog
             AppDialogs.showConfirmDialog(context, Z.of(context).logoutAreYouSure, Z.of(context).logoutReassurance,
                 CaseChange.toUpperCase(Z.of(context).yes, context), () async {
-              // prevent interaction while logging out:
-              AppAnimation.animationLauncher(context, AnimationType.GENERIC);
-
-              // Unsubscribe from notifications
-              await sl.get<SharedPrefsUtil>().setNotificationsOn(false);
-              try {
-                final String? fcmToken = await FirebaseMessaging.instance.getToken();
-                EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
-                EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
-              } catch (e) {
-                log.e(e.toString());
-              }
-
-              try {
-                if (_loggedInWithMagic) {
-                  await magic.user.logout();
-                }
-              } catch (e) {
-                log.e(e.toString());
-              }
-
-              try {
-                // Delete all data
-                await sl.get<Vault>().deleteAll();
-                await sl.get<SharedPrefsUtil>().deleteAll();
-                if (!mounted) return;
-                StateContainer.of(context).logOut();
-                Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
-              } catch (e) {
-                log.e(e.toString());
-              }
+              _logOut();
             });
           });
         }),
@@ -2572,25 +2542,47 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       }),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemSingleLine(
-                          context, Z.of(context).resetDatabase, AppIcons.trashcan, onPressed: () async {
-                        AppDialogs.showConfirmDialog(
-                            context,
-                            Z.of(context).resetDatabase,
-                            Z.of(context).resetDatabaseConfirmation,
-                            CaseChange.toUpperCase(Z.of(context).yes, context), () async {
-                          // push animation to prevent early exit:
-                          bool animationOpen = true;
-                          AppAnimation.animationLauncher(context, AnimationType.GENERIC,
-                              onPoppedCallback: () => animationOpen = false);
+                        context,
+                        Z.of(context).resetDatabase,
+                        AppIcons.trashcan,
+                        onPressed: () async {
+                          AppDialogs.showConfirmDialog(
+                              context,
+                              Z.of(context).resetDatabase,
+                              Z.of(context).resetDatabaseConfirmation,
+                              CaseChange.toUpperCase(Z.of(context).yes, context), () async {
+                            // push animation to prevent early exit:
+                            bool animationOpen = true;
+                            AppAnimation.animationLauncher(context, AnimationType.GENERIC,
+                                onPoppedCallback: () => animationOpen = false);
 
-                          // sleep to flex the animation a bit:
-                          await Future<dynamic>.delayed(const Duration(milliseconds: 500));
+                            // sleep to flex the animation a bit:
+                            await Future<dynamic>.delayed(const Duration(milliseconds: 500));
 
-                          if (!mounted) return;
+                            if (!mounted) return;
 
-                          await StateContainer.of(context).resetApp(context);
-                        }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
-                      }),
+                            await StateContainer.of(context).resetApp(context);
+                          }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
+                        },
+                      ),
+                      if (_loggedInWithMagic)
+                        AppSettings.buildSettingsListItemSingleLine(
+                            context, Z.of(context).deleteAccount, AppIcons.logout, onPressed: () {
+                          AppDialogs.showConfirmDialog(
+                              context,
+                              CaseChange.toUpperCase(Z.of(context).warning, context),
+                              Z.of(context).logoutDetail.replaceAll("%1", NonTranslatable.appName),
+                              Z.of(context).logoutAction.toUpperCase(), () {
+                            // Show another confirm dialog
+                            AppDialogs.showConfirmDialog(
+                                context,
+                                Z.of(context).logoutAreYouSure,
+                                Z.of(context).logoutReassurance,
+                                CaseChange.toUpperCase(Z.of(context).yes, context), () async {
+                              _logOut();
+                            });
+                          });
+                        }),
                     ],
                   ),
                 ),
@@ -2948,6 +2940,40 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           ),
         );
       });
+    }
+  }
+
+  Future<void> _logOut() async {
+    // prevent interaction while logging out:
+    AppAnimation.animationLauncher(context, AnimationType.GENERIC);
+
+    // Unsubscribe from notifications
+    await sl.get<SharedPrefsUtil>().setNotificationsOn(false);
+    try {
+      final String? fcmToken = await FirebaseMessaging.instance.getToken();
+      EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
+      EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
+    } catch (e) {
+      log.e(e.toString());
+    }
+
+    try {
+      if (_loggedInWithMagic) {
+        await magic.user.logout();
+      }
+    } catch (e) {
+      log.e(e.toString());
+    }
+
+    try {
+      // Delete all data
+      await sl.get<Vault>().deleteAll();
+      await sl.get<SharedPrefsUtil>().deleteAll();
+      if (!mounted) return;
+      StateContainer.of(context).logOut();
+      Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+    } catch (e) {
+      log.e(e.toString());
     }
   }
 }

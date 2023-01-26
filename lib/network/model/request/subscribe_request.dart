@@ -14,7 +14,7 @@ class SubscribeRequest extends BaseRequest {
     this.ack = true,
     this.fcmToken,
     this.notificationEnabled,
-    this.option,
+    this.options,
   }) : super();
 
   factory SubscribeRequest.fromJson(Map<String, dynamic> json) => _$SubscribeRequestFromJson(json);
@@ -40,6 +40,6 @@ class SubscribeRequest extends BaseRequest {
   @JsonKey(name: 'notification_enabled', includeIfNull: false)
   bool? notificationEnabled;
 
-  @JsonKey(name: 'option', includeIfNull: false)
-  SubscribeOption? option;
+  @JsonKey(name: 'options', includeIfNull: false)
+  SubscribeOption? options;
 }

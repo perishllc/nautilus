@@ -16,7 +16,8 @@ StateBlock _$StateBlockFromJson(Map<String, dynamic> json) => StateBlock(
     )
       ..type = json['type'] as String?
       ..subType = json['subtype'] as String?
-      ..signature = json['signature'] as String?;
+      ..signature = json['signature'] as String?
+      ..linkAsAccount = json['link_as_account'] as String?;
 
 Map<String, dynamic> _$StateBlockToJson(StateBlock instance) {
   final val = <String, dynamic>{
@@ -37,5 +38,6 @@ Map<String, dynamic> _$StateBlockToJson(StateBlock instance) {
   }
 
   writeNotNull('work', instance.work);
+  writeNotNull('link_as_account', instance.linkAsAccount);
   return val;
 }

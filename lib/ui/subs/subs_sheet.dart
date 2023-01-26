@@ -274,6 +274,19 @@ class SubsSheetState extends State<SubsSheet> {
                   ),
                 ],
               ),
+              Row(
+                children: <Widget>[
+                  AppButton.buildAppButton(
+                    context,
+                    AppButtonType.PRIMARY_OUTLINE,
+                    Z.of(context).close,
+                    Dimens.BUTTON_BOTTOM_DIMENS,
+                    onPressed: () async {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
         ),

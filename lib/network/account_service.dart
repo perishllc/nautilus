@@ -58,6 +58,9 @@ Map? decodeJson(dynamic src) {
 String HTTP_URL = "";
 String WS_URL = "";
 
+const String DEFAULT_HTTP_URL = "https://nautilus.perish.co/api";
+const String DEFAULT_WS_URL = "wss://nautilus.perish.co";
+
 // AccountService singleton
 class AccountService {
   // Constructor
@@ -83,8 +86,8 @@ class AccountService {
       log.e(e);
     }
     if (HTTP_URL == "" || WS_URL == "") {
-      HTTP_URL = "https://nautilus.perish.co/api";
-      WS_URL = "wss://nautilus.perish.co";
+      HTTP_URL = DEFAULT_HTTP_URL;
+      WS_URL = DEFAULT_WS_URL;
     }
   }
 
@@ -97,8 +100,8 @@ class AccountService {
       log.e(e);
     }
     if (HTTP_URL == "" || WS_URL == "") {
-      HTTP_URL = "https://nautilus.perish.co/api";
-      WS_URL = "wss://nautilus.perish.co";
+      HTTP_URL = DEFAULT_HTTP_URL;
+      WS_URL = DEFAULT_WS_URL;
     }
 
     // reset vars:
@@ -270,23 +273,24 @@ class AccountService {
       if (msg == null) {
         throw Exception("Invalid JSON received");
       }
-      // // Determine response type
-      // if (msg.containsKey("uuid") || (msg.containsKey("frontier") && msg.containsKey("representative_block"))) {
-      //   // Subscribe response
-      //   final SubscribeResponse resp = await compute(subscribeResponseFromJson, msg);
-      //   // Post to callbacks
-      //   EventTaxiImpl.singleton().fire(SubscribeEvent(response: resp));
-      // } else if (msg.containsKey("currency") && msg.containsKey("price")) {
-      //   // Price info sent from server
-      //   final PriceResponse resp = PriceResponse.fromJson(msg as Map<String, dynamic>);
-      //   EventTaxiImpl.singleton().fire(PriceEvent(response: resp));
-      // } else if (msg.containsKey("block") && msg.containsKey("hash") && msg.containsKey("account")) {
-      //   final CallbackResponse resp = await compute(callbackResponseFromJson, msg);
-      //   EventTaxiImpl.singleton().fire(CallbackEvent(response: resp));
-      // } else if (msg.containsKey("error")) {
-      //   final ErrorResponse resp = ErrorResponse.fromJson(msg as Map<String, dynamic>);
-      //   EventTaxiImpl.singleton().fire(ErrorEvent(response: resp));
-      // }
+      // Determine response type
+      if (msg.containsKey("message")) {
+        // Subscribe response
+        final SubscribeResponse resp = await compute(subscribeResponseFromJson, msg["message"] as Map<String, dynamic>);
+        EventTaxiImpl.singleton().fire(SubscribeEvent(response: resp));
+        // @legacy server:
+      } else if (msg.containsKey("block") && msg.containsKey("hash") && msg.containsKey("account")) {
+        // Subscribe response
+        final SubscribeResponse resp = await compute(subscribeResponseFromJson, msg);
+        EventTaxiImpl.singleton().fire(SubscribeEvent(response: resp));
+      } else if (msg.containsKey("currency") && msg.containsKey("price")) {
+        // Price info sent from server
+        final PriceResponse resp = PriceResponse.fromJson(msg as Map<String, dynamic>);
+        EventTaxiImpl.singleton().fire(PriceEvent(response: resp));
+      } else if (msg.containsKey("error")) {
+        final ErrorResponse resp = ErrorResponse.fromJson(msg as Map<String, dynamic>);
+        EventTaxiImpl.singleton().fire(ErrorEvent(response: resp));
+      }
       return;
     });
   }
@@ -639,7 +643,16 @@ class AccountService {
 
   Future<String?> requestWork(String url, String hash) async {
     return http
-        .post(Uri.parse(url), headers: {'Content-type': 'application/json'}, body: json.encode({"hash": hash}))
+        .post(
+      Uri.parse(url),
+      headers: {'Content-type': 'application/json'},
+      body: json.encode(
+        {
+          "action": "work_generate",
+          "hash": hash,
+        },
+      ),
+    )
         .then((http.Response response) {
       if (response.statusCode == 200) {
         final Map<String, dynamic> decoded = json.decode(response.body) as Map<String, dynamic>;

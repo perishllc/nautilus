@@ -2,6 +2,7 @@
 #### Added
 - Checkout menu
 #### Changed
+- Websockets reworked to connect to node directly
 #### Fixed
 - Sub links
 - QR code scanning
