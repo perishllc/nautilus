@@ -21,6 +21,7 @@ import 'package:wallet_flutter/network/model/base_request.dart';
 import 'package:wallet_flutter/network/model/block_types.dart';
 import 'package:wallet_flutter/network/model/request/account_history_request.dart';
 import 'package:wallet_flutter/network/model/request/account_info_request.dart';
+import 'package:wallet_flutter/network/model/request/account_representative_request.dart';
 import 'package:wallet_flutter/network/model/request/accounts_balances_request.dart';
 import 'package:wallet_flutter/network/model/request/auth_reply_request.dart';
 import 'package:wallet_flutter/network/model/request/block_info_request.dart';
@@ -31,6 +32,7 @@ import 'package:wallet_flutter/network/model/request/subscribe_request.dart';
 import 'package:wallet_flutter/network/model/request_item.dart';
 import 'package:wallet_flutter/network/model/response/account_history_response.dart';
 import 'package:wallet_flutter/network/model/response/account_info_response.dart';
+import 'package:wallet_flutter/network/model/response/account_representative_response.dart';
 import 'package:wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:wallet_flutter/network/model/response/block_info_item.dart';
 import 'package:wallet_flutter/network/model/response/callback_response.dart';
@@ -255,6 +257,7 @@ class AccountService {
     }
   }
 
+  // from the websocket server:
   Future<void> _onMessageReceived(dynamic message) async {
     if (suspended) {
       return;
@@ -267,23 +270,23 @@ class AccountService {
       if (msg == null) {
         throw Exception("Invalid JSON received");
       }
-      // Determine response type
-      if (msg.containsKey("uuid") || (msg.containsKey("frontier") && msg.containsKey("representative_block"))) {
-        // Subscribe response
-        final SubscribeResponse resp = await compute(subscribeResponseFromJson, msg);
-        // Post to callbacks
-        EventTaxiImpl.singleton().fire(SubscribeEvent(response: resp));
-      } else if (msg.containsKey("currency") && msg.containsKey("price")) {
-        // Price info sent from server
-        final PriceResponse resp = PriceResponse.fromJson(msg as Map<String, dynamic>);
-        EventTaxiImpl.singleton().fire(PriceEvent(response: resp));
-      } else if (msg.containsKey("block") && msg.containsKey("hash") && msg.containsKey("account")) {
-        final CallbackResponse resp = await compute(callbackResponseFromJson, msg);
-        EventTaxiImpl.singleton().fire(CallbackEvent(response: resp));
-      } else if (msg.containsKey("error")) {
-        final ErrorResponse resp = ErrorResponse.fromJson(msg as Map<String, dynamic>);
-        EventTaxiImpl.singleton().fire(ErrorEvent(response: resp));
-      }
+      // // Determine response type
+      // if (msg.containsKey("uuid") || (msg.containsKey("frontier") && msg.containsKey("representative_block"))) {
+      //   // Subscribe response
+      //   final SubscribeResponse resp = await compute(subscribeResponseFromJson, msg);
+      //   // Post to callbacks
+      //   EventTaxiImpl.singleton().fire(SubscribeEvent(response: resp));
+      // } else if (msg.containsKey("currency") && msg.containsKey("price")) {
+      //   // Price info sent from server
+      //   final PriceResponse resp = PriceResponse.fromJson(msg as Map<String, dynamic>);
+      //   EventTaxiImpl.singleton().fire(PriceEvent(response: resp));
+      // } else if (msg.containsKey("block") && msg.containsKey("hash") && msg.containsKey("account")) {
+      //   final CallbackResponse resp = await compute(callbackResponseFromJson, msg);
+      //   EventTaxiImpl.singleton().fire(CallbackEvent(response: resp));
+      // } else if (msg.containsKey("error")) {
+      //   final ErrorResponse resp = ErrorResponse.fromJson(msg as Map<String, dynamic>);
+      //   EventTaxiImpl.singleton().fire(ErrorEvent(response: resp));
+      // }
       return;
     });
   }
@@ -489,6 +492,15 @@ class AccountService {
       throw Exception("Received error ${response.error} ${response.details}");
     }
     return AccountsBalancesResponse.fromJson(response);
+  }
+
+  Future<AccountRepresentativeResponse> requestAccountRepresentative(String account) async {
+    final AccountRepresentativeRequest request = AccountRepresentativeRequest(account: account);
+    final dynamic response = await makeHttpRequest(request);
+    if (response is ErrorResponse) {
+      throw Exception("Received error ${response.error} ${response.details}");
+    }
+    return AccountRepresentativeResponse.fromJson(response);
   }
 
   // Future<dynamic> createSwapToXMR({

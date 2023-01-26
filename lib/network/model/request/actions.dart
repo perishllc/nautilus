@@ -1,6 +1,7 @@
 class Actions {
-  static const String SUBSCRIBE = 'account_subscribe';
+  static const String SUBSCRIBE = 'subscribe';
   static const String ACCOUNT_HISTORY = 'account_history';
+  static const String ACCOUNT_REPRESENTATIVE = 'account_representative';
   static const String PROCESS = 'process';
   static const String BLOCK_INFO = 'block_info';
   static const String RECEIVABLE = 'receivable';

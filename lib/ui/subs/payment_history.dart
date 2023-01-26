@@ -180,56 +180,11 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
                 children: <Widget>[
                   AppButton.buildAppButton(
                     context,
-                    AppButtonType.PRIMARY,
-                    Z.of(context).addSubscription,
+                    AppButtonType.PRIMARY_OUTLINE,
+                    Z.of(context).close,
                     Dimens.BUTTON_TOP_DIMENS,
-                    disabled: _addingNode,
                     onPressed: () async {
-                      if (!_addingNode) {
-                        setState(() {
-                          _addingNode = true;
-                        });
-
-                        final Subscription? sub = await Sheets.showAppHeightNineSheet(
-                          context: context,
-                          widget: AddSubSheet(
-                            localCurrency: StateContainer.of(context).curCurrency,
-                          ),
-                        ) as Subscription?;
-                        if (!mounted) return;
-                        if (sub == null) {
-                          setState(() {
-                            _addingNode = false;
-                          });
-                          return;
-                        }
-
-                        // sl.get<DBHelper>().saveNode(node).then((Node? newNode) {
-                        //   if (newNode == null) {
-                        //     sl.get<Logger>().d("Error adding node: node was null");
-                        //     return;
-                        //   }
-                        //   widget.nodes.add(newNode);
-                        //   setState(() {
-                        //     _addingNode = false;
-                        //     widget.nodes.sort((Node a, Node b) => a.id!.compareTo(b.id!));
-                        //     // Scroll if list is full
-                        //     if (expandedKey.currentContext != null) {
-                        //       final RenderBox? box = expandedKey.currentContext!.findRenderObject() as RenderBox?;
-                        //       if (box == null) return;
-                        //       if (widget.nodes.length * 72.0 >= box.size.height) {
-                        //         _scrollController.animateTo(
-                        //           newNode.id! * 72.0 > _scrollController.position.maxScrollExtent
-                        //               ? _scrollController.position.maxScrollExtent + 72.0
-                        //               : newNode.id! * 72.0,
-                        //           curve: Curves.easeOut,
-                        //           duration: const Duration(milliseconds: 200),
-                        //         );
-                        //       }
-                        //     }
-                        //   });
-                        // });
-                      }
+                      Navigator.of(context).pop();
                     },
                   ),
                 ],

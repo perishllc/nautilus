@@ -35,11 +35,13 @@ import 'package:wallet_flutter/network/metadata_service.dart';
 import 'package:wallet_flutter/network/model/block_types.dart';
 import 'package:wallet_flutter/network/model/fcm_message_event.dart';
 import 'package:wallet_flutter/network/model/request/fcm_update_request.dart';
+import 'package:wallet_flutter/network/model/request/subscribe_option.dart';
 import 'package:wallet_flutter/network/model/request/subscribe_request.dart';
 import 'package:wallet_flutter/network/model/response/account_balance_item.dart';
 import 'package:wallet_flutter/network/model/response/account_history_response.dart';
 import 'package:wallet_flutter/network/model/response/account_history_response_item.dart';
 import 'package:wallet_flutter/network/model/response/account_info_response.dart';
+import 'package:wallet_flutter/network/model/response/account_representative_response.dart';
 import 'package:wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:wallet_flutter/network/model/response/callback_response.dart';
@@ -784,7 +786,7 @@ class StateContainerState extends State<StateContainer> {
         watchOnly: watchOnly,
         loading: true,
       );
-      getAccountInfo();
+      getRequiredAccountInfo();
       requestUpdate();
       updateSolids();
     });
@@ -1280,32 +1282,31 @@ class StateContainerState extends State<StateContainer> {
   }
 
   // one time request required to render history correctly:
-  Future<void> getAccountInfo() async {
+  Future<void> getRequiredAccountInfo() async {
     if (wallet == null || wallet?.address == null || !Address(wallet!.address).isValid()) {
       return;
     }
 
     // get account info:
     final AccountInfoResponse accountResp = await sl.get<AccountService>().getAccountInfo(wallet!.address!);
-    final int confirmationHeight = accountResp.confirmationHeight ?? 0;
-    final int blockCount = accountResp.blockCount ?? 0;
-    
+
+    // get account representative:
+    final AccountRepresentativeResponse representativeResp =
+        await sl.get<AccountService>().requestAccountRepresentative(wallet!.address!);
+
     setState(() {
       wallet!.loading = false;
-      wallet!.confirmationHeight = confirmationHeight;
-      wallet!.blockCount = blockCount;
+      wallet!.confirmationHeight = accountResp.confirmationHeight ?? 0;
       wallet!.frontier = accountResp.frontier;
       wallet!.representativeBlock = accountResp.representativeBlock;
       wallet!.openBlock = accountResp.openBlock;
       wallet!.blockCount = accountResp.blockCount;
-      wallet!.confirmationHeight = accountResp.confirmationHeight ?? 0;
       if (accountResp.balance == null) {
         wallet!.accountBalance = BigInt.from(0);
       } else {
         wallet!.accountBalance = BigInt.tryParse(accountResp.balance!)!;
       }
-      // TODO:
-      // wallet!.representative = accountResp.representative ?? AppWallet.defaultRepresentative;
+      wallet!.representative = representativeResp.representative ?? AppWallet.defaultRepresentative;
     });
   }
 
@@ -1483,14 +1484,13 @@ class StateContainerState extends State<StateContainer> {
     sl.get<AccountService>().clearQueue();
     sl.get<AccountService>().queueRequest(
           SubscribeRequest(
-            account: wallet!.address,
-            currency: curCurrency.getIso4217Code(),
-            uuid: uuid,
-            fcmToken: fcmToken,
-            notificationEnabled: notificationsEnabled,
+            option: SubscribeOption(accounts: [wallet!.address ?? ""]),
           ),
         );
     sl.get<AccountService>().processQueue();
+    if (notificationsEnabled == true) {
+      // await sl.get<MetaData>().subscribeToAccount(wallet!.address, fcmToken);
+    }
   }
 
   Future<String> decryptMessageCurrentAccount(String memoEnc, String? fromAddress, String? toAddress) async {

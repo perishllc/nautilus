@@ -1514,11 +1514,18 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       });
     }
 
-    // are we not connected after ~5 seconds?
-    await Future<dynamic>.delayed(const Duration(seconds: 8));
+    // check immediately but only act on it if we are connected:
     final bool connected = await sl.get<AccountService>().isConnected();
-    showConnectionWarning(!connected);
-    // await generateUnifiedList(fastUpdate: false);
+    if (connected) {
+      // remove the warning if it's there:
+      showConnectionWarning(!connected);
+    } else {
+      // check again after ~5 seconds:
+      await Future<dynamic>.delayed(const Duration(seconds: 5));
+      final bool connected = await sl.get<AccountService>().isConnected();
+      showConnectionWarning(!connected);
+    }
+    
     // setState(() {});
   }
 
