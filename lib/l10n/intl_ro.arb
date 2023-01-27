@@ -675,6 +675,11 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteAccount": "Șterge cont",
+  "@deleteAccount": {
+    "type": "text",
+    "description": "settings_delete_account"
+  },
   "deleteNodeConfirmation": "Sigur doriți să ștergeți acest nod?\n\nPuteți oricând să-l adăugați din nou mai târziu atingând butonul „Adăugați nod”.",
   "@deleteNodeConfirmation": {
     "type": "text",
@@ -2700,6 +2705,11 @@
     "type": "text",
     "description": "send_to"
   },
+  "todayAt": "Astăzi la",
+  "@todayAt": {
+    "type": "text",
+    "description": "history_today_at"
+  },
   "tooManyFailedAttempts": "Prea multe încercări de deblocare eșuate.",
   "@tooManyFailedAttempts": {
     "type": "text",
@@ -3074,5 +3084,10 @@
   "@yesButton": {
     "type": "text",
     "description": "A button that accepts the mentioned process."
+  },
+  "yesterdayAt": "Ieri la",
+  "@yesterdayAt": {
+    "type": "text",
+    "description": "history_yesterday_at"
   }
 }

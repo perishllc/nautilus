@@ -244,6 +244,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Conta %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Excluir"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Deletar conta"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Tem certeza de que deseja excluir este nó?\n\nVocê sempre pode adicioná-lo novamente mais tarde tocando no botão \"Adicionar nó\""),
         "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("Excluir nó?"),
@@ -896,6 +897,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "Isso pode demorar um pouco..."),
         "to": MessageLookupByLibrary.simpleMessage("Para"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Hoje às"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Muitas tentativas de desbloqueio falharam."),
         "trackingHeader":
@@ -1017,6 +1019,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Sincronizando"),
         "yes": MessageLookupByLibrary.simpleMessage("Sim"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Sim")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Sim"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Ontem às")
       };
 }

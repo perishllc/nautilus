@@ -675,6 +675,11 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteAccount": "מחק חשבון",
+  "@deleteAccount": {
+    "type": "text",
+    "description": "settings_delete_account"
+  },
   "deleteNodeConfirmation": "האם אתה בטוח שברצונך למחוק את הצומת הזה?\n\nאתה תמיד יכול להוסיף אותו מחדש מאוחר יותר על ידי הקשה על כפתור \"הוסף צומת\".",
   "@deleteNodeConfirmation": {
     "type": "text",
@@ -2700,6 +2705,11 @@
     "type": "text",
     "description": "send_to"
   },
+  "todayAt": "היום ב",
+  "@todayAt": {
+    "type": "text",
+    "description": "history_today_at"
+  },
   "tooManyFailedAttempts": "יותר מדי נסיונות כושלים לשחרור הנעילה.",
   "@tooManyFailedAttempts": {
     "type": "text",
@@ -3074,5 +3084,10 @@
   "@yesButton": {
     "type": "text",
     "description": "A button that accepts the mentioned process."
+  },
+  "yesterdayAt": "אתמול ב",
+  "@yesterdayAt": {
+    "type": "text",
+    "description": "history_yesterday_at"
   }
 }

@@ -675,6 +675,11 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteAccount": "Xóa tài khoản",
+  "@deleteAccount": {
+    "type": "text",
+    "description": "settings_delete_account"
+  },
   "deleteNodeConfirmation": "Bạn có chắc chắn muốn xóa nút này không?\n\nBạn luôn có thể thêm lại sau bằng cách nhấn vào nút \"Thêm nút\"",
   "@deleteNodeConfirmation": {
     "type": "text",
@@ -2700,6 +2705,11 @@
     "type": "text",
     "description": "send_to"
   },
+  "todayAt": "Hôm nay lúc",
+  "@todayAt": {
+    "type": "text",
+    "description": "history_today_at"
+  },
   "tooManyFailedAttempts": "Quá nhiều lần mở khoá thất bại.",
   "@tooManyFailedAttempts": {
     "type": "text",
@@ -3074,5 +3084,10 @@
   "@yesButton": {
     "type": "text",
     "description": "A button that accepts the mentioned process."
+  },
+  "yesterdayAt": "Hôm qua lúc",
+  "@yesterdayAt": {
+    "type": "text",
+    "description": "history_yesterday_at"
   }
 }

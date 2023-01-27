@@ -241,6 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Konts %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Dzēst kontu"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Vai tiešām vēlaties dzēst šo mezglu?\n\nJūs vienmēr varat to atkārtoti pievienot vēlāk, pieskaroties pogai \"Pievienot mezglu\"."),
         "deleteNodeHeader":
@@ -887,6 +888,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "tas var aizņemt kādu laiku..."),
         "to": MessageLookupByLibrary.simpleMessage("Adresāts"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Šodien plkst"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Pārāk daudz atslēgšanas mēģinājumi."),
         "trackingHeader":
@@ -1007,6 +1009,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Sinhronizācija"),
         "yes": MessageLookupByLibrary.simpleMessage("Jā"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Yes")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Yes"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Vakar plkst")
       };
 }

@@ -675,6 +675,11 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteAccount": "계정 삭제",
+  "@deleteAccount": {
+    "type": "text",
+    "description": "settings_delete_account"
+  },
   "deleteNodeConfirmation": "이 노드를 삭제하시겠습니까?\n\n\"노드 추가\" 버튼을 탭하여 나중에 언제든지 다시 추가할 수 있습니다.",
   "@deleteNodeConfirmation": {
     "type": "text",
@@ -2700,6 +2705,11 @@
     "type": "text",
     "description": "send_to"
   },
+  "todayAt": "오늘",
+  "@todayAt": {
+    "type": "text",
+    "description": "history_today_at"
+  },
   "tooManyFailedAttempts": "Too many failed unlock attempts.",
   "@tooManyFailedAttempts": {
     "type": "text",
@@ -3074,5 +3084,10 @@
   "@yesButton": {
     "type": "text",
     "description": "A button that accepts the mentioned process."
+  },
+  "yesterdayAt": "어제",
+  "@yesterdayAt": {
+    "type": "text",
+    "description": "history_yesterday_at"
   }
 }

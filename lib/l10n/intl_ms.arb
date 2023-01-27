@@ -675,6 +675,11 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteAccount": "Padam Akaun",
+  "@deleteAccount": {
+    "type": "text",
+    "description": "settings_delete_account"
+  },
   "deleteNodeConfirmation": "Adakah anda pasti mahu memadamkan nod ini?\n\nAnda sentiasa boleh menambahkannya semula kemudian dengan mengetik butang \"Tambah Nod\".",
   "@deleteNodeConfirmation": {
     "type": "text",
@@ -2700,6 +2705,11 @@
     "type": "text",
     "description": "send_to"
   },
+  "todayAt": "Hari ini di",
+  "@todayAt": {
+    "type": "text",
+    "description": "history_today_at"
+  },
   "tooManyFailedAttempts": "Terlalu banyak percubaan membuka kunci gagal.",
   "@tooManyFailedAttempts": {
     "type": "text",
@@ -3074,5 +3084,10 @@
   "@yesButton": {
     "type": "text",
     "description": "A button that accepts the mentioned process."
+  },
+  "yesterdayAt": "Semalam di",
+  "@yesterdayAt": {
+    "type": "text",
+    "description": "history_yesterday_at"
   }
 }

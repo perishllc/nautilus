@@ -222,6 +222,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("חשבון %1"),
         "delete": MessageLookupByLibrary.simpleMessage("מחיקה"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("מחק חשבון"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "האם אתה בטוח שברצונך למחוק את הצומת הזה?\n\nאתה תמיד יכול להוסיף אותו מחדש מאוחר יותר על ידי הקשה על כפתור \"הוסף צומת\"."),
         "deleteNodeHeader":
@@ -821,6 +822,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("זה עשוי לקחת זמן..."),
         "to": MessageLookupByLibrary.simpleMessage("מ"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("היום ב"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "יותר מדי נסיונות כושלים לשחרור הנעילה."),
         "trackingHeader": MessageLookupByLibrary.simpleMessage("אישור מעקב"),
@@ -935,6 +937,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("מסנכרן"),
         "yes": MessageLookupByLibrary.simpleMessage("כן"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Yes")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Yes"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("אתמול ב")
       };
 }

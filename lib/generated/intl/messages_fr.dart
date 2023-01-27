@@ -253,6 +253,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Compte %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Supprimer"),
+        "deleteAccount":
+            MessageLookupByLibrary.simpleMessage("Supprimer le compte"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Voulez-vous vraiment supprimer ce nœud ?\n\nVous pouvez toujours le rajouter plus tard en appuyant sur le bouton \"Ajouter un nœud\""),
         "deleteNodeHeader":
@@ -917,6 +919,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "Cela peut prendre un peu de temps..."),
         "to": MessageLookupByLibrary.simpleMessage("À"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Aujourd\'hui à"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Trop de tentatives de déverrouillage."),
         "trackingHeader":
@@ -1039,6 +1042,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Synchronisation"),
         "yes": MessageLookupByLibrary.simpleMessage("Oui"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Oui")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Oui"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Hier à")
       };
 }

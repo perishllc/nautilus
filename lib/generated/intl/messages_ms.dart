@@ -236,6 +236,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Akaun %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Padam"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Padam Akaun"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Adakah anda pasti mahu memadamkan nod ini?\n\nAnda sentiasa boleh menambahkannya semula kemudian dengan mengetik butang \"Tambah Nod\"."),
         "deleteNodeHeader":
@@ -884,6 +885,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "ini mungkin mengambil sedikit masa..."),
         "to": MessageLookupByLibrary.simpleMessage("Ke"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Hari ini di"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Terlalu banyak percubaan membuka kunci gagal."),
         "trackingHeader":
@@ -1005,6 +1007,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Menyegerakkan"),
         "yes": MessageLookupByLibrary.simpleMessage("Ya"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Ya")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Ya"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Semalam di")
       };
 }

@@ -239,6 +239,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Акаунт %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Изтриване"),
+        "deleteAccount":
+            MessageLookupByLibrary.simpleMessage("Изтриване на акаунт"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Сигурни ли сте, че искате да изтриете този възел?\n\nВинаги можете да го добавите отново по-късно, като докоснете бутона „Добавяне на възел“."),
         "deleteNodeHeader":
@@ -894,6 +896,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "това може да отнеме известно време..."),
         "to": MessageLookupByLibrary.simpleMessage("До"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Днес в"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Твърде много неуспешни опити за отключване."),
         "trackingHeader":
@@ -1015,6 +1018,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Синхронизиране"),
         "yes": MessageLookupByLibrary.simpleMessage("Да"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Да")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Да"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Вчера в")
       };
 }

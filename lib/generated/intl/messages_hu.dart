@@ -245,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Törlés"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Fiók törlése"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Biztosan törli ezt a csomópontot?\n\nKésőbb bármikor újra hozzáadhatja a \"Csomópont hozzáadása\" gombra koppintva"),
         "deleteNodeHeader":
@@ -903,6 +904,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("ez eltarthat egy ideig..."),
         "to": MessageLookupByLibrary.simpleMessage("Küldés ide"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Ma at"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Túl sok hibás feloldási kísérlet."),
         "trackingHeader":
@@ -1027,6 +1029,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Szinkronizálás"),
         "yes": MessageLookupByLibrary.simpleMessage("Igen"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Yes")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Yes"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Tegnap at")
       };
 }

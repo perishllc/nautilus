@@ -244,6 +244,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Elimina"),
+        "deleteAccount":
+            MessageLookupByLibrary.simpleMessage("Eliminare l\'account"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Sei sicuro di voler eliminare questo nodo?\n\nPuoi sempre aggiungerlo nuovamente in un secondo momento toccando il pulsante \"Aggiungi nodo\"."),
         "deleteNodeHeader":
@@ -894,6 +896,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("potrebbe volerci un po\'..."),
         "to": MessageLookupByLibrary.simpleMessage("A"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Oggi alle"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Troppi tentativi di sblocco falliti."),
         "trackingHeader": MessageLookupByLibrary.simpleMessage(
@@ -1019,6 +1022,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Sincronizzazione"),
         "yes": MessageLookupByLibrary.simpleMessage("Si"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Si")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Si"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Ieri alle")
       };
 }

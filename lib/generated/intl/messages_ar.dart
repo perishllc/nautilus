@@ -229,6 +229,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("الحساب %1"),
         "delete": MessageLookupByLibrary.simpleMessage("حذف"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد أنك تريد حذف هذه العقدة؟\n\nيمكنك دائمًا إعادة إضافته لاحقًا بالنقر فوق الزر \"إضافة عقدة\""),
         "deleteNodeHeader":
@@ -858,6 +859,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("هذا قد يستغرق بعض الوقت..."),
         "to": MessageLookupByLibrary.simpleMessage("إلى"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("اليوم في"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "العديد من محاولات الفتح الفاشلة."),
         "trackingHeader": MessageLookupByLibrary.simpleMessage("إذن التتبع"),
@@ -974,6 +976,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("مزامنة"),
         "yes": MessageLookupByLibrary.simpleMessage("نعم"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("نعم")
+        "yesButton": MessageLookupByLibrary.simpleMessage("نعم"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("البارحة عند")
       };
 }

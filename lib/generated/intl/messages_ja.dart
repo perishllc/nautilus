@@ -202,6 +202,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("アカウント％1"),
         "delete": MessageLookupByLibrary.simpleMessage("削除"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("アカウントを削除する"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "このノードを削除してもよろしいですか?\n\n「ノードの追加」ボタンをタップすると、後でいつでも再追加できます"),
         "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("ノードを削除しますか?"),
@@ -764,6 +765,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("これは時間がかかる場合があります..."),
         "to": MessageLookupByLibrary.simpleMessage("送金先"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("今日"),
         "tooManyFailedAttempts":
             MessageLookupByLibrary.simpleMessage("既定のロック解除の失敗回数を超えています。"),
         "trackingHeader": MessageLookupByLibrary.simpleMessage("追跡承認"),
@@ -873,6 +875,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage("同期済み"),
         "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage("同期中"),
         "yes": MessageLookupByLibrary.simpleMessage("はい"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("はい")
+        "yesButton": MessageLookupByLibrary.simpleMessage("はい"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("昨日の")
       };
 }

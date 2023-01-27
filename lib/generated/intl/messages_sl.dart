@@ -243,6 +243,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Račun %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Izbriši"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Izbriši račun"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Ali ste prepričani, da želite izbrisati to vozlišče?\n\nPozneje ga lahko kadar koli znova dodate tako, da tapnete gumb »Dodaj vozlišče«."),
         "deleteNodeHeader":
@@ -888,6 +889,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "to lahko traja nekaj časa ..."),
         "to": MessageLookupByLibrary.simpleMessage("Na"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Danes ob"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Preveč neuspešnih poizkusov."),
         "trackingHeader":
@@ -1008,6 +1010,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Sinhronizacija"),
         "yes": MessageLookupByLibrary.simpleMessage("Da"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Yes")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Yes"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Včeraj ob")
       };
 }

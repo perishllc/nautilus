@@ -240,6 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Tài khoản %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Xoá"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Xóa tài khoản"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn xóa nút này không?\n\nBạn luôn có thể thêm lại sau bằng cách nhấn vào nút \"Thêm nút\""),
         "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("Xóa nút?"),
@@ -883,6 +884,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "Việc này có thể mất một lúc..."),
         "to": MessageLookupByLibrary.simpleMessage("tới"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Hôm nay lúc"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Quá nhiều lần mở khoá thất bại."),
         "trackingHeader":
@@ -1006,6 +1008,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Đồng bộ hóa"),
         "yes": MessageLookupByLibrary.simpleMessage("Có"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Đồng ý")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Đồng ý"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Hôm qua lúc")
       };
 }

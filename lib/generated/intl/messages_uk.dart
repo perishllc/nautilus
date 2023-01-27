@@ -247,6 +247,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Гаманець %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Вилучити"),
+        "deleteAccount":
+            MessageLookupByLibrary.simpleMessage("Видалити аккаунт"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Ви впевнені, що хочете видалити цей вузол?\n\nВи завжди можете повторно додати його пізніше, натиснувши кнопку «Додати вузол»."),
         "deleteNodeHeader":
@@ -911,6 +913,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "це може зайняти деякий час..."),
         "to": MessageLookupByLibrary.simpleMessage("Для"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Сьогодні о"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Надто багато невірних спроб розблокувати."),
         "trackingHeader":
@@ -1038,6 +1041,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Синхронізація"),
         "yes": MessageLookupByLibrary.simpleMessage("Так"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Так")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Так"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Вчора о")
       };
 }

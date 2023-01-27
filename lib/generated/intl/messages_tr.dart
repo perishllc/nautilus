@@ -236,6 +236,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Hesap %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Sil"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Hesabı sil"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Bu düğümü silmek istediğinizden emin misiniz?\n\n\"Düğüm Ekle\" düğmesine dokunarak istediğiniz zaman yeniden ekleyebilirsiniz."),
         "deleteNodeHeader":
@@ -875,6 +876,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("bu biraz zaman alabilir..."),
         "to": MessageLookupByLibrary.simpleMessage("Adres"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Bugün"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Çok fazla kilit açma denemesi başarız oldu."),
         "trackingHeader":
@@ -997,6 +999,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("senkronizasyon"),
         "yes": MessageLookupByLibrary.simpleMessage("Evet"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Evet")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Evet"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Önceki günde")
       };
 }

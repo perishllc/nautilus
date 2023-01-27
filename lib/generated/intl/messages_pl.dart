@@ -236,6 +236,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Konto %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Usuń"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Usuń konto"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Czy na pewno chcesz usunąć ten węzeł?\n\nZawsze możesz dodać go ponownie później, dotykając przycisku „Dodaj węzeł”."),
         "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("Usuń węzeł?"),
@@ -885,6 +886,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("to może zająć chwilę..."),
         "to": MessageLookupByLibrary.simpleMessage("Do"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Dzisiaj o"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Za dużo nieudanych prób odblokowania."),
         "trackingHeader":
@@ -1005,6 +1007,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Synchronizacja"),
         "yes": MessageLookupByLibrary.simpleMessage("Tak"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Tak")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Tak"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Wczoraj o godz")
       };
 }

@@ -239,6 +239,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Účet %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "deleteAccount":
+            MessageLookupByLibrary.simpleMessage("Esborrar compte"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Esteu segur que voleu suprimir aquest node?\n\nSempre el podeu tornar a afegir més tard tocant el botó \"Afegeix un node\"."),
         "deleteNodeHeader":
@@ -885,6 +887,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "això pot trigar una estona..."),
         "to": MessageLookupByLibrary.simpleMessage("Pro"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Avui a les"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Příliš mnoho neúspěšných pokusů o odemknutí."),
         "trackingHeader":
@@ -1005,6 +1008,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Sincronització"),
         "yes": MessageLookupByLibrary.simpleMessage("Ano"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Ano")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Ano"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Ahir a les")
       };
 }

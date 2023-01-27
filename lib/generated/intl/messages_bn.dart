@@ -245,6 +245,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("অ্যাকাউন্ট %1"),
         "delete": MessageLookupByLibrary.simpleMessage("মুছে ফেলুন"),
+        "deleteAccount":
+            MessageLookupByLibrary.simpleMessage("হিসাব মুছে ফেলা"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "আপনি কি নিশ্চিত আপনি এই নোড মুছে ফেলতে চান?\n\nআপনি \"অ্যাড নোড\" বোতামে আলতো চাপ দিয়ে পরে এটিকে সর্বদা পুনরায় যোগ করতে পারেন৷"),
         "deleteNodeHeader":
@@ -892,6 +894,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("এটি একটু সময় নিতে পারে..."),
         "to": MessageLookupByLibrary.simpleMessage("প্রতি"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("আজ এ"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "আনলক করার অনেক চেষ্টা ব্যর্থ হয়েছে।"),
         "trackingHeader":
@@ -1014,6 +1017,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("সিঙ্ক হচ্ছে"),
         "yes": MessageLookupByLibrary.simpleMessage("হ্যাঁ"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("হ্যাঁ")
+        "yesButton": MessageLookupByLibrary.simpleMessage("হ্যাঁ"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("গতকাল এ")
       };
 }

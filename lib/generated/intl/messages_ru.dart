@@ -246,6 +246,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Счёт %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
+        "deleteAccount":
+            MessageLookupByLibrary.simpleMessage("Удалить аккаунт"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Вы уверены, что хотите удалить этот узел?\n\nВы всегда можете повторно добавить его позже, нажав кнопку «Добавить узел»."),
         "deleteNodeHeader":
@@ -905,6 +907,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "это может занять некоторое время..."),
         "to": MessageLookupByLibrary.simpleMessage("на"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Сегодня в"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Много неудачных попыток разблокировки."),
         "trackingHeader":
@@ -1028,6 +1031,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Синхронизации"),
         "yes": MessageLookupByLibrary.simpleMessage("Да"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Да")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Да"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Вчера в")
       };
 }

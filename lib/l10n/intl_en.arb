@@ -675,6 +675,11 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteAccount": "Delete Account",
+  "@deleteAccount": {
+    "type": "text",
+    "description": "settings_delete_account"
+  },
   "deleteNodeConfirmation": "Are you sure you want to delete this node?\n\nYou can always re-add it later by tapping the \"Add Node\" button",
   "@deleteNodeConfirmation": {
     "type": "text",
@@ -1034,16 +1039,6 @@
   "@featured": {
     "type": "text",
     "description": "featured"
-  },
-  "todayAt": "Today at",
-  "@todayAt": {
-    "type": "text",
-    "description": "history_today_at"
-  },
-  "yesterdayAt": "Yesterday at",
-  "@yesterdayAt": {
-    "type": "text",
-    "description": "history_yesterday_at"
   },
   "fewDaysAgo": "A few days ago",
   "@fewDaysAgo": {
@@ -1419,11 +1414,6 @@
   "@logout": {
     "type": "text",
     "description": "settings_logout"
-  },
-  "deleteAccount": "Delete Account",
-  "@deleteAccount": {
-    "type": "text",
-    "description": "settings_delete_account"
   },
   "logoutAction": "Delete Seed and Logout",
   "@logoutAction": {
@@ -2715,6 +2705,11 @@
     "type": "text",
     "description": "send_to"
   },
+  "todayAt": "Today at",
+  "@todayAt": {
+    "type": "text",
+    "description": "history_today_at"
+  },
   "tooManyFailedAttempts": "Too many failed unlock attempts.",
   "@tooManyFailedAttempts": {
     "type": "text",
@@ -3089,5 +3084,10 @@
   "@yesButton": {
     "type": "text",
     "description": "A button that accepts the mentioned process."
+  },
+  "yesterdayAt": "Yesterday at",
+  "@yesterdayAt": {
+    "type": "text",
+    "description": "history_yesterday_at"
   }
 }

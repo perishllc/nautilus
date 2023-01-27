@@ -246,6 +246,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Tanggalin"),
+        "deleteAccount":
+            MessageLookupByLibrary.simpleMessage("Tanggalin ang Account"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Sigurado ka bang gusto mong tanggalin ang node na ito?\n\nMaaari mo itong muling idagdag anumang oras sa ibang pagkakataon sa pamamagitan ng pag-tap sa \"Magdagdag ng Node\" na button"),
         "deleteNodeHeader":
@@ -920,6 +922,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "magtatagal pa ito ng ilang sandali..."),
         "to": MessageLookupByLibrary.simpleMessage("Sa"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Ngayon sa"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Masyadong madaming maling unlock attempts."),
         "trackingHeader":
@@ -1049,6 +1052,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Nagsi-sync"),
         "yes": MessageLookupByLibrary.simpleMessage("Oo"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Oo")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Oo"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Kahapon sa")
       };
 }

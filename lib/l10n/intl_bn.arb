@@ -675,6 +675,11 @@
     "type": "text",
     "description": "home_delete_slide"
   },
+  "deleteAccount": "হিসাব মুছে ফেলা",
+  "@deleteAccount": {
+    "type": "text",
+    "description": "settings_delete_account"
+  },
   "deleteNodeConfirmation": "আপনি কি নিশ্চিত আপনি এই নোড মুছে ফেলতে চান?\n\nআপনি \"অ্যাড নোড\" বোতামে আলতো চাপ দিয়ে পরে এটিকে সর্বদা পুনরায় যোগ করতে পারেন৷",
   "@deleteNodeConfirmation": {
     "type": "text",
@@ -2700,6 +2705,11 @@
     "type": "text",
     "description": "send_to"
   },
+  "todayAt": "আজ এ",
+  "@todayAt": {
+    "type": "text",
+    "description": "history_today_at"
+  },
   "tooManyFailedAttempts": "আনলক করার অনেক চেষ্টা ব্যর্থ হয়েছে।",
   "@tooManyFailedAttempts": {
     "type": "text",
@@ -3074,5 +3084,10 @@
   "@yesButton": {
     "type": "text",
     "description": "A button that accepts the mentioned process."
+  },
+  "yesterdayAt": "গতকাল এ",
+  "@yesterdayAt": {
+    "type": "text",
+    "description": "history_yesterday_at"
   }
 }

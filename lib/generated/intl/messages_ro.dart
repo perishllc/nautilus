@@ -240,6 +240,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Contul nr. %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Șterge"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Șterge cont"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Sigur doriți să ștergeți acest nod?\n\nPuteți oricând să-l adăugați din nou mai târziu atingând butonul „Adăugați nod”."),
         "deleteNodeHeader":
@@ -896,6 +897,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "acest lucru poate dura ceva timp..."),
         "to": MessageLookupByLibrary.simpleMessage("Către"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Astăzi la"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Prea multe încercări de deblocare eșuate."),
         "trackingHeader":
@@ -1019,6 +1021,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Sincronizare"),
         "yes": MessageLookupByLibrary.simpleMessage("Da"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Da")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Da"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Ieri la")
       };
 }

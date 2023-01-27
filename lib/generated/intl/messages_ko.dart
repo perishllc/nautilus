@@ -205,6 +205,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("삭제"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("계정 삭제"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "이 노드를 삭제하시겠습니까?\n\n\"노드 추가\" 버튼을 탭하여 나중에 언제든지 다시 추가할 수 있습니다."),
         "deleteNodeHeader":
@@ -770,6 +771,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("시간이 좀 걸릴 수 있습니다..."),
         "to": MessageLookupByLibrary.simpleMessage("받는 사람"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("오늘"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Too many failed unlock attempts."),
         "trackingHeader": MessageLookupByLibrary.simpleMessage("추적 승인"),
@@ -879,6 +881,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage("동기화됨"),
         "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage("동기화 중"),
         "yes": MessageLookupByLibrary.simpleMessage("네"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Yes")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Yes"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("어제")
       };
 }

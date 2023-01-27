@@ -183,6 +183,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("看看鸚鵡螺！我用這個鏈接給你發了一些 nano："),
         "defaultNewAccountName": MessageLookupByLibrary.simpleMessage("帳戶 %1"),
         "delete": MessageLookupByLibrary.simpleMessage("刪除"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("刪除帳戶"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "您確定要刪除此節點嗎？\n\n您以後隨時可以通過點擊“添加節點”按鈕重新添加它"),
         "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("刪除節點？"),
@@ -691,6 +692,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("可能還要等一下..."),
         "to": MessageLookupByLibrary.simpleMessage("至："),
+        "todayAt": MessageLookupByLibrary.simpleMessage("今天在"),
         "tooManyFailedAttempts":
             MessageLookupByLibrary.simpleMessage("解鎖失敗太多次"),
         "trackingHeader": MessageLookupByLibrary.simpleMessage("追踪授權"),
@@ -792,6 +794,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronized": MessageLookupByLibrary.simpleMessage("同步"),
         "xmrStatusSynchronizing": MessageLookupByLibrary.simpleMessage("同步"),
         "yes": MessageLookupByLibrary.simpleMessage("確認"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("確認")
+        "yesButton": MessageLookupByLibrary.simpleMessage("確認"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("昨天在")
       };
 }

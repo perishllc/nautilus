@@ -247,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Name des neuen Kontos %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Löschen"),
+        "deleteAccount": MessageLookupByLibrary.simpleMessage("Konto löschen"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Möchten Sie diesen Knoten wirklich löschen?\n\nSie können ihn später jederzeit wieder hinzufügen, indem Sie auf die Schaltfläche „Knoten hinzufügen“ tippen"),
         "deleteNodeHeader":
@@ -913,6 +914,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "das kann eine Weile dauern..."),
         "to": MessageLookupByLibrary.simpleMessage("An"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Heute um"),
         "tooManyFailedAttempts":
             MessageLookupByLibrary.simpleMessage("Zu viele Fehlversuche."),
         "trackingHeader":
@@ -1037,6 +1039,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Synchronisieren"),
         "yes": MessageLookupByLibrary.simpleMessage("Ja"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Ja")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Ja"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Gestern um")
       };
 }

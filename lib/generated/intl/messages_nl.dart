@@ -245,6 +245,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Verwijderen"),
+        "deleteAccount":
+            MessageLookupByLibrary.simpleMessage("Account verwijderen"),
         "deleteNodeConfirmation": MessageLookupByLibrary.simpleMessage(
             "Weet u zeker dat u dit knooppunt wilt verwijderen?\n\nJe kunt het later altijd opnieuw toevoegen door op de knop \"Knooppunt toevoegen\" te tikken"),
         "deleteNodeHeader":
@@ -897,6 +899,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("Dit kan een tijdje duren..."),
         "to": MessageLookupByLibrary.simpleMessage("Naar"),
+        "todayAt": MessageLookupByLibrary.simpleMessage("Vandaag bij"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
             "Te veel mislukte ontgrendelpogingen."),
         "trackingHeader":
@@ -1018,6 +1021,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "xmrStatusSynchronizing":
             MessageLookupByLibrary.simpleMessage("Synchroniseren"),
         "yes": MessageLookupByLibrary.simpleMessage("Ja"),
-        "yesButton": MessageLookupByLibrary.simpleMessage("Ja")
+        "yesButton": MessageLookupByLibrary.simpleMessage("Ja"),
+        "yesterdayAt": MessageLookupByLibrary.simpleMessage("Gisteren om")
       };
 }

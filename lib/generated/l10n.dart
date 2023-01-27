@@ -1405,6 +1405,16 @@ class Z {
     );
   }
 
+  /// `Delete Account`
+  String get deleteAccount {
+    return Intl.message(
+      'Delete Account',
+      name: 'deleteAccount',
+      desc: 'settings_delete_account',
+      args: [],
+    );
+  }
+
   /// `Are you sure you want to delete this node?\n\nYou can always re-add it later by tapping the "Add Node" button`
   String get deleteNodeConfirmation {
     return Intl.message(
@@ -2122,26 +2132,6 @@ class Z {
       'Featured',
       name: 'featured',
       desc: 'featured',
-      args: [],
-    );
-  }
-
-  /// `Today at`
-  String get todayAt {
-    return Intl.message(
-      'Today at',
-      name: 'todayAt',
-      desc: 'history_today_at',
-      args: [],
-    );
-  }
-
-  /// `Yesterday at`
-  String get yesterdayAt {
-    return Intl.message(
-      'Yesterday at',
-      name: 'yesterdayAt',
-      desc: 'history_yesterday_at',
       args: [],
     );
   }
@@ -2893,16 +2883,6 @@ class Z {
       'Logout',
       name: 'logout',
       desc: 'settings_logout',
-      args: [],
-    );
-  }
-
-  /// `Delete Account`
-  String get deleteAccount {
-    return Intl.message(
-      'Delete Account',
-      name: 'deleteAccount',
-      desc: 'settings_delete_account',
       args: [],
     );
   }
@@ -5495,6 +5475,16 @@ class Z {
     );
   }
 
+  /// `Today at`
+  String get todayAt {
+    return Intl.message(
+      'Today at',
+      name: 'todayAt',
+      desc: 'history_today_at',
+      args: [],
+    );
+  }
+
   /// `Too many failed unlock attempts.`
   String get tooManyFailedAttempts {
     return Intl.message(
@@ -6241,6 +6231,16 @@ class Z {
       'Yes',
       name: 'yesButton',
       desc: 'A button that accepts the mentioned process.',
+      args: [],
+    );
+  }
+
+  /// `Yesterday at`
+  String get yesterdayAt {
+    return Intl.message(
+      'Yesterday at',
+      name: 'yesterdayAt',
+      desc: 'history_yesterday_at',
       args: [],
     );
   }
