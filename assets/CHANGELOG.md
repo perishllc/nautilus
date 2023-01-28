@@ -1,6 +1,4 @@
-## v0.7.4 - [2023-02-XX]
-#### Added
-- Checkout menu
+## v0.7.4 - [2023-01-29]
 #### Changed
 - Websockets reworked to connect to node directly
 #### Fixed
