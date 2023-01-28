@@ -37,8 +37,14 @@ class Sheets {
   }
 
   //App Height Eigth Sheet
-  static Future<T?> showAppHeightEightSheet<T>(
-      {required BuildContext context, required Widget widget, Color? color, double radius = 30.0, Color? barrier, int animationDurationMs = 225}) {
+  static Future<T?> showAppHeightEightSheet<T>({
+    required BuildContext context,
+    required Widget widget,
+    Color? color,
+    double radius = 30.0,
+    Color? barrier,
+    int animationDurationMs = 225,
+  }) {
     assert(radius > 0.0);
     color ??= StateContainer.of(context).curTheme.backgroundDark;
     barrier ??= StateContainer.of(context).curTheme.barrier;
@@ -94,11 +100,23 @@ class _AppHeightNineSheetLayout extends SingleChildLayoutDelegate {
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
     if (constraints.maxHeight < 667)
-      return BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: constraints.maxHeight * 0.95);
+      return BoxConstraints(
+          minWidth: constraints.maxWidth,
+          maxWidth: constraints.maxWidth,
+          minHeight: 0.0,
+          maxHeight: constraints.maxHeight * 0.95);
     if ((constraints.maxHeight / constraints.maxWidth > 2.1 && Platform.isAndroid) || constraints.maxHeight > 812)
-      return BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: constraints.maxHeight * 0.8);
+      return BoxConstraints(
+          minWidth: constraints.maxWidth,
+          maxWidth: constraints.maxWidth,
+          minHeight: 0.0,
+          maxHeight: constraints.maxHeight * 0.8);
     else
-      return BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: constraints.maxHeight * 0.9);
+      return BoxConstraints(
+          minWidth: constraints.maxWidth,
+          maxWidth: constraints.maxWidth,
+          minHeight: 0.0,
+          maxHeight: constraints.maxHeight * 0.9);
   }
 
   @override
@@ -158,12 +176,13 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
     assert(_animationController == null);
     _animationController = BottomSheet.createAnimationController(navigator!.overlay!);
     _animationController!.duration = Duration(milliseconds: animationDurationMs!);
-    appSheetAnimation = CurvedAnimation(parent: _animationController!, curve: Curves.easeOut, reverseCurve: Curves.linear)
-      ..addStatusListener((AnimationStatus animationStatus) {
-        if (animationStatus == AnimationStatus.completed) {
-          appSheetAnimation.curve = Curves.linear;
-        }
-      });
+    appSheetAnimation =
+        CurvedAnimation(parent: _animationController!, curve: Curves.easeOut, reverseCurve: Curves.linear)
+          ..addStatusListener((AnimationStatus animationStatus) {
+            if (animationStatus == AnimationStatus.completed) {
+              appSheetAnimation.curve = Curves.linear;
+            }
+          });
     return _animationController!;
   }
 
@@ -225,11 +244,23 @@ class _AppHeightEightSheetLayout extends SingleChildLayoutDelegate {
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
     if (constraints.maxHeight < 667)
-      return BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: constraints.maxHeight * 0.9);
+      return BoxConstraints(
+          minWidth: constraints.maxWidth,
+          maxWidth: constraints.maxWidth,
+          minHeight: 0.0,
+          maxHeight: constraints.maxHeight * 0.9);
     if (constraints.maxHeight / constraints.maxWidth > 2.1)
-      return BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: constraints.maxHeight * 0.7);
+      return BoxConstraints(
+          minWidth: constraints.maxWidth,
+          maxWidth: constraints.maxWidth,
+          minHeight: 0.0,
+          maxHeight: constraints.maxHeight * 0.7);
     else
-      return BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: constraints.maxHeight * 0.8);
+      return BoxConstraints(
+          minWidth: constraints.maxWidth,
+          maxWidth: constraints.maxWidth,
+          minHeight: 0.0,
+          maxHeight: constraints.maxHeight * 0.8);
   }
 
   @override
@@ -244,7 +275,14 @@ class _AppHeightEightSheetLayout extends SingleChildLayoutDelegate {
 }
 
 class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
-  _AppHeightEightModalRoute({this.builder, this.barrierLabel, this.color, this.radius, RouteSettings? settings, this.barrier, this.animationDurationMs})
+  _AppHeightEightModalRoute(
+      {this.builder,
+      this.barrierLabel,
+      this.color,
+      this.radius,
+      RouteSettings? settings,
+      this.barrier,
+      this.animationDurationMs})
       : super(settings: settings);
 
   final WidgetBuilder? builder;
@@ -270,12 +308,13 @@ class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
     assert(_animationController == null);
     _animationController = BottomSheet.createAnimationController(navigator!.overlay!);
     _animationController!.duration = Duration(milliseconds: animationDurationMs!);
-    appSheetAnimation = CurvedAnimation(parent: _animationController!, curve: Curves.easeOut, reverseCurve: Curves.linear)
-      ..addStatusListener((AnimationStatus animationStatus) {
-        if (animationStatus == AnimationStatus.completed) {
-          appSheetAnimation.curve = Curves.linear;
-        }
-      });
+    appSheetAnimation =
+        CurvedAnimation(parent: _animationController!, curve: Curves.easeOut, reverseCurve: Curves.linear)
+          ..addStatusListener((AnimationStatus animationStatus) {
+            if (animationStatus == AnimationStatus.completed) {
+              appSheetAnimation.curve = Curves.linear;
+            }
+          });
     return _animationController!;
   }
 
@@ -329,11 +368,23 @@ class _AppHeightFullSheetLayout extends SingleChildLayoutDelegate {
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
     if (constraints.maxHeight < 667)
-      return BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: constraints.maxHeight * 0.95);
+      return BoxConstraints(
+          minWidth: constraints.maxWidth,
+          maxWidth: constraints.maxWidth,
+          minHeight: 0.0,
+          maxHeight: constraints.maxHeight * 0.95);
     if ((constraints.maxHeight / constraints.maxWidth > 2.1 && Platform.isAndroid) || constraints.maxHeight > 812)
-      return BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: constraints.maxHeight * 0.8);
+      return BoxConstraints(
+          minWidth: constraints.maxWidth,
+          maxWidth: constraints.maxWidth,
+          minHeight: 0.0,
+          maxHeight: constraints.maxHeight * 0.8);
     else
-      return BoxConstraints(minWidth: constraints.maxWidth, maxWidth: constraints.maxWidth, minHeight: 0.0, maxHeight: constraints.maxHeight * 0.9);
+      return BoxConstraints(
+          minWidth: constraints.maxWidth,
+          maxWidth: constraints.maxWidth,
+          minHeight: 0.0,
+          maxHeight: constraints.maxHeight * 0.9);
   }
 
   @override
@@ -393,12 +444,13 @@ class _AppHeightFullModalRoute<T> extends PopupRoute<T> {
     assert(_animationController == null);
     _animationController = BottomSheet.createAnimationController(navigator!.overlay!);
     _animationController!.duration = Duration(milliseconds: animationDurationMs!);
-    appSheetAnimation = CurvedAnimation(parent: _animationController!, curve: Curves.easeOut, reverseCurve: Curves.linear)
-      ..addStatusListener((AnimationStatus animationStatus) {
-        if (animationStatus == AnimationStatus.completed) {
-          appSheetAnimation.curve = Curves.linear;
-        }
-      });
+    appSheetAnimation =
+        CurvedAnimation(parent: _animationController!, curve: Curves.easeOut, reverseCurve: Curves.linear)
+          ..addStatusListener((AnimationStatus animationStatus) {
+            if (animationStatus == AnimationStatus.completed) {
+              appSheetAnimation.curve = Curves.linear;
+            }
+          });
     return _animationController!;
   }
 

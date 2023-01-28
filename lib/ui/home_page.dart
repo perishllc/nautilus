@@ -7,7 +7,7 @@ import 'dart:math';
 
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:badges/badges.dart';
+// import 'package:badges/badges.dart';
 import 'package:confetti/confetti.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -2615,10 +2615,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             ),
             BottomNavigationBarItem(
               icon: Badge(
-                showBadge: unpaidSubCount > 0,
-                badgeContent: Text("$unpaidSubCount", style: const TextStyle(color: Colors.white)),
-                animationType: BadgeAnimationType.scale,
-                shape: BadgeShape.circle,
+                isLabelVisible: unpaidSubCount > 0,
+                label: Text("$unpaidSubCount", style: const TextStyle(color: Colors.white)),
                 child: const Icon(Icons.currency_exchange),
               ),
               label: Z.of(context).subsButton,

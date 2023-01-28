@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cron_form_field/cron_expression.dart';
 import 'package:easy_cron/easy_cron.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,7 +27,6 @@ import 'package:wallet_flutter/ui/widgets/misc.dart';
 import 'package:wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/numberutil.dart';
-import 'package:cron_form_field/cron_form_field.dart';
 
 class AddSubSheet extends StatefulWidget {
   const AddSubSheet({required this.localCurrency}) : super();

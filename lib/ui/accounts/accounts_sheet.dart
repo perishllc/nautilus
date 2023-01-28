@@ -72,23 +72,6 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
     super.dispose();
   }
 
-  Future<void> _handleAccountsBalancesResponse(AccountsBalancesResponse resp) async {
-    // Handle balances event
-    for (final Account account in widget.accounts) {
-      resp.balances!.forEach((String address, AccountBalanceItem balance) {
-        address = address;
-        final String combinedBalance =
-            (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.receivable!)!).toString();
-        if (account.address == address && combinedBalance != account.balance) {
-          sl.get<DBHelper>().updateAccountBalance(account, combinedBalance);
-          setState(() {
-            account.balance = combinedBalance;
-          });
-        }
-      });
-    }
-  }
-
   void _registerBus() {
     _accountModifiedSub =
         EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((AccountModifiedEvent event) {
@@ -126,6 +109,23 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
   void _destroyBus() {
     if (_accountModifiedSub != null) {
       _accountModifiedSub!.cancel();
+    }
+  }
+
+  Future<void> _handleAccountsBalancesResponse(AccountsBalancesResponse resp) async {
+    // Handle balances event
+    for (final Account account in widget.accounts) {
+      resp.balances!.forEach((String address, AccountBalanceItem balance) {
+        address = address;
+        final String combinedBalance =
+            (BigInt.tryParse(balance.balance!)! + BigInt.tryParse(balance.receivable!)!).toString();
+        if (account.address == address && combinedBalance != account.balance) {
+          sl.get<DBHelper>().updateAccountBalance(account, combinedBalance);
+          setState(() {
+            account.balance = combinedBalance;
+          });
+        }
+      });
     }
   }
 
@@ -172,245 +172,6 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
       }
     }
     return totalBalance.toString();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-        minimum: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height * 0.035,
-        ),
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 60,
-                    height: 60,
-                    child: AppDialogs.infoButton(
-                      context,
-                      () {
-                        AppDialogs.showConfirmDialog(
-                            context,
-                            Z.of(context).hideAccountsHeader,
-                            Z.of(context).hideAccountsConfirmation,
-                            CaseChange.toUpperCase(Z.of(context).yes, context), () async {
-                          await Future<dynamic>.delayed(const Duration(milliseconds: 250));
-                          final List<Account> accountsToRemove = <Account>[];
-                          for (final Account account in widget.accounts) {
-                            if (account.selected ||
-                                account.index == 0 ||
-                                account.watchOnly ||
-                                account.balance == null) {
-                              continue;
-                            }
-
-                            if (BigInt.tryParse(account.balance!) == BigInt.zero) {
-                              accountsToRemove.add(account);
-                            }
-                          }
-                          for (final Account account in accountsToRemove) {
-                            await sl.get<DBHelper>().deleteAccount(account);
-                            EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: account, deleted: true));
-                            setState(() {
-                              widget.accounts.removeWhere((Account acc) => acc.index == account.index);
-                            });
-                          }
-                        }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
-                      },
-                      icon: AppIcons.trashcan,
-                    ),
-                  ),
-                  Column(
-                    children: <Widget>[
-                      Handlebars.horizontal(
-                        context,
-                        width: MediaQuery.of(context).size.width * 0.15,
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 15.0),
-                        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
-                        child: Column(
-                          children: <Widget>[
-                            AutoSizeText(
-                              CaseChange.toUpperCase(Z.of(context).accounts, context),
-                              style: AppStyles.textStyleHeader(context),
-                              maxLines: 1,
-                              stepGranularity: 0.1,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(top: 5.0),
-                        child: RichText(
-                          textAlign: TextAlign.start,
-                          text: TextSpan(
-                            text: '',
-                            children: [
-                              TextSpan(
-                                text: "(",
-                                style: TextStyle(
-                                  color: StateContainer.of(context).curTheme.primary60,
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w100,
-                                  fontFamily: "NunitoSans",
-                                ),
-                              ),
-                              TextSpan(
-                                text: getRawAsThemeAwareFormattedAmount(context, _getTotalBalance()),
-                                style: TextStyle(
-                                  color: StateContainer.of(context).curTheme.primary60,
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: "NunitoSans",
-                                ),
-                              ),
-                              TextSpan(
-                                text: (StateContainer.of(context).nyanoMode) ? (" nyano)") : (" NANO)"),
-                                style: TextStyle(
-                                  color: StateContainer.of(context).curTheme.primary60,
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w100,
-                                  fontFamily: "NunitoSans",
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    width: 60,
-                    height: 60,
-                    child: AppDialogs.infoButton(
-                      context,
-                      () {
-                        Sheets.showAppHeightEightSheet(context: context, widget: const AddWatchOnlyAccountSheet());
-                      },
-                      icon: AppIcons.search,
-                    ),
-                  ),
-                ],
-              ),
-
-              // A list containing accounts
-              Expanded(
-                  key: expandedKey,
-                  child: Stack(
-                    children: <Widget>[
-                      if (widget.accounts == null)
-                        const Center(
-                          child: Text("Loading"),
-                        )
-                      else
-                        DraggableScrollbar(
-                          controller: _scrollController,
-                          scrollbarColor: StateContainer.of(context).curTheme.primary,
-                          scrollbarTopMargin: 20.0,
-                          scrollbarBottomMargin: 12.0,
-                          child: ListView.builder(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            itemCount: widget.accounts.length,
-                            controller: _scrollController,
-                            itemBuilder: (BuildContext context, int index) {
-                              return _buildAccountListItem(context, widget.accounts[index], setState, index);
-                            },
-                          ),
-                        ),
-
-                      // begin: const AlignmentDirectional(0.5, 1.0),
-                      // end: const AlignmentDirectional(0.5, -1.0),
-                      ListGradient(
-                        height: 20,
-                        top: true,
-                        color: StateContainer.of(context).curTheme.backgroundDark!,
-                      ),
-                      ListGradient(
-                        height: 20,
-                        top: false,
-                        color: StateContainer.of(context).curTheme.backgroundDark!,
-                      ),
-                    ],
-                  )),
-              const SizedBox(
-                height: 15,
-              ),
-              //A row with Add Account button
-              if (widget.accounts.length < MAX_ACCOUNTS)
-                Row(
-                  children: <Widget>[
-                    AppButton.buildAppButton(
-                      context,
-                      AppButtonType.PRIMARY,
-                      Z.of(context).addAccount,
-                      Dimens.BUTTON_TOP_DIMENS,
-                      disabled: _addingAccount,
-                      onPressed: () {
-                        if (!_addingAccount) {
-                          setState(() {
-                            _addingAccount = true;
-                          });
-                          StateContainer.of(context).getSeed().then((String seed) {
-                            sl
-                                .get<DBHelper>()
-                                .addAccount(seed, nameBuilder: Z.of(context).defaultNewAccountName)
-                                .then((Account? newAccount) {
-                              if (newAccount == null) {
-                                sl.get<Logger>().d("Error adding account: account was null");
-                                return;
-                              }
-                              _requestBalances(context, [newAccount]);
-                              StateContainer.of(context).updateRecentlyUsedAccounts();
-                              widget.accounts.add(newAccount);
-                              setState(() {
-                                _addingAccount = false;
-                                widget.accounts.sort((Account a, Account b) => a.index!.compareTo(b.index!));
-                                // Scroll if list is full
-                                if (expandedKey.currentContext != null) {
-                                  final RenderBox? box = expandedKey.currentContext!.findRenderObject() as RenderBox?;
-                                  if (box == null) return;
-                                  if (widget.accounts.length * 72.0 >= box.size.height) {
-                                    _scrollController.animateTo(
-                                      newAccount.index! * 72.0 > _scrollController.position.maxScrollExtent
-                                          ? _scrollController.position.maxScrollExtent + 72.0
-                                          : newAccount.index! * 72.0,
-                                      curve: Curves.easeOut,
-                                      duration: const Duration(milliseconds: 200),
-                                    );
-                                  }
-                                }
-                              });
-                            });
-                          });
-                        }
-                      },
-                    ),
-                  ],
-                ),
-              // Close button
-              Row(
-                children: <Widget>[
-                  AppButton.buildAppButton(
-                    context,
-                    AppButtonType.PRIMARY_OUTLINE,
-                    Z.of(context).close,
-                    Dimens.BUTTON_BOTTOM_DIMENS,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ));
   }
 
   Widget _buildAccountListItem(BuildContext context, Account account, StateSetter setState, int index) {
@@ -693,5 +454,244 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
       // All actions are defined in the children parameter.
       children: actions,
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        minimum: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height * 0.035,
+        ),
+        child: SizedBox(
+          width: double.infinity,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 60,
+                    height: 60,
+                    child: AppDialogs.infoButton(
+                      context,
+                      () {
+                        AppDialogs.showConfirmDialog(
+                            context,
+                            Z.of(context).hideAccountsHeader,
+                            Z.of(context).hideAccountsConfirmation,
+                            CaseChange.toUpperCase(Z.of(context).yes, context), () async {
+                          await Future<dynamic>.delayed(const Duration(milliseconds: 250));
+                          final List<Account> accountsToRemove = <Account>[];
+                          for (final Account account in widget.accounts) {
+                            if (account.selected ||
+                                account.index == 0 ||
+                                account.watchOnly ||
+                                account.balance == null) {
+                              continue;
+                            }
+
+                            if (BigInt.tryParse(account.balance!) == BigInt.zero) {
+                              accountsToRemove.add(account);
+                            }
+                          }
+                          for (final Account account in accountsToRemove) {
+                            await sl.get<DBHelper>().deleteAccount(account);
+                            EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: account, deleted: true));
+                            setState(() {
+                              widget.accounts.removeWhere((Account acc) => acc.index == account.index);
+                            });
+                          }
+                        }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
+                      },
+                      icon: AppIcons.trashcan,
+                    ),
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Handlebars.horizontal(
+                        context,
+                        width: MediaQuery.of(context).size.width * 0.15,
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 15.0),
+                        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
+                        child: Column(
+                          children: <Widget>[
+                            AutoSizeText(
+                              CaseChange.toUpperCase(Z.of(context).accounts, context),
+                              style: AppStyles.textStyleHeader(context),
+                              maxLines: 1,
+                              stepGranularity: 0.1,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 5.0),
+                        child: RichText(
+                          textAlign: TextAlign.start,
+                          text: TextSpan(
+                            text: '',
+                            children: [
+                              TextSpan(
+                                text: "(",
+                                style: TextStyle(
+                                  color: StateContainer.of(context).curTheme.primary60,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w100,
+                                  fontFamily: "NunitoSans",
+                                ),
+                              ),
+                              TextSpan(
+                                text: getRawAsThemeAwareFormattedAmount(context, _getTotalBalance()),
+                                style: TextStyle(
+                                  color: StateContainer.of(context).curTheme.primary60,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: "NunitoSans",
+                                ),
+                              ),
+                              TextSpan(
+                                text: (StateContainer.of(context).nyanoMode) ? (" nyano)") : (" NANO)"),
+                                style: TextStyle(
+                                  color: StateContainer.of(context).curTheme.primary60,
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w100,
+                                  fontFamily: "NunitoSans",
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    width: 60,
+                    height: 60,
+                    child: AppDialogs.infoButton(
+                      context,
+                      () {
+                        Sheets.showAppHeightEightSheet(context: context, widget: const AddWatchOnlyAccountSheet());
+                      },
+                      icon: AppIcons.search,
+                    ),
+                  ),
+                ],
+              ),
+
+              // A list containing accounts
+              Expanded(
+                  key: expandedKey,
+                  child: Stack(
+                    children: <Widget>[
+                      if (widget.accounts == null)
+                        const Center(
+                          child: Text("Loading"),
+                        )
+                      else
+                        DraggableScrollbar(
+                          controller: _scrollController,
+                          scrollbarColor: StateContainer.of(context).curTheme.primary,
+                          scrollbarTopMargin: 20.0,
+                          scrollbarBottomMargin: 12.0,
+                          child: ListView.builder(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            itemCount: widget.accounts.length,
+                            controller: _scrollController,
+                            itemBuilder: (BuildContext context, int index) {
+                              return _buildAccountListItem(context, widget.accounts[index], setState, index);
+                            },
+                          ),
+                        ),
+
+                      // begin: const AlignmentDirectional(0.5, 1.0),
+                      // end: const AlignmentDirectional(0.5, -1.0),
+                      ListGradient(
+                        height: 20,
+                        top: true,
+                        color: StateContainer.of(context).curTheme.backgroundDark!,
+                      ),
+                      ListGradient(
+                        height: 20,
+                        top: false,
+                        color: StateContainer.of(context).curTheme.backgroundDark!,
+                      ),
+                    ],
+                  )),
+              const SizedBox(
+                height: 15,
+              ),
+              //A row with Add Account button
+              if (widget.accounts.length < MAX_ACCOUNTS)
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(
+                      context,
+                      AppButtonType.PRIMARY,
+                      Z.of(context).addAccount,
+                      Dimens.BUTTON_TOP_DIMENS,
+                      disabled: _addingAccount,
+                      onPressed: () {
+                        if (!_addingAccount) {
+                          setState(() {
+                            _addingAccount = true;
+                          });
+                          StateContainer.of(context).getSeed().then((String seed) {
+                            sl
+                                .get<DBHelper>()
+                                .addAccount(seed, nameBuilder: Z.of(context).defaultNewAccountName)
+                                .then((Account? newAccount) {
+                              if (newAccount == null) {
+                                sl.get<Logger>().d("Error adding account: account was null");
+                                return;
+                              }
+                              _requestBalances(context, [newAccount]);
+                              StateContainer.of(context).updateRecentlyUsedAccounts();
+                              widget.accounts.add(newAccount);
+                              setState(() {
+                                _addingAccount = false;
+                                widget.accounts.sort((Account a, Account b) => a.index!.compareTo(b.index!));
+                                // Scroll if list is full
+                                if (expandedKey.currentContext != null) {
+                                  final RenderBox? box = expandedKey.currentContext!.findRenderObject() as RenderBox?;
+                                  if (box == null) return;
+                                  if (widget.accounts.length * 72.0 >= box.size.height) {
+                                    _scrollController.animateTo(
+                                      newAccount.index! * 72.0 > _scrollController.position.maxScrollExtent
+                                          ? _scrollController.position.maxScrollExtent + 72.0
+                                          : newAccount.index! * 72.0,
+                                      curve: Curves.easeOut,
+                                      duration: const Duration(milliseconds: 200),
+                                    );
+                                  }
+                                }
+                              });
+                            });
+                          });
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              // Close button
+              Row(
+                children: <Widget>[
+                  AppButton.buildAppButton(
+                    context,
+                    AppButtonType.PRIMARY_OUTLINE,
+                    Z.of(context).close,
+                    Dimens.BUTTON_BOTTOM_DIMENS,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ));
   }
 }
