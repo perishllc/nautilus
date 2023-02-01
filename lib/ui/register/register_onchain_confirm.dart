@@ -2,21 +2,16 @@ import 'dart:async';
 
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/authentication_method.dart';
 import 'package:wallet_flutter/model/vault.dart';
-import 'package:wallet_flutter/network/account_service.dart';
-import 'package:wallet_flutter/network/model/response/process_response.dart';
 import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/register/register_onchain_complete_sheet.dart';
-import 'package:wallet_flutter/ui/send/send_complete_sheet.dart';
-import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
@@ -27,7 +22,6 @@ import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:wallet_flutter/util/biometrics.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/hapticutil.dart';
-import 'package:wallet_flutter/util/nanoutil.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
 
 class RegisterOnchainConfirmSheet extends StatefulWidget {
@@ -115,7 +109,7 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.address!,
-                          contactName: "@${widget.username!}")),
+                          contactName: "@${widget.username}")),
 
                   // "FOR" text
                   // Container(

@@ -190,6 +190,7 @@ mixin SendSheetHelpers {
       }
 
       // Go to confirm sheet:
+      // ignore: use_build_context_synchronously
       Sheets.showAppHeightNineSheet(
           context: context,
           widget: HandoffConfirmSheet(
@@ -204,25 +205,28 @@ mixin SendSheetHelpers {
       final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(authItem.account);
 
       // Go to confirm sheet:
+      // ignore: use_build_context_synchronously
       Sheets.showAppHeightNineSheet(
-          context: context,
-          widget: AuthConfirmSheet(
-            authItem: authItem,
-            destination: user?.address ?? authItem.account,
-            contactName: user?.getDisplayName(),
-          ));
+        context: context,
+        widget: AuthConfirmSheet(
+          authItem: authItem,
+          destination: user?.address ?? authItem.account,
+          contactName: user?.getDisplayName(),
+        ),
+      );
     } else if (scanResult is SubItem) {
       Sheets.showAppHeightNineSheet(
-          context: context,
-          widget: SubConfirmSheet(
-            sub: Subscription(
-              address: scanResult.account,
-              amount_raw: scanResult.amount,
-              name: scanResult.label,
-              frequency: scanResult.frequency,
-              active: false,
-            ),
-          ));
+        context: context,
+        widget: SubConfirmSheet(
+          sub: Subscription(
+            address: scanResult.account,
+            amount_raw: scanResult.amount,
+            label: scanResult.label,
+            frequency: scanResult.frequency,
+            active: true,
+          ),
+        ),
+      );
     }
   }
 
@@ -764,15 +768,16 @@ class SendSheetState extends State<SendSheet> {
                     context,
                     () {
                       Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
-                      Sheets.showAppHeightEightSheet(
-                          context: context,
-                          widget: SendGiftSheet(
-                            localCurrency: widget.localCurrency,
-                          ));
+                      // Sheets.showAppHeightEightSheet(
+                      //     context: context,
+                      //     widget: SendGiftSheet(
+                      //       localCurrency: widget.localCurrency,
+                      //     ));
+                      Navigator.of(context).pushNamed("/gift_paper_wallet");
                     },
-                    // icon: AppIcons.gift,
-                    icon: AppIcons.envelope,
-                    color: StateContainer.of(context).curTheme.error,
+                    icon: AppIcons.gift,
+                    // icon: AppIcons.envelope,
+                    // color: StateContainer.of(context).curTheme.error,
                     key: const Key("gift_button"),
                   ),
                 ),
@@ -815,7 +820,7 @@ class SendSheetState extends State<SendSheet> {
 
             const SizedBox(height: 5),
             // account / wallet name:
-            OutlinedButton(
+            TextButton(
               onPressed: () async {
                 Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
                 setState(() {

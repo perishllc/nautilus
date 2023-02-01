@@ -706,7 +706,6 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
                   ),
                 ],
               ),
-              //A row with Close button
               Row(
                 children: <Widget>[
                   AppButton.buildAppButton(

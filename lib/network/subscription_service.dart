@@ -276,7 +276,7 @@ Have a happy Chinese New Year!
     await flutterLocalNotificationsPlugin.zonedSchedule(
       sub.id ?? 0,
       "Subscription Reminder",
-      "Your subscription for ${sub.name} is due",
+      "Your subscription for ${sub.label} is due",
       tzdatetime,
       const NotificationDetails(
         android: androidNotificationDetails,

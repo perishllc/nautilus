@@ -334,8 +334,7 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       BranchResponse<dynamic>? branchResponse;
 
       if (widget.splitAmountRaw.isNotEmpty) {
-        final String paperWalletAccount = NanoUtil.seedToAddress(widget.paperWalletSeed, 0);
-        Map resp = await sl<GiftCards>().createSplitGiftCard(
+        Map resp = await sl.get<GiftCards>().createSplitGiftCard(
           seed: widget.paperWalletSeed,
           requestingAccount: walletAddress,
           memo: widget.memo,
@@ -347,7 +346,7 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
           branchLink = resp["link"] as String;
         }
       } else {
-        branchResponse = await sl<GiftCards>().createGiftCard(
+        branchResponse = await sl.get<GiftCards>().createGiftCard(
           context,
           paperWalletSeed: widget.paperWalletSeed,
           amountRaw: widget.amountRaw,
@@ -377,15 +376,17 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       }
 
       // ignore: use_build_context_synchronously
-      await sl.get<GiftCards>().handleResponse(context,
-          success: linkCreationSuccess,
-          amountRaw: widget.amountRaw,
-          destination: widget.destination,
-          localCurrency: widget.localCurrency,
-          hash: resp?.hash,
-          link: branchLink,
-          paperWalletSeed: widget.paperWalletSeed,
-          memo: widget.memo);
+      await sl.get<GiftCards>().handleResponse(
+            context,
+            success: linkCreationSuccess,
+            amountRaw: widget.amountRaw,
+            destination: widget.destination,
+            localCurrency: widget.localCurrency,
+            hash: resp?.hash,
+            link: branchLink,
+            paperWalletSeed: widget.paperWalletSeed,
+            memo: widget.memo,
+          );
     } catch (error) {
       sl.get<Logger>().d("gift_confirm_error: $error");
       // Send failed

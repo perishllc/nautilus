@@ -207,6 +207,8 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
               child: BottomSheet(
                 animationController: _animationController,
                 onClosing: () => Navigator.pop(context),
+                backgroundColor: color,
+                elevation: 0,
                 builder: (BuildContext context) => Container(
                   decoration: BoxDecoration(
                     color: color,
@@ -332,6 +334,8 @@ class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
             child: BottomSheet(
               animationController: _animationController,
               onClosing: () => Navigator.pop(context),
+              backgroundColor: color,
+              elevation: 0,
               builder: (BuildContext context) => Container(
                 decoration: BoxDecoration(
                   color: color,

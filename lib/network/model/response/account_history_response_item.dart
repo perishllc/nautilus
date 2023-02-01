@@ -5,6 +5,9 @@ part 'account_history_response_item.g.dart';
 
 int? _toInt(String? v) => v == null ? 0 : int.tryParse(v);
 
+// ignore: avoid_bool_literals_in_conditional_expressions
+bool? _toBool(String? v) => v == null ? false : v == 'true';
+
 @JsonSerializable()
 class AccountHistoryResponseItem {
   @JsonKey(name: 'type')
@@ -28,31 +31,24 @@ class AccountHistoryResponseItem {
   @JsonKey(name: 'link')
   String? link;
 
-  @JsonKey(ignore: true)
+  // @JsonKey(ignore: true)
+  @JsonKey(name: 'confirmed', fromJson: _toBool)
   bool? confirmed;
 
   @JsonKey(name: 'local_timestamp', fromJson: _toInt)
   int? local_timestamp;
 
-  AccountHistoryResponseItem(
-      {String? type,
-      String? subtype,
-      String? account,
-      String? amount,
-      String? hash,
-      int? height,
-      String? link,
-      int? local_timestamp,
-      this.confirmed}) {
-    this.type = type;
-    this.subtype = subtype;
-    this.account = account;
-    this.amount = amount;
-    this.hash = hash;
-    this.height = height;
-    this.link = link;
-    this.local_timestamp = local_timestamp;
-  }
+  AccountHistoryResponseItem({
+    this.type,
+    this.subtype,
+    this.account,
+    this.amount,
+    this.hash,
+    this.height,
+    this.link,
+    this.local_timestamp,
+    this.confirmed,
+  });
 
   String? getShortString() {
     return Address(account).getShortString();

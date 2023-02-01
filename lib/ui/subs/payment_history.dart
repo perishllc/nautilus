@@ -277,7 +277,7 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
                                     children: <Widget>[
                                       // Account name
                                       AutoSizeText(
-                                        sub.name,
+                                        sub.label,
                                         style: TextStyle(
                                           fontFamily: "NunitoSans",
                                           fontWeight: FontWeight.w600,

@@ -223,34 +223,34 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) => SafeArea(
           minimum: EdgeInsets.only(
-              bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.075),
+              bottom: MediaQuery.of(context).size.height * 0.035, top: MediaQuery.of(context).size.height * 0.05),
           child: Column(
             children: <Widget>[
               Stack(
                 children: <Widget>[
-                  // Back Button
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    height: 50,
-                    width: 50,
-                    child: TextButton(
-                        style: TextButton.styleFrom(
-                          foregroundColor: StateContainer.of(context).curTheme.text15,
-                          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-                          padding: EdgeInsets.zero,
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
-                  ),
+                  // // Back Button
+                  // Container(
+                  //   alignment: Alignment.centerLeft,
+                  //   height: 50,
+                  //   width: 50,
+                  //   child: TextButton(
+                  //       style: TextButton.styleFrom(
+                  //         foregroundColor: StateContainer.of(context).curTheme.text15,
+                  //         backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                  //         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+                  //         padding: EdgeInsets.zero,
+                  //       ),
+                  //       onPressed: () {
+                  //         Navigator.pop(context);
+                  //       },
+                  //       child: Icon(AppIcons.back, color: StateContainer.of(context).curTheme.text, size: 24)),
+                  // ),
 
                   // Safety icon
                   Container(
                     alignment: Alignment.center,
                     child: Icon(
-                      AppIcons.money_bill_wave,
+                      AppIcons.gift,
                       size: 48,
                       color: StateContainer.of(context).curTheme.primary,
                     ),
@@ -296,7 +296,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                     //   stepGranularity: 0.5,
                     // ),
                     child: Text(
-                      Z.of(context).giftInfo.replaceAll("%1", NonTranslatable.appName),
+                      Z.of(context).giftInfo.replaceAll("%1", NonTranslatable.appName).replaceAll("%2", NonTranslatable.currencyName),
                       style: AppStyles.textStyleParagraph(context),
                     ),
                     // ),
@@ -397,6 +397,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                         SizedBox(width: MediaQuery.of(context).size.width * 0.105),
                         Checkbox(
                           activeColor: StateContainer.of(context).curTheme.primary,
+                          side: BorderSide(color: StateContainer.of(context).curTheme.text ?? Colors.white),
                           value: requireCaptcha,
                           onChanged: (bool? value) {
                             if (value == null) {
@@ -431,7 +432,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   AppButton.buildAppButton(
-                      context, AppButtonType.PRIMARY, Z.of(context).createGiftCard, Dimens.BUTTON_BOTTOM_DIMENS,
+                      context, AppButtonType.PRIMARY, Z.of(context).createGiftCard, Dimens.BUTTON_TOP_DIMENS,
                       onPressed: () {
                     final bool isValid = _validateRequest();
                     if (!isValid) {
@@ -468,6 +469,19 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                           requireCaptcha: requireCaptcha,
                         ));
                   }),
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  AppButton.buildAppButton(
+                    context,
+                    AppButtonType.PRIMARY_OUTLINE,
+                    Z.of(context).close,
+                    Dimens.BUTTON_BOTTOM_DIMENS,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                 ],
               ),
             ],

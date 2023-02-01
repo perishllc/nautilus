@@ -10,6 +10,7 @@ import 'package:wallet_flutter/model/db/subscription.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/model/db/user.dart';
 import 'package:wallet_flutter/model/db/work_source.dart';
+import 'package:wallet_flutter/network/account_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/util/nanoutil.dart';
@@ -112,7 +113,7 @@ class DBHelper {
   static const String SUBS_SQL = """
         CREATE TABLE Subscriptions( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        name TEXT,
+        label TEXT,
         active BOOLEAN,
         paid BOOLEAN,
         autopay BOOLEAN,
@@ -243,8 +244,8 @@ class DBHelper {
         id: 0,
         name: "Perish Node",
         selected: true,
-        http_url: "https://nautilus.perish.co/api",
-        ws_url: "wss://nautilus.perish.co",
+        http_url: AccountService.DEFAULT_HTTP_URL,
+        ws_url: AccountService.DEFAULT_WS_URL,
       ),
       dbClient: dbClient,
     );
@@ -464,7 +465,7 @@ class DBHelper {
       subs.add(
         Subscription(
           id: list[i]["id"] as int? ?? 0,
-          name: list[i]["name"] as String,
+          label: list[i]["name"] as String,
           address: list[i]["address"] as String,
           amount_raw: list[i]["amount_raw"] as String,
           frequency: list[i]["frequency"] as String,
@@ -483,7 +484,7 @@ class DBHelper {
       await txn.rawInsert(
           'INSERT INTO Subscriptions (name, active, paid, autopay, address, amount_raw, frequency) values(?, ?, ?, ?, ?, ?, ?)',
           [
-            sub.name,
+            sub.label,
             if (sub.active) 1 else 0,
             if (sub.paid) 1 else 0,
             if (sub.autopay) 1 else 0,

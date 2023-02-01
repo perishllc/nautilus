@@ -351,6 +351,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             barrierColor: StateContainer.of(context).curTheme.barrier,
             builder: (BuildContext context) {
               return AlertDialog(
+                surfaceTintColor: Colors.transparent,
                 actionsPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 title: Text(
@@ -502,6 +503,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             barrierColor: StateContainer.of(context).curTheme.barrier,
             builder: (BuildContext context) {
               return AlertDialog(
+                surfaceTintColor: Colors.transparent,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 actionsPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 title: Text(
@@ -512,7 +514,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Text("${Z.of(context).importGiftv2}\n\n", style: AppStyles.textStyleParagraph(context)),
+                    Text("${Z.of(context).importGiftv2.replaceAll("%2", NonTranslatable.currencyName)}\n\n",
+                        style: AppStyles.textStyleParagraph(context)),
                     RichText(
                       textAlign: TextAlign.start,
                       text: TextSpan(
@@ -607,9 +610,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             // sleep to flex the animation a bit:
             await Future<dynamic>.delayed(const Duration(milliseconds: 1500));
 
-            final dynamic res = await sl
-                .get<GiftCards>()
-                .giftCardClaim(giftUUID: giftUUID, requestingAccount: requestingAccount, hcaptchaToken: hcaptchaToken);
+            final dynamic res = await sl.get<GiftCards>().giftCardClaim(
+                  giftUUID: giftUUID,
+                  requestingAccount: requestingAccount,
+                  hcaptchaToken: hcaptchaToken,
+                );
             if (!mounted) return;
 
             if (res["error"] != null) {
@@ -650,6 +655,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           barrierColor: StateContainer.of(context).curTheme.barrier,
           builder: (BuildContext context) {
             return AlertDialog(
+              surfaceTintColor: Colors.transparent,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
               title: Text(
                 Z.of(context).giftAlertEmpty,
@@ -838,15 +844,70 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             return true; // Return false if you want to cancel the click event.
           },
           ignoreNativeDialog: Platform.isAndroid,
+          // ignoreNativeDialog: false,
           dialogStyle: const DialogStyle(
             dialogShape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
-          ), // Custom dialog styles.
+          ),
           // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
           onDismissed: () => rateMyApp.callEvent(RateMyAppEventType.laterButtonPressed),
           // This one allows you to change the default dialog content.
-          // contentBuilder: (context, defaultContent) => content,
-          // This one allows you to use your own buttons.
-          // actionsBuilder: (context) => [],
+          contentBuilder: (BuildContext context, Widget defaultContent) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  Z.of(context).rateTheAppDescription,
+                  style: TextStyle(
+                    fontSize: AppFontSizes.medium,
+                    color: StateContainer.of(context).curTheme.text,
+                  ),
+                ),
+              ],
+            );
+          },
+
+          // actionsBuilder: (BuildContext context) {
+          //   return [
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.start,
+          //       children: <Widget>[
+          //         AppSimpleDialogOption(
+          //           onPressed: () async {
+          //             await rateMyApp.callEvent(RateMyAppEventType.noButtonPressed);
+          //             if (!mounted) return;
+          //             Navigator.pop(context);
+          //           },
+          //           child: Text(
+          //             Z.of(context).noThanks,
+          //             style: AppStyles.textStyleDialogOptions(context),
+          //           ),
+          //         ),
+          //         AppSimpleDialogOption(
+          //           onPressed: () async {
+          //             await rateMyApp.callEvent(RateMyAppEventType.laterButtonPressed);
+          //             if (!mounted) return;
+          //             Navigator.pop(context);
+          //           },
+          //           child: Text(
+          //             Z.of(context).maybeLater,
+          //             style: AppStyles.textStyleDialogOptions(context),
+          //           ),
+          //         ),
+          //         AppSimpleDialogOption(
+          //           onPressed: () async {
+          //             await rateMyApp.callEvent(RateMyAppEventType.rateButtonPressed);
+          //             if (!mounted) return;
+          //             // Navigator.pop(context);
+          //           },
+          //           child: Text(
+          //             Z.of(context).rate,
+          //             style: AppStyles.textStyleDialogOptions(context),
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ];
+          // },
         );
       }
 
@@ -1121,9 +1182,15 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           bool shouldUpdate = false;
           if (tx.request_time == null) {
             shouldUpdate = true;
-          } else if (DateTime.fromMillisecondsSinceEpoch(tx.request_time! * 1000)
-              .isBefore(DateTime.now().subtract(const Duration(minutes: 1)))) {
-            shouldUpdate = true;
+          } else {
+            // don't update if the balance is now 0:
+            final List<String> metadata = tx.metadata!.split(RecordTypes.SEPARATOR);
+            if (metadata.length >= 2 && metadata[2] == "0") {
+              shouldUpdate = false;
+            } else if (DateTime.fromMillisecondsSinceEpoch(tx.request_time! * 1000)
+                .isBefore(DateTime.now().subtract(const Duration(minutes: 1)))) {
+              shouldUpdate = true;
+            }
           }
           if (shouldUpdate) {
             tx.request_time = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
@@ -1525,7 +1592,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       final bool connected = await sl.get<AccountService>().isConnected();
       showConnectionWarning(!connected);
     }
-    
+
     // setState(() {});
   }
 
@@ -2216,6 +2283,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         return;
       }
 
+      if (!mounted) return;
+
       // Go to confirm sheet:
       Sheets.showAppHeightNineSheet(
           context: context,
@@ -2229,6 +2298,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       final AuthItem authItem = scanResult;
       // See if this address belongs to a contact or username
       final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(authItem.account);
+
+      if (!mounted) return;
 
       // Go to confirm sheet:
       Sheets.showAppHeightNineSheet(
@@ -2246,9 +2317,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           sub: Subscription(
             address: scanResult.account,
             amount_raw: scanResult.amount,
-            name: scanResult.label,
+            label: scanResult.label,
             frequency: scanResult.frequency,
-            active: false,
+            active: true,
           ),
         ),
       );

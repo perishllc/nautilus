@@ -108,7 +108,7 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
                       ],
                     ),
                   ),
-                  if (widget.sub.name.isNotEmpty)
+                  if (widget.sub.label.isNotEmpty)
                     Container(
                       margin: EdgeInsets.only(
                           left: MediaQuery.of(context).size.width * 0.105,
@@ -125,7 +125,7 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
                           text: "",
                           children: [
                             TextSpan(
-                              text: widget.sub.name,
+                              text: widget.sub.label,
                               style: AppStyles.textStyleParagraphPrimary(context),
                             ),
                           ],
@@ -147,7 +147,7 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
                     ),
                     child: UIUtil.threeLineAddressText(context, widget.sub.address),
                   ),
-                  // if (widget.sub.name.isNotEmpty)
+                  // if (widget.sub.label.isNotEmpty)
                   //   Container(
                   //     margin: EdgeInsets.only(
                   //         left: MediaQuery.of(context).size.width * 0.105,
@@ -239,6 +239,37 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
                           //   ),
                           // ),
                         ],
+                      ),
+                    ),
+                  ),
+
+                  // "EVERY" text
+                  Container(
+                    margin: const EdgeInsets.only(top: 30, bottom: 10),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          CaseChange.toUpperCase(Z.of(context).subscribeEvery, context),
+                          style: AppStyles.textStyleHeader(context),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width * 0.105,
+                        right: MediaQuery.of(context).size.width * 0.105),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: StateContainer.of(context).curTheme.backgroundDarkest,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        text: widget.sub.frequency,
+                        style: AppStyles.textStyleParagraphPrimary(context),
                       ),
                     ),
                   ),
@@ -355,7 +386,7 @@ class SubConfirmSheetState extends State<SubConfirmSheet> {
         closeOnTap: true,
         removeUntilHome: true,
         widget: SubCompleteSheet(
-          label: widget.sub.name,
+          label: widget.sub.label,
         ),
       );
     } catch (error) {

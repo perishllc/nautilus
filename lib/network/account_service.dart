@@ -58,11 +58,13 @@ Map? decodeJson(dynamic src) {
 String HTTP_URL = "";
 String WS_URL = "";
 
-const String DEFAULT_HTTP_URL = "https://nautilus.perish.co/api";
-const String DEFAULT_WS_URL = "wss://nautilus.perish.co";
-
 // AccountService singleton
 class AccountService {
+// static const String DEFAULT_HTTP_URL = "https://nautilus.perish.co/api";
+// static const String DEFAULT_WS_URL = "wss://nautilus.perish.co";
+  static const String DEFAULT_HTTP_URL = "http://node.perish.co:9076";
+  static const String DEFAULT_WS_URL = "ws://node.perish.co:9078";
+
   // Constructor
   AccountService() {
     _requestQueue = Queue();
@@ -504,7 +506,7 @@ class AccountService {
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error} ${response.details}");
     }
-    return AccountRepresentativeResponse.fromJson(response);
+    return AccountRepresentativeResponse.fromJson(response as Map<String, dynamic>);
   }
 
   // Future<dynamic> createSwapToXMR({

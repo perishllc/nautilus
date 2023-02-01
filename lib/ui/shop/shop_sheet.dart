@@ -1,8 +1,6 @@
-import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:wallet_flutter/app_icons.dart';
@@ -11,7 +9,6 @@ import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/styles.dart';
-import 'package:wallet_flutter/themes.dart';
 import 'package:wallet_flutter/ui/shop/use_card.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
@@ -262,6 +259,13 @@ class ShopSheetState extends State<ShopSheet> {
                             title: NonTranslatable.wenano,
                             onPress: () async {
                               await UIUtil.showChromeSafariWebview(context, "https://wenano.net");
+                            },
+                          ),
+                          UseCard(
+                            image: "assets/logos/perseeve.png",
+                            title: NonTranslatable.perseeve,
+                            onPress: () async {
+                              await UIUtil.showChromeSafariWebview(context, "https://perseeve.app");
                             },
                           ),
                         ],

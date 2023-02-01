@@ -824,11 +824,12 @@ class AddSubSheetState extends State<AddSubSheet> {
                     }
 
                     final Subscription sub = Subscription(
-                      name: _nameController.text,
+                      label: _nameController.text,
                       amount_raw: amountRaw,
                       frequency: _frequencyController.text,
                       address: finalAddress,
                       active: true,
+                      paid: false,
                     );
                     if (!mounted) return;
                     Navigator.of(context).pop(sub);

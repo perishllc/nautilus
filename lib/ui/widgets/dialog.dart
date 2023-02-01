@@ -154,7 +154,7 @@ class AppDialogs {
 
     // check if we have a valid subscription to pro:
     for (final Subscription sub in subs) {
-      if (sub.name == "${NonTranslatable.appName} Pro" && sub.address == SubscriptionService.PRO_PAYMENT_ADDRESS) {
+      if (sub.label == "${NonTranslatable.appName} Pro" && sub.address == SubscriptionService.PRO_PAYMENT_ADDRESS) {
         // if they pay anything at all, it's good enough for me
         // not worth the effort to lock things down, if they pay, they pay
         if (sub.paid) return true;
@@ -163,8 +163,7 @@ class AppDialogs {
 
     if (!shouldShowDialog) return false;
 
-    bool recurring = false;
-
+    // ignore: use_build_context_synchronously
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -182,7 +181,13 @@ class AppDialogs {
               ),
               content: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
                 Text(
-                  Z.of(context).proSubRequiredParagraph.replaceAll("%1", NonTranslatable.appName).replaceAll("%2", NonTranslatable.currencyName).replaceAll("%3", getRawAsThemeAwareFormattedAmount(context, SubscriptionService.PRO_PAYMENT_MONTHLY_COST)),
+                  Z
+                      .of(context)
+                      .proSubRequiredParagraph
+                      .replaceAll("%1", NonTranslatable.appName)
+                      .replaceAll("%2", NonTranslatable.currencyName)
+                      .replaceAll("%3",
+                          getRawAsThemeAwareFormattedAmount(context, SubscriptionService.PRO_PAYMENT_MONTHLY_COST)),
                   style: AppStyles.textStyleParagraph(context),
                 ),
                 // Row(
@@ -285,7 +290,7 @@ class AppDialogs {
                             address: SubscriptionService.PRO_PAYMENT_ADDRESS,
                             amount_raw: SubscriptionService.PRO_PAYMENT_MONTHLY_COST,
                             frequency: frequency,
-                            name: "${NonTranslatable.appName} Pro",
+                            label: "${NonTranslatable.appName} Pro",
                             active: true,
                           ),
                         ),
@@ -437,6 +442,7 @@ class AppDialogs {
     // this is so it doesn't have the top margin of the other h2's
     changeLogMarkdown = changeLogMarkdown.replaceFirst(RegExp(r'#'), "");
 
+    // ignore: use_build_context_synchronously
     await showDialog(
         barrierDismissible: false,
         context: context,
@@ -444,7 +450,8 @@ class AppDialogs {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
-              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+              backgroundColor: StateContainer.of(context).curTheme.background,
+              surfaceTintColor: Colors.transparent,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,

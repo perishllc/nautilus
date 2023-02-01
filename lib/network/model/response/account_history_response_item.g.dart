@@ -17,6 +17,7 @@ AccountHistoryResponseItem _$AccountHistoryResponseItemFromJson(
       height: _toInt(json['height'] as String?),
       link: json['link'] as String?,
       local_timestamp: _toInt(json['local_timestamp'] as String?),
+      confirmed: _toBool(json['confirmed'] as String?),
     );
 
 Map<String, dynamic> _$AccountHistoryResponseItemToJson(
@@ -29,5 +30,6 @@ Map<String, dynamic> _$AccountHistoryResponseItemToJson(
       'hash': instance.hash,
       'height': instance.height,
       'link': instance.link,
+      'confirmed': instance.confirmed,
       'local_timestamp': instance.local_timestamp,
     };

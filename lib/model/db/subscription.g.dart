@@ -7,7 +7,7 @@ part of 'subscription.dart';
 // **************************************************************************
 
 Subscription _$SubscriptionFromJson(Map<String, dynamic> json) => Subscription(
-      name: json['name'] as String,
+      label: json['label'] as String,
       active: json['active'] as bool? ?? false,
       autopay: json['autopay'] as bool? ?? false,
       paid: json['paid'] as bool? ?? false,
@@ -18,7 +18,7 @@ Subscription _$SubscriptionFromJson(Map<String, dynamic> json) => Subscription(
 
 Map<String, dynamic> _$SubscriptionToJson(Subscription instance) =>
     <String, dynamic>{
-      'name': instance.name,
+      'label': instance.label,
       'active': instance.active,
       'autopay': instance.autopay,
       'paid': instance.paid,

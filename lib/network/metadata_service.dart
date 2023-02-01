@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:coingecko_api/coingecko_api.dart';
-import 'package:coingecko_api/data/price_info.dart';
 import 'package:coingecko_api/coingecko_result.dart';
+import 'package:coingecko_api/data/price_info.dart';
 import 'package:cron/cron.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:http/http.dart' as http;
@@ -24,8 +24,6 @@ import 'package:wallet_flutter/service_locator.dart';
 
 // MetadataService singleton
 class MetadataService {
-  CoinGeckoApi CGApi = CoinGeckoApi();
-  AvailableCurrency _currency = AvailableCurrency(AvailableCurrencyEnum.USD);
 
   // Constructor
   MetadataService() {
@@ -36,6 +34,9 @@ class MetadataService {
     });
     getPriceData();
   }
+  
+  CoinGeckoApi CGApi = CoinGeckoApi();
+  AvailableCurrency _currency = AvailableCurrency(AvailableCurrencyEnum.USD);
 
   // meta:
   static String META_SERVER = "https://meta.perish.co";

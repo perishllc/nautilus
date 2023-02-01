@@ -1,3 +1,12 @@
+## v0.7.5 - [2023-02-02]
+#### Added
+- Perseeve added to the shop menu
+#### Changed
+- Split gift cards are back
+- Default node updated
+#### Fixed
+- Price data on initial load
+- Minor rendering issues
 ## v0.7.4 - [2023-01-29]
 #### Changed
 - Websockets reworked to connect to node directly

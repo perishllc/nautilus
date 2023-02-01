@@ -8,8 +8,8 @@ part 'subscription.g.dart';
 class Subscription {
   @JsonKey(ignore: true)
   int? id;
-  @JsonKey(name: 'name')
-  String name;
+  @JsonKey(name: 'label')
+  String label;
   @JsonKey(name: 'active')
   bool active;
   @JsonKey(name: 'autopay')
@@ -24,7 +24,7 @@ class Subscription {
   String frequency;
 
   Subscription({
-    required this.name,
+    required this.label,
     this.active = false,
     this.autopay = false,
     this.paid = false,

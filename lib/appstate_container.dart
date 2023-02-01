@@ -772,6 +772,9 @@ class StateContainerState extends State<StateContainer> {
       }
     }
 
+    // price data:
+    sl.get<MetadataService>().getPriceData();
+
     // TODO: make username a setting if there are multiple:
     final User? user = await sl.get<DBHelper>().getUserWithAddress(account.address!);
     String? walletUsername;
@@ -1048,7 +1051,7 @@ class StateContainerState extends State<StateContainer> {
     // if (response.uuid != null) {
     //   sl.get<SharedPrefsUtil>().setUuid(response.uuid!);
     // }
-    // EventTaxiImpl.singleton().fire(ConfirmationHeightChangedEvent(confirmationHeight: response.confirmationHeight));
+    // EventTaxiImpl.singleton().fire(ConfirmationHeightChangedEvent(confirmationHeight: resp.confirmationHeight));
 
     // // check subscriptions:
     // if (wallet != null && wallet!.history != null && wallet!.history.isNotEmpty) {
@@ -1298,6 +1301,9 @@ class StateContainerState extends State<StateContainer> {
     final AccountRepresentativeResponse representativeResp =
         await sl.get<AccountService>().requestAccountRepresentative(wallet!.address!);
 
+    EventTaxiImpl.singleton()
+        .fire(ConfirmationHeightChangedEvent(confirmationHeight: accountResp.confirmationHeight ?? 0));
+
     setState(() {
       wallet!.loading = false;
       wallet!.confirmationHeight = accountResp.confirmationHeight ?? 0;
@@ -1356,6 +1362,15 @@ class StateContainerState extends State<StateContainer> {
           postedToHome = true;
           break;
         }
+      }
+
+      // check if confirmation height changed:
+      final AccountHistoryResponseItem lastItem = resp.history!.first;
+      if ((lastItem.confirmed ?? false) && ((lastItem.height ?? 0) > wallet!.confirmationHeight)) {
+        EventTaxiImpl.singleton().fire(ConfirmationHeightChangedEvent(confirmationHeight: lastItem.height));
+        setState(() {
+          wallet!.confirmationHeight = lastItem.height!;
+        });
       }
       setState(() {
         wallet!.historyLoading = false;
@@ -1489,11 +1504,13 @@ class StateContainerState extends State<StateContainer> {
     sl.get<AccountService>().queueRequest(
           SubscribeRequest(
             options: SubscribeOption(accounts: [wallet!.address ?? ""]),
+            ack: false,
           ),
         );
     sl.get<AccountService>().processQueue();
     if (notificationsEnabled == true) {
-      // await sl.get<MetaData>().subscribeToAccount(wallet!.address, fcmToken);
+      // await sl.get<MetadataService>().subscribeToAccount(wallet!.address, fcmToken);
+      // TODO: subscribe to account
     }
   }
 

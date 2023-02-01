@@ -10,8 +10,6 @@ import 'package:http/http.dart' as http;
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
-import 'package:wallet_flutter/network/account_service.dart';
-import 'package:wallet_flutter/network/metadata_service.dart';
 import 'package:wallet_flutter/network/model/record_types.dart';
 import 'package:wallet_flutter/network/model/status_types.dart';
 import 'package:wallet_flutter/service_locator.dart';
@@ -113,18 +111,20 @@ class GiftCards {
         "error": "Something went wrong",
       };
     }
-    final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_GIFT),
-        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken},
-        body: json.encode(
-          {
-            "action": "gift_split_create",
-            "seed": seed,
-            "requesting_account": requestingAccount,
-            "split_amount_raw": splitAmountRaw,
-            "memo": memo,
-            "require_captcha": requireCaptcha,
-          },
-        ));
+    final http.Response response = await http.post(
+      Uri.parse(SERVER_ADDRESS_GIFT),
+      headers: {"Content-type": "application/json", "X-Firebase-AppCheck": appCheckToken},
+      body: json.encode(
+        <String, dynamic>{
+          "action": "gift_split_create",
+          "seed": seed,
+          "requesting_account": requestingAccount,
+          "split_amount_raw": splitAmountRaw,
+          "memo": memo,
+          "require_captcha": requireCaptcha,
+        },
+      ),
+    );
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
@@ -143,7 +143,7 @@ class GiftCards {
       };
     }
     final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_GIFT),
-        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken},
+        headers: {"Content-type": "application/json", "X-Firebase-AppCheck": appCheckToken},
         body: json.encode(
           {
             "action": "gift_info",
@@ -173,7 +173,12 @@ class GiftCards {
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
     final String runningVersion = packageInfo.version;
     final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_GIFT),
-        headers: {"Accept": "application/json", "X-Firebase-AppCheck": appCheckToken, "app-version": runningVersion, "hcaptcha-token": hcaptchaToken ?? ""},
+        headers: {
+          "Content-type": "application/json",
+          "X-Firebase-AppCheck": appCheckToken,
+          "app-version": runningVersion,
+          "hcaptcha-token": hcaptchaToken ?? ""
+        },
         body: json.encode(
           {
             "action": "gift_claim",

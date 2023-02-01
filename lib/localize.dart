@@ -140,4 +140,8 @@ class NonTranslatable {
   static String get monero {
     return "Monero";
   }
+
+  static String get perseeve {
+    return "Perseeve";
+  }
 }
