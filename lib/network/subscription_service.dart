@@ -72,7 +72,7 @@ class SubscriptionService {
     }
 
     // chinese new year notification:
-    setupChineseNewYearNotification();
+    // setupChineseNewYearNotification();
   }
 
   Future<void> checkAreSubscriptionsPaid(List<AccountHistoryResponseItem> history) async {
