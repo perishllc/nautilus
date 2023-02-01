@@ -820,7 +820,7 @@ class SendSheetState extends State<SendSheet> {
 
             const SizedBox(height: 5),
             // account / wallet name:
-            TextButton(
+            OutlinedButton(
               onPressed: () async {
                 Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
                 setState(() {
