@@ -859,6 +859,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBy": MessageLookupByLibrary.simpleMessage("Sadalīt pēc"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Abonementi"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonēt"),
+        "subscribeEvery": MessageLookupByLibrary.simpleMessage("Abonēt katru"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Abonējiet, izmantojot Apple Pay"),
         "subscribed": MessageLookupByLibrary.simpleMessage("Abonēts"),

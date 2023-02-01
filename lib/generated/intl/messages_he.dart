@@ -797,6 +797,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBy": MessageLookupByLibrary.simpleMessage("פיצול לפי"),
         "subsButton": MessageLookupByLibrary.simpleMessage("מנויים"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("הירשם"),
+        "subscribeEvery": MessageLookupByLibrary.simpleMessage("הירשם כל"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("הירשם באמצעות Apple Pay"),
         "subscribed": MessageLookupByLibrary.simpleMessage("נרשם"),

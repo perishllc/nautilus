@@ -2620,6 +2620,11 @@
     "type": "text",
     "description": "subscribed_text"
   },
+  "subscribeEvery": "सदस्यता लें हर",
+  "@subscribeEvery": {
+    "type": "text",
+    "description": "subscribe_every"
+  },
   "subscribeWithApple": "ऐप्पल पे के माध्यम से सदस्यता लें",
   "@subscribeWithApple": {
     "type": "text",

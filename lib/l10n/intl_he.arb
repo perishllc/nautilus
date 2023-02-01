@@ -2620,6 +2620,11 @@
     "type": "text",
     "description": "subscribed_text"
   },
+  "subscribeEvery": "הירשם כל",
+  "@subscribeEvery": {
+    "type": "text",
+    "description": "subscribe_every"
+  },
   "subscribeWithApple": "הירשם באמצעות Apple Pay",
   "@subscribeWithApple": {
     "type": "text",

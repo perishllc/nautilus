@@ -852,6 +852,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subsButton": MessageLookupByLibrary.simpleMessage("सदस्यता"),
         "subscribeButton":
             MessageLookupByLibrary.simpleMessage("सदस्यता लेने के"),
+        "subscribeEvery":
+            MessageLookupByLibrary.simpleMessage("सदस्यता लें हर"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "ऐप्पल पे के माध्यम से सदस्यता लें"),
         "subscribed": MessageLookupByLibrary.simpleMessage("सदस्यता लिया"),

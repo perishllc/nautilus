@@ -857,6 +857,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBy": MessageLookupByLibrary.simpleMessage("Chia theo"),
         "subsButton": MessageLookupByLibrary.simpleMessage("đăng ký"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Đặt mua"),
+        "subscribeEvery": MessageLookupByLibrary.simpleMessage("Đăng ký mỗi"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Đăng ký qua Apple Pay"),
         "subscribed": MessageLookupByLibrary.simpleMessage("đã đăng ký"),

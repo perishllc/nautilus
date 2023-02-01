@@ -2620,6 +2620,11 @@
     "type": "text",
     "description": "subscribed_text"
   },
+  "subscribeEvery": "Mag-subscribe Bawat",
+  "@subscribeEvery": {
+    "type": "text",
+    "description": "subscribe_every"
+  },
   "subscribeWithApple": "Mag-subscribe sa pamamagitan ng Apple Pay",
   "@subscribeWithApple": {
     "type": "text",

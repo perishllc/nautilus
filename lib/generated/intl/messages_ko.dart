@@ -749,6 +749,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBy": MessageLookupByLibrary.simpleMessage("분할 기준"),
         "subsButton": MessageLookupByLibrary.simpleMessage("구독"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("구독하다"),
+        "subscribeEvery": MessageLookupByLibrary.simpleMessage("구독하기"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Apple Pay를 통해 구독"),
         "subscribed": MessageLookupByLibrary.simpleMessage("구독"),

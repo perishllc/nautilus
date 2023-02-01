@@ -2620,6 +2620,11 @@
     "type": "text",
     "description": "subscribed_text"
   },
+  "subscribeEvery": "구독하기",
+  "@subscribeEvery": {
+    "type": "text",
+    "description": "subscribe_every"
+  },
   "subscribeWithApple": "Apple Pay를 통해 구독",
   "@subscribeWithApple": {
     "type": "text",

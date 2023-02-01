@@ -2620,6 +2620,11 @@
     "type": "text",
     "description": "subscribed_text"
   },
+  "subscribeEvery": "Feliratkozás Minden",
+  "@subscribeEvery": {
+    "type": "text",
+    "description": "subscribe_every"
+  },
   "subscribeWithApple": "Előfizetés az Apple Pay-en keresztül",
   "@subscribeWithApple": {
     "type": "text",

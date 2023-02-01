@@ -5305,6 +5305,16 @@ class Z {
     );
   }
 
+  /// `Subscribe Every`
+  String get subscribeEvery {
+    return Intl.message(
+      'Subscribe Every',
+      name: 'subscribeEvery',
+      desc: 'subscribe_every',
+      args: [],
+    );
+  }
+
   /// `Subscribe via Apple Pay`
   String get subscribeWithApple {
     return Intl.message(

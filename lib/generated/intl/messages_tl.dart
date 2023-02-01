@@ -895,6 +895,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "subsButton": MessageLookupByLibrary.simpleMessage("Mga subscription"),
         "subscribeButton":
             MessageLookupByLibrary.simpleMessage("Mag-subscribe"),
+        "subscribeEvery":
+            MessageLookupByLibrary.simpleMessage("Mag-subscribe Bawat"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Mag-subscribe sa pamamagitan ng Apple Pay"),
         "subscribed": MessageLookupByLibrary.simpleMessage("Naka-subscribe"),

@@ -878,6 +878,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBy": MessageLookupByLibrary.simpleMessage("Felosztás"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Előfizetések"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Iratkozz fel"),
+        "subscribeEvery":
+            MessageLookupByLibrary.simpleMessage("Feliratkozás Minden"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "Előfizetés az Apple Pay-en keresztül"),
         "subscribed": MessageLookupByLibrary.simpleMessage("Előfizetve"),

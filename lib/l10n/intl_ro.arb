@@ -2620,6 +2620,11 @@
     "type": "text",
     "description": "subscribed_text"
   },
+  "subscribeEvery": "Abonați-vă fiecare",
+  "@subscribeEvery": {
+    "type": "text",
+    "description": "subscribe_every"
+  },
   "subscribeWithApple": "Abonați-vă prin Apple Pay",
   "@subscribeWithApple": {
     "type": "text",

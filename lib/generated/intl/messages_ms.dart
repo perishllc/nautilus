@@ -858,6 +858,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBy": MessageLookupByLibrary.simpleMessage("Dipisahkan Oleh"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Langganan"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Langgan"),
+        "subscribeEvery":
+            MessageLookupByLibrary.simpleMessage("Langgan Setiap"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Langgan melalui Apple Pay"),
         "subscribed": MessageLookupByLibrary.simpleMessage("Dilanggan"),

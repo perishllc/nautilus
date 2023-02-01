@@ -742,6 +742,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBy": MessageLookupByLibrary.simpleMessage("分割"),
         "subsButton": MessageLookupByLibrary.simpleMessage("サブスクリプション"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("申し込む"),
+        "subscribeEvery": MessageLookupByLibrary.simpleMessage("定期購読"),
         "subscribeWithApple":
             MessageLookupByLibrary.simpleMessage("Apple Pay で購読する"),
         "subscribed": MessageLookupByLibrary.simpleMessage("購読済み"),

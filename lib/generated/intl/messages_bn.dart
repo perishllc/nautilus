@@ -867,6 +867,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBy": MessageLookupByLibrary.simpleMessage("দ্বারা বিভক্ত"),
         "subsButton": MessageLookupByLibrary.simpleMessage("সদস্যতা"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("সাবস্ক্রাইব"),
+        "subscribeEvery":
+            MessageLookupByLibrary.simpleMessage("প্রতিটি সদস্যতা"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(
             "অ্যাপল পে এর মাধ্যমে সদস্যতা নিন"),
         "subscribed": MessageLookupByLibrary.simpleMessage("সদস্যতা"),

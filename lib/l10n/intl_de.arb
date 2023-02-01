@@ -2620,6 +2620,11 @@
     "type": "text",
     "description": "subscribed_text"
   },
+  "subscribeEvery": "Abonnieren Sie alle",
+  "@subscribeEvery": {
+    "type": "text",
+    "description": "subscribe_every"
+  },
   "subscribeWithApple": "Abonnieren Sie über Apple Pay",
   "@subscribeWithApple": {
     "type": "text",
