@@ -1385,8 +1385,12 @@ class StateContainerState extends State<StateContainer> {
       sl.get<AccountService>().processQueue();
 
       // check if any subscriptions were paid:
-      sl.get<SubscriptionService>().checkAreSubscriptionsPaid(wallet!.history);
-
+      try {
+        sl.get<SubscriptionService>().checkAreSubscriptionsPaid(wallet!.history);
+      } catch (e) {
+        log.e(e);
+      }
+      
       // Receive receivables
       if (receivable) {
         receivableRequests.clear();
