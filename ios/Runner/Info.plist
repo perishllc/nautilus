@@ -153,5 +153,7 @@
 		<key>NSAllowsLocalNetworking</key><true/>
 		<key>NSAllowsArbitraryLoadsInWebContent</key><true/>
 	</dict>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
 </dict>
 </plist>

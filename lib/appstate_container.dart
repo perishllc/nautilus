@@ -762,14 +762,10 @@ class StateContainerState extends State<StateContainer> {
     // check address for a username:
 
     if (mounted) {
-      try {
-        await sl.get<UsernameService>().checkAddressDebounced(
-              context,
-              account.address!,
-            );
-      } catch (e) {
-        log.v("couldn't check address for username: $e");
-      }
+      await sl.get<UsernameService>().checkAddressDebounced(
+            context,
+            account.address!,
+          );
     }
 
     // price data:
@@ -996,7 +992,7 @@ class StateContainerState extends State<StateContainer> {
     }
     log.d("Received subscription message: ${json.encode(resp.toJson())}");
 
-    if (resp.block?.subType != BlockTypes.SEND) {
+    if (resp.block?.subType == BlockTypes.SEND) {
       sl.get<AccountService>().processQueue();
       return;
     }
@@ -1105,7 +1101,6 @@ class StateContainerState extends State<StateContainer> {
     }
 
     // if there's no user for this address, check if one exists on the block chain:
-
     if (link_as_account != null && mounted) {
       await sl.get<UsernameService>().checkAddressDebounced(context, link_as_account);
     }
@@ -1390,7 +1385,7 @@ class StateContainerState extends State<StateContainer> {
       } catch (e) {
         log.e(e);
       }
-      
+
       // Receive receivables
       if (receivable) {
         receivableRequests.clear();

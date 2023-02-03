@@ -955,10 +955,15 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
       // check account for a username:
       if (StateContainer.of(context).wallet?.address != null && mounted) {
-        await sl.get<UsernameService>().checkAddressDebounced(
-              context,
-              StateContainer.of(context).wallet!.address!,
-            );
+        try {
+          await sl.get<UsernameService>().checkAddressDebounced(
+                context,
+                StateContainer.of(context).wallet!.address!,
+              );
+        } catch (e) {
+          // in case something is wrong with the rust code:
+          log.e('Error checking username', e);
+        }
       }
 
       // check for nautilus pro sub:

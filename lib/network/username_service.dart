@@ -712,16 +712,20 @@ class UsernameService {
 
   Future<void> checkAddressDebounced(BuildContext context, String address) async {
     log.d("checking address: $address");
-    final String? checked = await sl.get<SharedPrefsUtil>().getWithExpiry(address) as String?;
-    if (checked == null) {
-      // check if we already have a record for this address:
-      User? user = await sl.get<DBHelper>().getUserWithAddress(address);
-      // adds to the db if found:
-      user ??= await sl.get<UsernameService>().figureOutIfAddressHasName(address);
-    } else {
-      // add some kind of timeout so we don't keep checking for the same username within a day:
-      const int dayInSeconds = 86400;
-      await sl.get<SharedPrefsUtil>().setWithExpiry(address, "1", dayInSeconds);
+    try {
+      final String? checked = await sl.get<SharedPrefsUtil>().getWithExpiry(address) as String?;
+      if (checked == null) {
+        // check if we already have a record for this address:
+        User? user = await sl.get<DBHelper>().getUserWithAddress(address);
+        // adds to the db if found:
+        user ??= await sl.get<UsernameService>().figureOutIfAddressHasName(address);
+      } else {
+        // add some kind of timeout so we don't keep checking for the same username within a day:
+        const int dayInSeconds = 86400;
+        await sl.get<SharedPrefsUtil>().setWithExpiry(address, "1", dayInSeconds);
+      }
+    } catch (e) {
+      log.e("error checking address: $address $e");
     }
   }
 }

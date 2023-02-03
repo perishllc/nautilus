@@ -1,3 +1,6 @@
+## v0.7.6 - [2023-02-03]
+#### Fixed
+- Hotfixes for receiving blocks
 ## v0.7.5 - [2023-02-02]
 #### Added
 - Perseeve added to the shop menu
