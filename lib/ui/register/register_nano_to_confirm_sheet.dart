@@ -264,7 +264,7 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
           privKey,
           max: widget.maxSend);
       StateContainer.of(context).wallet!.frontier = resp.hash;
-      StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
+      StateContainer.of(context).wallet!.accountBalance -= BigInt.parse(widget.amountRaw);
 
       // Update the state with the new balance
       StateContainer.of(context).requestUpdate();

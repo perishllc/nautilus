@@ -581,9 +581,9 @@ class SendGiftSheetState extends State<SendGiftSheet> {
           if (!_localCurrencyMode) {
             setState(() {
               _amountValidationText = "";
-              _amountController!.text = getRawAsThemeAwareFormattedAmount(
+              _amountController.text = getRawAsThemeAwareFormattedAmount(
                   context, StateContainer.of(context).wallet!.accountBalance.toString());
-              _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
+              _amountController.selection = TextSelection.collapsed(offset: _amountController.text.length);
             });
           } else {
             String localAmount = StateContainer.of(context).wallet!.getLocalCurrencyBalance(

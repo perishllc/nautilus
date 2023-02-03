@@ -499,7 +499,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
             max: widget.maxSend);
         if (!mounted) return;
         StateContainer.of(context).wallet!.frontier = resp.hash;
-        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
+        StateContainer.of(context).wallet!.accountBalance -= BigInt.parse(widget.amountRaw);
       } else {
         sl.get<Logger>().v("OBSCURED MODE");
 
@@ -525,7 +525,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
             );
         if (!mounted) return;
         StateContainer.of(context).wallet!.frontier = resp.hash;
-        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
+        StateContainer.of(context).wallet!.accountBalance -= BigInt.parse(widget.amountRaw);
 
         sl.get<Logger>().v("SENT TO ADDRESS 200");
 
