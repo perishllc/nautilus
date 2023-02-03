@@ -125,7 +125,6 @@ class AppState extends State<App> {
         theme: ThemeData(
           dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           primaryColor: StateContainer.of(context).curTheme.primary,
-          backgroundColor: StateContainer.of(context).curTheme.background,
           brightness: StateContainer.of(context).curTheme.brightness,
           fontFamily: "NunitoSans",
           useMaterial3: true,
@@ -134,6 +133,7 @@ class AppState extends State<App> {
               brightness: StateContainer.of(context).curTheme.brightness,
               error: StateContainer.of(context).curTheme.error,
               primary: StateContainer.of(context).curTheme.primary),
+              scaffoldBackgroundColor: StateContainer.of(context).curTheme.background,
         ),
         localizationsDelegates: [
           ZsDelegate(StateContainer.of(context).curLanguage),
