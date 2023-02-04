@@ -115,6 +115,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency": MessageLookupByLibrary.simpleMessage("通貨を変更する"),
         "changeLog": MessageLookupByLibrary.simpleMessage("変更ログ"),
         "changeNode": MessageLookupByLibrary.simpleMessage("ノードの変更"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "接続しているノードを変更します。これにより、デフォルトのノードに問題がある場合、または自分でホストしているノードに接続したい場合に、別のノードに接続できます。ノードは、トランザクションを送信し、アカウントに関する更新を受信するために使用されます。"),
         "changePassword": MessageLookupByLibrary.simpleMessage("パスワードを変更する"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "既存のパスワードを変更します。現在のパスワードがわからない場合は、(すでにログインしているため) 実際には変更する必要がないため、できるだけ推測してください。ただし、既存のバックアップ エントリを削除することはできます。"),
@@ -122,6 +124,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePinHint": MessageLookupByLibrary.simpleMessage("セットピン"),
         "changePow": MessageLookupByLibrary.simpleMessage("PoWを変更"),
         "changePowSource": MessageLookupByLibrary.simpleMessage("PoW ソースの変更"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "トランザクションの送受信に使用される PoW のソースを変更します。"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("代理人を変更する"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("変更する"),
@@ -741,6 +745,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage("分割請求情報"),
         "splitBy": MessageLookupByLibrary.simpleMessage("分割"),
         "subsButton": MessageLookupByLibrary.simpleMessage("サブスクリプション"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "サブスクリプションを使用して、お気に入りのコンテンツ作成者への毎月の寄付や、サービスへの毎月のサブスクリプションなどを設定できます。サブスクリプションの長さはカスタマイズ可能で、簡単にオフにしてから再びオンにすることができます.サブスクリプションの期限が来ると、期限が来たことを知らせる通知とバッジが表示されます。"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("申し込む"),
         "subscribeEvery": MessageLookupByLibrary.simpleMessage("定期購読"),
         "subscribeWithApple":

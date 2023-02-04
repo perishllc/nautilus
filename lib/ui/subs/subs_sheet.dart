@@ -159,7 +159,13 @@ class SubsSheetState extends State<SubsSheet> {
                     height: 60,
                     child: AppDialogs.infoButton(
                       context,
-                      () {},
+                      () {
+                        AppDialogs.showInfoDialog(
+                          context,
+                          Z.of(context).subsButton,
+                          Z.of(context).subsInfo,
+                        );
+                      },
                     ),
                   ),
                 ],

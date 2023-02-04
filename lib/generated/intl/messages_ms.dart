@@ -131,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tukar Mata Wang"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Perubahan Log"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Tukar Nod"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Tukar nod yang anda sambungkan. Ini membolehkan anda menyambung ke nod lain sekiranya anda menghadapi masalah dengan nod lalai, atau hanya jika anda ingin menyambung ke nod yang anda hos sendiri. Nod digunakan untuk menyerahkan transaksi dan menerima kemas kini tentang akaun anda."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Tukar kata laluan"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -140,6 +142,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Tukar PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Tukar Sumber PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Tukar sumber PoW yang digunakan untuk menghantar dan menerima transaksi."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Tukar Wakil"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Ubah"),
@@ -857,6 +861,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Maklumat Bil Pisah"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dipisahkan Oleh"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Langganan"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Anda boleh menggunakan langganan untuk menyediakan perkara seperti derma bulanan kepada pencipta kandungan kegemaran anda, atau langganan bulanan kepada perkhidmatan, tempoh langganan boleh disesuaikan dan mudah dimatikan dan dihidupkan semula. Apabila langganan perlu dibayar, anda akan mendapat pemberitahuan dan lencana untuk mengingatkan anda bahawa ia perlu dibayar."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Langgan"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Langgan Setiap"),

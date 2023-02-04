@@ -169,7 +169,13 @@ class ChangeNodeSheetState extends State<ChangeNodeSheet> {
                     height: 60,
                     child: AppDialogs.infoButton(
                       context,
-                      () {},
+                      () {
+                        AppDialogs.showInfoDialog(
+                          context,
+                          Z.of(context).changeNode,
+                          Z.of(context).changeNodeInfo,
+                        );
+                      },
                     ),
                   ),
                 ],

@@ -1190,7 +1190,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           } else {
             // don't update if the balance is now 0:
             final List<String> metadata = tx.metadata!.split(RecordTypes.SEPARATOR);
-            if (metadata.length >= 2 && metadata[2] == "0") {
+            if (metadata.length >= 2 && metadata[1] == "0") {
               shouldUpdate = false;
             } else if (DateTime.fromMillisecondsSinceEpoch(tx.request_time! * 1000)
                 .isBefore(DateTime.now().subtract(const Duration(minutes: 1)))) {

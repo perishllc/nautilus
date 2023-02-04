@@ -131,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Change Currency"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Change Log"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Change Node"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Change the node that you are connected to. This allows you to connect to a different node in case you are having issues with the default one, or just if you want to connect to one you host yourself. The node is used for submitting transactions and receiving updates about your account."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -140,6 +142,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Change PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Change PoW Source"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Change the source of PoW used to send and receive transactions."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Change Representative"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Change"),
@@ -835,6 +839,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Split Bill Info"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Split By"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Subscriptions"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "You can use subscriptions to setup things like a monthly donation to your favorite content creator, or a monthly subscription to a service, the length of the subscription is customizable, and easily turned off and on again. When a subscription becomes due, you\'ll get a notification and a badge to remind you that it\'s due."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Subscribe"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Subscribe Every"),

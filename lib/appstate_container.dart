@@ -62,6 +62,7 @@ import 'package:wallet_flutter/util/ninja/api.dart';
 import 'package:wallet_flutter/util/ninja/ninja_node.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:collection/collection.dart';
 import 'package:uni_links/uni_links.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -672,7 +673,7 @@ class StateContainerState extends State<StateContainer> {
               "address": data["address"] as String? ?? "",
               "from_address": data["from_address"] as String? ?? "",
               "memo": data["memo"] as String? ?? "",
-              "require_captcha": data["require_captcha"] == "True",
+              "require_captcha": data["require_captcha"] != "",
               "uuid": data["gift_uuid"] as String? ?? "",
             };
           });
@@ -1290,14 +1291,24 @@ class StateContainerState extends State<StateContainer> {
     }
 
     // get account info:
-    final AccountInfoResponse accountResp = await sl.get<AccountService>().getAccountInfo(wallet!.address!);
+    AccountInfoResponse accountResp = AccountInfoResponse();
+    try {
+      accountResp = await sl.get<AccountService>().getAccountInfo(wallet!.address!);
+    } catch (e) {
+      log.e("Error getting account info", e);
+    }
 
     // get account representative:
-    final AccountRepresentativeResponse representativeResp =
-        await sl.get<AccountService>().requestAccountRepresentative(wallet!.address!);
+    AccountRepresentativeResponse representativeResp = AccountRepresentativeResponse();
+    try {
+      representativeResp = await sl.get<AccountService>().requestAccountRepresentative(wallet!.address!);
+    } catch (e) {
+      log.e("Error getting representative", e);
+    }
 
-    EventTaxiImpl.singleton()
-        .fire(ConfirmationHeightChangedEvent(confirmationHeight: accountResp.confirmationHeight ?? 0));
+    EventTaxiImpl.singleton().fire(ConfirmationHeightChangedEvent(
+      confirmationHeight: accountResp.confirmationHeight ?? 0,
+    ));
 
     setState(() {
       wallet!.loading = false;
@@ -1332,8 +1343,11 @@ class StateContainerState extends State<StateContainer> {
       count = 50;
     }
     try {
-      final AccountHistoryResponse resp =
-          await sl.get<AccountService>().requestAccountHistory(wallet!.address, count: count, raw: true);
+      final AccountHistoryResponse resp = await sl.get<AccountService>().requestAccountHistory(
+            wallet!.address,
+            count: count,
+            raw: true,
+          );
       _requestBalances();
       bool postedToHome = false;
       // Iterate list in reverse (oldest to newest block)
@@ -1360,12 +1374,14 @@ class StateContainerState extends State<StateContainer> {
       }
 
       // check if confirmation height changed:
-      final AccountHistoryResponseItem lastItem = resp.history!.first;
-      if ((lastItem.confirmed ?? false) && ((lastItem.height ?? 0) > wallet!.confirmationHeight)) {
-        EventTaxiImpl.singleton().fire(ConfirmationHeightChangedEvent(confirmationHeight: lastItem.height));
-        setState(() {
-          wallet!.confirmationHeight = lastItem.height!;
-        });
+      final AccountHistoryResponseItem? lastItem = resp.history?.firstOrNull;
+      if (lastItem != null) {
+        if ((lastItem.confirmed ?? false) && ((lastItem.height ?? 0) > wallet!.confirmationHeight)) {
+          EventTaxiImpl.singleton().fire(ConfirmationHeightChangedEvent(confirmationHeight: lastItem.height));
+          setState(() {
+            wallet!.confirmationHeight = lastItem.height!;
+          });
+        }
       }
       setState(() {
         wallet!.historyLoading = false;
@@ -1479,7 +1495,7 @@ class StateContainerState extends State<StateContainer> {
         }
       }
     } catch (e) {
-      // TODO handle account history error
+      // TODO: handle account history error
       log.e("account_history e", e);
     }
   }

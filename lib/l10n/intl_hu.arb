@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Módosítsa azt a csomópontot, amelyhez csatlakozik. Ez lehetővé teszi, hogy csatlakozzon egy másik csomóponthoz, ha problémái vannak az alapértelmezett csomóponttal, vagy csak akkor, ha egy Ön által tárolt csomóponthoz szeretne csatlakozni. A csomópont tranzakciók beküldésére és fiókjával kapcsolatos frissítések fogadására szolgál.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Jelszó módosítása",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Módosítsa a tranzakciók küldésére és fogadására használt PoW forrását.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Képviselő Megváltoztatása",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Az előfizetések segítségével beállíthat olyan dolgokat, mint például havi adományozás kedvenc tartalomkészítőjének vagy havi előfizetés egy szolgáltatásra. Az előfizetés időtartama testreszabható, és könnyen ki- és bekapcsolható. Amikor egy előfizetés esedékessé válik, értesítést és egy jelvényt kap, amely emlékezteti az előfizetés esedékességére.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

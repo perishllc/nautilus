@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Endre noden du er koblet til. Dette lar deg koble til en annen node i tilfelle du har problemer med standarden, eller bare hvis du vil koble til en du er vert for selv. Noden brukes til å sende inn transaksjoner og motta oppdateringer om kontoen din.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Bytt passord",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Endre kilden til PoW som brukes til å sende og motta transaksjoner.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Endre representant",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Du kan bruke abonnementer til å sette opp ting som en månedlig donasjon til favorittinnholdsskaperen din, eller et månedlig abonnement på en tjeneste, lengden på abonnementet kan tilpasses og enkelt skrus av og på igjen. Når et abonnement forfaller, får du et varsel og et merke for å minne deg på at det er forfall.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

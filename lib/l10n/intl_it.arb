@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Cambia il nodo a cui sei connesso. Ciò ti consente di connetterti a un nodo diverso nel caso in cui riscontri problemi con quello predefinito o semplicemente se desideri connetterti a uno che ospiti tu stesso. Il nodo viene utilizzato per inviare transazioni e ricevere aggiornamenti sul tuo account.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Cambia la password",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Modificare la fonte di PoW utilizzata per inviare e ricevere transazioni.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Cambia Rappresentante",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Puoi utilizzare gli abbonamenti per impostare cose come una donazione mensile al tuo creatore di contenuti preferito o un abbonamento mensile a un servizio, la durata dell'abbonamento è personalizzabile e facilmente disattivabile e riattivabile. Quando un abbonamento scade, riceverai una notifica e un badge per ricordarti che è scaduto.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

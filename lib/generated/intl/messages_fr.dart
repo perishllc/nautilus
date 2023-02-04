@@ -143,6 +143,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeLog":
             MessageLookupByLibrary.simpleMessage("Journal des modifications"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Changer de nœud"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Modifiez le nœud auquel vous êtes connecté. Cela vous permet de vous connecter à un nœud différent au cas où vous auriez des problèmes avec celui par défaut, ou simplement si vous souhaitez vous connecter à celui que vous hébergez vous-même. Le nœud est utilisé pour soumettre des transactions et recevoir des mises à jour sur votre compte."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Changer le mot de passe"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -154,6 +156,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Changer de mot de passe"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Changer la source de PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Modifiez la source de PoW utilisée pour envoyer et recevoir des transactions."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Changer le représentant"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Changer"),
@@ -890,6 +894,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Diviser les informations sur la facture"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Divisé par"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Abonnements"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Vous pouvez utiliser des abonnements pour configurer des choses comme un don mensuel à votre créateur de contenu préféré ou un abonnement mensuel à un service, la durée de l\'abonnement est personnalisable et facilement désactivée et réactivée. Lorsqu\'un abonnement arrive à échéance, vous recevez une notification et un badge pour vous rappeler qu\'il est dû."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("S\'abonner"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Abonnez-vous chaque"),

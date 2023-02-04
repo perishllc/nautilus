@@ -3,10 +3,9 @@ import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decimal/decimal.dart';
-import 'package:event_taxi/event_taxi.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+// ignore: implementation_imports
 import 'package:flutter_branch_sdk/src/objects/branch_universal_object.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:intl/intl.dart';
@@ -14,15 +13,11 @@ import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
-import 'package:wallet_flutter/bus/fcm_update_event.dart';
-import 'package:wallet_flutter/bus/notification_setting_change_event.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/localize.dart';
-import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/model/db/user.dart';
-import 'package:wallet_flutter/model/notification_setting.dart';
 import 'package:wallet_flutter/network/giftcards.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
@@ -32,7 +27,6 @@ import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
-import 'package:wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';
@@ -40,7 +34,6 @@ import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/nanoutil.dart';
 import 'package:wallet_flutter/util/numberutil.dart';
-import 'package:wallet_flutter/util/sharedprefsutil.dart';
 
 class SendGiftSheet extends StatefulWidget {
   const SendGiftSheet({required this.localCurrency}) : super();
@@ -103,16 +96,16 @@ class SendGiftSheetState extends State<SendGiftSheet> {
     // _memoHint = Z.of(context).enterMemo;
 
     // On amount focus change
-    _amountFocusNode!.addListener(() {
-      if (_amountFocusNode!.hasFocus) {
+    _amountFocusNode.addListener(() {
+      if (_amountFocusNode.hasFocus) {
         if (_rawAmount != null) {
           setState(() {
-            _amountController!.text = getRawAsThemeAwareAmount(context, _rawAmount);
+            _amountController.text = getRawAsThemeAwareAmount(context, _rawAmount);
             _rawAmount = null;
           });
         }
         if (quickSendAmount != null) {
-          _amountController!.text = "";
+          _amountController.text = "";
           setState(() {
             quickSendAmount = null;
           });
@@ -128,8 +121,8 @@ class SendGiftSheetState extends State<SendGiftSheet> {
       }
     });
     // On memo focus change
-    _memoFocusNode!.addListener(() {
-      if (_memoFocusNode!.hasFocus) {
+    _memoFocusNode.addListener(() {
+      if (_memoFocusNode.hasFocus) {
         setState(() {
           _memoHint = "";
           _memoValidationText = "";
@@ -148,7 +141,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
     if (quickSendAmount != null && quickSendAmount!.isNotEmpty && quickSendAmount != "0") {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         setState(() {
-          _amountController!.text = getRawAsThemeAwareAmount(context, quickSendAmount);
+          _amountController.text = getRawAsThemeAwareAmount(context, quickSendAmount);
         });
       });
     }
@@ -221,8 +214,8 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                 child: GestureDetector(
                   onTap: () {
                     // Clear focus of our fields when tapped in this empty space
-                    _amountFocusNode!.unfocus();
-                    _memoFocusNode!.unfocus();
+                    _amountFocusNode.unfocus();
+                    _memoFocusNode.unfocus();
                   },
                   child: KeyboardAvoider(
                     duration: Duration.zero,
@@ -319,18 +312,18 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                       }
 
                       late String formattedAddress;
-                      final String formattedAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
+                      final String formattedAmount = sanitizedAmount(_localCurrencyFormat, _amountController.text);
 
                       String amountRaw;
 
-                      if (_amountController!.text.isEmpty || _amountController!.text == "0") {
+                      if (_amountController.text.isEmpty || _amountController.text == "0") {
                         amountRaw = "0";
                       } else {
                         if (_localCurrencyMode) {
                           amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
                               _localCurrencyFormat,
                               convertLocalCurrencyToLocalizedCrypto(
-                                  context, _localCurrencyFormat, _amountController!.text)));
+                                  context, _localCurrencyFormat, _amountController.text)));
                         } else {
                           if (_rawAmount != null) {
                             amountRaw = _rawAmount!;
@@ -353,7 +346,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                         context,
                         paperWalletSeed: paperWalletSeed,
                         amountRaw: amountRaw,
-                        memo: _memoController!.text,
+                        memo: _memoController.text,
                       );
 
                       if (giftCardItem.success) {
@@ -381,8 +374,8 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                               // phoneNumber: phoneNumber ?? "",
                               link: link,
                               paperWalletSeed: paperWalletSeed,
-                              localCurrency: _localCurrencyMode ? _amountController!.text : null,
-                              memo: _memoController!.text));
+                              localCurrency: _localCurrencyMode ? _amountController.text : null,
+                              memo: _memoController.text));
                     }),
                   ],
                 ),
@@ -395,11 +388,11 @@ class SendGiftSheetState extends State<SendGiftSheet> {
   // Determine if this is a max send or not by comparing balances
   bool _isMaxSend() {
     // Sanitize commas
-    if (_amountController!.text.isEmpty) {
+    if (_amountController.text.isEmpty) {
       return false;
     }
     try {
-      String textField = _amountController!.text;
+      String textField = _amountController.text;
       String balance;
       if (_localCurrencyMode) {
         balance = StateContainer.of(context).wallet!.getLocalCurrencyBalance(
@@ -441,10 +434,10 @@ class SendGiftSheetState extends State<SendGiftSheet> {
   /// @returns true if valid, false otherwise
   Future<bool> _validateRequest() async {
     bool isValid = true;
-    _amountFocusNode!.unfocus();
-    _memoFocusNode!.unfocus();
+    _amountFocusNode.unfocus();
+    _memoFocusNode.unfocus();
     // Validate amount
-    if (_amountController!.text.trim().isEmpty && _memoController!.text.trim().isEmpty) {
+    if (_amountController.text.trim().isEmpty && _memoController.text.trim().isEmpty) {
       isValid = false;
       setState(() {
         _amountValidationText = Z.of(context).amountMissing;
@@ -453,10 +446,10 @@ class SendGiftSheetState extends State<SendGiftSheet> {
       String bananoAmount;
       if (_localCurrencyMode) {
         bananoAmount = sanitizedAmount(_localCurrencyFormat,
-            convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController!.text));
+            convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController.text));
       } else {
         if (_rawAmount == null) {
-          bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
+          bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController.text);
         } else {
           bananoAmount = getRawAsThemeAwareAmount(context, _rawAmount);
         }
@@ -467,7 +460,7 @@ class SendGiftSheetState extends State<SendGiftSheet> {
       final BigInt balanceRaw = StateContainer.of(context).wallet!.accountBalance;
       final BigInt? sendAmount = BigInt.tryParse(getThemeAwareAmountAsRaw(context, bananoAmount));
       if (sendAmount == null || sendAmount == BigInt.zero) {
-        if (_memoController!.text.trim().isEmpty) {
+        if (_memoController.text.trim().isEmpty) {
           isValid = false;
           setState(() {
             _amountValidationText = Z.of(context).amountMissing;
@@ -595,8 +588,8 @@ class SendGiftSheetState extends State<SendGiftSheet> {
                 NumberUtil.sanitizeNumber(localAmount).replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
             setState(() {
               _amountValidationText = "";
-              _amountController!.text = _localCurrencyFormat.currencySymbol + localAmount;
-              _amountController!.selection = TextSelection.collapsed(offset: _amountController!.text.length);
+              _amountController.text = _localCurrencyFormat.currencySymbol + localAmount;
+              _amountController.selection = TextSelection.collapsed(offset: _amountController.text.length);
             });
           }
         },

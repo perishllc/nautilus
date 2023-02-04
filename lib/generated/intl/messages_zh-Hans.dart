@@ -105,6 +105,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency": MessageLookupByLibrary.simpleMessage("更改货币"),
         "changeLog": MessageLookupByLibrary.simpleMessage("更改日志"),
         "changeNode": MessageLookupByLibrary.simpleMessage("改变节点"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "更改您连接到的节点。这允许您连接到不同的节点，以防万一您对默认节点有问题，或者只是想连接到您自己托管的节点。该节点用于提交交易和接收有关您帐户的更新。"),
         "changePassword": MessageLookupByLibrary.simpleMessage("更改密码"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "更改现有密码。如果您不知道当前密码，请做出最佳猜测，因为实际上不需要更改它（因为您已经登录），但它确实让我们删除了现有的备份条目。"),
@@ -112,6 +114,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePinHint": MessageLookupByLibrary.simpleMessage("设置引脚"),
         "changePow": MessageLookupByLibrary.simpleMessage("改变工作量证明"),
         "changePowSource": MessageLookupByLibrary.simpleMessage("更改 PoW 源"),
+        "changePowSourceInfo":
+            MessageLookupByLibrary.simpleMessage("更改用于发送和接收交易的 PoW 来源。"),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage("更改代表"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("更改"),
         "changeRepHint": MessageLookupByLibrary.simpleMessage("输入新代表"),
@@ -671,6 +675,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "splitBillInfoHeader": MessageLookupByLibrary.simpleMessage("拆分账单信息"),
         "splitBy": MessageLookupByLibrary.simpleMessage("拆分依据"),
         "subsButton": MessageLookupByLibrary.simpleMessage("订阅"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "您可以使用订阅来设置诸如每月向您最喜欢的内容创作者捐款，或每月订阅一项服务，订阅的长度是可定制的，并且可以轻松地关闭和重新打开。当订阅到期时，您会收到通知和徽章，提醒您订阅到期。"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("订阅"),
         "subscribeEvery": MessageLookupByLibrary.simpleMessage("订阅每"),
         "subscribeWithApple":

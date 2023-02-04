@@ -134,6 +134,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đổi loại tiền pháp định"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Thay đổi Nhật ký"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Thay đổi nút"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Thay đổi nút mà bạn đã kết nối. Điều này cho phép bạn kết nối với một nút khác trong trường hợp bạn gặp sự cố với nút mặc định hoặc chỉ khi bạn muốn kết nối với nút mà bạn tự lưu trữ. Nút được sử dụng để gửi giao dịch và nhận thông tin cập nhật về tài khoản của bạn."),
         "changePassword": MessageLookupByLibrary.simpleMessage("Đổi mật khẩu"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "Thay đổi mật khẩu hiện có của bạn. Nếu bạn không biết mật khẩu hiện tại của mình, chỉ cần phỏng đoán chính xác nhất vì thực tế không bắt buộc phải thay đổi mật khẩu (vì bạn đã đăng nhập), nhưng nó cho phép chúng tôi xóa mục sao lưu hiện có."),
@@ -142,6 +144,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Thay đổi PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Thay đổi nguồn PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Thay đổi nguồn PoW được sử dụng để gửi và nhận giao dịch."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Thay đổi đại diện"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Thay đổi"),
@@ -856,6 +860,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thông tin tách bạch hóa đơn"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Chia theo"),
         "subsButton": MessageLookupByLibrary.simpleMessage("đăng ký"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Bạn có thể sử dụng đăng ký để thiết lập những thứ như quyên góp hàng tháng cho người tạo nội dung yêu thích của mình hoặc đăng ký hàng tháng cho một dịch vụ, thời hạn của đăng ký có thể tùy chỉnh và dễ dàng tắt và bật lại. Khi đến hạn đăng ký, bạn sẽ nhận được thông báo và huy hiệu để nhắc bạn rằng đến hạn."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Đặt mua"),
         "subscribeEvery": MessageLookupByLibrary.simpleMessage("Đăng ký mỗi"),
         "subscribeWithApple":

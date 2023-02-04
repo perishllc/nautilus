@@ -136,6 +136,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Endre valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Endre logg"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Endre node"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Endre noden du er koblet til. Dette lar deg koble til en annen node i tilfelle du har problemer med standarden, eller bare hvis du vil koble til en du er vert for selv. Noden brukes til å sende inn transaksjoner og motta oppdateringer om kontoen din."),
         "changePassword": MessageLookupByLibrary.simpleMessage("Bytt passord"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "Endre ditt eksisterende passord. Hvis du ikke kjenner det nåværende passordet ditt, gjør du bare din beste gjetning ettersom det faktisk ikke er nødvendig å endre det (siden du allerede er logget på), men det lar oss slette den eksisterende sikkerhetskopioppføringen."),
@@ -144,6 +146,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Endre PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Endre PoW-kilde"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Endre kilden til PoW som brukes til å sende og motta transaksjoner."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Endre representant"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Endre"),
@@ -858,6 +862,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Del regningsinformasjon"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Del opp etter"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Abonnementer"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Du kan bruke abonnementer til å sette opp ting som en månedlig donasjon til favorittinnholdsskaperen din, eller et månedlig abonnement på en tjeneste, lengden på abonnementet kan tilpasses og enkelt skrus av og på igjen. Når et abonnement forfaller, får du et varsel og et merke for å minne deg på at det er forfall."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonnere"),
         "subscribeEvery": MessageLookupByLibrary.simpleMessage("Abonner hver"),
         "subscribeWithApple":

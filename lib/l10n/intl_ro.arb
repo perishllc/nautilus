@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Schimbați nodul la care sunteți conectat. Acest lucru vă permite să vă conectați la un alt nod în cazul în care aveți probleme cu cel implicit sau doar dacă doriți să vă conectați la unul pe care îl găzduiți dvs. Nodul este folosit pentru a trimite tranzacții și a primi actualizări despre contul dvs.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Schimbaţi parola",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Schimbați sursa PoW utilizată pentru a trimite și primi tranzacții.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Schimbă reprezentantul",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Puteți folosi abonamente pentru a configura lucruri precum o donație lunară către creatorul dvs. de conținut preferat sau un abonament lunar la un serviciu, durata abonamentului este personalizabilă și ușor dezactivată și reactivată. Când un abonament devine scadent, veți primi o notificare și o insignă pentru a vă aminti că este scadent.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

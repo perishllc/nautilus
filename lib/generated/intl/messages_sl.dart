@@ -135,6 +135,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Spremeni valuto"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Spremeni dnevnik"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Spremeni vozlišče"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Spremenite vozlišče, s katerim ste povezani. To vam omogoča, da se povežete z drugim vozliščem, če imate težave s privzetim vozliščem ali pa se želite povezati z vozliščem, ki ga gostite sami. Vozlišče se uporablja za pošiljanje transakcij in prejemanje posodobitev o vašem računu."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Spremeni geslo"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -145,6 +147,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Spremeni PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Spremenite vir PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Spremenite vir PoW, ki se uporablja za pošiljanje in prejemanje transakcij."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Zamenjaj predstavnika"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Zamenjaj"),
@@ -860,6 +864,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Informacije o razdeljenem računu"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Razdeli po"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Naročnine"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Naročnine lahko uporabite za nastavitev stvari, kot je mesečna donacija vašemu najljubšemu ustvarjalcu vsebine ali mesečna naročnina na storitev, dolžina naročnine je prilagodljiva in jo je enostavno izklopiti in znova vklopiti. Ko bo naročnina zapadla, boste prejeli obvestilo in značko, ki vas bosta opomnila, da je zapadla."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Naročite se"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Naročite se na vsako"),

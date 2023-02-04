@@ -138,6 +138,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("মুদ্রা পরিবর্তন"),
         "changeLog": MessageLookupByLibrary.simpleMessage("লগ পরিবর্তন করুন"),
         "changeNode": MessageLookupByLibrary.simpleMessage("নোড পরিবর্তন করুন"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "আপনি যে নোডের সাথে সংযুক্ত তা পরিবর্তন করুন। এটি আপনাকে একটি ভিন্ন নোডের সাথে সংযোগ করার অনুমতি দেয় যদি আপনি ডিফল্ট নোডের সাথে সমস্যায় পড়েন, অথবা আপনি যদি নিজে হোস্ট করা একটির সাথে সংযোগ করতে চান। নোডটি লেনদেন জমা দেওয়ার জন্য এবং আপনার অ্যাকাউন্ট সম্পর্কে আপডেট পেতে ব্যবহৃত হয়।"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("পাসওয়ার্ড পরিবর্তন করুন"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -147,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("PoW পরিবর্তন করুন"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("PoW উত্স পরিবর্তন করুন"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "লেনদেন প্রেরণ এবং গ্রহণ করতে ব্যবহৃত PoW এর উত্স পরিবর্তন করুন।"),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage(
             "রিপ্রেজেন্টেটিভ পরিবর্তন করুন"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("পরিবর্তন"),
@@ -866,6 +870,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("বিভক্ত বিল তথ্য"),
         "splitBy": MessageLookupByLibrary.simpleMessage("দ্বারা বিভক্ত"),
         "subsButton": MessageLookupByLibrary.simpleMessage("সদস্যতা"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "আপনি আপনার প্রিয় বিষয়বস্তু নির্মাতাকে মাসিক অনুদান, বা একটি পরিষেবার মাসিক সদস্যতা, সদস্যতার দৈর্ঘ্য কাস্টমাইজযোগ্য, এবং সহজেই বন্ধ এবং আবার চালু করার মতো জিনিসগুলি সেটআপ করতে সদস্যতা ব্যবহার করতে পারেন। যখন একটি সাবস্ক্রিপশন বকেয়া হয়ে যায়, তখন আপনি একটি বিজ্ঞপ্তি এবং একটি ব্যাজ পাবেন যা আপনাকে মনে করিয়ে দেওয়ার জন্য এটি বকেয়া।"),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("সাবস্ক্রাইব"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("প্রতিটি সদস্যতা"),

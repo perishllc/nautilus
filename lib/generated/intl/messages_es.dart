@@ -139,6 +139,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeLog":
             MessageLookupByLibrary.simpleMessage("Registro de cambios"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Cambiar nodo"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Cambie el nodo al que está conectado. Esto le permite conectarse a un nodo diferente en caso de que tenga problemas con el predeterminado, o simplemente si desea conectarse a uno que usted mismo aloja. El nodo se utiliza para enviar transacciones y recibir actualizaciones sobre su cuenta."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Cambia la contraseña"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -148,6 +150,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Cambiar PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Cambiar fuente PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Cambie la fuente de PoW utilizada para enviar y recibir transacciones."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Cambiar representante"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Cambiar"),
@@ -883,6 +887,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Información de factura dividida"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dividir por"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Suscripciones"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Puede usar suscripciones para configurar cosas como una donación mensual a su creador de contenido favorito, o una suscripción mensual a un servicio, la duración de la suscripción es personalizable y se apaga y enciende fácilmente. Cuando una suscripción vence, recibirá una notificación y una insignia para recordarle que vence."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Suscribir"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Suscríbete cada"),

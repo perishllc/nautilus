@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Змініть вузол, до якого ви підключені. Це дозволяє вам підключитися до іншого вузла, якщо у вас виникли проблеми з вузлом за замовчуванням, або просто якщо ви хочете підключитися до вузла, який ви хостите самостійно. Вузол використовується для надсилання транзакцій і отримання оновлень про ваш обліковий запис.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Змінити пароль",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Змініть джерело PoW, що використовується для надсилання та отримання транзакцій.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Зміна представника",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Ви можете використовувати підписки, щоб налаштувати такі речі, як щомісячна пожертва вашому улюбленому творцю контенту або щомісячна підписка на послугу. Тривалість підписки можна налаштувати, її легко вимкнути та знову ввімкнути. Коли термін підписки настане, ви отримаєте сповіщення та значок, щоб нагадати вам про це.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

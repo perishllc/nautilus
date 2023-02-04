@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Canvia el node al qual estàs connectat. Això us permet connectar-vos a un node diferent en cas que tingueu problemes amb el per defecte, o només si voleu connectar-vos a un que allotgeu vosaltres mateixos. El node s'utilitza per enviar transaccions i rebre actualitzacions sobre el vostre compte.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Canvia la contrasenya",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Canvieu la font de PoW que s'utilitza per enviar i rebre transaccions.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Změnit zástupce",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Podeu utilitzar les subscripcions per configurar coses com una donació mensual al vostre creador de contingut preferit o una subscripció mensual a un servei, la durada de la subscripció es pot personalitzar i es pot desactivar i tornar a activar fàcilment. Quan s'hagi vençut una subscripció, rebràs una notificació i una insígnia per recordar-te que està vençuda.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

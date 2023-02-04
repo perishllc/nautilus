@@ -139,6 +139,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeLog":
             MessageLookupByLibrary.simpleMessage("Registro de alterações"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Alterar nó"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Altere o nó ao qual você está conectado. Isso permite que você se conecte a um nó diferente caso esteja tendo problemas com o nó padrão ou apenas se quiser se conectar a um que você mesmo hospeda. O nó é usado para enviar transações e receber atualizações sobre sua conta."),
         "changePassword": MessageLookupByLibrary.simpleMessage("Mudar senha"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "Altere sua senha existente. Se você não souber sua senha atual, apenas faça o seu melhor palpite, pois não é realmente necessário alterá-la (já que você já está logado), mas nos permite excluir a entrada de backup existente."),
@@ -147,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Alterar PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Alterar fonte de PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Altere a origem do PoW usado para enviar e receber transações."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Mudar Representante"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Mudar"),
@@ -870,6 +874,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Informações da fatura dividida"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dividir por"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Assinaturas"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Você pode usar assinaturas para configurar coisas como uma doação mensal para seu criador de conteúdo favorito ou uma assinatura mensal para um serviço, a duração da assinatura é personalizável e facilmente desativada e ativada novamente. Quando uma assinatura vencer, você receberá uma notificação e um selo para lembrá-lo de que está vencida."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Se inscrever"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Inscrever-se a cada"),

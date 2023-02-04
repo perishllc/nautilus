@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Mainiet mezglu, ar kuru esat izveidojis savienojumu. Tas ļauj izveidot savienojumu ar citu mezglu, ja rodas problēmas ar noklusējuma mezglu vai vienkārši vēlaties izveidot savienojumu ar mezglu, kuru mitināt pats. Mezgls tiek izmantots, lai iesniegtu darījumus un saņemtu atjauninājumus par jūsu kontu.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Mainīt paroli",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Mainiet darījumu nosūtīšanai un saņemšanai izmantotā PoW avotu.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Mainīt pārstāvi",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Varat izmantot abonementus, lai iestatītu tādas lietas kā ikmēneša ziedojums savam iecienītākajam satura veidotājam vai pakalpojuma ikmēneša abonements. Abonementa ilgums ir pielāgojams, un to var viegli izslēgt un atkal ieslēgt. Kad būs pienācis abonementa termiņš, jūs saņemsit paziņojumu un emblēmu, kas atgādinās, ka abonementa termiņš ir pienācis.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

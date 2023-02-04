@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Tukar nod yang anda sambungkan. Ini membolehkan anda menyambung ke nod lain sekiranya anda menghadapi masalah dengan nod lalai, atau hanya jika anda ingin menyambung ke nod yang anda hos sendiri. Nod digunakan untuk menyerahkan transaksi dan menerima kemas kini tentang akaun anda.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Tukar kata laluan",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Tukar sumber PoW yang digunakan untuk menghantar dan menerima transaksi.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Tukar Wakil",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Anda boleh menggunakan langganan untuk menyediakan perkara seperti derma bulanan kepada pencipta kandungan kegemaran anda, atau langganan bulanan kepada perkhidmatan, tempoh langganan boleh disesuaikan dan mudah dimatikan dan dihidupkan semula. Apabila langganan perlu dibayar, anda akan mendapat pemberitahuan dan lencana untuk mengingatkan anda bahawa ia perlu dibayar.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

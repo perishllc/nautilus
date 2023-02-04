@@ -116,6 +116,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency": MessageLookupByLibrary.simpleMessage("통화 변경"),
         "changeLog": MessageLookupByLibrary.simpleMessage("변경 로그"),
         "changeNode": MessageLookupByLibrary.simpleMessage("노드 변경"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "연결된 노드를 변경합니다. 이렇게 하면 기본 노드에 문제가 있거나 직접 호스팅하는 노드에 연결하려는 경우 다른 노드에 연결할 수 있습니다. 노드는 트랜잭션을 제출하고 계정에 대한 업데이트를 받는 데 사용됩니다."),
         "changePassword": MessageLookupByLibrary.simpleMessage("비밀번호 변경"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "기존 비밀번호를 변경합니다. 현재 비밀번호를 모르는 경우 실제로 비밀번호를 변경할 필요는 없지만(이미 로그인되어 있으므로) 기존 백업 항목을 삭제할 수 있으므로 최선을 다해 추측하십시오."),
@@ -123,6 +125,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePinHint": MessageLookupByLibrary.simpleMessage("핀 설정"),
         "changePow": MessageLookupByLibrary.simpleMessage("작업 증명 변경"),
         "changePowSource": MessageLookupByLibrary.simpleMessage("PoW 소스 변경"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "트랜잭션을 보내고 받는 데 사용되는 PoW의 소스를 변경합니다."),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage("대리인 변경"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("바꾸기"),
         "changeRepHint": MessageLookupByLibrary.simpleMessage("새로운 대리인을 입력하세요"),
@@ -748,6 +752,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("분할 청구서 정보"),
         "splitBy": MessageLookupByLibrary.simpleMessage("분할 기준"),
         "subsButton": MessageLookupByLibrary.simpleMessage("구독"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "구독을 사용하여 좋아하는 콘텐츠 제작자에게 월간 기부 또는 서비스에 대한 월간 구독과 같은 항목을 설정할 수 있으며 구독 기간은 사용자 정의할 수 있으며 쉽게 껐다가 다시 켤 수 있습니다. 구독 기한이 되면 기한이 되었음을 알리는 알림과 배지가 표시됩니다."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("구독하다"),
         "subscribeEvery": MessageLookupByLibrary.simpleMessage("구독하기"),
         "subscribeWithApple":

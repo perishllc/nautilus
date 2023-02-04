@@ -133,6 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ubah Mata Uang"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Perubahan Log"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Ubah Node"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Ubah node yang terhubung dengan Anda. Ini memungkinkan Anda untuk terhubung ke node yang berbeda jika Anda mengalami masalah dengan yang default, atau hanya jika Anda ingin terhubung ke node yang Anda host sendiri. Node digunakan untuk mengirimkan transaksi dan menerima pembaruan tentang akun Anda."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Ganti kata sandi"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -142,6 +144,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Ubah PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Ubah Sumber PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Ubah sumber PoW yang digunakan untuk mengirim dan menerima transaksi."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Ubah Perwakilan"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Ubah"),
@@ -860,6 +864,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bagi Info Tagihan"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dibagi Oleh"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Langganan"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Anda dapat menggunakan langganan untuk menyiapkan hal-hal seperti donasi bulanan ke pembuat konten favorit Anda, atau langganan bulanan ke suatu layanan, lama langganan dapat disesuaikan, dan mudah dimatikan dan dihidupkan lagi. Saat langganan jatuh tempo, Anda akan mendapatkan notifikasi dan lencana untuk mengingatkan Anda bahwa langganan sudah jatuh tempo."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Langganan"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Berlangganan Setiap"),

@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Bağlı olduğunuz düğümü değiştirin. Bu, varsayılan düğümle ilgili sorunlarınız olması durumunda veya yalnızca kendi barındırdığınız bir düğüme bağlanmak istediğinizde farklı bir düğüme bağlanmanıza olanak tanır. Düğüm, işlemleri göndermek ve hesabınızla ilgili güncellemeleri almak için kullanılır.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Şifre değiştir",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "İşlem göndermek ve almak için kullanılan PoW kaynağını değiştirin.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Temsilci Değiştir",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Abonelikleri, favori içerik oluşturucunuza aylık bağış veya bir hizmete aylık abonelik gibi ayarları yapmak için kullanabilirsiniz; aboneliğin süresi özelleştirilebilir ve kolayca kapatılıp tekrar açılabilir. Bir aboneliğin süresi dolduğunda, size bunun son tarihini hatırlatan bir bildirim ve bir rozet alırsınız.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

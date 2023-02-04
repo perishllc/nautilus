@@ -125,6 +125,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency": MessageLookupByLibrary.simpleMessage("تغيير العملة"),
         "changeLog": MessageLookupByLibrary.simpleMessage("سجل التغيير"),
         "changeNode": MessageLookupByLibrary.simpleMessage("تغيير العقدة"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "قم بتغيير العقدة التي تتصل بها. يتيح لك هذا الاتصال بعقدة مختلفة في حالة مواجهة مشكلات مع العقدة الافتراضية ، أو فقط إذا كنت ترغب في الاتصال بعقدة تستضيفها بنفسك. تُستخدم العقدة لإرسال المعاملات وتلقي التحديثات حول حسابك."),
         "changePassword": MessageLookupByLibrary.simpleMessage("غير كلمة السر"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "غيّر كلمة مرورك الحالية. إذا كنت لا تعرف كلمة مرورك الحالية ، فما عليك سوى تخمين أفضل ما لديك لأنه ليس مطلوبًا في الواقع تغييرها (نظرًا لأنك قمت بتسجيل الدخول بالفعل) ، ولكنها تتيح لنا حذف إدخال النسخ الاحتياطي الحالي."),
@@ -133,6 +135,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("تغيير إثبات العمل"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("تغيير مصدر إثبات العمل"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "تغيير مصدر إثبات العمل المستخدم لإرسال واستقبال المعاملات."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("تغير المندوب"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("تغير"),
@@ -832,6 +836,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تقسيم معلومات بيل"),
         "splitBy": MessageLookupByLibrary.simpleMessage("تقسيم حسب"),
         "subsButton": MessageLookupByLibrary.simpleMessage("الاشتراكات"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "يمكنك استخدام الاشتراكات لإعداد أشياء مثل التبرع الشهري لمنشئ المحتوى المفضل لديك ، أو اشتراك شهري في خدمة ، ويكون طول الاشتراك قابلاً للتخصيص ، ويمكن إيقاف تشغيله وتشغيله بسهولة مرة أخرى. عندما يحين موعد الاشتراك ، ستتلقى إشعارًا وشارة لتذكيرك بأن هذا الاشتراك قد حان."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("الإشتراك"),
         "subscribeEvery": MessageLookupByLibrary.simpleMessage("اشترك كل"),
         "subscribeWithApple":

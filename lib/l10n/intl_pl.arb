@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Zmień węzeł, z którym jesteś połączony. Dzięki temu możesz połączyć się z innym węzłem w przypadku problemów z domyślnym węzłem lub po prostu, jeśli chcesz połączyć się z węzłem, który sam hostujesz. Węzeł służy do przesyłania transakcji i otrzymywania aktualizacji dotyczących Twojego konta.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Zmień hasło",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Zmień źródło PoW używane do wysyłania i odbierania transakcji.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Zmień przedstawiciela",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Możesz użyć subskrypcji, aby skonfigurować takie rzeczy, jak miesięczna darowizna dla ulubionego twórcy treści lub miesięczna subskrypcja usługi, długość subskrypcji można dostosować oraz łatwo wyłączyć i ponownie włączyć. Gdy upływa termin subskrypcji, otrzymasz powiadomienie i plakietkę przypominającą o tym terminie.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

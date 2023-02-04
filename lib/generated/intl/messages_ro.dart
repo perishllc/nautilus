@@ -134,6 +134,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Schimbă valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Schimbare jurnal"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Schimbați nodul"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Schimbați nodul la care sunteți conectat. Acest lucru vă permite să vă conectați la un alt nod în cazul în care aveți probleme cu cel implicit sau doar dacă doriți să vă conectați la unul pe care îl găzduiți dvs. Nodul este folosit pentru a trimite tranzacții și a primi actualizări despre contul dvs."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Schimbaţi parola"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -143,6 +145,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Schimbați PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Schimbați sursa PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Schimbați sursa PoW utilizată pentru a trimite și primi tranzacții."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Schimbă reprezentantul"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Schimbă"),
@@ -867,6 +871,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Împărțiți informațiile facturii"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Split By"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Abonamente"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Puteți folosi abonamente pentru a configura lucruri precum o donație lunară către creatorul dvs. de conținut preferat sau un abonament lunar la un serviciu, durata abonamentului este personalizabilă și ușor dezactivată și reactivată. Când un abonament devine scadent, veți primi o notificare și o insignă pentru a vă aminti că este scadent."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonati-va"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Abonați-vă fiecare"),

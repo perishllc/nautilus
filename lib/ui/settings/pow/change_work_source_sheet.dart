@@ -164,7 +164,13 @@ class ChangePowSheetState extends State<ChangePowSheet> {
                     height: 60,
                     child: AppDialogs.infoButton(
                       context,
-                      () {},
+                      () {
+                        AppDialogs.showInfoDialog(
+                          context,
+                          Z.of(context).changePowSource,
+                          Z.of(context).changePowSourceInfo,
+                        );
+                      },
                     ),
                   ),
                 ],

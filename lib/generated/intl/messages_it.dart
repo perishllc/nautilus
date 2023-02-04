@@ -136,6 +136,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Cambia Valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Registro modifiche"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Cambia nodo"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Cambia il nodo a cui sei connesso. Ciò ti consente di connetterti a un nodo diverso nel caso in cui riscontri problemi con quello predefinito o semplicemente se desideri connetterti a uno che ospiti tu stesso. Il nodo viene utilizzato per inviare transazioni e ricevere aggiornamenti sul tuo account."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Cambia la password"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -145,6 +147,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Cambia PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Cambia sorgente PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Modificare la fonte di PoW utilizzata per inviare e ricevere transazioni."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Cambia Rappresentante"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Cambia"),
@@ -869,6 +873,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Dividi le informazioni sulla fattura"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dividi per"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Abbonamenti"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Puoi utilizzare gli abbonamenti per impostare cose come una donazione mensile al tuo creatore di contenuti preferito o un abbonamento mensile a un servizio, la durata dell\'abbonamento è personalizzabile e facilmente disattivabile e riattivabile. Quando un abbonamento scade, riceverai una notifica e un badge per ricordarti che è scaduto."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("sottoscrivi"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Iscriviti ogni"),

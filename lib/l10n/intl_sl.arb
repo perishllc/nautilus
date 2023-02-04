@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Spremenite vozlišče, s katerim ste povezani. To vam omogoča, da se povežete z drugim vozliščem, če imate težave s privzetim vozliščem ali pa se želite povezati z vozliščem, ki ga gostite sami. Vozlišče se uporablja za pošiljanje transakcij in prejemanje posodobitev o vašem računu.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Spremeni geslo",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Spremenite vir PoW, ki se uporablja za pošiljanje in prejemanje transakcij.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Zamenjaj predstavnika",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Naročnine lahko uporabite za nastavitev stvari, kot je mesečna donacija vašemu najljubšemu ustvarjalcu vsebine ali mesečna naročnina na storitev, dolžina naročnine je prilagodljiva in jo je enostavno izklopiti in znova vklopiti. Ko bo naročnina zapadla, boste prejeli obvestilo in značko, ki vas bosta opomnila, da je zapadla.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

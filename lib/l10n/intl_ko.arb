@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "연결된 노드를 변경합니다. 이렇게 하면 기본 노드에 문제가 있거나 직접 호스팅하는 노드에 연결하려는 경우 다른 노드에 연결할 수 있습니다. 노드는 트랜잭션을 제출하고 계정에 대한 업데이트를 받는 데 사용됩니다.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "비밀번호 변경",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "트랜잭션을 보내고 받는 데 사용되는 PoW의 소스를 변경합니다.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "대리인 변경",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "구독을 사용하여 좋아하는 콘텐츠 제작자에게 월간 기부 또는 서비스에 대한 월간 구독과 같은 항목을 설정할 수 있으며 구독 기간은 사용자 정의할 수 있으며 쉽게 껐다가 다시 켤 수 있습니다. 구독 기한이 되면 기한이 되었음을 알리는 알림과 배지가 표시됩니다.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

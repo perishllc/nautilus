@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "שנה את הצומת שאליו אתה מחובר. זה מאפשר לך להתחבר לצומת אחר במקרה שאתה נתקל בבעיות עם הצומת המוגדר כברירת מחדל, או רק אם אתה רוצה להתחבר לצומת שאתה מארח בעצמך. הצומת משמש להגשת עסקאות וקבלת עדכונים לגבי חשבונך.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "שנה סיסמא",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "שנה את מקור ה-PoW המשמש לשליחה וקבלה של עסקאות.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "שנה נציג",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "אתה יכול להשתמש במינויים כדי להגדיר דברים כמו תרומה חודשית ליוצר התוכן המועדף עליך, או מנוי חודשי לשירות, אורך המנוי ניתן להתאמה אישית, ובקלות לכבות ולהדליק שוב. כשיגיע מועד למנוי, תקבל התראה ותג כדי להזכיר לך שזה הגיע.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

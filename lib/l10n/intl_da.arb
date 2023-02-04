@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Skift den node, du er forbundet til. Dette giver dig mulighed for at oprette forbindelse til en anden node, hvis du har problemer med standarden, eller bare hvis du vil oprette forbindelse til en, du selv er vært for. Noden bruges til at sende transaktioner og modtage opdateringer om din konto.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Skift kodeord",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Skift kilden til PoW, der bruges til at sende og modtage transaktioner.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Změnit zástupce",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Du kan bruge abonnementer til at konfigurere ting som en månedlig donation til din yndlingsindholdsskaber eller et månedligt abonnement på en tjeneste. Længden af abonnementet kan tilpasses og kan nemt slås fra og til igen. Når et abonnement forfalder, får du en notifikation og et badge for at minde dig om, at det er forfaldent.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

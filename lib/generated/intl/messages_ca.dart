@@ -132,6 +132,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Změna měny"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Change Log"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Canvia el node"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Canvia el node al qual estàs connectat. Això us permet connectar-vos a un node diferent en cas que tingueu problemes amb el per defecte, o només si voleu connectar-vos a un que allotgeu vosaltres mateixos. El node s\'utilitza per enviar transaccions i rebre actualitzacions sobre el vostre compte."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Canvia la contrasenya"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -141,6 +143,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Canvia PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Canvia la font de PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Canvieu la font de PoW que s\'utilitza per enviar i rebre transaccions."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Změnit zástupce"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Změnit"),
@@ -859,6 +863,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Informació de factura dividida"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dividit per"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Subscripcions"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Podeu utilitzar les subscripcions per configurar coses com una donació mensual al vostre creador de contingut preferit o una subscripció mensual a un servei, la durada de la subscripció es pot personalitzar i es pot desactivar i tornar a activar fàcilment. Quan s\'hagi vençut una subscripció, rebràs una notificació i una insígnia per recordar-te que està vençuda."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Subscriu-te"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Subscriu-te cada"),

@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Altere o nó ao qual você está conectado. Isso permite que você se conecte a um nó diferente caso esteja tendo problemas com o nó padrão ou apenas se quiser se conectar a um que você mesmo hospeda. O nó é usado para enviar transações e receber atualizações sobre sua conta.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Mudar senha",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Altere a origem do PoW usado para enviar e receber transações.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Mudar Representante",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Você pode usar assinaturas para configurar coisas como uma doação mensal para seu criador de conteúdo favorito ou uma assinatura mensal para um serviço, a duração da assinatura é personalizável e facilmente desativada e ativada novamente. Quando uma assinatura vencer, você receberá uma notificação e um selo para lembrá-lo de que está vencida.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

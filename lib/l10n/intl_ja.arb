@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "接続しているノードを変更します。これにより、デフォルトのノードに問題がある場合、または自分でホストしているノードに接続したい場合に、別のノードに接続できます。ノードは、トランザクションを送信し、アカウントに関する更新を受信するために使用されます。",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "パスワードを変更する",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "トランザクションの送受信に使用される PoW のソースを変更します。",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "代理人を変更する",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "サブスクリプションを使用して、お気に入りのコンテンツ作成者への毎月の寄付や、サービスへの毎月のサブスクリプションなどを設定できます。サブスクリプションの長さはカスタマイズ可能で、簡単にオフにしてから再びオンにすることができます.サブスクリプションの期限が来ると、期限が来たことを知らせる通知とバッジが表示されます。",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

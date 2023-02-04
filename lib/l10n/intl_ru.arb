@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Измените узел, к которому вы подключены. Это позволяет вам подключиться к другому узлу, если у вас возникли проблемы с узлом по умолчанию, или просто если вы хотите подключиться к тому, который вы размещаете сами. Узел используется для отправки транзакций и получения обновлений о вашей учетной записи.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Изменить пароль",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Измените источник PoW, используемый для отправки и получения транзакций.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Сменить представителя",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Вы можете использовать подписки для настройки таких вещей, как ежемесячное пожертвование вашему любимому создателю контента или ежемесячная подписка на службу, продолжительность подписки настраивается, и ее легко отключить и снова включить. Когда срок подписки подходит к концу, вы получите уведомление и значок, чтобы напомнить вам, что срок ее действия истек.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

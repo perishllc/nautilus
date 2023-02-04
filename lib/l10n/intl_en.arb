@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Change the node that you are connected to. This allows you to connect to a different node in case you are having issues with the default one, or just if you want to connect to one you host yourself. The node is used for submitting transactions and receiving updates about your account.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Change Password",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Change the source of PoW used to send and receive transactions.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Change Representative",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "You can use subscriptions to setup things like a monthly donation to your favorite content creator, or a monthly subscription to a service, the length of the subscription is customizable, and easily turned off and on again. When a subscription becomes due, you'll get a notification and a badge to remind you that it's due.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

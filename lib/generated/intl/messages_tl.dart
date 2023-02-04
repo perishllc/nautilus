@@ -138,6 +138,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Palitan ang Currency"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Baguhin ang Log"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Baguhin ang Node"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Baguhin ang node kung saan ka nakakonekta. Binibigyang-daan ka nitong kumonekta sa ibang node kung sakaling nagkakaroon ka ng mga isyu sa default, o kung gusto mong kumonekta sa isa na ikaw mismo ang nagho-host. Ginagamit ang node para sa pagsusumite ng mga transaksyon at pagtanggap ng mga update tungkol sa iyong account."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Palitan ANG password"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -147,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Baguhin ang PoW"),
         "changePowSource": MessageLookupByLibrary.simpleMessage(
             "Baguhin ang Pinagmulan ng PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Baguhin ang pinagmulan ng PoW na ginamit upang magpadala at tumanggap ng mga transaksyon."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Palitan ang Representative"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Palitan"),
@@ -893,6 +897,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Impormasyon ng Split Bill"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Hatiin Ni"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Mga subscription"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Maaari kang gumamit ng mga subscription upang mag-set up ng mga bagay tulad ng buwanang donasyon sa iyong paboritong tagalikha ng nilalaman, o buwanang subscription sa isang serbisyo, ang haba ng subscription ay nako-customize, at madaling i-off at i-on muli. Kapag ang isang subscription ay dapat nang bayaran, makakatanggap ka ng isang notification at isang badge na magpapaalala sa iyo na ito ay dapat bayaran."),
         "subscribeButton":
             MessageLookupByLibrary.simpleMessage("Mag-subscribe"),
         "subscribeEvery":

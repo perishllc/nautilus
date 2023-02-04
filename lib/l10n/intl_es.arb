@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Cambie el nodo al que está conectado. Esto le permite conectarse a un nodo diferente en caso de que tenga problemas con el predeterminado, o simplemente si desea conectarse a uno que usted mismo aloja. El nodo se utiliza para enviar transacciones y recibir actualizaciones sobre su cuenta.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Cambia la contraseña",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Cambie la fuente de PoW utilizada para enviar y recibir transacciones.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Cambiar representante",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Puede usar suscripciones para configurar cosas como una donación mensual a su creador de contenido favorito, o una suscripción mensual a un servicio, la duración de la suscripción es personalizable y se apaga y enciende fácilmente. Cuando una suscripción vence, recibirá una notificación y una insignia para recordarle que vence.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

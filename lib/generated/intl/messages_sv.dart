@@ -138,6 +138,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Ändra valuta"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Ändra logg"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Byt nod"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Ändra noden som du är ansluten till. Detta gör att du kan ansluta till en annan nod om du har problem med standardnoden, eller bara om du vill ansluta till en du själv är värd för. Noden används för att skicka transaktioner och ta emot uppdateringar om ditt konto."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Ändra lösenord"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -147,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Ändra PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Ändra PoW-källa"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Ändra källan till PoW som används för att skicka och ta emot transaktioner."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Byt representant"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Ändra"),
@@ -860,6 +864,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Dela fakturainformation"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Dela av"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Prenumerationer"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Du kan använda prenumerationer för att ställa in saker som en månatlig donation till din favoritinnehållsskapare eller en månatlig prenumeration på en tjänst, längden på prenumerationen är anpassningsbar och kan enkelt stängas av och slås på igen. När en prenumeration förfaller får du ett meddelande och ett märke för att påminna dig om att det förfaller."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Prenumerera"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Prenumerera varje"),

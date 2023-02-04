@@ -133,6 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeLog":
             MessageLookupByLibrary.simpleMessage("Промяна на дневника"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Промяна на възела"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Променете възела, към който сте свързани. Това ви позволява да се свържете с различен възел, в случай че имате проблеми с този по подразбиране или просто ако искате да се свържете с такъв, който хоствате сами. Възелът се използва за подаване на транзакции и получаване на актуализации за вашия акаунт."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Промяна на паролата"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -142,6 +144,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Промяна на PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Промяна на източника на PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Променете източника на PoW, използван за изпращане и получаване на транзакции."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Смени Представителя"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Смени"),
@@ -866,6 +870,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Разделена информация за сметката"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Разделяне по"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Абонаменти"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Можете да използвате абонаменти, за да настроите неща като месечно дарение за любимия ви създател на съдържание или месечен абонамент за услуга, като продължителността на абонамента може да се персонализира и лесно се изключва и включва отново. Когато даден абонамент стане дължим, ще получите известие и значка, които да ви напомнят, че е дължим."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Абонирай се"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Абонирайте се за всеки"),

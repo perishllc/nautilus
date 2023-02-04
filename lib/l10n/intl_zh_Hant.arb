@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "更改您連接到的節點。這允許您連接到不同的節點，以防萬一您對默認節點有問題，或者只是想連接到您自己託管的節點。該節點用於提交交易和接收有關您帳戶的更新。",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "更改密碼",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "更改用於發送和接收交易的 PoW 來源。",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "變更代表",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "您可以使用訂閱來設置諸如每月向您最喜歡的內容創作者捐款，或每月訂閱一項服務，訂閱的長度是可定制的，並且可以輕鬆地關閉和重新打開。當訂閱到期時，您會收到通知和徽章，提醒您訂閱到期。",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

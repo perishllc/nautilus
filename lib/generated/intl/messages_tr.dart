@@ -130,6 +130,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Para Birimi"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Girişi değiştir"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Düğümü Değiştir"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Bağlı olduğunuz düğümü değiştirin. Bu, varsayılan düğümle ilgili sorunlarınız olması durumunda veya yalnızca kendi barındırdığınız bir düğüme bağlanmak istediğinizde farklı bir düğüme bağlanmanıza olanak tanır. Düğüm, işlemleri göndermek ve hesabınızla ilgili güncellemeleri almak için kullanılır."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Şifre değiştir"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -139,6 +141,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("PoW\'u değiştir"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("PoW Kaynağını Değiştir"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "İşlem göndermek ve almak için kullanılan PoW kaynağını değiştirin."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Temsilci Değiştir"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Değiştir"),
@@ -848,6 +852,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bölünmüş Fatura Bilgisi"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Bölme Ölçütü"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Abonelikler"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Abonelikleri, favori içerik oluşturucunuza aylık bağış veya bir hizmete aylık abonelik gibi ayarları yapmak için kullanabilirsiniz; aboneliğin süresi özelleştirilebilir ve kolayca kapatılıp tekrar açılabilir. Bir aboneliğin süresi dolduğunda, size bunun son tarihini hatırlatan bir bildirim ve bir rozet alırsınız."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abone olmak"),
         "subscribeEvery": MessageLookupByLibrary.simpleMessage("Abone Ol"),
         "subscribeWithApple":

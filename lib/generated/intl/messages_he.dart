@@ -122,6 +122,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("שנה מטבע חליפין"),
         "changeLog": MessageLookupByLibrary.simpleMessage("שינוי יומן"),
         "changeNode": MessageLookupByLibrary.simpleMessage("שנה צומת"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "שנה את הצומת שאליו אתה מחובר. זה מאפשר לך להתחבר לצומת אחר במקרה שאתה נתקל בבעיות עם הצומת המוגדר כברירת מחדל, או רק אם אתה רוצה להתחבר לצומת שאתה מארח בעצמך. הצומת משמש להגשת עסקאות וקבלת עדכונים לגבי חשבונך."),
         "changePassword": MessageLookupByLibrary.simpleMessage("שנה סיסמא"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "שנה את הסיסמה הקיימת שלך. אם אינך יודע את הסיסמה הנוכחית שלך, פשוט בצע את הניחוש הטוב ביותר שלך, כי למעשה אין צורך לשנות אותה (מכיוון שאתה כבר מחובר), אך היא מאפשרת לנו למחוק את ערך הגיבוי הקיים."),
@@ -129,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePinHint": MessageLookupByLibrary.simpleMessage("הגדר סיכה"),
         "changePow": MessageLookupByLibrary.simpleMessage("שנה PoW"),
         "changePowSource": MessageLookupByLibrary.simpleMessage("שנה מקור PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "שנה את מקור ה-PoW המשמש לשליחה וקבלה של עסקאות."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("שנה נציג"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("שנה"),
@@ -796,6 +800,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("פיצול פרטי חשבון"),
         "splitBy": MessageLookupByLibrary.simpleMessage("פיצול לפי"),
         "subsButton": MessageLookupByLibrary.simpleMessage("מנויים"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "אתה יכול להשתמש במינויים כדי להגדיר דברים כמו תרומה חודשית ליוצר התוכן המועדף עליך, או מנוי חודשי לשירות, אורך המנוי ניתן להתאמה אישית, ובקלות לכבות ולהדליק שוב. כשיגיע מועד למנוי, תקבל התראה ותג כדי להזכיר לך שזה הגיע."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("הירשם"),
         "subscribeEvery": MessageLookupByLibrary.simpleMessage("הירשם כל"),
         "subscribeWithApple":

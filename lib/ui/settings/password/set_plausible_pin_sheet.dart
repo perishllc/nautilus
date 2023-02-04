@@ -84,7 +84,10 @@ class _SetPlausiblePinSheetState extends State<SetPlausiblePinSheet> {
                             context,
                             () {
                               AppDialogs.showInfoDialog(
-                                  context, Z.of(context).plausibleInfoHeader, Z.of(context).plausibleSheetInfo);
+                                context,
+                                Z.of(context).plausibleInfoHeader,
+                                Z.of(context).plausibleSheetInfo,
+                              );
                             },
                           ),
                         ),

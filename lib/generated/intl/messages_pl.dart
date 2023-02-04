@@ -132,6 +132,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Zmień walutę"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Dziennik zmian"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Zmień węzeł"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Zmień węzeł, z którym jesteś połączony. Dzięki temu możesz połączyć się z innym węzłem w przypadku problemów z domyślnym węzłem lub po prostu, jeśli chcesz połączyć się z węzłem, który sam hostujesz. Węzeł służy do przesyłania transakcji i otrzymywania aktualizacji dotyczących Twojego konta."),
         "changePassword": MessageLookupByLibrary.simpleMessage("Zmień hasło"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "Zmień swoje dotychczasowe hasło. Jeśli nie znasz swojego aktualnego hasła, po prostu zgadnij, ponieważ w rzeczywistości nie jest wymagane jego zmienianie (ponieważ jesteś już zalogowany), ale pozwala nam to usunąć istniejący wpis kopii zapasowej."),
@@ -140,6 +142,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Zmień POW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Zmień źródło PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Zmień źródło PoW używane do wysyłania i odbierania transakcji."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Zmień przedstawiciela"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Zmień"),
@@ -857,6 +861,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Podziel informacje o rachunku"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Podziel według"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Abonamenty"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Możesz użyć subskrypcji, aby skonfigurować takie rzeczy, jak miesięczna darowizna dla ulubionego twórcy treści lub miesięczna subskrypcja usługi, długość subskrypcji można dostosować oraz łatwo wyłączyć i ponownie włączyć. Gdy upływa termin subskrypcji, otrzymasz powiadomienie i plakietkę przypominającą o tym terminie."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Subskrybuj"),
         "subscribeEvery": MessageLookupByLibrary.simpleMessage("Subskrybuj co"),
         "subscribeWithApple":

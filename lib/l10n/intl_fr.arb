@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Modifiez le nœud auquel vous êtes connecté. Cela vous permet de vous connecter à un nœud différent au cas où vous auriez des problèmes avec celui par défaut, ou simplement si vous souhaitez vous connecter à celui que vous hébergez vous-même. Le nœud est utilisé pour soumettre des transactions et recevoir des mises à jour sur votre compte.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Changer le mot de passe",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Modifiez la source de PoW utilisée pour envoyer et recevoir des transactions.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Changer le représentant",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Vous pouvez utiliser des abonnements pour configurer des choses comme un don mensuel à votre créateur de contenu préféré ou un abonnement mensuel à un service, la durée de l'abonnement est personnalisable et facilement désactivée et réactivée. Lorsqu'un abonnement arrive à échéance, vous recevez une notification et un badge pour vous rappeler qu'il est dû.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

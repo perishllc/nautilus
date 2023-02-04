@@ -139,6 +139,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeLog": MessageLookupByLibrary.simpleMessage("Logboek wijzigen"),
         "changeNode":
             MessageLookupByLibrary.simpleMessage("Knooppunt wijzigen"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Wijzig het knooppunt waarmee u bent verbonden. Hierdoor kunt u verbinding maken met een ander knooppunt voor het geval u problemen ondervindt met het standaardknooppunt, of gewoon als u verbinding wilt maken met een knooppunt dat u zelf host. Het knooppunt wordt gebruikt voor het indienen van transacties en het ontvangen van updates over uw account."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Verander wachtwoord"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -148,6 +150,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("PoW wijzigen"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Verander de PoW-bron"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Wijzig de bron van PoW die wordt gebruikt om transacties te verzenden en te ontvangen."),
         "changeRepAuthenticate": MessageLookupByLibrary.simpleMessage(
             "Verander van vertegenwoordiger"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Verander"),
@@ -869,6 +873,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Factuurgegevens splitsen"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Gesplitst door"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Abonnementen"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "U kunt abonnementen gebruiken om dingen in te stellen zoals een maandelijkse donatie aan uw favoriete maker van inhoud, of een maandelijks abonnement op een service. De duur van het abonnement is aanpasbaar en kan eenvoudig worden uit- en weer ingeschakeld. Wanneer een abonnement vervalt, ontvangt u een melding en een badge om u eraan te herinneren dat het vervalt."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonneren"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Abonneer je op elke"),

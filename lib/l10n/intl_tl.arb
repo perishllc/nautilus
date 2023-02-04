@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "Baguhin ang node kung saan ka nakakonekta. Binibigyang-daan ka nitong kumonekta sa ibang node kung sakaling nagkakaroon ka ng mga isyu sa default, o kung gusto mong kumonekta sa isa na ikaw mismo ang nagho-host. Ginagamit ang node para sa pagsusumite ng mga transaksyon at pagtanggap ng mga update tungkol sa iyong account.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "Palitan ANG password",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "Baguhin ang pinagmulan ng PoW na ginamit upang magpadala at tumanggap ng mga transaksyon.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "Palitan ang Representative",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "Maaari kang gumamit ng mga subscription upang mag-set up ng mga bagay tulad ng buwanang donasyon sa iyong paboritong tagalikha ng nilalaman, o buwanang subscription sa isang serbisyo, ang haba ng subscription ay nako-customize, at madaling i-off at i-on muli. Kapag ang isang subscription ay dapat nang bayaran, makakatanggap ka ng isang notification at isang badge na magpapaalala sa iyo na ito ay dapat bayaran.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

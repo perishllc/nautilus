@@ -138,6 +138,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeLog": MessageLookupByLibrary.simpleMessage("Változási napló"),
         "changeNode":
             MessageLookupByLibrary.simpleMessage("Csomópont módosítása"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Módosítsa azt a csomópontot, amelyhez csatlakozik. Ez lehetővé teszi, hogy csatlakozzon egy másik csomóponthoz, ha problémái vannak az alapértelmezett csomóponttal, vagy csak akkor, ha egy Ön által tárolt csomóponthoz szeretne csatlakozni. A csomópont tranzakciók beküldésére és fiókjával kapcsolatos frissítések fogadására szolgál."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Jelszó módosítása"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -148,6 +150,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("PoW módosítása"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("PoW-forrás módosítása"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Módosítsa a tranzakciók küldésére és fogadására használt PoW forrását."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Képviselő Megváltoztatása"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Megváltoztat"),
@@ -877,6 +881,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Split Bill Info"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Felosztás"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Előfizetések"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Az előfizetések segítségével beállíthat olyan dolgokat, mint például havi adományozás kedvenc tartalomkészítőjének vagy havi előfizetés egy szolgáltatásra. Az előfizetés időtartama testreszabható, és könnyen ki- és bekapcsolható. Amikor egy előfizetés esedékessé válik, értesítést és egy jelvényt kap, amely emlékezteti az előfizetés esedékességére."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Iratkozz fel"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Feliratkozás Minden"),

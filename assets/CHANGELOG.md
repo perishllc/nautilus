@@ -1,3 +1,10 @@
+## v0.7.7 - [2023-02-05]
+#### Added
+- Info button content on several places that explain what a feature is
+#### Fixed
+- More network fixes
+- Giftcard balance rendering bug
+- Giftcard fixes
 ## v0.7.6 - [2023-02-03]
 #### Fixed
 - Hotfixes for receiving blocks

@@ -135,6 +135,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency": MessageLookupByLibrary.simpleMessage("Mainīt valūtu"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Change Log"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Mainīt mezglu"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Mainiet mezglu, ar kuru esat izveidojis savienojumu. Tas ļauj izveidot savienojumu ar citu mezglu, ja rodas problēmas ar noklusējuma mezglu vai vienkārši vēlaties izveidot savienojumu ar mezglu, kuru mitināt pats. Mezgls tiek izmantots, lai iesniegtu darījumus un saņemtu atjauninājumus par jūsu kontu."),
         "changePassword": MessageLookupByLibrary.simpleMessage("Mainīt paroli"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "Mainiet savu esošo paroli. Ja nezināt savu pašreizējo paroli, vienkārši uzminējiet, jo tā faktiski nav jāmaina (jo jūs jau esat pieteicies), taču tas ļauj mums izdzēst esošo rezerves ierakstu."),
@@ -143,6 +145,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Mainīt PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Mainiet PoW avotu"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Mainiet darījumu nosūtīšanai un saņemšanai izmantotā PoW avotu."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Mainīt pārstāvi"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Mainīt"),
@@ -858,6 +862,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Dalīta rēķina informācija"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Sadalīt pēc"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Abonementi"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Varat izmantot abonementus, lai iestatītu tādas lietas kā ikmēneša ziedojums savam iecienītākajam satura veidotājam vai pakalpojuma ikmēneša abonements. Abonementa ilgums ir pielāgojams, un to var viegli izslēgt un atkal ieslēgt. Kad būs pienācis abonementa termiņš, jūs saņemsit paziņojumu un emblēmu, kas atgādinās, ka abonementa termiņš ir pienācis."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonēt"),
         "subscribeEvery": MessageLookupByLibrary.simpleMessage("Abonēt katru"),
         "subscribeWithApple": MessageLookupByLibrary.simpleMessage(

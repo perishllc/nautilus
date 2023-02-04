@@ -134,6 +134,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeCurrency": MessageLookupByLibrary.simpleMessage("मुद्रा बदलें"),
         "changeLog": MessageLookupByLibrary.simpleMessage("लॉग बदलें"),
         "changeNode": MessageLookupByLibrary.simpleMessage("नोड बदलें"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "उस नोड को बदलें जिससे आप जुड़े हुए हैं। यह आपको एक अलग नोड से कनेक्ट करने की अनुमति देता है यदि आपको डिफ़ॉल्ट के साथ समस्या हो रही है, या यदि आप स्वयं को होस्ट करने वाले से कनेक्ट करना चाहते हैं। नोड का उपयोग लेन-देन सबमिट करने और आपके खाते के बारे में अपडेट प्राप्त करने के लिए किया जाता है।"),
         "changePassword": MessageLookupByLibrary.simpleMessage("पासवर्ड बदलें"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
             "अपना मौजूदा पासवर्ड बदलें। यदि आप अपना वर्तमान पासवर्ड नहीं जानते हैं, तो बस अपना सर्वश्रेष्ठ अनुमान लगाएं क्योंकि वास्तव में इसे बदलने की आवश्यकता नहीं है (चूंकि आप पहले से लॉग इन हैं), लेकिन यह हमें मौजूदा बैकअप प्रविष्टि को हटाने देता है।"),
@@ -142,6 +144,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("पीओडब्ल्यू बदलें"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("पीओडब्ल्यू स्रोत बदलें"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "लेन-देन भेजने और प्राप्त करने के लिए उपयोग किए जाने वाले PoW के स्रोत को बदलें।"),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("प्रतिनिधि बदलें"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("बदलें"),
@@ -850,6 +854,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("स्प्लिट बिल जानकारी"),
         "splitBy": MessageLookupByLibrary.simpleMessage("विभाजित करके"),
         "subsButton": MessageLookupByLibrary.simpleMessage("सदस्यता"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "आप अपने पसंदीदा सामग्री निर्माता को मासिक दान, या किसी सेवा के लिए मासिक सदस्यता जैसी चीजों को सेटअप करने के लिए सदस्यता का उपयोग कर सकते हैं, सदस्यता की अवधि अनुकूलन योग्य है, और आसानी से बंद और फिर से चालू हो जाती है। जब कोई सदस्यता देय हो जाती है, तो आपको यह याद दिलाने के लिए एक सूचना और एक बैज प्राप्त होगा कि यह देय है।"),
         "subscribeButton":
             MessageLookupByLibrary.simpleMessage("सदस्यता लेने के"),
         "subscribeEvery":

@@ -750,6 +750,16 @@ class Z {
     );
   }
 
+  /// `Change the node that you are connected to. This allows you to connect to a different node in case you are having issues with the default one, or just if you want to connect to one you host yourself. The node is used for submitting transactions and receiving updates about your account.`
+  String get changeNodeInfo {
+    return Intl.message(
+      'Change the node that you are connected to. This allows you to connect to a different node in case you are having issues with the default one, or just if you want to connect to one you host yourself. The node is used for submitting transactions and receiving updates about your account.',
+      name: 'changeNodeInfo',
+      desc: 'change node',
+      args: [],
+    );
+  }
+
   /// `Change Password`
   String get changePassword {
     return Intl.message(
@@ -807,6 +817,16 @@ class Z {
       'Change PoW Source',
       name: 'changePowSource',
       desc: 'change pow source',
+      args: [],
+    );
+  }
+
+  /// `Change the source of PoW used to send and receive transactions.`
+  String get changePowSourceInfo {
+    return Intl.message(
+      'Change the source of PoW used to send and receive transactions.',
+      name: 'changePowSourceInfo',
+      desc: 'change pow source info',
       args: [],
     );
   }
@@ -5331,6 +5351,16 @@ class Z {
       'Subscribing',
       name: 'subscribing',
       desc: 'sub_confirm',
+      args: [],
+    );
+  }
+
+  /// `You can use subscriptions to setup things like a monthly donation to your favorite content creator, or a monthly subscription to a service, the length of the subscription is customizable, and easily turned off and on again. When a subscription becomes due, you'll get a notification and a badge to remind you that it's due.`
+  String get subsInfo {
+    return Intl.message(
+      'You can use subscriptions to setup things like a monthly donation to your favorite content creator, or a monthly subscription to a service, the length of the subscription is customizable, and easily turned off and on again. When a subscription becomes due, you\'ll get a notification and a badge to remind you that it\'s due.',
+      name: 'subsInfo',
+      desc: 'subs_info',
       args: [],
     );
   }

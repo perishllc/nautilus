@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "قم بتغيير العقدة التي تتصل بها. يتيح لك هذا الاتصال بعقدة مختلفة في حالة مواجهة مشكلات مع العقدة الافتراضية ، أو فقط إذا كنت ترغب في الاتصال بعقدة تستضيفها بنفسك. تُستخدم العقدة لإرسال المعاملات وتلقي التحديثات حول حسابك.",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "غير كلمة السر",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "تغيير مصدر إثبات العمل المستخدم لإرسال واستقبال المعاملات.",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "تغير المندوب",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "يمكنك استخدام الاشتراكات لإعداد أشياء مثل التبرع الشهري لمنشئ المحتوى المفضل لديك ، أو اشتراك شهري في خدمة ، ويكون طول الاشتراك قابلاً للتخصيص ، ويمكن إيقاف تشغيله وتشغيله بسهولة مرة أخرى. عندما يحين موعد الاشتراك ، ستتلقى إشعارًا وشارة لتذكيرك بأن هذا الاشتراك قد حان.",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

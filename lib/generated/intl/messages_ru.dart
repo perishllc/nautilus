@@ -137,6 +137,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Сменить Валюту"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Журнал изменений"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Изменить узел"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Измените узел, к которому вы подключены. Это позволяет вам подключиться к другому узлу, если у вас возникли проблемы с узлом по умолчанию, или просто если вы хотите подключиться к тому, который вы размещаете сами. Узел используется для отправки транзакций и получения обновлений о вашей учетной записи."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Изменить пароль"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -147,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Изменить PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Изменить источник PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Измените источник PoW, используемый для отправки и получения транзакций."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Сменить представителя"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Изменить"),
@@ -879,6 +883,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Информация о раздельном счете"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Разделить по"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Подписки"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Вы можете использовать подписки для настройки таких вещей, как ежемесячное пожертвование вашему любимому создателю контента или ежемесячная подписка на службу, продолжительность подписки настраивается, и ее легко отключить и снова включить. Когда срок подписки подходит к концу, вы получите уведомление и значок, чтобы напомнить вам, что срок ее действия истек."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Подписывайся"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Подписывайтесь каждый"),

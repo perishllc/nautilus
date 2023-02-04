@@ -137,6 +137,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Змінити валюту"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Журнал змін"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Змінити вузол"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Змініть вузол, до якого ви підключені. Це дозволяє вам підключитися до іншого вузла, якщо у вас виникли проблеми з вузлом за замовчуванням, або просто якщо ви хочете підключитися до вузла, який ви хостите самостійно. Вузол використовується для надсилання транзакцій і отримання оновлень про ваш обліковий запис."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Змінити пароль"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -147,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("Змінити PoW"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Змінити джерело PoW"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Змініть джерело PoW, що використовується для надсилання та отримання транзакцій."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Зміна представника"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Зміна"),
@@ -884,6 +888,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Інформація про розділений рахунок"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Розділити за"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Підписки"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Ви можете використовувати підписки, щоб налаштувати такі речі, як щомісячна пожертва вашому улюбленому творцю контенту або щомісячна підписка на послугу. Тривалість підписки можна налаштувати, її легко вимкнути та знову ввімкнути. Коли термін підписки настане, ви отримаєте сповіщення та значок, щоб нагадати вам про це."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Підпишіться"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Підпишіться кожен"),

@@ -350,6 +350,11 @@
     "type": "text",
     "description": "change node"
   },
+  "changeNodeInfo": "उस नोड को बदलें जिससे आप जुड़े हुए हैं। यह आपको एक अलग नोड से कनेक्ट करने की अनुमति देता है यदि आपको डिफ़ॉल्ट के साथ समस्या हो रही है, या यदि आप स्वयं को होस्ट करने वाले से कनेक्ट करना चाहते हैं। नोड का उपयोग लेन-देन सबमिट करने और आपके खाते के बारे में अपडेट प्राप्त करने के लिए किया जाता है।",
+  "@changeNodeInfo": {
+    "type": "text",
+    "description": "change node"
+  },
   "changePassword": "पासवर्ड बदलें",
   "@changePassword": {
     "type": "text",
@@ -379,6 +384,11 @@
   "@changePowSource": {
     "type": "text",
     "description": "change pow source"
+  },
+  "changePowSourceInfo": "लेन-देन भेजने और प्राप्त करने के लिए उपयोग किए जाने वाले PoW के स्रोत को बदलें।",
+  "@changePowSourceInfo": {
+    "type": "text",
+    "description": "change pow source info"
   },
   "changeRepAuthenticate": "प्रतिनिधि बदलें",
   "@changeRepAuthenticate": {
@@ -2634,6 +2644,11 @@
   "@subscribing": {
     "type": "text",
     "description": "sub_confirm"
+  },
+  "subsInfo": "आप अपने पसंदीदा सामग्री निर्माता को मासिक दान, या किसी सेवा के लिए मासिक सदस्यता जैसी चीजों को सेटअप करने के लिए सदस्यता का उपयोग कर सकते हैं, सदस्यता की अवधि अनुकूलन योग्य है, और आसानी से बंद और फिर से चालू हो जाती है। जब कोई सदस्यता देय हो जाती है, तो आपको यह याद दिलाने के लिए एक सूचना और एक बैज प्राप्त होगा कि यह देय है।",
+  "@subsInfo": {
+    "type": "text",
+    "description": "subs_info"
   },
   "supportButton": "Support",
   "@supportButton": {

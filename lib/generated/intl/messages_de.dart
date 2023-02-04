@@ -139,6 +139,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Währung ändern"),
         "changeLog": MessageLookupByLibrary.simpleMessage("Protokoll ändern"),
         "changeNode": MessageLookupByLibrary.simpleMessage("Knoten ändern"),
+        "changeNodeInfo": MessageLookupByLibrary.simpleMessage(
+            "Ändern Sie den Knoten, mit dem Sie verbunden sind. Auf diese Weise können Sie sich mit einem anderen Knoten verbinden, falls Sie Probleme mit dem Standardknoten haben, oder wenn Sie sich einfach mit einem verbinden möchten, den Sie selbst hosten. Der Knoten wird zum Senden von Transaktionen und zum Empfangen von Aktualisierungen über Ihr Konto verwendet."),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Passwort ändern"),
         "changePasswordParagraph": MessageLookupByLibrary.simpleMessage(
@@ -148,6 +150,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changePow": MessageLookupByLibrary.simpleMessage("PoW ändern"),
         "changePowSource":
             MessageLookupByLibrary.simpleMessage("Ändern Sie die PoW-Quelle"),
+        "changePowSourceInfo": MessageLookupByLibrary.simpleMessage(
+            "Ändern Sie die PoW-Quelle, die zum Senden und Empfangen von Transaktionen verwendet wird."),
         "changeRepAuthenticate":
             MessageLookupByLibrary.simpleMessage("Vertreter wechseln"),
         "changeRepButton": MessageLookupByLibrary.simpleMessage("Ändern"),
@@ -885,6 +889,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Split-Rechnungsinformationen"),
         "splitBy": MessageLookupByLibrary.simpleMessage("Geteilt durch"),
         "subsButton": MessageLookupByLibrary.simpleMessage("Abonnements"),
+        "subsInfo": MessageLookupByLibrary.simpleMessage(
+            "Sie können Abonnements verwenden, um Dinge wie eine monatliche Spende an Ihren bevorzugten Ersteller von Inhalten oder ein monatliches Abonnement für einen Dienst einzurichten, die Länge des Abonnements ist anpassbar und kann einfach deaktiviert und wieder aktiviert werden. Wenn ein Abonnement fällig wird, erhalten Sie eine Benachrichtigung und ein Abzeichen, um Sie daran zu erinnern, dass es fällig ist."),
         "subscribeButton": MessageLookupByLibrary.simpleMessage("Abonnieren"),
         "subscribeEvery":
             MessageLookupByLibrary.simpleMessage("Abonnieren Sie alle"),

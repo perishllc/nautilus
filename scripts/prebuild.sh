@@ -40,6 +40,7 @@ cargo ndk -t arm64-v8a -t armeabi-v7a -o ../android/app/src/main/jniLibs build
 cd ..
 
 touch .env
+echo "" > .env
 echo "ONRAMPER_API_KEY=$ONRAMPER_API_KEY" >> .env
 echo "INFURA_API_KEY=$INFURA_API_KEY" >> .env
 echo "UD_API_KEY=$UD_API_KEY" >> .env
