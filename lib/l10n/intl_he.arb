@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "האם אתה בטוח שברצונך למחוק את מקור העבודה הזה?\n\nאתה תמיד יכול להוסיף אותו מחדש מאוחר יותר על ידי הקשה על הלחצן \"הוסף מקור עבודה\".",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "למחוק את מקור העבודה?",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Disable",
   "@disablePasswordSheetHeader": {
     "type": "text",

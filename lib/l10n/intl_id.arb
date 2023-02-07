@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "Anda yakin ingin menghapus sumber pekerjaan ini?\n\nAnda selalu dapat menambahkannya kembali nanti dengan mengetuk tombol \"Tambahkan Sumber Kerja\".",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "Hapus Sumber Kerja?",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Nonaktifkan",
   "@disablePasswordSheetHeader": {
     "type": "text",

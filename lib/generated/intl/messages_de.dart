@@ -262,6 +262,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Möchten Sie dieses Abonnement wirklich löschen?\n\nSie können es später jederzeit wieder hinzufügen, indem Sie auf die Schaltfläche \"Abonnement hinzufügen\" tippen"),
         "deleteSubHeader":
             MessageLookupByLibrary.simpleMessage("Abonnement löschen?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Möchten Sie diese Arbeitsquelle wirklich löschen?\n\nSie können es später jederzeit wieder hinzufügen, indem Sie auf die Schaltfläche „Arbeitsquelle hinzufügen“ tippen"),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("Arbeitsquelle löschen?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Deaktivieren"),
         "disablePasswordSuccess":

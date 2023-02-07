@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "Сигурни ли сте, че искате да изтриете този източник на работа?\n\nВинаги можете да го добавите отново по-късно, като докоснете бутона „Добавяне на работен източник“.",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "Изтриване на работния източник?",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Деактивирай",
   "@disablePasswordSheetHeader": {
     "type": "text",

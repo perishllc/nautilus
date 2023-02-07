@@ -260,6 +260,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Biztosan törli ezt az előfizetést?\n\nKésőbb bármikor újra felveheti az „Előfizetés hozzáadása” gombra koppintva"),
         "deleteSubHeader":
             MessageLookupByLibrary.simpleMessage("Törli az előfizetést?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Biztosan törli ezt a munkaforrást?\n\nKésőbb bármikor újra hozzáadhatja a \"Munkaforrás hozzáadása\" gombra koppintva"),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("Törli a munkaforrást?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Disable"),
         "disablePasswordSuccess":

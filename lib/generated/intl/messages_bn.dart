@@ -261,6 +261,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "আপনি কি এই সদস্যতা মুছে ফেলার বিষয়ে নিশ্চিত?\n\nআপনি \"সাবস্ক্রিপশন যোগ করুন\" বোতামে আলতো চাপ দিয়ে পরে এটিকে সর্বদা পুনরায় যোগ করতে পারেন৷"),
         "deleteSubHeader":
             MessageLookupByLibrary.simpleMessage("সদস্যতা মুছবেন?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "আপনি কি এই কাজের উৎস মুছে ফেলার বিষয়ে নিশ্চিত?\n\nআপনি \"কাজের উত্স যোগ করুন\" বোতামে আলতো চাপ দিয়ে পরে এটিকে সর্বদা পুনরায় যোগ করতে পারেন৷"),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("কাজের উত্স মুছবেন?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("নিষ্ক্রিয়"),
         "disablePasswordSuccess": MessageLookupByLibrary.simpleMessage(

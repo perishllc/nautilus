@@ -644,10 +644,10 @@ class StateContainerState extends State<StateContainer> {
         updateRecentlyUsedAccounts();
       }
       // check account for a username:
-      if (StateContainer.of(context).wallet?.address != null && mounted) {
+      if (wallet?.address != null && mounted) {
         sl.get<UsernameService>().checkAddressDebounced(
               context,
-              StateContainer.of(context).wallet!.address!,
+              wallet!.address!,
             );
       }
     });
@@ -845,19 +845,19 @@ class StateContainerState extends State<StateContainer> {
 
     // re-add account index 0 and switch the account to it:
     if (!mounted) return;
-    final String seed = await StateContainer.of(context).getSeed();
+    final String seed = await getSeed();
     if (!mounted) return;
     await NanoUtil().loginAccount(seed, context);
     if (!mounted) return;
-    await StateContainer.of(context).resetRecentlyUsedAccounts();
+    await resetRecentlyUsedAccounts();
     final Account? mainAccount = await sl.get<DBHelper>().getSelectedAccount(seed);
     if (!mounted) return;
-    StateContainer.of(context).updateWallet(account: mainAccount!);
+    updateWallet(account: mainAccount!);
     // force users list to update on the home page:
     EventTaxiImpl.singleton().fire(ContactModifiedEvent());
     EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: <TXData>[]));
 
-    StateContainer.of(context).updateUnified(true);
+    updateUnified(true);
     EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
 
     // EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: mainAccount));
@@ -995,6 +995,10 @@ class StateContainerState extends State<StateContainer> {
 
     if (resp.block?.subType == BlockTypes.SEND) {
       sl.get<AccountService>().processQueue();
+      // update our frontier:
+      if (resp.hash != null && resp.hash!.isNotEmpty) {
+        wallet!.frontier = resp.hash;
+      }
       return;
     }
 
@@ -1380,9 +1384,11 @@ class StateContainerState extends State<StateContainer> {
           EventTaxiImpl.singleton().fire(ConfirmationHeightChangedEvent(confirmationHeight: lastItem.height));
           setState(() {
             wallet!.confirmationHeight = lastItem.height!;
+            wallet!.frontier = lastItem.hash;
           });
         }
       }
+
       setState(() {
         wallet!.historyLoading = false;
       });

@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "您確定要刪除此工作來源嗎？\n\n您以後隨時可以通過點擊“添加工作源”按鈕重新添加它",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "刪除工作源？",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "解除",
   "@disablePasswordSheetHeader": {
     "type": "text",

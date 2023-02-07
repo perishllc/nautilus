@@ -260,6 +260,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sei sicuro di voler eliminare questo abbonamento?\n\nPuoi sempre aggiungerlo nuovamente in un secondo momento toccando il pulsante \"Aggiungi abbonamento\"."),
         "deleteSubHeader":
             MessageLookupByLibrary.simpleMessage("Elimina abbonamento?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Sei sicuro di voler eliminare questa fonte di lavoro?\n\nPuoi sempre aggiungerlo nuovamente in un secondo momento toccando il pulsante \"Aggiungi fonte di lavoro\"."),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("Eliminare fonte di lavoro?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Disabilita"),
         "disablePasswordSuccess": MessageLookupByLibrary.simpleMessage(

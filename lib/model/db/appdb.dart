@@ -274,10 +274,10 @@ class DBHelper {
     await saveWorkSource(
       WorkSource(
         id: 1,
-        name: "Perish Workers",
+        name: AccountService.DEFAULT_WORKER_NAME,
         selected: true,
         type: WorkSourceTypes.URL,
-        url: "http://workers.perish.co:5555",
+        url: AccountService.DEFAULT_WORK_URL,
       ),
       dbClient: dbClient,
     );

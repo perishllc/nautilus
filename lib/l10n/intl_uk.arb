@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "Ви впевнені, що хочете видалити це робоче джерело?\n\nВи завжди можете повторно додати його пізніше, натиснувши кнопку «Додати робоче джерело».",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "Видалити робоче джерело?",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Вимкнути",
   "@disablePasswordSheetHeader": {
     "type": "text",

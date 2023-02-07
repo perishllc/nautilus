@@ -254,6 +254,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "क्या आप वाकई इस सदस्यता को हटाना चाहते हैं?\n\nआप \"सदस्यता जोड़ें\" बटन पर टैप करके इसे बाद में कभी भी पुनः जोड़ सकते हैं"),
         "deleteSubHeader":
             MessageLookupByLibrary.simpleMessage("सदस्यता हटाएं?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "क्या आप वाकई इस कार्य स्रोत को हटाना चाहते हैं?\n\nआप \"कार्य स्रोत जोड़ें\" बटन पर टैप करके इसे बाद में कभी भी पुनः जोड़ सकते हैं"),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("कार्य स्रोत हटाएं?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("अक्षम"),
         "disablePasswordSuccess": MessageLookupByLibrary.simpleMessage(

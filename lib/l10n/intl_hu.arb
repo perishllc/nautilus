@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "Biztosan törli ezt a munkaforrást?\n\nKésőbb bármikor újra hozzáadhatja a \"Munkaforrás hozzáadása\" gombra koppintva",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "Törli a munkaforrást?",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Disable",
   "@disablePasswordSheetHeader": {
     "type": "text",

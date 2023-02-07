@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:logger/logger.dart';
@@ -458,7 +459,7 @@ class ChangePowSheetState extends State<ChangePowSheet> {
           // await Slidable.of(context)!.close();
         }));
 
-    if (node.id! > 0) {
+    if (node.id! > 2) {
       actions.add(
         SlidableAction(
           autoClose: false,
@@ -468,18 +469,18 @@ class ChangePowSheetState extends State<ChangePowSheet> {
           icon: Icons.delete,
           label: Z.of(context).delete,
           onPressed: (BuildContext context) {
-            // AppDialogs.showConfirmDialog(context, Z.of(context).deleteNodeHeader, Z.of(context).deleteNodeConfirmation,
-            //     CaseChange.toUpperCase(Z.of(context).yes, context), () async {
-            //   await Future<dynamic>.delayed(const Duration(milliseconds: 250));
-            //   // Remove account
-            //   await sl.get<DBHelper>().deleteWorkSource(node);
-            //   EventTaxiImpl.singleton().fire(NodeModifiedEvent(node: node, deleted: true));
-            //   setState(() {
-            //     widget.workSources.removeWhere((WorkSource acc) => acc.id == node.id);
-            //   });
-            //   if (!mounted) return;
-            //   await Slidable.of(context)!.close();
-            // }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
+            AppDialogs.showConfirmDialog(context, Z.of(context).deleteWorkSourceHeader, Z.of(context).deleteWorkSourceConfirmation,
+                CaseChange.toUpperCase(Z.of(context).yes, context), () async {
+              await Future<dynamic>.delayed(const Duration(milliseconds: 250));
+              // Remove account
+              await sl.get<DBHelper>().deleteWorkSource(node);
+              // EventTaxiImpl.singleton().fire(NodeModifiedEvent(node: node, deleted: true));
+              setState(() {
+                widget.workSources.removeWhere((WorkSource acc) => acc.id == node.id);
+              });
+              if (!mounted) return;
+              await Slidable.of(context)!.close();
+            }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
           },
         ),
       );
@@ -488,7 +489,7 @@ class ChangePowSheetState extends State<ChangePowSheet> {
     return ActionPane(
       // motion: const DrawerMotion(),
       motion: const ScrollMotion(),
-      extentRatio: (node.id! > 0) ? 0.5 : 0.25,
+      extentRatio: (node.id! > 2) ? 0.5 : 0.25,
       children: actions,
     );
   }

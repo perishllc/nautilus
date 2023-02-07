@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "Czy na pewno chcesz usunąć to źródło pracy?\n\nZawsze możesz dodać je ponownie później, dotykając przycisku „Dodaj źródło pracy”.",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "Usunąć źródło pracy?",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Usuń",
   "@disablePasswordSheetHeader": {
     "type": "text",

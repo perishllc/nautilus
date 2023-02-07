@@ -258,6 +258,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ali ste prepričani, da želite izbrisati to naročnino?\n\nPozneje ga lahko kadar koli znova dodate tako, da tapnete gumb »Dodaj naročnino«."),
         "deleteSubHeader":
             MessageLookupByLibrary.simpleMessage("Želite izbrisati naročnino?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Ali ste prepričani, da želite izbrisati ta vir dela?\n\nPozneje ga lahko kadar koli znova dodate tako, da tapnete gumb »Dodaj delovni vir«."),
+        "deleteWorkSourceHeader": MessageLookupByLibrary.simpleMessage(
+            "Želite izbrisati delovni vir?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Disable"),
         "disablePasswordSuccess":

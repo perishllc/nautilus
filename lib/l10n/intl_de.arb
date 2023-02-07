@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "Möchten Sie diese Arbeitsquelle wirklich löschen?\n\nSie können es später jederzeit wieder hinzufügen, indem Sie auf die Schaltfläche „Arbeitsquelle hinzufügen“ tippen",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "Arbeitsquelle löschen?",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Deaktivieren",
   "@disablePasswordSheetHeader": {
     "type": "text",

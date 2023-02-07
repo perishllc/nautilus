@@ -251,6 +251,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Are you sure you want to delete this subscription?\n\nYou can always re-add it later by tapping the \"Add Subscription\" button"),
         "deleteSubHeader":
             MessageLookupByLibrary.simpleMessage("Delete Subscription?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete this work source?\n\nYou can always re-add it later by tapping the \"Add Work Source\" button"),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("Delete Work Source?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Disable"),
         "disablePasswordSuccess":

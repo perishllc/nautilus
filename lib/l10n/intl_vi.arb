@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "Bạn có chắc chắn muốn xóa nguồn công việc này không?\n\nBạn luôn có thể thêm lại nó sau bằng cách nhấn vào nút \"Thêm nguồn công việc\"",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "Xóa nguồn công việc?",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Vô hiệu hoá",
   "@disablePasswordSheetHeader": {
     "type": "text",

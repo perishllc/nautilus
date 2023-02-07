@@ -27,7 +27,7 @@ Map<String, dynamic> _$StateBlockToJson(StateBlock instance) {
     'account': instance.account,
     'representative': instance.representative,
     'balance': instance.balance,
-    'link': instance.link,
+    'link': StateBlock._toJsonLink(instance.link),
     'signature': instance.signature,
   };
 

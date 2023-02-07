@@ -253,6 +253,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn xóa đăng ký này?\n\nBạn luôn có thể thêm lại nó sau bằng cách nhấn vào nút \"Thêm đăng ký\""),
         "deleteSubHeader": MessageLookupByLibrary.simpleMessage("Xóa đăng ký?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn muốn xóa nguồn công việc này không?\n\nBạn luôn có thể thêm lại nó sau bằng cách nhấn vào nút \"Thêm nguồn công việc\""),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("Xóa nguồn công việc?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Vô hiệu hoá"),
         "disablePasswordSuccess":

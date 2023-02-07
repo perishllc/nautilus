@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "Voulez-vous vraiment supprimer cette source de travail ?\n\nVous pouvez toujours le rajouter plus tard en appuyant sur le bouton \"Ajouter une source de travail\"",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "Supprimer la source de travail ?",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Désactiver",
   "@disablePasswordSheetHeader": {
     "type": "text",

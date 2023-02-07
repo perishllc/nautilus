@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "Bu iş kaynağını silmek istediğinizden emin misiniz?\n\n\"Çalışma Kaynağı Ekle\" düğmesine dokunarak istediğiniz zaman yeniden ekleyebilirsiniz.",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "Çalışma Kaynağı Silinsin mi?",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Kaldır",
   "@disablePasswordSheetHeader": {
     "type": "text",

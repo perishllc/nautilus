@@ -1,3 +1,8 @@
+## v0.7.8 - [2023-02-09]
+#### Added
+- Long pressing the "Receive" button is now a shortcut to open the QR code sheet
+#### Fixed
+- Bugs with multiple successive transactions
 ## v0.7.7 - [2023-02-05]
 #### Added
 - Info button content on several places that explain what a feature is

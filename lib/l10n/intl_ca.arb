@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "Esteu segur que voleu suprimir aquesta font de treball?\n\nSempre el podeu tornar a afegir més tard tocant el botó \"Afegeix una font de treball\".",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "Vols suprimir la font de treball?",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Vypnout",
   "@disablePasswordSheetHeader": {
     "type": "text",

@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 
+import 'package:collection/collection.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/foundation.dart';
@@ -13,6 +14,7 @@ import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:synchronized/synchronized.dart';
 import 'package:wallet_flutter/bus/events.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/node.dart';
 import 'package:wallet_flutter/model/db/work_source.dart';
@@ -35,7 +37,6 @@ import 'package:wallet_flutter/network/model/response/account_info_response.dart
 import 'package:wallet_flutter/network/model/response/account_representative_response.dart';
 import 'package:wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:wallet_flutter/network/model/response/block_info_item.dart';
-import 'package:wallet_flutter/network/model/response/callback_response.dart';
 import 'package:wallet_flutter/network/model/response/error_response.dart';
 import 'package:wallet_flutter/network/model/response/handoff_response.dart';
 import 'package:wallet_flutter/network/model/response/price_response.dart';
@@ -55,16 +56,13 @@ Map? decodeJson(dynamic src) {
 }
 
 // overriden!:
+String NODE_NAME = "";
 String HTTP_URL = "";
 String WS_URL = "";
+String WORK_URL = "";
 
 // AccountService singleton
 class AccountService {
-// static const String DEFAULT_HTTP_URL = "https://nautilus.perish.co/api";
-// static const String DEFAULT_WS_URL = "wss://nautilus.perish.co";
-  static const String DEFAULT_HTTP_URL = "http://node.perish.co:9076";
-  static const String DEFAULT_WS_URL = "ws://node.perish.co:9078";
-
   // Constructor
   AccountService() {
     _requestQueue = Queue();
@@ -77,6 +75,14 @@ class AccountService {
       await updateNode();
     }();
   }
+// static const String DEFAULT_HTTP_URL = "https://nautilus.perish.co/api";
+// static const String DEFAULT_WS_URL = "wss://nautilus.perish.co";
+  static const String DEFAULT_NODE_NAME = "Perish Nodes";
+  static const String DEFAULT_HTTP_URL = "http://node.perish.co:9076";
+  static const String DEFAULT_WS_URL = "ws://node.perish.co:9078";
+
+  static const String DEFAULT_WORKER_NAME = "Perish Workers";
+  static const String DEFAULT_WORK_URL = "http://workers.perish.co:5555";
 
   Future<void> initUrls() async {
     if (HTTP_URL != "") return;
@@ -94,6 +100,66 @@ class AccountService {
   }
 
   Future<void> updateNode() async {
+    final Node? node = (await sl.get<DBHelper>().getNodes()).firstOrNull;
+
+    // if the default node doesn't match, update it:
+    if (node == null ||
+        node.http_url != DEFAULT_HTTP_URL ||
+        node.ws_url != DEFAULT_WS_URL ||
+        node.name != DEFAULT_NODE_NAME) {
+      // delete by id in case of conflict:
+      await sl.get<DBHelper>().deleteNode(
+            Node(
+              id: 0,
+              http_url: "",
+              ws_url: "",
+              name: "",
+              selected: false,
+            ),
+          );
+      await sl.get<DBHelper>().saveNode(
+            Node(
+              id: 0,
+              name: DEFAULT_NODE_NAME,
+              http_url: DEFAULT_HTTP_URL,
+              ws_url: DEFAULT_WS_URL,
+              selected: node?.selected ?? true,
+            ),
+          );
+    }
+
+    // if the default work source doesn't match, update it:
+    final List<WorkSource> workSources = await sl.get<DBHelper>().getWorkSources();
+    WorkSource? workSource;
+    if (workSources.length > 1) {
+      workSource = workSources[1];
+    }
+
+    // if the default ws doesn't match, update it:
+    if (workSource == null ||
+        workSource.name != DEFAULT_WORKER_NAME ||
+        workSource.type != WorkSourceTypes.URL ||
+        workSource.url != DEFAULT_WORK_URL) {
+      // delete by id in case of conflict:
+      await sl.get<DBHelper>().deleteWorkSource(
+            WorkSource(
+              id: 1,
+              name: "",
+              selected: false,
+              type: WorkSourceTypes.NONE,
+            ),
+          );
+      await sl.get<DBHelper>().saveWorkSource(
+            WorkSource(
+              id: 1,
+              name: DEFAULT_WORKER_NAME,
+              type: WorkSourceTypes.URL,
+              selected: workSource?.selected ?? true,
+              url: DEFAULT_WORK_URL,
+            ),
+          );
+    }
+
     try {
       final Node node = await sl.get<DBHelper>().getSelectedNode();
       HTTP_URL = node.http_url;
@@ -562,6 +628,10 @@ class AccountService {
     String? message,
     Map<String, String?>? metadata,
   }) async {
+    // if (link != null && link.contains(NonTranslatable.currencyPrefix)) {
+    //   link = NanoUtil.addressToPublicKey(link);
+    // }
+
     final StateBlock sendBlock = StateBlock(
         subtype: BlockTypes.SEND,
         previous: previous,
@@ -585,6 +655,7 @@ class AccountService {
         HandoffReplyRequest(block: sendBlock, label: label, message: message, metadata: metadata);
 
     // return requestHandoff(handoffReplyRequest);
+    log.v(handoffReplyRequest.block?.toJson());
 
     final http.Response response = await http.post(Uri.parse(URI),
         headers: {'Content-type': 'application/json'}, body: json.encode(handoffReplyRequest.toJson()));
@@ -632,7 +703,7 @@ class AccountService {
       final HandoffResponse item = HandoffResponse.fromJson(decoded as Map<String, dynamic>);
       return item;
     } catch (e) {
-      throw Exception("Received error ${e}");
+      throw Exception("Received error $e");
     }
   }
 
@@ -754,6 +825,10 @@ class AccountService {
   Future<ProcessResponse> requestSend(
       String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,
       {bool max = false}) async {
+    if (link != null && link.contains(NonTranslatable.currencyPrefix)) {
+      link = NanoUtil.addressToPublicKey(link);
+    }
+
     final StateBlock sendBlock = StateBlock(
       subtype: BlockTypes.SEND,
       previous: previous,

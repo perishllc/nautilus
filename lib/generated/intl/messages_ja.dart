@@ -216,6 +216,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "このサブスクリプションを削除してもよろしいですか?\n\n「サブスクリプションを追加」ボタンをタップすると、後でいつでも再追加できます"),
         "deleteSubHeader":
             MessageLookupByLibrary.simpleMessage("サブスクリプションを削除しますか?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "この作業ソースを削除してもよろしいですか?\n\n[作業ソースを追加] ボタンをタップすると、後でいつでも再追加できます。"),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("ワーク ソースを削除しますか?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("無効にする"),
         "disablePasswordSuccess":

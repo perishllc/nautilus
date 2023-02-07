@@ -220,6 +220,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "이 구독을 삭제하시겠습니까?\n\n\"구독 추가\" 버튼을 탭하여 나중에 언제든지 다시 추가할 수 있습니다."),
         "deleteSubHeader":
             MessageLookupByLibrary.simpleMessage("구독을 삭제하시겠습니까?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "이 작업 소스를 삭제하시겠습니까?\n\n\"작업 소스 추가\" 버튼을 탭하여 나중에 언제든지 다시 추가할 수 있습니다."),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("작업 소스를 삭제하시겠습니까?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Disable"),
         "disablePasswordSuccess":

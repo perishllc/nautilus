@@ -263,6 +263,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ви впевнені, що хочете видалити цю підписку?\n\nВи завжди можете повторно додати його пізніше, натиснувши кнопку «Додати підписку»."),
         "deleteSubHeader":
             MessageLookupByLibrary.simpleMessage("Видалити підписку?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Ви впевнені, що хочете видалити це робоче джерело?\n\nВи завжди можете повторно додати його пізніше, натиснувши кнопку «Додати робоче джерело»."),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("Видалити робоче джерело?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Вимкнути"),
         "disablePasswordSuccess":

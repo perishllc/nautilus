@@ -213,7 +213,7 @@ class AddWorkSourceSheetState extends State<AddWorkSourceSheet> {
                       margin: const EdgeInsets.only(top: 10, bottom: 15),
                     ),
                     AutoSizeText(
-                      CaseChange.toUpperCase(Z.of(context).addNode, context),
+                      CaseChange.toUpperCase(Z.of(context).addWorkSource, context),
                       style: AppStyles.textStyleHeader(context),
                       textAlign: TextAlign.center,
                       maxLines: 1,
@@ -315,7 +315,7 @@ class AddWorkSourceSheetState extends State<AddWorkSourceSheet> {
                 children: <Widget>[
                   // Add Node Button
                   AppButton.buildAppButton(
-                      context, AppButtonType.PRIMARY, Z.of(context).addNode, Dimens.BUTTON_TOP_DIMENS,
+                      context, AppButtonType.PRIMARY, Z.of(context).addWorkSource, Dimens.BUTTON_TOP_DIMENS,
                       onPressed: () async {
                     if (!await validateForm()) {
                       return;

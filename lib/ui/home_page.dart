@@ -64,6 +64,7 @@ import 'package:wallet_flutter/ui/home/payment_details_sheet.dart';
 import 'package:wallet_flutter/ui/home/top_card.dart';
 import 'package:wallet_flutter/ui/popup_button.dart';
 import 'package:wallet_flutter/ui/receive/receive_sheet.dart';
+import 'package:wallet_flutter/ui/receive/receive_show_qr.dart';
 import 'package:wallet_flutter/ui/receive/receive_xmr_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
@@ -2551,12 +2552,30 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                           );
                           if (!mounted) return;
                           Sheets.showAppHeightNineSheet(
-                              context: context,
-                              widget: ReceiveSheet(
-                                localCurrency: StateContainer.of(context).curCurrency,
-                                address: StateContainer.of(context).wallet!.address,
-                                qrWidget: qrWidget,
-                              ));
+                            context: context,
+                            widget: ReceiveSheet(
+                              localCurrency: StateContainer.of(context).curCurrency,
+                              address: StateContainer.of(context).wallet!.address,
+                              qrWidget: qrWidget,
+                            ),
+                          );
+                        },
+                        onLongPress: () async {
+                          final String data =
+                              "${NonTranslatable.currencyUriPrefix}:${StateContainer.of(context).wallet!.address}";
+                          final Widget qrWidget = SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: await UIUtil.getQRImage(context, data),
+                          );
+                          if (!mounted) return;
+                          Sheets.showAppHeightEightSheet(
+                            context: context,
+                            widget: ReceiveShowQRSheet(
+                              localCurrency: StateContainer.of(context).curCurrency,
+                              address: StateContainer.of(context).wallet!.address,
+                              qrWidget: qrWidget,
+                            ),
+                          );
                         },
                       ),
                     ),

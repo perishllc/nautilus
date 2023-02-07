@@ -256,6 +256,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vai tiešām vēlaties dzēst šo abonementu?\n\nJūs vienmēr varat to atkārtoti pievienot vēlāk, pieskaroties pogai \"Pievienot abonementu\"."),
         "deleteSubHeader":
             MessageLookupByLibrary.simpleMessage("Vai dzēst abonementu?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Vai tiešām vēlaties dzēst šo darba avotu?\n\nJūs vienmēr varat to atkārtoti pievienot vēlāk, pieskaroties pogai \"Pievienot darba avotu\"."),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("Vai dzēst darba avotu?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Disable"),
         "disablePasswordSuccess":

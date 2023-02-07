@@ -252,6 +252,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Er du sikker på, at du vil slette dette abonnement?\n\nDu kan altid tilføje det igen senere ved at trykke på knappen \"Tilføj abonnement\"."),
         "deleteSubHeader":
             MessageLookupByLibrary.simpleMessage("Vil du slette abonnement?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Er du sikker på, at du vil slette denne arbejdskilde?\n\nDu kan altid tilføje det igen senere ved at trykke på knappen \"Tilføj arbejdskilde\"."),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("Vil du slette arbejdskilde?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Vypnout"),
         "disablePasswordSuccess":

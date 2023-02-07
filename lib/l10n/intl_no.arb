@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "Er du sikker på at du vil slette denne arbeidskilden?\n\nDu kan alltid legge den til på nytt senere ved å trykke på \"Legg til arbeidskilde\"-knappen",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "Vil du slette arbeidskilde?",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Deaktiver",
   "@disablePasswordSheetHeader": {
     "type": "text",

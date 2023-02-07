@@ -251,6 +251,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Adakah anda pasti mahu memadamkan langganan ini?\n\nAnda sentiasa boleh menambahkannya semula kemudian dengan mengetik butang \"Tambah Langganan\"."),
         "deleteSubHeader":
             MessageLookupByLibrary.simpleMessage("Padamkan Langganan?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Adakah anda pasti mahu memadamkan sumber kerja ini?\n\nAnda sentiasa boleh menambahkannya semula kemudian dengan mengetik butang \"Tambah Sumber Kerja\"."),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("Padamkan Sumber Kerja?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Lumpuhkan"),
         "disablePasswordSuccess": MessageLookupByLibrary.simpleMessage(

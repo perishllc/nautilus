@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "আপনি কি এই কাজের উৎস মুছে ফেলার বিষয়ে নিশ্চিত?\n\nআপনি \"কাজের উত্স যোগ করুন\" বোতামে আলতো চাপ দিয়ে পরে এটিকে সর্বদা পুনরায় যোগ করতে পারেন৷",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "কাজের উত্স মুছবেন?",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "নিষ্ক্রিয়",
   "@disablePasswordSheetHeader": {
     "type": "text",

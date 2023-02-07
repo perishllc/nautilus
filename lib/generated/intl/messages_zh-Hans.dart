@@ -196,6 +196,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "您确定要删除此订阅吗？\n\n您以后随时可以通过点击“添加订阅”按钮重新添加它"),
         "deleteSubHeader": MessageLookupByLibrary.simpleMessage("删除订阅？"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "您确定要删除此工作来源吗？\n\n您以后随时可以通过点击“添加工作源”按钮重新添加它"),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("删除工作源？"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("解除"),
         "disablePasswordSuccess":

@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/network/model/block_types.dart';
+import 'package:wallet_flutter/util/nanoutil.dart';
 
 part 'state_block.g.dart';
 
@@ -32,7 +34,7 @@ class StateBlock {
   @JsonKey(name: 'balance')
   String? balance;
 
-  @JsonKey(name: 'link')
+  @JsonKey(name: 'link', toJson: _toJsonLink)
   String? link;
 
   @JsonKey(name: 'signature')
@@ -40,7 +42,6 @@ class StateBlock {
 
   @JsonKey(name: 'work', includeIfNull: false)
   String? work;
-
 
   // new 1/25/23:
   @JsonKey(name: 'link_as_account', includeIfNull: false)
@@ -123,4 +124,14 @@ class StateBlock {
 
   factory StateBlock.fromJson(Map<String, dynamic> json) => _$StateBlockFromJson(json);
   Map<String, dynamic> toJson() => _$StateBlockToJson(this);
+
+  static String? _toJsonLink(String? link) {
+    if (link == null) {
+      return null;
+    }
+    if (link.contains(NonTranslatable.currencyPrefix)) {
+      return NanoUtil.addressToPublicKey(link);
+    }
+    return link;
+  }
 }

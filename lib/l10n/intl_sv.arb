@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "Är du säker på att du vill ta bort den här arbetskällan?\n\nDu kan alltid lägga till den igen senare genom att trycka på knappen \"Lägg till arbetskälla\".",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "Ta bort arbetskälla?",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "Avaktivera",
   "@disablePasswordSheetHeader": {
     "type": "text",

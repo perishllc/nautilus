@@ -715,6 +715,16 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
+  "deleteWorkSourceConfirmation": "この作業ソースを削除してもよろしいですか?\n\n[作業ソースを追加] ボタンをタップすると、後でいつでも再追加できます。",
+  "@deleteWorkSourceConfirmation": {
+    "type": "text",
+    "description": "delete work source confirmation info"
+  },
+  "deleteWorkSourceHeader": "ワーク ソースを削除しますか?",
+  "@deleteWorkSourceHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
   "disablePasswordSheetHeader": "無効にする",
   "@disablePasswordSheetHeader": {
     "type": "text",

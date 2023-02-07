@@ -261,6 +261,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Weet u zeker dat u dit abonnement wilt verwijderen?\n\nJe kunt het later altijd opnieuw toevoegen door op de knop \"Abonnement toevoegen\" te tikken"),
         "deleteSubHeader":
             MessageLookupByLibrary.simpleMessage("Abonnement verwijderen?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Weet u zeker dat u deze werkbron wilt verwijderen?\n\nJe kunt het later altijd opnieuw toevoegen door op de knop \"Werkbron toevoegen\" te tikken"),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("Werkbron verwijderen?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Uitschakelen"),
         "disablePasswordSuccess":

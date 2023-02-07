@@ -255,6 +255,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sigur doriți să ștergeți acest abonament?\n\nPuteți oricând să-l adăugați din nou mai târziu atingând butonul „Adăugați abonament”."),
         "deleteSubHeader":
             MessageLookupByLibrary.simpleMessage("Ștergeți abonamentul?"),
+        "deleteWorkSourceConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Sigur doriți să ștergeți această sursă de lucru?\n\nPuteți oricând să-l adăugați din nou mai târziu atingând butonul „Adăugați sursa de lucru”."),
+        "deleteWorkSourceHeader":
+            MessageLookupByLibrary.simpleMessage("Ștergeți sursa de lucru?"),
         "disablePasswordSheetHeader":
             MessageLookupByLibrary.simpleMessage("Dezactivare"),
         "disablePasswordSuccess":
