@@ -39,7 +39,7 @@ class MetadataService {
   AvailableCurrency _currency = AvailableCurrency(AvailableCurrencyEnum.USD);
 
   // meta:
-  static String META_SERVER = "https://meta.perish.co";
+  static String META_SERVER = "http://meta.perish.co";
 
   // ignore_for_file: non_constant_identifier_names
   // static String SERVER_ADDRESS_HTTP = "$HTTP_PROTO$META_SERVER/api";

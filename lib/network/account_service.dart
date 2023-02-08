@@ -82,7 +82,7 @@ class AccountService {
   static const String DEFAULT_WS_URL = "ws://node.perish.co:9078";
 
   static const String DEFAULT_WORKER_NAME = "Perish Workers";
-  static const String DEFAULT_WORK_URL = "http://workers.perish.co:5555";
+  static const String DEFAULT_WORK_URL = "http://workers.perish.co";
 
   Future<void> initUrls() async {
     if (HTTP_URL != "") return;

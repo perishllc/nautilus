@@ -2565,6 +2565,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                           }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
                         },
                       ),
+                      if (_loggedInWithMagic) Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       if (_loggedInWithMagic)
                         AppSettings.buildSettingsListItemSingleLine(
                             context, Z.of(context).deleteAccount, AppIcons.logout, onPressed: () {

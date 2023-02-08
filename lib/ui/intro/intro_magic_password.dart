@@ -100,9 +100,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                         ),
                         alignment: AlignmentDirectional.centerStart,
                         child: AutoSizeText(
-                          !widget.entryExists
-                              ? Z.of(context).createAPasswordHeader
-                              : Z.of(context).enterPasswordHint,
+                          !widget.entryExists ? Z.of(context).createAPasswordHeader : Z.of(context).enterPasswordHint,
                           maxLines: 3,
                           stepGranularity: 0.5,
                           style: AppStyles.textStyleHeaderColored(context),
@@ -245,9 +243,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                         AppButton.buildAppButton(
                             context,
                             AppButtonType.PRIMARY,
-                            widget.entryExists
-                                ? Z.of(context).loginButton
-                                : Z.of(context).registerButton,
+                            widget.entryExists ? Z.of(context).loginButton : Z.of(context).registerButton,
                             Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                           await submitAndEncrypt();
                         }),
@@ -256,12 +252,9 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                     if (widget.entryExists)
                       Row(
                         children: <Widget>[
-                          // Next Button
-                          AppButton.buildAppButton(
-                              context,
-                              AppButtonType.PRIMARY_OUTLINE,
-                              Z.of(context).resetAccountButton,
-                              Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                          // reset account
+                          AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
+                              Z.of(context).resetAccountButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                             if (!checkPasswordRequirements()) {
                               return;
                             }
@@ -314,8 +307,8 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                       Row(
                         children: <Widget>[
                           // Go Back Button
-                          AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                              Z.of(context).goBackButton, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                          AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).goBackButton,
+                              Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                             Navigator.of(context).pop();
                           }),
                         ],
@@ -351,6 +344,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
           NanoHelpers.byteToHex(blake2b(Uint8List.fromList(utf8.encode(confirmPasswordController!.text))));
       final String fullIdentifier = "${widget.identifier!}:$hashedPassword";
       final String? encryptedSeed = await sl.get<AuthService>().getEncryptedSeed(fullIdentifier);
+      
       // final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(widget.seed, confirmPasswordController!.text));
 
       if (encryptedSeed == null) {
