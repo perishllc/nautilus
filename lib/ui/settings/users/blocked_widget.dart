@@ -312,8 +312,7 @@ class BlockedListState extends State<BlockedList> {
                     Container(
                       margin: const EdgeInsets.only(right: 25),
                       child: AppDialogs.infoButton(context, () {
-                        AppDialogs.showInfoDialog(context, Z.of(context).blockedInfoHeader,
-                            Z.of(context).blockedInfo);
+                        AppDialogs.showInfoDialog(context, Z.of(context).blockedInfoHeader, Z.of(context).blockedInfo);
                       }),
                     ),
                   ],
@@ -330,7 +329,7 @@ class BlockedListState extends State<BlockedList> {
                       itemCount: _blocked.length,
                       itemBuilder: (BuildContext context, int index) {
                         // Build contact
-                        return buildSingleContact(context, _blocked[index]);
+                        return buildSingleContact(context, _blocked[index], index);
                       },
                     ),
                     ListGradient(
@@ -350,8 +349,9 @@ class BlockedListState extends State<BlockedList> {
                 margin: const EdgeInsets.only(top: 10),
                 child: Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE,
-                        Z.of(context).addBlocked, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                    AppButton.buildAppButton(
+                        context, AppButtonType.TEXT_OUTLINE, Z.of(context).addBlocked, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () {
                       Sheets.showAppHeightEightSheet(context: context, widget: AddBlockedSheet());
                     }),
                   ],
@@ -412,13 +412,19 @@ class BlockedListState extends State<BlockedList> {
     }
   }
 
-  Widget buildSingleContact(BuildContext context, User user) {
+  Widget buildSingleContact(BuildContext context, User user, int index) {
     return TextButton(
       style: TextButton.styleFrom(
         padding: EdgeInsets.zero,
       ),
       onPressed: () {
-        BlockedDetailsSheet(user, documentsDirectory).mainBottomSheet(context);
+        Sheets.showAppHeightEightSheet(
+          context: context,
+          widget: BlockedDetailsSheet(
+            blocked: user,
+            documentsDirectory: documentsDirectory,
+          ),
+        );
       },
       child: Column(children: <Widget>[
         Divider(
@@ -447,6 +453,11 @@ class BlockedListState extends State<BlockedList> {
             ],
           ),
         ),
+        if (index == _blocked.length - 1)
+          Divider(
+            height: 2,
+            color: StateContainer.of(context).curTheme.text15,
+          ),
       ]),
     );
   }

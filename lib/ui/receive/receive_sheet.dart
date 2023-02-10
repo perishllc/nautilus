@@ -3,17 +3,13 @@ import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decimal/decimal.dart';
-import 'package:event_taxi/event_taxi.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:intl/intl.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
+import 'package:quiver/strings.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
-import 'package:wallet_flutter/bus/fcm_update_event.dart';
-import 'package:wallet_flutter/bus/notification_setting_change_event.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/localize.dart';
@@ -21,7 +17,6 @@ import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/user.dart';
-import 'package:wallet_flutter/model/notification_setting.dart';
 import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
@@ -43,7 +38,7 @@ import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/numberutil.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
 import 'package:wallet_flutter/util/user_data_util.dart';
-import 'package:quiver/strings.dart';
+
 // import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
 // import 'package:ndef/ndef.dart' as ndef;
 // import 'package:flutter_nearby_messages_api/flutter_nearby_messages_api.dart';
@@ -284,7 +279,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                             localCurrencyFormat: _localCurrencyFormat,
                           ));
                     },
-                    icon: AppIcons.money_bill_wave,
+                    icon: Icons.call_split,
                   ),
                 ),
 
@@ -327,7 +322,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
 
             const SizedBox(height: 5),
             // account / wallet name:
-            OutlinedButton(
+            TextButton(
               onPressed: () async {
                 Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
                 setState(() {
@@ -348,14 +343,14 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Icon(
-                        AppIcons.content_copy,
-                        size: 24,
-                        color: StateContainer.of(context).curTheme.primary,
-                      ),
-                    ),
+                    // Align(
+                    //   alignment: Alignment.centerLeft,
+                    //   child: Icon(
+                    //     AppIcons.content_copy,
+                    //     size: 24,
+                    //     color: StateContainer.of(context).curTheme.primary,
+                    //   ),
+                    // ),
                     Column(
                       children: [
                         const SizedBox(height: 5),
@@ -664,55 +659,6 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
             //A column with Copy Address and Share Address buttons
             Column(
               children: <Widget>[
-                // Row(
-                //   children: <Widget>[
-                //     AppButton.buildAppButton(
-                //       context,
-                //       // Share Address Button
-                //       AppButtonType.PRIMARY_OUTLINE,
-                //       Z.of(context).shareViaNFC,
-                //       Dimens.BUTTON_BOTTOM_DIMENS,
-                //       onPressed: () async {
-                //         // final availability = await FlutterNfcKit.nfcAvailability;
-                //         // print("ok");
-                //         // if (availability != NFCAvailability.available) {
-                //         //   // oh-no
-                //         //   print("NFC is not available");
-                //         // }
-
-                //         // // timeout only works on Android, while the latter two messages are only for iOS
-                //         // var tag = await FlutterNfcKit.poll(
-                //         //     timeout: Duration(seconds: 10), iosMultipleTagMessage: "Multiple tags found!", iosAlertMessage: "Scan your tag");
-                //         // print(jsonEncode(tag));
-                //         // // if (tag.type == NFCTagType.iso7816) {
-                //         // //   var result = await FlutterNfcKit.transceive("00B0950000",
-                //         // //       timeout: Duration(seconds: 5)); // timeout is still Android-only, persist until next change
-                //         // //   print(result);
-                //         // // }
-                //         // // // read NDEF records if available
-                //         // if (tag.ndefAvailable!) {
-                //         //   /// decoded NDEF records (see [ndef.NDEFRecord] for details)
-                //         //   /// `UriRecord: id=(empty) typeNameFormat=TypeNameFormat.nfcWellKnown type=U uri=https://github.com/nfcim/ndef`
-                //         //   for (var record in await FlutterNfcKit.readNDEFRecords(cached: false)) {
-                //         //     print(record.toString());
-                //         //   }
-
-                //         // //   /// raw NDEF records (data in hex string)
-                //         // //   /// `{identifier: "", payload: "00010203", type: "0001", typeNameFormat: "nfcWellKnown"}`
-                //         // //   for (var record in await FlutterNfcKit.readNDEFRawRecords(cached: false)) {
-                //         // //     print(jsonEncode(record).toString());
-                //         // //   }
-                //         // }
-
-                //         // write NDEF record:
-                //         // decoded NDEF records
-                //         // await FlutterNfcKit.writeNDEFRecords([new ndef.UriRecord.fromUriString("https://github.com/nfcim/flutter_nfc_kit")]);
-                //         // raw NDEF records
-                //         // await FlutterNfcKit.writeNDEFRawRecords([new NDEFRawRecord("0001", "0002", "0003", ndef.TypeNameFormat.unknown)]);
-                //       },
-                //     ),
-                //   ],
-                // ),
                 // Row(
                 //   children: <Widget>[
                 //     AppButton.buildAppButton(

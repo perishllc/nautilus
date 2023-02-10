@@ -377,6 +377,7 @@ class SendSheetState extends State<SendSheet> {
     }
     // On amount focus change
     _amountFocusNode.addListener(() {
+      if (!mounted) return;
       if (_amountFocusNode.hasFocus) {
         if (_rawAmount != null) {
           setState(() {
@@ -402,6 +403,7 @@ class SendSheetState extends State<SendSheet> {
     });
     // On address focus change
     _addressFocusNode.addListener(() async {
+      if (!mounted) return;
       if (_addressFocusNode.hasFocus) {
         setState(() {
           _addressHint = "";
@@ -820,7 +822,7 @@ class SendSheetState extends State<SendSheet> {
 
             const SizedBox(height: 5),
             // account / wallet name:
-            OutlinedButton(
+            TextButton(
               onPressed: () async {
                 Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
                 setState(() {
@@ -841,14 +843,14 @@ class SendSheetState extends State<SendSheet> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Icon(
-                        AppIcons.content_copy,
-                        size: 24,
-                        color: StateContainer.of(context).curTheme.primary,
-                      ),
-                    ),
+                    // Align(
+                    //   alignment: Alignment.centerLeft,
+                    //   child: Icon(
+                    //     AppIcons.content_copy,
+                    //     size: 24,
+                    //     color: StateContainer.of(context).curTheme.primary,
+                    //   ),
+                    // ),
                     Column(
                       children: [
                         const SizedBox(height: 5),

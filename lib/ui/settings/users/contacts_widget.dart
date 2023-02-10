@@ -7,8 +7,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/contact.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' as cont;
-
 import 'package:logger/logger.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/contacts_setting_change_event.dart';
@@ -27,8 +28,6 @@ import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 class ContactsList extends StatefulWidget {
   ContactsList(this.contactsController, this.contactsOpen);
@@ -311,8 +310,7 @@ class _ContactsListState extends State<ContactsList> {
         if (numSaved > 0) {
           _updateContacts();
           EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: User(nickname: "", address: "")));
-          UIUtil.showSnackbar(
-              Z.of(context).contactsImportSuccess.replaceAll("%1", numSaved.toString()), context);
+          UIUtil.showSnackbar(Z.of(context).contactsImportSuccess.replaceAll("%1", numSaved.toString()), context);
         } else {
           UIUtil.showSnackbar(Z.of(context).noContactsImport, context);
         }
@@ -449,7 +447,7 @@ class _ContactsListState extends State<ContactsList> {
                       itemCount: _contacts.length,
                       itemBuilder: (BuildContext context, int index) {
                         // Build contact
-                        return buildSingleContact(context, _contacts[index]);
+                        return buildSingleContact(context, _contacts[index], index);
                       },
                     ),
                     ListGradient(
@@ -469,8 +467,9 @@ class _ContactsListState extends State<ContactsList> {
                 margin: const EdgeInsets.only(top: 10),
                 child: Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(context, AppButtonType.TEXT_OUTLINE,
-                        Z.of(context).addContact, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                    AppButton.buildAppButton(
+                        context, AppButtonType.TEXT_OUTLINE, Z.of(context).addContact, Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () {
                       Sheets.showAppHeightEightSheet(context: context, widget: AddContactSheet());
                     }),
                   ],
@@ -529,13 +528,19 @@ class _ContactsListState extends State<ContactsList> {
     }
   }
 
-  Widget buildSingleContact(BuildContext context, User user) {
+  Widget buildSingleContact(BuildContext context, User user, int index) {
     return TextButton(
       style: TextButton.styleFrom(
         padding: EdgeInsets.zero,
       ),
       onPressed: () {
-        ContactDetailsSheet(user, documentsDirectory).mainBottomSheet(context);
+        Sheets.showAppHeightEightSheet(
+          context: context,
+          widget: ContactDetailsSheet(
+            contact: user,
+            documentsDirectory: documentsDirectory,
+          ),
+        );
       },
       child: Column(children: <Widget>[
         Divider(
@@ -564,6 +569,11 @@ class _ContactsListState extends State<ContactsList> {
             ],
           ),
         ),
+        if (index == _contacts.length - 1)
+          Divider(
+            height: 2,
+            color: StateContainer.of(context).curTheme.text15,
+          ),
       ]),
     );
   }

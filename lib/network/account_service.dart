@@ -654,11 +654,11 @@ class AccountService {
     final HandoffReplyRequest handoffReplyRequest =
         HandoffReplyRequest(block: sendBlock, label: label, message: message, metadata: metadata);
 
-    // return requestHandoff(handoffReplyRequest);
-    log.v(handoffReplyRequest.block?.toJson());
-
-    final http.Response response = await http.post(Uri.parse(URI),
-        headers: {'Content-type': 'application/json'}, body: json.encode(handoffReplyRequest.toJson()));
+    final http.Response response = await http.post(
+      Uri.parse(URI),
+      headers: {'Content-type': 'application/json'},
+      body: json.encode(handoffReplyRequest.toJson()),
+    );
 
     if (response.statusCode != 200) {
       throw Exception("Received error ${response.statusCode}");

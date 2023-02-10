@@ -2750,6 +2750,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               switch (index) {
                 case SUBS_INDEX:
                   final List<Subscription> subs = await sl.get<DBHelper>().getSubscriptions();
+                  if (!mounted) return;
                   await Sheets.showAppHeightNineSheet(
                     context: context,
                     barrier: Colors.transparent,
