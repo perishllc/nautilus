@@ -1,3 +1,4 @@
+import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -193,51 +194,53 @@ class ShopSheetState extends State<ShopSheet> {
                       //     ],
                       //   ),
                       // ),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          UseCard(
-                            image: "assets/logos/luckynano.png",
-                            title: NonTranslatable.luckynano,
-                            onPress: () async {
-                              await UIUtil.showChromeSafariWebview(context, "https://luckynano.com");
-                            },
-                          ),
-                          UseCard(
-                            image: "assets/logos/playnano.png",
-                            title: NonTranslatable.playnano,
-                            onPress: () async {
-                              await UIUtil.showChromeSafariWebview(context, "https://playnano.online/?ref=nautilus");
-                            },
-                          ),
-                        ],
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Row(
+                      if (!Platform.isIOS)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              Z.of(context).exchangeNano,
-                              style: AppStyles.textStyleHeader2Colored(context),
+                            UseCard(
+                              image: "assets/logos/luckynano.png",
+                              title: NonTranslatable.luckynano,
+                              onPress: () async {
+                                await UIUtil.showChromeSafariWebview(context, "https://luckynano.com");
+                              },
+                            ),
+                            UseCard(
+                              image: "assets/logos/playnano.png",
+                              title: NonTranslatable.playnano,
+                              onPress: () async {
+                                await UIUtil.showChromeSafariWebview(context, "https://playnano.online/?ref=nautilus");
+                              },
                             ),
                           ],
                         ),
-                      ),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          UseCard(
-                            image: "assets/logos/nanswap.png",
-                            title: NonTranslatable.nanswap,
-                            onPress: () async {
-                              await UIUtil.showChromeSafariWebview(context, "https://nanswap.com/?ref=nautilus");
-                            },
+                      if (!Platform.isIOS)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Row(
+                            children: [
+                              Text(
+                                Z.of(context).exchangeNano,
+                                style: AppStyles.textStyleHeader2Colored(context),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+
+                      if (!Platform.isIOS)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            UseCard(
+                              image: "assets/logos/nanswap.png",
+                              title: NonTranslatable.nanswap,
+                              onPress: () async {
+                                await UIUtil.showChromeSafariWebview(context, "https://nanswap.com/?ref=nautilus");
+                              },
+                            ),
+                          ],
+                        ),
 
                       Padding(
                         padding: const EdgeInsets.only(left: 20),

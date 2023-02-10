@@ -85,6 +85,11 @@ Future<void> main() async {
   if (kReleaseMode) {
     await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
+
+  if (kDebugMode) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  }
+
   runApp(const StateContainer(child: App()));
 
   Magic.instance = Magic(dotenv.env["MAGIC_SDK_KEY"]!);
@@ -112,7 +117,7 @@ class AppState extends State<App> {
       textStyle: AppStyles.textStyleSnackbar(context),
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       child: MaterialApp(
-        debugShowCheckedModeBanner: kDebugMode,
+        debugShowCheckedModeBanner: false,
         title: NonTranslatable.appName,
         // theme: ThemeData(
         //   dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
