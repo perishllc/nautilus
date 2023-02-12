@@ -24,7 +24,6 @@ import 'package:wallet_flutter/service_locator.dart';
 
 // MetadataService singleton
 class MetadataService {
-
   // Constructor
   MetadataService() {
     // get price data every 5 minutes:
@@ -34,7 +33,7 @@ class MetadataService {
     });
     getPriceData();
   }
-  
+
   CoinGeckoApi CGApi = CoinGeckoApi();
   AvailableCurrency _currency = AvailableCurrency(AvailableCurrencyEnum.USD);
 
@@ -47,6 +46,7 @@ class MetadataService {
   static String SERVER_ADDRESS_NOTIFICATIONS = "$META_SERVER/notifications";
   static String SERVER_ADDRESS_ALERTS = "$META_SERVER/alerts";
   static String SERVER_ADDRESS_FUNDING = "$META_SERVER/funding";
+  static String SERVER_ADDRESS_GIFT = "$META_SERVER/gift";
 
   final Logger log = sl.get<Logger>();
 
@@ -95,18 +95,23 @@ class MetadataService {
   }
 
   Future<dynamic> makePaymentsRequest(BaseRequest request) async {
-    final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_PAYMENTS),
-        headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
+    print(request.toJson());
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
-    if (response.statusCode != 200) {
-      return null;
-    }
-    final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
-    if (decoded.containsKey("error")) {
-      return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
-    }
+    return null;
 
-    return decoded;
+    // final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_PAYMENTS),
+    //     headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
+
+    // if (response.statusCode != 200) {
+    //   return null;
+    // }
+    // final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
+    // if (decoded.containsKey("error")) {
+    //   return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
+    // }
+
+    // return decoded;
   }
 
   // request money from an account:

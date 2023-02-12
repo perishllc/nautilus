@@ -1,7 +1,9 @@
-## v0.7.9 - [2023-02-XX]
+## v0.7.9 - [2023-02-12]
 #### Added
 #### Changed
+- Minor UI updates
 #### Fixed
+- Giftcard bugs
 ## v0.7.8 - [2023-02-09]
 #### Added
 - Long pressing the "Receive" button is now a shortcut to open the QR code sheet

@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
+import 'package:wallet_flutter/network/metadata_service.dart';
 import 'package:wallet_flutter/network/model/record_types.dart';
 import 'package:wallet_flutter/network/model/status_types.dart';
 import 'package:wallet_flutter/service_locator.dart';
@@ -26,7 +27,6 @@ final BigInt rawPerNano = BigInt.from(10).pow(30);
 final BigInt rawPerNyano = BigInt.from(10).pow(24);
 
 class GiftCards {
-  static const String SERVER_ADDRESS_GIFT = "https://meta.perish.co/gift";
 
   Future<BranchResponse<dynamic>> createGiftCard(
     BuildContext context, {
@@ -112,7 +112,7 @@ class GiftCards {
       };
     }
     final http.Response response = await http.post(
-      Uri.parse(SERVER_ADDRESS_GIFT),
+      Uri.parse(MetadataService.SERVER_ADDRESS_GIFT),
       headers: {"Content-type": "application/json", "X-Firebase-AppCheck": appCheckToken},
       body: json.encode(
         <String, dynamic>{
@@ -142,7 +142,7 @@ class GiftCards {
         "error": "Something went wrong",
       };
     }
-    final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_GIFT),
+    final http.Response response = await http.post(Uri.parse(MetadataService.SERVER_ADDRESS_GIFT),
         headers: {"Content-type": "application/json", "X-Firebase-AppCheck": appCheckToken},
         body: json.encode(
           {
@@ -172,7 +172,7 @@ class GiftCards {
     }
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
     final String runningVersion = packageInfo.version;
-    final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_GIFT),
+    final http.Response response = await http.post(Uri.parse(MetadataService.SERVER_ADDRESS_GIFT),
         headers: {
           "Content-type": "application/json",
           "X-Firebase-AppCheck": appCheckToken,
