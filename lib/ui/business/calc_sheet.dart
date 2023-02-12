@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
+// import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:math_expressions/math_expressions.dart';
 // ignore: depend_on_referenced_packages
-import 'package:ndef/ndef.dart' as ndef;
+// import 'package:ndef/ndef.dart' as ndef;
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
@@ -383,16 +383,16 @@ class CalcSheetState extends State<CalcSheet> {
                       Z.of(context).scanNFC,
                       Dimens.BUTTON_BOTTOM_DIMENS,
                       onPressed: () async {
-                        final NFCAvailability availability = await FlutterNfcKit.nfcAvailability;
-                        if (availability != NFCAvailability.available) {
-                          sl.get<Logger>().e("NFC is not available");
-                        }
+                        // final NFCAvailability availability = await FlutterNfcKit.nfcAvailability;
+                        // if (availability != NFCAvailability.available) {
+                        //   sl.get<Logger>().e("NFC is not available");
+                        // }
 
-                        sl.get<Logger>().v("writing ndef record");
+                        // sl.get<Logger>().v("writing ndef record");
 
-                        // write NDEF record:
-                        // decoded NDEF records
-                        await FlutterNfcKit.writeNDEFRecords([ndef.UriRecord.fromString("https://google.com")]);
+                        // // write NDEF record:
+                        // // decoded NDEF records
+                        // await FlutterNfcKit.writeNDEFRecords([ndef.UriRecord.fromString("https://google.com")]);
                       },
                     ),
                   ],

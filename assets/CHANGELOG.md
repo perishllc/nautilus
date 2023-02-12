@@ -1,5 +1,4 @@
 ## v0.7.9 - [2023-02-12]
-#### Added
 #### Changed
 - Minor UI updates
 #### Fixed
