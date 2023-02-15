@@ -152,8 +152,15 @@ class AppSettings {
   }
 
   //Settings item without any dropdown option but rather a direct functionality
-  static Widget buildSettingsListItemSingleLine(BuildContext context, String heading, IconData settingIcon,
-      {Function? onPressed, Function? onLongPress, bool disabled = false, Widget? iconOverride}) {
+  static Widget buildSettingsListItemSingleLine(
+    BuildContext context,
+    String heading,
+    IconData settingIcon, {
+    Function? onPressed,
+    Function? onLongPress,
+    bool disabled = false,
+    Widget? iconOverride,
+  }) {
     return IgnorePointer(
       ignoring: disabled,
       child: TextButton(
@@ -221,6 +228,97 @@ class AppSettings {
               ),
               SizedBox(
                 width: UIUtil.drawerWidth(context) - 100,
+                child: Text(
+                  heading,
+                  style: disabled
+                      ? AppStyles.textStyleSettingItemHeader45(context)
+                      : AppStyles.textStyleSettingItemHeader(context),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  static Widget buildSettingsListItemSingleLineTwoItems(
+    BuildContext context,
+    String heading,
+    IconData settingIcon, {
+    Function? onPressed,
+    Function? onLongPress,
+    bool disabled = false,
+    Widget? iconOverride,
+  }) {
+    return IgnorePointer(
+      ignoring: disabled,
+      child: TextButton(
+        style: TextButton.styleFrom(
+          foregroundColor: StateContainer.of(context).curTheme.text15, padding: EdgeInsets.zero,
+          // highlightColor: StateContainer.of(context).curTheme.text15,
+          // splashColor: StateContainer.of(context).curTheme.text15,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+        ),
+        onLongPress: () {
+          if (onLongPress != null) {
+            // ignore: avoid_dynamic_calls
+            onLongPress();
+          } else {
+            return;
+          }
+        },
+        onPressed: () {
+          if (onPressed != null) {
+            // ignore: avoid_dynamic_calls
+            onPressed();
+          } else {
+            return;
+          }
+        },
+        child: Container(
+          height: 60.0,
+          // width: 120,
+          margin: const EdgeInsetsDirectional.only(start: 30.0),
+          child: Row(
+            children: <Widget>[
+              Container(
+                margin: const EdgeInsetsDirectional.only(end: 13.0),
+                child: Container(
+                  margin: EdgeInsetsDirectional.only(
+                    top: 3,
+                    start: settingIcon == AppIcons.logout
+                        ? 6
+                        : settingIcon == AppIcons.changerepresentative
+                            ? 0
+                            : settingIcon == AppIcons.backupseed
+                                ? 1
+                                : settingIcon == AppIcons.transferfunds
+                                    ? 2
+                                    : 3,
+                    bottom: 3,
+                    end: settingIcon == AppIcons.logout
+                        ? 0
+                        : settingIcon == AppIcons.changerepresentative
+                            ? 6
+                            : settingIcon == AppIcons.backupseed
+                                ? 5
+                                : settingIcon == AppIcons.transferfunds
+                                    ? 4
+                                    : 3,
+                  ),
+                  child: iconOverride ??
+                      Icon(
+                        settingIcon,
+                        color: disabled
+                            ? StateContainer.of(context).curTheme.primary45
+                            : StateContainer.of(context).curTheme.primary,
+                        size: 24,
+                      ),
+                ),
+              ),
+              SizedBox(
+                // width: UIUtil.drawerWidth(context) / 3,
                 child: Text(
                   heading,
                   style: disabled

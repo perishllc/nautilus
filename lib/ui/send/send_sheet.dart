@@ -821,170 +821,6 @@ class SendSheetState extends State<SendSheet> {
             ),
 
             const SizedBox(height: 5),
-            // account / wallet name:
-            TextButton(
-              onPressed: () async {
-                Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
-                setState(() {
-                  // Set copied style
-                  _addressCopied = true;
-                });
-                _addressCopiedTimer?.cancel();
-                _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
-                  if (!mounted) return;
-                  setState(() {
-                    _addressCopied = false;
-                  });
-                });
-                UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
-              },
-              child: Container(
-                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 2),
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    // Align(
-                    //   alignment: Alignment.centerLeft,
-                    //   child: Icon(
-                    //     AppIcons.content_copy,
-                    //     size: 24,
-                    //     color: StateContainer.of(context).curTheme.primary,
-                    //   ),
-                    // ),
-                    Column(
-                      children: [
-                        const SizedBox(height: 5),
-                        Column(
-                          children: <Widget>[
-                            Align(
-                              alignment: Alignment.center,
-                              child: RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  text: '',
-                                  children: [
-                                    TextSpan(
-                                      text: StateContainer.of(context).selectedAccount!.name,
-                                      style: TextStyle(
-                                        color: StateContainer.of(context).curTheme.text60,
-                                        fontSize: AppFontSizes.small,
-                                        fontWeight: FontWeight.w700,
-                                        fontFamily: "NunitoSans",
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: RichText(
-                                textAlign: TextAlign.start,
-                                text: TextSpan(
-                                  text: '',
-                                  children: [
-                                    TextSpan(
-                                      text: StateContainer.of(context).wallet?.username ??
-                                          Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
-                                      style: TextStyle(
-                                        color: StateContainer.of(context).curTheme.text60,
-                                        fontSize: AppFontSizes.small,
-                                        fontWeight: FontWeight.w700,
-                                        fontFamily: "NunitoSans",
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        FutureBuilder<PriceConversion>(
-                          future: sl.get<SharedPrefsUtil>().getPriceConversion(),
-                          builder: (BuildContext context, AsyncSnapshot snapshot) {
-                            if (snapshot.hasData && snapshot.data != null && snapshot.data != PriceConversion.HIDDEN) {
-                              return RichText(
-                                textAlign: TextAlign.start,
-                                text: TextSpan(
-                                  text: '',
-                                  children: [
-                                    TextSpan(
-                                      text: "(",
-                                      style: TextStyle(
-                                        color: StateContainer.of(context).curTheme.primary60,
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.w100,
-                                        fontFamily: "NunitoSans",
-                                      ),
-                                    ),
-                                    if (!_localCurrencyMode)
-                                      TextSpan(
-                                        text: getThemeAwareRawAccuracy(
-                                          context,
-                                          StateContainer.of(context).wallet!.accountBalance.toString(),
-                                        ),
-                                        style: TextStyle(
-                                          color: StateContainer.of(context).curTheme.primary60,
-                                          fontSize: 14.0,
-                                          fontWeight: FontWeight.w700,
-                                          fontFamily: "NunitoSans",
-                                        ),
-                                      ),
-                                    if (!_localCurrencyMode)
-                                      displayCurrencySymbol(
-                                        context,
-                                        TextStyle(
-                                          color: StateContainer.of(context).curTheme.primary60,
-                                          fontSize: 14.0,
-                                          fontWeight: FontWeight.w700,
-                                          fontFamily: "NunitoSans",
-                                        ),
-                                      ),
-                                    TextSpan(
-                                      text: _localCurrencyMode
-                                          ? StateContainer.of(context).wallet!.getLocalCurrencyBalance(
-                                              context, StateContainer.of(context).curCurrency,
-                                              locale: StateContainer.of(context).currencyLocale)
-                                          : getRawAsThemeAwareFormattedAmount(
-                                              context, StateContainer.of(context).wallet!.accountBalance.toString()),
-                                      style: TextStyle(
-                                        color: StateContainer.of(context).curTheme.primary60,
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.w700,
-                                        fontFamily: "NunitoSans",
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: ")",
-                                      style: TextStyle(
-                                        color: StateContainer.of(context).curTheme.primary60,
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.w100,
-                                        fontFamily: "NunitoSans",
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }
-                            return const Text(
-                              "*******",
-                              style: TextStyle(
-                                color: Colors.transparent,
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.w100,
-                                fontFamily: "NunitoSans",
-                              ),
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 5),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
 
             // A main container that holds everything
             Expanded(
@@ -1001,150 +837,150 @@ class SendSheetState extends State<SendSheet> {
                     duration: Duration.zero,
                     autoScroll: true,
                     focusPadding: 40,
-                    child: Column(
+                    child: Stack(
                       children: <Widget>[
-                        Stack(
+
+                        // wallet / balance button:
+                        Misc.walletBalanceButton(context, _localCurrencyMode),
+
+                        // Enter Amount container + Enter Amount Error container
+                        Column(
                           children: <Widget>[
-                            // Enter Amount container + Enter Amount Error container
-                            Column(
-                              children: <Widget>[
-                                // ******* Enter Amount Container ******* //
-                                getEnterAmountContainer(),
-                                // ******* Enter Amount Container End ******* //
+                            // ******* Enter Amount Container ******* //
+                            getEnterAmountContainer(),
+                            // ******* Enter Amount Container End ******* //
 
-                                // ******* Enter Amount Error Container ******* //
-                                Container(
-                                  alignment: AlignmentDirectional.center,
-                                  margin: const EdgeInsets.only(top: 3),
-                                  child: Text(_amountValidationText,
-                                      style: TextStyle(
-                                        fontSize: 14.0,
-                                        color: StateContainer.of(context).curTheme.primary,
-                                        fontFamily: "NunitoSans",
-                                        fontWeight: FontWeight.w600,
-                                      )),
-                                ),
-                                // ******* Enter Amount Error Container End ******* //
-                              ],
+                            // ******* Enter Amount Error Container ******* //
+                            Container(
+                              alignment: AlignmentDirectional.center,
+                              margin: const EdgeInsets.only(top: 3),
+                              child: Text(_amountValidationText,
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: StateContainer.of(context).curTheme.primary,
+                                    fontFamily: "NunitoSans",
+                                    fontWeight: FontWeight.w600,
+                                  )),
                             ),
+                            // ******* Enter Amount Error Container End ******* //
+                          ],
+                        ),
 
-                            // Column for Enter Address container + Enter Address Error container
-                            Column(
-                              children: <Widget>[
-                                Container(
-                                  alignment: Alignment.topCenter,
-                                  child: Stack(
-                                    alignment: Alignment.topCenter,
-                                    children: <Widget>[
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            left: MediaQuery.of(context).size.width * 0.105,
-                                            right: MediaQuery.of(context).size.width * 0.105),
-                                        alignment: Alignment.bottomCenter,
-                                        constraints: const BoxConstraints(maxHeight: 160, minHeight: 0),
-                                        // ********************************************* //
-                                        // ********* The pop-up Contacts List ********* //
-                                        child: ClipRRect(
+                        // Column for Enter Address container + Enter Address Error container
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              alignment: Alignment.topCenter,
+                              child: Stack(
+                                alignment: Alignment.topCenter,
+                                children: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        left: MediaQuery.of(context).size.width * 0.105,
+                                        right: MediaQuery.of(context).size.width * 0.105),
+                                    alignment: Alignment.bottomCenter,
+                                    constraints: const BoxConstraints(maxHeight: 160, minHeight: 0),
+                                    // ********************************************* //
+                                    // ********* The pop-up Contacts List ********* //
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(25),
+                                      child: Container(
+                                        decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(25),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(25),
-                                              color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                            ),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(25),
-                                              ),
-                                              margin: const EdgeInsets.only(bottom: 50),
-                                              child: _users.isEmpty
-                                                  ? const SizedBox()
-                                                  : ListView.builder(
-                                                      shrinkWrap: true,
-                                                      padding: EdgeInsets.zero,
-                                                      itemCount: _users.length,
-                                                      itemBuilder: (BuildContext context, int index) {
-                                                        return Misc.buildUserItem(context, _users[index], false,
-                                                            (User user) {
-                                                          _addressController.text = user.getDisplayName()!;
-                                                          _addressFocusNode.unfocus();
-                                                          if (_amountController.text.isEmpty) {
-                                                            FocusScope.of(context).requestFocus(_amountFocusNode);
-                                                          }
-                                                          setState(() {
-                                                            _isUser = true;
-                                                            _pasteButtonVisible = false;
-                                                            _addressStyle = AddressStyle.PRIMARY;
-                                                            _addressValidationText = "";
-                                                          });
-                                                        });
-                                                      },
-                                                    ),
-                                            ),
+                                          color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                        ),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(25),
                                           ),
+                                          margin: const EdgeInsets.only(bottom: 50),
+                                          child: _users.isEmpty
+                                              ? const SizedBox()
+                                              : ListView.builder(
+                                                  shrinkWrap: true,
+                                                  padding: EdgeInsets.zero,
+                                                  itemCount: _users.length,
+                                                  itemBuilder: (BuildContext context, int index) {
+                                                    return Misc.buildUserItem(context, _users[index], false,
+                                                        (User user) {
+                                                      _addressController.text = user.getDisplayName()!;
+                                                      _addressFocusNode.unfocus();
+                                                      if (_amountController.text.isEmpty) {
+                                                        FocusScope.of(context).requestFocus(_amountFocusNode);
+                                                      }
+                                                      setState(() {
+                                                        _isUser = true;
+                                                        _pasteButtonVisible = false;
+                                                        _addressStyle = AddressStyle.PRIMARY;
+                                                        _addressValidationText = "";
+                                                      });
+                                                    });
+                                                  },
+                                                ),
                                         ),
                                       ),
-
-                                      // ******* Enter Address Container ******* //
-                                      getEnterAddressContainer(),
-                                      // ******* Enter Address Container End ******* //
-                                    ],
+                                    ),
                                   ),
-                                ),
 
-                                // ******* Enter Address Error Container ******* //
-                                Container(
-                                  alignment: AlignmentDirectional.center,
-                                  margin: const EdgeInsets.only(top: 3),
-                                  child: Text(_addressValidationText,
-                                      style: TextStyle(
-                                        fontSize: 14.0,
-                                        color: StateContainer.of(context).curTheme.primary,
-                                        fontFamily: "NunitoSans",
-                                        fontWeight: FontWeight.w600,
-                                      )),
-                                ),
-                                // ******* Enter Address Error Container End ******* //
-                              ],
+                                  // ******* Enter Address Container ******* //
+                                  getEnterAddressContainer(),
+                                  // ******* Enter Address Container End ******* //
+                                ],
+                              ),
                             ),
 
-                            // Column for Enter Memo container + Enter Memo Error container
-                            Column(
-                              children: <Widget>[
-                                Container(
-                                  alignment: Alignment.topCenter,
-                                  child: Stack(
-                                    alignment: Alignment.topCenter,
-                                    children: <Widget>[
-                                      Container(
-                                        margin: EdgeInsets.only(
-                                            left: MediaQuery.of(context).size.width * 0.105,
-                                            right: MediaQuery.of(context).size.width * 0.105),
-                                        alignment: Alignment.bottomCenter,
-                                        constraints: const BoxConstraints(maxHeight: 174, minHeight: 0),
-                                      ),
-
-                                      // ******* Enter Memo Container ******* //
-                                      getEnterMemoContainer(),
-                                      // ******* Enter Memo Container End ******* //
-                                    ],
-                                  ),
-                                ),
-
-                                // ******* Enter Memo Error Container ******* //
-                                Container(
-                                  alignment: AlignmentDirectional.center,
-                                  margin: const EdgeInsets.only(top: 3),
-                                  child: Text(_memoValidationText,
-                                      style: TextStyle(
-                                        fontSize: 14.0,
-                                        color: StateContainer.of(context).curTheme.primary,
-                                        fontFamily: "NunitoSans",
-                                        fontWeight: FontWeight.w600,
-                                      )),
-                                ),
-                                // ******* Enter Memo Error Container End ******* //
-                              ],
+                            // ******* Enter Address Error Container ******* //
+                            Container(
+                              alignment: AlignmentDirectional.center,
+                              margin: const EdgeInsets.only(top: 3),
+                              child: Text(_addressValidationText,
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: StateContainer.of(context).curTheme.primary,
+                                    fontFamily: "NunitoSans",
+                                    fontWeight: FontWeight.w600,
+                                  )),
                             ),
+                            // ******* Enter Address Error Container End ******* //
+                          ],
+                        ),
+
+                        // Column for Enter Memo container + Enter Memo Error container
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              alignment: Alignment.topCenter,
+                              child: Stack(
+                                alignment: Alignment.topCenter,
+                                children: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        left: MediaQuery.of(context).size.width * 0.105,
+                                        right: MediaQuery.of(context).size.width * 0.105),
+                                    alignment: Alignment.bottomCenter,
+                                    constraints: const BoxConstraints(maxHeight: 174, minHeight: 0),
+                                  ),
+
+                                  // ******* Enter Memo Container ******* //
+                                  getEnterMemoContainer(),
+                                  // ******* Enter Memo Container End ******* //
+                                ],
+                              ),
+                            ),
+
+                            // ******* Enter Memo Error Container ******* //
+                            Container(
+                              alignment: AlignmentDirectional.center,
+                              margin: const EdgeInsets.only(top: 3),
+                              child: Text(_memoValidationText,
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: StateContainer.of(context).curTheme.primary,
+                                    fontFamily: "NunitoSans",
+                                    fontWeight: FontWeight.w600,
+                                  )),
+                            ),
+                            // ******* Enter Memo Error Container End ******* //
                           ],
                         ),
                       ],

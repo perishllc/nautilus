@@ -2699,14 +2699,14 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           type: BottomNavigationBarType.fixed,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: const Icon(Icons.shopping_bag),
-              label: Z.of(context).shopButton,
-              backgroundColor: StateContainer.of(context).curTheme.warning,
-            ),
-            BottomNavigationBarItem(
               icon: const Icon(Icons.home),
               label: Z.of(context).homeButton,
               backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.shopping_bag),
+              label: Z.of(context).shopButton,
+              backgroundColor: StateContainer.of(context).curTheme.warning,
             ),
             BottomNavigationBarItem(
               icon: Badge(
@@ -2722,15 +2722,21 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             //   label: Z.of(context).businessButton,
             //   backgroundColor: StateContainer.of(context).curTheme.warning,
             // ),
+            BottomNavigationBarItem(
+              icon: const Icon(AppIcons.settings),
+              label: Z.of(context).settingsHeader,
+              backgroundColor: StateContainer.of(context).curTheme.warning,
+            ),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: StateContainer.of(context).curTheme.primary,
           unselectedItemColor: StateContainer.of(context).curTheme.text,
           onTap: (int index) async {
-            const int HOME_INDEX = 1;
-            const int SHOP_INDEX = 0;
+            const int HOME_INDEX = 0;
+            const int SHOP_INDEX = 1;
             const int SUBS_INDEX = 2;
-            const int BUSINESS_INDEX = 3;
+            const int SETTINGS_INDEX = 3;
+            const int BUSINESS_INDEX = 4;
 
             // special case for when you double tap home, scroll to the top:
             if (_selectedIndex == index) {
@@ -2783,6 +2789,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                       // qrWidget: qrWidget,
                     ),
                   );
+                  break;
+                case SETTINGS_INDEX:
+                  _scaffoldKey.currentState?.openDrawer();
                   break;
               }
 
