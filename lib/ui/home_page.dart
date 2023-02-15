@@ -1365,11 +1365,20 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       }
     });
     // listen to connection events:
-    _connectionSub = EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((ConnStatusEvent event) {
+    _connectionSub = EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((ConnStatusEvent event) async {
       if (event.status == ConnectionStatus.CONNECTED) {
         showConnectionWarning(false);
       } else if (event.status == ConnectionStatus.DISCONNECTED) {
-        showConnectionWarning(true);
+        final bool connected = await sl.get<AccountService>().isConnected();
+        if (connected) {
+          // remove the warning if it's there:
+          showConnectionWarning(!connected);
+        } else {
+          // check again after ~5 seconds:
+          await Future<dynamic>.delayed(const Duration(seconds: 5));
+          final bool connected = await sl.get<AccountService>().isConnected();
+          showConnectionWarning(!connected);
+        }
       }
     });
     final Stream<List<PurchaseDetails>> purchaseUpdated = InAppPurchase.instance.purchaseStream;
