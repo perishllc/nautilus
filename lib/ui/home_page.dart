@@ -1243,34 +1243,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   StreamSubscription<XMREvent>? _xmrSub;
   StreamSubscription<ConnStatusEvent>? _connectionSub;
   StreamSubscription<SubsChangedEvent>? _subscriptionsSub;
-  // purchase sub:
-  StreamSubscription<List<PurchaseDetails>>? _subscription;
-
-  void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
-    purchaseDetailsList.forEach((PurchaseDetails purchaseDetails) async {
-      if (purchaseDetails.status == PurchaseStatus.pending) {
-        // _showPendingUI();
-      } else {
-        if (purchaseDetails.status == PurchaseStatus.error) {
-          // _handleError(purchaseDetails.error!);
-          UIUtil.showSnackbar(
-            /*Z.of(context)!.purchaseError*/ "There was an error handling the purchase request!",
-            context,
-          );
-        } else if (purchaseDetails.status == PurchaseStatus.purchased ||
-            purchaseDetails.status == PurchaseStatus.restored) {
-          log.e("PURCHASED: ${purchaseDetails.productID}");
-          // TODO: verify purchase:
-          const int monthInSecs = 2628000;
-          sl.get<SharedPrefsUtil>().setProStatus(relativeExpireTime: monthInSecs);
-          _isPro = true;
-        }
-        if (purchaseDetails.pendingCompletePurchase) {
-          await InAppPurchase.instance.completePurchase(purchaseDetails);
-        }
-      }
-    });
-  }
 
   void _registerBus() {
     _historySub = EventTaxiImpl.singleton().registerTo<HistoryHomeEvent>().listen((HistoryHomeEvent event) {
@@ -1365,34 +1337,13 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       }
     });
     // listen to connection events:
-    _connectionSub = EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((ConnStatusEvent event) async {
+    _connectionSub = EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((ConnStatusEvent event) {
       if (event.status == ConnectionStatus.CONNECTED) {
         showConnectionWarning(false);
       } else if (event.status == ConnectionStatus.DISCONNECTED) {
-        final bool connected = await sl.get<AccountService>().isConnected();
-        if (connected) {
-          // remove the warning if it's there:
-          showConnectionWarning(!connected);
-        } else {
-          // check again after ~5 seconds:
-          await Future<dynamic>.delayed(const Duration(seconds: 5));
-          final bool connected = await sl.get<AccountService>().isConnected();
-          showConnectionWarning(!connected);
-        }
+        showConnectionWarning(true);
       }
     });
-    final Stream<List<PurchaseDetails>> purchaseUpdated = InAppPurchase.instance.purchaseStream;
-    _subscription = purchaseUpdated.listen((List<PurchaseDetails> purchaseDetailsList) {
-      _listenToPurchaseUpdated(purchaseDetailsList);
-    }, onDone: () {
-      _subscription?.cancel();
-    }, onError: (error) {
-      // handle error here.
-      log.v("Error listening to purchase updates: $error");
-    });
-    if (Platform.isIOS) {
-      InAppPurchase.instance.restorePurchases();
-    }
     _subscriptionsSub = EventTaxiImpl.singleton().registerTo<SubsChangedEvent>().listen((SubsChangedEvent event) {
       if (mounted) {
         setState(() {
@@ -1413,7 +1364,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     _solidsSub?.cancel();
     _unifiedSub?.cancel();
     _xmrSub?.cancel();
-    _subscription?.cancel();
     _connectionSub?.cancel();
   }
 
