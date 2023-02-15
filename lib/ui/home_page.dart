@@ -200,6 +200,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   bool _isPro = false;
   List<Subscription> _subscriptions = [];
+  
+  // make the connection warning less annoying:
+  Timer? _connectionTimer;
 
   Future<void> _switchToAccount(String account) async {
     final List<Account> accounts = await sl.get<DBHelper>().getAccounts(await StateContainer.of(context).getSeed());
@@ -1339,9 +1342,14 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     // listen to connection events:
     _connectionSub = EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((ConnStatusEvent event) {
       if (event.status == ConnectionStatus.CONNECTED) {
+        // cancel the timer, if it's still running:
+        _connectionTimer?.cancel();
         showConnectionWarning(false);
       } else if (event.status == ConnectionStatus.DISCONNECTED) {
-        showConnectionWarning(true);
+        // start a timer, if it expires, show the warning:
+        _connectionTimer = Timer(const Duration(seconds: 8), () {
+          showConnectionWarning(true);
+        });
       }
     });
     _subscriptionsSub = EventTaxiImpl.singleton().registerTo<SubsChangedEvent>().listen((SubsChangedEvent event) {
