@@ -1,3 +1,10 @@
+## v0.8.1 - [2023-02-XX]
+#### Added
+#### Changed
+- UI updates
+#### Fixed
+- Minor fixes
+- Long standing confirmation height on send bug
 ## v0.8.0 - [2023-02-17]
 #### Added
 - Support "payto:" links / URI scheme

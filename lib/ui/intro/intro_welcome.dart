@@ -9,6 +9,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
@@ -60,7 +61,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
             onPressed: () async {
               bool trackingEnabled = false;
               if (Platform.isIOS) {
-                trackingEnabled = await AppTrackingTransparency.requestTrackingAuthorization() == TrackingStatus.authorized;
+                trackingEnabled =
+                    await AppTrackingTransparency.requestTrackingAuthorization() == TrackingStatus.authorized;
               } else {
                 trackingEnabled = (await AppDialogs.showTrackingDialog(context))!;
               }
@@ -184,6 +186,13 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                       child: SvgPicture.asset("assets/logo.svg", color: primaryColor),
                     ),
 
+                    // LottieBuilder.asset(
+                    //   "assets/animations/whale.json",
+                    //   width: 100,
+                    //   height: 100,
+                    //   fit: BoxFit.cover,
+                    // ),
+
                     SizedBox(
                       width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
                       child: Column(
@@ -195,19 +204,24 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                                 alignment: Alignment.topCenter,
                                 margin: const EdgeInsets.only(top: 20),
                                 color: StateContainer.of(context).curTheme.text,
-                                width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
+                                width: landscape
+                                    ? MediaQuery.of(context).size.width / 2
+                                    : MediaQuery.of(context).size.width,
                                 height: 80,
                               ),
                               Container(
                                 alignment: Alignment.topCenter,
                                 padding: EdgeInsets.zero,
-                                width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
+                                width: landscape
+                                    ? MediaQuery.of(context).size.width / 2
+                                    : MediaQuery.of(context).size.width,
                                 height: 100,
                                 child: TextLiquidFill(
                                   text: CaseChange.toUpperCase(NonTranslatable.appName, context),
                                   waveColor: primaryColor ?? NautilusTheme.nautilusBlue,
                                   boxBackgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
-                                  textStyle: const TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold, color: Colors.white),
+                                  textStyle:
+                                      const TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold, color: Colors.white),
                                   boxHeight: 100,
                                   boxWidth: double.infinity,
                                   loadDuration: const Duration(seconds: 3),
@@ -219,12 +233,13 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                                 alignment: Alignment.topCenter,
                                 margin: const EdgeInsets.only(top: 90),
                                 color: StateContainer.of(context).curTheme.backgroundDark,
-                                width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
+                                width: landscape
+                                    ? MediaQuery.of(context).size.width / 2
+                                    : MediaQuery.of(context).size.width,
                                 height: 15,
                               ),
                             ],
                           ),
-
                           // Container for the paragraph
                           Container(
                             margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 30 : 40, vertical: 20),
@@ -238,6 +253,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                         ],
                       ),
                     ),
+
+                    // end
                   ],
                 ),
               ),
@@ -282,7 +299,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                   Row(
                     children: <Widget>[
                       // New Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).loginOrRegisterHeader, Dimens.BUTTON_TOP_DIMENS,
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY, Z.of(context).loginOrRegisterHeader, Dimens.BUTTON_TOP_DIMENS,
                           instanceKey: const Key("get_started"), onPressed: () {
                         Navigator.of(context).pushNamed('/intro_login');
                       }),
@@ -292,7 +310,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                   Row(
                     children: <Widget>[
                       // New Wallet Button
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).continueWithoutLogin, Dimens.BUTTON_BOTTOM_DIMENS,
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
+                          Z.of(context).continueWithoutLogin, Dimens.BUTTON_BOTTOM_DIMENS,
                           instanceKey: const Key("new_existing"), onPressed: () {
                         Navigator.of(context).pushNamed('/intro_new_existing');
                       }),

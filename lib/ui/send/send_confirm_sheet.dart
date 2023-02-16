@@ -530,7 +530,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         sl.get<Logger>().v("SENT TO ADDRESS 200");
 
         // receive from address 200:
-        await AppTransferOverviewSheet()
+        await AppTransferOverviewSheetState()
             .receiveAtIndex(context, await StateContainer.of(context).getSeed(), randomIndex, derivationMethod);
 
         sl.get<Logger>().v("RECEIVED AT ADDRESS 200");
@@ -539,7 +539,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
         if (!mounted) return;
 
-        await AppTransferOverviewSheet().sendAtIndex(
+        await AppTransferOverviewSheetState().sendAtIndex(
           context,
           await StateContainer.of(context).getSeed(),
           randomIndex,

@@ -410,7 +410,12 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     _transferCompleteSub =
         EventTaxiImpl.singleton().registerTo<TransferCompleteEvent>().listen((TransferCompleteEvent event) {
       StateContainer.of(context).requestUpdate();
-      AppTransferCompleteSheet(getRawAsThemeAwareAmount(context, event.amount.toString())).mainBottomSheet(context);
+      Sheets.showAppHeightNineSheet(
+        context: context,
+        widget: AppTransferCompleteSheet(
+          transferAmount: getRawAsThemeAwareAmount(context, event.amount.toString()),
+        ),
+      );
     });
     // notification setting changed:
     _notificationSettingChangeSub = EventTaxiImpl.singleton()
@@ -1644,6 +1649,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            const SizedBox(width: 30),
             AppSettings.buildSettingsListItemSingleLineTwoItems(
               context,
               Z.of(context).contactsHeader,
@@ -1662,6 +1668,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                 _contactsController!.forward();
               },
             ),
+            const SizedBox(width: 30),
             AppSettings.buildSettingsListItemSingleLineTwoItems(
               context,
               Z.of(context).blockedHeader,
@@ -1721,7 +1728,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).settingsTransfer, AppIcons.transferfunds,
             onPressed: () {
-          AppTransferOverviewSheet().mainBottomSheet(context);
+          Sheets.showAppHeightNineSheet(context: context, widget: AppTransferOverviewSheet());
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(

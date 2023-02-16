@@ -339,7 +339,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     if (giftUUID.isEmpty) {
       // check if there's actually any nano to claim:
       if (seed.isNotEmpty) {
-        balance = await AppTransferOverviewSheet().getGiftCardBalance(context, seed);
+        balance = await AppTransferOverviewSheetState().getGiftCardBalance(context, seed);
       }
       if (!mounted) return;
 
@@ -463,11 +463,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             // not really worth actually checking the captcha, just send the gift anyway:
 
             // await AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, StateContainer.of(context).wallet);
-            await AppTransferOverviewSheet().startAutoTransfer(context, seed, StateContainer.of(context).wallet!);
+            await AppTransferOverviewSheetState().startAutoTransfer(context, seed, StateContainer.of(context).wallet!);
             break;
           case 0:
             // refund the gift:
-            await AppTransferOverviewSheet().startAutoRefund(
+            await AppTransferOverviewSheetState().startAutoRefund(
               context,
               seed,
               fromAddress,

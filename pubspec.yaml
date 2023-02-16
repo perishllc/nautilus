@@ -8,7 +8,7 @@ publish_to: "none"
 # followed by an optional build number separated by a +.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
-version: 0.8.0
+version: 0.8.1
 
 environment:
   sdk: ">=2.18.2 <3.0.0"
@@ -335,6 +335,7 @@ flutter:
     - assets/animations/loading/tri_circle_spinner.json
     - assets/animations/world-lines.json
     - assets/animations/world-plane.json
+    - assets/animations/whale.json
     # other assets
     - assets/logo.png
     - assets/logo.svg

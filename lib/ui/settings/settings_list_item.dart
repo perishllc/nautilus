@@ -279,7 +279,7 @@ class AppSettings {
         child: Container(
           height: 60.0,
           // width: 120,
-          margin: const EdgeInsetsDirectional.only(start: 30.0),
+          // margin: const EdgeInsetsDirectional.only(start: 30.0, end: 12),
           child: Row(
             children: <Widget>[
               Container(

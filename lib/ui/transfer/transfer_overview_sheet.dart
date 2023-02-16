@@ -33,9 +33,14 @@ import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/nanoutil.dart';
 import 'package:wallet_flutter/util/user_data_util.dart';
 
-class AppTransferOverviewSheet {
-  AppTransferOverviewSheet();
+class AppTransferOverviewSheet extends StatefulWidget {
+  const AppTransferOverviewSheet() : super();
 
+  @override
+  AppTransferOverviewSheetState createState() => AppTransferOverviewSheetState();
+}
+
+class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
   static const int NUM_SWEEP = 15; // Number of accounts to sweep from a seed
 
   // accounts to private keys/account balances
@@ -47,7 +52,8 @@ class AppTransferOverviewSheet {
     return true;
   }
 
-  void mainBottomSheet(BuildContext context, {String? quickSeed}) {
+  @override
+  Widget build(BuildContext context, {String? quickSeed}) {
     void manualEntryCallback(String seed) {
       Navigator.of(context).pop();
       startTransfer(context, seed, manualEntry: true);
@@ -55,157 +61,149 @@ class AppTransferOverviewSheet {
 
     // If there's a quick seed, open the manual transfer sheet
     if (quickSeed != null) {
-      Sheets.showAppHeightNineSheet(
-          context: context,
-          widget: TransferManualEntrySheet(
-            quickSeed: quickSeed,
-            validSeedCallback: manualEntryCallback,
-          ));
+      return TransferManualEntrySheet(
+        quickSeed: quickSeed,
+        validSeedCallback: manualEntryCallback,
+      );
     } else {
-      AppSheets.showAppHeightNineSheet(
-          context: context,
-          onDisposed: _onWillPop,
-          builder: (BuildContext context) {
-            return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-              return WillPopScope(
-                onWillPop: _onWillPop,
-                child: SafeArea(
-                  minimum: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).size.height * 0.035,
+      return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+        return WillPopScope(
+          onWillPop: _onWillPop,
+          child: SafeArea(
+            minimum: EdgeInsets.only(
+              bottom: MediaQuery.of(context).size.height * 0.035,
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  // A container for the header
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      // Emtpy SizedBox
+                      const SizedBox(
+                        height: 60,
+                        width: 60,
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Handlebars.horizontal(context),
+                          // The header
+                          Container(
+                            margin: const EdgeInsets.only(top: 15.0),
+                            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
+                            child: AutoSizeText(
+                              CaseChange.toUpperCase(Z.of(context).transferHeader, context),
+                              style: AppStyles.textStyleHeader(context),
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              stepGranularity: 0.1,
+                            ),
+                          ),
+                        ],
+                      ),
+                      // Emtpy SizedBox
+                      const SizedBox(
+                        height: 60,
+                        width: 60,
+                      ),
+                    ],
                   ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: <Widget>[
-                        // A container for the header
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            // Emtpy SizedBox
-                            const SizedBox(
-                              height: 60,
-                              width: 60,
-                            ),
-                            Column(
-                              children: <Widget>[
-                                Handlebars.horizontal(context),
-                                // The header
-                                Container(
-                                  margin: const EdgeInsets.only(top: 15.0),
-                                  constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
-                                  child: AutoSizeText(
-                                    CaseChange.toUpperCase(Z.of(context).transferHeader, context),
-                                    style: AppStyles.textStyleHeader(context),
-                                    textAlign: TextAlign.center,
-                                    maxLines: 2,
-                                    stepGranularity: 0.1,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            // Emtpy SizedBox
-                            const SizedBox(
-                              height: 60,
-                              width: 60,
-                            ),
-                          ],
-                        ),
 
-                        // A container for the illustration and paragraphs
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+                  // A container for the illustration and paragraphs
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          constraints: BoxConstraints(
+                              maxHeight: MediaQuery.of(context).size.height * 0.2,
+                              maxWidth: MediaQuery.of(context).size.width * 0.6),
+                          child: Stack(
                             children: <Widget>[
-                              Container(
-                                constraints: BoxConstraints(
-                                    maxHeight: MediaQuery.of(context).size.height * 0.2,
-                                    maxWidth: MediaQuery.of(context).size.width * 0.6),
-                                child: Stack(
-                                  children: <Widget>[
-                                    Center(
-                                      child: SvgPicture.asset("assets/illustrations/transferfunds_paperwalletonly.svg",
-                                          color: StateContainer.of(context).curTheme.text45,
-                                          width: MediaQuery.of(context).size.width),
-                                    ),
-                                    Center(
-                                      child: SvgPicture.asset("assets/illustrations/transferfunds_start.svg",
-                                          color: StateContainer.of(context).curTheme.primary,
-                                          width: MediaQuery.of(context).size.width),
-                                    ),
-                                  ],
-                                ),
+                              Center(
+                                child: SvgPicture.asset("assets/illustrations/transferfunds_paperwalletonly.svg",
+                                    color: StateContainer.of(context).curTheme.text45,
+                                    width: MediaQuery.of(context).size.width),
                               ),
-                              Container(
-                                alignment: AlignmentDirectional.centerStart,
-                                margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
-                                child: AutoSizeText(
-                                  Z
-                                      .of(context)
-                                      .transferIntro
-                                      .replaceAll("%1", Z.of(context).scanQrCode)
-                                      .replaceAll("%2", NonTranslatable.appName),
-                                  style: AppStyles.textStyleParagraph(context),
-                                  textAlign: TextAlign.start,
-                                  maxLines: 6,
-                                  stepGranularity: 0.5,
-                                ),
+                              Center(
+                                child: SvgPicture.asset("assets/illustrations/transferfunds_start.svg",
+                                    color: StateContainer.of(context).curTheme.primary,
+                                    width: MediaQuery.of(context).size.width),
                               ),
                             ],
                           ),
                         ),
-
-                        Row(
-                          children: <Widget>[
-                            AppButton.buildAppButton(
-                              context,
-                              AppButtonType.PRIMARY,
-                              Z.of(context).scanQrCode,
-                              Dimens.BUTTON_TOP_DIMENS,
-                              onPressed: () async {
-                                UIUtil.cancelLockEvent();
-                                final String? result =
-                                    await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
-                                if (result == null) {
-                                  return;
-                                }
-
-                                if (!NanoUtil.isValidSeed(result)) {
-                                  UIUtil.showSnackbar(Z.of(context).qrInvalidSeed, context);
-                                  return;
-                                }
-                                startTransfer(context, result);
-                              },
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            AppButton.buildAppButton(
-                              context,
-                              AppButtonType.PRIMARY_OUTLINE,
-                              Z.of(context).manualEntry,
-                              Dimens.BUTTON_BOTTOM_DIMENS,
-                              onPressed: () {
-                                Sheets.showAppHeightNineSheet(
-                                  context: context,
-                                  widget: TransferManualEntrySheet(
-                                    validSeedCallback: manualEntryCallback,
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
+                        Container(
+                          alignment: AlignmentDirectional.centerStart,
+                          margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
+                          child: AutoSizeText(
+                            Z
+                                .of(context)
+                                .transferIntro
+                                .replaceAll("%1", Z.of(context).scanQrCode)
+                                .replaceAll("%2", NonTranslatable.appName),
+                            style: AppStyles.textStyleParagraph(context),
+                            textAlign: TextAlign.start,
+                            maxLines: 6,
+                            stepGranularity: 0.5,
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ),
-              );
-            });
-          });
+
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                        context,
+                        AppButtonType.PRIMARY,
+                        Z.of(context).scanQrCode,
+                        Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: () async {
+                          UIUtil.cancelLockEvent();
+                          final String? result = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
+                          if (result == null) {
+                            return;
+                          }
+
+                          if (!NanoUtil.isValidSeed(result)) {
+                            UIUtil.showSnackbar(Z.of(context).qrInvalidSeed, context);
+                            return;
+                          }
+                          startTransfer(context, result);
+                        },
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                        context,
+                        AppButtonType.PRIMARY_OUTLINE,
+                        Z.of(context).manualEntry,
+                        Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () {
+                          Sheets.showAppHeightNineSheet(
+                            context: context,
+                            widget: TransferManualEntrySheet(
+                              validSeedCallback: manualEntryCallback,
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      });
     }
   }
 
