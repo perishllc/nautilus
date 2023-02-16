@@ -997,11 +997,13 @@ class StateContainerState extends State<StateContainer> {
       sl.get<AccountService>().processQueue();
       // update our frontier:
       if (resp.hash != null && resp.hash!.isNotEmpty) {
-        wallet!.frontier = resp.hash;
-        wallet!.confirmationHeight += 1;
-        EventTaxiImpl.singleton().fire(ConfirmationHeightChangedEvent(
-          confirmationHeight: wallet!.confirmationHeight,
-        ));
+        if (resp.hash! != wallet!.frontier) {
+          wallet!.frontier = resp.hash;
+          wallet!.confirmationHeight += 1;
+          EventTaxiImpl.singleton().fire(ConfirmationHeightChangedEvent(
+            confirmationHeight: wallet!.confirmationHeight,
+          ));
+        }
       }
       return;
     }
