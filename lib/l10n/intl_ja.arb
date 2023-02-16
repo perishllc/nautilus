@@ -2525,6 +2525,11 @@
     "type": "text",
     "description": "funding_show"
   },
+  "showAccount": "アカウントを表示",
+  "@showAccount": {
+    "type": "text",
+    "description": "show_account"
+  },
   "showAccountInfo": "アカウント情報",
   "@showAccountInfo": {
     "type": "text",

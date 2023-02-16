@@ -2525,6 +2525,11 @@
     "type": "text",
     "description": "funding_show"
   },
+  "showAccount": "顯示帳戶",
+  "@showAccount": {
+    "type": "text",
+    "description": "show_account"
+  },
   "showAccountInfo": "帳戶信息",
   "@showAccountInfo": {
     "type": "text",

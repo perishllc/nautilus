@@ -2525,6 +2525,11 @@
     "type": "text",
     "description": "funding_show"
   },
+  "showAccount": "Visa konto",
+  "@showAccount": {
+    "type": "text",
+    "description": "show_account"
+  },
   "showAccountInfo": "Konto information",
   "@showAccountInfo": {
     "type": "text",

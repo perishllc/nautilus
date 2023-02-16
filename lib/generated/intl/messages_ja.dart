@@ -725,6 +725,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareText": MessageLookupByLibrary.simpleMessage("テキストを共有"),
         "shopButton": MessageLookupByLibrary.simpleMessage("店"),
         "show": MessageLookupByLibrary.simpleMessage("見せる"),
+        "showAccount": MessageLookupByLibrary.simpleMessage("アカウントを表示"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("アカウント情報"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("アカウントの QR コードを表示"),

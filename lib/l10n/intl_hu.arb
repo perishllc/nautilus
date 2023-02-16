@@ -2525,6 +2525,11 @@
     "type": "text",
     "description": "funding_show"
   },
+  "showAccount": "Számla megjelenítése",
+  "@showAccount": {
+    "type": "text",
+    "description": "show_account"
+  },
   "showAccountInfo": "Számlainformáció",
   "@showAccountInfo": {
     "type": "text",

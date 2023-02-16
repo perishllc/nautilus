@@ -2525,6 +2525,11 @@
     "type": "text",
     "description": "funding_show"
   },
+  "showAccount": "Показати обліковий запис",
+  "@showAccount": {
+    "type": "text",
+    "description": "show_account"
+  },
   "showAccountInfo": "Інформація про обліковий запис",
   "@showAccountInfo": {
     "type": "text",

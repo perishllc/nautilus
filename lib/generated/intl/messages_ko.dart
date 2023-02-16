@@ -733,6 +733,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareText": MessageLookupByLibrary.simpleMessage("텍스트 공유"),
         "shopButton": MessageLookupByLibrary.simpleMessage("가게"),
         "show": MessageLookupByLibrary.simpleMessage("보여 주다"),
+        "showAccount": MessageLookupByLibrary.simpleMessage("계정 표시"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("계정 정보"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage("계정 QR 코드 표시"),
         "showContacts": MessageLookupByLibrary.simpleMessage("연락처 보기"),

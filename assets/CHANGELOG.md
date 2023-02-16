@@ -1,7 +1,13 @@
-## v0.8.0 - [2023-02-XX]
+## v0.8.0 - [2023-02-17]
 #### Added
+- Support "payto:" links / URI scheme
 #### Changed
+- Receive sheet "Show QR Code" -> "Show Account"
+- UI fixes and updates
+- Contacts and Blocked menu buttons combined into a single row
+- Settings button now in the bottom bar
 #### Fixed
+- Connection warning fixed to appear less often and only when actually necessary
 ## v0.7.9 - [2023-02-12]
 #### Changed
 - Minor UI updates

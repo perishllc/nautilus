@@ -853,6 +853,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareText": MessageLookupByLibrary.simpleMessage("Szöveg megosztása"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Üzlet"),
         "show": MessageLookupByLibrary.simpleMessage("Előadás"),
+        "showAccount":
+            MessageLookupByLibrary.simpleMessage("Számla megjelenítése"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Számlainformáció"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage(

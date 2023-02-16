@@ -596,7 +596,7 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 Row(
                   children: <Widget>[
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).showQR, Dimens.BUTTON_BOTTOM_DIMENS,
+                        context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).showAccount, Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () async {
                       final String formattedAmount = sanitizedAmount(_localCurrencyFormat, _amountController.text);
                       String amountRaw;

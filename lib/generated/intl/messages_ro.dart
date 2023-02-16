@@ -843,6 +843,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareText": MessageLookupByLibrary.simpleMessage("Partajați text"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Magazin"),
         "show": MessageLookupByLibrary.simpleMessage("Spectacol"),
+        "showAccount": MessageLookupByLibrary.simpleMessage("Afișați contul"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Informatii cont"),
         "showAccountQR":

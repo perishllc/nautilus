@@ -831,6 +831,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareText": MessageLookupByLibrary.simpleMessage("Chia sẻ văn bản"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Cửa hàng"),
         "show": MessageLookupByLibrary.simpleMessage("Trình diễn"),
+        "showAccount":
+            MessageLookupByLibrary.simpleMessage("Hiển thị tài khoản"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Thông tin tài khoản"),
         "showAccountQR":

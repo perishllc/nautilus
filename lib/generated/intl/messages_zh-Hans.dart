@@ -657,6 +657,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareText": MessageLookupByLibrary.simpleMessage("分享文字"),
         "shopButton": MessageLookupByLibrary.simpleMessage("店铺"),
         "show": MessageLookupByLibrary.simpleMessage("节目"),
+        "showAccount": MessageLookupByLibrary.simpleMessage("显示帐户"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("帐户信息"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage("显示账户二维码"),
         "showContacts": MessageLookupByLibrary.simpleMessage("显示联系人"),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/address.dart';
@@ -70,14 +71,14 @@ class Misc {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                // Align(
-                //   alignment: Alignment.centerLeft,
-                //   child: Icon(
-                //     AppIcons.content_copy,
-                //     size: 24,
-                //     color: StateContainer.of(context).curTheme.primary,
-                //   ),
-                // ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Icon(
+                    AppIcons.content_copy,
+                    size: 24,
+                    color: StateContainer.of(context).curTheme.primary60,
+                  ),
+                ),
                 Column(
                   children: [
                     const SizedBox(height: 5),
@@ -194,15 +195,16 @@ class Misc {
                             ),
                           );
                         }
-                        return const Text(
-                          "*******",
-                          style: TextStyle(
-                            color: Colors.transparent,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w100,
-                            fontFamily: "NunitoSans",
-                          ),
-                        );
+                        // return Text(
+                        //   "*******",
+                        //   style: TextStyle(
+                        //     color: StateContainer.of(context).curTheme.text,
+                        //     fontSize: 14.0,
+                        //     fontWeight: FontWeight.w100,
+                        //     fontFamily: "NunitoSans",
+                        //   ),
+                        // );
+                        return const SizedBox();
                       },
                     ),
                     const SizedBox(height: 5),

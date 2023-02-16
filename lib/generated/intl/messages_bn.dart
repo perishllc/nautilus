@@ -844,6 +844,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareText": MessageLookupByLibrary.simpleMessage("টেক্সট শেয়ার করুন"),
         "shopButton": MessageLookupByLibrary.simpleMessage("দোকান"),
         "show": MessageLookupByLibrary.simpleMessage("দেখান"),
+        "showAccount": MessageLookupByLibrary.simpleMessage("অ্যাকাউন্ট দেখান"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("অ্যাকাউন্ট তথ্য"),
         "showAccountQR":

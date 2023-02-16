@@ -868,6 +868,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareText": MessageLookupByLibrary.simpleMessage("Ibahagi ang Teksto"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Mamili"),
         "show": MessageLookupByLibrary.simpleMessage("Ipakita"),
+        "showAccount":
+            MessageLookupByLibrary.simpleMessage("Ipakita ang Account"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Impormasyon ng Account"),
         "showAccountQR":

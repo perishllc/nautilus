@@ -55,6 +55,7 @@
 				<string>nanosub</string>
 				<string>nanosign</string>
 				<string>nanoauth</string>
+				<string>payto</string>
 			</array>
 		</dict>
 	</array>

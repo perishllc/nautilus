@@ -2525,6 +2525,11 @@
     "type": "text",
     "description": "funding_show"
   },
+  "showAccount": "অ্যাকাউন্ট দেখান",
+  "@showAccount": {
+    "type": "text",
+    "description": "show_account"
+  },
   "showAccountInfo": "অ্যাকাউন্ট তথ্য",
   "@showAccountInfo": {
     "type": "text",

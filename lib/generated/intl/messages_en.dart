@@ -815,6 +815,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareText": MessageLookupByLibrary.simpleMessage("Share Text"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Shop"),
         "show": MessageLookupByLibrary.simpleMessage("Show"),
+        "showAccount": MessageLookupByLibrary.simpleMessage("Show Account"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("Account Info"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Show Account QR Code"),

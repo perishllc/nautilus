@@ -836,6 +836,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareText": MessageLookupByLibrary.simpleMessage("Delite besedilo"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Trgovina"),
         "show": MessageLookupByLibrary.simpleMessage("Prikaži"),
+        "showAccount": MessageLookupByLibrary.simpleMessage("Pokaži račun"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Informacije o računu"),
         "showAccountQR":

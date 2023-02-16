@@ -835,6 +835,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareText": MessageLookupByLibrary.simpleMessage("Kopīgot tekstu"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Veikals"),
         "show": MessageLookupByLibrary.simpleMessage("Rādīt"),
+        "showAccount": MessageLookupByLibrary.simpleMessage("Rādīt kontu"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Konta informācija"),
         "showAccountQR":

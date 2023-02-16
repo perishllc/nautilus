@@ -5115,6 +5115,16 @@ class Z {
     );
   }
 
+  /// `Show Account`
+  String get showAccount {
+    return Intl.message(
+      'Show Account',
+      name: 'showAccount',
+      desc: 'show_account',
+      args: [],
+    );
+  }
+
   /// `Account Info`
   String get showAccountInfo {
     return Intl.message(

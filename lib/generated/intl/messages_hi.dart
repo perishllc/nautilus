@@ -827,6 +827,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareText": MessageLookupByLibrary.simpleMessage("पाठ साझा करें"),
         "shopButton": MessageLookupByLibrary.simpleMessage("दुकान"),
         "show": MessageLookupByLibrary.simpleMessage("प्रदर्शन"),
+        "showAccount": MessageLookupByLibrary.simpleMessage("खाता दिखाएँ"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("खाता जानकारी"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("खाता क्यूआर कोड दिखाएं"),

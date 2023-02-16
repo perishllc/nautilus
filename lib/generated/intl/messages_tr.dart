@@ -825,6 +825,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareText": MessageLookupByLibrary.simpleMessage("Metni Paylaş"),
         "shopButton": MessageLookupByLibrary.simpleMessage("Mağaza"),
         "show": MessageLookupByLibrary.simpleMessage("Göstermek"),
+        "showAccount": MessageLookupByLibrary.simpleMessage("Hesabı Göster"),
         "showAccountInfo":
             MessageLookupByLibrary.simpleMessage("Hesap bilgisi"),
         "showAccountQR":

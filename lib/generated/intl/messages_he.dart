@@ -776,6 +776,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "shareText": MessageLookupByLibrary.simpleMessage("שתף טקסט"),
         "shopButton": MessageLookupByLibrary.simpleMessage("לִקְנוֹת"),
         "show": MessageLookupByLibrary.simpleMessage("הופעה"),
+        "showAccount": MessageLookupByLibrary.simpleMessage("הצג חשבון"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("פרטי חשבון"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("הצג קוד QR של חשבון"),
