@@ -225,6 +225,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "created": MessageLookupByLibrary.simpleMessage("създадено"),
         "creatingGiftCard": MessageLookupByLibrary.simpleMessage(
             "Създаване на Подаръчна Карта"),
+        "cronFormatExplainer":
+            MessageLookupByLibrary.simpleMessage("Посочен във формат CRON"),
         "currency": MessageLookupByLibrary.simpleMessage("Валута"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Валутен режим"),
         "currencyModeHeader": MessageLookupByLibrary.simpleMessage(

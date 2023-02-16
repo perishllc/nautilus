@@ -231,6 +231,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "created": MessageLookupByLibrary.simpleMessage("létre"),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Ajándékkártya Létrehozása"),
+        "cronFormatExplainer": MessageLookupByLibrary.simpleMessage(
+            "CRON formátumban van megadva"),
         "currency": MessageLookupByLibrary.simpleMessage("Pénznem"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Pénznem mód"),
         "currencyModeHeader":

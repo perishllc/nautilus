@@ -174,6 +174,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "createQR": MessageLookupByLibrary.simpleMessage("建立二維碼"),
         "created": MessageLookupByLibrary.simpleMessage("創建"),
         "creatingGiftCard": MessageLookupByLibrary.simpleMessage("建立禮品卡"),
+        "cronFormatExplainer":
+            MessageLookupByLibrary.simpleMessage("以 CRON 格式指定"),
         "currency": MessageLookupByLibrary.simpleMessage("貨幣"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("貨幣模式"),
         "currencyModeHeader": MessageLookupByLibrary.simpleMessage("貨幣模式資訊"),

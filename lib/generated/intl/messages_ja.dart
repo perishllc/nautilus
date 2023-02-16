@@ -192,6 +192,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "createQR": MessageLookupByLibrary.simpleMessage("QR コードを作成する"),
         "created": MessageLookupByLibrary.simpleMessage("作成した"),
         "creatingGiftCard": MessageLookupByLibrary.simpleMessage("ギフトカードを作成する"),
+        "cronFormatExplainer":
+            MessageLookupByLibrary.simpleMessage("CRON形式で指定"),
         "currency": MessageLookupByLibrary.simpleMessage("通貨"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("通貨モード"),
         "currencyModeHeader": MessageLookupByLibrary.simpleMessage("通貨モード情報"),

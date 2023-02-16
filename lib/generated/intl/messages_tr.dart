@@ -222,6 +222,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "created": MessageLookupByLibrary.simpleMessage("yaratıldı"),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Hediye Kartı Oluşturma"),
+        "cronFormatExplainer":
+            MessageLookupByLibrary.simpleMessage("CRON biçiminde belirtilir"),
         "currency": MessageLookupByLibrary.simpleMessage("Para Birimi"),
         "currencyMode":
             MessageLookupByLibrary.simpleMessage("Para Birimi Modu"),

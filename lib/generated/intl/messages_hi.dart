@@ -226,6 +226,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "created": MessageLookupByLibrary.simpleMessage("बनाया था"),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("गिफ्ट कार्ड बनाना"),
+        "cronFormatExplainer":
+            MessageLookupByLibrary.simpleMessage("क्रॉन प्रारूप में निर्दिष्ट"),
         "currency": MessageLookupByLibrary.simpleMessage("मुद्रा"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("करेंसी मोड"),
         "currencyModeHeader":

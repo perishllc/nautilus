@@ -630,6 +630,11 @@
     "type": "text",
     "description": "creating_gift_card"
   },
+  "cronFormatExplainer": "Angegeben im CRON-Format",
+  "@cronFormatExplainer": {
+    "type": "text",
+    "description": "sub_creation_cron_hint"
+  },
   "currency": "Währung",
   "@currency": {
     "type": "text",

@@ -222,6 +222,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "created": MessageLookupByLibrary.simpleMessage("dicipta"),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Mewujudkan Kad Hadiah"),
+        "cronFormatExplainer": MessageLookupByLibrary.simpleMessage(
+            "Ditentukan dalam format CRON"),
         "currency": MessageLookupByLibrary.simpleMessage("Mata wang"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Mod Mata Wang"),
         "currencyModeHeader":

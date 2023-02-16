@@ -630,6 +630,11 @@
     "type": "text",
     "description": "creating_gift_card"
   },
+  "cronFormatExplainer": "Tinukoy sa CRON na format",
+  "@cronFormatExplainer": {
+    "type": "text",
+    "description": "sub_creation_cron_hint"
+  },
   "currency": "Currency",
   "@currency": {
     "type": "text",

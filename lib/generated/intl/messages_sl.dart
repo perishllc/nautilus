@@ -229,6 +229,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "created": MessageLookupByLibrary.simpleMessage("ustvarili"),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Ustvarjanje darilne kartice"),
+        "cronFormatExplainer":
+            MessageLookupByLibrary.simpleMessage("Podano v formatu CRON"),
         "currency": MessageLookupByLibrary.simpleMessage("Valuta"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Valutni način"),
         "currencyModeHeader": MessageLookupByLibrary.simpleMessage(

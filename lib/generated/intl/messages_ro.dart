@@ -226,6 +226,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "created": MessageLookupByLibrary.simpleMessage("creată"),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Crearea cardului cadou"),
+        "cronFormatExplainer":
+            MessageLookupByLibrary.simpleMessage("Specificat în format CRON"),
         "currency": MessageLookupByLibrary.simpleMessage("Valută"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Modul Moneda"),
         "currencyModeHeader": MessageLookupByLibrary.simpleMessage(

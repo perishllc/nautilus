@@ -159,6 +159,22 @@ class AddSubSheetState extends State<AddSubSheet> {
       }
     });
 
+    _frequencyFocusNode.addListener(() async {
+      if (_frequencyFocusNode.hasFocus) {
+        setState(() {
+          _frequencyValidationText = "";
+        });
+      }
+    });
+
+    _nameFocusNode.addListener(() async {
+      if (_nameFocusNode.hasFocus) {
+        setState(() {
+          _nameValidationText = "";
+        });
+      }
+    });
+
     // Set initial currency format
     _localCurrencyFormat = NumberFormat.currency(
         locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
@@ -774,6 +790,18 @@ class AddSubSheetState extends State<AddSubSheet> {
                                       fontWeight: FontWeight.w600,
                                     )),
                               ),
+                              if (_frequencyValidationText == Z.of(context).invalidFrequency)
+                                Container(
+                                  alignment: AlignmentDirectional.center,
+                                  margin: const EdgeInsets.only(top: 3),
+                                  child: Text("(${Z.of(context).cronFormatExplainer})",
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: StateContainer.of(context).curTheme.primary,
+                                        fontFamily: "NunitoSans",
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                ),
                             ],
                           ),
                         ],

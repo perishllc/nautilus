@@ -227,6 +227,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "created": MessageLookupByLibrary.simpleMessage("tạo"),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Tạo thẻ quà tặng"),
+        "cronFormatExplainer": MessageLookupByLibrary.simpleMessage(
+            "Được chỉ định ở định dạng CRON"),
         "currency": MessageLookupByLibrary.simpleMessage("Tiền tệ"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Chế độ tiền tệ"),
         "currencyModeHeader":

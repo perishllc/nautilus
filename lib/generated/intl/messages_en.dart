@@ -222,6 +222,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "created": MessageLookupByLibrary.simpleMessage("created"),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Creating Gift Card"),
+        "cronFormatExplainer":
+            MessageLookupByLibrary.simpleMessage("Specified in CRON format"),
         "currency": MessageLookupByLibrary.simpleMessage("Currency"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Currency Mode"),
         "currencyModeHeader":

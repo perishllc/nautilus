@@ -194,6 +194,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "createQR": MessageLookupByLibrary.simpleMessage("QR 코드 생성"),
         "created": MessageLookupByLibrary.simpleMessage("만들어진"),
         "creatingGiftCard": MessageLookupByLibrary.simpleMessage("기프트 카드 만들기"),
+        "cronFormatExplainer":
+            MessageLookupByLibrary.simpleMessage("CRON 형식으로 지정"),
         "currency": MessageLookupByLibrary.simpleMessage("통화"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("통화 모드"),
         "currencyModeHeader": MessageLookupByLibrary.simpleMessage("통화 모드 정보"),

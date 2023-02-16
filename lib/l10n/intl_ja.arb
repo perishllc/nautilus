@@ -630,6 +630,11 @@
     "type": "text",
     "description": "creating_gift_card"
   },
+  "cronFormatExplainer": "CRON形式で指定",
+  "@cronFormatExplainer": {
+    "type": "text",
+    "description": "sub_creation_cron_hint"
+  },
   "currency": "通貨",
   "@currency": {
     "type": "text",

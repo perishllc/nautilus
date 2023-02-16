@@ -1315,6 +1315,16 @@ class Z {
     );
   }
 
+  /// `Specified in CRON format`
+  String get cronFormatExplainer {
+    return Intl.message(
+      'Specified in CRON format',
+      name: 'cronFormatExplainer',
+      desc: 'sub_creation_cron_hint',
+      args: [],
+    );
+  }
+
   /// `Currency`
   String get currency {
     return Intl.message(

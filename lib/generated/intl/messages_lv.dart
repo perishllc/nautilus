@@ -227,6 +227,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "created": MessageLookupByLibrary.simpleMessage("izveidots"),
         "creatingGiftCard":
             MessageLookupByLibrary.simpleMessage("Creating Gift Card"),
+        "cronFormatExplainer":
+            MessageLookupByLibrary.simpleMessage("Norādīts CRON formātā"),
         "currency": MessageLookupByLibrary.simpleMessage("Currency"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Currency Mode"),
         "currencyModeHeader":

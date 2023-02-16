@@ -630,6 +630,11 @@
     "type": "text",
     "description": "creating_gift_card"
   },
+  "cronFormatExplainer": "Especificat en format CRON",
+  "@cronFormatExplainer": {
+    "type": "text",
+    "description": "sub_creation_cron_hint"
+  },
   "currency": "Měna",
   "@currency": {
     "type": "text",
