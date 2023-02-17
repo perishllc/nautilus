@@ -149,7 +149,10 @@ class _FundingMessagesSheetState extends State<FundingMessagesSheet> {
             end: 12,
             bottom: 20,
           ),
-          child: Text(Z.of(context).iosFundingMessage.replaceAll("%1", NonTranslatable.appName)),
+          child: Text(
+            Z.of(context).iosFundingMessage.replaceAll("%1", NonTranslatable.appName),
+            style: AppStyles.textStyleParagraphPrimary(context),
+          ),
         ),
       );
     }

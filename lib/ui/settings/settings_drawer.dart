@@ -1534,10 +1534,13 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
             ),
             child: FundingMessageCard(
               title: Z.of(context).donateToSupport,
-              shortDescription: StateContainer.of(context).fundingAlerts![currentFundingIndex].title,
+              shortDescription: Platform.isIOS
+                  ? Z.of(context).supportDevelopment
+                  : StateContainer.of(context).fundingAlerts![currentFundingIndex].title,
               currentAmountRaw: StateContainer.of(context).fundingAlerts![currentFundingIndex].currentAmountRaw,
               goalAmountRaw: StateContainer.of(context).fundingAlerts![currentFundingIndex].goalAmountRaw,
               hideAmounts: true,
+              hideProgressBar: Platform.isIOS,
               onPressed: () {
                 Sheets.showAppHeightEightSheet(
                   context: context,
