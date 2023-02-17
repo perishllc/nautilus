@@ -152,10 +152,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                       children: <Widget>[
                         Text(
                           CaseChange.toUpperCase(
-                              (widget.link.isEmpty)
-                                  ? Z.of(context).sending
-                                  : Z.of(context).creatingGiftCard,
-                              context),
+                              (widget.link.isEmpty) ? Z.of(context).sending : Z.of(context).creatingGiftCard, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -343,7 +340,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
                       final String authText = isMessage
                           ? Z.of(context).sendMessageConfirm
-                          : Z.of(context)
+                          : Z
+                              .of(context)
                               .sendAmountConfirm
                               .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
                               .replaceAll("%2", StateContainer.of(context).currencyMode);
@@ -424,8 +422,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${Z.of(context).unopenedWarningWarning}\n\n",
-                    style: AppStyles.textStyleParagraph(context)),
+                Text("${Z.of(context).unopenedWarningWarning}\n\n", style: AppStyles.textStyleParagraph(context)),
                 RichText(
                   textAlign: TextAlign.start,
                   text: TextSpan(
@@ -490,13 +487,14 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         final String privKey = await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(),
             StateContainer.of(context).selectedAccount!.index!, derivationMethod);
         resp = await sl.get<AccountService>().requestSend(
-            StateContainer.of(context).wallet!.representative,
-            StateContainer.of(context).wallet!.frontier,
-            widget.amountRaw,
-            widget.destination,
-            StateContainer.of(context).wallet!.address,
-            privKey,
-            max: widget.maxSend);
+              StateContainer.of(context).wallet!.representative,
+              StateContainer.of(context).wallet!.frontier,
+              widget.amountRaw,
+              widget.destination,
+              StateContainer.of(context).wallet!.address,
+              privKey,
+              max: widget.maxSend,
+            );
         if (!mounted) return;
         StateContainer.of(context).wallet!.frontier = resp.hash;
         StateContainer.of(context).wallet!.accountBalance -= BigInt.parse(widget.amountRaw);
@@ -676,7 +674,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
     if (memoSendFailed) {
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-      UIUtil.showSnackbar(Z.of(context).sendMemoError.replaceAll("%1", NonTranslatable.appName), context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).sendMemoError.replaceAll("%1", NonTranslatable.appName), context,
+          durationMs: 5000);
     } else {
       if (widget.link.isEmpty) {
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
@@ -729,7 +728,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
         plausiblePin: plausiblePin,
-        description: Z.of(context)
+        description: Z
+            .of(context)
             .sendAmountConfirm
             .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
             .replaceAll("%2", StateContainer.of(context).currencyMode),
