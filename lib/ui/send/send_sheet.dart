@@ -839,7 +839,6 @@ class SendSheetState extends State<SendSheet> {
                     focusPadding: 40,
                     child: Stack(
                       children: <Widget>[
-
                         // wallet / balance button:
                         Misc.walletBalanceButton(context, _localCurrencyMode),
 
@@ -1076,6 +1075,7 @@ class SendSheetState extends State<SendSheet> {
                     }),
                   ],
                 ),
+                if (Platform.isIOS && !isIpad) const SizedBox(height: 8),
                 if (Platform.isIOS && !isIpad)
                   Row(
                     children: <Widget>[
