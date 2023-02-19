@@ -38,7 +38,9 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
 
   @override
   Color? get barrierColor {
-    if (type == AnimationType.TRANSFER_TRANSFERRING || type == AnimationType.TRANSFER_SEARCHING_QR || type == AnimationType.TRANSFER_SEARCHING_MANUAL) {
+    if (type == AnimationType.TRANSFER_TRANSFERRING ||
+        type == AnimationType.TRANSFER_SEARCHING_QR ||
+        type == AnimationType.TRANSFER_SEARCHING_MANUAL) {
       return barrierStronger;
     }
     return barrier;
@@ -81,7 +83,8 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
   }
 
   @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(
+      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     return child;
   }
 }
@@ -95,7 +98,8 @@ class AppAnimation extends StatefulWidget {
 
   static void animationLauncher(BuildContext context, AnimationType type, {Function? onPoppedCallback}) {
     Navigator.of(context).push(
-      AnimationLoadingOverlay(type, StateContainer.of(context).curTheme.animationOverlayStrong, StateContainer.of(context).curTheme.animationOverlayMedium,
+      AnimationLoadingOverlay(type, StateContainer.of(context).curTheme.animationOverlayStrong,
+          StateContainer.of(context).curTheme.animationOverlayMedium,
           onPoppedCallback: onPoppedCallback),
     );
   }
@@ -109,7 +113,7 @@ class AppAnimation extends StatefulWidget {
 
     switch (type) {
       case AnimationType.SEND:
-        return "assets/animations/world-lines.json";
+        return "assets/animations/data-upload2.json";
       case AnimationType.REQUEST:
         return "assets/animations/load-n.json";
       case AnimationType.SEND_MESSAGE:
@@ -167,7 +171,7 @@ class AppAnimationState extends State<AppAnimation> with SingleTickerProviderSta
           width: width,
           height: height,
           fit: BoxFit.contain,
-          onLoaded: (LottieComposition composition) => onAnimationLoaded(composition, Duration(milliseconds: 2000)),
+          onLoaded: (LottieComposition composition) => onAnimationLoaded(composition, Duration(milliseconds: 4000)),
         );
       case AnimationType.REQUEST:
         return LottieBuilder.asset(

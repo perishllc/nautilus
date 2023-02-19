@@ -56,18 +56,32 @@ class CurrencyFormatter2 extends TextInputFormatter {
 
     // we added 1 character:
     if (workingText.length == oldValue.text.length + 1) {
-      // we added a comma, attempt to replace it with a decimalSeparator if there isn't one already:
-      if (commaSeparator.allMatches(workingText).length > commaSeparator.allMatches(oldValue.text).length) {
-        // return if we already have a decimalSeparator:
-        if (workingText.contains(decimalSeparator)) {
-          return same;
-        }
+
+      // OLD:
+      // // we added a comma, attempt to replace it with a decimalSeparator if there isn't one already:
+      // if (commaSeparator.allMatches(workingText).length > commaSeparator.allMatches(oldValue.text).length) {
+      //   // return if we already have a decimalSeparator:
+      //   if (workingText.contains(decimalSeparator)) {
+      //     return same;
+      //   }
+      //   // replace the comma with a decimalSeparator:
+      //   // find the index of the comma:
+      //   final int commaIndex = findDifferentCharacterInString(workingText, oldValue.text);
+      //   workingText = workingText.substring(0, commaIndex) + decimalSeparator + workingText.substring(commaIndex + 1);
+      // }
+
+
+      // NEW:
+
+      // find the index of the new character:
+      final int newCharIndex = findDifferentCharacterInString(workingText, oldValue.text);
+      final String newChar = workingText[newCharIndex];
+      // if the new character isn't a number, replace the character with a decimalSeparator:
+      if (!RegExp(r"^\d$").hasMatch(newChar)) {
 
         // replace the comma with a decimalSeparator:
-
-        // find the index of the comma:
-        final int commaIndex = findDifferentCharacterInString(workingText, oldValue.text);
-        workingText = workingText.substring(0, commaIndex) + decimalSeparator + workingText.substring(commaIndex + 1);
+        workingText =
+            workingText.substring(0, newCharIndex) + decimalSeparator + workingText.substring(newCharIndex + 1);
       }
     }
 

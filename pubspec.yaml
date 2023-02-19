@@ -335,7 +335,9 @@ flutter:
     - assets/animations/loading/tri_circle_spinner.json
     - assets/animations/world-lines.json
     - assets/animations/world-plane.json
-    - assets/animations/whale.json
+    # - assets/animations/whale.json
+    # - assets/animations/data-upload.json
+    - assets/animations/data-upload2.json
     # other assets
     - assets/logo.png
     - assets/logo.svg

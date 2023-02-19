@@ -1,3 +1,8 @@
+## v0.8.2 - [2023-02-XX]
+#### Changed
+- New sending animation
+#### Fixed
+- Comma bug for some users
 ## v0.8.1 - [2023-02-17]
 #### Changed
 - UI updates
