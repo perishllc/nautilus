@@ -95,23 +95,19 @@ class MetadataService {
   }
 
   Future<dynamic> makePaymentsRequest(BaseRequest request) async {
-    print(request.toJson());
-    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
-    return null;
+    final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_PAYMENTS),
+        headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
 
-    // final http.Response response = await http.post(Uri.parse(SERVER_ADDRESS_PAYMENTS),
-    //     headers: {'Content-type': 'application/json'}, body: json.encode(request.toJson()));
+    if (response.statusCode != 200) {
+      return null;
+    }
+    final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
+    if (decoded.containsKey("error")) {
+      return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
+    }
 
-    // if (response.statusCode != 200) {
-    //   return null;
-    // }
-    // final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
-    // if (decoded.containsKey("error")) {
-    //   return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
-    // }
-
-    // return decoded;
+    return decoded;
   }
 
   // request money from an account:

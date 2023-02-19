@@ -111,9 +111,15 @@ class AppAnimation extends StatefulWidget {
       // "assets/animations/loading/generic_spinner_3.json",
     ];
 
+    // final List<String> sendLoaders = [
+    //   "assets/animations/loading/generic_spinner_1.json",
+    //   "assets/animations/loading/generic_spinner_2.json",
+    //   // "assets/animations/loading/generic_spinner_3.json",
+    // ];
+
     switch (type) {
       case AnimationType.SEND:
-        return "assets/animations/data-upload2.json";
+        return "assets/animations/data-upload.json";
       case AnimationType.REQUEST:
         return "assets/animations/load-n.json";
       case AnimationType.SEND_MESSAGE:
@@ -171,7 +177,7 @@ class AppAnimationState extends State<AppAnimation> with SingleTickerProviderSta
           width: width,
           height: height,
           fit: BoxFit.contain,
-          onLoaded: (LottieComposition composition) => onAnimationLoaded(composition, Duration(milliseconds: 4000)),
+          onLoaded: (LottieComposition composition) => onAnimationLoaded(composition, const Duration(milliseconds: 4000)),
         );
       case AnimationType.REQUEST:
         return LottieBuilder.asset(
