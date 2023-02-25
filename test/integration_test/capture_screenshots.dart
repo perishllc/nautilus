@@ -44,7 +44,8 @@ Future<void> goBack(WidgetTester tester) async {
 /// returns a base64 screenshot of the screen, useful for making a
 /// diagnostic for unit test failures.
 Future<String> takeScreenshot() async {
-  final RenderRepaintBoundary renderObj = find.byKey(const ValueKey('screenshotter')).evaluate().single.renderObject! as RenderRepaintBoundary;
+  final RenderRepaintBoundary renderObj =
+      find.byKey(const ValueKey('screenshotter')).evaluate().single.renderObject! as RenderRepaintBoundary;
 
   final double devicePixelRatio = WidgetsBinding.instance.window.devicePixelRatio;
   final ui.Image image = await renderObj.toImage(pixelRatio: devicePixelRatio);
@@ -61,6 +62,7 @@ Future<void> printScreenshot() async {
 }
 
 Future<void> saveScreenshot(IntegrationTestWidgetsFlutterBinding binding, String name) async {
+  print("saving screenshot: $name");
   final String screenshot = await takeScreenshot();
   binding.reportData?[name] = screenshot;
 }
@@ -71,7 +73,7 @@ Future<void> appMain() async {
 
   // load environment variables:
   await dotenv.load();
-  
+
   // Setup Service Provide
   setupServiceLocator();
   // Setup logger, only show warning and higher in release mode.
@@ -97,7 +99,7 @@ Future<void> appMain() async {
   }
   // runApp(StateContainer(child: App()));
   runApp(const RepaintBoundary(
-    key: ValueKey('screenshotter'),
+    key: ValueKey<String>("screenshotter"),
     child: StateContainer(
       child: app.App(),
     ),
@@ -138,13 +140,13 @@ void main() {
 
     // await tester.pumpAndSettle();
     // sleep for a bit to let the app load
-    await Future<dynamic>.delayed(const Duration(seconds: 6));
+    await Future<dynamic>.delayed(const Duration(seconds: 10));
 
     bool loggedIn = false;
 
     // may or may not already be logged in:
     try {
-      expect(find.byKey(const Key("new_wallet_button")), findsOneWidget);
+      expect(find.byKey(const Key("new_existing_button")), findsOneWidget);
       loggedIn = false;
     } catch (error) {
       loggedIn = true;
@@ -152,6 +154,8 @@ void main() {
 
     if (!loggedIn) {
       await saveScreenshot(binding, "welcome_intro_screen");
+      await tester.tap(find.byKey(const Key("new_existing_button")));
+      await pumpSettleWait(tester, halfSecond);
       await tester.tap(find.byKey(const Key("new_wallet_button")));
       await pumpSettleWait(tester, halfSecond);
       await tester.tap(find.byKey(const Key("got_it_button")));

@@ -298,10 +298,9 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
 
                   Row(
                     children: <Widget>[
-                      // New Wallet Button
                       AppButton.buildAppButton(
                           context, AppButtonType.PRIMARY, Z.of(context).loginOrRegisterHeader, Dimens.BUTTON_TOP_DIMENS,
-                          instanceKey: const Key("get_started"), onPressed: () {
+                          instanceKey: const Key("get_started_button"), onPressed: () {
                         Navigator.of(context).pushNamed('/intro_login');
                       }),
                     ],
@@ -309,10 +308,9 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
 
                   Row(
                     children: <Widget>[
-                      // New Wallet Button
                       AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
                           Z.of(context).continueWithoutLogin, Dimens.BUTTON_BOTTOM_DIMENS,
-                          instanceKey: const Key("new_existing"), onPressed: () {
+                          instanceKey: const Key("new_existing_button"), onPressed: () {
                         Navigator.of(context).pushNamed('/intro_new_existing');
                       }),
                     ],

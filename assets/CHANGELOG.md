@@ -1,3 +1,7 @@
+## v0.8.3 - [2023-02-XX]
+#### Added
+#### Changed
+#### Fixed
 ## v0.8.2 - [2023-02-20]
 #### Changed
 - New sending animation

@@ -19,6 +19,7 @@ import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
+import 'package:wallet_flutter/ui/widgets/dialog.dart';
 import 'package:wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:wallet_flutter/util/nanoutil.dart';
@@ -227,6 +228,7 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
           child: Column(
             children: <Widget>[
               Stack(
+                alignment: Alignment.centerRight,
                 children: <Widget>[
                   // // Back Button
                   // Container(
@@ -255,6 +257,27 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                       color: StateContainer.of(context).curTheme.primary,
                     ),
                   ),
+
+                  
+                  SizedBox(
+                    width: 60,
+                    height: 60,
+                    child: AppDialogs.infoButton(
+                      context,
+                      () {
+                        AppDialogs.showInfoDialog(
+                          context,
+                          Z.of(context).giftCardInfoHeader,
+                          Z
+                              .of(context)
+                              .giftInfo
+                              .replaceAll("%1", NonTranslatable.appName)
+                              .replaceAll("%2", NonTranslatable.currencyName),
+                          scrollable: true,
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
 
@@ -274,35 +297,40 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                   minFontSize: 12,
                 ),
               ),
-              // The paragraph
-              Container(
-                height: 128,
-                padding: EdgeInsetsDirectional.only(
-                    start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
-                child: DraggableScrollbar(
-                  controller: _scrollController,
-                  scrollbarColor: StateContainer.of(context).curTheme.primary,
-                  scrollbarTopMargin: 2.0,
-                  scrollbarBottomMargin: 2.0,
-                  scrollbarHeight: 30,
-                  scrollbarHideAfterDuration: Duration.zero,
-                  child: SingleChildScrollView(
-                    controller: _scrollController,
-                    // child: AutoSizeText(
-                    //   Z.of(context).giftInfo,
-                    //   style: AppStyles.textStyleParagraph(context),
-                    //   maxLines: 12,
-                    //   minFontSize: 12,
-                    //   stepGranularity: 0.5,
-                    // ),
-                    child: Text(
-                      Z.of(context).giftInfo.replaceAll("%1", NonTranslatable.appName).replaceAll("%2", NonTranslatable.currencyName),
-                      style: AppStyles.textStyleParagraph(context),
-                    ),
-                    // ),
-                  ),
-                ),
-              ),
+
+              // // The paragraph
+              // Container(
+              //   height: 128,
+              //   padding: EdgeInsetsDirectional.only(
+              //       start: smallScreen(context) ? 30 : 40, end: smallScreen(context) ? 30 : 40, top: 15.0),
+              //   child: DraggableScrollbar(
+              //     controller: _scrollController,
+              //     scrollbarColor: StateContainer.of(context).curTheme.primary,
+              //     scrollbarTopMargin: 2.0,
+              //     scrollbarBottomMargin: 2.0,
+              //     scrollbarHeight: 30,
+              //     scrollbarHideAfterDuration: Duration.zero,
+              //     child: SingleChildScrollView(
+              //       controller: _scrollController,
+              //       // child: AutoSizeText(
+              //       //   Z.of(context).giftInfo,
+              //       //   style: AppStyles.textStyleParagraph(context),
+              //       //   maxLines: 12,
+              //       //   minFontSize: 12,
+              //       //   stepGranularity: 0.5,
+              //       // ),
+              //       child: Text(
+              //         Z
+              //             .of(context)
+              //             .giftInfo
+              //             .replaceAll("%1", NonTranslatable.appName)
+              //             .replaceAll("%2", NonTranslatable.currencyName),
+              //         style: AppStyles.textStyleParagraph(context),
+              //       ),
+              //       // ),
+              //     ),
+              //   ),
+              // ),
               // A widget that holds the header, the paragraph, the seed, "seed copied" text and the back button
               Expanded(
                   child: GestureDetector(
