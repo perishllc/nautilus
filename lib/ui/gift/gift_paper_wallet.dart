@@ -259,7 +259,8 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                   ),
 
                   
-                  SizedBox(
+                  Container(
+                    alignment: Alignment.topCenter,
                     width: 60,
                     height: 60,
                     child: AppDialogs.infoButton(
