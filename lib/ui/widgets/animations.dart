@@ -177,7 +177,7 @@ class AppAnimationState extends State<AppAnimation> with SingleTickerProviderSta
           width: width,
           height: height,
           fit: BoxFit.contain,
-          onLoaded: (LottieComposition composition) => onAnimationLoaded(composition, const Duration(milliseconds: 4000)),
+          onLoaded: (LottieComposition composition) => onAnimationLoaded(composition, const Duration(milliseconds: 3000)),
         );
       case AnimationType.REQUEST:
         return LottieBuilder.asset(

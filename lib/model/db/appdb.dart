@@ -238,7 +238,6 @@ class DBHelper {
   }
 
   Future<void> _addDefaultNodes({Database? dbClient}) async {
-    // add default nodes:
     await saveNode(
       Node(
         id: 0,
@@ -259,6 +258,16 @@ class DBHelper {
       ),
       dbClient: dbClient,
     );
+    // await saveNode(
+    //   Node(
+    //     id: 1,
+    //     name: "Nano.to Node",
+    //     selected: false,
+    //     http_url: "https://rpc.nano.to",
+    //     // ws_url: "",// todo: add nano.to rpc ws (doesn't exist yet)
+    //   ),
+    //   dbClient: dbClient,
+    // );
   }
 
   Future<void> _addDefaultWorkSources({Database? dbClient}) async {
