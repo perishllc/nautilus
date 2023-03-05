@@ -56,7 +56,6 @@ class CurrencyFormatter2 extends TextInputFormatter {
 
     // we added 1 character:
     if (workingText.length == oldValue.text.length + 1) {
-
       // OLD:
       // // we added a comma, attempt to replace it with a decimalSeparator if there isn't one already:
       // if (commaSeparator.allMatches(workingText).length > commaSeparator.allMatches(oldValue.text).length) {
@@ -70,7 +69,6 @@ class CurrencyFormatter2 extends TextInputFormatter {
       //   workingText = workingText.substring(0, commaIndex) + decimalSeparator + workingText.substring(commaIndex + 1);
       // }
 
-
       // NEW:
 
       // find the index of the new character:
@@ -78,7 +76,6 @@ class CurrencyFormatter2 extends TextInputFormatter {
       final String newChar = workingText[newCharIndex];
       // if the new character isn't a number, replace the character with a decimalSeparator:
       if (!RegExp(r"^\d$").hasMatch(newChar)) {
-
         // replace the comma with a decimalSeparator:
         workingText =
             workingText.substring(0, newCharIndex) + decimalSeparator + workingText.substring(newCharIndex + 1);
@@ -364,9 +361,23 @@ TextSpan displayCurrencySymbol(BuildContext context, TextStyle textStyle, {Strin
     return TextSpan(text: "${prefix}y", style: textStyle.copyWith(decoration: TextDecoration.lineThrough));
   }
 
+  if (StateContainer.of(context).bananoMode) {
+    return TextSpan(text: "${prefix}B", style: textStyle.copyWith(decoration: TextDecoration.lineThrough));
+  }
+
   return TextSpan(text: "$prefixӾ", style: textStyle);
 
   // return const TextSpan();
+}
+
+String getCurrencySuffix(BuildContext context) {
+  if (StateContainer.of(context).nyanoMode) {
+    return " nyano)";
+  }
+  if (StateContainer.of(context).bananoMode) {
+    return " banano)";
+  }
+  return " NANO)";
 }
 
 List<TextSpan> displayRawFull(BuildContext context, TextStyle textStyle, String raw) {
@@ -374,12 +385,20 @@ List<TextSpan> displayRawFull(BuildContext context, TextStyle textStyle, String 
 }
 
 String getRawAsThemeAwareAmount(BuildContext context, String? raw) {
-  final BigInt rawPerCur = StateContainer.of(context).nyanoMode ? NumberUtil.rawPerNyano : NumberUtil.rawPerNano;
+  final BigInt rawPerCur = StateContainer.of(context).nyanoMode
+      ? NumberUtil.rawPerNyano
+      : StateContainer.of(context).bananoMode
+          ? NumberUtil.rawPerBanano
+          : NumberUtil.rawPerNano;
   return NumberUtil.getRawAsUsableString(raw, rawPerCur); // "$amount.$decPart"
 }
 
 String getThemeAwareRawAccuracy(BuildContext context, String? raw) {
-  final BigInt rawPerCur = StateContainer.of(context).nyanoMode ? NumberUtil.rawPerNyano : NumberUtil.rawPerNano;
+  final BigInt rawPerCur = StateContainer.of(context).nyanoMode
+      ? NumberUtil.rawPerNyano
+      : StateContainer.of(context).bananoMode
+          ? NumberUtil.rawPerBanano
+          : NumberUtil.rawPerNano;
   final String rawString = NumberUtil.getRawAsUsableString(raw, rawPerCur);
   final String rawDecimalString = NumberUtil.getRawAsDecimal(raw, rawPerCur).toString();
 

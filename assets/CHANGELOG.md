@@ -1,4 +1,4 @@
-## v0.8.3 - [2023-02-XX]
+## v0.8.3 - [2023-03-XX]
 #### Added
 #### Changed
 - Updated some animation speeds

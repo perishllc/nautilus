@@ -554,7 +554,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
                                 ),
                               ),
                               TextSpan(
-                                text: (StateContainer.of(context).nyanoMode) ? (" nyano)") : (" NANO)"),
+                                text: getCurrencySuffix(context),
                                 style: TextStyle(
                                   color: StateContainer.of(context).curTheme.primary60,
                                   fontSize: 14.0,

@@ -7,6 +7,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
@@ -153,7 +154,7 @@ class NearbyDevicesSheetState extends State<NearbyDevicesSheet> {
                               ),
                             ),
                             TextSpan(
-                              text: (StateContainer.of(context).nyanoMode) ? (" nyano)") : (" NANO)"),
+                              text: getCurrencySuffix(context),
                               style: TextStyle(
                                 color: StateContainer.of(context).curTheme.primary60,
                                 fontSize: 14.0,

@@ -142,6 +142,7 @@ class StateContainerState extends State<StateContainer> {
   BaseTheme curTheme =
       SchedulerBinding.instance.window.platformBrightness == Brightness.dark ? NautilusTheme() : IndiumTheme();
   bool nyanoMode = false;
+  bool bananoMode = false;
   String currencyMode = CurrencyModeSetting(CurrencyModeOptions.NANO).getDisplayName();
   // Currently selected account
   Account? selectedAccount = Account(id: 1, name: "AB", index: 0, lastAccess: 0, selected: true);
@@ -931,6 +932,7 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       this.currencyMode = currencyMode;
       nyanoMode = this.currencyMode == CurrencyModeSetting(CurrencyModeOptions.NYANO).getDisplayName();
+      bananoMode = this.currencyMode == CurrencyModeSetting(CurrencyModeOptions.BANANO).getDisplayName();
     });
   }
 
