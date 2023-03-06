@@ -1649,40 +1649,49 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                   fontSize: 16.0, fontWeight: FontWeight.w100, color: StateContainer.of(context).curTheme.text60)),
         ),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             const SizedBox(width: 30),
-            AppSettings.buildSettingsListItemSingleLineTwoItems(
-              context,
-              Z.of(context).contactsHeader,
-              AppIcons.contact,
-              onPressed: () async {
-                // check if contacts have been asked before:
-                // reloading prefs to be sure we get the latest value:
-                await sl.get<SharedPrefsUtil>().reload();
-                final bool contactsSet = await sl.get<SharedPrefsUtil>().getContactsSet();
-                if (!contactsSet) {
-                  await _getContactsPermissions();
-                }
-                setState(() {
-                  _contactsOpen = true;
-                });
-                _contactsController!.forward();
-              },
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AppSettings.buildSettingsListItemSingleLineTwoItems(
+                    context,
+                    Z.of(context).contactsHeader,
+                    AppIcons.contact,
+                    onPressed: () async {
+                      // check if contacts have been asked before:
+                      // reloading prefs to be sure we get the latest value:
+                      await sl.get<SharedPrefsUtil>().reload();
+                      final bool contactsSet = await sl.get<SharedPrefsUtil>().getContactsSet();
+                      if (!contactsSet) {
+                        await _getContactsPermissions();
+                      }
+                      setState(() {
+                        _contactsOpen = true;
+                      });
+                      _contactsController!.forward();
+                    },
+                  ),
+                  // const SizedBox(width: 120),
+                  AppSettings.buildSettingsListItemSingleLineTwoItems(
+                    context,
+                    Z.of(context).blockedHeader,
+                    AppIcons.block,
+                    onPressed: () {
+                      setState(() {
+                        _blockedOpen = true;
+                      });
+                      _blockedController!.forward();
+                    },
+                  ),
+                  // const SizedBox(width: 30),
+                ],
+              ),
             ),
-            const SizedBox(width: 30),
-            AppSettings.buildSettingsListItemSingleLineTwoItems(
-              context,
-              Z.of(context).blockedHeader,
-              AppIcons.block,
-              onPressed: () {
-                setState(() {
-                  _blockedOpen = true;
-                });
-                _blockedController!.forward();
-              },
-            ),
+            const SizedBox(width: 90),
           ],
         ),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
@@ -1829,6 +1838,27 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         ),
         child: Column(
           children: <Widget>[
+            Row(
+              children: [
+                Container(
+                  // padding: EdgeInsets.only(top: 40, bottom: 16),
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    icon: Icon(Icons.close, color: StateContainer.of(context).curTheme.text),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+                Text(
+                  Z.of(context).settingsHeader,
+                  style: AppStyles.textStyleSettingsHeader(context).copyWith(
+                    fontSize: AppFontSizes.medium,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
             // A container for accounts area
             Container(
               margin: const EdgeInsetsDirectional.only(start: 26.0, end: 20, bottom: 15),

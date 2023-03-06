@@ -463,10 +463,10 @@ class UIUtil {
   }
 
   static double drawerWidth(BuildContext context) {
-    if (MediaQuery.of(context).size.width < 375) {
-      return MediaQuery.of(context).size.width * 0.94;
+    if (MediaQuery.of(context).size.width < 1200) {
+      return MediaQuery.of(context).size.width;
     } else {
-      // cap drawer width
+      // for tablets, cap drawer width
       return min(MediaQuery.of(context).size.width * 0.85, 300);
     }
   }

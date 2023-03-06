@@ -1,5 +1,6 @@
-## v0.8.3 - [2023-03-XX]
+## v0.8.3 - [2023-03-07]
 #### Added
+- Lots of UI updates
 #### Changed
 - Updated some animation speeds
 #### Fixed

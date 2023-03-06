@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:collection/collection.dart';
 import 'package:devicelocale/devicelocale.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -13,6 +14,8 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uni_links/uni_links.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/bus/payments_home_event.dart';
 import 'package:wallet_flutter/bus/tx_update_event.dart';
@@ -61,9 +64,6 @@ import 'package:wallet_flutter/util/nanoutil.dart';
 import 'package:wallet_flutter/util/ninja/api.dart';
 import 'package:wallet_flutter/util/ninja/ninja_node.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:collection/collection.dart';
-import 'package:uni_links/uni_links.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // print("Handling a background message");
@@ -154,6 +154,7 @@ class StateContainerState extends State<StateContainer> {
   String xmrAddress = "";
   int? xmrRestoreHeight;
   bool xmrEnabled = true;
+  bool showChart = false;
   String? xmrWalletData;
   String xmrFee = "";
   String xmrBalance = "0";
@@ -465,6 +466,8 @@ class StateContainerState extends State<StateContainer> {
       }
     }
   }
+
+  
 
   @override
   void initState() {
@@ -959,6 +962,12 @@ class StateContainerState extends State<StateContainer> {
     if (!enabled && localhostServer.isRunning()) {
       localhostServer.close();
     }
+  }
+
+  void toggleChart() {
+    setState(() {
+      showChart = !showChart;
+    });
   }
 
   void disconnect() {

@@ -56,6 +56,7 @@ import 'package:wallet_flutter/ui/auth/auth_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/business/calc_sheet.dart';
 import 'package:wallet_flutter/ui/handoff/handoff_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/home/card_actions.dart';
+import 'package:wallet_flutter/ui/home/market_card.dart';
 import 'package:wallet_flutter/ui/home/payment_details_sheet.dart';
 import 'package:wallet_flutter/ui/home/top_card.dart';
 import 'package:wallet_flutter/ui/popup_button.dart';
@@ -193,7 +194,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   bool _isPro = false;
   List<Subscription> _subscriptions = [];
-  
+
   // make the connection warning less annoying:
   Timer? _connectionTimer;
 
@@ -815,8 +816,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             }
             return true; // Return false if you want to cancel the click event.
           },
-          ignoreNativeDialog: Platform.isAndroid,
-          // ignoreNativeDialog: false,
+          // ignoreNativeDialog: Platform.isAndroid,
+          ignoreNativeDialog: false,
           dialogStyle: const DialogStyle(
             dialogShape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
           ),
@@ -2298,11 +2299,13 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                     opacityAnimation: _opacityAnimation,
                     child: _buildSearchbarAnimation(),
                   ),
-                  // MarketCard(
-                  //   scaffoldKey: _scaffoldKey,
-                  //   localCurrency: StateContainer.of(context).curCurrency,
-                  //   opacityAnimation: _opacityAnimation,
-                  // ),
+                  if (StateContainer.of(context).showChart) const SizedBox(height: 20),
+                  if (StateContainer.of(context).showChart)
+                    MarketCard(
+                      scaffoldKey: _scaffoldKey,
+                      localCurrency: StateContainer.of(context).curCurrency,
+                      opacityAnimation: _opacityAnimation,
+                    ),
                   Container(
                     margin: const EdgeInsetsDirectional.only(top: 20),
                   ),
@@ -2522,7 +2525,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                           stepGranularity: 0.5,
                         ),
                         onPressed: () async {
-
                           final String data = "monero:${StateContainer.of(context).xmrAddress}";
                           final Widget qrWidget = SizedBox(
                             width: MediaQuery.of(context).size.width,
@@ -2589,18 +2591,22 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       }
     }
     return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)),
-        boxShadow: [
-          BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
-        ],
-      ),
+      // decoration: const BoxDecoration(
+      //   borderRadius: BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+      //   boxShadow: [
+      //     BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
+      //   ],
+      // ),
       child: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(32),
-          topLeft: Radius.circular(32),
-        ),
+        // borderRadius: const BorderRadius.only(
+        //   topRight: Radius.circular(32),
+        //   topLeft: Radius.circular(32),
+        // ),
         child: BottomNavigationBar(
+          elevation: 0,
+          iconSize: 20,
+          // unselectedFontSize: 11,
+          // selectedFontSize: 11,
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           type: BottomNavigationBarType.fixed,
           items: <BottomNavigationBarItem>[
@@ -2724,6 +2730,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     if (!UIUtil.isTablet(context)) {
       return Scaffold(
         drawerEdgeDragWidth: 180,
+        drawerEnableOpenDragGesture: false,
         resizeToAvoidBottomInset: false,
         key: _scaffoldKey,
         backgroundColor: StateContainer.of(context).curTheme.background,

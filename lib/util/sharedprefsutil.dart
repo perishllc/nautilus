@@ -24,6 +24,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Price conversion preference values
 enum PriceConversion { CURRENCY, NONE, HIDDEN }
 
+enum ChartStatus { WEEK, MONTH, NINETY, ALL, HIDDEN }
+
 /// Singleton wrapper for shared preferences
 class SharedPrefsUtil {
   // Keys
