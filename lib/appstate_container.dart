@@ -21,6 +21,7 @@ import 'package:wallet_flutter/bus/payments_home_event.dart';
 import 'package:wallet_flutter/bus/tx_update_event.dart';
 import 'package:wallet_flutter/bus/unified_home_event.dart';
 import 'package:wallet_flutter/bus/xmr_event.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/available_block_explorer.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
@@ -466,8 +467,6 @@ class StateContainerState extends State<StateContainer> {
       }
     }
   }
-
-  
 
   @override
   void initState() {
@@ -936,6 +935,18 @@ class StateContainerState extends State<StateContainer> {
       this.currencyMode = currencyMode;
       nyanoMode = this.currencyMode == CurrencyModeSetting(CurrencyModeOptions.NYANO).getDisplayName();
       bananoMode = this.currencyMode == CurrencyModeSetting(CurrencyModeOptions.BANANO).getDisplayName();
+
+      if (bananoMode) {
+        NonTranslatable.currencyName = "Banano";
+        NonTranslatable.currencyPrefix = "ban_";
+        NonTranslatable.currencyUriPrefix = "ban";
+        NonTranslatable.accountType = NanoAccountType.BANANO;
+      } else {
+        NonTranslatable.currencyName = "Nano";
+        NonTranslatable.currencyPrefix = "nano_";
+        NonTranslatable.currencyUriPrefix = "nano";
+        NonTranslatable.accountType = NanoAccountType.NANO;
+      }
     });
   }
 

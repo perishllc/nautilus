@@ -17,6 +17,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/contact_modified_event.dart';
 import 'package:wallet_flutter/bus/payments_home_event.dart';
 import 'package:wallet_flutter/generated/rust/username_registration.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/model/db/user.dart';
@@ -108,8 +109,8 @@ class UsernameService {
     String? address;
 
     if (decoded != null && decoded["records"] != null && decoded["records"]["crypto.NANO.address"] != null) {
-      address = decoded["records"]["crypto.NANO.address"] as String?;
-      if (NanoAccounts.isValid(NanoAccountType.NANO, address!)) {
+      address = decoded["records"]["crypto.${NonTranslatable.currencyName.toUpperCase()}.address"] as String?;
+      if (NanoAccounts.isValid(NonTranslatable.accountType, address!)) {
         return address;
       }
     }
@@ -122,9 +123,9 @@ class UsernameService {
     if (pubKey.isEmpty) {
       return null;
     } else {
-      final String address = NanoAccounts.createAccount(NanoAccountType.NANO, pubKey);
+      final String address = NanoAccounts.createAccount(NonTranslatable.accountType, pubKey);
       // Validating address
-      if (NanoAccounts.isValid(NanoAccountType.NANO, address)) {
+      if (NanoAccounts.isValid(NonTranslatable.accountType, address)) {
         return address;
       } else {
         return null;
@@ -397,7 +398,7 @@ class UsernameService {
       final ReceivableResponseItem? item = receivableBlocks[hash];
 
       String stateHash = NanoBlocks.computeStateHash(
-        NanoAccountType.NANO,
+        NonTranslatable.accountType,
         A3Account,
         "0",
         representativeEncodedUsername,

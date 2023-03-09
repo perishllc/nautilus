@@ -8,6 +8,7 @@ import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:libcrypto/libcrypto.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/db/account.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/service_locator.dart';
@@ -19,7 +20,7 @@ class NanoUtil {
   }
 
   static String seedToAddress(String seed, int index) {
-    return NanoAccounts.createAccount(NanoAccountType.NANO, privateKeyToPublic(seedToPrivate(seed, index)));
+    return NanoAccounts.createAccount(NonTranslatable.accountType, privateKeyToPublic(seedToPrivate(seed, index)));
   }
 
   // static String createPublicKey(String privateKey) {
@@ -36,11 +37,11 @@ class NanoUtil {
 
   // universal:
   static String privateKeyToAddress(String privateKey) {
-    return NanoAccounts.createAccount(NanoAccountType.NANO, privateKeyToPublic(privateKey));
+    return NanoAccounts.createAccount(NonTranslatable.accountType, privateKeyToPublic(privateKey));
   }
 
   static String publicKeyToAddress(String publicKey) {
-    return NanoAccounts.createAccount(NanoAccountType.NANO, publicKey);
+    return NanoAccounts.createAccount(NonTranslatable.accountType, publicKey);
   }
 
   // standard + hd:
@@ -71,7 +72,7 @@ class NanoUtil {
   }
 
   static Future<String> hdSeedToAddress(String seed, int index) async {
-    return NanoAccounts.createAccount(NanoAccountType.NANO, privateKeyToPublic(await hdSeedToPrivate(seed, index)));
+    return NanoAccounts.createAccount(NonTranslatable.accountType, privateKeyToPublic(await hdSeedToPrivate(seed, index)));
   }
 
   static Future<String> uniSeedToAddress(String seed, int index, String type) {
@@ -105,7 +106,7 @@ class NanoUtil {
   // }
 
   // static String hdSeedToAddress(String seed, int index) {
-  //   // return NanoAccounts.createAccount(NanoAccountType.NANO, NanoKeys.createPublicKey(seedToPrivate(seed, index)));
+  //   // return NanoAccounts.createAccount(NonTranslatable.accountType, NanoKeys.createPublicKey(seedToPrivate(seed, index)));
 
   //   return "";
   // }

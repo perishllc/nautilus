@@ -471,7 +471,7 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
       }
     }
     // Also treat this seed as a private key
-    address = NanoAccounts.createAccount(NanoAccountType.NANO, NanoKeys.createPublicKey(seed));
+    address = NanoAccounts.createAccount(NonTranslatable.accountType, NanoKeys.createPublicKey(seed));
     if (address != StateContainer.of(context).wallet!.address) {
       privKeyBalanceMap.putIfAbsent(address, () => AccountBalanceItem(privKey: seed));
       accountsToRequest.add(address);

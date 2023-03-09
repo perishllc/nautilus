@@ -241,7 +241,7 @@ class DBHelper {
     await saveNode(
       Node(
         id: 0,
-        name: "Perish Node",
+        name: "Nautilus Node",
         selected: true,
         http_url: AccountService.DEFAULT_HTTP_URL,
         ws_url: AccountService.DEFAULT_WS_URL,
@@ -255,6 +255,16 @@ class DBHelper {
         selected: false,
         http_url: "https://app.natrium.io/api",
         ws_url: "wss://app.natrium.io",
+      ),
+      dbClient: dbClient,
+    );
+    await saveNode(
+      Node(
+        id: 2,
+        name: "Kalium Node (banano)",
+        selected: false,
+        http_url: "https://kaliumapi.appditto.com/api",
+        ws_url: "wss://kaliumapi.appditto.com",
       ),
       dbClient: dbClient,
     );

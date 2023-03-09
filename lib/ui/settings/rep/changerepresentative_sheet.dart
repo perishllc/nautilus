@@ -126,7 +126,7 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
             // splashColor: StateContainer.of(context).curTheme.text15,
           ),
           onPressed: () async {
-            if (!NanoAccounts.isValid(NanoAccountType.NANO, rep.account!)) {
+            if (!NanoAccounts.isValid(NonTranslatable.accountType, rep.account!)) {
               return;
             }
             _rep = rep;
@@ -476,7 +476,7 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               Z.of(context).useAppRep.replaceAll("%1", NonTranslatable.appName),
                               Dimens.BUTTON_TOP_DIMENS,
                               onPressed: () async {
-                                if (!NanoAccounts.isValid(NanoAccountType.NANO, AppWallet.nautilusRepresentative)) {
+                                if (!NanoAccounts.isValid(NonTranslatable.accountType, AppWallet.nautilusRepresentative)) {
                                   return;
                                 }
                                 _rep = NinjaNode(account: AppWallet.nautilusRepresentative);

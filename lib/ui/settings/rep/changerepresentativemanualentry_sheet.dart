@@ -12,6 +12,7 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/authentication_method.dart';
 import 'package:wallet_flutter/model/vault.dart';
@@ -259,7 +260,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                             Z.of(context).changeRepButton.toUpperCase(),
                             Dimens.BUTTON_TOP_DIMENS,
                             onPressed: () async {
-                              if (!NanoAccounts.isValid(NanoAccountType.NANO, widget.repController.text)) {
+                              if (!NanoAccounts.isValid(NonTranslatable.accountType, widget.repController.text)) {
                                 return;
                               }
                               // Authenticate
