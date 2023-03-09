@@ -824,6 +824,25 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
+  Future<void> modeChange(BuildContext context) async {
+    // re-add account index 0 and switch the account to it:
+    if (!mounted) return;
+    final String seed = await getSeed();
+    if (!mounted) return;
+    await NanoUtil().loginAccount(seed, context);
+    if (!mounted) return;
+    await resetRecentlyUsedAccounts();
+    final Account? mainAccount = await sl.get<DBHelper>().getSelectedAccount(seed);
+    if (!mounted) return;
+    updateWallet(account: mainAccount!);
+    // force users list to update on the home page:
+    EventTaxiImpl.singleton().fire(ContactModifiedEvent());
+    EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: <TXData>[]));
+
+    updateUnified(true);
+    EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, delayPop: true));
+  }
+
   Future<void> resetApp(BuildContext context) async {
     // Delete the database
     try {
@@ -930,22 +949,31 @@ class StateContainerState extends State<StateContainer> {
   }
 
   // Change currency mode setting
-  void setCurrencyMode(String currencyMode) {
+  void setCurrencyMode(String currencyMode, {BuildContext? context}) {
     setState(() {
       this.currencyMode = currencyMode;
       nyanoMode = this.currencyMode == CurrencyModeSetting(CurrencyModeOptions.NYANO).getDisplayName();
       bananoMode = this.currencyMode == CurrencyModeSetting(CurrencyModeOptions.BANANO).getDisplayName();
 
       if (bananoMode) {
+        if (wallet?.representative.startsWith("nano_") ?? false) {
+          wallet?.representative = wallet!.representative.replaceAll("nano_", "ban_");
+        }
         NonTranslatable.currencyName = "Banano";
         NonTranslatable.currencyPrefix = "ban_";
         NonTranslatable.currencyUriPrefix = "ban";
         NonTranslatable.accountType = NanoAccountType.BANANO;
       } else {
+        if (wallet?.representative.startsWith("ban_") ?? false) {
+          wallet?.representative = wallet!.representative.replaceAll("ban_", "nano_");
+        }
         NonTranslatable.currencyName = "Nano";
         NonTranslatable.currencyPrefix = "nano_";
         NonTranslatable.currencyUriPrefix = "nano";
         NonTranslatable.accountType = NanoAccountType.NANO;
+      }
+      if (context != null) {
+        modeChange(context);
       }
     });
   }
