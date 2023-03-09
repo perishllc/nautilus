@@ -1,4 +1,4 @@
-## v0.8.3 - [2023-03-07]
+## v0.8.3 - [2023-03-10]
 #### Added
 - Lots of UI updates
 #### Changed

@@ -105,3 +105,6 @@ lib/generated/rust/*
 rust/src/*generated
 ios/Runner/Generated/*
 android/app/src/main/jniLibs/*
+
+# screenshots
+flutter_*.png
