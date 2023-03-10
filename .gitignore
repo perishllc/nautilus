@@ -108,3 +108,6 @@ android/app/src/main/jniLibs/*
 
 # screenshots
 flutter_*.png
+
+# include the pubspec.lock file:
+!pubspec.lock
