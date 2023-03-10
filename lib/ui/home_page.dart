@@ -1507,6 +1507,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     });
     if (_currentMode == "nano") {
       await StateContainer.of(context).getRequiredAccountInfo();
+      if (!mounted) return;
       await StateContainer.of(context).requestUpdate();
       if (!mounted) return;
       // queries the db for account specific solids:
