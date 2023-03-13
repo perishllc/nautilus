@@ -1,3 +1,8 @@
+## v0.8.4 - [2023-03-XX]
+#### Added
+#### Changed
+#### Fixed
+- Handoff balance bug
 ## v0.8.3 - [2023-03-10]
 #### Added
 - Lots of UI updates

@@ -725,10 +725,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_rust_bridge
-      sha256: "92d2a19d0e630acd15cea5901d89027d764424bd7d5adf515dfd99776dd572bf"
+      sha256: e0ec75581c739e9ce706f6d8f2a15566b070125586fb571ac398098a8a610eb5
       url: "https://pub.dev"
     source: hosted
-    version: "1.68.0"
+    version: "1.69.0"
   flutter_secure_storage:
     dependency: "direct main"
     description:
@@ -917,10 +917,10 @@ packages:
     dependency: transitive
     description:
       name: image_picker_android
-      sha256: "1f5a4b38eb742422d89c1a01d9db6077c3c9496f551bc9da74649e338a2b5101"
+      sha256: "420ed22d2c9ce767ed96df723aaebfeb20ce92dfda8665cd2ba72d72a51ae669"
       url: "https://pub.dev"
     source: hosted
-    version: "0.8.6"
+    version: "0.8.6+1"
   image_picker_for_web:
     dependency: transitive
     description:
@@ -1115,10 +1115,10 @@ packages:
     dependency: "direct main"
     description:
       name: logger
-      sha256: c40f9ef51e5bffb4ce69ad2d8c8aad7bd47ec109c090521109b63a4e2bc27191
+      sha256: db2ff852ed77090ba9f62d3611e4208a3d11dfa35991a81ae724c113fcb3e3f7
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.2"
+    version: "1.3.0"
   logging:
     dependency: transitive
     description:
@@ -1475,10 +1475,10 @@ packages:
     dependency: "direct main"
     description:
       name: rate_my_app
-      sha256: d233a8acef9cb89fd110a6c4bcce304c7b1a5c192195f73667d2766d41cdcb44
+      sha256: fe210e9e6068095945f89fc2310a71b1cc2caae7f64fa65b83fc796badcb05e3
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.3"
+    version: "1.1.4"
   rational:
     dependency: transitive
     description:
@@ -1656,10 +1656,10 @@ packages:
     dependency: transitive
     description:
       name: sqlite3
-      sha256: "805cd0b49c0c927b9dbaf92508f33461e83807f9ab76bfbf660ac769b27f90e5"
+      sha256: "0a9f8fe561aad15b94549c98d55dee6825a401efec83bf92956e337e35e68ae5"
       url: "https://pub.dev"
     source: hosted
-    version: "1.9.2"
+    version: "1.9.3"
   stack_trace:
     dependency: transitive
     description:

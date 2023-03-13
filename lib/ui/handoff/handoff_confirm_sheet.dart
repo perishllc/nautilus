@@ -405,7 +405,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
         poppedError = handoffResponse.message;
         throw Exception("Handoff failed");
       } else {
-        StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.payItem.amount);
+        StateContainer.of(context).wallet!.accountBalance -= BigInt.parse(widget.payItem.amount);
       }
 
       // Show complete
