@@ -13,6 +13,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
 import 'package:magic_sdk/magic_sdk.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/firebase_options.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
@@ -49,7 +50,6 @@ import 'package:wallet_flutter/ui/widgets/dialog.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/nanoutil.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
-import 'package:oktoast/oktoast.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,9 +67,7 @@ Future<void> main() async {
     Logger.level = Level.verbose;
   }
   // Setup firebase
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform, name: "wallet_flutter");
 
   await FirebaseAppCheck.instance.activate(
     webRecaptchaSiteKey: dotenv.env["CAPTCHA_SITE_KEY"],
@@ -138,7 +136,7 @@ class AppState extends State<App> {
               brightness: StateContainer.of(context).curTheme.brightness,
               error: StateContainer.of(context).curTheme.error,
               primary: StateContainer.of(context).curTheme.primary),
-              scaffoldBackgroundColor: StateContainer.of(context).curTheme.background,
+          scaffoldBackgroundColor: StateContainer.of(context).curTheme.background,
         ),
         localizationsDelegates: [
           ZsDelegate(StateContainer.of(context).curLanguage),

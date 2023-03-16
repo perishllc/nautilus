@@ -80,6 +80,7 @@ dependencies:
 
   # Logger
   logger: ^1.0.0
+  logging: ^1.1.1
 
   # changelog:
   package_info_plus: ^1.4.2
