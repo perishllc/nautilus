@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: "98d1d33ed129b372846e862de23a0fc365745f4d7b5e786ce667fcbbb7ac5c07"
+      sha256: "503361166f4a100e0d7eb7fb5a62c6f0322512f2bcb48d6922caf98f24b0ab90"
       url: "https://pub.dev"
     source: hosted
-    version: "55.0.0"
+    version: "56.0.0"
   _flutterfire_internals:
     dependency: transitive
     description:
@@ -29,10 +29,10 @@ packages:
     dependency: "direct dev"
     description:
       name: analyzer
-      sha256: "881348aed9b0b425882c97732629a6a31093c8ff20fc4b3b03fb9d3d50a3a126"
+      sha256: "93fcd81a6716e69864516750590cf1e699420615046bda19100238aa7b429785"
       url: "https://pub.dev"
     source: hosted
-    version: "5.7.1"
+    version: "5.8.0"
   android_id:
     dependency: "direct main"
     description:
@@ -705,6 +705,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  flutter_nfc_kit:
+    dependency: "direct main"
+    description:
+      name: flutter_nfc_kit
+      sha256: "47f0f5cda9343489ae729c3eedaae3b69d63564af8fe9c78496d6715f6a2e899"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -725,10 +733,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_rust_bridge
-      sha256: d92711479cc66e71310015e2bbcb6ef75fa5d495aeecd777bf7524fb8ec784e4
+      sha256: "0f506efee81dbbc0c31af7c31dda5339c82a8d5d0c3ec168e68dc54855263e97"
       url: "https://pub.dev"
     source: hosted
-    version: "1.70.0"
+    version: "1.71.1"
   flutter_secure_storage:
     dependency: "direct main"
     description:
@@ -917,10 +925,10 @@ packages:
     dependency: transitive
     description:
       name: image_picker_android
-      sha256: "42b2f33dcddd18921d650cc3e816e97ec03e43729ef4e132c39c39406319b1d2"
+      sha256: b81db5f5ed8a69d54d5f0932c2af8120e8c0518a037d8beee494eec671da4d4c
       url: "https://pub.dev"
     source: hosted
-    version: "0.8.6+4"
+    version: "0.8.6+5"
   image_picker_for_web:
     dependency: transitive
     description:
@@ -1195,10 +1203,18 @@ packages:
     dependency: "direct main"
     description:
       name: mobile_scanner
-      sha256: "4045e8441e21f1fb8998a76fbffd054510dd3a3b1dee55c7c9a2083eee687345"
+      sha256: "441ac8d39742c221b19519ed6469909687619405c593004b6332c97d908f838a"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.0"
+    version: "3.1.0"
+  ndef:
+    dependency: transitive
+    description:
+      name: ndef
+      sha256: e40ece11d1cac52cba2b7d0211228c1b5c278032cce3f5bf3e2eefe3762fde6b
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.1"
   nfc_manager:
     dependency: "direct main"
     description:

@@ -190,7 +190,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   String _currentMode = "nano";
 
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
 
   bool _isPro = false;
   List<Subscription> _subscriptions = [];
@@ -2612,16 +2612,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           type: BottomNavigationBarType.fixed,
           items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.home),
-              label: Z.of(context).homeButton,
-              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.shopping_bag),
-              label: Z.of(context).shopButton,
-              backgroundColor: StateContainer.of(context).curTheme.warning,
-            ),
+            // BottomNavigationBarItem(
+            //   icon: const Icon(Icons.shopping_bag),
+            //   label: Z.of(context).shopButton,
+            //   backgroundColor: StateContainer.of(context).curTheme.warning,
+            // ),
             BottomNavigationBarItem(
               icon: Badge(
                 isLabelVisible: unpaidSubCount > 0,
@@ -2630,6 +2625,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               ),
               label: Z.of(context).subsButton,
               backgroundColor: StateContainer.of(context).curTheme.warning,
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.home),
+              label: Z.of(context).homeButton,
+              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
             ),
             // BottomNavigationBarItem(
             //   icon: const Icon(Icons.business),
@@ -2646,10 +2646,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           selectedItemColor: StateContainer.of(context).curTheme.primary,
           unselectedItemColor: StateContainer.of(context).curTheme.text,
           onTap: (int index) async {
-            const int HOME_INDEX = 0;
+            const int HOME_INDEX = 1;
             const int SHOP_INDEX = 1;
-            const int SUBS_INDEX = 2;
-            const int SETTINGS_INDEX = 3;
+            const int SUBS_INDEX = 0;
+            const int SETTINGS_INDEX = 2;
             const int BUSINESS_INDEX = 4;
 
             // special case for when you double tap home, scroll to the top:
@@ -3475,16 +3475,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                                   ),
                                   words: false),
 
-                              // TRANSACTION STATE TAG
-                              if (transactionState != null)
-                                // ignore: avoid_unnecessary_containers
-                                Container(
-                                  // margin: const EdgeInsetsDirectional.only(
-                                  //     // top: 10,
-                                  //     ),
-                                  child: TransactionStateTag(transactionState: transactionState),
-                                ),
-
                               if (txDetails.request_time != null)
                                 SubstringHighlight(
                                   caseSensitive: false,
@@ -3502,6 +3492,15 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                                       fontSize: AppFontSizes.smallest,
                                       fontWeight: FontWeight.w600,
                                       color: StateContainer.of(context).curTheme.warning30),
+                                ),
+                              // TRANSACTION STATE TAG
+                              if (transactionState != null)
+                                // ignore: avoid_unnecessary_containers
+                                Container(
+                                  // margin: const EdgeInsetsDirectional.only(
+                                  //     // top: 10,
+                                  //     ),
+                                  child: TransactionStateTag(transactionState: transactionState),
                                 ),
                             ],
                           ),
@@ -3641,7 +3640,13 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             txDetails: _txDetailsMap[indexedItem.hash]);
     final bool isRecipient = txDetails.isRecipient(StateContainer.of(context).wallet!.address);
     final String account = txDetails.getAccount(isRecipient);
-    String displayName = Address(account).getShortestString() ?? "";
+    String displayName = "";
+    if (txDetails.memo?.isNotEmpty ?? false) {
+      displayName = Address(account).getShortestString() ?? "";
+    } else {
+      displayName = Address(account).getShortString() ?? "";
+    }
+    
 
     // check if there's a username:
     for (final User user in _users) {
