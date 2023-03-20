@@ -977,6 +977,15 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           StateContainer.of(context).wallet!.historyLoading = false;
         });
       }
+      // start a timer to check if we're connected:
+      _connectionTimer = Timer.periodic(const Duration(seconds: 5), (Timer t) async {
+        final bool connected = await sl.get<AccountService>().isConnected();
+        if (connected) {
+          t.cancel();
+          if (!mounted) return;
+          StateContainer.of(context).removeActiveOrSettingsAlert(alert, null);
+        }
+      });
     } else {
       StateContainer.of(context).removeActiveOrSettingsAlert(alert, null);
     }

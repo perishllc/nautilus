@@ -1,5 +1,4 @@
-## v0.8.4 - [2023-03-XX]
-#### Added
+## v0.8.4 - [2023-03-21]
 #### Changed
 - Improved home cards to change layout based on whether a memo is present
 #### Fixed
