@@ -227,6 +227,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "currency": MessageLookupByLibrary.simpleMessage("Para Birimi"),
         "currencyMode":
             MessageLookupByLibrary.simpleMessage("Para Birimi Modu"),
+        "currencyModeChange": MessageLookupByLibrary.simpleMessage(
+            "Para Birimi Modu Değişikliği"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Değişikliğin etkili olması için düğümü bir BANANO düğümünden / olarak değiştirmeyi unutmayın! Bunu gelişmiş ayarlar menüsü -> Düğümü Değiştir\'den yapabilirsiniz."),
         "currencyModeHeader":
             MessageLookupByLibrary.simpleMessage("Para Birimi Modu Bilgisi"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

@@ -229,6 +229,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Spesifisert i CRON-format"),
         "currency": MessageLookupByLibrary.simpleMessage("Valuta"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Valuta-modus"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("Endring av valutamodus"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Husk å endre noden til/fra en BANANO-node for at endringen skal tre i kraft! Du kan gjøre dette i menyen for avanserte innstillinger -> Endre node."),
         "currencyModeHeader":
             MessageLookupByLibrary.simpleMessage("Valuta Mode Info"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

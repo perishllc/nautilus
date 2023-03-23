@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Perubahan Mode Mata Uang",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Ingatlah untuk mengubah simpul ke / dari simpul BANANO agar perubahan diterapkan! Anda dapat melakukan ini di menu pengaturan lanjutan -> Ubah Node.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Info Mode Mata Uang",
   "@currencyModeHeader": {
     "type": "text",

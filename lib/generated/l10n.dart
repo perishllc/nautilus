@@ -1345,6 +1345,26 @@ class Z {
     );
   }
 
+  /// `Currency Mode Change`
+  String get currencyModeChange {
+    return Intl.message(
+      'Currency Mode Change',
+      name: 'currencyModeChange',
+      desc: 'currency_mode_change',
+      args: [],
+    );
+  }
+
+  /// `Remember to change the node to / from a BANANO node for the change to take effect! You can do this in the advanced settings menu -> Change Node.`
+  String get currencyModeChangeWarning {
+    return Intl.message(
+      'Remember to change the node to / from a BANANO node for the change to take effect! You can do this in the advanced settings menu -> Change Node.',
+      name: 'currencyModeChangeWarning',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Currency Mode Info`
   String get currencyModeHeader {
     return Intl.message(

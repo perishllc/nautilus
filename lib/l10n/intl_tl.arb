@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Pagbabago ng Currency Mode",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Tandaan na baguhin ang node sa / mula sa isang BANANO node para magkabisa ang pagbabago! Magagawa mo ito sa menu ng mga advanced na setting -> Baguhin ang Node.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Impormasyon ng Mode ng Pera",
   "@currencyModeHeader": {
     "type": "text",

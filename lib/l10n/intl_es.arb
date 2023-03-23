@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Cambio de modo de moneda",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "¡Recuerda cambiar el nodo a/desde un nodo BANANO para que el cambio surta efecto! Puede hacerlo en el menú de configuración avanzada -> Cambiar nodo.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Información del modo moneda",
   "@currencyModeHeader": {
     "type": "text",

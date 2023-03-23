@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "通貨モードの変更",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "変更を有効にするには、ノードを BANANO ノードに/から変更することを忘れないでください。詳細設定メニュー -> ノードの変更でこれを行うことができます。",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "通貨モード情報",
   "@currencyModeHeader": {
     "type": "text",

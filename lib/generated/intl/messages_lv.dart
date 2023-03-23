@@ -231,6 +231,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Norādīts CRON formātā"),
         "currency": MessageLookupByLibrary.simpleMessage("Currency"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Currency Mode"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("Valūtas režīma maiņa"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Atcerieties nomainīt mezglu uz/no BANANO mezgla, lai izmaiņas stātos spēkā! To var izdarīt papildu iestatījumu izvēlnē -> Mainīt mezglu."),
         "currencyModeHeader":
             MessageLookupByLibrary.simpleMessage("Currency Mode Info"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

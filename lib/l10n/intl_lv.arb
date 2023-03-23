@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Valūtas režīma maiņa",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Atcerieties nomainīt mezglu uz/no BANANO mezgla, lai izmaiņas stātos spēkā! To var izdarīt papildu iestatījumu izvēlnē -> Mainīt mezglu.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Currency Mode Info",
   "@currencyModeHeader": {
     "type": "text",

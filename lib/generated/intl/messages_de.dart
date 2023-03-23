@@ -237,6 +237,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Angegeben im CRON-Format"),
         "currency": MessageLookupByLibrary.simpleMessage("Währung"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Währungsmodus"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("Änderung des Währungsmodus"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Denken Sie daran, den Knoten zu / von einem BANANO-Knoten zu ändern, damit die Änderung wirksam wird! Sie können dies im erweiterten Einstellungsmenü -> Knoten ändern tun."),
         "currencyModeHeader": MessageLookupByLibrary.simpleMessage(
             "Informationen zum Währungsmodus"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

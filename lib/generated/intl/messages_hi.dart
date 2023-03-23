@@ -230,6 +230,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("क्रॉन प्रारूप में निर्दिष्ट"),
         "currency": MessageLookupByLibrary.simpleMessage("मुद्रा"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("करेंसी मोड"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("मुद्रा मोड परिवर्तन"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "परिवर्तन प्रभावी होने के लिए नोड को BANANO नोड से / में बदलना याद रखें! आप इसे उन्नत सेटिंग्स मेनू में कर सकते हैं -> नोड बदलें।"),
         "currencyModeHeader":
             MessageLookupByLibrary.simpleMessage("करेंसी मोड की जानकारी"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

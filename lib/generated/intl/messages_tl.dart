@@ -236,6 +236,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tinukoy sa CRON na format"),
         "currency": MessageLookupByLibrary.simpleMessage("Currency"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Mode ng Pera"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("Pagbabago ng Currency Mode"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Tandaan na baguhin ang node sa / mula sa isang BANANO node para magkabisa ang pagbabago! Magagawa mo ito sa menu ng mga advanced na setting -> Baguhin ang Node."),
         "currencyModeHeader":
             MessageLookupByLibrary.simpleMessage("Impormasyon ng Mode ng Pera"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

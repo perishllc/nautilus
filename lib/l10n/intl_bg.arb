@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Промяна на режим на валута",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Не забравяйте да промените възела към/от BANANO възел, за да влезе промяната в сила! Можете да направите това в менюто за разширени настройки -> Промяна на възела.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Информация за валутния режим",
   "@currencyModeHeader": {
     "type": "text",

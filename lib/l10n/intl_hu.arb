@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Pénznem mód módosítása",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Ne felejtse el módosítani a csomópontot BANANO csomópontra / BANANO csomópontra, hogy a változtatás érvénybe lépjen! Ezt a speciális beállítások menü -> Csomópont módosítása menüpontban teheti meg.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Pénznem mód információ",
   "@currencyModeHeader": {
     "type": "text",

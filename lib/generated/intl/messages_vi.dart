@@ -231,6 +231,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Được chỉ định ở định dạng CRON"),
         "currency": MessageLookupByLibrary.simpleMessage("Tiền tệ"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Chế độ tiền tệ"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("Thay đổi chế độ tiền tệ"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Hãy nhớ thay đổi nút thành/từ nút BANANO để thay đổi có hiệu lực! Bạn có thể thực hiện việc này trong menu cài đặt nâng cao -> Thay đổi Node."),
         "currencyModeHeader":
             MessageLookupByLibrary.simpleMessage("Thông tin về chế độ tiền tệ"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

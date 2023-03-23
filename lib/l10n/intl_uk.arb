@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Зміна режиму валюти",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Не забудьте змінити вузол на/з вузла BANANO, щоб зміни набули чинності! Ви можете зробити це в меню додаткових налаштувань -> Змінити вузол.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Інформація про режим валюти",
   "@currencyModeHeader": {
     "type": "text",

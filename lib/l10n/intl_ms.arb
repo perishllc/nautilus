@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Perubahan Mod Mata Wang",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Ingat untuk menukar nod kepada / daripada nod BANANO untuk perubahan itu berkuat kuasa! Anda boleh melakukan ini dalam menu tetapan lanjutan -> Tukar Nod.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Maklumat Mod Mata Wang",
   "@currencyModeHeader": {
     "type": "text",

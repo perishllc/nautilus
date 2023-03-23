@@ -178,6 +178,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("以 CRON 格式指定"),
         "currency": MessageLookupByLibrary.simpleMessage("货币"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("货币模式"),
+        "currencyModeChange": MessageLookupByLibrary.simpleMessage("货币模式变更"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "请记住将节点更改为/从 BANANO 节点以使更改生效！您可以在高级设置菜单 -> 更改节点中执行此操作。"),
         "currencyModeHeader": MessageLookupByLibrary.simpleMessage("货币模式信息"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(
             "选择要显示金额的单位。\n1 nyano = 0.000001 NANO，或者 \n1,000,000 nyano = 1 NANO"),

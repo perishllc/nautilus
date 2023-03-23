@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Alteração do modo de moeda",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Lembre-se de alterar o nó para/de um nó BANANO para que a alteração entre em vigor! Você pode fazer isso no menu de configurações avançadas -> Alterar nó.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Informações do modo de moeda",
   "@currencyModeHeader": {
     "type": "text",

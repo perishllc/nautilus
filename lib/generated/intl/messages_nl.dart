@@ -235,6 +235,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Gespecificeerd in CRON-indeling"),
         "currency": MessageLookupByLibrary.simpleMessage("Valuta"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Valuta-modus"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("Valutamodus wijzigen"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Vergeet niet om het knooppunt te wijzigen van/naar een BANANO-knooppunt om de wijziging door te voeren! U kunt dit doen in het menu Geavanceerde instellingen -> Knooppunt wijzigen."),
         "currencyModeHeader":
             MessageLookupByLibrary.simpleMessage("Informatie over valutamodus"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

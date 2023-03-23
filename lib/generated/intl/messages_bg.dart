@@ -229,6 +229,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Посочен във формат CRON"),
         "currency": MessageLookupByLibrary.simpleMessage("Валута"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Валутен режим"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("Промяна на режим на валута"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Не забравяйте да промените възела към/от BANANO възел, за да влезе промяната в сила! Можете да направите това в менюто за разширени настройки -> Промяна на възела."),
         "currencyModeHeader": MessageLookupByLibrary.simpleMessage(
             "Информация за валутния режим"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

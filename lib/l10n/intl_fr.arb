@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Changement de mode monétaire",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "N'oubliez pas de changer le nœud vers / depuis un nœud BANANO pour que le changement prenne effet ! Vous pouvez le faire dans le menu des paramètres avancés -> Changer de nœud.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Informations sur le mode devise",
   "@currencyModeHeader": {
     "type": "text",

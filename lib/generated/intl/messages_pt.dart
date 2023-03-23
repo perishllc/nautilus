@@ -234,6 +234,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Especificado no formato CRON"),
         "currency": MessageLookupByLibrary.simpleMessage("Moeda"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Modo de moeda"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("Alteração do modo de moeda"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Lembre-se de alterar o nó para/de um nó BANANO para que a alteração entre em vigor! Você pode fazer isso no menu de configurações avançadas -> Alterar nó."),
         "currencyModeHeader": MessageLookupByLibrary.simpleMessage(
             "Informações do modo de moeda"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Currency Mode Change",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Remember to change the node to / from a BANANO node for the change to take effect! You can do this in the advanced settings menu -> Change Node.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Currency Mode Info",
   "@currencyModeHeader": {
     "type": "text",

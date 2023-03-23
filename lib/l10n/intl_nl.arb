@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Valutamodus wijzigen",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Vergeet niet om het knooppunt te wijzigen van/naar een BANANO-knooppunt om de wijziging door te voeren! U kunt dit doen in het menu Geavanceerde instellingen -> Knooppunt wijzigen.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Informatie over valutamodus",
   "@currencyModeHeader": {
     "type": "text",

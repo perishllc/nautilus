@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Sprememba načina valute",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Ne pozabite spremeniti vozlišča v/iz vozlišča BANANO, da bo sprememba začela veljati! To lahko storite v meniju naprednih nastavitev -> Spremeni vozlišče.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Informacije o valutnem načinu",
   "@currencyModeHeader": {
     "type": "text",

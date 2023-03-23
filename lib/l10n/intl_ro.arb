@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Schimbarea modului valutar",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Amintiți-vă să schimbați nodul în / de la un nod BANANO pentru ca modificarea să intre în vigoare! Puteți face acest lucru în meniul de setări avansate -> Schimbați nodul.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Informații despre modul valutar",
   "@currencyModeHeader": {
     "type": "text",

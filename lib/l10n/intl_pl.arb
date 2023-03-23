@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Zmiana trybu waluty",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Pamiętaj, aby zmienić węzeł na/z węzła BANANO, aby zmiana zaczęła obowiązywać! Możesz to zrobić w menu ustawień zaawansowanych -> Zmień węzeł.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Informacje o trybie walutowym",
   "@currencyModeHeader": {
     "type": "text",

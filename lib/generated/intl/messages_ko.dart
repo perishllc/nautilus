@@ -198,6 +198,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("CRON 형식으로 지정"),
         "currency": MessageLookupByLibrary.simpleMessage("통화"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("통화 모드"),
+        "currencyModeChange": MessageLookupByLibrary.simpleMessage("통화 모드 변경"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "변경 사항을 적용하려면 노드를 BANANO 노드로/에서 변경해야 합니다! 고급 설정 메뉴 -> 노드 변경에서 이 작업을 수행할 수 있습니다."),
         "currencyModeHeader": MessageLookupByLibrary.simpleMessage("통화 모드 정보"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(
             "금액을 표시할 단위를 선택합니다.\n1 냐노 = 0.000001 나노 또는 \n1,000,000 냐노 = 1 나노"),

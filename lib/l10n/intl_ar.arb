@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "تغيير وضع العملة",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "تذكر تغيير العقدة إلى / من عقدة BANANO حتى يسري التغيير! يمكنك القيام بذلك في قائمة الإعدادات المتقدمة -> تغيير العقدة.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "معلومات وضع العملة",
   "@currencyModeHeader": {
     "type": "text",

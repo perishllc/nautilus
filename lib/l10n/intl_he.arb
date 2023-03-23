@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "שינוי מצב מטבע",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "זכור לשנות את הצומת ל / מ צומת BANANO כדי שהשינוי ייכנס לתוקף! אתה יכול לעשות זאת בתפריט ההגדרות המתקדמות -> שנה צומת.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "מידע על מצב מטבע",
   "@currencyModeHeader": {
     "type": "text",

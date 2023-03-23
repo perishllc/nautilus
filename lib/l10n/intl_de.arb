@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Änderung des Währungsmodus",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Denken Sie daran, den Knoten zu / von einem BANANO-Knoten zu ändern, damit die Änderung wirksam wird! Sie können dies im erweiterten Einstellungsmenü -> Knoten ändern tun.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Informationen zum Währungsmodus",
   "@currencyModeHeader": {
     "type": "text",

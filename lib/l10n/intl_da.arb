@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Ændring af valutatilstand",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Husk at ændre noden til/fra en BANANO node for at ændringen træder i kraft! Du kan gøre dette i menuen avancerede indstillinger -> Skift node.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Info om valutatilstand",
   "@currencyModeHeader": {
     "type": "text",

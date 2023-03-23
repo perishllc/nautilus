@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Изменение валютного режима",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Не забудьте изменить узел на/с узла BANANO, чтобы изменение вступило в силу! Сделать это можно в меню дополнительных настроек -> Изменить узел.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Информация о валютном режиме",
   "@currencyModeHeader": {
     "type": "text",

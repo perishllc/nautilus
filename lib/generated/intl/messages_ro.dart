@@ -230,6 +230,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Specificat în format CRON"),
         "currency": MessageLookupByLibrary.simpleMessage("Valută"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Modul Moneda"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("Schimbarea modului valutar"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Amintiți-vă să schimbați nodul în / de la un nod BANANO pentru ca modificarea să intre în vigoare! Puteți face acest lucru în meniul de setări avansate -> Schimbați nodul."),
         "currencyModeHeader": MessageLookupByLibrary.simpleMessage(
             "Informații despre modul valutar"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

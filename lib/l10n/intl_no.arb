@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Endring av valutamodus",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Husk å endre noden til/fra en BANANO-node for at endringen skal tre i kraft! Du kan gjøre dette i menyen for avanserte innstillinger -> Endre node.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Valuta Mode Info",
   "@currencyModeHeader": {
     "type": "text",

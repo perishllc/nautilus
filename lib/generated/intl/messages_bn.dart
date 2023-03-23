@@ -235,6 +235,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "CRON বিন্যাসে নির্দিষ্ট করা হয়েছে"),
         "currency": MessageLookupByLibrary.simpleMessage("কারেন্সি"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("কারেন্সি মোড"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("মুদ্রা মোড পরিবর্তন"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "পরিবর্তনটি কার্যকর হওয়ার জন্য BANANO নোডে/থেকে নোড পরিবর্তন করতে ভুলবেন না! আপনি উন্নত সেটিংস মেনুতে এটি করতে পারেন -> নোড পরিবর্তন করুন।"),
         "currencyModeHeader":
             MessageLookupByLibrary.simpleMessage("কারেন্সি মোডের তথ্য"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

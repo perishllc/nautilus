@@ -196,6 +196,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("CRON形式で指定"),
         "currency": MessageLookupByLibrary.simpleMessage("通貨"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("通貨モード"),
+        "currencyModeChange": MessageLookupByLibrary.simpleMessage("通貨モードの変更"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "変更を有効にするには、ノードを BANANO ノードに/から変更することを忘れないでください。詳細設定メニュー -> ノードの変更でこれを行うことができます。"),
         "currencyModeHeader": MessageLookupByLibrary.simpleMessage("通貨モード情報"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(
             "金額を表示する単位を選択します。\n1 ニャノ = 0.000001 ナノ、または \n1,000,000 ニャノ = 1 ナノ"),

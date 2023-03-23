@@ -235,6 +235,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "CRON formátumban van megadva"),
         "currency": MessageLookupByLibrary.simpleMessage("Pénznem"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Pénznem mód"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("Pénznem mód módosítása"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Ne felejtse el módosítani a csomópontot BANANO csomópontra / BANANO csomópontra, hogy a változtatás érvénybe lépjen! Ezt a speciális beállítások menü -> Csomópont módosítása menüpontban teheti meg."),
         "currencyModeHeader":
             MessageLookupByLibrary.simpleMessage("Pénznem mód információ"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

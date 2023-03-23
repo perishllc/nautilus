@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "मुद्रा मोड परिवर्तन",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "परिवर्तन प्रभावी होने के लिए नोड को BANANO नोड से / में बदलना याद रखें! आप इसे उन्नत सेटिंग्स मेनू में कर सकते हैं -> नोड बदलें।",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "करेंसी मोड की जानकारी",
   "@currencyModeHeader": {
     "type": "text",

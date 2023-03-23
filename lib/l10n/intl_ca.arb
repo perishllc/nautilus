@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Canvi de mode de moneda",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Recordeu canviar el node a/des d'un node BANANO perquè el canvi tingui efecte! Podeu fer-ho al menú de configuració avançada -> Canvia node.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Currency Mode Info",
   "@currencyModeHeader": {
     "type": "text",

@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "মুদ্রা মোড পরিবর্তন",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "পরিবর্তনটি কার্যকর হওয়ার জন্য BANANO নোডে/থেকে নোড পরিবর্তন করতে ভুলবেন না! আপনি উন্নত সেটিংস মেনুতে এটি করতে পারেন -> নোড পরিবর্তন করুন।",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "কারেন্সি মোডের তথ্য",
   "@currencyModeHeader": {
     "type": "text",

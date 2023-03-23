@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "貨幣模式變更",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "請記住將節點更改為/從 BANANO 節點以使更改生效！您可以在高級設置菜單 -> 更改節點中執行此操作。",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "貨幣模式資訊",
   "@currencyModeHeader": {
     "type": "text",

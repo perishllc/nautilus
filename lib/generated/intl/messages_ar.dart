@@ -219,6 +219,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("محدد بتنسيق CRON"),
         "currency": MessageLookupByLibrary.simpleMessage("عملة"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("وضع العملة"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("تغيير وضع العملة"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "تذكر تغيير العقدة إلى / من عقدة BANANO حتى يسري التغيير! يمكنك القيام بذلك في قائمة الإعدادات المتقدمة -> تغيير العقدة."),
         "currencyModeHeader":
             MessageLookupByLibrary.simpleMessage("معلومات وضع العملة"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

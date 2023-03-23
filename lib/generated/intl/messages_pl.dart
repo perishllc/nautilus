@@ -226,6 +226,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Określone w formacie CRON"),
         "currency": MessageLookupByLibrary.simpleMessage("Waluta"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Tryb walutowy"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("Zmiana trybu waluty"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Pamiętaj, aby zmienić węzeł na/z węzła BANANO, aby zmiana zaczęła obowiązywać! Możesz to zrobić w menu ustawień zaawansowanych -> Zmień węzeł."),
         "currencyModeHeader": MessageLookupByLibrary.simpleMessage(
             "Informacje o trybie walutowym"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

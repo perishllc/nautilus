@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Thay đổi chế độ tiền tệ",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Hãy nhớ thay đổi nút thành/từ nút BANANO để thay đổi có hiệu lực! Bạn có thể thực hiện việc này trong menu cài đặt nâng cao -> Thay đổi Node.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Thông tin về chế độ tiền tệ",
   "@currencyModeHeader": {
     "type": "text",

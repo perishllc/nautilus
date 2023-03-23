@@ -229,6 +229,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Especificat en format CRON"),
         "currency": MessageLookupByLibrary.simpleMessage("Měna"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Currency Mode"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("Canvi de mode de moneda"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Recordeu canviar el node a/des d\'un node BANANO perquè el canvi tingui efecte! Podeu fer-ho al menú de configuració avançada -> Canvia node."),
         "currencyModeHeader":
             MessageLookupByLibrary.simpleMessage("Currency Mode Info"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

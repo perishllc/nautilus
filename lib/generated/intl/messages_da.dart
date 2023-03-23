@@ -227,6 +227,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Specificeret i CRON-format"),
         "currency": MessageLookupByLibrary.simpleMessage("Měna"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Valuta tilstand"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("Ændring af valutatilstand"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Husk at ændre noden til/fra en BANANO node for at ændringen træder i kraft! Du kan gøre dette i menuen avancerede indstillinger -> Skift node."),
         "currencyModeHeader":
             MessageLookupByLibrary.simpleMessage("Info om valutatilstand"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

@@ -226,6 +226,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ditentukan dalam format CRON"),
         "currency": MessageLookupByLibrary.simpleMessage("Mata wang"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Mod Mata Wang"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("Perubahan Mod Mata Wang"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Ingat untuk menukar nod kepada / daripada nod BANANO untuk perubahan itu berkuat kuasa! Anda boleh melakukan ini dalam menu tetapan lanjutan -> Tukar Nod."),
         "currencyModeHeader":
             MessageLookupByLibrary.simpleMessage("Maklumat Mod Mata Wang"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

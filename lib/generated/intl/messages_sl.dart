@@ -233,6 +233,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Podano v formatu CRON"),
         "currency": MessageLookupByLibrary.simpleMessage("Valuta"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("Valutni način"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("Sprememba načina valute"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "Ne pozabite spremeniti vozlišča v/iz vozlišča BANANO, da bo sprememba začela veljati! To lahko storite v meniju naprednih nastavitev -> Spremeni vozlišče."),
         "currencyModeHeader": MessageLookupByLibrary.simpleMessage(
             "Informacije o valutnem načinu"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

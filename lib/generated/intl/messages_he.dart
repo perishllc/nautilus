@@ -213,6 +213,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("מצוין בפורמט CRON"),
         "currency": MessageLookupByLibrary.simpleMessage("מטבע"),
         "currencyMode": MessageLookupByLibrary.simpleMessage("מצב מטבע"),
+        "currencyModeChange":
+            MessageLookupByLibrary.simpleMessage("שינוי מצב מטבע"),
+        "currencyModeChangeWarning": MessageLookupByLibrary.simpleMessage(
+            "זכור לשנות את הצומת ל / מ צומת BANANO כדי שהשינוי ייכנס לתוקף! אתה יכול לעשות זאת בתפריט ההגדרות המתקדמות -> שנה צומת."),
         "currencyModeHeader":
             MessageLookupByLibrary.simpleMessage("מידע על מצב מטבע"),
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(

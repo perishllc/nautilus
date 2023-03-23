@@ -645,6 +645,13 @@
     "type": "text",
     "description": "currency_mode"
   },
+  "currencyModeChange": "Para Birimi Modu Değişikliği",
+  "@currencyModeChange": {
+    "type": "text",
+    "description": "currency_mode_change"
+  },
+  "currencyModeChangeWarning": "Değişikliğin etkili olması için düğümü bir BANANO düğümünden / olarak değiştirmeyi unutmayın! Bunu gelişmiş ayarlar menüsü -> Düğümü Değiştir'den yapabilirsiniz.",
+  "@currencyModeChangeWarning": {},
   "currencyModeHeader": "Para Birimi Modu Bilgisi",
   "@currencyModeHeader": {
     "type": "text",
