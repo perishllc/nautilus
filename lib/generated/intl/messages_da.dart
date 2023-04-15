@@ -447,10 +447,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Det link, du klikkede på, indeholder noget NANO. Vil du importere det til denne tegnebog?"),
         "importHD": MessageLookupByLibrary.simpleMessage("Importer HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("Importer HD / Trust"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importujte tajnou frázi"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Níže zadejte svoji 24slovnou tajnou frázi. Každé slovo by mělo být odděleno mezerou."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Indtast venligst din hemmelige sætning på 12 eller 24 ord nedenfor. Hvert ord skal adskilles med et mellemrum."),
         "importSeed":
             MessageLookupByLibrary.simpleMessage("Importovat semínko"),
         "importSeedHint": MessageLookupByLibrary.simpleMessage(
@@ -523,6 +527,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mnemonická fráze"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Tajná fráze může obsahovat pouze 24 slov"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "Hemmelig sætning må kun indeholde 12 eller 24 ord"),
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(
             "Månedlige serveromkostninger"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -845,6 +851,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Kontooplysninger"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Vis konto QR-kode"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("Vis adresse"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Vis kontakter"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Vis finansieringsbanner"),

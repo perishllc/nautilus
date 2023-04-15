@@ -1307,6 +1307,11 @@
     "type": "text",
     "description": "intro_import_hd"
   },
+  "importHDTrust": "Importera HD / Trust",
+  "@importHDTrust": {
+    "type": "text",
+    "description": "intro_import_hd_trust"
+  },
   "importSecretPhrase": "Importera hemlig fras",
   "@importSecretPhrase": {
     "type": "text",
@@ -1314,6 +1319,11 @@
   },
   "importSecretPhraseHint": "Ange din hemliga fras på 24 ord. Varje ord ska separeras med ett mellanslag.",
   "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSecretPhraseHint2": "Ange din hemliga fras på 12 eller 24 ord nedan. Varje ord ska separeras med ett mellanslag.",
+  "@importSecretPhraseHint2": {
     "type": "text",
     "description": "helper message for importing mnemnic"
   },
@@ -1544,6 +1554,11 @@
   },
   "mnemonicSizeError": "En hemlig fras kan bara innehålla 24 ord",
   "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "mnemonicSizeError2": "Hemlig fras får bara innehålla 12 eller 24 ord",
+  "@mnemonicSizeError2": {
     "type": "text",
     "description": "err"
   },
@@ -2551,6 +2566,11 @@
   "@showAccountQR": {
     "type": "text",
     "description": "show_account_qr"
+  },
+  "showAddress": "Visa adress",
+  "@showAddress": {
+    "type": "text",
+    "description": "show_address"
   },
   "showContacts": "Visa kontakter",
   "@showContacts": {

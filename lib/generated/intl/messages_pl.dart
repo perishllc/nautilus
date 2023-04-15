@@ -445,10 +445,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Link, który kliknąłeś zawiera jakieś NANO, czy chcesz je zaimportować do tego portfela?"),
         "importHD": MessageLookupByLibrary.simpleMessage("Importuj HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("Importuj HD / Zaufanie"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importuj Sekretną Frazę"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Wpisz swoją frazę która ma 24 słowa. Każde słowo powinno być oddzielone spacją."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Wpisz poniżej swoją tajną frazę składającą się z 12 lub 24 słów. Każde słowo powinno być oddzielone spacją."),
         "importSeed": MessageLookupByLibrary.simpleMessage("Importuj nasiono."),
         "importSeedHint": MessageLookupByLibrary.simpleMessage(
             "Prosze zapisz swoje nasiono poniżej."),
@@ -523,6 +527,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fraza Mnemnoniczna"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Sekretna fraza może zawierać tylko 24 słowa"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "Tajna fraza może zawierać tylko 12 lub 24 słowa"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Miesięczne koszty serwera"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -845,6 +851,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Informacje o koncie"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Pokaż kod QR konta"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("Pokaż adres"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Pokaż kontakty"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Pokaż baner finansowania"),

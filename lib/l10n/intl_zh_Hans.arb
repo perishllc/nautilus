@@ -1307,6 +1307,11 @@
     "type": "text",
     "description": "intro_import_hd"
   },
+  "importHDTrust": "导入高清/信任",
+  "@importHDTrust": {
+    "type": "text",
+    "description": "intro_import_hd_trust"
+  },
   "importSecretPhrase": "输入秘密词语",
   "@importSecretPhrase": {
     "type": "text",
@@ -1314,6 +1319,11 @@
   },
   "importSecretPhraseHint": "请输入您的24个秘密词语。每个词语应该由空格分隔。",
   "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSecretPhraseHint2": "请在下方输入您的 12 或 24 字密码。每个单词应以空格分隔。",
+  "@importSecretPhraseHint2": {
     "type": "text",
     "description": "helper message for importing mnemnic"
   },
@@ -1544,6 +1554,11 @@
   },
   "mnemonicSizeError": "秘密词语一定要包含 24 个词语",
   "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "mnemonicSizeError2": "密语只能包含 12 或 24 个字",
+  "@mnemonicSizeError2": {
     "type": "text",
     "description": "err"
   },
@@ -2551,6 +2566,11 @@
   "@showAccountQR": {
     "type": "text",
     "description": "show_account_qr"
+  },
+  "showAddress": "显示地址",
+  "@showAddress": {
+    "type": "text",
+    "description": "show_address"
   },
   "showContacts": "显示联系人",
   "@showContacts": {

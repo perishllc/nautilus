@@ -452,10 +452,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Povezava, ki ste jo kliknili, vsebuje nekaj NANO, ali bi ga radi uvozili v to denarnico?"),
         "importHD": MessageLookupByLibrary.simpleMessage("Uvoz HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("Uvoz HD / Trust"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Uvozi skrivni niz"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Spodaj vnesite vaš skrivni 24-besedni niz. Vsaka beseda naj bo ločena s presledkom."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Spodaj vnesite svoj 12 ali 24-besedni tajni stavek. Vsaka beseda mora biti ločena s presledkom."),
         "importSeed": MessageLookupByLibrary.simpleMessage("Uvozi ključ"),
         "importSeedHint":
             MessageLookupByLibrary.simpleMessage("Spodaj vnesite ključ."),
@@ -527,6 +531,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("Besedna fraza"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Skrivni niz lahko vsebuje samo 24 besed"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "Skrivni stavek lahko vsebuje samo 12 ali 24 besed"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Mesečni stroški strežnika"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -847,6 +853,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Informacije o računu"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Prikaži QR kodo računa"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("Pokaži naslov"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Pokaži stike"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Pokaži pasico financiranja"),

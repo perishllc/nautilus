@@ -1307,6 +1307,11 @@
     "type": "text",
     "description": "intro_import_hd"
   },
+  "importHDTrust": "Importar HD / Confiar",
+  "@importHDTrust": {
+    "type": "text",
+    "description": "intro_import_hd_trust"
+  },
   "importSecretPhrase": "Importar Frase Secreta",
   "@importSecretPhrase": {
     "type": "text",
@@ -1314,6 +1319,11 @@
   },
   "importSecretPhraseHint": "Por favor, insira sua frase secreta de 24 palavras abaixo. Cada palavra deve ser separada por um espaço.",
   "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSecretPhraseHint2": "Digite sua frase secreta de 12 ou 24 palavras abaixo. Cada palavra deve ser separada por um espaço.",
+  "@importSecretPhraseHint2": {
     "type": "text",
     "description": "helper message for importing mnemnic"
   },
@@ -1544,6 +1554,11 @@
   },
   "mnemonicSizeError": "Pode conter apenas 24 palavras na frase secreta",
   "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "mnemonicSizeError2": "A frase secreta pode conter apenas 12 ou 24 palavras",
+  "@mnemonicSizeError2": {
     "type": "text",
     "description": "err"
   },
@@ -2551,6 +2566,11 @@
   "@showAccountQR": {
     "type": "text",
     "description": "show_account_qr"
+  },
+  "showAddress": "Mostrar endereço",
+  "@showAddress": {
+    "type": "text",
+    "description": "show_address"
   },
   "showContacts": "Mostrar contatos",
   "@showContacts": {

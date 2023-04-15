@@ -845,7 +845,7 @@ class SlidableState extends State<Slidable> with TickerProviderStateMixin, Autom
 
   void _addScrollingNotifierListener() {
     if (widget.closeOnScroll) {
-      _scrollPosition = Scrollable.of(context)?.position;
+      _scrollPosition = Scrollable.of(context).position;
       if (_scrollPosition != null) _scrollPosition!.isScrollingNotifier.addListener(_isScrollingListener);
     }
   }

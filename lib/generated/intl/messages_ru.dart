@@ -462,10 +462,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Ссылка, по которой вы щелкнули, содержит некоторое количество NANO. Вы хотите импортировать его в этот кошелек?"),
         "importHD": MessageLookupByLibrary.simpleMessage("Импорт HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("Импорт HD / Доверие"),
         "importSecretPhrase": MessageLookupByLibrary.simpleMessage(
             "Импортировать секретную фразу"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Пожалуйста, введите вашу секретную фразу из 24 слов ниже, каждое слово должно быть разделено пробелом."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Введите ниже секретную фразу из 12 или 24 слов. Каждое слово должно быть разделено пробелом."),
         "importSeed":
             MessageLookupByLibrary.simpleMessage("Импортировать  Seed"),
         "importSeedHint": MessageLookupByLibrary.simpleMessage(
@@ -538,6 +542,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Мнемоническая фраза"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Секретная фраза может содержать только 24 слова"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "Секретная фраза может содержать только 12 или 24 слова."),
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(
             "Ежемесячные расходы на сервер"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -865,6 +871,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Информация об аккаунте"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage(
             "Показать QR-код учетной записи"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("Показать адрес"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Показать контакты"),
         "showFunding": MessageLookupByLibrary.simpleMessage(

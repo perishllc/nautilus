@@ -443,10 +443,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Tıkladığınız bağlantı biraz NANO içeriyor, onu bu cüzdana aktarmak ister misiniz?"),
         "importHD": MessageLookupByLibrary.simpleMessage("HD\'yi içe aktar"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("HD / Güveni İçe Aktar"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Gizli Cümle Aktar"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Lütfen 24 kelimelik gizli cümleni, her kelime birer boşlukla ayrılmış şekilde gir."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Lütfen 12 veya 24 kelimelik gizli ifadenizi aşağıya girin. Her kelime bir boşlukla ayrılmalıdır."),
         "importSeed": MessageLookupByLibrary.simpleMessage("Seed\'i içe aktar"),
         "importSeedHint":
             MessageLookupByLibrary.simpleMessage("Lütfen seed\'inizi girin."),
@@ -519,6 +523,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("Memonik Cümle"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Gizli cümle 24 kelime olmalı"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "Gizli ifade yalnızca 12 veya 24 kelime içerebilir"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Aylık Sunucu Maliyetleri"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -836,6 +842,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hesap bilgisi"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Hesap QR Kodunu Göster"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("Adresi Göster"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Kişileri Göster"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Finansman Afişini Göster"),

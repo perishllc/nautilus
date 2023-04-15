@@ -1307,6 +1307,11 @@
     "type": "text",
     "description": "intro_import_hd"
   },
+  "importHDTrust": "Importació HD / Trust",
+  "@importHDTrust": {
+    "type": "text",
+    "description": "intro_import_hd_trust"
+  },
   "importSecretPhrase": "Importujte tajnou frázi",
   "@importSecretPhrase": {
     "type": "text",
@@ -1314,6 +1319,11 @@
   },
   "importSecretPhraseHint": "Níže zadejte svoji 24slovnou tajnou frázi. Každé slovo by mělo být odděleno mezerou.",
   "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSecretPhraseHint2": "Introduïu la vostra frase secreta de 12 o 24 paraules a continuació. Cada paraula ha d'estar separada per un espai.",
+  "@importSecretPhraseHint2": {
     "type": "text",
     "description": "helper message for importing mnemnic"
   },
@@ -1544,6 +1554,11 @@
   },
   "mnemonicSizeError": "Tajná fráze může obsahovat pouze 24 slov",
   "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "mnemonicSizeError2": "La frase secreta només pot contenir 12 o 24 paraules",
+  "@mnemonicSizeError2": {
     "type": "text",
     "description": "err"
   },
@@ -2551,6 +2566,11 @@
   "@showAccountQR": {
     "type": "text",
     "description": "show_account_qr"
+  },
+  "showAddress": "Mostra l'adreça",
+  "@showAddress": {
+    "type": "text",
+    "description": "show_address"
   },
   "showContacts": "Show Contacts",
   "@showContacts": {

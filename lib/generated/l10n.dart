@@ -2676,6 +2676,16 @@ class Z {
     );
   }
 
+  /// `Import HD / Trust`
+  String get importHDTrust {
+    return Intl.message(
+      'Import HD / Trust',
+      name: 'importHDTrust',
+      desc: 'intro_import_hd_trust',
+      args: [],
+    );
+  }
+
   /// `Import Secret Phrase`
   String get importSecretPhrase {
     return Intl.message(
@@ -2691,6 +2701,16 @@ class Z {
     return Intl.message(
       'Please enter your 24-word secret phrase below. Each word should be separated by a space.',
       name: 'importSecretPhraseHint',
+      desc: 'helper message for importing mnemnic',
+      args: [],
+    );
+  }
+
+  /// `Please enter your 12 or 24-word secret phrase below. Each word should be separated by a space.`
+  String get importSecretPhraseHint2 {
+    return Intl.message(
+      'Please enter your 12 or 24-word secret phrase below. Each word should be separated by a space.',
+      name: 'importSecretPhraseHint2',
       desc: 'helper message for importing mnemnic',
       args: [],
     );
@@ -3153,6 +3173,16 @@ class Z {
     return Intl.message(
       'Secret phrase may only contain 24 words',
       name: 'mnemonicSizeError',
+      desc: 'err',
+      args: [],
+    );
+  }
+
+  /// `Secret phrase may only contain 12 or 24 words`
+  String get mnemonicSizeError2 {
+    return Intl.message(
+      'Secret phrase may only contain 12 or 24 words',
+      name: 'mnemonicSizeError2',
       desc: 'err',
       args: [],
     );
@@ -5171,6 +5201,16 @@ class Z {
       'Show Account QR Code',
       name: 'showAccountQR',
       desc: 'show_account_qr',
+      args: [],
+    );
+  }
+
+  /// `Show Address`
+  String get showAddress {
+    return Intl.message(
+      'Show Address',
+      name: 'showAddress',
+      desc: 'show_address',
       args: [],
     );
   }

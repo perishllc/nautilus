@@ -1307,6 +1307,11 @@
     "type": "text",
     "description": "intro_import_hd"
   },
+  "importHDTrust": "Importer HD / Trust",
+  "@importHDTrust": {
+    "type": "text",
+    "description": "intro_import_hd_trust"
+  },
   "importSecretPhrase": "Importer tilknytningkode",
   "@importSecretPhrase": {
     "type": "text",
@@ -1314,6 +1319,11 @@
   },
   "importSecretPhraseHint": "Vennligst angi din 24-ords tilknytningskode nedenfor. Hvert ord skal være adskilt med et mellomrom.",
   "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSecretPhraseHint2": "Skriv inn din hemmelige setning på 12 eller 24 ord nedenfor. Hvert ord skal skilles med et mellomrom.",
+  "@importSecretPhraseHint2": {
     "type": "text",
     "description": "helper message for importing mnemnic"
   },
@@ -1544,6 +1554,11 @@
   },
   "mnemonicSizeError": "Tilknytningskode kan kun inneholde 24 ord",
   "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "mnemonicSizeError2": "Hemmelig setning kan bare inneholde 12 eller 24 ord",
+  "@mnemonicSizeError2": {
     "type": "text",
     "description": "err"
   },
@@ -2551,6 +2566,11 @@
   "@showAccountQR": {
     "type": "text",
     "description": "show_account_qr"
+  },
+  "showAddress": "Vis adresse",
+  "@showAddress": {
+    "type": "text",
+    "description": "show_address"
   },
   "showContacts": "Vis kontakter",
   "@showContacts": {

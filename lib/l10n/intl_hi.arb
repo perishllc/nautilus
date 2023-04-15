@@ -1307,6 +1307,11 @@
     "type": "text",
     "description": "intro_import_hd"
   },
+  "importHDTrust": "एचडी/ट्रस्ट आयात करें",
+  "@importHDTrust": {
+    "type": "text",
+    "description": "intro_import_hd_trust"
+  },
   "importSecretPhrase": "गुप्त वाक्यांश आयात करें",
   "@importSecretPhrase": {
     "type": "text",
@@ -1314,6 +1319,11 @@
   },
   "importSecretPhraseHint": "कृपया अपना 24-शब्द गुप्त वाक्यांश नीचे दर्ज करें। प्रत्येक शब्द को एक स्थान से अलग किया जाना चाहिए।",
   "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSecretPhraseHint2": "कृपया नीचे अपना 12 या 24 शब्दों का गुप्त वाक्यांश दर्ज करें। प्रत्येक शब्द को एक स्थान से अलग किया जाना चाहिए।",
+  "@importSecretPhraseHint2": {
     "type": "text",
     "description": "helper message for importing mnemnic"
   },
@@ -1544,6 +1554,11 @@
   },
   "mnemonicSizeError": "गुप्त वाक्यांश में केवल 24 शब्द हो सकते हैं",
   "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "mnemonicSizeError2": "गुप्त वाक्यांश में केवल 12 या 24 शब्द हो सकते हैं",
+  "@mnemonicSizeError2": {
     "type": "text",
     "description": "err"
   },
@@ -2551,6 +2566,11 @@
   "@showAccountQR": {
     "type": "text",
     "description": "show_account_qr"
+  },
+  "showAddress": "पता दिखाएँ",
+  "@showAddress": {
+    "type": "text",
+    "description": "show_address"
   },
   "showContacts": "संपर्क दिखाएँ",
   "@showContacts": {

@@ -463,10 +463,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "El enlace en el que hizo clic contiene algo de NANO, ¿le gustaría importarlo a esta billetera?"),
         "importHD": MessageLookupByLibrary.simpleMessage("Importar HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("Importar HD / Confianza"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importar frase secreta"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Por favor ingrese su frase secreta de 24 palabras a continuación. Cada palabra debe estar separada por un espacio"),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Ingrese su frase secreta de 12 o 24 palabras a continuación. Cada palabra debe estar separada por un espacio."),
         "importSeed": MessageLookupByLibrary.simpleMessage("Importar semilla"),
         "importSeedHint": MessageLookupByLibrary.simpleMessage(
             "Por favor ingrese su semilla a continuación."),
@@ -540,6 +544,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Frase mnemónica"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "La frase secreta solo puede contener 24 palabras"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "La frase secreta solo puede contener 12 o 24 palabras"),
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(
             "Costos mensuales del Servidor"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -870,6 +876,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Informacion de cuenta"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Mostrar Código QR de Cuenta"),
+        "showAddress":
+            MessageLookupByLibrary.simpleMessage("Mostrar dirección"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Mostrar contactos"),
         "showFunding": MessageLookupByLibrary.simpleMessage(

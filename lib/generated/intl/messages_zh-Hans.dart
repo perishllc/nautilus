@@ -351,9 +351,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2":
             MessageLookupByLibrary.simpleMessage("您点击的链接包含一些 NANO，您想将其导入此钱包吗？"),
         "importHD": MessageLookupByLibrary.simpleMessage("导入高清"),
+        "importHDTrust": MessageLookupByLibrary.simpleMessage("导入高清/信任"),
         "importSecretPhrase": MessageLookupByLibrary.simpleMessage("输入秘密词语"),
         "importSecretPhraseHint":
             MessageLookupByLibrary.simpleMessage("请输入您的24个秘密词语。每个词语应该由空格分隔。"),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "请在下方输入您的 12 或 24 字密码。每个单词应以空格分隔。"),
         "importSeed": MessageLookupByLibrary.simpleMessage("导入种子"),
         "importSeedHint": MessageLookupByLibrary.simpleMessage("请在下面输入您的种子。"),
         "importSeedInstead": MessageLookupByLibrary.simpleMessage("导入种子"),
@@ -408,6 +411,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("秘密短语"),
         "mnemonicSizeError":
             MessageLookupByLibrary.simpleMessage("秘密词语一定要包含 24 个词语"),
+        "mnemonicSizeError2":
+            MessageLookupByLibrary.simpleMessage("密语只能包含 12 或 24 个字"),
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage("每月服务器成本"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings": MessageLookupByLibrary.simpleMessage("更多设置"),
@@ -665,6 +670,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showAccount": MessageLookupByLibrary.simpleMessage("显示帐户"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("帐户信息"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage("显示账户二维码"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("显示地址"),
         "showContacts": MessageLookupByLibrary.simpleMessage("显示联系人"),
         "showFunding": MessageLookupByLibrary.simpleMessage("显示资金横幅"),
         "showLinkOptions": MessageLookupByLibrary.simpleMessage("显示链接选项"),

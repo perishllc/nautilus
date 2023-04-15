@@ -443,10 +443,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "The link you clicked contains some %2, would you like to import it to this wallet?"),
         "importHD": MessageLookupByLibrary.simpleMessage("Import HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("Import HD / Trust"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Import Secret Phrase"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Please enter your 24-word secret phrase below. Each word should be separated by a space."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Please enter your 12 or 24-word secret phrase below. Each word should be separated by a space."),
         "importSeed": MessageLookupByLibrary.simpleMessage("Import Seed"),
         "importSeedHint": MessageLookupByLibrary.simpleMessage(
             "Please enter your seed below."),
@@ -515,6 +519,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mnemonic Phrase"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Secret phrase may only contain 24 words"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "Secret phrase may only contain 12 or 24 words"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Monthly Server Costs"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -825,6 +831,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("Account Info"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Show Account QR Code"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("Show Address"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Show Contacts"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Show Funding Banner"),

@@ -462,10 +462,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Посилання, яке ви клацнули, містить трохи NANO, чи хочете ви імпортувати його в цей гаманець?"),
         "importHD": MessageLookupByLibrary.simpleMessage("Імпорт HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("Імпорт HD / Trust"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Імпортувати секретну фразу"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Будь ласка введіть секретну фразу із 24 слів. Слова мають бути розділені пробілом."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Будь ласка, введіть секретну фразу з 12 або 24 слів нижче. Кожне слово має бути розділене пробілом."),
         "importSeed": MessageLookupByLibrary.simpleMessage("Імпортувати seed"),
         "importSeedHint": MessageLookupByLibrary.simpleMessage(
             "Будь ласка введіть ваш seed нижче."),
@@ -540,6 +544,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Мнемонічна фраза"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Секретна фраза складається  із точно 24х слів"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "Секретна фраза може містити лише 12 або 24 слова"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Щомісячні витрати на сервер"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -870,6 +876,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Інформація про обліковий запис"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage(
             "Показати QR-код облікового запису"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("Показати адресу"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Показати контакти"),
         "showFunding":

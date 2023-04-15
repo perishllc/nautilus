@@ -453,10 +453,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Връзката, върху която сте кликнали, съдържа малко NANO, искате ли да го импортирате в този портфейл?"),
         "importHD": MessageLookupByLibrary.simpleMessage("Импортиране на HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("Импортиране на HD / Trust"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Импортирай тайната фраза"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Моля, въведете вашата тайна фраза от 24 думи по-долу.  Всяка дума трябва да бъде отделена с интервал."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Моля, въведете вашата тайна фраза от 12 или 24 думи по-долу. Всяка дума трябва да бъде разделена с интервал."),
         "importSeed": MessageLookupByLibrary.simpleMessage("Импортирай seed"),
         "importSeedHint": MessageLookupByLibrary.simpleMessage(
             "Моля въведете вашият Seed по-долу."),
@@ -531,6 +535,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Мнемонична фраза"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Тайната фраза може да съдържа само 24 думи"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "Тайната фраза може да съдържа само 12 или 24 думи"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Месечни разходи за сървър"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -853,6 +859,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Информация за акаунта"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage(
             "Показване на QR кода на акаунта"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("Покажи адрес"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Показване на контактите"),
         "showFunding": MessageLookupByLibrary.simpleMessage(

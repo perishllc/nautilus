@@ -431,10 +431,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "الرابط الذي نقرت عليه يحتوي على بعض NANO ، هل ترغب في استيراده إلى هذه المحفظة؟"),
         "importHD": MessageLookupByLibrary.simpleMessage("استيراد HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("استيراد HD / Trust"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("استيراد العبارة السرية"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "الرجاء إدخال عبارة سرية مكونة من 24 كلمة. يجب فصل كل كلمة بمسافة."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "الرجاء إدخال العبارة السرية المكونة من 12 أو 24 كلمة أدناه. يجب فصل كل كلمة بمسافة."),
         "importSeed": MessageLookupByLibrary.simpleMessage("جلب المفتاح الخاص"),
         "importSeedHint":
             MessageLookupByLibrary.simpleMessage("أدخل المفتاح الخاص"),
@@ -506,6 +510,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("عبارة تذكيرية"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "العبارة السرية قد تحتوي فقط على 24 كلمة"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "يجب ألا تحتوي العبارة السرية إلا على 12 أو 24 كلمة"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("تكاليف الخادم الشهرية"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -819,6 +825,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("معلومات الحساب"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage(
             "إظهار رمز الاستجابة السريعة للحساب"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("إظهار العنوان"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("إظهار جهات الاتصال"),
         "showFunding":

@@ -454,10 +454,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "আপনি যে লিঙ্কটি ক্লিক করেছেন তাতে কিছু NANO রয়েছে, আপনি কি এটি এই ওয়ালেটে আমদানি করতে চান?"),
         "importHD": MessageLookupByLibrary.simpleMessage("এইচডি আমদানি করুন"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("এইচডি / ট্রাস্ট আমদানি করুন"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("গোপন বাক্যাংশ আমদানি করুন"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "দয়া করে নীচে আপনার 24-শব্দের গোপন বাক্যাংশটি প্রবেশ করান প্রতিটি শব্দ একটি স্থান দ্বারা পৃথক করা উচিত।"),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "নিচে আপনার 12 বা 24-শব্দের গোপন বাক্যাংশ লিখুন। প্রতিটি শব্দ একটি স্থান দ্বারা পৃথক করা উচিত."),
         "importSeed": MessageLookupByLibrary.simpleMessage("সীড আমদানি করুন"),
         "importSeedHint": MessageLookupByLibrary.simpleMessage(
             "অনুগ্রহ করে নিচে আপনার সীড লিখুন।"),
@@ -532,6 +536,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("স্মারক বাক্যাংশ"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "গোপন বাক্যে শুধুমাত্র 24 টি শব্দ থাকতে পারে"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "গোপন বাক্যাংশে শুধুমাত্র 12 বা 24 শব্দ থাকতে পারে"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("মাসিক সার্ভার খরচ"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -855,6 +861,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("অ্যাকাউন্ট তথ্য"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("অ্যাকাউন্ট QR কোড দেখান"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("ঠিকানা দেখান"),
         "showContacts": MessageLookupByLibrary.simpleMessage("পরিচিতি দেখাও"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("ফান্ডিং ব্যানার দেখান"),

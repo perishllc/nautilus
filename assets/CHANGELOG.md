@@ -1,7 +1,8 @@
-## v0.8.5 - [2023-04-XX]
+## v0.8.5 - [2023-04-16]
 #### Added
-#### Changed
+- Ability to import 12 word mnemonics / trust wallet phrases
 #### Fixed
+- Minor fixes
 ## v0.8.4 - [2023-03-21]
 #### Changed
 - Improved home cards to change layout based on whether a memo is present

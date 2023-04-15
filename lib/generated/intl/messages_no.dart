@@ -449,10 +449,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Linken du klikket inneholder noe NANO, vil du importere det til denne lommeboken?"),
         "importHD": MessageLookupByLibrary.simpleMessage("Importer HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("Importer HD / Trust"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importer tilknytningkode"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Vennligst angi din 24-ords tilknytningskode nedenfor. Hvert ord skal være adskilt med et mellomrom."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Skriv inn din hemmelige setning på 12 eller 24 ord nedenfor. Hvert ord skal skilles med et mellomrom."),
         "importSeed": MessageLookupByLibrary.simpleMessage("Importer Seed"),
         "importSeedHint":
             MessageLookupByLibrary.simpleMessage("Angi Seed nedenfor"),
@@ -526,6 +530,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mnemonisk frase"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Tilknytningskode kan kun inneholde 24 ord"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "Hemmelig setning kan bare inneholde 12 eller 24 ord"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Månedlige serverkostnader"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -847,6 +853,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Kontoinformasjon"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Vis konto QR-kode"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("Vis adresse"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Vis kontakter"),
         "showFunding":
             MessageLookupByLibrary.simpleMessage("Vis finansieringsbanner"),

@@ -452,10 +452,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Tautan yang Anda klik mengandung beberapa NANO, apakah Anda ingin mengimpornya ke dompet ini?"),
         "importHD": MessageLookupByLibrary.simpleMessage("Impor HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("Impor HD / Kepercayaan"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Impor Kata Rahasia"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Masukkan 24 kata rahasia dibawah ini . Setiap kata harus dipisahkan dengan spasi"),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Silakan masukkan frase rahasia 12 atau 24 kata Anda di bawah ini. Setiap kata harus dipisahkan oleh spasi."),
         "importSeed": MessageLookupByLibrary.simpleMessage("Impor Benih"),
         "importSeedHint": MessageLookupByLibrary.simpleMessage(
             "Masukkan benih dompet anda dibawah ini."),
@@ -525,6 +529,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Frase Mnemonic"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Kalimat rahasia hanya terdiri dari 24 kata."),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "Frasa rahasia hanya boleh berisi 12 atau 24 kata"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Biaya Server Bulanan"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -846,6 +852,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("Info akun"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Tampilkan Kode QR Akun"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("Tampilkan Alamat"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Tampilkan Kontak"),
         "showFunding":

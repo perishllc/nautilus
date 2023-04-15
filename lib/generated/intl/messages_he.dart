@@ -419,10 +419,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "הקישור שלחצתם מכיל קצת NANO, האם תרצה לייבא אותו לארנק הזה?"),
         "importHD": MessageLookupByLibrary.simpleMessage("ייבוא HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("ייבוא HD / אמון"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Import Secret Phrase"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Please enter your 24-word secret phrase below. Each word should be separated by a space."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "אנא הזן את הביטוי הסודי שלך בן 12 או 24 מילים למטה. כל מילה צריכה להיות מופרדת ברווח."),
         "importSeed": MessageLookupByLibrary.simpleMessage("ייבא סיד"),
         "importSeedHint":
             MessageLookupByLibrary.simpleMessage("בבקשה תכניס את הסיד שלך."),
@@ -486,6 +490,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("פתגם זכרון"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Secret phrase may only contain 24 words"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "ביטוי סודי יכול להכיל רק 12 או 24 מילים"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("עלויות שרת חודשיות"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -786,6 +792,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("פרטי חשבון"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("הצג קוד QR של חשבון"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("הצג כתובת"),
         "showContacts": MessageLookupByLibrary.simpleMessage("הצג אנשי קשר"),
         "showFunding": MessageLookupByLibrary.simpleMessage("הצג באנר מימון"),
         "showLinkOptions":

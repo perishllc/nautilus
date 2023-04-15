@@ -388,10 +388,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "クリックしたリンクには NANO が含まれています。このウォレットにインポートしますか?"),
         "importHD": MessageLookupByLibrary.simpleMessage("HD のインポート"),
+        "importHDTrust": MessageLookupByLibrary.simpleMessage("HD のインポート / 信頼"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("シークレットフレーズをインポートする"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "以下に24語のシークレットフレーズを入力してください。各単語はスペースで区切ります。"),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "以下に 12 語または 24 語の秘密のフレーズを入力してください。各単語はスペースで区切る必要があります。"),
         "importSeed": MessageLookupByLibrary.simpleMessage("シードをインポートする"),
         "importSeedHint": MessageLookupByLibrary.simpleMessage("シードを入力してください。"),
         "importSeedInstead":
@@ -451,6 +454,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("[Obsolete] ニーモニックフレーズ"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "シークレットフレーズには24語しか含めることができません"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "秘密のフレーズには 12 語または 24 語のみを含めることができます"),
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage("月額サーバー費用"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings": MessageLookupByLibrary.simpleMessage("その他の設定"),
@@ -734,6 +739,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("アカウント情報"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("アカウントの QR コードを表示"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("住所を表示"),
         "showContacts": MessageLookupByLibrary.simpleMessage("連絡先を表示"),
         "showFunding": MessageLookupByLibrary.simpleMessage("ファンディング バナーを表示"),
         "showLinkOptions": MessageLookupByLibrary.simpleMessage("リンク オプションを表示"),

@@ -1307,6 +1307,11 @@
     "type": "text",
     "description": "intro_import_hd"
   },
+  "importHDTrust": "এইচডি / ট্রাস্ট আমদানি করুন",
+  "@importHDTrust": {
+    "type": "text",
+    "description": "intro_import_hd_trust"
+  },
   "importSecretPhrase": "গোপন বাক্যাংশ আমদানি করুন",
   "@importSecretPhrase": {
     "type": "text",
@@ -1314,6 +1319,11 @@
   },
   "importSecretPhraseHint": "দয়া করে নীচে আপনার 24-শব্দের গোপন বাক্যাংশটি প্রবেশ করান প্রতিটি শব্দ একটি স্থান দ্বারা পৃথক করা উচিত।",
   "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSecretPhraseHint2": "নিচে আপনার 12 বা 24-শব্দের গোপন বাক্যাংশ লিখুন। প্রতিটি শব্দ একটি স্থান দ্বারা পৃথক করা উচিত.",
+  "@importSecretPhraseHint2": {
     "type": "text",
     "description": "helper message for importing mnemnic"
   },
@@ -1544,6 +1554,11 @@
   },
   "mnemonicSizeError": "গোপন বাক্যে শুধুমাত্র 24 টি শব্দ থাকতে পারে",
   "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "mnemonicSizeError2": "গোপন বাক্যাংশে শুধুমাত্র 12 বা 24 শব্দ থাকতে পারে",
+  "@mnemonicSizeError2": {
     "type": "text",
     "description": "err"
   },
@@ -2551,6 +2566,11 @@
   "@showAccountQR": {
     "type": "text",
     "description": "show_account_qr"
+  },
+  "showAddress": "ঠিকানা দেখান",
+  "@showAddress": {
+    "type": "text",
+    "description": "show_address"
   },
   "showContacts": "পরিচিতি দেখাও",
   "@showContacts": {

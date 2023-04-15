@@ -459,10 +459,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "A link, amelyre kattintott, NANO-t tartalmaz. Szeretné importálni ebbe a pénztárcába?"),
         "importHD": MessageLookupByLibrary.simpleMessage("HD importálása"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("HD/Trust importálása"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Import Secret Phrase"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Please enter your 24-word secret phrase below. Each word should be separated by a space."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Kérjük, írja be alább a 12 vagy 24 szavas titkos kifejezést. Minden szót szóközzel kell elválasztani."),
         "importSeed": MessageLookupByLibrary.simpleMessage("Seed importálása"),
         "importSeedHint":
             MessageLookupByLibrary.simpleMessage("Írd be a seeded."),
@@ -536,6 +540,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mnemonic Phrase"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Secret phrase may only contain 24 words"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "A titkos kifejezés csak 12 vagy 24 szóból állhat"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Havi szerverköltségek"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -865,6 +871,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Számlainformáció"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage(
             "Fiók QR-kódjának megjelenítése"),
+        "showAddress":
+            MessageLookupByLibrary.simpleMessage("Cím megjelenítése"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Névjegyek megjelenítése"),
         "showFunding": MessageLookupByLibrary.simpleMessage(

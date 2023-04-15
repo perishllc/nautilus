@@ -466,10 +466,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Ang link na iyong na-click ay naglalaman ng ilang NANO, gusto mo bang i-import ito sa wallet na ito?"),
         "importHD": MessageLookupByLibrary.simpleMessage("Mag-import ng HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("Mag-import ng HD / Trust"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("I-import ang secret phrase"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Pakilagay ang iyong 24 na salita na iyong secret phrase sa ibaba. Ang bawat salita ay dapat may ispasyo sa pagitan."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Pakipasok ang iyong 12 o 24 na salita na sikretong parirala sa ibaba. Ang bawat salita ay dapat na pinaghihiwalay ng isang puwang."),
         "importSeed":
             MessageLookupByLibrary.simpleMessage("I-import ang iyong seed"),
         "importSeedHint": MessageLookupByLibrary.simpleMessage(
@@ -544,6 +548,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mnemonic Phrase"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Secret phrase ay may 24 na salita lamang"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "Ang lihim na parirala ay maaari lamang maglaman ng 12 o 24 na salita"),
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(
             "Buwanang Mga Gastos sa Server"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -880,6 +886,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Impormasyon ng Account"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Ipakita ang Account QR Code"),
+        "showAddress":
+            MessageLookupByLibrary.simpleMessage("Ipakita ang Address"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Ipakita ang Contact"),
         "showFunding":

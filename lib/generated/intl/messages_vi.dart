@@ -446,10 +446,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Liên kết bạn đã nhấp vào chứa một số NANO, bạn có muốn nhập nó vào ví này không?"),
         "importHD": MessageLookupByLibrary.simpleMessage("Nhập HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("Nhập HD / Tin cậy"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Nhập cụm từ bí mật"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Hãy nhập 24 từ bí mật vào dưới đây. Mỗi từ phải được cách nhau bởi dấu cách."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Vui lòng nhập cụm từ bí mật 12 hoặc 24 từ của bạn bên dưới. Mỗi từ nên được phân tách bằng một khoảng trắng."),
         "importSeed": MessageLookupByLibrary.simpleMessage("Nhập hạt giống"),
         "importSeedHint": MessageLookupByLibrary.simpleMessage(
             "Nhập hạt giống của bạn vào phần dưới đây."),
@@ -523,6 +527,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cụm từ ghi nhớ"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Cụm từ bí mật chỉ có thể gồm 24 từ"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "Cụm từ bí mật chỉ có thể chứa 12 hoặc 24 từ"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Chi phí máy chủ hàng tháng"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -843,6 +849,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thông tin tài khoản"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Hiển thị mã QR tài khoản"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("Hiển thị địa chỉ"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Hiển thị danh bạ"),
         "showFunding":

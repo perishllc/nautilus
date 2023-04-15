@@ -150,7 +150,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                         margin: EdgeInsets.only(left: smallScreen(context) ? 30 : 40, right: smallScreen(context) ? 30 : 40, top: 15.0),
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          _seedMode ? Z.of(context).importSeedHint : Z.of(context).importSecretPhraseHint,
+                          _seedMode ? Z.of(context).importSeedHint : Z.of(context).importSecretPhraseHint2,
                           style: AppStyles.textStyleParagraph(context),
                           textAlign: TextAlign.start,
                         ),
@@ -417,8 +417,9 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     // import ledger:
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).importHD, Dimens.BUTTON_COMPACT_LEFT_DIMENS,
-                        instanceKey: const Key("new_wallet_button"), onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).importHD, Dimens.BUTTON_COMPACT_LEFT_DIMENS,
+                        instanceKey: const Key("new_wallet_button"), 
+                        onPressed: () async {
                       if (_seedMode) {
                         _seedInputFocusNode.unfocus();
                         // If seed valid, log them in
@@ -474,7 +475,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                           if (_mnemonicController.text.split(' ').length != 24) {
                             setState(() {
                               _mnemonicIsValid = false;
-                              _mnemonicError = Z.of(context).mnemonicSizeError;
+                              _mnemonicError = Z.of(context).mnemonicSizeError2;
                             });
                           } else {
                             _mnemonicController.text.split(' ').forEach((String word) {
@@ -491,6 +492,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                     }),
 
                     AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).importStandard, Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
+                    disabled: !_seedMode && _mnemonicController.text.isNotEmpty && _mnemonicController.text.split(" ").length < 13,
                         onPressed: () async {
                       if (_seedMode) {
                         _seedInputFocusNode.unfocus();
@@ -540,7 +542,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                           if (_mnemonicController.text.split(' ').length != 24) {
                             setState(() {
                               _mnemonicIsValid = false;
-                              _mnemonicError = Z.of(context).mnemonicSizeError;
+                              _mnemonicError = Z.of(context).mnemonicSizeError2;
                             });
                           } else {
                             _mnemonicController.text.split(' ').forEach((String word) {

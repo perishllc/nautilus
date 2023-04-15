@@ -458,10 +458,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "De link waarop je hebt geklikt, bevat wat NANO, wil je deze in deze portemonnee importeren?"),
         "importHD": MessageLookupByLibrary.simpleMessage("HD importeren"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("HD / vertrouwen importeren"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importeer geheime zin"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Voer hieronder jouw geheime zin van 24 woorden in. Elk woord moet worden gescheiden door een spatie."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Voer hieronder uw geheime zin van 12 of 24 woorden in. Elk woord moet worden gescheiden door een spatie."),
         "importSeed": MessageLookupByLibrary.simpleMessage("Importeer seed"),
         "importSeedHint":
             MessageLookupByLibrary.simpleMessage("Vul je seed in."),
@@ -535,6 +539,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "mnemonicPhrase": MessageLookupByLibrary.simpleMessage("Woordvolgorde"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "De geheime zin mag slechts 24 woorden bevatten"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "Geheime zin mag slechts 12 of 24 woorden bevatten"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Maandelijkse serverkosten"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -858,6 +864,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Account informatie"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage(
             "QR-code van account weergeven"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("Adres tonen"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Contacten tonen"),
         "showFunding": MessageLookupByLibrary.simpleMessage(
             "Financieringsbanner weergeven"),

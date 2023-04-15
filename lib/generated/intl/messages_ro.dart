@@ -455,10 +455,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Linkul pe care ați dat clic conține niște NANO, doriți să îl importați în acest portofel?"),
         "importHD": MessageLookupByLibrary.simpleMessage("Import HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("Import HD / Trust"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importare formulă secretă"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Introduceți fraza de 24 de cuvinte mai jos. Fiecare cuvânt trebuie să fie separat printr-un spațiu."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Vă rugăm să introduceți mai jos expresia secretă de 12 sau 24 de cuvinte. Fiecare cuvânt trebuie separat printr-un spațiu."),
         "importSeed": MessageLookupByLibrary.simpleMessage("Importă seed-ul"),
         "importSeedHint":
             MessageLookupByLibrary.simpleMessage("Introdu seed-ul mai jos."),
@@ -531,6 +535,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Frază de memorat"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Formula secretă conține doar 24 de cuvinte"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "Fraza secretă poate conține doar 12 sau 24 de cuvinte"),
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(
             "Costuri lunare ale serverului"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -854,6 +860,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Informatii cont"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Afișați codul QR contului"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("Arată adresa"),
         "showContacts":
             MessageLookupByLibrary.simpleMessage("Afișați contactele"),
         "showFunding": MessageLookupByLibrary.simpleMessage(

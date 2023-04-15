@@ -1307,6 +1307,11 @@
     "type": "text",
     "description": "intro_import_hd"
   },
+  "importHDTrust": "HD のインポート / 信頼",
+  "@importHDTrust": {
+    "type": "text",
+    "description": "intro_import_hd_trust"
+  },
   "importSecretPhrase": "シークレットフレーズをインポートする",
   "@importSecretPhrase": {
     "type": "text",
@@ -1314,6 +1319,11 @@
   },
   "importSecretPhraseHint": "以下に24語のシークレットフレーズを入力してください。各単語はスペースで区切ります。",
   "@importSecretPhraseHint": {
+    "type": "text",
+    "description": "helper message for importing mnemnic"
+  },
+  "importSecretPhraseHint2": "以下に 12 語または 24 語の秘密のフレーズを入力してください。各単語はスペースで区切る必要があります。",
+  "@importSecretPhraseHint2": {
     "type": "text",
     "description": "helper message for importing mnemnic"
   },
@@ -1544,6 +1554,11 @@
   },
   "mnemonicSizeError": "シークレットフレーズには24語しか含めることができません",
   "@mnemonicSizeError": {
+    "type": "text",
+    "description": "err"
+  },
+  "mnemonicSizeError2": "秘密のフレーズには 12 語または 24 語のみを含めることができます",
+  "@mnemonicSizeError2": {
     "type": "text",
     "description": "err"
   },
@@ -2551,6 +2566,11 @@
   "@showAccountQR": {
     "type": "text",
     "description": "show_account_qr"
+  },
+  "showAddress": "住所を表示",
+  "@showAddress": {
+    "type": "text",
+    "description": "show_address"
   },
   "showContacts": "連絡先を表示",
   "@showContacts": {

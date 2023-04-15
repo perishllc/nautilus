@@ -386,10 +386,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "클릭한 링크에 일부 나노가 포함되어 있습니다. 이 지갑으로 가져오시겠습니까?"),
         "importHD": MessageLookupByLibrary.simpleMessage("HD 가져오기"),
+        "importHDTrust": MessageLookupByLibrary.simpleMessage("HD/트러스트 가져오기"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Import Secret Phrase"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Please enter your 24-word secret phrase below. Each word should be separated by a space."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "아래에 12단어 또는 24단어의 비밀 문구를 입력하십시오. 각 단어는 공백으로 구분해야 합니다."),
         "importSeed": MessageLookupByLibrary.simpleMessage("시드를 가져 옵니다"),
         "importSeedHint": MessageLookupByLibrary.simpleMessage("아래에 시드를 입력하세요"),
         "importSeedInstead":
@@ -453,6 +456,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mnemonic Phrase"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Secret phrase may only contain 24 words"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "비밀 문구는 12단어 또는 24단어만 포함할 수 있습니다."),
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage("월간 서버 비용"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings": MessageLookupByLibrary.simpleMessage("자세한 설정"),
@@ -741,6 +746,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "showAccount": MessageLookupByLibrary.simpleMessage("계정 표시"),
         "showAccountInfo": MessageLookupByLibrary.simpleMessage("계정 정보"),
         "showAccountQR": MessageLookupByLibrary.simpleMessage("계정 QR 코드 표시"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("주소 보기"),
         "showContacts": MessageLookupByLibrary.simpleMessage("연락처 보기"),
         "showFunding": MessageLookupByLibrary.simpleMessage("펀딩 배너 표시"),
         "showLinkOptions": MessageLookupByLibrary.simpleMessage("링크 옵션 표시"),

@@ -454,10 +454,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
             "Saite, uz kuras noklikšķinājāt, satur kādu NANO. Vai vēlaties to importēt šajā makā?"),
         "importHD": MessageLookupByLibrary.simpleMessage("Importēt HD"),
+        "importHDTrust":
+            MessageLookupByLibrary.simpleMessage("Importēt HD / Trust"),
         "importSecretPhrase":
             MessageLookupByLibrary.simpleMessage("Importēt slepeno frāzi"),
         "importSecretPhraseHint": MessageLookupByLibrary.simpleMessage(
             "Lūdzu ievadiet jūsu 24 vārdu slepeno frāzi. Katram vārdam jābūt atdalītam ar atstarpi."),
+        "importSecretPhraseHint2": MessageLookupByLibrary.simpleMessage(
+            "Lūdzu, tālāk ievadiet savu 12 vai 24 vārdu garo slepeno frāzi. Katrs vārds ir jāatdala ar atstarpi."),
         "importSeed": MessageLookupByLibrary.simpleMessage("Importēt sēklu"),
         "importSeedHint":
             MessageLookupByLibrary.simpleMessage("Zemāk norādiet sēklu."),
@@ -527,6 +531,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Mnemoniskā frāze"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
             "Slepenā frāze var saturēt tikai 24 vārdus"),
+        "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
+            "Slepenajā frāzē var būt tikai 12 vai 24 vārdi"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Ikmēneša servera izmaksas"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -846,6 +852,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Konta informācija"),
         "showAccountQR":
             MessageLookupByLibrary.simpleMessage("Rādīt konta QR kodu"),
+        "showAddress": MessageLookupByLibrary.simpleMessage("Rādīt adresi"),
         "showContacts": MessageLookupByLibrary.simpleMessage("Show Contacts"),
         "showFunding": MessageLookupByLibrary.simpleMessage(
             "Rādīt finansējuma reklāmkarogu"),
