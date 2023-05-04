@@ -20,7 +20,6 @@ import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/bus/payments_home_event.dart';
 import 'package:wallet_flutter/bus/tx_update_event.dart';
 import 'package:wallet_flutter/bus/unified_home_event.dart';
-import 'package:wallet_flutter/bus/xmr_event.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/available_block_explorer.dart';
@@ -151,15 +150,7 @@ class StateContainerState extends State<StateContainer> {
   Account? recentLast;
   Account? recentSecondLast;
 
-  // xmr:
-  String xmrAddress = "";
-  int? xmrRestoreHeight;
-  bool xmrEnabled = true;
   bool showChart = false;
-  String? xmrWalletData;
-  String xmrFee = "";
-  String xmrBalance = "0";
-  final InAppLocalhostServer localhostServer = InAppLocalhostServer();
 
   // Natricon / Nyanicon settings
   bool? natriconOn = false;
@@ -528,14 +519,6 @@ class StateContainerState extends State<StateContainer> {
     sl.get<SharedPrefsUtil>().getCurrencyMode().then((String currencyMode) {
       setCurrencyMode(currencyMode);
     });
-    // Get xmr restore height:
-    sl.get<SharedPrefsUtil>().getXmrRestoreHeight().then((int height) {
-      setXmrRestoreHeight(height);
-    });
-    // Get xmr enabled:
-    sl.get<SharedPrefsUtil>().getXmrEnabled().then((bool enabled) {
-      setXmrEnabled(enabled);
-    });
     // restore payments from the cache
     updateSolids();
 
@@ -557,7 +540,6 @@ class StateContainerState extends State<StateContainer> {
   StreamSubscription<FcmUpdateEvent>? _fcmUpdateSub;
   StreamSubscription<FcmMessageEvent>? _fcmMessageSub;
   StreamSubscription<AccountModifiedEvent>? _accountModifiedSub;
-  StreamSubscription<XMREvent>? _xmrSub;
 
   @override
   void dispose() {
@@ -686,33 +668,6 @@ class StateContainerState extends State<StateContainer> {
     }, onError: (dynamic error) {
       final PlatformException platformException = error as PlatformException;
       log.d('InitSession error: ${platformException.code} - ${platformException.message}');
-    });
-
-    // xmr:
-    _xmrSub = EventTaxiImpl.singleton().registerTo<XMREvent>().listen((XMREvent event) {
-      if (event.type == "primary_address") {
-        setState(() {
-          xmrAddress = event.message;
-        });
-      }
-      if (event.type == "update_restore_height") {
-        final int? height = int.tryParse(event.message);
-        if (height == null) {
-          log.e("Failed to parse restore height");
-          return;
-        }
-        setXmrRestoreHeight(height);
-      }
-      if (event.type == "update_fee") {
-        setState(() {
-          xmrFee = event.message;
-        });
-      }
-      if (event.type == "update_balance") {
-        setState(() {
-          xmrBalance = event.message;
-        });
-      }
     });
   }
 
@@ -976,31 +931,6 @@ class StateContainerState extends State<StateContainer> {
         modeChange(context);
       }
     });
-  }
-
-  // set xmr restore height:
-  void setXmrRestoreHeight(int height) {
-    setState(() {
-      xmrRestoreHeight = height;
-    });
-    EventTaxiImpl.singleton().fire(XMREvent(type: "set_restore_height", message: height.toString()));
-  }
-
-  // show / hide xmr section setting
-  void setXmrEnabled(bool enabled) {
-    setState(() {
-      xmrEnabled = enabled;
-    });
-    if (!enabled) {
-      EventTaxiImpl.singleton().fire(XMREvent(type: "mode_change", message: "nano"));
-    }
-    // start/stop web server for xmr:
-    if (enabled && !localhostServer.isRunning()) {
-      localhostServer.start();
-    }
-    if (!enabled && localhostServer.isRunning()) {
-      localhostServer.close();
-    }
   }
 
   void toggleChart() {
@@ -2078,9 +2008,6 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       wallet = AppWallet();
       encryptedSecret = null;
-      xmrAddress = "";
-      xmrFee = "";
-      xmrRestoreHeight = 0;
     });
     sl.get<DBHelper>().dropAccounts();
     sl.get<AccountService>().clearQueue();

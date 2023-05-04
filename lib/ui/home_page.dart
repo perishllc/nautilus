@@ -25,7 +25,6 @@ import 'package:wallet_flutter/bus/payments_home_event.dart';
 import 'package:wallet_flutter/bus/subs_changed_event.dart';
 import 'package:wallet_flutter/bus/tx_update_event.dart';
 import 'package:wallet_flutter/bus/unified_home_event.dart';
-import 'package:wallet_flutter/bus/xmr_event.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/address.dart';
@@ -62,7 +61,6 @@ import 'package:wallet_flutter/ui/home/top_card.dart';
 import 'package:wallet_flutter/ui/popup_button.dart';
 import 'package:wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:wallet_flutter/ui/receive/receive_show_qr.dart';
-import 'package:wallet_flutter/ui/receive/receive_xmr_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
 import 'package:wallet_flutter/ui/settings/settings_drawer.dart';
@@ -77,7 +75,6 @@ import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/animations.dart';
 import 'package:wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
-import 'package:wallet_flutter/ui/widgets/custom_monero.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';
 import 'package:wallet_flutter/ui/widgets/draggable_scrollbar.dart';
 import 'package:wallet_flutter/ui/widgets/example_cards.dart';
@@ -133,15 +130,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   final Map<String, GlobalKey<AnimatedListState>> _unifiedListKeyMap = <String, GlobalKey<AnimatedListState>>{};
   final Map<String, ListModel<dynamic>> _unifiedListMap = <String, ListModel<dynamic>>{};
 
-  // A separate unfortunate instance of this list, is a little unfortunate
-  // but seems the only way to handle the animations
-  List<dynamic> _moneroHistoryList = <dynamic>[];
-  // final Map<String, GlobalKey<AnimatedListState>> _moneroListKeyMap = <String, GlobalKey<AnimatedListState>>{};
-  // final Map<String, ListModel<dynamic>> _moneroListMap = <String, ListModel<dynamic>>{};
-  GlobalKey<AnimatedListState>? _moneroListKey = GlobalKey<AnimatedListState>();
-  GlobalKey<AnimatedListState>? _moneroListKeyAlert;
-  late ListModel<dynamic>? _moneroList;
-
   // used to associate memos with blocks so we don't have search on every re-render:
   final Map<String, TXData> _txDetailsMap = {};
 
@@ -149,7 +137,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   final TextEditingController _searchController = TextEditingController();
   bool _searchOpen = false;
   bool _noSearchResults = false;
-  bool _xmrNoSearchResults = false;
 
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
   // List<User> _contacts = [];
@@ -164,7 +151,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   int _maxHistItems = 100;
   int _trueMaxHistItems = 10000;
   bool _loadingMore = false;
-  late ScrollController _xmrScrollController;
   late TabController _tabController;
 
   bool _isRefreshing = false;
@@ -187,8 +173,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   // confetti:
   late ConfettiController _confettiControllerLeft;
   late ConfettiController _confettiControllerRight;
-
-  String _currentMode = "nano";
 
   int _selectedIndex = 1;
 
@@ -742,17 +726,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     // _updateTXData();
     // infinite scroll:
     _scrollController = ScrollController();
-    _xmrScrollController = ScrollController();
-    _tabController = TabController(vsync: this, length: 2);
-    _tabController.addListener(() {
-      final String mode = _tabController.index == 0 ? "nano" : "monero";
-      if (_currentMode != mode) {
-        setState(() {
-          _currentMode = mode;
-        });
-        EventTaxiImpl.singleton().fire(XMREvent(type: "mode_change", message: mode));
-      }
-    });
     // Setup placeholder animation and start
     _animationDisposed = false;
     _placeholderCardAnimationController = AnimationController(
@@ -779,8 +752,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     _opacityAnimation.addStatusListener(_animationStatusListener);
     _placeholderCardAnimationController.forward();
 
-    _moneroListKey = GlobalKey<AnimatedListState>();
-    _moneroList = ListModel<dynamic>(listKey: _moneroListKey!);
     // Register handling of push notifications
     // *only triggers when tapped!*:
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
@@ -1221,7 +1192,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   StreamSubscription<DisableLockTimeoutEvent>? _disableLockSub;
   StreamSubscription<AccountChangedEvent>? _switchAccountSub;
   StreamSubscription<DeepLinkEvent>? _deepLinkEventSub;
-  StreamSubscription<XMREvent>? _xmrSub;
   StreamSubscription<ConnStatusEvent>? _connectionSub;
   StreamSubscription<SubsChangedEvent>? _subscriptionsSub;
 
@@ -1304,19 +1274,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     _deepLinkEventSub = EventTaxiImpl.singleton().registerTo<DeepLinkEvent>().listen((DeepLinkEvent event) {
       handleDeepLink(event.link);
     });
-    // xmr:
-    _xmrSub = EventTaxiImpl.singleton().registerTo<XMREvent>().listen((XMREvent event) {
-      if (event.type == "update_transfers") {
-        final List<dynamic> transfers = jsonDecode(event.message) as List<dynamic>;
-        _moneroHistoryList = transfers;
-
-        if (StateContainer.of(context).wallet?.xmrLoading ?? false) {
-          setState(() {
-            StateContainer.of(context).wallet!.xmrLoading = false;
-          });
-        }
-      }
-    });
     // listen to connection events:
     _connectionSub = EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((ConnStatusEvent event) {
       if (event.status == ConnectionStatus.CONNECTED) {
@@ -1349,7 +1306,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     _txUpdatesSub?.cancel();
     _solidsSub?.cancel();
     _unifiedSub?.cancel();
-    _xmrSub?.cancel();
     _connectionSub?.cancel();
   }
 
@@ -1359,7 +1315,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     WidgetsBinding.instance.removeObserver(this);
     // _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
-    _xmrScrollController.dispose();
     _tabController.dispose();
     _placeholderCardAnimationController.dispose();
     _loadMoreAnimationController.dispose();
@@ -1514,25 +1469,17 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         _isRefreshing = false;
       });
     });
-    if (_currentMode == "nano") {
-      await StateContainer.of(context).getRequiredAccountInfo();
-      if (!mounted) return;
-      await StateContainer.of(context).requestUpdate();
-      if (!mounted) return;
-      // queries the db for account specific solids:
-      await StateContainer.of(context).updateSolids();
-      // _updateTXData();
+    await StateContainer.of(context).getRequiredAccountInfo();
+    if (!mounted) return;
+    await StateContainer.of(context).requestUpdate();
+    if (!mounted) return;
+    // queries the db for account specific solids:
+    await StateContainer.of(context).updateSolids();
+    // _updateTXData();
 
-      if (!mounted) return;
-      // for memos:
-      await _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
-    } else {
-      EventTaxiImpl.singleton().fire(XMREvent(type: "xmr_reload"));
-      EventTaxiImpl.singleton().fire(XMREvent(type: "update_status", message: "loading"));
-      setState(() {
-        StateContainer.of(context).wallet!.xmrLoading = true;
-      });
-    }
+    if (!mounted) return;
+    // for memos:
+    await _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
 
     // check immediately but only act on it if we are connected:
     final bool connected = await sl.get<AccountService>().isConnected();
@@ -1651,222 +1598,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
 
     return 0;
-  }
-
-  Future<void> generateMoneroList({bool fastUpdate = false}) async {
-    ListModel<dynamic>? ULM = _moneroList;
-    // if (StateContainer.of(context).activeAlert != null) {
-    //   ULM = _unifiedListMap["${StateContainer.of(context).wallet!.address}alert"];
-    // }
-    if (StateContainer.of(context).activeAlerts.isNotEmpty) {
-      ULM = _moneroList; // todo: use the alert list
-    }
-
-    if (_moneroHistoryList == null || ULM == null) {
-      return;
-    }
-
-    if (ULM.length > 0) {
-      log.d("generating unified list! fastUpdate: $fastUpdate");
-    }
-
-    // this isn't performant but w/e
-    List<dynamic> unifiedList = [];
-    List<int> removeIndices = [];
-
-    // combine history and payments:
-    // List<AccountHistoryResponseItem> historyList = StateContainer.of(context).wallet!.history!;
-    // List<TXData> solidsList = StateContainer.of(context).wallet!.solids!;
-    // final List<AccountHistoryResponseItem> historyList = _historyListMap[StateContainer.of(context).wallet!.address]!;
-    // final List<TXData> solidsList = _solidsListMap[StateContainer.of(context).wallet!.address]!;
-
-    // for (var tx in solidsList) {
-    //   print("memo: ${tx.memo} is_request: ${tx.is_request}");
-    // }
-
-    // add tx's to the unified list:
-    // unifiedList.addAll(historyList);
-    // unifiedList.addAll(solidsList);
-    // don't process change or openblocks:
-    // unifiedList =
-    //     List<dynamic>.from(historyList.where((AccountHistoryResponseItem element) => ![BlockTypes.CHANGE, BlockTypes.OPEN].contains(element.subtype)).toList());
-
-    unifiedList = _moneroHistoryList;
-
-    if (!mounted) return;
-
-    bool overrideSort = false;
-
-    // filter by search results:
-    if (_searchController.text.isNotEmpty) {
-      removeIndices = [];
-      final String lowerCaseSearch = _searchController.text.toLowerCase();
-
-      // override the sorting algo if the search is numeric:
-      overrideSort = double.tryParse(lowerCaseSearch) != null;
-
-      for (final dynamic dynamicItem in unifiedList) {
-        bool shouldRemove = true;
-
-        if (dynamicItem is SizedBox) continue;
-
-        final TXData txDetails = dynamicItem is TXData
-            ? dynamicItem
-            : convertHistItemToTXData(dynamicItem as AccountHistoryResponseItem,
-                txDetails: _txDetailsMap[dynamicItem.hash]);
-        final bool isRecipient = txDetails.isRecipient(StateContainer.of(context).wallet!.address);
-        final String account = txDetails.getAccount(isRecipient);
-        String displayName = Address(account).getShortestString() ?? "";
-
-        // check if there's a username:
-        for (final User user in _users) {
-          if (user.address == account) {
-            displayName = user.getDisplayName()!;
-            break;
-          }
-        }
-
-        String? amountStr;
-        int? localTimestamp;
-
-        if (txDetails.request_time != null) {
-          localTimestamp = txDetails.request_time;
-        }
-
-        if (txDetails.amount_raw != null && txDetails.amount_raw!.isNotEmpty) {
-          amountStr = getRawAsThemeAwareAmount(context, txDetails.amount_raw);
-          if (txDetails.is_request) {
-            if (isRecipient) {
-              if (Z.of(context).request.toLowerCase().contains(lowerCaseSearch)) {
-                shouldRemove = false;
-              }
-            } else {
-              if (Z.of(context).asked.toLowerCase().contains(lowerCaseSearch)) {
-                shouldRemove = false;
-              }
-            }
-          }
-        }
-
-        if (txDetails.is_tx) {
-          if (txDetails.sub_type == BlockTypes.SEND) {
-            if (Z.of(context).sent.toLowerCase().contains(lowerCaseSearch)) {
-              shouldRemove = false;
-            }
-          }
-          if (txDetails.sub_type == BlockTypes.RECEIVE) {
-            if (Z.of(context).received.toLowerCase().contains(lowerCaseSearch)) {
-              shouldRemove = false;
-            }
-          }
-        }
-
-        if (localTimestamp != null) {
-          final String timeStr = getTimeAgoString(context, localTimestamp);
-          if (timeStr.toLowerCase().contains(lowerCaseSearch)) {
-            shouldRemove = false;
-          }
-        }
-
-        if (amountStr != null && amountStr.contains(lowerCaseSearch)) {
-          shouldRemove = false;
-        }
-        if (isNotEmpty(txDetails.memo)) {
-          if (txDetails.memo!.toLowerCase().contains(lowerCaseSearch)) {
-            shouldRemove = false;
-          }
-        }
-
-        if (txDetails.record_type == RecordTypes.GIFT_LOAD) {
-          if (Z.of(context).loaded.toLowerCase().contains(lowerCaseSearch)) {
-            shouldRemove = false;
-          }
-        }
-
-        if (isNotEmpty(displayName)) {
-          if (displayName.toLowerCase().contains(lowerCaseSearch)) {
-            shouldRemove = false;
-          }
-        } else if (account.toLowerCase().contains(lowerCaseSearch)) {
-          shouldRemove = false;
-        }
-
-        if (shouldRemove) {
-          removeIndices.add(unifiedList.indexOf(dynamicItem));
-        }
-      }
-
-      for (int i = removeIndices.length - 1; i >= 0; i--) {
-        unifiedList.removeAt(removeIndices[i]);
-      }
-    }
-
-    // sort by timestamp
-    // should already be sorted but:
-    // needed to sort payment requests by request time from each other:
-    // if (!overrideSort) {
-    //   unifiedList.sort(defaultSortComparison);
-    // } else {
-    //   unifiedList.sort(amountSortComparison);
-    // }
-
-    final bool noSearchResults = unifiedList.isEmpty && _searchController.text.isNotEmpty;
-
-    if (noSearchResults) {
-      unifiedList.add(const SizedBox());
-    }
-
-    if (noSearchResults != _xmrNoSearchResults) {
-      setState(() {
-        _xmrNoSearchResults = noSearchResults;
-      });
-    }
-
-    // create a list of indices to remove:
-    removeIndices = [];
-
-    // remove anything that's not supposed to be there anymore:
-    ULM.items.where((dynamic item) => !unifiedList.contains(item)).forEach((dynamic dynamicItem) {
-      removeIndices.add(ULM!.items.indexOf(dynamicItem));
-    });
-    // mark anything out of place or not in the unified list as to be removed:
-    if (_searchController.text.isNotEmpty) {
-      ULM.items
-          .where((dynamic item) => ULM!.items.indexOf(item) != (unifiedList.indexOf(item)))
-          .forEach((dynamic dynamicItem) {
-        removeIndices.add(ULM!.items.indexOf(dynamicItem));
-      });
-    }
-    // ensure uniqueness and must be sorted to prevent an index error:
-    removeIndices = removeIndices.toSet().toList();
-    removeIndices.sort((int a, int b) => a.compareTo(b));
-
-    // remove from the listmap:
-    for (int i = removeIndices.length - 1; i >= 0; i--) {
-      // don't set state since we don't need it to re-render just yet:
-      // also it will throw an error because the list can be empty and the builder will get upset:
-      ULM.removeAt(removeIndices[i], _buildUnifiedItem, instant: true);
-    }
-
-    // insert unifiedList into listmap:
-    unifiedList.where((dynamic item) => !ULM!.items.contains(item)).forEach((dynamic dynamicItem) {
-      int index = unifiedList.indexOf(dynamicItem);
-      if (dynamicItem == null) {
-        return;
-      }
-      index = max(min(index, ULM!.length), 0);
-      setState(() {
-        ULM!.insertAt(dynamicItem, index, instant: fastUpdate);
-      });
-    });
-
-    // ready to be rendered:
-    // if (StateContainer.of(context).wallet!.xmrLoading) {
-    //   setState(() {
-    //     // _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
-    //     StateContainer.of(context).wallet!.xmrLoading = false;
-    //   });
-    // }
   }
 
   Future<void> generateUnifiedList({bool fastUpdate = false}) async {
@@ -2320,120 +2051,23 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                   Container(
                     margin: const EdgeInsetsDirectional.only(top: 20),
                   ),
-                  if (StateContainer.of(context).xmrEnabled)
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 14),
-                      child: TabBar(
-                        controller: _tabController,
-                        indicatorWeight: 2,
-                        indicatorColor: StateContainer.of(context).curTheme.primary,
-                        indicatorPadding: const EdgeInsets.only(
-                          left: 15,
-                          right: 15,
-                        ),
-                        isScrollable: false,
-                        splashBorderRadius: const BorderRadius.all(Radius.circular(15)),
-                        tabs: <Widget>[
-                          Tab(
-                            child: Container(
-                              margin: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                              child: Text(
-                                NonTranslatable.nano,
-                                textAlign: TextAlign.center,
-                                style: AppStyles.textStyleTransactionWelcome(context),
-                              ),
-                            ),
-                          ),
-                          Tab(
-                            child: Container(
-                              margin: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                              child: Text(
-                                NonTranslatable.monero,
-                                textAlign: TextAlign.center,
-                                style: AppStyles.textStyleTransactionWelcome(context),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                   const SizedBox(height: 6),
-                  // load xmr tab immediately if enabled to speed up the syncing process:
-                  if (StateContainer.of(context).xmrEnabled)
-                    Stack(
-                      alignment: Alignment.center,
+                  Expanded(
+                    child: Stack(
                       children: <Widget>[
-                        const CustomMonero(),
-                        Container(
-                          width: 2,
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.background?.withOpacity(1),
+                        _getUnifiedListWidget(context),
+                        ListGradient(
+                          height: 10,
+                          top: true,
+                          color: StateContainer.of(context).curTheme.background!,
+                        ),
+                        ListGradient(
+                          height: 20,
+                          top: false,
+                          color: StateContainer.of(context).curTheme.background!,
                         ),
                       ],
                     ),
-
-                  Expanded(
-                    child: (StateContainer.of(context).xmrEnabled)
-                        ? TabBarView(
-                            controller: _tabController,
-                            children: <Widget>[
-                              Stack(
-                                children: <Widget>[
-                                  _getUnifiedListWidget(context),
-                                  ListGradient(
-                                    height: 10,
-                                    top: true,
-                                    color: StateContainer.of(context).curTheme.background!,
-                                  ),
-                                  ListGradient(
-                                    height: 20,
-                                    top: false,
-                                    color: StateContainer.of(context).curTheme.background!,
-                                  ),
-                                ],
-                              ),
-                              Stack(
-                                children: <Widget>[
-                                  _getMoneroListWidget(context),
-                                  ListGradient(
-                                    height: 10,
-                                    top: true,
-                                    color: StateContainer.of(context).curTheme.background!,
-                                  ),
-                                  ListGradient(
-                                    height: 20,
-                                    top: false,
-                                    color: StateContainer.of(context).curTheme.background!,
-                                  ),
-                                  // TextButton(
-                                  //   onPressed: () async {
-                                  //     Sheets.showAppHeightEightSheet(context: context, widget: SetRestoreHeightSheet());
-                                  //   },
-                                  //   child: Text(
-                                  //     "Set Restore Height/local",
-                                  //     textAlign: TextAlign.center,
-                                  //     style: AppStyles.textStyleButtonPrimary(context),
-                                  //   ),
-                                  // ),
-                                ],
-                              ),
-                            ],
-                          )
-                        : Stack(
-                            children: <Widget>[
-                              _getUnifiedListWidget(context),
-                              ListGradient(
-                                height: 10,
-                                top: true,
-                                color: StateContainer.of(context).curTheme.background!,
-                              ),
-                              ListGradient(
-                                height: 20,
-                                top: false,
-                                color: StateContainer.of(context).curTheme.background!,
-                              ),
-                            ],
-                          ),
                   ),
                   SizedBox(
                     height: 55,
@@ -2442,120 +2076,71 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 ],
               ),
 
-              if (_currentMode == "nano")
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS),
-                        boxShadow: <BoxShadow>[StateContainer.of(context).curTheme.boxShadowButton!],
-                      ),
-                      height: 55,
-                      width: (UIUtil.getDrawerAwareScreenWidth(context) - 42).abs() / 2,
-                      margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
-                      // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
-                      child: TextButton(
-                        key: const Key("home_receive_button"),
-                        style: TextButton.styleFrom(
-                          backgroundColor: StateContainer.of(context).curTheme.primary,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
-                          foregroundColor: StateContainer.of(context).curTheme.background40,
-                        ),
-                        child: AutoSizeText(
-                          Z.of(context).request,
-                          textAlign: TextAlign.center,
-                          style: AppStyles.textStyleButtonPrimary(context),
-                          maxLines: 1,
-                          stepGranularity: 0.5,
-                        ),
-                        onPressed: () async {
-                          final String data =
-                              "${NonTranslatable.currencyUriPrefix}:${StateContainer.of(context).wallet!.address}";
-                          final Widget qrWidget = SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: await UIUtil.getQRImage(context, data),
-                          );
-                          if (!mounted) return;
-                          Sheets.showAppHeightNineSheet(
-                            context: context,
-                            widget: ReceiveSheet(
-                              localCurrency: StateContainer.of(context).curCurrency,
-                              address: StateContainer.of(context).wallet!.address,
-                              qrWidget: qrWidget,
-                            ),
-                          );
-                        },
-                        onLongPress: () async {
-                          final String data =
-                              "${NonTranslatable.currencyUriPrefix}:${StateContainer.of(context).wallet!.address}";
-                          final Widget qrWidget = SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: await UIUtil.getQRImage(context, data),
-                          );
-                          if (!mounted) return;
-                          Sheets.showAppHeightEightSheet(
-                            context: context,
-                            widget: ReceiveShowQRSheet(
-                              localCurrency: StateContainer.of(context).curCurrency,
-                              address: StateContainer.of(context).wallet!.address,
-                              qrWidget: qrWidget,
-                            ),
-                          );
-                        },
-                      ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS),
+                      boxShadow: <BoxShadow>[StateContainer.of(context).curTheme.boxShadowButton!],
                     ),
-                    const AppPopupButton(moneroEnabled: false, enabled: true),
-                  ],
-                )
-              else
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS),
-                        boxShadow: <BoxShadow>[StateContainer.of(context).curTheme.boxShadowButton!],
+                    height: 55,
+                    width: (UIUtil.getDrawerAwareScreenWidth(context) - 42).abs() / 2,
+                    margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
+                    // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
+                    child: TextButton(
+                      key: const Key("home_receive_button"),
+                      style: TextButton.styleFrom(
+                        backgroundColor: StateContainer.of(context).curTheme.primary,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
+                        foregroundColor: StateContainer.of(context).curTheme.background40,
                       ),
-                      height: 55,
-                      width: (UIUtil.getDrawerAwareScreenWidth(context) - 42).abs() / 2,
-                      margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
-                      // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
-                      child: TextButton(
-                        key: const Key("home_receive_button"),
-                        style: TextButton.styleFrom(
-                          backgroundColor: StateContainer.of(context).curTheme.primary,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
-                          foregroundColor: StateContainer.of(context).curTheme.background40,
-                        ),
-                        child: AutoSizeText(
-                          Z.of(context).receive,
-                          textAlign: TextAlign.center,
-                          style: AppStyles.textStyleButtonPrimary(context),
-                          maxLines: 1,
-                          stepGranularity: 0.5,
-                        ),
-                        onPressed: () async {
-                          final String data = "monero:${StateContainer.of(context).xmrAddress}";
-                          final Widget qrWidget = SizedBox(
-                            width: MediaQuery.of(context).size.width,
-                            child: await UIUtil.getQRImage(context, data),
-                          );
-                          if (!mounted) return;
-                          Sheets.showAppHeightNineSheet(
-                            context: context,
-                            widget: ReceiveXMRSheet(
-                              address: StateContainer.of(context).xmrAddress,
-                              qrWidget: qrWidget,
-                              localCurrency: StateContainer.of(context).curCurrency,
-                            ),
-                          );
-                        },
+                      child: AutoSizeText(
+                        Z.of(context).request,
+                        textAlign: TextAlign.center,
+                        style: AppStyles.textStyleButtonPrimary(context),
+                        maxLines: 1,
+                        stepGranularity: 0.5,
                       ),
+                      onPressed: () async {
+                        final String data =
+                            "${NonTranslatable.currencyUriPrefix}:${StateContainer.of(context).wallet!.address}";
+                        final Widget qrWidget = SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: await UIUtil.getQRImage(context, data),
+                        );
+                        if (!mounted) return;
+                        Sheets.showAppHeightNineSheet(
+                          context: context,
+                          widget: ReceiveSheet(
+                            localCurrency: StateContainer.of(context).curCurrency,
+                            address: StateContainer.of(context).wallet!.address,
+                            qrWidget: qrWidget,
+                          ),
+                        );
+                      },
+                      onLongPress: () async {
+                        final String data =
+                            "${NonTranslatable.currencyUriPrefix}:${StateContainer.of(context).wallet!.address}";
+                        final Widget qrWidget = SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: await UIUtil.getQRImage(context, data),
+                        );
+                        if (!mounted) return;
+                        Sheets.showAppHeightEightSheet(
+                          context: context,
+                          widget: ReceiveShowQRSheet(
+                            localCurrency: StateContainer.of(context).curCurrency,
+                            address: StateContainer.of(context).wallet!.address,
+                            qrWidget: qrWidget,
+                          ),
+                        );
+                      },
                     ),
-                    AppPopupButton(moneroEnabled: true),
-                  ],
-                ),
+                  ),
+                  const AppPopupButton(enabled: true),
+                ],
+              ),
 
               // confetti: LEFT
               Align(
@@ -3139,15 +2724,9 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
 
     if (txDetails.is_tx) {
-      if (_currentMode == "nano") {
-        if ((!txDetails.is_fulfilled) ||
-            (currentConfHeight > -1 && txDetails.height != null && txDetails.height! > currentConfHeight)) {
-          transactionState = TransactionStateOptions.UNCONFIRMED;
-        }
-      } else {
-        if (!txDetails.is_fulfilled) {
-          transactionState = TransactionStateOptions.UNCONFIRMED;
-        }
+      if ((!txDetails.is_fulfilled) ||
+          (currentConfHeight > -1 && txDetails.height != null && txDetails.height! > currentConfHeight)) {
+        transactionState = TransactionStateOptions.UNCONFIRMED;
       }
 
       // watch only: receivable:
@@ -3564,56 +3143,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     return converted;
   }
 
-  TXData convertMoneroHistItemToTXData(dynamic histItem, {TXData? txDetails}) {
-    TXData converted = TXData();
-    if (txDetails != null) {
-      converted = txDetails;
-    }
-    histItem = histItem["state"];
-
-    // transfer:
-
-    final dynamic tx = histItem["tx"]["state"];
-
-    if (tx["isIncoming"] as bool) {
-      converted.sub_type = BlockTypes.RECEIVE;
-      converted.to_address = StateContainer.of(context).xmrAddress;
-      converted.from_address = histItem["address"] as String;
-      converted.amount_raw = histItem["amount"] as String;
-    } else if (tx["isOutgoing"] as bool) {
-      converted.sub_type = BlockTypes.SEND;
-      converted.from_address = StateContainer.of(context).xmrAddress;
-      converted.to_address = histItem["addresses"][0] as String;
-      converted.amount_raw = histItem["amount"] as String;
-    }
-
-    // convert to xmr amount:
-    converted.amount_raw = (BigInt.parse(converted.amount_raw!) * NumberUtil.convertXMRtoNano).toString();
-
-    converted.block ??= tx["hash"] as String;
-    // converted.request_time ??= tx["block"]["state"]["timestamp"] as int;
-    // converted.height ??= tx["block"]["state"]["height"] as int;
-    if (tx["block"] != null) {
-      converted.request_time ??= tx["block"]["state"]["timestamp"] as int?;
-      converted.height ??= tx["block"]["state"]["height"] as int?;
-    }
-
-    if (tx["isConfirmed"] != null) {
-      converted.is_fulfilled = tx["isConfirmed"] as bool; // confirmation status
-    } else {
-      converted.is_fulfilled = true; // default to true as it cannot be null
-    }
-    // converted.height ??= histItem.height!; // block height
-
-    if (isNotEmpty(txDetails?.memo)) {
-      converted.is_memo = true;
-    } else {
-      converted.is_acknowledged = true;
-    }
-    converted.is_tx = true;
-    return converted;
-  }
-
   // Used to build list items that haven't been removed.
   Widget _buildUnifiedItem(BuildContext context, int index, Animation<double> animation) {
     if (index < StateContainer.of(context).activeAlerts.length && StateContainer.of(context).activeAlerts.isNotEmpty) {
@@ -3655,7 +3184,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     } else {
       displayName = Address(account).getShortString() ?? "";
     }
-    
 
     // check if there's a username:
     for (final User user in _users) {
@@ -3666,194 +3194,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     }
 
     return _buildUnifiedCard(txDetails, animation, displayName, context);
-  }
-
-  // Used to build list items that haven't been removed.
-  Widget _buildMoneroItem(BuildContext context, int index, Animation<double> animation) {
-    if (index < StateContainer.of(context).activeAlerts.length && StateContainer.of(context).activeAlerts.isNotEmpty) {
-      return _buildRemoteMessageCard(StateContainer.of(context).activeAlerts[index]);
-    }
-    if (index == 0 && _xmrNoSearchResults) {
-      return ExampleCards.noSearchResultsCard(context);
-    }
-
-    int localIndex = index;
-    if (StateContainer.of(context).activeAlerts.isNotEmpty) {
-      localIndex -= StateContainer.of(context).activeAlerts.length;
-    }
-
-    ListModel? list;
-
-    final String ADR = StateContainer.of(context).wallet!.address!;
-
-    if (StateContainer.of(context).activeAlerts.isNotEmpty) {
-      list = _moneroList;
-    } else {
-      list = _moneroList; // todo:
-    }
-
-    final dynamic indexedItem = list![localIndex];
-    final TXData txDetails = indexedItem is TXData
-        ? indexedItem
-        : convertMoneroHistItemToTXData(indexedItem /*, txDetails: _txDetailsMap[indexedItem.hash]*/);
-    final bool isRecipient = txDetails.isRecipient(StateContainer.of(context).xmrAddress);
-    // final String displayName = txDetails.getShortestString(isRecipient) ?? "";
-    final String account = txDetails.getAccount(isRecipient);
-    String displayName = "${account.substring(0, 9)}\n...${account.substring(account.length - 6)}";
-    // check if there's a username:
-    for (final User user in _users) {
-      if (user.address == account) {
-        displayName = user.getDisplayName()!;
-        break;
-      }
-    }
-
-    return _buildUnifiedCard(txDetails, animation, displayName, context);
-  }
-
-  Widget _getMoneroListWidget(BuildContext context) {
-    if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.historyLoading == false) {
-      // Setup history list
-      if (_moneroHistoryList == null) {
-        setState(() {
-          _moneroHistoryList = <dynamic>[];
-        });
-      }
-
-      GlobalKey<AnimatedListState>? listKey;
-      ListModel? list;
-      if (StateContainer.of(context).activeAlerts.isNotEmpty) {
-        listKey = _moneroListKeyAlert;
-        list = _moneroList; // todo:
-      } else {
-        listKey = _moneroListKey;
-        list = _moneroList;
-      }
-
-      // Setup unified list
-      if (_moneroListKey == null) {
-        _moneroListKey = GlobalKey<AnimatedListState>();
-        setState(() {
-          _moneroList = ListModel<dynamic>(
-            listKey: listKey!,
-            initialItems: <dynamic>[],
-          );
-        });
-      }
-
-      if (StateContainer.of(context).wallet!.xmrLoading || (list != null && list.length == 0)) {
-        generateMoneroList(fastUpdate: true);
-      }
-    }
-
-    if (StateContainer.of(context).wallet == null ||
-        StateContainer.of(context).wallet!.loading ||
-        (StateContainer.of(context).wallet!.xmrLoading && StateContainer.of(context).xmrEnabled)) {
-      // Loading Animation
-      return ReactiveRefreshIndicator(
-          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-          onRefresh: _refresh,
-          isRefreshing: _isRefreshing,
-          child: ListView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            controller: _xmrScrollController,
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-            children: <Widget>[
-              ExampleCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Sent", "10244000", "123456789121234"),
-              ExampleCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Received", "100,00000", "@fosse1234"),
-              ExampleCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Sent", "14500000", "12345678912345671234"),
-              ExampleCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Sent", "12,51200", "123456789121234"),
-              ExampleCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Received", "1,45300", "123456789121234"),
-              ExampleCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Sent", "100,00000", "12345678912345671234"),
-              ExampleCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Received", "24,00000", "12345678912345671234"),
-              ExampleCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
-              ExampleCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
-              ExampleCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
-            ],
-          ));
-    } else if (!StateContainer.of(context).wallet!.unifiedLoading) {
-      _disposeAnimation();
-    }
-
-    if (_moneroList == null || _moneroList!.length == 0) {
-      final List<Widget> activeAlerts = <Widget>[];
-      // for (final AlertResponseItem alert in StateContainer.of(context).activeAlerts) {
-      //   activeAlerts.add(_buildRemoteMessageCard(alert));
-      // }
-      return DraggableScrollbar(
-        controller: _scrollController,
-        scrollbarColor: StateContainer.of(context).curTheme.primary,
-        scrollbarTopMargin: 10.0,
-        scrollbarBottomMargin: 20.0,
-        child: ReactiveRefreshIndicator(
-          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-          onRefresh: _refresh,
-          isRefreshing: _isRefreshing,
-          child: ListView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            controller: _scrollController,
-            padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-            children: <Widget>[
-              // REMOTE MESSAGE CARDS
-              if (StateContainer.of(context).activeAlerts.isNotEmpty)
-                Column(
-                  children: activeAlerts,
-                ),
-              ExampleCards.welcomeTransactionCard(context, true),
-              _buildDummyTXCard(
-                context,
-                amount_raw: "30000000000000000000000000000000",
-                displayName: Z.of(context).exampleRecRecipient,
-                memo: Z.of(context).exampleRecRecipientMessage,
-                is_recipient: true,
-                is_tx: true,
-                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60),
-              ),
-              _buildDummyTXCard(
-                context,
-                amount_raw: "50000000000000000000000000000000",
-                displayName: Z.of(context).examplePayRecipient,
-                memo: Z.of(context).examplePayRecipientMessage,
-                is_recipient: false,
-                is_tx: true,
-                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 1),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
-    return DraggableScrollbar(
-      controller: _xmrScrollController,
-      scrollbarColor: StateContainer.of(context).curTheme.primary,
-      scrollbarTopMargin: 10.0,
-      scrollbarBottomMargin: 20.0,
-      child: ReactiveRefreshIndicator(
-        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-        onRefresh: _refresh,
-        isRefreshing: _isRefreshing,
-        child: AnimatedList(
-          physics: const AlwaysScrollableScrollPhysics(),
-          controller: _xmrScrollController,
-          primary: false,
-          key: _moneroListKey,
-          padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-          initialItemCount: _moneroList!.length,
-          itemBuilder: _buildMoneroItem,
-        ),
-      ),
-    );
   }
 
   // Return widget for list
@@ -3933,8 +3273,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                   context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
             ],
           ));
-      // TODO: animation for xmr list
-      // } else if (!StateContainer.of(context).xmrEnabled || !StateContainer.of(context).wallet!.xmrLoading) {
     } else {
       _disposeAnimation();
     }

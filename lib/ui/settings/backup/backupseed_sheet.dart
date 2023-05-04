@@ -17,7 +17,6 @@ import 'package:wallet_flutter/ui/widgets/plainseed_display.dart';
 import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/user_data_util.dart';
-import 'package:wallet_flutter/util/xmr_util.dart';
 
 class AppSeedBackupSheet extends StatefulWidget {
   const AppSeedBackupSheet({required this.seed}) : super();
@@ -200,33 +199,6 @@ class _AppSeedBackupSheetState extends State<AppSeedBackupSheet> {
                       _seedCopiedTimer = Timer(const Duration(milliseconds: 1000), () {
                         setState(() {
                           _seedCopied = false;
-                        });
-                      });
-                    }),
-                  ],
-                ),
-
-              if (StateContainer.of(context).xmrEnabled)
-                Row(
-                  children: <Widget>[
-                    AppButton.buildAppButton(
-                        context,
-                        // Copy Seed Button
-                        _xmrSeedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _xmrSeedCopied ? Z.of(context).seedCopiedShort : Z.of(context).copyXMRSeed,
-                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                      if (_seed == null) return;
-                      UserDataUtil.setSecureClipboardItem(XmrUtil.seedToXmrSecretKey(_seed!));
-                      setState(() {
-                        // Set copied style
-                        _xmrSeedCopied = true;
-                      });
-                      if (_xmrSeedCopiedTimer != null) {
-                        _xmrSeedCopiedTimer!.cancel();
-                      }
-                      _xmrSeedCopiedTimer = Timer(const Duration(milliseconds: 1000), () {
-                        setState(() {
-                          _xmrSeedCopied = false;
                         });
                       });
                     }),

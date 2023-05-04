@@ -20,7 +20,6 @@ import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/contacts_setting_change_event.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/bus/notification_setting_change_event.dart';
-import 'package:wallet_flutter/bus/xmr_event.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/address.dart';
@@ -79,7 +78,6 @@ import 'package:wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:wallet_flutter/ui/widgets/remote_message_card.dart';
 import 'package:wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:wallet_flutter/ui/widgets/security.dart';
-import 'package:wallet_flutter/ui/widgets/set_xmr_restore_height.dart';
 import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:wallet_flutter/util/biometrics.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
@@ -122,7 +120,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   NotificationSetting _curNotificiationSetting = NotificationSetting(NotificationOptions.ON);
   ContactsSetting _curContactsSetting = ContactsSetting(ContactsOptions.OFF);
   ContactsSetting _curUnopenedWarningSetting = ContactsSetting(ContactsOptions.ON);
-  ContactsSetting _curXmrEnabledSetting = ContactsSetting(ContactsOptions.ON);
   ContactsSetting _curTrackingSetting = ContactsSetting(ContactsOptions.ON);
   NatriconSetting _curNatriconSetting = NatriconSetting(NatriconOptions.ON);
   NyaniconSetting _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
@@ -132,7 +129,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   UnlockSetting _curUnlockSetting = UnlockSetting(UnlockOption.NO);
   LockTimeoutSetting _curTimeoutSetting = LockTimeoutSetting(LockTimeoutOption.ONE);
   ThemeSetting _curThemeSetting = ThemeSetting(ThemeOptions.NAUTILUS);
-  int _curXmrRestoreHeight = 0;
 
   late bool _loadingAccounts;
 
@@ -234,18 +230,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       setState(() {
         _curUnopenedWarningSetting =
             contactsOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
-      });
-    });
-    // Get show monero setting:
-    sl.get<SharedPrefsUtil>().getXmrEnabled().then((bool contactsOn) {
-      setState(() {
-        _curXmrEnabledSetting = contactsOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
-      });
-    });
-    // restore height:
-    sl.get<SharedPrefsUtil>().getXmrRestoreHeight().then((int height) {
-      setState(() {
-        _curXmrRestoreHeight = StateContainer.of(context).xmrRestoreHeight ?? 0;
       });
     });
     // Get tracking authorization:
@@ -396,7 +380,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
   StreamSubscription<TransferCompleteEvent>? _transferCompleteSub;
   StreamSubscription<NotificationSettingChangeEvent>? _notificationSettingChangeSub;
   StreamSubscription<ContactsSettingChangeEvent>? _contactsSettingChangeSub;
-  StreamSubscription<XMREvent>? _xmrSub;
 
   void _registerBus() {
     // Ready to go to transfer confirm
@@ -435,15 +418,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       setState(() {
         _curContactsSetting = event.isOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
       });
-    });
-    // xmr:
-    _xmrSub = EventTaxiImpl.singleton().registerTo<XMREvent>().listen((XMREvent event) {
-      if (event.type == "set_restore_height") {
-        if (!mounted) return;
-        setState(() {
-          _curXmrRestoreHeight = int.parse(event.message);
-        });
-      }
     });
   }
 
@@ -757,70 +731,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     await sl.get<SharedPrefsUtil>().setUnopenedWarningOn(picked == ContactsOptions.ON);
     setState(() {
       _curUnopenedWarningSetting = ContactsSetting(picked);
-    });
-  }
-
-  Future<void> _showMoneroDialog() async {
-    final ContactsOptions? picked = await showDialog<ContactsOptions>(
-        context: context,
-        barrierColor: StateContainer.of(context).curTheme.barrier,
-        builder: (BuildContext context) {
-          return AppSimpleDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  Z.of(context).showMoneroHeader,
-                  style: AppStyles.textStyleDialogHeader(context),
-                ),
-                AppDialogs.infoButton(
-                  context,
-                  () {
-                    AppDialogs.showInfoDialog(context, Z.of(context).showMoneroHeader, Z.of(context).showMoneroInfo);
-                  },
-                )
-              ],
-            ),
-            children: <Widget>[
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, ContactsOptions.ON);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Text(
-                    Z.of(context).onStr,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-              AppSimpleDialogOption(
-                onPressed: () {
-                  Navigator.pop(context, ContactsOptions.OFF);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Text(
-                    Z.of(context).off,
-                    style: AppStyles.textStyleDialogOptions(context),
-                  ),
-                ),
-              ),
-            ],
-          );
-        });
-
-    if (picked == null) {
-      return;
-    }
-
-    final bool enabled = picked == ContactsOptions.ON;
-    await sl.get<SharedPrefsUtil>().setXmrEnabled(enabled);
-    if (!mounted) return;
-    StateContainer.of(context).setXmrEnabled(enabled);
-    setState(() {
-      _curXmrEnabledSetting = ContactsSetting(picked);
     });
   }
 
@@ -1610,10 +1520,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         // AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).createGiftCard, AppIcons.export_icon, onPressed: () {
         //   Navigator.of(context).pushNamed("/gift_paper_wallet");
-        // }),
-        // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        // AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).swapXMR, AppIcons.swapcurrency, onPressed: () {
-        //   Navigator.of(context).pushNamed("/swap_xmr");
         // }),
         // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         Container(
@@ -2542,15 +2448,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                               color: StateContainer.of(context).curTheme.text60,
                             )),
                       ),
-                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                      AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).showMoneroHeader,
-                          _curXmrEnabledSetting, Icons.toll, _showMoneroDialog),
-                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                      AppSettings.buildSettingsListItemDoubleLine(
-                          context, Z.of(context).setXMRRestoreHeight, null, AppIcons.backupseed,
-                          overrideSubtitle: _curXmrRestoreHeight.toString(), () async {
-                        Sheets.showAppHeightEightSheet(context: context, widget: SetXMRRestoreHeightSheet());
-                      }),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).currencyMode,
                           _curCurrencyModeSetting, AppIcons.currency, _currencyModeDialog),

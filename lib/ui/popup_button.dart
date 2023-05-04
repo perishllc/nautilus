@@ -21,15 +21,12 @@ import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:wallet_flutter/util/hapticutil.dart';
 import 'package:wallet_flutter/util/user_data_util.dart';
 
-import 'send/send_xmr_sheet.dart';
-
 class AppPopupButton extends StatefulWidget {
-  const AppPopupButton({required this.moneroEnabled, this.enabled = true}) : super();
+  const AppPopupButton({this.enabled = true}) : super();
 
   @override
   AppPopupButtonState createState() => AppPopupButtonState();
 
-  final bool moneroEnabled;
   final bool enabled;
 }
 
@@ -212,11 +209,6 @@ class AppPopupButtonState extends State<AppPopupButton> {
                     : Colors.transparent,
               ),
               onPressed: () {
-                if (widget.moneroEnabled) {
-                  Sheets.showAppHeightNineSheet(
-                      context: context, widget: SendXMRSheet(localCurrency: StateContainer.of(context).curCurrency));
-                  return;
-                }
                 if (StateContainer.of(context).wallet != null && !disableSend) {
                   Sheets.showAppHeightNineSheet(
                       context: context, widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency));
