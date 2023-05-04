@@ -1,3 +1,7 @@
+## v0.8.6 - [2023-04-XX]
+#### Added
+#### Changed
+#### Fixed
 ## v0.8.5 - [2023-04-16]
 #### Added
 - Ability to import 12 word mnemonics / trust wallet phrases
