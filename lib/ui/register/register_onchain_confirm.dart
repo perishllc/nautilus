@@ -224,8 +224,8 @@ class _RegisterOnchainConfirmSheetState extends State<RegisterOnchainConfirmShee
     try {
       _showSendingAnimation(context);
 
-      await sl.get<UsernameService>().registerUsernameToAccountMap(context, widget.username);
-      await sl.get<UsernameService>().registerAccountToUsernameMap(context, widget.username);
+      // await sl.get<UsernameService>().registerUsernameToAccountMap(context, widget.username);
+      // await sl.get<UsernameService>().registerAccountToUsernameMap(context, widget.username);
 
       // sleep for a while before updating the database:
       await Future<dynamic>.delayed(const Duration(milliseconds: 2000));

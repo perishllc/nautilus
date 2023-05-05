@@ -1,6 +1,7 @@
 ## v0.8.6 - [2023-04-XX]
 #### Added
 #### Changed
+- Move block explorer setting to advanced settings
 #### Fixed
 ## v0.8.5 - [2023-04-16]
 #### Added

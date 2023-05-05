@@ -913,7 +913,8 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
     if ((_curCurrencyModeSetting.setting == CurrencyModeOptions.BANANO && chosen != CurrencyModeOptions.BANANO) ||
         (_curCurrencyModeSetting.setting != CurrencyModeOptions.BANANO && chosen == CurrencyModeOptions.BANANO)) {
       if (!mounted) return;
-      await AppDialogs.showInfoDialog(context, Z.of(context).currencyModeChange, Z.of(context).currencyModeChangeWarning);
+      await AppDialogs.showInfoDialog(
+          context, Z.of(context).currencyModeChange, Z.of(context).currencyModeChangeWarning);
     }
     sl.get<SharedPrefsUtil>().setCurrencyMode(currencyMode).then((void result) {
       setState(() {
@@ -1540,14 +1541,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemDoubleLine(
             context, Z.of(context).themeHeader, _curThemeSetting, AppIcons.theme, _themeDialog),
-        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemDoubleLine(
-          context,
-          Z.of(context).blockExplorer,
-          StateContainer.of(context).curBlockExplorer,
-          AppIcons.search,
-          _explorerDialog,
-        ),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).securityHeader, AppIcons.security,
             onPressed: () {
@@ -2437,6 +2430,14 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).trackingHeader,
                           _curTrackingSetting, Icons.query_stats, _showTrackingDialog),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemDoubleLine(
+                        context,
+                        Z.of(context).blockExplorer,
+                        StateContainer.of(context).curBlockExplorer,
+                        AppIcons.search,
+                        _explorerDialog,
+                      ),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
 
                       Container(

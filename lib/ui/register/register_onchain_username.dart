@@ -253,14 +253,14 @@ class _RegisterOnchainUsernameScreenState extends State<RegisterOnchainUsernameS
                         });
                         return;
                       }
-                      final bool available = await sl.get<UsernameService>().checkOnchainUsernameAvailability(username);
-                      if (available) {
-                        setState(() {
-                          _usernameValidationText = Z.of(context).usernameAvailable;
-                          _showRegisterButton = true;
-                        });
-                        return;
-                      }
+                      // final bool available = await sl.get<UsernameService>().checkOnchainUsernameAvailability(username);
+                      // if (available) {
+                      //   setState(() {
+                      //     _usernameValidationText = Z.of(context).usernameAvailable;
+                      //     _showRegisterButton = true;
+                      //   });
+                      //   return;
+                      // }
                       setState(() {
                         _usernameValidationText = Z.of(context).usernameUnavailable;
                       });
