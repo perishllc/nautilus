@@ -6,6 +6,18 @@ part 'subscription.g.dart';
 
 @JsonSerializable()
 class Subscription {
+
+  Subscription({
+    required this.label,
+    this.active = false,
+    this.autopay = false,
+    this.paid = false,
+    required this.amount_raw,
+    required this.address,
+    this.id,
+    required this.frequency,
+  });
+  
   @JsonKey(ignore: true)
   int? id;
   @JsonKey(name: 'label')
@@ -22,17 +34,6 @@ class Subscription {
   String address;
   @JsonKey(name: 'frequency')
   String frequency;
-
-  Subscription({
-    required this.label,
-    this.active = false,
-    this.autopay = false,
-    this.paid = false,
-    required this.amount_raw,
-    required this.address,
-    this.id,
-    required this.frequency,
-  });
 
   // factory Subscription.fromJson(Map<String, dynamic> json) => _$SubscriptionFromJson(json);
   // Map<String, dynamic> toJson() => _$SubscriptionToJson(this);

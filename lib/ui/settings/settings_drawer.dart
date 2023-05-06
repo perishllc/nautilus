@@ -1443,35 +1443,35 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
           Column(
             children: settingsAlerts,
           ),
-        if (StateContainer.of(context).fundingAlerts != null &&
-            StateContainer.of(context).fundingAlerts!.isNotEmpty &&
-            _curFundingSetting.setting == FundingOptions.SHOW)
-          Container(
-            padding: const EdgeInsetsDirectional.only(
-              start: 12,
-              end: 12,
-              bottom: 20,
-            ),
-            child: FundingMessageCard(
-              title: Z.of(context).donateToSupport,
-              shortDescription: Platform.isIOS
-                  ? /*Z.of(context).supportDevelopment*/ null
-                  : StateContainer.of(context).fundingAlerts![currentFundingIndex].title,
-              currentAmountRaw: StateContainer.of(context).fundingAlerts![currentFundingIndex].currentAmountRaw,
-              goalAmountRaw: StateContainer.of(context).fundingAlerts![currentFundingIndex].goalAmountRaw,
-              hideAmounts: true,
-              hideProgressBar: Platform.isIOS,
-              onPressed: () {
-                Sheets.showAppHeightEightSheet(
-                  context: context,
-                  widget: FundingMessagesSheet(
-                    alerts: StateContainer.of(context).fundingAlerts,
-                    hasDismissButton: false,
-                  ),
-                );
-              },
-            ),
-          ),
+        // if (StateContainer.of(context).fundingAlerts != null &&
+        //     StateContainer.of(context).fundingAlerts!.isNotEmpty &&
+        //     _curFundingSetting.setting == FundingOptions.SHOW)
+        //   Container(
+        //     padding: const EdgeInsetsDirectional.only(
+        //       start: 12,
+        //       end: 12,
+        //       bottom: 20,
+        //     ),
+        //     child: FundingMessageCard(
+        //       title: Z.of(context).donateToSupport,
+        //       shortDescription: Platform.isIOS
+        //           ? /*Z.of(context).supportDevelopment*/ null
+        //           : StateContainer.of(context).fundingAlerts![currentFundingIndex].title,
+        //       currentAmountRaw: StateContainer.of(context).fundingAlerts![currentFundingIndex].currentAmountRaw,
+        //       goalAmountRaw: StateContainer.of(context).fundingAlerts![currentFundingIndex].goalAmountRaw,
+        //       hideAmounts: true,
+        //       hideProgressBar: Platform.isIOS,
+        //       onPressed: () {
+        //         Sheets.showAppHeightEightSheet(
+        //           context: context,
+        //           widget: FundingMessagesSheet(
+        //             alerts: StateContainer.of(context).fundingAlerts,
+        //             hasDismissButton: false,
+        //           ),
+        //         );
+        //       },
+        //     ),
+        //   ),
         // Container(
         //   margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
         //   child: Text(
@@ -2425,9 +2425,9 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).showUnopenedWarning,
                           _curUnopenedWarningSetting, Icons.warning, _unopenedWarningDialog),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                      AppSettings.buildSettingsListItemDoubleLine(
-                          context, Z.of(context).showFunding, _curFundingSetting, Icons.flag, _fundingDialog),
-                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      // AppSettings.buildSettingsListItemDoubleLine(
+                      //     context, Z.of(context).showFunding, _curFundingSetting, Icons.flag, _fundingDialog),
+                      // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).trackingHeader,
                           _curTrackingSetting, Icons.query_stats, _showTrackingDialog),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
@@ -2440,22 +2440,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                       ),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
 
-                      Container(
-                        margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
-                        child: Text(Z.of(context).advanced,
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w100,
-                              color: StateContainer.of(context).curTheme.text60,
-                            )),
-                      ),
-                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                      AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).currencyMode,
-                          _curCurrencyModeSetting, AppIcons.currency, _currencyModeDialog),
-                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-                      AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).receiveMinimum,
-                          _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
-                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       Container(
                         margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
                         child: Text(Z.of(context).manage,
@@ -2494,6 +2478,23 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                           });
                         }
                       }),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+
+                      Container(
+                        margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
+                        child: Text(Z.of(context).advanced,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w100,
+                              color: StateContainer.of(context).curTheme.text60,
+                            )),
+                      ),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).currencyMode,
+                          _curCurrencyModeSetting, AppIcons.currency, _currencyModeDialog),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).receiveMinimum,
+                          _curMinRawSetting, AppIcons.less_than_equal, _minRawDialog),
                       Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemSingleLine(
                           context, Z.of(context).exportTXData, AppIcons.file_export, onPressed: () async {

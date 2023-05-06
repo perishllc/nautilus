@@ -748,6 +748,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("Scan NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Scan QR Code"),
         "schedule": MessageLookupByLibrary.simpleMessage("Schedule"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("Scheduled"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Search for anything"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(

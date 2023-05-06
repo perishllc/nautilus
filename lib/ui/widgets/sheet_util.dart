@@ -70,7 +70,8 @@ class Sheets {
       int animationDurationMs = 250,
       bool removeUntilHome = false,
       bool closeOnTap = false,
-      Function? onDisposed}) {
+      Function? onDisposed,
+      bool allowSlide = false}) {
     assert(radius > 0.0);
     color ??= StateContainer.of(context).curTheme.backgroundDark;
     barrier ??= StateContainer.of(context).curTheme.barrier;
@@ -84,7 +85,8 @@ class Sheets {
         barrier: barrier,
         animationDurationMs: animationDurationMs,
         closeOnTap: closeOnTap,
-        onDisposed: onDisposed);
+        onDisposed: onDisposed,
+        allowSlide: allowSlide);
     if (removeUntilHome) {
       return Navigator.pushAndRemoveUntil<T>(context, route, RouteUtils.withNameLike('/home'));
     }
@@ -371,24 +373,12 @@ class _AppHeightFullSheetLayout extends SingleChildLayoutDelegate {
 
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
-    if (constraints.maxHeight < 667)
-      return BoxConstraints(
-          minWidth: constraints.maxWidth,
-          maxWidth: constraints.maxWidth,
-          minHeight: 0.0,
-          maxHeight: constraints.maxHeight * 0.95);
-    if ((constraints.maxHeight / constraints.maxWidth > 2.1 && Platform.isAndroid) || constraints.maxHeight > 812)
-      return BoxConstraints(
-          minWidth: constraints.maxWidth,
-          maxWidth: constraints.maxWidth,
-          minHeight: 0.0,
-          maxHeight: constraints.maxHeight * 0.8);
-    else
-      return BoxConstraints(
-          minWidth: constraints.maxWidth,
-          maxWidth: constraints.maxWidth,
-          minHeight: 0.0,
-          maxHeight: constraints.maxHeight * 0.9);
+    return BoxConstraints(
+      minWidth: constraints.maxWidth,
+      maxWidth: constraints.maxWidth,
+      minHeight: 0.0,
+      maxHeight: constraints.maxHeight,
+    );
   }
 
   @override
@@ -412,7 +402,8 @@ class _AppHeightFullModalRoute<T> extends PopupRoute<T> {
       this.barrier,
       this.animationDurationMs,
       this.closeOnTap,
-      this.onDisposed})
+      this.onDisposed,
+      this.allowSlide = false})
       : super(settings: settings);
 
   final WidgetBuilder? builder;
@@ -422,6 +413,7 @@ class _AppHeightFullModalRoute<T> extends PopupRoute<T> {
   final int? animationDurationMs;
   final bool? closeOnTap;
   final Function? onDisposed;
+  final bool allowSlide;
 
   @override
   Color? get barrierColor => barrier;
@@ -460,6 +452,42 @@ class _AppHeightFullModalRoute<T> extends PopupRoute<T> {
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+    if (allowSlide) {
+      return MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        child: GestureDetector(
+          onTap: () {
+            if (closeOnTap!) {
+              // Close when tapped anywhere
+              Navigator.of(context).pop();
+            }
+          },
+          child: AnimatedBuilder(
+            animation: appSheetAnimation,
+            builder: (BuildContext context, Widget? child) => CustomSingleChildLayout(
+              delegate: _AppHeightFullSheetLayout(appSheetAnimation.value),
+              child: BottomSheet(
+                animationController: _animationController,
+                onClosing: () => Navigator.pop(context),
+                backgroundColor: color,
+                elevation: 0,
+                builder: (BuildContext context) => Container(
+                  decoration: BoxDecoration(
+                    color: color,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(radius!),
+                      topRight: Radius.circular(radius!),
+                    ),
+                  ),
+                  child: Builder(builder: builder!),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,

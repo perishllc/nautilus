@@ -129,7 +129,7 @@ class User {
     if (userType == UserTypes.ONCHAIN) {
       return "@${name!}";
     } else if (userType == UserTypes.NANO_TO) {
-      return "#${name!}";
+      return "@${name!}";
     } else {
       return name;
     }

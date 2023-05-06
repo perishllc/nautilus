@@ -22,6 +22,7 @@ import 'package:wallet_flutter/bus/blocked_modified_event.dart';
 import 'package:wallet_flutter/bus/deep_link_event.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/bus/payments_home_event.dart';
+import 'package:wallet_flutter/bus/scheduled_changed_event.dart';
 import 'package:wallet_flutter/bus/subs_changed_event.dart';
 import 'package:wallet_flutter/bus/tx_update_event.dart';
 import 'package:wallet_flutter/bus/unified_home_event.dart';
@@ -30,6 +31,7 @@ import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/db/account.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
+import 'package:wallet_flutter/model/db/scheduled.dart';
 import 'package:wallet_flutter/model/db/subscription.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/model/db/user.dart';
@@ -178,6 +180,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   bool _isPro = false;
   List<Subscription> _subscriptions = [];
+  List<Scheduled> _scheduled = [];
 
   // make the connection warning less annoying:
   Timer? _connectionTimer;
@@ -1194,6 +1197,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   StreamSubscription<DeepLinkEvent>? _deepLinkEventSub;
   StreamSubscription<ConnStatusEvent>? _connectionSub;
   StreamSubscription<SubsChangedEvent>? _subscriptionsSub;
+  StreamSubscription<ScheduledChangedEvent>? _scheduledSub;
 
   void _registerBus() {
     _historySub = EventTaxiImpl.singleton().registerTo<HistoryHomeEvent>().listen((HistoryHomeEvent event) {
@@ -1291,6 +1295,13 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       if (mounted) {
         setState(() {
           _subscriptions = event.subs ?? <Subscription>[];
+        });
+      }
+    });
+    _scheduledSub = EventTaxiImpl.singleton().registerTo<ScheduledChangedEvent>().listen((ScheduledChangedEvent event) {
+      if (mounted) {
+        setState(() {
+          _scheduled = event.scheduled ?? <Scheduled>[];
         });
       }
     });
@@ -2181,9 +2192,15 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
 
   Widget _buildBottomNavigationBar(BuildContext context) {
     int unpaidSubCount = 0;
+    int scheduledCount = 0;
     for (final Subscription sub in _subscriptions) {
       if (sub.active && !sub.paid) {
         unpaidSubCount++;
+      }
+    }
+    for (final Scheduled scheduled in _scheduled) {
+      if (scheduled.active) {
+        scheduledCount++;
       }
     }
     return Container(
@@ -2212,6 +2229,20 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             //   backgroundColor: StateContainer.of(context).curTheme.warning,
             // ),
             BottomNavigationBarItem(
+              icon: const Icon(Icons.home),
+              label: Z.of(context).homeButton,
+              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+            ),
+            BottomNavigationBarItem(
+              icon: Badge(
+                isLabelVisible: scheduledCount > 0,
+                label: Text("$scheduledCount", style: const TextStyle(color: Colors.white)),
+                child: const Icon(Icons.schedule),
+              ),
+              label: Z.of(context).scheduledButton,
+              backgroundColor: StateContainer.of(context).curTheme.warning,
+            ),
+            BottomNavigationBarItem(
               icon: Badge(
                 isLabelVisible: unpaidSubCount > 0,
                 label: Text("$unpaidSubCount", style: const TextStyle(color: Colors.white)),
@@ -2219,11 +2250,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               ),
               label: Z.of(context).subsButton,
               backgroundColor: StateContainer.of(context).curTheme.warning,
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.home),
-              label: Z.of(context).homeButton,
-              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
             ),
             // BottomNavigationBarItem(
             //   icon: const Icon(Icons.business),
@@ -2240,11 +2266,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           selectedItemColor: StateContainer.of(context).curTheme.primary,
           unselectedItemColor: StateContainer.of(context).curTheme.text,
           onTap: (int index) async {
-            const int HOME_INDEX = 1;
-            const int SHOP_INDEX = 1;
-            const int SUBS_INDEX = 0;
-            const int SETTINGS_INDEX = 2;
-            const int BUSINESS_INDEX = 4;
+            const int HOME_INDEX = 0;
+            const int SHOP_INDEX = 9;
+            const int SUBS_INDEX = 2;
+            const int SCHEDULED_INDEX = 1;
+            const int SETTINGS_INDEX = 3;
+            const int BUSINESS_INDEX = 9;
 
             // special case for when you double tap home, scroll to the top:
             if (_selectedIndex == index) {
@@ -2264,6 +2291,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               switch (index) {
                 case SUBS_INDEX:
                   final List<Subscription> subs = await sl.get<DBHelper>().getSubscriptions();
+                  // final List<Scheduled> scheduled = await sl.get<DBHelper>().getScheduled();
                   if (!mounted) return;
                   await Sheets.showAppHeightNineSheet(
                     context: context,
@@ -2299,7 +2327,22 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                   );
                   break;
                 case SETTINGS_INDEX:
-                  _scaffoldKey.currentState?.openDrawer();
+                  // _scaffoldKey.currentState?.openDrawer();
+                  await Sheets.showAppHeightFullSheet(
+                    context: context,
+                    barrier: Colors.transparent,
+                    widget: SettingsSheet(),
+                    allowSlide: true,
+                  );
+                  break;
+                case SCHEDULED_INDEX:
+                  // await Sheets.showAppHeightNineSheet(
+                  //   context: context,
+                  //   barrier: Colors.transparent,
+                  //   widget: ScheduledSheet(
+                  //     scheduled: scheduled,
+                  //   ),
+                  // );
                   break;
               }
 

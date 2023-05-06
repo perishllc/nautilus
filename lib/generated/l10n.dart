@@ -5405,6 +5405,16 @@ class Z {
     );
   }
 
+  /// `Scheduled`
+  String get scheduledButton {
+    return Intl.message(
+      'Scheduled',
+      name: 'scheduledButton',
+      desc: 'scheduled_button',
+      args: [],
+    );
+  }
+
   /// `Subscribe`
   String get subscribeButton {
     return Intl.message(

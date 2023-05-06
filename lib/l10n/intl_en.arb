@@ -2667,6 +2667,11 @@
     "type": "text",
     "description": "subs_button"
   },
+  "scheduledButton": "Scheduled",
+  "@scheduledButton": {
+    "type": "text",
+    "description": "scheduled_button"
+  },
   "subscribeButton": "Subscribe",
   "@subscribeButton": {
     "type": "text",
