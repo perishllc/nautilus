@@ -2193,14 +2193,17 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   Widget _buildBottomNavigationBar(BuildContext context) {
     int unpaidSubCount = 0;
     int scheduledCount = 0;
+    int upcomingCount = 0;
     for (final Subscription sub in _subscriptions) {
       if (sub.active && !sub.paid) {
         unpaidSubCount++;
+        upcomingCount++;
       }
     }
     for (final Scheduled scheduled in _scheduled) {
       if (scheduled.active) {
         scheduledCount++;
+        upcomingCount++;
       }
     }
     return Container(
@@ -2229,28 +2232,28 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             //   backgroundColor: StateContainer.of(context).curTheme.warning,
             // ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.home),
-              label: Z.of(context).homeButton,
-              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-            ),
-            BottomNavigationBarItem(
               icon: Badge(
-                isLabelVisible: scheduledCount > 0,
-                label: Text("$scheduledCount", style: const TextStyle(color: Colors.white)),
+                isLabelVisible: upcomingCount > 0,
+                label: Text("$upcomingCount", style: const TextStyle(color: Colors.white)),
                 child: const Icon(Icons.schedule),
               ),
               label: Z.of(context).scheduledButton,
               backgroundColor: StateContainer.of(context).curTheme.warning,
             ),
             BottomNavigationBarItem(
-              icon: Badge(
-                isLabelVisible: unpaidSubCount > 0,
-                label: Text("$unpaidSubCount", style: const TextStyle(color: Colors.white)),
-                child: const Icon(Icons.currency_exchange),
-              ),
-              label: Z.of(context).subsButton,
-              backgroundColor: StateContainer.of(context).curTheme.warning,
+              icon: const Icon(Icons.home),
+              label: Z.of(context).homeButton,
+              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
             ),
+            // BottomNavigationBarItem(
+            //   icon: Badge(
+            //     isLabelVisible: unpaidSubCount > 0,
+            //     label: Text("$unpaidSubCount", style: const TextStyle(color: Colors.white)),
+            //     child: const Icon(Icons.currency_exchange),
+            //   ),
+            //   label: Z.of(context).subsButton,
+            //   backgroundColor: StateContainer.of(context).curTheme.warning,
+            // ),
             // BottomNavigationBarItem(
             //   icon: const Icon(Icons.business),
             //   label: Z.of(context).businessButton,
@@ -2266,10 +2269,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
           selectedItemColor: StateContainer.of(context).curTheme.primary,
           unselectedItemColor: StateContainer.of(context).curTheme.text,
           onTap: (int index) async {
-            const int HOME_INDEX = 0;
+            const int HOME_INDEX = 1;
             const int SHOP_INDEX = 9;
-            const int SUBS_INDEX = 2;
-            const int SCHEDULED_INDEX = 1;
+            const int SUBS_INDEX = 0;
+            const int SCHEDULED_INDEX = 9;
             const int SETTINGS_INDEX = 3;
             const int BUSINESS_INDEX = 9;
 
@@ -2335,15 +2338,15 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                     allowSlide: true,
                   );
                   break;
-                case SCHEDULED_INDEX:
-                  // await Sheets.showAppHeightNineSheet(
-                  //   context: context,
-                  //   barrier: Colors.transparent,
-                  //   widget: ScheduledSheet(
-                  //     scheduled: scheduled,
-                  //   ),
-                  // );
-                  break;
+                // case SCHEDULED_INDEX:
+                //   // await Sheets.showAppHeightNineSheet(
+                //   //   context: context,
+                //   //   barrier: Colors.transparent,
+                //   //   widget: ScheduledSheet(
+                //   //     scheduled: scheduled,
+                //   //   ),
+                //   // );
+                //   break;
               }
 
               // return to home:
