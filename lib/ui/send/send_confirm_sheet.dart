@@ -13,6 +13,7 @@ import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/authentication_method.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
+import 'package:wallet_flutter/model/db/scheduled.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/model/db/user.dart';
 import 'package:wallet_flutter/model/vault.dart';
@@ -654,6 +655,20 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         StateContainer.of(context).updateTXMemos();
         StateContainer.of(context).updateUnified(true);
         break;
+      }
+    }
+
+    // check if this fulfilled any subscriptions / scheduled payments:
+    final List<Scheduled> scheduledPayments = await sl.get<DBHelper>().getScheduled();
+    for (int i = 0; i < scheduledPayments.length; i++) {
+      final Scheduled scheduled = scheduledPayments[i];
+      // check to make sure the recipient is correct and the amount is correct:
+      if (scheduled.address == widget.destination && scheduled.amount_raw == widget.amountRaw) {
+        // make sure the payment was due:
+        final int currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+        if (scheduled.timestamp < currentTime) {
+          await sl.get<DBHelper>().deleteScheduled(scheduled);
+        }
       }
     }
 

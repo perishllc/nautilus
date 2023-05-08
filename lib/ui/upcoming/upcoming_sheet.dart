@@ -672,6 +672,17 @@ class UpcomingSheetState extends State<UpcomingSheet> {
   Widget _buildScheduledListItem(BuildContext context, Scheduled sub, StateSetter setState, int index) {
     final DateTime nextPaymentTime = DateTime.fromMillisecondsSinceEpoch(sub.timestamp * 1000);
 
+    Color? color = StateContainer.of(context).curTheme.success;
+
+    bool overdue = false;
+
+    if (sub.timestamp < DateTime.now().millisecondsSinceEpoch ~/ 1000) {
+      color = StateContainer.of(context).curTheme.warning;
+      overdue = true;
+    } else {
+      color = StateContainer.of(context).curTheme.success;
+    }
+
     return Column(
       children: <Widget>[
         if (index != 0)
@@ -832,7 +843,7 @@ class UpcomingSheetState extends State<UpcomingSheet> {
                                       children: [
                                         RichText(
                                           text: TextSpan(
-                                            text: "${Z.of(context).nextPayment}: ",
+                                            text: "${Z.of(context).paymentTime}: ",
                                             style: TextStyle(
                                               fontFamily: "OverpassMono",
                                               fontWeight: FontWeight.w100,
@@ -848,7 +859,7 @@ class UpcomingSheetState extends State<UpcomingSheet> {
                                               fontFamily: "OverpassMono",
                                               fontWeight: FontWeight.w100,
                                               fontSize: AppFontSizes.small,
-                                              color: StateContainer.of(context).curTheme.success,
+                                              color: color,
                                             ),
                                           ),
                                         ),
@@ -973,8 +984,8 @@ class UpcomingSheetState extends State<UpcomingSheet> {
         icon: Icons.delete,
         label: Z.of(context).delete,
         onPressed: (BuildContext context) {
-          AppDialogs.showConfirmDialog(context, Z.of(context).deleteScheduledHeader, Z.of(context).deleteScheduledConfirmation,
-              CaseChange.toUpperCase(Z.of(context).yes, context), () async {
+          AppDialogs.showConfirmDialog(context, Z.of(context).deleteScheduledHeader,
+              Z.of(context).deleteScheduledConfirmation, CaseChange.toUpperCase(Z.of(context).yes, context), () async {
             await Future<dynamic>.delayed(const Duration(milliseconds: 250));
             // Remove account
             await sl.get<DBHelper>().deleteScheduled(sub);

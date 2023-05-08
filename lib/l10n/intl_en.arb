@@ -1652,6 +1652,16 @@
     "type": "text",
     "description": "next_payment"
   },
+  "paymentTime": "Payment Time",
+  "@paymentTime": {
+    "type": "text",
+    "description": "payment_time"
+  },
+  "overdue": "Overdue",
+  "@overdue": {
+    "type": "text",
+    "description": "payment_overdue"
+  },
   "no": "No",
   "@no": {
     "type": "text",

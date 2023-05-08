@@ -590,6 +590,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Opened"),
+        "overdue": MessageLookupByLibrary.simpleMessage("Overdue"),
         "paid": MessageLookupByLibrary.simpleMessage("paid"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("Paper Wallet"),
         "passwordBlank":
@@ -624,6 +625,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Someone has requested payment from you! check the payments page for more info."),
         "paymentScheduled":
             MessageLookupByLibrary.simpleMessage("Payment Scheduled"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("Payment Time"),
         "payments": MessageLookupByLibrary.simpleMessage("Payments"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Pick From a List"),

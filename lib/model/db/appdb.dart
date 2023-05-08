@@ -339,6 +339,7 @@ class DBHelper {
     await dbClient.execute("DROP TABLE IF EXISTS Transactions");
     await dbClient.execute("DROP TABLE IF EXISTS Nodes");
     await dbClient.execute("DROP TABLE IF EXISTS Subscriptions");
+    await dbClient.execute("DROP TABLE IF EXISTS Scheduled");
     await dbClient.execute("DROP TABLE IF EXISTS WorkSources");
 
     _onCreate(dbClient, DB_VERSION);

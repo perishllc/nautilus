@@ -563,6 +563,68 @@ class AddScheduledSheetState extends State<AddScheduledSheet> {
     );
   }
 
+  Future<void> pickTime() async {
+    _timestampValidationText = "";
+    final DateTime? picked = await showRoundedDatePicker(
+      context: context,
+      height: 300,
+      initialDate: _timestamp != 0 ? DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000) : DateTime.now(),
+      firstDate: DateTime(DateTime.now().hour + 1),
+      lastDate: DateTime(DateTime.now().year + 1),
+      theme: ThemeData(
+        dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
+        primaryColor: StateContainer.of(context).curTheme.primary,
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(
+            color: StateContainer.of(context).curTheme.text,
+          ),
+          bodyMedium: TextStyle(
+            color: StateContainer.of(context).curTheme.text,
+          ),
+          bodySmall: TextStyle(
+            color: StateContainer.of(context).curTheme.primary60,
+          ),
+        ),
+      ),
+    );
+    if (!mounted) return;
+    if (picked != null) {
+      final TimeOfDay? pickedTime = await showRoundedTimePicker(
+        context: context,
+        initialTime: _timestamp != 0
+            ? TimeOfDay.fromDateTime(DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000))
+            : TimeOfDay.now(),
+        theme: ThemeData(
+          dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
+          primaryColor: StateContainer.of(context).curTheme.primary,
+          textTheme: TextTheme(
+            bodyLarge: TextStyle(
+              color: StateContainer.of(context).curTheme.text,
+            ),
+            bodyMedium: TextStyle(
+              color: StateContainer.of(context).curTheme.text,
+            ),
+            bodySmall: TextStyle(
+              color: StateContainer.of(context).curTheme.text,
+            ),
+          ),
+        ),
+      );
+      if (pickedTime != null) {
+        final DateTime finalDateTime = DateTime(
+          picked.year,
+          picked.month,
+          picked.day,
+          pickedTime.hour,
+          pickedTime.minute,
+        );
+        setState(() {
+          _timestamp = finalDateTime.millisecondsSinceEpoch ~/ 1000;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return TapOutsideUnfocus(
@@ -781,88 +843,66 @@ class AddScheduledSheetState extends State<AddScheduledSheet> {
                       ),
                       // Column for timestamp container + error container
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          // getEnterFrequencyContainer(),
-
                           const SizedBox(height: 10), // spacer
 
                           // pick date and time button:
-                          Container(
-                            alignment: Alignment.topCenter,
-                            child: AppButton.buildAppButton(
-                                context, AppButtonType.PRIMARY, Z.of(context).pickTime, Dimens.BUTTON_TOP_DIMENS,
-                                onPressed: () async {
-                              final DateTime? picked = await showRoundedDatePicker(
-                                context: context,
-                                height: 300,
-                                initialDate: _timestamp != 0 ? DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000) : DateTime.now(),
-                                firstDate: DateTime(DateTime.now().hour + 1),
-                                lastDate: DateTime(DateTime.now().year + 1),
-                                theme: ThemeData(
-                                  dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
-                                  primaryColor: StateContainer.of(context).curTheme.primary,
-                                  textTheme: TextTheme(
-                                    bodyLarge: TextStyle(
-                                      color: StateContainer.of(context).curTheme.text,
-                                    ),
-                                    bodyMedium: TextStyle(
-                                      color: StateContainer.of(context).curTheme.text,
-                                    ),
-                                    bodySmall: TextStyle(
-                                      color: StateContainer.of(context).curTheme.primary60,
-                                    ),
-                                  ),
+                          // Container(
+                          //   alignment: Alignment.topCenter,
+                          //   child: AppButton.buildAppButton(
+                          //     context,
+                          //     AppButtonType.PRIMARY,
+                          //     Z.of(context).pickTime,
+                          //     Dimens.BUTTON_TOP_DIMENS,
+                          //     onPressed: pickTime,
+                          //   ),
+                          // ),
+
+                          // pick a time text and button:
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.105),
+                            child: SizedBox(
+                              height: 50,
+                              child: OutlinedButton(
+                                onPressed: pickTime,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    // Container(
+                                    //   onp
+                                    // )
+                                    // pick time text:
+                                    if (_timestamp == 0)
+                                      Text(
+                                        Z.of(context).pickTime,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: StateContainer.of(context).curTheme.text,
+                                          fontFamily: "NunitoSans",
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      )
+                                    else
+                                      Container(
+                                        alignment: AlignmentDirectional.center,
+                                        margin: const EdgeInsets.only(top: 3),
+                                        child: Text(
+                                            DateFormat("EEEE, MMMM d, yyyy, h:mm a")
+                                                .format(DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000)),
+                                            style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: StateContainer.of(context).curTheme.primary,
+                                              fontFamily: "NunitoSans",
+                                              fontWeight: FontWeight.w600,
+                                            )),
+                                      ),
+                                  ],
                                 ),
-                              );
-                              if (!mounted) return;
-                              if (picked != null) {
-                                final TimeOfDay? pickedTime = await showRoundedTimePicker(
-                                  context: context,
-                                  initialTime: _timestamp != 0 ? TimeOfDay.fromDateTime(DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000)) : TimeOfDay.now(),
-                                  theme: ThemeData(
-                                    dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
-                                    primaryColor: StateContainer.of(context).curTheme.primary,
-                                    textTheme: TextTheme(
-                                      bodyLarge: TextStyle(
-                                        color: StateContainer.of(context).curTheme.text,
-                                      ),
-                                      bodyMedium: TextStyle(
-                                        color: StateContainer.of(context).curTheme.text,
-                                      ),
-                                      bodySmall: TextStyle(
-                                        color: StateContainer.of(context).curTheme.text,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                                if (pickedTime != null) {
-                                  final DateTime finalDateTime = DateTime(
-                                    picked.year,
-                                    picked.month,
-                                    picked.day,
-                                    pickedTime.hour,
-                                    pickedTime.minute,
-                                  );
-                                  setState(() {
-                                    _timestamp = finalDateTime.millisecondsSinceEpoch ~/ 1000;
-                                  });
-                                }
-                              }
-                            }),
-                          ),
-                          if (_timestamp != 0)
-                            Container(
-                              alignment: AlignmentDirectional.center,
-                              margin: const EdgeInsets.only(top: 3),
-                              child: Text(
-                                  "(${DateFormat("EEEE, MMMM d, yyyy, h:mm a").format(DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000))})",
-                                  style: TextStyle(
-                                    fontSize: 14.0,
-                                    color: StateContainer.of(context).curTheme.primary,
-                                    fontFamily: "NunitoSans",
-                                    fontWeight: FontWeight.w600,
-                                  )),
+                              ),
                             ),
+                          ),
+
                           Container(
                             alignment: AlignmentDirectional.center,
                             margin: const EdgeInsets.only(top: 3),
@@ -1027,10 +1067,8 @@ class AddScheduledSheetState extends State<AddScheduledSheet> {
         _timestampValidationText = Z.of(context).timestampEmpty;
       });
       isValid = false;
-    }
-
-    // check if time is in the future:
-    if (_timestamp < (DateTime.now().millisecondsSinceEpoch ~/ 1000)) {
+      // check if time is in the future:
+    } else if (_timestamp < (DateTime.now().millisecondsSinceEpoch ~/ 1000)) {
       setState(() {
         _timestampValidationText = Z.of(context).timestampInPast;
       });

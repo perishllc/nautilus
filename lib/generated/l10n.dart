@@ -3368,6 +3368,26 @@ class Z {
     );
   }
 
+  /// `Payment Time`
+  String get paymentTime {
+    return Intl.message(
+      'Payment Time',
+      name: 'paymentTime',
+      desc: 'payment_time',
+      args: [],
+    );
+  }
+
+  /// `Overdue`
+  String get overdue {
+    return Intl.message(
+      'Overdue',
+      name: 'overdue',
+      desc: 'payment_overdue',
+      args: [],
+    );
+  }
+
   /// `No`
   String get no {
     return Intl.message(
