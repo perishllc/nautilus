@@ -70,6 +70,7 @@ import 'package:wallet_flutter/ui/shop/shop_sheet.dart';
 import 'package:wallet_flutter/ui/subs/sub_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/subs/subs_sheet.dart';
 import 'package:wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
+import 'package:wallet_flutter/ui/upcoming/upcoming_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
@@ -2273,7 +2274,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             const int SHOP_INDEX = 9;
             const int SUBS_INDEX = 0;
             const int SCHEDULED_INDEX = 9;
-            const int SETTINGS_INDEX = 3;
+            const int SETTINGS_INDEX = 2;
             const int BUSINESS_INDEX = 9;
 
             // special case for when you double tap home, scroll to the top:
@@ -2294,13 +2295,14 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               switch (index) {
                 case SUBS_INDEX:
                   final List<Subscription> subs = await sl.get<DBHelper>().getSubscriptions();
-                  // final List<Scheduled> scheduled = await sl.get<DBHelper>().getScheduled();
+                  final List<Scheduled> scheduled = await sl.get<DBHelper>().getScheduled();
                   if (!mounted) return;
                   await Sheets.showAppHeightNineSheet(
                     context: context,
                     barrier: Colors.transparent,
-                    widget: SubsSheet(
+                    widget: UpcomingSheet(
                       subs: subs,
+                      scheduled: scheduled,
                     ),
                   );
                   break;

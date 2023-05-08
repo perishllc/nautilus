@@ -253,6 +253,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Delete Node?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to delete this scheduled payment?\n\nYou can always re-add it later by tapping the \"Schedule Payment\" button"),
+        "deleteScheduledHeader":
+            MessageLookupByLibrary.simpleMessage("Delete Scheduled Payment?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete this subscription?\n\nYou can always re-add it later by tapping the \"Add Subscription\" button"),
         "deleteSubHeader":
@@ -618,9 +622,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Payment History"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Someone has requested payment from you! check the payments page for more info."),
+        "paymentScheduled":
+            MessageLookupByLibrary.simpleMessage("Payment Scheduled"),
         "payments": MessageLookupByLibrary.simpleMessage("Payments"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Pick From a List"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("Pick a Time"),
         "pinBlank": MessageLookupByLibrary.simpleMessage("Pin cannot be empty"),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("Pins do not match"),
@@ -748,6 +755,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("Scan NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Scan QR Code"),
         "schedule": MessageLookupByLibrary.simpleMessage("Schedule"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("Schedule Payment"),
         "scheduledButton": MessageLookupByLibrary.simpleMessage("Scheduled"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Search for anything"),
@@ -886,6 +895,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("Theme"),
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("this may take a while..."),
+        "timestampEmpty":
+            MessageLookupByLibrary.simpleMessage("Please pick a time"),
+        "timestampInPast":
+            MessageLookupByLibrary.simpleMessage("Time must be in the future"),
         "to": MessageLookupByLibrary.simpleMessage("To"),
         "todayAt": MessageLookupByLibrary.simpleMessage("Today at"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -946,6 +959,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Account Unopened"),
         "unpaid": MessageLookupByLibrary.simpleMessage("unpaid"),
         "unread": MessageLookupByLibrary.simpleMessage("unread"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Please enter a URL"),
         "useAppRep": MessageLookupByLibrary.simpleMessage("Use %1 Rep"),

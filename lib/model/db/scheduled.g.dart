@@ -13,7 +13,7 @@ Scheduled _$ScheduledFromJson(Map<String, dynamic> json) => Scheduled(
       paid: json['paid'] as bool? ?? false,
       amount_raw: json['amount_raw'] as String,
       address: json['address'] as String,
-      timestamp: json['timestamp'] as String,
+      timestamp: json['timestamp'] as int,
     );
 
 Map<String, dynamic> _$ScheduledToJson(Scheduled instance) => <String, dynamic>{

@@ -8,6 +8,7 @@
 - Nano.to usernames are now prefixed with '@' again (on-chain usernames put on hiatus)
 - Updated order of the advanced settings menu
 - Settings menu now slides up/down to dismiss
+- Updated subscriptions to show the payment address
 #### Fixed
 ## v0.8.5 - [2023-04-16]
 #### Added

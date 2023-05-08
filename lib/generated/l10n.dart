@@ -1495,6 +1495,16 @@ class Z {
     );
   }
 
+  /// `Pick a Time`
+  String get pickTime {
+    return Intl.message(
+      'Pick a Time',
+      name: 'pickTime',
+      desc: 'pick_time_button',
+      args: [],
+    );
+  }
+
   /// `Are you sure you want to delete this subscription?\n\nYou can always re-add it later by tapping the "Add Subscription" button`
   String get deleteSubConfirmation {
     return Intl.message(
@@ -1510,6 +1520,26 @@ class Z {
     return Intl.message(
       'Delete Subscription?',
       name: 'deleteSubHeader',
+      desc: 'Confirmation dialog header',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this scheduled payment?\n\nYou can always re-add it later by tapping the "Schedule Payment" button`
+  String get deleteScheduledConfirmation {
+    return Intl.message(
+      'Are you sure you want to delete this scheduled payment?\n\nYou can always re-add it later by tapping the "Schedule Payment" button',
+      name: 'deleteScheduledConfirmation',
+      desc: 'delete scheduled payment confirmation info',
+      args: [],
+    );
+  }
+
+  /// `Delete Scheduled Payment?`
+  String get deleteScheduledHeader {
+    return Intl.message(
+      'Delete Scheduled Payment?',
+      name: 'deleteScheduledHeader',
       desc: 'Confirmation dialog header',
       args: [],
     );
@@ -2262,6 +2292,26 @@ class Z {
       'Please enter a Frequency',
       name: 'frequencyEmpty',
       desc: 'frequency_empty',
+      args: [],
+    );
+  }
+
+  /// `Please pick a time`
+  String get timestampEmpty {
+    return Intl.message(
+      'Please pick a time',
+      name: 'timestampEmpty',
+      desc: 'timestamp_empty',
+      args: [],
+    );
+  }
+
+  /// `Time must be in the future`
+  String get timestampInPast {
+    return Intl.message(
+      'Time must be in the future',
+      name: 'timestampInPast',
+      desc: 'timestamp_in_past',
       args: [],
     );
   }
@@ -5411,6 +5461,36 @@ class Z {
       'Scheduled',
       name: 'scheduledButton',
       desc: 'scheduled_button',
+      args: [],
+    );
+  }
+
+  /// `Schedule Payment`
+  String get schedulePayment {
+    return Intl.message(
+      'Schedule Payment',
+      name: 'schedulePayment',
+      desc: 'schedule_payment_button',
+      args: [],
+    );
+  }
+
+  /// `Payment Scheduled`
+  String get paymentScheduled {
+    return Intl.message(
+      'Payment Scheduled',
+      name: 'paymentScheduled',
+      desc: 'payment_scheduled',
+      args: [],
+    );
+  }
+
+  /// `Upcoming`
+  String get upcomingButton {
+    return Intl.message(
+      'Upcoming',
+      name: 'upcomingButton',
+      desc: 'upcoming_button',
       args: [],
     );
   }

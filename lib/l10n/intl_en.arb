@@ -717,6 +717,11 @@
     "type": "text",
     "description": "delete_request"
   },
+  "pickTime": "Pick a Time",
+  "@pickTime": {
+    "type": "text",
+    "description": "pick_time_button"
+  },
   "deleteSubConfirmation": "Are you sure you want to delete this subscription?\n\nYou can always re-add it later by tapping the \"Add Subscription\" button",
   "@deleteSubConfirmation": {
     "type": "text",
@@ -724,6 +729,16 @@
   },
   "deleteSubHeader": "Delete Subscription?",
   "@deleteSubHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
+  },
+  "deleteScheduledConfirmation": "Are you sure you want to delete this scheduled payment?\n\nYou can always re-add it later by tapping the \"Schedule Payment\" button",
+  "@deleteScheduledConfirmation": {
+    "type": "text",
+    "description": "delete scheduled payment confirmation info"
+  },
+  "deleteScheduledHeader": "Delete Scheduled Payment?",
+  "@deleteScheduledHeader": {
     "type": "text",
     "description": "Confirmation dialog header"
   },
@@ -1101,6 +1116,16 @@
   "@frequencyEmpty": {
     "type": "text",
     "description": "frequency_empty"
+  },
+  "timestampEmpty": "Please pick a time",
+  "@timestampEmpty": {
+    "type": "text",
+    "description": "timestamp_empty"
+  },
+  "timestampInPast": "Time must be in the future",
+  "@timestampInPast": {
+    "type": "text",
+    "description": "timestamp_in_past"
   },
   "from": "From",
   "@from": {
@@ -2671,6 +2696,21 @@
   "@scheduledButton": {
     "type": "text",
     "description": "scheduled_button"
+  },
+  "schedulePayment": "Schedule Payment",
+  "@schedulePayment": {
+    "type": "text",
+    "description": "schedule_payment_button"
+  },
+  "paymentScheduled": "Payment Scheduled",
+  "@paymentScheduled": {
+    "type": "text",
+    "description": "payment_scheduled"
+  },
+  "upcomingButton": "Upcoming",
+  "@upcomingButton": {
+    "type": "text",
+    "description": "upcoming_button"
   },
   "subscribeButton": "Subscribe",
   "@subscribeButton": {

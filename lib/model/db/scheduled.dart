@@ -33,7 +33,7 @@ class Scheduled {
   @JsonKey(name: 'address')
   String address;
   @JsonKey(name: 'timestamp')
-  String timestamp;
+  int timestamp;
 
   // factory Scheduled.fromJson(Map<String, dynamic> json) => _$ScheduledFromJson(json);
   // Map<String, dynamic> toJson() => _$ScheduledToJson(this);
