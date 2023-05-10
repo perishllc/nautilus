@@ -8,7 +8,7 @@ part 'scheduled.g.dart';
 class Scheduled {
 
   Scheduled({
-    required this.label,
+    this.label = "",
     this.active = false,
     this.autopay = false,
     this.paid = false,

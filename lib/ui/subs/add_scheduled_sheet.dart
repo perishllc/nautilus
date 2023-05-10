@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_cron/easy_cron.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -565,12 +566,12 @@ class AddScheduledSheetState extends State<AddScheduledSheet> {
 
   Future<void> pickTime() async {
     _timestampValidationText = "";
-    final DateTime? picked = await showRoundedDatePicker(
+    final DateTime? pickedDate = await showRoundedDatePicker(
       context: context,
       height: 300,
       initialDate: _timestamp != 0 ? DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000) : DateTime.now(),
       firstDate: DateTime(DateTime.now().hour + 1),
-      lastDate: DateTime(DateTime.now().year + 1),
+      lastDate: DateTime(DateTime.now().year + 3),
       theme: ThemeData(
         dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
         primaryColor: StateContainer.of(context).curTheme.primary,
@@ -588,35 +589,49 @@ class AddScheduledSheetState extends State<AddScheduledSheet> {
       ),
     );
     if (!mounted) return;
-    if (picked != null) {
-      final TimeOfDay? pickedTime = await showRoundedTimePicker(
-        context: context,
-        initialTime: _timestamp != 0
-            ? TimeOfDay.fromDateTime(DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000))
-            : TimeOfDay.now(),
-        theme: ThemeData(
-          dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
-          primaryColor: StateContainer.of(context).curTheme.primary,
-          textTheme: TextTheme(
-            bodyLarge: TextStyle(
-              color: StateContainer.of(context).curTheme.text,
-            ),
-            bodyMedium: TextStyle(
-              color: StateContainer.of(context).curTheme.text,
-            ),
-            bodySmall: TextStyle(
-              color: StateContainer.of(context).curTheme.text,
-            ),
-          ),
-        ),
+    if (pickedDate != null) {
+      // final TimeOfDay? pickedTime = await showRoundedTimePicker(
+      //   context: context,
+      //   initialTime: _timestamp != 0
+      //       ? TimeOfDay.fromDateTime(DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000))
+      //       : TimeOfDay.now(),
+      //   theme: ThemeData(
+      //     dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
+      //     primaryColor: StateContainer.of(context).curTheme.primary,
+      //     textTheme: TextTheme(
+      //       bodyLarge: TextStyle(
+      //         color: StateContainer.of(context).curTheme.text,
+      //       ),
+      //       bodyMedium: TextStyle(
+      //         color: StateContainer.of(context).curTheme.text,
+      //       ),
+      //       bodySmall: TextStyle(
+      //         color: StateContainer.of(context).curTheme.text,
+      //       ),
+      //     ),
+      //   ),
+      // );
+      TimeOfDay? pickedTime = TimeOfDay.now();
+      await CupertinoRoundedDatePicker.show(
+        context,
+        fontFamily: "Mali",
+        textColor: StateContainer.of(context).curTheme.text!,
+        background: StateContainer.of(context).curTheme.background!,
+        borderRadius: 16,
+        initialDatePickerMode: CupertinoDatePickerMode.time,
+        use24hFormat: true,
+        initialDate: _timestamp != 0 ? DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000) : DateTime.now(),
+        onDateTimeChanged: (DateTime newDateTime) {
+          pickedTime = TimeOfDay.fromDateTime(newDateTime);
+        },
       );
       if (pickedTime != null) {
         final DateTime finalDateTime = DateTime(
-          picked.year,
-          picked.month,
-          picked.day,
-          pickedTime.hour,
-          pickedTime.minute,
+          pickedDate.year,
+          pickedDate.month,
+          pickedDate.day,
+          pickedTime?.hour ?? 0,
+          pickedTime?.minute ?? 0,
         );
         setState(() {
           _timestamp = finalDateTime.millisecondsSinceEpoch ~/ 1000;
@@ -688,23 +703,23 @@ class AddScheduledSheetState extends State<AddScheduledSheet> {
                     children: <Widget>[
                       Stack(
                         children: <Widget>[
-                          // Column for Enter Name container + Enter Name Error container
-                          Column(
-                            children: [
-                              getEnterNameContainer(),
-                              Container(
-                                alignment: AlignmentDirectional.center,
-                                margin: const EdgeInsets.only(top: 3),
-                                child: Text(_nameValidationText,
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: StateContainer.of(context).curTheme.primary,
-                                      fontFamily: "NunitoSans",
-                                      fontWeight: FontWeight.w600,
-                                    )),
-                              ),
-                            ],
-                          ),
+                          // // Column for Enter Name container + Enter Name Error container
+                          // Column(
+                          //   children: [
+                          //     getEnterNameContainer(),
+                          //     Container(
+                          //       alignment: AlignmentDirectional.center,
+                          //       margin: const EdgeInsets.only(top: 3),
+                          //       child: Text(_nameValidationText,
+                          //           style: TextStyle(
+                          //             fontSize: 14.0,
+                          //             color: StateContainer.of(context).curTheme.primary,
+                          //             fontFamily: "NunitoSans",
+                          //             fontWeight: FontWeight.w600,
+                          //           )),
+                          //     ),
+                          //   ],
+                          // ),
 
                           // Column for Enter Address container + Enter Address Error container
                           Column(
@@ -964,7 +979,7 @@ class AddScheduledSheetState extends State<AddScheduledSheet> {
                     }
 
                     final Scheduled sched = Scheduled(
-                      label: _nameController.text,
+                      // label: _nameController.text,
                       amount_raw: amountRaw,
                       timestamp: _timestamp,
                       address: finalAddress,
@@ -1009,17 +1024,17 @@ class AddScheduledSheetState extends State<AddScheduledSheet> {
   Future<bool> validateForm() async {
     bool isValid = true;
 
-    // validate name
-    if (_nameController.text.isEmpty) {
-      setState(() {
-        _nameValidationText = Z.of(context).nameEmpty;
-      });
-      isValid = false;
-    } else {
-      setState(() {
-        _nameValidationText = "";
-      });
-    }
+    // // validate name
+    // if (_nameController.text.isEmpty) {
+    //   setState(() {
+    //     _nameValidationText = Z.of(context).nameEmpty;
+    //   });
+    //   isValid = false;
+    // } else {
+    //   setState(() {
+    //     _nameValidationText = "";
+    //   });
+    // }
 
     // validate amount
     if (_amountController.text.isEmpty || _amountController.text == "0") {

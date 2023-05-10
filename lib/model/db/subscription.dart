@@ -8,7 +8,7 @@ part 'subscription.g.dart';
 class Subscription {
 
   Subscription({
-    required this.label,
+    this.label = "",
     this.active = false,
     this.autopay = false,
     this.paid = false,

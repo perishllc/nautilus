@@ -765,23 +765,23 @@ class UpcomingSheetState extends State<UpcomingSheet> {
                                     children: [
                                       RichText(
                                         text: TextSpan(
-                                          text: sub.label,
-                                          style: TextStyle(
-                                            fontFamily: "OverpassMono",
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: AppFontSizes.small,
-                                            color: StateContainer.of(context).curTheme.text,
-                                          ),
-                                        ),
-                                      ),
-                                      RichText(
-                                        text: TextSpan(
                                           text: Address(sub.address).getShortString() ?? "",
                                           style: TextStyle(
                                             fontFamily: "OverpassMono",
                                             fontWeight: FontWeight.w100,
                                             fontSize: AppFontSizes.smallest,
                                             color: StateContainer.of(context).curTheme.text60,
+                                          ),
+                                        ),
+                                      ),
+                                      RichText(
+                                        text: TextSpan(
+                                          text: sub.label,
+                                          style: TextStyle(
+                                            fontFamily: "OverpassMono",
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: AppFontSizes.small,
+                                            color: StateContainer.of(context).curTheme.text,
                                           ),
                                         ),
                                       ),
@@ -837,34 +837,34 @@ class UpcomingSheetState extends State<UpcomingSheet> {
                                   // ),
 
                                   // display next payment time:
-                                  if (sub.active)
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        RichText(
-                                          text: TextSpan(
-                                            text: "${Z.of(context).paymentTime}: ",
-                                            style: TextStyle(
-                                              fontFamily: "OverpassMono",
-                                              fontWeight: FontWeight.w100,
-                                              fontSize: AppFontSizes.small,
-                                              color: StateContainer.of(context).curTheme.text60,
-                                            ),
+                                  // if (sub.active)
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      RichText(
+                                        text: TextSpan(
+                                          text: "${overdue ? Z.of(context).pastDue : Z.of(context).paymentTime}: ",
+                                          style: TextStyle(
+                                            fontFamily: "OverpassMono",
+                                            fontWeight: FontWeight.w100,
+                                            fontSize: AppFontSizes.small,
+                                            color: overdue ? color : StateContainer.of(context).curTheme.text60,
                                           ),
                                         ),
-                                        RichText(
-                                          text: TextSpan(
-                                            text: getCardTime(nextPaymentTime.millisecondsSinceEpoch ~/ 1000),
-                                            style: TextStyle(
-                                              fontFamily: "OverpassMono",
-                                              fontWeight: FontWeight.w100,
-                                              fontSize: AppFontSizes.small,
-                                              color: color,
-                                            ),
+                                      ),
+                                      RichText(
+                                        text: TextSpan(
+                                          text: getCardTime(nextPaymentTime.millisecondsSinceEpoch ~/ 1000),
+                                          style: TextStyle(
+                                            fontFamily: "OverpassMono",
+                                            fontWeight: FontWeight.w100,
+                                            fontSize: AppFontSizes.small,
+                                            color: color,
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
+                                  ),
 
                                   // Container(
                                   //   // margin: const EdgeInsetsDirectional.only(start: 10, end: 10),

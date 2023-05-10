@@ -617,6 +617,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "This password will be required to open %1."),
         "passwordsDontMatch":
             MessageLookupByLibrary.simpleMessage("Passwords do not match"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("Past Due"),
         "pay": MessageLookupByLibrary.simpleMessage("Pay"),
         "payRequest": MessageLookupByLibrary.simpleMessage("Pay this request"),
         "paymentHistory":

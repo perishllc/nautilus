@@ -1652,6 +1652,11 @@
     "type": "text",
     "description": "next_payment"
   },
+  "pastDue": "Past Due",
+  "@pastDue": {
+    "type": "text",
+    "description": "past_due"
+  },
   "paymentTime": "Payment Time",
   "@paymentTime": {
     "type": "text",
