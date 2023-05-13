@@ -2670,7 +2670,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemSingleLine(
                         context, Z.of(context).copyWalletAddressToClipboard, AppIcons.content_copy, onPressed: () {
-                      Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
+                      Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address ?? ""));
                       UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
                     }),
                     Divider(height: 2, color: StateContainer.of(context).curTheme.text15),

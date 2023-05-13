@@ -70,7 +70,7 @@ class SubDetailsSheetState extends State<SubDetailsSheet> {
                       // var history = await sl.get<SubscriptionService>().getPaymentHistory(context, widget.sub);
                       Sheets.showAppHeightEightSheet(
                         context: context,
-                        widget: PaymentHistorySheet(history: [],),
+                        widget: PaymentHistorySheet(address: widget.sub.address),
                         animationDurationMs: 175,
                       );
                     }),

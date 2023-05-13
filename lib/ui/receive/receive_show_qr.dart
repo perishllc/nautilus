@@ -302,7 +302,7 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                             _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
                             _addressCopied ? Z.of(context).addressCopied : Z.of(context).copyAddress,
                             Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
-                          Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
+                          Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address ?? ""));
                           setState(() {
                             // Set copied style
                             _addressCopied = true;

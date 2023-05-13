@@ -56,7 +56,7 @@ class ShopSheetState extends State<ShopSheet> {
                   child: AppDialogs.infoButton(
                     context,
                     () {
-                      Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
+                      Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address ?? ""));
                       UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
                     },
                     icon: AppIcons.content_copy,

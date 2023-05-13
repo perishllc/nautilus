@@ -691,6 +691,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "A minimum amount to receive. If a payment or request is received with an amount less than this, it will be ignored."),
         "received": MessageLookupByLibrary.simpleMessage("Received"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("Recurring"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("Recurring Payments"),
         "refund": MessageLookupByLibrary.simpleMessage("Refund"),
         "registerButton": MessageLookupByLibrary.simpleMessage("Register"),
         "registerFor": MessageLookupByLibrary.simpleMessage("for"),

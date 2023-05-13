@@ -242,7 +242,7 @@ class ContactDetailsSheetState extends State<ContactDetailsSheet> {
                     if (widget.contact.address != null)
                       GestureDetector(
                         onTap: () {
-                          Clipboard.setData(ClipboardData(text: widget.contact.address));
+                          Clipboard.setData(ClipboardData(text: widget.contact.address ?? ""));
                           setState(() {
                             _addressCopied = true;
                           });

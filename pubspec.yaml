@@ -74,7 +74,7 @@ dependencies:
   json_annotation: ^4.8.0
 
   # Localization
-  intl: ^0.17.0
+  intl: ^0.18.0
   # BigDecimal alternative
   decimal: ^2.3.0
 
@@ -83,8 +83,8 @@ dependencies:
   logging: ^1.1.1
 
   # changelog:
-  package_info_plus: ^1.4.2
-  # package_info_plus: ^3.0.0
+  # package_info_plus: ^1.4.2
+  # package_info_plus: ^4.0.0
   flutter_markdown: ^0.6.12
 
   # Native webview plugin
@@ -124,7 +124,8 @@ dependencies:
   mobile_scanner: ^3.0.0-beta.4
   # mobile_scanner: 3.0.0-beta.1
   # Share files
-  share_plus: ^6.2.0
+  share_plus: ^7.0.0
+
 
   # File picker
   file_picker: ^5.2.0
@@ -237,7 +238,7 @@ dependencies:
   flutter_native_timezone: ^2.0.0
   cron: ^0.5.1
   math_expressions: ^2.3.1
-  flutter_rounded_date_picker: ^3.0.2
+  omni_datetime_picker: ^1.0.7
 
 flutter_intl:
   enabled: true
@@ -251,6 +252,7 @@ flutter_intl:
 
 dependency_overrides:
   ffi: ^2.0.1
+  package_info_plus: ^4.0.0
   # web3dart: 2.0.0
   # analyzer: ^4.1.0
   # dart_style: ^2.2.3

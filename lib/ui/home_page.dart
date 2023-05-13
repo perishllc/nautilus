@@ -2202,12 +2202,10 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       }
     }
     for (final Scheduled scheduled in _scheduled) {
-      if (scheduled.active) {
-        // check if scheduled time is in the past:
-        if (scheduled.timestamp < DateTime.now().millisecondsSinceEpoch ~/ 1000) {
-          scheduledCount++;
-          upcomingCount++;
-        }
+      // check if scheduled time is in the past:
+      if (scheduled.timestamp < DateTime.now().millisecondsSinceEpoch ~/ 1000) {
+        scheduledCount++;
+        upcomingCount++;
       }
     }
     return Container(

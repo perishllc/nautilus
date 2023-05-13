@@ -121,13 +121,16 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                 if (!isGiftLoad && !txDetails.is_message && addressToCopy != null)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).viewPaymentHistory, Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () async {
-                            // var history = await sl.get<DBHelper>().getPaymentHistory(addressToCopy!);
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).viewPaymentHistory,
+                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                        // var history = await sl.get<DBHelper>().getPaymentHistory(addressToCopy!);
                         Sheets.showAppHeightEightSheet(
                           context: context,
-                          widget: PaymentHistorySheet(history: [],),
+                          widget: PaymentHistorySheet(
+                            address: (StateContainer.of(context).wallet?.address == widget.txDetails?.from_address
+                                ? widget.txDetails?.from_address
+                                : widget.txDetails?.to_address) ?? "",
+                          ),
                           animationDurationMs: 175,
                         );
                       }),
@@ -143,7 +146,7 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
                           _addressCopied ? Z.of(context).addressCopied : Z.of(context).copyAddress,
                           Dimens.BUTTON_TOP_DIMENS, onPressed: () {
-                        Clipboard.setData(ClipboardData(text: addressToCopy));
+                        Clipboard.setData(ClipboardData(text: addressToCopy ?? ""));
                         if (mounted) {
                           setState(() {
                             // Set copied style
@@ -293,7 +296,7 @@ class PaymentDetailsSheetState extends State<PaymentDetailsSheet> {
                           _seedCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY_OUTLINE,
                           _seedCopied ? Z.of(context).seedCopiedShort : Z.of(context).copySeed,
                           Dimens.BUTTON_BOTTOM_EXCEPTION_DIMENS, onPressed: () {
-                        Clipboard.setData(ClipboardData(text: walletSeed));
+                        Clipboard.setData(ClipboardData(text: walletSeed ?? ""));
                         if (!mounted) return;
                         setState(() {
                           // Set copied style

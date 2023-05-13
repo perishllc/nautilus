@@ -126,17 +126,69 @@ class AppState extends State<App> {
         //   brightness: Brightness.dark,
         // ),
         theme: ThemeData(
-          dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-          primaryColor: StateContainer.of(context).curTheme.primary,
-          brightness: StateContainer.of(context).curTheme.brightness,
+          // colorSchemeSeed: StateContainer.of(context).curTheme.primary,
+          // dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
+          // primaryColor: StateContainer.of(context).curTheme.primary,
+          // brightness: StateContainer.of(context).curTheme.brightness,
+          // textTheme: TextTheme(
+          //   bodySmall: TextStyle(
+          //     color: StateContainer.of(context).curTheme.text,
+          //   ),
+          //   bodyMedium: TextStyle(
+          //     color: StateContainer.of(context).curTheme.text,
+          //   ),
+          //   bodyLarge: TextStyle(
+          //     color: StateContainer.of(context).curTheme.text,
+          //   ),
+          //   displaySmall: TextStyle(
+          //     color: StateContainer.of(context).curTheme.text,
+          //   ),
+          //   displayMedium: TextStyle(
+          //     color: StateContainer.of(context).curTheme.text,
+          //   ),
+          //   displayLarge: TextStyle(
+          //     color: StateContainer.of(context).curTheme.text,
+          //   ),
+          //   labelSmall: TextStyle(
+          //     color: StateContainer.of(context).curTheme.text,
+          //   ),
+          //   labelMedium: TextStyle(
+          //     color: StateContainer.of(context).curTheme.text,
+          //   ),
+          //   labelLarge: TextStyle(
+          //     color: StateContainer.of(context).curTheme.text,
+          //   ),
+          //   headlineSmall: TextStyle(
+          //     color: StateContainer.of(context).curTheme.text,
+          //   ),
+          //   headlineMedium: TextStyle(
+          //     color: StateContainer.of(context).curTheme.text,
+          //   ),
+          //   headlineLarge: TextStyle(
+          //     color: StateContainer.of(context).curTheme.text,
+          //   ),
+          //   titleSmall: TextStyle(
+          //     color: StateContainer.of(context).curTheme.text,
+          //   ),
+          //   titleMedium: TextStyle(
+          //     color: StateContainer.of(context).curTheme.text,
+          //   ),
+          //   titleLarge: TextStyle(
+          //     color: StateContainer.of(context).curTheme.text,
+          //   ),
+          // ),
           fontFamily: "NunitoSans",
           useMaterial3: true,
           colorScheme: ColorScheme.fromSwatch().copyWith(
-              secondary: StateContainer.of(context).curTheme.primary10,
-              brightness: StateContainer.of(context).curTheme.brightness,
-              error: StateContainer.of(context).curTheme.error,
-              primary: StateContainer.of(context).curTheme.primary),
-          scaffoldBackgroundColor: StateContainer.of(context).curTheme.background,
+            secondary: StateContainer.of(context).curTheme.primary10,
+            brightness: StateContainer.of(context).curTheme.brightness,
+            error: StateContainer.of(context).curTheme.error,
+            primary: StateContainer.of(context).curTheme.primary,
+            // background: StateContainer.of(context).curTheme.background,
+            tertiary: StateContainer.of(context).curTheme.warning,
+          ),
+          brightness: StateContainer.of(context).curTheme.brightness,
+          // scaffoldBackgroundColor: StateContainer.of(context).curTheme.background,
         ),
         localizationsDelegates: [
           ZsDelegate(StateContainer.of(context).curLanguage),

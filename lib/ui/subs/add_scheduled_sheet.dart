@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
+import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
@@ -28,7 +29,6 @@ import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/misc.dart';
 import 'package:wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
-import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:wallet_flutter/util/numberutil.dart';
 
 class AddScheduledSheet extends StatefulWidget {
@@ -566,28 +566,42 @@ class AddScheduledSheetState extends State<AddScheduledSheet> {
 
   Future<void> pickTime() async {
     _timestampValidationText = "";
-    final DateTime? pickedDate = await showRoundedDatePicker(
-      context: context,
-      height: 300,
-      initialDate: _timestamp != 0 ? DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000) : DateTime.now(),
-      firstDate: DateTime(DateTime.now().hour + 1),
-      lastDate: DateTime(DateTime.now().year + 3),
-      theme: ThemeData(
-        dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
-        primaryColor: StateContainer.of(context).curTheme.primary,
-        textTheme: TextTheme(
-          bodyLarge: TextStyle(
-            color: StateContainer.of(context).curTheme.text,
-          ),
-          bodyMedium: TextStyle(
-            color: StateContainer.of(context).curTheme.text,
-          ),
-          bodySmall: TextStyle(
-            color: StateContainer.of(context).curTheme.primary60,
-          ),
-        ),
-      ),
-    );
+    // final DateTime? pickedDate = await showRoundedDatePicker(
+    //   context: context,
+    //   height: 300,
+    //   initialDate: _timestamp != 0 ? DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000) : DateTime.now(),
+    //   firstDate: DateTime(DateTime.now().hour + 1),
+    //   lastDate: DateTime(DateTime.now().year + 3),
+    //   theme: ThemeData(
+    //     dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
+    //     primaryColor: StateContainer.of(context).curTheme.primary,
+    //     textTheme: TextTheme(
+    //       bodyLarge: TextStyle(
+    //         color: StateContainer.of(context).curTheme.text,
+    //       ),
+    //       bodyMedium: TextStyle(
+    //         color: StateContainer.of(context).curTheme.text,
+    //       ),
+    //       bodySmall: TextStyle(
+    //         color: StateContainer.of(context).curTheme.primary60,
+    //       ),
+    //     ),
+    //   ),
+    // );
+    DateTime? pickedDate = DateTime.now();
+    // await CupertinoRoundedDatePicker.show(
+    //   context,
+    //   fontFamily: "Mali",
+    //   textColor: StateContainer.of(context).curTheme.text!,
+    //   background: StateContainer.of(context).curTheme.background!,
+    //   borderRadius: 16,
+    //   initialDatePickerMode: CupertinoDatePickerMode.time,
+    //   use24hFormat: true,
+    //   initialDate: _timestamp != 0 ? DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000) : DateTime.now(),
+    //   onDateTimeChanged: (DateTime newDateTime) {
+    //     pickedDate = newDateTime;
+    //   },
+    // );
     if (!mounted) return;
     if (pickedDate != null) {
       // final TimeOfDay? pickedTime = await showRoundedTimePicker(
@@ -611,28 +625,80 @@ class AddScheduledSheetState extends State<AddScheduledSheet> {
       //     ),
       //   ),
       // );
-      TimeOfDay? pickedTime = TimeOfDay.now();
-      await CupertinoRoundedDatePicker.show(
-        context,
-        fontFamily: "Mali",
-        textColor: StateContainer.of(context).curTheme.text!,
-        background: StateContainer.of(context).curTheme.background!,
-        borderRadius: 16,
-        initialDatePickerMode: CupertinoDatePickerMode.time,
-        use24hFormat: true,
-        initialDate: _timestamp != 0 ? DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000) : DateTime.now(),
-        onDateTimeChanged: (DateTime newDateTime) {
-          pickedTime = TimeOfDay.fromDateTime(newDateTime);
+      // TimeOfDay? pickedTime = TimeOfDay.now();
+      // await CupertinoRoundedDatePicker.show(
+      //   context,
+      //   fontFamily: "Mali",
+      //   textColor: StateContainer.of(context).curTheme.text!,
+      //   background: StateContainer.of(context).curTheme.background!,
+      //   borderRadius: 16,
+      //   initialDatePickerMode: CupertinoDatePickerMode.time,
+      //   use24hFormat: true,
+      //   initialDate: _timestamp != 0 ? DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000) : DateTime.now(),
+      //   onDateTimeChanged: (DateTime newDateTime) {
+      //     pickedTime = TimeOfDay.fromDateTime(newDateTime);
+      //   },
+      // );
+
+      DateTime? pickedDateTime = await showOmniDateTimePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1600).subtract(const Duration(days: 3652)),
+        lastDate: DateTime.now().add(
+          const Duration(days: 3652),
+        ),
+        is24HourMode: true,
+        isShowSeconds: false,
+        minutesInterval: 1,
+        secondsInterval: 1,
+        theme: ThemeData(
+          useMaterial3: true,
+          colorSchemeSeed: StateContainer.of(context).curTheme.primary,
+          brightness: StateContainer.of(context).curTheme.brightness,
+          // colorScheme: ColorScheme.fromSwatch().copyWith(
+          // //   secondary: StateContainer.of(context).curTheme.primary10,
+          //   brightness: StateContainer.of(context).curTheme.brightness,
+          // //   error: StateContainer.of(context).curTheme.error,
+          //   primary: StateContainer.of(context).curTheme.primary,
+          // //   background: StateContainer.of(context).curTheme.background,
+          // //   tertiary: StateContainer.of(context).curTheme.warning,
+
+          // ),
+        ),
+        type: OmniDateTimePickerType.dateAndTime,
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        constraints: const BoxConstraints(
+          maxWidth: 350,
+          maxHeight: 650,
+        ),
+        transitionBuilder: (BuildContext context, Animation<double> anim1, Animation<double> anim2, Widget child) {
+          return FadeTransition(
+            opacity: anim1.drive(
+              Tween(
+                begin: 0,
+                end: 1,
+              ),
+            ),
+            child: child,
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 200),
+        barrierDismissible: true,
+        selectableDayPredicate: (DateTime dateTime) {
+          // disable dates before today:
+          return dateTime.isAfter(DateTime.now().subtract(const Duration(days: 1)));
         },
       );
-      if (pickedTime != null) {
-        final DateTime finalDateTime = DateTime(
-          pickedDate.year,
-          pickedDate.month,
-          pickedDate.day,
-          pickedTime?.hour ?? 0,
-          pickedTime?.minute ?? 0,
-        );
+
+      if (pickedDateTime != null) {
+        // final DateTime finalDateTime = DateTime(
+        //   pickedDate?.year ?? 0,
+        //   pickedDate?.month ?? 0,
+        //   pickedDate?.day ?? 0,
+        //   pickedTime?.hour ?? 0,
+        //   pickedTime?.minute ?? 0,
+        // );
+        final DateTime finalDateTime = pickedDateTime!;
         setState(() {
           _timestamp = finalDateTime.millisecondsSinceEpoch ~/ 1000;
         });

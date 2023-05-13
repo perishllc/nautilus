@@ -71,7 +71,7 @@ class ScheduledDetailsSheetState extends State<ScheduledDetailsSheet> {
                       // var history = await sl.get<SubscriptionService>().getPaymentHistory(context, widget.sub);
                       Sheets.showAppHeightEightSheet(
                         context: context,
-                        widget: PaymentHistorySheet(history: [],),
+                        widget: PaymentHistorySheet(address: widget.scheduled.address),
                         animationDurationMs: 175,
                       );
                     }),

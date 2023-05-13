@@ -412,7 +412,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
         label: Z.of(context).copy,
         onPressed: (BuildContext context) async {
           await Clipboard.setData(
-            ClipboardData(text: account.address),
+            ClipboardData(text: account.address ?? ""),
           );
           if (!mounted) return;
           UIUtil.showSnackbar(

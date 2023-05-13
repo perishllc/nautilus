@@ -115,7 +115,7 @@ class UserDataUtil {
       await _channel.invokeMethod("setSecureClipboardItem", params);
     } else {
       // Set item in clipboard
-      await Clipboard.setData(ClipboardData(text: value));
+      await Clipboard.setData(ClipboardData(text: value ?? ""));
       // Auto clear it after 2 minutes
       if (setStream != null) {
         setStream!.cancel();

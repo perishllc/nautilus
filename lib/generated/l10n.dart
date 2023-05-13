@@ -5495,6 +5495,26 @@ class Z {
     );
   }
 
+  /// `Recurring`
+  String get recurringButton {
+    return Intl.message(
+      'Recurring',
+      name: 'recurringButton',
+      desc: 'recurring_button',
+      args: [],
+    );
+  }
+
+  /// `Recurring Payments`
+  String get recurringPayments {
+    return Intl.message(
+      'Recurring Payments',
+      name: 'recurringPayments',
+      desc: 'recurring_payments',
+      args: [],
+    );
+  }
+
   /// `Schedule Payment`
   String get schedulePayment {
     return Intl.message(

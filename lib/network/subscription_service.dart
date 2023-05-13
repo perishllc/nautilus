@@ -9,6 +9,7 @@ import 'package:logger/logger.dart';
 import 'package:timezone/data/latest.dart' as tz;
 // ignore: depend_on_referenced_packages
 import 'package:timezone/timezone.dart' as tz;
+import 'package:wallet_flutter/bus/scheduled_changed_event.dart';
 import 'package:wallet_flutter/bus/subs_changed_event.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/scheduled.dart';
@@ -94,7 +95,8 @@ class SubscriptionService {
       }
     }
     EventTaxiImpl.singleton().fire(SubsChangedEvent(subs: await sl.get<DBHelper>().getSubscriptions()));
-
+    EventTaxiImpl.singleton().fire(ScheduledChangedEvent(scheduled: await sl.get<DBHelper>().getScheduled()));
+    
     // get all scheduled payments:
     // final List<Scheduled> scheduled = await sl.get<DBHelper>().getScheduled();
     // for (final Scheduled sched in scheduled) {
@@ -327,10 +329,12 @@ Have a happy Chinese New Year!
       presentBadge: true,
     );
 
+    try {
+
     await flutterLocalNotificationsPlugin.zonedSchedule(
       sched.id ?? 0,
       "Payment Reminder",
-      "Your Scheduled Payment for ${sched.label} is due",
+      "Your Scheduled Payment is due",
       tzdatetime,
       const NotificationDetails(
         android: androidNotificationDetails,
@@ -339,5 +343,8 @@ Have a happy Chinese New Year!
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
     );
+    } catch (e) {
+      log.e("scheduled time was probably in the past: $e");
+    }
   }
 }

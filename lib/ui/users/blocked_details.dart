@@ -266,7 +266,7 @@ class BlockedDetailsSheetState extends State<BlockedDetailsSheet> {
                       // Contact Address
                       GestureDetector(
                         onTap: () {
-                          Clipboard.setData(ClipboardData(text: widget.blocked.address));
+                          Clipboard.setData(ClipboardData(text: widget.blocked.address ?? ""));
                           setState(() {
                             _addressCopied = true;
                           });

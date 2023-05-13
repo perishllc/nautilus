@@ -236,7 +236,7 @@ class OnboardSheetState extends State<OnboardSheet> {
                         _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
                         _linkCopied ? Z.of(context).linkCopied : Z.of(context).copyLink,
                         Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
-                      Clipboard.setData(ClipboardData(text: widget.link));
+                      Clipboard.setData(ClipboardData(text: widget.link ?? ""));
                       setState(() {
                         // Set copied style
                         _linkCopied = true;

@@ -2712,6 +2712,16 @@
     "type": "text",
     "description": "scheduled_button"
   },
+  "recurringButton": "Recurring",
+  "@recurringButton": {
+    "type": "text",
+    "description": "recurring_button"
+  },
+  "recurringPayments": "Recurring Payments",
+  "@recurringPayments": {
+    "type": "text",
+    "description": "recurring_payments"
+  },
   "schedulePayment": "Schedule Payment",
   "@schedulePayment": {
     "type": "text",

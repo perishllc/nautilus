@@ -224,7 +224,7 @@ class AccountDetailsSheetState extends State<AccountDetailsSheet> {
                                   _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
                                   _addressCopied ? Z.of(context).addressCopied : Z.of(context).copyAddress,
                                   Dimens.BUTTON_TOP_DIMENS, onPressed: () {
-                                Clipboard.setData(ClipboardData(text: widget.account.address));
+                                Clipboard.setData(ClipboardData(text: widget.account.address ?? ""));
                                 setState(() {
                                   // Set copied style
                                   _addressCopied = true;
