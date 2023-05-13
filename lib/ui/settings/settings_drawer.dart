@@ -679,21 +679,16 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         builder: (BuildContext context) {
           return AppSimpleDialog(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  Z.of(context).unopenedWarningHeader,
-                  style: AppStyles.textStyleDialogHeader(context),
-                ),
-                AppDialogs.infoButton(
-                  context,
-                  () {
-                    AppDialogs.showInfoDialog(
-                        context, Z.of(context).unopenedWarningHeader, Z.of(context).unopenedWarningInfo);
-                  },
-                )
-              ],
+            title: Text(
+              Z.of(context).unopenedWarningHeader,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            infoButton: AppDialogs.infoButton(
+              context,
+              () {
+                AppDialogs.showInfoDialog(
+                    context, Z.of(context).unopenedWarningHeader, Z.of(context).unopenedWarningInfo);
+              },
             ),
             children: <Widget>[
               AppSimpleDialogOption(
@@ -852,21 +847,16 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         builder: (BuildContext context) {
           return AppSimpleDialog(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  Z.of(context).receiveMinimum,
-                  style: AppStyles.textStyleDialogHeader(context),
-                ),
-                AppDialogs.infoButton(
-                  context,
-                  () {
-                    AppDialogs.showInfoDialog(
-                        context, Z.of(context).receiveMinimumHeader, Z.of(context).receiveMinimumInfo);
-                  },
-                )
-              ],
+            title: Text(
+              Z.of(context).receiveMinimum,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            infoButton: AppDialogs.infoButton(
+              context,
+              () {
+                AppDialogs.showInfoDialog(
+                    context, Z.of(context).receiveMinimumHeader, Z.of(context).receiveMinimumInfo);
+              },
             ),
             children: _buildMinRawOptions(),
           );
@@ -888,21 +878,15 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         builder: (BuildContext context) {
           return AppSimpleDialog(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  Z.of(context).currencyMode,
-                  style: AppStyles.textStyleDialogHeader(context),
-                ),
-                AppDialogs.infoButton(
-                  context,
-                  () {
-                    AppDialogs.showInfoDialog(
-                        context, Z.of(context).currencyModeHeader, Z.of(context).currencyModeInfo);
-                  },
-                )
-              ],
+            title: Text(
+              Z.of(context).currencyMode,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            infoButton: AppDialogs.infoButton(
+              context,
+              () {
+                AppDialogs.showInfoDialog(context, Z.of(context).currencyModeHeader, Z.of(context).currencyModeInfo);
+              },
             ),
             children: _buildCurrencyModeOptions(),
           );
@@ -916,11 +900,15 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
       await AppDialogs.showInfoDialog(
           context, Z.of(context).currencyModeChange, Z.of(context).currencyModeChangeWarning);
     }
-    sl.get<SharedPrefsUtil>().setCurrencyMode(currencyMode).then((void result) {
-      setState(() {
-        StateContainer.of(context).setCurrencyMode(currencyMode, context: context);
-        _curCurrencyModeSetting = CurrencyModeSetting(chosen);
-      });
+
+    if (chosen == null) {
+      return;
+    }
+
+    await sl.get<SharedPrefsUtil>().setCurrencyMode(currencyMode);
+    setState(() {
+      StateContainer.of(context).setCurrencyMode(currencyMode, context: context);
+      _curCurrencyModeSetting = CurrencyModeSetting(chosen);
     });
   }
 
@@ -1096,15 +1084,13 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
         builder: (BuildContext context) {
           return AppSimpleDialog(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-              Text(
-                Z.of(context).blockExplorer,
-                style: AppStyles.textStyleDialogHeader(context),
-              ),
-              AppDialogs.infoButton(context, () {
-                AppDialogs.showInfoDialog(context, Z.of(context).blockExplorerHeader, Z.of(context).blockExplorerInfo);
-              }),
-            ]),
+            title: Text(
+              Z.of(context).blockExplorer,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            infoButton: AppDialogs.infoButton(context, () {
+              AppDialogs.showInfoDialog(context, Z.of(context).blockExplorerHeader, Z.of(context).blockExplorerInfo);
+            }),
             children: _buildExplorerOptions(),
           );
         });

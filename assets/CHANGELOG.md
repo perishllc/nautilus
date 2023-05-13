@@ -2,6 +2,7 @@
 #### Added
 - Scheduled Payments
 #### Changed
+- Dialog style updates
 - Move block explorer setting to advanced settings
 - Remove funding banner
 - Remove Monero support

@@ -322,7 +322,7 @@ class DBHelper {
         name: "nano.to",
         selected: false,
         type: WorkSourceTypes.URL,
-        url: "https://pow.nano.to",
+        url: "https://rpc.nano.to",
       ),
       dbClient: dbClient,
     );

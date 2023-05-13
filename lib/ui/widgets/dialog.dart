@@ -571,21 +571,15 @@ class AppDialogs {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
             ),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  Z.of(context).trackingHeader,
-                  style: AppStyles.textStyleDialogHeader(context),
-                ),
-                AppDialogs.infoButton(
-                  context,
-                  () {
-                    AppDialogs.showInfoDialog(
-                        context, Z.of(context).trackingHeader, Z.of(context).trackingWarningBodyLong);
-                  },
-                )
-              ],
+            title: Text(
+              Z.of(context).trackingHeader,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            infoButton: AppDialogs.infoButton(
+              context,
+              () {
+                AppDialogs.showInfoDialog(context, Z.of(context).trackingHeader, Z.of(context).trackingWarningBodyLong);
+              },
             ),
             children: <Widget>[
               AppSimpleDialogOption(

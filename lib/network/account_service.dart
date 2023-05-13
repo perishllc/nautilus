@@ -710,7 +710,6 @@ class AccountService {
   // Future<HandoffWorkResponse> requestWork(String url, String hash) async {
   // }
 
-
   // NEEDS PoW
 
   Future<String?> requestWork(String url, String hash) async {

@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/ui/widgets/dialog.dart';
 
 // Examples can assume:
 // enum Department { treasury, state }
@@ -465,6 +466,7 @@ class AppSimpleDialog extends StatelessWidget {
     this.contentPadding = const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 16.0),
     this.semanticLabel,
     this.shape = const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
+    this.infoButton,
   });
 
   /// The (optional) title of the dialog is displayed in a large font at the top
@@ -472,6 +474,8 @@ class AppSimpleDialog extends StatelessWidget {
   ///
   /// Typically a [Text] widget.
   final Widget? title;
+
+  final Widget? infoButton;
 
   /// Padding around the title.
   ///
@@ -527,12 +531,28 @@ class AppSimpleDialog extends StatelessWidget {
     String? label = semanticLabel;
 
     if (title != null) {
-      body.add(Padding(
-          padding: titlePadding,
-          child: DefaultTextStyle(
-            style: Theme.of(context).textTheme.headline1!,
-            child: Semantics(namesRoute: true, child: title),
-          )));
+      if (infoButton == null) {
+        body.add(Padding(
+            padding: titlePadding,
+            child: DefaultTextStyle(
+              style: Theme.of(context).textTheme.displayLarge!,
+              child: Semantics(namesRoute: true, child: title),
+            )));
+      } else {
+        body.add(
+          Stack(
+            children: [
+              Align(alignment: Alignment.topRight, child: infoButton!),
+              Padding(
+                  padding: titlePadding,
+                  child: DefaultTextStyle(
+                    style: Theme.of(context).textTheme.displayLarge!,
+                    child: Semantics(namesRoute: true, child: title),
+                  ))
+            ],
+          ),
+        );
+      }
     } else {
       switch (defaultTargetPlatform) {
         case TargetPlatform.iOS:
