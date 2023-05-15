@@ -1,6 +1,8 @@
 ## v0.8.6 - [2023-05-XX]
 #### Added
 - Scheduled Payments
+- Support for .well-known DID's
+- Confirmation popup when looking up a username
 - Revamped username support
 - Solar PoW option
 - rpc.nano.to PoW option
