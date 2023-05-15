@@ -6175,6 +6175,16 @@ class Z {
     );
   }
 
+  /// `We're about to check if this username is registered on a few different services.\nThis may take a second or so.`
+  String get checkUsernameConfirmInfo {
+    return Intl.message(
+      'We\'re about to check if this username is registered on a few different services.\nThis may take a second or so.',
+      name: 'checkUsernameConfirmInfo',
+      desc: 'username_check_confirm_info',
+      args: [],
+    );
+  }
+
   /// `Username available!`
   String get usernameAvailable {
     return Intl.message(

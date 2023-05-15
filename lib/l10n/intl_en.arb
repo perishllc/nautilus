@@ -3052,6 +3052,11 @@
     "type": "text",
     "description": "Description for username already registered"
   },
+  "checkUsernameConfirmInfo": "We're about to check if this username is registered on a few different services.\nThis may take a second or so.",
+  "@checkUsernameConfirmInfo": {
+    "type": "text",
+    "description": "username_check_confirm_info"
+  },
   "usernameAvailable": "Username available!",
   "@usernameAvailable": {
     "type": "text",

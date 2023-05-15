@@ -211,12 +211,16 @@ class UsernameService {
   }
 
   Future<String?> checkNanoToUsername(String username) async {
-    final List<User>? users = await fetchNanoToKnown(http.Client());
-    if (users == null) return null;
-    for (final User user in users) {
-      if (user.username == username) {
-        return user.address;
+    try {
+      final List<User>? users = await fetchNanoToKnown(http.Client());
+      if (users == null) return null;
+      for (final User user in users) {
+        if (user.username == username) {
+          return user.address;
+        }
       }
+    } catch (e) {
+      log.e("Error checking nano.to username: $e");
     }
     return null;
   }
@@ -619,7 +623,7 @@ class UsernameService {
 
   // figure out what type of username, if any, this string is:
   Future<User?> figureOutUsernameType(String username) async {
-    final String strippedUsername = SendSheetHelpers.stripPrefixes(username);
+    String strippedUsername = SendSheetHelpers.stripPrefixes(username);
     String? type;
     String? address;
 
@@ -658,10 +662,21 @@ class UsernameService {
     }
 
     // check if nano.to username:
+    // if (address == null) {
+    //   address = await sl.get<UsernameService>().checkNanoToUsername(strippedUsername);
+    //   if (address != null) {
+    //     type = UserTypes.NANO_TO;
+    //   }
+    // }
+
+    // check if .well-known:
     if (address == null) {
-      address = await sl.get<UsernameService>().checkNanoToUsername(strippedUsername);
-      if (address != null) {
-        type = UserTypes.NANO_TO;
+      if (username.contains(".") && username.contains("@")) {
+        address = await sl.get<UsernameService>().checkWellKnown(username);
+        if (address != null) {
+          // strippedUsername = username;// bit of a hack, but we need the full username for the .well-known address
+          type = UserTypes.WELL_KNOWN;
+        }
       }
     }
 
@@ -689,13 +704,13 @@ class UsernameService {
     //   }
     // }
 
-    // check if nano.to address:
-    if (username == null) {
-      username = await sl.get<UsernameService>().checkNanoToAddress(address);
-      if (username != null) {
-        type = UserTypes.NANO_TO;
-      }
-    }
+    // // check if nano.to address:
+    // if (username == null) {
+    //   username = await sl.get<UsernameService>().checkNanoToAddress(address);
+    //   if (username != null) {
+    //     type = UserTypes.NANO_TO;
+    //   }
+    // }
 
     // add to the db if missing:
     if (type != null) {
@@ -727,5 +742,37 @@ class UsernameService {
     } catch (e) {
       log.e("error checking address: $address $e");
     }
+  }
+
+  Future<String?> checkWellKnown(String username) async {
+    // split the string by the @ symbol:
+    try {
+      final List<String> splitStrs = username.split("@");
+      String name = splitStrs.first.toLowerCase();
+      final String domain = splitStrs.last;
+      // lookup domain/.well-known/nano-currency.json and check if it has a nano address:
+      final http.Response response = await http.get(
+        Uri.parse("https://$domain/.well-known/nano-currency.json"),
+        headers: <String, String>{"Accept": "application/json"},
+      );
+      if (name.isEmpty) {
+        name = "_";
+      }
+      if (response.statusCode != 200) {
+        return null;
+      }
+      final Map<String, dynamic> decoded = json.decode(response.body) as Map<String, dynamic>;
+
+      // Access the first element in the names array and retrieve its address
+      final List<dynamic> names = decoded["names"] as List<dynamic>;
+      for (final dynamic item in names) {
+        if (item["name"].toLowerCase() == name) {
+          return item["address"] as String;
+        }
+      }
+    } catch (e) {
+      log.e("error checking well-known: $e");
+    }
+    return null;
   }
 }

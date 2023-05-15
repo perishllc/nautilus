@@ -158,6 +158,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Change the seed/phrase associated with this magic-link authed account, whatever password you set here will overwrite your existing password, but you can use the same password if you choose."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Check Availability"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "We\'re about to check if this username is registered on a few different services.\nThis may take a second or so."),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmPasswordHint":

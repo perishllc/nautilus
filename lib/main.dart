@@ -126,7 +126,15 @@ class AppState extends State<App> {
         //   brightness: Brightness.dark,
         // ),
         theme: ThemeData(
-          colorSchemeSeed: StateContainer.of(context).curTheme.primary,
+          // colorSchemeSeed: StateContainer.of(context).curTheme.primary,
+          colorScheme: ColorScheme.fromSeed(seedColor: StateContainer.of(context).curTheme.primary ?? Colors.blue).copyWith(
+            secondary: StateContainer.of(context).curTheme.primary10,
+            brightness: StateContainer.of(context).curTheme.brightness,
+            error: StateContainer.of(context).curTheme.error,
+            primary: StateContainer.of(context).curTheme.primary,
+            background: StateContainer.of(context).curTheme.background,
+            tertiary: StateContainer.of(context).curTheme.warning,
+          ),
           // dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
           // primaryColor: StateContainer.of(context).curTheme.primary,
           // brightness: StateContainer.of(context).curTheme.brightness,

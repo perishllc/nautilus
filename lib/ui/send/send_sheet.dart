@@ -41,6 +41,7 @@ import 'package:wallet_flutter/ui/scan/scan_screen.dart';
 import 'package:wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_gift.dart';
 import 'package:wallet_flutter/ui/subs/sub_confirm_sheet.dart';
+import 'package:wallet_flutter/ui/util/confirm_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/routes.dart';
@@ -75,7 +76,19 @@ enum AddressStyle { TEXT60, TEXT90, PRIMARY }
 
 mixin SendSheetHelpers {
   static String stripPrefixes(String addressText) {
-    return addressText.replaceAll("@", "").replaceAll("★", "").replaceAll("#", "");
+    addressText = addressText.replaceAll("★", "").replaceAll("#", "");
+
+    // // remove everything after the @ sign:
+    // if (addressText.contains("@")) {
+    //   addressText = addressText.substring(0, addressText.indexOf("@"));
+    // }
+
+    // if the username starts with an @, remove it:
+    if (addressText.startsWith("@")) {
+      addressText = addressText.substring(1);
+    }
+
+    return addressText;
   }
 
   static List<String> toggleLocalCurrency(
@@ -236,6 +249,13 @@ mixin SendSheetHelpers {
         address.startsWith("★") ||
         address.contains(".") ||
         address.contains(r"$")) {
+      return true;
+    }
+    return false;
+  }
+
+  static bool isWellKnown(String address) {
+    if (address.contains("@") && address.contains(".")) {
       return true;
     }
     return false;
@@ -422,7 +442,7 @@ class SendSheetState extends State<SendSheet> {
             _addressController.text.length > 1 &&
             SendSheetHelpers.isSpecialAddress(_addressController.text)) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
-          if (_addressController.text != formattedAddress) {
+          if (_addressController.text != formattedAddress && !SendSheetHelpers.isWellKnown(_addressController.text)) {
             setState(() {
               _addressController.text = formattedAddress;
             });
@@ -459,7 +479,18 @@ class SendSheetState extends State<SendSheet> {
         // check if UD / ENS / opencap / onchain address:
         if (_addressController.text.isNotEmpty && !_addressController.text.contains("★")) {
           User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
-          user ??= await sl.get<UsernameService>().figureOutUsernameType(_addressController.text);
+          if (user == null) {
+            if (!mounted) return;
+            final bool? confirmed = await Sheets.showAppHeightSmallSheet(
+              context: context,
+              widget: ConfirmSheet(subtitle: Z.of(context).checkUsernameConfirmInfo),
+              allowSlide: true,
+            ) as bool?;
+            
+            if (confirmed == true) {
+              user ??= await sl.get<UsernameService>().figureOutUsernameType(_addressController.text);
+            }
+          }
 
           if (user != null) {
             setState(() {

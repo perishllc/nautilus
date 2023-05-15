@@ -162,7 +162,7 @@ class DBHelper {
   static const String ACCOUNTS_ADD_WATCH_ONLY_COLUMN_SQL = """
     ALTER TABLE Accounts ADD watch_only BOOLEAN
     """;
-  
+
   static Database? _db;
 
   NanoUtil? _nanoUtil;
@@ -323,6 +323,16 @@ class DBHelper {
         selected: false,
         type: WorkSourceTypes.URL,
         url: "https://rpc.nano.to",
+      ),
+      dbClient: dbClient,
+    );
+    await saveWorkSource(
+      WorkSource(
+        id: 2,
+        name: "solar",
+        selected: false,
+        type: WorkSourceTypes.URL,
+        url: "https://rpc.nano.to/?source=solar",
       ),
       dbClient: dbClient,
     );
@@ -501,7 +511,7 @@ class DBHelper {
       subs.add(
         Subscription(
           id: list[i]["id"] as int? ?? 0,
-          label: list[i]["label"] as String? ?? "",// todo: remove this null check
+          label: list[i]["label"] as String? ?? "", // todo: remove this null check
           address: list[i]["address"] as String,
           amount_raw: list[i]["amount_raw"] as String,
           frequency: list[i]["frequency"] as String,
@@ -955,7 +965,9 @@ class DBHelper {
   Future<User?> getUserOrContactWithName(String name) async {
     final Database dbClient = (await db)!;
     List<Map> list = [];
-    if (name.contains("@") || name.contains(".") || name.contains("#")) {
+    /*if (name.contains("@") && name.contains(".")) {
+      list = await dbClient.rawQuery('SELECT * FROM Users WHERE lower(username) = ?', [name.toLowerCase()]);
+    } else */if (name.contains("@") || name.contains(".") || name.contains("#")) {
       list = await dbClient.rawQuery(
           'SELECT * FROM Users WHERE lower(username) = ?', [SendSheetHelpers.stripPrefixes(name.toLowerCase())]);
     } else if (name.contains("★")) {

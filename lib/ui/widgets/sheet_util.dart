@@ -92,6 +92,38 @@ class Sheets {
     }
     return Navigator.push<T>(context, route);
   }
+
+  static Future<T?> showAppHeightSmallSheet<T>(
+      {required BuildContext context,
+      required Widget widget,
+      Color? color,
+      double radius = 30.0,
+      Color? barrier,
+      int animationDurationMs = 250,
+      bool removeUntilHome = false,
+      bool closeOnTap = false,
+      Function? onDisposed,
+      bool allowSlide = false}) {
+    assert(radius > 0.0);
+    color ??= StateContainer.of(context).curTheme.backgroundDark;
+    barrier ??= StateContainer.of(context).curTheme.barrier;
+    final _AppHeightSmallModalRoute<T> route = _AppHeightSmallModalRoute<T>(
+        builder: (BuildContext context) {
+          return widget;
+        },
+        color: color,
+        radius: radius,
+        barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+        barrier: barrier,
+        animationDurationMs: animationDurationMs,
+        closeOnTap: closeOnTap,
+        onDisposed: onDisposed,
+        allowSlide: allowSlide);
+    if (removeUntilHome) {
+      return Navigator.pushAndRemoveUntil<T>(context, route, RouteUtils.withNameLike('/home'));
+    }
+    return Navigator.push<T>(context, route);
+  }
 }
 
 class _AppHeightNineSheetLayout extends SingleChildLayoutDelegate {
@@ -467,6 +499,155 @@ class _AppHeightFullModalRoute<T> extends PopupRoute<T> {
             animation: appSheetAnimation,
             builder: (BuildContext context, Widget? child) => CustomSingleChildLayout(
               delegate: _AppHeightFullSheetLayout(appSheetAnimation.value),
+              child: BottomSheet(
+                animationController: _animationController,
+                onClosing: () => Navigator.pop(context),
+                backgroundColor: color,
+                elevation: 0,
+                builder: (BuildContext context) => Container(
+                  decoration: BoxDecoration(
+                    color: color,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(radius!),
+                      topRight: Radius.circular(radius!),
+                    ),
+                  ),
+                  child: Builder(builder: builder!),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+    return MediaQuery.removePadding(
+      context: context,
+      removeTop: true,
+      child: GestureDetector(
+        onTap: () {
+          if (closeOnTap!) {
+            // Close when tapped anywhere
+            Navigator.of(context).pop();
+          }
+        },
+        child: Builder(builder: builder!),
+      ),
+    );
+  }
+
+  @override
+  bool get maintainState => false;
+
+  @override
+  bool get opaque => false;
+
+  @override
+  Duration get transitionDuration => Duration(milliseconds: animationDurationMs!);
+}
+//App Height Full Sheet End
+
+class _AppHeightSmallSheetLayout extends SingleChildLayoutDelegate {
+  _AppHeightSmallSheetLayout(this.progress);
+
+  final double progress;
+
+  @override
+  BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
+    return BoxConstraints(
+      minWidth: constraints.maxWidth,
+      maxWidth: constraints.maxWidth,
+      minHeight: 0.0,
+      // maxHeight: constraints.maxHeight / 3,
+      maxHeight: 250,
+    );
+  }
+
+  @override
+  Offset getPositionForChild(Size size, Size childSize) {
+    return Offset(0.0, size.height - childSize.height * progress);
+  }
+
+  @override
+  bool shouldRelayout(_AppHeightSmallSheetLayout oldDelegate) {
+    return progress != oldDelegate.progress;
+  }
+}
+
+class _AppHeightSmallModalRoute<T> extends PopupRoute<T> {
+  _AppHeightSmallModalRoute(
+      {this.builder,
+      this.barrierLabel,
+      this.color,
+      this.radius,
+      RouteSettings? settings,
+      this.barrier,
+      this.animationDurationMs,
+      this.closeOnTap,
+      this.onDisposed,
+      this.allowSlide = false})
+      : super(settings: settings);
+
+  final WidgetBuilder? builder;
+  final double? radius;
+  final Color? color;
+  final Color? barrier;
+  final int? animationDurationMs;
+  final bool? closeOnTap;
+  final Function? onDisposed;
+  final bool allowSlide;
+
+  @override
+  Color? get barrierColor => barrier;
+
+  @override
+  bool get barrierDismissible => true;
+
+  @override
+  String? barrierLabel;
+
+  @override
+  void didComplete(T? result) {
+    if (onDisposed != null) {
+      onDisposed!();
+    }
+    super.didComplete(result);
+  }
+
+  AnimationController? _animationController;
+  late CurvedAnimation appSheetAnimation;
+
+  @override
+  AnimationController createAnimationController() {
+    assert(_animationController == null);
+    _animationController = BottomSheet.createAnimationController(navigator!.overlay!);
+    _animationController!.duration = Duration(milliseconds: animationDurationMs!);
+    appSheetAnimation =
+        CurvedAnimation(parent: _animationController!, curve: Curves.easeOut, reverseCurve: Curves.linear)
+          ..addStatusListener((AnimationStatus animationStatus) {
+            if (animationStatus == AnimationStatus.completed) {
+              appSheetAnimation.curve = Curves.linear;
+            }
+          });
+    return _animationController!;
+  }
+
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+    if (allowSlide) {
+      return MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        child: GestureDetector(
+          onTap: () {
+            if (closeOnTap!) {
+              // Close when tapped anywhere
+              Navigator.of(context).pop();
+            }
+          },
+          child: AnimatedBuilder(
+            animation: appSheetAnimation,
+            builder: (BuildContext context, Widget? child) => CustomSingleChildLayout(
+              delegate: _AppHeightSmallSheetLayout(appSheetAnimation.value),
               child: BottomSheet(
                 animationController: _animationController,
                 onClosing: () => Navigator.pop(context),

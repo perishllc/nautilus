@@ -18,12 +18,14 @@ import 'package:wallet_flutter/network/username_service.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
+import 'package:wallet_flutter/ui/util/confirm_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/misc.dart';
+import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/numberutil.dart';
@@ -105,7 +107,7 @@ class AddSubSheetState extends State<AddSubSheet> {
             _addressController.text.length > 1 &&
             SendSheetHelpers.isSpecialAddress(_addressController.text)) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
-          if (_addressController.text != formattedAddress) {
+          if (_addressController.text != formattedAddress && !SendSheetHelpers.isWellKnown(_addressController.text)) {
             setState(() {
               _addressController.text = formattedAddress;
             });
@@ -142,7 +144,18 @@ class AddSubSheetState extends State<AddSubSheet> {
         // check if UD / ENS / opencap / onchain address:
         if (_addressController.text.isNotEmpty && !_addressController.text.contains("★")) {
           User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
-          user ??= await sl.get<UsernameService>().figureOutUsernameType(_addressController.text);
+          if (user == null) {
+            if (!mounted) return;
+            final bool? confirmed = await Sheets.showAppHeightSmallSheet(
+              context: context,
+              widget: ConfirmSheet(subtitle: Z.of(context).checkUsernameConfirmInfo),
+              allowSlide: true,
+            ) as bool?;
+
+            if (confirmed == true) {
+              user ??= await sl.get<UsernameService>().figureOutUsernameType(_addressController.text);
+            }
+          }
 
           if (user != null) {
             setState(() {

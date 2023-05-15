@@ -1,16 +1,19 @@
 ## v0.8.6 - [2023-05-XX]
 #### Added
 - Scheduled Payments
+- Revamped username support
+- Solar PoW option
+- rpc.nano.to PoW option
 #### Changed
 - Dialog style updates
 - Move block explorer setting to advanced settings
 - Remove funding banner
 - Remove Monero support
-- Nano.to usernames are now prefixed with '@' again (on-chain usernames put on hiatus)
 - Updated order of the advanced settings menu
 - Settings menu now slides up/down to dismiss
 - Updated subscriptions to show the payment address
 #### Fixed
+- Many minor bugs
 ## v0.8.5 - [2023-04-16]
 #### Added
 - Ability to import 12 word mnemonics / trust wallet phrases
