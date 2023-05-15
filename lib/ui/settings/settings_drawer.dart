@@ -2014,8 +2014,11 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                                   setState(() {
                                     _loadingAccounts = false;
                                   });
+                                  if (!mounted) return;
                                   Sheets.showAppHeightNineSheet(
-                                      context: context, widget: AppAccountsSheet(accounts: accounts));
+                                    context: context,
+                                    widget: AppAccountsSheet(accounts: accounts),
+                                  );
                                 }
                               },
                               child: Container(
@@ -2030,9 +2033,6 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                                 child: Icon(
                                   Icons.manage_accounts,
                                   size: 24,
-                                  // AppIcons.accountswitcher,
-                                  // size: 36,
-
                                   color: _loadingAccounts
                                       ? StateContainer.of(context).curTheme.primary60
                                       : StateContainer.of(context).curTheme.primary,

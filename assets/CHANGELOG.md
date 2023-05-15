@@ -3,6 +3,7 @@
 - Scheduled Payments
 - Support for .well-known DID's
 - Confirmation popup when looking up a username
+- Account switcher on the send/receive sheets
 - Revamped username support
 - Solar PoW option
 - rpc.nano.to PoW option
