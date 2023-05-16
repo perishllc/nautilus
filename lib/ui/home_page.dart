@@ -154,7 +154,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
   int _maxHistItems = 100;
   int _trueMaxHistItems = 10000;
   bool _loadingMore = false;
-  late TabController _tabController;
 
   bool _isRefreshing = false;
   bool _lockDisabled = false; // whether we should avoid locking the app
@@ -1327,7 +1326,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     WidgetsBinding.instance.removeObserver(this);
     // _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
-    _tabController.dispose();
     _placeholderCardAnimationController.dispose();
     _loadMoreAnimationController.dispose();
     // confetti:
