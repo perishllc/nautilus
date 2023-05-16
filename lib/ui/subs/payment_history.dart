@@ -797,7 +797,7 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
                       // show the text: Between A and B: where A and B are the two accounts: widget.address and StateContainer.of(context).wallet!.address:
                       Container(
                         constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 1.5),
-                        // width: 
+                        // width:
                         child: Column(
                           children: [
                             Stack(

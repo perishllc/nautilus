@@ -197,7 +197,7 @@ class UsernameService {
   }
 
   Future<List<User>?> fetchNanoToKnown(http.Client client) async {
-    http.Response response = await client.get(Uri.parse(NANO_TO_KNOWN_ENDPOINT));
+    final http.Response response = await client.get(Uri.parse(NANO_TO_KNOWN_ENDPOINT));
     // todo: use the compute function to run parseUsers in a separate isolate
 
     final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
@@ -615,7 +615,7 @@ class UsernameService {
 
   // figure out what type of username, if any, this string is:
   Future<User?> figureOutUsernameType(String username) async {
-    String strippedUsername = SendSheetHelpers.stripPrefixes(username);
+    final String strippedUsername = SendSheetHelpers.stripPrefixes(username);
     String? type;
     String? address;
 
@@ -696,11 +696,15 @@ class UsernameService {
     //   }
     // }
 
-    // check if nano.to address:
-    if (username == null) {
-      username = await sl.get<UsernameService>().checkNanoToAddress(address);
-      if (username != null) {
-        type = UserTypes.NANO_TO;
+    // check if nano.to (well-known) address:
+    final List<String> domains = ["nano.to"];
+    for (final String domain in domains) {
+      if (username == null) {
+        username = await sl.get<UsernameService>().checkWellKnownAddress(domain, address);
+        if (username != null) {
+          type = UserTypes.WELL_KNOWN;
+          break;
+        }
       }
     }
 
@@ -720,13 +724,14 @@ class UsernameService {
   Future<void> checkAddressDebounced(BuildContext context, String address) async {
     log.d("checking address: $address");
     try {
-      final String? checked = await sl.get<SharedPrefsUtil>().getWithExpiry(address) as String?;
+      String? checked = await sl.get<SharedPrefsUtil>().getWithExpiry(address) as String?;
+      checked = null;
       if (checked == null) {
         // check if we already have a record for this address:
         User? user = await sl.get<DBHelper>().getUserWithAddress(address);
         // adds to the db if found:
         user ??= await sl.get<UsernameService>().figureOutIfAddressHasName(address);
-      } else {
+
         // add some kind of timeout so we don't keep checking for the same username within a day:
         const int dayInSeconds = 86400;
         await sl.get<SharedPrefsUtil>().setWithExpiry(address, "1", dayInSeconds);
@@ -788,7 +793,7 @@ class UsernameService {
       final List<dynamic> names = decoded["names"] as List<dynamic>;
       for (final dynamic item in names) {
         if (item["address"].toLowerCase() == address) {
-          return item["name"] as String;
+          return "${item["name"] as String}@$domain";
         }
       }
     } catch (e) {

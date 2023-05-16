@@ -706,6 +706,7 @@ class StateContainerState extends State<StateContainer> {
 
   // Update the global wallet instance with a new address
   Future<void> updateWallet({required Account account}) async {
+
     final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
     // final String address = NanoUtil.seedToAddress(await getSeed(), account.index!);
     final String address = await NanoUtil.uniSeedToAddress(await getSeed(), account.index!, derivationMethod);
@@ -812,9 +813,10 @@ class StateContainerState extends State<StateContainer> {
     // add the donations contact:
     await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
     final User donationsContact = User(
-        nickname: "NautilusDonations",
-        address: "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579",
-        type: UserTypes.CONTACT);
+      nickname: "NautilusDonations",
+      address: "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579",
+      type: UserTypes.CONTACT,
+    );
     await sl.get<DBHelper>().saveContact(donationsContact);
 
     // set the "has asked for contacts" flag so it doesn't ask again:
@@ -824,12 +826,10 @@ class StateContainerState extends State<StateContainer> {
     if (!mounted) return;
     final String seed = await getSeed();
     if (!mounted) return;
-    await NanoUtil().loginAccount(seed, context);
+    await NanoUtil().loginAccount(seed, context, updateWallet: false);
     if (!mounted) return;
     await resetRecentlyUsedAccounts();
     final Account? mainAccount = await sl.get<DBHelper>().getSelectedAccount(seed);
-    if (!mounted) return;
-    updateWallet(account: mainAccount!);
     // force users list to update on the home page:
     EventTaxiImpl.singleton().fire(ContactModifiedEvent());
     EventTaxiImpl.singleton().fire(PaymentsHomeEvent(items: <TXData>[]));

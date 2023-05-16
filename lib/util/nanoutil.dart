@@ -72,7 +72,8 @@ class NanoUtil {
   }
 
   static Future<String> hdSeedToAddress(String seed, int index) async {
-    return NanoAccounts.createAccount(NonTranslatable.accountType, privateKeyToPublic(await hdSeedToPrivate(seed, index)));
+    return NanoAccounts.createAccount(
+        NonTranslatable.accountType, privateKeyToPublic(await hdSeedToPrivate(seed, index)));
   }
 
   static Future<String> uniSeedToAddress(String seed, int index, String type) {
@@ -111,13 +112,15 @@ class NanoUtil {
   //   return "";
   // }
 
-  Future<void> loginAccount(String? seed, BuildContext context, {int offset = 0}) async {
+  Future<void> loginAccount(String? seed, BuildContext context, {int offset = 0, bool updateWallet = true}) async {
     Account? selectedAcct = await sl.get<DBHelper>().getSelectedAccount(seed);
     if (selectedAcct == null) {
       selectedAcct = Account(index: offset, lastAccess: 0, name: Z.of(context).defaultAccountName, selected: true);
       await sl.get<DBHelper>().saveAccount(selectedAcct);
     }
-    StateContainer.of(context).updateWallet(account: selectedAcct);
+    if (updateWallet) {
+      StateContainer.of(context).updateWallet(account: selectedAcct);
+    }
   }
 
   static bool isValidBip39Seed(String seed) {

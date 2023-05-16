@@ -129,8 +129,6 @@ class User {
   static String? getDisplayNameWithType(String? name, String? userType) {
     if (userType == UserTypes.ONCHAIN || userType == UserTypes.WELL_KNOWN) {
       return "@${name!}";
-    } else if (userType == UserTypes.NANO_TO) {
-      return "${name!}@nano.to";
     } else {
       return name;
     }

@@ -17,6 +17,7 @@
 - Updated subscriptions to show the payment address
 #### Fixed
 - Bug with receives not updating the home page properly
+- Username checking is now properly debounced
 ## v0.8.5 - [2023-04-16]
 #### Added
 - Ability to import 12 word mnemonics / trust wallet phrases
