@@ -973,7 +973,11 @@ class StateContainerState extends State<StateContainer> {
     }
     log.d("Received subscription message: ${json.encode(resp.toJson())}");
 
-    if (resp.block?.subType == BlockTypes.SEND) {
+    // for some reason, the subscription responses (from receiving) don't have the correct block subtype?
+    // I'm probably just misunderstanding the spec though
+    // if (resp.block?.subType == BlockTypes.SEND) {// changed 5/16/23
+    // edit: this means a receive block with our account was just confirmed:
+    if (resp.block?.subType == BlockTypes.RECEIVE) {
       sl.get<AccountService>().processQueue();
       // update our frontier:
       if (resp.hash != null && resp.hash!.isNotEmpty) {
@@ -990,7 +994,10 @@ class StateContainerState extends State<StateContainer> {
 
     final ReceivableResponseItem receivableItem =
         ReceivableResponseItem(hash: resp.hash, source: resp.account, amount: resp.amount);
-    final String? receivedHash = await handleReceivableItem(receivableItem, link_as_account: resp.block!.linkAsAccount);
+
+    // link as account isn't accurate here, we're operating off of the knowledge of the confirmed "SEND" block,
+    // and so what we really want is the send block's account:
+    final String? receivedHash = await handleReceivableItem(receivableItem, link_as_account: resp.block?.linkAsAccount);
     if (receivedHash != null) {
       final AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
         type: BlockTypes.STATE,
@@ -1043,8 +1050,8 @@ class StateContainerState extends State<StateContainer> {
     }
 
     // if there's no user for this address, check if one exists on the block chain:
-    if (link_as_account != null && mounted) {
-      await sl.get<UsernameService>().checkAddressDebounced(context, link_as_account);
+    if (item.source != null && mounted) {
+      await sl.get<UsernameService>().checkAddressDebounced(context, item.source!);
     }
 
     if (wallet!.watchOnly && link_as_account != null && link_as_account == wallet!.address) {

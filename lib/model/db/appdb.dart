@@ -328,7 +328,7 @@ class DBHelper {
     );
     await saveWorkSource(
       WorkSource(
-        id: 2,
+        id: 3,
         name: "solar",
         selected: false,
         type: WorkSourceTypes.URL,

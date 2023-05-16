@@ -125,6 +125,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
 
   Widget? qrWidget;
 
+  bool _isSheetOpen = true;
+
   @override
   void initState() {
     super.initState();
@@ -218,12 +220,13 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
           User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
           if (user == null) {
             if (!mounted) return;
+            if (!_isSheetOpen) return;
             final bool? confirmed = await Sheets.showAppHeightSmallSheet(
               context: context,
               widget: ConfirmSheet(subtitle: Z.of(context).checkUsernameConfirmInfo),
               allowSlide: true,
             ) as bool?;
-            
+
             if (confirmed == true) {
               user ??= await sl.get<UsernameService>().figureOutUsernameType(_addressController.text);
             }
@@ -270,7 +273,14 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
   Widget build(BuildContext context) {
     // The main column that holds everything
     return SafeArea(
-        minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
+      minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
+      child: WillPopScope(
+        onWillPop: () async {
+          setState(() {
+            _isSheetOpen = false;
+          });
+          return true;
+        },
         child: Column(
           children: <Widget>[
             // A row for the header of the sheet, balance text and close button
@@ -351,7 +361,6 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                     focusPadding: 40,
                     child: Stack(
                       children: <Widget>[
-
                         // wallet / balance button:
                         Misc.walletBalanceButton(context, _localCurrencyMode),
 
@@ -640,7 +649,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
               ],
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 
   // Determine if this is a max send or not by comparing balances

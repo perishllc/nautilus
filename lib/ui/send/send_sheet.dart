@@ -363,6 +363,7 @@ class SendSheetState extends State<SendSheet> {
   String _lastLocalCurrencyAmount = "";
   String _lastCryptoAmount = "";
   late NumberFormat _localCurrencyFormat;
+  bool _isSheetOpen = true;
 
   bool isIpad = false;
 
@@ -481,12 +482,13 @@ class SendSheetState extends State<SendSheet> {
           User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
           if (user == null) {
             if (!mounted) return;
+            if (!_isSheetOpen) return;
             final bool? confirmed = await Sheets.showAppHeightSmallSheet(
               context: context,
               widget: ConfirmSheet(subtitle: Z.of(context).checkUsernameConfirmInfo),
               allowSlide: true,
             ) as bool?;
-            
+
             if (confirmed == true) {
               user ??= await sl.get<UsernameService>().figureOutUsernameType(_addressController.text);
             }
@@ -786,7 +788,14 @@ class SendSheetState extends State<SendSheet> {
 
     // The main column that holds everything
     return SafeArea(
-        minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
+      minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
+      child: WillPopScope(
+        onWillPop: () async {
+          setState(() {
+            _isSheetOpen = false;
+          });
+          return true;
+        },
         child: Column(
           children: <Widget>[
             // A row for the header of the sheet, balance text and close button
@@ -1146,7 +1155,9 @@ class SendSheetState extends State<SendSheet> {
               ],
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 
   // Determine if this is a max send or not by comparing balances

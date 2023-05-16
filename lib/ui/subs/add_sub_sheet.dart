@@ -76,6 +76,8 @@ class AddSubSheetState extends State<AddSubSheet> {
   final String _valueToValidate = '';
   final String _valueSaved = '';
 
+  bool _isSheetOpen = true;
+
   @override
   void initState() {
     super.initState();
@@ -146,6 +148,7 @@ class AddSubSheetState extends State<AddSubSheet> {
           User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
           if (user == null) {
             if (!mounted) return;
+            if (!_isSheetOpen) return;
             final bool? confirmed = await Sheets.showAppHeightSmallSheet(
               context: context,
               widget: ConfirmSheet(subtitle: Z.of(context).checkUsernameConfirmInfo),
@@ -576,335 +579,344 @@ class AddSubSheetState extends State<AddSubSheet> {
   @override
   Widget build(BuildContext context) {
     return TapOutsideUnfocus(
-        child: SafeArea(
-      minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
-      child: Column(
-        children: <Widget>[
-          // Top row of the sheet which contains the header and the scan qr button
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+      child: SafeArea(
+        minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
+        child: WillPopScope(
+          onWillPop: () async {
+            setState(() {
+              _isSheetOpen = false;
+            });
+            return true;
+          },
+          child: Column(
             children: <Widget>[
-              // Empty SizedBox
-              const SizedBox(
-                width: 60,
-                height: 60,
-              ),
-              // The header of the sheet
-              Container(
-                margin: EdgeInsets.zero,
-                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
-                child: Column(
-                  children: <Widget>[
-                    Handlebars.horizontal(
-                      context,
-                      margin: const EdgeInsets.only(top: 10, bottom: 15),
+              // Top row of the sheet which contains the header and the scan qr button
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  // Empty SizedBox
+                  const SizedBox(
+                    width: 60,
+                    height: 60,
+                  ),
+                  // The header of the sheet
+                  Container(
+                    margin: EdgeInsets.zero,
+                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
+                    child: Column(
+                      children: <Widget>[
+                        Handlebars.horizontal(
+                          context,
+                          margin: const EdgeInsets.only(top: 10, bottom: 15),
+                        ),
+                        AutoSizeText(
+                          CaseChange.toUpperCase(Z.of(context).addSubscription, context),
+                          style: AppStyles.textStyleHeader(context),
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                          stepGranularity: 0.1,
+                        ),
+                      ],
                     ),
-                    AutoSizeText(
-                      CaseChange.toUpperCase(Z.of(context).addSubscription, context),
-                      style: AppStyles.textStyleHeader(context),
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      stepGranularity: 0.1,
-                    ),
-                  ],
-                ),
+                  ),
+
+                  // Scan QR Button
+                  const SizedBox(width: 60, height: 60),
+                ],
               ),
 
-              // Scan QR Button
-              const SizedBox(width: 60, height: 60),
-            ],
-          ),
-
-          // The main container that holds "Enter Name" and "Enter Address" text fields
-          Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(top: 5, bottom: 5),
-              child: GestureDetector(
-                onTap: () {
-                  // Clear focus of our fields when tapped in this empty space
-                  _nameFocusNode.unfocus();
-                  _amountFocusNode.unfocus();
-                  _addressFocusNode.unfocus();
-                  _frequencyFocusNode.unfocus();
-                },
-                child: KeyboardAvoider(
-                  duration: Duration.zero,
-                  autoScroll: true,
-                  focusPadding: 40,
-                  child: Column(
-                    children: <Widget>[
-                      Stack(
+              // The main container that holds "Enter Name" and "Enter Address" text fields
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(top: 5, bottom: 5),
+                  child: GestureDetector(
+                    onTap: () {
+                      // Clear focus of our fields when tapped in this empty space
+                      _nameFocusNode.unfocus();
+                      _amountFocusNode.unfocus();
+                      _addressFocusNode.unfocus();
+                      _frequencyFocusNode.unfocus();
+                    },
+                    child: KeyboardAvoider(
+                      duration: Duration.zero,
+                      autoScroll: true,
+                      focusPadding: 40,
+                      child: Column(
                         children: <Widget>[
-                          // Column for Enter Name container + Enter Name Error container
-                          Column(
-                            children: [
-                              getEnterNameContainer(),
-                              Container(
-                                alignment: AlignmentDirectional.center,
-                                margin: const EdgeInsets.only(top: 3),
-                                child: Text(_nameValidationText,
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: StateContainer.of(context).curTheme.primary,
-                                      fontFamily: "NunitoSans",
-                                      fontWeight: FontWeight.w600,
-                                    )),
-                              ),
-                            ],
-                          ),
-
-                          // Column for Enter Address container + Enter Address Error container
-                          Column(
+                          Stack(
                             children: <Widget>[
-                              Container(
-                                alignment: Alignment.topCenter,
-                                child: Stack(
-                                  alignment: Alignment.topCenter,
-                                  children: <Widget>[
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          left: MediaQuery.of(context).size.width * 0.105,
-                                          right: MediaQuery.of(context).size.width * 0.105),
-                                      alignment: Alignment.bottomCenter,
-                                      constraints: const BoxConstraints(maxHeight: 160, minHeight: 0),
-                                      // ********************************************* //
-                                      // ********* The pop-up Contacts List ********* //
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(25),
-                                        child: Container(
-                                          decoration: BoxDecoration(
+                              // Column for Enter Name container + Enter Name Error container
+                              Column(
+                                children: [
+                                  getEnterNameContainer(),
+                                  Container(
+                                    alignment: AlignmentDirectional.center,
+                                    margin: const EdgeInsets.only(top: 3),
+                                    child: Text(_nameValidationText,
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          color: StateContainer.of(context).curTheme.primary,
+                                          fontFamily: "NunitoSans",
+                                          fontWeight: FontWeight.w600,
+                                        )),
+                                  ),
+                                ],
+                              ),
+
+                              // Column for Enter Address container + Enter Address Error container
+                              Column(
+                                children: <Widget>[
+                                  Container(
+                                    alignment: Alignment.topCenter,
+                                    child: Stack(
+                                      alignment: Alignment.topCenter,
+                                      children: <Widget>[
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              left: MediaQuery.of(context).size.width * 0.105,
+                                              right: MediaQuery.of(context).size.width * 0.105),
+                                          alignment: Alignment.bottomCenter,
+                                          constraints: const BoxConstraints(maxHeight: 160, minHeight: 0),
+                                          // ********************************************* //
+                                          // ********* The pop-up Contacts List ********* //
+                                          child: ClipRRect(
                                             borderRadius: BorderRadius.circular(25),
-                                            color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                          ),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(25),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(25),
+                                                color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                              ),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(25),
+                                                ),
+                                                margin: const EdgeInsets.only(bottom: 50),
+                                                child: _users.isEmpty
+                                                    ? const SizedBox()
+                                                    : ListView.builder(
+                                                        shrinkWrap: true,
+                                                        padding: EdgeInsets.zero,
+                                                        itemCount: _users.length,
+                                                        itemBuilder: (BuildContext context, int index) {
+                                                          return Misc.buildUserItem(context, _users[index], true,
+                                                              (User user) {
+                                                            _addressController!.text =
+                                                                user.getDisplayName(ignoreNickname: true)!;
+                                                            _addressFocusNode!.unfocus();
+                                                            setState(() {
+                                                              _isUser = true;
+                                                              _pasteButtonVisible = false;
+                                                              _addressStyle = AddressStyle.PRIMARY;
+                                                              _addressValidationText = "";
+                                                            });
+                                                          });
+                                                        },
+                                                      ),
+                                              ),
                                             ),
-                                            margin: const EdgeInsets.only(bottom: 50),
-                                            child: _users.isEmpty
-                                                ? const SizedBox()
-                                                : ListView.builder(
-                                                    shrinkWrap: true,
-                                                    padding: EdgeInsets.zero,
-                                                    itemCount: _users.length,
-                                                    itemBuilder: (BuildContext context, int index) {
-                                                      return Misc.buildUserItem(context, _users[index], true,
-                                                          (User user) {
-                                                        _addressController!.text =
-                                                            user.getDisplayName(ignoreNickname: true)!;
-                                                        _addressFocusNode!.unfocus();
-                                                        setState(() {
-                                                          _isUser = true;
-                                                          _pasteButtonVisible = false;
-                                                          _addressStyle = AddressStyle.PRIMARY;
-                                                          _addressValidationText = "";
-                                                        });
-                                                      });
-                                                    },
-                                                  ),
                                           ),
                                         ),
-                                      ),
+
+                                        // ******* Enter Address Container ******* //
+                                        getEnterAddressContainer(),
+                                        // ******* Enter Address Container End ******* //
+                                      ],
                                     ),
+                                  ),
 
-                                    // ******* Enter Address Container ******* //
-                                    getEnterAddressContainer(),
-                                    // ******* Enter Address Container End ******* //
-                                  ],
-                                ),
+                                  // Enter Address Error Container
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 5, bottom: 5),
+                                    child: Text(_addressValidationText,
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          color: StateContainer.of(context).curTheme.primary,
+                                          fontFamily: "NunitoSans",
+                                          fontWeight: FontWeight.w600,
+                                        )),
+                                  ),
+                                ],
+                              ),
+                              // const Text(
+                              //   'CronFormField data readable value:',
+                              //   style: TextStyle(fontWeight: FontWeight.bold),
+                              // ),
+
+                              // Column for Enter Amount container + Enter Amount Error container
+                              Column(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.topCenter,
+                                    child: Stack(
+                                      alignment: Alignment.topCenter,
+                                      children: <Widget>[
+                                        getEnterAmountContainer(),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: AlignmentDirectional.center,
+                                    margin: const EdgeInsets.only(top: 3),
+                                    child: Text(_amountValidationText,
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          color: StateContainer.of(context).curTheme.primary,
+                                          fontFamily: "NunitoSans",
+                                          fontWeight: FontWeight.w600,
+                                        )),
+                                  ),
+                                ],
                               ),
 
-                              // Enter Address Error Container
-                              Container(
-                                margin: const EdgeInsets.only(top: 5, bottom: 5),
-                                child: Text(_addressValidationText,
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: StateContainer.of(context).curTheme.primary,
-                                      fontFamily: "NunitoSans",
-                                      fontWeight: FontWeight.w600,
-                                    )),
-                              ),
-                            ],
-                          ),
-                          // const Text(
-                          //   'CronFormField data readable value:',
-                          //   style: TextStyle(fontWeight: FontWeight.bold),
-                          // ),
+                              // // frequency container:
+                              // Column(
+                              //   children: [
+                              //     Container(
+                              //       alignment: Alignment.topCenter,
+                              //       margin: EdgeInsets.only(
+                              //         left: MediaQuery.of(context).size.width * 0.105,
+                              //         right: MediaQuery.of(context).size.width * 0.105,
+                              //         top: 300,
+                              //       ),
+                              //       child: CronFormField(
+                              //         // controller: _cronController,
+                              //         initialValue: "0 0 1 * *", // the first of every month
+                              //         labelText: Z.of(context).schedule,
+                              //         onChanged: (String val) => setState(() => _valueChanged = val),
+                              //         validator: (String? val) {
+                              //           setState(() => _valueToValidate = val ?? '');
+                              //           return null;
+                              //         },
+                              //         onSaved: (String? val) => setState(() => _valueSaved = val ?? ''),
+                              //         // outputFormat: CronExpressionOutputFormat.AUTO,
+                              //       ),
+                              //     ),
+                              //     const SizedBox(height: 10),
+                              //     Text(CronExpression.fromString(_valueChanged).toReadableString()),
+                              //     const SizedBox(height: 30),
+                              //   ],
+                              // ),
 
-                          // Column for Enter Amount container + Enter Amount Error container
-                          Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.topCenter,
-                                child: Stack(
-                                  alignment: Alignment.topCenter,
-                                  children: <Widget>[
-                                    getEnterAmountContainer(),
-                                  ],
-                                ),
+                              // Column for frequency container + frequency Error container
+                              Column(
+                                children: [
+                                  getEnterFrequencyContainer(),
+                                  Container(
+                                    alignment: AlignmentDirectional.center,
+                                    margin: const EdgeInsets.only(top: 3),
+                                    child: Text(_frequencyValidationText,
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          color: StateContainer.of(context).curTheme.primary,
+                                          fontFamily: "NunitoSans",
+                                          fontWeight: FontWeight.w600,
+                                        )),
+                                  ),
+                                  if (_frequencyValidationText == Z.of(context).invalidFrequency)
+                                    Container(
+                                      alignment: AlignmentDirectional.center,
+                                      margin: const EdgeInsets.only(top: 3),
+                                      child: Text("(${Z.of(context).cronFormatExplainer})",
+                                          style: TextStyle(
+                                            fontSize: 14.0,
+                                            color: StateContainer.of(context).curTheme.primary,
+                                            fontFamily: "NunitoSans",
+                                            fontWeight: FontWeight.w600,
+                                          )),
+                                    ),
+                                ],
                               ),
-                              Container(
-                                alignment: AlignmentDirectional.center,
-                                margin: const EdgeInsets.only(top: 3),
-                                child: Text(_amountValidationText,
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: StateContainer.of(context).curTheme.primary,
-                                      fontFamily: "NunitoSans",
-                                      fontWeight: FontWeight.w600,
-                                    )),
-                              ),
-                            ],
-                          ),
-
-                          // // frequency container:
-                          // Column(
-                          //   children: [
-                          //     Container(
-                          //       alignment: Alignment.topCenter,
-                          //       margin: EdgeInsets.only(
-                          //         left: MediaQuery.of(context).size.width * 0.105,
-                          //         right: MediaQuery.of(context).size.width * 0.105,
-                          //         top: 300,
-                          //       ),
-                          //       child: CronFormField(
-                          //         // controller: _cronController,
-                          //         initialValue: "0 0 1 * *", // the first of every month
-                          //         labelText: Z.of(context).schedule,
-                          //         onChanged: (String val) => setState(() => _valueChanged = val),
-                          //         validator: (String? val) {
-                          //           setState(() => _valueToValidate = val ?? '');
-                          //           return null;
-                          //         },
-                          //         onSaved: (String? val) => setState(() => _valueSaved = val ?? ''),
-                          //         // outputFormat: CronExpressionOutputFormat.AUTO,
-                          //       ),
-                          //     ),
-                          //     const SizedBox(height: 10),
-                          //     Text(CronExpression.fromString(_valueChanged).toReadableString()),
-                          //     const SizedBox(height: 30),
-                          //   ],
-                          // ),
-
-                          // Column for frequency container + frequency Error container
-                          Column(
-                            children: [
-                              getEnterFrequencyContainer(),
-                              Container(
-                                alignment: AlignmentDirectional.center,
-                                margin: const EdgeInsets.only(top: 3),
-                                child: Text(_frequencyValidationText,
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      color: StateContainer.of(context).curTheme.primary,
-                                      fontFamily: "NunitoSans",
-                                      fontWeight: FontWeight.w600,
-                                    )),
-                              ),
-                              if (_frequencyValidationText == Z.of(context).invalidFrequency)
-                                Container(
-                                  alignment: AlignmentDirectional.center,
-                                  margin: const EdgeInsets.only(top: 3),
-                                  child: Text("(${Z.of(context).cronFormatExplainer})",
-                                      style: TextStyle(
-                                        fontSize: 14.0,
-                                        color: StateContainer.of(context).curTheme.primary,
-                                        fontFamily: "NunitoSans",
-                                        fontWeight: FontWeight.w600,
-                                      )),
-                                ),
                             ],
                           ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
 
-          //A column with "Add Contact" and "Close" buttons
-          Column(
-            children: <Widget>[
-              Row(
+              //A column with "Add Contact" and "Close" buttons
+              Column(
                 children: <Widget>[
-                  // Add Contact Button
-                  AppButton.buildAppButton(
-                      context, AppButtonType.PRIMARY, Z.of(context).addSubscription, Dimens.BUTTON_TOP_DIMENS,
-                      onPressed: () async {
-                    if (!await validateForm()) {
-                      return;
-                    }
+                  Row(
+                    children: <Widget>[
+                      // Add Contact Button
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY, Z.of(context).addSubscription, Dimens.BUTTON_TOP_DIMENS,
+                          onPressed: () async {
+                        if (!await validateForm()) {
+                          return;
+                        }
 
-                    final String amountRaw = SendSheetHelpers.getAmountRaw(
-                      context,
-                      _localCurrencyFormat,
-                      _amountController,
-                      _localCurrencyMode,
-                    );
+                        final String amountRaw = SendSheetHelpers.getAmountRaw(
+                          context,
+                          _localCurrencyFormat,
+                          _amountController,
+                          _localCurrencyMode,
+                        );
 
-                    late String finalAddress;
+                        late String finalAddress;
 
-                    if (SendSheetHelpers.isSpecialAddress(_addressController.text)) {
-                      // Need to make sure its a valid contact or user
-                      final User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
-                      if (user == null) {
-                        setState(() {
-                          _addressValidationText =
-                              SendSheetHelpers.getInvalidAddressMessage(context, _addressController.text);
-                        });
-                        return;
-                      } else {
-                        finalAddress = user.address!;
-                      }
-                    } else {
-                      finalAddress = _addressController.text;
-                    }
+                        if (SendSheetHelpers.isSpecialAddress(_addressController.text)) {
+                          // Need to make sure its a valid contact or user
+                          final User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
+                          if (user == null) {
+                            setState(() {
+                              _addressValidationText =
+                                  SendSheetHelpers.getInvalidAddressMessage(context, _addressController.text);
+                            });
+                            return;
+                          } else {
+                            finalAddress = user.address!;
+                          }
+                        } else {
+                          finalAddress = _addressController.text;
+                        }
 
-                    final Subscription sub = Subscription(
-                      label: _nameController.text,
-                      amount_raw: amountRaw,
-                      frequency: _frequencyController.text,
-                      address: finalAddress,
-                      active: true,
-                      paid: false,
-                    );
-                    if (!mounted) return;
-                    Navigator.of(context).pop(sub);
+                        final Subscription sub = Subscription(
+                          label: _nameController.text,
+                          amount_raw: amountRaw,
+                          frequency: _frequencyController.text,
+                          address: finalAddress,
+                          active: true,
+                          paid: false,
+                        );
+                        if (!mounted) return;
+                        Navigator.of(context).pop(sub);
 
-                    // if (await validateForm()) {
-                    //   final String formAddress = widget.address ?? _amountController!.text;
-                    //   // if we're given an address with corresponding username, just block:
-                    //   if (_correspondingUsername != null) {
-                    //     Navigator.of(context).pop(formAddress);
-                    //   } else if (_correspondingAddress != null) {
-                    //     Navigator.of(context).pop(_correspondingAddress);
-                    //   } else {
-                    //     // just an address:
-                    //     Navigator.of(context).pop(formAddress);
-                    //   }
-                    // }
-                  }),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  // Close Button
-                  AppButton.buildAppButton(
-                      context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
-                      onPressed: () {
-                    Navigator.of(context).pop();
-                  }),
+                        // if (await validateForm()) {
+                        //   final String formAddress = widget.address ?? _amountController!.text;
+                        //   // if we're given an address with corresponding username, just block:
+                        //   if (_correspondingUsername != null) {
+                        //     Navigator.of(context).pop(formAddress);
+                        //   } else if (_correspondingAddress != null) {
+                        //     Navigator.of(context).pop(_correspondingAddress);
+                        //   } else {
+                        //     // just an address:
+                        //     Navigator.of(context).pop(formAddress);
+                        //   }
+                        // }
+                      }),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      // Close Button
+                      AppButton.buildAppButton(
+                          context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS,
+                          onPressed: () {
+                        Navigator.of(context).pop();
+                      }),
+                    ],
+                  ),
                 ],
               ),
             ],
           ),
-        ],
+        ),
       ),
-    ));
+    );
   }
 
   Future<bool> validateForm() async {

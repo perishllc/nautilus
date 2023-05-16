@@ -16,7 +16,7 @@
 - Settings menu now slides up/down to dismiss
 - Updated subscriptions to show the payment address
 #### Fixed
-- Many minor bugs
+- Bug with receives not updating the home page properly
 ## v0.8.5 - [2023-04-16]
 #### Added
 - Ability to import 12 word mnemonics / trust wallet phrases

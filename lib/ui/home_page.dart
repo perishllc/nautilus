@@ -1936,7 +1936,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
       // Remove any other screens from stack
       if (!mounted) return;
-      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+      Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
       if (amount != null && sufficientBalance) {
         // Go to send confirm with amount
         Sheets.showAppHeightNineSheet(
@@ -2239,7 +2239,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 label: Text("$upcomingCount", style: const TextStyle(color: Colors.white)),
                 child: const Icon(Icons.schedule),
               ),
-              label: Z.of(context).scheduledButton,
+              label: Z.of(context).upcomingButton,
               backgroundColor: StateContainer.of(context).curTheme.warning,
             ),
             BottomNavigationBarItem(

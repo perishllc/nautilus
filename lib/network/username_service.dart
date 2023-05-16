@@ -225,14 +225,7 @@ class UsernameService {
   }
 
   Future<String?> checkNanoToAddress(String address) async {
-    final List<User>? users = await fetchNanoToKnown(http.Client());
-    if (users == null) return null;
-    for (final User user in users) {
-      if (user.address == address) {
-        return user.username;
-      }
-    }
-    return null;
+    return checkWellKnownAddress("nano.to", address);
   }
 
   // END NANO.TO
@@ -671,7 +664,7 @@ class UsernameService {
     // check if .well-known:
     if (address == null) {
       if (username.contains(".") && username.contains("@")) {
-        address = await sl.get<UsernameService>().checkWellKnown(username);
+        address = await sl.get<UsernameService>().checkWellKnownUsername(username);
         if (address != null) {
           // strippedUsername = username;// bit of a hack, but we need the full username for the .well-known address
           type = UserTypes.WELL_KNOWN;
@@ -703,13 +696,13 @@ class UsernameService {
     //   }
     // }
 
-    // // check if nano.to address:
-    // if (username == null) {
-    //   username = await sl.get<UsernameService>().checkNanoToAddress(address);
-    //   if (username != null) {
-    //     type = UserTypes.NANO_TO;
-    //   }
-    // }
+    // check if nano.to address:
+    if (username == null) {
+      username = await sl.get<UsernameService>().checkNanoToAddress(address);
+      if (username != null) {
+        type = UserTypes.NANO_TO;
+      }
+    }
 
     // add to the db if missing:
     if (type != null) {
@@ -743,20 +736,22 @@ class UsernameService {
     }
   }
 
-  Future<String?> checkWellKnown(String username) async {
+  Future<String?> checkWellKnownUsername(String username) async {
     // split the string by the @ symbol:
     try {
       final List<String> splitStrs = username.split("@");
       String name = splitStrs.first.toLowerCase();
       final String domain = splitStrs.last;
-      // lookup domain/.well-known/nano-currency.json and check if it has a nano address:
-      final http.Response response = await http.get(
-        Uri.parse("https://$domain/.well-known/nano-currency.json"),
-        headers: <String, String>{"Accept": "application/json"},
-      );
+
       if (name.isEmpty) {
         name = "_";
       }
+      // lookup domain/.well-known/nano-currency.json and check if it has a nano address:
+      final http.Response response = await http.get(
+        Uri.parse("https://$domain/.well-known/nano-currency.json?names=$name"),
+        headers: <String, String>{"Accept": "application/json"},
+      );
+
       if (response.statusCode != 200) {
         return null;
       }
@@ -770,7 +765,34 @@ class UsernameService {
         }
       }
     } catch (e) {
-      log.e("error checking well-known: $e");
+      log.e("error checking well-known username: $e");
+    }
+    return null;
+  }
+
+  Future<String?> checkWellKnownAddress(String domain, String address) async {
+    try {
+      // lookup domain/.well-known/nano-currency.json and check if it has a nano address:
+      final http.Response response = await http.get(
+        // Uri.parse("https://$domain/.well-known/nano-currency.json?address=$address"),// todo: this doesn't work for some reason
+        Uri.parse("https://$domain/.well-known/nano-currency.json?names=$address"),
+        headers: <String, String>{"Accept": "application/json"},
+      );
+
+      if (response.statusCode != 200) {
+        return null;
+      }
+      final Map<String, dynamic> decoded = json.decode(response.body) as Map<String, dynamic>;
+
+      // Access the first element in the names array and retrieve its address
+      final List<dynamic> names = decoded["names"] as List<dynamic>;
+      for (final dynamic item in names) {
+        if (item["address"].toLowerCase() == address) {
+          return item["name"] as String;
+        }
+      }
+    } catch (e) {
+      log.e("error checking well-known address: $e");
     }
     return null;
   }
