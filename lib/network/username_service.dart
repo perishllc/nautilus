@@ -725,7 +725,6 @@ class UsernameService {
     log.d("checking address: $address");
     try {
       String? checked = await sl.get<SharedPrefsUtil>().getWithExpiry(address) as String?;
-      checked = null;
       if (checked == null) {
         // check if we already have a record for this address:
         User? user = await sl.get<DBHelper>().getUserWithAddress(address);
