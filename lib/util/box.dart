@@ -2,8 +2,8 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:encrypt/encrypt.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
-import 'package:flutter_sodium/flutter_sodium.dart';
+import 'package:nanodart/nanodart.dart';
+// import 'package:flutter_sodium/flutter_sodium.dart';
 import 'package:wallet_flutter/util/blake2b.dart';
 import 'package:x25519/x25519.dart';
 
@@ -75,35 +75,37 @@ class Box {
   static const int NONCE_LENGTH = 24;
 
   static String encrypt(String message, String address, String privateKey) {
-    final String publicKey = NanoAccounts.extractPublicKey(address);
+    // final String publicKey = NanoAccounts.extractPublicKey(address);
 
-    final Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(NanoHelpers.hexToBytes(publicKey));
-    final Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
+    // final Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(NanoHelpers.hexToBytes(publicKey));
+    // final Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
 
-    final Uint8List aliceSharedKey = X25519(convertedPrivateKey, convertedPublicKey);
+    // final Uint8List aliceSharedKey = X25519(convertedPrivateKey, convertedPublicKey);
 
-    final Key key = Key(aliceSharedKey);
-    final IV iv = IV.fromLength(16);
+    // final Key key = Key(aliceSharedKey);
+    // final IV iv = IV.fromLength(16);
 
-    final Encrypter encrypter = Encrypter(AES(key));
+    // final Encrypter encrypter = Encrypter(AES(key));
 
-    final Encrypted encrypted = encrypter.encrypt(message, iv: iv);
+    // final Encrypted encrypted = encrypter.encrypt(message, iv: iv);
 
-    return encrypted.base64;
+    // return encrypted.base64;
+    return "";
   }
 
   static String decrypt(String encrypted, String address, String privateKey) {
-    final String publicKey = NanoAccounts.extractPublicKey(address);
+    // final String publicKey = NanoAccounts.extractPublicKey(address);
 
-    final Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(NanoHelpers.hexToBytes(publicKey));
-    final Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
+    // final Uint8List convertedPublicKey = Sodium.cryptoSignEd25519PkToCurve25519(NanoHelpers.hexToBytes(publicKey));
+    // final Uint8List convertedPrivateKey = convertEd25519SecretKeyToCurve25519(NanoHelpers.hexToBytes(privateKey));
 
-    final Uint8List bobSharedKey = X25519(convertedPrivateKey, convertedPublicKey);
-    final Key key = Key(bobSharedKey);
-    final Encrypter encrypter = Encrypter(AES(key));
-    final IV iv = IV.fromLength(16);
-    final String decrypted = encrypter.decrypt(Encrypted.fromBase64(encrypted), iv: iv);
+    // final Uint8List bobSharedKey = X25519(convertedPrivateKey, convertedPublicKey);
+    // final Key key = Key(bobSharedKey);
+    // final Encrypter encrypter = Encrypter(AES(key));
+    // final IV iv = IV.fromLength(16);
+    // final String decrypted = encrypter.decrypt(Encrypted.fromBase64(encrypted), iv: iv);
 
-    return decrypted;
+    // return decrypted;
+    return "";
   }
 }

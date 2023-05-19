@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // ignore: implementation_imports
 import 'package:flutter_branch_sdk/src/objects/branch_universal_object.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:nanodart/nanodart.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';

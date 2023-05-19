@@ -39,10 +39,11 @@ dependencies:
   flutter_secure_storage: ^6.0.0
 
   # Nano core functions
-  flutter_nano_ffi:
-    git:
-      url: https://github.com/perishllc/flutter_nano_ffi.git
-      ref: main
+  # flutter_nano_ffi:
+  #   git:
+  #     url: https://github.com/perishllc/flutter_nano_ffi.git
+  #     ref: main
+  nanodart: ^2.0.0
 
   # Shared prefs
   shared_preferences: ^2.0.15
@@ -199,10 +200,10 @@ dependencies:
   devicelocale: ^0.5.5
 
   # encryption helper:
-  flutter_sodium:
-    git:
-      url: https://github.com/perishllc/flutter_sodium
-      ref: main
+  # flutter_sodium:
+  #   git:
+  #     url: https://github.com/perishllc/flutter_sodium
+  #     ref: main
   x25519: ^0.1.1
   encrypt: ^5.0.1
 

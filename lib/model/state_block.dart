@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:nanodart/nanodart.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/network/model/block_types.dart';

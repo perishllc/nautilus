@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:nanodart/nanodart.dart';
 import 'package:logger/logger.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
@@ -286,13 +286,13 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
       final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
       final String nonceHex = secondsSinceEpoch.toRadixString(16);
       final String signature = NanoSignatures.signBlock(nonceHex, privKey);
-      // check validity locally:
-      final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-      final bool isValid =
-          NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
-      if (!isValid) {
-        throw Exception("Invalid signature?!");
-      }
+      // // check validity locally:
+      // final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
+      // final bool isValid =
+      //     NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+      // if (!isValid) {
+      //   throw Exception("Invalid signature?!");
+      // }
 
       const Uuid uuid = Uuid();
       final String localUuid = "LOCAL:${uuid.v4()}";

@@ -11,7 +11,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:nanodart/nanodart.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -172,9 +172,9 @@ class StateContainerState extends State<StateContainer> {
   // Initial deep link
   String? initialDeepLink;
   // Deep link changes
-  StreamSubscription? _deepLinkSub;
+  // StreamSubscription? _deepLinkSub;
   // branch subscription:
-  StreamSubscription<Map>? _branchSub;
+  // StreamSubscription<Map>? _branchSub;
 
   List<String?> receivableRequests = [];
   List<String?> alreadyReceived = [];
@@ -522,13 +522,13 @@ class StateContainerState extends State<StateContainer> {
     // restore payments from the cache
     updateSolids();
 
-    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
-    FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
-    FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-      alert: false,
-      badge: true,
-      sound: true,
-    );
+    // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    // FirebaseMessaging.onMessage.listen(firebaseMessagingForegroundHandler);
+    // FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    //   alert: false,
+    //   badge: true,
+    //   sound: true,
+    // );
   }
 
   // Subscriptions
@@ -636,39 +636,39 @@ class StateContainerState extends State<StateContainer> {
             );
       }
     });
-    // Deep link has been updated
-    _deepLinkSub = linkStream.listen((String? link) {
-      setState(() {
-        initialDeepLink = link;
-      });
-    });
+    // // Deep link has been updated
+    // _deepLinkSub = linkStream.listen((String? link) {
+    //   setState(() {
+    //     initialDeepLink = link;
+    //   });
+    // });
 
-    // branch deep links:
-    _branchSub = FlutterBranchSdk.initSession().listen((Map data) {
-      // TODO: investigate:
-      if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) {
-        // check if they were gifted a wallet:
-        if (data.containsKey("~feature") && (data["~feature"] == "gift" || data["~feature"] == "splitgift")) {
-          // if (data["+match_guaranteed"] == true) {
-          // setup the auto load wallet:
-          setState(() {
-            gift = <String, dynamic>{
-              "seed": data["seed"] as String? ?? "",
-              "amount_raw": data["amount_raw"] as String? ?? "",
-              "address": data["address"] as String? ?? "",
-              "from_address": data["from_address"] as String? ?? "",
-              "memo": data["memo"] as String? ?? "",
-              "require_captcha": data["require_captcha"] != "",
-              "uuid": data["gift_uuid"] as String? ?? "",
-            };
-          });
-          // }
-        }
-      }
-    }, onError: (dynamic error) {
-      final PlatformException platformException = error as PlatformException;
-      log.d('InitSession error: ${platformException.code} - ${platformException.message}');
-    });
+    // // branch deep links:
+    // _branchSub = FlutterBranchSdk.initSession().listen((Map data) {
+    //   // TODO: investigate:
+    //   if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) {
+    //     // check if they were gifted a wallet:
+    //     if (data.containsKey("~feature") && (data["~feature"] == "gift" || data["~feature"] == "splitgift")) {
+    //       // if (data["+match_guaranteed"] == true) {
+    //       // setup the auto load wallet:
+    //       setState(() {
+    //         gift = <String, dynamic>{
+    //           "seed": data["seed"] as String? ?? "",
+    //           "amount_raw": data["amount_raw"] as String? ?? "",
+    //           "address": data["address"] as String? ?? "",
+    //           "from_address": data["from_address"] as String? ?? "",
+    //           "memo": data["memo"] as String? ?? "",
+    //           "require_captcha": data["require_captcha"] != "",
+    //           "uuid": data["gift_uuid"] as String? ?? "",
+    //         };
+    //       });
+    //       // }
+    //     }
+    //   }
+    // }, onError: (dynamic error) {
+    //   final PlatformException platformException = error as PlatformException;
+    //   log.d('InitSession error: ${platformException.code} - ${platformException.message}');
+    // });
   }
 
   void _destroyBus() {
@@ -696,12 +696,12 @@ class StateContainerState extends State<StateContainer> {
     if (_accountModifiedSub != null) {
       _accountModifiedSub!.cancel();
     }
-    if (_deepLinkSub != null) {
-      _deepLinkSub!.cancel();
-    }
-    if (_branchSub != null) {
-      _branchSub!.cancel();
-    }
+    // if (_deepLinkSub != null) {
+    //   _deepLinkSub!.cancel();
+    // }
+    // if (_branchSub != null) {
+    //   _branchSub!.cancel();
+    // }
   }
 
   // Update the global wallet instance with a new address

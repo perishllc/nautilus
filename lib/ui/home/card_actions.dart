@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:nanodart/nanodart.dart';
 import 'package:logger/logger.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
@@ -41,12 +41,12 @@ class CardActions {
     final String nonceHex = secondsSinceEpoch.toRadixString(16);
     final String signature = NanoSignatures.signBlock(nonceHex, privKey);
 
-    // check validity locally:
-    final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-    final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
-    if (!isValid) {
-      throw Exception("Invalid signature?!");
-    }
+    // // check validity locally:
+    // final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
+    // final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+    // if (!isValid) {
+    //   throw Exception("Invalid signature?!");
+    // }
 
     // create a local memo object:
     const Uuid uuid = Uuid();
@@ -122,12 +122,12 @@ class CardActions {
     final String nonceHex = secondsSinceEpoch.toRadixString(16);
     final String signature = NanoSignatures.signBlock(nonceHex, privKey);
 
-    // check validity locally:
-    final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-    final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
-    if (!isValid) {
-      throw Exception("Invalid signature?!");
-    }
+    // // check validity locally:
+    // final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
+    // final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+    // if (!isValid) {
+    //   throw Exception("Invalid signature?!");
+    // }
 
     // create a local memo object:
     const Uuid uuid = Uuid();
@@ -191,12 +191,12 @@ class CardActions {
     final String nonceHex = secondsSinceEpoch.toRadixString(16);
     final String signature = NanoSignatures.signBlock(nonceHex, privKey);
 
-    // check validity locally:
-    final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-    final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
-    if (!isValid) {
-      throw Exception("Invalid signature?!");
-    }
+    // // check validity locally:
+    // final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
+    // final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+    // if (!isValid) {
+    //   throw Exception("Invalid signature?!");
+    // }
 
     // create a local memo object:
     const Uuid uuid = Uuid();

@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:nanodart/nanodart.dart';
 import 'package:logger/logger.dart';
 import 'package:magic_sdk/magic_sdk.dart';
 import 'package:oktoast/oktoast.dart';
@@ -54,8 +54,12 @@ import 'package:wallet_flutter/util/sharedprefsutil.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  print("here1");
+
   // load environment variables:
   await dotenv.load();
+  print("here2");
+
 
   // Setup Service Provide
   setupServiceLocator();
@@ -66,13 +70,34 @@ Future<void> main() async {
     // Logger.level = Level.debug;
     Logger.level = Level.verbose;
   }
-  // Setup firebase
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform, name: "wallet_flutter");
+  print("here3");
 
-  await FirebaseAppCheck.instance.activate(
-    webRecaptchaSiteKey: dotenv.env["CAPTCHA_SITE_KEY"],
-  );
-  FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
+  // Setup firebase
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform, name: "wallet_flutter");
+  await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: "AIzaSyAnbE5oUQmEtcfqbv8Qm5W9WxMSrk4JFQA",
+        appId: '1:871480363204:web:72ea28aeacd116e4492191',
+        messagingSenderId: '871480363204',
+        projectId: 'nautilus-a7345',
+        authDomain: 'nautilus-a7345.firebaseapp.com',
+        storageBucket: 'nautilus-a7345.appspot.com',
+        measurementId: 'G-K2BCTV2J80',
+      ),
+      name: "wallet_flutter");
+
+  print("here4");
+
+  // await FirebaseAppCheck.instance.activate(
+  //   webRecaptchaSiteKey: dotenv.env["CAPTCHA_SITE_KEY"],
+  // );
+
+  print("here5");
+
+  // FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
+
+  print("here6");
+
 
   if (!kReleaseMode) {
     // we have to stall for whatever reason in debug mode
@@ -127,7 +152,8 @@ class AppState extends State<App> {
         // ),
         theme: ThemeData(
           // colorSchemeSeed: StateContainer.of(context).curTheme.primary,
-          colorScheme: ColorScheme.fromSeed(seedColor: StateContainer.of(context).curTheme.primary ?? Colors.blue).copyWith(
+          colorScheme:
+              ColorScheme.fromSeed(seedColor: StateContainer.of(context).curTheme.primary ?? Colors.blue).copyWith(
             secondary: StateContainer.of(context).curTheme.primary10,
             brightness: StateContainer.of(context).curTheme.brightness,
             error: StateContainer.of(context).curTheme.error,
@@ -499,7 +525,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     // Update session key
     await sl.get<Vault>().updateSessionKey();
     // Check if device is rooted or jailbroken, show user a warning informing them of the risks if so
-    if (Platform.isIOS || Platform.isAndroid) {
+    if (!kIsWeb && (Platform.isIOS || Platform.isAndroid)) {
       if (!(await sl.get<SharedPrefsUtil>().getHasSeenRootWarning()) && await FlutterJailbreakDetection.jailbroken) {
         if (!mounted) return;
         AppDialogs.showConfirmDialog(

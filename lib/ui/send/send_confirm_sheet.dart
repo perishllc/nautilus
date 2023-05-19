@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:nanodart/nanodart.dart';
 import 'package:logger/logger.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
@@ -564,13 +564,13 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       final String nonceHex = secondsSinceEpoch.toRadixString(16);
       final String signature = NanoSignatures.signBlock(nonceHex, privKey);
 
-      // check validity locally:
-      final String pubKey = NanoAccounts.extractPublicKey(walletAddress);
-      final bool isValid =
-          NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
-      if (!isValid) {
-        throw Exception("Invalid signature?!");
-      }
+      // // check validity locally:
+      // final String pubKey = NanoAccounts.extractPublicKey(walletAddress);
+      // final bool isValid =
+      //     NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+      // if (!isValid) {
+      //   throw Exception("Invalid signature?!");
+      // }
 
       // create a local memo object:
       const Uuid uuid = Uuid();

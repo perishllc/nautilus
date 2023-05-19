@@ -1,6 +1,6 @@
 import 'package:decimal/decimal.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:nanodart/nanodart.dart';
 import 'package:intl/intl.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/available_currency.dart';

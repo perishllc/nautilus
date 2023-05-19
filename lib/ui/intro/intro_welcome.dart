@@ -4,10 +4,11 @@ import 'dart:io';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:nanodart/nanodart.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:wallet_flutter/app_icons.dart';
@@ -48,7 +49,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
       bool openedDialog = false;
 
       // If the system can show an authorization request dialog
-      if (Platform.isIOS) {
+      if (!kIsWeb && Platform.isIOS) {
         if (await sl.get<SharedPrefsUtil>().getTrackingEnabled() == false ||
             await AppTrackingTransparency.trackingAuthorizationStatus == TrackingStatus.notDetermined) {
           // Show a custom explainer dialog before the system dialog
