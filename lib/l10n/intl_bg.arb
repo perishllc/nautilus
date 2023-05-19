@@ -430,6 +430,11 @@
     "type": "text",
     "description": "check_availability"
   },
+  "checkUsernameConfirmInfo": "Предстои да проверим дали това потребителско име е регистрирано в няколко различни услуги.\nТова може да отнеме около секунда.",
+  "@checkUsernameConfirmInfo": {
+    "type": "text",
+    "description": "username_check_confirm_info"
+  },
   "close": "Затвори",
   "@close": {
     "type": "text",
@@ -716,6 +721,16 @@
   "@deleteRequest": {
     "type": "text",
     "description": "delete_request"
+  },
+  "deleteScheduledConfirmation": "Сигурни ли сте, че искате да изтриете това насрочено плащане?\n\nВинаги можете да го добавите отново по-късно, като докоснете бутона „График на плащане“.",
+  "@deleteScheduledConfirmation": {
+    "type": "text",
+    "description": "delete scheduled payment confirmation info"
+  },
+  "deleteScheduledHeader": "Изтриване на насрочено плащане?",
+  "@deleteScheduledHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
   },
   "deleteSubConfirmation": "Сигурни ли сте, че искате да изтриете този абонамент?\n\nВинаги можете да го добавите отново по-късно, като докоснете бутона „Добавяне на абонамент“.",
   "@deleteSubConfirmation": {
@@ -1787,6 +1802,11 @@
     "type": "text",
     "description": "history_opened"
   },
+  "overdue": "Просрочени",
+  "@overdue": {
+    "type": "text",
+    "description": "payment_overdue"
+  },
   "paid": "платени",
   "@paid": {
     "type": "text",
@@ -1852,6 +1872,11 @@
     "type": "text",
     "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
   },
+  "pastDue": "Просрочие",
+  "@pastDue": {
+    "type": "text",
+    "description": "past_due"
+  },
   "pay": "Плати",
   "@pay": {
     "type": "text",
@@ -1872,6 +1897,16 @@
     "type": "text",
     "description": "payments"
   },
+  "paymentScheduled": "Планирано плащане",
+  "@paymentScheduled": {
+    "type": "text",
+    "description": "payment_scheduled"
+  },
+  "paymentTime": "Време за плащане",
+  "@paymentTime": {
+    "type": "text",
+    "description": "payment_time"
+  },
   "payRequest": "Плати тази заявка",
   "@payRequest": {
     "type": "text",
@@ -1881,6 +1916,11 @@
   "@pickFromList": {
     "type": "text",
     "description": "pick rep from list"
+  },
+  "pickTime": "Изберете час",
+  "@pickTime": {
+    "type": "text",
+    "description": "pick_time_button"
   },
   "pinBlank": "Pin не може да бъде празен",
   "@pinBlank": {
@@ -2071,6 +2111,16 @@
   "@receiveMinimumInfo": {
     "type": "text",
     "description": "receive_minimum_info"
+  },
+  "recurringButton": "Повтарящи се",
+  "@recurringButton": {
+    "type": "text",
+    "description": "recurring_button"
+  },
+  "recurringPayments": "Периодични плащания",
+  "@recurringPayments": {
+    "type": "text",
+    "description": "recurring_payments"
   },
   "refund": "Възстановяване",
   "@refund": {
@@ -2286,6 +2336,16 @@
   "@schedule": {
     "type": "text",
     "description": "subs_schedule"
+  },
+  "scheduledButton": "Планиран",
+  "@scheduledButton": {
+    "type": "text",
+    "description": "scheduled_button"
+  },
+  "schedulePayment": "График на плащане",
+  "@schedulePayment": {
+    "type": "text",
+    "description": "schedule_payment_button"
   },
   "searchHint": "Търсете каквото и да е",
   "@searchHint": {
@@ -2767,6 +2827,16 @@
     "type": "text",
     "description": "xmr_loading_takes_time"
   },
+  "timestampEmpty": "Моля, изберете час",
+  "@timestampEmpty": {
+    "type": "text",
+    "description": "timestamp_empty"
+  },
+  "timestampInPast": "Времето трябва да е в бъдещето",
+  "@timestampInPast": {
+    "type": "text",
+    "description": "timestamp_in_past"
+  },
   "to": "До",
   "@to": {
     "type": "text",
@@ -2941,6 +3011,11 @@
   "@unread": {
     "type": "text",
     "description": "history_unread"
+  },
+  "upcomingButton": "Предстои",
+  "@upcomingButton": {
+    "type": "text",
+    "description": "upcoming_button"
   },
   "uptime": "Ъптайм",
   "@uptime": {

@@ -151,6 +151,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "قم بتغيير العبارة الأولية المرتبطة بهذا الحساب المصادق عليه الارتباط السحري ، مهما كانت كلمة المرور التي قمت بتعيينها هنا ستحل محل كلمة المرور الحالية ، ولكن يمكنك استخدام نفس كلمة المرور إذا اخترت ذلك."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("تحقق من التوفر"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "نحن على وشك التحقق مما إذا كان اسم المستخدم هذا مسجلاً في بعض الخدمات المختلفة.\nقد يستغرق هذا ثانية أو نحو ذلك."),
         "close": MessageLookupByLibrary.simpleMessage("إغلاق"),
         "confirm": MessageLookupByLibrary.simpleMessage("تأكيد"),
         "confirmPasswordHint":
@@ -246,6 +248,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("هل تريد حذف العقدة؟"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "هل أنت متأكد أنك تريد حذف هذه الدفعة المجدولة؟\n\nيمكنك دائمًا إعادة إضافته لاحقًا عن طريق النقر على الزر \"جدولة الدفع\""),
+        "deleteScheduledHeader":
+            MessageLookupByLibrary.simpleMessage("هل تريد حذف الدفع المجدول؟"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "هل أنت متأكد أنك تريد حذف هذا الاشتراك؟\n\nيمكنك دائمًا إعادة إضافته لاحقًا بالنقر فوق الزر \"إضافة اشتراك\""),
         "deleteSubHeader":
@@ -576,6 +582,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("أونرامب"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("تم افتتاحه"),
+        "overdue": MessageLookupByLibrary.simpleMessage("متأخر"),
         "paid": MessageLookupByLibrary.simpleMessage("دفع"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("المحفظة الورقية"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
@@ -602,13 +609,18 @@ class MessageLookup extends MessageLookupByLibrary {
                 "هناك حاجة إلى كلمة المرور لفتح نتريم"),
         "passwordsDontMatch":
             MessageLookupByLibrary.simpleMessage("كلمة المرور غير مطابقة\n"),
+        "pastDue":
+            MessageLookupByLibrary.simpleMessage("تجاوز تاريخ الاستحقاق"),
         "pay": MessageLookupByLibrary.simpleMessage("الدفع"),
         "payRequest": MessageLookupByLibrary.simpleMessage("ادفع هذا الطلب"),
         "paymentHistory": MessageLookupByLibrary.simpleMessage("تاريخ الدفع"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "طلب شخص ما الدفع منك! تحقق من صفحة المدفوعات لمزيد من المعلومات."),
+        "paymentScheduled": MessageLookupByLibrary.simpleMessage("جدولة الدفع"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("وقت الدفع"),
         "payments": MessageLookupByLibrary.simpleMessage("المدفوعات"),
         "pickFromList": MessageLookupByLibrary.simpleMessage("اختيار من قائمة"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("اختر وقتًا"),
         "pinBlank": MessageLookupByLibrary.simpleMessage(
             "لا يمكن أن يكون رقم التعريف الشخصي فارغًا"),
         "pinConfirmError":
@@ -670,6 +682,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "الحد الأدنى للمبلغ لتلقيه. إذا تم استلام دفعة أو طلب بمبلغ أقل من هذا، فسيتم تجاهله."),
         "received": MessageLookupByLibrary.simpleMessage("تم الإستلام"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("يتكرر"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("دفعات متكررة"),
         "refund": MessageLookupByLibrary.simpleMessage("استرداد"),
         "registerButton": MessageLookupByLibrary.simpleMessage("يسجل"),
         "registerFor": MessageLookupByLibrary.simpleMessage("من أجل"),
@@ -737,6 +752,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("مسح رمز الاستجابة السريعة"),
         "schedule": MessageLookupByLibrary.simpleMessage("برنامج"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("دفع الجدول الزمني"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("المقرر"),
         "searchHint": MessageLookupByLibrary.simpleMessage("ابحث عن أي شيء"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "في الشاشة التالية ، سترى العبارة السرية الخاصة بك. إنها كلمة مرور للوصول إلى أموالك. من الأهمية أن تقوم بنسخه احتياطيًا وأن لا تشاركه أبدًا مع أي شخص."),
@@ -883,6 +901,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("مظهر"),
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("هذا قد يستغرق بعض الوقت..."),
+        "timestampEmpty":
+            MessageLookupByLibrary.simpleMessage("الرجاء اختيار وقت"),
+        "timestampInPast": MessageLookupByLibrary.simpleMessage(
+            "يجب أن يكون الوقت في المستقبل"),
         "to": MessageLookupByLibrary.simpleMessage("إلى"),
         "todayAt": MessageLookupByLibrary.simpleMessage("اليوم في"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -939,6 +961,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الحساب مفتوح"),
         "unpaid": MessageLookupByLibrary.simpleMessage("غير مدفوع"),
         "unread": MessageLookupByLibrary.simpleMessage("غير مقروء"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("القادمة"),
         "uptime": MessageLookupByLibrary.simpleMessage("مدة التشغيل"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("الرجاء إدخال عنوان URL"),

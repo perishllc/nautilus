@@ -165,6 +165,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Измените начальное число/фразу, связанную с этой учетной записью с авторизацией по магической ссылке, любой пароль, который вы установите здесь, перезапишет ваш существующий пароль, но вы можете использовать тот же пароль, если хотите."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Проверить доступность"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "Мы собираемся проверить, зарегистрировано ли это имя пользователя в нескольких разных службах.\nЭто может занять секунду или около того."),
         "close": MessageLookupByLibrary.simpleMessage("Закрыть"),
         "confirm": MessageLookupByLibrary.simpleMessage("Подтвердить"),
         "confirmPasswordHint":
@@ -264,6 +266,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Удалить узел?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Вы уверены, что хотите удалить этот запланированный платеж?\n\nВы всегда можете повторно добавить его позже, нажав кнопку «Запланировать платеж»."),
+        "deleteScheduledHeader": MessageLookupByLibrary.simpleMessage(
+            "Удалить запланированный платеж?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "Вы уверены, что хотите удалить эту подписку?\n\nВы всегда можете повторно добавить ее позже, нажав кнопку «Добавить подписку»."),
         "deleteSubHeader":
@@ -610,6 +616,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("На рампе"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Открыт"),
+        "overdue": MessageLookupByLibrary.simpleMessage("Просрочено"),
         "paid": MessageLookupByLibrary.simpleMessage("оплаченный"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("Paper кошелёк"),
         "passwordBlank":
@@ -636,6 +643,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Этот пароль потребуется для открытия Nautilus."),
         "passwordsDontMatch":
             MessageLookupByLibrary.simpleMessage("Пароли не совпадают"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("Просроченный"),
         "pay": MessageLookupByLibrary.simpleMessage("Оплатить"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Оплатить этот запрос"),
@@ -643,9 +651,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("История платежей"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Кто-то запросил у вас оплату! посетите страницу платежей для получения дополнительной информации."),
+        "paymentScheduled":
+            MessageLookupByLibrary.simpleMessage("Запланированный платеж"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("Время оплаты"),
         "payments": MessageLookupByLibrary.simpleMessage("Платежи"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Выбрать из списка"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("Выберите время"),
         "pinBlank": MessageLookupByLibrary.simpleMessage(
             "PIN-код не может быть пустым"),
         "pinConfirmError":
@@ -710,6 +722,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "Минимальная сумма для получения. Если платеж или запрос получен на сумму меньше указанной, они будут проигнорированы."),
         "received": MessageLookupByLibrary.simpleMessage("Получено"),
+        "recurringButton":
+            MessageLookupByLibrary.simpleMessage("Повторяющийся"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("Регулярные платежи"),
         "refund": MessageLookupByLibrary.simpleMessage("Возврат"),
         "registerButton": MessageLookupByLibrary.simpleMessage("регистр"),
         "registerFor": MessageLookupByLibrary.simpleMessage("для"),
@@ -781,6 +797,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("Сканировать QR-код"),
         "schedule": MessageLookupByLibrary.simpleMessage("График"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("Запланировать платеж"),
+        "scheduledButton":
+            MessageLookupByLibrary.simpleMessage("Запланированное"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Ищите что угодно"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "На следующем экране вы увидите свою секретную фразу. Это пароль для доступа к вашим средствам. Крайне важно, чтобы вы создали резервную копию и никогда не передавали ее никому."),
@@ -932,6 +952,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("Тема"),
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "это может занять некоторое время..."),
+        "timestampEmpty":
+            MessageLookupByLibrary.simpleMessage("Пожалуйста, выберите время"),
+        "timestampInPast":
+            MessageLookupByLibrary.simpleMessage("Время должно быть в будущем"),
         "to": MessageLookupByLibrary.simpleMessage("на"),
         "todayAt": MessageLookupByLibrary.simpleMessage("Сегодня в"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -991,6 +1015,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Счет не открыт"),
         "unpaid": MessageLookupByLibrary.simpleMessage("невыплаченных"),
         "unread": MessageLookupByLibrary.simpleMessage("непрочитанный"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("Предстоящие"),
         "uptime": MessageLookupByLibrary.simpleMessage("Онлайн время"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Пожалуйста, введите URL"),

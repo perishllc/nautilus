@@ -158,6 +158,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tukar benih/frasa yang dikaitkan dengan akaun sah pautan ajaib ini, apa sahaja kata laluan yang anda tetapkan di sini akan menimpa kata laluan sedia ada anda, tetapi anda boleh menggunakan kata laluan yang sama jika anda memilih."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Semak Ketersediaan"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "Kami akan menyemak sama ada nama pengguna ini didaftarkan pada beberapa perkhidmatan yang berbeza.\nIni mungkin mengambil masa sesaat atau lebih."),
         "close": MessageLookupByLibrary.simpleMessage("Tutup"),
         "confirm": MessageLookupByLibrary.simpleMessage("Konfirm"),
         "confirmPasswordHint":
@@ -253,6 +255,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Padamkan Nod?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Adakah anda pasti mahu memadamkan pembayaran berjadual ini?\n\nAnda sentiasa boleh menambahkannya semula kemudian dengan mengetik butang \"Jadualkan Pembayaran\"."),
+        "deleteScheduledHeader": MessageLookupByLibrary.simpleMessage(
+            "Padamkan Pembayaran Berjadual?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "Adakah anda pasti mahu memadamkan langganan ini?\n\nAnda sentiasa boleh menambahkannya semula kemudian dengan mengetik butang \"Tambah Langganan\"."),
         "deleteSubHeader":
@@ -597,6 +603,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Dibuka"),
+        "overdue": MessageLookupByLibrary.simpleMessage("Tertunggak"),
         "paid": MessageLookupByLibrary.simpleMessage("dibayar"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("Dompet Kertas"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
@@ -623,6 +630,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Kata laluan ini diperlukan untuk membuka Nautilus."),
         "passwordsDontMatch":
             MessageLookupByLibrary.simpleMessage("Kata laluan tidak sepadan"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("Telah berlalu"),
         "pay": MessageLookupByLibrary.simpleMessage("Bayar"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Bayar permintaan ini"),
@@ -630,9 +638,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("sejarah pembayaran"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Seseorang telah meminta pembayaran daripada anda! semak halaman pembayaran untuk maklumat lanjut."),
+        "paymentScheduled":
+            MessageLookupByLibrary.simpleMessage("Pembayaran Dijadualkan"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("Masa Pembayaran"),
         "payments": MessageLookupByLibrary.simpleMessage("Bayaran"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Pilih Daripada Senarai"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("Pilih Masa"),
         "pinBlank":
             MessageLookupByLibrary.simpleMessage("Pin tidak boleh kosong"),
         "pinConfirmError":
@@ -694,6 +706,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "Jumlah minimum untuk diterima. Jika pembayaran atau permintaan diterima dengan jumlah yang kurang daripada ini, ia akan diabaikan."),
         "received": MessageLookupByLibrary.simpleMessage("Diterima"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("Berulang"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("Bayaran Berulang"),
         "refund": MessageLookupByLibrary.simpleMessage("Bayaran Balik"),
         "registerButton": MessageLookupByLibrary.simpleMessage("Daftar"),
         "registerFor": MessageLookupByLibrary.simpleMessage("bagi"),
@@ -762,6 +777,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("Hantar melalui NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Imbaskan Kod QR"),
         "schedule": MessageLookupByLibrary.simpleMessage("Jadual"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("Jadual Pembayaran"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("Dijadualkan"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Cari apa-apa"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "Dalam skrin seterusnya, anda akan melihat frasa rahsia anda. Ia adalah kata laluan untuk mengakses dana anda. Adalah penting bahawa anda menyokongnya dan tidak pernah berkongsi dengan sesiapa sahaja."),
@@ -910,6 +928,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("Tema"),
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "ini mungkin mengambil sedikit masa..."),
+        "timestampEmpty":
+            MessageLookupByLibrary.simpleMessage("Sila pilih masa"),
+        "timestampInPast": MessageLookupByLibrary.simpleMessage(
+            "Masa mesti ada di masa hadapan"),
         "to": MessageLookupByLibrary.simpleMessage("Ke"),
         "todayAt": MessageLookupByLibrary.simpleMessage("Hari ini di"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -970,6 +992,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Akaun Belum Dibuka"),
         "unpaid": MessageLookupByLibrary.simpleMessage("tidak dibayar"),
         "unread": MessageLookupByLibrary.simpleMessage("belum dibaca"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("Akan datang"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Sila masukkan URL"),
         "useAppRep": MessageLookupByLibrary.simpleMessage("Gunakan % 1 Rep"),

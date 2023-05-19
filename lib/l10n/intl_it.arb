@@ -430,6 +430,11 @@
     "type": "text",
     "description": "check_availability"
   },
+  "checkUsernameConfirmInfo": "Stiamo per verificare se questo nome utente è registrato su alcuni servizi diversi.\nQuesto potrebbe richiedere circa un secondo.",
+  "@checkUsernameConfirmInfo": {
+    "type": "text",
+    "description": "username_check_confirm_info"
+  },
   "close": "Chiudi",
   "@close": {
     "type": "text",
@@ -716,6 +721,16 @@
   "@deleteRequest": {
     "type": "text",
     "description": "delete_request"
+  },
+  "deleteScheduledConfirmation": "Sei sicuro di voler eliminare questo pagamento pianificato?\n\nPuoi sempre aggiungerlo nuovamente in un secondo momento toccando il pulsante \"Pianifica pagamento\".",
+  "@deleteScheduledConfirmation": {
+    "type": "text",
+    "description": "delete scheduled payment confirmation info"
+  },
+  "deleteScheduledHeader": "Eliminare il pagamento programmato?",
+  "@deleteScheduledHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
   },
   "deleteSubConfirmation": "Sei sicuro di voler eliminare questo abbonamento?\n\nPuoi sempre aggiungerlo nuovamente in un secondo momento toccando il pulsante \"Aggiungi abbonamento\".",
   "@deleteSubConfirmation": {
@@ -1787,6 +1802,11 @@
     "type": "text",
     "description": "history_opened"
   },
+  "overdue": "In ritardo",
+  "@overdue": {
+    "type": "text",
+    "description": "payment_overdue"
+  },
   "paid": "pagato",
   "@paid": {
     "type": "text",
@@ -1852,6 +1872,11 @@
     "type": "text",
     "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
   },
+  "pastDue": "Scaduto",
+  "@pastDue": {
+    "type": "text",
+    "description": "past_due"
+  },
   "pay": "Paga",
   "@pay": {
     "type": "text",
@@ -1872,6 +1897,16 @@
     "type": "text",
     "description": "payments"
   },
+  "paymentScheduled": "Pagamento programmato",
+  "@paymentScheduled": {
+    "type": "text",
+    "description": "payment_scheduled"
+  },
+  "paymentTime": "Tempo di pagamento",
+  "@paymentTime": {
+    "type": "text",
+    "description": "payment_time"
+  },
   "payRequest": "Paga questa richiesta",
   "@payRequest": {
     "type": "text",
@@ -1881,6 +1916,11 @@
   "@pickFromList": {
     "type": "text",
     "description": "pick rep from list"
+  },
+  "pickTime": "Scegli un orario",
+  "@pickTime": {
+    "type": "text",
+    "description": "pick_time_button"
   },
   "pinBlank": "Il pin non può essere vuoto",
   "@pinBlank": {
@@ -2071,6 +2111,16 @@
   "@receiveMinimumInfo": {
     "type": "text",
     "description": "receive_minimum_info"
+  },
+  "recurringButton": "Ricorrente",
+  "@recurringButton": {
+    "type": "text",
+    "description": "recurring_button"
+  },
+  "recurringPayments": "Pagamenti ricorrenti",
+  "@recurringPayments": {
+    "type": "text",
+    "description": "recurring_payments"
   },
   "refund": "rimborso",
   "@refund": {
@@ -2286,6 +2336,16 @@
   "@schedule": {
     "type": "text",
     "description": "subs_schedule"
+  },
+  "scheduledButton": "Programmato",
+  "@scheduledButton": {
+    "type": "text",
+    "description": "scheduled_button"
+  },
+  "schedulePayment": "Pianificare il pagamento",
+  "@schedulePayment": {
+    "type": "text",
+    "description": "schedule_payment_button"
   },
   "searchHint": "Cerca qualsiasi cosa",
   "@searchHint": {
@@ -2767,6 +2827,16 @@
     "type": "text",
     "description": "xmr_loading_takes_time"
   },
+  "timestampEmpty": "Scegli un orario",
+  "@timestampEmpty": {
+    "type": "text",
+    "description": "timestamp_empty"
+  },
+  "timestampInPast": "Il tempo deve essere nel futuro",
+  "@timestampInPast": {
+    "type": "text",
+    "description": "timestamp_in_past"
+  },
   "to": "A",
   "@to": {
     "type": "text",
@@ -2941,6 +3011,11 @@
   "@unread": {
     "type": "text",
     "description": "history_unread"
+  },
+  "upcomingButton": "In arrivo",
+  "@upcomingButton": {
+    "type": "text",
+    "description": "upcoming_button"
   },
   "uptime": "Operatività",
   "@uptime": {

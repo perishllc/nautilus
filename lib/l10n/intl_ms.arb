@@ -430,6 +430,11 @@
     "type": "text",
     "description": "check_availability"
   },
+  "checkUsernameConfirmInfo": "Kami akan menyemak sama ada nama pengguna ini didaftarkan pada beberapa perkhidmatan yang berbeza.\nIni mungkin mengambil masa sesaat atau lebih.",
+  "@checkUsernameConfirmInfo": {
+    "type": "text",
+    "description": "username_check_confirm_info"
+  },
   "close": "Tutup",
   "@close": {
     "type": "text",
@@ -716,6 +721,16 @@
   "@deleteRequest": {
     "type": "text",
     "description": "delete_request"
+  },
+  "deleteScheduledConfirmation": "Adakah anda pasti mahu memadamkan pembayaran berjadual ini?\n\nAnda sentiasa boleh menambahkannya semula kemudian dengan mengetik butang \"Jadualkan Pembayaran\".",
+  "@deleteScheduledConfirmation": {
+    "type": "text",
+    "description": "delete scheduled payment confirmation info"
+  },
+  "deleteScheduledHeader": "Padamkan Pembayaran Berjadual?",
+  "@deleteScheduledHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
   },
   "deleteSubConfirmation": "Adakah anda pasti mahu memadamkan langganan ini?\n\nAnda sentiasa boleh menambahkannya semula kemudian dengan mengetik butang \"Tambah Langganan\".",
   "@deleteSubConfirmation": {
@@ -1787,6 +1802,11 @@
     "type": "text",
     "description": "history_opened"
   },
+  "overdue": "Tertunggak",
+  "@overdue": {
+    "type": "text",
+    "description": "payment_overdue"
+  },
   "paid": "dibayar",
   "@paid": {
     "type": "text",
@@ -1852,6 +1872,11 @@
     "type": "text",
     "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
   },
+  "pastDue": "Telah berlalu",
+  "@pastDue": {
+    "type": "text",
+    "description": "past_due"
+  },
   "pay": "Bayar",
   "@pay": {
     "type": "text",
@@ -1872,6 +1897,16 @@
     "type": "text",
     "description": "payments"
   },
+  "paymentScheduled": "Pembayaran Dijadualkan",
+  "@paymentScheduled": {
+    "type": "text",
+    "description": "payment_scheduled"
+  },
+  "paymentTime": "Masa Pembayaran",
+  "@paymentTime": {
+    "type": "text",
+    "description": "payment_time"
+  },
   "payRequest": "Bayar permintaan ini",
   "@payRequest": {
     "type": "text",
@@ -1881,6 +1916,11 @@
   "@pickFromList": {
     "type": "text",
     "description": "pick rep from list"
+  },
+  "pickTime": "Pilih Masa",
+  "@pickTime": {
+    "type": "text",
+    "description": "pick_time_button"
   },
   "pinBlank": "Pin tidak boleh kosong",
   "@pinBlank": {
@@ -2071,6 +2111,16 @@
   "@receiveMinimumInfo": {
     "type": "text",
     "description": "receive_minimum_info"
+  },
+  "recurringButton": "Berulang",
+  "@recurringButton": {
+    "type": "text",
+    "description": "recurring_button"
+  },
+  "recurringPayments": "Bayaran Berulang",
+  "@recurringPayments": {
+    "type": "text",
+    "description": "recurring_payments"
   },
   "refund": "Bayaran Balik",
   "@refund": {
@@ -2286,6 +2336,16 @@
   "@schedule": {
     "type": "text",
     "description": "subs_schedule"
+  },
+  "scheduledButton": "Dijadualkan",
+  "@scheduledButton": {
+    "type": "text",
+    "description": "scheduled_button"
+  },
+  "schedulePayment": "Jadual Pembayaran",
+  "@schedulePayment": {
+    "type": "text",
+    "description": "schedule_payment_button"
   },
   "searchHint": "Cari apa-apa",
   "@searchHint": {
@@ -2767,6 +2827,16 @@
     "type": "text",
     "description": "xmr_loading_takes_time"
   },
+  "timestampEmpty": "Sila pilih masa",
+  "@timestampEmpty": {
+    "type": "text",
+    "description": "timestamp_empty"
+  },
+  "timestampInPast": "Masa mesti ada di masa hadapan",
+  "@timestampInPast": {
+    "type": "text",
+    "description": "timestamp_in_past"
+  },
   "to": "Ke",
   "@to": {
     "type": "text",
@@ -2941,6 +3011,11 @@
   "@unread": {
     "type": "text",
     "description": "history_unread"
+  },
+  "upcomingButton": "Akan datang",
+  "@upcomingButton": {
+    "type": "text",
+    "description": "upcoming_button"
   },
   "uptime": "Uptime",
   "@uptime": {

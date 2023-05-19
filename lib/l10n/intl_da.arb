@@ -430,6 +430,11 @@
     "type": "text",
     "description": "check_availability"
   },
+  "checkUsernameConfirmInfo": "Vi er ved at tjekke, om dette brugernavn er registreret på et par forskellige tjenester.\nDette kan tage et sekund eller deromkring.",
+  "@checkUsernameConfirmInfo": {
+    "type": "text",
+    "description": "username_check_confirm_info"
+  },
   "close": "Zavřít",
   "@close": {
     "type": "text",
@@ -716,6 +721,16 @@
   "@deleteRequest": {
     "type": "text",
     "description": "delete_request"
+  },
+  "deleteScheduledConfirmation": "Er du sikker på, at du vil slette denne planlagte betaling?\n\nDu kan altid tilføje det igen senere ved at trykke på knappen \"Bestil betaling\".",
+  "@deleteScheduledConfirmation": {
+    "type": "text",
+    "description": "delete scheduled payment confirmation info"
+  },
+  "deleteScheduledHeader": "Vil du slette planlagt betaling?",
+  "@deleteScheduledHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
   },
   "deleteSubConfirmation": "Er du sikker på, at du vil slette dette abonnement?\n\nDu kan altid tilføje det igen senere ved at trykke på knappen \"Tilføj abonnement\".",
   "@deleteSubConfirmation": {
@@ -1787,6 +1802,11 @@
     "type": "text",
     "description": "history_opened"
   },
+  "overdue": "Forsinket",
+  "@overdue": {
+    "type": "text",
+    "description": "payment_overdue"
+  },
   "paid": "betalt",
   "@paid": {
     "type": "text",
@@ -1852,6 +1872,11 @@
     "type": "text",
     "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
   },
+  "pastDue": "Ikke betalt til tiden",
+  "@pastDue": {
+    "type": "text",
+    "description": "past_due"
+  },
   "pay": "Betal",
   "@pay": {
     "type": "text",
@@ -1872,6 +1897,16 @@
     "type": "text",
     "description": "payments"
   },
+  "paymentScheduled": "Betaling planlagt",
+  "@paymentScheduled": {
+    "type": "text",
+    "description": "payment_scheduled"
+  },
+  "paymentTime": "Betalingstid",
+  "@paymentTime": {
+    "type": "text",
+    "description": "payment_time"
+  },
   "payRequest": "Betal denne anmodning",
   "@payRequest": {
     "type": "text",
@@ -1881,6 +1916,11 @@
   "@pickFromList": {
     "type": "text",
     "description": "pick rep from list"
+  },
+  "pickTime": "Vælg et tidspunkt",
+  "@pickTime": {
+    "type": "text",
+    "description": "pick_time_button"
   },
   "pinBlank": "Pin kan ikke være tom",
   "@pinBlank": {
@@ -2071,6 +2111,16 @@
   "@receiveMinimumInfo": {
     "type": "text",
     "description": "receive_minimum_info"
+  },
+  "recurringButton": "Tilbagevendende",
+  "@recurringButton": {
+    "type": "text",
+    "description": "recurring_button"
+  },
+  "recurringPayments": "Tilbagevendende betalinger",
+  "@recurringPayments": {
+    "type": "text",
+    "description": "recurring_payments"
   },
   "refund": "tilbagebetaling",
   "@refund": {
@@ -2286,6 +2336,16 @@
   "@schedule": {
     "type": "text",
     "description": "subs_schedule"
+  },
+  "scheduledButton": "Planlagt",
+  "@scheduledButton": {
+    "type": "text",
+    "description": "scheduled_button"
+  },
+  "schedulePayment": "Planlæg betaling",
+  "@schedulePayment": {
+    "type": "text",
+    "description": "schedule_payment_button"
   },
   "searchHint": "Søg efter noget",
   "@searchHint": {
@@ -2767,6 +2827,16 @@
     "type": "text",
     "description": "xmr_loading_takes_time"
   },
+  "timestampEmpty": "Vælg venligst et tidspunkt",
+  "@timestampEmpty": {
+    "type": "text",
+    "description": "timestamp_empty"
+  },
+  "timestampInPast": "Tiden skal være i fremtiden",
+  "@timestampInPast": {
+    "type": "text",
+    "description": "timestamp_in_past"
+  },
   "to": "Pro",
   "@to": {
     "type": "text",
@@ -2941,6 +3011,11 @@
   "@unread": {
     "type": "text",
     "description": "history_unread"
+  },
+  "upcomingButton": "Kommende",
+  "@upcomingButton": {
+    "type": "text",
+    "description": "upcoming_button"
   },
   "uptime": "Provozuschopnost",
   "@uptime": {

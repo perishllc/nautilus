@@ -430,6 +430,11 @@
     "type": "text",
     "description": "check_availability"
   },
+  "checkUsernameConfirmInfo": "Ми збираємося перевірити, чи це ім’я користувача зареєстровано в кількох різних службах.\nЦе може зайняти секунду або близько того.",
+  "@checkUsernameConfirmInfo": {
+    "type": "text",
+    "description": "username_check_confirm_info"
+  },
   "close": "Закрити",
   "@close": {
     "type": "text",
@@ -716,6 +721,16 @@
   "@deleteRequest": {
     "type": "text",
     "description": "delete_request"
+  },
+  "deleteScheduledConfirmation": "Ви впевнені, що бажаєте видалити цей запланований платіж?\n\nВи завжди можете повторно додати його пізніше, натиснувши кнопку «Запланувати оплату».",
+  "@deleteScheduledConfirmation": {
+    "type": "text",
+    "description": "delete scheduled payment confirmation info"
+  },
+  "deleteScheduledHeader": "Видалити запланований платіж?",
+  "@deleteScheduledHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
   },
   "deleteSubConfirmation": "Ви впевнені, що хочете видалити цю підписку?\n\nВи завжди можете повторно додати його пізніше, натиснувши кнопку «Додати підписку».",
   "@deleteSubConfirmation": {
@@ -1787,6 +1802,11 @@
     "type": "text",
     "description": "history_opened"
   },
+  "overdue": "Прострочена",
+  "@overdue": {
+    "type": "text",
+    "description": "payment_overdue"
+  },
   "paid": "оплачується",
   "@paid": {
     "type": "text",
@@ -1852,6 +1872,11 @@
     "type": "text",
     "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
   },
+  "pastDue": "Прострочено",
+  "@pastDue": {
+    "type": "text",
+    "description": "past_due"
+  },
   "pay": "Оплатити",
   "@pay": {
     "type": "text",
@@ -1872,6 +1897,16 @@
     "type": "text",
     "description": "payments"
   },
+  "paymentScheduled": "Платіж запланований",
+  "@paymentScheduled": {
+    "type": "text",
+    "description": "payment_scheduled"
+  },
+  "paymentTime": "Час оплати",
+  "@paymentTime": {
+    "type": "text",
+    "description": "payment_time"
+  },
   "payRequest": "Сплатити цей запит",
   "@payRequest": {
     "type": "text",
@@ -1881,6 +1916,11 @@
   "@pickFromList": {
     "type": "text",
     "description": "pick rep from list"
+  },
+  "pickTime": "Виберіть час",
+  "@pickTime": {
+    "type": "text",
+    "description": "pick_time_button"
   },
   "pinBlank": "PIN-код не може бути порожнім",
   "@pinBlank": {
@@ -2071,6 +2111,16 @@
   "@receiveMinimumInfo": {
     "type": "text",
     "description": "receive_minimum_info"
+  },
+  "recurringButton": "Повторювані",
+  "@recurringButton": {
+    "type": "text",
+    "description": "recurring_button"
+  },
+  "recurringPayments": "Регулярні платежі",
+  "@recurringPayments": {
+    "type": "text",
+    "description": "recurring_payments"
   },
   "refund": "Повернення",
   "@refund": {
@@ -2286,6 +2336,16 @@
   "@schedule": {
     "type": "text",
     "description": "subs_schedule"
+  },
+  "scheduledButton": "За розкладом",
+  "@scheduledButton": {
+    "type": "text",
+    "description": "scheduled_button"
+  },
+  "schedulePayment": "Графік оплати",
+  "@schedulePayment": {
+    "type": "text",
+    "description": "schedule_payment_button"
   },
   "searchHint": "Шукати що-небудь",
   "@searchHint": {
@@ -2767,6 +2827,16 @@
     "type": "text",
     "description": "xmr_loading_takes_time"
   },
+  "timestampEmpty": "Виберіть час",
+  "@timestampEmpty": {
+    "type": "text",
+    "description": "timestamp_empty"
+  },
+  "timestampInPast": "Час має бути в майбутньому",
+  "@timestampInPast": {
+    "type": "text",
+    "description": "timestamp_in_past"
+  },
   "to": "Для",
   "@to": {
     "type": "text",
@@ -2941,6 +3011,11 @@
   "@unread": {
     "type": "text",
     "description": "history_unread"
+  },
+  "upcomingButton": "Майбутні",
+  "@upcomingButton": {
+    "type": "text",
+    "description": "upcoming_button"
   },
   "uptime": "Час в мережі",
   "@uptime": {

@@ -336,6 +336,16 @@ class DBHelper {
       ),
       dbClient: dbClient,
     );
+    await saveWorkSource(
+      WorkSource(
+        id: 4,
+        name: "nanoriver",
+        selected: false,
+        type: WorkSourceTypes.URL,
+        url: "https://nanoriver.cc",
+      ),
+      dbClient: dbClient,
+    );
   }
 
   Future<void> nukeDatabase() async {

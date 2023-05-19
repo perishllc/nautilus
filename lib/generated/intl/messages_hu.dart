@@ -165,6 +165,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Módosítsa a magic-link hitelesített fiókhoz társított magot/kifejezést, az itt beállított jelszó felülírja a meglévő jelszavát, de ha úgy dönt, használhatja ugyanazt a jelszót."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Szabad szobák ellenőrzése"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "Arra készülünk, hogy ellenőrizzük, hogy ez a felhasználónév regisztrálva van-e néhány különböző szolgáltatásban.\nEz eltarthat egy másodpercig."),
         "close": MessageLookupByLibrary.simpleMessage("Bezárás"),
         "confirm": MessageLookupByLibrary.simpleMessage("Megerősít"),
         "confirmPasswordHint":
@@ -262,6 +264,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Csomópont törlése?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Biztosan törli ezt az ütemezett fizetést?\n\nKésőbb bármikor újra felveheti a „Fizetési ütemezés” gombra koppintva"),
+        "deleteScheduledHeader": MessageLookupByLibrary.simpleMessage(
+            "Törli az ütemezett fizetést?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "Biztosan törli ezt az előfizetést?\n\nKésőbb bármikor újra felveheti az „Előfizetés hozzáadása” gombra koppintva"),
         "deleteSubHeader":
@@ -610,6 +616,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("Onrámpa"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Nyitott"),
+        "overdue": MessageLookupByLibrary.simpleMessage("Lejárt"),
         "paid": MessageLookupByLibrary.simpleMessage("fizetett"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("Paper Wallet"),
         "passwordBlank":
@@ -636,6 +643,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "This password will be required to open Nautilus."),
         "passwordsDontMatch":
             MessageLookupByLibrary.simpleMessage("Passwords do not match"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("Határidőn túl"),
         "pay": MessageLookupByLibrary.simpleMessage("Fizessen"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Fizesse ezt a kérelmet"),
@@ -643,9 +651,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fizetési előzmények"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Valaki kért fizetést tőled! további információkért nézze meg a fizetési oldalt."),
+        "paymentScheduled":
+            MessageLookupByLibrary.simpleMessage("Fizetés ütemezve"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("Fizetési idő"),
         "payments": MessageLookupByLibrary.simpleMessage("Fizetések"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Pick From a List"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("Válasszon időpontot"),
         "pinBlank":
             MessageLookupByLibrary.simpleMessage("A pin nem lehet üres"),
         "pinConfirmError":
@@ -711,6 +723,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "Minimális összeg a fogadáshoz. Ha ennél kisebb összegű fizetés vagy kérés érkezik, akkor azt figyelmen kívül hagyják."),
         "received": MessageLookupByLibrary.simpleMessage("Fogadott"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("Ismétlődő"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("Ismétlődő kifizetések"),
         "refund": MessageLookupByLibrary.simpleMessage("visszatérítés"),
         "registerButton": MessageLookupByLibrary.simpleMessage("Regisztráció"),
         "registerFor": MessageLookupByLibrary.simpleMessage("mert"),
@@ -783,6 +798,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("Olvasd be a QR Kódot"),
         "schedule": MessageLookupByLibrary.simpleMessage("Menetrend"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("Fizetés ütemezése"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("Ütemezett"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Bármit kereshet"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "In the next screen, you will see your secret phrase. It is a password to access your funds. It is crucial that you back it up and never share it with anyone."),
@@ -931,6 +949,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("Téma"),
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("ez eltarthat egy ideig..."),
+        "timestampEmpty":
+            MessageLookupByLibrary.simpleMessage("Kérem válasszon időpontot"),
+        "timestampInPast": MessageLookupByLibrary.simpleMessage(
+            "Az időnek a jövőben kell lennie"),
         "to": MessageLookupByLibrary.simpleMessage("Küldés ide"),
         "todayAt": MessageLookupByLibrary.simpleMessage("Ma at"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -991,6 +1013,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Fiók nyitatlan"),
         "unpaid": MessageLookupByLibrary.simpleMessage("kifizetetlen"),
         "unread": MessageLookupByLibrary.simpleMessage("olvasatlan"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("Közelgő"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Kérjük, adjon meg egy URL-t"),

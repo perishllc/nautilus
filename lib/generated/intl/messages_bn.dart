@@ -165,6 +165,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "এই ম্যাজিক-লিঙ্ক প্রমাণিত অ্যাকাউন্টের সাথে যুক্ত বীজ/বাক্যাংশ পরিবর্তন করুন, আপনি এখানে যে পাসওয়ার্ড সেট করবেন তা আপনার বিদ্যমান পাসওয়ার্ডটি ওভাররাইট করবে, তবে আপনি যদি চয়ন করেন তবে আপনি একই পাসওয়ার্ড ব্যবহার করতে পারেন।"),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("প্রাপ্যতা পরীক্ষা করুন"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "আমরা এই ব্যবহারকারীর নামটি কয়েকটি ভিন্ন পরিষেবাতে নিবন্ধিত কিনা তা পরীক্ষা করতে চলেছি৷\nএটি এক সেকেন্ড বা তার বেশি সময় নিতে পারে।"),
         "close": MessageLookupByLibrary.simpleMessage("বন্ধ"),
         "confirm": MessageLookupByLibrary.simpleMessage("নিশ্চিত করুন"),
         "confirmPasswordHint":
@@ -263,6 +265,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("নোড মুছে দিন?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "আপনি কি এই নির্ধারিত অর্থপ্রদান মুছে ফেলার বিষয়ে নিশ্চিত?\n\nআপনি \"সময়সূচী অর্থপ্রদান\" বোতামে আলতো চাপ দিয়ে পরে এটিকে সর্বদা পুনরায় যোগ করতে পারেন৷"),
+        "deleteScheduledHeader": MessageLookupByLibrary.simpleMessage(
+            "নির্ধারিত অর্থপ্রদান মুছবেন?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "আপনি কি এই সদস্যতা মুছে ফেলার বিষয়ে নিশ্চিত?\n\nআপনি \"সাবস্ক্রিপশন যোগ করুন\" বোতামে আলতো চাপ দিয়ে পরে এটিকে সর্বদা পুনরায় যোগ করতে পারেন৷"),
         "deleteSubHeader":
@@ -603,6 +609,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("ঢালু পথ"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("খোলা"),
+        "overdue": MessageLookupByLibrary.simpleMessage("ওভারডিউ"),
         "paid": MessageLookupByLibrary.simpleMessage("অর্থ প্রদান"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("পেপার ওয়ালেট"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
@@ -629,6 +636,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Natrium খোলার জন্য এই পাসওয়ার্ডের প্রয়োজন হবে।"),
         "passwordsDontMatch":
             MessageLookupByLibrary.simpleMessage("পাসওয়ার্ড মিলছে না"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("অতীতের দেনা"),
         "pay": MessageLookupByLibrary.simpleMessage("পে"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("এই অনুরোধটি পরিশোধ করুন"),
@@ -636,9 +644,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("অর্থ প্রদান ইতিহাস"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "কেউ আপনার কাছ থেকে অর্থ প্রদানের অনুরোধ করেছে! আরও তথ্যের জন্য পেমেন্ট পেজ চেক করুন।"),
+        "paymentScheduled":
+            MessageLookupByLibrary.simpleMessage("পেমেন্ট নির্ধারিত"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("পেমেন্ট সময়"),
         "payments": MessageLookupByLibrary.simpleMessage("পেমেন্টস"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("একটি তালিকা থেকে বাছাই করুন"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("একটি সময় চয়ন করুন"),
         "pinBlank":
             MessageLookupByLibrary.simpleMessage("পিন খালি করা যাবে না"),
         "pinConfirmError": MessageLookupByLibrary.simpleMessage("পিন সঠিক নই"),
@@ -699,6 +711,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "প্রাপ্ত ন্যূনতম পরিমাণ। যদি কোনও অর্থ প্রদান বা অনুরোধ এর চেয়ে কম পরিমাণে গ্রহণ করা হয়, তবে এটি উপেক্ষা করা হবে।"),
         "received": MessageLookupByLibrary.simpleMessage("গৃহীত"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("পুনরাবৃত্ত"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("আবর্তক পেমেন্ট"),
         "refund": MessageLookupByLibrary.simpleMessage("ফেরত"),
         "registerButton": MessageLookupByLibrary.simpleMessage("নিবন্ধন"),
         "registerFor": MessageLookupByLibrary.simpleMessage("জন্য"),
@@ -772,6 +787,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanQrCode":
             MessageLookupByLibrary.simpleMessage("QR কোড স্ক্যান করুন"),
         "schedule": MessageLookupByLibrary.simpleMessage("সময়সূচী"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("সময়সূচী পেমেন্ট"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("তালিকাভুক্ত"),
         "searchHint": MessageLookupByLibrary.simpleMessage(
             "যেকোনো কিছুর জন্য অনুসন্ধান করুন"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -919,6 +937,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("থিম"),
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("এটি একটু সময় নিতে পারে..."),
+        "timestampEmpty":
+            MessageLookupByLibrary.simpleMessage("একটি সময় বাছাই করুন"),
+        "timestampInPast":
+            MessageLookupByLibrary.simpleMessage("সময় ভবিষ্যতে হতে হবে"),
         "to": MessageLookupByLibrary.simpleMessage("প্রতি"),
         "todayAt": MessageLookupByLibrary.simpleMessage("আজ এ"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -979,6 +1001,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("অ্যাকাউন্ট খোলা নেই"),
         "unpaid": MessageLookupByLibrary.simpleMessage("অবৈতনিক"),
         "unread": MessageLookupByLibrary.simpleMessage("অপঠিত"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("আসন্ন"),
         "uptime": MessageLookupByLibrary.simpleMessage("আপটাইম"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("একটি URL লিখুন"),
         "useAppRep":

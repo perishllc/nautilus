@@ -162,6 +162,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Schimbați semințele/expresia asociată cu acest cont autentificat prin link magic, orice parolă pe care o setați aici va suprascrie parola existentă, dar puteți utiliza aceeași parolă dacă doriți."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Verifică disponibilitatea"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "Suntem pe cale să verificăm dacă acest nume de utilizator este înregistrat pe câteva servicii diferite.\nAcest lucru poate dura o secundă sau cam așa ceva."),
         "close": MessageLookupByLibrary.simpleMessage("Închide"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirmare"),
         "confirmPasswordHint":
@@ -257,6 +259,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ștergeți nodul?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Sigur doriți să ștergeți această plată programată?\n\nPuteți oricând să-l adăugați din nou mai târziu atingând butonul „Programați plata”."),
+        "deleteScheduledHeader":
+            MessageLookupByLibrary.simpleMessage("Ștergeți plata programată?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "Sigur doriți să ștergeți acest abonament?\n\nPuteți oricând să-l adăugați din nou mai târziu atingând butonul „Adăugați abonament”."),
         "deleteSubHeader":
@@ -603,6 +609,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("Onrampă"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Deschis"),
+        "overdue": MessageLookupByLibrary.simpleMessage("Depasit"),
         "paid": MessageLookupByLibrary.simpleMessage("plătit"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("Paper Wallet"),
         "passwordBlank":
@@ -629,6 +636,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Această parolă va fi necesară pentru a deschide Nautilus."),
         "passwordsDontMatch":
             MessageLookupByLibrary.simpleMessage("Parolele nu corespund"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("Ulterior"),
         "pay": MessageLookupByLibrary.simpleMessage("Plătiți"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Plătiți această solicitare"),
@@ -636,8 +644,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("istoria platilor"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Cineva a solicitat plata de la tine! verificați pagina de plăți pentru mai multe informații."),
+        "paymentScheduled":
+            MessageLookupByLibrary.simpleMessage("Plata programata"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("Timp de plată"),
         "payments": MessageLookupByLibrary.simpleMessage("Plăți"),
         "pickFromList": MessageLookupByLibrary.simpleMessage("Alege din listă"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("Alegeți o oră"),
         "pinBlank":
             MessageLookupByLibrary.simpleMessage("Pinul nu poate fi gol"),
         "pinConfirmError":
@@ -701,6 +713,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "O sumă minimă de primit. Dacă se primește o plată sau o cerere cu o sumă mai mică decât aceasta, aceasta va fi ignorată."),
         "received": MessageLookupByLibrary.simpleMessage("Ai primit"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("Recurente"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("Plăți recurente"),
         "refund": MessageLookupByLibrary.simpleMessage("Rambursare"),
         "registerButton":
             MessageLookupByLibrary.simpleMessage("Inregistreaza-te"),
@@ -773,6 +788,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("Trimite prin NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Scanare cod QR"),
         "schedule": MessageLookupByLibrary.simpleMessage("Programa"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("Programați plata"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("Programat"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Caută orice"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "În continuare, veți vedea formula secretă a portofelului. Aceasta este o parolă care permite accesul la fonduri. Este vital să fie notată într-un caiet și să nu fie arătată vreodată nimănui."),
@@ -922,6 +940,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("Aspect"),
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "acest lucru poate dura ceva timp..."),
+        "timestampEmpty":
+            MessageLookupByLibrary.simpleMessage("Vă rugăm să alegeți o oră"),
+        "timestampInPast": MessageLookupByLibrary.simpleMessage(
+            "Timpul trebuie să fie în viitor"),
         "to": MessageLookupByLibrary.simpleMessage("Către"),
         "todayAt": MessageLookupByLibrary.simpleMessage("Astăzi la"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -982,6 +1004,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cont nedeschis"),
         "unpaid": MessageLookupByLibrary.simpleMessage("neplătit"),
         "unread": MessageLookupByLibrary.simpleMessage("necitită"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("În viitor"),
         "uptime": MessageLookupByLibrary.simpleMessage("Timp de funcționare"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage(
             "Vă rugăm să introduceți o adresă URL"),

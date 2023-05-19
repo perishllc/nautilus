@@ -160,6 +160,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Променете семената/фразата, свързана с този удостоверен с магическа връзка акаунт, каквато и парола да зададете тук, ще замени съществуващата ви парола, но можете да използвате същата парола, ако решите."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Провери наличността"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "Предстои да проверим дали това потребителско име е регистрирано в няколко различни услуги.\nТова може да отнеме около секунда."),
         "close": MessageLookupByLibrary.simpleMessage("Затвори"),
         "confirm": MessageLookupByLibrary.simpleMessage("Потвърди"),
         "confirmPasswordHint":
@@ -257,6 +259,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Изтриване на възел?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Сигурни ли сте, че искате да изтриете това насрочено плащане?\n\nВинаги можете да го добавите отново по-късно, като докоснете бутона „График на плащане“."),
+        "deleteScheduledHeader": MessageLookupByLibrary.simpleMessage(
+            "Изтриване на насрочено плащане?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "Сигурни ли сте, че искате да изтриете този абонамент?\n\nВинаги можете да го добавите отново по-късно, като докоснете бутона „Добавяне на абонамент“."),
         "deleteSubHeader":
@@ -601,6 +607,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Отворен"),
+        "overdue": MessageLookupByLibrary.simpleMessage("Просрочени"),
         "paid": MessageLookupByLibrary.simpleMessage("платени"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("Хартиен Портфейл"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
@@ -627,14 +634,19 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Тази парола ще се изисква за да се отвори Nautilus."),
         "passwordsDontMatch":
             MessageLookupByLibrary.simpleMessage("Паролите не съвпадат"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("Просрочие"),
         "pay": MessageLookupByLibrary.simpleMessage("Плати"),
         "payRequest": MessageLookupByLibrary.simpleMessage("Плати тази заявка"),
         "paymentHistory":
             MessageLookupByLibrary.simpleMessage("История на плащанията"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Някой е поискал плащане от вас! проверете страницата за плащания за повече информация."),
+        "paymentScheduled":
+            MessageLookupByLibrary.simpleMessage("Планирано плащане"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("Време за плащане"),
         "payments": MessageLookupByLibrary.simpleMessage("Плащания"),
         "pickFromList": MessageLookupByLibrary.simpleMessage("Избери от листа"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("Изберете час"),
         "pinBlank":
             MessageLookupByLibrary.simpleMessage("Pin не може да бъде празен"),
         "pinConfirmError":
@@ -699,6 +711,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "Минимална сума за получаване. Ако плащането или искането е получено със сума, по-малка от тази, тя ще бъде игнорирана."),
         "received": MessageLookupByLibrary.simpleMessage("Получено"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("Повтарящи се"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("Периодични плащания"),
         "refund": MessageLookupByLibrary.simpleMessage("Възстановяване"),
         "registerButton": MessageLookupByLibrary.simpleMessage("Регистрирам"),
         "registerFor": MessageLookupByLibrary.simpleMessage("за"),
@@ -769,6 +784,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("Изпращане чрез NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Сканирай QR-код"),
         "schedule": MessageLookupByLibrary.simpleMessage("График"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("График на плащане"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("Планиран"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Търсете каквото и да е"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -922,6 +940,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("Тема"),
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "това може да отнеме известно време..."),
+        "timestampEmpty":
+            MessageLookupByLibrary.simpleMessage("Моля, изберете час"),
+        "timestampInPast": MessageLookupByLibrary.simpleMessage(
+            "Времето трябва да е в бъдещето"),
         "to": MessageLookupByLibrary.simpleMessage("До"),
         "todayAt": MessageLookupByLibrary.simpleMessage("Днес в"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -981,6 +1003,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Неотворен акаунт"),
         "unpaid": MessageLookupByLibrary.simpleMessage("неплатени"),
         "unread": MessageLookupByLibrary.simpleMessage("непрочетени"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("Предстои"),
         "uptime": MessageLookupByLibrary.simpleMessage("Ъптайм"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Моля, въведете URL"),
         "useAppRep": MessageLookupByLibrary.simpleMessage("Използвайте %1 Rep"),

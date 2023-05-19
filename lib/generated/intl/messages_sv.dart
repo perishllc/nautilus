@@ -165,6 +165,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ändra fröet/frasen som är associerad med detta magiska länkgodkända konto, vilket lösenord du än anger här kommer att skriva över ditt befintliga lösenord, men du kan använda samma lösenord om du vill."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Kontrollera tillgänglighet"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "Vi håller på att kontrollera om detta användarnamn är registrerat på några olika tjänster.\nDet här kan ta någon sekund eller så."),
         "close": MessageLookupByLibrary.simpleMessage("Stäng"),
         "confirm": MessageLookupByLibrary.simpleMessage("Bekräfta"),
         "confirmPasswordHint":
@@ -262,6 +264,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Radera knutpunkt?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Är du säker på att du vill ta bort den här schemalagda betalningen?\n\nDu kan alltid lägga till den igen senare genom att trycka på knappen \"Schemalägg betalning\"."),
+        "deleteScheduledHeader": MessageLookupByLibrary.simpleMessage(
+            "Ta bort schemalagd betalning?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "Är du säker på att du vill ta bort den här prenumerationen?\n\nDu kan alltid lägga till den igen senare genom att trycka på knappen \"Lägg till prenumeration\"."),
         "deleteSubHeader":
@@ -599,6 +605,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Öppnade"),
+        "overdue": MessageLookupByLibrary.simpleMessage("Försenad"),
         "paid": MessageLookupByLibrary.simpleMessage("betald"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("Pappersplånbok"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
@@ -625,6 +632,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Lösenordet behövs för att öppna Nautilus."),
         "passwordsDontMatch": MessageLookupByLibrary.simpleMessage(
             "Lösenorden stämmer ej överens"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("Gått över tiden"),
         "pay": MessageLookupByLibrary.simpleMessage("Betala"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Betala denna begäran"),
@@ -632,9 +640,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Betalningshistorik"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Någon har begärt betalning från dig! kolla betalningssidan för mer info."),
+        "paymentScheduled":
+            MessageLookupByLibrary.simpleMessage("Betalning planerad"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("Betalningstid"),
         "payments": MessageLookupByLibrary.simpleMessage("Betalningar"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Välj från en lista"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("Välj en tid"),
         "pinBlank":
             MessageLookupByLibrary.simpleMessage("Pin kan inte vara tom"),
         "pinConfirmError":
@@ -695,6 +707,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "Ett minimibelopp att ta emot. Om en betalning eller begäran tas emot med ett belopp som är mindre än detta, det kommer att ignoreras."),
         "received": MessageLookupByLibrary.simpleMessage("Mottagit"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("Återkommande"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("Återkommande betalningar"),
         "refund": MessageLookupByLibrary.simpleMessage("Återbetalning"),
         "registerButton": MessageLookupByLibrary.simpleMessage("Registrera"),
         "registerFor": MessageLookupByLibrary.simpleMessage("för"),
@@ -765,6 +780,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("Skicka via NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Skanna QR-kod"),
         "schedule": MessageLookupByLibrary.simpleMessage("Schema"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("Schemalägg betalning"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("Schemalagt"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Sök efter vad som helst"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -912,6 +930,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("Tema"),
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("det här kan ta ett tag..."),
+        "timestampEmpty": MessageLookupByLibrary.simpleMessage("Välj en tid"),
+        "timestampInPast": MessageLookupByLibrary.simpleMessage(
+            "Tiden måste ligga i framtiden"),
         "to": MessageLookupByLibrary.simpleMessage("Till"),
         "todayAt": MessageLookupByLibrary.simpleMessage("Idag kl"),
         "tooManyFailedAttempts":
@@ -971,6 +992,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Konto oöppnat"),
         "unpaid": MessageLookupByLibrary.simpleMessage("obetald"),
         "unread": MessageLookupByLibrary.simpleMessage("oläst"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("Kommande"),
         "uptime": MessageLookupByLibrary.simpleMessage("Upptid"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Ange en URL"),
         "useAppRep": MessageLookupByLibrary.simpleMessage("Använd %1 Rep"),

@@ -430,6 +430,11 @@
     "type": "text",
     "description": "check_availability"
   },
+  "checkUsernameConfirmInfo": "We're about to check if this username is registered on a few different services.\nThis may take a second or so.",
+  "@checkUsernameConfirmInfo": {
+    "type": "text",
+    "description": "username_check_confirm_info"
+  },
   "close": "Close",
   "@close": {
     "type": "text",
@@ -717,10 +722,15 @@
     "type": "text",
     "description": "delete_request"
   },
-  "pickTime": "Pick a Time",
-  "@pickTime": {
+  "deleteScheduledConfirmation": "Are you sure you want to delete this scheduled payment?\n\nYou can always re-add it later by tapping the \"Schedule Payment\" button",
+  "@deleteScheduledConfirmation": {
     "type": "text",
-    "description": "pick_time_button"
+    "description": "delete scheduled payment confirmation info"
+  },
+  "deleteScheduledHeader": "Delete Scheduled Payment?",
+  "@deleteScheduledHeader": {
+    "type": "text",
+    "description": "Confirmation dialog header"
   },
   "deleteSubConfirmation": "Are you sure you want to delete this subscription?\n\nYou can always re-add it later by tapping the \"Add Subscription\" button",
   "@deleteSubConfirmation": {
@@ -729,16 +739,6 @@
   },
   "deleteSubHeader": "Delete Subscription?",
   "@deleteSubHeader": {
-    "type": "text",
-    "description": "Confirmation dialog header"
-  },
-  "deleteScheduledConfirmation": "Are you sure you want to delete this scheduled payment?\n\nYou can always re-add it later by tapping the \"Schedule Payment\" button",
-  "@deleteScheduledConfirmation": {
-    "type": "text",
-    "description": "delete scheduled payment confirmation info"
-  },
-  "deleteScheduledHeader": "Delete Scheduled Payment?",
-  "@deleteScheduledHeader": {
     "type": "text",
     "description": "Confirmation dialog header"
   },
@@ -1116,16 +1116,6 @@
   "@frequencyEmpty": {
     "type": "text",
     "description": "frequency_empty"
-  },
-  "timestampEmpty": "Please pick a time",
-  "@timestampEmpty": {
-    "type": "text",
-    "description": "timestamp_empty"
-  },
-  "timestampInPast": "Time must be in the future",
-  "@timestampInPast": {
-    "type": "text",
-    "description": "timestamp_in_past"
   },
   "from": "From",
   "@from": {
@@ -1652,21 +1642,6 @@
     "type": "text",
     "description": "next_payment"
   },
-  "pastDue": "Past Due",
-  "@pastDue": {
-    "type": "text",
-    "description": "past_due"
-  },
-  "paymentTime": "Payment Time",
-  "@paymentTime": {
-    "type": "text",
-    "description": "payment_time"
-  },
-  "overdue": "Overdue",
-  "@overdue": {
-    "type": "text",
-    "description": "payment_overdue"
-  },
   "no": "No",
   "@no": {
     "type": "text",
@@ -1827,6 +1802,11 @@
     "type": "text",
     "description": "history_opened"
   },
+  "overdue": "Overdue",
+  "@overdue": {
+    "type": "text",
+    "description": "payment_overdue"
+  },
   "paid": "paid",
   "@paid": {
     "type": "text",
@@ -1892,6 +1872,11 @@
     "type": "text",
     "description": "A paragraph that tells the users that the created password will be required to open Nautilus."
   },
+  "pastDue": "Past Due",
+  "@pastDue": {
+    "type": "text",
+    "description": "past_due"
+  },
   "pay": "Pay",
   "@pay": {
     "type": "text",
@@ -1912,6 +1897,16 @@
     "type": "text",
     "description": "payments"
   },
+  "paymentScheduled": "Payment Scheduled",
+  "@paymentScheduled": {
+    "type": "text",
+    "description": "payment_scheduled"
+  },
+  "paymentTime": "Payment Time",
+  "@paymentTime": {
+    "type": "text",
+    "description": "payment_time"
+  },
   "payRequest": "Pay this request",
   "@payRequest": {
     "type": "text",
@@ -1921,6 +1916,11 @@
   "@pickFromList": {
     "type": "text",
     "description": "pick rep from list"
+  },
+  "pickTime": "Pick a Time",
+  "@pickTime": {
+    "type": "text",
+    "description": "pick_time_button"
   },
   "pinBlank": "Pin cannot be empty",
   "@pinBlank": {
@@ -2111,6 +2111,16 @@
   "@receiveMinimumInfo": {
     "type": "text",
     "description": "receive_minimum_info"
+  },
+  "recurringButton": "Recurring",
+  "@recurringButton": {
+    "type": "text",
+    "description": "recurring_button"
+  },
+  "recurringPayments": "Recurring Payments",
+  "@recurringPayments": {
+    "type": "text",
+    "description": "recurring_payments"
   },
   "refund": "Refund",
   "@refund": {
@@ -2326,6 +2336,16 @@
   "@schedule": {
     "type": "text",
     "description": "subs_schedule"
+  },
+  "scheduledButton": "Scheduled",
+  "@scheduledButton": {
+    "type": "text",
+    "description": "scheduled_button"
+  },
+  "schedulePayment": "Schedule Payment",
+  "@schedulePayment": {
+    "type": "text",
+    "description": "schedule_payment_button"
   },
   "searchHint": "Search for anything",
   "@searchHint": {
@@ -2707,36 +2727,6 @@
     "type": "text",
     "description": "subs_button"
   },
-  "scheduledButton": "Scheduled",
-  "@scheduledButton": {
-    "type": "text",
-    "description": "scheduled_button"
-  },
-  "recurringButton": "Recurring",
-  "@recurringButton": {
-    "type": "text",
-    "description": "recurring_button"
-  },
-  "recurringPayments": "Recurring Payments",
-  "@recurringPayments": {
-    "type": "text",
-    "description": "recurring_payments"
-  },
-  "schedulePayment": "Schedule Payment",
-  "@schedulePayment": {
-    "type": "text",
-    "description": "schedule_payment_button"
-  },
-  "paymentScheduled": "Payment Scheduled",
-  "@paymentScheduled": {
-    "type": "text",
-    "description": "payment_scheduled"
-  },
-  "upcomingButton": "Upcoming",
-  "@upcomingButton": {
-    "type": "text",
-    "description": "upcoming_button"
-  },
   "subscribeButton": "Subscribe",
   "@subscribeButton": {
     "type": "text",
@@ -2836,6 +2826,16 @@
   "@thisMayTakeSomeTime": {
     "type": "text",
     "description": "xmr_loading_takes_time"
+  },
+  "timestampEmpty": "Please pick a time",
+  "@timestampEmpty": {
+    "type": "text",
+    "description": "timestamp_empty"
+  },
+  "timestampInPast": "Time must be in the future",
+  "@timestampInPast": {
+    "type": "text",
+    "description": "timestamp_in_past"
   },
   "to": "To",
   "@to": {
@@ -3012,6 +3012,11 @@
     "type": "text",
     "description": "history_unread"
   },
+  "upcomingButton": "Upcoming",
+  "@upcomingButton": {
+    "type": "text",
+    "description": "upcoming_button"
+  },
   "uptime": "Uptime",
   "@uptime": {
     "type": "text",
@@ -3051,11 +3056,6 @@
   "@usernameAlreadyRegistered": {
     "type": "text",
     "description": "Description for username already registered"
-  },
-  "checkUsernameConfirmInfo": "We're about to check if this username is registered on a few different services.\nThis may take a second or so.",
-  "@checkUsernameConfirmInfo": {
-    "type": "text",
-    "description": "username_check_confirm_info"
   },
   "usernameAvailable": "Username available!",
   "@usernameAvailable": {

@@ -124,6 +124,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
             "更改與此magic-link authed 帳戶關聯的種子/短語，您在此處設置的任何密碼都將覆蓋您現有的密碼，但您可以選擇使用相同的密碼。"),
         "checkAvailability": MessageLookupByLibrary.simpleMessage("查看可用性"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "我們將檢查此用戶名是否已在幾個不同的服務上註冊。\n這可能需要一秒鐘左右的時間。"),
         "close": MessageLookupByLibrary.simpleMessage("關閉"),
         "confirm": MessageLookupByLibrary.simpleMessage("確認"),
         "confirmPasswordHint": MessageLookupByLibrary.simpleMessage("確認密碼"),
@@ -198,6 +200,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("刪除節點？"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "您確定要刪除此預定付款嗎？\n\n您以後隨時可以通過點擊“安排付款”按鈕重新添加"),
+        "deleteScheduledHeader":
+            MessageLookupByLibrary.simpleMessage("刪除預定付款？"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "您確定要刪除此訂閱嗎？\n\n您以後隨時可以通過點擊“添加訂閱”按鈕重新添加它"),
         "deleteSubHeader": MessageLookupByLibrary.simpleMessage("刪除訂閱？"),
@@ -466,6 +472,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("在坡道上"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("打開"),
+        "overdue": MessageLookupByLibrary.simpleMessage("逾期"),
         "paid": MessageLookupByLibrary.simpleMessage("支付"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("紙錢包"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage("密碼不得留白"),
@@ -486,13 +493,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordWillBeRequiredToOpenParagraph":
             MessageLookupByLibrary.simpleMessage("以後需要這個密碼方可開啟 Nautilus。"),
         "passwordsDontMatch": MessageLookupByLibrary.simpleMessage("密碼不匹配"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("逾期"),
         "pay": MessageLookupByLibrary.simpleMessage("支付"),
         "payRequest": MessageLookupByLibrary.simpleMessage("支付此請求"),
         "paymentHistory": MessageLookupByLibrary.simpleMessage("支付歷史"),
         "paymentRequestMessage":
             MessageLookupByLibrary.simpleMessage("有人要求您付款！查看付款頁面以獲取更多信息。"),
+        "paymentScheduled": MessageLookupByLibrary.simpleMessage("預定付款"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("付款時間"),
         "payments": MessageLookupByLibrary.simpleMessage("付款"),
         "pickFromList": MessageLookupByLibrary.simpleMessage("自代表名單選擇"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("選擇時間"),
         "pinBlank": MessageLookupByLibrary.simpleMessage("引腳不能為空"),
         "pinConfirmError": MessageLookupByLibrary.simpleMessage("識別碼不匹配"),
         "pinConfirmTitle": MessageLookupByLibrary.simpleMessage("確認您的識別碼"),
@@ -541,6 +552,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "收到的最低金額。如果收到的付款或請求金額少於此金額，則會被忽略。"),
         "received": MessageLookupByLibrary.simpleMessage("收到"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("再次發生的"),
+        "recurringPayments": MessageLookupByLibrary.simpleMessage("定期付款"),
         "refund": MessageLookupByLibrary.simpleMessage("退款"),
         "registerButton": MessageLookupByLibrary.simpleMessage("登記"),
         "registerFor": MessageLookupByLibrary.simpleMessage("為了"),
@@ -599,6 +612,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("通過 NFC 發送"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("掃描二維條碼"),
         "schedule": MessageLookupByLibrary.simpleMessage("日程"),
+        "schedulePayment": MessageLookupByLibrary.simpleMessage("安排付款"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("已預定"),
         "searchHint": MessageLookupByLibrary.simpleMessage("搜尋任何東西"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "您將看到您的秘密詞語，秘密詞語是存取您資產的密碼。務必確認您將其備份，不與他人分享。"),
@@ -714,6 +729,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("佈景主題"),
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("可能還要等一下..."),
+        "timestampEmpty": MessageLookupByLibrary.simpleMessage("請選擇時間"),
+        "timestampInPast": MessageLookupByLibrary.simpleMessage("時間必須在未來"),
         "to": MessageLookupByLibrary.simpleMessage("至："),
         "todayAt": MessageLookupByLibrary.simpleMessage("今天在"),
         "tooManyFailedAttempts":
@@ -767,6 +784,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("未開戶"),
         "unpaid": MessageLookupByLibrary.simpleMessage("未付"),
         "unread": MessageLookupByLibrary.simpleMessage("未讀"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("即將到來"),
         "uptime": MessageLookupByLibrary.simpleMessage("上線時間"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("請輸入網址"),
         "useAppRep": MessageLookupByLibrary.simpleMessage("使用 %1 代表"),

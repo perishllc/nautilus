@@ -161,6 +161,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mainiet sēklu/frāzi, kas saistīta ar šo maģiskās saites autentificēto kontu, neatkarīgi no šeit iestatītās paroles tiks pārrakstīta jūsu esošā parole, taču varat izmantot to pašu paroli, ja vēlaties."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Check Availability"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "Mēs gatavojamies pārbaudīt, vai šis lietotājvārds ir reģistrēts dažos dažādos pakalpojumos.\nTas var aizņemt kādu sekundi."),
         "close": MessageLookupByLibrary.simpleMessage("Aizvērt"),
         "confirm": MessageLookupByLibrary.simpleMessage("Apstiprināt"),
         "confirmPasswordHint":
@@ -258,6 +260,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vai dzēst mezglu?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Vai tiešām vēlaties dzēst šo ieplānoto maksājumu?\n\nJūs vienmēr varat to atkārtoti pievienot vēlāk, pieskaroties pogai \"Ieplānot maksājumu\"."),
+        "deleteScheduledHeader": MessageLookupByLibrary.simpleMessage(
+            "Vai dzēst ieplānoto maksājumu?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "Vai tiešām vēlaties dzēst šo abonementu?\n\nJūs vienmēr varat to atkārtoti pievienot vēlāk, pieskaroties pogai \"Pievienot abonementu\"."),
         "deleteSubHeader":
@@ -599,6 +605,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Opened"),
+        "overdue": MessageLookupByLibrary.simpleMessage("Nokavēts"),
         "paid": MessageLookupByLibrary.simpleMessage("paid"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("Papīra maks"),
         "passwordBlank":
@@ -625,15 +632,20 @@ class MessageLookup extends MessageLookupByLibrary {
                 "This password will be required to open Nautilus."),
         "passwordsDontMatch":
             MessageLookupByLibrary.simpleMessage("Passwords do not match"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("Nokavēts termiņš"),
         "pay": MessageLookupByLibrary.simpleMessage("Pay"),
         "payRequest": MessageLookupByLibrary.simpleMessage("Pay this request"),
         "paymentHistory":
             MessageLookupByLibrary.simpleMessage("Maksājumu vēsture"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Someone has requested payment from you! check the payments page for more info."),
+        "paymentScheduled":
+            MessageLookupByLibrary.simpleMessage("Maksājums ieplānots"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("Maksājuma laiks"),
         "payments": MessageLookupByLibrary.simpleMessage("Payments"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Pick From a List"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("Izvēlieties laiku"),
         "pinBlank": MessageLookupByLibrary.simpleMessage("Pin nevar būt tukšs"),
         "pinConfirmError": MessageLookupByLibrary.simpleMessage("PIN nesakrīt"),
         "pinConfirmTitle":
@@ -694,6 +706,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "A minimum amount to receive. If a payment or request is received with an amount less than this, it will be ignored."),
         "received": MessageLookupByLibrary.simpleMessage("Saņemtie"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("Atkārtojas"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("Atkārtoti maksājumi"),
         "refund": MessageLookupByLibrary.simpleMessage("Refund"),
         "registerButton": MessageLookupByLibrary.simpleMessage("Reģistrēties"),
         "registerFor": MessageLookupByLibrary.simpleMessage("for"),
@@ -763,6 +778,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sūtīt, izmantojot NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Skenēt QR kodu"),
         "schedule": MessageLookupByLibrary.simpleMessage("Grafiks"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("Ieplānot maksājumu"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("Plānots"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Search for anything"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -912,6 +930,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("Motīvs"),
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "tas var aizņemt kādu laiku..."),
+        "timestampEmpty":
+            MessageLookupByLibrary.simpleMessage("Lūdzu, izvēlieties laiku"),
+        "timestampInPast":
+            MessageLookupByLibrary.simpleMessage("Laikam jābūt nākotnē"),
         "to": MessageLookupByLibrary.simpleMessage("Adresāts"),
         "todayAt": MessageLookupByLibrary.simpleMessage("Šodien plkst"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -972,6 +994,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Konts neatvērts"),
         "unpaid": MessageLookupByLibrary.simpleMessage("unpaid"),
         "unread": MessageLookupByLibrary.simpleMessage("unread"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("Gaidāms"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Lūdzu, ievadiet URL"),
         "useAppRep": MessageLookupByLibrary.simpleMessage("Izmantojiet %1 Rep"),

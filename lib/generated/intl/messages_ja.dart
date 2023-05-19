@@ -137,6 +137,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
             "このマジック リンクで認証されたアカウントに関連付けられているシード/フレーズを変更します。ここで設定したパスワードは既存のパスワードを上書きしますが、必要に応じて同じパスワードを使用できます。"),
         "checkAvailability": MessageLookupByLibrary.simpleMessage("空き状況を確認する"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "このユーザー名がいくつかの異なるサービスに登録されているかどうかを確認しようとしています。\nこれには 1 秒ほどかかる場合があります。"),
         "close": MessageLookupByLibrary.simpleMessage("閉じる"),
         "confirm": MessageLookupByLibrary.simpleMessage("確認しました"),
         "confirmPasswordHint":
@@ -217,6 +219,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("ノードを削除しますか?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "この予定された支払いを削除してもよろしいですか?\n\n「支払いのスケジュール」ボタンをタップすると、後でいつでも再追加できます。"),
+        "deleteScheduledHeader":
+            MessageLookupByLibrary.simpleMessage("支払い予定を削除しますか?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "このサブスクリプションを削除してもよろしいですか?\n\n「サブスクリプションを追加」ボタンをタップすると、後でいつでも再追加できます"),
         "deleteSubHeader":
@@ -514,6 +520,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("オンランプ"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("開いた"),
+        "overdue": MessageLookupByLibrary.simpleMessage("期限を過ぎました"),
         "paid": MessageLookupByLibrary.simpleMessage("支払った"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("ペーパーウォレット"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage("パスワードは空欄にできません"),
@@ -538,13 +545,17 @@ class MessageLookup extends MessageLookupByLibrary {
                 "このパスワードはNautilusを開く際に必要となります。"),
         "passwordsDontMatch":
             MessageLookupByLibrary.simpleMessage("パスワードが一致しません"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("延滞"),
         "pay": MessageLookupByLibrary.simpleMessage("支払う"),
         "payRequest": MessageLookupByLibrary.simpleMessage("このリクエストを支払う"),
         "paymentHistory": MessageLookupByLibrary.simpleMessage("支払歴"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "誰かがあなたに支払いを要求しました！詳細については、支払いページを確認してください。"),
+        "paymentScheduled": MessageLookupByLibrary.simpleMessage("支払い予定"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("支払い時間"),
         "payments": MessageLookupByLibrary.simpleMessage("ペイメント"),
         "pickFromList": MessageLookupByLibrary.simpleMessage("リストから選択する"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("時間を選んでください"),
         "pinBlank": MessageLookupByLibrary.simpleMessage("ピンを空にすることはできません"),
         "pinConfirmError": MessageLookupByLibrary.simpleMessage("暗証番号が一致しません"),
         "pinConfirmTitle":
@@ -600,6 +611,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "受け取る最低金額。これより少ない金額の支払いまたは要求が受領された場合、それは無視されます。"),
         "received": MessageLookupByLibrary.simpleMessage("着金済み"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("繰り返し発生する"),
+        "recurringPayments": MessageLookupByLibrary.simpleMessage("定期支払い"),
         "refund": MessageLookupByLibrary.simpleMessage("払い戻し"),
         "registerButton": MessageLookupByLibrary.simpleMessage("登録"),
         "registerFor": MessageLookupByLibrary.simpleMessage("にとって"),
@@ -662,6 +675,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("NFC経由で送信"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("QRコードをスキャン"),
         "schedule": MessageLookupByLibrary.simpleMessage("スケジュール"),
+        "schedulePayment": MessageLookupByLibrary.simpleMessage("支払いのスケジュール設定"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("予定されている"),
         "searchHint": MessageLookupByLibrary.simpleMessage("何でも検索"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "次の画面で、シークレットフレーズが表示されます。資金にアクセスするためのパスワードです。バックアップして、誰とも共有しないでください。"),
@@ -787,6 +802,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("壁紙"),
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("これは時間がかかる場合があります..."),
+        "timestampEmpty": MessageLookupByLibrary.simpleMessage("時間を選択してください"),
+        "timestampInPast":
+            MessageLookupByLibrary.simpleMessage("時間は未来でなければなりません"),
         "to": MessageLookupByLibrary.simpleMessage("送金先"),
         "todayAt": MessageLookupByLibrary.simpleMessage("今日"),
         "tooManyFailedAttempts":
@@ -843,6 +861,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("アカウント未開設"),
         "unpaid": MessageLookupByLibrary.simpleMessage("未払い"),
         "unread": MessageLookupByLibrary.simpleMessage("未読です"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("今後の予定"),
         "uptime": MessageLookupByLibrary.simpleMessage("稼働時間"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("URL を入力してください"),
         "useAppRep": MessageLookupByLibrary.simpleMessage("%1 担当者を使用"),

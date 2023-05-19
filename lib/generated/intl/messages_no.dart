@@ -162,6 +162,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Endre frøet/frasen som er knyttet til denne magiske lenken godkjente kontoen, uansett passord du angir her vil overskrive det eksisterende passordet ditt, men du kan bruke det samme passordet hvis du velger det."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Sjekk tilgjengelighet"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "Vi er i ferd med å sjekke om dette brukernavnet er registrert på noen forskjellige tjenester.\nDette kan ta et sekund eller så."),
         "close": MessageLookupByLibrary.simpleMessage("Lukk"),
         "confirm": MessageLookupByLibrary.simpleMessage("Bekreft"),
         "confirmPasswordHint":
@@ -255,6 +257,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteNodeHeader": MessageLookupByLibrary.simpleMessage("Slett node?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Er du sikker på at du vil slette denne planlagte betalingen?\n\nDu kan alltid legge den til på nytt senere ved å trykke på \"Planlegg betaling\"-knappen"),
+        "deleteScheduledHeader": MessageLookupByLibrary.simpleMessage(
+            "Vil du slette planlagt betaling?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "Er du sikker på at du vil slette dette abonnementet?\n\nDu kan alltid legge den til på nytt senere ved å trykke på \"Legg til abonnement\"-knappen"),
         "deleteSubHeader":
@@ -598,6 +604,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Åpnet"),
+        "overdue": MessageLookupByLibrary.simpleMessage("Forfalt"),
         "paid": MessageLookupByLibrary.simpleMessage("betalt"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("Papirlommebok"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
@@ -624,6 +631,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Dette passordet vil være påkrevd for å åpne Nautilus."),
         "passwordsDontMatch": MessageLookupByLibrary.simpleMessage(
             "Passordene stemmer ikke overens"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("Forfalt"),
         "pay": MessageLookupByLibrary.simpleMessage("Betale"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Betal denne forespørselen"),
@@ -631,9 +639,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("betalingshistorikk"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Noen har bedt om betaling fra deg! sjekk betalingssiden for mer info."),
+        "paymentScheduled":
+            MessageLookupByLibrary.simpleMessage("Betaling planlagt"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("Betalingstid"),
         "payments": MessageLookupByLibrary.simpleMessage("Betalinger"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Velg en fra listen"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("Velg et tidspunkt"),
         "pinBlank":
             MessageLookupByLibrary.simpleMessage("Pin kan ikke være tom"),
         "pinConfirmError": MessageLookupByLibrary.simpleMessage(
@@ -695,6 +707,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "Et minimumsbeløp å motta. Hvis en betaling eller forespørsel mottas med et beløp mindre enn dette, det vil bli ignorert."),
         "received": MessageLookupByLibrary.simpleMessage("Mottatt"),
+        "recurringButton":
+            MessageLookupByLibrary.simpleMessage("Tilbakevendende"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("Gjentakende betalinger"),
         "refund": MessageLookupByLibrary.simpleMessage("tilbakebetaling"),
         "registerButton": MessageLookupByLibrary.simpleMessage("Registrere"),
         "registerFor": MessageLookupByLibrary.simpleMessage("for"),
@@ -765,6 +781,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("Send via NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Scan QR-kode"),
         "schedule": MessageLookupByLibrary.simpleMessage("Rute"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("Planlegg betaling"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("Planlagt"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Søk etter hva som helst"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -907,6 +926,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("Tema"),
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("dette kan ta en stund..."),
+        "timestampEmpty":
+            MessageLookupByLibrary.simpleMessage("Vennligst velg et tidspunkt"),
+        "timestampInPast":
+            MessageLookupByLibrary.simpleMessage("Tiden må være i fremtiden"),
         "to": MessageLookupByLibrary.simpleMessage("Til"),
         "todayAt": MessageLookupByLibrary.simpleMessage("I dag kl"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -966,6 +989,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Konto uåpnet"),
         "unpaid": MessageLookupByLibrary.simpleMessage("ubetalt"),
         "unread": MessageLookupByLibrary.simpleMessage("ulest"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("Kommende"),
         "uptime": MessageLookupByLibrary.simpleMessage("Tid online"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Vennligst skriv inn en URL"),

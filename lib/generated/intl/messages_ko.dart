@@ -138,6 +138,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeSeedParagraph": MessageLookupByLibrary.simpleMessage(
             "이 매직 링크 인증 계정과 연결된 시드/구문을 변경합니다. 여기에 설정한 비밀번호가 무엇이든 기존 비밀번호를 덮어쓰지만 원하는 경우 동일한 비밀번호를 사용할 수 있습니다."),
         "checkAvailability": MessageLookupByLibrary.simpleMessage("이용 가능 확인"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "이 사용자 이름이 몇 가지 다른 서비스에 등록되어 있는지 확인하려고 합니다.\n이 작업은 1초 정도 소요될 수 있습니다."),
         "close": MessageLookupByLibrary.simpleMessage("닫기"),
         "confirm": MessageLookupByLibrary.simpleMessage("확인"),
         "confirmPasswordHint":
@@ -221,6 +223,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("노드를 삭제하시겠습니까?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "이 예약 결제를 삭제하시겠습니까?\n\n\"결제 예약\" 버튼을 탭하여 나중에 언제든지 다시 추가할 수 있습니다."),
+        "deleteScheduledHeader":
+            MessageLookupByLibrary.simpleMessage("예정된 결제를 삭제하시겠습니까?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "이 구독을 삭제하시겠습니까?\n\n\"구독 추가\" 버튼을 탭하여 나중에 언제든지 다시 추가할 수 있습니다."),
         "deleteSubHeader":
@@ -515,6 +521,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("진입로"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("오픈했습니다"),
+        "overdue": MessageLookupByLibrary.simpleMessage("연체"),
         "paid": MessageLookupByLibrary.simpleMessage("유료"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("Paper Wallet"),
         "passwordBlank":
@@ -540,14 +547,18 @@ class MessageLookup extends MessageLookupByLibrary {
                 "This password will be required to open Nautilus."),
         "passwordsDontMatch":
             MessageLookupByLibrary.simpleMessage("Passwords do not match"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("연체"),
         "pay": MessageLookupByLibrary.simpleMessage("유료"),
         "payRequest": MessageLookupByLibrary.simpleMessage("이 요청 지불"),
         "paymentHistory": MessageLookupByLibrary.simpleMessage("지불 내역"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "누군가 결제를 요청했습니다!자세한 내용은 결제 페이지를 확인하세요."),
+        "paymentScheduled": MessageLookupByLibrary.simpleMessage("지불 예정"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("결제시간"),
         "payments": MessageLookupByLibrary.simpleMessage("결제"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Pick From a List"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("시간 선택"),
         "pinBlank": MessageLookupByLibrary.simpleMessage("핀은 비워둘 수 없습니다."),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("비밀번호가 일치하지 않습니다"),
@@ -604,6 +615,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "받을 최소 금액입니다.이보다 적은 금액으로 결제 또는 요청이 접수되면 무시됩니다."),
         "received": MessageLookupByLibrary.simpleMessage("수신 완료"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("되풀이"),
+        "recurringPayments": MessageLookupByLibrary.simpleMessage("정기 결제"),
         "refund": MessageLookupByLibrary.simpleMessage("환불"),
         "registerButton": MessageLookupByLibrary.simpleMessage("등록하다"),
         "registerFor": MessageLookupByLibrary.simpleMessage("...에 대한"),
@@ -666,6 +679,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("NFC를 통해 보내기"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("QR 코드를 스캔하세요"),
         "schedule": MessageLookupByLibrary.simpleMessage("일정"),
+        "schedulePayment": MessageLookupByLibrary.simpleMessage("지불 일정"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("예정"),
         "searchHint": MessageLookupByLibrary.simpleMessage("무엇이든 검색"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "In the next screen, you will see your secret phrase. It is a password to access your funds. It is crucial that you back it up and never share it with anyone."),
@@ -793,6 +808,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("테마"),
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("시간이 좀 걸릴 수 있습니다..."),
+        "timestampEmpty": MessageLookupByLibrary.simpleMessage("시간을 선택하세요."),
+        "timestampInPast":
+            MessageLookupByLibrary.simpleMessage("시간은 미래여야 합니다."),
         "to": MessageLookupByLibrary.simpleMessage("받는 사람"),
         "todayAt": MessageLookupByLibrary.simpleMessage("오늘"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -850,6 +868,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("계정 미개봉"),
         "unpaid": MessageLookupByLibrary.simpleMessage("무급"),
         "unread": MessageLookupByLibrary.simpleMessage("읽히지 않는"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("다가오는"),
         "uptime": MessageLookupByLibrary.simpleMessage("Uptime"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("URL을 입력하세요."),
         "useAppRep": MessageLookupByLibrary.simpleMessage("%1 담당자 사용"),

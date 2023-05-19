@@ -159,6 +159,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Canvieu la llavor/frase associada amb aquest compte autenticat d\'enllaç màgic, qualsevol contrasenya que hàgiu establert aquí sobreescriurà la contrasenya existent, però podeu utilitzar la mateixa contrasenya si ho voleu."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Check Availability"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "Estem a punt de comprovar si aquest nom d\'usuari està registrat en alguns serveis diferents.\nAixò pot trigar un segon més o menys."),
         "close": MessageLookupByLibrary.simpleMessage("Zavřít"),
         "confirm": MessageLookupByLibrary.simpleMessage("Potvrdit"),
         "confirmPasswordHint":
@@ -257,6 +259,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vols suprimir el node?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Esteu segur que voleu suprimir aquest pagament programat?\n\nSempre el podeu tornar a afegir més tard tocant el botó \"Programar el pagament\"."),
+        "deleteScheduledHeader": MessageLookupByLibrary.simpleMessage(
+            "Vols suprimir el pagament programat?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "Esteu segur que voleu suprimir aquesta subscripció?\n\nSempre el podeu tornar a afegir més tard tocant el botó \"Afegeix una subscripció\"."),
         "deleteSubHeader": MessageLookupByLibrary.simpleMessage(
@@ -595,6 +601,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("Onramp"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Opened"),
+        "overdue": MessageLookupByLibrary.simpleMessage("Endarrerit"),
         "paid": MessageLookupByLibrary.simpleMessage("paid"),
         "paperWallet":
             MessageLookupByLibrary.simpleMessage("Papírová Peněženka"),
@@ -622,15 +629,21 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Toto heslo bude vyžadováno k otevření Nautilus."),
         "passwordsDontMatch":
             MessageLookupByLibrary.simpleMessage("Heslo se neshoduje"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("Vençuda"),
         "pay": MessageLookupByLibrary.simpleMessage("Pay"),
         "payRequest": MessageLookupByLibrary.simpleMessage("Pay this request"),
         "paymentHistory":
             MessageLookupByLibrary.simpleMessage("Historial de pagaments"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Someone has requested payment from you! check the payments page for more info."),
+        "paymentScheduled":
+            MessageLookupByLibrary.simpleMessage("Pagament programat"),
+        "paymentTime":
+            MessageLookupByLibrary.simpleMessage("Temps de pagament"),
         "payments": MessageLookupByLibrary.simpleMessage("Payments"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Vyberte ze seznamu"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("Tria una hora"),
         "pinBlank":
             MessageLookupByLibrary.simpleMessage("El pin no pot estar buit"),
         "pinConfirmError":
@@ -692,6 +705,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "A minimum amount to receive. If a payment or request is received with an amount less than this, it will be ignored."),
         "received": MessageLookupByLibrary.simpleMessage("Přijmuto"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("Recurrent"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("Pagaments recurrents"),
         "refund": MessageLookupByLibrary.simpleMessage("Refund"),
         "registerButton": MessageLookupByLibrary.simpleMessage("Registra\'t"),
         "registerFor": MessageLookupByLibrary.simpleMessage("for"),
@@ -761,6 +777,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enviar mitjançant NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Oskenovat QR kód"),
         "schedule": MessageLookupByLibrary.simpleMessage("Horari"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("Programar el pagament"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("Programat"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Search for anything"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -912,6 +931,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("Tématika"),
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "això pot trigar una estona..."),
+        "timestampEmpty": MessageLookupByLibrary.simpleMessage(
+            "Si us plau, escolliu una hora"),
+        "timestampInPast": MessageLookupByLibrary.simpleMessage(
+            "El temps ha de ser en el futur"),
         "to": MessageLookupByLibrary.simpleMessage("Pro"),
         "todayAt": MessageLookupByLibrary.simpleMessage("Avui a les"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -972,6 +995,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Compte sense obrir"),
         "unpaid": MessageLookupByLibrary.simpleMessage("unpaid"),
         "unread": MessageLookupByLibrary.simpleMessage("unread"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("Properament"),
         "uptime": MessageLookupByLibrary.simpleMessage("Provozuschopnost"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Introduïu un URL"),
         "useAppRep": MessageLookupByLibrary.simpleMessage("Utilitzeu %1 Rep"),

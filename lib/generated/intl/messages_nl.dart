@@ -166,6 +166,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Wijzig de seed/phrase die is gekoppeld aan dit door magic-link geverifieerde account, welk wachtwoord u hier ook instelt, uw bestaande wachtwoord wordt overschreven, maar u kunt hetzelfde wachtwoord gebruiken als u dat wilt."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Beschikbaarheid controleren"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "We staan op het punt te controleren of deze gebruikersnaam is geregistreerd bij een aantal verschillende services.\nDit kan een seconde of zo duren."),
         "close": MessageLookupByLibrary.simpleMessage("Sluiten"),
         "confirm": MessageLookupByLibrary.simpleMessage("Bevestig"),
         "confirmPasswordHint":
@@ -263,6 +265,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Knooppunt verwijderen?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Weet u zeker dat u deze geplande betaling wilt verwijderen?\n\nJe kunt het later altijd opnieuw toevoegen door op de knop \"Betaling plannen\" te tikken"),
+        "deleteScheduledHeader": MessageLookupByLibrary.simpleMessage(
+            "Geplande betaling verwijderen?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "Weet u zeker dat u dit abonnement wilt verwijderen?\n\nJe kunt het later altijd opnieuw toevoegen door op de knop \"Abonnement toevoegen\" te tikken"),
         "deleteSubHeader":
@@ -607,6 +613,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("Op de oprit"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Geopende"),
+        "overdue": MessageLookupByLibrary.simpleMessage("Verlopen"),
         "paid": MessageLookupByLibrary.simpleMessage("betaald"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("Papieren wallet"),
         "passwordBlank": MessageLookupByLibrary.simpleMessage(
@@ -633,6 +640,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Dit wachtwoord is vereist om Nautilus te openen."),
         "passwordsDontMatch": MessageLookupByLibrary.simpleMessage(
             "Wachtwoorden kom niet overeen"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("Verlopen"),
         "pay": MessageLookupByLibrary.simpleMessage("Betalen"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Betaal dit verzoek"),
@@ -640,8 +648,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Betaalgeschiedenis"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Iemand heeft u om betaling gevraagd! kijk op de betaalpagina voor meer informatie."),
+        "paymentScheduled":
+            MessageLookupByLibrary.simpleMessage("Betaling gepland"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("Betaaltijd"),
         "payments": MessageLookupByLibrary.simpleMessage("Betalingen"),
         "pickFromList": MessageLookupByLibrary.simpleMessage("Kies uit lijst"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("Kies een tijd"),
         "pinBlank":
             MessageLookupByLibrary.simpleMessage("Pin mag niet leeg zijn"),
         "pinConfirmError":
@@ -704,6 +716,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "Een minimumbedrag om te ontvangen. Als een betaling of verzoek wordt ontvangen met een lager bedrag dan dit, wordt deze genegeerd."),
         "received": MessageLookupByLibrary.simpleMessage("Ontvangen"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("Terugkerend"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("Terugkerende betalingen"),
         "refund": MessageLookupByLibrary.simpleMessage("Terugbetaling"),
         "registerButton": MessageLookupByLibrary.simpleMessage("Register"),
         "registerFor": MessageLookupByLibrary.simpleMessage("voor"),
@@ -775,6 +790,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("Verzenden via NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Scan QR Code"),
         "schedule": MessageLookupByLibrary.simpleMessage("Schema"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("Schema betaling"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("Gepland"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Zoek naar alles"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "In het volgende scherm zie je jouw geheime zin. Het is een wachtwoord voor toegang tot jouw saldo. Het is cruciaal dat je er een back-up van maakt en het nooit met iemand deelt."),
@@ -924,6 +942,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("Thema"),
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("Dit kan een tijdje duren..."),
+        "timestampEmpty": MessageLookupByLibrary.simpleMessage("Kies een tijd"),
+        "timestampInPast": MessageLookupByLibrary.simpleMessage(
+            "De tijd moet in de toekomst liggen"),
         "to": MessageLookupByLibrary.simpleMessage("Naar"),
         "todayAt": MessageLookupByLibrary.simpleMessage("Vandaag bij"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -983,6 +1004,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Rekening ongeopend"),
         "unpaid": MessageLookupByLibrary.simpleMessage("onbetaald"),
         "unread": MessageLookupByLibrary.simpleMessage("ongelezen"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("Aanstaande"),
         "uptime": MessageLookupByLibrary.simpleMessage("Tijd online"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Voer een URL in"),
         "useAppRep": MessageLookupByLibrary.simpleMessage("Gebruik %1 Rep"),

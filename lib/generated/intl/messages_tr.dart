@@ -157,6 +157,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bu sihirli bağlantı yetkilendirilmiş hesapla ilişkili çekirdeği/ifadeyi değiştirin, burada belirlediğiniz parola ne olursa olsun, mevcut parolanızın üzerine yazacaktır, ancak isterseniz aynı parolayı kullanabilirsiniz."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Durumu Kontrol Et"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "Bu kullanıcı adının birkaç farklı hizmette kayıtlı olup olmadığını kontrol etmek üzereyiz.\nBu bir saniye kadar sürebilir."),
         "close": MessageLookupByLibrary.simpleMessage("Kapat"),
         "confirm": MessageLookupByLibrary.simpleMessage("Onayla"),
         "confirmPasswordHint":
@@ -253,6 +255,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Düğüm silinsin mi?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Bu planlanmış ödemeyi silmek istediğinizden emin misiniz?\n\n\"Ödemeyi Planla\" düğmesine dokunarak istediğiniz zaman yeniden ekleyebilirsiniz."),
+        "deleteScheduledHeader": MessageLookupByLibrary.simpleMessage(
+            "Planlanmış Ödeme Silinsin mi?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "Bu aboneliği silmek istediğinizden emin misiniz?\n\n\"Abonelik Ekle\" düğmesine dokunarak istediğiniz zaman yeniden ekleyebilirsiniz."),
         "deleteSubHeader":
@@ -590,6 +596,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("Onrampa"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Açıldı"),
+        "overdue": MessageLookupByLibrary.simpleMessage("vadesi geçmiş"),
         "paid": MessageLookupByLibrary.simpleMessage("kazanç"),
         "paperWallet": MessageLookupByLibrary.simpleMessage("Kağıt Cüzdan"),
         "passwordBlank":
@@ -616,13 +623,18 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Nautilus\'u açabilmek için bu şifre gerekecek."),
         "passwordsDontMatch":
             MessageLookupByLibrary.simpleMessage("Şifreler eşleşmiyor"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("Vadesi Geçti"),
         "pay": MessageLookupByLibrary.simpleMessage("Öde"),
         "payRequest": MessageLookupByLibrary.simpleMessage("Bu talebi öde"),
         "paymentHistory": MessageLookupByLibrary.simpleMessage("ödeme geçmişi"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Birisi sizden ödeme talep etti! Daha fazla bilgi için ödemeler sayfasını kontrol edin."),
+        "paymentScheduled":
+            MessageLookupByLibrary.simpleMessage("Ödeme Planlandı"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("Ödeme Süresi"),
         "payments": MessageLookupByLibrary.simpleMessage("Ödemeler"),
         "pickFromList": MessageLookupByLibrary.simpleMessage("Listeden Seç"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("Bir Zaman Seç"),
         "pinBlank": MessageLookupByLibrary.simpleMessage("Pin boş olamaz"),
         "pinConfirmError":
             MessageLookupByLibrary.simpleMessage("Şifreler uyuşmuyor"),
@@ -685,6 +697,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "Alınacak minimum miktar. Bundan daha az bir miktarla bir ödeme veya talep alınırsa, göz ardı edilecektir."),
         "received": MessageLookupByLibrary.simpleMessage("Alındı"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("yinelenen"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("Yinelenen ödemeler"),
         "refund": MessageLookupByLibrary.simpleMessage("İade"),
         "registerButton": MessageLookupByLibrary.simpleMessage("Kayıt ol"),
         "registerFor": MessageLookupByLibrary.simpleMessage("için"),
@@ -753,6 +768,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("NFC ile gönder"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("QR Kodu Tara"),
         "schedule": MessageLookupByLibrary.simpleMessage("Takvim"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("Ödeme planlamak"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("planlanmış"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Herhangi bir şey arayın"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -900,6 +918,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("Tema"),
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("bu biraz zaman alabilir..."),
+        "timestampEmpty":
+            MessageLookupByLibrary.simpleMessage("Lütfen bir zaman seçin"),
+        "timestampInPast":
+            MessageLookupByLibrary.simpleMessage("Zaman gelecekte olmalı"),
         "to": MessageLookupByLibrary.simpleMessage("Adres"),
         "todayAt": MessageLookupByLibrary.simpleMessage("Bugün"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -960,6 +982,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hesap Açılmadı"),
         "unpaid": MessageLookupByLibrary.simpleMessage("ödenmemiş"),
         "unread": MessageLookupByLibrary.simpleMessage("okunmamış"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("Yaklaşan"),
         "uptime": MessageLookupByLibrary.simpleMessage("Çevrimiçi"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Lütfen bir URL girin"),

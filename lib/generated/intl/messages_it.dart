@@ -163,6 +163,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Modifica il seme/frase associato a questo account autenticato con collegamento magico, qualunque password imposti qui sovrascriverà la password esistente, ma puoi utilizzare la stessa password se lo desideri."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Verifica disponibilità"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "Stiamo per verificare se questo nome utente è registrato su alcuni servizi diversi.\nQuesto potrebbe richiedere circa un secondo."),
         "close": MessageLookupByLibrary.simpleMessage("Chiudi"),
         "confirm": MessageLookupByLibrary.simpleMessage("Conferma"),
         "confirmPasswordHint":
@@ -262,6 +264,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Elimina nodo?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Sei sicuro di voler eliminare questo pagamento pianificato?\n\nPuoi sempre aggiungerlo nuovamente in un secondo momento toccando il pulsante \"Pianifica pagamento\"."),
+        "deleteScheduledHeader": MessageLookupByLibrary.simpleMessage(
+            "Eliminare il pagamento programmato?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "Sei sicuro di voler eliminare questo abbonamento?\n\nPuoi sempre aggiungerlo nuovamente in un secondo momento toccando il pulsante \"Aggiungi abbonamento\"."),
         "deleteSubHeader":
@@ -606,6 +612,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("Sulla rampa"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Aperta"),
+        "overdue": MessageLookupByLibrary.simpleMessage("In ritardo"),
         "paid": MessageLookupByLibrary.simpleMessage("pagato"),
         "paperWallet":
             MessageLookupByLibrary.simpleMessage("Portafoglio Cartaceo"),
@@ -633,6 +640,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Questa password sarà richiesta per aprire Nautilus."),
         "passwordsDontMatch": MessageLookupByLibrary.simpleMessage(
             "Le password non corrispondono"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("Scaduto"),
         "pay": MessageLookupByLibrary.simpleMessage("Paga"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Paga questa richiesta"),
@@ -640,9 +648,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Storico dei pagamenti"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Qualcuno ha richiesto il pagamento da te! controlla la pagina dei pagamenti per maggiori informazioni."),
+        "paymentScheduled":
+            MessageLookupByLibrary.simpleMessage("Pagamento programmato"),
+        "paymentTime":
+            MessageLookupByLibrary.simpleMessage("Tempo di pagamento"),
         "payments": MessageLookupByLibrary.simpleMessage("Pagamenti"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Scegli da una Lista"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("Scegli un orario"),
         "pinBlank":
             MessageLookupByLibrary.simpleMessage("Il pin non può essere vuoto"),
         "pinConfirmError":
@@ -704,6 +717,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "Un importo minimo da ricevere. Se un pagamento o una richiesta viene ricevuta con un importo inferiore a questo, verrà ignorato."),
         "received": MessageLookupByLibrary.simpleMessage("Ricevuti"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("Ricorrente"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("Pagamenti ricorrenti"),
         "refund": MessageLookupByLibrary.simpleMessage("rimborso"),
         "registerButton": MessageLookupByLibrary.simpleMessage("Registrati"),
         "registerFor": MessageLookupByLibrary.simpleMessage("per"),
@@ -774,6 +790,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("Invia tramite NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Codice QR"),
         "schedule": MessageLookupByLibrary.simpleMessage("Programma"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("Pianificare il pagamento"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("Programmato"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Cerca qualsiasi cosa"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
@@ -921,6 +940,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("Tema"),
         "thisMayTakeSomeTime":
             MessageLookupByLibrary.simpleMessage("potrebbe volerci un po\'..."),
+        "timestampEmpty":
+            MessageLookupByLibrary.simpleMessage("Scegli un orario"),
+        "timestampInPast": MessageLookupByLibrary.simpleMessage(
+            "Il tempo deve essere nel futuro"),
         "to": MessageLookupByLibrary.simpleMessage("A"),
         "todayAt": MessageLookupByLibrary.simpleMessage("Oggi alle"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -982,6 +1005,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Conto non aperto"),
         "unpaid": MessageLookupByLibrary.simpleMessage("non pagati"),
         "unread": MessageLookupByLibrary.simpleMessage("da leggere"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("In arrivo"),
         "uptime": MessageLookupByLibrary.simpleMessage("Operatività"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Inserisci un URL"),
         "useAppRep":

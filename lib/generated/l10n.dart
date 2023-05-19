@@ -912,6 +912,16 @@ class Z {
     );
   }
 
+  /// `We're about to check if this username is registered on a few different services.\nThis may take a second or so.`
+  String get checkUsernameConfirmInfo {
+    return Intl.message(
+      'We\'re about to check if this username is registered on a few different services.\nThis may take a second or so.',
+      name: 'checkUsernameConfirmInfo',
+      desc: 'username_check_confirm_info',
+      args: [],
+    );
+  }
+
   /// `Close`
   String get close {
     return Intl.message(
@@ -1495,12 +1505,22 @@ class Z {
     );
   }
 
-  /// `Pick a Time`
-  String get pickTime {
+  /// `Are you sure you want to delete this scheduled payment?\n\nYou can always re-add it later by tapping the "Schedule Payment" button`
+  String get deleteScheduledConfirmation {
     return Intl.message(
-      'Pick a Time',
-      name: 'pickTime',
-      desc: 'pick_time_button',
+      'Are you sure you want to delete this scheduled payment?\n\nYou can always re-add it later by tapping the "Schedule Payment" button',
+      name: 'deleteScheduledConfirmation',
+      desc: 'delete scheduled payment confirmation info',
+      args: [],
+    );
+  }
+
+  /// `Delete Scheduled Payment?`
+  String get deleteScheduledHeader {
+    return Intl.message(
+      'Delete Scheduled Payment?',
+      name: 'deleteScheduledHeader',
+      desc: 'Confirmation dialog header',
       args: [],
     );
   }
@@ -1520,26 +1540,6 @@ class Z {
     return Intl.message(
       'Delete Subscription?',
       name: 'deleteSubHeader',
-      desc: 'Confirmation dialog header',
-      args: [],
-    );
-  }
-
-  /// `Are you sure you want to delete this scheduled payment?\n\nYou can always re-add it later by tapping the "Schedule Payment" button`
-  String get deleteScheduledConfirmation {
-    return Intl.message(
-      'Are you sure you want to delete this scheduled payment?\n\nYou can always re-add it later by tapping the "Schedule Payment" button',
-      name: 'deleteScheduledConfirmation',
-      desc: 'delete scheduled payment confirmation info',
-      args: [],
-    );
-  }
-
-  /// `Delete Scheduled Payment?`
-  String get deleteScheduledHeader {
-    return Intl.message(
-      'Delete Scheduled Payment?',
-      name: 'deleteScheduledHeader',
       desc: 'Confirmation dialog header',
       args: [],
     );
@@ -2292,26 +2292,6 @@ class Z {
       'Please enter a Frequency',
       name: 'frequencyEmpty',
       desc: 'frequency_empty',
-      args: [],
-    );
-  }
-
-  /// `Please pick a time`
-  String get timestampEmpty {
-    return Intl.message(
-      'Please pick a time',
-      name: 'timestampEmpty',
-      desc: 'timestamp_empty',
-      args: [],
-    );
-  }
-
-  /// `Time must be in the future`
-  String get timestampInPast {
-    return Intl.message(
-      'Time must be in the future',
-      name: 'timestampInPast',
-      desc: 'timestamp_in_past',
       args: [],
     );
   }
@@ -3368,36 +3348,6 @@ class Z {
     );
   }
 
-  /// `Past Due`
-  String get pastDue {
-    return Intl.message(
-      'Past Due',
-      name: 'pastDue',
-      desc: 'past_due',
-      args: [],
-    );
-  }
-
-  /// `Payment Time`
-  String get paymentTime {
-    return Intl.message(
-      'Payment Time',
-      name: 'paymentTime',
-      desc: 'payment_time',
-      args: [],
-    );
-  }
-
-  /// `Overdue`
-  String get overdue {
-    return Intl.message(
-      'Overdue',
-      name: 'overdue',
-      desc: 'payment_overdue',
-      args: [],
-    );
-  }
-
   /// `No`
   String get no {
     return Intl.message(
@@ -3718,6 +3668,16 @@ class Z {
     );
   }
 
+  /// `Overdue`
+  String get overdue {
+    return Intl.message(
+      'Overdue',
+      name: 'overdue',
+      desc: 'payment_overdue',
+      args: [],
+    );
+  }
+
   /// `paid`
   String get paid {
     return Intl.message(
@@ -3851,6 +3811,16 @@ class Z {
     );
   }
 
+  /// `Past Due`
+  String get pastDue {
+    return Intl.message(
+      'Past Due',
+      name: 'pastDue',
+      desc: 'past_due',
+      args: [],
+    );
+  }
+
   /// `Pay`
   String get pay {
     return Intl.message(
@@ -3891,6 +3861,26 @@ class Z {
     );
   }
 
+  /// `Payment Scheduled`
+  String get paymentScheduled {
+    return Intl.message(
+      'Payment Scheduled',
+      name: 'paymentScheduled',
+      desc: 'payment_scheduled',
+      args: [],
+    );
+  }
+
+  /// `Payment Time`
+  String get paymentTime {
+    return Intl.message(
+      'Payment Time',
+      name: 'paymentTime',
+      desc: 'payment_time',
+      args: [],
+    );
+  }
+
   /// `Pay this request`
   String get payRequest {
     return Intl.message(
@@ -3907,6 +3897,16 @@ class Z {
       'Pick From a List',
       name: 'pickFromList',
       desc: 'pick rep from list',
+      args: [],
+    );
+  }
+
+  /// `Pick a Time`
+  String get pickTime {
+    return Intl.message(
+      'Pick a Time',
+      name: 'pickTime',
+      desc: 'pick_time_button',
       args: [],
     );
   }
@@ -4288,6 +4288,26 @@ class Z {
       'A minimum amount to receive. If a payment or request is received with an amount less than this, it will be ignored.',
       name: 'receiveMinimumInfo',
       desc: 'receive_minimum_info',
+      args: [],
+    );
+  }
+
+  /// `Recurring`
+  String get recurringButton {
+    return Intl.message(
+      'Recurring',
+      name: 'recurringButton',
+      desc: 'recurring_button',
+      args: [],
+    );
+  }
+
+  /// `Recurring Payments`
+  String get recurringPayments {
+    return Intl.message(
+      'Recurring Payments',
+      name: 'recurringPayments',
+      desc: 'recurring_payments',
       args: [],
     );
   }
@@ -4720,6 +4740,26 @@ class Z {
       'Schedule',
       name: 'schedule',
       desc: 'subs_schedule',
+      args: [],
+    );
+  }
+
+  /// `Scheduled`
+  String get scheduledButton {
+    return Intl.message(
+      'Scheduled',
+      name: 'scheduledButton',
+      desc: 'scheduled_button',
+      args: [],
+    );
+  }
+
+  /// `Schedule Payment`
+  String get schedulePayment {
+    return Intl.message(
+      'Schedule Payment',
+      name: 'schedulePayment',
+      desc: 'schedule_payment_button',
       args: [],
     );
   }
@@ -5485,66 +5525,6 @@ class Z {
     );
   }
 
-  /// `Scheduled`
-  String get scheduledButton {
-    return Intl.message(
-      'Scheduled',
-      name: 'scheduledButton',
-      desc: 'scheduled_button',
-      args: [],
-    );
-  }
-
-  /// `Recurring`
-  String get recurringButton {
-    return Intl.message(
-      'Recurring',
-      name: 'recurringButton',
-      desc: 'recurring_button',
-      args: [],
-    );
-  }
-
-  /// `Recurring Payments`
-  String get recurringPayments {
-    return Intl.message(
-      'Recurring Payments',
-      name: 'recurringPayments',
-      desc: 'recurring_payments',
-      args: [],
-    );
-  }
-
-  /// `Schedule Payment`
-  String get schedulePayment {
-    return Intl.message(
-      'Schedule Payment',
-      name: 'schedulePayment',
-      desc: 'schedule_payment_button',
-      args: [],
-    );
-  }
-
-  /// `Payment Scheduled`
-  String get paymentScheduled {
-    return Intl.message(
-      'Payment Scheduled',
-      name: 'paymentScheduled',
-      desc: 'payment_scheduled',
-      args: [],
-    );
-  }
-
-  /// `Upcoming`
-  String get upcomingButton {
-    return Intl.message(
-      'Upcoming',
-      name: 'upcomingButton',
-      desc: 'upcoming_button',
-      args: [],
-    );
-  }
-
   /// `Subscribe`
   String get subscribeButton {
     return Intl.message(
@@ -5741,6 +5721,26 @@ class Z {
       'this may take a while...',
       name: 'thisMayTakeSomeTime',
       desc: 'xmr_loading_takes_time',
+      args: [],
+    );
+  }
+
+  /// `Please pick a time`
+  String get timestampEmpty {
+    return Intl.message(
+      'Please pick a time',
+      name: 'timestampEmpty',
+      desc: 'timestamp_empty',
+      args: [],
+    );
+  }
+
+  /// `Time must be in the future`
+  String get timestampInPast {
+    return Intl.message(
+      'Time must be in the future',
+      name: 'timestampInPast',
+      desc: 'timestamp_in_past',
       args: [],
     );
   }
@@ -6095,6 +6095,16 @@ class Z {
     );
   }
 
+  /// `Upcoming`
+  String get upcomingButton {
+    return Intl.message(
+      'Upcoming',
+      name: 'upcomingButton',
+      desc: 'upcoming_button',
+      args: [],
+    );
+  }
+
   /// `Uptime`
   String get uptime {
     return Intl.message(
@@ -6171,16 +6181,6 @@ class Z {
       'You already have a username registered! It\'s not currently possible to change your username, but you\'re free to register a new one under a different address.',
       name: 'usernameAlreadyRegistered',
       desc: 'Description for username already registered',
-      args: [],
-    );
-  }
-
-  /// `We're about to check if this username is registered on a few different services.\nThis may take a second or so.`
-  String get checkUsernameConfirmInfo {
-    return Intl.message(
-      'We\'re about to check if this username is registered on a few different services.\nThis may take a second or so.',
-      name: 'checkUsernameConfirmInfo',
-      desc: 'username_check_confirm_info',
       args: [],
     );
   }

@@ -165,6 +165,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Змініть початкове значення/фразу, пов’язану з цим обліковим записом із автентифікацією за допомогою магічного посилання, будь-який пароль, який ви встановите тут, перезапише ваш існуючий пароль, але ви можете використовувати той самий пароль, якщо забажаєте."),
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Перевірити наявність"),
+        "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
+            "Ми збираємося перевірити, чи це ім’я користувача зареєстровано в кількох різних службах.\nЦе може зайняти секунду або близько того."),
         "close": MessageLookupByLibrary.simpleMessage("Закрити"),
         "confirm": MessageLookupByLibrary.simpleMessage("Підтвердити"),
         "confirmPasswordHint":
@@ -265,6 +267,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Видалити вузол?"),
         "deleteRequest":
             MessageLookupByLibrary.simpleMessage("Delete this request"),
+        "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
+            "Ви впевнені, що бажаєте видалити цей запланований платіж?\n\nВи завжди можете повторно додати його пізніше, натиснувши кнопку «Запланувати оплату»."),
+        "deleteScheduledHeader": MessageLookupByLibrary.simpleMessage(
+            "Видалити запланований платіж?"),
         "deleteSubConfirmation": MessageLookupByLibrary.simpleMessage(
             "Ви впевнені, що хочете видалити цю підписку?\n\nВи завжди можете повторно додати його пізніше, натиснувши кнопку «Додати підписку»."),
         "deleteSubHeader":
@@ -612,6 +618,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "onramp": MessageLookupByLibrary.simpleMessage("Онрамп"),
         "onramper": MessageLookupByLibrary.simpleMessage("Onramper"),
         "opened": MessageLookupByLibrary.simpleMessage("Відкрито"),
+        "overdue": MessageLookupByLibrary.simpleMessage("Прострочена"),
         "paid": MessageLookupByLibrary.simpleMessage("оплачується"),
         "paperWallet":
             MessageLookupByLibrary.simpleMessage("Паперовий гаманець"),
@@ -639,6 +646,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Цей пароль буде необхідним щоб відкрити Nautilus."),
         "passwordsDontMatch":
             MessageLookupByLibrary.simpleMessage("Паролі не співпали"),
+        "pastDue": MessageLookupByLibrary.simpleMessage("Прострочено"),
         "pay": MessageLookupByLibrary.simpleMessage("Оплатити"),
         "payRequest":
             MessageLookupByLibrary.simpleMessage("Сплатити цей запит"),
@@ -646,9 +654,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Історія платежів"),
         "paymentRequestMessage": MessageLookupByLibrary.simpleMessage(
             "Хтось запросив у вас оплату! перегляньте сторінку платежів для отримання додаткової інформації."),
+        "paymentScheduled":
+            MessageLookupByLibrary.simpleMessage("Платіж запланований"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("Час оплати"),
         "payments": MessageLookupByLibrary.simpleMessage("Платежі"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Оберіть із списку"),
+        "pickTime": MessageLookupByLibrary.simpleMessage("Виберіть час"),
         "pinBlank": MessageLookupByLibrary.simpleMessage(
             "PIN-код не може бути порожнім"),
         "pinConfirmError":
@@ -713,6 +725,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "receiveMinimumInfo": MessageLookupByLibrary.simpleMessage(
             "Мінімальна сума для отримання. Якщо платіж або запит надійде на суму менше цієї, вона буде проігнорована."),
         "received": MessageLookupByLibrary.simpleMessage("Отримано"),
+        "recurringButton": MessageLookupByLibrary.simpleMessage("Повторювані"),
+        "recurringPayments":
+            MessageLookupByLibrary.simpleMessage("Регулярні платежі"),
         "refund": MessageLookupByLibrary.simpleMessage("Повернення"),
         "registerButton":
             MessageLookupByLibrary.simpleMessage("зареєструватися"),
@@ -783,6 +798,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanNFC": MessageLookupByLibrary.simpleMessage("Надіслати через NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Сканувати QR код"),
         "schedule": MessageLookupByLibrary.simpleMessage("розклад"),
+        "schedulePayment":
+            MessageLookupByLibrary.simpleMessage("Графік оплати"),
+        "scheduledButton": MessageLookupByLibrary.simpleMessage("За розкладом"),
         "searchHint": MessageLookupByLibrary.simpleMessage("Шукати що-небудь"),
         "secretInfo": MessageLookupByLibrary.simpleMessage(
             "На наступному екрані ви побачите секретну фразу. Це пароль для доступа до ваших коштів. Це НАДЗВИЧАЙНО важливо зробити резервну копію фрази і ніколи не ділитися нею ні з ким."),
@@ -939,6 +957,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "themeHeader": MessageLookupByLibrary.simpleMessage("Тема"),
         "thisMayTakeSomeTime": MessageLookupByLibrary.simpleMessage(
             "це може зайняти деякий час..."),
+        "timestampEmpty": MessageLookupByLibrary.simpleMessage("Виберіть час"),
+        "timestampInPast":
+            MessageLookupByLibrary.simpleMessage("Час має бути в майбутньому"),
         "to": MessageLookupByLibrary.simpleMessage("Для"),
         "todayAt": MessageLookupByLibrary.simpleMessage("Сьогодні о"),
         "tooManyFailedAttempts": MessageLookupByLibrary.simpleMessage(
@@ -999,6 +1020,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Рахунок не відкрито"),
         "unpaid": MessageLookupByLibrary.simpleMessage("неоплачений"),
         "unread": MessageLookupByLibrary.simpleMessage("непрочитані"),
+        "upcomingButton": MessageLookupByLibrary.simpleMessage("Майбутні"),
         "uptime": MessageLookupByLibrary.simpleMessage("Час в мережі"),
         "urlEmpty":
             MessageLookupByLibrary.simpleMessage("Будь ласка, введіть URL"),
