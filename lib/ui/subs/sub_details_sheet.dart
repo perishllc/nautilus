@@ -67,7 +67,6 @@ class SubDetailsSheetState extends State<SubDetailsSheet> {
                     AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).viewPaymentHistory,
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                       // Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
-                      // var history = await sl.get<SubscriptionService>().getPaymentHistory(context, widget.sub);
                       Sheets.showAppHeightEightSheet(
                         context: context,
                         widget: PaymentHistorySheet(address: widget.sub.address),

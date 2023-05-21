@@ -1,12 +1,14 @@
 ## v0.8.6 - [2023-05-XX]
 #### Added
 - Scheduled Payments
+- Payment History
 - Support for .well-known DID's
 - Confirmation popup when looking up a username
 - Account switcher on the send/receive sheets
 - Revamped username support
 - Solar PoW option
 - rpc.nano.to PoW option
+- nanoriver PoW option
 #### Changed
 - Dialog style updates
 - Move block explorer setting to advanced settings

@@ -80,7 +80,7 @@ import 'package:wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';
 import 'package:wallet_flutter/ui/widgets/draggable_scrollbar.dart';
-import 'package:wallet_flutter/ui/widgets/example_cards.dart';
+import 'package:wallet_flutter/ui/widgets/transaction_cards.dart';
 import 'package:wallet_flutter/ui/widgets/hcaptcha.dart';
 import 'package:wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:wallet_flutter/ui/widgets/reactive_refresh.dart';
@@ -349,19 +349,20 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                   children: <Widget>[
                     Text("${Z.of(context).importGift.replaceAll("%2", NonTranslatable.currencyName)}\n\n",
                         style: AppStyles.textStyleParagraph(context)),
-                    RichText(
-                      textAlign: TextAlign.start,
-                      text: TextSpan(
-                        text: "${Z.of(context).giftFrom}: ",
-                        style: AppStyles.textStyleParagraph(context),
-                        children: [
-                          TextSpan(
-                            text: "${userOrFromAddress!}\n",
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                        ],
+                    if (userOrFromAddress?.isNotEmpty ?? false)
+                      RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          text: "${Z.of(context).giftFrom}: ",
+                          style: AppStyles.textStyleParagraph(context),
+                          children: [
+                            TextSpan(
+                              text: "${userOrFromAddress!}\n",
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
                     if (memo.isNotEmpty)
                       Text(
                         "${Z.of(context).giftMessage}: $memo\n",
@@ -501,19 +502,20 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                   children: <Widget>[
                     Text("${Z.of(context).importGiftv2.replaceAll("%2", NonTranslatable.currencyName)}\n\n",
                         style: AppStyles.textStyleParagraph(context)),
-                    RichText(
-                      textAlign: TextAlign.start,
-                      text: TextSpan(
-                        text: "${Z.of(context).giftFrom}: ",
-                        style: AppStyles.textStyleParagraph(context),
-                        children: [
-                          TextSpan(
-                            text: "${userOrFromAddress!}\n",
-                            style: AppStyles.textStyleParagraphPrimary(context),
-                          ),
-                        ],
+                    if (userOrFromAddress?.isNotEmpty ?? false)
+                      RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          text: "${Z.of(context).giftFrom}: ",
+                          style: AppStyles.textStyleParagraph(context),
+                          children: [
+                            TextSpan(
+                              text: "${userOrFromAddress!}\n",
+                              style: AppStyles.textStyleParagraphPrimary(context),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
                     if (memo.isNotEmpty)
                       Text(
                         "${Z.of(context).giftMessage}: $memo\n",
@@ -3196,7 +3198,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       return _buildRemoteMessageCard(StateContainer.of(context).activeAlerts[index]);
     }
     if (index == 0 && _noSearchResults) {
-      return ExampleCards.noSearchResultsCard(context);
+      return TXCards.noSearchResultsCard(context);
     }
 
     int localIndex = index;
@@ -3212,7 +3214,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     if (_loadingMore) {
       final int maxLen = _unifiedListMap[ADR]!.length + StateContainer.of(context).activeAlerts.length;
       if (index == maxLen - 1) {
-        return ExampleCards.loadingCard(context);
+        return TXCards.loadingCard(context);
       }
     }
 
@@ -3240,7 +3242,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
       }
     }
 
-    return _buildUnifiedCard(txDetails, animation, displayName, context);
+    return TXCards.unifiedCard(txDetails, animation, displayName, context, _searchController.text);
   }
 
   // Return widget for list
@@ -3298,25 +3300,25 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             controller: _scrollController,
             padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
             children: <Widget>[
-              ExampleCards.loadingTransactionCard(
+              TXCards.loadingTransactionCard(
                   context, _opacityAnimation.value, "Sent", "10244000", "123456789121234"),
-              ExampleCards.loadingTransactionCard(
+              TXCards.loadingTransactionCard(
                   context, _opacityAnimation.value, "Received", "100,00000", "@fosse1234"),
-              ExampleCards.loadingTransactionCard(
+              TXCards.loadingTransactionCard(
                   context, _opacityAnimation.value, "Sent", "14500000", "12345678912345671234"),
-              ExampleCards.loadingTransactionCard(
+              TXCards.loadingTransactionCard(
                   context, _opacityAnimation.value, "Sent", "12,51200", "123456789121234"),
-              ExampleCards.loadingTransactionCard(
+              TXCards.loadingTransactionCard(
                   context, _opacityAnimation.value, "Received", "1,45300", "123456789121234"),
-              ExampleCards.loadingTransactionCard(
+              TXCards.loadingTransactionCard(
                   context, _opacityAnimation.value, "Sent", "100,00000", "12345678912345671234"),
-              ExampleCards.loadingTransactionCard(
+              TXCards.loadingTransactionCard(
                   context, _opacityAnimation.value, "Received", "24,00000", "12345678912345671234"),
-              ExampleCards.loadingTransactionCard(
+              TXCards.loadingTransactionCard(
                   context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
-              ExampleCards.loadingTransactionCard(
+              TXCards.loadingTransactionCard(
                   context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
-              ExampleCards.loadingTransactionCard(
+              TXCards.loadingTransactionCard(
                   context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
             ],
           ));
@@ -3349,7 +3351,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 Column(
                   children: activeAlerts,
                 ),
-              ExampleCards.welcomeTransactionCard(context),
+              TXCards.welcomeTransactionCard(context),
               _buildDummyTXCard(
                 context,
                 amount_raw: "30000000000000000000000000000000",
@@ -3368,7 +3370,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 is_tx: true,
                 timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 1),
               ),
-              ExampleCards.welcomePaymentCardTwo(context),
+              TXCards.welcomePaymentCardTwo(context),
 
               _buildDummyTXCard(
                 context,
@@ -3443,7 +3445,7 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
     //   ),
     // );
 
-    final Widget placeholder = ExampleCards.placeholderCard(context);
+    final Widget placeholder = TXCards.placeholderCard(context);
 
     return NotificationListener<ScrollNotification>(
       onNotification: (ScrollNotification notification) {
@@ -3472,8 +3474,8 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
               if (_loadingMore) {
                 final int maxLen = _unifiedListMap[ADR]!.length + StateContainer.of(context).activeAlerts.length;
                 if (index == maxLen - 1) {
-                  return ExampleCards.loadingCard(context);
-                  // return ExampleCards.loadingCardAdvanced(context, _loadMoreAnimationController);
+                  return TXCards.loadingCard(context);
+                  // return TXCards.loadingCardAdvanced(context, _loadMoreAnimationController);
                 }
               }
               return FrameSeparateWidget(

@@ -615,7 +615,7 @@ class UsernameService {
 
   // figure out what type of username, if any, this string is:
   Future<User?> figureOutUsernameType(String username) async {
-    final String strippedUsername = SendSheetHelpers.stripPrefixes(username);
+    String strippedUsername = SendSheetHelpers.stripPrefixes(username);
     String? type;
     String? address;
 
@@ -667,6 +667,19 @@ class UsernameService {
         address = await sl.get<UsernameService>().checkWellKnownUsername(username);
         if (address != null) {
           // strippedUsername = username;// bit of a hack, but we need the full username for the .well-known address
+          type = UserTypes.WELL_KNOWN;
+        }
+      }
+    }
+
+    if (address == null) {
+      // only attempt if we didn't manually put in a domain:
+      if (!strippedUsername.contains(".")) {
+        // try with the @nano.to suffix:
+        // bit of a hack, but we need the domain in the strippedUsername for the .well-known address to display properly
+        strippedUsername = "$strippedUsername@nano.to";
+        address = await sl.get<UsernameService>().checkWellKnownUsername(strippedUsername);
+        if (address != null) {
           type = UserTypes.WELL_KNOWN;
         }
       }

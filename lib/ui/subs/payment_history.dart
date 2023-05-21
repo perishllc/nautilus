@@ -41,7 +41,7 @@ import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';
 import 'package:wallet_flutter/ui/widgets/draggable_scrollbar.dart';
-import 'package:wallet_flutter/ui/widgets/example_cards.dart';
+import 'package:wallet_flutter/ui/widgets/transaction_cards.dart';
 import 'package:wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:wallet_flutter/ui/widgets/transaction_state_tag.dart';
@@ -86,10 +86,10 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
       for (final User user in _users) {
         if (user.address == widget.address) {
           setState(() {
-            _displayName = user.getDisplayName()!;
+            _displayName = user.getDisplayName();
           });
-        }
-        break;
+          break;
+        }        
       }
     });
   }
@@ -103,556 +103,6 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
   void _registerBus() {}
 
   void _destroyBus() {}
-
-  Widget _buildUnifiedCard(TXData txDetails, Animation<double> animation, String displayName, BuildContext context) {
-    late String itemText;
-    IconData? icon;
-    Color? iconColor;
-
-    bool isGift = false;
-    final String? walletAddress = StateContainer.of(context).wallet!.address;
-
-    if (txDetails.is_message) {
-      // just in case:
-      txDetails.amount_raw = null;
-    }
-
-    if (txDetails.isRecipient(walletAddress)) {
-      txDetails.is_acknowledged = true;
-    }
-
-    if (txDetails.record_type == RecordTypes.GIFT_ACK ||
-        txDetails.record_type == RecordTypes.GIFT_OPEN ||
-        txDetails.record_type == RecordTypes.GIFT_LOAD) {
-      isGift = true;
-    }
-
-    // set icon color:
-    if (txDetails.is_message || txDetails.is_request) {
-      if (txDetails.is_request) {
-        if (txDetails.isRecipient(walletAddress)) {
-          itemText = Z.of(context).request;
-          icon = AppIcons.call_made;
-          iconColor = StateContainer.of(context).curTheme.text60;
-        } else {
-          itemText = Z.of(context).asked;
-          icon = AppIcons.call_received;
-          iconColor = StateContainer.of(context).curTheme.primary60;
-        }
-      } else if (txDetails.is_message) {
-        if (txDetails.isRecipient(walletAddress)) {
-          itemText = Z.of(context).received;
-          icon = AppIcons.call_received;
-          iconColor = StateContainer.of(context).curTheme.primary60;
-        } else {
-          itemText = Z.of(context).sent;
-          icon = AppIcons.call_made;
-          iconColor = StateContainer.of(context).curTheme.text60;
-        }
-      }
-    } else if (txDetails.is_tx) {
-      if (isGift) {
-        if (txDetails.record_type == RecordTypes.GIFT_LOAD) {
-          itemText = Z.of(context).loaded;
-          icon = AppIcons.transferfunds;
-          iconColor = StateContainer.of(context).curTheme.primary60;
-        } else if (txDetails.record_type == RecordTypes.GIFT_OPEN) {
-          itemText = Z.of(context).opened;
-          icon = AppIcons.transferfunds;
-          iconColor = StateContainer.of(context).curTheme.primary60;
-        } else {
-          throw Exception("something went wrong with gift type");
-        }
-      } else {
-        if (txDetails.sub_type == BlockTypes.SEND) {
-          itemText = Z.of(context).sent;
-          icon = AppIcons.sent;
-          iconColor = StateContainer.of(context).curTheme.text60;
-        } else {
-          itemText = Z.of(context).received;
-          icon = AppIcons.received;
-          iconColor = StateContainer.of(context).curTheme.primary60;
-        }
-      }
-    }
-
-    BoxShadow? setShadow;
-
-    // set box shadow color:
-    if (txDetails.record_type == RecordTypes.GIFT_LOAD) {
-      // normal tx:
-      setShadow = StateContainer.of(context).curTheme.boxShadow;
-    } else if (txDetails.status == StatusTypes.CREATE_FAILED) {
-      if (txDetails.is_request || txDetails.is_message) {
-        iconColor = StateContainer.of(context).curTheme.error60;
-        setShadow = BoxShadow(
-          color: StateContainer.of(context).curTheme.error60!.withOpacity(0.2),
-          offset: Offset.zero,
-          blurRadius: 0,
-          spreadRadius: 1,
-        );
-      } else {
-        iconColor = StateContainer.of(context).curTheme.warning60;
-        setShadow = BoxShadow(
-          color: StateContainer.of(context).curTheme.warning60!.withOpacity(0.2),
-          offset: Offset.zero,
-          blurRadius: 0,
-          spreadRadius: 1,
-        );
-      }
-    } else if (txDetails.is_fulfilled && (txDetails.is_request || txDetails.is_message)) {
-      iconColor = StateContainer.of(context).curTheme.success60;
-      setShadow = BoxShadow(
-        color: StateContainer.of(context).curTheme.success60!.withOpacity(0.2),
-        offset: Offset.zero,
-        blurRadius: 0,
-        spreadRadius: 1,
-      );
-    } else if (!txDetails.is_acknowledged && (txDetails.is_request || txDetails.is_message)) {
-      iconColor = StateContainer.of(context).curTheme.warning60;
-      setShadow = BoxShadow(
-        color: StateContainer.of(context).curTheme.warning60!.withOpacity(0.2),
-        offset: Offset.zero,
-        blurRadius: 0,
-        spreadRadius: 1,
-      );
-    } else if ((!txDetails.is_acknowledged && !txDetails.is_tx) || (txDetails.is_request && !txDetails.is_fulfilled)) {
-      iconColor = StateContainer.of(context).curTheme.warning60;
-      setShadow = BoxShadow(
-        color: StateContainer.of(context).curTheme.warning60!.withOpacity(0.2),
-        offset: Offset.zero,
-        blurRadius: 0,
-        spreadRadius: 1,
-      );
-    } else {
-      // normal transaction:
-      setShadow = StateContainer.of(context).curTheme.boxShadow;
-    }
-
-    bool slideEnabled = false;
-    // valid wallet:
-    if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet!.accountBalance > BigInt.zero) {
-      // does it make sense to make it slideable?
-      // if (isPaymentRequest && isRecipient && !txDetails.is_fulfilled) {
-      //   slideEnabled = true;
-      // }
-      if (txDetails.is_request && !txDetails.is_fulfilled) {
-        slideEnabled = true;
-      }
-      if (txDetails.is_tx && !isGift) {
-        slideEnabled = true;
-      }
-      if (txDetails.is_message) {
-        slideEnabled = true;
-      }
-    }
-
-    TransactionStateOptions? transactionState;
-
-    if (txDetails.record_type != RecordTypes.GIFT_LOAD) {
-      if (txDetails.is_request) {
-        if (txDetails.is_fulfilled) {
-          transactionState = TransactionStateOptions.PAID;
-        } else {
-          transactionState = TransactionStateOptions.UNPAID;
-        }
-      }
-      if (!txDetails.is_acknowledged) {
-        transactionState = TransactionStateOptions.UNREAD;
-      }
-
-      if (txDetails.status == StatusTypes.CREATE_FAILED) {
-        if (txDetails.is_request || txDetails.is_message) {
-          transactionState = TransactionStateOptions.NOT_SENT;
-        } else {
-          transactionState = TransactionStateOptions.FAILED_MSG;
-        }
-      }
-    }
-
-    if (txDetails.is_tx) {
-      final int currentConfHeight = StateContainer.of(context).wallet?.confirmationHeight ?? 0;
-      if ((!txDetails.is_fulfilled) ||
-          (currentConfHeight > -1 && txDetails.height != null && txDetails.height! > currentConfHeight)) {
-        transactionState = TransactionStateOptions.UNCONFIRMED;
-      }
-
-      // watch only: receivable:
-      if (txDetails.record_type == BlockTypes.RECEIVE) {
-        transactionState = TransactionStateOptions.RECEIVABLE;
-      }
-    }
-
-    final List<Widget> slideActions = [];
-    String? label;
-    if (txDetails.is_tx) {
-      label = Z.of(context).send;
-    } else {
-      if (txDetails.is_request && txDetails.isRecipient(walletAddress)) {
-        label = Z.of(context).pay;
-      }
-    }
-
-    // payment request / pay button:
-    if (label != null) {
-      slideActions.add(SlidableAction(
-          autoClose: false,
-          borderRadius: BorderRadius.circular(5.0),
-          backgroundColor: StateContainer.of(context).curTheme.background!,
-          foregroundColor: StateContainer.of(context).curTheme.success,
-          icon: Icons.send,
-          label: label,
-          onPressed: (BuildContext context) async {
-            if (!mounted) return;
-            await CardActions.payTX(context, txDetails);
-            if (!mounted) return;
-            await Slidable.of(context)!.close();
-          }));
-    }
-
-    // reply button:
-    if (txDetails.is_message && txDetails.isRecipient(walletAddress)) {
-      slideActions.add(SlidableAction(
-          autoClose: false,
-          borderRadius: BorderRadius.circular(5.0),
-          backgroundColor: StateContainer.of(context).curTheme.background!,
-          foregroundColor: StateContainer.of(context).curTheme.success,
-          icon: Icons.send,
-          label: Z.of(context).reply,
-          onPressed: (BuildContext context) async {
-            if (!mounted) return;
-            await CardActions.payTX(context, txDetails);
-            if (!mounted) return;
-            await Slidable.of(context)!.close();
-          }));
-    }
-
-    // retry buttons:
-    if (!txDetails.is_acknowledged) {
-      if (txDetails.is_request) {
-        slideActions.add(SlidableAction(
-            autoClose: false,
-            borderRadius: BorderRadius.circular(5.0),
-            backgroundColor: StateContainer.of(context).curTheme.background!,
-            foregroundColor: StateContainer.of(context).curTheme.warning60,
-            icon: Icons.refresh_rounded,
-            label: Z.of(context).retry,
-            onPressed: (BuildContext context) async {
-              if (!mounted) return;
-              await CardActions.resendRequest(context, txDetails);
-              if (!mounted) return;
-              await Slidable.of(context)!.close();
-            }));
-      } else if (txDetails.is_memo) {
-        slideActions.add(SlidableAction(
-            autoClose: false,
-            borderRadius: BorderRadius.circular(5.0),
-            backgroundColor: StateContainer.of(context).curTheme.background!,
-            foregroundColor: StateContainer.of(context).curTheme.warning60,
-            icon: Icons.refresh_rounded,
-            label: Z.of(context).retry,
-            onPressed: (BuildContext context) async {
-              if (!mounted) return;
-              await CardActions.resendMemo(context, txDetails);
-              if (!mounted) return;
-              await Slidable.of(context)!.close();
-            }));
-      } else if (txDetails.is_message) {
-        // TODO: resend message
-        slideActions.add(SlidableAction(
-            autoClose: false,
-            borderRadius: BorderRadius.circular(5.0),
-            backgroundColor: StateContainer.of(context).curTheme.background!,
-            foregroundColor: StateContainer.of(context).curTheme.warning60,
-            icon: Icons.refresh_rounded,
-            label: Z.of(context).retry,
-            onPressed: (BuildContext context) async {
-              if (!mounted) return;
-              await CardActions.resendMessage(context, txDetails);
-              if (!mounted) return;
-              await Slidable.of(context)!.close();
-            }));
-      }
-    }
-
-    if (txDetails.is_request || txDetails.is_message) {
-      slideActions.add(SlidableAction(
-          autoClose: false,
-          borderRadius: BorderRadius.circular(5.0),
-          backgroundColor: StateContainer.of(context).curTheme.background!,
-          foregroundColor: StateContainer.of(context).curTheme.error60,
-          icon: Icons.delete,
-          label: Z.of(context).delete,
-          onPressed: (BuildContext context) async {
-            if (txDetails.uuid != null) {
-              await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
-            }
-            if (!mounted) return;
-            await StateContainer.of(context).updateSolids();
-            if (!mounted) return;
-            await StateContainer.of(context).updateUnified(false);
-            if (!mounted) return;
-            await Slidable.of(context)!.close();
-          }));
-    }
-
-    final ActionPane actionPane = ActionPane(
-      motion: const ScrollMotion(),
-      extentRatio: slideActions.length * 0.2,
-      children: slideActions,
-    );
-
-    const double cardHeight = 65;
-
-    return Slidable(
-      enabled: slideEnabled,
-      endActionPane: actionPane,
-      child: SizeTransitionNoClip(
-        sizeFactor: animation,
-        child: Stack(
-          alignment: AlignmentDirectional.centerEnd,
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsetsDirectional.fromSTEB(14.0, 4.0, 14.0, 4.0),
-              decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.backgroundDark,
-                borderRadius: BorderRadius.circular(10.0),
-                boxShadow: [setShadow!],
-              ),
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  foregroundColor: StateContainer.of(context).curTheme.text15,
-                  backgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                ),
-                onPressed: () {
-                  Sheets.showAppHeightEightSheet(
-                    context: context,
-                    widget: PaymentDetailsSheet(txDetails: txDetails),
-                    animationDurationMs: 175,
-                  );
-                },
-                child: Center(
-                  // ignore: avoid_unnecessary_containers
-                  child: Container(
-                    // constraints: const BoxConstraints(
-                    //   minHeight: cardHeight,
-                    //   maxHeight: cardHeight+10,
-                    // ),
-                    // padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
-                    // padding: const EdgeInsets.only(top: 14.0, bottom: 14.0, left: 20.0),
-                    // padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 20.0),
-                    // padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20.0),
-
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Container(
-                          constraints: const BoxConstraints(
-                            minHeight: cardHeight,
-                            // maxHeight: cardHeight+20,
-                          ),
-                          margin: const EdgeInsetsDirectional.only(start: 20.0),
-                          child: Row(
-                            children: <Widget>[
-                              Container(
-                                margin: const EdgeInsetsDirectional.only(end: 16.0),
-                                child: Icon(
-                                  icon,
-                                  color: iconColor,
-                                  size: 20,
-                                ),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  SubstringHighlight(
-                                    caseSensitive: false,
-                                    words: false,
-                                    term: "",
-                                    text: itemText,
-                                    textAlign: TextAlign.start,
-                                    textStyle: AppStyles.textStyleTransactionType(context),
-                                    textStyleHighlight: TextStyle(
-                                        fontFamily: "NunitoSans",
-                                        fontSize: AppFontSizes.small,
-                                        fontWeight: FontWeight.w600,
-                                        color: StateContainer.of(context).curTheme.warning60),
-                                  ),
-                                  if (!txDetails.is_message && !isEmpty(txDetails.amount_raw))
-                                    Row(
-                                      children: <Widget>[
-                                        Text(
-                                          getThemeAwareRawAccuracy(context, txDetails.amount_raw),
-                                          style: AppStyles.textStyleTransactionAmount(context),
-                                        ),
-                                        RichText(
-                                          textAlign: TextAlign.start,
-                                          text: TextSpan(
-                                            text: "",
-                                            children: [
-                                              displayCurrencySymbol(
-                                                context,
-                                                AppStyles.textStyleTransactionAmount(context),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        SubstringHighlight(
-                                            caseSensitive: false,
-                                            words: false,
-                                            term: "",
-                                            text: getRawAsThemeAwareFormattedAmount(context, txDetails.amount_raw),
-                                            textAlign: TextAlign.start,
-                                            textStyle: AppStyles.textStyleTransactionAmount(context),
-                                            textStyleHighlight: TextStyle(
-                                                fontFamily: "NunitoSans",
-                                                color: StateContainer.of(context).curTheme.warning60,
-                                                fontSize: AppFontSizes.smallest,
-                                                fontWeight: FontWeight.w600)),
-                                        if (isGift &&
-                                            txDetails.record_type == RecordTypes.GIFT_LOAD &&
-                                            txDetails.metadata!.split(RecordTypes.SEPARATOR).length > 2)
-                                          Row(
-                                            children: <Widget>[
-                                              Text(
-                                                " : ",
-                                                style: AppStyles.textStyleTransactionAmount(context),
-                                              ),
-                                              Text(
-                                                getThemeAwareRawAccuracy(
-                                                    context, txDetails.metadata!.split(RecordTypes.SEPARATOR)[2]),
-                                                style: AppStyles.textStyleTransactionAmount(context),
-                                              ),
-                                              RichText(
-                                                textAlign: TextAlign.start,
-                                                text: TextSpan(
-                                                  text: "",
-                                                  children: <InlineSpan>[
-                                                    displayCurrencySymbol(
-                                                      context,
-                                                      AppStyles.textStyleTransactionAmount(context),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Text(
-                                                getRawAsThemeAwareFormattedAmount(
-                                                    context, txDetails.metadata!.split(RecordTypes.SEPARATOR)[2]),
-                                                style: AppStyles.textStyleTransactionAmount(context),
-                                              ),
-                                            ],
-                                          ),
-                                      ],
-                                    ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        // Container(
-                        //   constraints: const BoxConstraints(
-                        //     minHeight: 10,
-                        //     maxHeight: 100,
-                        //   ),
-                        //   child: Text(
-                        //     "asdadad",
-                        //     style: AppStyles.textStyleTransactionAmount(context),
-                        //   ),
-                        // ),
-                        if (txDetails.memo != null && txDetails.memo!.isNotEmpty)
-                          Expanded(
-                            child: Container(
-                              constraints: const BoxConstraints(
-                                minHeight: 10,
-                                maxHeight: 100,
-                              ),
-                              child: SingleChildScrollView(
-                                child: Column(children: <Widget>[
-                                  SubstringHighlight(
-                                      caseSensitive: false,
-                                      term: "",
-                                      text: txDetails.memo!,
-                                      textAlign: TextAlign.center,
-                                      textStyle: AppStyles.textStyleTransactionMemo(context),
-                                      textStyleHighlight: TextStyle(
-                                        fontSize: AppFontSizes.smallest,
-                                        fontFamily: 'OverpassMono',
-                                        fontWeight: FontWeight.w100,
-                                        color: StateContainer.of(context).curTheme.warning60,
-                                      ),
-                                      words: false),
-                                ]),
-                              ),
-                            ),
-                          ),
-                        Container(
-                          // width: MediaQuery.of(context).size.width / 4.0,
-                          // constraints: const BoxConstraints(maxHeight: cardHeight),
-                          margin: const EdgeInsetsDirectional.only(end: 20.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              SubstringHighlight(
-                                  caseSensitive: false,
-                                  maxLines: 5,
-                                  term: "",
-                                  text: displayName,
-                                  textAlign: TextAlign.right,
-                                  textStyle: AppStyles.textStyleTransactionAddress(context),
-                                  textStyleHighlight: TextStyle(
-                                    fontSize: AppFontSizes.smallest,
-                                    fontFamily: 'OverpassMono',
-                                    fontWeight: FontWeight.w100,
-                                    color: StateContainer.of(context).curTheme.warning60,
-                                  ),
-                                  words: false),
-
-                              if (txDetails.request_time != null)
-                                SubstringHighlight(
-                                  caseSensitive: false,
-                                  words: false,
-                                  term: "",
-                                  text: getTimeAgoString(context, txDetails.request_time!),
-                                  textAlign: TextAlign.start,
-                                  textStyle: TextStyle(
-                                      fontFamily: "OverpassMono",
-                                      fontSize: AppFontSizes.smallest,
-                                      fontWeight: FontWeight.w600,
-                                      color: StateContainer.of(context).curTheme.text30),
-                                  textStyleHighlight: TextStyle(
-                                      fontFamily: "OverpassMono",
-                                      fontSize: AppFontSizes.smallest,
-                                      fontWeight: FontWeight.w600,
-                                      color: StateContainer.of(context).curTheme.warning30),
-                                ),
-                              // TRANSACTION STATE TAG
-                              if (transactionState != null)
-                                // ignore: avoid_unnecessary_containers
-                                Container(
-                                  // margin: const EdgeInsetsDirectional.only(
-                                  //     // top: 10,
-                                  //     ),
-                                  child: TransactionStateTag(transactionState: transactionState),
-                                ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            if (slideEnabled) Handlebars.vertical(context),
-          ],
-        ),
-      ),
-    );
-  } // Payment Card End
 
   TXData convertHistItemToTXData(AccountHistoryResponseItem histItem, {TXData? txDetails}) {
     TXData converted = TXData();
@@ -746,18 +196,18 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
       }
     }
 
-    return _buildUnifiedCard(txDetails, animation, displayName, context);
+    return TXCards.unifiedCard(txDetails, animation, displayName, context, "");
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: EdgeInsets.only(
-        bottom: MediaQuery.of(context).size.height * 0.035,
-      ),
+      // minimum: EdgeInsets.only(
+      //   bottom: MediaQuery.of(context).size.height * 0.035,
+      // ),
       child: Container(
         decoration: BoxDecoration(
-          color: StateContainer.of(context).curTheme.backgroundDark,
+          color: StateContainer.of(context).curTheme.background,
           borderRadius: const BorderRadius.all(Radius.circular(15)),
         ),
         child: SizedBox(
@@ -770,7 +220,7 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(
-                    width: 60,
+                    width: 30,
                     height: 60,
                   ),
                   Column(
@@ -796,62 +246,23 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
                       const SizedBox(height: 15),
                       // show the text: Between A and B: where A and B are the two accounts: widget.address and StateContainer.of(context).wallet!.address:
                       Container(
-                        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 1.5),
+                        constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 60),
+                        // width: 300,
+                        // alignment: Alignment.centerLeft,
                         // width:
-                        child: Column(
+                        child: Stack(
+                          alignment: Alignment.centerLeft,
                           children: [
-                            Stack(
-                              children: [
-                                Container(
-                                  height: 50,
-                                  alignment: Alignment.centerLeft,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      RichText(
-                                        textAlign: TextAlign.center,
-                                        text: TextSpan(
-                                          text: StateContainer.of(context).selectedAccount!.name,
-                                          style: TextStyle(
-                                            color: StateContainer.of(context).curTheme.text60,
-                                            fontSize: AppFontSizes.small,
-                                            fontWeight: FontWeight.w700,
-                                            fontFamily: "NunitoSans",
-                                          ),
-                                        ),
-                                      ),
-                                      RichText(
-                                        textAlign: TextAlign.start,
-                                        text: TextSpan(
-                                          text: StateContainer.of(context).wallet?.username ??
-                                              Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
-                                          style: TextStyle(
-                                            color: StateContainer.of(context).curTheme.text60,
-                                            fontSize: AppFontSizes.small,
-                                            fontWeight: FontWeight.w700,
-                                            fontFamily: "NunitoSans",
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  height: 50,
-                                  alignment: Alignment.center,
-                                  child: Icon(
-                                    Icons.sync_alt,
-                                    size: 24,
-                                    color: StateContainer.of(context).curTheme.primary60,
-                                  ),
-                                ),
-                                Container(
-                                  height: 50,
-                                  alignment: Alignment.centerRight,
-                                  child: RichText(
+                            Container(
+                              height: 50,
+                              alignment: Alignment.centerLeft,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  RichText(
                                     textAlign: TextAlign.center,
                                     text: TextSpan(
-                                      text: _displayName ?? Address(widget.address).getShortFirstPart(),
+                                      text: StateContainer.of(context).selectedAccount!.name,
                                       style: TextStyle(
                                         color: StateContainer.of(context).curTheme.text60,
                                         fontSize: AppFontSizes.small,
@@ -860,8 +271,46 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
                                       ),
                                     ),
                                   ),
+                                  RichText(
+                                    textAlign: TextAlign.start,
+                                    text: TextSpan(
+                                      text: StateContainer.of(context).wallet?.username ??
+                                          Address(StateContainer.of(context).wallet!.address).getShortFirstPart(),
+                                      style: TextStyle(
+                                        color: StateContainer.of(context).curTheme.text60,
+                                        fontSize: AppFontSizes.small,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: "NunitoSans",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: 50,
+                              alignment: Alignment.center,
+                              child: Icon(
+                                Icons.sync_alt,
+                                size: 24,
+                                color: StateContainer.of(context).curTheme.primary60,
+                              ),
+                            ),
+                            Container(
+                              height: 50,
+                              alignment: Alignment.centerRight,
+                              child: RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                  text: _displayName ?? Address(widget.address).getShortFirstPart(),
+                                  style: TextStyle(
+                                    color: StateContainer.of(context).curTheme.text60,
+                                    fontSize: AppFontSizes.small,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "NunitoSans",
+                                  ),
                                 ),
-                              ],
+                              ),
                             ),
                           ],
                         ),
@@ -870,12 +319,12 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
                     ],
                   ),
                   SizedBox(
-                    width: 60,
+                    width: 30,
                     height: 60,
-                    child: AppDialogs.infoButton(
-                      context,
-                      () {},
-                    ),
+                    // child: AppDialogs.infoButton(
+                    //   context,
+                    //   () {},
+                    // ),
                   ),
                 ],
               ),
@@ -909,19 +358,19 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
                       ListGradient(
                         height: 20,
                         top: true,
-                        color: StateContainer.of(context).curTheme.backgroundDark!,
+                        color: StateContainer.of(context).curTheme.background!,
                       ),
                       ListGradient(
                         height: 20,
                         top: false,
-                        color: StateContainer.of(context).curTheme.backgroundDark!,
+                        color: StateContainer.of(context).curTheme.background!,
                       ),
                     ],
                   )),
               const SizedBox(
                 height: 15,
               ),
-              //A row with Add Sub button
+              // close button
               Row(
                 children: <Widget>[
                   AppButton.buildAppButton(

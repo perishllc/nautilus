@@ -342,7 +342,7 @@ class DBHelper {
         name: "nanoriver",
         selected: false,
         type: WorkSourceTypes.URL,
-        url: "https://nanoriver.cc",
+        url: "https://worker.nanoriver.cc",
       ),
       dbClient: dbClient,
     );
