@@ -90,7 +90,8 @@ class Misc {
                     UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
                   },
                   child: Container(
-                    padding: const EdgeInsets.all(4),
+                    width: 36,
+                    height: 36,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
                       border: Border.all(
@@ -100,7 +101,7 @@ class Misc {
                     ),
                     child: Icon(
                       Icons.content_copy,
-                      size: 24,
+                      size: 20,
                       color: StateContainer.of(context).curTheme.primary60,
                     ),
                   ),
@@ -108,10 +109,6 @@ class Misc {
               ),
               // Account switcher
               Container(
-                // height: 36,
-                // width: 36,
-                // height: 48,
-                // width: 48,
                 alignment: Alignment.centerRight,
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
@@ -133,7 +130,8 @@ class Misc {
                     );
                   },
                   child: Container(
-                    padding: const EdgeInsets.all(4),
+                    width: 36,
+                    height: 36,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
                       border: Border.all(

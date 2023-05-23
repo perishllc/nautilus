@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
+import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
@@ -38,6 +39,8 @@ class AddSubSheet extends StatefulWidget {
   @override
   AddSubSheetState createState() => AddSubSheetState();
 }
+
+enum Frequency { monthly, weekly, daily }
 
 class AddSubSheetState extends State<AddSubSheet> {
   final FocusNode _nameFocusNode = FocusNode();
@@ -77,6 +80,12 @@ class AddSubSheetState extends State<AddSubSheet> {
   final String _valueSaved = '';
 
   bool _isSheetOpen = true;
+
+  String _timestampValidationText = "";
+
+  int _timestamp = 0;
+
+  Frequency _frequency = Frequency.monthly;
 
   @override
   void initState() {
@@ -215,6 +224,78 @@ class AddSubSheetState extends State<AddSubSheet> {
   //   }
   //   return true;
   // }
+
+  String toCronFormat(DateTime dateTime, Frequency frequency) {
+    switch (frequency) {
+      case Frequency.monthly:
+        // At 'time' on day-of-month of month
+        return '${dateTime.minute} ${dateTime.hour} ${dateTime.day} * *';
+      case Frequency.weekly:
+        // At 'time' on day-of-week
+        return '${dateTime.minute} ${dateTime.hour} * * ${dateTime.weekday}';
+      case Frequency.daily:
+      default:
+        // At 'time' every day
+        return '${dateTime.minute} ${dateTime.hour} * * *';
+    }
+  }
+
+  Future<void> _pickTime() async {
+    setState(() {
+      _frequencyValidationText = "";
+    });
+    DateTime? pickedDate = DateTime.now();
+    if (!mounted) return;
+    if (pickedDate != null) {
+      DateTime? pickedDateTime = await showOmniDateTimePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1600).subtract(const Duration(days: 3652)),
+        lastDate: DateTime.now().add(
+          const Duration(days: 3652),
+        ),
+        is24HourMode: true,
+        isShowSeconds: false,
+        minutesInterval: 1,
+        secondsInterval: 1,
+        theme: ThemeData(
+          useMaterial3: true,
+          colorSchemeSeed: StateContainer.of(context).curTheme.primary,
+          brightness: StateContainer.of(context).curTheme.brightness,
+        ),
+        type: OmniDateTimePickerType.dateAndTime,
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        constraints: const BoxConstraints(
+          maxWidth: 350,
+          maxHeight: 650,
+        ),
+        transitionBuilder: (BuildContext context, Animation<double> anim1, Animation<double> anim2, Widget child) {
+          return FadeTransition(
+            opacity: anim1.drive(
+              Tween(
+                begin: 0,
+                end: 1,
+              ),
+            ),
+            child: child,
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 200),
+        barrierDismissible: true,
+        selectableDayPredicate: (DateTime dateTime) {
+          // disable dates before today:
+          return dateTime.isAfter(DateTime.now().subtract(const Duration(days: 1)));
+        },
+      );
+
+      if (pickedDateTime != null) {
+        final DateTime finalDateTime = pickedDateTime;
+        setState(() {
+          _timestamp = finalDateTime.millisecondsSinceEpoch ~/ 1000;
+        });
+      }
+    }
+  }
 
   Widget getEnterNameContainer() {
     return AppTextField(
@@ -799,35 +880,148 @@ class AddSubSheetState extends State<AddSubSheet> {
                               // ),
 
                               // Column for frequency container + frequency Error container
-                              Column(
-                                children: [
-                                  getEnterFrequencyContainer(),
-                                  Container(
-                                    alignment: AlignmentDirectional.center,
-                                    margin: const EdgeInsets.only(top: 3),
-                                    child: Text(_frequencyValidationText,
+                              // Column(
+                              //   children: [
+                              //     getEnterFrequencyContainer(),
+                              //     Container(
+                              //       alignment: AlignmentDirectional.center,
+                              //       margin: const EdgeInsets.only(top: 3),
+                              //       child: Text(_frequencyValidationText,
+                              //           style: TextStyle(
+                              //             fontSize: 14.0,
+                              //             color: StateContainer.of(context).curTheme.primary,
+                              //             fontFamily: "NunitoSans",
+                              //             fontWeight: FontWeight.w600,
+                              //           )),
+                              //     ),
+                              //     if (_frequencyValidationText == Z.of(context).invalidFrequency)
+                              //       Container(
+                              //         alignment: AlignmentDirectional.center,
+                              //         margin: const EdgeInsets.only(top: 3),
+                              //         child: Text("(${Z.of(context).cronFormatExplainer})",
+                              //             style: TextStyle(
+                              //               fontSize: 14.0,
+                              //               color: StateContainer.of(context).curTheme.primary,
+                              //               fontFamily: "NunitoSans",
+                              //               fontWeight: FontWeight.w600,
+                              //             )),
+                              //       ),
+                              //   ],
+                              // ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 10), // spacer
+
+                          // pick a time text and button:
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.105),
+                            child: SizedBox(
+                              height: 50,
+                              child: OutlinedButton(
+                                onPressed: _pickTime,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    // pick time text:
+                                    if (_timestamp == 0)
+                                      Text(
+                                        Z.of(context).pickTime,
                                         style: TextStyle(
-                                          fontSize: 14.0,
-                                          color: StateContainer.of(context).curTheme.primary,
+                                          fontSize: 16,
+                                          color: StateContainer.of(context).curTheme.text,
                                           fontFamily: "NunitoSans",
                                           fontWeight: FontWeight.w600,
-                                        )),
-                                  ),
-                                  if (_frequencyValidationText == Z.of(context).invalidFrequency)
-                                    Container(
-                                      alignment: AlignmentDirectional.center,
-                                      margin: const EdgeInsets.only(top: 3),
-                                      child: Text("(${Z.of(context).cronFormatExplainer})",
-                                          style: TextStyle(
-                                            fontSize: 14.0,
-                                            color: StateContainer.of(context).curTheme.primary,
-                                            fontFamily: "NunitoSans",
-                                            fontWeight: FontWeight.w600,
-                                          )),
-                                    ),
-                                ],
+                                        ),
+                                      )
+                                    else
+                                      Container(
+                                        alignment: AlignmentDirectional.center,
+                                        margin: const EdgeInsets.only(top: 3),
+                                        child: Text(
+                                            DateFormat("EEEE, MMMM d, yyyy, h:mm a")
+                                                .format(DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000)),
+                                            style: TextStyle(
+                                              fontSize: 14.0,
+                                              color: StateContainer.of(context).curTheme.primary,
+                                              fontFamily: "NunitoSans",
+                                              fontWeight: FontWeight.w600,
+                                            )),
+                                      ),
+                                  ],
+                                ),
                               ),
-                            ],
+                            ),
+                          ),
+
+                          Container(
+                            alignment: AlignmentDirectional.center,
+                            margin: const EdgeInsets.only(top: 3),
+                            child: Text(_frequencyValidationText,
+                                style: TextStyle(
+                                  fontSize: 14.0,
+                                  color: StateContainer.of(context).curTheme.primary,
+                                  fontFamily: "NunitoSans",
+                                  fontWeight: FontWeight.w600,
+                                )),
+                          ),
+
+                          const SizedBox(height: 10), // spacer
+
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.105),
+                            child: Container(
+                              height: 50,
+                              padding: const EdgeInsets.symmetric(horizontal: 20),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                border: Border.all(
+                                  color: StateContainer.of(context).curTheme.text45 ?? Colors.white,
+                                  style: BorderStyle.solid,
+                                  width: 1,
+                                ),
+                              ),
+                              child: DropdownButton<Frequency>(
+                                isExpanded: true,
+                                value: _frequency,
+                                icon: const Icon(Icons.arrow_drop_down),
+                                iconSize: 24,
+                                elevation: 16,
+                                style: TextStyle(color: StateContainer.of(context).curTheme.text),
+                                onChanged: (Frequency? newValue) {
+                                  setState(() {
+                                    _frequency = newValue ?? _frequency;
+                                  });
+                                },
+                                dropdownColor: StateContainer.of(context).curTheme.background,
+                                items: Frequency.values.map<DropdownMenuItem<Frequency>>((Frequency value) {
+                                  return DropdownMenuItem<Frequency>(
+                                    value: value,
+                                    child: Text(
+                                      getFrequencyString(value),
+                                      style: TextStyle(
+                                        fontSize: AppFontSizes.small,
+                                        color: StateContainer.of(context).curTheme.text,
+                                        fontFamily: "NunitoSans",
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ),
+
+                          Container(
+                            alignment: AlignmentDirectional.center,
+                            margin: const EdgeInsets.only(top: 3),
+                            child: Text(_timestampValidationText,
+                                style: TextStyle(
+                                  fontSize: 14.0,
+                                  color: StateContainer.of(context).curTheme.primary,
+                                  fontFamily: "NunitoSans",
+                                  fontWeight: FontWeight.w600,
+                                )),
                           ),
                         ],
                       ),
@@ -974,13 +1168,29 @@ class AddSubSheetState extends State<AddSubSheet> {
       _addressFocusNode.unfocus();
     }
 
-    // validate frequency
-    if (_frequencyController.text.isEmpty) {
+    // validate timestamp
+
+    if (_timestamp == 0) {
       setState(() {
-        _frequencyValidationText = Z.of(context).frequencyEmpty;
+        _frequencyValidationText = Z.of(context).timestampEmpty;
       });
       isValid = false;
-    } else {
+      // check if time is in the future:
+    } else if (_timestamp < (DateTime.now().millisecondsSinceEpoch ~/ 1000)) {
+      setState(() {
+        _timestampValidationText = Z.of(context).timestampInPast;
+      });
+      isValid = false;
+    }
+
+    // convert timestamp + enum to cron:
+    if (isValid) {
+      final DateTime dt = DateTime.fromMillisecondsSinceEpoch(_timestamp * 1000);
+      final String cron = toCronFormat(dt, _frequency);
+      setState(() {
+        _frequencyController.text = cron;
+      });
+
       try {
         UnixCronParser().parse(_frequencyController.text);
       } catch (e) {
@@ -991,6 +1201,13 @@ class AddSubSheetState extends State<AddSubSheet> {
       }
     }
 
+    // if (_frequencyController.text.isEmpty) {
+    //   setState(() {
+    //     _frequencyValidationText = Z.of(context).frequencyEmpty;
+    //   });
+    //   isValid = false;
+    // } else {}
+
     if (isValid) {
       setState(() {
         _frequencyValidationText = "";
@@ -998,5 +1215,18 @@ class AddSubSheetState extends State<AddSubSheet> {
     }
 
     return isValid;
+  }
+
+  String getFrequencyString(Frequency frequency) {
+    switch (frequency) {
+      case Frequency.daily:
+        return Z.of(context).daily;
+      case Frequency.weekly:
+        return Z.of(context).weekly;
+      case Frequency.monthly:
+        return Z.of(context).monthly;
+      default:
+        return Z.of(context).monthly;
+    }
   }
 }

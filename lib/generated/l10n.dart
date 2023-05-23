@@ -6145,6 +6145,36 @@ class Z {
     );
   }
 
+  /// `Daily`
+  String get daily {
+    return Intl.message(
+      'Daily',
+      name: 'daily',
+      desc: 'frequency_daily',
+      args: [],
+    );
+  }
+
+  /// `Weekly`
+  String get weekly {
+    return Intl.message(
+      'Weekly',
+      name: 'weekly',
+      desc: 'frequency_weekly',
+      args: [],
+    );
+  }
+
+  /// `Monthly`
+  String get monthly {
+    return Intl.message(
+      'Monthly',
+      name: 'monthly',
+      desc: 'frequency_monthly',
+      args: [],
+    );
+  }
+
   /// `Use NANO`
   String get useNano {
     return Intl.message(

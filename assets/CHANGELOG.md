@@ -10,6 +10,7 @@
 - rpc.nano.to PoW option
 - nanoriver PoW option
 #### Changed
+- Send / Request confirm sheet updates
 - Dialog style updates
 - Move block explorer setting to advanced settings
 - Remove funding banner

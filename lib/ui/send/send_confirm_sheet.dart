@@ -322,12 +322,20 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
             //A container for CONFIRM and CANCEL buttons
             Column(
               children: <Widget>[
-                // A row for CONFIRM Button
+                // A row for buttons
                 Row(
                   children: <Widget>[
+                    // CANCEL Button
+                    AppButton.buildAppButton(
+                        context,
+                        AppButtonType.PRIMARY_OUTLINE,
+                        CaseChange.toUpperCase(Z.of(context).cancel, context),
+                        Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
+                      Navigator.of(context).pop();
+                    }),
                     // CONFIRM Button
                     AppButton.buildAppButton(context, AppButtonType.PRIMARY,
-                        CaseChange.toUpperCase(Z.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
+                        CaseChange.toUpperCase(Z.of(context).confirm, context), Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
                         disabled: !shownWarning, onPressed: () async {
                       if (clicking) return;
                       clicking = true;
@@ -370,18 +378,12 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                   ],
                 ),
                 // A row for CANCEL Button
-                Row(
-                  children: <Widget>[
-                    // CANCEL Button
-                    AppButton.buildAppButton(
-                        context,
-                        AppButtonType.PRIMARY_OUTLINE,
-                        CaseChange.toUpperCase(Z.of(context).cancel, context),
-                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                      Navigator.of(context).pop();
-                    }),
-                  ],
-                ),
+                // Row(
+                //   children: <Widget>[
+                //     // CANCEL Button
+
+                //   ],
+                // ),
               ],
             ),
           ],

@@ -517,7 +517,7 @@ class UIUtil {
       Align(
         alignment: Alignment.topCenter,
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.05, horizontal: 14),
+          margin: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.07, horizontal: 14),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
           width: MediaQuery.of(context).size.width - 30,
           decoration: BoxDecoration(
