@@ -238,6 +238,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Wybierz jednostkę, w której chcesz wyświetlić kwoty.\n1 nyano = 0.000001 NANO, lub \n1 000 000 nyano = 1 NANO"),
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage(
             "Obecnie Representowany Przez"),
+        "daily": MessageLookupByLibrary.simpleMessage("Codziennie"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("Dzień temu"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Błąd deszyfrowania!"),
@@ -535,6 +536,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sekretna fraza może zawierać tylko 24 słowa"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "Tajna fraza może zawierać tylko 12 lub 24 słowa"),
+        "monthly": MessageLookupByLibrary.simpleMessage("Miesięczny"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Miesięczne koszty serwera"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1035,6 +1037,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Wysyłanie jest wyłączone na adresach tylko na zegarku"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("Tydzień temu"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Co tydzień"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Witam w Nautilus. Żeby kontynuować, możesz stworzyć nowy portfel albo importować go."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

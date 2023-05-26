@@ -242,6 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Alegeți în ce unitate să afișați sumele.\n1 nyano = 0.000001 NANO, sau \n1.000,000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Reprezentantul curent:"),
+        "daily": MessageLookupByLibrary.simpleMessage("Zilnic"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("Acum o zi"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Eroare de decriptare!"),
@@ -543,6 +544,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Formula secretă conține doar 24 de cuvinte"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "Fraza secretă poate conține doar 12 sau 24 de cuvinte"),
+        "monthly": MessageLookupByLibrary.simpleMessage("Lunar"),
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(
             "Costuri lunare ale serverului"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1048,6 +1050,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Trimiterile sunt dezactivate numai pe adresele de ceas"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("Acum o saptamana"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Săptămânal"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Bine ai venit! Pentru a continua, creează un portofel nou sau importă unul deja existent."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

@@ -672,6 +672,11 @@
     "type": "text",
     "description": "change_representative_current_header"
   },
+  "daily": "Zilnic",
+  "@daily": {
+    "type": "text",
+    "description": "frequency_daily"
+  },
   "dayAgo": "Acum o zi",
   "@dayAgo": {
     "type": "text",
@@ -1576,6 +1581,11 @@
   "@mnemonicSizeError2": {
     "type": "text",
     "description": "err"
+  },
+  "monthly": "Lunar",
+  "@monthly": {
+    "type": "text",
+    "description": "frequency_monthly"
   },
   "monthlyServerCosts": "Costuri lunare ale serverului",
   "@monthlyServerCosts": {
@@ -3146,6 +3156,11 @@
   "@weekAgo": {
     "type": "text",
     "description": "history_week_ago"
+  },
+  "weekly": "Săptămânal",
+  "@weekly": {
+    "type": "text",
+    "description": "frequency_weekly"
   },
   "welcomeText": "Bine ai venit! Pentru a continua, creează un portofel nou sau importă unul deja existent.",
   "@welcomeText": {

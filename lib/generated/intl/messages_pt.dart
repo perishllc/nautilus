@@ -246,6 +246,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Escolha em qual unidade exibir os valores.\n1 nyano = 0,000001 NANO, ou \n1.000.000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Atualmente representado por"),
+        "daily": MessageLookupByLibrary.simpleMessage("Diário"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("Um dia atrás"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Erro de descriptografia!"),
@@ -543,6 +544,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pode conter apenas 24 palavras na frase secreta"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "A frase secreta pode conter apenas 12 ou 24 palavras"),
+        "monthly": MessageLookupByLibrary.simpleMessage("Por mês"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Custos Mensais do Servidor"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1047,6 +1049,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Os envios estão desativados em endereços somente de exibição"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("Uma semana atrás"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Semanalmente"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Bem-vindo a Nautilus. Para continuar, você pode criar uma nova carteira ou importar uma existente."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

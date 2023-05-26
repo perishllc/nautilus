@@ -247,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Välj vilken enhet som ska visas i.\n1 nyano = 0,000001 NANO, eller \n1,000,000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Aktiv representant"),
+        "daily": MessageLookupByLibrary.simpleMessage("Dagligen"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("En dag sen"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Dekryptering Fel!"),
@@ -539,6 +540,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "En hemlig fras kan bara innehålla 24 ord"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "Hemlig fras får bara innehålla 12 eller 24 ord"),
+        "monthly": MessageLookupByLibrary.simpleMessage("En gång i månaden"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Månatliga serverkostnader"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1034,6 +1036,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Sändningar är inaktiverade på adresser med endast bevakning"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("En vecka sedan"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Varje vecka"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Välkommen till Nautilus. För att fortsätta, behöver du skapa en ny plånbok eller importera en befintlig."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

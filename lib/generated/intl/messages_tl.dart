@@ -248,6 +248,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Piliin kung aling yunit ang magpapakita ng mga halaga.\n1 nyano = 0.000001 NANO, o \n1,000,000 nyano = 1 NANO"),
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage(
             "Kasalukuyang nirerepresenta ng"),
+        "daily": MessageLookupByLibrary.simpleMessage("Araw-araw"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("Kahapon"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Error sa pag-decryption!"),
@@ -556,6 +557,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Secret phrase ay may 24 na salita lamang"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "Ang lihim na parirala ay maaari lamang maglaman ng 12 o 24 na salita"),
+        "monthly": MessageLookupByLibrary.simpleMessage("Buwan-buwan"),
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(
             "Buwanang Mga Gastos sa Server"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1079,6 +1081,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Naka-disable ang mga pagpapadala sa mga address na relo lang"),
         "weekAgo": MessageLookupByLibrary.simpleMessage(
             "Isang linggo na ang nakalipas"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Linggu-linggo"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Maligayang pagdating sa Nautilus. Para magpatuloy, gumawa ng bagong wallet o gamitin ang dating wallet."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

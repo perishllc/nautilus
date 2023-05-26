@@ -242,6 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "चुनें कि किस यूनिट में राशियों को प्रदर्शित करना है।\n1 नैनो = 0.000001 नैनो, या \n1,000,000 नैनो = 1 नैनो"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("वर्तमान प्रतिनिधि "),
+        "daily": MessageLookupByLibrary.simpleMessage("दैनिक"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("एक दिन पहले"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("डिक्रिप्शन त्रुटि!"),
@@ -532,6 +533,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "गुप्त वाक्यांश में केवल 24 शब्द हो सकते हैं"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "गुप्त वाक्यांश में केवल 12 या 24 शब्द हो सकते हैं"),
+        "monthly": MessageLookupByLibrary.simpleMessage("महीने के"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("मासिक सर्वर लागत"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1033,6 +1035,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "केवल घड़ी के पतों पर भेजना अक्षम है"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("एक हफ्ते पहले"),
+        "weekly": MessageLookupByLibrary.simpleMessage("साप्ताहिक"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "नेट्रियम में आपका स्वागत है। आगे बढ़ने के लिए, आप एक नया वॉलेट बना सकते हैं या एक मौजूदा वॉलेट को आयात कर सकते हैं।"),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

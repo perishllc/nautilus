@@ -231,6 +231,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "اختر الوحدة التي تريد عرض الكميات بها.\n1 نيانو = 0.000001 نانو، أو \n1,000,000 نيانو = 1 نانو"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("المندوب الحالي"),
+        "daily": MessageLookupByLibrary.simpleMessage("يوميًا"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("قبل يوم"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("خطأ فك التشفير!"),
@@ -518,6 +519,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "العبارة السرية قد تحتوي فقط على 24 كلمة"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "يجب ألا تحتوي العبارة السرية إلا على 12 أو 24 كلمة"),
+        "monthly": MessageLookupByLibrary.simpleMessage("شهريا"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("تكاليف الخادم الشهرية"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1004,6 +1006,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "يتم تعطيل عمليات الإرسال على عناوين المشاهدة فقط"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("منذ أسبوع"),
+        "weekly": MessageLookupByLibrary.simpleMessage("أسبوعي"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "أهلا بك في نتريوم. لتبدأ، إحدث محفظة أو إجلب محفظة موجودة."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

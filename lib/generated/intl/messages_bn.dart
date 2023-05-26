@@ -247,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "কোন ইউনিট পরিমাণ প্রদর্শন করতে হবে তা চয়ন করুন।\n1 নয়ানো = 0.000001 ন্যানো, বা \n১,০০,০০০ নয়ানো = ১ ন্যানো"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("বর্তমানের রিপ্রেজেন্টেটিভ"),
+        "daily": MessageLookupByLibrary.simpleMessage("দৈনিক"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("একদিন আগে"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("ডিক্রিপশন ত্রুটি!"),
@@ -544,6 +545,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "গোপন বাক্যে শুধুমাত্র 24 টি শব্দ থাকতে পারে"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "গোপন বাক্যাংশে শুধুমাত্র 12 বা 24 শব্দ থাকতে পারে"),
+        "monthly": MessageLookupByLibrary.simpleMessage("মাসিক"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("মাসিক সার্ভার খরচ"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1044,6 +1046,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "শুধুমাত্র ঘড়ির ঠিকানায় পাঠানো অক্ষম"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("এক সপ্তাহ আগে"),
+        "weekly": MessageLookupByLibrary.simpleMessage("সাপ্তাহিক"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "নাট্রিয়ামে স্বাগতম। শুরু করার জন্য, আপনি একটি নতুন ওয়ালেট তৈরি করতে পারেন অথবা বিদ্যমান একটি ব্যবহার করতে পারেন।"),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

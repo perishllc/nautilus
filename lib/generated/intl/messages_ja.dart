@@ -205,6 +205,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(
             "金額を表示する単位を選択します。\n1 ニャノ = 0.000001 ナノ、または \n1,000,000 ニャノ = 1 ナノ"),
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage("現在の代理人"),
+        "daily": MessageLookupByLibrary.simpleMessage("毎日"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("昨日"),
         "decryptionError": MessageLookupByLibrary.simpleMessage("復号化エラー！"),
         "defaultAccountName": MessageLookupByLibrary.simpleMessage("メインアカウント"),
@@ -462,6 +463,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "シークレットフレーズには24語しか含めることができません"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "秘密のフレーズには 12 語または 24 語のみを含めることができます"),
+        "monthly": MessageLookupByLibrary.simpleMessage("毎月"),
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage("月額サーバー費用"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings": MessageLookupByLibrary.simpleMessage("その他の設定"),
@@ -898,6 +900,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled":
             MessageLookupByLibrary.simpleMessage("監視専用アドレスでは送信が無効になっています"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("1週間前"),
+        "weekly": MessageLookupByLibrary.simpleMessage("毎週"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "ナトリアムへようこそ。最初に、新しいウォレットを作成するか、既存のウォレットをインポートします。"),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

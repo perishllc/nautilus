@@ -243,6 +243,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Choose which unit to display amounts in.\n1 nyano = 0.000001 NANO, or \n1,000,000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Pašreizējais pārstāvis ir"),
+        "daily": MessageLookupByLibrary.simpleMessage("Ikdienas"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("Pirms dienas"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Decryption Error!"),
@@ -539,6 +540,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Slepenā frāze var saturēt tikai 24 vārdus"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "Slepenajā frāzē var būt tikai 12 vai 24 vārdi"),
+        "monthly": MessageLookupByLibrary.simpleMessage("Ikmēneša"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Ikmēneša servera izmaksas"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1034,6 +1036,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Sūtīšana ir atspējota tikai pulksteņa adresēm"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("Pirms nedēļas"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Iknedēļas"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Sveicināti Nautilus. Izveidojiet jaunu maku vai importējiet eksistējošu"),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

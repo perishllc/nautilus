@@ -132,7 +132,7 @@ class AppState extends State<App> {
             brightness: StateContainer.of(context).curTheme.brightness,
             error: StateContainer.of(context).curTheme.error,
             primary: StateContainer.of(context).curTheme.primary,
-            background: StateContainer.of(context).curTheme.background,
+            background: StateContainer.of(context).curTheme.backgroundDark,
             tertiary: StateContainer.of(context).curTheme.warning,
           ),
           // dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDarkest,

@@ -225,6 +225,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "בחר באיזו יחידה להציג כמויות.\n1 ניאנו = 0.000001 ננו, או \n1,000,000 ניאנו = 1 ננו"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("מיוצג על ידי"),
+        "daily": MessageLookupByLibrary.simpleMessage("יום יומי"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("לפני יום"),
         "decryptionError": MessageLookupByLibrary.simpleMessage("שגיאת פענוח!"),
         "defaultAccountName":
@@ -498,6 +499,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Secret phrase may only contain 24 words"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "ביטוי סודי יכול להכיל רק 12 או 24 מילים"),
+        "monthly": MessageLookupByLibrary.simpleMessage("יַרחוֹן"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("עלויות שרת חודשיות"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -962,6 +964,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "השליחה מושבתת בכתובות לשעון בלבד"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("לפני שבוע"),
+        "weekly": MessageLookupByLibrary.simpleMessage("שְׁבוּעִי"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "ברוך הבא לנאטריום. בכדי להמשיך, אתה רשאי לייצר ארנק חדש או לייבא אחד קיים."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

@@ -672,6 +672,11 @@
     "type": "text",
     "description": "change_representative_current_header"
   },
+  "daily": "Daily",
+  "@daily": {
+    "type": "text",
+    "description": "frequency_daily"
+  },
   "dayAgo": "A day ago",
   "@dayAgo": {
     "type": "text",
@@ -1576,6 +1581,11 @@
   "@mnemonicSizeError2": {
     "type": "text",
     "description": "err"
+  },
+  "monthly": "Monthly",
+  "@monthly": {
+    "type": "text",
+    "description": "frequency_monthly"
   },
   "monthlyServerCosts": "Monthly Server Costs",
   "@monthlyServerCosts": {
@@ -3037,21 +3047,6 @@
     "type": "text",
     "description": "use_currency"
   },
-  "daily": "Daily",
-  "@daily": {
-    "type": "text",
-    "description": "frequency_daily"
-  },
-  "weekly": "Weekly",
-  "@weekly": {
-    "type": "text",
-    "description": "frequency_weekly"
-  },
-  "monthly": "Monthly",
-  "@monthly": {
-    "type": "text",
-    "description": "frequency_monthly"
-  },
   "useNano": "Use NANO",
   "@useNano": {
     "type": "text",
@@ -3161,6 +3156,11 @@
   "@weekAgo": {
     "type": "text",
     "description": "history_week_ago"
+  },
+  "weekly": "Weekly",
+  "@weekly": {
+    "type": "text",
+    "description": "frequency_weekly"
   },
   "welcomeText": "",
   "@welcomeText": {

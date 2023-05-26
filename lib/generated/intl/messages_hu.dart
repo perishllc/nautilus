@@ -247,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Válassza ki, melyik egységben jelenítse meg az összegeket.\n1 nyano = 0,000001 NANO, vagy \n1 000 000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Jelenlegi Képviselő"),
+        "daily": MessageLookupByLibrary.simpleMessage("Napi"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("Egy napja"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Dekódolási hiba!"),
@@ -548,6 +549,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Secret phrase may only contain 24 words"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "A titkos kifejezés csak 12 vagy 24 szóból állhat"),
+        "monthly": MessageLookupByLibrary.simpleMessage("Havi"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Havi szerverköltségek"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1058,6 +1060,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "A küldések le vannak tiltva a csak figyelni kívánt címeken"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("Egy hete"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Heti"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Üdvözöllek a Nautilusban! Hozz létre egy új tárcát, vagy importálj egy létezőt."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

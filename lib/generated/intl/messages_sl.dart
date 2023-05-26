@@ -245,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Izberite, v kateri enoti želite prikazati zneske.\n1 nyano = 0,000001 NANO, ali \n1.000.000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Trenutni predstavnik"),
+        "daily": MessageLookupByLibrary.simpleMessage("Dnevno"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("Pred enim dnevom"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Napaka dešifriranja!"),
@@ -539,6 +540,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Skrivni niz lahko vsebuje samo 24 besed"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "Skrivni stavek lahko vsebuje samo 12 ali 24 besed"),
+        "monthly": MessageLookupByLibrary.simpleMessage("Mesečno"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Mesečni stroški strežnika"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1038,6 +1040,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Pošiljanje je onemogočeno na naslovih samo za gledanje"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("Pred enim tednom"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Tedensko"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Dobrodošli v Nautilus. Za začetek ustvarite novo denarnico ali uvozite že obstoječo."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

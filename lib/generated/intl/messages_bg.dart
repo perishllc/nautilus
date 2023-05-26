@@ -241,6 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Изберете в коя единица да се показват сумите.\n1 няно = 0.000001 НАНО, или \n1 000 000 нано = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Сегашният Представител е"),
+        "daily": MessageLookupByLibrary.simpleMessage("Ежедневно"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("Преди ден"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Грешка при декриптиране!"),
@@ -543,6 +544,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Тайната фраза може да съдържа само 24 думи"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "Тайната фраза може да съдържа само 12 или 24 думи"),
+        "monthly": MessageLookupByLibrary.simpleMessage("Месечно"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Месечни разходи за сървър"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1046,6 +1048,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Изпращанията са деактивирани на адреси само за гледане"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("Преди седмица"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Ежеседмично"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Добре дошли в Nautilus. За да започнете, можете да създадете нов портфейл или да импортирате вече съществуващ."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

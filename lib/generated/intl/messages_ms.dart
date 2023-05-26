@@ -238,6 +238,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Pilih unit mana untuk memaparkan jumlah masuk.\n1 nyano = 0.000001 NANO, atau \n1,000,000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Sekarang diwakili oleh"),
+        "daily": MessageLookupByLibrary.simpleMessage("Setiap hari"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("Sehari yang lalu"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Ralat penyahsulitan!"),
@@ -538,6 +539,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Frasa rahsia hanya boleh mengandungi 24 perkataan"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "Frasa rahsia hanya boleh mengandungi 12 atau 24 patah perkataan"),
+        "monthly": MessageLookupByLibrary.simpleMessage("Bulanan"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Kos Pelayan Bulanan"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1034,6 +1036,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Hantaran dilumpuhkan pada alamat jam tangan sahaja"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("Seminggu yang lalu"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Setiap minggu"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Selamat datang ke Nautilus. Untuk bersambung, anda boleh membuat dompet yang baru atau import dompet yang sedia ada."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

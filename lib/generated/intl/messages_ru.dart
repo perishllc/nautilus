@@ -248,6 +248,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Выберите единицу измерения для отображения сумм.\n1 ньяно = 0,000001 НАНО, или \n1 000 000 ньяно = 1 НАНО"),
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage(
             "В настоящее время представлен"),
+        "daily": MessageLookupByLibrary.simpleMessage("Ежедневно"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("День назад"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Ошибка дешифрования!"),
@@ -550,6 +551,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Секретная фраза может содержать только 24 слова"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "Секретная фраза может содержать только 12 или 24 слова."),
+        "monthly": MessageLookupByLibrary.simpleMessage("Ежемесячно"),
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(
             "Ежемесячные расходы на сервер"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1060,6 +1062,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Отправка отключена на адресах только для просмотра"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("Неделю назад"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Еженедельно"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Добро пожаловать в Nautilus. Вы можете создать новый кошелек или импортировать уже существующий."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

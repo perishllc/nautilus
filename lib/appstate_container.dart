@@ -706,7 +706,6 @@ class StateContainerState extends State<StateContainer> {
 
   // Update the global wallet instance with a new address
   Future<void> updateWallet({required Account account}) async {
-
     final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
     // final String address = NanoUtil.seedToAddress(await getSeed(), account.index!);
     final String address = await NanoUtil.uniSeedToAddress(await getSeed(), account.index!, derivationMethod);
@@ -1189,7 +1188,13 @@ class StateContainerState extends State<StateContainer> {
 
       try {
         final ProcessResponse resp = await sl.get<AccountService>().requestReceive(
-            wallet!.representative, wallet!.frontier, item.amount, item.hash, wallet!.address, await _getPrivKey());
+              wallet!.representative,
+              wallet!.frontier,
+              item.amount,
+              item.hash,
+              wallet!.address,
+              await _getPrivKey(),
+            );
 
         wallet!.frontier = resp.hash;
         receivableRequests.remove(item.hash);

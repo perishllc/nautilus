@@ -1405,6 +1405,16 @@ class Z {
     );
   }
 
+  /// `Daily`
+  String get daily {
+    return Intl.message(
+      'Daily',
+      name: 'daily',
+      desc: 'frequency_daily',
+      args: [],
+    );
+  }
+
   /// `A day ago`
   String get dayAgo {
     return Intl.message(
@@ -3214,6 +3224,16 @@ class Z {
       'Secret phrase may only contain 12 or 24 words',
       name: 'mnemonicSizeError2',
       desc: 'err',
+      args: [],
+    );
+  }
+
+  /// `Monthly`
+  String get monthly {
+    return Intl.message(
+      'Monthly',
+      name: 'monthly',
+      desc: 'frequency_monthly',
       args: [],
     );
   }
@@ -6145,36 +6165,6 @@ class Z {
     );
   }
 
-  /// `Daily`
-  String get daily {
-    return Intl.message(
-      'Daily',
-      name: 'daily',
-      desc: 'frequency_daily',
-      args: [],
-    );
-  }
-
-  /// `Weekly`
-  String get weekly {
-    return Intl.message(
-      'Weekly',
-      name: 'weekly',
-      desc: 'frequency_weekly',
-      args: [],
-    );
-  }
-
-  /// `Monthly`
-  String get monthly {
-    return Intl.message(
-      'Monthly',
-      name: 'monthly',
-      desc: 'frequency_monthly',
-      args: [],
-    );
-  }
-
   /// `Use NANO`
   String get useNano {
     return Intl.message(
@@ -6391,6 +6381,16 @@ class Z {
       'A week ago',
       name: 'weekAgo',
       desc: 'history_week_ago',
+      args: [],
+    );
+  }
+
+  /// `Weekly`
+  String get weekly {
+    return Intl.message(
+      'Weekly',
+      name: 'weekly',
+      desc: 'frequency_weekly',
       args: [],
     );
   }

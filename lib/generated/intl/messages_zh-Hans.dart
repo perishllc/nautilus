@@ -187,6 +187,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(
             "选择要显示金额的单位。\n1 nyano = 0.000001 NANO，或者 \n1,000,000 nyano = 1 NANO"),
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage("当前代表"),
+        "daily": MessageLookupByLibrary.simpleMessage("日常的"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("一天前"),
         "decryptionError": MessageLookupByLibrary.simpleMessage("解密错误！"),
         "defaultAccountName": MessageLookupByLibrary.simpleMessage("主要账户"),
@@ -419,6 +420,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("秘密词语一定要包含 24 个词语"),
         "mnemonicSizeError2":
             MessageLookupByLibrary.simpleMessage("密语只能包含 12 或 24 个字"),
+        "monthly": MessageLookupByLibrary.simpleMessage("每月"),
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage("每月服务器成本"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings": MessageLookupByLibrary.simpleMessage("更多设置"),
@@ -817,6 +819,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled":
             MessageLookupByLibrary.simpleMessage("仅监视地址上禁用发送"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("一星期前"),
+        "weekly": MessageLookupByLibrary.simpleMessage("每周"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "欢迎来到Nautilus。下一步，您可以创建新钱包或导入已有钱包。"),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

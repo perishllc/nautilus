@@ -246,6 +246,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Scegliere in quale unità visualizzare gli importi.\n1 nyano = 0,000001 NANO, oppure \n1.000.000 nyano = 1 NANO"),
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage(
             "Attualmente Rappresentato Da"),
+        "daily": MessageLookupByLibrary.simpleMessage("Quotidiano"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("Un giorno fa"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Errore di decrittazione!"),
@@ -546,6 +547,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "La frase segreta può contenere solo 24 parole"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "La frase segreta può contenere solo 12 o 24 parole"),
+        "monthly": MessageLookupByLibrary.simpleMessage("Mensile"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Costi mensili del server"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1049,6 +1051,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Gli invii sono disabilitati sugli indirizzi di sola visualizzazione"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("Una settimana fa"),
+        "weekly": MessageLookupByLibrary.simpleMessage("settimanalmente"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Benvenuto in Nautilus. Per continuare, puoi creare un nuovo portafoglio o importarne uno esistente."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

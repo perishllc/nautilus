@@ -247,6 +247,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kies in welke eenheid de bedragen moeten worden weergegeven.\n1 nyano = 0,000001 NANO, of \n1.000.000 nyano = 1 NANO"),
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage(
             "Jouw huidige vertegenwoordiger is"),
+        "daily": MessageLookupByLibrary.simpleMessage("Dagelijks"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("Een dag geleden"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Decryption-fout!"),
@@ -547,6 +548,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "De geheime zin mag slechts 24 woorden bevatten"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "Geheime zin mag slechts 12 of 24 woorden bevatten"),
+        "monthly": MessageLookupByLibrary.simpleMessage("Maandelijks"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Maandelijkse serverkosten"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1046,6 +1048,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Verzenden is uitgeschakeld op alleen-kijken-adressen"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("Een week geleden"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Wekelijks"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Welkom bij Nautilus. Creëer een nieuwe wallet of importeer een bestaande wallet om verder te gaan."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

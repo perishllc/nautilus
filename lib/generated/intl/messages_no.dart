@@ -241,6 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Velg hvilken enhet du vil vise beløp i.\n1 nyano = 0.000001 NANO, eller \n1 000,000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Aktuell representant"),
+        "daily": MessageLookupByLibrary.simpleMessage("Daglig"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("En dag siden"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Dekryptering Feil!"),
@@ -538,6 +539,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tilknytningskode kan kun inneholde 24 ord"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "Hemmelig setning kan bare inneholde 12 eller 24 ord"),
+        "monthly": MessageLookupByLibrary.simpleMessage("Månedlig"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Månedlige serverkostnader"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1032,6 +1034,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Sending er deaktivert på adresser som kun er på vakt"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("En uke siden"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Ukentlig"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Velkommen til Nautilus. For å starte, kan du opprette en ny lommebok eller importere en eksisterende."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

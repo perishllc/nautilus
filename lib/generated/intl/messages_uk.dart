@@ -249,6 +249,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Виберіть, в якій одиниці відображати суми.\n1 ньяно = 0,000001 НАНО, або \n1,000,000 ньяно = 1 НАНО"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("На разі представлено"),
+        "daily": MessageLookupByLibrary.simpleMessage("Щодня"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("День тому"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Помилка розшифровки!"),
@@ -552,6 +553,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Секретна фраза складається  із точно 24х слів"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "Секретна фраза може містити лише 12 або 24 слова"),
+        "monthly": MessageLookupByLibrary.simpleMessage("Щомісяця"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Щомісячні витрати на сервер"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1067,6 +1069,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Надсилання вимкнено на адресах лише для перегляду"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("Тиждень тому"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Щотижня"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Ласкаво просимо до Nautilus. Щоб продовжити ви можете створити новий гаманець або імпортувати існуючий."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

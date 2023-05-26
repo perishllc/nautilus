@@ -241,6 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Choose which unit to display amounts in.\n1 nyano = 0.000001 NANO, or \n1,000,000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("V současné době zastupuje"),
+        "daily": MessageLookupByLibrary.simpleMessage("Diàriament"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("Fa un dia"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Decryption Error!"),
@@ -536,6 +537,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tajná fráze může obsahovat pouze 24 slov"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "La frase secreta només pot contenir 12 o 24 paraules"),
+        "monthly": MessageLookupByLibrary.simpleMessage("Mensual"),
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage(
             "Costos mensuals del servidor"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1036,6 +1038,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Els enviaments estan desactivats a les adreces només de rellotge"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("Fa una setmana"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Setmanalment"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Vítejte v Nautilus. Nejprve můžete vytvořit novou peněženku nebo importovat stávající."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

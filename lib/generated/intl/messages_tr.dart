@@ -239,6 +239,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Miktarları hangi birimde görüntüleneceğini seçin.\n1 nyano = 0.000001 NANO veya \n1,000.000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Mevcut Temsilci:"),
+        "daily": MessageLookupByLibrary.simpleMessage("Günlük"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("Bir gün önce"),
         "decryptionError":
             MessageLookupByLibrary.simpleMessage("Şifre Çözme Hatası!"),
@@ -531,6 +532,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Gizli cümle 24 kelime olmalı"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "Gizli ifade yalnızca 12 veya 24 kelime içerebilir"),
+        "monthly": MessageLookupByLibrary.simpleMessage("Aylık"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Aylık Sunucu Maliyetleri"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1025,6 +1027,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Yalnızca izleme adreslerinde gönderimler devre dışı bırakıldı"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("Bir hafta önce"),
+        "weekly": MessageLookupByLibrary.simpleMessage("Haftalık"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Nautilus\'a hoşgeldiniz. Devam etmek için yeni bir cüzdan oluşturabilir veya var olanı içe aktarabilirsiniz."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

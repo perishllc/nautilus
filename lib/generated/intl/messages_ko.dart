@@ -207,6 +207,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "currencyModeInfo": MessageLookupByLibrary.simpleMessage(
             "금액을 표시할 단위를 선택합니다.\n1 냐노 = 0.000001 나노 또는 \n1,000,000 냐노 = 1 나노"),
         "currentlyRepresented": MessageLookupByLibrary.simpleMessage("현재 대리인"),
+        "daily": MessageLookupByLibrary.simpleMessage("일일"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("하루 전"),
         "decryptionError": MessageLookupByLibrary.simpleMessage("암호 해독 오류!"),
         "defaultAccountName":
@@ -464,6 +465,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Secret phrase may only contain 24 words"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "비밀 문구는 12단어 또는 24단어만 포함할 수 있습니다."),
+        "monthly": MessageLookupByLibrary.simpleMessage("월간 간행물"),
         "monthlyServerCosts": MessageLookupByLibrary.simpleMessage("월간 서버 비용"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
         "moreSettings": MessageLookupByLibrary.simpleMessage("자세한 설정"),
@@ -904,6 +906,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled":
             MessageLookupByLibrary.simpleMessage("보기 전용 주소에서는 보내기가 비활성화됩니다."),
         "weekAgo": MessageLookupByLibrary.simpleMessage("일주일 전"),
+        "weekly": MessageLookupByLibrary.simpleMessage("주간"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Nautilus에 오신 것을 환영합니다. 계속하려면, 새 지갑을 만들거나 기존 지갑을 불러오세요."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(

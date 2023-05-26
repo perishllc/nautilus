@@ -243,6 +243,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Chọn đơn vị nào để hiển thị số tiền trong đó.\n1 nyano = 0.000001 NANO, hoặc \n1.000.000 nyano = 1 NANO"),
         "currentlyRepresented":
             MessageLookupByLibrary.simpleMessage("Hiện đang được đại diện bởi"),
+        "daily": MessageLookupByLibrary.simpleMessage("Hằng ngày"),
         "dayAgo": MessageLookupByLibrary.simpleMessage("Một ngày trước"),
         "decryptionError": MessageLookupByLibrary.simpleMessage("Lỗi giải mã!"),
         "defaultAccountName":
@@ -535,6 +536,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Cụm từ bí mật chỉ có thể gồm 24 từ"),
         "mnemonicSizeError2": MessageLookupByLibrary.simpleMessage(
             "Cụm từ bí mật chỉ có thể chứa 12 hoặc 24 từ"),
+        "monthly": MessageLookupByLibrary.simpleMessage("hàng tháng"),
         "monthlyServerCosts":
             MessageLookupByLibrary.simpleMessage("Chi phí máy chủ hàng tháng"),
         "moonpay": MessageLookupByLibrary.simpleMessage("MoonPay"),
@@ -1036,6 +1038,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "watchOnlySendDisabled": MessageLookupByLibrary.simpleMessage(
             "Tính năng gửi bị tắt trên các địa chỉ chỉ xem"),
         "weekAgo": MessageLookupByLibrary.simpleMessage("Một tuần trước"),
+        "weekly": MessageLookupByLibrary.simpleMessage("hàng tuần"),
         "welcomeText": MessageLookupByLibrary.simpleMessage(
             "Chào mừng đến với Nautilus. Để bắt đầu, bạn có thể tạo ví mới hoặc nhập ví hiện có."),
         "welcomeTextLogin": MessageLookupByLibrary.simpleMessage(
