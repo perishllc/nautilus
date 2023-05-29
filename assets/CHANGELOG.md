@@ -9,7 +9,9 @@
 - Solar PoW option
 - rpc.nano.to PoW option
 - nanoriver PoW option
+- Account switcher on the home screen (tap and hold to copy address)
 #### Changed
+- Time format on transaction cards
 - Send / Request confirm sheet updates
 - Dialog style updates
 - Move block explorer setting to advanced settings

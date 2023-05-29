@@ -60,6 +60,7 @@ import 'package:wallet_flutter/ui/home/card_actions.dart';
 import 'package:wallet_flutter/ui/home/market_card.dart';
 import 'package:wallet_flutter/ui/home/payment_details_sheet.dart';
 import 'package:wallet_flutter/ui/home/top_card.dart';
+import 'package:wallet_flutter/ui/home/wallet_info.dart';
 import 'package:wallet_flutter/ui/popup_button.dart';
 import 'package:wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:wallet_flutter/ui/receive/receive_show_qr.dart';
@@ -2048,22 +2049,56 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  TopCard(
+                  WalletInfo(
                     scaffoldKey: _scaffoldKey,
                     opacityAnimation: _opacityAnimation,
-                    child: _buildSearchbarAnimation(),
                   ),
-                  if (StateContainer.of(context).showChart) const SizedBox(height: 20),
-                  if (StateContainer.of(context).showChart)
-                    MarketCard(
-                      scaffoldKey: _scaffoldKey,
-                      localCurrency: StateContainer.of(context).curCurrency,
-                      opacityAnimation: _opacityAnimation,
-                    ),
+                  // TopCard(
+                  //   scaffoldKey: _scaffoldKey,
+                  //   opacityAnimation: _opacityAnimation,
+                  //   child: _buildSearchbarAnimation(),
+                  // ),
+                  // Container(
+                  //   margin: const EdgeInsetsDirectional.symmetric(horizontal: 14),
+                  //   child:
+                  // ),
+                  // if (StateContainer.of(context).showChart) const SizedBox(height: 20),
+                  // if (StateContainer.of(context).showChart)
+                  //   MarketCard(
+                  //     scaffoldKey: _scaffoldKey,
+                  //     localCurrency: StateContainer.of(context).curCurrency,
+                  //     opacityAnimation: _opacityAnimation,
+                  //   ),
+                  // Container(
+                  //   margin: const EdgeInsetsDirectional.only(top: 20),
+                  // ),
+                  // const SizedBox(height: 6),
                   Container(
-                    margin: const EdgeInsetsDirectional.only(top: 20),
+                    margin: const EdgeInsetsDirectional.only(start: 14, end: 14, top: 8, bottom: 4),
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          height: 50,
+                          margin: const EdgeInsetsDirectional.only(start: 16),
+                          child: Text(
+                            CaseChange.toUpperCase(Z.of(context).transactions, context),
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w100,
+                              color: StateContainer.of(context).curTheme.text,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 50,
+                          child: _buildSearchbarAnimation(),
+                        ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 6),
+
                   Expanded(
                     child: Stack(
                       children: <Widget>[
@@ -2750,26 +2785,20 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
             controller: _scrollController,
             padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
             children: <Widget>[
-              TXCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Sent", "10244000", "123456789121234"),
-              TXCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Received", "100,00000", "@fosse1234"),
+              TXCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "10244000", "123456789121234"),
+              TXCards.loadingTransactionCard(context, _opacityAnimation.value, "Received", "100,00000", "@fosse1234"),
               TXCards.loadingTransactionCard(
                   context, _opacityAnimation.value, "Sent", "14500000", "12345678912345671234"),
-              TXCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Sent", "12,51200", "123456789121234"),
+              TXCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "12,51200", "123456789121234"),
               TXCards.loadingTransactionCard(
                   context, _opacityAnimation.value, "Received", "1,45300", "123456789121234"),
               TXCards.loadingTransactionCard(
                   context, _opacityAnimation.value, "Sent", "100,00000", "12345678912345671234"),
               TXCards.loadingTransactionCard(
                   context, _opacityAnimation.value, "Received", "24,00000", "12345678912345671234"),
-              TXCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
-              TXCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
-              TXCards.loadingTransactionCard(
-                  context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
+              TXCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
+              TXCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
+              TXCards.loadingTransactionCard(context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
             ],
           ));
     } else {

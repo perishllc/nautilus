@@ -61,92 +61,92 @@ class Misc {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Container(
-                // width: 36,
-                // height: 36,
-                alignment: Alignment.centerLeft,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                ),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: StateContainer.of(context).curTheme.text30,
-                    padding: EdgeInsets.zero,
-                    shape: const CircleBorder(),
-                  ),
-                  onPressed: () {
-                    Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address ?? ""));
-                    // setState(() {
-                    //   // Set copied style
-                    //   _addressCopied = true;
-                    // });
-                    // _addressCopiedTimer?.cancel();
-                    // _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
-                    //   if (!mounted) return;
-                    //   setState(() {
-                    //     _addressCopied = false;
-                    //   });
-                    // });
-                    UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
-                  },
-                  child: Container(
-                    width: 36,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      border: Border.all(
-                        width: 2,
-                        color: StateContainer.of(context).curTheme.primary60 ?? Colors.transparent,
-                      ),
-                    ),
-                    child: Icon(
-                      Icons.content_copy,
-                      size: 20,
-                      color: StateContainer.of(context).curTheme.primary60,
-                    ),
-                  ),
-                ),
-              ),
+              // Container(
+              //   // width: 36,
+              //   // height: 36,
+              //   alignment: Alignment.centerLeft,
+              //   decoration: const BoxDecoration(
+              //     shape: BoxShape.circle,
+              //   ),
+              //   child: TextButton(
+              //     style: TextButton.styleFrom(
+              //       foregroundColor: StateContainer.of(context).curTheme.text30,
+              //       padding: EdgeInsets.zero,
+              //       shape: const CircleBorder(),
+              //     ),
+              //     onPressed: () {
+              //       Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address ?? ""));
+              //       // setState(() {
+              //       //   // Set copied style
+              //       //   _addressCopied = true;
+              //       // });
+              //       // _addressCopiedTimer?.cancel();
+              //       // _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
+              //       //   if (!mounted) return;
+              //       //   setState(() {
+              //       //     _addressCopied = false;
+              //       //   });
+              //       // });
+              //       UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
+              //     },
+              //     child: Container(
+              //       width: 36,
+              //       height: 36,
+              //       decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(100),
+              //         border: Border.all(
+              //           width: 2,
+              //           color: StateContainer.of(context).curTheme.primary60 ?? Colors.transparent,
+              //         ),
+              //       ),
+              //       child: Icon(
+              //         Icons.content_copy,
+              //         size: 20,
+              //         color: StateContainer.of(context).curTheme.primary60,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               // Account switcher
-              Container(
-                alignment: Alignment.centerRight,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                ),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: StateContainer.of(context).curTheme.text30,
-                    padding: EdgeInsets.zero,
-                    shape: const CircleBorder(),
-                  ),
-                  onPressed: () async {
-                    final String seed = await StateContainer.of(context).getSeed();
-                    final List<Account> accounts = await sl.get<DBHelper>().getAccounts(seed);
+              // Container(
+              //   alignment: Alignment.centerRight,
+              //   decoration: const BoxDecoration(
+              //     shape: BoxShape.circle,
+              //   ),
+              //   child: TextButton(
+              //     style: TextButton.styleFrom(
+              //       foregroundColor: StateContainer.of(context).curTheme.text30,
+              //       padding: EdgeInsets.zero,
+              //       shape: const CircleBorder(),
+              //     ),
+              //     onPressed: () async {
+              //       final String seed = await StateContainer.of(context).getSeed();
+              //       final List<Account> accounts = await sl.get<DBHelper>().getAccounts(seed);
 
-                    // ignore: use_build_context_synchronously
-                    Sheets.showAppHeightNineSheet(
-                      context: context,
-                      widget: AppAccountsSheet(accounts: accounts),
-                    );
-                  },
-                  child: Container(
-                    width: 36,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      border: Border.all(
-                        width: 2,
-                        color: StateContainer.of(context).curTheme.primary60 ?? Colors.transparent,
-                      ),
-                    ),
-                    child: Icon(
-                      Icons.manage_accounts,
-                      size: 24,
-                      color: StateContainer.of(context).curTheme.primary60,
-                    ),
-                  ),
-                ),
-              ),
+              //       // ignore: use_build_context_synchronously
+              //       Sheets.showAppHeightNineSheet(
+              //         context: context,
+              //         widget: AppAccountsSheet(accounts: accounts),
+              //       );
+              //     },
+              //     child: Container(
+              //       width: 36,
+              //       height: 36,
+              //       decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(100),
+              //         border: Border.all(
+              //           width: 2,
+              //           color: StateContainer.of(context).curTheme.primary60 ?? Colors.transparent,
+              //         ),
+              //       ),
+              //       child: Icon(
+              //         Icons.manage_accounts,
+              //         size: 24,
+              //         color: StateContainer.of(context).curTheme.primary60,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Column(
                 children: [
                   const SizedBox(height: 5),
