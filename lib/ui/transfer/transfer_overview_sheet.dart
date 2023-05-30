@@ -127,12 +127,14 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
                             children: <Widget>[
                               Center(
                                 child: SvgPicture.asset("assets/illustrations/transferfunds_paperwalletonly.svg",
-                                    color: StateContainer.of(context).curTheme.text45,
+                                    colorFilter: ColorFilter.mode(
+                                        StateContainer.of(context).curTheme.text45 ?? Colors.white, BlendMode.srcIn),
                                     width: MediaQuery.of(context).size.width),
                               ),
                               Center(
                                 child: SvgPicture.asset("assets/illustrations/transferfunds_start.svg",
-                                    color: StateContainer.of(context).curTheme.primary,
+                                    colorFilter: ColorFilter.mode(
+                                        StateContainer.of(context).curTheme.primary ?? Colors.white, BlendMode.srcIn),
                                     width: MediaQuery.of(context).size.width),
                               ),
                             ],
@@ -166,10 +168,12 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
                         Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                           UIUtil.cancelLockEvent();
-                          final String? result = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
+                          final String? result = await UserDataUtil.getQRData(DataType.SEED, context) as String?;
                           if (result == null) {
                             return;
                           }
+
+                          if (!mounted) return;
 
                           if (!NanoUtil.isValidSeed(result)) {
                             UIUtil.showSnackbar(Z.of(context).qrInvalidSeed, context);

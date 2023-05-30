@@ -445,6 +445,16 @@ class DBHelper {
     return dbClient.rawUpdate('UPDATE Nodes SET name = ? WHERE id = ?', [name, node.id]);
   }
 
+  Future<int> changeNodeHttp(Node node, String http_url) async {
+    final Database dbClient = (await db)!;
+    return dbClient.rawUpdate('UPDATE Nodes SET http_url = ? WHERE id = ?', [http_url, node.id]);
+  }
+
+  Future<int> changeNodeWs(Node node, String ws_url) async {
+    final Database dbClient = (await db)!;
+    return dbClient.rawUpdate('UPDATE Nodes SET ws_url = ? WHERE id = ?', [ws_url, node.id]);
+  }
+
   // Work sources:
 
   Future<List<WorkSource>> getWorkSources() async {
@@ -510,6 +520,11 @@ class DBHelper {
   Future<int> changeWorkSourceName(WorkSource ws, String name) async {
     final Database dbClient = (await db)!;
     return dbClient.rawUpdate('UPDATE WorkSources SET name = ? WHERE id = ?', [name, ws.id]);
+  }
+
+  Future<int> changeWorkSourceUrl(WorkSource ws, String url) async {
+    final Database dbClient = (await db)!;
+    return dbClient.rawUpdate('UPDATE WorkSources SET url = ? WHERE id = ?', [url, ws.id]);
   }
 
   // subscriptions:

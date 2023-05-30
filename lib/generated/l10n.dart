@@ -932,6 +932,16 @@ class Z {
     );
   }
 
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: 'dialog_save',
+      args: [],
+    );
+  }
+
   /// `Confirm`
   String get confirm {
     return Intl.message(

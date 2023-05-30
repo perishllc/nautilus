@@ -440,6 +440,11 @@
     "type": "text",
     "description": "dialog_close"
   },
+  "save": "Save",
+  "@save": {
+    "type": "text",
+    "description": "dialog_save"
+  },
   "confirm": "Confirm",
   "@confirm": {
     "type": "text",

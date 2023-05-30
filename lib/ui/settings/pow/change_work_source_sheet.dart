@@ -7,6 +7,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:logger/logger.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/node_modified_event.dart';
+import 'package:wallet_flutter/bus/work_source_modified_event.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
@@ -14,6 +15,7 @@ import 'package:wallet_flutter/model/db/work_source.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/settings/pow/add_work_source_sheet.dart';
+import 'package:wallet_flutter/ui/settings/pow/pow_details_sheet.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';
@@ -38,11 +40,11 @@ class ChangePowSheetState extends State<ChangePowSheet> {
   bool _addingItem = false;
   final ScrollController _scrollController = ScrollController();
 
-  StreamSubscription<NodeModifiedEvent>? _nodeModifiedSub;
+  StreamSubscription<WorkSourceModifiedEvent>? _workSourceModifiedSub;
 
   Future<bool> _onWillPop() async {
-    if (_nodeModifiedSub != null) {
-      _nodeModifiedSub!.cancel();
+    if (_workSourceModifiedSub != null) {
+      _workSourceModifiedSub!.cancel();
     }
     return true;
   }
@@ -61,42 +63,41 @@ class ChangePowSheetState extends State<ChangePowSheet> {
   }
 
   void _registerBus() {
-    // _nodeModifiedSub = EventTaxiImpl.singleton().registerTo<NodeModifiedEvent>().listen((NodeModifiedEvent event) {
-    //   if (event.deleted) {
-    //     if (event.node!.selected) {
-    //       Future<void>.delayed(const Duration(milliseconds: 50), () {
-    //         setState(() {
-    //           widget.workSources
-    //               .where((WorkSource a) => a.id == StateContainer.of(context).selectedAccount!.id)
-    //               .forEach((WorkSource ws) async {
-    //             ws.selected = true;
-    //             await sl.get<DBHelper>().changeWorkSource(ws);
-    //             // await sl.get<AccountService>().updateNode();
-    //           });
-    //         });
-    //       });
-    //     }
-    //     setState(() {
-    //       widget.workSources.removeWhere((WorkSource a) => a.id == event.node!.id);
-    //     });
-    //   } else if (event.created && event.node != null) {
-    //     setState(() {
-    //       widget.workSources.add(event.node!);
-    //     });
-    //   } else {
-    //     // Name change
-    //     setState(() {
-    //       widget.workSources.removeWhere((Node a) => a.id == event.node!.id);
-    //       widget.workSources.add(event.node!);
-    //       widget.workSources.sort((Node a, Node b) => a.id!.compareTo(b.id!));
-    //     });
-    //   }
-    // });
+    _workSourceModifiedSub = EventTaxiImpl.singleton().registerTo<WorkSourceModifiedEvent>().listen((WorkSourceModifiedEvent event) {
+      if (event.deleted) {
+        if (event.workSource!.selected) {
+          Future<void>.delayed(const Duration(milliseconds: 50), () {
+            setState(() {
+              widget.workSources
+                  .where((WorkSource a) => a.id == StateContainer.of(context).selectedAccount!.id)
+                  .forEach((WorkSource ws) async {
+                ws.selected = true;
+                await sl.get<DBHelper>().changeWorkSource(ws);
+              });
+            });
+          });
+        }
+        setState(() {
+          widget.workSources.removeWhere((WorkSource a) => a.id == event.workSource!.id);
+        });
+      } else if (event.created && event.workSource != null) {
+        setState(() {
+          widget.workSources.add(event.workSource!);
+        });
+      } else {
+        // Name change
+        setState(() {
+          widget.workSources.removeWhere((WorkSource a) => a.id == event.workSource!.id);
+          widget.workSources.add(event.workSource!);
+          widget.workSources.sort((WorkSource a, WorkSource b) => a.id!.compareTo(b.id!));
+        });
+      }
+    });
   }
 
   void _destroyBus() {
-    if (_nodeModifiedSub != null) {
-      _nodeModifiedSub!.cancel();
+    if (_workSourceModifiedSub != null) {
+      _workSourceModifiedSub!.cancel();
     }
   }
 
@@ -450,13 +451,13 @@ class ChangePowSheetState extends State<ChangePowSheet> {
         icon: Icons.edit,
         label: Z.of(context).edit,
         onPressed: (BuildContext context) async {
-          // await Future<dynamic>.delayed(const Duration(milliseconds: 250));
-          // if (!mounted) return;
-          // Sheets.showAppHeightNineSheet(
-          //   context: context,
-          //   widget: NodeDetailsSheet(node: node),
-          // );
-          // await Slidable.of(context)!.close();
+          await Future<dynamic>.delayed(const Duration(milliseconds: 250));
+          if (!mounted) return;
+          Sheets.showAppHeightNineSheet(
+            context: context,
+            widget: WorkSourceDetailsSheet(workSource: node),
+          );
+          await Slidable.of(context)!.close();
         }));
 
     if (node.id! > 2) {
