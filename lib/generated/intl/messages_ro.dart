@@ -785,6 +785,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Reîncercați"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "Se pare că acest dispozitiv este \"rootat\" / \"jailbroken\" sau modificat astfel încât securitatea este pusă în pericol. Recomandăm să resetați dispozitivul la starea originală înainte de a continua."),
+        "save": MessageLookupByLibrary.simpleMessage("Salvați"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Scanează o adresă NANO de tip cod QR"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Trimite prin NFC"),

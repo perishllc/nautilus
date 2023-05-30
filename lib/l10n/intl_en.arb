@@ -440,11 +440,6 @@
     "type": "text",
     "description": "dialog_close"
   },
-  "save": "Save",
-  "@save": {
-    "type": "text",
-    "description": "dialog_save"
-  },
   "confirm": "Confirm",
   "@confirm": {
     "type": "text",
@@ -2331,6 +2326,11 @@
   "@rootWarning": {
     "type": "text",
     "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
+  },
+  "save": "Save",
+  "@save": {
+    "type": "text",
+    "description": "dialog_save"
   },
   "scanInstructions": "Scan a %2 \naddress QR code",
   "@scanInstructions": {

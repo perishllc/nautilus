@@ -672,6 +672,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("再試行"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "お使いの電子機器は制限が不正に無効化されており、セキュリティが不十分な状態です。作業を進行する前に元の状態にリセットするよう推奨します。"),
+        "save": MessageLookupByLibrary.simpleMessage("保存"),
         "scanInstructions":
             MessageLookupByLibrary.simpleMessage("ナノ \n アドレスのQRコードをスキャンします"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("NFC経由で送信"),

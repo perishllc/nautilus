@@ -793,6 +793,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Próbálja újra"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding."),
+        "save": MessageLookupByLibrary.simpleMessage("Megment"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Olvass be QR kóddal egy Nano \ncímet"),
         "scanNFC":

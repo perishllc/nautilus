@@ -778,6 +778,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Poskusite znova"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding."),
+        "save": MessageLookupByLibrary.simpleMessage("Shrani"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Zajemi Nano \nnaslov QR kodo"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Pošlji prek NFC"),

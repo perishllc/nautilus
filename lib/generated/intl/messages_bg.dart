@@ -781,6 +781,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Повторен опит"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "Изглежда вашето устройство е “рутнато”, “джейлбрейкнато” или модифицирано така, че да може да бъде компроментирано. Препоръчително е да върнете устройството към фабрични настройки преди да продължите. "),
+        "save": MessageLookupByLibrary.simpleMessage("Запазване"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Сканирай Nano адрес или QR-код"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Изпращане чрез NFC"),

@@ -932,16 +932,6 @@ class Z {
     );
   }
 
-  /// `Save`
-  String get save {
-    return Intl.message(
-      'Save',
-      name: 'save',
-      desc: 'dialog_save',
-      args: [],
-    );
-  }
-
   /// `Confirm`
   String get confirm {
     return Intl.message(
@@ -4730,6 +4720,16 @@ class Z {
       name: 'rootWarning',
       desc:
           'Shown to users if they have a rooted Android device or jailbroken iOS device',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: 'dialog_save',
       args: [],
     );
   }

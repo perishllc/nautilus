@@ -613,6 +613,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("重试"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "您的设备似乎被“越狱”或被修改，从而存在安全隐患。建议您在继续之前把设备还原到初始状态。"),
+        "save": MessageLookupByLibrary.simpleMessage("节省"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage("扫描NANO二维码地址"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("通过 NFC 发送"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("扫描二维码"),

@@ -2327,6 +2327,11 @@
     "type": "text",
     "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
   },
+  "save": "зберегти",
+  "@save": {
+    "type": "text",
+    "description": "dialog_save"
+  },
   "scanInstructions": "Сканувати QR код \n NANO адреси",
   "@scanInstructions": {
     "type": "text",

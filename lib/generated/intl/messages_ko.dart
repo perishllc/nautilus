@@ -676,6 +676,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("재시도"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding."),
+        "save": MessageLookupByLibrary.simpleMessage("구하다"),
         "scanInstructions":
             MessageLookupByLibrary.simpleMessage("Nano QR 코드 주소를 스캔하하세요"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("NFC를 통해 보내기"),

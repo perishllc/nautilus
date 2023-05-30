@@ -783,6 +783,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("পুনরায় চেষ্টা করা"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "মনে হচ্ছে আপনার ডিভাইসটি \"রুট\", \"জেলব্রোকেন\", বা এমনভাবে সংশোধন করা হয়েছে যা নিরাপত্তার সাথে আপোষ করে। এগিয়ে যাওয়ার আগে আপনার ডিভাইসটিকে তার আসল অবস্থায় রিসেট করার পরামর্শ দেওয়া হচ্ছে।"),
+        "save": MessageLookupByLibrary.simpleMessage("সংরক্ষণ"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "একটি ন্যানো <নতুন লাইন> ঠিকানা QR কোড স্ক্যান করুন"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("NFC এর মাধ্যমে পাঠান"),

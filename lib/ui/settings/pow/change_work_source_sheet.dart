@@ -15,7 +15,7 @@ import 'package:wallet_flutter/model/db/work_source.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/settings/pow/add_work_source_sheet.dart';
-import 'package:wallet_flutter/ui/settings/pow/pow_details_sheet.dart';
+import 'package:wallet_flutter/ui/settings/pow/work_source_details_sheet.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';

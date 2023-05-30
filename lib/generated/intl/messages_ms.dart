@@ -774,6 +774,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Cuba semula"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "Nampaknya peranti anda \"di-root\", \"jailbroken\", atau diubah suai dengan cara yang menjejaskan keselamatan. Adalah disyorkan bahawa anda menetapkan semula peranti anda kepada keadaan asal sebelum meneruskan."),
+        "save": MessageLookupByLibrary.simpleMessage("Jimat"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Imbaskan Kod QR\n Alamat Nano anda"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Hantar melalui NFC"),

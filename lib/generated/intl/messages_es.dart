@@ -793,6 +793,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Intentar de nuevo"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "Parece que su dispositivo está \"rooteado\", \"liberado\" o modificado de una manera que compromete su seguridad. Se recomienda que restablezca su dispositivo a su estado original antes de continuar."),
+        "save": MessageLookupByLibrary.simpleMessage("Ahorrar"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Escanear el código QR\n de una billetera de Nano."),
         "scanNFC":

@@ -609,6 +609,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("重試"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "您的裝置似乎已「越獄」或被修改，從而存在安全疑慮。建議您在繼續之前，將裝置還原至初始狀態。"),
+        "save": MessageLookupByLibrary.simpleMessage("節省"),
         "scanInstructions":
             MessageLookupByLibrary.simpleMessage("掃描 NANO 二維條碼地址"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("通過 NFC 發送"),

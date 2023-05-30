@@ -771,6 +771,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Thử lại"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "Có vẻ như thiết bị của bạn đã được \"root\", \"jailbreak\" hoặc được sửa đổi gây ảnh hưởng đến tính bảo mật. Bạn nên đặt lại thiết bị của bạn về trạng thái ban đầu trước khi tiếp tục."),
+        "save": MessageLookupByLibrary.simpleMessage("Cứu"),
         "scanInstructions":
             MessageLookupByLibrary.simpleMessage("Quét \nmã QR địa chỉ Banano"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Gửi qua NFC"),

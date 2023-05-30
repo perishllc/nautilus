@@ -2327,6 +2327,11 @@
     "type": "text",
     "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
   },
+  "save": "구하다",
+  "@save": {
+    "type": "text",
+    "description": "dialog_save"
+  },
   "scanInstructions": "Nano QR 코드 주소를 스캔하하세요",
   "@scanInstructions": {
     "type": "text",

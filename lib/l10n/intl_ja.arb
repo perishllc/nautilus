@@ -2327,6 +2327,11 @@
     "type": "text",
     "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
   },
+  "save": "保存",
+  "@save": {
+    "type": "text",
+    "description": "dialog_save"
+  },
   "scanInstructions": "ナノ \n アドレスのQRコードをスキャンします",
   "@scanInstructions": {
     "type": "text",

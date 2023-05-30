@@ -793,6 +793,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Повторить"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "Похоже, ваше устройство \"рутировано\" , \"взломано\" или модифицировано таким образом, что это ставит под угрозу безопасность. Перед продолжением рекомендуется переустановить устройство в исходное состояние."),
+        "save": MessageLookupByLibrary.simpleMessage("Сохранять"),
         "scanInstructions":
             MessageLookupByLibrary.simpleMessage("Сканировать\nQR-код адрес."),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Отправить через NFC"),

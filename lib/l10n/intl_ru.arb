@@ -2327,6 +2327,11 @@
     "type": "text",
     "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
   },
+  "save": "Сохранять",
+  "@save": {
+    "type": "text",
+    "description": "dialog_save"
+  },
   "scanInstructions": "Сканировать\nQR-код адрес.",
   "@scanInstructions": {
     "type": "text",

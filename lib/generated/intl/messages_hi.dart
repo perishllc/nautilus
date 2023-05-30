@@ -767,6 +767,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("पुनः प्रयास करें"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "ऐसा प्रतीत होता है कि आपका डिवाइस \"रूटेड\", \"जेलब्रोकन\" है, या सुरक्षा से समझौता करने वाले तरीके से संशोधित है। यह अनुशंसा की जाती है कि आप आगे बढ़ने से पहले अपने डिवाइस को उसकी मूल स्थिति में रीसेट कर दें।"),
+        "save": MessageLookupByLibrary.simpleMessage("बचाना"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "बनानो के पते का \nक्यू आर कोड स्कैन करें "),
         "scanNFC":

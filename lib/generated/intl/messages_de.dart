@@ -802,6 +802,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Versuchen Sie es erneut"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "Es sieht aus, als seien Änderungen an deinem Gerät vorgenommen worden, welche dessen Sicherheit beeinträchtigen. Es wird empfohlen, das Gerät in seinen Originalzustand zurückzusetzen."),
+        "save": MessageLookupByLibrary.simpleMessage("Speichern"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Scanne einen\nNano-Address-QR-Code"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Über NFC senden"),

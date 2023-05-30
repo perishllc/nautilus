@@ -765,6 +765,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Tekrar Dene"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "Cihazın \"root\" veya \"jailbreak\" edilmiş gibi görünüyor. Bu durum bir güvenlik riski oluşturuyor. Devam etmeden önce cihazını sıfırlamanı ve eski haline döndürmeni tavsiye ederiz."),
+        "save": MessageLookupByLibrary.simpleMessage("Kaydetmek"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Nano Adresi\'nin \n QR Kodu\'nu tarayın"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("NFC ile gönder"),

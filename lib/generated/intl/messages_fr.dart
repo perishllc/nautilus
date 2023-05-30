@@ -801,6 +801,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Réessayer"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "Votre appareil semble débridé ou modifié, ce qui en compromet sa sécurité. Il est recommandé de réinitialiser votre appareil en son état d\'origine avant de continuer."),
+        "save": MessageLookupByLibrary.simpleMessage("Sauvegarder"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Scanner le code QR d’une adresse Nano"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Envoyer par NFC"),

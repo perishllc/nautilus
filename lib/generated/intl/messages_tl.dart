@@ -803,6 +803,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Subukan muli"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "Ang iyong device ay \"rooted\", \"jailbroken\", o nabago ang security settings. Mabuti na i-reset mo ang iyong device sa orihinal na estado bago magpatuloy."),
+        "save": MessageLookupByLibrary.simpleMessage("I-save"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "I-scan ang Nano \naddress QR code"),
         "scanNFC": MessageLookupByLibrary.simpleMessage(

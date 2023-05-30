@@ -773,6 +773,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Ponów próbę"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "Wygląda na to, że twoje urządzenie zostało zmodyfikowane. Jest rekomendowane żeby zresetować urządzenie do oryginalnego stanu przed kontynuacją."),
+        "save": MessageLookupByLibrary.simpleMessage("Ratować"),
         "scanInstructions":
             MessageLookupByLibrary.simpleMessage("Zeskanuj  \naddres Kod QR "),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Wyślij przez NFC"),

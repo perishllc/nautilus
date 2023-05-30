@@ -748,6 +748,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "يبدو أن جهازك \"rooted\" أو \"jailbroken\" أو تم تعديله بطريقة تعرض الأمان للخطر. يرجى إعادة ضبط جهازك إلى حالته الأصلية قبل المتابعة.\n"),
+        "save": MessageLookupByLibrary.simpleMessage("يحفظ"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "مسح \nعنوان رمز الاستجابة السريعة"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("إرسال عبر NFC"),

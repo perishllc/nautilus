@@ -787,6 +787,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Probeer het opnieuw"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "Het lijkt erop dat jouw apparaat is \"geroot\", \"gejailbreakt\" of is aangepast op een manier die de beveiliging in gevaar brengt. Het wordt aanbevolen dat je jouw apparaat in de oorspronkelijke staat reset voordat je doorgaat."),
+        "save": MessageLookupByLibrary.simpleMessage("Redden"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Scan een Nano\nadres QR code"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Verzenden via NFC"),

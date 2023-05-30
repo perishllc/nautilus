@@ -2327,6 +2327,11 @@
     "type": "text",
     "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
   },
+  "save": "बचाना",
+  "@save": {
+    "type": "text",
+    "description": "dialog_save"
+  },
   "scanInstructions": "बनानो के पते का \nक्यू आर कोड स्कैन करें ",
   "@scanInstructions": {
     "type": "text",

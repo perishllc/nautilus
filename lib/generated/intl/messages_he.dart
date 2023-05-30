@@ -720,6 +720,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("נסה שוב"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "It appears your device is \"rooted\", \"jailbroken\", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding."),
+        "save": MessageLookupByLibrary.simpleMessage("להציל"),
         "scanInstructions":
             MessageLookupByLibrary.simpleMessage("סרוק כתובת ברקוד \n של נאנו"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("שלח דרך NFC"),

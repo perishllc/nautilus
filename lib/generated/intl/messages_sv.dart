@@ -777,6 +777,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Försök igen"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "Det verkar som att din enhet har \"rootats\", \"jailbreakats\" eller modififierats på ett sätt som kan äventyra säkerheten. Det är rekommenderat att du återställer din enhet till sitt ursprungliga tillstånd."),
+        "save": MessageLookupByLibrary.simpleMessage("Spara"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Skanna en Nano\nadress QR-kod"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("Skicka via NFC"),
