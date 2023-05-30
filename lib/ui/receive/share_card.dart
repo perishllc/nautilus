@@ -61,7 +61,7 @@ class _AppShareCardState extends State<AppShareCard> {
                         height: 64.6,
                         width: 64.6,
                         padding: const EdgeInsets.all(2),
-                        child: QrImage(
+                        child: QrImageView(
                           padding: EdgeInsets.zero,
                           data: StateContainer.of(context).wallet!.address!,
                           version: 6,

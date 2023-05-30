@@ -2091,13 +2091,14 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                             ),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           height: 50,
                           child: _buildSearchbarAnimation(),
                         ),
                       ],
                     ),
                   ),
+                  const SizedBox(height: 2),
 
                   Expanded(
                     child: Stack(

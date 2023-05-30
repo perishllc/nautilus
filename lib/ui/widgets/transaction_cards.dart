@@ -35,7 +35,7 @@ class TXCards {
     workingStr = workingStr
         .replaceAll("%1", NonTranslatable.appName)
         .replaceAll("%2", NonTranslatable.currencyName.toUpperCase());
-    
+
     if (!workingStr.contains("NANO") && !workingStr.contains("XMR")) {
       return TextSpan(
         text: workingStr,
@@ -586,9 +586,8 @@ class TXCards {
     );
   }
 
-
-
-  static Widget unifiedCard(TXData txDetails, Animation<double> animation, String displayName, BuildContext context, String searchControllerText) {
+  static Widget unifiedCard(TXData txDetails, Animation<double> animation, String displayName, BuildContext context,
+      String searchControllerText) {
     late String itemText;
     IconData? icon;
     Color? iconColor;
@@ -781,6 +780,7 @@ class TXCards {
     if (label != null) {
       slideActions.add(SlidableAction(
           autoClose: false,
+          padding: EdgeInsets.zero,
           borderRadius: BorderRadius.circular(5.0),
           backgroundColor: StateContainer.of(context).curTheme.background!,
           foregroundColor: StateContainer.of(context).curTheme.success,
@@ -796,6 +796,7 @@ class TXCards {
     if (txDetails.is_message && txDetails.isRecipient(walletAddress)) {
       slideActions.add(SlidableAction(
           autoClose: false,
+          padding: EdgeInsets.zero,
           borderRadius: BorderRadius.circular(5.0),
           backgroundColor: StateContainer.of(context).curTheme.background!,
           foregroundColor: StateContainer.of(context).curTheme.success,
@@ -812,6 +813,7 @@ class TXCards {
       if (txDetails.is_request) {
         slideActions.add(SlidableAction(
             autoClose: false,
+            padding: EdgeInsets.zero,
             borderRadius: BorderRadius.circular(5.0),
             backgroundColor: StateContainer.of(context).curTheme.background!,
             foregroundColor: StateContainer.of(context).curTheme.warning60,
@@ -824,6 +826,7 @@ class TXCards {
       } else if (txDetails.is_memo) {
         slideActions.add(SlidableAction(
             autoClose: false,
+            padding: EdgeInsets.zero,
             borderRadius: BorderRadius.circular(5.0),
             backgroundColor: StateContainer.of(context).curTheme.background!,
             foregroundColor: StateContainer.of(context).curTheme.warning60,
@@ -837,6 +840,7 @@ class TXCards {
         // TODO: resend message
         slideActions.add(SlidableAction(
             autoClose: false,
+            padding: EdgeInsets.zero,
             borderRadius: BorderRadius.circular(5.0),
             backgroundColor: StateContainer.of(context).curTheme.background!,
             foregroundColor: StateContainer.of(context).curTheme.warning60,
@@ -852,6 +856,7 @@ class TXCards {
     if (txDetails.is_request || txDetails.is_message) {
       slideActions.add(SlidableAction(
           autoClose: false,
+          padding: EdgeInsets.zero,
           borderRadius: BorderRadius.circular(5.0),
           backgroundColor: StateContainer.of(context).curTheme.background!,
           foregroundColor: StateContainer.of(context).curTheme.error60,
