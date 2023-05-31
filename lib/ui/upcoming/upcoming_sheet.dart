@@ -626,7 +626,7 @@ class UpcomingSheetState extends State<UpcomingSheet> {
                                         ),
                                         RichText(
                                           text: TextSpan(
-                                            text: getCardTime(nextPaymentTime.millisecondsSinceEpoch ~/ 1000),
+                                            text: getOldCardTime(nextPaymentTime.millisecondsSinceEpoch ~/ 1000),
                                             style: TextStyle(
                                               fontFamily: "OverpassMono",
                                               fontWeight: FontWeight.w100,
@@ -854,7 +854,7 @@ class UpcomingSheetState extends State<UpcomingSheet> {
                                       ),
                                       RichText(
                                         text: TextSpan(
-                                          text: getCardTime(nextPaymentTime.millisecondsSinceEpoch ~/ 1000),
+                                          text: getOldCardTime(nextPaymentTime.millisecondsSinceEpoch ~/ 1000),
                                           style: TextStyle(
                                             fontFamily: "OverpassMono",
                                             fontWeight: FontWeight.w100,

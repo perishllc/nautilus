@@ -508,6 +508,7 @@ String getThemeCurrencyMode(BuildContext context) {
 // String CARD_TIME_FORMAT = "MMM d, h:mm a";
 // ignore: non_constant_identifier_names
 // String CARD_TIME_FORMAT = "MMM dd, HH:mm";
+String OLD_CARD_TIME_FORMAT = "MMM dd, HH:mm";
 String CARD_TIME_FORMAT = "y/M/d, HH:mm";
 String CARD_HOUR_TIME_FORMAT = "HH:mm";
 String getTimeAgoString(BuildContext context, int epochTime) {
@@ -572,5 +573,10 @@ String getTimeAgoString(BuildContext context, int epochTime) {
 
 String getCardTime(int epochTime) {
   final String timeStr = DateFormat(CARD_TIME_FORMAT).format(DateTime.fromMillisecondsSinceEpoch(epochTime * 1000));
+  return timeStr;
+}
+
+String getOldCardTime(int epochTime) {
+  final String timeStr = DateFormat(OLD_CARD_TIME_FORMAT).format(DateTime.fromMillisecondsSinceEpoch(epochTime * 1000));
   return timeStr;
 }
