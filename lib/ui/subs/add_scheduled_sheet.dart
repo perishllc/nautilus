@@ -148,7 +148,9 @@ class AddScheduledSheetState extends State<AddScheduledSheet> {
           return;
         }
         // check if UD / ENS / opencap / onchain address:
-        if (_addressController.text.isNotEmpty && !_addressController.text.contains("★")) {
+        if (_addressController.text.isNotEmpty &&
+            !_addressController.text.contains("★") &&
+            !_addressController.text.startsWith(NonTranslatable.currencyPrefix)) {
           User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
           if (user == null) {
             if (!mounted) return;
@@ -707,23 +709,23 @@ class AddScheduledSheetState extends State<AddScheduledSheet> {
                         children: <Widget>[
                           Stack(
                             children: <Widget>[
-                              // // Column for Enter Name container + Enter Name Error container
-                              // Column(
-                              //   children: [
-                              //     getEnterNameContainer(),
-                              //     Container(
-                              //       alignment: AlignmentDirectional.center,
-                              //       margin: const EdgeInsets.only(top: 3),
-                              //       child: Text(_nameValidationText,
-                              //           style: TextStyle(
-                              //             fontSize: 14.0,
-                              //             color: StateContainer.of(context).curTheme.primary,
-                              //             fontFamily: "NunitoSans",
-                              //             fontWeight: FontWeight.w600,
-                              //           )),
-                              //     ),
-                              //   ],
-                              // ),
+                              // Column for Enter Name container + Enter Name Error container
+                              Column(
+                                children: [
+                                  getEnterNameContainer(),
+                                  Container(
+                                    alignment: AlignmentDirectional.center,
+                                    margin: const EdgeInsets.only(top: 3),
+                                    child: Text(_nameValidationText,
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          color: StateContainer.of(context).curTheme.primary,
+                                          fontFamily: "NunitoSans",
+                                          fontWeight: FontWeight.w600,
+                                        )),
+                                  ),
+                                ],
+                              ),
 
                               // Column for Enter Address container + Enter Address Error container
                               Column(
@@ -762,9 +764,9 @@ class AddScheduledSheetState extends State<AddScheduledSheet> {
                                                         itemBuilder: (BuildContext context, int index) {
                                                           return Misc.buildUserItem(context, _users[index], true,
                                                               (User user) {
-                                                            _addressController!.text =
+                                                            _addressController.text =
                                                                 user.getDisplayName(ignoreNickname: true)!;
-                                                            _addressFocusNode!.unfocus();
+                                                            _addressFocusNode.unfocus();
                                                             setState(() {
                                                               _isUser = true;
                                                               _pasteButtonVisible = false;
@@ -968,7 +970,7 @@ class AddScheduledSheetState extends State<AddScheduledSheet> {
                         }
 
                         final Scheduled sched = Scheduled(
-                          // label: _nameController.text,
+                          label: _nameController.text,
                           amount_raw: amountRaw,
                           timestamp: _timestamp,
                           address: finalAddress,
@@ -1015,17 +1017,17 @@ class AddScheduledSheetState extends State<AddScheduledSheet> {
   Future<bool> validateForm() async {
     bool isValid = true;
 
-    // // validate name
-    // if (_nameController.text.isEmpty) {
-    //   setState(() {
-    //     _nameValidationText = Z.of(context).nameEmpty;
-    //   });
-    //   isValid = false;
-    // } else {
-    //   setState(() {
-    //     _nameValidationText = "";
-    //   });
-    // }
+    // validate name
+    if (_nameController.text.isEmpty) {
+      setState(() {
+        _nameValidationText = Z.of(context).nameEmpty;
+      });
+      isValid = false;
+    } else {
+      setState(() {
+        _nameValidationText = "";
+      });
+    }
 
     // validate amount
     if (_amountController.text.isEmpty || _amountController.text == "0") {

@@ -37,10 +37,10 @@ class AddContactSheet extends StatefulWidget {
 }
 
 class _AddContactSheetState extends State<AddContactSheet> {
-  FocusNode? _nameFocusNode;
-  FocusNode? _addressFocusNode;
-  TextEditingController? _nameController;
-  TextEditingController? _addressController;
+  FocusNode _nameFocusNode = FocusNode();
+  FocusNode _addressFocusNode = FocusNode();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _addressController = TextEditingController();
 
   // State variables
   bool? _addressValid;
@@ -61,11 +61,6 @@ class _AddContactSheetState extends State<AddContactSheet> {
   @override
   void initState() {
     super.initState();
-    // Text field initialization
-    _nameFocusNode = FocusNode();
-    _addressFocusNode = FocusNode();
-    _nameController = TextEditingController();
-    _addressController = TextEditingController();
     // State initializationrue;
     _addressValid = false;
     _pasteButtonVisible = true;
@@ -75,8 +70,8 @@ class _AddContactSheetState extends State<AddContactSheet> {
     _users = [];
     // Add focus listeners
     // On name focus change
-    _nameFocusNode!.addListener(() {
-      if (_nameFocusNode!.hasFocus) {
+    _nameFocusNode.addListener(() {
+      if (_nameFocusNode.hasFocus) {
         setState(() {
           _nameHint = "";
         });
@@ -87,15 +82,15 @@ class _AddContactSheetState extends State<AddContactSheet> {
       }
     });
     // On address focus change
-    _addressFocusNode!.addListener(() async {
-      if (_addressFocusNode!.hasFocus) {
+    _addressFocusNode.addListener(() async {
+      if (_addressFocusNode.hasFocus) {
         setState(() {
           _addressHint = "";
           _addressValidationText = "";
           _addressValidAndUnfocused = false;
           _pasteButtonVisible = true;
           _addressStyle = AddressStyle.TEXT60;
-          if (_addressController!.text.isNotEmpty) {
+          if (_addressController.text.isNotEmpty) {
             _clearButton = true;
           } else {
             _clearButton = false;
@@ -103,11 +98,12 @@ class _AddContactSheetState extends State<AddContactSheet> {
         });
         _addressController!.selection =
             TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
-        if (_addressController!.text.isNotEmpty && !_addressController!.text.startsWith(NonTranslatable.currencyPrefix)) {
+        if (_addressController.text.isNotEmpty &&
+            !_addressController!.text.startsWith(NonTranslatable.currencyPrefix)) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
-          if (_addressController!.text != formattedAddress) {
+          if (_addressController.text != formattedAddress) {
             setState(() {
-              _addressController!.text = formattedAddress;
+              _addressController.text = formattedAddress;
             });
           }
           final List<User> userList = await sl.get<DBHelper>().getUserSuggestionsNoContacts(formattedAddress);
@@ -116,7 +112,7 @@ class _AddContactSheetState extends State<AddContactSheet> {
           });
         }
 
-        if (_addressController!.text.isEmpty) {
+        if (_addressController.text.isEmpty) {
           setState(() {
             _users = [];
           });
@@ -133,13 +129,15 @@ class _AddContactSheetState extends State<AddContactSheet> {
           }
         });
         // check if UD / ENS / opencap / onchain address:
-        if (_addressController!.text.isNotEmpty && !_addressController!.text.contains("★")) {
-          User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController!.text);
-          user ??= await sl.get<UsernameService>().figureOutUsernameType(_addressController!.text);
+        if (_addressController.text.isNotEmpty &&
+            !_addressController.text.contains("★") &&
+            !_addressController.text.startsWith(NonTranslatable.currencyPrefix)) {
+          User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
+          user ??= await sl.get<UsernameService>().figureOutUsernameType(_addressController.text);
 
           if (user != null) {
             setState(() {
-              _addressController!.text = user!.getDisplayName()!;
+              _addressController.text = user!.getDisplayName()!;
               _pasteButtonVisible = false;
               _addressStyle = AddressStyle.PRIMARY;
             });

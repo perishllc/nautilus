@@ -39,10 +39,10 @@ class AddWatchOnlyAccountSheet extends StatefulWidget {
 class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
   static const int MAX_ACCOUNTS = 50;
   final GlobalKey expandedKey = GlobalKey();
-  FocusNode? _nameFocusNode;
-  FocusNode? _addressFocusNode;
-  TextEditingController? _nameController;
-  TextEditingController? _addressController;
+  FocusNode _nameFocusNode = FocusNode();
+  FocusNode _addressFocusNode = FocusNode();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _addressController = TextEditingController();
 
   // State variables
   bool? _addressValid;
@@ -78,11 +78,6 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
     _registerBus();
     // _addingAccount = false;
     // _accountIsChanging = false;
-    // Text field initialization
-    _nameFocusNode = FocusNode();
-    _addressFocusNode = FocusNode();
-    _nameController = TextEditingController();
-    _addressController = TextEditingController();
     // State initializationrue;
     _addressValid = false;
     _pasteButtonVisible = true;
@@ -92,7 +87,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
     _users = [];
     // On name focus change
     _nameFocusNode!.addListener(() {
-      if (_nameFocusNode!.hasFocus) {
+      if (_nameFocusNode.hasFocus) {
         setState(() {
           _nameHint = "";
         });
@@ -103,21 +98,20 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
       }
     });
     // On address focus change
-    _addressFocusNode!.addListener(() async {
-      if (_addressFocusNode!.hasFocus) {
+    _addressFocusNode.addListener(() async {
+      if (_addressFocusNode.hasFocus) {
         setState(() {
           _addressHint = "";
           _addressValidAndUnfocused = false;
           _pasteButtonVisible = true;
           _addressStyle = AddressStyle.TEXT60;
         });
-        _addressController!.selection =
-            TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
-        if (_addressController!.text.isNotEmpty && !_addressController!.text.startsWith(NonTranslatable.currencyPrefix)) {
-          final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
-          if (_addressController!.text != formattedAddress) {
+        _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
+        if (_addressController.text.isNotEmpty && !_addressController.text.startsWith(NonTranslatable.currencyPrefix)) {
+          final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
+          if (_addressController.text != formattedAddress) {
             setState(() {
-              _addressController!.text = formattedAddress;
+              _addressController.text = formattedAddress;
             });
           }
           final List<User> userList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(formattedAddress);
@@ -126,7 +120,7 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
           });
         }
 
-        if (_addressController!.text.isEmpty) {
+        if (_addressController.text.isEmpty) {
           setState(() {
             _users = [];
           });
@@ -135,21 +129,23 @@ class _AddWatchOnlyAccountSheetState extends State<AddWatchOnlyAccountSheet> {
         setState(() {
           _addressHint = null;
           _users = [];
-          if (Address(_addressController!.text).isValid()) {
+          if (Address(_addressController.text).isValid()) {
             _addressValidAndUnfocused = true;
           }
-          if (_addressController!.text.isEmpty) {
+          if (_addressController.text.isEmpty) {
             _pasteButtonVisible = true;
           }
         });
         // check if UD / ENS / opencap / onchain address:
-        if (_addressController!.text.isNotEmpty && !_addressController!.text.contains("★")) {
-          User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController!.text);
-          user ??= await sl.get<UsernameService>().figureOutUsernameType(_addressController!.text);
+        if (_addressController.text.isNotEmpty &&
+            !_addressController.text.contains("★") &&
+            !_addressController.text.startsWith(NonTranslatable.currencyPrefix)) {
+          User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
+          user ??= await sl.get<UsernameService>().figureOutUsernameType(_addressController.text);
 
           if (user != null) {
             setState(() {
-              _addressController!.text = user!.getDisplayName()!;
+              _addressController.text = user!.getDisplayName()!;
               _pasteButtonVisible = false;
               _addressStyle = AddressStyle.PRIMARY;
             });

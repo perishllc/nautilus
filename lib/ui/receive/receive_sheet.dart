@@ -216,7 +216,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
           return;
         }
         // check if UD / ENS / opencap / onchain address:
-        if (_addressController.text.isNotEmpty && !_addressController.text.contains("★")) {
+        if (_addressController.text.isNotEmpty &&
+            !_addressController.text.contains("★") &&
+            !_addressController.text.startsWith(NonTranslatable.currencyPrefix)) {
           User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
           if (user == null) {
             if (!mounted) return;

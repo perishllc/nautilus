@@ -15,6 +15,7 @@ import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/scheduled.dart';
 import 'package:wallet_flutter/model/db/subscription.dart';
+import 'package:wallet_flutter/model/db/user.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/subs/add_scheduled_sheet.dart';
@@ -546,16 +547,37 @@ class UpcomingSheetState extends State<UpcomingSheet> {
                                           ),
                                         ),
                                       ),
-                                      RichText(
-                                        text: TextSpan(
-                                          text: Address(sub.address).getShortString() ?? "",
-                                          style: TextStyle(
-                                            fontFamily: "OverpassMono",
-                                            fontWeight: FontWeight.w100,
-                                            fontSize: AppFontSizes.smallest,
-                                            color: StateContainer.of(context).curTheme.text60,
-                                          ),
-                                        ),
+                                      FutureBuilder<User?>(
+                                        future: sl.get<DBHelper>().getUserOrContactWithAddress(sub.address),
+                                        builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                          if (snapshot.hasData && snapshot.data != null) {
+                                            User user = snapshot.data as User;
+                                            return RichText(
+                                              text: TextSpan(
+                                                text: user.getDisplayName() ??
+                                                    Address(sub.address).getShortString() ??
+                                                    "",
+                                                style: TextStyle(
+                                                  fontFamily: "OverpassMono",
+                                                  fontWeight: FontWeight.w100,
+                                                  fontSize: AppFontSizes.smallest,
+                                                  color: StateContainer.of(context).curTheme.text60,
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          return RichText(
+                                            text: TextSpan(
+                                              text: Address(sub.address).getShortString() ?? "",
+                                              style: TextStyle(
+                                                fontFamily: "OverpassMono",
+                                                fontWeight: FontWeight.w100,
+                                                fontSize: AppFontSizes.smallest,
+                                                color: StateContainer.of(context).curTheme.text60,
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ],
                                   ),
@@ -765,17 +787,6 @@ class UpcomingSheetState extends State<UpcomingSheet> {
                                     children: [
                                       RichText(
                                         text: TextSpan(
-                                          text: Address(sub.address).getShortString() ?? "",
-                                          style: TextStyle(
-                                            fontFamily: "OverpassMono",
-                                            fontWeight: FontWeight.w100,
-                                            fontSize: AppFontSizes.smallest,
-                                            color: StateContainer.of(context).curTheme.text60,
-                                          ),
-                                        ),
-                                      ),
-                                      RichText(
-                                        text: TextSpan(
                                           text: sub.label,
                                           style: TextStyle(
                                             fontFamily: "OverpassMono",
@@ -784,6 +795,38 @@ class UpcomingSheetState extends State<UpcomingSheet> {
                                             color: StateContainer.of(context).curTheme.text,
                                           ),
                                         ),
+                                      ),
+                                      FutureBuilder<User?>(
+                                        future: sl.get<DBHelper>().getUserOrContactWithAddress(sub.address),
+                                        builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                          if (snapshot.hasData && snapshot.data != null) {
+                                            User user = snapshot.data as User;
+                                            return RichText(
+                                              text: TextSpan(
+                                                text: user.getDisplayName() ??
+                                                    Address(sub.address).getShortString() ??
+                                                    "",
+                                                style: TextStyle(
+                                                  fontFamily: "OverpassMono",
+                                                  fontWeight: FontWeight.w100,
+                                                  fontSize: AppFontSizes.smallest,
+                                                  color: StateContainer.of(context).curTheme.text60,
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          return RichText(
+                                            text: TextSpan(
+                                              text: Address(sub.address).getShortString() ?? "",
+                                              style: TextStyle(
+                                                fontFamily: "OverpassMono",
+                                                fontWeight: FontWeight.w100,
+                                                fontSize: AppFontSizes.smallest,
+                                                color: StateContainer.of(context).curTheme.text60,
+                                              ),
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ],
                                   ),

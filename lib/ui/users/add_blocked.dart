@@ -35,10 +35,10 @@ class AddBlockedSheet extends StatefulWidget {
 }
 
 class AddBlockedSheetState extends State<AddBlockedSheet> {
-  late FocusNode _nameFocusNode;
-  FocusNode? _addressFocusNode;
-  TextEditingController? _nameController;
-  TextEditingController? _addressController;
+  FocusNode _nameFocusNode = FocusNode();
+  FocusNode _addressFocusNode = FocusNode();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _addressController = TextEditingController();
 
   // State variables
   bool? _addressValid;
@@ -58,11 +58,6 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
   @override
   void initState() {
     super.initState();
-    // Text field initialization
-    _nameFocusNode = FocusNode();
-    _addressFocusNode = FocusNode();
-    _nameController = TextEditingController();
-    _addressController = TextEditingController();
     // State initializationrue;
     _addressValid = false;
     _pasteButtonVisible = true;
@@ -72,26 +67,25 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
     // Add focus listeners
     // On address focus change
     _addressFocusNode!.addListener(() async {
-      if (_addressFocusNode!.hasFocus) {
+      if (_addressFocusNode.hasFocus) {
         setState(() {
           _addressHint = "";
           _addressValidationText = "";
           _addressValidAndUnfocused = false;
           _pasteButtonVisible = true;
           _addressStyle = AddressStyle.TEXT60;
-          if (_addressController!.text.isNotEmpty) {
+          if (_addressController.text.isNotEmpty) {
             _clearButton = true;
           } else {
             _clearButton = false;
           }
         });
-        _addressController!.selection =
-            TextSelection.fromPosition(TextPosition(offset: _addressController!.text.length));
-        if (_addressController!.text.isNotEmpty && !_addressController!.text.startsWith(NonTranslatable.currencyPrefix)) {
-          final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController!.text);
-          if (_addressController!.text != formattedAddress) {
+        _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
+        if (_addressController.text.isNotEmpty && !_addressController.text.startsWith(NonTranslatable.currencyPrefix)) {
+          final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
+          if (_addressController.text != formattedAddress) {
             setState(() {
-              _addressController!.text = formattedAddress;
+              _addressController.text = formattedAddress;
             });
           }
           final List<User> userList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(formattedAddress);
@@ -100,7 +94,7 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
           });
         }
 
-        if (_addressController!.text.isEmpty) {
+        if (_addressController.text.isEmpty) {
           setState(() {
             _users = [];
           });
@@ -109,15 +103,32 @@ class AddBlockedSheetState extends State<AddBlockedSheet> {
         setState(() {
           _addressHint = null;
           _users = [];
-          if (Address(_addressController!.text).isValid()) {
+          if (Address(_addressController.text).isValid()) {
             _addressValidAndUnfocused = true;
           }
-          if (_addressController!.text.isEmpty) {
+          if (_addressController.text.isEmpty) {
             _pasteButtonVisible = true;
           }
         });
         // check if UD / ENS / opencap / onchain address:
-        if (_addressController!.text.isNotEmpty) {}
+        if (_addressController.text.isNotEmpty &&
+            !_addressController.text.contains("★") &&
+            !_addressController.text.startsWith(NonTranslatable.currencyPrefix)) {
+          User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
+          user ??= await sl.get<UsernameService>().figureOutUsernameType(_addressController.text);
+
+          if (user != null) {
+            setState(() {
+              _addressController.text = user!.getDisplayName()!;
+              _pasteButtonVisible = false;
+              _addressStyle = AddressStyle.PRIMARY;
+            });
+          } else {
+            setState(() {
+              _addressStyle = AddressStyle.TEXT60;
+            });
+          }
+        }
       }
     });
   }
