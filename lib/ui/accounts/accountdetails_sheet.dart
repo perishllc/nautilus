@@ -214,30 +214,30 @@ class AccountDetailsSheetState extends State<AccountDetailsSheet> {
               ),
               Column(
                 children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          // Share Address Button
-                          _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                          _addressCopied ? Z.of(context).addressCopied : Z.of(context).copyAddress,
-                          Dimens.BUTTON_TOP_DIMENS, onPressed: () {
-                        Clipboard.setData(ClipboardData(text: widget.account.address ?? ""));
-                        setState(() {
-                          // Set copied style
-                          _addressCopied = true;
-                        });
-                        if (_addressCopiedTimer != null) {
-                          _addressCopiedTimer!.cancel();
-                        }
-                        _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
-                          setState(() {
-                            _addressCopied = false;
-                          });
-                        });
-                      }),
-                    ],
-                  ),
+                  // Row(
+                  //   children: <Widget>[
+                  //     AppButton.buildAppButton(
+                  //         context,
+                  //         // Share Address Button
+                  //         _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
+                  //         _addressCopied ? Z.of(context).addressCopied : Z.of(context).copyAddress,
+                  //         Dimens.BUTTON_TOP_DIMENS, onPressed: () {
+                  //       Clipboard.setData(ClipboardData(text: widget.account.address ?? ""));
+                  //       setState(() {
+                  //         // Set copied style
+                  //         _addressCopied = true;
+                  //       });
+                  //       if (_addressCopiedTimer != null) {
+                  //         _addressCopiedTimer!.cancel();
+                  //       }
+                  //       _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
+                  //         setState(() {
+                  //           _addressCopied = false;
+                  //         });
+                  //       });
+                  //     }),
+                  //   ],
+                  // ),
                   Row(
                     children: <Widget>[
                       AppButton.buildAppButton(
