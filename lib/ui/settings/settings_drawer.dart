@@ -894,11 +894,13 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
 
     final String currencyMode = CurrencyModeSetting(chosen).getDisplayName();
     // if we're changing to / from BANANO, we need to show the warning dialog:
-    if ((_curCurrencyModeSetting.setting == CurrencyModeOptions.BANANO && chosen != CurrencyModeOptions.BANANO) ||
-        (_curCurrencyModeSetting.setting != CurrencyModeOptions.BANANO && chosen == CurrencyModeOptions.BANANO)) {
-      if (!mounted) return;
-      await AppDialogs.showInfoDialog(
-          context, Z.of(context).currencyModeChange, Z.of(context).currencyModeChangeWarning);
+    if (chosen != null) {
+      if ((_curCurrencyModeSetting.setting == CurrencyModeOptions.BANANO && chosen != CurrencyModeOptions.BANANO) ||
+          (_curCurrencyModeSetting.setting != CurrencyModeOptions.BANANO && chosen == CurrencyModeOptions.BANANO)) {
+        if (!mounted) return;
+        await AppDialogs.showInfoDialog(
+            context, Z.of(context).currencyModeChange, Z.of(context).currencyModeChangeWarning);
+      }
     }
 
     if (chosen == null) {
