@@ -310,7 +310,7 @@ class ScheduledConfirmSheetState extends State<ScheduledConfirmSheet> {
 
                       if (!mounted) return;
 
-                      final String authText = Z.of(context).subscribing;
+                      final String authText = Z.of(context).schedulePayment;
 
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         try {
