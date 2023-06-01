@@ -95,7 +95,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo library access is required for saving the account QR code.</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>Used strictly for install / link attribution (i.e. promotional links)</string>
+	<string>This permission is used strictly for install / link attribution for promotional links, so that if you clicked on a promotional link we can tell what device / link to attribute the install to. The permission isn't used for anything other than this, and can be disabled anytime in settings.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
