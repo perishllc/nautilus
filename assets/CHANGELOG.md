@@ -1,4 +1,4 @@
-## v0.8.8 - [2023-06-02]
+## v0.8.8 - [2023-06-22]
 #### Added
 #### Changed
 - Slight update to card time format
@@ -8,7 +8,6 @@
 #### Added
 - Username support on the "upcoming" sheet
 - Labels for scheduled payments
-#### Changed
 #### Fixed
 - Bug where app would ask to check usernames on nano addresses
 ## v0.8.6 - [2023-06-01]
