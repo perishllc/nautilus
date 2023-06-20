@@ -1,6 +1,5 @@
 import 'package:decimal/decimal.dart';
 
-
 class NumberUtil {
   static const int maxDecimalDigits = 6; // Max digits after decimal
   static BigInt rawPerNano = BigInt.parse("1000000000000000000000000000000");
@@ -9,7 +8,6 @@ class NumberUtil {
   static BigInt rawPerXMR = BigInt.parse("1000000000000");
   static BigInt convertXMRtoNano = BigInt.parse("1000000000000000000");
   // static BigInt convertXMRtoNano = BigInt.parse("1000000000000000000000000000");
-
 
   /// Convert raw to ban and return as BigDecimal
   ///
@@ -110,6 +108,12 @@ class NumberUtil {
     return (asDecimal * rawDecimal).toString();
   }
 
+  static String getBananoAmountAsRaw(String amount) {
+    final Decimal asDecimal = Decimal.parse(amount);
+    final Decimal rawDecimal = Decimal.parse(rawPerBanano.toString());
+    return (asDecimal * rawDecimal).toString();
+  }
+
   /// Return readable string amount as raw string
   /// @param amount 1.01
   /// @returns  101000000000000000000000000000
@@ -132,7 +136,8 @@ class NumberUtil {
   static String getPercentOfTotalSupply(BigInt amount) {
     final Decimal totalSupply = Decimal.parse('133248290000000000000000000000000000000');
     final Decimal amountRaw = Decimal.parse(amount.toString());
-    return ((amountRaw / totalSupply).toDecimal(scaleOnInfinitePrecision: maxDecimalDigits) * Decimal.fromInt(100)).toStringAsFixed(4);
+    return ((amountRaw / totalSupply).toDecimal(scaleOnInfinitePrecision: maxDecimalDigits) * Decimal.fromInt(100))
+        .toStringAsFixed(4);
   }
 
   /// Sanitize a number as something that can actually

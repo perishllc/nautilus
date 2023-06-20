@@ -439,6 +439,8 @@ String getXMRThemeAwareRawAccuracy(BuildContext context, String? raw) {
 String getThemeAwareAmountAsRaw(BuildContext context, String amount) {
   if (StateContainer.of(context).nyanoMode) {
     return NumberUtil.getNyanoAmountAsRaw(amount);
+  } else if (StateContainer.of(context).bananoMode) {
+    return NumberUtil.getBananoAmountAsRaw(amount);
   } else {
     return NumberUtil.getAmountAsRaw(amount);
   }
