@@ -384,6 +384,10 @@ class PaymentHistorySheetState extends State<PaymentHistorySheet> {
                   ),
                 ],
               ),
+              // used for padding because the safe area box is the wrong color:
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.035,
+              ),
             ],
           ),
         ),

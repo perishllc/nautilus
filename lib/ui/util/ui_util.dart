@@ -94,7 +94,9 @@ class UIUtil {
       case ThreeLineAddressTextType.PRIMARY:
         Widget contactWidget;
         if (contactName != null) {
-          contactWidget = RichText(textAlign: TextAlign.center, text: TextSpan(text: contactName, style: AppStyles.textStyleAddressPrimary(context)));
+          contactWidget = RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(text: contactName, style: AppStyles.textStyleAddressPrimary(context)));
         } else {
           contactWidget = const SizedBox();
         }
@@ -150,7 +152,9 @@ class UIUtil {
       case ThreeLineAddressTextType.SUCCESS:
         Widget contactWidget;
         if (contactName != null) {
-          contactWidget = RichText(textAlign: TextAlign.center, text: TextSpan(text: contactName, style: AppStyles.textStyleAddressSuccess(context)));
+          contactWidget = RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(text: contactName, style: AppStyles.textStyleAddressSuccess(context)));
         } else {
           contactWidget = const SizedBox();
         }
@@ -257,7 +261,8 @@ class UIUtil {
     }
   }
 
-  static Widget oneLineAddressText(BuildContext context, String address, {OneLineAddressTextType type = OneLineAddressTextType.PRIMARY}) {
+  static Widget oneLineAddressText(BuildContext context, String address,
+      {OneLineAddressTextType type = OneLineAddressTextType.PRIMARY}) {
     final String stringPartOne = address.substring(0, 12);
     final String stringPartFive = address.substring(59);
     switch (type) {
@@ -512,26 +517,33 @@ class UIUtil {
     return Image.memory(byteData!.buffer.asUint8List());
   }
 
-  static void showSnackbar(String content, BuildContext context, {int durationMs = 2500, double topMarginPercent = 0.8}) {
+  static void showSnackbar(String content, BuildContext context,
+      {int durationMs = 2500, double topMarginPercent = 0.09}) {
     showToastWidget(
-      Align(
-        alignment: Alignment.topCenter,
-        child: Container(
-          // margin: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.07, horizontal: 14),
-          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * topMarginPercent, left: 14, right: 14),
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-          width: MediaQuery.of(context).size.width - 30,
-          decoration: BoxDecoration(
-            color: StateContainer.of(context).curTheme.warning,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(color: StateContainer.of(context).curTheme.barrier!, offset: const Offset(0, 15), blurRadius: 30, spreadRadius: -5),
-            ],
-          ),
-          child: Text(
-            content,
-            style: AppStyles.textStyleSnackbar(context),
-            textAlign: TextAlign.start,
+      SafeArea(
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Container(
+            // margin: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.07, horizontal: 14),
+            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * topMarginPercent, left: 14, right: 14),
+            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+            width: MediaQuery.of(context).size.width - 30,
+            decoration: BoxDecoration(
+              color: StateContainer.of(context).curTheme.warning,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                    color: StateContainer.of(context).curTheme.barrier!,
+                    offset: const Offset(0, 15),
+                    blurRadius: 30,
+                    spreadRadius: -5),
+              ],
+            ),
+            child: Text(
+              content,
+              style: AppStyles.textStyleSnackbar(context),
+              textAlign: TextAlign.start,
+            ),
           ),
         ),
       ),
@@ -564,7 +576,6 @@ class UIUtil {
       return false;
   }
 }
-
 
 /// This is used so that the elevation of the container is kept and the
 /// drop shadow is not clipped.

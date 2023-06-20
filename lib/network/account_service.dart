@@ -487,9 +487,9 @@ class AccountService {
       body: json.encode(request.toJson()),
     );
 
-    if (response.statusCode != 200) {
-      return null;
-    }
+    // if (response.statusCode != 200) {
+    //   return null;
+    // }
     final Map<dynamic, dynamic> decoded = json.decode(response.body) as Map<dynamic, dynamic>;
     if (decoded.containsKey("error")) {
       return ErrorResponse.fromJson(decoded as Map<String, dynamic>);

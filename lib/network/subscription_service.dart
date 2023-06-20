@@ -96,7 +96,7 @@ class SubscriptionService {
     }
     EventTaxiImpl.singleton().fire(SubsChangedEvent(subs: await sl.get<DBHelper>().getSubscriptions()));
     EventTaxiImpl.singleton().fire(ScheduledChangedEvent(scheduled: await sl.get<DBHelper>().getScheduled()));
-    
+
     // get all scheduled payments:
     // final List<Scheduled> scheduled = await sl.get<DBHelper>().getScheduled();
     // for (final Scheduled sched in scheduled) {
@@ -107,7 +107,6 @@ class SubscriptionService {
     //     await sl.get<DBHelper>().toggleScheduledPaid(sched);
     //   }
     // }
-
 
     // update scheduled notifications:
     scheduleNotifications();
@@ -180,7 +179,7 @@ class SubscriptionService {
       priority: Priority.high,
       ticker: "ticker",
       styleInformation: BigTextStyleInformation(
-"""
+        """
 As one of the biggest traditions to celebrate Chinese New Year, many people gift money in red envelopes. That’s why, for the coming week, you’ll be able to digitally gift a red envelope filled with nano to the ones you love!
 
 Simply click "send" and select the red envelope in the top left corner to share some nano with your friends, family, colleagues, or even a stranger on the internet!
@@ -218,7 +217,6 @@ Have a happy Chinese New Year!
 
   // check whether a subscription has been paid:
   Future<bool> checkSubPaid(List<AccountHistoryResponseItem> history, Subscription sub) async {
-
     // first check if sub is active:
     if (!sub.active) {
       return false;
@@ -330,21 +328,20 @@ Have a happy Chinese New Year!
     );
 
     try {
-
-    await flutterLocalNotificationsPlugin.zonedSchedule(
-      sched.id ?? 0,
-      "Payment Reminder",
-      "Your Scheduled Payment is due",
-      tzdatetime,
-      const NotificationDetails(
-        android: androidNotificationDetails,
-        iOS: darwinNotificationDetails,
-      ),
-      androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-    );
+      await flutterLocalNotificationsPlugin.zonedSchedule(
+        sched.id ?? 0,
+        "Payment Reminder",
+        "Your Scheduled Payment is due",
+        tzdatetime,
+        const NotificationDetails(
+          android: androidNotificationDetails,
+          iOS: darwinNotificationDetails,
+        ),
+        androidAllowWhileIdle: true,
+        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+      );
     } catch (e) {
-      log.e("scheduled time was probably in the past: $e");
+      log.v("scheduled time was probably in the past: $e");
     }
   }
 }

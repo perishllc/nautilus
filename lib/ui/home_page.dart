@@ -1973,12 +1973,12 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         return;
       }
 
-      // if payItem.exact is false, we should allow the user to change the amount to send to >= amount
-      if (!payItem.exact && mounted) {
-        // TODO:
-        log.d("PayItem exact is false: unsupported handoff flow!");
-        return;
-      }
+      // // if payItem.exact is false, we should allow the user to change the amount to send to >= amount
+      // if (!payItem.exact && mounted) {
+      //   // TODO:
+      //   log.d("PayItem exact is false: unsupported handoff flow!");
+      //   return;
+      // }
 
       if (!mounted) return;
 
