@@ -1,5 +1,4 @@
-## v0.8.8 - [2023-06-22]
-#### Added
+## v0.8.8 - [2023-08-09]
 #### Changed
 - Slight update to card time format
 #### Fixed
