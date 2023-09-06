@@ -137,7 +137,7 @@ class StateContainerState extends State<StateContainer> {
   Locale deviceLocale = const Locale('en', 'US');
   AvailableCurrency curCurrency = AvailableCurrency(AvailableCurrencyEnum.USD);
   LanguageSetting curLanguage = LanguageSetting(AvailableLanguage.DEFAULT);
-  AvailableBlockExplorer curBlockExplorer = AvailableBlockExplorer(AvailableBlockExplorerEnum.NANOLOOKER);
+  AvailableBlockExplorer curBlockExplorer = AvailableBlockExplorer(AvailableBlockExplorerEnum.NANOBROWSE);
 
   BaseTheme curTheme =
       SchedulerBinding.instance.window.platformBrightness == Brightness.dark ? NautilusTheme() : IndiumTheme();
