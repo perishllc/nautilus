@@ -366,11 +366,9 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
         raw = NumberUtil.getAmountAsRaw(_lastCryptoAmount);
       }
     } else {
+      print(sanitizedAmount(_localCurrencyFormat, _amountController.text));
       raw = _amountController.text.isNotEmpty
-          ? NumberUtil.getAmountAsRaw(_amountController.text
-              .trim()
-              .replaceAll(_localCurrencyFormat.currencySymbol, "")
-              .replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, ""))
+          ? NumberUtil.getAmountAsRaw(sanitizedAmount(_localCurrencyFormat, _amountController.text))
           : "";
     }
     paintQrCode(address: widget.address, amount: raw);

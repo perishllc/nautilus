@@ -518,7 +518,7 @@ class UIUtil {
   }
 
   static void showSnackbar(String content, BuildContext context,
-      {int durationMs = 2500, double topMarginPercent = 0.09}) {
+      {int durationMs = 2500, double topMarginPercent = 0.05}) {
     showToastWidget(
       SafeArea(
         child: Align(

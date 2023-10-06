@@ -365,22 +365,22 @@ class GeneratePaperWalletScreenState extends State<GeneratePaperWalletScreen> {
                             )),
                       ),
 
-                      // ******* Enter Amount Container ******* //
-                      getEnterSplitAmountContainer(),
-                      // ******* Enter Amount Container End ******* //
+                      // // ******* Enter Amount Container ******* //
+                      // getEnterSplitAmountContainer(),
+                      // // ******* Enter Amount Container End ******* //
 
-                      // ******* Enter Amount Error Container ******* //
-                      Container(
-                        alignment: AlignmentDirectional.center,
-                        margin: const EdgeInsets.only(top: 3),
-                        child: Text(_splitAmountValidationText,
-                            style: TextStyle(
-                              fontSize: 14.0,
-                              color: StateContainer.of(context).curTheme.primary,
-                              fontFamily: "NunitoSans",
-                              fontWeight: FontWeight.w600,
-                            )),
-                      ),
+                      // // ******* Enter Amount Error Container ******* //
+                      // Container(
+                      //   alignment: AlignmentDirectional.center,
+                      //   margin: const EdgeInsets.only(top: 3),
+                      //   child: Text(_splitAmountValidationText,
+                      //       style: TextStyle(
+                      //         fontSize: 14.0,
+                      //         color: StateContainer.of(context).curTheme.primary,
+                      //         fontFamily: "NunitoSans",
+                      //         fontWeight: FontWeight.w600,
+                      //       )),
+                      // ),
 
                       // ******* Enter Amount Error Container End ******* //
                       // Column for Enter Memo container + Enter Memo Error container

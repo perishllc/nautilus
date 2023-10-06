@@ -2905,25 +2905,6 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
         });
       }
     }
-    // return DraggableScrollbar(
-    //   controller: _scrollController,
-    //   scrollbarColor: StateContainer.of(context).curTheme.primary,
-    //   scrollbarTopMargin: 10.0,
-    //   scrollbarBottomMargin: 20.0,
-    //   child: ReactiveRefreshIndicator(
-    //     backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-    //     onRefresh: _refresh,
-    //     isRefreshing: _isRefreshing,
-    //     child: AnimatedList(
-    //       physics: const AlwaysScrollableScrollPhysics(),
-    //       controller: _scrollController,
-    //       key: _unifiedListKeyMap[ADR],
-    //       padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-    //       initialItemCount: _unifiedListMap[ADR]!.length + StateContainer.of(context).activeAlerts.length,
-    //       itemBuilder: _buildUnifiedItem,
-    //     ),
-    //   ),
-    // );
 
     final Widget placeholder = TXCards.placeholderCard(context);
 
@@ -2955,16 +2936,11 @@ class AppHomePageState extends State<AppHomePage> with WidgetsBindingObserver, T
                 final int maxLen = _unifiedListMap[ADR]!.length + StateContainer.of(context).activeAlerts.length;
                 if (index == maxLen - 1) {
                   return TXCards.loadingCard(context);
-                  // return TXCards.loadingCardAdvanced(context, _loadMoreAnimationController);
                 }
               }
               return FrameSeparateWidget(
                 index: index,
                 placeHolder: placeholder,
-                // placeHolder: Container(
-                //   color: index.isEven ? Colors.red : Colors.blue,
-                //   height: 65,
-                // ),
                 child: _buildUnifiedItem(context, index, animation),
               );
             },
