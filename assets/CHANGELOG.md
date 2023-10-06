@@ -1,10 +1,11 @@
-## v0.8.9 - [2023-09-07]
+## v0.8.9 - [2023-10-07]
 #### Added
 - New block explorer option: nanobrowse.com
 #### Changed
 - Default block explorer changed to nanobrowse.com
 #### Fixed
-- Bugs with Brazillian Real and QR code scanning 
+- Bugs with Brazillian Real and QR code scanning
+- Lots of translation fixes
 ## v0.8.8 - [2023-08-09]
 #### Changed
 - Slight update to card time format
