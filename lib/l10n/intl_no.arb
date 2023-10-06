@@ -1552,7 +1552,7 @@
     "type": "text",
     "description": "message_header"
   },
-  "minimumSend": "Minste overførselsbeløp er %1 NANO",
+  "minimumSend": "Minste overførselsbeløp er %1 %2",
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
@@ -1722,7 +1722,7 @@
     "type": "text",
     "description": "notifications_settings"
   },
-  "notificationTitle": "%1 NANO mottatt",
+  "notificationTitle": "%1 %2 mottatt",
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "Send %1 NANO",
+  "sendAmountConfirm": "Send %1 %2",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"

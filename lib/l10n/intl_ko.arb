@@ -235,7 +235,7 @@
     "type": "text",
     "description": "settings_fingerprint_method"
   },
-  "blockedAdded": "% 1이 성공적으로 차단되었습니다.",
+  "blockedAdded": "%1이 성공적으로 차단되었습니다.",
   "@blockedAdded": {
     "type": "text",
     "description": "blocked_added"
@@ -270,7 +270,7 @@
     "type": "text",
     "description": "blocked_name_missing"
   },
-  "blockedRemoved": "% 1이 (가) 차단 해제되었습니다",
+  "blockedRemoved": "%1이 (가) 차단 해제되었습니다",
   "@blockedRemoved": {
     "type": "text",
     "description": "blocked_removed"
@@ -1077,7 +1077,7 @@
     "type": "text",
     "description": "favorite_name_missing"
   },
-  "favoriteRemoved": "% 1이 (가) 즐겨찾기에서 제거되었습니다!",
+  "favoriteRemoved": "%1이 (가) 즐겨찾기에서 제거되었습니다!",
   "@favoriteRemoved": {
     "type": "text",
     "description": "favorite_removed"
@@ -1552,7 +1552,7 @@
     "type": "text",
     "description": "message_header"
   },
-  "minimumSend": "최소 전송 금액은 %1% 2입니다.",
+  "minimumSend": "최소 전송 금액은 %1 %2 입니다.",
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
@@ -1722,7 +1722,7 @@
     "type": "text",
     "description": "notifications_settings"
   },
-  "notificationTitle": "% s개의 NANO을 받았습니다",
+  "notificationTitle": "%1 개의 %2 을 받았습니다",
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
@@ -2177,7 +2177,7 @@
     "type": "text",
     "description": "blocked_remove_btn"
   },
-  "removeBlockedConfirmation": "% 1을 (를) 차단 해제하시겠습니까?",
+  "removeBlockedConfirmation": "%1을 (를) 차단 해제하시겠습니까?",
   "@removeBlockedConfirmation": {
     "type": "text",
     "description": "blocked_remove_sure"
@@ -2227,7 +2227,7 @@
     "type": "text",
     "description": "home_request_cta"
   },
-  "requestAmountConfirm": "요청% 1 %2",
+  "requestAmountConfirm": "요청 %1 %2",
   "@requestAmountConfirm": {
     "type": "text",
     "description": "request_pin_description"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "%1 Nano를 발송하시겠습니까?",
+  "sendAmountConfirm": "%1 %2 를 발송하시겠습니까?",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"
@@ -2907,7 +2907,7 @@
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferConfirmInfo": "A wallet with a balance of %1 NANO has been detected.\n",
+  "transferConfirmInfo": "A wallet with a balance of %1 %2 has been detected.\n",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"

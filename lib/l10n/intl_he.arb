@@ -150,7 +150,7 @@
     "type": "text",
     "description": "send_enter_amount"
   },
-  "appWallet": "% 1 ארנק",
+  "appWallet": "%1 ארנק",
   "@appWallet": {
     "type": "text",
     "description": "app_wallet"
@@ -235,7 +235,7 @@
     "type": "text",
     "description": "settings_fingerprint_method"
   },
-  "blockedAdded": "% 1 נחסם בהצלחה.",
+  "blockedAdded": "%1 נחסם בהצלחה.",
   "@blockedAdded": {
     "type": "text",
     "description": "blocked_added"
@@ -270,7 +270,7 @@
     "type": "text",
     "description": "blocked_name_missing"
   },
-  "blockedRemoved": "% 1 לא נחסם!",
+  "blockedRemoved": "%1 לא נחסם!",
   "@blockedRemoved": {
     "type": "text",
     "description": "blocked_removed"
@@ -1077,7 +1077,7 @@
     "type": "text",
     "description": "favorite_name_missing"
   },
-  "favoriteRemoved": "% 1 הוסר מהמועדפים!",
+  "favoriteRemoved": "%1 הוסר מהמועדפים!",
   "@favoriteRemoved": {
     "type": "text",
     "description": "favorite_removed"
@@ -1552,7 +1552,7 @@
     "type": "text",
     "description": "message_header"
   },
-  "minimumSend": "כמות השליחה המינימלית היא% 1",
+  "minimumSend": "כמות השליחה המינימלית היא%1",
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
@@ -2177,7 +2177,7 @@
     "type": "text",
     "description": "blocked_remove_btn"
   },
-  "removeBlockedConfirmation": "האם אתה בטוח שברצונך לבטל את החסימן% 1?",
+  "removeBlockedConfirmation": "האם אתה בטוח שברצונך לבטל את החסימן%1?",
   "@removeBlockedConfirmation": {
     "type": "text",
     "description": "blocked_remove_sure"
@@ -2227,7 +2227,7 @@
     "type": "text",
     "description": "home_request_cta"
   },
-  "requestAmountConfirm": "בקשה% 1",
+  "requestAmountConfirm": "בקשה%1 %2",
   "@requestAmountConfirm": {
     "type": "text",
     "description": "request_pin_description"
@@ -2587,7 +2587,7 @@
     "type": "text",
     "description": "settings_share"
   },
-  "shareAppText": "בדוק את% 1! ארנק נייד NANO מעולה!",
+  "shareAppText": "בדוק את%1! ארנק נייד NANO מעולה!",
   "@shareAppText": {
     "type": "text",
     "description": "share_extra"
@@ -2702,7 +2702,7 @@
     "type": "text",
     "description": "send_someone"
   },
-  "spendCurrency": "הוצא% 2",
+  "spendCurrency": "הוצא%2",
   "@spendCurrency": {
     "type": "text",
     "description": "spend_currency"
@@ -3042,12 +3042,12 @@
     "type": "text",
     "description": "url_empty"
   },
-  "useAppRep": "השתמש ב-% 1 נציג",
+  "useAppRep": "השתמש ב- 1 נציג",
   "@useAppRep": {
     "type": "text",
     "description": "use app node as rep"
   },
-  "useCurrency": "השתמש ב% 2",
+  "useCurrency": "השתמש ב%2",
   "@useCurrency": {
     "type": "text",
     "description": "use_currency"

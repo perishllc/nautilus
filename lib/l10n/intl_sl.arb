@@ -235,7 +235,7 @@
     "type": "text",
     "description": "settings_fingerprint_method"
   },
-  "blockedAdded": "% 1 uspešno blokiran.",
+  "blockedAdded": "%1 uspešno blokiran.",
   "@blockedAdded": {
     "type": "text",
     "description": "blocked_added"
@@ -270,7 +270,7 @@
     "type": "text",
     "description": "blocked_name_missing"
   },
-  "blockedRemoved": "% 1 je bil odblokiran!",
+  "blockedRemoved": "%1 je bil odblokiran!",
   "@blockedRemoved": {
     "type": "text",
     "description": "blocked_removed"
@@ -1077,7 +1077,7 @@
     "type": "text",
     "description": "favorite_name_missing"
   },
-  "favoriteRemoved": "% 1 je bil odstranjen iz priljubljenih!",
+  "favoriteRemoved": "%1 je bil odstranjen iz priljubljenih!",
   "@favoriteRemoved": {
     "type": "text",
     "description": "favorite_removed"
@@ -1552,7 +1552,7 @@
     "type": "text",
     "description": "message_header"
   },
-  "minimumSend": "Minimalni znesek za pošiljanje je% 1% 2",
+  "minimumSend": "Minimalni znesek za pošiljanje je %1 %2",
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
@@ -1722,7 +1722,7 @@
     "type": "text",
     "description": "notifications_settings"
   },
-  "notificationTitle": "Prejeto %1 NANO",
+  "notificationTitle": "Prejeto %1 %2",
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
@@ -2177,7 +2177,7 @@
     "type": "text",
     "description": "blocked_remove_btn"
   },
-  "removeBlockedConfirmation": "Ali ste prepričani, da želite odblokirati odblokiranje% 1?",
+  "removeBlockedConfirmation": "Ali ste prepričani, da želite odblokirati odblokiranje %1?",
   "@removeBlockedConfirmation": {
     "type": "text",
     "description": "blocked_remove_sure"
@@ -2227,7 +2227,7 @@
     "type": "text",
     "description": "home_request_cta"
   },
-  "requestAmountConfirm": "Zahtevite% 1% 2",
+  "requestAmountConfirm": "Zahtevite %1 %2",
   "@requestAmountConfirm": {
     "type": "text",
     "description": "request_pin_description"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "Pošlji %1 NANO",
+  "sendAmountConfirm": "Pošlji %1 %2",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"
@@ -2902,12 +2902,12 @@
     "type": "text",
     "description": "transfer_close_text"
   },
-  "transferComplete": "%1 NANO uspešno prenešenih v vašo Nautilus denarnico.\n",
+  "transferComplete": "%1 %2 uspešno prenešenih v vašo Nautilus denarnico.\n",
   "@transferComplete": {
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferConfirmInfo": "Denarnica z zneskom %1 NANO je bila zaznana.\n",
+  "transferConfirmInfo": "Denarnica z zneskom %1 %2 je bila zaznana.\n",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"

@@ -235,7 +235,7 @@
     "type": "text",
     "description": "settings_fingerprint_method"
   },
-  "blockedAdded": "% 1 সফলভাবে ব্লক করা হয়েছে।",
+  "blockedAdded": "%1 সফলভাবে ব্লক করা হয়েছে।",
   "@blockedAdded": {
     "type": "text",
     "description": "blocked_added"
@@ -270,7 +270,7 @@
     "type": "text",
     "description": "blocked_name_missing"
   },
-  "blockedRemoved": "% 1 আনব্লক করা হয়েছে!",
+  "blockedRemoved": "%1 আনব্লক করা হয়েছে!",
   "@blockedRemoved": {
     "type": "text",
     "description": "blocked_removed"
@@ -1077,7 +1077,7 @@
     "type": "text",
     "description": "favorite_name_missing"
   },
-  "favoriteRemoved": "% 1 ফেভারিট থেকে মুছে ফেলা হয়েছে!",
+  "favoriteRemoved": "%1 ফেভারিট থেকে মুছে ফেলা হয়েছে!",
   "@favoriteRemoved": {
     "type": "text",
     "description": "favorite_removed"
@@ -1552,7 +1552,7 @@
     "type": "text",
     "description": "message_header"
   },
-  "minimumSend": "ন্যূনতম পাঠানোর পরিমাণ %1 NANO",
+  "minimumSend": "ন্যূনতম পাঠানোর পরিমাণ %1 %2",
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
@@ -1722,7 +1722,7 @@
     "type": "text",
     "description": "notifications_settings"
   },
-  "notificationTitle": "%1 NANO পেয়েছি",
+  "notificationTitle": "%1 %2 পেয়েছি",
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
@@ -2177,7 +2177,7 @@
     "type": "text",
     "description": "blocked_remove_btn"
   },
-  "removeBlockedConfirmation": "আপনি কি নিশ্চিত% 1 আনব্লক করতে চান?",
+  "removeBlockedConfirmation": "আপনি কি নিশ্চিত%1 আনব্লক করতে চান?",
   "@removeBlockedConfirmation": {
     "type": "text",
     "description": "blocked_remove_sure"
@@ -2227,7 +2227,7 @@
     "type": "text",
     "description": "home_request_cta"
   },
-  "requestAmountConfirm": "অনুরোধ% 1",
+  "requestAmountConfirm": "অনুরোধ%1",
   "@requestAmountConfirm": {
     "type": "text",
     "description": "request_pin_description"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "%1 NANO পাঠান",
+  "sendAmountConfirm": "%1 %2 পাঠান",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"
@@ -2902,12 +2902,12 @@
     "type": "text",
     "description": "transfer_close_text"
   },
-  "transferComplete": "%1 NANO সফলভাবে আপনার Natrium Wallet এ স্থানান্তরিত হয়েছে। <নতুন লাইন>",
+  "transferComplete": "%1 %2 সফলভাবে আপনার Natrium Wallet এ স্থানান্তরিত হয়েছে। <নতুন লাইন>",
   "@transferComplete": {
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferConfirmInfo": "%1 NANO ব্যালেন্স সহ একটি মানিব্যাগ সনাক্ত করা হয়েছে। <নতুন লাইন>",
+  "transferConfirmInfo": "%1 %2 ব্যালেন্স সহ একটি মানিব্যাগ সনাক্ত করা হয়েছে। <নতুন লাইন>",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"

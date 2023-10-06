@@ -235,7 +235,7 @@
     "type": "text",
     "description": "settings_fingerprint_method"
   },
-  "blockedAdded": "% 1 a fost blocat cu succes.",
+  "blockedAdded": "%1 a fost blocat cu succes.",
   "@blockedAdded": {
     "type": "text",
     "description": "blocked_added"
@@ -270,7 +270,7 @@
     "type": "text",
     "description": "blocked_name_missing"
   },
-  "blockedRemoved": "% 1 a fost deblocat!",
+  "blockedRemoved": "%1 a fost deblocat!",
   "@blockedRemoved": {
     "type": "text",
     "description": "blocked_removed"
@@ -692,7 +692,7 @@
     "type": "text",
     "description": "Default account name"
   },
-  "defaultGiftMessage": "Vezi Nautilus! Ți-am trimis niște nano cu acest link:",
+  "defaultGiftMessage": "Vezi Nautilus! Ți-am trimis niște %2 cu acest link:",
   "@defaultGiftMessage": {
     "type": "text",
     "description": "default_gift_message"
@@ -1077,7 +1077,7 @@
     "type": "text",
     "description": "favorite_name_missing"
   },
-  "favoriteRemoved": "% 1 a fost eliminat din favorite!",
+  "favoriteRemoved": "%1 a fost eliminat din favorite!",
   "@favoriteRemoved": {
     "type": "text",
     "description": "favorite_removed"
@@ -1552,7 +1552,7 @@
     "type": "text",
     "description": "message_header"
   },
-  "minimumSend": "Suma minimă de trimitere este% 1% 2",
+  "minimumSend": "Suma minimă de trimitere este %1 %2",
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
@@ -2177,7 +2177,7 @@
     "type": "text",
     "description": "blocked_remove_btn"
   },
-  "removeBlockedConfirmation": "Sigur doriți să deblocați deblocarea% 1?",
+  "removeBlockedConfirmation": "Sigur doriți să deblocați deblocarea %1?",
   "@removeBlockedConfirmation": {
     "type": "text",
     "description": "blocked_remove_sure"
@@ -2227,7 +2227,7 @@
     "type": "text",
     "description": "home_request_cta"
   },
-  "requestAmountConfirm": "Cerere% 1% 2",
+  "requestAmountConfirm": "Cerere %1 %2",
   "@requestAmountConfirm": {
     "type": "text",
     "description": "request_pin_description"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "Trimite %1 NANO",
+  "sendAmountConfirm": "Trimite %1 %2",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"

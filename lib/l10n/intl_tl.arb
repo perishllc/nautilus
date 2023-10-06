@@ -1722,7 +1722,7 @@
     "type": "text",
     "description": "notifications_settings"
   },
-  "notificationTitle": "Nakatanggap ng %1 NANO",
+  "notificationTitle": "Nakatanggap ng %1 %2",
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "Magpadala ng %1 Nano?",
+  "sendAmountConfirm": "Magpadala ng %1 %2?",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"
@@ -2902,12 +2902,12 @@
     "type": "text",
     "description": "transfer_close_text"
   },
-  "transferComplete": "%1 NANO ay nalipat na sa iyong Nautilus Wallet.",
+  "transferComplete": "%1 %2 ay nalipat na sa iyong Nautilus Wallet.",
   "@transferComplete": {
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferConfirmInfo": "Ang wallet na may balanse na %1 NANO ay na-detect.\n",
+  "transferConfirmInfo": "Ang wallet na may balanse na %1 %2 ay na-detect.\n",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"

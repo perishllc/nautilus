@@ -235,7 +235,7 @@
     "type": "text",
     "description": "settings_fingerprint_method"
   },
-  "blockedAdded": "% 1 blev blokeret.",
+  "blockedAdded": "%1 blev blokeret.",
   "@blockedAdded": {
     "type": "text",
     "description": "blocked_added"
@@ -270,7 +270,7 @@
     "type": "text",
     "description": "blocked_name_missing"
   },
-  "blockedRemoved": "% 1 er blevet blokeret!",
+  "blockedRemoved": "%1 er blevet blokeret!",
   "@blockedRemoved": {
     "type": "text",
     "description": "blocked_removed"
@@ -692,7 +692,7 @@
     "type": "text",
     "description": "Default account name"
   },
-  "defaultGiftMessage": "Tjek Nautilus ud! Jeg sendte dig noget nano med dette link:",
+  "defaultGiftMessage": "Tjek Nautilus ud! Jeg sendte dig noget %2 med dette link:",
   "@defaultGiftMessage": {
     "type": "text",
     "description": "default_gift_message"
@@ -1077,7 +1077,7 @@
     "type": "text",
     "description": "favorite_name_missing"
   },
-  "favoriteRemoved": "% 1 er blevet fjernet fra favoritter!",
+  "favoriteRemoved": "%1 er blevet fjernet fra favoritter!",
   "@favoriteRemoved": {
     "type": "text",
     "description": "favorite_removed"
@@ -1552,7 +1552,7 @@
     "type": "text",
     "description": "message_header"
   },
-  "minimumSend": "Minimální částka pro odeslání je% 1 NANO",
+  "minimumSend": "Minimální částka pro odeslání je %1 %2",
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
@@ -1562,7 +1562,7 @@
     "type": "text",
     "description": "history_minute_ago"
   },
-  "mnemonicInvalidWord": "% 1 není platné slovo",
+  "mnemonicInvalidWord": "%1 není platné slovo",
   "@mnemonicInvalidWord": {
     "type": "text",
     "description": "A word that is not part of bip39"
@@ -1722,7 +1722,7 @@
     "type": "text",
     "description": "notifications_settings"
   },
-  "notificationTitle": "Přijato %1 NANO",
+  "notificationTitle": "Přijato %1 %2",
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
@@ -2177,7 +2177,7 @@
     "type": "text",
     "description": "blocked_remove_btn"
   },
-  "removeBlockedConfirmation": "Er du sikker på at du vil fjerne blokeringen% 1?",
+  "removeBlockedConfirmation": "Er du sikker på at du vil fjerne blokeringen %1?",
   "@removeBlockedConfirmation": {
     "type": "text",
     "description": "blocked_remove_sure"
@@ -2227,7 +2227,7 @@
     "type": "text",
     "description": "home_request_cta"
   },
-  "requestAmountConfirm": "Anmodning% 1% 2",
+  "requestAmountConfirm": "Anmodning %1 %2",
   "@requestAmountConfirm": {
     "type": "text",
     "description": "request_pin_description"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "Odeslat %1 NANO",
+  "sendAmountConfirm": "Odeslat %1 %2",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"
@@ -2902,12 +2902,12 @@
     "type": "text",
     "description": "transfer_close_text"
   },
-  "transferComplete": "%1 NANO úspěšně převedeno do vaší peněženky Nautilus. \n",
+  "transferComplete": "%1 %2 úspěšně převedeno do vaší peněženky Nautilus. \n",
   "@transferComplete": {
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferConfirmInfo": "Byla nalezena peněženka se zůstatkem %1 NANO. \n",
+  "transferConfirmInfo": "Byla nalezena peněženka se zůstatkem %1 %2. \n",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"
@@ -2932,7 +2932,7 @@
     "type": "text",
     "description": "transfer_header"
   },
-  "transferIntro": "Tento proces přenese prostředky z papírové peněženky do vaší peněženky Nautilus. \n\n Začněte klepnutím na tlačítko \"% 1\".",
+  "transferIntro": "Tento proces přenese prostředky z papírové peněženky do vaší peněženky Nautilus. \n\n Začněte klepnutím na tlačítko \"%1\".",
   "@transferIntro": {
     "type": "text",
     "description": "transfer_intro"

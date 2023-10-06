@@ -1722,7 +1722,7 @@
     "type": "text",
     "description": "notifications_settings"
   },
-  "notificationTitle": "%1 NANO recibidos",
+  "notificationTitle": "%1 %2 recibidos",
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "Enviar %1 NANO",
+  "sendAmountConfirm": "Enviar %1 %2",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"
@@ -2907,7 +2907,7 @@
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferConfirmInfo": "Se ha detectado una billetera con un balance de %1 NANO.\n",
+  "transferConfirmInfo": "Se ha detectado una billetera con un balance de %1 %2.\n",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"

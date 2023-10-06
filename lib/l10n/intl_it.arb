@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "Inviare %1 Nano?",
+  "sendAmountConfirm": "Inviare %1 %2?",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"
@@ -2902,7 +2902,7 @@
     "type": "text",
     "description": "transfer_close_text"
   },
-  "transferComplete": "%1 NANO trasferiti con successo sul tuo portafoglio Nautilus.",
+  "transferComplete": "%1 %2 trasferiti con successo sul tuo portafoglio Nautilus.",
   "@transferComplete": {
     "type": "text",
     "description": "transfer_complete_text"

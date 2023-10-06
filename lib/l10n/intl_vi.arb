@@ -235,7 +235,7 @@
     "type": "text",
     "description": "settings_fingerprint_method"
   },
-  "blockedAdded": "% 1 bị chặn thành công.",
+  "blockedAdded": "%1 bị chặn thành công.",
   "@blockedAdded": {
     "type": "text",
     "description": "blocked_added"
@@ -270,7 +270,7 @@
     "type": "text",
     "description": "blocked_name_missing"
   },
-  "blockedRemoved": "% 1 đã được bỏ chặn!",
+  "blockedRemoved": "%1 đã được bỏ chặn!",
   "@blockedRemoved": {
     "type": "text",
     "description": "blocked_removed"
@@ -1077,7 +1077,7 @@
     "type": "text",
     "description": "favorite_name_missing"
   },
-  "favoriteRemoved": "% 1 đã bị xóa khỏi mục yêu thích!",
+  "favoriteRemoved": "%1 đã bị xóa khỏi mục yêu thích!",
   "@favoriteRemoved": {
     "type": "text",
     "description": "favorite_removed"
@@ -1722,7 +1722,7 @@
     "type": "text",
     "description": "notifications_settings"
   },
-  "notificationTitle": "Đã nhận %1 BAN",
+  "notificationTitle": "Đã nhận %1 %2",
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
@@ -2177,7 +2177,7 @@
     "type": "text",
     "description": "blocked_remove_btn"
   },
-  "removeBlockedConfirmation": "Bạn có chắc muốn bỏ chăng% 1 không?",
+  "removeBlockedConfirmation": "Bạn có chắc muốn bỏ chăng %1 không?",
   "@removeBlockedConfirmation": {
     "type": "text",
     "description": "blocked_remove_sure"
@@ -2227,7 +2227,7 @@
     "type": "text",
     "description": "home_request_cta"
   },
-  "requestAmountConfirm": "Yêu cầu% 1",
+  "requestAmountConfirm": "Yêu cầu %1",
   "@requestAmountConfirm": {
     "type": "text",
     "description": "request_pin_description"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "Gửi %1 NANO",
+  "sendAmountConfirm": "Gửi %1 %2",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"
@@ -2902,7 +2902,7 @@
     "type": "text",
     "description": "transfer_close_text"
   },
-  "transferComplete": "%1 Nano đã được chuyển vào ví Nautilus của bạn.\n",
+  "transferComplete": "%1 %2 đã được chuyển vào ví Nautilus của bạn.\n",
   "@transferComplete": {
     "type": "text",
     "description": "transfer_complete_text"

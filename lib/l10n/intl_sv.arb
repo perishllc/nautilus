@@ -235,7 +235,7 @@
     "type": "text",
     "description": "settings_fingerprint_method"
   },
-  "blockedAdded": "% 1 blockerades framgångsrikt.",
+  "blockedAdded": "%1 blockerades framgångsrikt.",
   "@blockedAdded": {
     "type": "text",
     "description": "blocked_added"
@@ -270,7 +270,7 @@
     "type": "text",
     "description": "blocked_name_missing"
   },
-  "blockedRemoved": "% 1 har avblockerats!",
+  "blockedRemoved": "%1 har avblockerats!",
   "@blockedRemoved": {
     "type": "text",
     "description": "blocked_removed"
@@ -1077,7 +1077,7 @@
     "type": "text",
     "description": "favorite_name_missing"
   },
-  "favoriteRemoved": "% 1 har tagits bort från favoriter!",
+  "favoriteRemoved": "%1 har tagits bort från favoriter!",
   "@favoriteRemoved": {
     "type": "text",
     "description": "favorite_removed"
@@ -1722,7 +1722,7 @@
     "type": "text",
     "description": "notifications_settings"
   },
-  "notificationTitle": "Mottog %1 NANO",
+  "notificationTitle": "Mottog %1 %2",
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
@@ -2177,7 +2177,7 @@
     "type": "text",
     "description": "blocked_remove_btn"
   },
-  "removeBlockedConfirmation": "Är du säker på att du vill avblockera% 1?",
+  "removeBlockedConfirmation": "Är du säker på att du vill avblockera %1?",
   "@removeBlockedConfirmation": {
     "type": "text",
     "description": "blocked_remove_sure"
@@ -2227,7 +2227,7 @@
     "type": "text",
     "description": "home_request_cta"
   },
-  "requestAmountConfirm": "Begäran% 1% 2",
+  "requestAmountConfirm": "Begäran %1 %2",
   "@requestAmountConfirm": {
     "type": "text",
     "description": "request_pin_description"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "Skicka %1 Nano?",
+  "sendAmountConfirm": "Skicka %1 %2?",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"
@@ -2902,7 +2902,7 @@
     "type": "text",
     "description": "transfer_close_text"
   },
-  "transferComplete": "%1 NANO har överförts till din Nautilus-plånbok.",
+  "transferComplete": "%1 %2 har överförts till din Nautilus-plånbok.",
   "@transferComplete": {
     "type": "text",
     "description": "transfer_complete_text"

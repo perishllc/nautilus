@@ -235,7 +235,7 @@
     "type": "text",
     "description": "settings_fingerprint_method"
   },
-  "blockedAdded": "% 1 berhasil diblokir.",
+  "blockedAdded": "%1 berhasil diblokir.",
   "@blockedAdded": {
     "type": "text",
     "description": "blocked_added"
@@ -270,7 +270,7 @@
     "type": "text",
     "description": "blocked_name_missing"
   },
-  "blockedRemoved": "% 1 telah dibuka blokir!",
+  "blockedRemoved": "%1 telah dibuka blokir!",
   "@blockedRemoved": {
     "type": "text",
     "description": "blocked_removed"
@@ -1077,7 +1077,7 @@
     "type": "text",
     "description": "favorite_name_missing"
   },
-  "favoriteRemoved": "% 1 telah dihapus dari favorit!",
+  "favoriteRemoved": "%1 telah dihapus dari favorit!",
   "@favoriteRemoved": {
     "type": "text",
     "description": "favorite_removed"
@@ -1722,7 +1722,7 @@
     "type": "text",
     "description": "notifications_settings"
   },
-  "notificationTitle": "Menerima %1 NANO",
+  "notificationTitle": "Menerima %1 %2",
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
@@ -2177,7 +2177,7 @@
     "type": "text",
     "description": "blocked_remove_btn"
   },
-  "removeBlockedConfirmation": "Anda yakin ingin membuka blokir% 1?",
+  "removeBlockedConfirmation": "Anda yakin ingin membuka blokir %1?",
   "@removeBlockedConfirmation": {
     "type": "text",
     "description": "blocked_remove_sure"
@@ -2227,7 +2227,7 @@
     "type": "text",
     "description": "home_request_cta"
   },
-  "requestAmountConfirm": "Permintaan% 1% 2",
+  "requestAmountConfirm": "Permintaan %1 %2",
   "@requestAmountConfirm": {
     "type": "text",
     "description": "request_pin_description"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "Kirim %1 Nano?",
+  "sendAmountConfirm": "Kirim %1 %2?",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"
@@ -2902,7 +2902,7 @@
     "type": "text",
     "description": "transfer_close_text"
   },
-  "transferComplete": "%1 NANO berhasil ditransfer ke Dompet Nautilus Anda.",
+  "transferComplete": "%1 %2 berhasil ditransfer ke Dompet Nautilus Anda.",
   "@transferComplete": {
     "type": "text",
     "description": "transfer_complete_text"

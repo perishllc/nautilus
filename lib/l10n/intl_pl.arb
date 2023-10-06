@@ -235,7 +235,7 @@
     "type": "text",
     "description": "settings_fingerprint_method"
   },
-  "blockedAdded": "% 1 został pomyślnie zablokowany.",
+  "blockedAdded": "%1 został pomyślnie zablokowany.",
   "@blockedAdded": {
     "type": "text",
     "description": "blocked_added"
@@ -270,7 +270,7 @@
     "type": "text",
     "description": "blocked_name_missing"
   },
-  "blockedRemoved": "% 1 został odblokowany!",
+  "blockedRemoved": "%1 został odblokowany!",
   "@blockedRemoved": {
     "type": "text",
     "description": "blocked_removed"
@@ -692,7 +692,7 @@
     "type": "text",
     "description": "Default account name"
   },
-  "defaultGiftMessage": "Sprawdź Nautilusa! Wysłałem Ci trochę nano z tym linkiem:",
+  "defaultGiftMessage": "Sprawdź Nautilusa! Wysłałem Ci trochę %2 z tym linkiem:",
   "@defaultGiftMessage": {
     "type": "text",
     "description": "default_gift_message"
@@ -1077,7 +1077,7 @@
     "type": "text",
     "description": "favorite_name_missing"
   },
-  "favoriteRemoved": "% 1 został usunięty z ulubionych!",
+  "favoriteRemoved": "%1 został usunięty z ulubionych!",
   "@favoriteRemoved": {
     "type": "text",
     "description": "favorite_removed"
@@ -1552,7 +1552,7 @@
     "type": "text",
     "description": "message_header"
   },
-  "minimumSend": "Minimalna kwota wysłania to% 1% 2",
+  "minimumSend": "Minimalna kwota wysłania to %1 %2",
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
@@ -2177,7 +2177,7 @@
     "type": "text",
     "description": "blocked_remove_btn"
   },
-  "removeBlockedConfirmation": "Czy na pewno chcesz odblokować% 1?",
+  "removeBlockedConfirmation": "Czy na pewno chcesz odblokować %1?",
   "@removeBlockedConfirmation": {
     "type": "text",
     "description": "blocked_remove_sure"
@@ -2227,7 +2227,7 @@
     "type": "text",
     "description": "home_request_cta"
   },
-  "requestAmountConfirm": "Żądanie% 1% 2",
+  "requestAmountConfirm": "Żądanie %1 %2",
   "@requestAmountConfirm": {
     "type": "text",
     "description": "request_pin_description"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "Wyślij %1 Nano?",
+  "sendAmountConfirm": "Wyślij %1 %2?",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"

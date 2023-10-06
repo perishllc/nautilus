@@ -235,7 +235,7 @@
     "type": "text",
     "description": "settings_fingerprint_method"
   },
-  "blockedAdded": "% 1 е блокиран успешно.",
+  "blockedAdded": "%1 е блокиран успешно.",
   "@blockedAdded": {
     "type": "text",
     "description": "blocked_added"
@@ -270,7 +270,7 @@
     "type": "text",
     "description": "blocked_name_missing"
   },
-  "blockedRemoved": "% 1 е бил отблокиран!",
+  "blockedRemoved": "%1 е бил отблокиран!",
   "@blockedRemoved": {
     "type": "text",
     "description": "blocked_removed"
@@ -1077,7 +1077,7 @@
     "type": "text",
     "description": "favorite_name_missing"
   },
-  "favoriteRemoved": "% 1 е премахнат от любими!",
+  "favoriteRemoved": "%1 е премахнат от любими!",
   "@favoriteRemoved": {
     "type": "text",
     "description": "favorite_removed"
@@ -2177,7 +2177,7 @@
     "type": "text",
     "description": "blocked_remove_btn"
   },
-  "removeBlockedConfirmation": "Сигурни ли сте, че искате да деблокирате% 1?",
+  "removeBlockedConfirmation": "Сигурни ли сте, че искате да деблокирате %1?",
   "@removeBlockedConfirmation": {
     "type": "text",
     "description": "blocked_remove_sure"
@@ -2227,7 +2227,7 @@
     "type": "text",
     "description": "home_request_cta"
   },
-  "requestAmountConfirm": "Заявка% 1% 2",
+  "requestAmountConfirm": "Заявка %1 %2",
   "@requestAmountConfirm": {
     "type": "text",
     "description": "request_pin_description"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "Изпрати %1 NANO",
+  "sendAmountConfirm": "Изпрати %1 %2",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"

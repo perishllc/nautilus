@@ -127,7 +127,6 @@ dependencies:
   # Share files
   share_plus: ^7.0.0
 
-
   # File picker
   file_picker: ^5.2.0
 

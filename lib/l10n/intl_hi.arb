@@ -150,7 +150,7 @@
     "type": "text",
     "description": "send_enter_amount"
   },
-  "appWallet": "% 1 बटुआ",
+  "appWallet": "%1 बटुआ",
   "@appWallet": {
     "type": "text",
     "description": "app_wallet"
@@ -235,7 +235,7 @@
     "type": "text",
     "description": "settings_fingerprint_method"
   },
-  "blockedAdded": "% 1 सफलतापूर्वक ब्लॉक किया गया।",
+  "blockedAdded": "%1 सफलतापूर्वक ब्लॉक किया गया।",
   "@blockedAdded": {
     "type": "text",
     "description": "blocked_added"
@@ -270,7 +270,7 @@
     "type": "text",
     "description": "blocked_name_missing"
   },
-  "blockedRemoved": "% 1 को अनब्लॉक कर दिया गया है!",
+  "blockedRemoved": "%1 को अनब्लॉक कर दिया गया है!",
   "@blockedRemoved": {
     "type": "text",
     "description": "blocked_removed"
@@ -1002,7 +1002,7 @@
     "type": "text",
     "description": "example_rec_recipient_message"
   },
-  "exchangeCurrency": "एक्सचेंज% 2",
+  "exchangeCurrency": "एक्सचेंज%2",
   "@exchangeCurrency": {
     "type": "text",
     "description": "exchange_currency"
@@ -1077,7 +1077,7 @@
     "type": "text",
     "description": "favorite_name_missing"
   },
-  "favoriteRemoved": "% 1 को पसंदीदा से हटा दिया गया है!",
+  "favoriteRemoved": "%1 को पसंदीदा से हटा दिया गया है!",
   "@favoriteRemoved": {
     "type": "text",
     "description": "favorite_removed"
@@ -1142,7 +1142,7 @@
     "type": "text",
     "description": "funding_header"
   },
-  "getCurrency": "% 2 प्राप्त करें",
+  "getCurrency": "%2 प्राप्त करें",
   "@getCurrency": {
     "type": "text",
     "description": "get_currency"
@@ -2032,7 +2032,7 @@
     "type": "text",
     "description": "pro_sub_required_paragraph"
   },
-  "purchaseCurrency": "खरीद% 2",
+  "purchaseCurrency": "खरीद%2",
   "@purchaseCurrency": {
     "type": "text",
     "description": "purchase_currency"
@@ -2177,7 +2177,7 @@
     "type": "text",
     "description": "blocked_remove_btn"
   },
-  "removeBlockedConfirmation": "क्या आप वाक़ई% 1 को अनवरोधित करना चाहते हैं?",
+  "removeBlockedConfirmation": "क्या आप वाक़ई%1 को अनवरोधित करना चाहते हैं?",
   "@removeBlockedConfirmation": {
     "type": "text",
     "description": "blocked_remove_sure"
@@ -2227,7 +2227,7 @@
     "type": "text",
     "description": "home_request_cta"
   },
-  "requestAmountConfirm": "निवेद% 1% 2",
+  "requestAmountConfirm": "निवेद %1 %2",
   "@requestAmountConfirm": {
     "type": "text",
     "description": "request_pin_description"
@@ -2582,12 +2582,12 @@
     "type": "text",
     "description": "nautilus_share"
   },
-  "shareApp": "शेयर% 1",
+  "shareApp": "शेयर%1",
   "@shareApp": {
     "type": "text",
     "description": "settings_share"
   },
-  "shareAppText": "चेक आउट % 1! एक प्रमुख नैनो मोबाइल वॉलेट!",
+  "shareAppText": "चेक आउट %1! एक प्रमुख नैनो मोबाइल वॉलेट!",
   "@shareAppText": {
     "type": "text",
     "description": "share_extra"
@@ -2702,7 +2702,7 @@
     "type": "text",
     "description": "send_someone"
   },
-  "spendCurrency": "खर्च % 2",
+  "spendCurrency": "खर्च %2",
   "@spendCurrency": {
     "type": "text",
     "description": "spend_currency"
@@ -2907,7 +2907,7 @@
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferConfirmInfo": "% 1 नैनो के बैलेंस वाले वॉलेट का पता चला है \n",
+  "transferConfirmInfo": "%1 नैनो के बैलेंस वाले वॉलेट का पता चला है \n",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"
@@ -2932,7 +2932,7 @@
     "type": "text",
     "description": "transfer_header"
   },
-  "transferIntro": "यह प्रक्रिया एक पेपर वॉलेट से आपके नैट्रियम वॉलेट में फंड ट्रांसफर कर देगी। \n\nशुरू करने के लिए \"% 1\" बटन को दबाएँ।",
+  "transferIntro": "यह प्रक्रिया एक पेपर वॉलेट से आपके नैट्रियम वॉलेट में फंड ट्रांसफर कर देगी। \n\nशुरू करने के लिए \"%1\" बटन को दबाएँ।",
   "@transferIntro": {
     "type": "text",
     "description": "transfer_intro"
@@ -3042,12 +3042,12 @@
     "type": "text",
     "description": "url_empty"
   },
-  "useAppRep": "% 1 प्रतिनिधि का प्रयोग करें",
+  "useAppRep": "%1 प्रतिनिधि का प्रयोग करें",
   "@useAppRep": {
     "type": "text",
     "description": "use app node as rep"
   },
-  "useCurrency": "% 2 का प्रयोग करें",
+  "useCurrency": "%2 का प्रयोग करें",
   "@useCurrency": {
     "type": "text",
     "description": "use_currency"

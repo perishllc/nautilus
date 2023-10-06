@@ -1552,7 +1552,7 @@
     "type": "text",
     "description": "message_header"
   },
-  "minimumSend": "Der Mindest-Sendebetrag beträgt %1 NANO",
+  "minimumSend": "Der Mindest-Sendebetrag beträgt %1 %2",
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "%1 NANO senden?",
+  "sendAmountConfirm": "%1 %2 senden?",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"

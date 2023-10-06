@@ -235,7 +235,7 @@
     "type": "text",
     "description": "settings_fingerprint_method"
   },
-  "blockedAdded": "% 1 успешно заблокирован.",
+  "blockedAdded": "%1 успешно заблокирован.",
   "@blockedAdded": {
     "type": "text",
     "description": "blocked_added"
@@ -270,7 +270,7 @@
     "type": "text",
     "description": "blocked_name_missing"
   },
-  "blockedRemoved": "% 1 разблокирован!",
+  "blockedRemoved": "%1 разблокирован!",
   "@blockedRemoved": {
     "type": "text",
     "description": "blocked_removed"
@@ -1077,7 +1077,7 @@
     "type": "text",
     "description": "favorite_name_missing"
   },
-  "favoriteRemoved": "% 1 удален из избранного!",
+  "favoriteRemoved": "%1 удален из избранного!",
   "@favoriteRemoved": {
     "type": "text",
     "description": "favorite_removed"
@@ -1552,7 +1552,7 @@
     "type": "text",
     "description": "message_header"
   },
-  "minimumSend": "Минимум сумма отправки % 1 NANO ",
+  "minimumSend": "Минимум сумма отправки %1 %2 ",
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
@@ -1722,7 +1722,7 @@
     "type": "text",
     "description": "notifications_settings"
   },
-  "notificationTitle": "Получено %1 NANO",
+  "notificationTitle": "Получено %1 %2",
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "Отправить %1 Nano",
+  "sendAmountConfirm": "Отправить %1 %2",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"
@@ -2902,12 +2902,12 @@
     "type": "text",
     "description": "transfer_close_text"
   },
-  "transferComplete": "%1 NANO успешно переведены в Nautilus кошелёк.\n",
+  "transferComplete": "%1 %2 успешно переведены в Nautilus кошелёк.\n",
   "@transferComplete": {
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferConfirmInfo": "Обнаружен кошелёк с балансом %1 NANO.\n",
+  "transferConfirmInfo": "Обнаружен кошелёк с балансом %1 %2.\n",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"

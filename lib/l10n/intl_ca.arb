@@ -150,7 +150,7 @@
     "type": "text",
     "description": "send_enter_amount"
   },
-  "appWallet": "Cartera % 1",
+  "appWallet": "Cartera %1",
   "@appWallet": {
     "type": "text",
     "description": "app_wallet"
@@ -692,7 +692,7 @@
     "type": "text",
     "description": "Default account name"
   },
-  "defaultGiftMessage": "Fes una ullada a Nautilus! T'he enviat un nano amb aquest enllaç:",
+  "defaultGiftMessage": "Fes una ullada a Nautilus! T'he enviat un %2 amb aquest enllaç:",
   "@defaultGiftMessage": {
     "type": "text",
     "description": "default_gift_message"
@@ -917,7 +917,7 @@
     "type": "text",
     "description": "example_card_from"
   },
-  "exampleCardIntro": "Vítejte v Natriu. Jakmile obdržíte NANO, transakce se zobrazí takto:",
+  "exampleCardIntro": "Vítejte v Natriu. Jakmile obdržíte %2, transakce se zobrazí takto:",
   "@exampleCardIntro": {
     "type": "text",
     "description": "example_card_intro"
@@ -1302,12 +1302,12 @@
     "type": "text",
     "description": "Generic import"
   },
-  "importGift": "The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?",
+  "importGift": "The link you clicked contains some %2, would you like to import it to this wallet, or refund it to whoever sent it?",
   "@importGift": {
     "type": "text",
     "description": "import_gift"
   },
-  "importGiftEmpty": "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message.",
+  "importGiftEmpty": "Unfortunately the link you clicked that contained some %2 appears to be empty, but you can still see the amount and associated message.",
   "@importGiftEmpty": {
     "type": "text",
     "description": "import_gift_empty"
@@ -1552,7 +1552,7 @@
     "type": "text",
     "description": "message_header"
   },
-  "minimumSend": "Minimální částka pro odeslání je% 1 NANO",
+  "minimumSend": "Minimální částka pro odeslání je %1 %2",
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
@@ -1562,7 +1562,7 @@
     "type": "text",
     "description": "history_minute_ago"
   },
-  "mnemonicInvalidWord": "% 1 není platné slovo",
+  "mnemonicInvalidWord": "%1 není platné slovo",
   "@mnemonicInvalidWord": {
     "type": "text",
     "description": "A word that is not part of bip39"
@@ -1722,7 +1722,7 @@
     "type": "text",
     "description": "notifications_settings"
   },
-  "notificationTitle": "Přijato %1 NANO",
+  "notificationTitle": "Přijato %1 %2",
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
@@ -2332,7 +2332,7 @@
     "type": "text",
     "description": "dialog_save"
   },
-  "scanInstructions": "Naskenujte QR kód Nano \n adresy",
+  "scanInstructions": "Naskenujte QR kód %2 \n adresy",
   "@scanInstructions": {
     "type": "text",
     "description": "scan_send_instruction_label"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "Odeslat %1 NANO",
+  "sendAmountConfirm": "Odeslat %1 %2",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"
@@ -2907,7 +2907,7 @@
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferConfirmInfo": "Byla nalezena peněženka se zůstatkem %1 NANO. \n",
+  "transferConfirmInfo": "Byla nalezena peněženka se zůstatkem %1 %2. \n",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"
@@ -2932,7 +2932,7 @@
     "type": "text",
     "description": "transfer_header"
   },
-  "transferIntro": "Tento proces přenese prostředky z papírové peněženky do vaší peněženky Nautilus. \n\n Začněte klepnutím na tlačítko \"% 1\".",
+  "transferIntro": "Tento proces přenese prostředky z papírové peněženky do vaší peněženky Nautilus. \n\n Začněte klepnutím na tlačítko \"%1\".",
   "@transferIntro": {
     "type": "text",
     "description": "transfer_intro"

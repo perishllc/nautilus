@@ -235,7 +235,7 @@
     "type": "text",
     "description": "settings_fingerprint_method"
   },
-  "blockedAdded": "% 1 已成功封鎖。",
+  "blockedAdded": "%1 已成功封鎖。",
   "@blockedAdded": {
     "type": "text",
     "description": "blocked_added"
@@ -270,7 +270,7 @@
     "type": "text",
     "description": "blocked_name_missing"
   },
-  "blockedRemoved": "% 1 已解除封鎖！",
+  "blockedRemoved": "%1 已解除封鎖！",
   "@blockedRemoved": {
     "type": "text",
     "description": "blocked_removed"
@@ -692,7 +692,7 @@
     "type": "text",
     "description": "Default account name"
   },
-  "defaultGiftMessage": "看看鸚鵡螺！我用這個鏈接給你發了一些 nano：",
+  "defaultGiftMessage": "看看鸚鵡螺！我用這個鏈接給你發了一些 %2：",
   "@defaultGiftMessage": {
     "type": "text",
     "description": "default_gift_message"
@@ -1077,7 +1077,7 @@
     "type": "text",
     "description": "favorite_name_missing"
   },
-  "favoriteRemoved": "% 1 已從我的最愛中移除！",
+  "favoriteRemoved": "%1 已從我的最愛中移除！",
   "@favoriteRemoved": {
     "type": "text",
     "description": "favorite_removed"
@@ -1552,7 +1552,7 @@
     "type": "text",
     "description": "message_header"
   },
-  "minimumSend": "最低發送金額是 %1 NANO",
+  "minimumSend": "最低發送金額是 %1 %2",
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
@@ -1722,7 +1722,7 @@
     "type": "text",
     "description": "notifications_settings"
   },
-  "notificationTitle": "收到 %1 NANO",
+  "notificationTitle": "收到 %1 %2",
   "@notificationTitle": {
     "type": "text",
     "description": "notification_title"
@@ -2177,7 +2177,7 @@
     "type": "text",
     "description": "blocked_remove_btn"
   },
-  "removeBlockedConfirmation": "您確定要解除封鎖% 1 嗎？",
+  "removeBlockedConfirmation": "您確定要解除封鎖 %1 嗎？",
   "@removeBlockedConfirmation": {
     "type": "text",
     "description": "blocked_remove_sure"
@@ -2227,7 +2227,7 @@
     "type": "text",
     "description": "home_request_cta"
   },
-  "requestAmountConfirm": "請求% 1",
+  "requestAmountConfirm": "請求%1",
   "@requestAmountConfirm": {
     "type": "text",
     "description": "request_pin_description"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "發送 %1 NANO？",
+  "sendAmountConfirm": "發送 %1 %2",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"
@@ -2907,7 +2907,7 @@
     "type": "text",
     "description": "transfer_complete_text"
   },
-  "transferConfirmInfo": "偵測到一個內有 %1 NANO 的錢包。\n",
+  "transferConfirmInfo": "偵測到一個內有 %1 %2 的錢包。\n",
   "@transferConfirmInfo": {
     "type": "text",
     "description": "transfer_confirm_info_first"

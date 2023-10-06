@@ -692,7 +692,7 @@
     "type": "text",
     "description": "Default account name"
   },
-  "defaultGiftMessage": "Kijk eens naar Nautilus! Ik heb je wat nano gestuurd met deze link:",
+  "defaultGiftMessage": "Kijk eens naar Nautilus! Ik heb je wat %2 gestuurd met deze link:",
   "@defaultGiftMessage": {
     "type": "text",
     "description": "default_gift_message"
@@ -1552,7 +1552,7 @@
     "type": "text",
     "description": "message_header"
   },
-  "minimumSend": "Het minimum te verzenden bedrag is %1 NANO",
+  "minimumSend": "Het minimum te verzenden bedrag is %1 %2",
   "@minimumSend": {
     "type": "text",
     "description": "send_minimum_error"
@@ -2442,7 +2442,7 @@
     "type": "text",
     "description": "home_send_cta"
   },
-  "sendAmountConfirm": "Verstuur %1 Nano",
+  "sendAmountConfirm": "Verstuur %1 %2",
   "@sendAmountConfirm": {
     "type": "text",
     "description": "send_amount_confirm"
