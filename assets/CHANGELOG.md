@@ -1,8 +1,13 @@
+## v0.9.0 - [2023-XX-XX]
+#### Added
+#### Changed
+#### Fixed
 ## v0.8.9 - [2023-10-07]
 #### Added
 - New block explorer option: nanobrowse.com
 #### Changed
 - Default block explorer changed to nanobrowse.com
+- Removed Split Gift Card option
 #### Fixed
 - Bugs with Brazillian Real and QR code scanning
 - Lots of translation fixes
