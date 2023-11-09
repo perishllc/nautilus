@@ -129,7 +129,8 @@ class AccountService {
     }
 
     // if the default work source doesn't match, update it:
-    final List<WorkSource> workSources = await sl.get<DBHelper>().getWorkSources();
+    final List<WorkSource> workSources =
+        await sl.get<DBHelper>().getWorkSources();
     WorkSource? workSource;
     if (workSources.length > 1) {
       workSource = workSources[1];
@@ -213,7 +214,8 @@ class AccountService {
     }
     _isInRetryState = true;
     log.d("Retrying connection in 3 seconds...");
-    final Future<dynamic> delayed = Future<dynamic>.delayed(const Duration(seconds: 3));
+    final Future<dynamic> delayed =
+        Future<dynamic>.delayed(const Duration(seconds: 3));
     delayed.then((_) {
       return true;
     });
@@ -249,17 +251,21 @@ class AccountService {
 
       _isConnecting = true;
       suspended = false;
-      _channel = IOWebSocketChannel.connect(WS_URL, headers: {'X-Client-Version': packageInfo.buildNumber});
+      _channel = IOWebSocketChannel.connect(WS_URL,
+          headers: {'X-Client-Version': packageInfo.buildNumber});
       log.d("Connected to service");
       _isConnecting = false;
       _isConnected = true;
-      EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.CONNECTED));
-      _channel!.stream.listen(_onMessageReceived, onDone: connectionClosed, onError: connectionClosedError);
+      EventTaxiImpl.singleton()
+          .fire(ConnStatusEvent(status: ConnectionStatus.CONNECTED));
+      _channel!.stream.listen(_onMessageReceived,
+          onDone: connectionClosed, onError: connectionClosedError);
     } catch (e) {
       log.e("Error from service ${e.toString()}", e);
       _isConnected = false;
       _isConnecting = false;
-      EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));
+      EventTaxiImpl.singleton()
+          .fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));
     }
   }
 
@@ -270,7 +276,8 @@ class AccountService {
     clearQueue();
     log.d("disconnected from service");
     // Send disconnected message
-    EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));
+    EventTaxiImpl.singleton()
+        .fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));
   }
 
   // Connection closed (with error)
@@ -280,14 +287,17 @@ class AccountService {
     clearQueue();
     log.w("disconnected from service with error ${e.toString()}");
     // Send disconnected message
-    EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));
+    EventTaxiImpl.singleton()
+        .fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));
   }
 
   // are we connected?
 
   Future<bool> isConnected() async {
-    final ConnectivityResult connectivityResult = await Connectivity().checkConnectivity();
-    if (connectivityResult != ConnectivityResult.bluetooth && connectivityResult != ConnectivityResult.none) {
+    final ConnectivityResult connectivityResult =
+        await Connectivity().checkConnectivity();
+    if (connectivityResult != ConnectivityResult.bluetooth &&
+        connectivityResult != ConnectivityResult.none) {
       // I am connected to some network, make sure there is actually a net connection.
       return InternetConnectionChecker().hasConnection;
     }
@@ -344,19 +354,25 @@ class AccountService {
       // Determine response type
       if (msg.containsKey("message")) {
         // Subscribe response
-        final SubscribeResponse resp = await compute(subscribeResponseFromJson, msg["message"] as Map<String, dynamic>);
+        final SubscribeResponse resp = await compute(
+            subscribeResponseFromJson, msg["message"] as Map<String, dynamic>);
         EventTaxiImpl.singleton().fire(SubscribeEvent(response: resp));
         // @legacy server:
-      } else if (msg.containsKey("block") && msg.containsKey("hash") && msg.containsKey("account")) {
+      } else if (msg.containsKey("block") &&
+          msg.containsKey("hash") &&
+          msg.containsKey("account")) {
         // Subscribe response
-        final SubscribeResponse resp = await compute(subscribeResponseFromJson, msg);
+        final SubscribeResponse resp =
+            await compute(subscribeResponseFromJson, msg);
         EventTaxiImpl.singleton().fire(SubscribeEvent(response: resp));
       } else if (msg.containsKey("currency") && msg.containsKey("price")) {
         // Price info sent from server
-        final PriceResponse resp = PriceResponse.fromJson(msg as Map<String, dynamic>);
+        final PriceResponse resp =
+            PriceResponse.fromJson(msg as Map<String, dynamic>);
         EventTaxiImpl.singleton().fire(PriceEvent(response: resp));
       } else if (msg.containsKey("error")) {
-        final ErrorResponse resp = ErrorResponse.fromJson(msg as Map<String, dynamic>);
+        final ErrorResponse resp =
+            ErrorResponse.fromJson(msg as Map<String, dynamic>);
         EventTaxiImpl.singleton().fire(ErrorEvent(response: resp));
       }
       return;
@@ -390,10 +406,12 @@ class AccountService {
             return;
           }
           requestItem.isProcessing = true;
-          final String requestJson = await compute(encodeRequestItem, requestItem.request);
+          final String requestJson =
+              await compute(encodeRequestItem, requestItem.request);
           // log.d("Sending: $requestJson");
           await _send(requestJson);
-        } else if (DateTime.now().difference(requestItem.expireDt!).inSeconds > RequestItem.EXPIRE_TIME_S) {
+        } else if (DateTime.now().difference(requestItem.expireDt!).inSeconds >
+            RequestItem.EXPIRE_TIME_S) {
           pop();
           processQueue();
         }
@@ -410,7 +428,8 @@ class AccountService {
     for (final RequestItem requestItem in _requestQueue!) {
       if (requestItem.request is ProcessRequest) {
         final ProcessRequest request = requestItem.request as ProcessRequest;
-        final StateBlock block = StateBlock.fromJson(json.decode(request.block!) as Map<String, dynamic>);
+        final StateBlock block = StateBlock.fromJson(
+            json.decode(request.block!) as Map<String, dynamic>);
         if (block.hash == hash) {
           return true;
         }
@@ -426,7 +445,8 @@ class AccountService {
     for (final RequestItem requestItem in _requestQueue!) {
       if (requestItem.request is ProcessRequest) {
         final ProcessRequest request = requestItem.request as ProcessRequest;
-        final StateBlock block = StateBlock.fromJson(json.decode(request.block!) as Map<String, dynamic>);
+        final StateBlock block = StateBlock.fromJson(
+            json.decode(request.block!) as Map<String, dynamic>);
         if (BigInt.tryParse(block.previous!) == BigInt.zero) {
           return true;
         }
@@ -483,14 +503,18 @@ class AccountService {
     await initUrls();
     final http.Response response = await http.post(
       Uri.parse(HTTP_URL),
-      headers: {'Content-type': 'application/json'},
+      headers: {
+        'Content-type': 'application/json',
+        "nano-app": "nautilus",
+      },
       body: json.encode(request.toJson()),
     );
 
     // if (response.statusCode != 200) {
     //   return null;
     // }
-    final Map<dynamic, dynamic> decoded = json.decode(response.body) as Map<dynamic, dynamic>;
+    final Map<dynamic, dynamic> decoded =
+        json.decode(response.body) as Map<dynamic, dynamic>;
     if (decoded.containsKey("error")) {
       return ErrorResponse.fromJson(decoded as Map<String, dynamic>);
     }
@@ -507,7 +531,8 @@ class AccountService {
       }
       throw Exception("Received error ${response.error}");
     }
-    final AccountInfoResponse infoResponse = AccountInfoResponse.fromJson(response as Map<String, dynamic>);
+    final AccountInfoResponse infoResponse =
+        AccountInfoResponse.fromJson(response as Map<String, dynamic>);
     return infoResponse;
   }
 
@@ -515,8 +540,11 @@ class AccountService {
       {String? threshold, bool includeActive = false}) async {
     threshold = threshold ?? BigInt.from(10).pow(24).toString();
 
-    final ReceivableRequest request =
-        ReceivableRequest(account: account, count: count, threshold: threshold, includeActive: includeActive);
+    final ReceivableRequest request = ReceivableRequest(
+        account: account,
+        count: count,
+        threshold: threshold,
+        includeActive: includeActive);
     final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
@@ -536,12 +564,15 @@ class AccountService {
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
     }
-    final BlockInfoItem item = BlockInfoItem.fromJson(response as Map<String, dynamic>);
+    final BlockInfoItem item =
+        BlockInfoItem.fromJson(response as Map<String, dynamic>);
     return item;
   }
 
-  Future<AccountHistoryResponse> requestAccountHistory(String? account, {int count = 1, bool raw = false}) async {
-    final AccountHistoryRequest request = AccountHistoryRequest(account: account, count: count, raw: raw);
+  Future<AccountHistoryResponse> requestAccountHistory(String? account,
+      {int count = 1, bool raw = false}) async {
+    final AccountHistoryRequest request =
+        AccountHistoryRequest(account: account, count: count, raw: raw);
     final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error}");
@@ -557,8 +588,10 @@ class AccountService {
     return AccountHistoryResponse.fromJson(response as Map<String, dynamic>);
   }
 
-  Future<AccountsBalancesResponse> requestAccountsBalances(List<String> accounts) async {
-    final AccountsBalancesRequest request = AccountsBalancesRequest(accounts: accounts);
+  Future<AccountsBalancesResponse> requestAccountsBalances(
+      List<String> accounts) async {
+    final AccountsBalancesRequest request =
+        AccountsBalancesRequest(accounts: accounts);
     final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error} ${response.details}");
@@ -566,13 +599,16 @@ class AccountService {
     return AccountsBalancesResponse.fromJson(response);
   }
 
-  Future<AccountRepresentativeResponse> requestAccountRepresentative(String account) async {
-    final AccountRepresentativeRequest request = AccountRepresentativeRequest(account: account);
+  Future<AccountRepresentativeResponse> requestAccountRepresentative(
+      String account) async {
+    final AccountRepresentativeRequest request =
+        AccountRepresentativeRequest(account: account);
     final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error} ${response.details}");
     }
-    return AccountRepresentativeResponse.fromJson(response as Map<String, dynamic>);
+    return AccountRepresentativeResponse.fromJson(
+        response as Map<String, dynamic>);
   }
 
   // Future<dynamic> createSwapToXMR({
@@ -643,7 +679,8 @@ class AccountService {
         privKey: privKey);
 
     final BlockInfoItem previousInfo = await requestBlockInfo(previous);
-    final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
+    final StateBlock previousBlock = StateBlock.fromJson(
+        json.decode(previousInfo.contents!) as Map<String, dynamic>);
 
     // Update data on our next receivable request
     sendBlock.representative = previousBlock.representative;
@@ -651,8 +688,8 @@ class AccountService {
     await sendBlock.sign(privKey);
 
     // Process
-    final HandoffReplyRequest handoffReplyRequest =
-        HandoffReplyRequest(block: sendBlock, label: label, message: message, metadata: metadata);
+    final HandoffReplyRequest handoffReplyRequest = HandoffReplyRequest(
+        block: sendBlock, label: label, message: message, metadata: metadata);
 
     final http.Response response = await http.post(
       Uri.parse(URI),
@@ -666,14 +703,17 @@ class AccountService {
     final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
 
     if (decoded.containsKey("error")) {
-      final ErrorResponse err = ErrorResponse.fromJson(decoded as Map<String, dynamic>);
+      final ErrorResponse err =
+          ErrorResponse.fromJson(decoded as Map<String, dynamic>);
       throw Exception("Received error ${err.error} ${err.details}");
     }
-    final HandoffResponse item = HandoffResponse.fromJson(decoded as Map<String, dynamic>);
+    final HandoffResponse item =
+        HandoffResponse.fromJson(decoded as Map<String, dynamic>);
     return item;
   }
 
-  Future<HandoffResponse> requestAuthHTTP(String URI, String account, String signature, String signed, String formatted,
+  Future<HandoffResponse> requestAuthHTTP(String URI, String account,
+      String signature, String signed, String formatted,
       {String? message, String? label}) async {
     // Process
     final AuthReplyRequest authReplyRequest = AuthReplyRequest(
@@ -688,19 +728,23 @@ class AccountService {
     // return requestHandoff(handoffReplyRequest);
 
     final http.Response response = await http.post(Uri.parse(URI),
-        headers: {'Content-type': 'application/json'}, body: json.encode(authReplyRequest.toJson()));
+        headers: {'Content-type': 'application/json'},
+        body: json.encode(authReplyRequest.toJson()));
 
     if (response.statusCode != 200) {
       throw Exception("Received error ${response.statusCode}");
     }
     try {
-      final Map<dynamic, dynamic> decoded = json.decode(response.body) as Map<dynamic, dynamic>;
+      final Map<dynamic, dynamic> decoded =
+          json.decode(response.body) as Map<dynamic, dynamic>;
 
       if (decoded.containsKey("error")) {
-        final ErrorResponse err = ErrorResponse.fromJson(decoded as Map<String, dynamic>);
+        final ErrorResponse err =
+            ErrorResponse.fromJson(decoded as Map<String, dynamic>);
         throw Exception("Received error ${err.error} ${err.details}");
       }
-      final HandoffResponse item = HandoffResponse.fromJson(decoded as Map<String, dynamic>);
+      final HandoffResponse item =
+          HandoffResponse.fromJson(decoded as Map<String, dynamic>);
       return item;
     } catch (e) {
       throw Exception("Received error $e");
@@ -726,7 +770,8 @@ class AccountService {
     )
         .then((http.Response response) {
       if (response.statusCode == 200) {
-        final Map<String, dynamic> decoded = json.decode(response.body) as Map<String, dynamic>;
+        final Map<String, dynamic> decoded =
+            json.decode(response.body) as Map<String, dynamic>;
         if (decoded.containsKey("error")) {
           final ErrorResponse err = ErrorResponse.fromJson(decoded);
           throw Exception("Received error ${err.error} ${err.details}");
@@ -741,11 +786,13 @@ class AccountService {
   Future<ProcessResponse> requestProcess(ProcessRequest request) async {
     // check if the request needs PoW:
     try {
-      final StateBlock requestBlock = StateBlock.fromJson(json.decode(request.block!) as Map<String, dynamic>);
+      final StateBlock requestBlock = StateBlock.fromJson(
+          json.decode(request.block!) as Map<String, dynamic>);
       final String subtype = request.subtype ?? BlockTypes.SEND;
       String? workHash = requestBlock.previous;
       if (requestBlock.previous == "0" ||
-          requestBlock.previous == "0000000000000000000000000000000000000000000000000000000000000000") {
+          requestBlock.previous ==
+              "0000000000000000000000000000000000000000000000000000000000000000") {
         workHash = NanoUtil.addressToPublicKey(requestBlock.account!);
       }
 
@@ -780,7 +827,8 @@ class AccountService {
     if (response is ErrorResponse) {
       throw Exception("Received error ${response.error} ${response.details}");
     }
-    final ProcessResponse item = ProcessResponse.fromJson(response as Map<String, dynamic>);
+    final ProcessResponse item =
+        ProcessResponse.fromJson(response as Map<String, dynamic>);
     return item;
   }
 
@@ -794,7 +842,12 @@ class AccountService {
   // }
 
   Future<ProcessResponse> requestReceive(
-      String? representative, String? previous, String? balance, String? link, String? account, String? privKey) async {
+      String? representative,
+      String? previous,
+      String? balance,
+      String? link,
+      String? account,
+      String? privKey) async {
     final StateBlock receiveBlock = StateBlock(
       subtype: BlockTypes.RECEIVE,
       previous: previous,
@@ -806,7 +859,8 @@ class AccountService {
     );
 
     final BlockInfoItem previousInfo = await requestBlockInfo(previous);
-    final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
+    final StateBlock previousBlock = StateBlock.fromJson(
+        json.decode(previousInfo.contents!) as Map<String, dynamic>);
 
     // Update data on our next receivable request
     receiveBlock.representative = previousBlock.representative;
@@ -814,14 +868,14 @@ class AccountService {
     await receiveBlock.sign(privKey);
 
     // Process
-    final ProcessRequest processRequest =
-        ProcessRequest(block: json.encode(receiveBlock.toJson()), subtype: BlockTypes.RECEIVE);
+    final ProcessRequest processRequest = ProcessRequest(
+        block: json.encode(receiveBlock.toJson()), subtype: BlockTypes.RECEIVE);
 
     return requestProcess(processRequest);
   }
 
-  Future<ProcessResponse> requestSend(
-      String? representative, String? previous, String? sendAmount, String? link, String? account, String? privKey,
+  Future<ProcessResponse> requestSend(String? representative, String? previous,
+      String? sendAmount, String? link, String? account, String? privKey,
       {bool max = false}) async {
     if (link != null && link.contains(NonTranslatable.currencyPrefix)) {
       link = NanoUtil.addressToPublicKey(link);
@@ -838,7 +892,8 @@ class AccountService {
     );
 
     final BlockInfoItem previousInfo = await requestBlockInfo(previous);
-    final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
+    final StateBlock previousBlock = StateBlock.fromJson(
+        json.decode(previousInfo.contents!) as Map<String, dynamic>);
 
     // Update data on our next receivable request
     sendBlock.representative = previousBlock.representative;
@@ -854,9 +909,11 @@ class AccountService {
     return requestProcess(processRequest);
   }
 
-  Future<ProcessResponse> requestOpen(String? balance, String? link, String? account, String? privKey,
+  Future<ProcessResponse> requestOpen(
+      String? balance, String? link, String? account, String? privKey,
       {String? representative}) async {
-    representative = representative ?? await sl.get<SharedPrefsUtil>().getRepresentative();
+    representative =
+        representative ?? await sl.get<SharedPrefsUtil>().getRepresentative();
     final StateBlock openBlock = StateBlock(
       subtype: BlockTypes.OPEN,
       previous: "0",
@@ -879,8 +936,8 @@ class AccountService {
     return requestProcess(processRequest);
   }
 
-  Future<ProcessResponse> requestChange(
-      String? account, String? representative, String? previous, String balance, String privKey) async {
+  Future<ProcessResponse> requestChange(String? account, String? representative,
+      String? previous, String balance, String privKey) async {
     final StateBlock chgBlock = StateBlock(
       subtype: BlockTypes.CHANGE,
       previous: previous,
@@ -892,15 +949,16 @@ class AccountService {
     );
 
     final BlockInfoItem previousInfo = await requestBlockInfo(previous);
-    final StateBlock previousBlock = StateBlock.fromJson(json.decode(previousInfo.contents!) as Map<String, dynamic>);
+    final StateBlock previousBlock = StateBlock.fromJson(
+        json.decode(previousInfo.contents!) as Map<String, dynamic>);
 
     // Update data on our next receivable request
     chgBlock.setBalance(previousBlock.balance);
     await chgBlock.sign(privKey);
 
     // Process
-    final ProcessRequest processRequest =
-        ProcessRequest(block: json.encode(chgBlock.toJson()), subtype: BlockTypes.CHANGE);
+    final ProcessRequest processRequest = ProcessRequest(
+        block: json.encode(chgBlock.toJson()), subtype: BlockTypes.CHANGE);
 
     return requestProcess(processRequest);
   }
