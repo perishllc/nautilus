@@ -9,7 +9,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lottie/lottie.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
@@ -36,7 +35,8 @@ class IntroWelcomePage extends StatefulWidget {
 class IntroWelcomePageState extends State<IntroWelcomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  bool isDarkModeEnabled = SchedulerBinding.instance.window.platformBrightness == Brightness.dark;
+  bool isDarkModeEnabled =
+      SchedulerBinding.instance.window.platformBrightness == Brightness.dark;
 
   Timer? timer;
 
@@ -50,7 +50,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
       // If the system can show an authorization request dialog
       if (Platform.isIOS) {
         if (await sl.get<SharedPrefsUtil>().getTrackingEnabled() == false ||
-            await AppTrackingTransparency.trackingAuthorizationStatus == TrackingStatus.notDetermined) {
+            await AppTrackingTransparency.trackingAuthorizationStatus ==
+                TrackingStatus.notDetermined) {
           // Show a custom explainer dialog before the system dialog
           await AppDialogs.showInfoDialog(
             context,
@@ -61,12 +62,16 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
             onPressed: () async {
               bool trackingEnabled = false;
               if (Platform.isIOS) {
-                trackingEnabled =
-                    await AppTrackingTransparency.requestTrackingAuthorization() == TrackingStatus.authorized;
+                trackingEnabled = await AppTrackingTransparency
+                        .requestTrackingAuthorization() ==
+                    TrackingStatus.authorized;
               } else {
-                trackingEnabled = (await AppDialogs.showTrackingDialog(context))!;
+                trackingEnabled =
+                    (await AppDialogs.showTrackingDialog(context))!;
               }
-              await sl.get<SharedPrefsUtil>().setTrackingEnabled(trackingEnabled);
+              await sl
+                  .get<SharedPrefsUtil>()
+                  .setTrackingEnabled(trackingEnabled);
               FlutterBranchSdk.disableTracking(!trackingEnabled);
             },
           );
@@ -112,7 +117,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
         context: context,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
@@ -124,9 +130,13 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
           );
         });
     if (selection != null) {
-      ThemeSetting _curThemeSetting = await sl.get<SharedPrefsUtil>().getTheme();
+      ThemeSetting _curThemeSetting =
+          await sl.get<SharedPrefsUtil>().getTheme();
       if (_curThemeSetting != ThemeSetting(selection)) {
-        sl.get<SharedPrefsUtil>().setTheme(ThemeSetting(selection)).then((void result) {
+        sl
+            .get<SharedPrefsUtil>()
+            .setTheme(ThemeSetting(selection))
+            .then((void result) {
           setState(() {
             StateContainer.of(context).updateTheme(ThemeSetting(selection));
             _curThemeSetting = ThemeSetting(selection);
@@ -158,7 +168,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
   @override
   Widget build(BuildContext context) {
     final Color? primaryColor = StateContainer.of(context).curTheme.primary;
-    final bool landscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final bool landscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
@@ -176,14 +187,17 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                 child: Flex(
                   direction: landscape ? Axis.horizontal : Axis.vertical,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: landscape ? MainAxisAlignment.center : MainAxisAlignment.start,
+                  mainAxisAlignment: landscape
+                      ? MainAxisAlignment.center
+                      : MainAxisAlignment.start,
                   children: <Widget>[
                     //Container for the animation
                     Container(
                       width: MediaQuery.of(context).size.width / 2,
                       margin: const EdgeInsets.only(bottom: 30),
                       height: 200,
-                      child: SvgPicture.asset("assets/logo.svg", color: primaryColor),
+                      child: SvgPicture.asset("assets/logo.svg",
+                          color: primaryColor),
                     ),
 
                     // LottieBuilder.asset(
@@ -194,7 +208,9 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                     // ),
 
                     SizedBox(
-                      width: landscape ? MediaQuery.of(context).size.width / 2 : MediaQuery.of(context).size.width,
+                      width: landscape
+                          ? MediaQuery.of(context).size.width / 2
+                          : MediaQuery.of(context).size.width,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -217,11 +233,17 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                                     : MediaQuery.of(context).size.width,
                                 height: 100,
                                 child: TextLiquidFill(
-                                  text: CaseChange.toUpperCase(NonTranslatable.appName, context),
-                                  waveColor: primaryColor ?? NautilusTheme.nautilusBlue,
-                                  boxBackgroundColor: StateContainer.of(context).curTheme.backgroundDark!,
-                                  textStyle:
-                                      const TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold, color: Colors.white),
+                                  text: CaseChange.toUpperCase(
+                                      NonTranslatable.appName, context),
+                                  waveColor: primaryColor ??
+                                      NautilusTheme.nautilusBlue,
+                                  boxBackgroundColor: StateContainer.of(context)
+                                      .curTheme
+                                      .backgroundDark!,
+                                  textStyle: const TextStyle(
+                                      fontSize: 60.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
                                   boxHeight: 100,
                                   boxWidth: double.infinity,
                                   loadDuration: const Duration(seconds: 3),
@@ -232,7 +254,9 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                               Container(
                                 alignment: Alignment.topCenter,
                                 margin: const EdgeInsets.only(top: 90),
-                                color: StateContainer.of(context).curTheme.backgroundDark,
+                                color: StateContainer.of(context)
+                                    .curTheme
+                                    .backgroundDark,
                                 width: landscape
                                     ? MediaQuery.of(context).size.width / 2
                                     : MediaQuery.of(context).size.width,
@@ -242,9 +266,14 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                           ),
                           // Container for the paragraph
                           Container(
-                            margin: EdgeInsets.symmetric(horizontal: smallScreen(context) ? 30 : 40, vertical: 20),
+                            margin: EdgeInsets.symmetric(
+                                horizontal: smallScreen(context) ? 30 : 40,
+                                vertical: 20),
                             child: AutoSizeText(
-                              Z.of(context).welcomeTextLogin.replaceAll("%1", NonTranslatable.appName),
+                              Z
+                                  .of(context)
+                                  .welcomeTextLogin
+                                  .replaceAll("%1", NonTranslatable.appName),
                               style: AppStyles.textStyleParagraph(context),
                               maxLines: 4,
                               stepGranularity: 0.5,
@@ -284,7 +313,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                     margin: const EdgeInsets.only(bottom: 16, right: 28),
                     alignment: Alignment.centerRight,
                     child: FloatingActionButton(
-                      backgroundColor: StateContainer.of(context).curTheme.successDark,
+                      backgroundColor:
+                          StateContainer.of(context).curTheme.successDark,
                       onPressed: () {
                         _themeDialog();
                       },
@@ -296,22 +326,46 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                     ),
                   ),
 
-                  Row(
-                    children: <Widget>[
-                      AppButton.buildAppButton(
-                          context, AppButtonType.PRIMARY, Z.of(context).loginOrRegisterHeader, Dimens.BUTTON_TOP_DIMENS,
-                          instanceKey: const Key("get_started_button"), onPressed: () {
-                        Navigator.of(context).pushNamed('/intro_login');
-                      }),
-                    ],
-                  ),
+                  // Row(
+                  //   children: <Widget>[
+                  //     AppButton.buildAppButton(
+                  //         context, AppButtonType.PRIMARY, Z.of(context).loginOrRegisterHeader, Dimens.BUTTON_TOP_DIMENS,
+                  //         instanceKey: const Key("get_started_button"), onPressed: () {
+                  //       Navigator.of(context).pushNamed('/intro_login');
+                  //     }),
+                  //   ],
+                  // ),
+
+                  // Row(
+                  //   children: <Widget>[
+                  //     AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
+                  //         Z.of(context).continueWithoutLogin, Dimens.BUTTON_BOTTOM_DIMENS,
+                  //         instanceKey: const Key("new_existing_button"), onPressed: () {
+                  //       Navigator.of(context).pushNamed('/intro_new_existing');
+                  //     }),
+                  //   ],
+                  // ),
 
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
-                          Z.of(context).continueWithoutLogin, Dimens.BUTTON_BOTTOM_DIMENS,
-                          instanceKey: const Key("new_existing_button"), onPressed: () {
-                        Navigator.of(context).pushNamed('/intro_new_existing');
+                      // New Wallet Button
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY,
+                          Z.of(context).newWallet, Dimens.BUTTON_TOP_DIMENS,
+                          instanceKey: const Key("new_wallet_button"),
+                          onPressed: () {
+                        Navigator.of(context).pushNamed('/intro_backup_safety');
+                      }),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      // Import Wallet Button
+                      AppButton.buildAppButton(
+                          context,
+                          AppButtonType.PRIMARY_OUTLINE,
+                          Z.of(context).importWallet,
+                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                        Navigator.of(context).pushNamed('/intro_import');
                       }),
                     ],
                   ),
@@ -352,10 +406,13 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
 
     await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
     await sl.get<Vault>().writePin(DEFAULT_PIN);
-    final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
+    final PriceConversion conversion =
+        await sl.get<SharedPrefsUtil>().getPriceConversion();
     if (!mounted) return;
     StateContainer.of(context).requestSubscribe();
-    Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: conversion);
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        '/home', (Route<dynamic> route) => false,
+        arguments: conversion);
   }
 
   Future<void> handleBranchGift() async {
@@ -365,7 +422,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               Z.of(context).giftAlert,
               style: AppStyles.textStyleDialogHeader(context),
@@ -374,7 +432,8 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${Z.of(context).importGiftIntro}\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text("${Z.of(context).importGiftIntro}\n\n",
+                    style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actionsAlignment: MainAxisAlignment.end,

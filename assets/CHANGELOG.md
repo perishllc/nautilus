@@ -1,7 +1,7 @@
-## v0.9.0 - [2023-XX-XX]
-#### Added
+## v0.9.0 - [2023-11-15]
 #### Changed
-#### Fixed
+- Updated default pow node source
+- Re-work on magic-link login
 ## v0.8.9 - [2023-10-07]
 #### Added
 - New block explorer option: nanobrowse.com
