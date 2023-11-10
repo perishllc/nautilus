@@ -302,15 +302,6 @@ class DBHelper {
     await saveWorkSource(
       WorkSource(
         id: id++,
-        name: "Use Node (none)",
-        selected: false,
-        type: WorkSourceTypes.NODE,
-      ),
-      dbClient: dbClient,
-    );
-    await saveWorkSource(
-      WorkSource(
-        id: id++,
         name: AccountService.DEFAULT_WORKER_NAME,
         selected: true,
         type: WorkSourceTypes.URL,
