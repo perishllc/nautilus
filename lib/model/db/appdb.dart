@@ -254,9 +254,10 @@ class DBHelper {
   }
 
   Future<void> _addDefaultNodes({Database? dbClient}) async {
+    int id = 0;
     await saveNode(
       Node(
-        id: 0,
+        id: id++,
         name: "Nautilus Node",
         selected: true,
         http_url: AccountService.DEFAULT_HTTP_URL,
@@ -266,7 +267,7 @@ class DBHelper {
     );
     await saveNode(
       Node(
-        id: 1,
+        id: id++,
         name: "Natrium Node",
         selected: false,
         http_url: "https://app.natrium.io/api",
@@ -276,7 +277,7 @@ class DBHelper {
     );
     await saveNode(
       Node(
-        id: 2,
+        id: id++,
         name: "Kalium Node (banano)",
         selected: false,
         http_url: "https://kaliumapi.appditto.com/api",
@@ -297,9 +298,10 @@ class DBHelper {
   }
 
   Future<void> _addDefaultWorkSources({Database? dbClient}) async {
+    int id = 0;
     await saveWorkSource(
       WorkSource(
-        id: 0,
+        id: id++,
         name: "Use Node (none)",
         selected: false,
         type: WorkSourceTypes.NODE,
@@ -308,7 +310,7 @@ class DBHelper {
     );
     await saveWorkSource(
       WorkSource(
-        id: 1,
+        id: id++,
         name: AccountService.DEFAULT_WORKER_NAME,
         selected: true,
         type: WorkSourceTypes.URL,
@@ -316,19 +318,19 @@ class DBHelper {
       ),
       dbClient: dbClient,
     );
+    // await saveWorkSource(
+    //   WorkSource(
+    //     id: id++,
+    //     name: "nano.to",
+    //     selected: false,
+    //     type: WorkSourceTypes.URL,
+    //     url: "https://rpc.nano.to",
+    //   ),
+    //   dbClient: dbClient,
+    // );
     await saveWorkSource(
       WorkSource(
-        id: 2,
-        name: "nano.to",
-        selected: false,
-        type: WorkSourceTypes.URL,
-        url: "https://rpc.nano.to",
-      ),
-      dbClient: dbClient,
-    );
-    await saveWorkSource(
-      WorkSource(
-        id: 3,
+        id: id++,
         name: "solar",
         selected: false,
         type: WorkSourceTypes.URL,
@@ -338,7 +340,7 @@ class DBHelper {
     );
     await saveWorkSource(
       WorkSource(
-        id: 4,
+        id: id++,
         name: "nanoriver",
         selected: false,
         type: WorkSourceTypes.URL,
