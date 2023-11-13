@@ -1,4 +1,4 @@
-## v0.9.1 - [2023-11-XX]
+## v0.9.1 - [2023-11-15]
 #### Added
 - local pow generation
 #### Fixed
