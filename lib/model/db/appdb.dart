@@ -312,7 +312,7 @@ class DBHelper {
     await saveWorkSource(
       WorkSource(
         id: id++,
-        name: "Local PoW Generation (CPU)",
+        name: "Local (CPU)",
         selected: true,
         type: WorkSourceTypes.LOCAL,
       ),
