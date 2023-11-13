@@ -309,6 +309,15 @@ class DBHelper {
       ),
       dbClient: dbClient,
     );
+    await saveWorkSource(
+      WorkSource(
+        id: id++,
+        name: "Local PoW Generation (CPU)",
+        selected: true,
+        type: WorkSourceTypes.LOCAL,
+      ),
+      dbClient: dbClient,
+    );
     // await saveWorkSource(
     //   WorkSource(
     //     id: id++,

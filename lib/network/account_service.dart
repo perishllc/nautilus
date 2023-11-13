@@ -14,6 +14,7 @@ import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:synchronized/synchronized.dart';
 import 'package:wallet_flutter/bus/events.dart';
+import 'package:wallet_flutter/bus/work_event.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/node.dart';
@@ -783,6 +784,33 @@ class AccountService {
     });
   }
 
+  Future<String> requestLocalWork(String hash, [String subtype = "send"]) async {
+    String res = "";
+    final StreamSubscription<WorkEvent> workSub = EventTaxiImpl.singleton()
+        .registerTo<WorkEvent>()
+        .listen((WorkEvent event) async {
+      if (event.type == "work") {
+        res = event.message;
+      }
+    });
+
+    EventTaxiImpl.singleton()
+        .fire(WorkEvent(type: "generate_work", message: "$subtype:$hash"));
+
+    int secondsWaited = 0;
+    while (res == "") {
+      await Future<void>.delayed(const Duration(milliseconds: 1000));
+      secondsWaited += 1;
+      if (secondsWaited > 60) {
+        break;
+      }
+    }
+
+    workSub.cancel();
+
+    return res;
+  }
+
   Future<ProcessResponse> requestProcess(ProcessRequest request) async {
     // check if the request needs PoW:
     try {
@@ -805,11 +833,16 @@ class AccountService {
             // rely on the node to handle PoW:
             break;
           case WorkSourceTypes.LOCAL:
-            // TODO: Local work
+            requestBlock.work = await requestLocalWork(workHash);
             break;
           case WorkSourceTypes.URL:
-            final String? work = await requestWork(ws.url!, workHash);
-            requestBlock.work = work;
+            try {
+              final String work = (await requestWork(ws.url!, workHash))!;
+              requestBlock.work = work;
+            } catch (e) {
+              log.e("Error getting PoW: $e");
+              requestBlock.work = await requestLocalWork(workHash);
+            }
             break;
         }
       }
@@ -820,8 +853,6 @@ class AccountService {
     } catch (e) {
       throw Exception("Error trying to add PoW to block: $e");
     }
-
-    // print("request: ${json.encode(request.toJson())}");
 
     final dynamic response = await makeHttpRequest(request);
     if (response is ErrorResponse) {

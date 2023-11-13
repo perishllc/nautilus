@@ -355,6 +355,10 @@ flutter:
     # illustrations:
     - assets/illustrations/transferfunds_start.svg
     - assets/illustrations/transferfunds_paperwalletonly.svg
+    # nano-pow:
+    - assets/work/
+    - assets/work/nano-pow/
+    - assets/work/nano-pow/thread-worker.js
     # changelog:
     - assets/CHANGELOG.md
 
