@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:isolate';
 
 import 'package:collection/collection.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -45,6 +46,7 @@ import 'package:wallet_flutter/network/model/response/process_response.dart';
 import 'package:wallet_flutter/network/model/response/receivable_response.dart';
 import 'package:wallet_flutter/network/model/response/subscribe_response.dart';
 import 'package:wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/util/blake2b.dart';
 import 'package:wallet_flutter/util/nanoutil.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
 import 'package:web_socket_channel/io.dart';
@@ -784,29 +786,36 @@ class AccountService {
     });
   }
 
-  Future<String> requestLocalWork(String hash, [String subtype = "send"]) async {
-    String res = "";
-    final StreamSubscription<WorkEvent> workSub = EventTaxiImpl.singleton()
-        .registerTo<WorkEvent>()
-        .listen((WorkEvent event) async {
-      if (event.type == "work") {
-        res = event.message;
-      }
-    });
+  Future<String> requestLocalWork(String hash,
+      [String subtype = "send"]) async {
+    // String res = "";
+    // final StreamSubscription<WorkEvent> workSub = EventTaxiImpl.singleton()
+    //     .registerTo<WorkEvent>()
+    //     .listen((WorkEvent event) async {
+    //   if (event.type == "work") {
+    //     res = event.message;
+    //   }
+    // });
 
-    EventTaxiImpl.singleton()
-        .fire(WorkEvent(type: "generate_work", message: "$subtype:$hash"));
+    // EventTaxiImpl.singleton()
+    //     .fire(WorkEvent(type: "generate_work", message: "$subtype:$hash"));
 
-    int secondsWaited = 0;
-    while (res == "") {
-      await Future<void>.delayed(const Duration(milliseconds: 1000));
-      secondsWaited += 1;
-      if (secondsWaited > 600) {
-        break;
-      }
-    }
+    // int secondsWaited = 0;
+    // while (res == "") {
+    //   await Future<void>.delayed(const Duration(seconds: 1));
+    //   secondsWaited += 1;
+    //   print(secondsWaited);
+    //   if (secondsWaited > 600) {
+    //     break;
+    //   }
+    // }
 
-    workSub.cancel();
+    // workSub.cancel();
+
+    String res = await compute(generate_work, hash);
+    // String res = await runOnMultipleThreads(hash, 4);
+
+    print("@@@@@@@@@@@@@ res: $res");
 
     return res;
   }

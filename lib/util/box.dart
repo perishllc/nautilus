@@ -83,7 +83,7 @@ class Box {
     final Uint8List aliceSharedKey = X25519(convertedPrivateKey, convertedPublicKey);
 
     final Key key = Key(aliceSharedKey);
-    final IV iv = IV.fromLength(16);
+    final IV iv = IV.allZerosOfLength(16);
 
     final Encrypter encrypter = Encrypter(AES(key));
 
@@ -101,7 +101,7 @@ class Box {
     final Uint8List bobSharedKey = X25519(convertedPrivateKey, convertedPublicKey);
     final Key key = Key(bobSharedKey);
     final Encrypter encrypter = Encrypter(AES(key));
-    final IV iv = IV.fromLength(16);
+    final IV iv = IV.allZerosOfLength(16);
     final String decrypted = encrypter.decrypt(Encrypted.fromBase64(encrypted), iv: iv);
 
     return decrypted;

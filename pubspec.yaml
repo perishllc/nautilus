@@ -204,7 +204,7 @@ dependencies:
       url: https://github.com/perishllc/flutter_sodium
       ref: main
   x25519: ^0.1.1
-  encrypt: ^5.0.1
+  encrypt: ^5.0.3
 
   # search bar + text highlighting:
   # searchbar_animation: ^0.0.3
