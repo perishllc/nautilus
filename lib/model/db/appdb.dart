@@ -313,7 +313,7 @@ class DBHelper {
       WorkSource(
         id: id++,
         name: "Local (CPU)",
-        selected: true,
+        selected: false,
         type: WorkSourceTypes.LOCAL,
       ),
       dbClient: dbClient,
