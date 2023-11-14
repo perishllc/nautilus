@@ -801,7 +801,7 @@ class AccountService {
     while (res == "") {
       await Future<void>.delayed(const Duration(milliseconds: 1000));
       secondsWaited += 1;
-      if (secondsWaited > 60) {
+      if (secondsWaited > 600) {
         break;
       }
     }
