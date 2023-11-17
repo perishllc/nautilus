@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "Ustvarjanje PoW, to lahko traja nekaj časa (> 20 sekund) ...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "Pridobite %2",
   "@getCurrency": {
     "type": "text",

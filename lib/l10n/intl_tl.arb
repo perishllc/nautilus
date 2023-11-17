@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "Pagbuo ng PoW, maaaring tumagal ito ng ilang sandali (> 20 segundo)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "Kumuha ng %2",
   "@getCurrency": {
     "type": "text",

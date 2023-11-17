@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "Menghasilkan PoW, ini mungkin memakan waktu cukup lama (> 20 detik)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "Dapatkan %2",
   "@getCurrency": {
     "type": "text",

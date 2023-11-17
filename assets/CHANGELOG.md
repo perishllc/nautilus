@@ -1,6 +1,6 @@
-## v0.9.1 - [2023-11-15]
+## v0.9.1 - [2023-11-18]
 #### Added
-- local work generation
+- work generation
 #### Fixed
 - Minor fixes
 ## v0.9.0 - [2023-11-10]

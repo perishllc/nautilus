@@ -799,13 +799,6 @@ class AccountService {
       }
     });
 
-    // TODO: figure out how to localize this:
-    // UIUtil.showSnackbar(
-    //   "Generating PoW, this may take a while...",
-    //   context,
-    //   durationMs: durationMs,
-    // );
-
     EventTaxiImpl.singleton().fire(
         WorkEvent(type: "generate_work", currentHash: hash, subtype: subtype));
 

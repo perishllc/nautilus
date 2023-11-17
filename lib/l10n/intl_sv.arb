@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "Genererar PoW, detta kan ta ett tag (> 20 sekunder)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "Hämta %2",
   "@getCurrency": {
     "type": "text",

@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "S'està generant PoW, això pot trigar una estona (> 20 segons)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "Obteniu %2",
   "@getCurrency": {
     "type": "text",

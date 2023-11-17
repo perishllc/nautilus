@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "יוצר PoW, זה עשוי לקחת זמן מה (> 20 שניות)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "קבל %2",
   "@getCurrency": {
     "type": "text",

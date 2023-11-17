@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "Генериране на PoW, това може да отнеме известно време (> 20 секунди)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "Вземете %2",
   "@getCurrency": {
     "type": "text",

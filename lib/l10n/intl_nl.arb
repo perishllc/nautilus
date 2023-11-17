@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "PoW genereren, dit kan even duren (> 20 seconden)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "Krijg %2",
   "@getCurrency": {
     "type": "text",

@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "PoW generálása, ez eltarthat egy ideig (> 20 másodperc)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "Szerezze be a %2-t",
   "@getCurrency": {
     "type": "text",

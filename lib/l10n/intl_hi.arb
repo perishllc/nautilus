@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "PoW जेनरेट करने में कुछ समय लग सकता है (> 20 सेकंड)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "%2 प्राप्त करें",
   "@getCurrency": {
     "type": "text",

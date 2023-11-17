@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "إنشاء إثبات العمل (PoW)، قد يستغرق ذلك بعض الوقت (> 20 ثانية)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "احصل على٪ 2",
   "@getCurrency": {
     "type": "text",

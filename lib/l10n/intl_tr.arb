@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "PoW oluşturuluyor, bu biraz zaman alabilir (> 20 saniye)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "%2'yi al",
   "@getCurrency": {
     "type": "text",

@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "Se generează PoW, aceasta poate dura ceva timp (> 20 de secunde)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "Obțineți %2",
   "@getCurrency": {
     "type": "text",

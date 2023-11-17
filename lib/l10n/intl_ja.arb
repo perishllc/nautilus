@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "PoW を生成しています。これにはしばらく時間がかかる場合があります (20 秒以上)。",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "%2 を取得",
   "@getCurrency": {
     "type": "text",

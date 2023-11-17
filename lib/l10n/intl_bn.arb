@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "PoW তৈরি করা হচ্ছে, এতে কিছু সময় লাগতে পারে (> 20 সেকেন্ড)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "%2 পান",
   "@getCurrency": {
     "type": "text",

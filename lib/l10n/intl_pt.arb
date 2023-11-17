@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "Gerando PoW, isso pode demorar um pouco (> 20 segundos)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "Obtenha %2",
   "@getCurrency": {
     "type": "text",

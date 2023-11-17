@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "生成 PoW，这可能需要一段时间（> 20 秒）...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "获取 %2",
   "@getCurrency": {
     "type": "text",

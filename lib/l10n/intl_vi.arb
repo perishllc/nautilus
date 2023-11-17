@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "Đang tạo PoW, quá trình này có thể mất một lúc (> 20 giây)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "Nhận %2",
   "@getCurrency": {
     "type": "text",

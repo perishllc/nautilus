@@ -1142,6 +1142,10 @@
     "type": "text",
     "description": "funding_header"
   },
+  "generatingWork": "Notiek PoW ģenerēšana, tas var aizņemt kādu laiku (> 20 sekundes)...",
+  "@generatingWork": {
+    "description": "generating_local_work"
+  },
   "getCurrency": "Iegūstiet %2",
   "@getCurrency": {
     "type": "text",
