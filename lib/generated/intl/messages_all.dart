@@ -51,38 +51,38 @@ import 'messages_zh-Hant.dart' as messages_zh_hant;
 
 typedef Future<dynamic> LibraryLoader();
 Map<String, LibraryLoader> _deferredLibraries = {
-  'ar': () => new SynchronousFuture(null),
-  'bg': () => new SynchronousFuture(null),
-  'bn': () => new SynchronousFuture(null),
-  'ca': () => new SynchronousFuture(null),
-  'da': () => new SynchronousFuture(null),
-  'de': () => new SynchronousFuture(null),
-  'en': () => new SynchronousFuture(null),
-  'es': () => new SynchronousFuture(null),
-  'fr': () => new SynchronousFuture(null),
-  'he': () => new SynchronousFuture(null),
-  'hi': () => new SynchronousFuture(null),
-  'hu': () => new SynchronousFuture(null),
-  'id': () => new SynchronousFuture(null),
-  'it': () => new SynchronousFuture(null),
-  'ja': () => new SynchronousFuture(null),
-  'ko': () => new SynchronousFuture(null),
-  'lv': () => new SynchronousFuture(null),
-  'ms': () => new SynchronousFuture(null),
-  'nl': () => new SynchronousFuture(null),
-  'no': () => new SynchronousFuture(null),
-  'pl': () => new SynchronousFuture(null),
-  'pt': () => new SynchronousFuture(null),
-  'ro': () => new SynchronousFuture(null),
-  'ru': () => new SynchronousFuture(null),
-  'sl': () => new SynchronousFuture(null),
-  'sv': () => new SynchronousFuture(null),
-  'tl': () => new SynchronousFuture(null),
-  'tr': () => new SynchronousFuture(null),
-  'uk': () => new SynchronousFuture(null),
-  'vi': () => new SynchronousFuture(null),
-  'zh_Hans': () => new SynchronousFuture(null),
-  'zh_Hant': () => new SynchronousFuture(null),
+  'ar': () => new Future.value(null),
+  'bg': () => new Future.value(null),
+  'bn': () => new Future.value(null),
+  'ca': () => new Future.value(null),
+  'da': () => new Future.value(null),
+  'de': () => new Future.value(null),
+  'en': () => new Future.value(null),
+  'es': () => new Future.value(null),
+  'fr': () => new Future.value(null),
+  'he': () => new Future.value(null),
+  'hi': () => new Future.value(null),
+  'hu': () => new Future.value(null),
+  'id': () => new Future.value(null),
+  'it': () => new Future.value(null),
+  'ja': () => new Future.value(null),
+  'ko': () => new Future.value(null),
+  'lv': () => new Future.value(null),
+  'ms': () => new Future.value(null),
+  'nl': () => new Future.value(null),
+  'no': () => new Future.value(null),
+  'pl': () => new Future.value(null),
+  'pt': () => new Future.value(null),
+  'ro': () => new Future.value(null),
+  'ru': () => new Future.value(null),
+  'sl': () => new Future.value(null),
+  'sv': () => new Future.value(null),
+  'tl': () => new Future.value(null),
+  'tr': () => new Future.value(null),
+  'uk': () => new Future.value(null),
+  'vi': () => new Future.value(null),
+  'zh_Hans': () => new Future.value(null),
+  'zh_Hant': () => new Future.value(null),
 };
 
 MessageLookupByLibrary? _findExact(String localeName) {
@@ -162,13 +162,13 @@ Future<bool> initializeMessages(String localeName) {
       localeName, (locale) => _deferredLibraries[locale] != null,
       onFailure: (_) => null);
   if (availableLocale == null) {
-    return new SynchronousFuture(false);
+    return new Future.value(false);
   }
   var lib = _deferredLibraries[availableLocale];
-  lib == null ? new SynchronousFuture(false) : lib();
+  lib == null ? new Future.value(false) : lib();
   initializeInternalMessageLookup(() => new CompositeMessageLookup());
   messageLookup.addLocale(availableLocale, _findGeneratedMessagesFor);
-  return new SynchronousFuture(true);
+  return new Future.value(true);
 }
 
 bool _messagesExistFor(String locale) {
