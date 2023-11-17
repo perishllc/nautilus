@@ -255,7 +255,7 @@ class DBHelper {
     if (oldVersion == 11) {
       // delete all old work sources:
       try {
-        final List<WorkSource> sources = await getWorkSources();
+        final List<WorkSource> sources = await getWorkSources(dbClient: db);
         for (int i = 0; i < sources.length; i++) {
           await deleteWorkSource(
             WorkSource(
