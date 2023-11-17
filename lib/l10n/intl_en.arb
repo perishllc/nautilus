@@ -2842,6 +2842,11 @@
     "type": "text",
     "description": "xmr_loading_takes_time"
   },
+  "generatingWork": "Generating PoW, this may take a while (> 20 seconds)...",
+  "@generatingWork": {
+    "type": "text",
+    "description": "generating_local_work"
+  },
   "timestampEmpty": "Please pick a time",
   "@timestampEmpty": {
     "type": "text",

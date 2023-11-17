@@ -7,6 +7,7 @@
 // 64-bit unsigned addition
 // Sets v[a,a+1] += v[b,b+1]
 // v should be a Uint32Array
+import 'dart:async';
 import 'dart:isolate';
 import 'dart:math';
 import 'dart:typed_data';
@@ -795,26 +796,49 @@ const int sendChangeThreshold = 0xfffffff800000000;
 const int receiveOpenThreshold = 0xfffffe0000000000;
 
 bool threshold(Uint8List value, int difficulty) {
-  // print(NanoHelpers.byteToHex(value));
+  if ((value[0] == 255) && (value[1] == 255) && (value[2] == 255)) {
+    print("0x${uint8ToHex(value)}");
+  }
+
+  if ((value[0] == 255) &&
+      (value[1] == 255) &&
+      (value[2] == 255) &&
+      (value[3] >= 192)) {
+    print("0x${uint8ToHex(value)}");
+    return true;
+  } else {
+    return false;
+  }
+
   // if ((value[0] == 255) &&
   //     (value[1] == 255) &&
   //     (value[2] == 255) &&
-  //     (value[3] >= 192)) {
+  //     (value[3] == 255)) {
+  //   // print(NanoHelpers.byteToHex(value));
+  //   print("0x${uint8ToHex(value)}");
+  //   return true;
+  // }
+
+  // sendChangeThreshold:
+  // if ((value[0] == 255) && // 0xff
+  //     (value[1] == 255) && // 0xff
+  //     (value[2] == 255) && // 0xff
+  //     (value[3] == 255) && // 0xff
+  //     (value[4] >= 248)) {// 0xf8
   //   return true;
   // } else {
   //   return false;
   // }
 
-  // sendChangeThreshold:
-  if ((value[0] == 255) && // 0xff
-      (value[1] == 255) && // 0xff
-      (value[2] == 255) && // 0xff
-      (value[3] == 255) && // 0xff
-      (value[4] >= 248)) { // 0xf8
-    return true;
-  } else {
-    return false;
-  }
+  // receiveOpenThreshold:
+  // if ((value[0] == 255) && // 0xff
+  //     (value[1] == 255) && // 0xff
+  //     (value[2] >= 254)) {
+  //   // 0xfe
+  //   return true;
+  // } else {
+  //   return false;
+  // }
 
   // // // Combine the bytes into a 64-bit unsigned integer
   // // int combinedValue = 0;
@@ -842,6 +866,8 @@ bool threshold(Uint8List value, int difficulty) {
   //   }
   // }
   // return true;
+
+  return false;
 }
 
 Uint8List randomUint() {
@@ -853,6 +879,7 @@ Uint8List? generator256(Uint8List hash) {
   Uint8List random = randomUint();
   for (int r = 0; r < 256; r++) {
     random[7] = (random[7] + r) % 256; // pseudo random part
+    // Uint8List random = randomUint();
     final dynamic context = blake2bInit(8, null);
     blake2bUpdate(context, random);
     blake2bUpdate(context, hash);
@@ -865,49 +892,74 @@ Uint8List? generator256(Uint8List hash) {
   return null;
 }
 
-Future<String> generate_work(String hashString) async {
+Future<String> generate_work(String hashString, int threadNum) async {
   final Uint8List hash = NanoHelpers.hexToBytes(hashString);
-  for (int i = 0; i < 16384; i++) {
-    print(i);
+  for (int i = 0; i < 1024; i++) {
+    if (i % 512 == 0) {
+      print("$threadNum: $i");
+    }
     final Uint8List? generate = generator256(hash);
     if (generate != null) {
-      print(NanoHelpers.byteToHex(generate));
-      return NanoHelpers.byteToHex(generate);
+      // print(uint8ToHex(generate));
+      return uint8ToHex(generate);
     }
   }
-  print('Finished or no result found.');
-  return "";
+  throw Exception("didn't find a valid nonce");
 }
 
-Future<String> runInIsolate(String hashString, SendPort mainSendPort) async {
-  final response = ReceivePort();
-  await Isolate.spawn(
-      _isolateFunction, [hashString, response.sendPort, mainSendPort]);
-  return response.first as Future<String>;
-}
-
-void _isolateFunction(List<dynamic> args) async {
-  String hashString = args[0] as String;
-  SendPort responsePort = args[1] as SendPort;
-  SendPort mainSendPort = args[2] as SendPort;
-  String result = await generate_work(hashString);
-  mainSendPort.send(result);
-  Isolate.exit(responsePort, result);
-}
-
-Future<String> runOnMultipleThreads(String hashString, int threadCount) async {
-  final mainReceivePort = ReceivePort();
-  String result = '';
-  for (int i = 0; i < threadCount; i++) {
-    runInIsolate(hashString, mainReceivePort.sendPort);
+Future<String> generateWorkMultiThreaded(String hash) async {
+  final List<Future<String>> results = <Future<String>>[];
+  for (int i = 0; i < 4; i++) {
+    results.add(Isolate.run(() {
+      return generate_work(hash, i + 1);
+    }));
   }
 
-  mainReceivePort.listen((message) {
-    if (result.isEmpty) {
-      result = message as String;
-      mainReceivePort.close();
-    }
-  });
+  final Completer<String> completer = Completer<String>();
 
-  return result;
+  for (final Future<String> future in results) {
+    future.then(
+      (String value) {
+        if (!completer.isCompleted) {
+          // completer.complete(value);
+          return value;
+        }
+      },
+      onError: (error) {
+        // You can handle or log the error if needed
+        print(error);
+      },
+    );
+  }
+
+  throw Exception("didn't find a valid nonce");
+
+  // return completer.future;
+}
+
+List<int> uint8ToUint4(Uint8List uint8) {
+  int length = uint8.length;
+  List<int> uint4 = List.filled(length * 2, 0);
+  for (int i = 0; i < length; i++) {
+    uint4[i * 2] = uint8[i] ~/ 16;
+    uint4[i * 2 + 1] = uint8[i] % 16;
+  }
+  return uint4;
+}
+
+Uint8List hexToUint8(String hex) {
+  int length = hex.length ~/ 2;
+  Uint8List uint8 = Uint8List(length);
+  for (int i = 0; i < length; i++) {
+    uint8[i] = int.parse(hex.substring(i * 2, i * 2 + 2), radix: 16);
+  }
+  return uint8;
+}
+
+String uint4ToHex(List<int> uint4) {
+  return uint4.map((val) => val.toRadixString(16).toLowerCase()).join('');
+}
+
+String uint8ToHex(Uint8List uint8) {
+  return uint4ToHex(uint8ToUint4(uint8));
 }

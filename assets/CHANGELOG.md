@@ -1,6 +1,6 @@
 ## v0.9.1 - [2023-11-15]
 #### Added
-- local pow generation
+- local work generation
 #### Fixed
 - Minor fixes
 ## v0.9.0 - [2023-11-10]

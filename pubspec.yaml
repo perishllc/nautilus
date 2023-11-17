@@ -11,7 +11,7 @@ publish_to: "none"
 version: 0.9.1
 
 environment:
-  sdk: ">=2.18.2 <3.0.0"
+  sdk: ">=2.19.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -357,8 +357,6 @@ flutter:
     - assets/illustrations/transferfunds_paperwalletonly.svg
     # nano-pow:
     - assets/work/
-    - assets/work/nano-pow/
-    - assets/work/nano-pow/thread-worker.js
     # changelog:
     - assets/CHANGELOG.md
 

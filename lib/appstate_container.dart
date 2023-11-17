@@ -1167,7 +1167,7 @@ class StateContainerState extends State<StateContainer> {
     if (link_as_account != null && link_as_account != wallet!.address) {
       // we aren't on the current account for this receive:
       log.d("Receive is for a different account: $link_as_account");
-      // HANDLE IT: 😔
+      return null;// added to prevent unnecessary receives when using local work generation
 
       final AccountInfoResponse accountResp =
           await sl.get<AccountService>().getAccountInfo(link_as_account);

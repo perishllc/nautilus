@@ -13,6 +13,7 @@ import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:quiver/iterables.dart';
 import 'package:synchronized/synchronized.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/bus/work_event.dart';
@@ -46,6 +47,7 @@ import 'package:wallet_flutter/network/model/response/process_response.dart';
 import 'package:wallet_flutter/network/model/response/receivable_response.dart';
 import 'package:wallet_flutter/network/model/response/subscribe_response.dart';
 import 'package:wallet_flutter/service_locator.dart';
+import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/util/blake2b.dart';
 import 'package:wallet_flutter/util/nanoutil.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
@@ -788,35 +790,35 @@ class AccountService {
 
   Future<String> requestLocalWork(String hash,
       [String subtype = "send"]) async {
-    // String res = "";
-    // final StreamSubscription<WorkEvent> workSub = EventTaxiImpl.singleton()
-    //     .registerTo<WorkEvent>()
-    //     .listen((WorkEvent event) async {
-    //   if (event.type == "work") {
-    //     res = event.message;
-    //   }
-    // });
+    String res = "";
+    final StreamSubscription<WorkEvent> workSub = EventTaxiImpl.singleton()
+        .registerTo<WorkEvent>()
+        .listen((WorkEvent event) async {
+      if (event.type == "work" && event.currentHash == hash) {
+        res = event.value;
+      }
+    });
 
-    // EventTaxiImpl.singleton()
-    //     .fire(WorkEvent(type: "generate_work", message: "$subtype:$hash"));
+    // TODO: figure out how to localize this:
+    // UIUtil.showSnackbar(
+    //   "Generating PoW, this may take a while...",
+    //   context,
+    //   durationMs: durationMs,
+    // );
 
-    // int secondsWaited = 0;
-    // while (res == "") {
-    //   await Future<void>.delayed(const Duration(seconds: 1));
-    //   secondsWaited += 1;
-    //   print(secondsWaited);
-    //   if (secondsWaited > 600) {
-    //     break;
-    //   }
-    // }
+    EventTaxiImpl.singleton().fire(
+        WorkEvent(type: "generate_work", currentHash: hash, subtype: subtype));
 
-    // workSub.cancel();
+    int secondsWaited = 0;
+    while (res == "") {
+      await Future<void>.delayed(const Duration(seconds: 1));
+      secondsWaited += 1;
+      if (secondsWaited > 600) {
+        break;
+      }
+    }
 
-    String res = await compute(generate_work, hash);
-    // String res = await runOnMultipleThreads(hash, 4);
-
-    print("@@@@@@@@@@@@@ res: $res");
-
+    workSub.cancel();
     return res;
   }
 
@@ -842,15 +844,23 @@ class AccountService {
             // rely on the node to handle PoW:
             break;
           case WorkSourceTypes.LOCAL:
-            requestBlock.work = await requestLocalWork(workHash);
+            requestBlock.work = await requestLocalWork(workHash, subtype);
             break;
           case WorkSourceTypes.URL:
             try {
               final String work = (await requestWork(ws.url!, workHash))!;
               requestBlock.work = work;
             } catch (e) {
+              // backup use local work
               log.e("Error getting PoW: $e");
-              requestBlock.work = await requestLocalWork(workHash);
+              int durationMs = 30000;
+              if (subtype == BlockTypes.RECEIVE) {
+                durationMs = 2500;
+              }
+              UIUtil.showSnackbarNoContext(
+                  "Generating PoW, this may take a while...",
+                  durationMs: durationMs);
+              requestBlock.work = await requestLocalWork(workHash, subtype);
             }
             break;
         }

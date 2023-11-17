@@ -39,11 +39,8 @@ class CustomWorkerState extends State<CustomWorker>
         .registerTo<WorkEvent>()
         .listen((WorkEvent event) async {
       if (event.type == "generate_work") {
-        final List<String> msgs = event.message.split(":");
-        final String type = msgs[0];
-        final String hash = msgs[1];
-        webViewController
-            ?.runJavascript("window.type = '$type'; window.hash = '$hash';");
+        webViewController?.runJavascript(
+            "window.type = '${event.subtype}'; window.hash = '${event.currentHash}';");
       }
     });
   }
@@ -77,12 +74,22 @@ class CustomWorkerState extends State<CustomWorker>
               name: "POW",
               onMessageReceived: (JavascriptMessage message) {
                 final String messageString = message.message;
-                final String type =
-                    messageString.substring(0, messageString.indexOf(":"));
-                final String eventMessage =
-                    messageString.substring(messageString.indexOf(":") + 1);
-                EventTaxiImpl.singleton()
-                    .fire(WorkEvent(type: type, message: eventMessage));
+
+                final List<String> msgs = messageString.split(":");
+                final String type = msgs[0];
+                final String currentHash = msgs[1];
+                final String field2 = msgs[2];
+
+                switch (type) {
+                  case "progress":
+                    EventTaxiImpl.singleton().fire(WorkEvent(
+                        type: type, currentHash: currentHash, value: field2));
+                    break;
+                  case "work":
+                    EventTaxiImpl.singleton().fire(WorkEvent(
+                        type: type, currentHash: currentHash, value: field2));
+                    break;
+                }
               }),
           JavascriptChannel(
               name: "CloseWebView",
