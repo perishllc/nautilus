@@ -254,23 +254,23 @@ class DBHelper {
     }
     if (oldVersion == 11) {
       // delete all old work sources:
-      // try {
-      //   final List<WorkSource> sources = await getWorkSources();
-      //   for (int i = 0; i < sources.length; i++) {
-      //     await deleteWorkSource(
-      //       WorkSource(
-      //         id: i,
-      //         name: "",
-      //         selected: false,
-      //         type: WorkSourceTypes.NONE,
-      //       ),
-      //     );
-      //   }
-      // } catch (e) {
-      //   // no-op
-      // }
+      try {
+        final List<WorkSource> sources = await getWorkSources();
+        for (int i = 0; i < sources.length; i++) {
+          await deleteWorkSource(
+            WorkSource(
+              id: i,
+              name: "",
+              selected: false,
+              type: WorkSourceTypes.NONE,
+            ),
+          );
+        }
+      } catch (e) {
+        // no-op
+      }
       // add new ones:
-      await _addDefaultWorkSources();
+      await _addDefaultWorkSources(dbClient: db);
     }
   }
 
