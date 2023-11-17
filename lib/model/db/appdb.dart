@@ -322,7 +322,7 @@ class DBHelper {
     await saveWorkSource(
       WorkSource(
         id: id++,
-        name: "Local (CPU)",
+        name: "Local (GPU)",
         selected: false,
         type: WorkSourceTypes.LOCAL,
       ),
