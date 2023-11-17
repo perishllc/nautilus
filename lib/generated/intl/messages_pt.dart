@@ -71,7 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "O valor da divisão não pode ser maior que o saldo do presente"),
         "amountMissing": MessageLookupByLibrary.simpleMessage(
             "Por favor insira uma quantia"),
-        "appWallet": MessageLookupByLibrary.simpleMessage("% 1 Carteira"),
+        "appWallet": MessageLookupByLibrary.simpleMessage("%1 Carteira"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Percebemos que você clicou em um link que contém alguns nano. Você gostaria de pular o processo de configuração? Você sempre pode mudar as coisas mais tarde.\n\n No entanto, se você tiver uma semente existente que deseja importar, selecione não."),
         "askTracking": MessageLookupByLibrary.simpleMessage(
@@ -108,7 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockUser":
             MessageLookupByLibrary.simpleMessage("Bloquear este usuário"),
         "blockedAdded":
-            MessageLookupByLibrary.simpleMessage("% 1 bloqueado com sucesso."),
+            MessageLookupByLibrary.simpleMessage("%1 bloqueado com sucesso."),
         "blockedExists":
             MessageLookupByLibrary.simpleMessage("Usuário já bloqueado!"),
         "blockedHeader": MessageLookupByLibrary.simpleMessage("Bloqueado"),
@@ -121,7 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedNameMissing":
             MessageLookupByLibrary.simpleMessage("Escolha um apelido"),
         "blockedRemoved":
-            MessageLookupByLibrary.simpleMessage("O% 1 foi desbloqueado!"),
+            MessageLookupByLibrary.simpleMessage("O %1 foi desbloqueado!"),
         "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
             "Parece que não conseguimos alcançar a API Branch, isso geralmente é causado por algum tipo de problema de rede ou VPN bloqueando a conexão.\n\n Você ainda poderá usar o aplicativo normalmente, no entanto, enviar e receber cartões-presente pode não funcionar."),
         "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
@@ -253,7 +253,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Conta Principal"),
         "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
-            "Confira Nautilus! Enviei-lhe alguns nano com este link:"),
+            "Confira Nautilus! Enviei-lhe alguns %2 com este link:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Conta %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Excluir"),
@@ -358,7 +358,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("@coworker"),
         "exampleRecRecipientMessage":
             MessageLookupByLibrary.simpleMessage("Dinheiro do gás"),
-        "exchangeCurrency": MessageLookupByLibrary.simpleMessage("Troca % 2"),
+        "exchangeCurrency": MessageLookupByLibrary.simpleMessage("Troca %2"),
         "exchangeNano": MessageLookupByLibrary.simpleMessage("Troca NANO"),
         "existingPasswordHint":
             MessageLookupByLibrary.simpleMessage("Digite a senha atual"),
@@ -383,7 +383,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favoriteNameMissing": MessageLookupByLibrary.simpleMessage(
             "Escolha um nome para este favorito"),
         "favoriteRemoved": MessageLookupByLibrary.simpleMessage(
-            "O% 1 foi removido dos favoritos!"),
+            "O %1 foi removido dos favoritos!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Favoritos"),
         "featured": MessageLookupByLibrary.simpleMessage("Em destaque"),
         "fewDaysAgo": MessageLookupByLibrary.simpleMessage("Alguns dias atrás"),
@@ -402,7 +402,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Banner de financiamento"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Financiamento"),
-        "getCurrency": MessageLookupByLibrary.simpleMessage("Obtenha % 2"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "Gerando PoW, isso pode demorar um pouco (> 20 segundos)..."),
+        "getCurrency": MessageLookupByLibrary.simpleMessage("Obtenha %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Obter NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Você tem um dom!"),
         "giftAlertEmpty":
@@ -735,7 +737,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tem certeza de que deseja ocultar esta conta? Você pode adicioná-la novamente tocando no botão \"%1\""),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Desbloquear"),
         "removeBlockedConfirmation": MessageLookupByLibrary.simpleMessage(
-            "Tem certeza de que deseja desbloquear o% 1?"),
+            "Tem certeza de que deseja desbloquear o%1?"),
         "removeContact":
             MessageLookupByLibrary.simpleMessage("Remover Contato"),
         "removeContactConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -753,7 +755,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Representantes"),
         "request": MessageLookupByLibrary.simpleMessage("Solicitação"),
         "requestAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Solicitação% 1% 2"),
+            MessageLookupByLibrary.simpleMessage("Solicitação %1 %2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Falha na solicitação: Este usuário não parece ter o Nautilus instalado ou as notificações estão desativadas."),
         "requestFrom": MessageLookupByLibrary.simpleMessage("Solicitar de"),
@@ -823,7 +825,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Não é possível solicitar de si mesmo"),
         "send": MessageLookupByLibrary.simpleMessage("Enviar"),
         "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Enviar %1 NANO?"),
+            MessageLookupByLibrary.simpleMessage("Enviar %1 %2?"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("Enviar valores"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Um erro ocorreu. Tente mais tarde."),
@@ -867,7 +869,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsTransfer":
             MessageLookupByLibrary.simpleMessage("Carteira de Papel"),
         "share": MessageLookupByLibrary.simpleMessage("Compartilhar"),
-        "shareApp": MessageLookupByLibrary.simpleMessage("Compartilhar % 1"),
+        "shareApp": MessageLookupByLibrary.simpleMessage("Compartilhar %1"),
         "shareAppText": MessageLookupByLibrary.simpleMessage(
             "Verifique %1! Uma carteira móvel NANO de primeira linha!"),
         "shareLink": MessageLookupByLibrary.simpleMessage("Compartilhar link"),
@@ -903,7 +905,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("Simplex"),
         "social": MessageLookupByLibrary.simpleMessage("Social"),
         "someone": MessageLookupByLibrary.simpleMessage("alguém"),
-        "spendCurrency": MessageLookupByLibrary.simpleMessage("Gastar % 2"),
+        "spendCurrency": MessageLookupByLibrary.simpleMessage("Gastar %2"),
         "spendNano": MessageLookupByLibrary.simpleMessage("Gaste NANO"),
         "splitBill": MessageLookupByLibrary.simpleMessage("Conta dividida"),
         "splitBillHeader":
@@ -1011,8 +1013,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "upcomingButton": MessageLookupByLibrary.simpleMessage("Por vir"),
         "uptime": MessageLookupByLibrary.simpleMessage("tempo online"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("Insira um URL"),
-        "useAppRep": MessageLookupByLibrary.simpleMessage("Usar % 1 Rep"),
-        "useCurrency": MessageLookupByLibrary.simpleMessage("Usar % 2"),
+        "useAppRep": MessageLookupByLibrary.simpleMessage("Usar %1 Rep"),
+        "useCurrency": MessageLookupByLibrary.simpleMessage("Usar %2"),
         "useNano": MessageLookupByLibrary.simpleMessage("Usar NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),

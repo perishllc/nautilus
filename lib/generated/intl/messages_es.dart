@@ -409,6 +409,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Bandera de Financiación"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Financiación"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "Generando PoW, esto puede tardar un poco (> 20 segundos)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("Obtener %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Obtén NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("¡Tienes un regalo!"),
@@ -596,7 +598,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "Para que esta función funcione correctamente, las notificaciones deben estar habilitadas"),
         "notificationTitle":
-            MessageLookupByLibrary.simpleMessage("%1 NANO recibidos"),
+            MessageLookupByLibrary.simpleMessage("%1 %2 recibidos"),
         "notificationWarning": MessageLookupByLibrary.simpleMessage(
             "Notificaciones deshabilitadas"),
         "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
@@ -833,7 +835,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "No se puede solicitar a mí mismo"),
         "send": MessageLookupByLibrary.simpleMessage("Enviar"),
         "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Enviar %1 NANO"),
+            MessageLookupByLibrary.simpleMessage("Enviar %1 %2"),
         "sendAmounts":
             MessageLookupByLibrary.simpleMessage("Enviar cantidades"),
         "sendError": MessageLookupByLibrary.simpleMessage(
@@ -982,7 +984,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferComplete": MessageLookupByLibrary.simpleMessage(
             "%1 NANO se han transferido con éxito a su billetera de Nautilus."),
         "transferConfirmInfo": MessageLookupByLibrary.simpleMessage(
-            "Se ha detectado una billetera con un balance de %1 NANO.\n"),
+            "Se ha detectado una billetera con un balance de %1 %2.\n"),
         "transferConfirmInfoSecond": MessageLookupByLibrary.simpleMessage(
             "Pulse confirmar para transferir los fondos.\n"),
         "transferConfirmInfoThird": MessageLookupByLibrary.simpleMessage(

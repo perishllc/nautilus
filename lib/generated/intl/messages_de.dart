@@ -411,6 +411,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Finanzierungsbanner"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finanzierung"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "PoW wird generiert, dies kann eine Weile dauern (> 20 Sekunden) ..."),
         "getCurrency":
             MessageLookupByLibrary.simpleMessage("Holen Sie sich %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Holen Sie sich Nano"),
@@ -548,7 +550,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nachricht kopiert"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Nachricht"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
-            "Der Mindest-Sendebetrag beträgt %1 NANO"),
+            "Der Mindest-Sendebetrag beträgt %1 %2"),
         "minuteAgo": MessageLookupByLibrary.simpleMessage("Vor einer Minute"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 ist kein gültiges Wort"),
@@ -838,7 +840,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kann nicht von sich selbst anfragen"),
         "send": MessageLookupByLibrary.simpleMessage("Senden"),
         "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("%1 NANO senden?"),
+            MessageLookupByLibrary.simpleMessage("%1 %2 senden?"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("Beträge senden"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Ein Fehler ist aufgetreten. Versuche es später erneut."),

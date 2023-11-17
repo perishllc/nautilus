@@ -2346,6 +2346,16 @@ class Z {
     );
   }
 
+  /// `Generating PoW, this may take a while (> 20 seconds)...`
+  String get generatingWork {
+    return Intl.message(
+      'Generating PoW, this may take a while (> 20 seconds)...',
+      name: 'generatingWork',
+      desc: 'generating_local_work',
+      args: [],
+    );
+  }
+
   /// `Get %2`
   String get getCurrency {
     return Intl.message(

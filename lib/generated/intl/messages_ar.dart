@@ -313,7 +313,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("من شخص ما"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
-            "مرحبا بكم في نتريوم. بمجرد تلقي NANO ، ستظهر المعاملات كما يلي:"),
+            "مرحبا بكم في نتريوم. بمجرد تلقي %2 ، ستظهر المعاملات كما يلي:"),
         "exampleCardLittle": MessageLookupByLibrary.simpleMessage("القليل"),
         "exampleCardLot": MessageLookupByLibrary.simpleMessage("كثيرا من"),
         "exampleCardTo": MessageLookupByLibrary.simpleMessage("إلى شخص ما"),
@@ -380,6 +380,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("لافتة التمويل"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("التمويل"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "إنشاء إثبات العمل (PoW)، قد يستغرق ذلك بعض الوقت (> 20 ثانية)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("احصل على٪ 2"),
         "getNano": MessageLookupByLibrary.simpleMessage("احصل على NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("لديك هدية!"),
@@ -432,7 +434,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "importGift": MessageLookupByLibrary.simpleMessage(
             "يحتوي الرابط الذي نقرت عليه على بعض النانو، هل ترغب في استيراده إلى هذه المحفظة، أو إعادته إلى من أرسله؟"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
-            "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
+            "Unfortunately the link you clicked that contained some %2 appears to be empty, but you can still see the amount and associated message."),
         "importGiftIntro": MessageLookupByLibrary.simpleMessage(
             "يبدو أنك نقرت على رابط يحتوي على بعض NANO ، من أجل تلقي هذه الأموال ، نحتاج فقط لك لإنهاء إعداد محفظتك."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
@@ -561,7 +563,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "لكي تعمل هذه الميزة بشكل صحيح، يجب تمكين الإشعارات."),
         "notificationTitle":
-            MessageLookupByLibrary.simpleMessage("تم استلام %1 NANO"),
+            MessageLookupByLibrary.simpleMessage("تم استلام %1 %2"),
         "notificationWarning":
             MessageLookupByLibrary.simpleMessage("تعطيل الإخطارات"),
         "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
@@ -785,8 +787,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "selfSendError":
             MessageLookupByLibrary.simpleMessage("لا يمكن الطلب من الذات"),
         "send": MessageLookupByLibrary.simpleMessage("إرسال"),
-        "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("أرسل %1 NANO"),
+        "sendAmountConfirm": MessageLookupByLibrary.simpleMessage("أرسل %1 %2"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("إرسال المبالغ"),
         "sendError":
             MessageLookupByLibrary.simpleMessage("يوجد خطأ. حاول لاحقاً."),
@@ -923,9 +924,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferClose": MessageLookupByLibrary.simpleMessage(
             "اضغط في أي مكان لغلق النافذة."),
         "transferComplete": MessageLookupByLibrary.simpleMessage(
-            "تم تحويل %1 NANO إلى محفظة نتريوم.\n"),
-        "transferConfirmInfo": MessageLookupByLibrary.simpleMessage(
-            "تم كشف محفظة برصيد %1 NANO.\n"),
+            "تم تحويل %1 %2 إلى محفظة نتريوم.\n"),
+        "transferConfirmInfo":
+            MessageLookupByLibrary.simpleMessage("تم كشف محفظة برصيد %1 %2.\n"),
         "transferConfirmInfoSecond":
             MessageLookupByLibrary.simpleMessage("إضغط لتأكيد تحويل الرصيد.\n"),
         "transferConfirmInfoThird":

@@ -103,7 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockUser":
             MessageLookupByLibrary.simpleMessage("Blokir Pengguna ini"),
         "blockedAdded":
-            MessageLookupByLibrary.simpleMessage("% 1 berhasil diblokir."),
+            MessageLookupByLibrary.simpleMessage("%1 berhasil diblokir."),
         "blockedExists":
             MessageLookupByLibrary.simpleMessage("Pengguna sudah Diblokir!"),
         "blockedHeader": MessageLookupByLibrary.simpleMessage("Diblokir"),
@@ -116,7 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedNameMissing":
             MessageLookupByLibrary.simpleMessage("Pilih Nama Nick"),
         "blockedRemoved":
-            MessageLookupByLibrary.simpleMessage("% 1 telah dibuka blokir!"),
+            MessageLookupByLibrary.simpleMessage("%1 telah dibuka blokir!"),
         "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
             "Kami sepertinya tidak dapat menjangkau API Cabang, ini biasanya disebabkan oleh semacam masalah jaringan atau VPN yang memblokir koneksi.\n\n Anda masih dapat menggunakan aplikasi seperti biasa, namun mengirim dan menerima kartu hadiah mungkin tidak berfungsi."),
         "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
@@ -380,7 +380,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favoriteNameMissing": MessageLookupByLibrary.simpleMessage(
             "Pilih Nama untuk Favorit ini"),
         "favoriteRemoved": MessageLookupByLibrary.simpleMessage(
-            "% 1 telah dihapus dari favorit!"),
+            "%1 telah dihapus dari favorit!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Favorit"),
         "featured": MessageLookupByLibrary.simpleMessage("Unggulan"),
         "fewDaysAgo":
@@ -400,6 +400,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Spanduk Pendanaan"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Pendanaan"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "Menghasilkan PoW, ini mungkin memakan waktu cukup lama (> 20 detik)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("Dapatkan %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Dapatkan NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Kau punya hadiah!"),
@@ -583,7 +585,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "Agar fitur ini berfungsi dengan benar, notifikasi harus diaktifkan"),
         "notificationTitle":
-            MessageLookupByLibrary.simpleMessage("Menerima %1 NANO"),
+            MessageLookupByLibrary.simpleMessage("Menerima %1 %2"),
         "notificationWarning":
             MessageLookupByLibrary.simpleMessage("Notifikasi Dinonaktifkan"),
         "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
@@ -726,7 +728,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Anda yakin akan menyembunyikan akun ini? Anda dapat menambahkan kembali dengan klik tombol \"%1\"."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Buka blokir"),
         "removeBlockedConfirmation": MessageLookupByLibrary.simpleMessage(
-            "Anda yakin ingin membuka blokir% 1?"),
+            "Anda yakin ingin membuka blokir %1?"),
         "removeContact": MessageLookupByLibrary.simpleMessage("Hapus Kontak"),
         "removeContactConfirmation": MessageLookupByLibrary.simpleMessage(
             "Anda yakib akan menghapus %1?"),
@@ -742,7 +744,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Representatif"),
         "request": MessageLookupByLibrary.simpleMessage("Permintaan"),
         "requestAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Permintaan% 1% 2"),
+            MessageLookupByLibrary.simpleMessage("Permintaan %1 %2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Permintaan Gagal: Pengguna ini tampaknya tidak menginstal Nautilus, atau menonaktifkan notifikasi."),
         "requestFrom": MessageLookupByLibrary.simpleMessage("Permintaan Dari"),
@@ -813,7 +815,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tidak dapat meminta dari diri sendiri"),
         "send": MessageLookupByLibrary.simpleMessage("Kirim"),
         "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Kirim %1 Nano?"),
+            MessageLookupByLibrary.simpleMessage("Kirim %1 %2?"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("Kirim Jumlah"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Terjadi kesalahan. Coba lagi nanti."),
@@ -955,7 +957,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferClose": MessageLookupByLibrary.simpleMessage(
             "Ketuk di mana saja untuk melanjutkan."),
         "transferComplete": MessageLookupByLibrary.simpleMessage(
-            "%1 NANO berhasil ditransfer ke Dompet Nautilus Anda."),
+            "%1 %2 berhasil ditransfer ke Dompet Nautilus Anda."),
         "transferConfirmInfo": MessageLookupByLibrary.simpleMessage(
             "Dompet dengan saldo %1 NANO telah terdeteksi.\n"),
         "transferConfirmInfoSecond": MessageLookupByLibrary.simpleMessage(

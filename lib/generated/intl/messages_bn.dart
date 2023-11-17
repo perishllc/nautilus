@@ -108,7 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockUser":
             MessageLookupByLibrary.simpleMessage("এই ব্যবহারকারীকে ব্লক করুন"),
         "blockedAdded":
-            MessageLookupByLibrary.simpleMessage("% 1 সফলভাবে ব্লক করা হয়েছে।"),
+            MessageLookupByLibrary.simpleMessage("%1 সফলভাবে ব্লক করা হয়েছে।"),
         "blockedExists": MessageLookupByLibrary.simpleMessage(
             "ব্যবহারকারী ইতোমধ্যে ব্লক করা হয়েছে!"),
         "blockedHeader": MessageLookupByLibrary.simpleMessage("অবরুদ্ধ"),
@@ -121,7 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedNameMissing":
             MessageLookupByLibrary.simpleMessage("একটি ডাকনাম বেছে নিন"),
         "blockedRemoved":
-            MessageLookupByLibrary.simpleMessage("% 1 আনব্লক করা হয়েছে!"),
+            MessageLookupByLibrary.simpleMessage("%1 আনব্লক করা হয়েছে!"),
         "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
             "আমরা ব্রাঞ্চ এপিআই-এ পৌঁছাতে পারছি না, এটি সাধারণত কিছু ধরণের নেটওয়ার্ক সমস্যা বা VPN সংযোগ ব্লক করার কারণে হয়।\n\n আপনি এখনও স্বাভাবিক হিসাবে অ্যাপটি ব্যবহার করতে সক্ষম হবেন, তবে উপহার কার্ড পাঠানো এবং গ্রহণ করা কাজ নাও করতে পারে।"),
         "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
@@ -384,7 +384,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favoriteNameMissing": MessageLookupByLibrary.simpleMessage(
             "এই পছন্দের জন্য একটি নাম বেছে নিন"),
         "favoriteRemoved": MessageLookupByLibrary.simpleMessage(
-            "% 1 ফেভারিট থেকে মুছে ফেলা হয়েছে!"),
+            "%1 ফেভারিট থেকে মুছে ফেলা হয়েছে!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("প্রিয়"),
         "featured": MessageLookupByLibrary.simpleMessage("বৈশিষ্ট্যযুক্ত"),
         "fewDaysAgo": MessageLookupByLibrary.simpleMessage("কিছু দিন আগে"),
@@ -401,6 +401,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("ফান্ডিং ব্যানার"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("অর্থায়ন"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "PoW তৈরি করা হচ্ছে, এতে কিছু সময় লাগতে পারে (> 20 সেকেন্ড)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("%2 পান"),
         "getNano": MessageLookupByLibrary.simpleMessage("NANO পান"),
         "giftAlert":
@@ -535,7 +537,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("বার্তা অনুলিপি করা হয়েছে"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("বার্তা"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
-            "ন্যূনতম পাঠানোর পরিমাণ %1 NANO"),
+            "ন্যূনতম পাঠানোর পরিমাণ %1 %2"),
         "minuteAgo": MessageLookupByLibrary.simpleMessage("এক মিনিট আগে"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 একটি বৈধ শব্দ নয়"),
@@ -588,7 +590,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "এই বৈশিষ্ট্যটি সঠিকভাবে কাজ করার জন্য, বিজ্ঞপ্তিগুলি সক্ষম করা আবশ্যক"),
         "notificationTitle":
-            MessageLookupByLibrary.simpleMessage("%1 NANO পেয়েছি"),
+            MessageLookupByLibrary.simpleMessage("%1 %2 পেয়েছি"),
         "notificationWarning":
             MessageLookupByLibrary.simpleMessage("বিজ্ঞপ্তি নিষ্ক্রিয়"),
         "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
@@ -730,7 +732,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "removeBlocked":
             MessageLookupByLibrary.simpleMessage("অবরোধ মুক্ত করা"),
         "removeBlockedConfirmation": MessageLookupByLibrary.simpleMessage(
-            "আপনি কি নিশ্চিত% 1 আনব্লক করতে চান?"),
+            "আপনি কি নিশ্চিত%1 আনব্লক করতে চান?"),
         "removeContact":
             MessageLookupByLibrary.simpleMessage("কন্টাক্ট মুছে ফেলুন"),
         "removeContactConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -748,7 +750,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("রিপ্রেজেন্টেটিভ"),
         "request": MessageLookupByLibrary.simpleMessage("অনুরোধ"),
         "requestAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("অনুরোধ% 1"),
+            MessageLookupByLibrary.simpleMessage("অনুরোধ%1"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "অনুরোধ ব্যর্থ: এই ব্যবহারকারী Nautilus ইনস্টল করা আছে বলে মনে হচ্ছে না, অথবা বিজ্ঞপ্তি অক্ষম আছে।"),
         "requestFrom": MessageLookupByLibrary.simpleMessage("অনুরোধক্রমে"),
@@ -821,7 +823,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("স্ব থেকে অনুরোধ করা যাবে না"),
         "send": MessageLookupByLibrary.simpleMessage("পাঠান"),
         "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("%1 NANO পাঠান"),
+            MessageLookupByLibrary.simpleMessage("%1 %2 পাঠান"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("পরিমাণ পাঠান"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "একটি ত্রুটি ঘটেছে. পরে আবার চেষ্টা করুন।"),
@@ -961,9 +963,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferClose": MessageLookupByLibrary.simpleMessage(
             "বন্ধ করতে যেকোনো জায়গায় আলতো চাপুন।"),
         "transferComplete": MessageLookupByLibrary.simpleMessage(
-            "%1 NANO সফলভাবে আপনার Natrium Wallet এ স্থানান্তরিত হয়েছে। <নতুন লাইন>"),
+            "%1 %2 সফলভাবে আপনার Natrium Wallet এ স্থানান্তরিত হয়েছে। <নতুন লাইন>"),
         "transferConfirmInfo": MessageLookupByLibrary.simpleMessage(
-            "%1 NANO ব্যালেন্স সহ একটি মানিব্যাগ সনাক্ত করা হয়েছে। <নতুন লাইন>"),
+            "%1 %2 ব্যালেন্স সহ একটি মানিব্যাগ সনাক্ত করা হয়েছে। <নতুন লাইন>"),
         "transferConfirmInfoSecond": MessageLookupByLibrary.simpleMessage(
             "ফান্ড ট্রান্সফার করতে কনফার্ম ট্যাপ করুন। <নতুন লাইন>"),
         "transferConfirmInfoThird": MessageLookupByLibrary.simpleMessage(

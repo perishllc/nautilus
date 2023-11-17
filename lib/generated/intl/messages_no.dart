@@ -396,6 +396,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Finansieringsbanner"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finansiering"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "Genererer PoW, dette kan ta en stund (> 20 sekunder)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("Få %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Skaff deg NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Du har en gave!"),
@@ -528,7 +530,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Melding kopiert"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Melding"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
-            "Minste overførselsbeløp er %1 NANO"),
+            "Minste overførselsbeløp er %1 %2"),
         "minuteAgo":
             MessageLookupByLibrary.simpleMessage("For et minutt siden"),
         "mnemonicInvalidWord":
@@ -583,7 +585,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "For at denne funksjonen skal fungere riktig, må varsler være aktivert"),
         "notificationTitle":
-            MessageLookupByLibrary.simpleMessage("%1 NANO mottatt"),
+            MessageLookupByLibrary.simpleMessage("%1 %2 mottatt"),
         "notificationWarning":
             MessageLookupByLibrary.simpleMessage("Varsler deaktivert"),
         "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
@@ -814,8 +816,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "selfSendError":
             MessageLookupByLibrary.simpleMessage("Kan ikke be om fra meg selv"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
-        "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Send %1 NANO"),
+        "sendAmountConfirm": MessageLookupByLibrary.simpleMessage("Send %1 %2"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("Send beløp"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Det oppsto en feil. Prøv igjen senere."),

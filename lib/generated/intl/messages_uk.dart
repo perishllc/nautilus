@@ -107,7 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockUser": MessageLookupByLibrary.simpleMessage(
             "Заблокувати цього користувача"),
         "blockedAdded":
-            MessageLookupByLibrary.simpleMessage("% 1 успішно заблоковано."),
+            MessageLookupByLibrary.simpleMessage("%1 успішно заблоковано."),
         "blockedExists": MessageLookupByLibrary.simpleMessage(
             "Користувач вже заблокований!"),
         "blockedHeader": MessageLookupByLibrary.simpleMessage("Заблоковано"),
@@ -120,7 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedNameMissing":
             MessageLookupByLibrary.simpleMessage("Виберіть назву псевдоніма"),
         "blockedRemoved":
-            MessageLookupByLibrary.simpleMessage("% 1 розблоковано!"),
+            MessageLookupByLibrary.simpleMessage("%1 розблоковано!"),
         "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
             "Здається, ми не можемо отримати доступ до Branch API, зазвичай це спричинено якоюсь проблемою з мережею або VPN, що блокує з’єднання.\n\n Ви все ще зможете користуватися програмою як зазвичай, однак надсилання й отримання подарункових карток може не працювати."),
         "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
@@ -387,8 +387,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Введіть назву псевдоніма"),
         "favoriteNameMissing": MessageLookupByLibrary.simpleMessage(
             "Виберіть назву для цього Улюбленця"),
-        "favoriteRemoved": MessageLookupByLibrary.simpleMessage(
-            "% 1 було вилучено з обраних!"),
+        "favoriteRemoved":
+            MessageLookupByLibrary.simpleMessage("%1 було вилучено з обраних!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Вибране"),
         "featured": MessageLookupByLibrary.simpleMessage("Рекомендовані"),
         "fewDaysAgo":
@@ -408,6 +408,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Банер фінансування"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Фінансування"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "Генерація PoW, це може зайняти деякий час (> 20 секунд)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("Отримати %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Отримати NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("У вас є подарунок!"),
@@ -543,7 +545,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Повідомлення скопійовано"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Повідомлення"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
-            "Мінімальна сума для пересилання %1 NANO"),
+            "Мінімальна сума для пересилання %1 %2"),
         "minuteAgo": MessageLookupByLibrary.simpleMessage("Хвилину тому"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 неправильне слово"),
@@ -597,7 +599,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "Щоб ця функція працювала коректно, повідомлення повинні бути включені"),
         "notificationTitle":
-            MessageLookupByLibrary.simpleMessage("Отримано %1 NANO"),
+            MessageLookupByLibrary.simpleMessage("Отримано %1 %2"),
         "notificationWarning":
             MessageLookupByLibrary.simpleMessage("Сповіщення вимкнено"),
         "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
@@ -744,7 +746,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Чи дійсно ви бажаєте приховати цей профіль? Ви зможете його побачити торкнувши кнопку \"%1\"."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Розблокувати"),
         "removeBlockedConfirmation": MessageLookupByLibrary.simpleMessage(
-            "Ви справді бажаєте розблокувати% 1?"),
+            "Ви справді бажаєте розблокувати %1?"),
         "removeContact":
             MessageLookupByLibrary.simpleMessage("Видалити контакт"),
         "removeContactConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -761,7 +763,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "representatives": MessageLookupByLibrary.simpleMessage("Представники"),
         "request": MessageLookupByLibrary.simpleMessage("Запит"),
         "requestAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Запит% 1% 2"),
+            MessageLookupByLibrary.simpleMessage("Запит %1 %2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Помилка запиту: Здається, у цього користувача не встановлено Nautilus або вимкнено сповіщення."),
         "requestFrom": MessageLookupByLibrary.simpleMessage("Запит від"),
@@ -832,7 +834,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Не можу подати запит від себе"),
         "send": MessageLookupByLibrary.simpleMessage("Надіслати"),
         "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Надіслати %1 Nano"),
+            MessageLookupByLibrary.simpleMessage("Надіслати %1 %2"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("Відправити суми"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Сталася помилка. Спробуйте ще раз пізніше."),
@@ -982,7 +984,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferComplete": MessageLookupByLibrary.simpleMessage(
             "%1 NANO успішно переказано до вашого гаманця Nautilus. \n"),
         "transferConfirmInfo": MessageLookupByLibrary.simpleMessage(
-            "Знайдено гаманець з балансом %1 NANO . \n"),
+            "Знайдено гаманець з балансом %1 %2 . \n"),
         "transferConfirmInfoSecond": MessageLookupByLibrary.simpleMessage(
             "Натисніть сюди щоб підтвердити переказ коштів. \n"),
         "transferConfirmInfoThird": MessageLookupByLibrary.simpleMessage(

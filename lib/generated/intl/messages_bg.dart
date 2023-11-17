@@ -103,7 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockUser": MessageLookupByLibrary.simpleMessage(
             "Блокиране на този потребител"),
         "blockedAdded":
-            MessageLookupByLibrary.simpleMessage("% 1 е блокиран успешно."),
+            MessageLookupByLibrary.simpleMessage("%1 е блокиран успешно."),
         "blockedExists": MessageLookupByLibrary.simpleMessage(
             "Потребителят вече е блокиран!"),
         "blockedHeader": MessageLookupByLibrary.simpleMessage("Блокиран"),
@@ -116,7 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedNameMissing":
             MessageLookupByLibrary.simpleMessage("Изберете име на Ник"),
         "blockedRemoved":
-            MessageLookupByLibrary.simpleMessage("% 1 е бил отблокиран!"),
+            MessageLookupByLibrary.simpleMessage("%1 е бил отблокиран!"),
         "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
             "Изглежда не можем да достигнем до Branch API, това обикновено се дължи на някакъв мрежов проблем или VPN блокиране на връзката.\n\n Все още трябва да можете да използвате приложението както обикновено, но изпращането и получаването на карти за подаръци може да не работи."),
         "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
@@ -381,7 +381,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favoriteNameMissing": MessageLookupByLibrary.simpleMessage(
             "Изберете име за този фаворит"),
         "favoriteRemoved":
-            MessageLookupByLibrary.simpleMessage("% 1 е премахнат от любими!"),
+            MessageLookupByLibrary.simpleMessage("%1 е премахнат от любими!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Любими"),
         "featured": MessageLookupByLibrary.simpleMessage("Препоръчани"),
         "fewDaysAgo": MessageLookupByLibrary.simpleMessage("Преди няколко дни"),
@@ -400,6 +400,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Банер за финансиране"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Финансиране"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "Генериране на PoW, това може да отнеме известно време (> 20 секунди)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("Вземете %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Вземете NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Имаш дарба!"),
@@ -729,7 +731,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Наистина ли искате да скриете този акаунт? Може да го добавите по-късно като натиснете бутона  \"%1\"."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Отблокиране"),
         "removeBlockedConfirmation": MessageLookupByLibrary.simpleMessage(
-            "Сигурни ли сте, че искате да деблокирате% 1?"),
+            "Сигурни ли сте, че искате да деблокирате %1?"),
         "removeContact":
             MessageLookupByLibrary.simpleMessage("Премахни Контакт"),
         "removeContactConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -747,7 +749,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Представители"),
         "request": MessageLookupByLibrary.simpleMessage("Заявка"),
         "requestAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Заявка% 1% 2"),
+            MessageLookupByLibrary.simpleMessage("Заявка %1 %2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Заявката е неуспешна: Изглежда, че този потребител няма инсталиран Nautilus или известията са деактивирани."),
         "requestFrom": MessageLookupByLibrary.simpleMessage("Заявка от"),
@@ -817,7 +819,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Не мога да поискам от себе си"),
         "send": MessageLookupByLibrary.simpleMessage("Изпрати"),
         "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Изпрати %1 NANO"),
+            MessageLookupByLibrary.simpleMessage("Изпрати %1 %2"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("Изпратете суми"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Възникна грешка. Опитайте по-късно."),

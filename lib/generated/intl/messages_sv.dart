@@ -108,7 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockUser":
             MessageLookupByLibrary.simpleMessage("Blockera denna användare"),
         "blockedAdded": MessageLookupByLibrary.simpleMessage(
-            "% 1 blockerades framgångsrikt."),
+            "%1 blockerades framgångsrikt."),
         "blockedExists": MessageLookupByLibrary.simpleMessage(
             "Användaren är redan blockerad!"),
         "blockedHeader": MessageLookupByLibrary.simpleMessage("blockerad"),
@@ -121,7 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedNameMissing":
             MessageLookupByLibrary.simpleMessage("Välj ett smeknamn"),
         "blockedRemoved":
-            MessageLookupByLibrary.simpleMessage("% 1 har avblockerats!"),
+            MessageLookupByLibrary.simpleMessage("%1 har avblockerats!"),
         "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
             "Vi verkar inte kunna nå Branch API, detta beror vanligtvis på något slags nätverksproblem eller att VPN blockerar anslutningen.\n\n Du bör fortfarande kunna använda appen som vanligt, men att skicka och ta emot presentkort kanske inte fungerar."),
         "branchConnectErrorShortDesc":
@@ -380,7 +380,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favoriteNameMissing": MessageLookupByLibrary.simpleMessage(
             "Välj ett namn för den här favoriten"),
         "favoriteRemoved": MessageLookupByLibrary.simpleMessage(
-            "% 1 har tagits bort från favoriter!"),
+            "%1 har tagits bort från favoriter!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("favoriter"),
         "featured": MessageLookupByLibrary.simpleMessage("Dagens"),
         "fewDaysAgo":
@@ -399,6 +399,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Finansieringsbanner"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finansiering"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "Genererar PoW, detta kan ta ett tag (> 20 sekunder)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("Hämta %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Skaffa NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Du har en gåva!"),
@@ -584,7 +586,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "För att den här funktionen ska fungera korrekt måste aviseringar vara aktiverade"),
         "notificationTitle":
-            MessageLookupByLibrary.simpleMessage("Mottog %1 NANO"),
+            MessageLookupByLibrary.simpleMessage("Mottog %1 %2"),
         "notificationWarning":
             MessageLookupByLibrary.simpleMessage("Aviseringar inaktiverade"),
         "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
@@ -725,7 +727,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Är du säker på att du vill dölja kontot? Du kan lägga till det igen genom att trycka på \"%1\" knappen."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Avblockera"),
         "removeBlockedConfirmation": MessageLookupByLibrary.simpleMessage(
-            "Är du säker på att du vill avblockera% 1?"),
+            "Är du säker på att du vill avblockera %1?"),
         "removeContact":
             MessageLookupByLibrary.simpleMessage("Ta bort kontakt"),
         "removeContactConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -743,7 +745,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Representanter"),
         "request": MessageLookupByLibrary.simpleMessage("Förfrågan"),
         "requestAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Begäran% 1% 2"),
+            MessageLookupByLibrary.simpleMessage("Begäran %1 %2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Begäran misslyckades: Den här användaren verkar inte ha Nautilus installerat eller har aviseringar inaktiverade."),
         "requestFrom": MessageLookupByLibrary.simpleMessage("Förfrågan från"),
@@ -815,7 +817,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kan inte begära från sig själv"),
         "send": MessageLookupByLibrary.simpleMessage("Skicka"),
         "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Skicka %1 Nano?"),
+            MessageLookupByLibrary.simpleMessage("Skicka %1 %2?"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("Skicka belopp"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Ett fel inträffade. Försök igen senare."),
@@ -953,7 +955,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferClose": MessageLookupByLibrary.simpleMessage(
             "Tryck någonstans för att stänga fönstret."),
         "transferComplete": MessageLookupByLibrary.simpleMessage(
-            "%1 NANO har överförts till din Nautilus-plånbok."),
+            "%1 %2 har överförts till din Nautilus-plånbok."),
         "transferConfirmInfo": MessageLookupByLibrary.simpleMessage(
             "En plånbok med ett saldo på %1 NANO har upptäckts.\n"),
         "transferConfirmInfoSecond": MessageLookupByLibrary.simpleMessage(

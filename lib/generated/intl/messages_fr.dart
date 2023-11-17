@@ -417,6 +417,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Bannière de donation"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Donation"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "Génération de PoW, cela peut prendre un certain temps (> 20 secondes)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("Obtenez %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Obtenez NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Tu as un cadeau !"),

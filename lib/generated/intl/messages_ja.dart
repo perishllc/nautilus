@@ -338,6 +338,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("ファンディング バナー"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("資金調達"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "PoW を生成しています。これにはしばらく時間がかかる場合があります (20 秒以上)。"),
         "getCurrency": MessageLookupByLibrary.simpleMessage("%2 を取得"),
         "getNano": MessageLookupByLibrary.simpleMessage("ナノを入手"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("おまえには贈り物がある！"),

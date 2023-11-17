@@ -68,7 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "L\'import dividit no pot ser superior al saldo del regal"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Prosím zadejte částku"),
-        "appWallet": MessageLookupByLibrary.simpleMessage("Cartera % 1"),
+        "appWallet": MessageLookupByLibrary.simpleMessage("Cartera %1"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Hem observat que heu fet clic en un enllaç que conté una mica de nano, voleu ometre el procés de configuració? Sempre pots canviar les coses després.\n\n Tanmateix, si teniu una llavor existent que voleu importar, haureu de seleccionar no."),
         "askTracking": MessageLookupByLibrary.simpleMessage(
@@ -248,7 +248,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Hlavní účet"),
         "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
-            "Fes una ullada a Nautilus! T\'he enviat un nano amb aquest enllaç:"),
+            "Fes una ullada a Nautilus! T\'he enviat un %2 amb aquest enllaç:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Účet %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
@@ -328,7 +328,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "eula": MessageLookupByLibrary.simpleMessage("EULA"),
         "exampleCardFrom": MessageLookupByLibrary.simpleMessage("od někoho"),
         "exampleCardIntro": MessageLookupByLibrary.simpleMessage(
-            "Vítejte v Natriu. Jakmile obdržíte NANO, transakce se zobrazí takto:"),
+            "Vítejte v Natriu. Jakmile obdržíte %2, transakce se zobrazí takto:"),
         "exampleCardLittle": MessageLookupByLibrary.simpleMessage("Málo"),
         "exampleCardLot": MessageLookupByLibrary.simpleMessage("Hodně"),
         "exampleCardTo": MessageLookupByLibrary.simpleMessage("někomu"),
@@ -397,6 +397,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Banner de finançament"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finançament"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "S\'està generant PoW, això pot trigar una estona (> 20 segons)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("Obteniu %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Aconsegueix NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("You have a gift!"),
@@ -447,9 +449,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "imSure": MessageLookupByLibrary.simpleMessage("Estic segur"),
         "import": MessageLookupByLibrary.simpleMessage("Importovat"),
         "importGift": MessageLookupByLibrary.simpleMessage(
-            "The link you clicked contains some nano, would you like to import it to this wallet, or refund it to whoever sent it?"),
+            "The link you clicked contains some %2, would you like to import it to this wallet, or refund it to whoever sent it?"),
         "importGiftEmpty": MessageLookupByLibrary.simpleMessage(
-            "Unfortunately the link you clicked that contained some nano appears to be empty, but you can still see the amount and associated message."),
+            "Unfortunately the link you clicked that contained some %2 appears to be empty, but you can still see the amount and associated message."),
         "importGiftIntro": MessageLookupByLibrary.simpleMessage(
             "Sembla que heu fet clic en un enllaç que conté una mica de NANO, per rebre aquests fons només necessitem que acabeu de configurar la vostra cartera."),
         "importGiftv2": MessageLookupByLibrary.simpleMessage(
@@ -527,10 +529,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("S\'ha copiat el missatge"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Zpráva"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
-            "Minimální částka pro odeslání je% 1 NANO"),
+            "Minimální částka pro odeslání je %1 %2"),
         "minuteAgo": MessageLookupByLibrary.simpleMessage("Fa un minut"),
         "mnemonicInvalidWord":
-            MessageLookupByLibrary.simpleMessage("% 1 není platné slovo"),
+            MessageLookupByLibrary.simpleMessage("%1 není platné slovo"),
         "mnemonicPhrase":
             MessageLookupByLibrary.simpleMessage("Mnemonická fráze"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
@@ -580,7 +582,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "In order for this feature to work correctly, notifications must be enabled"),
         "notificationTitle":
-            MessageLookupByLibrary.simpleMessage("Přijato %1 NANO"),
+            MessageLookupByLibrary.simpleMessage("Přijato %1 %2"),
         "notificationWarning":
             MessageLookupByLibrary.simpleMessage("Notificacions desactivades"),
         "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
@@ -775,7 +777,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Zdá se, že vaše zařízení je \"rootováno\", \"jailbroken\" nebo upraveno způsobem, který ohrožuje zabezpečení. Před pokračováním se doporučuje resetovat zařízení do původního stavu."),
         "save": MessageLookupByLibrary.simpleMessage("Desa"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
-            "Naskenujte QR kód Nano \n adresy"),
+            "Naskenujte QR kód %2 \n adresy"),
         "scanNFC":
             MessageLookupByLibrary.simpleMessage("Enviar mitjançant NFC"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("Oskenovat QR kód"),
@@ -812,7 +814,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Can\'t request from self"),
         "send": MessageLookupByLibrary.simpleMessage("Poslat"),
         "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Odeslat %1 NANO"),
+            MessageLookupByLibrary.simpleMessage("Odeslat %1 %2"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("Envia quantitats"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Došlo k chybě. Zkuste to později."),
@@ -957,7 +959,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferComplete": MessageLookupByLibrary.simpleMessage(
             "%1 NANO úspěšně převedeno do vaší peněženky Nautilus. \n"),
         "transferConfirmInfo": MessageLookupByLibrary.simpleMessage(
-            "Byla nalezena peněženka se zůstatkem %1 NANO. \n"),
+            "Byla nalezena peněženka se zůstatkem %1 %2. \n"),
         "transferConfirmInfoSecond": MessageLookupByLibrary.simpleMessage(
             "Prostředky převedete klepnutím na potvrzení. \n"),
         "transferConfirmInfoThird": MessageLookupByLibrary.simpleMessage(
@@ -967,7 +969,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferHeader":
             MessageLookupByLibrary.simpleMessage("Převést finanční prostředky"),
         "transferIntro": MessageLookupByLibrary.simpleMessage(
-            "Tento proces přenese prostředky z papírové peněženky do vaší peněženky Nautilus. \n\n Začněte klepnutím na tlačítko \"% 1\"."),
+            "Tento proces přenese prostředky z papírové peněženky do vaší peněženky Nautilus. \n\n Začněte klepnutím na tlačítko \"%1\"."),
         "transferIntroShort": MessageLookupByLibrary.simpleMessage(
             "This process will transfer the funds from a paper wallet to your Nautilus wallet."),
         "transferLoading": MessageLookupByLibrary.simpleMessage("Přenáší se"),

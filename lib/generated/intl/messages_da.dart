@@ -102,7 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockUser":
             MessageLookupByLibrary.simpleMessage("Bloker denne bruger"),
         "blockedAdded":
-            MessageLookupByLibrary.simpleMessage("% 1 blev blokeret."),
+            MessageLookupByLibrary.simpleMessage("%1 blev blokeret."),
         "blockedExists":
             MessageLookupByLibrary.simpleMessage("Bruger allerede blokeret!"),
         "blockedHeader": MessageLookupByLibrary.simpleMessage("blokeret"),
@@ -115,7 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedNameMissing":
             MessageLookupByLibrary.simpleMessage("Vælg et kaldenavn"),
         "blockedRemoved":
-            MessageLookupByLibrary.simpleMessage("% 1 er blevet blokeret!"),
+            MessageLookupByLibrary.simpleMessage("%1 er blevet blokeret!"),
         "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
             "Vi kan tilsyneladende ikke nå Branch API, dette skyldes normalt en form for netværksproblem eller VPN, der blokerer forbindelsen.\n\n Du bør stadig være i stand til at bruge appen som normalt, men at sende og modtage gavekort fungerer muligvis ikke."),
         "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
@@ -246,7 +246,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Hlavní účet"),
         "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
-            "Tjek Nautilus ud! Jeg sendte dig noget nano med dette link:"),
+            "Tjek Nautilus ud! Jeg sendte dig noget %2 med dette link:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Účet %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Slet"),
@@ -377,7 +377,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favoriteNameMissing": MessageLookupByLibrary.simpleMessage(
             "Vælg et navn til denne favorit"),
         "favoriteRemoved": MessageLookupByLibrary.simpleMessage(
-            "% 1 er blevet fjernet fra favoritter!"),
+            "%1 er blevet fjernet fra favoritter!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("favoritter"),
         "featured": MessageLookupByLibrary.simpleMessage("Fremhævede"),
         "fewDaysAgo": MessageLookupByLibrary.simpleMessage("For få dage siden"),
@@ -396,6 +396,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Finansieringsbanner"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finansiering"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "Genererer PoW, dette kan tage et stykke tid (> 20 sekunder)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("Hent %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Få NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Du har en gave!"),
@@ -526,10 +528,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Meddelelse kopieret"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Zpráva"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
-            "Minimální částka pro odeslání je% 1 NANO"),
+            "Minimální částka pro odeslání je %1 %2"),
         "minuteAgo": MessageLookupByLibrary.simpleMessage("For et minut siden"),
         "mnemonicInvalidWord":
-            MessageLookupByLibrary.simpleMessage("% 1 není platné slovo"),
+            MessageLookupByLibrary.simpleMessage("%1 není platné slovo"),
         "mnemonicPhrase":
             MessageLookupByLibrary.simpleMessage("Mnemonická fráze"),
         "mnemonicSizeError": MessageLookupByLibrary.simpleMessage(
@@ -580,7 +582,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "For at denne funktion skal fungere korrekt, skal meddelelser være aktiveret"),
         "notificationTitle":
-            MessageLookupByLibrary.simpleMessage("Přijato %1 NANO"),
+            MessageLookupByLibrary.simpleMessage("Přijato %1 %2"),
         "notificationWarning":
             MessageLookupByLibrary.simpleMessage("Notifikationer deaktiveret"),
         "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
@@ -726,7 +728,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "removeBlocked":
             MessageLookupByLibrary.simpleMessage("Fjern blokeringen"),
         "removeBlockedConfirmation": MessageLookupByLibrary.simpleMessage(
-            "Er du sikker på at du vil fjerne blokeringen% 1?"),
+            "Er du sikker på at du vil fjerne blokeringen %1?"),
         "removeContact":
             MessageLookupByLibrary.simpleMessage("Odstranit kontakt"),
         "removeContactConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -742,7 +744,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "representatives": MessageLookupByLibrary.simpleMessage("Zástupci"),
         "request": MessageLookupByLibrary.simpleMessage("Anmodning"),
         "requestAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Anmodning% 1% 2"),
+            MessageLookupByLibrary.simpleMessage("Anmodning %1 %2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Anmodning mislykkedes: Denne bruger ser ikke ud til at have Nautilus installeret, eller har meddelelser deaktiveret."),
         "requestFrom": MessageLookupByLibrary.simpleMessage("Anmodning fra"),
@@ -813,7 +815,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kan ikke anmode om fra mig selv"),
         "send": MessageLookupByLibrary.simpleMessage("Poslat"),
         "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Odeslat %1 NANO"),
+            MessageLookupByLibrary.simpleMessage("Odeslat %1 %2"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("Send beløb"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Došlo k chybě. Zkuste to později."),
@@ -952,9 +954,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferClose": MessageLookupByLibrary.simpleMessage(
             "Klepnutím kamkoli zavřete okno."),
         "transferComplete": MessageLookupByLibrary.simpleMessage(
-            "%1 NANO úspěšně převedeno do vaší peněženky Nautilus. \n"),
+            "%1 %2 úspěšně převedeno do vaší peněženky Nautilus. \n"),
         "transferConfirmInfo": MessageLookupByLibrary.simpleMessage(
-            "Byla nalezena peněženka se zůstatkem %1 NANO. \n"),
+            "Byla nalezena peněženka se zůstatkem %1 %2. \n"),
         "transferConfirmInfoSecond": MessageLookupByLibrary.simpleMessage(
             "Prostředky převedete klepnutím na potvrzení. \n"),
         "transferConfirmInfoThird": MessageLookupByLibrary.simpleMessage(
@@ -964,7 +966,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferHeader":
             MessageLookupByLibrary.simpleMessage("Převést finanční prostředky"),
         "transferIntro": MessageLookupByLibrary.simpleMessage(
-            "Tento proces přenese prostředky z papírové peněženky do vaší peněženky Nautilus. \n\n Začněte klepnutím na tlačítko \"% 1\"."),
+            "Tento proces přenese prostředky z papírové peněženky do vaší peněženky Nautilus. \n\n Začněte klepnutím na tlačítko \"%1\"."),
         "transferIntroShort": MessageLookupByLibrary.simpleMessage(
             "Denne proces overfører midlerne fra en papirpung til din Nautilus-tegnebog."),
         "transferLoading": MessageLookupByLibrary.simpleMessage("Přenáší se"),

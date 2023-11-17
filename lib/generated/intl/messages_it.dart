@@ -407,6 +407,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Banner di finanziamento"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finanziamento"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "Generazione PoW, l\'operazione potrebbe richiedere del tempo (> 20 secondi)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("Ottieni %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Ottieni NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Hai un regalo!"),
@@ -823,7 +825,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Impossibile richiedere da sé"),
         "send": MessageLookupByLibrary.simpleMessage("Invia"),
         "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Inviare %1 Nano?"),
+            MessageLookupByLibrary.simpleMessage("Inviare %1 %2?"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("Invia importi"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Si è verificato un errore. Riprova più tardi."),
@@ -964,7 +966,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferClose": MessageLookupByLibrary.simpleMessage(
             "Premi dove vuoi per chiudere la finestra."),
         "transferComplete": MessageLookupByLibrary.simpleMessage(
-            "%1 NANO trasferiti con successo sul tuo portafoglio Nautilus."),
+            "%1 %2 trasferiti con successo sul tuo portafoglio Nautilus."),
         "transferConfirmInfo": MessageLookupByLibrary.simpleMessage(
             "Rilevato un portafoglio con un saldo di %1 NANO.\n"),
         "transferConfirmInfoSecond": MessageLookupByLibrary.simpleMessage(

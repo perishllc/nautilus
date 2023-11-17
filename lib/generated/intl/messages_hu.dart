@@ -107,7 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockUser":
             MessageLookupByLibrary.simpleMessage("A felhasználó letiltása"),
         "blockedAdded":
-            MessageLookupByLibrary.simpleMessage("% 1 sikeresen letiltva."),
+            MessageLookupByLibrary.simpleMessage("%1 sikeresen letiltva."),
         "blockedExists": MessageLookupByLibrary.simpleMessage(
             "A felhasználó már blokkolva van!"),
         "blockedHeader": MessageLookupByLibrary.simpleMessage("blokkolt"),
@@ -119,7 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("A becenév már használt!"),
         "blockedNameMissing":
             MessageLookupByLibrary.simpleMessage("Válassz egy becenevet"),
-        "blockedRemoved": MessageLookupByLibrary.simpleMessage("% 1 feloldva!"),
+        "blockedRemoved": MessageLookupByLibrary.simpleMessage("%1 feloldva!"),
         "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
             "Úgy tűnik, hogy nem tudjuk elérni a Branch API-t, ezt általában valamilyen hálózati probléma vagy a VPN blokkolása okozza.\n\n Továbbra is a szokásos módon használhatja az alkalmazást, azonban előfordulhat, hogy az ajándékutalványok küldése és fogadása nem működik."),
         "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
@@ -254,7 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Main Account"),
         "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
-            "Nézd meg a Nautilust! Küldtem neked egy nano-t ezzel a linkkel:"),
+            "Nézd meg a Nautilust! Küldtem neked egy %2-t ezzel a linkkel:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Törlés"),
@@ -388,7 +388,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favoriteNameMissing": MessageLookupByLibrary.simpleMessage(
             "Válasszon nevet ennek a kedvencnek"),
         "favoriteRemoved": MessageLookupByLibrary.simpleMessage(
-            "% 1 el lett távolítva a kedvencek közül!"),
+            "%1 el lett távolítva a kedvencek közül!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("kedvencek"),
         "featured": MessageLookupByLibrary.simpleMessage("Kiemelt"),
         "fewDaysAgo":
@@ -406,6 +406,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage(
             "Finanszírozási szalaghirdetés"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finanszírozás"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "PoW generálása, ez eltarthat egy ideig (> 20 másodperc)..."),
         "getCurrency":
             MessageLookupByLibrary.simpleMessage("Szerezze be a %2-t"),
         "getNano": MessageLookupByLibrary.simpleMessage("Szerezd meg a NANO-t"),
@@ -538,7 +540,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageCopied": MessageLookupByLibrary.simpleMessage("Üzenet másolva"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Üzenet"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
-            "A minimális küldési összeg:% 1% 2"),
+            "A minimális küldési összeg: %1 %2"),
         "minuteAgo":
             MessageLookupByLibrary.simpleMessage("Egy perccel ezelőtt"),
         "mnemonicInvalidWord":
@@ -595,7 +597,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "Annak érdekében, hogy ez a funkció megfelelően működjön, az értesítéseket engedélyezni kell"),
         "notificationTitle":
-            MessageLookupByLibrary.simpleMessage("Kaptál %1 NANO-t"),
+            MessageLookupByLibrary.simpleMessage("Kaptál %1 %2-t"),
         "notificationWarning":
             MessageLookupByLibrary.simpleMessage("Értesítések letiltva"),
         "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
@@ -741,7 +743,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Are you sure you want to hide this account? You can re-add it later by tapping the \"%1\" button."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Feloldás"),
         "removeBlockedConfirmation": MessageLookupByLibrary.simpleMessage(
-            "Biztosan fel akarja oldani a (z)% 1 blokkolását?"),
+            "Biztosan fel akarja oldani a (z) %1 blokkolását?"),
         "removeContact":
             MessageLookupByLibrary.simpleMessage("Kontakt Törlése"),
         "removeContactConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -759,7 +761,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Representatives"),
         "request": MessageLookupByLibrary.simpleMessage("Kérés"),
         "requestAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("% 1% 2 kérés"),
+            MessageLookupByLibrary.simpleMessage("%1 %2 kérés"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Kérelem sikertelen: Úgy tűnik, hogy a felhasználó nem telepítette a Nautilust, vagy letiltotta az értesítéseket."),
         "requestFrom": MessageLookupByLibrary.simpleMessage("Kérelem feladója"),
@@ -830,7 +832,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nem kérhet önmagától"),
         "send": MessageLookupByLibrary.simpleMessage("Küldés"),
         "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("%1 Nano küldése?"),
+            MessageLookupByLibrary.simpleMessage("%1 %2 küldése?"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("Összegek küldése"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Hiba történt. Próbálkozz később."),

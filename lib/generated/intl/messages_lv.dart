@@ -402,6 +402,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Finansēšanas reklāmkarogs"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finansējums"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "Notiek PoW ģenerēšana, tas var aizņemt kādu laiku (> 20 sekundes)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("Iegūstiet %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Iegūstiet NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("You have a gift!"),

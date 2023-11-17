@@ -391,6 +391,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Finansman Afişi"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finansman"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "PoW oluşturuluyor, bu biraz zaman alabilir (> 20 saniye)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("%2\'yi al"),
         "getNano": MessageLookupByLibrary.simpleMessage("NANO\'yu edinin"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Bir yeteneğin var!"),
@@ -575,7 +577,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "Bu özelliğin düzgün çalışması için bildirimlerin etkinleştirilmesi gerekir"),
         "notificationTitle":
-            MessageLookupByLibrary.simpleMessage("%1 NANO Alındı"),
+            MessageLookupByLibrary.simpleMessage("%1 %2 Alındı"),
         "notificationWarning":
             MessageLookupByLibrary.simpleMessage("Bildirimler Devre Dışı"),
         "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
@@ -731,7 +733,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "representatives": MessageLookupByLibrary.simpleMessage("Temsilciler"),
         "request": MessageLookupByLibrary.simpleMessage("Talep"),
         "requestAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("İstek %1% 2"),
+            MessageLookupByLibrary.simpleMessage("İstek %1 %2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "İstek Başarısız: Bu kullanıcı Nautilus yüklü görünmüyor, veya bildirimler devre dışı bırakıldı."),
         "requestFrom": MessageLookupByLibrary.simpleMessage("İstek Gönderen"),
@@ -801,7 +803,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Kendinden istek yapamıyorum"),
         "send": MessageLookupByLibrary.simpleMessage("Gönder"),
         "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("%1 Nano gönder?"),
+            MessageLookupByLibrary.simpleMessage("%1 %2 gönder?"),
         "sendAmounts":
             MessageLookupByLibrary.simpleMessage("Gönderim Tutarları"),
         "sendError": MessageLookupByLibrary.simpleMessage(
@@ -944,7 +946,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferComplete": MessageLookupByLibrary.simpleMessage(
             "%1 NANO başarıyla Nautilus cüzdanına aktarıldı."),
         "transferConfirmInfo": MessageLookupByLibrary.simpleMessage(
-            "%1 NANO bakiyeye sahip bir cüzdan tespit edildi.\n"),
+            "%1 %2 bakiyeye sahip bir cüzdan tespit edildi.\n"),
         "transferConfirmInfoSecond": MessageLookupByLibrary.simpleMessage(
             "Transfer işlemini başlatmak için onayla butonuna bas.\n"),
         "transferConfirmInfoThird": MessageLookupByLibrary.simpleMessage(

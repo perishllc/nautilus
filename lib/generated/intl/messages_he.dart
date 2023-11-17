@@ -61,7 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "הסכום המפוצל לא יכול להיות גדול מיתרת המתנה"),
         "amountMissing": MessageLookupByLibrary.simpleMessage("הזן סכום"),
-        "appWallet": MessageLookupByLibrary.simpleMessage("% 1 ארנק"),
+        "appWallet": MessageLookupByLibrary.simpleMessage("%1 ארנק"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "שמנו לב שלחצת על קישור שמכיל קצת ננו, האם תרצה לדלג על תהליך ההגדרה? תמיד תוכל לשנות דברים מאוחר יותר.\n\n אם יש לך זרע קיים שברצונך לייבא עם זאת, עליך לבחור לא."),
         "askTracking": MessageLookupByLibrary.simpleMessage(
@@ -93,8 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockExplorerInfo": MessageLookupByLibrary.simpleMessage(
             "איזה Explorer לחסום להשתמש כדי להציג מידע העסקה"),
         "blockUser": MessageLookupByLibrary.simpleMessage("חסום משתמש זה"),
-        "blockedAdded":
-            MessageLookupByLibrary.simpleMessage("% 1 נחסם בהצלחה."),
+        "blockedAdded": MessageLookupByLibrary.simpleMessage("%1 נחסם בהצלחה."),
         "blockedExists":
             MessageLookupByLibrary.simpleMessage("המשתמש כבר חסום!"),
         "blockedHeader": MessageLookupByLibrary.simpleMessage("חסום"),
@@ -105,7 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("שם ניק כבר בשימוש!"),
         "blockedNameMissing":
             MessageLookupByLibrary.simpleMessage("בחר שם ניק"),
-        "blockedRemoved": MessageLookupByLibrary.simpleMessage("% 1 לא נחסם!"),
+        "blockedRemoved": MessageLookupByLibrary.simpleMessage("%1 לא נחסם!"),
         "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
             "נראה שאיננו יכולים להגיע ל-Banch API, זה בדרך כלל נגרם על ידי בעיה כלשהי ברשת או VPN שחוסם את החיבור.\n\n אתה עדיין אמור להיות מסוגל להשתמש באפליקציה כרגיל, אולם ייתכן ששליחה וקבלה של כרטיסי מתנה לא יפעלו."),
         "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
@@ -352,7 +351,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favoriteNameMissing":
             MessageLookupByLibrary.simpleMessage("בחר שם עבור מועדף זה"),
         "favoriteRemoved":
-            MessageLookupByLibrary.simpleMessage("% 1 הוסר מהמועדפים!"),
+            MessageLookupByLibrary.simpleMessage("%1 הוסר מהמועדפים!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("מועדפים"),
         "featured": MessageLookupByLibrary.simpleMessage("מובלט"),
         "fewDaysAgo": MessageLookupByLibrary.simpleMessage("לפני מספר ימים"),
@@ -368,6 +367,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("באנר מימון"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("מימון"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "יוצר PoW, זה עשוי לקחת זמן מה (> 20 שניות)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("קבל %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("קבל NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("יש לך כישרון!"),
@@ -489,8 +490,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "תזכיר נשלח מחדש! אם עדיין לא הודה, ייתכן שהמכשיר של הנמען במצב לא מקוון."),
         "messageCopied": MessageLookupByLibrary.simpleMessage("ההודעה הועתקה"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("הודעה"),
-        "minimumSend": MessageLookupByLibrary.simpleMessage(
-            "כמות השליחה המינימלית היא% 1"),
+        "minimumSend":
+            MessageLookupByLibrary.simpleMessage("כמות השליחה המינימלית היא%1"),
         "minuteAgo": MessageLookupByLibrary.simpleMessage("לפני דקה"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 is not a valid word"),
@@ -676,7 +677,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "אתה בטוח שאתה רוצה להחביא את החשבון? אתה יכול להוסיף אותו מחודש מאוחר יותר על ידי לחיצה על כפתור ה%1."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("בטל חסימה"),
         "removeBlockedConfirmation": MessageLookupByLibrary.simpleMessage(
-            "האם אתה בטוח שברצונך לבטל את החסימן% 1?"),
+            "האם אתה בטוח שברצונך לבטל את החסימן%1?"),
         "removeContact": MessageLookupByLibrary.simpleMessage("הסר איש קשר"),
         "removeContactConfirmation": MessageLookupByLibrary.simpleMessage(
             "האם אתה בטוח שאתה רוצה למחוק את %?"),
@@ -689,7 +690,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "reply": MessageLookupByLibrary.simpleMessage("השב"),
         "representatives": MessageLookupByLibrary.simpleMessage("נציגים"),
         "request": MessageLookupByLibrary.simpleMessage("בקשה"),
-        "requestAmountConfirm": MessageLookupByLibrary.simpleMessage("בקשה% 1"),
+        "requestAmountConfirm":
+            MessageLookupByLibrary.simpleMessage("בקשה%1 %2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "הבקשה נכשלה: נראה שלמשתמש זה לא מותקן נאוטילוס או שההודעות מושבתות."),
         "requestFrom": MessageLookupByLibrary.simpleMessage("בקשה מ"),
@@ -799,7 +801,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "share": MessageLookupByLibrary.simpleMessage("לַחֲלוֹק"),
         "shareApp": MessageLookupByLibrary.simpleMessage("שתף %1"),
         "shareAppText": MessageLookupByLibrary.simpleMessage(
-            "בדוק את% 1! ארנק נייד NANO מעולה!"),
+            "בדוק את%1! ארנק נייד NANO מעולה!"),
         "shareLink": MessageLookupByLibrary.simpleMessage("שתף קישור"),
         "shareMessage": MessageLookupByLibrary.simpleMessage("שתף הודעה"),
         "shareNautilus": MessageLookupByLibrary.simpleMessage("Share Nautilus"),
@@ -828,7 +830,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "simplex": MessageLookupByLibrary.simpleMessage("סימפלקס"),
         "social": MessageLookupByLibrary.simpleMessage("חֶברָתִי"),
         "someone": MessageLookupByLibrary.simpleMessage("מִישֶׁהוּ"),
-        "spendCurrency": MessageLookupByLibrary.simpleMessage("הוצא% 2"),
+        "spendCurrency": MessageLookupByLibrary.simpleMessage("הוצא%2"),
         "spendNano": MessageLookupByLibrary.simpleMessage("להוציא ננו"),
         "splitBill": MessageLookupByLibrary.simpleMessage("ביל מפוצל"),
         "splitBillHeader": MessageLookupByLibrary.simpleMessage("פיצול שטר"),
@@ -928,8 +930,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "upcomingButton": MessageLookupByLibrary.simpleMessage("בקרוב"),
         "uptime": MessageLookupByLibrary.simpleMessage("זמן אונליין"),
         "urlEmpty": MessageLookupByLibrary.simpleMessage("נא להזין כתובת URL"),
-        "useAppRep": MessageLookupByLibrary.simpleMessage("השתמש ב-% 1 נציג"),
-        "useCurrency": MessageLookupByLibrary.simpleMessage("השתמש ב% 2"),
+        "useAppRep": MessageLookupByLibrary.simpleMessage("השתמש ב- 1 נציג"),
+        "useCurrency": MessageLookupByLibrary.simpleMessage("השתמש ב%2"),
         "useNano": MessageLookupByLibrary.simpleMessage("השתמש ב-NANO"),
         "useNautilusRep":
             MessageLookupByLibrary.simpleMessage("Use Nautilus Rep"),

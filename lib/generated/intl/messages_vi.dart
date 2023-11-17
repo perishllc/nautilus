@@ -103,7 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockUser":
             MessageLookupByLibrary.simpleMessage("Chặn người dùng này"),
         "blockedAdded":
-            MessageLookupByLibrary.simpleMessage("% 1 bị chặn thành công."),
+            MessageLookupByLibrary.simpleMessage("%1 bị chặn thành công."),
         "blockedExists":
             MessageLookupByLibrary.simpleMessage("Người dùng đã bị chặn!"),
         "blockedHeader": MessageLookupByLibrary.simpleMessage("Bị chặn"),
@@ -116,7 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedNameMissing":
             MessageLookupByLibrary.simpleMessage("Chọn một Nick Name"),
         "blockedRemoved":
-            MessageLookupByLibrary.simpleMessage("% 1 đã được bỏ chặn!"),
+            MessageLookupByLibrary.simpleMessage("%1 đã được bỏ chặn!"),
         "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
             "Chúng tôi dường như không thể truy cập API Chi nhánh, điều này thường là do một số loại sự cố mạng hoặc VPN chặn kết nối.\n\n Bạn vẫn có thể sử dụng ứng dụng như bình thường, tuy nhiên, việc gửi và nhận thẻ quà tặng có thể không hoạt động."),
         "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
@@ -372,7 +372,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favoriteNameMissing": MessageLookupByLibrary.simpleMessage(
             "Chọn tên cho mục yêu thích này"),
         "favoriteRemoved": MessageLookupByLibrary.simpleMessage(
-            "% 1 đã bị xóa khỏi mục yêu thích!"),
+            "%1 đã bị xóa khỏi mục yêu thích!"),
         "favoritesHeader":
             MessageLookupByLibrary.simpleMessage("Mục yêu thích"),
         "featured": MessageLookupByLibrary.simpleMessage("Nổi bật"),
@@ -392,6 +392,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Biểu ngữ tài trợ"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Kinh phí"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "Đang tạo PoW, quá trình này có thể mất một lúc (> 20 giây)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("Nhận %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Nhận NANO"),
         "giftAlert":
@@ -578,7 +580,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationInfo": MessageLookupByLibrary.simpleMessage(
             "Để tính năng này hoạt động chính xác, thông báo phải được bật"),
         "notificationTitle":
-            MessageLookupByLibrary.simpleMessage("Đã nhận %1 BAN"),
+            MessageLookupByLibrary.simpleMessage("Đã nhận %1 %2"),
         "notificationWarning":
             MessageLookupByLibrary.simpleMessage("Đã tắt thông báo"),
         "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
@@ -722,7 +724,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn có chắc muốn ẩn tài khoản này? Bạn có thể thêm lại bằng cách ấn vào nút \"%1\"."),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Bỏ chặn"),
         "removeBlockedConfirmation": MessageLookupByLibrary.simpleMessage(
-            "Bạn có chắc muốn bỏ chăng% 1 không?"),
+            "Bạn có chắc muốn bỏ chăng %1 không?"),
         "removeContact": MessageLookupByLibrary.simpleMessage("Xóa liên hệ"),
         "removeContactConfirmation":
             MessageLookupByLibrary.simpleMessage("Bạn chắc chắn muốn xóa %1?"),
@@ -737,7 +739,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "representatives": MessageLookupByLibrary.simpleMessage("Đại diện"),
         "request": MessageLookupByLibrary.simpleMessage("Yêu cầu"),
         "requestAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Yêu cầu% 1"),
+            MessageLookupByLibrary.simpleMessage("Yêu cầu %1"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Yêu cầu thất bại: Người dùng này dường như không có Nautilus cài đặt hoặc đã tắt thông báo."),
         "requestFrom": MessageLookupByLibrary.simpleMessage("Yêu cầu từ"),
@@ -808,8 +810,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "selfSendError":
             MessageLookupByLibrary.simpleMessage("Không thể yêu cầu từ tự"),
         "send": MessageLookupByLibrary.simpleMessage("Gửi"),
-        "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Gửi %1 NANO"),
+        "sendAmountConfirm": MessageLookupByLibrary.simpleMessage("Gửi %1 %2"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("Gửi số tiền"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "Đã xảy ra lỗi, vui lòng thử lại sau."),
@@ -952,7 +953,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferClose": MessageLookupByLibrary.simpleMessage(
             "Chạm một chỗ bất kỳ để đóng cửa sổ."),
         "transferComplete": MessageLookupByLibrary.simpleMessage(
-            "%1 Nano đã được chuyển vào ví Nautilus của bạn.\n"),
+            "%1 %2 đã được chuyển vào ví Nautilus của bạn.\n"),
         "transferConfirmInfo": MessageLookupByLibrary.simpleMessage(
             "Đã tìm thấy một ví với số dư là %1 BAN. \n"),
         "transferConfirmInfoSecond": MessageLookupByLibrary.simpleMessage(

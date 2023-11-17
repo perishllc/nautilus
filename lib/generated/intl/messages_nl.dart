@@ -254,7 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Hoofd Account"),
         "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
-            "Kijk eens naar Nautilus! Ik heb je wat nano gestuurd met deze link:"),
+            "Kijk eens naar Nautilus! Ik heb je wat %2 gestuurd met deze link:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Account %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Verwijderen"),
@@ -405,6 +405,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Financieringsbanner"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Financiering"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "PoW genereren, dit kan even duren (> 20 seconden)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("Krijg %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Krijg NANO"),
         "giftAlert":
@@ -539,7 +541,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bericht gekopieerd"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Bericht"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
-            "Het minimum te verzenden bedrag is %1 NANO"),
+            "Het minimum te verzenden bedrag is %1 %2"),
         "minuteAgo": MessageLookupByLibrary.simpleMessage("Een minuut geleden"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 is geen geldig woord"),
@@ -823,7 +825,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Kan niet zelf vragen"),
         "send": MessageLookupByLibrary.simpleMessage("Verstuur"),
         "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Verstuur %1 Nano"),
+            MessageLookupByLibrary.simpleMessage("Verstuur %1 %2"),
         "sendAmounts":
             MessageLookupByLibrary.simpleMessage("Bedragen verzenden"),
         "sendError": MessageLookupByLibrary.simpleMessage(

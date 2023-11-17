@@ -192,7 +192,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "decryptionError": MessageLookupByLibrary.simpleMessage("解密错误！"),
         "defaultAccountName": MessageLookupByLibrary.simpleMessage("主要账户"),
         "defaultGiftMessage":
-            MessageLookupByLibrary.simpleMessage("看看鹦鹉螺！我用这个链接给你发了一些 nano："),
+            MessageLookupByLibrary.simpleMessage("看看鹦鹉螺！我用这个链接给你发了一些 %2："),
         "defaultNewAccountName": MessageLookupByLibrary.simpleMessage("账户 %1"),
         "delete": MessageLookupByLibrary.simpleMessage("删除"),
         "deleteAccount": MessageLookupByLibrary.simpleMessage("删除帐户"),
@@ -307,6 +307,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fulfilled": MessageLookupByLibrary.simpleMessage("完成"),
         "fundingBannerHeader": MessageLookupByLibrary.simpleMessage("资金横幅"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("资金"),
+        "generatingWork":
+            MessageLookupByLibrary.simpleMessage("生成 PoW，这可能需要一段时间（> 20 秒）..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("获取 %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("获取纳米"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("你有天赋！"),
@@ -455,7 +457,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("点击打开"),
         "notificationInfo":
             MessageLookupByLibrary.simpleMessage("为了使此功能正常工作，必须启用通知"),
-        "notificationTitle": MessageLookupByLibrary.simpleMessage("收到 %1 NANO"),
+        "notificationTitle": MessageLookupByLibrary.simpleMessage("收到 %1 %2"),
         "notificationWarning": MessageLookupByLibrary.simpleMessage("通知已禁用"),
         "notificationWarningBodyLong": MessageLookupByLibrary.simpleMessage(
             "付款请求、备忘录和消息都需要启用通知才能正常工作，因为它们使用 FCM 通知服务来确保消息传递。\n\n如果您不想使用这些功能，可以使用下面的按钮启用通知或关闭此卡。"),
@@ -614,7 +616,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "您的设备似乎被“越狱”或被修改，从而存在安全隐患。建议您在继续之前把设备还原到初始状态。"),
         "save": MessageLookupByLibrary.simpleMessage("节省"),
-        "scanInstructions": MessageLookupByLibrary.simpleMessage("扫描NANO二维码地址"),
+        "scanInstructions": MessageLookupByLibrary.simpleMessage("扫描%2二维码地址"),
         "scanNFC": MessageLookupByLibrary.simpleMessage("通过 NFC 发送"),
         "scanQrCode": MessageLookupByLibrary.simpleMessage("扫描二维码"),
         "schedule": MessageLookupByLibrary.simpleMessage("日程"),
@@ -640,7 +642,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "seedInvalid": MessageLookupByLibrary.simpleMessage("无效的种子"),
         "selfSendError": MessageLookupByLibrary.simpleMessage("无法向自己申请"),
         "send": MessageLookupByLibrary.simpleMessage("发送"),
-        "sendAmountConfirm": MessageLookupByLibrary.simpleMessage("发送 %1 NANO"),
+        "sendAmountConfirm": MessageLookupByLibrary.simpleMessage("发送 %1 %2"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("发送金额"),
         "sendError": MessageLookupByLibrary.simpleMessage("发生错误。请稍后再试。"),
         "sendFrom": MessageLookupByLibrary.simpleMessage("发送自"),
@@ -751,7 +753,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "transferComplete": MessageLookupByLibrary.simpleMessage(
             "%1 NANO 成功传送到您的 Nautilus 钱包。\n"),
         "transferConfirmInfo":
-            MessageLookupByLibrary.simpleMessage("检测到一个包含 %1 NANO 的钱包。\n"),
+            MessageLookupByLibrary.simpleMessage("检测到一个包含 %1 %2 的钱包。\n"),
         "transferConfirmInfoSecond":
             MessageLookupByLibrary.simpleMessage("按键确定传送钱币。\n"),
         "transferConfirmInfoThird":

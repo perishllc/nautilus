@@ -103,8 +103,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ce explorator de blocuri să utilizați pentru a afișa informațiile despre tranzacții"),
         "blockUser":
             MessageLookupByLibrary.simpleMessage("Blocați acest utilizator"),
-        "blockedAdded": MessageLookupByLibrary.simpleMessage(
-            "% 1 a fost blocat cu succes."),
+        "blockedAdded":
+            MessageLookupByLibrary.simpleMessage("%1 a fost blocat cu succes."),
         "blockedExists": MessageLookupByLibrary.simpleMessage(
             "Utilizatorul este deja blocat!"),
         "blockedHeader": MessageLookupByLibrary.simpleMessage("Blocată"),
@@ -117,7 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blockedNameMissing":
             MessageLookupByLibrary.simpleMessage("Alegeți un nume Nick"),
         "blockedRemoved":
-            MessageLookupByLibrary.simpleMessage("% 1 a fost deblocat!"),
+            MessageLookupByLibrary.simpleMessage("%1 a fost deblocat!"),
         "branchConnectErrorLongDesc": MessageLookupByLibrary.simpleMessage(
             "Se pare că nu putem ajunge la API-ul Branch, acest lucru este de obicei cauzat de un fel de problemă de rețea sau de blocarea conexiunii prin VPN.\n\n Ar trebui să puteți folosi aplicația ca de obicei, dar este posibil ca trimiterea și primirea cardurilor cadou să nu funcționeze."),
         "branchConnectErrorShortDesc": MessageLookupByLibrary.simpleMessage(
@@ -249,7 +249,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "defaultAccountName":
             MessageLookupByLibrary.simpleMessage("Cont principal"),
         "defaultGiftMessage": MessageLookupByLibrary.simpleMessage(
-            "Vezi Nautilus! Ți-am trimis niște nano cu acest link:"),
+            "Vezi Nautilus! Ți-am trimis niște %2 cu acest link:"),
         "defaultNewAccountName":
             MessageLookupByLibrary.simpleMessage("Contul nr. %1"),
         "delete": MessageLookupByLibrary.simpleMessage("Șterge"),
@@ -384,7 +384,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favoriteNameMissing": MessageLookupByLibrary.simpleMessage(
             "Alegeți un nume pentru acest favorit"),
         "favoriteRemoved": MessageLookupByLibrary.simpleMessage(
-            "% 1 a fost eliminat din favorite!"),
+            "%1 a fost eliminat din favorite!"),
         "favoritesHeader": MessageLookupByLibrary.simpleMessage("Favorite"),
         "featured": MessageLookupByLibrary.simpleMessage("Recomandate"),
         "fewDaysAgo":
@@ -403,6 +403,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "fundingBannerHeader":
             MessageLookupByLibrary.simpleMessage("Banner de finanțare"),
         "fundingHeader": MessageLookupByLibrary.simpleMessage("Finanțarea"),
+        "generatingWork": MessageLookupByLibrary.simpleMessage(
+            "Se generează PoW, aceasta poate dura ceva timp (> 20 de secunde)..."),
         "getCurrency": MessageLookupByLibrary.simpleMessage("Obțineți %2"),
         "getNano": MessageLookupByLibrary.simpleMessage("Ia NANO"),
         "giftAlert": MessageLookupByLibrary.simpleMessage("Ai un cadou!"),
@@ -534,7 +536,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messageCopied": MessageLookupByLibrary.simpleMessage("Mesaj copiat"),
         "messageHeader": MessageLookupByLibrary.simpleMessage("Mesaj"),
         "minimumSend": MessageLookupByLibrary.simpleMessage(
-            "Suma minimă de trimitere este% 1% 2"),
+            "Suma minimă de trimitere este %1 %2"),
         "minuteAgo": MessageLookupByLibrary.simpleMessage("Un minut în urmă"),
         "mnemonicInvalidWord":
             MessageLookupByLibrary.simpleMessage("%1 nu este un cuvânt valid"),
@@ -732,7 +734,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sigur doriți să ascundeți acest cont? Îl puteți reafișa mai târziu apăsând butonul \"%1\""),
         "removeBlocked": MessageLookupByLibrary.simpleMessage("Deblocați"),
         "removeBlockedConfirmation": MessageLookupByLibrary.simpleMessage(
-            "Sigur doriți să deblocați deblocarea% 1?"),
+            "Sigur doriți să deblocați deblocarea %1?"),
         "removeContact":
             MessageLookupByLibrary.simpleMessage("Șterge contactul"),
         "removeContactConfirmation": MessageLookupByLibrary.simpleMessage(
@@ -750,7 +752,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Reprezentanți"),
         "request": MessageLookupByLibrary.simpleMessage("Cerere"),
         "requestAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Cerere% 1% 2"),
+            MessageLookupByLibrary.simpleMessage("Cerere %1 %2"),
         "requestError": MessageLookupByLibrary.simpleMessage(
             "Solicitare eșuată: Acest utilizator nu pare să aibă instalat Nautilus sau notificările sunt dezactivate."),
         "requestFrom": MessageLookupByLibrary.simpleMessage("O cerere de la"),
@@ -821,7 +823,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nu se poate solicita de la sine"),
         "send": MessageLookupByLibrary.simpleMessage("Trimite"),
         "sendAmountConfirm":
-            MessageLookupByLibrary.simpleMessage("Trimite %1 NANO"),
+            MessageLookupByLibrary.simpleMessage("Trimite %1 %2"),
         "sendAmounts": MessageLookupByLibrary.simpleMessage("Trimiteți sume"),
         "sendError": MessageLookupByLibrary.simpleMessage(
             "A apărut o eroare. Încercați din nou mai târziu."),
