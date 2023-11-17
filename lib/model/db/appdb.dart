@@ -255,7 +255,7 @@ class DBHelper {
     if (oldVersion == 11) {
       // delete all old work sources:
       try {
-        final List<WorkSource> sources = await getWorkSources();
+        final List<WorkSource> sources = await getWorkSources(dbClient: db);
         for (int i = 0; i < sources.length; i++) {
           await deleteWorkSource(
             WorkSource(
@@ -264,6 +264,7 @@ class DBHelper {
               selected: false,
               type: WorkSourceTypes.NONE,
             ),
+            dbClient: db,
           );
         }
       } catch (e) {
@@ -491,8 +492,8 @@ class DBHelper {
 
   // Work sources:
 
-  Future<List<WorkSource>> getWorkSources() async {
-    final Database dbClient = (await db)!;
+  Future<List<WorkSource>> getWorkSources({Database? dbClient}) async {
+    dbClient ??= (await db)!;
     final List<Map> list = await dbClient.rawQuery("SELECT * FROM WorkSources");
     final List<WorkSource> workSources = [];
     for (int i = 0; i < list.length; i++) {
@@ -551,8 +552,8 @@ class DBHelper {
     return ws;
   }
 
-  Future<int> deleteWorkSource(WorkSource ws) async {
-    final Database dbClient = (await db)!;
+  Future<int> deleteWorkSource(WorkSource ws, {Database? dbClient}) async {
+    dbClient ??= (await db)!;
     return dbClient.rawDelete('DELETE FROM WorkSources WHERE id = ?', [ws.id]);
   }
 
