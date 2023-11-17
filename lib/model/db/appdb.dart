@@ -492,8 +492,8 @@ class DBHelper {
 
   // Work sources:
 
-  Future<List<WorkSource>> getWorkSources() async {
-    final Database dbClient = (await db)!;
+  Future<List<WorkSource>> getWorkSources({Database? dbClient}) async {
+    dbClient ??= (await db)!;
     final List<Map> list = await dbClient.rawQuery("SELECT * FROM WorkSources");
     final List<WorkSource> workSources = [];
     for (int i = 0; i < list.length; i++) {
