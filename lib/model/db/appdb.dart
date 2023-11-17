@@ -21,7 +21,7 @@ class DBHelper {
   DBHelper() {
     _nanoUtil = NanoUtil();
   }
-  static const int DB_VERSION = 11;
+  static const int DB_VERSION = 12;
   static const String CONTACTS_SQL = """
         CREATE TABLE Contacts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -251,6 +251,25 @@ class DBHelper {
     }
     if (oldVersion == 10) {
       await db.execute(SCHEDULED_SQL);
+    }
+    if (oldVersion == 11) {
+      // delete all old work sources:
+      try {
+        for (int i = 0; i < 5; i++) {
+          await deleteWorkSource(
+            WorkSource(
+              id: i,
+              name: "",
+              selected: false,
+              type: WorkSourceTypes.NONE,
+            ),
+          );
+        }
+      } catch (e) {
+        // no-op
+      }
+      // add new ones:
+      await _addDefaultWorkSources();
     }
   }
 

@@ -1,6 +1,8 @@
 ## v0.9.1 - [2023-11-18]
 #### Added
-- work generation
+- Work generation
+#### Changed
+- This resets the list of work generation sources
 #### Fixed
 - Minor fixes
 ## v0.9.0 - [2023-11-10]
