@@ -264,6 +264,7 @@ class DBHelper {
               selected: false,
               type: WorkSourceTypes.NONE,
             ),
+            dbClient: db,
           );
         }
       } catch (e) {
@@ -551,8 +552,8 @@ class DBHelper {
     return ws;
   }
 
-  Future<int> deleteWorkSource(WorkSource ws) async {
-    final Database dbClient = (await db)!;
+  Future<int> deleteWorkSource(WorkSource ws, {Database? dbClient}) async {
+    dbClient ??= (await db)!;
     return dbClient.rawDelete('DELETE FROM WorkSources WHERE id = ?', [ws.id]);
   }
 
