@@ -1587,7 +1587,7 @@ class SettingsSheetState extends State<SettingsSheet> with TickerProviderStateMi
                 ],
               ),
             ),
-            const SizedBox(width: 90),
+            SizedBox(width: UIUtil.isTablet(context) ? 30 : 90),
           ],
         ),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
