@@ -594,13 +594,13 @@ class UIUtil {
             decoration: BoxDecoration(
               // color: StateContainer.of(context).curTheme.warning,
               borderRadius: BorderRadius.circular(10),
-              // boxShadow: [
-              //   BoxShadow(
-              //       // color: StateContainer.of(context).curTheme.barrier!,
-              //       offset: const Offset(0, 15),
-              //       blurRadius: 30,
-              //       spreadRadius: -5),
-              // ],
+              boxShadow: [
+                BoxShadow(
+                    // color: StateContainer.of(context).curTheme.barrier!,
+                    offset: const Offset(0, 15),
+                    blurRadius: 30,
+                    spreadRadius: -5),
+              ],
             ),
             child: Text(
               content,

@@ -1,7 +1,6 @@
-## v0.9.2 - [2023-11-XX]
-#### Added
-#### Changed
+## v0.9.2 - [2023-11-30]
 #### Fixed
+- Minor fixes
 ## v0.9.1 - [2023-11-18]
 #### Added
 - Work generation

@@ -17,6 +17,7 @@ import 'package:quiver/iterables.dart';
 import 'package:synchronized/synchronized.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/bus/work_event.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/node.dart';
@@ -850,8 +851,7 @@ class AccountService {
               if (subtype == BlockTypes.RECEIVE) {
                 durationMs = 2500;
               }
-              UIUtil.showSnackbarNoContext(
-                  "Generating PoW, this may take a while...",
+              UIUtil.showSnackbarNoContext(Z.current.generatingWork,
                   durationMs: durationMs);
               requestBlock.work = await requestLocalWork(workHash, subtype);
             }
