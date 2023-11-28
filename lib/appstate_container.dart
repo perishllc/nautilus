@@ -20,6 +20,7 @@ import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/bus/payments_home_event.dart';
 import 'package:wallet_flutter/bus/tx_update_event.dart';
 import 'package:wallet_flutter/bus/unified_home_event.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/available_block_explorer.dart';
@@ -437,15 +438,9 @@ class StateContainerState extends State<StateContainer> {
     final AlertResponseItem branchAlert = AlertResponseItem(
       id: 4040,
       active: true,
-      // can't get localized strings in this context: :/
-      // TODO: find a way, but as a temp fix for the settings drawer, we need to put in something:
-      // title: Z.of(context).branchConnectErrorTitle,
-      // shortDescription: Z.of(context).branchConnectErrorShortDesc,
-      // longDescription: Z.of(context).branchConnectErrorLongDesc,
-      title: "Connection Warning",
-      shortDescription: "Error: can't reach Branch API",
-      longDescription:
-          "We can't seem to reach the Branch API, this is usually cause by some sort of network issue or VPN blocking the connection.\n\n You should still be able to use the app as normal, however sending and receiving gift cards may not work.",
+      title: Z.current.branchConnectErrorTitle,
+      shortDescription: Z.current.branchConnectErrorShortDesc,
+      longDescription: Z.current.branchConnectErrorLongDesc,
       dismissable: true,
     );
     try {
@@ -1784,8 +1779,7 @@ class StateContainerState extends State<StateContainer> {
       if (memo != null) {
         txData.memo = memo;
       } else {
-        // TODO: figure out how to get localized string here:
-        txData.memo = "Decryption Error!";
+        txData.memo = Z.current.decryptionError;
         txData.memo_enc = memoEnc;
       }
     }
@@ -1868,8 +1862,7 @@ class StateContainerState extends State<StateContainer> {
             if (memo != null) {
               newTXInfo.memo = memo;
             } else {
-              // TODO: figure out how to get localized string here:
-              newTXInfo.memo = "Decryption Error!";
+              newTXInfo.memo = Z.current.decryptionError;
               newTXInfo.memo_enc = memoEnc;
             }
           }
@@ -1963,8 +1956,7 @@ class StateContainerState extends State<StateContainer> {
             if (memo != null) {
               newTXInfo.memo = memo;
             } else {
-              // TODO: figure out how to get localized string here:
-              newTXInfo.memo = "Decryption Error!";
+              newTXInfo.memo = Z.current.decryptionError;
               newTXInfo.memo_enc = memoEnc;
             }
           }
@@ -2085,8 +2077,7 @@ class StateContainerState extends State<StateContainer> {
       if (memo != null) {
         txData.memo = memo;
       } else {
-        // TODO: figure out how to get localized string here:
-        txData.memo = "Decryption Error!";
+        txData.memo = Z.current.decryptionError;
         txData.memo_enc = memoEnc;
       }
     }
