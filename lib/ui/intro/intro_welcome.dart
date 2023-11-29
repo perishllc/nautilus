@@ -275,7 +275,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                                   .welcomeTextLogin
                                   .replaceAll("%1", NonTranslatable.appName),
                               style: AppStyles.textStyleParagraph(context),
-                              maxLines: 4,
+                              maxLines: 2,
                               stepGranularity: 0.5,
                             ),
                           ),
