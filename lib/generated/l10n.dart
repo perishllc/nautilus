@@ -6621,6 +6621,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<Z> {
       Locale.fromSubtags(languageCode: 'tr'),
       Locale.fromSubtags(languageCode: 'uk'),
       Locale.fromSubtags(languageCode: 'vi'),
+      Locale.fromSubtags(languageCode: 'zh'),
       Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
       Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
     ];

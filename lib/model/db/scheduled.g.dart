@@ -7,7 +7,7 @@ part of 'scheduled.dart';
 // **************************************************************************
 
 Scheduled _$ScheduledFromJson(Map<String, dynamic> json) => Scheduled(
-      label: json['label'] as String,
+      label: json['label'] as String? ?? "",
       active: json['active'] as bool? ?? false,
       autopay: json['autopay'] as bool? ?? false,
       paid: json['paid'] as bool? ?? false,
