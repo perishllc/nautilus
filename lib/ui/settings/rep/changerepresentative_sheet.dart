@@ -147,7 +147,7 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
               } catch (e) {
                 await authenticateWithPin(rep.account, context);
               }
-            } else if (authMethod.method == AuthMethod.PIN) {
+            } else if (authMethod.method == AuthMethod.PIN || (authMethod.method == AuthMethod.BIOMETRICS && !hasBiometrics)) {
               await authenticateWithPin(rep.account, context);
             } else {
               EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
@@ -517,7 +517,7 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                                     await authenticateWithPin(
                                         AppWallet.nautilusRepresentative, context);
                                   }
-                                } else if (authMethod.method == AuthMethod.PIN) {
+                                } else if (authMethod.method == AuthMethod.PIN || (authMethod.method == AuthMethod.BIOMETRICS && !hasBiometrics)) {
                                   await authenticateWithPin(
                                       AppWallet.nautilusRepresentative, context);
                                 } else {

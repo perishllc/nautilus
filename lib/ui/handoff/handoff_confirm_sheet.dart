@@ -303,7 +303,7 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                         } catch (e) {
                           await authenticateWithPin();
                         }
-                      } else if (authMethod.method == AuthMethod.PIN) {
+                      } else if (authMethod.method == AuthMethod.PIN || (authMethod.method == AuthMethod.BIOMETRICS && !hasBiometrics)) {
                         await authenticateWithPin();
                       } else {
                         EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));

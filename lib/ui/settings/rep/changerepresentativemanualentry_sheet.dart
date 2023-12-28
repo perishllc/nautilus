@@ -287,7 +287,7 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                                 } catch (e) {
                                   await authenticateWithPin(context);
                                 }
-                              } else if (authMethod.method == AuthMethod.PIN) {
+                              } else if (authMethod.method == AuthMethod.PIN || (authMethod.method == AuthMethod.BIOMETRICS && !hasBiometrics)) {
                                 await authenticateWithPin(context);
                               } else {
                                 EventTaxiImpl.singleton()
