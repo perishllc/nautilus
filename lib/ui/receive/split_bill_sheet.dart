@@ -469,7 +469,7 @@ class SplitBillSheetState extends State<SplitBillSheet> {
           currencyFormat: widget.localCurrencyFormat,
           maxDecimalDigits: _localCurrencyMode
               ? widget.localCurrencyFormat.decimalDigits ?? 2
-              : NumberUtil.maxDecimalDigits,
+              : NanoAmounts.maxDecimalDigits,
         ),
       ],
       onChanged: (String text) {

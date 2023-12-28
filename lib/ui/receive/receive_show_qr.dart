@@ -428,7 +428,7 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
           currencyFormat: _localCurrencyFormat,
           maxDecimalDigits: _localCurrencyMode
               ? _localCurrencyFormat.decimalDigits ?? 2
-              : NumberUtil.maxDecimalDigits,
+              : NanoAmounts.maxDecimalDigits,
         ),
       ],
       onChanged: (String text) {

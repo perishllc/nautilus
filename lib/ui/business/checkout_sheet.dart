@@ -463,7 +463,7 @@ class CheckoutSheetState extends State<CheckoutSheet> {
         CurrencyFormatter2(
           active: _localCurrencyMode,
           currencyFormat: _localCurrencyFormat,
-          maxDecimalDigits: _localCurrencyMode ? _localCurrencyFormat.decimalDigits ?? 2 : NumberUtil.maxDecimalDigits,
+          maxDecimalDigits: _localCurrencyMode ? _localCurrencyFormat.decimalDigits ?? 2 : NanoAmounts.maxDecimalDigits,
         ),
       ],
       onChanged: (String text) {

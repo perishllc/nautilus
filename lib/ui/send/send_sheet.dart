@@ -1215,21 +1215,21 @@ class SendSheetState extends State<SendSheet> {
         final String sanitizedTextField = sanitizedAmount(_localCurrencyFormat, textField);
         final String sanitizedBalance = sanitizedAmount(_localCurrencyFormat, balance);
         textFieldInt = (Decimal.parse(sanitizedTextField) *
-                Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+                Decimal.fromInt(pow(10, NanoAmounts.maxDecimalDigits) as int))
             .toDouble()
             .toInt();
         balanceInt = (Decimal.parse(sanitizedBalance) *
-                Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+                Decimal.fromInt(pow(10, NanoAmounts.maxDecimalDigits) as int))
             .toDouble()
             .toInt();
       } else {
         textField = sanitizedAmount(_localCurrencyFormat, textField);
         textFieldInt = (Decimal.parse(textField) *
-                Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+                Decimal.fromInt(pow(10, NanoAmounts.maxDecimalDigits) as int))
             .toDouble()
             .toInt();
         balanceInt =
-            (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+            (Decimal.parse(balance) * Decimal.fromInt(pow(10, NanoAmounts.maxDecimalDigits) as int))
                 .toDouble()
                 .toInt();
       }
@@ -1446,7 +1446,7 @@ class SendSheetState extends State<SendSheet> {
           currencyFormat: _localCurrencyFormat,
           maxDecimalDigits: _localCurrencyMode
               ? _localCurrencyFormat.decimalDigits ?? 2
-              : NumberUtil.maxDecimalDigits,
+              : NanoAmounts.maxDecimalDigits,
         ),
       ],
       onChanged: (String text) {

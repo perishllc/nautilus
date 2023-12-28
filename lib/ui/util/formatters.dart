@@ -23,7 +23,7 @@ int findDifferentCharacterInString(String str1, String str2) {
 /// Input formatter for Crypto/Fiat amounts
 class CurrencyFormatter2 extends TextInputFormatter {
   CurrencyFormatter2(
-      {required this.currencyFormat, this.maxDecimalDigits = NumberUtil.maxDecimalDigits, this.active = false});
+      {required this.currencyFormat, this.maxDecimalDigits = NanoAmounts.maxDecimalDigits, this.active = false});
 
   NumberFormat currencyFormat;
   int maxDecimalDigits;
@@ -445,8 +445,8 @@ String getRawAsThemeAwareFormattedAmount(BuildContext context, String? raw) {
   //   final String result = numAmount.replaceAllMapped(reg, mathFunc);
 
   //   // truncate:
-  //   if (decAmount.length > NumberUtil.maxDecimalDigits) {
-  //     decAmount = decAmount.substring(0, NumberUtil.maxDecimalDigits);
+  //   if (decAmount.length > NanoAmounts.maxDecimalDigits) {
+  //     decAmount = decAmount.substring(0, NanoAmounts.maxDecimalDigits);
   //     // remove trailing zeros:
   //     decAmount = decAmount.replaceAllMapped(RegExp(r'0+$'), (Match match) => "");
   //   }
