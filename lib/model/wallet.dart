@@ -2,6 +2,7 @@ import 'package:decimal/decimal.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:intl/intl.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/model/available_currency.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
@@ -76,8 +77,10 @@ class AppWallet {
   // the default is randomized but in case the user is offline during account creation we still need a default:
   static String defaultRepresentative =
       "${NonTranslatable.currencyPrefix}38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579";
-  static const String nautilusRepresentative = "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579";
-  static const String potasiusRepresentative = "ban_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579";
+  static const String nautilusRepresentative =
+      "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579";
+  static const String potasiusRepresentative =
+      "ban_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579";
 
   bool loading; // Whether or not app is initially loading
   bool historyLoading; // Whether or not we have received initial account history response
@@ -101,13 +104,16 @@ class AppWallet {
   List<TXData> solids;
   List<dynamic> unified;
 
-  String getLocalCurrencyBalance(BuildContext context, AvailableCurrency currency, {String locale = "en_US"}) {
-    final BigInt rawPerCur =
-        (NonTranslatable.accountType == NanoAccountType.NANO) ? NumberUtil.rawPerNano : NumberUtil.rawPerBanano;
+  String getLocalCurrencyBalance(BuildContext context, AvailableCurrency currency,
+      {String locale = "en_US"}) {
+    final BigInt rawPerCur = (NonTranslatable.accountType == NanoAccountType.NANO)
+        ? NanoAmounts.rawPerNano
+        : NanoAmounts.rawPerBanano;
 
-    final Decimal converted =
-        Decimal.parse(localCurrencyPrice) * NumberUtil.getRawAsDecimal(accountBalance.toString(), rawPerCur);
-    return NumberFormat.currency(locale: locale, symbol: currency.getCurrencySymbol()).format(converted.toDouble());
+    final Decimal converted = Decimal.parse(localCurrencyPrice) *
+        NanoAmounts.getRawAsDecimal(accountBalance.toString(), rawPerCur);
+    return NumberFormat.currency(locale: locale, symbol: currency.getCurrencySymbol())
+        .format(converted.toDouble());
   }
 
   String? get localCurrencyConversion {

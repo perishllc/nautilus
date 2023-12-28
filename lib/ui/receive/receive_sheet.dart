@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:quiver/strings.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
@@ -175,17 +176,20 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
           }
           _addressStyle = AddressStyle.TEXT60;
         });
-        _addressController.selection = TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
+        _addressController.selection =
+            TextSelection.fromPosition(TextPosition(offset: _addressController.text.length));
         if (_addressController.text.isNotEmpty &&
             _addressController.text.length > 1 &&
             SendSheetHelpers.isSpecialAddress(_addressController.text)) {
           final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
-          if (_addressController.text != formattedAddress && !SendSheetHelpers.isWellKnown(_addressController.text)) {
+          if (_addressController.text != formattedAddress &&
+              !SendSheetHelpers.isWellKnown(_addressController.text)) {
             setState(() {
               _addressController.text = formattedAddress;
             });
           }
-          final List<User> userList = await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(formattedAddress);
+          final List<User> userList =
+              await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(formattedAddress);
           setState(() {
             _users = userList;
           });
@@ -230,7 +234,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
             ) as bool?;
 
             if (confirmed == true) {
-              user ??= await sl.get<UsernameService>().figureOutUsernameType(_addressController.text);
+              user ??=
+                  await sl.get<UsernameService>().figureOutUsernameType(_addressController.text);
             }
           }
 
@@ -313,7 +318,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                     Handlebars.horizontal(context),
                     Container(
                       margin: const EdgeInsets.only(top: 15.0),
-                      constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
+                      constraints:
+                          BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                       child: Column(
                         children: <Widget>[
                           // Header
@@ -410,7 +416,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                                       child: Container(
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(25),
-                                          color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                          color:
+                                              StateContainer.of(context).curTheme.backgroundDarkest,
                                         ),
                                         child: Container(
                                           decoration: BoxDecoration(
@@ -424,12 +431,14 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                                                   padding: EdgeInsets.zero,
                                                   itemCount: _users.length,
                                                   itemBuilder: (BuildContext context, int index) {
-                                                    return Misc.buildUserItem(context, _users[index], false,
-                                                        (User user) {
-                                                      _addressController.text = user.getDisplayName()!;
+                                                    return Misc.buildUserItem(
+                                                        context, _users[index], false, (User user) {
+                                                      _addressController.text =
+                                                          user.getDisplayName()!;
                                                       _addressFocusNode.unfocus();
                                                       if (_amountController.text.isEmpty) {
-                                                        FocusScope.of(context).requestFocus(_amountFocusNode);
+                                                        FocusScope.of(context)
+                                                            .requestFocus(_amountFocusNode);
                                                       }
                                                       setState(() {
                                                         _isUser = true;
@@ -538,28 +547,31 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 // ),
                 Row(
                   children: <Widget>[
-                    AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, Z.of(context).request, Dimens.BUTTON_TOP_DIMENS,
-                        onPressed: () async {
+                    AppButton.buildAppButton(context, AppButtonType.PRIMARY, Z.of(context).request,
+                        Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       final bool validRequest = await _validateRequest();
                       if (!mounted) return;
 
                       if (!validRequest) {
                         return;
                       }
-                      final String formattedAddress = SendSheetHelpers.stripPrefixes(_addressController.text);
+                      final String formattedAddress =
+                          SendSheetHelpers.stripPrefixes(_addressController.text);
 
-                      final String formattedAmount = sanitizedAmount(_localCurrencyFormat, _amountController.text);
+                      final String formattedAmount =
+                          sanitizedAmount(_localCurrencyFormat, _amountController.text);
 
                       String amountRaw;
                       if (_amountController.text.isEmpty || _amountController.text == "0") {
                         amountRaw = "0";
                       } else {
                         if (_localCurrencyMode) {
-                          amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
-                              _localCurrencyFormat,
-                              convertLocalCurrencyToLocalizedCrypto(
-                                  context, _localCurrencyFormat, _amountController.text)));
+                          amountRaw = NanoAmounts.getAmountAsRaw(
+                              sanitizedAmount(
+                                  _localCurrencyFormat,
+                                  convertLocalCurrencyToLocalizedCrypto(
+                                      context, _localCurrencyFormat, _amountController.text)),
+                              NanoAmounts.rawPerNano);
                         } else {
                           if (!mounted) return;
                           amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
@@ -574,11 +586,13 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                       // verifies the input is a user in the db
                       if (SendSheetHelpers.isSpecialAddress(_addressController.text)) {
                         // Need to make sure its a valid contact or user
-                        final User? user = await sl.get<DBHelper>().getUserOrContactWithName(_addressController.text);
+                        final User? user = await sl
+                            .get<DBHelper>()
+                            .getUserOrContactWithName(_addressController.text);
                         if (user == null) {
                           setState(() {
-                            _addressValidationText =
-                                SendSheetHelpers.getInvalidAddressMessage(context, _addressController.text);
+                            _addressValidationText = SendSheetHelpers.getInvalidAddressMessage(
+                                context, _addressController.text);
                           });
                         } else {
                           Sheets.showAppHeightNineSheet(
@@ -591,13 +605,19 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                                 memo: _memoController.text,
                               ));
                         }
-                      } else if (_addressController.text.contains(".") || _addressController.text.contains(r"$")) {
+                      } else if (_addressController.text.contains(".") ||
+                          _addressController.text.contains(r"$")) {
                         String? address;
 
                         // check if UD domain:
-                        address = await sl.get<UsernameService>().checkUnstoppableDomain(_addressController.text);
-                        address ??= await sl.get<UsernameService>().checkENSDomain(_addressController.text);
-                        address ??= await sl.get<UsernameService>().checkOpencapDomain(_addressController.text);
+                        address = await sl
+                            .get<UsernameService>()
+                            .checkUnstoppableDomain(_addressController.text);
+                        address ??=
+                            await sl.get<UsernameService>().checkENSDomain(_addressController.text);
+                        address ??= await sl
+                            .get<UsernameService>()
+                            .checkOpencapDomain(_addressController.text);
 
                         if (!mounted) return;
 
@@ -619,18 +639,23 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
                 Row(
                   children: <Widget>[
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY_OUTLINE, Z.of(context).showAddress, Dimens.BUTTON_BOTTOM_DIMENS,
-                        onPressed: () async {
-                      final String formattedAmount = sanitizedAmount(_localCurrencyFormat, _amountController.text);
+                        context,
+                        AppButtonType.PRIMARY_OUTLINE,
+                        Z.of(context).showAddress,
+                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                      final String formattedAmount =
+                          sanitizedAmount(_localCurrencyFormat, _amountController.text);
                       String amountRaw;
                       if (_amountController.text.isEmpty || _amountController.text == "0") {
                         amountRaw = "0";
                       } else {
                         if (_localCurrencyMode) {
-                          amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
-                              _localCurrencyFormat,
-                              convertLocalCurrencyToLocalizedCrypto(
-                                  context, _localCurrencyFormat, _amountController.text)));
+                          amountRaw = NanoAmounts.getAmountAsRaw(
+                              sanitizedAmount(
+                                  _localCurrencyFormat,
+                                  convertLocalCurrencyToLocalizedCrypto(
+                                      context, _localCurrencyFormat, _amountController.text)),
+                              NanoAmounts.rawPerNano);
                         } else {
                           if (!mounted) return;
                           amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
@@ -670,7 +695,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
             context, StateContainer.of(context).curCurrency,
             locale: StateContainer.of(context).currencyLocale);
       } else {
-        balance = getRawAsThemeAwareAmount(context, StateContainer.of(context).wallet!.accountBalance.toString());
+        balance = getRawAsThemeAwareAmount(
+            context, StateContainer.of(context).wallet!.accountBalance.toString());
       }
       // Convert to Integer representations
       int textFieldInt;
@@ -680,20 +706,24 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
         textField = textField.replaceAll(",", ".");
         final String sanitizedTextField = sanitizedAmount(_localCurrencyFormat, textField);
         final String sanitizedBalance = sanitizedAmount(_localCurrencyFormat, balance);
-        textFieldInt =
-            (Decimal.parse(sanitizedTextField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
-                .toDouble()
-                .toInt();
-        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+        textFieldInt = (Decimal.parse(sanitizedTextField) *
+                Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+            .toDouble()
+            .toInt();
+        balanceInt = (Decimal.parse(sanitizedBalance) *
+                Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
             .toDouble()
             .toInt();
       } else {
         textField = sanitizedAmount(_localCurrencyFormat, textField);
-        textFieldInt = (Decimal.parse(textField) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+        textFieldInt = (Decimal.parse(textField) *
+                Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
             .toDouble()
             .toInt();
         balanceInt =
-            (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int)).toDouble().toInt();
+            (Decimal.parse(balance) * Decimal.fromInt(pow(10, NumberUtil.maxDecimalDigits) as int))
+                .toDouble()
+                .toInt();
       }
       return textFieldInt == balanceInt;
     } catch (e) {
@@ -705,17 +735,21 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
     String? raw;
     if (_localCurrencyMode) {
       _lastLocalCurrencyAmount = _amountController.text;
-      _lastCryptoAmount = sanitizedAmount(_localCurrencyFormat,
-          convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController.text));
+      _lastCryptoAmount = sanitizedAmount(
+          _localCurrencyFormat,
+          convertLocalCurrencyToLocalizedCrypto(
+              context, _localCurrencyFormat, _amountController.text));
       if (_lastCryptoAmount.isNotEmpty) {
-        raw = NumberUtil.getAmountAsRaw(_lastCryptoAmount);
+        raw = NanoAmounts.getAmountAsRaw(_lastCryptoAmount, NanoAmounts.rawPerNano);
       }
     } else {
       raw = _amountController.text.isNotEmpty
-          ? NumberUtil.getAmountAsRaw(_amountController.text
-              .trim()
-              .replaceAll(_localCurrencyFormat.currencySymbol, "")
-              .replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, ""))
+          ? NanoAmounts.getAmountAsRaw(
+              _amountController.text
+                  .trim()
+                  .replaceAll(_localCurrencyFormat.currencySymbol, "")
+                  .replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, ""),
+              NanoAmounts.rawPerNano)
           : "";
     }
     paintQrCode(address: widget.address, amount: raw);
@@ -729,8 +763,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
       data = "${NonTranslatable.currencyUriPrefix}:${address!}";
     }
 
-    final Widget qr =
-        SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: await UIUtil.getQRImage(context, data));
+    final Widget qr = SizedBox(
+        width: MediaQuery.of(context).size.width / 2.675,
+        child: await UIUtil.getQRImage(context, data));
     setState(() {
       qrWidget = qr;
     });
@@ -753,7 +788,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Text("${Z.of(context).needVerificationAlert}\n\n", style: AppStyles.textStyleParagraph(context)),
+                Text("${Z.of(context).needVerificationAlert}\n\n",
+                    style: AppStyles.textStyleParagraph(context)),
               ],
             ),
             actions: <Widget>[
@@ -804,8 +840,10 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
     } else {
       String bananoAmount;
       if (_localCurrencyMode) {
-        bananoAmount = sanitizedAmount(_localCurrencyFormat,
-            convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController.text));
+        bananoAmount = sanitizedAmount(
+            _localCurrencyFormat,
+            convertLocalCurrencyToLocalizedCrypto(
+                context, _localCurrencyFormat, _amountController.text));
       } else {
         if (_rawAmount == null) {
           bananoAmount = sanitizedAmount(_localCurrencyFormat, _amountController.text);
@@ -836,9 +874,11 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
       }
     }
     // Validate address
-    final bool isUser = _addressController.text.startsWith("@") || _addressController.text.startsWith("#");
+    final bool isUser =
+        _addressController.text.startsWith("@") || _addressController.text.startsWith("#");
     final bool isFavorite = _addressController.text.startsWith("★");
-    final bool isDomain = _addressController.text.contains(".") || _addressController.text.contains(r"$");
+    final bool isDomain =
+        _addressController.text.contains(".") || _addressController.text.contains(r"$");
     // final bool isPhoneNumber = _isPhoneNumber(_addressController!.text);
     if (_addressController.text.trim().isEmpty) {
       isValid = false;
@@ -867,7 +907,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
       // notifications must be turned on if sending a request or memo:
       final bool notificationsEnabled = await sl.get<SharedPrefsUtil>().getNotificationsOn();
 
-      if ((_memoController.text.isNotEmpty && _addressController.text.isNotEmpty) && !notificationsEnabled) {
+      if ((_memoController.text.isNotEmpty && _addressController.text.isNotEmpty) &&
+          !notificationsEnabled) {
         final bool notificationTurnedOn = await SendSheetHelpers.showNotificationDialog(context);
         if (!notificationTurnedOn) {
           isValid = false;
@@ -924,7 +965,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
         CurrencyFormatter2(
           active: _localCurrencyMode,
           currencyFormat: _localCurrencyFormat,
-          maxDecimalDigits: _localCurrencyMode ? _localCurrencyFormat.decimalDigits ?? 2 : NumberUtil.maxDecimalDigits,
+          maxDecimalDigits: _localCurrencyMode
+              ? _localCurrencyFormat.decimalDigits ?? 2
+              : NumberUtil.maxDecimalDigits,
         ),
       ],
       onChanged: (String text) {
@@ -1006,8 +1049,9 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
   Widget getEnterAddressContainer() {
     return AppTextField(
         topMargin: 115,
-        padding:
-            _addressValidAndUnfocused ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
+        padding: _addressValidAndUnfocused
+            ? const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0)
+            : EdgeInsets.zero,
         // padding: EdgeInsets.zero,
         textAlign: TextAlign.center,
         // textAlign: (_isUser || _addressController.text.length == 0) ? TextAlign.center : TextAlign.start,
@@ -1015,7 +1059,10 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
         controller: _addressController,
         cursorColor: StateContainer.of(context).curTheme.primary,
         inputFormatters: [
-          if (_isUser) LengthLimitingTextInputFormatter(20) else LengthLimitingTextInputFormatter(65),
+          if (_isUser)
+            LengthLimitingTextInputFormatter(20)
+          else
+            LengthLimitingTextInputFormatter(65),
         ],
         textInputAction: _memoController.text.isEmpty ? TextInputAction.next : TextInputAction.done,
         maxLines: null,
@@ -1025,7 +1072,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
             icon: AppIcons.scan,
             onPressed: () async {
               UIUtil.cancelLockEvent();
-              final String? scanResult = await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
+              final String? scanResult =
+                  await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
               if (!mounted) return;
               if (scanResult == null) {
                 UIUtil.showSnackbar(Z.of(context).qrInvalidAddress, context);
@@ -1149,16 +1197,18 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
               _users = [];
             });
           } else if (isFavorite) {
-            final List<User> matchedList =
-                await sl.get<DBHelper>().getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+            final List<User> matchedList = await sl
+                .get<DBHelper>()
+                .getContactsWithNameLike(SendSheetHelpers.stripPrefixes(text));
             final Set<String?> nicknames = {};
             matchedList.retainWhere((User x) => nicknames.add(x.nickname));
             setState(() {
               _users = matchedList;
             });
           } else if (isUser || isDomain) {
-            final List<User> matchedList =
-                await sl.get<DBHelper>().getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
+            final List<User> matchedList = await sl
+                .get<DBHelper>()
+                .getUserContactSuggestionsWithNameLike(SendSheetHelpers.stripPrefixes(text));
             setState(() {
               _users = matchedList;
             });
@@ -1247,7 +1297,8 @@ class _ReceiveSheetState extends State<ReceiveSheet> {
         fontFamily: 'OverpassMono',
       ),
       onChanged: (String text) {
-        setState(() {}); // forces address container to respect the memo's status (empty or not empty)
+        setState(
+            () {}); // forces address container to respect the memo's status (empty or not empty)
         // nothing for now
       },
     );

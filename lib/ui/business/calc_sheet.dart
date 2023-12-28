@@ -343,35 +343,35 @@ class CalcSheetState extends State<CalcSheet> {
                     "Checkout",
                     Dimens.BUTTON_TOP_DIMENS,
                     onPressed: () async {
-                      bool _localCurrencyMode = false;
+                      // bool _localCurrencyMode = false;
 
-                      final String formattedAmount = sanitizedAmount(_localCurrencyFormat, answer);
-                      String amountRaw;
-                      if (answer.isEmpty || answer == "0") {
-                        amountRaw = "0";
-                      } else {
-                        if (_localCurrencyMode) {
-                          amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
-                              _localCurrencyFormat,
-                              convertLocalCurrencyToLocalizedCrypto(
-                                  context, _localCurrencyFormat, _amountController.text)));
-                        } else {
-                          if (!mounted) return;
-                          amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
-                        }
-                      }
+                      // final String formattedAmount = sanitizedAmount(_localCurrencyFormat, answer);
+                      // String amountRaw;
+                      // if (answer.isEmpty || answer == "0") {
+                      //   amountRaw = "0";
+                      // } else {
+                      //   if (_localCurrencyMode) {
+                      //     amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
+                      //         _localCurrencyFormat,
+                      //         convertLocalCurrencyToLocalizedCrypto(
+                      //             context, _localCurrencyFormat, _amountController.text)));
+                      //   } else {
+                      //     if (!mounted) return;
+                      //     amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
+                      //   }
+                      // }
 
                       // getThemeAwareAmountAsRaw(context, amount)
 
-                      Sheets.showAppHeightEightSheet(
-                        context: context,
-                        widget: ReceiveShowQRSheet(
-                          localCurrency: widget.localCurrency,
-                          address: widget.address,
-                          qrWidget: widget.qrWidget,
-                          amountRaw: amountRaw,
-                        ),
-                      );
+                      // Sheets.showAppHeightEightSheet(
+                      //   context: context,
+                      //   widget: ReceiveShowQRSheet(
+                      //     localCurrency: widget.localCurrency,
+                      //     address: widget.address,
+                      //     qrWidget: widget.qrWidget,
+                      //     amountRaw: amountRaw,
+                      //   ),
+                      // );
                     },
                   ),
                 ],

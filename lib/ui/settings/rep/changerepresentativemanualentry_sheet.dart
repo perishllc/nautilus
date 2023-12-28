@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
@@ -122,7 +123,8 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                           Handlebars.horizontal(context),
                           Container(
                             margin: const EdgeInsets.only(top: 15),
-                            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
+                            constraints:
+                                BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                             child: AutoSizeText(
                               CaseChange.toUpperCase(Z.of(context).changeRepAuthenticate, context),
                               style: AppStyles.textStyleHeader(context),
@@ -167,7 +169,8 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                               onPressed: () async {
                                 UIUtil.cancelLockEvent();
                                 final String? result =
-                                    await UserDataUtil.getQRData(DataType.ADDRESS, context) as String?;
+                                    await UserDataUtil.getQRData(DataType.ADDRESS, context)
+                                        as String?;
                                 if (result == null) {
                                   return;
                                 }
@@ -240,7 +243,8 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                                         FocusScope.of(context).requestFocus(_repFocusNode);
                                       });
                                     },
-                                    child: UIUtil.threeLineAddressText(context, widget.repController.text),
+                                    child: UIUtil.threeLineAddressText(
+                                        context, widget.repController.text),
                                   )
                                 : null,
                           ),
@@ -260,20 +264,25 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                             Z.of(context).changeRepButton.toUpperCase(),
                             Dimens.BUTTON_TOP_DIMENS,
                             onPressed: () async {
-                              if (!NanoAccounts.isValid(NonTranslatable.accountType, widget.repController.text)) {
+                              if (!NanoAccounts.isValid(
+                                  NonTranslatable.accountType, widget.repController.text)) {
                                 return;
                               }
                               // Authenticate
-                              final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-                              final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+                              final AuthenticationMethod authMethod =
+                                  await sl.get<SharedPrefsUtil>().getAuthMethod();
+                              final bool hasBiometrics =
+                                  await sl.get<BiometricUtil>().hasBiometrics();
                               if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                                 try {
                                   final bool authenticated = await sl
                                       .get<BiometricUtil>()
-                                      .authenticateWithBiometrics(context, Z.of(context).changeRepAuthenticate);
+                                      .authenticateWithBiometrics(
+                                          context, Z.of(context).changeRepAuthenticate);
                                   if (authenticated) {
                                     sl.get<HapticUtil>().fingerprintSucess();
-                                    EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE_MANUAL));
+                                    EventTaxiImpl.singleton()
+                                        .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE_MANUAL));
                                   }
                                 } catch (e) {
                                   await authenticateWithPin(context);
@@ -281,7 +290,8 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
                               } else if (authMethod.method == AuthMethod.PIN) {
                                 await authenticateWithPin(context);
                               } else {
-                                EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE_MANUAL));
+                                EventTaxiImpl.singleton()
+                                    .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE_MANUAL));
                               }
                             },
                           ),
@@ -309,7 +319,8 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
 
   Future<void> doChange(BuildContext context) async {
     _animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.CHANGE_REP, onPoppedCallback: () => _animationOpen = false);
+    AppAnimation.animationLauncher(context, AnimationType.CHANGE_REP,
+        onPoppedCallback: () => _animationOpen = false);
     // If account isnt open, just store the account in sharedprefs
     if (StateContainer.of(context).wallet!.openBlock == null) {
       await sl.get<SharedPrefsUtil>().setRepresentative(widget.repController.text);
@@ -319,8 +330,12 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
     } else {
       try {
         final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
-        final String privKey = await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(),
-            StateContainer.of(context).selectedAccount!.index!, derivationMethod);
+        final NanoDerivationType derivationType = NanoUtilities.derivationMethodToType(derivationMethod);
+        final String privKey = await NanoDerivations.universalSeedToPrivate(
+          await StateContainer.of(context).getSeed(),
+          index: StateContainer.of(context).selectedAccount!.index!,
+          type: derivationType,
+        );
         final ProcessResponse resp = await sl.get<AccountService>().requestChange(
             StateContainer.of(context).wallet!.address,
             widget.repController.text,
@@ -345,7 +360,8 @@ class _ChangeRepManualSheetState extends State<ChangeRepManualSheet> {
     // PIN Authentication
     final String? expectedPin = await sl.get<Vault>().getPin();
     final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
-    final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    final bool? auth =
+        await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,

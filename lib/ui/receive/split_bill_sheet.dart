@@ -8,6 +8,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
@@ -99,7 +100,8 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                         Handlebars.horizontal(context),
                         Container(
                           margin: const EdgeInsets.only(top: 15.0),
-                          constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
+                          constraints:
+                              BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                           child: Column(
                             children: <Widget>[
                               AutoSizeText(
@@ -122,8 +124,8 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                     child: AppDialogs.infoButton(
                       context,
                       () {
-                        AppDialogs.showInfoDialog(
-                            context, Z.of(context).splitBillInfoHeader, Z.of(context).splitBillInfo);
+                        AppDialogs.showInfoDialog(context, Z.of(context).splitBillInfoHeader,
+                            Z.of(context).splitBillInfo);
                       },
                     ),
                   ),
@@ -180,7 +182,8 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                   margin: const EdgeInsets.only(right: 28, bottom: 10),
                   child: FloatingActionButton(
                     backgroundColor: StateContainer.of(context).curTheme.primary,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
                     onPressed: !_addingAccount
                         ? () async {
                             if (_addingAccount) {
@@ -267,10 +270,12 @@ class SplitBillSheetState extends State<SplitBillSheet> {
                           amountRaw = "0";
                         } else {
                           if (_localCurrencyMode) {
-                            amountRaw = NumberUtil.getAmountAsRaw(sanitizedAmount(
-                                widget.localCurrencyFormat,
-                                convertLocalCurrencyToLocalizedCrypto(
-                                    context, widget.localCurrencyFormat, amountController.text)));
+                            amountRaw = NanoAmounts.getAmountAsRaw(
+                                sanitizedAmount(
+                                    widget.localCurrencyFormat,
+                                    convertLocalCurrencyToLocalizedCrypto(context,
+                                        widget.localCurrencyFormat, amountController.text)),
+                                NanoAmounts.rawPerNano);
                           } else {
                             if (!mounted) return;
                             amountRaw = getThemeAwareAmountAsRaw(context, formattedAmount);
@@ -462,8 +467,9 @@ class SplitBillSheetState extends State<SplitBillSheet> {
         CurrencyFormatter2(
           active: _localCurrencyMode,
           currencyFormat: widget.localCurrencyFormat,
-          maxDecimalDigits:
-              _localCurrencyMode ? widget.localCurrencyFormat.decimalDigits ?? 2 : NumberUtil.maxDecimalDigits,
+          maxDecimalDigits: _localCurrencyMode
+              ? widget.localCurrencyFormat.decimalDigits ?? 2
+              : NumberUtil.maxDecimalDigits,
         ),
       ],
       onChanged: (String text) {
@@ -506,8 +512,10 @@ class SplitBillSheetState extends State<SplitBillSheet> {
             if (userMap[addr]["_amountController"] == null) {
               continue;
             }
-            final TextEditingController amountController = userMap[addr]["_amountController"] as TextEditingController;
-            final String lastLocalCurrencyAmount = userMap[addr]["_lastLocalCurrencyAmount"] as String;
+            final TextEditingController amountController =
+                userMap[addr]["_amountController"] as TextEditingController;
+            final String lastLocalCurrencyAmount =
+                userMap[addr]["_lastLocalCurrencyAmount"] as String;
             final String lastCryptoAmount = userMap[addr]["_lastCryptoAmount"] as String;
 
             final List<String> stateVars = SendSheetHelpers.toggleLocalCurrency(
@@ -608,5 +616,4 @@ class SplitBillSheetState extends State<SplitBillSheet> {
     );
   } //************ Enter Memo Container Method End ************//
   //*************************************************************//
-
 }

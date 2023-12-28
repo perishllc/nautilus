@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/address.dart';
 import 'package:wallet_flutter/model/db/subscription.dart';
@@ -51,7 +52,7 @@ class UserDataUtil {
       }
     } else if (type == DataType.SEED) {
       // Check if valid seed
-      if (NanoUtil.isValidSeed(data)) {
+      if (NanoDerivations.isValidHexFormSeed(data)) {
         return data;
       }
     } else if (type == DataType.DATA) {
@@ -126,7 +127,7 @@ class UserDataUtil {
       });
       setStream = delayed.asStream().listen((_) {
         Clipboard.getData("text/plain").then((ClipboardData? data) {
-          if (data != null && data.text != null && NanoUtil.isValidSeed(data.text!)) {
+          if (data != null && data.text != null && NanoDerivations.isValidHexFormSeed(data.text!)) {
             Clipboard.setData(const ClipboardData(text: ""));
           }
         });

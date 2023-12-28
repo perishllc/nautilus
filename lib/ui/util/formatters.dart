@@ -2,6 +2,7 @@ import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/util/numberutil.dart';
@@ -255,7 +256,7 @@ String convertLocalCurrencyToLocalizedCrypto(BuildContext context, NumberFormat 
   final Decimal valueLocal = Decimal.parse(sanitizedAmt);
   final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
   final String nanoAmount =
-      NumberUtil.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
+      NanoAmounts.truncateDecimal((valueLocal / conversion).toDecimal(scaleOnInfinitePrecision: 16));
 
   // replace dec separator as this function expects the localized version:
   // no need to put the group separator back in as it's stripped again anyways:
@@ -274,7 +275,7 @@ String convertCryptoToLocalCurrency(BuildContext context, NumberFormat localCurr
   }
   final Decimal valueCrypto = Decimal.parse(sanitizedAmt);
   final Decimal conversion = Decimal.parse(StateContainer.of(context).wallet!.localCurrencyConversion!);
-  sanitizedAmt = NumberUtil.truncateDecimal(valueCrypto * conversion, digits: 2);
+  sanitizedAmt = NanoAmounts.truncateDecimal(valueCrypto * conversion, digits: 2);
 
   return (localCurrencyFormat.currencySymbol + convertCryptoToLocalAmount(sanitizedAmt, localCurrencyFormat))
       .replaceAll(" ", "");
@@ -386,41 +387,21 @@ List<TextSpan> displayRawFull(BuildContext context, TextStyle textStyle, String 
 
 String getRawAsThemeAwareAmount(BuildContext context, String? raw) {
   final BigInt rawPerCur = StateContainer.of(context).nyanoMode
-      ? NumberUtil.rawPerNyano
+      ? NanoAmounts.rawPerNyano
       : StateContainer.of(context).bananoMode
-          ? NumberUtil.rawPerBanano
-          : NumberUtil.rawPerNano;
-  return NumberUtil.getRawAsUsableString(raw, rawPerCur); // "$amount.$decPart"
+          ? NanoAmounts.rawPerBanano
+          : NanoAmounts.rawPerNano;
+  return NanoAmounts.getRawAsUsableString(raw, rawPerCur); // "$amount.$decPart"
 }
 
 String getThemeAwareRawAccuracy(BuildContext context, String? raw) {
   final BigInt rawPerCur = StateContainer.of(context).nyanoMode
-      ? NumberUtil.rawPerNyano
+      ? NanoAmounts.rawPerNyano
       : StateContainer.of(context).bananoMode
-          ? NumberUtil.rawPerBanano
-          : NumberUtil.rawPerNano;
-  final String rawString = NumberUtil.getRawAsUsableString(raw, rawPerCur);
-  final String rawDecimalString = NumberUtil.getRawAsDecimal(raw, rawPerCur).toString();
-
-  if (raw == null || raw.isEmpty || raw == "0") {
-    return "";
-  }
-
-  if (rawString != rawDecimalString) {
-    return "~";
-  }
-  return "";
-}
-
-String getXMRRawAsThemeAwareAmount(BuildContext context, String? raw) {
-  final BigInt rawPerCur = NumberUtil.rawPerXMR;
-  return NumberUtil.getRawAsUsableString(raw, rawPerCur); // "$amount.$decPart"
-}
-
-String getXMRThemeAwareRawAccuracy(BuildContext context, String? raw) {
-  final BigInt rawPerCur = NumberUtil.rawPerXMR;
-  final String rawString = NumberUtil.getRawAsUsableString(raw, rawPerCur);
-  final String rawDecimalString = NumberUtil.getRawAsDecimal(raw, rawPerCur).toString();
+          ? NanoAmounts.rawPerBanano
+          : NanoAmounts.rawPerNano;
+  final String rawString = NanoAmounts.getRawAsUsableString(raw, rawPerCur);
+  final String rawDecimalString = NanoAmounts.getRawAsDecimal(raw, rawPerCur).toString();
 
   if (raw == null || raw.isEmpty || raw == "0") {
     return "";
@@ -438,11 +419,11 @@ String getXMRThemeAwareRawAccuracy(BuildContext context, String? raw) {
 
 String getThemeAwareAmountAsRaw(BuildContext context, String amount) {
   if (StateContainer.of(context).nyanoMode) {
-    return NumberUtil.getNyanoAmountAsRaw(amount);
+    return NanoAmounts.getAmountAsRaw(amount, NanoAmounts.rawPerNyano);
   } else if (StateContainer.of(context).bananoMode) {
-    return NumberUtil.getBananoAmountAsRaw(amount);
+    return NanoAmounts.getAmountAsRaw(amount, NanoAmounts.rawPerBanano);
   } else {
-    return NumberUtil.getAmountAsRaw(amount);
+    return NanoAmounts.getAmountAsRaw(amount, NanoAmounts.rawPerNano);
   }
 }
 

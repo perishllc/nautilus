@@ -220,7 +220,7 @@ class _PinScreenState extends State<PinScreen> with SingleTickerProviderStateMix
                     await sl.get<Vault>().deleteSeed();
                     await sl.get<Vault>().setSeed(hashedSeed);
                     if (!mounted) return;
-                    await NanoUtil().loginAccount(hashedSeed, context, offset: 0);
+                    await NanoUtilities().loginAccount(hashedSeed, context, offset: 0);
                     await sl.get<Vault>().updateSessionKey();
                     if (!mounted) return;
                     await StateContainer.of(context).resetRecentlyUsedAccounts();

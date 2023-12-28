@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/dimens.dart';
@@ -66,7 +67,9 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
   StreamSubscription<AuthenticatedEvent>? _authSub;
 
   void _registerBus() {
-    _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((AuthenticatedEvent event) {
+    _authSub = EventTaxiImpl.singleton()
+        .registerTo<AuthenticatedEvent>()
+        .listen((AuthenticatedEvent event) {
       if (event.authType == AUTH_EVENT_TYPE.SEND) {
         _doSend();
       }
@@ -183,7 +186,8 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
+                      child: UIUtil.threeLineAddressText(context, widget.destination,
+                          contactName: widget.contactName)),
 
                   // "FOR" TEXT
                   Container(
@@ -224,7 +228,8 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                           ),
                           TextSpan(
                             text: widget.payItem.message,
-                            style: AppStyles.textStyleParagraphPrimary(context).copyWith(fontSize: AppFontSizes.small),
+                            style: AppStyles.textStyleParagraphPrimary(context)
+                                .copyWith(fontSize: AppFontSizes.small),
                           ),
                         ],
                       ),
@@ -272,7 +277,8 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                         CaseChange.toUpperCase(Z.of(context).confirm, context),
                         Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       // Authenticate
-                      final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+                      final AuthenticationMethod authMethod =
+                          await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
 
                       if (!mounted) return;
@@ -280,16 +286,19 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                       final String authText = Z
                           .of(context)
                           .sendAmountConfirm
-                          .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.payItem.amount))
+                          .replaceAll(
+                              "%1", getRawAsThemeAwareAmount(context, widget.payItem.amount))
                           .replaceAll("%2", StateContainer.of(context).currencyMode);
 
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         try {
-                          final bool authenticated =
-                              await sl.get<BiometricUtil>().authenticateWithBiometrics(context, authText);
+                          final bool authenticated = await sl
+                              .get<BiometricUtil>()
+                              .authenticateWithBiometrics(context, authText);
                           if (authenticated) {
                             sl.get<HapticUtil>().fingerprintSucess();
-                            EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
+                            EventTaxiImpl.singleton()
+                                .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
                           }
                         } catch (e) {
                           await authenticateWithPin();
@@ -381,10 +390,12 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
       // url = "http://node-local.perish.co:5076/handoff";
 
       final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
-      final String privKey = await NanoUtil.uniSeedToPrivate(
+      final NanoDerivationType derivationType =
+          NanoUtilities.derivationMethodToType(derivationMethod);
+      final String privKey = await NanoDerivations.universalSeedToPrivate(
         await StateContainer.of(context).getSeed(),
-        StateContainer.of(context).selectedAccount!.index!,
-        derivationMethod,
+        index: StateContainer.of(context).selectedAccount!.index!,
+        type: derivationType,
       );
 
       final HandoffResponse handoffResponse = await sl.get<AccountService>().requestHandoffHTTP(
@@ -453,7 +464,8 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
     // PIN Authentication
     final String? expectedPin = await sl.get<Vault>().getPin();
     final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
-    final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    final bool? auth =
+        await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,

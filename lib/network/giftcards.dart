@@ -7,6 +7,7 @@ import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:http/http.dart' as http;
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/db/txdata.dart';
@@ -35,7 +36,7 @@ class GiftCards {
     String? memo,
     bool requireCaptcha = false,
   }) async {
-    final String paperWalletAccount = NanoUtil.seedToAddress(paperWalletSeed, 0);
+    final String paperWalletAccount = NanoDerivations.standardSeedToAddress(paperWalletSeed, index: 0);
 
     String giftDescription = "Get the app to open this gift card!";
 
@@ -43,7 +44,7 @@ class GiftCards {
     if (amountBigInt > BigInt.parse("1000000000000000000000000000000")) {
       // more than 1 NANO:
       final BigInt rawPerNano = BigInt.from(10).pow(30);
-      final String formattedAmount = NumberUtil.getRawAsUsableString(amountRaw, rawPerNano);
+      final String formattedAmount = NanoAmounts.getRawAsUsableString(amountRaw, rawPerNano);
       giftDescription = "Someone sent you $formattedAmount NANO! Get the app to open this gift card!";
     }
 

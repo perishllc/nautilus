@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:logger/logger.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/dimens.dart';
@@ -59,7 +60,9 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
   StreamSubscription<AuthenticatedEvent>? _authSub;
 
   void _registerBus() {
-    _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((AuthenticatedEvent event) {
+    _authSub = EventTaxiImpl.singleton()
+        .registerTo<AuthenticatedEvent>()
+        .listen((AuthenticatedEvent event) {
       if (event.authType == AUTH_EVENT_TYPE.SEND) {
         _doSend();
       }
@@ -87,7 +90,8 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
 
   void _showAnimation(BuildContext context) {
     animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.GENERATE, onPoppedCallback: () => animationOpen = false);
+    AppAnimation.animationLauncher(context, AnimationType.GENERATE,
+        onPoppedCallback: () => animationOpen = false);
   }
 
   @override
@@ -199,9 +203,11 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                               style: AppStyles.textStyleParagraphPrimary(context),
                             ),
                             TextSpan(
-                              text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
+                              text:
+                                  widget.localCurrency != null ? " (${widget.localCurrency})" : "",
                               style: AppStyles.textStyleParagraphPrimary(context).copyWith(
-                                color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
+                                color:
+                                    StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
                               ),
                             ),
                           ],
@@ -254,21 +260,26 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
                         CaseChange.toUpperCase(Z.of(context).confirm, context),
                         Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       // Authenticate
-                      final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+                      final AuthenticationMethod authMethod =
+                          await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         try {
                           if (!mounted) return;
-                          final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
-                              context,
-                              Z
-                                  .of(context)
-                                  .sendAmountConfirm
-                                  .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
-                                  .replaceAll("%2", StateContainer.of(context).currencyMode));
+                          final bool authenticated = await sl
+                              .get<BiometricUtil>()
+                              .authenticateWithBiometrics(
+                                  context,
+                                  Z
+                                      .of(context)
+                                      .sendAmountConfirm
+                                      .replaceAll(
+                                          "%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
+                                      .replaceAll("%2", StateContainer.of(context).currencyMode));
                           if (authenticated) {
                             sl.get<HapticUtil>().fingerprintSucess();
-                            EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
+                            EventTaxiImpl.singleton()
+                                .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
                           }
                         } catch (e) {
                           await authenticateWithPin();
@@ -335,24 +346,24 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
 
       if (widget.splitAmountRaw.isNotEmpty) {
         Map resp = await sl.get<GiftCards>().createSplitGiftCard(
-          seed: widget.paperWalletSeed,
-          requestingAccount: walletAddress,
-          memo: widget.memo,
-          splitAmountRaw: widget.splitAmountRaw,
-          requireCaptcha: widget.requireCaptcha,
-        ) as Map;
+              seed: widget.paperWalletSeed,
+              requestingAccount: walletAddress,
+              memo: widget.memo,
+              splitAmountRaw: widget.splitAmountRaw,
+              requireCaptcha: widget.requireCaptcha,
+            ) as Map;
 
         if (resp.containsKey("success")) {
           branchLink = resp["link"] as String;
         }
       } else {
         branchResponse = await sl.get<GiftCards>().createGiftCard(
-          context,
-          paperWalletSeed: widget.paperWalletSeed,
-          amountRaw: widget.amountRaw,
-          memo: widget.memo,
-          requireCaptcha: widget.requireCaptcha,
-        );
+              context,
+              paperWalletSeed: widget.paperWalletSeed,
+              amountRaw: widget.amountRaw,
+              memo: widget.memo,
+              requireCaptcha: widget.requireCaptcha,
+            );
         if (branchResponse.success) {
           branchLink = branchResponse.result as String;
         }
@@ -368,8 +379,10 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
             widget.amountRaw,
             widget.destination,
             StateContainer.of(context).wallet!.address,
-            NanoUtil.seedToPrivate(
-                await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
+            NanoDerivations.standardSeedToPrivate(
+              await StateContainer.of(context).getSeed(),
+              index: StateContainer.of(context).selectedAccount!.index!,
+            ),
             max: widget.maxSend);
         StateContainer.of(context).wallet!.frontier = resp.hash;
         StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
@@ -393,7 +406,8 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      Clipboard.setData(ClipboardData(text: (branchLink ?? "") + RecordTypes.SEPARATOR + widget.paperWalletSeed));
+      Clipboard.setData(
+          ClipboardData(text: (branchLink ?? "") + RecordTypes.SEPARATOR + widget.paperWalletSeed));
       UIUtil.showSnackbar(Z.of(context).giftCardCreationErrorSent, context, durationMs: 20000);
       Navigator.of(context).pop();
     }
@@ -403,7 +417,8 @@ class GenerateConfirmSheetState extends State<GenerateConfirmSheet> {
     // PIN Authentication
     final String? expectedPin = await sl.get<Vault>().getPin();
     final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
-    final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    final bool? auth =
+        await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,

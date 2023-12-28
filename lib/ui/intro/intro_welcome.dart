@@ -400,7 +400,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
     // Update wallet
     final String seed = await StateContainer.of(context).getSeed();
     if (!mounted) return;
-    await NanoUtil().loginAccount(seed, context);
+    await NanoUtilities().loginAccount(seed, context);
 
     const String DEFAULT_PIN = "000000";
 

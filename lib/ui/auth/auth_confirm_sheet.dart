@@ -4,6 +4,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/dimens.dart';
@@ -310,11 +311,12 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
       final String signed = NanoHelpers.byteToHex(NanoHelpers.stringToBytesUtf8(stringToSign));
 
       final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+      final NanoDerivationType derivationType = NanoUtilities.derivationMethodToType(derivationMethod);
 
-      final String privKey = await NanoUtil.uniSeedToPrivate(
+      final String privKey = await NanoDerivations.universalSeedToPrivate(
         await StateContainer.of(context).getSeed(),
-        StateContainer.of(context).selectedAccount!.index!,
-        derivationMethod,
+        index: StateContainer.of(context).selectedAccount!.index!,
+        type: derivationType,
       );
       final String signature = NanoSignatures.signBlock(signed, privKey);
       // final String pubKey = NanoAccounts.extractPublicKey(walletAddress);

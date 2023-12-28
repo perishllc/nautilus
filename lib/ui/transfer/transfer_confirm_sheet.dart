@@ -5,6 +5,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/dimens.dart';
@@ -167,7 +168,7 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
     } else {
       seed = await sl.get<Vault>().getSeed();
     }
-    return NanoUtil.seedToPrivate(seed!, index);
+    return NanoDerivations.standardSeedToPrivate(seed!, index: index);
   }
 
   Future<void> processWallets() async {

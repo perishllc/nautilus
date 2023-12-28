@@ -4,6 +4,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/dimens.dart';
@@ -271,10 +272,11 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
       _showAnimation(context);
 
       final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
-      final String privKey = await NanoUtil.uniSeedToPrivate(
+      final NanoDerivationType derivationType = NanoUtilities.derivationMethodToType(derivationMethod);
+      final String privKey = await NanoDerivations.universalSeedToPrivate(
         await StateContainer.of(context).getSeed(),
-        StateContainer.of(context).selectedAccount!.index!,
-        derivationMethod,
+        index: StateContainer.of(context).selectedAccount!.index!,
+        type: derivationType,
       );
 
       // get epoch time as hex:

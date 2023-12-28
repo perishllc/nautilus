@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
 import 'package:wallet_flutter/dimens.dart';
@@ -62,7 +63,9 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
   StreamSubscription<AuthenticatedEvent>? _authSub;
 
   void _registerBus() {
-    _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((AuthenticatedEvent event) {
+    _authSub = EventTaxiImpl.singleton()
+        .registerTo<AuthenticatedEvent>()
+        .listen((AuthenticatedEvent event) {
       if (event.authType == AUTH_EVENT_TYPE.SEND) {
         _doSend();
       }
@@ -130,7 +133,8 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
                         color: StateContainer.of(context).curTheme.backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet!.address!,
+                      child: UIUtil.threeLineAddressText(
+                          context, StateContainer.of(context).wallet!.address!,
                           contactName: "@${widget.username!}")),
 
                   // "FOR" text
@@ -201,21 +205,26 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
                         CaseChange.toUpperCase(Z.of(context).confirm, context),
                         Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       // Authenticate
-                      final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+                      final AuthenticationMethod authMethod =
+                          await sl.get<SharedPrefsUtil>().getAuthMethod();
                       final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
                       if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                         if (!mounted) return;
                         try {
-                          final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(
-                              context,
-                              Z
-                                  .of(context)
-                                  .sendAmountConfirm
-                                  .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
-                                  .replaceAll("%2", StateContainer.of(context).currencyMode));
+                          final bool authenticated = await sl
+                              .get<BiometricUtil>()
+                              .authenticateWithBiometrics(
+                                  context,
+                                  Z
+                                      .of(context)
+                                      .sendAmountConfirm
+                                      .replaceAll(
+                                          "%1", getRawAsThemeAwareAmount(context, widget.amountRaw))
+                                      .replaceAll("%2", StateContainer.of(context).currencyMode));
                           if (authenticated) {
                             sl.get<HapticUtil>().fingerprintSucess();
-                            EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
+                            EventTaxiImpl.singleton()
+                                .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
                           }
                         } catch (e) {
                           await authenticateWithPin();
@@ -252,8 +261,13 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
       _showSendingAnimation(context);
 
       final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
-      final String privKey = await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(),
-          StateContainer.of(context).selectedAccount!.index!, derivationMethod);
+      final NanoDerivationType derivationType =
+          NanoUtilities.derivationMethodToType(derivationMethod);
+      final String privKey = await NanoDerivations.universalSeedToPrivate(
+        await StateContainer.of(context).getSeed(),
+        index: StateContainer.of(context).selectedAccount!.index!,
+        type: derivationType,
+      );
 
       final ProcessResponse resp = await sl.get<AccountService>().requestSend(
           StateContainer.of(context).wallet!.representative,
@@ -303,7 +317,8 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
       // await StateContainer.of(context).checkAndUpdateNanoToUsernames(true);
 
       // refresh the wallet by just updating to the same account:
-      await StateContainer.of(context).updateWallet(account: StateContainer.of(context).selectedAccount!);
+      await StateContainer.of(context)
+          .updateWallet(account: StateContainer.of(context).selectedAccount!);
 
       // Show complete
       // await StateContainer.of(context).requestUpdate();
@@ -314,7 +329,9 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
           closeOnTap: true,
           removeUntilHome: true,
           widget: SendCompleteSheet(
-              amountRaw: widget.amountRaw, destination: widget.destination, localAmount: widget.localCurrency));
+              amountRaw: widget.amountRaw,
+              destination: widget.destination,
+              localAmount: widget.localCurrency));
     } catch (e) {
       // Send failed
       if (animationOpen) {
@@ -329,7 +346,8 @@ class _RegisterNanoToConfirmSheetState extends State<RegisterNanoToConfirmSheet>
     // PIN Authentication
     final String? expectedPin = await sl.get<Vault>().getPin();
     final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
-    final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    final bool? auth =
+        await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,

@@ -283,7 +283,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
                                 await sl.get<Vault>().setSeed(seed);
                                 if (!mounted) return;
                                 // Update wallet
-                                await NanoUtil().loginAccount(await StateContainer.of(context).getSeed(), context);
+                                await NanoUtilities().loginAccount(await StateContainer.of(context).getSeed(), context);
                                 if (!mounted) return;
                                 // upload encrypted seed to seed backup endpoint:
 
@@ -376,7 +376,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
       // also encrypt the seed with the session key:
       await sl.get<DBHelper>().dropAccounts();
       if (!mounted) return;
-      await NanoUtil().loginAccount(decryptedSeed, context);
+      await NanoUtilities().loginAccount(decryptedSeed, context);
       if (!mounted) return;
       skipPin();
       return;
@@ -415,7 +415,7 @@ class _IntroMagicPasswordState extends State<IntroMagicPassword> {
     await sl.get<Vault>().setSeed(seed);
     if (!mounted) return;
     // Update wallet
-    await NanoUtil().loginAccount(await StateContainer.of(context).getSeed(), context);
+    await NanoUtilities().loginAccount(await StateContainer.of(context).getSeed(), context);
     if (!mounted) return;
     // upload encrypted seed to seed backup endpoint:
 

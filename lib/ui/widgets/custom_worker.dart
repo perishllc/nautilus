@@ -61,8 +61,8 @@ class CustomWorkerState extends State<CustomWorker>
     const String url = "http://localhost:8080/assets/work/index.html";
 
     return SizedBox(
-      height: 2,
-      width: 2,
+      height: 1,
+      width: 1,
       child: WebView(
         initialUrl: url,
         javascriptMode: JavascriptMode.unrestricted,

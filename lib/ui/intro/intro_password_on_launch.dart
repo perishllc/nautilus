@@ -114,7 +114,7 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                           await sl.get<Vault>().setSeed(widget.seed);
                           await sl.get<DBHelper>().dropAccounts();
                           if (!mounted) return;
-                          await NanoUtil().loginAccount(widget.seed, context);
+                          await NanoUtilities().loginAccount(widget.seed, context);
                           // StateContainer.of(context).requestUpdate();
                           final String? pin = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
                             return PinScreen(
@@ -130,7 +130,7 @@ class _IntroPasswordOnLaunchState extends State<IntroPasswordOnLaunch> {
                           if (!mounted) return;
                           final String seed = await StateContainer.of(context).getSeed();
                           if (!mounted) return;
-                          await NanoUtil().loginAccount(seed, context);
+                          await NanoUtilities().loginAccount(seed, context);
                           if (!mounted) return;
                           Navigator.of(context).pushNamed('/intro_backup_safety');
                         }

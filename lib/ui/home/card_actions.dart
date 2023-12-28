@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/localize.dart';
@@ -24,26 +25,31 @@ class CardActions {
   static Future<void> resendRequest(BuildContext context, TXData txDetails) async {
     // show sending animation:
     bool animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.REQUEST, onPoppedCallback: () => animationOpen = false);
+    AppAnimation.animationLauncher(context, AnimationType.REQUEST,
+        onPoppedCallback: () => animationOpen = false);
 
     bool sendFailed = false;
 
     // send the request again:
     final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
-    final String privKey = await NanoUtil.uniSeedToPrivate(
+    NanoDerivationType derivationType = NanoUtilities.derivationMethodToType(derivationMethod);
+    final String privKey = await NanoDerivations.universalSeedToPrivate(
       await StateContainer.of(context).getSeed(),
-      StateContainer.of(context).selectedAccount!.index!,
-      derivationMethod,
+      index: StateContainer.of(context).selectedAccount!.index!,
+      type: derivationType,
     );
 
     // get epoch time as hex:
-    final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+    final int secondsSinceEpoch =
+        DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
     final String nonceHex = secondsSinceEpoch.toRadixString(16);
     final String signature = NanoSignatures.signBlock(nonceHex, privKey);
 
     // check validity locally:
-    final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-    final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+    final String pubKey =
+        NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
+    final bool isValid = NanoSignatures.validateSig(
+        nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
     if (!isValid) {
       throw Exception("Invalid signature?!");
     }
@@ -76,7 +82,13 @@ class CardActions {
         encryptedMemo = Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
       }
       await sl.get<MetadataService>().requestPayment(
-          txDetails.to_address, txDetails.amount_raw, StateContainer.of(context).wallet!.address, signature, nonceHex, encryptedMemo, localUuid);
+          txDetails.to_address,
+          txDetails.amount_raw,
+          StateContainer.of(context).wallet!.address,
+          signature,
+          nonceHex,
+          encryptedMemo,
+          localUuid);
     } catch (error) {
       sl.get<Logger>().v("Error encrypting memo: $error");
       sendFailed = true;
@@ -105,26 +117,32 @@ class CardActions {
   static Future<void> resendMemo(BuildContext context, TXData txDetails) async {
     // show sending animation:
     bool animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.SEND_MESSAGE, onPoppedCallback: () => animationOpen = false);
+    AppAnimation.animationLauncher(context, AnimationType.SEND_MESSAGE,
+        onPoppedCallback: () => animationOpen = false);
 
     bool memoSendFailed = false;
 
     // send the memo again:
     final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
-    final String privKey = await NanoUtil.uniSeedToPrivate(
+    NanoDerivationType derivationType = NanoUtilities.derivationMethodToType(derivationMethod);
+
+    final String privKey = await NanoDerivations.universalSeedToPrivate(
       await StateContainer.of(context).getSeed(),
-      StateContainer.of(context).selectedAccount!.index!,
-      derivationMethod,
+      index: StateContainer.of(context).selectedAccount!.index!,
+      type: derivationType,
     );
 
     // get epoch time as hex:
-    final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+    final int secondsSinceEpoch =
+        DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
     final String nonceHex = secondsSinceEpoch.toRadixString(16);
     final String signature = NanoSignatures.signBlock(nonceHex, privKey);
 
     // check validity locally:
-    final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-    final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+    final String pubKey =
+        NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
+    final bool isValid = NanoSignatures.validateSig(
+        nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
     if (!isValid) {
       throw Exception("Invalid signature?!");
     }
@@ -153,8 +171,15 @@ class CardActions {
     try {
       // encrypt the memo:
       final String encryptedMemo = Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
-      await sl.get<MetadataService>().sendTXMemo(txDetails.to_address!, StateContainer.of(context).wallet!.address!, txDetails.amount_raw, signature, nonceHex,
-          encryptedMemo, txDetails.block, localUuid);
+      await sl.get<MetadataService>().sendTXMemo(
+          txDetails.to_address!,
+          StateContainer.of(context).wallet!.address!,
+          txDetails.amount_raw,
+          signature,
+          nonceHex,
+          encryptedMemo,
+          txDetails.block,
+          localUuid);
     } catch (e) {
       memoSendFailed = true;
     }
@@ -165,7 +190,9 @@ class CardActions {
       // remove from the database:
       await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       // show error:
-      UIUtil.showSnackbar(Z.of(context).sendMemoError.replaceAll("%1", NonTranslatable.appName), context, durationMs: 5000);
+      UIUtil.showSnackbar(
+          Z.of(context).sendMemoError.replaceAll("%1", NonTranslatable.appName), context,
+          durationMs: 5000);
     } else {
       // delete the old memo by uuid:
       await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);
@@ -180,20 +207,27 @@ class CardActions {
   static Future<void> resendMessage(BuildContext context, TXData txDetails) async {
     // show sending animation:
     bool animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.SEND_MESSAGE, onPoppedCallback: () => animationOpen = false);
+    AppAnimation.animationLauncher(context, AnimationType.SEND_MESSAGE,
+        onPoppedCallback: () => animationOpen = false);
 
     bool sendFailed = false;
 
     // send the message again:
-    final String privKey = NanoUtil.seedToPrivate(await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!);
+    final String privKey = NanoDerivations.standardSeedToPrivate(
+      await StateContainer.of(context).getSeed(),
+      index: StateContainer.of(context).selectedAccount!.index!,
+    );
     // get epoch time as hex:
-    final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
+    final int secondsSinceEpoch =
+        DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
     final String nonceHex = secondsSinceEpoch.toRadixString(16);
     final String signature = NanoSignatures.signBlock(nonceHex, privKey);
 
     // check validity locally:
-    final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-    final bool isValid = NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+    final String pubKey =
+        NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
+    final bool isValid = NanoSignatures.validateSig(
+        nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
     if (!isValid) {
       throw Exception("Invalid signature?!");
     }
@@ -226,9 +260,13 @@ class CardActions {
       if (txDetails.memo != null && txDetails.memo!.isNotEmpty) {
         encryptedMemo = Box.encrypt(txDetails.memo!, txDetails.to_address!, privKey);
       }
-      await sl
-          .get<MetadataService>()
-          .sendTXMessage(txDetails.to_address!, StateContainer.of(context).wallet!.address!, signature, nonceHex, encryptedMemo!, localUuid);
+      await sl.get<MetadataService>().sendTXMessage(
+          txDetails.to_address!,
+          StateContainer.of(context).wallet!.address!,
+          signature,
+          nonceHex,
+          encryptedMemo!,
+          localUuid);
     } catch (error) {
       sl.get<Logger>().v("Error encrypting memo: $error");
       sendFailed = true;
@@ -240,7 +278,9 @@ class CardActions {
       // remove failed txdata from the database:
       await sl.get<DBHelper>().deleteTXDataByUUID(localUuid);
       // show error:
-      UIUtil.showSnackbar(Z.of(context).sendMemoError.replaceAll("%1", NonTranslatable.appName), context, durationMs: 5000);
+      UIUtil.showSnackbar(
+          Z.of(context).sendMemoError.replaceAll("%1", NonTranslatable.appName), context,
+          durationMs: 5000);
     } else {
       // delete the old request by uuid:
       await sl.get<DBHelper>().deleteTXDataByUUID(txDetails.uuid!);

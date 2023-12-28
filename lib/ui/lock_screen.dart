@@ -37,7 +37,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
     if (StateContainer.of(context).wallet != null) {
       StateContainer.of(context).reconnect();
     } else {
-      await NanoUtil().loginAccount(await StateContainer.of(context).getSeed(), context);
+      await NanoUtilities().loginAccount(await StateContainer.of(context).getSeed(), context);
     }
     StateContainer.of(context).requestUpdate();
     final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();

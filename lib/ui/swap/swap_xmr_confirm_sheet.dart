@@ -267,70 +267,70 @@ class SwapXMRConfirmSheetState extends State<SwapXMRConfirmSheet> {
   }
 
   Future<void> _doSend() async {
-    try {
-      _showAnimation(context);
-      final String walletAddress = StateContainer.of(context).wallet!.address!;
+    // try {
+    //   _showAnimation(context);
+    //   final String walletAddress = StateContainer.of(context).wallet!.address!;
 
-      // create link:
-      // final BranchUniversalObject buo = BranchUniversalObject(
-      //     canonicalIdentifier: 'flutter/branch',
-      //     title: 'Nautilus Gift Card',
-      //     contentDescription: 'Get the app to open this gift card!',
-      //     keywords: ['Nautilus', "Gift Card"],
-      //     publiclyIndex: true,
-      //     locallyIndex: true,
-      //     contentMetadata: BranchContentMetaData()
-      //       ..addCustomMetadata('seed', widget.paperWalletSeed)
-      //       ..addCustomMetadata('address', widget.destination)
-      //       ..addCustomMetadata('memo', widget.memo)
-      //       ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: sign these:
-      //       ..addCustomMetadata('signature', "")
-      //       ..addCustomMetadata('nonce', "")
-      //       ..addCustomMetadata('amount_raw', widget.amountRaw));
+    //   // create link:
+    //   // final BranchUniversalObject buo = BranchUniversalObject(
+    //   //     canonicalIdentifier: 'flutter/branch',
+    //   //     title: 'Nautilus Gift Card',
+    //   //     contentDescription: 'Get the app to open this gift card!',
+    //   //     keywords: ['Nautilus', "Gift Card"],
+    //   //     publiclyIndex: true,
+    //   //     locallyIndex: true,
+    //   //     contentMetadata: BranchContentMetaData()
+    //   //       ..addCustomMetadata('seed', widget.paperWalletSeed)
+    //   //       ..addCustomMetadata('address', widget.destination)
+    //   //       ..addCustomMetadata('memo', widget.memo)
+    //   //       ..addCustomMetadata('senderAddress', StateContainer.of(context).wallet!.address) // TODO: sign these:
+    //   //       ..addCustomMetadata('signature', "")
+    //   //       ..addCustomMetadata('nonce', "")
+    //   //       ..addCustomMetadata('amount_raw', widget.amountRaw));
 
-      // final BranchLinkProperties lp = BranchLinkProperties(
-      //     //alias: 'flutterplugin', //define link url,
-      //     channel: 'nautilusapp',
-      //     feature: 'gift',
-      //     stage: 'new share');
+    //   // final BranchLinkProperties lp = BranchLinkProperties(
+    //   //     //alias: 'flutterplugin', //define link url,
+    //   //     channel: 'nautilusapp',
+    //   //     feature: 'gift',
+    //   //     stage: 'new share');
 
-      // final BranchResponse branchResponse = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
+    //   // final BranchResponse branchResponse = await FlutterBranchSdk.getShortUrl(buo: buo, linkProperties: lp);
 
-      // send funds:
-      ProcessResponse? resp;
-      resp = await sl.get<AccountService>().requestSend(
-          StateContainer.of(context).wallet!.representative,
-          StateContainer.of(context).wallet!.frontier,
-          widget.amountRaw,
-          widget.destination,
-          StateContainer.of(context).wallet!.address,
-          NanoUtil.seedToPrivate(
-              await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
-          max: widget.maxSend);
+    //   // send funds:
+    //   ProcessResponse? resp;
+    //   resp = await sl.get<AccountService>().requestSend(
+    //       StateContainer.of(context).wallet!.representative,
+    //       StateContainer.of(context).wallet!.frontier,
+    //       widget.amountRaw,
+    //       widget.destination,
+    //       StateContainer.of(context).wallet!.address,
+    //       NanoUtil.seedToPrivate(
+    //           await StateContainer.of(context).getSeed(), StateContainer.of(context).selectedAccount!.index!),
+    //       max: widget.maxSend);
 
-      if (!mounted) return;
-      StateContainer.of(context).wallet!.frontier = resp.hash;
-      StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
+    //   if (!mounted) return;
+    //   StateContainer.of(context).wallet!.frontier = resp.hash;
+    //   StateContainer.of(context).wallet!.accountBalance += BigInt.parse(widget.amountRaw);
 
-      // // ignore: use_build_context_synchronously
-      // await sl.get<GiftCards>().handleResponse(context,
-      //     success: linkCreationSuccess,
-      //     amountRaw: widget.amountRaw,
-      //     destination: widget.destination,
-      //     localCurrency: widget.localCurrency,
-      //     hash: resp?.hash,
-      //     link: branchLink,
-      //     paperWalletSeed: widget.paperWalletSeed,
-      //     memo: widget.memo);
-    } catch (error) {
-      sl.get<Logger>().d("swap_xmr_error: $error");
-      // Send failed
-      if (animationOpen) {
-        Navigator.of(context).pop();
-      }
-      UIUtil.showSnackbar(Z.of(context).giftCardCreationErrorSent, context, durationMs: 20000);
-      Navigator.of(context).pop();
-    }
+    //   // // ignore: use_build_context_synchronously
+    //   // await sl.get<GiftCards>().handleResponse(context,
+    //   //     success: linkCreationSuccess,
+    //   //     amountRaw: widget.amountRaw,
+    //   //     destination: widget.destination,
+    //   //     localCurrency: widget.localCurrency,
+    //   //     hash: resp?.hash,
+    //   //     link: branchLink,
+    //   //     paperWalletSeed: widget.paperWalletSeed,
+    //   //     memo: widget.memo);
+    // } catch (error) {
+    //   sl.get<Logger>().d("swap_xmr_error: $error");
+    //   // Send failed
+    //   if (animationOpen) {
+    //     Navigator.of(context).pop();
+    //   }
+    //   UIUtil.showSnackbar(Z.of(context).giftCardCreationErrorSent, context, durationMs: 20000);
+    //   Navigator.of(context).pop();
+    // }
   }
 
   Future<void> authenticateWithPin() async {

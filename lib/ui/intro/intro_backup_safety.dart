@@ -39,7 +39,7 @@ class IntroBackupSafetyState extends State<IntroBackupSafetyPage> {
     sl.get<Vault>().setSeed(NanoSeeds.generateSeed()).then((String? result) {
       // Update wallet
       StateContainer.of(context).getSeed().then((String seed) {
-        NanoUtil().loginAccount(seed, context);
+        NanoUtilities().loginAccount(seed, context);
       });
     });
   }

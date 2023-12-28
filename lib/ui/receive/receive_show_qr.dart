@@ -8,6 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
@@ -47,7 +48,9 @@ class NumericalRangeFormatter extends TextInputFormatter {
 }
 
 class ReceiveShowQRSheet extends StatefulWidget {
-  const ReceiveShowQRSheet({required this.localCurrency, this.address, this.qrWidget, this.amountRaw}) : super();
+  const ReceiveShowQRSheet(
+      {required this.localCurrency, this.address, this.qrWidget, this.amountRaw})
+      : super();
 
   final AvailableCurrency localCurrency;
   final Widget? qrWidget;
@@ -125,7 +128,8 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
     });
     // Set initial currency format
     _localCurrencyFormat = NumberFormat.currency(
-        locale: widget.localCurrency.getLocale().toString(), symbol: widget.localCurrency.getCurrencySymbol());
+        locale: widget.localCurrency.getLocale().toString(),
+        symbol: widget.localCurrency.getCurrencySymbol());
 
     qrWidget = widget.qrWidget;
   }
@@ -169,14 +173,18 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                 // QR which takes all the available space left from the buttons & address text
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
-                    child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+                    padding:
+                        const EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
+                    child:
+                        LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
                       final double availableWidth = constraints.maxWidth;
-                      final double availableHeight = (StateContainer.of(context).wallet?.username != null)
-                          ? (constraints.maxHeight - 70)
-                          : constraints.maxHeight;
+                      final double availableHeight =
+                          (StateContainer.of(context).wallet?.username != null)
+                              ? (constraints.maxHeight - 70)
+                              : constraints.maxHeight;
                       const double widthDivideFactor = 1.3;
-                      final double computedMaxSize = math.min(availableWidth / widthDivideFactor, availableHeight);
+                      final double computedMaxSize =
+                          math.min(availableWidth / widthDivideFactor, availableHeight);
                       return Center(
                         child: Stack(
                           children: <Widget>[
@@ -248,7 +256,8 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                      color: StateContainer.of(context).curTheme.primary!, width: computedMaxSize / 90),
+                                      color: StateContainer.of(context).curTheme.primary!,
+                                      width: computedMaxSize / 90),
                                 ),
                               ),
                             ),
@@ -269,7 +278,8 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                                 width: computedMaxSize / 6.5,
                                 height: computedMaxSize / 6.5,
                                 decoration: const BoxDecoration(
-                                  color: /*StateContainer.of(context).curTheme.primary*/ Colors.black,
+                                  color: /*StateContainer.of(context).curTheme.primary*/
+                                      Colors.black,
                                   shape: BoxShape.circle,
                                 ),
                               ),
@@ -300,9 +310,12 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                             context,
                             // Copy Address Button
                             _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                            _addressCopied ? Z.of(context).addressCopied : Z.of(context).copyAddress,
+                            _addressCopied
+                                ? Z.of(context).addressCopied
+                                : Z.of(context).copyAddress,
                             Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
-                          Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address ?? ""));
+                          Clipboard.setData(ClipboardData(
+                              text: StateContainer.of(context).wallet!.address ?? ""));
                           setState(() {
                             // Set copied style
                             _addressCopied = true;
@@ -322,7 +335,8 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                             Z.of(context).addressShare,
                             Dimens.BUTTON_COMPACT_RIGHT_DIMENS,
                             disabled: _showShareCard, onPressed: () {
-                          final String receiveCardFileName = "share_${StateContainer.of(context).wallet!.address}.png";
+                          final String receiveCardFileName =
+                              "share_${StateContainer.of(context).wallet!.address}.png";
                           getApplicationDocumentsDirectory().then((Directory directory) {
                             final String filePath = "${directory.path}/$receiveCardFileName";
                             final File f = File(filePath);
@@ -335,7 +349,8 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                                   if (byteData != null) {
                                     f.writeAsBytes(byteData).then((File file) {
                                       UIUtil.cancelLockEvent();
-                                      Share.shareFiles([filePath], text: StateContainer.of(context).wallet!.address);
+                                      Share.shareFiles([filePath],
+                                          text: StateContainer.of(context).wallet!.address);
                                     });
                                   } else {
                                     // TODO - show a something went wrong message
@@ -360,15 +375,18 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
     String? raw;
     if (_localCurrencyMode) {
       _lastLocalCurrencyAmount = _amountController.text;
-      _lastCryptoAmount = sanitizedAmount(_localCurrencyFormat,
-          convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, _amountController.text));
+      _lastCryptoAmount = sanitizedAmount(
+          _localCurrencyFormat,
+          convertLocalCurrencyToLocalizedCrypto(
+              context, _localCurrencyFormat, _amountController.text));
       if (_lastCryptoAmount.isNotEmpty) {
-        raw = NumberUtil.getAmountAsRaw(_lastCryptoAmount);
+        raw = NanoAmounts.getAmountAsRaw(_lastCryptoAmount, NanoAmounts.rawPerNano);
       }
     } else {
       print(sanitizedAmount(_localCurrencyFormat, _amountController.text));
       raw = _amountController.text.isNotEmpty
-          ? NumberUtil.getAmountAsRaw(sanitizedAmount(_localCurrencyFormat, _amountController.text))
+          ? NanoAmounts.getAmountAsRaw(
+              sanitizedAmount(_localCurrencyFormat, _amountController.text), NanoAmounts.rawPerNano)
           : "";
     }
     paintQrCode(address: widget.address, amount: raw);
@@ -382,8 +400,9 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
       data = "${NonTranslatable.currencyUriPrefix}:${address!}";
     }
 
-    final Widget qr =
-        SizedBox(width: MediaQuery.of(context).size.width / 2.675, child: await UIUtil.getQRImage(context, data));
+    final Widget qr = SizedBox(
+        width: MediaQuery.of(context).size.width / 2.675,
+        child: await UIUtil.getQRImage(context, data));
     setState(() {
       qrWidget = qr;
     });
@@ -407,7 +426,9 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
         CurrencyFormatter2(
           active: _localCurrencyMode,
           currencyFormat: _localCurrencyFormat,
-          maxDecimalDigits: _localCurrencyMode ? _localCurrencyFormat.decimalDigits ?? 2 : NumberUtil.maxDecimalDigits,
+          maxDecimalDigits: _localCurrencyMode
+              ? _localCurrencyFormat.decimalDigits ?? 2
+              : NumberUtil.maxDecimalDigits,
         ),
       ],
       onChanged: (String text) {
@@ -477,5 +498,4 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
     );
   } //************ Enter Address Container Method End ************//
   //*************************************************************//
-
 }

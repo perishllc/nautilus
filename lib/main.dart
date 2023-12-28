@@ -469,7 +469,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
         } else if (await sl.get<SharedPrefsUtil>().getLock() || await sl.get<SharedPrefsUtil>().shouldLock()) {
           Navigator.of(context).pushReplacementNamed('/lock_screen');
         } else {
-          await NanoUtil().loginAccount(seed, context);
+          await NanoUtilities().loginAccount(seed, context);
           final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
           Navigator.of(context).pushReplacementNamed('/home', arguments: conversion);
         }

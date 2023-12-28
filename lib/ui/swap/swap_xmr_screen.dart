@@ -351,10 +351,10 @@ class SwapXMRScreenState extends State<SwapXMRScreen> {
                     final String xmrAddress = _xmrAddressController!.text;
 
                     final String formattedAmount = sanitizedAmount(_localCurrencyFormat, _amountController!.text);
-                    final String amountRaw = _localCurrencyMode
-                        ? NumberUtil.getAmountAsRaw(
-                            sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, formattedAmount)))
-                        : getThemeAwareAmountAsRaw(context, formattedAmount);
+                    // final String amountRaw = _localCurrencyMode
+                    //     ? NumberUtil.getAmountAsRaw(
+                    //         sanitizedAmount(_localCurrencyFormat, convertLocalCurrencyToLocalizedCrypto(context, _localCurrencyFormat, formattedAmount)))
+                    //     : getThemeAwareAmountAsRaw(context, formattedAmount);
 
                     // // start a swap for monero:
 

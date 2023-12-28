@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
@@ -176,7 +177,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                     prefixButton: TextFieldButton(
                                       icon: AppIcons.scan,
                                       onPressed: () async {
-                                        if (NanoUtil.isValidSeed(_seedInputController.text)) {
+                                        if (NanoDerivations.isValidHexFormSeed(_seedInputController.text)) {
                                           return;
                                         }
                                         // Scan QR for seed
@@ -185,7 +186,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                         if (result == null) {
                                           return;
                                         }
-                                        if (NanoUtil.isValidSeed(result)) {
+                                        if (NanoDerivations.isValidHexFormSeed(result)) {
                                           _seedInputController.text = result;
                                           setState(() {
                                             _seedIsValid = true;
@@ -205,17 +206,17 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                       },
                                     ),
                                     fadePrefixOnCondition: true,
-                                    prefixShowFirstCondition: !NanoUtil.isValidSeed(_seedInputController.text),
+                                    prefixShowFirstCondition: !NanoDerivations.isValidHexFormSeed(_seedInputController.text),
                                     suffixButton: TextFieldButton(
                                       icon: AppIcons.paste,
                                       onPressed: () {
-                                        if (NanoUtil.isValidSeed(_seedInputController.text)) {
+                                        if (NanoDerivations.isValidHexFormSeed(_seedInputController.text)) {
                                           return;
                                         }
                                         Clipboard.getData("text/plain").then((ClipboardData? data) {
                                           if (data == null || data.text == null) {
                                             return;
-                                          } else if (NanoUtil.isValidSeed(data.text!)) {
+                                          } else if (NanoDerivations.isValidHexFormSeed(data.text!)) {
                                             _seedInputController.text = data.text!;
                                             _seedInputFocusNode.unfocus();
                                             setState(() {
@@ -235,7 +236,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                       },
                                     ),
                                     fadeSuffixOnCondition: true,
-                                    suffixShowFirstCondition: !NanoUtil.isValidSeed(_seedInputController.text),
+                                    suffixShowFirstCondition: !NanoDerivations.isValidHexFormSeed(_seedInputController.text),
                                     keyboardType: TextInputType.text,
                                     style: _seedIsValid ? AppStyles.textStyleSeed(context) : AppStyles.textStyleSeedGray(context),
                                     onChanged: (String text) {
@@ -246,7 +247,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                         });
                                       }
                                       // If valid seed, clear focus/close keyboard
-                                      if (NanoUtil.isValidSeed(text)) {
+                                      if (NanoDerivations.isValidHexFormSeed(text)) {
                                         _seedInputFocusNode.unfocus();
                                         setState(() {
                                           _seedIsValid = true;
@@ -291,7 +292,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                           setState(() {
                                             _mnemonicIsValid = true;
                                           });
-                                        } else if (NanoUtil.isValidSeed(result)) {
+                                        } else if (NanoDerivations.isValidHexFormSeed(result)) {
                                           _seedInputController.text = result;
                                           _mnemonicFocusNode.unfocus();
                                           _seedInputFocusNode.unfocus();
@@ -322,7 +323,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                                             setState(() {
                                               _mnemonicIsValid = true;
                                             });
-                                          } else if (NanoUtil.isValidSeed(data.text!)) {
+                                          } else if (NanoDerivations.isValidHexFormSeed(data.text!)) {
                                             _seedInputController.text = data.text!;
                                             _mnemonicFocusNode.unfocus();
                                             _seedInputFocusNode.unfocus();
@@ -423,14 +424,14 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                       if (_seedMode) {
                         _seedInputFocusNode.unfocus();
                         // If seed valid, log them in
-                        if (NanoUtil.isValidBip39Seed(_seedInputController.text)) {
+                        if (NanoDerivations.isValidBip39Seed(_seedInputController.text)) {
                           await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
                           await sl.get<Vault>().setSeed(_seedInputController.text);
                           await changingSeed(_seedInputController.text);
                           await sl.get<SharedPrefsUtil>().setKeyDerivationMethod("hd");
                           await sl.get<DBHelper>().dropAccounts();
                           if (!mounted) return;
-                          await NanoUtil().loginAccount(_seedInputController.text, context);
+                          await NanoUtilities().loginAccount(_seedInputController.text, context);
                           if (!mounted) return;
                           // final String? pin = await Navigator.of(context).push(MaterialPageRoute<String>(builder: (BuildContext context) {
                           //   return PinScreen(
@@ -442,7 +443,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                           // }
                           skipPin();
                         } else {
-                          if (_seedInputController.text.length == 64 && NanoUtil.isValidSeed(_seedInputController.text)) {
+                          if (_seedInputController.text.length == 64 && NanoDerivations.isValidHexFormSeed(_seedInputController.text)) {
                             await AppDialogs.showInfoDialog(
                               context,
                               Z.of(context).logoutAreYouSure,
@@ -462,12 +463,12 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                         if (NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' '))) {
                           await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
                           await sl.get<SharedPrefsUtil>().setKeyDerivationMethod("hd");
-                          final String seed = await NanoUtil.hdMnemonicListToSeed(_mnemonicController.text.split(' '));
+                          final String seed = await NanoDerivations.hdMnemonicListToSeed(_mnemonicController.text.split(' '));
                           await sl.get<Vault>().setSeed(seed);
                           await changingSeed(seed);
                           await sl.get<DBHelper>().dropAccounts();
                           if (!mounted) return;
-                          await NanoUtil().loginAccount(seed, context);
+                          await NanoUtilities().loginAccount(seed, context);
                           if (!mounted) return;
                           skipPin();
                         } else {
@@ -497,7 +498,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                       if (_seedMode) {
                         _seedInputFocusNode.unfocus();
                         // If seed valid, log them in
-                        if (NanoUtil.isValidSeed(_seedInputController.text)) {
+                        if (NanoDerivations.isValidHexFormSeed(_seedInputController.text)) {
                           if (_seedInputController.text.length == 128) {
                             // are you sure?
                             final bool isSure = await AppDialogs.waitableConfirmDialog(context, Z.of(context).logoutAreYouSure,
@@ -514,7 +515,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                           await changingSeed(_seedInputController.text);
                           await sl.get<DBHelper>().dropAccounts();
                           if (!mounted) return;
-                          await NanoUtil().loginAccount(_seedInputController.text, context);
+                          await NanoUtilities().loginAccount(_seedInputController.text, context);
                           if (!mounted) return;
 
                           skipPin();
@@ -534,7 +535,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
                           await changingSeed(seed);
                           await sl.get<DBHelper>().dropAccounts();
                           if (!mounted) return;
-                          await NanoUtil().loginAccount(seed, context);
+                          await NanoUtilities().loginAccount(seed, context);
                           if (!mounted) return;
                           skipPin();
                         } else {

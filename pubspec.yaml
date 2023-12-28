@@ -44,6 +44,11 @@ dependencies:
       url: https://github.com/perishllc/flutter_nano_ffi.git
       ref: main
 
+  nanoutil:
+    git:
+      url: https://github.com/perishllc/nanoutil.git
+      ref: main
+
   # Shared prefs
   shared_preferences: ^2.0.15
 

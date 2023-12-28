@@ -174,7 +174,7 @@ class IntroBackupSeedState extends State<IntroBackupSeedPage> {
                       // Update wallet
                       sl.get<DBHelper>().dropAccounts().then((_) {
                         StateContainer.of(context).getSeed().then((String seed) {
-                          NanoUtil().loginAccount(seed, context).then((_) {
+                          NanoUtilities().loginAccount(seed, context).then((_) {
                             Navigator.of(context).pushNamed('/intro_backup_confirm');
                           });
                         });

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/localize.dart';
 import 'package:wallet_flutter/network/model/block_types.dart';
 import 'package:wallet_flutter/util/nanoutil.dart';
@@ -136,7 +137,7 @@ class StateBlock {
       return null;
     }
     if (link.contains(NonTranslatable.currencyPrefix)) {
-      return NanoUtil.addressToPublicKey(link);
+      return NanoDerivations.addressToPublicKey(link);
     }
     return link;
   }

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/events.dart';
@@ -285,7 +286,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
       return; // not sure why it's called more than once
     }
     _animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.CHANGE_REP, onPoppedCallback: () => _animationOpen = false);
+    AppAnimation.animationLauncher(context, AnimationType.CHANGE_REP,
+        onPoppedCallback: () => _animationOpen = false);
     // If account isnt open, just store the account in sharedprefs
     if (StateContainer.of(context).wallet!.openBlock == null) {
       await sl.get<SharedPrefsUtil>().setRepresentative(_rep.account);
@@ -303,8 +305,13 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
     } else {
       try {
         final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
-        final String privKey = await NanoUtil.uniSeedToPrivate(await StateContainer.of(context).getSeed(),
-            StateContainer.of(context).selectedAccount!.index!, derivationMethod);
+        final NanoDerivationType derivationType =
+            NanoUtilities.derivationMethodToType(derivationMethod);
+        final String privKey = await NanoDerivations.universalSeedToPrivate(
+          await StateContainer.of(context).getSeed(),
+          index: StateContainer.of(context).selectedAccount!.index!,
+          type: derivationType,
+        );
         final ProcessResponse resp = await sl.get<AccountService>().requestChange(
             StateContainer.of(context).wallet!.address,
             _rep.account,
@@ -357,9 +364,11 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                             Handlebars.horizontal(context),
                             Container(
                               margin: const EdgeInsets.only(top: 15),
-                              constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
+                              constraints:
+                                  BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
                               child: AutoSizeText(
-                                CaseChange.toUpperCase(Z.of(context).changeRepAuthenticate, context),
+                                CaseChange.toUpperCase(
+                                    Z.of(context).changeRepAuthenticate, context),
                                 style: AppStyles.textStyleHeader(context),
                                 textAlign: TextAlign.center,
                                 maxLines: 2,
@@ -377,15 +386,19 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                             style: TextButton.styleFrom(
                               foregroundColor: StateContainer.of(context).curTheme.text15,
                               backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-                              disabledForegroundColor: StateContainer.of(context).curTheme.text15?.withOpacity(0.38),
+                              disabledForegroundColor:
+                                  StateContainer.of(context).curTheme.text15?.withOpacity(0.38),
                               padding: const EdgeInsets.all(13.0),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                              shape:
+                                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
                               tapTargetSize: MaterialTapTargetSize.padded,
                             ),
                             onPressed: () {
-                              AppDialogs.showInfoDialog(context, Z.of(context).repInfoHeader, Z.of(context).repInfo);
+                              AppDialogs.showInfoDialog(
+                                  context, Z.of(context).repInfoHeader, Z.of(context).repInfo);
                             },
-                            child: Icon(AppIcons.info, size: 24, color: StateContainer.of(context).curTheme.text),
+                            child: Icon(AppIcons.info,
+                                size: 24, color: StateContainer.of(context).curTheme.text),
                           ),
                         ),
                       ],
@@ -395,7 +408,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                     Expanded(
                       child: Container(
                         margin: EdgeInsets.only(
-                            top: smallScreen(context) ? 20 : 35, bottom: smallScreen(context) ? 20 : 35),
+                            top: smallScreen(context) ? 20 : 35,
+                            bottom: smallScreen(context) ? 20 : 35),
                         child: Stack(children: <Widget>[
                           Container(
                             color: Colors.transparent,
@@ -416,15 +430,16 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               // Current representative
                               GestureDetector(
                                 onTap: () {
-                                  Clipboard.setData(
-                                      ClipboardData(text: StateContainer.of(context).wallet!.representative));
+                                  Clipboard.setData(ClipboardData(
+                                      text: StateContainer.of(context).wallet!.representative));
                                   setState(() {
                                     _addressCopied = true;
                                   });
                                   if (_addressCopiedTimer != null) {
                                     _addressCopiedTimer!.cancel();
                                   }
-                                  _addressCopiedTimer = Timer(const Duration(milliseconds: 800), () {
+                                  _addressCopiedTimer =
+                                      Timer(const Duration(milliseconds: 800), () {
                                     setState(() {
                                       _addressCopied = false;
                                     });
@@ -436,7 +451,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                                       left: MediaQuery.of(context).size.width * 0.105,
                                       right: MediaQuery.of(context).size.width * 0.105,
                                       top: 10),
-                                  padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
                                   decoration: BoxDecoration(
                                     color: StateContainer.of(context).curTheme.backgroundDarkest,
                                     borderRadius: BorderRadius.circular(25),
@@ -476,29 +492,37 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               Z.of(context).useAppRep.replaceAll("%1", NonTranslatable.appName),
                               Dimens.BUTTON_TOP_DIMENS,
                               onPressed: () async {
-                                if (!NanoAccounts.isValid(NonTranslatable.accountType, AppWallet.nautilusRepresentative)) {
+                                if (!NanoAccounts.isValid(NonTranslatable.accountType,
+                                    AppWallet.nautilusRepresentative)) {
                                   return;
                                 }
                                 _rep = NinjaNode(account: AppWallet.nautilusRepresentative);
                                 // Authenticate
-                                final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-                                final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+                                final AuthenticationMethod authMethod =
+                                    await sl.get<SharedPrefsUtil>().getAuthMethod();
+                                final bool hasBiometrics =
+                                    await sl.get<BiometricUtil>().hasBiometrics();
                                 if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
                                   try {
                                     final bool authenticated = await sl
                                         .get<BiometricUtil>()
-                                        .authenticateWithBiometrics(context, Z.of(context).changeRepAuthenticate);
+                                        .authenticateWithBiometrics(
+                                            context, Z.of(context).changeRepAuthenticate);
                                     if (authenticated) {
                                       sl.get<HapticUtil>().fingerprintSucess();
-                                      EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
+                                      EventTaxiImpl.singleton()
+                                          .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
                                     }
                                   } catch (e) {
-                                    await authenticateWithPin(AppWallet.nautilusRepresentative, context);
+                                    await authenticateWithPin(
+                                        AppWallet.nautilusRepresentative, context);
                                   }
                                 } else if (authMethod.method == AuthMethod.PIN) {
-                                  await authenticateWithPin(AppWallet.nautilusRepresentative, context);
+                                  await authenticateWithPin(
+                                      AppWallet.nautilusRepresentative, context);
                                 } else {
-                                  EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
+                                  EventTaxiImpl.singleton()
+                                      .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
                                 }
                               },
                             ),
@@ -532,7 +556,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               Dimens.BUTTON_BOTTOM_DIMENS,
                               onPressed: () {
                                 Sheets.showAppHeightEightSheet(
-                                    context: context, widget: ChangeRepManualSheet(TextEditingController()));
+                                    context: context,
+                                    widget: ChangeRepManualSheet(TextEditingController()));
                               },
                             ),
                           ],
@@ -549,7 +574,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
     // PIN Authentication
     final String? expectedPin = await sl.get<Vault>().getPin();
     final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
-    final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    final bool? auth =
+        await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,

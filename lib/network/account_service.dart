@@ -12,6 +12,7 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:quiver/iterables.dart';
 import 'package:synchronized/synchronized.dart';
@@ -826,7 +827,7 @@ class AccountService {
       if (requestBlock.previous == "0" ||
           requestBlock.previous ==
               "0000000000000000000000000000000000000000000000000000000000000000") {
-        workHash = NanoUtil.addressToPublicKey(requestBlock.account!);
+        workHash = NanoDerivations.addressToPublicKey(requestBlock.account!);
       }
 
       if (requestBlock.work == null && workHash != null) {
@@ -921,7 +922,7 @@ class AccountService {
       String? sendAmount, String? link, String? account, String? privKey,
       {bool max = false}) async {
     if (link != null && link.contains(NonTranslatable.currencyPrefix)) {
-      link = NanoUtil.addressToPublicKey(link);
+      link = NanoDerivations.addressToPublicKey(link);
     }
 
     final StateBlock sendBlock = StateBlock(

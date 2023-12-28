@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/dimens.dart';
@@ -127,7 +128,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                                 },
                               ),
                               fadeSuffixOnCondition: true,
-                              suffixShowFirstCondition: !NanoUtil.isValidSeed(_seedInputController!.text),
+                              suffixShowFirstCondition: !NanoDerivations.isValidHexFormSeed(_seedInputController!.text),
                               keyboardType: TextInputType.text,
                               style:
                                   seedIsValid ? AppStyles.textStyleSeed(context) : AppStyles.textStyleSeedGray(context),
@@ -137,7 +138,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                                   hasError = false;
                                 });
                                 // If valid seed, clear focus/close keyboard
-                                if (NanoUtil.isValidSeed(text) && mounted) {
+                                if (NanoDerivations.isValidHexFormSeed(text) && mounted) {
                                   _seedInputFocusNode!.unfocus();
                                   setState(() {
                                     seedIsValid = true;
@@ -213,7 +214,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                   Z.of(context).transfer,
                   Dimens.BUTTON_TOP_DIMENS,
                   onPressed: () {
-                    if (NanoUtil.isValidSeed(_seedInputController!.text) && widget.validSeedCallback != null) {
+                    if (NanoDerivations.isValidHexFormSeed(_seedInputController!.text) && widget.validSeedCallback != null) {
                       widget.validSeedCallback!(_seedInputController!.text);
                     } else if (mounted) {
                       setState(() {

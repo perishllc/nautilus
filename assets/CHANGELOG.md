@@ -1,3 +1,6 @@
+## v0.9.3 - [2024-01-01]
+#### Fixed
+- Fixed smalled dot at the top of the home screen
 ## v0.9.2 - [2023-11-30]
 #### Fixed
 - Minor fixes
