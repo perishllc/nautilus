@@ -1168,6 +1168,7 @@ class SendSheetState extends State<SendSheet> {
                               maxSend: isMaxSend,
                               localCurrency: _localCurrencyMode ? _amountController.text : null,
                               memo: _memoController.text,
+                              anonymousMode: anonymousMode,
                             ),
                           );
                         }

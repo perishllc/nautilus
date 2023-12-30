@@ -59,6 +59,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please enter a Username or Address"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Share Address"),
         "advanced": MessageLookupByLibrary.simpleMessage("Advanced"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Advanced Options"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliases"),
         "amount": MessageLookupByLibrary.simpleMessage("Amount"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(

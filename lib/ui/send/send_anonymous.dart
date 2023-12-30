@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
+import 'package:wallet_flutter/ui/widgets/buttons.dart';
 
 class AnonymousAdvancedOptions extends StatefulWidget {
   const AnonymousAdvancedOptions({
@@ -120,9 +122,20 @@ class AnonymousAdvancedOptionsState extends State<AnonymousAdvancedOptions> {
     );
   }
 
-  void _addNewSend() {
+  void _addSend() {
     setState(() {
       sends.add({'percent': 0, 'seconds': 0, 'percentController': TextEditingController()});
+      List<int> percentsThatAddTo100 = _numbersThatAddTo100(sends.length);
+      for (int i = 0; i < sends.length; i++) {
+        sends[i]['percent'] = percentsThatAddTo100[i];
+        sends[i]['percentController'].text = percentsThatAddTo100[i].toString();
+      }
+    });
+  }
+
+  void _removeSend() {
+    setState(() {
+      sends.removeLast();
       List<int> percentsThatAddTo100 = _numbersThatAddTo100(sends.length);
       for (int i = 0; i < sends.length; i++) {
         sends[i]['percent'] = percentsThatAddTo100[i];
@@ -139,30 +152,59 @@ class AnonymousAdvancedOptionsState extends State<AnonymousAdvancedOptions> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              // add additional send button:
-              IconButton(
-                icon: Icon(Icons.add),
-                onPressed: () {
-                  _addNewSend();
-                },
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Checkbox(
+                    value: _delays,
+                    activeColor: StateContainer.of(context).curTheme.primary,
+                    onChanged: (bool? value) {
+                      if (value == null) return;
+                      setState(() {
+                        _delays = value;
+                      });
+                    },
+                  ),
+                  const SizedBox(width: 10),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _delays = !_delays;
+                      });
+                    },
+                    child: Text(
+                      "Enable delays",
+                      style: AppStyles.textStyleParagraph(context),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  FloatingActionButton(
+                    backgroundColor: StateContainer.of(context).curTheme.primary,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
+                    onPressed: () {
+                      _addSend();
+                    },
+                    child: const Icon(Icons.add),
+                  ),
+                  FloatingActionButton(
+                    backgroundColor: StateContainer.of(context).curTheme.primary,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
+                    onPressed: () {
+                      _removeSend();
+                    },
+                    child: const Icon(Icons.remove),
+                  ),
+                ],
               ),
             ],
           ),
-
-          CheckboxListTile(
-            title: Text('Delays', style: AppStyles.textStyleSettingItemHeader(context)),
-            value: _delays,
-            onChanged: (bool? value) {
-              setState(() {
-                _delays = value!;
-              });
-            },
-            controlAffinity: ListTileControlAffinity.leading,
-          ),
-          //   ],
-          // ),
-          // ...sends.map((Map<String, int> send) => _buildSendInput(send)).toList(),
           ...List<Widget>.generate(sends.length, (int index) => _buildSendInput(index)),
         ],
       ),

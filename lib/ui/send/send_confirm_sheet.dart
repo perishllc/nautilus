@@ -320,7 +320,10 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         // Address text
                         FutureBuilder(
                             future: getNanonymousFeeRaw(context),
-                            builder: (BuildContext context, snapshot) {
+                            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                              if (!snapshot.hasData) {
+                                return const SizedBox();
+                              }
                               return Container(
                                 margin: EdgeInsets.only(
                                     left: MediaQuery.of(context).size.width * 0.105,
@@ -376,7 +379,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Checkbox(
-                              value: obscuredMode,
+                              value: advancedAnonymousOptions,
                               activeColor: StateContainer.of(context).curTheme.primary,
                               onChanged: (bool? value) {
                                 if (value == null) return;
@@ -393,7 +396,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                                 });
                               },
                               child: Text(
-                                Z.of(context).obscureTransaction,
+                                Z.of(context).advancedOptions,
                                 style: AppStyles.textStyleParagraph(context),
                               ),
                             ),
@@ -953,7 +956,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   Future<String> getNanonymousFeeRaw(BuildContext context) async {
     // GET: https://nanonymous.cc/api/v1?feecheck (returns {"fee": "0.02"}:
     final String fee = await sl.get<AnonymousService>().getFee();
-    final Decimal feeDecimal = Decimal.parse(fee);
+    final Decimal feeDecimal = Decimal.parse(fee) * Decimal.parse("0.01");
     final Decimal amountDecimal =
         Decimal.parse(NanoAmounts.getRawAsUsableString(widget.amountRaw, NanoAmounts.rawPerNano));
     final Decimal totalDecimal = feeDecimal * amountDecimal;

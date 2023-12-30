@@ -310,6 +310,16 @@ class Z {
     );
   }
 
+  /// `Advanced Options`
+  String get advancedOptions {
+    return Intl.message(
+      'Advanced Options',
+      name: 'advancedOptions',
+      desc: 'send_advanced_options',
+      args: [],
+    );
+  }
+
   /// `Aliases`
   String get aliases {
     return Intl.message(
