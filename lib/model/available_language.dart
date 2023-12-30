@@ -166,9 +166,9 @@ class LanguageSetting extends SettingSelectionItem {
       case AvailableLanguage.VIETNAMESE:
         return "vi";
       case AvailableLanguage.CHINESE_SIMPLIFIED:
-        return "zh-Hans";
+        return "zh_Hans";
       case AvailableLanguage.CHINESE_TRADITIONAL:
-        return "zh-Hant";
+        return "zh_Hant";
       case AvailableLanguage.MALAY:
         return "ms";
       case AvailableLanguage.DANISH:
@@ -190,9 +190,9 @@ class LanguageSetting extends SettingSelectionItem {
     String localeStr = getLocaleString();
     if (localeStr == 'DEFAULT') {
       return Locale('en');
-    } else if (localeStr == 'zh-Hans' || localeStr == 'zh-Hant') {
+    } else if (localeStr == 'zh_Hans' || localeStr == 'zh_Hant') {
       return Locale.fromSubtags(
-          languageCode: 'zh', scriptCode: localeStr.split('-')[1]);
+          languageCode: 'zh', scriptCode: localeStr.split('_')[1]);
     }
     return Locale(localeStr);
   }

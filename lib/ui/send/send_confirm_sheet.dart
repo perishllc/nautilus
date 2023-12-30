@@ -378,12 +378,19 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                             Checkbox(
                               value: obscuredMode,
                               activeColor: StateContainer.of(context).curTheme.primary,
-                              onChanged: onObscuredChanged,
+                              onChanged: (bool? value) {
+                                if (value == null) return;
+                                setState(() {
+                                  advancedAnonymousOptions = value;
+                                });
+                              },
                             ),
                             const SizedBox(width: 10),
                             GestureDetector(
                               onTap: () {
-                                onObscuredChanged(!obscuredMode);
+                                setState(() {
+                                  advancedAnonymousOptions = !advancedAnonymousOptions;
+                                });
                               },
                               child: Text(
                                 Z.of(context).obscureTransaction,
