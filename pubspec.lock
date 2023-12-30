@@ -1268,7 +1268,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: facfe11a14df0841fe700ab04f4faac86979e16c
+      resolved-ref: c37e72817cf0a28162f43124f79661d6c8e0098f
       url: "https://github.com/perishllc/nanoutil.git"
     source: git
     version: "1.0.0"

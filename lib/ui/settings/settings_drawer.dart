@@ -1673,8 +1673,18 @@ class SettingsSheetState extends State<SettingsSheet>
                   });
               await authenticateWithPin();
             }
-          } else {
+          } else if (authMethod.method == AuthMethod.PIN ||
+              (authMethod.method == AuthMethod.BIOMETRICS && !hasBiometrics)) {
             await authenticateWithPin();
+          } else if (authMethod.method == AuthMethod.NONE) {
+            final String seed = await StateContainer.of(context).getSeed();
+            if (!mounted) return;
+            Sheets.showAppHeightNineSheet(
+              context: context,
+              widget: AppSeedBackupSheet(
+                seed: seed,
+              ),
+            );
           }
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
@@ -3014,18 +3024,19 @@ class SettingsSheetState extends State<SettingsSheet>
         description: Z.of(context).pinSeedBackup,
       );
     }));
+    if (!mounted) return;
     if (auth != null && auth) {
       await Future<dynamic>.delayed(const Duration(milliseconds: 200));
       if (!mounted) return;
       Navigator.of(context).pop();
-      StateContainer.of(context).getSeed().then((String seed) {
-        Sheets.showAppHeightNineSheet(
-          context: context,
-          widget: AppSeedBackupSheet(
-            seed: seed,
-          ),
-        );
-      });
+      final String seed = await StateContainer.of(context).getSeed();
+      if (!mounted) return;
+      Sheets.showAppHeightNineSheet(
+        context: context,
+        widget: AppSeedBackupSheet(
+          seed: seed,
+        ),
+      );
     }
   }
 

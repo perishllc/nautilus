@@ -371,18 +371,14 @@ class SendSheetState extends State<SendSheet> {
   String _lastCryptoAmount = "";
   late NumberFormat _localCurrencyFormat;
   bool _isSheetOpen = true;
+  bool anonymousMode = false;
 
   bool isIpad = false;
-
-  final int _REQUIRED_CONFIRMATION_HEIGHT = 10;
 
   // Receive card instance
   ReceiveSheet? receive;
 
   String? _rawAmount;
-
-  bool _addressCopied = false;
-  Timer? _addressCopiedTimer;
 
   @override
   void initState() {
@@ -1009,42 +1005,89 @@ class SendSheetState extends State<SendSheet> {
                         ),
 
                         // Column for Enter Memo container + Enter Memo Error container
-                        Column(
-                          children: <Widget>[
-                            Container(
-                              alignment: Alignment.topCenter,
-                              child: Stack(
+                        if (!anonymousMode)
+                          Column(
+                            children: <Widget>[
+                              Container(
                                 alignment: Alignment.topCenter,
-                                children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                        left: MediaQuery.of(context).size.width * 0.105,
-                                        right: MediaQuery.of(context).size.width * 0.105),
-                                    alignment: Alignment.bottomCenter,
-                                    constraints: const BoxConstraints(maxHeight: 174, minHeight: 0),
-                                  ),
+                                child: Stack(
+                                  alignment: Alignment.topCenter,
+                                  children: <Widget>[
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                          left: MediaQuery.of(context).size.width * 0.105,
+                                          right: MediaQuery.of(context).size.width * 0.105),
+                                      alignment: Alignment.bottomCenter,
+                                      constraints:
+                                          const BoxConstraints(maxHeight: 174, minHeight: 0),
+                                    ),
 
-                                  // ******* Enter Memo Container ******* //
-                                  getEnterMemoContainer(),
-                                  // ******* Enter Memo Container End ******* //
-                                ],
+                                    // ******* Enter Memo Container ******* //
+                                    getEnterMemoContainer(),
+                                    // ******* Enter Memo Container End ******* //
+                                  ],
+                                ),
                               ),
-                            ),
 
-                            // ******* Enter Memo Error Container ******* //
-                            Container(
-                              alignment: AlignmentDirectional.center,
-                              margin: const EdgeInsets.only(top: 3),
-                              child: Text(_memoValidationText,
-                                  style: TextStyle(
-                                    fontSize: 14.0,
-                                    color: StateContainer.of(context).curTheme.primary,
-                                    fontFamily: "NunitoSans",
-                                    fontWeight: FontWeight.w600,
-                                  )),
-                            ),
-                            // ******* Enter Memo Error Container End ******* //
-                          ],
+                              // ******* Enter Memo Error Container ******* //
+                              Container(
+                                alignment: AlignmentDirectional.center,
+                                margin: const EdgeInsets.only(top: 3),
+                                child: Text(_memoValidationText,
+                                    style: TextStyle(
+                                      fontSize: 14.0,
+                                      color: StateContainer.of(context).curTheme.primary,
+                                      fontFamily: "NunitoSans",
+                                      fontWeight: FontWeight.w600,
+                                    )),
+                              ),
+                              // ******* Enter Memo Error Container End ******* //
+                            ],
+                          ),
+
+                        Container(
+                          margin: const EdgeInsets.only(top: 350),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Checkbox(
+                                value: anonymousMode,
+                                activeColor: StateContainer.of(context).curTheme.primary,
+                                onChanged: (bool? value) {
+                                  setState(() {
+                                    anonymousMode = value ?? false;
+                                  });
+                                },
+                              ),
+                              const SizedBox(width: 10),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    anonymousMode = !anonymousMode;
+                                  });
+                                },
+                                child: Text(
+                                  Z.of(context).obscureTransaction,
+                                  style: AppStyles.textStyleParagraph(context),
+                                ),
+                              ),
+                              Container(
+                                width: 60,
+                                height: 60,
+                                alignment: Alignment.center,
+                                child: AppDialogs.infoButton(
+                                  context,
+                                  () {
+                                    AppDialogs.showInfoDialog(
+                                      context,
+                                      Z.of(context).obscureInfoHeader,
+                                      Z.of(context).obscureTransactionBody,
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -1115,6 +1158,7 @@ class SendSheetState extends State<SendSheet> {
                                 context, _addressController.text);
                           });
                         } else {
+                          if (!mounted) return;
                           Sheets.showAppHeightNineSheet(
                             context: context,
                             widget: SendConfirmSheet(
@@ -1138,6 +1182,7 @@ class SendSheetState extends State<SendSheet> {
                             paperWalletSeed: "",
                             localCurrency: _localCurrencyMode ? _amountController.text : null,
                             memo: _memoController.text,
+                            anonymousMode: anonymousMode,
                           ),
                         );
                       }

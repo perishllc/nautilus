@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:decimal/decimal.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
 import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/appstate_container.dart';
@@ -20,6 +22,7 @@ import 'package:wallet_flutter/model/db/user.dart';
 import 'package:wallet_flutter/model/db/work_source.dart';
 import 'package:wallet_flutter/model/vault.dart';
 import 'package:wallet_flutter/network/account_service.dart';
+import 'package:wallet_flutter/network/anonymous_service.dart';
 import 'package:wallet_flutter/network/giftcards.dart';
 import 'package:wallet_flutter/network/metadata_service.dart';
 import 'package:wallet_flutter/network/model/record_types.dart';
@@ -28,6 +31,7 @@ import 'package:wallet_flutter/network/model/response/process_response.dart';
 import 'package:wallet_flutter/network/model/status_types.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
+import 'package:wallet_flutter/ui/send/send_anonymous.dart';
 import 'package:wallet_flutter/ui/send/send_complete_sheet.dart';
 import 'package:wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
@@ -58,7 +62,8 @@ class SendConfirmSheet extends StatefulWidget {
       this.phoneNumber = "",
       this.paperWalletSeed = "",
       this.link = "",
-      this.memo = ""})
+      this.memo = "",
+      this.anonymousMode = false})
       : super();
 
   final String amountRaw;
@@ -71,6 +76,7 @@ class SendConfirmSheet extends StatefulWidget {
   final String link;
   final String paperWalletSeed;
   final String memo;
+  final bool anonymousMode;
 
   @override
   _SendConfirmSheetState createState() => _SendConfirmSheetState();
@@ -81,6 +87,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   bool clicking = false;
   bool shownWarning = false;
   bool obscuredMode = false;
+  bool advancedAnonymousOptions = false;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
 
@@ -147,184 +154,312 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
             Handlebars.horizontal(context),
             //The main widget that holds the text fields, "SENDING" and "TO" texts
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  // "SENDING" TEXT
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 10.0),
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          CaseChange.toUpperCase(
-                              (widget.link.isEmpty)
-                                  ? Z.of(context).sending
-                                  : Z.of(context).creatingGiftCard,
-                              context),
-                          style: AppStyles.textStyleHeader(context),
+              child: GestureDetector(
+                onTap: () {
+                  // Clear focus of our fields when tapped in this empty space
+                  FocusScope.of(context).requestFocus(FocusNode());
+                },
+                child: KeyboardAvoider(
+                  duration: Duration.zero,
+                  autoScroll: true,
+                  focusPadding: 40,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      // "SENDING" TEXT
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 10.0),
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              CaseChange.toUpperCase(
+                                  (widget.link.isEmpty)
+                                      ? Z.of(context).sending
+                                      : Z.of(context).creatingGiftCard,
+                                  context),
+                              style: AppStyles.textStyleHeader(context),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                  // Container for the amount text
-                  if (widget.memo.isNotEmpty && (widget.amountRaw == "0"))
-                    Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.105,
-                            right: MediaQuery.of(context).size.width * 0.105),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: StateContainer.of(context).curTheme.backgroundDarkest,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Text(
-                          widget.memo,
-                          style: AppStyles.textStyleParagraph(context),
-                          textAlign: TextAlign.center,
-                        ))
-                  else
-                    Container(
-                      margin: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width * 0.105,
-                          right: MediaQuery.of(context).size.width * 0.105),
-                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
-                        borderRadius: BorderRadius.circular(50),
                       ),
-                      // Amount text
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          text: "",
-                          children: [
-                            TextSpan(
-                              text: getThemeAwareRawAccuracy(context, widget.amountRaw),
-                              style: AppStyles.textStyleParagraphPrimary(context),
+                      // Container for the amount text
+                      if (widget.memo.isNotEmpty && (widget.amountRaw == "0"))
+                        Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                            margin: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width * 0.105,
+                                right: MediaQuery.of(context).size.width * 0.105),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: StateContainer.of(context).curTheme.backgroundDarkest,
+                              borderRadius: BorderRadius.circular(25),
                             ),
-                            displayCurrencySymbol(
-                              context,
-                              AppStyles.textStyleParagraphPrimary(context),
+                            child: Text(
+                              widget.memo,
+                              style: AppStyles.textStyleParagraph(context),
+                              textAlign: TextAlign.center,
+                            ))
+                      else
+                        Container(
+                          margin: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width * 0.105,
+                              right: MediaQuery.of(context).size.width * 0.105),
+                          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: StateContainer.of(context).curTheme.backgroundDarkest,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          // Amount text
+                          child: RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              text: "",
+                              children: [
+                                TextSpan(
+                                  text: getThemeAwareRawAccuracy(context, widget.amountRaw),
+                                  style: AppStyles.textStyleParagraphPrimary(context),
+                                ),
+                                displayCurrencySymbol(
+                                  context,
+                                  AppStyles.textStyleParagraphPrimary(context),
+                                ),
+                                TextSpan(
+                                  text:
+                                      getRawAsThemeAwareFormattedAmount(context, widget.amountRaw),
+                                  style: AppStyles.textStyleParagraphPrimary(context),
+                                ),
+                                TextSpan(
+                                  text: widget.localCurrency != null
+                                      ? " (${widget.localCurrency})"
+                                      : "",
+                                  style: AppStyles.textStyleParagraphPrimary(context).copyWith(
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .primary!
+                                        .withOpacity(0.75),
+                                  ),
+                                ),
+                              ],
                             ),
-                            TextSpan(
-                              text: getRawAsThemeAwareFormattedAmount(context, widget.amountRaw),
-                              style: AppStyles.textStyleParagraphPrimary(context),
+                          ),
+                        ),
+
+                      // "TO" text
+                      if (widget.link.isEmpty)
+                        Container(
+                          margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                CaseChange.toUpperCase(Z.of(context).to, context),
+                                style: AppStyles.textStyleHeader(context),
+                              ),
+                            ],
+                          ),
+                        ),
+                      // Address text
+                      if (widget.link.isEmpty)
+                        Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                            margin: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width * 0.105,
+                                right: MediaQuery.of(context).size.width * 0.105),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: StateContainer.of(context).curTheme.backgroundDarkest,
+                              borderRadius: BorderRadius.circular(25),
                             ),
-                            TextSpan(
-                              text:
-                                  widget.localCurrency != null ? " (${widget.localCurrency})" : "",
-                              style: AppStyles.textStyleParagraphPrimary(context).copyWith(
-                                color:
-                                    StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
+                            child: UIUtil.threeLineAddressText(context, widget.destination,
+                                contactName: widget.contactName)),
+
+                      // WITH MESSAGE:
+                      if (widget.memo.isNotEmpty && (widget.amountRaw != "0"))
+                        Container(
+                          margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                CaseChange.toUpperCase(Z.of(context).withMessage, context),
+                                style: AppStyles.textStyleHeader(context),
+                              ),
+                            ],
+                          ),
+                        ),
+                      // MEMO:
+                      if (widget.memo.isNotEmpty && (widget.amountRaw != "0"))
+                        Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                            margin: EdgeInsets.only(
+                                left: MediaQuery.of(context).size.width * 0.105,
+                                right: MediaQuery.of(context).size.width * 0.105),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: StateContainer.of(context).curTheme.backgroundDarkest,
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: Text(
+                              widget.memo,
+                              style: AppStyles.textStyleParagraph(context),
+                              textAlign: TextAlign.center,
+                            )),
+
+                      // "FEE" text
+                      if (widget.anonymousMode) ...[
+                        Container(
+                          margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                CaseChange.toUpperCase(Z.current.withFee, context),
+                                style: AppStyles.textStyleHeader(context),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Address text
+                        FutureBuilder(
+                            future: getNanonymousFeeRaw(context),
+                            builder: (BuildContext context, snapshot) {
+                              return Container(
+                                margin: EdgeInsets.only(
+                                    left: MediaQuery.of(context).size.width * 0.105,
+                                    right: MediaQuery.of(context).size.width * 0.105),
+                                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                // Amount text
+                                child: RichText(
+                                  textAlign: TextAlign.center,
+                                  text: TextSpan(
+                                    text: "",
+                                    children: [
+                                      TextSpan(
+                                        text: getThemeAwareRawAccuracy(
+                                            context, snapshot.data.toString()),
+                                        style: AppStyles.textStyleParagraphPrimary(context),
+                                      ),
+                                      displayCurrencySymbol(
+                                        context,
+                                        AppStyles.textStyleParagraphPrimary(context),
+                                      ),
+                                      TextSpan(
+                                        text: getRawAsThemeAwareFormattedAmount(
+                                            context, snapshot.data.toString()),
+                                        style: AppStyles.textStyleParagraphPrimary(context),
+                                      ),
+                                      TextSpan(
+                                        text: widget.localCurrency != null
+                                            ? " (${widget.localCurrency})"
+                                            : "",
+                                        style:
+                                            AppStyles.textStyleParagraphPrimary(context).copyWith(
+                                          color: StateContainer.of(context)
+                                              .curTheme
+                                              .primary!
+                                              .withOpacity(0.75),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }),
+                      ],
+
+                      Container(
+                        margin: const EdgeInsets.only(top: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Checkbox(
+                              value: obscuredMode,
+                              activeColor: StateContainer.of(context).curTheme.primary,
+                              onChanged: onObscuredChanged,
+                            ),
+                            const SizedBox(width: 10),
+                            GestureDetector(
+                              onTap: () {
+                                onObscuredChanged(!obscuredMode);
+                              },
+                              child: Text(
+                                Z.of(context).obscureTransaction,
+                                style: AppStyles.textStyleParagraph(context),
+                              ),
+                            ),
+                            Container(
+                              width: 60,
+                              height: 60,
+                              alignment: Alignment.center,
+                              child: AppDialogs.infoButton(
+                                context,
+                                () {
+                                  AppDialogs.showInfoDialog(
+                                    context,
+                                    Z.of(context).obscureInfoHeader,
+                                    Z.of(context).obscureTransactionBody,
+                                  );
+                                },
                               ),
                             ),
                           ],
                         ),
                       ),
-                    ),
 
-                  // "TO" text
-                  if (widget.link.isEmpty)
-                    Container(
-                      margin: const EdgeInsets.only(top: 30.0, bottom: 10),
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            CaseChange.toUpperCase(Z.of(context).to, context),
-                            style: AppStyles.textStyleHeader(context),
-                          ),
-                        ],
-                      ),
-                    ),
-                  // Address text
-                  if (widget.link.isEmpty)
-                    Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.105,
-                            right: MediaQuery.of(context).size.width * 0.105),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: StateContainer.of(context).curTheme.backgroundDarkest,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: UIUtil.threeLineAddressText(context, widget.destination,
-                            contactName: widget.contactName)),
+                      if (advancedAnonymousOptions)
+                        AnonymousAdvancedOptions(
+                            onSendsChanged: (List<Map<String, dynamic>> sends) {
+                          setState(() {
+                            // this.sends = sends;
+                          });
+                        }),
 
-                  // WITH MESSAGE:
-                  if (widget.memo.isNotEmpty && (widget.amountRaw != "0"))
-                    Container(
-                      margin: const EdgeInsets.only(top: 30.0, bottom: 10),
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            CaseChange.toUpperCase(Z.of(context).withMessage, context),
-                            style: AppStyles.textStyleHeader(context),
-                          ),
-                        ],
-                      ),
-                    ),
-                  // MEMO:
-                  if (widget.memo.isNotEmpty && (widget.amountRaw != "0"))
-                    Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                        margin: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.105,
-                            right: MediaQuery.of(context).size.width * 0.105),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: StateContainer.of(context).curTheme.backgroundDarkest,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Text(
-                          widget.memo,
-                          style: AppStyles.textStyleParagraph(context),
-                          textAlign: TextAlign.center,
-                        )),
-
-                  // // obscured checkbox:
-                  // if (widget.amountRaw != "0" && widget.link.isEmpty)
-                  //   Container(
-                  //     margin: const EdgeInsets.only(top: 15),
-                  //     child: Row(
-                  //       mainAxisAlignment: MainAxisAlignment.center,
-                  //       children: <Widget>[
-                  //         Checkbox(
-                  //           value: obscuredMode,
-                  //           activeColor: StateContainer.of(context).curTheme.primary,
-                  //           onChanged: onObscuredChanged,
-                  //         ),
-                  //         const SizedBox(width: 10),
-                  //         GestureDetector(
-                  //           onTap: () {
-                  //             onObscuredChanged(!obscuredMode);
-                  //           },
-                  //           child: Text(
-                  //             Z.of(context).obscureTransaction,
-                  //             style: AppStyles.textStyleParagraph(context),
-                  //           ),
-                  //         ),
-                  //         Container(
-                  //           width: 60,
-                  //           height: 60,
-                  //           alignment: Alignment.center,
-                  //           child: AppDialogs.infoButton(
-                  //             context,
-                  //             () {
-                  //               AppDialogs.showInfoDialog(
-                  //                 context,
-                  //                 Z.of(context).obscureInfoHeader,
-                  //                 Z.of(context).obscureTransactionBody,
-                  //               );
-                  //             },
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                ],
+                      // // obscured checkbox:
+                      // if (widget.amountRaw != "0" && widget.link.isEmpty)
+                      //   Container(
+                      //     margin: const EdgeInsets.only(top: 15),
+                      //     child: Row(
+                      //       mainAxisAlignment: MainAxisAlignment.center,
+                      //       children: <Widget>[
+                      //         Checkbox(
+                      //           value: obscuredMode,
+                      //           activeColor: StateContainer.of(context).curTheme.primary,
+                      //           onChanged: onObscuredChanged,
+                      //         ),
+                      //         const SizedBox(width: 10),
+                      //         GestureDetector(
+                      //           onTap: () {
+                      //             onObscuredChanged(!obscuredMode);
+                      //           },
+                      //           child: Text(
+                      //             Z.of(context).obscureTransaction,
+                      //             style: AppStyles.textStyleParagraph(context),
+                      //           ),
+                      //         ),
+                      //         Container(
+                      //           width: 60,
+                      //           height: 60,
+                      //           alignment: Alignment.center,
+                      //           child: AppDialogs.infoButton(
+                      //             context,
+                      //             () {
+                      //               AppDialogs.showInfoDialog(
+                      //                 context,
+                      //                 Z.of(context).obscureInfoHeader,
+                      //                 Z.of(context).obscureTransactionBody,
+                      //               );
+                      //             },
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                    ],
+                  ),
+                ),
               ),
             ),
 
@@ -383,7 +518,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         } catch (e) {
                           await authenticateWithPin();
                         }
-                      } else if (authMethod.method == AuthMethod.PIN || (authMethod.method == AuthMethod.BIOMETRICS && !hasBiometrics)) {
+                      } else if (authMethod.method == AuthMethod.PIN ||
+                          (authMethod.method == AuthMethod.BIOMETRICS && !hasBiometrics)) {
                         await authenticateWithPin();
                       } else {
                         EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
@@ -805,5 +941,17 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     setState(() {
       obscuredMode = value;
     });
+  }
+
+  Future<String> getNanonymousFeeRaw(BuildContext context) async {
+    // GET: https://nanonymous.cc/api/v1?feecheck (returns {"fee": "0.02"}:
+    final String fee = await sl.get<AnonymousService>().getFee();
+    final Decimal feeDecimal = Decimal.parse(fee);
+    final Decimal amountDecimal =
+        Decimal.parse(NanoAmounts.getRawAsUsableString(widget.amountRaw, NanoAmounts.rawPerNano));
+    final Decimal totalDecimal = feeDecimal * amountDecimal;
+    final String feeRaw =
+        NanoAmounts.getAmountAsRaw(totalDecimal.toString(), NanoAmounts.rawPerNano);
+    return feeRaw;
   }
 }

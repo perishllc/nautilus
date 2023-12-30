@@ -103,7 +103,7 @@ dependencies:
   path_provider: ^2.0.11
 
   # TouchID/FaceID
-  local_auth: ^2.1.2
+  local_auth: ^2.1.7
 
   # Eventbus
   event_taxi: ^1.0.0

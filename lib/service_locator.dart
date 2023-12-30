@@ -3,6 +3,7 @@ import 'package:logger/logger.dart';
 import 'package:wallet_flutter/model/db/appdb.dart';
 import 'package:wallet_flutter/model/vault.dart';
 import 'package:wallet_flutter/network/account_service.dart';
+import 'package:wallet_flutter/network/anonymous_service.dart';
 import 'package:wallet_flutter/network/auth_service.dart';
 import 'package:wallet_flutter/network/giftcards.dart';
 import 'package:wallet_flutter/network/metadata_service.dart';
@@ -21,6 +22,7 @@ void setupServiceLocator() {
   sl.registerLazySingleton<MetadataService>(() => MetadataService());
   sl.registerLazySingleton<GiftCards>(() => GiftCards());
   sl.registerLazySingleton<SubscriptionService>(() => SubscriptionService());
+  sl.registerLazySingleton<AnonymousService>(() => AnonymousService());
   sl.registerLazySingleton<DBHelper>(() => DBHelper());
   sl.registerLazySingleton<HapticUtil>(() => HapticUtil());
   sl.registerLazySingleton<BiometricUtil>(() => BiometricUtil());
