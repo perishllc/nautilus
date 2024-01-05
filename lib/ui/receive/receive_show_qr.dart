@@ -182,7 +182,7 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                 Expanded(
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
+                        const EdgeInsetsDirectional.only(top: 0, bottom: 0, start: 20, end: 20),
                     child:
                         LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
                       final double availableWidth = constraints.maxWidth;

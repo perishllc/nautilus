@@ -52,11 +52,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("请输入用户名或地址"),
         "addressShare": MessageLookupByLibrary.simpleMessage("分享地址"),
         "advanced": MessageLookupByLibrary.simpleMessage("先进的"),
+        "advancedOptions": MessageLookupByLibrary.simpleMessage("高级选项"),
         "aliases": MessageLookupByLibrary.simpleMessage("别名"),
         "amount": MessageLookupByLibrary.simpleMessage("数量"),
         "amountGiftGreaterError":
             MessageLookupByLibrary.simpleMessage("分割金额不能大于礼物余额"),
         "amountMissing": MessageLookupByLibrary.simpleMessage("请输入金额"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "更改高级匿名设置。这允许您更改跃点数量和它们之间的延迟，以及每笔交易总额的百分比。"),
+        "anonymousFeeError":
+            MessageLookupByLibrary.simpleMessage("交易后剩余的匿名费不足！"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "这不是真正的隐私，但它会让人们更难使用匿名 API 跟踪您的交易。这是一项集中服务，我们对其使用中可能出现的任何问题不承担任何责任。"),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 钱包"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "我们注意到您单击了包含一些 nano 的链接，您想跳过设置过程吗？你以后总是可以改变的。\n\n 但是，如果您有要导入的现有种子，则应选择否。"),
@@ -226,6 +233,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateButton": MessageLookupByLibrary.simpleMessage("捐"),
         "donateToSupport": MessageLookupByLibrary.simpleMessage("支持项目"),
         "edit": MessageLookupByLibrary.simpleMessage("编辑"),
+        "enableDelays": MessageLookupByLibrary.simpleMessage("启用延迟"),
         "enableNotifications": MessageLookupByLibrary.simpleMessage("启用通知"),
         "enableTracking": MessageLookupByLibrary.simpleMessage("启用跟踪"),
         "encryptionFailedError":
