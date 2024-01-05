@@ -61,12 +61,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Моля, въведете потребителско име или адрес"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Сподели Адрес"),
         "advanced": MessageLookupByLibrary.simpleMessage("Разширено"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Разширени опции"),
         "aliases": MessageLookupByLibrary.simpleMessage("Псевдоними"),
         "amount": MessageLookupByLibrary.simpleMessage("Количество"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Разделената сума не може да бъде по-голяма от баланса на подаръка"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Моля въведете Сума"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Променете разширените нанонимни настройки. Това ви позволява да променяте броя на скоковете и закъсненията между тях, както и процента от общата сума на всяка транзакция."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Не остава достатъчно след транзакцията за такса за анонимност!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Това НЕ е истинска поверителност, но ще направи много по-трудно за хората да проследяват транзакциите ви с помощта на нанонимния API. Това е централизирана услуга и ние не носим отговорност за проблеми, които могат да възникнат от използването ѝ."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 портфейл"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Забелязахме, че сте кликнали върху връзка, която съдържа някои nano, искате ли да пропуснете процеса на настройка? Винаги можете да промените нещата по-късно.\n\n Ако обаче имате съществуващо семе, което искате да импортирате, трябва да изберете не."),
@@ -289,6 +297,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Подкрепете проекта"),
         "edit": MessageLookupByLibrary.simpleMessage("Редактиране"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("Разрешаване на закъснения"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Активиране на известията"),
         "enableTracking": MessageLookupByLibrary.simpleMessage(

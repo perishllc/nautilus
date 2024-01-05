@@ -54,11 +54,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ユーザー名またはアドレスを入力してください"),
         "addressShare": MessageLookupByLibrary.simpleMessage("アドレスを共有する"),
         "advanced": MessageLookupByLibrary.simpleMessage("高度"),
+        "advancedOptions": MessageLookupByLibrary.simpleMessage("高度なオプション"),
         "aliases": MessageLookupByLibrary.simpleMessage("エイリアス"),
         "amount": MessageLookupByLibrary.simpleMessage("額"),
         "amountGiftGreaterError":
             MessageLookupByLibrary.simpleMessage("分割金額はギフト残高より大きくすることはできません"),
         "amountMissing": MessageLookupByLibrary.simpleMessage("金額を入力してください"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "詳細な匿名設定を変更します。これにより、ホップ数とホップ間の遅延、および各トランザクションの合計額のパーセンテージを変更できます。"),
+        "anonymousFeeError":
+            MessageLookupByLibrary.simpleMessage("取引後に匿名料金が十分に残りません!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "これは真のプライバシーではありませんが、匿名 API を使用してユーザーがトランザクションを追跡することが非常に困難になります。これは集中型サービスであり、その使用によって発生する可能性のある問題については責任を負いません。"),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 ウォレット"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "nano を含むリンクをクリックしたことがわかりました。セットアップ プロセスをスキップしますか?後でいつでも変更できます。\n\n ただし、インポートしたい既存のシードがある場合は、いいえを選択する必要があります。"),
@@ -247,6 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateButton": MessageLookupByLibrary.simpleMessage("寄付"),
         "donateToSupport": MessageLookupByLibrary.simpleMessage("プロジェクトを支援する"),
         "edit": MessageLookupByLibrary.simpleMessage("編集"),
+        "enableDelays": MessageLookupByLibrary.simpleMessage("遅延を有効にする"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("通知を有効にします"),
         "enableTracking": MessageLookupByLibrary.simpleMessage("トラッキングを有効にする"),

@@ -65,12 +65,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Kérjük, adja meg felhasználónevét vagy címét"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Megosztás"),
         "advanced": MessageLookupByLibrary.simpleMessage("Fejlett"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Haladó beállítások"),
         "aliases": MessageLookupByLibrary.simpleMessage("Álnevek"),
         "amount": MessageLookupByLibrary.simpleMessage("Összeg"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "A megosztott összeg nem lehet nagyobb, mint az ajándékegyenleg"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Adjon meg egy összeget"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Módosítsa a speciális nanonim beállításokat. Ezzel módosíthatja az ugrások számát és a köztük lévő késéseket, valamint az egyes tranzakciók teljes összegének százalékos arányát."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "A tranzakció után nem maradt elég anonimitási díj!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Ez NEM valódi adatvédelem, de sokkal nehezebbé teszi az emberek számára a tranzakciók nyomon követését a nanonim API használatával. Ez egy központosított szolgáltatás, és nem vállalunk felelősséget a használatából eredő problémákért."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 Wallet"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Észrevettük, hogy egy nanoelemet tartalmazó linkre kattintott. Szeretné kihagyni a beállítási folyamatot? Később mindig változtathatsz a dolgokon.\n\n Ha azonban van egy meglévő vetőmagja, amelyet importálni szeretne, válassza a nem lehetőséget."),
@@ -294,6 +302,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Támogassa a Projektet"),
         "edit": MessageLookupByLibrary.simpleMessage("szerkesztése"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("Késések engedélyezése"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Értesítések engedélyezése"),
         "enableTracking": MessageLookupByLibrary.simpleMessage(

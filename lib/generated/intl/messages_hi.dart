@@ -61,12 +61,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "कृपया उपयोगकर्ता नाम या पता दर्ज करें"),
         "addressShare": MessageLookupByLibrary.simpleMessage("शेयर करें"),
         "advanced": MessageLookupByLibrary.simpleMessage("विकसित"),
+        "advancedOptions": MessageLookupByLibrary.simpleMessage("उन्नत विकल्प"),
         "aliases": MessageLookupByLibrary.simpleMessage("फर्जी नाम"),
         "amount": MessageLookupByLibrary.simpleMessage("मात्रा"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "विभाजित राशि उपहार शेष राशि से अधिक नहीं हो सकती"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("कृपया राशि दर्ज करें"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "उन्नत नैनोनामस सेटिंग्स बदलें. यह आपको हॉप्स की संख्या और उनके बीच की देरी, साथ ही प्रत्येक लेनदेन की कुल राशि का प्रतिशत बदलने की अनुमति देता है।"),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "लेनदेन के बाद गुमनामी शुल्क के लिए पर्याप्त राशि नहीं बची!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "यह सच्ची गोपनीयता नहीं है, लेकिन इससे लोगों के लिए नैनोनाम एपीआई का उपयोग करके आपके लेनदेन को ट्रैक करना बहुत कठिन हो जाएगा। यह एक केंद्रीकृत सेवा है, और इसके उपयोग से उत्पन्न होने वाली किसी भी समस्या के लिए हम ज़िम्मेदार नहीं हैं।"),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 बटुआ"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "हमने देखा है कि आपने एक लिंक पर क्लिक किया है जिसमें कुछ नैनो है, क्या आप सेटअप प्रक्रिया को छोड़ना चाहेंगे? आप बाद में कभी भी चीजें बदल सकते हैं।\n\n यदि आपके पास एक मौजूदा बीज है जिसे आप आयात करना चाहते हैं, तो आपको नहीं का चयन करना चाहिए।"),
@@ -287,6 +294,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("परियोजना का समर्थन करें"),
         "edit": MessageLookupByLibrary.simpleMessage("संपादित करें"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("विलंब सक्षम करें"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("सूचनाएं सक्षम करें"),
         "enableTracking":

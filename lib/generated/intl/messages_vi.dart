@@ -59,12 +59,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vui lòng nhập tên người dùng hoặc địa chỉ"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Chia sẻ địa chỉ"),
         "advanced": MessageLookupByLibrary.simpleMessage("Nâng cao"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Tùy chọn nâng cao"),
         "aliases": MessageLookupByLibrary.simpleMessage("Bí danh"),
         "amount": MessageLookupByLibrary.simpleMessage("Số lượng"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Số tiền Chia tách không được lớn hơn số dư quà tặng"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Hãy nhập lượng tiền"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Thay đổi cài đặt ẩn danh nâng cao. Điều này cho phép bạn thay đổi số bước nhảy và độ trễ giữa chúng, cũng như tỷ lệ phần trăm của tổng số tiền của mỗi giao dịch."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Không còn đủ sau khi giao dịch cho phí ẩn danh!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Đây KHÔNG phải là quyền riêng tư thực sự nhưng sẽ khiến mọi người khó theo dõi các giao dịch của bạn bằng API nanoonymous hơn nhiều. Đây là dịch vụ tập trung và chúng tôi không chịu trách nhiệm về bất kỳ vấn đề nào có thể phát sinh từ việc sử dụng dịch vụ này."),
         "appWallet": MessageLookupByLibrary.simpleMessage("Ví %1"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Chúng tôi nhận thấy bạn đã nhấp vào một liên kết có chứa một số nano, bạn có muốn bỏ qua quá trình thiết lập không? Bạn luôn có thể thay đổi mọi thứ sau này.\n\n Tuy nhiên, nếu bạn có một hạt giống hiện có mà bạn muốn nhập, bạn nên chọn không."),
@@ -286,6 +294,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateButton": MessageLookupByLibrary.simpleMessage("Quyên tặng"),
         "donateToSupport": MessageLookupByLibrary.simpleMessage("Hỗ trợ dự án"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
+        "enableDelays": MessageLookupByLibrary.simpleMessage("Bật độ trễ"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Bật thông báo"),
         "enableTracking": MessageLookupByLibrary.simpleMessage("Bật theo dõi"),

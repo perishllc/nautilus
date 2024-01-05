@@ -1079,8 +1079,8 @@ class SendSheetState extends State<SendSheet> {
                                   () {
                                     AppDialogs.showInfoDialog(
                                       context,
-                                      Z.of(context).obscureInfoHeader,
-                                      Z.of(context).obscureTransactionBody,
+                                      Z.current.obscureInfoHeader,
+                                      Z.current.anonymousInfoBody,
                                     );
                                   },
                                 ),

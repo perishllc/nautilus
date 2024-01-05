@@ -53,11 +53,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("사용자 이름 또는 주소를 입력하세요"),
         "addressShare": MessageLookupByLibrary.simpleMessage("공유"),
         "advanced": MessageLookupByLibrary.simpleMessage("고급의"),
+        "advancedOptions": MessageLookupByLibrary.simpleMessage("고급 옵션"),
         "aliases": MessageLookupByLibrary.simpleMessage("별칭"),
         "amount": MessageLookupByLibrary.simpleMessage("양"),
         "amountGiftGreaterError":
             MessageLookupByLibrary.simpleMessage("분할 금액은 선물 잔액보다 클 수 없습니다."),
         "amountMissing": MessageLookupByLibrary.simpleMessage("금액을 입력하세요"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "고급 나노니머스 설정을 변경합니다. 이를 통해 홉 수와 그 사이의 지연은 물론 각 트랜잭션의 총 금액에 대한 백분율을 변경할 수 있습니다."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "익명 수수료를 위한 거래 후 남은 금액이 충분하지 않습니다!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "이는 진정한 개인 정보 보호는 아니지만 사람들이 나노 익명 API를 사용하여 거래를 추적하는 것을 훨씬 더 어렵게 만듭니다. 이는 중앙 집중식 서비스이므로 사용으로 인해 발생할 수 있는 문제에 대해 책임을 지지 않습니다."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 지갑"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "나노가 포함된 링크를 클릭한 것을 확인했습니다. 설정 프로세스를 건너뛰시겠습니까? 나중에 언제든지 변경할 수 있습니다.\n\n 그러나 가져오려는 기존 시드가 있는 경우 아니오를 선택해야 합니다."),
@@ -251,6 +258,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateButton": MessageLookupByLibrary.simpleMessage("기부"),
         "donateToSupport": MessageLookupByLibrary.simpleMessage("프로젝트 지원"),
         "edit": MessageLookupByLibrary.simpleMessage("편집"),
+        "enableDelays": MessageLookupByLibrary.simpleMessage("지연 활성화"),
         "enableNotifications": MessageLookupByLibrary.simpleMessage("알림 활성화"),
         "enableTracking": MessageLookupByLibrary.simpleMessage("추적 활성화"),
         "encryptionFailedError": MessageLookupByLibrary.simpleMessage(

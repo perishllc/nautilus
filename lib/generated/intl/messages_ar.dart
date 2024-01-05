@@ -56,12 +56,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "الرجاء إدخال اسم مستخدم أو عنوان"),
         "addressShare": MessageLookupByLibrary.simpleMessage("أنشر العنوان"),
         "advanced": MessageLookupByLibrary.simpleMessage("متقدم"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("خيارات متقدمة"),
         "aliases": MessageLookupByLibrary.simpleMessage("الأسماء المستعارة"),
         "amount": MessageLookupByLibrary.simpleMessage("مقدار"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "لا يمكن أن يكون مبلغ الانقسام أكبر من رصيد الهدية"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("يرجى إدخال المبلغ"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "قم بتغيير الإعدادات المجهولة المتقدمة. يتيح لك ذلك تغيير عدد القفزات والتأخير بينها، بالإضافة إلى النسبة المئوية للمبلغ الإجمالي لكل معاملة."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "لم يبق ما يكفي بعد المعاملة لرسوم عدم الكشف عن هويته!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "هذه ليست خصوصية حقيقية، ولكنها ستجعل من الصعب على الأشخاص تتبع معاملاتك باستخدام واجهة برمجة التطبيقات المجهولة. هذه خدمة مركزية، ونحن لسنا مسؤولين عن أي مشاكل قد تنشأ عن استخدامها."),
         "appWallet": MessageLookupByLibrary.simpleMessage("٪ 1 محفظة"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "لاحظنا أنك نقرت على رابط يحتوي على بعض النانو ، هل ترغب في تخطي عملية الإعداد؟ يمكنك دائمًا تغيير الأشياء لاحقًا.\n\n ومع ذلك ، إذا كان لديك بذرة موجودة تريد استيرادها ، فيجب عليك تحديد لا."),
@@ -277,6 +285,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateButton": MessageLookupByLibrary.simpleMessage("يتبرع"),
         "donateToSupport": MessageLookupByLibrary.simpleMessage("دعم المشروع"),
         "edit": MessageLookupByLibrary.simpleMessage("تحرير"),
+        "enableDelays": MessageLookupByLibrary.simpleMessage("تمكين التأخير"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("تمكين الإخطارات"),
         "enableTracking": MessageLookupByLibrary.simpleMessage("تمكين التتبع"),

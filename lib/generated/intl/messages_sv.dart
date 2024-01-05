@@ -65,12 +65,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ange ett användarnamn eller adress"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Dela"),
         "advanced": MessageLookupByLibrary.simpleMessage("Avancerad"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Avancerade alternativ"),
         "aliases": MessageLookupByLibrary.simpleMessage("Alias"),
         "amount": MessageLookupByLibrary.simpleMessage("Belopp"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Delat belopp kan inte vara större än gåvobalansen"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Ange ett belopp"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Ändra de avancerade nanonyminställningarna. Detta gör att du kan ändra antalet hopp och förseningarna mellan dem, såväl som procentandelen av det totala beloppet för varje transaktion."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Inte tillräckligt kvar efter transaktionen för anonymitetsavgift!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Detta är INTE sann integritet, men det kommer att göra det mycket svårare för människor att spåra dina transaktioner med det nanonyma API:et. Detta är en centraliserad tjänst och vi är inte ansvariga för eventuella problem som kan uppstå vid användningen av den."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 Plånbok"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Vi märkte att du klickade på en länk som innehåller lite nano, vill du hoppa över installationsprocessen? Du kan alltid ändra saker senare.\n\n Om du däremot har ett befintligt frö som du vill importera bör du välja nej."),
@@ -294,6 +302,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Stöd projektet"),
         "edit": MessageLookupByLibrary.simpleMessage("Redigera"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("Aktivera fördröjningar"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Aktivera aviseringar"),
         "enableTracking":

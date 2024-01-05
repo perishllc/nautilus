@@ -63,12 +63,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Immettere un nome utente o un indirizzo"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Condividi"),
         "advanced": MessageLookupByLibrary.simpleMessage("Avanzate"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Opzioni avanzate"),
         "aliases": MessageLookupByLibrary.simpleMessage("Alias"),
         "amount": MessageLookupByLibrary.simpleMessage("Quantità"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "L\'importo diviso non può essere maggiore del saldo del regalo"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Inserisci un importo"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Modifica le impostazioni nanonime avanzate. Ciò ti consente di modificare il numero di salti e i ritardi tra di loro, nonché la percentuale dell\'importo totale di ciascuna transazione."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Non rimane abbastanza dopo la transazione per la commissione di anonimato!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Questa NON è vera privacy, ma renderà molto più difficile per le persone tenere traccia delle tue transazioni utilizzando l\'API nanonima. Questo è un servizio centralizzato e non siamo responsabili per eventuali problemi che potrebbero derivare dal suo utilizzo."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 Portafoglio"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Abbiamo notato che hai cliccato su un link che contiene alcuni nano, vuoi saltare il processo di configurazione? Puoi sempre cambiare le cose dopo.\n\n Se hai un seme esistente che desideri importare, tuttavia, dovresti selezionare no."),
@@ -294,6 +302,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Sostieni il progetto"),
         "edit": MessageLookupByLibrary.simpleMessage("Modifica"),
+        "enableDelays": MessageLookupByLibrary.simpleMessage("Abilita ritardi"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Attivare le notifiche"),
         "enableTracking":

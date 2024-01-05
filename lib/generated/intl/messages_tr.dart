@@ -60,12 +60,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Lütfen Kullanıcı Adı veya Adres Giriniz"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Paylaş"),
         "advanced": MessageLookupByLibrary.simpleMessage("Gelişmiş"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Gelişmiş seçenekler"),
         "aliases": MessageLookupByLibrary.simpleMessage("Takma adlar"),
         "amount": MessageLookupByLibrary.simpleMessage("Miktar"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Bölünmüş Tutar, hediye bakiyesinden fazla olamaz"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Lütfen bir miktar girin"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Gelişmiş nanonymous ayarlarını değiştirin. Bu, atlama sayısını ve aralarındaki gecikmeleri ve ayrıca her bir işlemin toplam tutarının yüzdesini değiştirmenize olanak tanır."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "İşlemden sonra anonimlik ücreti için yeterli miktar kalmadı!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Bu gerçek gizlilik DEĞİLDİR, ancak insanların nanoadlı API\'yi kullanarak işlemlerinizi takip etmesini çok daha zorlaştıracaktır. Bu merkezi bir hizmettir ve kullanımından doğabilecek sorunlardan biz sorumlu değiliz."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 Cüzdan"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Biraz nano içeren bir bağlantıya tıkladığınızı fark ettik, kurulum sürecini atlamak ister misiniz? İşleri daha sonra her zaman değiştirebilirsiniz.\n\n Ancak içe aktarmak istediğiniz mevcut bir tohumunuz varsa, hayır\'ı seçmelisiniz."),
@@ -285,6 +293,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Projeyi Destekleyin"),
         "edit": MessageLookupByLibrary.simpleMessage("Düzenle"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("Gecikmeleri etkinleştir"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Bildirimleri Etkinleştir"),
         "enableTracking":

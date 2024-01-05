@@ -66,12 +66,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare":
             MessageLookupByLibrary.simpleMessage("ঠিকানা শেয়ার করুন"),
         "advanced": MessageLookupByLibrary.simpleMessage("উন্নত"),
+        "advancedOptions": MessageLookupByLibrary.simpleMessage("উন্নত বিকল্প"),
         "aliases": MessageLookupByLibrary.simpleMessage("ছদ্মনাম"),
         "amount": MessageLookupByLibrary.simpleMessage("পরিমাণ"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "বিভক্ত পরিমাণ উপহার ব্যালেন্সের চেয়ে বেশি হতে পারে না"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("অনুগ্রহ করে পরিমাণ লিখুন"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "উন্নত নামবিহীন সেটিংস পরিবর্তন করুন। এটি আপনাকে হপগুলির সংখ্যা এবং তাদের মধ্যে বিলম্বের পাশাপাশি প্রতিটি লেনদেনের মোট পরিমাণের শতাংশ পরিবর্তন করতে দেয়।"),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "লেনদেনের পর পর্যাপ্ত বাকি নেই বেনামি ফি!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "এটি সত্য গোপনীয়তা নয়, তবে এটি ন্যানোনিমাস API ব্যবহার করে আপনার লেনদেনগুলি ট্র্যাক করা লোকেদের পক্ষে আরও কঠিন করে তুলবে৷ এটি একটি কেন্দ্রীভূত পরিষেবা, এবং এটির ব্যবহার থেকে উদ্ভূত কোনো সমস্যার জন্য আমরা দায়ী নই।"),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 ওয়ালেট"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "আমরা লক্ষ্য করেছি যে আপনি একটি লিঙ্কে ক্লিক করেছেন যাতে কিছু ন্যানো রয়েছে, আপনি কি সেটআপ প্রক্রিয়াটি এড়িয়ে যেতে চান? আপনি সবসময় পরে জিনিস পরিবর্তন করতে পারেন.\n\n যদি আপনার কাছে একটি বিদ্যমান বীজ থাকে যা আপনি আমদানি করতে চান তবে আপনাকে না নির্বাচন করা উচিত।"),
@@ -295,6 +302,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("প্রকল্প সমর্থন"),
         "edit": MessageLookupByLibrary.simpleMessage("সম্পাদনা"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("বিলম্ব সক্ষম করুন"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("বিজ্ঞপ্তি সক্রিয় করুন"),
         "enableTracking":

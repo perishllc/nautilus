@@ -130,6 +130,11 @@
     "type": "text",
     "description": "settings_advanced_header"
   },
+  "advancedOptions": "خيارات متقدمة",
+  "@advancedOptions": {
+    "type": "text",
+    "description": "send_advanced_options"
+  },
   "aliases": "الأسماء المستعارة",
   "@aliases": {
     "type": "text",
@@ -149,6 +154,21 @@
   "@amountMissing": {
     "type": "text",
     "description": "send_enter_amount"
+  },
+  "anonymousAdvancedInfoBody": "قم بتغيير الإعدادات المجهولة المتقدمة. يتيح لك ذلك تغيير عدد القفزات والتأخير بينها، بالإضافة إلى النسبة المئوية للمبلغ الإجمالي لكل معاملة.",
+  "@anonymousAdvancedInfoBody": {
+    "type": "text",
+    "description": "anonymous_advanced_info_body"
+  },
+  "anonymousFeeError": "لم يبق ما يكفي بعد المعاملة لرسوم عدم الكشف عن هويته!",
+  "@anonymousFeeError": {
+    "type": "text",
+    "description": "anonymous_fee_error"
+  },
+  "anonymousInfoBody": "هذه ليست خصوصية حقيقية، ولكنها ستجعل من الصعب على الأشخاص تتبع معاملاتك باستخدام واجهة برمجة التطبيقات المجهولة. هذه خدمة مركزية، ونحن لسنا مسؤولين عن أي مشاكل قد تنشأ عن استخدامها.",
+  "@anonymousInfoBody": {
+    "type": "text",
+    "description": "anonymous_info_body"
   },
   "appWallet": "٪ 1 محفظة",
   "@appWallet": {
@@ -806,6 +826,11 @@
   "@edit": {
     "type": "text",
     "description": "accounts_edit_slide"
+  },
+  "enableDelays": "تمكين التأخير",
+  "@enableDelays": {
+    "type": "text",
+    "description": "anonymous_enable_delays"
   },
   "enableNotifications": "تمكين الإخطارات",
   "@enableNotifications": {

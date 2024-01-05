@@ -64,12 +64,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Skriv inn et brukernavn eller adresse"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Del adresse"),
         "advanced": MessageLookupByLibrary.simpleMessage("Avansert"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Avanserte alternativer"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliaser"),
         "amount": MessageLookupByLibrary.simpleMessage("Beløp"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Delt beløp kan ikke være større enn gavesaldoen"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Vennligst tast inn et beløp"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Endre de avanserte nanonyminnstillingene. Dette lar deg endre antall hopp og forsinkelsene mellom dem, samt prosentandelen av det totale beløpet for hver transaksjon."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Ikke nok igjen etter transaksjon for anonymitetsgebyr!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Dette er IKKE ekte personvern, men det vil gjøre det mye vanskeligere for folk å spore transaksjonene dine ved å bruke det nanonyme API. Dette er en sentralisert tjeneste, og vi er ikke ansvarlige for eventuelle problemer som kan oppstå ved bruken av den."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 Lommebok"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Vi la merke til at du klikket på en lenke som inneholder noe nano, vil du hoppe over konfigurasjonsprosessen? Du kan alltid endre ting senere.\n\n Hvis du imidlertid har et eksisterende frø som du vil importere, bør du velge nei."),
@@ -287,6 +295,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Støtt prosjektet"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("Aktiver forsinkelser"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Aktiver varsler"),
         "enableTracking":

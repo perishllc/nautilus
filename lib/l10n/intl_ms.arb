@@ -130,6 +130,11 @@
     "type": "text",
     "description": "settings_advanced_header"
   },
+  "advancedOptions": "Pilihan Lanjutan",
+  "@advancedOptions": {
+    "type": "text",
+    "description": "send_advanced_options"
+  },
   "aliases": "Alias",
   "@aliases": {
     "type": "text",
@@ -149,6 +154,21 @@
   "@amountMissing": {
     "type": "text",
     "description": "send_enter_amount"
+  },
+  "anonymousAdvancedInfoBody": "Tukar tetapan nanonim lanjutan. Ini membolehkan anda menukar bilangan lompatan dan kelewatan di antara mereka, serta peratusan jumlah jumlah setiap transaksi.",
+  "@anonymousAdvancedInfoBody": {
+    "type": "text",
+    "description": "anonymous_advanced_info_body"
+  },
+  "anonymousFeeError": "Tidak cukup baki selepas transaksi untuk yuran tanpa nama!",
+  "@anonymousFeeError": {
+    "type": "text",
+    "description": "anonymous_fee_error"
+  },
+  "anonymousInfoBody": "Ini BUKAN privasi sebenar, tetapi ia akan menyukarkan orang ramai untuk menjejaki transaksi anda menggunakan API nanonama. Ini adalah perkhidmatan berpusat, dan kami tidak bertanggungjawab untuk sebarang isu yang mungkin timbul daripada penggunaannya.",
+  "@anonymousInfoBody": {
+    "type": "text",
+    "description": "anonymous_info_body"
   },
   "appWallet": "%1 Dompet",
   "@appWallet": {
@@ -806,6 +826,11 @@
   "@edit": {
     "type": "text",
     "description": "accounts_edit_slide"
+  },
+  "enableDelays": "Dayakan kelewatan",
+  "@enableDelays": {
+    "type": "text",
+    "description": "anonymous_enable_delays"
   },
   "enableNotifications": "Dayakan Pemberitahuan",
   "@enableNotifications": {

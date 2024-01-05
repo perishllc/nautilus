@@ -130,6 +130,11 @@
     "type": "text",
     "description": "settings_advanced_header"
   },
+  "advancedOptions": "Pielāgota opcija",
+  "@advancedOptions": {
+    "type": "text",
+    "description": "send_advanced_options"
+  },
   "aliases": "Aliases",
   "@aliases": {
     "type": "text",
@@ -149,6 +154,21 @@
   "@amountMissing": {
     "type": "text",
     "description": "send_enter_amount"
+  },
+  "anonymousAdvancedInfoBody": "Mainiet papildu nanonīmu iestatījumus. Tas ļauj mainīt apiņu skaitu un aizkaves starp tiem, kā arī procentuālo daudzumu no katra darījuma kopējās summas.",
+  "@anonymousAdvancedInfoBody": {
+    "type": "text",
+    "description": "anonymous_advanced_info_body"
+  },
+  "anonymousFeeError": "Pēc darījuma atlicis par maz anonimitātes maksai!",
+  "@anonymousFeeError": {
+    "type": "text",
+    "description": "anonymous_fee_error"
+  },
+  "anonymousInfoBody": "Tas NAV patiess privātums, taču cilvēkiem būs daudz grūtāk izsekot jūsu darījumiem, izmantojot nanonīmu API. Šis ir centralizēts pakalpojums, un mēs neesam atbildīgi par problēmām, kas var rasties tā lietošanas rezultātā.",
+  "@anonymousInfoBody": {
+    "type": "text",
+    "description": "anonymous_info_body"
   },
   "appWallet": "%1 Maks",
   "@appWallet": {
@@ -806,6 +826,11 @@
   "@edit": {
     "type": "text",
     "description": "accounts_edit_slide"
+  },
+  "enableDelays": "Iespējot aizkaves",
+  "@enableDelays": {
+    "type": "text",
+    "description": "anonymous_enable_delays"
   },
   "enableNotifications": "Iespējot paziņojumus",
   "@enableNotifications": {

@@ -61,12 +61,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sila Masukkan Nama Pengguna atau Alamat"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Kongsi"),
         "advanced": MessageLookupByLibrary.simpleMessage("Maju"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Pilihan Lanjutan"),
         "aliases": MessageLookupByLibrary.simpleMessage("Alias"),
         "amount": MessageLookupByLibrary.simpleMessage("Jumlah"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Jumlah Pisahan tidak boleh lebih besar daripada baki hadiah"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Sila masukkan jumlah"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Tukar tetapan nanonim lanjutan. Ini membolehkan anda menukar bilangan lompatan dan kelewatan di antara mereka, serta peratusan jumlah jumlah setiap transaksi."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Tidak cukup baki selepas transaksi untuk yuran tanpa nama!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Ini BUKAN privasi sebenar, tetapi ia akan menyukarkan orang ramai untuk menjejaki transaksi anda menggunakan API nanonama. Ini adalah perkhidmatan berpusat, dan kami tidak bertanggungjawab untuk sebarang isu yang mungkin timbul daripada penggunaannya."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 Dompet"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Kami mendapati anda mengklik pada pautan yang mengandungi beberapa nano, adakah anda ingin melangkau proses persediaan? Anda sentiasa boleh mengubah perkara kemudian.\n\n Jika anda mempunyai benih sedia ada yang anda ingin import walau bagaimanapun, anda harus memilih no."),
@@ -285,6 +293,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Sokong Projek"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("Dayakan kelewatan"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Dayakan Pemberitahuan"),
         "enableTracking":

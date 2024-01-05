@@ -61,12 +61,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vnesite uporabniško ime ali naslov"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Deli naslov"),
         "advanced": MessageLookupByLibrary.simpleMessage("Napredno"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Napredne možnosti"),
         "aliases": MessageLookupByLibrary.simpleMessage("Vzdevki"),
         "amount": MessageLookupByLibrary.simpleMessage("Znesek"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Razdeljeni znesek ne sme biti večji od darilnega stanja"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Prosim vnesite znesek"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Spremenite napredne nanonimne nastavitve. To vam omogoča, da spremenite število skokov in zamikov med njimi ter odstotek skupnega zneska posamezne transakcije."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Po transakciji ni ostalo dovolj za provizijo za anonimnost!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "To NI prava zasebnost, vendar bo ljudem veliko težje slediti vašim transakcijam z uporabo nanonimnega API-ja. To je centralizirana storitev in nismo odgovorni za kakršne koli težave, ki lahko nastanejo zaradi njene uporabe."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 denarnica"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Opazili smo, da ste kliknili povezavo, ki vsebuje nano, ali želite preskočiti postopek namestitve? Pozneje lahko vedno spremenite stvari.\n\n Če pa imate obstoječe seme, ki ga želite uvoziti, izberite ne."),
@@ -292,6 +300,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Podprite projekt"),
         "edit": MessageLookupByLibrary.simpleMessage("Uredi"),
+        "enableDelays": MessageLookupByLibrary.simpleMessage("Omogoči zamude"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Omogoči obvestila"),
         "enableTracking":

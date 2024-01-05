@@ -65,12 +65,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Voer een gebruikersnaam of adres in"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Deel"),
         "advanced": MessageLookupByLibrary.simpleMessage("Geavanceerd"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Geavanceerde mogelijkheden"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliassen"),
         "amount": MessageLookupByLibrary.simpleMessage("Hoeveelheid"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Gesplitst bedrag kan niet groter zijn dan het cadeausaldo"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Voer a.u.b. een bedrag in"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Wijzig de geavanceerde nanonieme instellingen. Hiermee kunt u het aantal hops en de vertragingen daartussen wijzigen, evenals het percentage van het totale bedrag van elke transactie."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Na de transactie is er niet genoeg over voor anonimiteitskosten!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Dit is GEEN echte privacy, maar het zal het voor mensen veel moeilijker maken om uw transacties te volgen met behulp van de nanonieme API. Dit is een gecentraliseerde service en wij zijn niet verantwoordelijk voor eventuele problemen die kunnen voortvloeien uit het gebruik ervan."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 Portefeuille"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "We hebben gemerkt dat je op een link hebt geklikt die wat nano bevat, wil je het installatieproces overslaan? Je kunt later altijd nog dingen veranderen.\n\n Als je echter een bestaande seed hebt die je wilt importeren, moet je nee selecteren."),
@@ -295,6 +303,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Steun het project"),
         "edit": MessageLookupByLibrary.simpleMessage("Bewerken"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("Schakel vertragingen in"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Notificaties aanzetten"),
         "enableTracking":

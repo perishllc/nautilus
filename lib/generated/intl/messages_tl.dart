@@ -65,12 +65,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mangyaring Magpasok ng Username o Address"),
         "addressShare": MessageLookupByLibrary.simpleMessage("I-share"),
         "advanced": MessageLookupByLibrary.simpleMessage("Advanced"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Mga Advanced na Opsyon"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliases"),
         "amount": MessageLookupByLibrary.simpleMessage("Halaga"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Ang Hati na Halaga ay hindi maaaring mas malaki kaysa sa balanse ng regalo"),
         "amountMissing": MessageLookupByLibrary.simpleMessage(
             "Mangyaring magpasok ng isang halaga"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Baguhin ang mga advanced na setting ng nanonymous. Nagbibigay-daan ito sa iyong baguhin ang bilang ng mga hop at ang mga pagkaantala sa pagitan ng mga ito, pati na rin ang porsyento ng kabuuang halaga ng bawat transaksyon."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Hindi sapat ang natitira pagkatapos ng transaksyon para sa anonymity fee!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "HINDI ito tunay na privacy, ngunit mas magiging mahirap para sa mga tao na subaybayan ang iyong mga transaksyon gamit ang nanonymous na API. Ito ay isang sentralisadong serbisyo, at hindi kami mananagot para sa anumang mga isyu na maaaring lumabas mula sa paggamit nito."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 Wallet"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Napansin naming nag-click ka sa isang link na naglalaman ng ilang nano, gusto mo bang laktawan ang proseso ng pag-setup? Maaari mong palaging baguhin ang mga bagay sa ibang pagkakataon.\n\n Kung mayroon kang umiiral na binhi na gusto mong i-import gayunpaman, dapat mong piliin ang hindi."),
@@ -296,6 +304,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Suportahan ang Proyekto"),
         "edit": MessageLookupByLibrary.simpleMessage("I-edit"),
+        "enableDelays": MessageLookupByLibrary.simpleMessage(
+            "Paganahin ang mga pagkaantala"),
         "enableNotifications": MessageLookupByLibrary.simpleMessage(
             "Paganahin ang mga notification"),
         "enableTracking":

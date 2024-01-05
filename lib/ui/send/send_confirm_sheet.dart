@@ -419,7 +419,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                                   AppDialogs.showInfoDialog(
                                     context,
                                     Z.of(context).obscureInfoHeader,
-                                    Z.of(context).obscureTransactionBody,
+                                    Z.of(context).anonymousAdvancedInfoBody,
                                   );
                                 },
                               ),

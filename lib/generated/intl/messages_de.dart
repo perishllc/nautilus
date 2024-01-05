@@ -65,12 +65,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bitte gib einen Nutzernamen oder eine Adresse ein"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Teilen"),
         "advanced": MessageLookupByLibrary.simpleMessage("Fortschrittlich"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Erweiterte Optionen"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliase"),
         "amount": MessageLookupByLibrary.simpleMessage("Höhe"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Der Aufteilungsbetrag darf nicht größer als das Geschenkguthaben sein"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Bitte Betrag eingeben"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Ändern Sie die erweiterten anonymen Einstellungen. Dadurch können Sie die Anzahl der Hops und die Verzögerungen zwischen ihnen sowie den Prozentsatz des Gesamtbetrags jeder Transaktion ändern."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Nach der Transaktion ist nicht genug für die Anonymitätsgebühr übrig!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Dies ist KEIN wahrer Datenschutz, aber es wird es für andere wesentlich schwieriger machen, Ihre Transaktionen mithilfe der anonymen API zu verfolgen. Dies ist ein zentralisierter Dienst und wir sind nicht für Probleme verantwortlich, die sich aus seiner Nutzung ergeben können."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 Geldbörse"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Wir haben festgestellt, dass Sie auf einen Link geklickt haben, der Nano enthält. Möchten Sie den Einrichtungsvorgang überspringen? Sie können die Dinge später immer noch ändern.\n\n Wenn Sie jedoch einen vorhandenen Seed haben, den Sie importieren möchten, sollten Sie Nein auswählen."),
@@ -296,6 +304,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport": MessageLookupByLibrary.simpleMessage(
             "Unterstützen Sie das Projekt"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("Verzögerungen aktivieren"),
         "enableNotifications": MessageLookupByLibrary.simpleMessage(
             "Benachrichtigungen aktivieren"),
         "enableTracking":

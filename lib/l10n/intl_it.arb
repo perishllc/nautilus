@@ -130,6 +130,11 @@
     "type": "text",
     "description": "settings_advanced_header"
   },
+  "advancedOptions": "Opzioni avanzate",
+  "@advancedOptions": {
+    "type": "text",
+    "description": "send_advanced_options"
+  },
   "aliases": "Alias",
   "@aliases": {
     "type": "text",
@@ -149,6 +154,21 @@
   "@amountMissing": {
     "type": "text",
     "description": "send_enter_amount"
+  },
+  "anonymousAdvancedInfoBody": "Modifica le impostazioni nanonime avanzate. Ciò ti consente di modificare il numero di salti e i ritardi tra di loro, nonché la percentuale dell'importo totale di ciascuna transazione.",
+  "@anonymousAdvancedInfoBody": {
+    "type": "text",
+    "description": "anonymous_advanced_info_body"
+  },
+  "anonymousFeeError": "Non rimane abbastanza dopo la transazione per la commissione di anonimato!",
+  "@anonymousFeeError": {
+    "type": "text",
+    "description": "anonymous_fee_error"
+  },
+  "anonymousInfoBody": "Questa NON è vera privacy, ma renderà molto più difficile per le persone tenere traccia delle tue transazioni utilizzando l'API nanonima. Questo è un servizio centralizzato e non siamo responsabili per eventuali problemi che potrebbero derivare dal suo utilizzo.",
+  "@anonymousInfoBody": {
+    "type": "text",
+    "description": "anonymous_info_body"
   },
   "appWallet": "%1 Portafoglio",
   "@appWallet": {
@@ -806,6 +826,11 @@
   "@edit": {
     "type": "text",
     "description": "accounts_edit_slide"
+  },
+  "enableDelays": "Abilita ritardi",
+  "@enableDelays": {
+    "type": "text",
+    "description": "anonymous_enable_delays"
   },
   "enableNotifications": "Attivare le notifiche",
   "@enableNotifications": {

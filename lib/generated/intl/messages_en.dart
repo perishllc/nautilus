@@ -67,8 +67,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Split Amount can\'t be greater than gift balance"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Please enter an Amount"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Change the advanced nanonymous settings. This allows you to change the number of hops and the delays between them, as well as the percentage of the total amount of each transaction."),
         "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
             "Not enough left after transaction for anonymity fee!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "This is NOT true privacy, but it will make it much harder for people to track your transactions using the nanonymous API. This is a centralized service, and we\'re not responsible for any issues that may arise from it\'s use."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 Wallet"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "We noticed you clicked on a link that contains some %2, would you like to skip the setup process? You can always change things later.\n\n If you have an existing seed that you want to import however, you should select no."),

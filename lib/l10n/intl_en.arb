@@ -155,6 +155,21 @@
     "type": "text",
     "description": "send_enter_amount"
   },
+  "anonymousAdvancedInfoBody": "Change the advanced nanonymous settings. This allows you to change the number of hops and the delays between them, as well as the percentage of the total amount of each transaction.",
+  "@anonymousAdvancedInfoBody": {
+    "type": "text",
+    "description": "anonymous_advanced_info_body"
+  },
+  "anonymousFeeError": "Not enough left after transaction for anonymity fee!",
+  "@anonymousFeeError": {
+    "type": "text",
+    "description": "anonymous_fee_error"
+  },
+  "anonymousInfoBody": "This is NOT true privacy, but it will make it much harder for people to track your transactions using the nanonymous API. This is a centralized service, and we're not responsible for any issues that may arise from it's use.",
+  "@anonymousInfoBody": {
+    "type": "text",
+    "description": "anonymous_info_body"
+  },
   "appWallet": "%1 Wallet",
   "@appWallet": {
     "type": "text",
@@ -812,6 +827,11 @@
     "type": "text",
     "description": "accounts_edit_slide"
   },
+  "enableDelays": "Enable delays",
+  "@enableDelays": {
+    "type": "text",
+    "description": "anonymous_enable_delays"
+  },
   "enableNotifications": "Enable Notifications",
   "@enableNotifications": {
     "type": "text",
@@ -821,16 +841,6 @@
   "@enableTracking": {
     "type": "text",
     "description": "tracking_warning_enable_button"
-  },
-  "enableDelays": "Enable delays",
-  "@enableDelays": {
-    "type": "text",
-    "description": "anonymous_enable_delays"
-  },
-  "anonymousFeeError": "Not enough left after transaction for anonymity fee!",
-  "@anonymousFeeError": {
-    "type": "text",
-    "description": "anonymous_fee_error"
   },
   "encryptionFailedError": "Failed to set a wallet password",
   "@encryptionFailedError": {

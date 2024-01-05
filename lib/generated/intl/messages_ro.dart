@@ -62,12 +62,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Introduceți un nume de utilizator sau o adresă"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Share"),
         "advanced": MessageLookupByLibrary.simpleMessage("Avansat"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Opțiuni avansate"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliasuri"),
         "amount": MessageLookupByLibrary.simpleMessage("Cantitate"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Suma împărțită nu poate fi mai mare decât soldul cadou"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Introduceți o sumă"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Schimbați setările avansate nanonime. Acest lucru vă permite să modificați numărul de hop și întârzierile dintre ele, precum și procentul din suma totală a fiecărei tranzacții."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Nu a mai rămas suficient după tranzacție pentru taxa de anonimat!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Aceasta NU este confidențialitate adevărată, dar va fi mult mai dificil pentru oameni să vă urmărească tranzacțiile folosind API-ul nanonymous. Acesta este un serviciu centralizat și nu suntem responsabili pentru problemele care pot apărea în urma utilizării acestuia."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 Portofel"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Am observat că ați dat clic pe un link care conține niște nano, doriți să săriți peste procesul de configurare? Poți oricând să schimbi lucrurile mai târziu.\n\n Dacă aveți o sămânță existentă pe care doriți să o importați, ar trebui să selectați nu."),
@@ -289,6 +297,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Susține proiectul"),
         "edit": MessageLookupByLibrary.simpleMessage("Editează"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("Activați întârzierile"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Activați notificările"),
         "enableTracking":

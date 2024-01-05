@@ -130,6 +130,11 @@
     "type": "text",
     "description": "settings_advanced_header"
   },
+  "advancedOptions": "Zaawansowane opcje",
+  "@advancedOptions": {
+    "type": "text",
+    "description": "send_advanced_options"
+  },
   "aliases": "Aliasy",
   "@aliases": {
     "type": "text",
@@ -149,6 +154,21 @@
   "@amountMissing": {
     "type": "text",
     "description": "send_enter_amount"
+  },
+  "anonymousAdvancedInfoBody": "Zmień zaawansowane ustawienia nanonimiczne. Dzięki temu możesz zmienić liczbę przeskoków i opóźnień między nimi, a także procent całkowitej kwoty każdej transakcji.",
+  "@anonymousAdvancedInfoBody": {
+    "type": "text",
+    "description": "anonymous_advanced_info_body"
+  },
+  "anonymousFeeError": "Za mało pozostało po transakcji na opłatę za anonimowość!",
+  "@anonymousFeeError": {
+    "type": "text",
+    "description": "anonymous_fee_error"
+  },
+  "anonymousInfoBody": "NIE jest to prawdziwa prywatność, ale znacznie utrudni śledzenie Twoich transakcji za pomocą nanonimicznego interfejsu API. Jest to usługa scentralizowana i nie ponosimy odpowiedzialności za jakiekolwiek problemy, które mogą wyniknąć z jej użycia.",
+  "@anonymousInfoBody": {
+    "type": "text",
+    "description": "anonymous_info_body"
   },
   "appWallet": "Portfel %1",
   "@appWallet": {
@@ -806,6 +826,11 @@
   "@edit": {
     "type": "text",
     "description": "accounts_edit_slide"
+  },
+  "enableDelays": "Włącz opóźnienia",
+  "@enableDelays": {
+    "type": "text",
+    "description": "anonymous_enable_delays"
   },
   "enableNotifications": "Włącz powiadomienia",
   "@enableNotifications": {

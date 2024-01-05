@@ -56,11 +56,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("אנא הזן שם משתמש או כתובת"),
         "addressShare": MessageLookupByLibrary.simpleMessage("שתף"),
         "advanced": MessageLookupByLibrary.simpleMessage("מִתקַדֵם"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("אפשרויות מתקדמות"),
         "aliases": MessageLookupByLibrary.simpleMessage("כינויים"),
         "amount": MessageLookupByLibrary.simpleMessage("כמות"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "הסכום המפוצל לא יכול להיות גדול מיתרת המתנה"),
         "amountMissing": MessageLookupByLibrary.simpleMessage("הזן סכום"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "שנה את ההגדרות הננומיות המתקדמות. זה מאפשר לשנות את מספר הקפיצות והעיכובים ביניהם, כמו גם את האחוז מהסכום הכולל של כל עסקה."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "לא נשאר מספיק לאחר העסקה עבור עמלת אנונימיות!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "זו לא פרטיות אמיתית, אבל זה יקשה הרבה יותר על אנשים לעקוב אחר העסקאות שלך באמצעות ה-API הננוני. זהו שירות מרוכז, ואיננו אחראים לכל בעיה שעלולה לנבוע מהשימוש בו."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 ארנק"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "שמנו לב שלחצת על קישור שמכיל קצת ננו, האם תרצה לדלג על תהליך ההגדרה? תמיד תוכל לשנות דברים מאוחר יותר.\n\n אם יש לך זרע קיים שברצונך לייבא עם זאת, עליך לבחור לא."),
@@ -268,6 +276,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateButton": MessageLookupByLibrary.simpleMessage("לִתְרוֹם"),
         "donateToSupport": MessageLookupByLibrary.simpleMessage("תמכו בפרויקט"),
         "edit": MessageLookupByLibrary.simpleMessage("ערוך"),
+        "enableDelays": MessageLookupByLibrary.simpleMessage("אפשר עיכובים"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("הפעל התראות"),
         "enableTracking": MessageLookupByLibrary.simpleMessage("אפשר מעקב"),

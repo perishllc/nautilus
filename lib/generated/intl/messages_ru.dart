@@ -63,12 +63,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Пожалуйста, введите имя пользователя или адрес"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Отправить"),
         "advanced": MessageLookupByLibrary.simpleMessage("Передовой"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Расширенные настройки"),
         "aliases": MessageLookupByLibrary.simpleMessage("Псевдонимы"),
         "amount": MessageLookupByLibrary.simpleMessage("Количество"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Сумма разделения не может превышать баланс подарка"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Пожалуйста введите сумму"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Измените расширенные настройки анонимности. Это позволяет изменять количество прыжков и задержки между ними, а также процент от общей суммы каждой транзакции."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Недостаточно средств после транзакции для оплаты анонимности!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Это НЕ настоящая конфиденциальность, но людям будет намного сложнее отслеживать ваши транзакции с помощью анонимного API. Это централизованный сервис, и мы не несем ответственности за любые проблемы, которые могут возникнуть в результате его использования."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 кошелек"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Мы заметили, что вы нажали на ссылку, содержащую нано. Хотите пропустить процесс установки? Вы всегда можете изменить ситуацию позже.\n\n Однако, если у вас есть семя, которое вы хотите импортировать, вам следует выбрать нет."),
@@ -296,6 +304,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Поддержите проект"),
         "edit": MessageLookupByLibrary.simpleMessage("Редактировать"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("Включить задержки"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Включить уведомления"),
         "enableTracking":

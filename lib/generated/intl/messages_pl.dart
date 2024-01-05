@@ -60,11 +60,19 @@ class MessageLookup extends MessageLookupByLibrary {
             "Wprowadź nazwę użytkownika lub adres"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Udostępnij"),
         "advanced": MessageLookupByLibrary.simpleMessage("Zaawansowany"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Zaawansowane opcje"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliasy"),
         "amount": MessageLookupByLibrary.simpleMessage("Ilość"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Podzielona kwota nie może być większa niż saldo prezentu"),
         "amountMissing": MessageLookupByLibrary.simpleMessage("Wpisz ilość"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Zmień zaawansowane ustawienia nanonimiczne. Dzięki temu możesz zmienić liczbę przeskoków i opóźnień między nimi, a także procent całkowitej kwoty każdej transakcji."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Za mało pozostało po transakcji na opłatę za anonimowość!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "NIE jest to prawdziwa prywatność, ale znacznie utrudni śledzenie Twoich transakcji za pomocą nanonimicznego interfejsu API. Jest to usługa scentralizowana i nie ponosimy odpowiedzialności za jakiekolwiek problemy, które mogą wyniknąć z jej użycia."),
         "appWallet": MessageLookupByLibrary.simpleMessage("Portfel %1"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Zauważyliśmy, że kliknąłeś link, który zawiera nano, czy chcesz pominąć proces konfiguracji? Zawsze możesz coś zmienić później.\n\n Jeśli jednak masz istniejący materiał siewny, który chcesz zaimportować, wybierz opcję nie."),
@@ -284,6 +292,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Wesprzyj projekt"),
         "edit": MessageLookupByLibrary.simpleMessage("Edytuj"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("Włącz opóźnienia"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Włącz powiadomienia"),
         "enableTracking":

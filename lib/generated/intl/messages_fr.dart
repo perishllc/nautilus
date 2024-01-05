@@ -66,12 +66,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Veuillez saisir un nom d\'utilisateur ou une adresse"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Partager"),
         "advanced": MessageLookupByLibrary.simpleMessage("Avancé"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Options avancées"),
         "aliases": MessageLookupByLibrary.simpleMessage("Alias"),
         "amount": MessageLookupByLibrary.simpleMessage("Quantité"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Le montant partagé ne peut pas être supérieur au solde du cadeau"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Veuillez entrer un montant"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Modifiez les paramètres avancés du nanonyme. Cela vous permet de modifier le nombre de sauts et les délais entre eux, ainsi que le pourcentage du montant total de chaque transaction."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Il n\'en reste pas assez après la transaction pour les frais d\'anonymat !"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Il ne s’agit PAS d’une véritable confidentialité, mais cela rendra beaucoup plus difficile le suivi de vos transactions à l’aide de l’API nanonyme. Il s\'agit d\'un service centralisé et nous ne sommes pas responsables des problèmes pouvant découler de son utilisation."),
         "appWallet": MessageLookupByLibrary.simpleMessage("Portefeuille %1"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Nous avons remarqué que vous avez cliqué sur un lien contenant des nano, souhaitez-vous ignorer le processus de configuration ? Vous pouvez toujours changer les choses plus tard.\n\n Si vous avez une graine existante que vous souhaitez importer, vous devez sélectionner non."),
@@ -303,6 +311,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Soutenir le projet"),
         "edit": MessageLookupByLibrary.simpleMessage("Modifier"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("Activer les délais"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Activer les notifications"),
         "enableTracking":

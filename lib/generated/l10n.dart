@@ -360,6 +360,36 @@ class Z {
     );
   }
 
+  /// `Change the advanced nanonymous settings. This allows you to change the number of hops and the delays between them, as well as the percentage of the total amount of each transaction.`
+  String get anonymousAdvancedInfoBody {
+    return Intl.message(
+      'Change the advanced nanonymous settings. This allows you to change the number of hops and the delays between them, as well as the percentage of the total amount of each transaction.',
+      name: 'anonymousAdvancedInfoBody',
+      desc: 'anonymous_advanced_info_body',
+      args: [],
+    );
+  }
+
+  /// `Not enough left after transaction for anonymity fee!`
+  String get anonymousFeeError {
+    return Intl.message(
+      'Not enough left after transaction for anonymity fee!',
+      name: 'anonymousFeeError',
+      desc: 'anonymous_fee_error',
+      args: [],
+    );
+  }
+
+  /// `This is NOT true privacy, but it will make it much harder for people to track your transactions using the nanonymous API. This is a centralized service, and we're not responsible for any issues that may arise from it's use.`
+  String get anonymousInfoBody {
+    return Intl.message(
+      'This is NOT true privacy, but it will make it much harder for people to track your transactions using the nanonymous API. This is a centralized service, and we\'re not responsible for any issues that may arise from it\'s use.',
+      name: 'anonymousInfoBody',
+      desc: 'anonymous_info_body',
+      args: [],
+    );
+  }
+
   /// `%1 Wallet`
   String get appWallet {
     return Intl.message(
@@ -1685,6 +1715,16 @@ class Z {
     );
   }
 
+  /// `Enable delays`
+  String get enableDelays {
+    return Intl.message(
+      'Enable delays',
+      name: 'enableDelays',
+      desc: 'anonymous_enable_delays',
+      args: [],
+    );
+  }
+
   /// `Enable Notifications`
   String get enableNotifications {
     return Intl.message(
@@ -1701,26 +1741,6 @@ class Z {
       'Enable Tracking',
       name: 'enableTracking',
       desc: 'tracking_warning_enable_button',
-      args: [],
-    );
-  }
-
-  /// `Enable delays`
-  String get enableDelays {
-    return Intl.message(
-      'Enable delays',
-      name: 'enableDelays',
-      desc: 'anonymous_enable_delays',
-      args: [],
-    );
-  }
-
-  /// `Not enough left after transaction for anonymity fee!`
-  String get anonymousFeeError {
-    return Intl.message(
-      'Not enough left after transaction for anonymity fee!',
-      name: 'anonymousFeeError',
-      desc: 'anonymous_fee_error',
       args: [],
     );
   }

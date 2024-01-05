@@ -63,12 +63,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "addressShare":
             MessageLookupByLibrary.simpleMessage("Поділитися адресою"),
         "advanced": MessageLookupByLibrary.simpleMessage("Просунутий"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Розширені опції"),
         "aliases": MessageLookupByLibrary.simpleMessage("Псевдоніми"),
         "amount": MessageLookupByLibrary.simpleMessage("Сума"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Розділена сума не може перевищувати баланс подарунку"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Будь ласка вкажіть суму"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Змініть розширені налаштування нанонімів. Це дозволяє змінювати кількість переходів і затримки між ними, а також відсоток від загальної суми кожної транзакції."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Після транзакції недостатньо для плати за анонімність!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Це НЕ справжня конфіденційність, але людям буде набагато важче відстежувати ваші транзакції за допомогою nanonymous API. Це централізована служба, і ми не несемо відповідальності за будь-які проблеми, які можуть виникнути внаслідок її використання."),
         "appWallet": MessageLookupByLibrary.simpleMessage("Гаманець %1"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Ми помітили, що ви натиснули на посилання, яке містить нано, чи бажаєте ви пропустити процес налаштування? Ви завжди можете щось змінити пізніше.\n\n Однак, якщо у вас є початковий код, який ви хочете імпортувати, вам слід вибрати «ні»."),
@@ -297,6 +305,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Підтримайте проект"),
         "edit": MessageLookupByLibrary.simpleMessage("Редагувати"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("Увімкнути затримки"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Увімкнути сповіщення"),
         "enableTracking":

@@ -64,12 +64,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please Enter a Username or Address"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Kopīgot adresi"),
         "advanced": MessageLookupByLibrary.simpleMessage("Papildu"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Pielāgota opcija"),
         "aliases": MessageLookupByLibrary.simpleMessage("Aliases"),
         "amount": MessageLookupByLibrary.simpleMessage("Summa"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Dalītā summa nevar būt lielāka par dāvanas atlikumu"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Lūdzu ievadiet daudzumu"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Mainiet papildu nanonīmu iestatījumus. Tas ļauj mainīt apiņu skaitu un aizkaves starp tiem, kā arī procentuālo daudzumu no katra darījuma kopējās summas."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Pēc darījuma atlicis par maz anonimitātes maksai!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Tas NAV patiess privātums, taču cilvēkiem būs daudz grūtāk izsekot jūsu darījumiem, izmantojot nanonīmu API. Šis ir centralizēts pakalpojums, un mēs neesam atbildīgi par problēmām, kas var rasties tā lietošanas rezultātā."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 Maks"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Mēs pamanījām, ka esat noklikšķinājis uz saites, kurā ir ietverts nanoelements. Vai vēlaties izlaist iestatīšanas procesu? Jūs vienmēr varat mainīt lietas vēlāk.\n\n Tomēr, ja jums ir kāda sēkla, kuru vēlaties importēt, atlasiet nē."),
@@ -290,6 +298,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Atbalstiet projektu"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("Iespējot aizkaves"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Iespējot paziņojumus"),
         "enableTracking":

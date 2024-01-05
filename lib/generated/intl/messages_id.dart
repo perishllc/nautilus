@@ -62,12 +62,20 @@ class MessageLookup extends MessageLookupByLibrary {
             "Harap Masukkan Nama Pengguna atau Alamat"),
         "addressShare": MessageLookupByLibrary.simpleMessage("Bagikan"),
         "advanced": MessageLookupByLibrary.simpleMessage("Canggih"),
+        "advancedOptions":
+            MessageLookupByLibrary.simpleMessage("Opsi Lanjutan"),
         "aliases": MessageLookupByLibrary.simpleMessage("Alias"),
         "amount": MessageLookupByLibrary.simpleMessage("Jumlah"),
         "amountGiftGreaterError": MessageLookupByLibrary.simpleMessage(
             "Jumlah Split tidak boleh lebih besar dari saldo hadiah"),
         "amountMissing":
             MessageLookupByLibrary.simpleMessage("Masukkan jumlah"),
+        "anonymousAdvancedInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Ubah pengaturan anonim tingkat lanjut. Hal ini memungkinkan Anda untuk mengubah jumlah hop dan penundaan di antara keduanya, serta persentase jumlah total setiap transaksi."),
+        "anonymousFeeError": MessageLookupByLibrary.simpleMessage(
+            "Tidak cukup sisa setelah transaksi untuk biaya anonimitas!"),
+        "anonymousInfoBody": MessageLookupByLibrary.simpleMessage(
+            "Ini BUKAN privasi sebenarnya, namun akan mempersulit orang lain untuk melacak transaksi Anda menggunakan API anonim. Ini adalah layanan terpusat, dan kami tidak bertanggung jawab atas masalah apa pun yang mungkin timbul akibat penggunaannya."),
         "appWallet": MessageLookupByLibrary.simpleMessage("%1 Dompet"),
         "askSkipSetup": MessageLookupByLibrary.simpleMessage(
             "Kami melihat Anda mengeklik tautan yang berisi beberapa nano, apakah Anda ingin melewati proses penyiapan? Anda selalu dapat mengubah banyak hal nanti.\n\n Jika Anda memiliki benih yang ingin Anda impor, Anda harus memilih no."),
@@ -288,6 +296,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Dukung Proyek"),
         "edit": MessageLookupByLibrary.simpleMessage("Mengedit"),
+        "enableDelays":
+            MessageLookupByLibrary.simpleMessage("Aktifkan penundaan"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Aktifkan Notifikasi"),
         "enableTracking":
