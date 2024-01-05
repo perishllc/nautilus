@@ -2301,7 +2301,7 @@ class AppHomePageState extends State<AppHomePage>
                             StateContainer.of(context).curTheme.background40,
                       ),
                       child: AutoSizeText(
-                        Z.of(context).request,
+                        Z.of(context).receive,
                         textAlign: TextAlign.center,
                         style: AppStyles.textStyleButtonPrimary(context),
                         maxLines: 1,
@@ -2315,9 +2315,9 @@ class AppHomePageState extends State<AppHomePage>
                           child: await UIUtil.getQRImage(context, data),
                         );
                         if (!mounted) return;
-                        Sheets.showAppHeightNineSheet(
+                        Sheets.showAppHeightEightSheet(
                           context: context,
-                          widget: ReceiveSheet(
+                          widget: ReceiveShowQRSheet(
                             localCurrency:
                                 StateContainer.of(context).curCurrency,
                             address: StateContainer.of(context).wallet!.address,

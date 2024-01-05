@@ -170,6 +170,14 @@ class ReceiveShowQRSheetState extends State<ReceiveShowQRSheet> {
                     // ******* Enter Amount Error Container End ******* //
                   ],
                 ),
+                if (StateContainer.of(context).wallet?.address != null)
+                  Container(
+                    child: UIUtil.threeLineAddressText(
+                      context,
+                      StateContainer.of(context).wallet!.address!,
+                      type: ThreeLineAddressTextType.PRIMARY60,
+                    ),
+                  ),
                 // QR which takes all the available space left from the buttons & address text
                 Expanded(
                   child: Padding(

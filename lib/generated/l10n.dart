@@ -1705,6 +1705,16 @@ class Z {
     );
   }
 
+  /// `Enable delays`
+  String get enableDelays {
+    return Intl.message(
+      'Enable delays',
+      name: 'enableDelays',
+      desc: 'anonymous_enable_delays',
+      args: [],
+    );
+  }
+
   /// `Failed to set a wallet password`
   String get encryptionFailedError {
     return Intl.message(

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:wallet_flutter/appstate_container.dart';
+import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/util/ui_util.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
@@ -175,7 +176,7 @@ class AnonymousAdvancedOptionsState extends State<AnonymousAdvancedOptions> {
                       });
                     },
                     child: Text(
-                      "Enable delays",
+                      Z.current.enableDelays,
                       style: AppStyles.textStyleParagraph(context),
                     ),
                   ),

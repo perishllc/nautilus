@@ -287,6 +287,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "donateToSupport":
             MessageLookupByLibrary.simpleMessage("Support the Project"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "enableDelays": MessageLookupByLibrary.simpleMessage("Enable delays"),
         "enableNotifications":
             MessageLookupByLibrary.simpleMessage("Enable Notifications"),
         "enableTracking":

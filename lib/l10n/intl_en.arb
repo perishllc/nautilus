@@ -822,6 +822,11 @@
     "type": "text",
     "description": "tracking_warning_enable_button"
   },
+  "enableDelays": "Enable delays",
+  "@enableDelays": {
+    "type": "text",
+    "description": "anonymous_enable_delays"
+  },
   "encryptionFailedError": "Failed to set a wallet password",
   "@encryptionFailedError": {
     "type": "text",

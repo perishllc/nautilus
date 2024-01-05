@@ -1,4 +1,9 @@
 ## v0.9.3 - [2024-01-01]
+#### Added
+- Nanonymous integration
+#### Changed
+- Removed messages and memos
+- Updated receive sheet to show the full nano address
 #### Fixed
 - Fixed smalled dot at the top of the home screen
 ## v0.9.2 - [2023-11-30]
