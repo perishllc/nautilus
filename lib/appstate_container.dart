@@ -106,10 +106,19 @@ class StateContainer extends StatefulWidget {
 
   final Widget child;
 
+  static dynamic _current;
+
+  static StateContainerState get current {
+    assert(_current != null,
+        'No instance of StateContainer was loaded. Try to initialize the StateContainer delegate before accessing StateContainer.current.');
+    return _current as StateContainerState;
+  }
+
   // This is the secret sauce. Write your own 'of' method that will behave
   // Exactly like MediaQuery.of and Theme.of
   // It basically says 'get the data from the widget of this type.
   static StateContainerState of(BuildContext context) {
+    _current ??= context.dependOnInheritedWidgetOfExactType<_InheritedStateContainer>()!.data;
     return context.dependOnInheritedWidgetOfExactType<_InheritedStateContainer>()!.data;
   }
 

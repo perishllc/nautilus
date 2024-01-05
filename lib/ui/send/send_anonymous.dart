@@ -20,7 +20,7 @@ class AnonymousAdvancedOptions extends StatefulWidget {
 }
 
 class AnonymousAdvancedOptionsState extends State<AnonymousAdvancedOptions> {
-  bool _delays = true;
+  bool _delays = false;
 
   List<Map<String, dynamic>> sends = [
     {'percent': 65, 'seconds': 0, 'percentController': TextEditingController()},
@@ -111,14 +111,22 @@ class AnonymousAdvancedOptionsState extends State<AnonymousAdvancedOptions> {
           Expanded(
             flex: 2,
             child: TextFormField(
-              initialValue: sends[index]['seconds'].toString(),
-              decoration: InputDecoration(
-                suffixText: 'seconds',
-                suffixStyle: AppStyles.textStyleSettingItemSubheader(context),
-              ),
-              style: AppStyles.textStyleAddressPrimary(context),
-              keyboardType: TextInputType.number,
-            ),
+                initialValue: sends[index]['seconds'].toString(),
+                decoration: InputDecoration(
+                  suffixText: 'seconds',
+                  suffixStyle: AppStyles.textStyleSettingItemSubheader(context),
+                ),
+                style: AppStyles.textStyleAddressPrimary(context),
+                keyboardType: TextInputType.number,
+                onChanged: (String value) {
+                  int? newSeconds = int.tryParse(value);
+                  if (newSeconds != null) {
+                    setState(() {
+                      send['seconds'] = newSeconds;
+                    });
+                    widget.onSendsChanged(sends);
+                  }
+                }),
           ),
         ]
       ],

@@ -80,6 +80,7 @@ class AnonymousService {
       }
 
       print("@@@@@@@@@@@@@ $url");
+      print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
       final http.Response resp = await http.get(
         Uri.parse(url),

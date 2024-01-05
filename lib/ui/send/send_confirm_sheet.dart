@@ -263,7 +263,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                       // "TO" text
                       if (widget.link.isEmpty)
                         Container(
-                          margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                          margin: const EdgeInsets.only(top: 16, bottom: 10),
                           child: Column(
                             children: <Widget>[
                               Text(
@@ -291,7 +291,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                       // WITH MESSAGE:
                       if (widget.memo.isNotEmpty && (widget.amountRaw != "0"))
                         Container(
-                          margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                          margin: const EdgeInsets.only(top: 16, bottom: 10),
                           child: Column(
                             children: <Widget>[
                               Text(
@@ -320,13 +320,12 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                             )),
 
                       // "FEE" text
-                      if (widget.anonymousMode && nanFeeRaw == null)
-                        const SizedBox(height: 132),
+                      if (widget.anonymousMode && nanFeeRaw == null) const SizedBox(height: 118),
                       if (widget.anonymousMode && nanFeeRaw != null) ...[
                         Column(
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                              margin: const EdgeInsets.only(top: 16, bottom: 10),
                               child: Column(
                                 children: <Widget>[
                                   Text(
@@ -767,10 +766,11 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           if (ws.type == WorkSourceTypes.LOCAL) {
             if (!mounted) return;
             UIUtil.showSnackbar(
-              Z.of(context).generatingWork,
+              Z.current.generatingWork,
               context,
               durationMs: 25000,
             );
+            return;
           }
           resp = await sl.get<AccountService>().requestSend(
                 StateContainer.of(context).wallet!.representative,
@@ -1060,7 +1060,6 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
             delays: delays,
           );
 
-      return null;
       return destination;
     } catch (e) {
       return null;
