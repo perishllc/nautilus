@@ -10,8 +10,10 @@ import 'package:wallet_flutter/ui/widgets/buttons.dart';
 class AnonymousAdvancedOptions extends StatefulWidget {
   const AnonymousAdvancedOptions({
     required this.onSendsChanged,
+    required this.onDelaysChanged,
   });
   final Function(List<Map<String, dynamic>>) onSendsChanged;
+  final Function(bool) onDelaysChanged;
 
   @override
   AnonymousAdvancedOptionsState createState() => AnonymousAdvancedOptionsState();
@@ -100,12 +102,12 @@ class AnonymousAdvancedOptionsState extends State<AnonymousAdvancedOptions> {
                   setState(() {});
                 }
               }
-              // widget.onSendsChanged(sends);
+              widget.onSendsChanged(sends);
             },
           ),
         ),
         if (_delays) ...[
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             flex: 2,
             child: TextFormField(
@@ -131,6 +133,7 @@ class AnonymousAdvancedOptionsState extends State<AnonymousAdvancedOptions> {
         sends[i]['percent'] = percentsThatAddTo100[i];
         sends[i]['percentController'].text = percentsThatAddTo100[i].toString();
       }
+      widget.onSendsChanged(sends);
     });
   }
 
@@ -142,6 +145,7 @@ class AnonymousAdvancedOptionsState extends State<AnonymousAdvancedOptions> {
         sends[i]['percent'] = percentsThatAddTo100[i];
         sends[i]['percentController'].text = percentsThatAddTo100[i].toString();
       }
+      widget.onSendsChanged(sends);
     });
   }
 
@@ -165,6 +169,7 @@ class AnonymousAdvancedOptionsState extends State<AnonymousAdvancedOptions> {
                       if (value == null) return;
                       setState(() {
                         _delays = value;
+                        widget.onDelaysChanged(_delays);
                       });
                     },
                   ),
@@ -173,6 +178,7 @@ class AnonymousAdvancedOptionsState extends State<AnonymousAdvancedOptions> {
                     onTap: () {
                       setState(() {
                         _delays = !_delays;
+                        widget.onDelaysChanged(_delays);
                       });
                     },
                     child: Text(
@@ -185,15 +191,7 @@ class AnonymousAdvancedOptionsState extends State<AnonymousAdvancedOptions> {
               Row(
                 children: [
                   FloatingActionButton(
-                    backgroundColor: StateContainer.of(context).curTheme.primary,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
-                    onPressed: () {
-                      _addSend();
-                    },
-                    child: const Icon(Icons.add),
-                  ),
-                  FloatingActionButton(
+                    mini: true,
                     backgroundColor: StateContainer.of(context).curTheme.primary,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
@@ -201,6 +199,17 @@ class AnonymousAdvancedOptionsState extends State<AnonymousAdvancedOptions> {
                       _removeSend();
                     },
                     child: const Icon(Icons.remove),
+                  ),
+                  const SizedBox(width: 4),
+                  FloatingActionButton(
+                    mini: true,
+                    backgroundColor: StateContainer.of(context).curTheme.primary,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
+                    onPressed: () {
+                      _addSend();
+                    },
+                    child: const Icon(Icons.add),
                   ),
                 ],
               ),

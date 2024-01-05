@@ -827,6 +827,11 @@
     "type": "text",
     "description": "anonymous_enable_delays"
   },
+  "anonymousFeeError": "Not enough left after transaction for anonymity fee!",
+  "@anonymousFeeError": {
+    "type": "text",
+    "description": "anonymous_fee_error"
+  },
   "encryptionFailedError": "Failed to set a wallet password",
   "@encryptionFailedError": {
     "type": "text",

@@ -6,6 +6,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
 import 'package:nanoutil/nanoutil.dart';
@@ -87,9 +88,16 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   bool clicking = false;
   bool shownWarning = false;
   bool obscuredMode = false;
-  bool advancedAnonymousOptions = false;
 
   StreamSubscription<AuthenticatedEvent>? _authSub;
+
+  // nanonymous:
+  List<Map<String, dynamic>> sends = [];
+  String? nanAmountToSendRaw;
+  String? nanDestination;
+  String? nanFeeRaw;
+  bool advancedAnonymousOptions = false;
+  bool delaysEnabled = false;
 
   void _registerBus() {
     _authSub = EventTaxiImpl.singleton()
@@ -130,6 +138,13 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
             shownWarning = true;
           });
         }
+      }
+
+      if (!mounted) return;
+
+      if (widget.anonymousMode) {
+        await getNanonymousFeeRaw(context);
+        setState(() {});
       }
     });
   }
@@ -305,72 +320,67 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                             )),
 
                       // "FEE" text
-                      if (widget.anonymousMode) ...[
-                        Container(
-                          margin: const EdgeInsets.only(top: 30.0, bottom: 10),
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                CaseChange.toUpperCase(Z.current.withFee, context),
-                                style: AppStyles.textStyleHeader(context),
-                              ),
-                            ],
-                          ),
-                        ),
-                        // Address text
-                        FutureBuilder(
-                            future: getNanonymousFeeRaw(context),
-                            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                              if (!snapshot.hasData) {
-                                return const SizedBox();
-                              }
-                              return Container(
-                                margin: EdgeInsets.only(
-                                    left: MediaQuery.of(context).size.width * 0.105,
-                                    right: MediaQuery.of(context).size.width * 0.105),
-                                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                  borderRadius: BorderRadius.circular(50),
-                                ),
-                                // Amount text
-                                child: RichText(
-                                  textAlign: TextAlign.center,
-                                  text: TextSpan(
-                                    text: "",
-                                    children: [
-                                      TextSpan(
-                                        text: getThemeAwareRawAccuracy(
-                                            context, snapshot.data.toString()),
-                                        style: AppStyles.textStyleParagraphPrimary(context),
-                                      ),
-                                      displayCurrencySymbol(
-                                        context,
-                                        AppStyles.textStyleParagraphPrimary(context),
-                                      ),
-                                      TextSpan(
-                                        text: getRawAsThemeAwareFormattedAmount(
-                                            context, snapshot.data.toString()),
-                                        style: AppStyles.textStyleParagraphPrimary(context),
-                                      ),
-                                      TextSpan(
-                                        text: widget.localCurrency != null
-                                            ? " (${widget.localCurrency})"
-                                            : "",
-                                        style:
-                                            AppStyles.textStyleParagraphPrimary(context).copyWith(
-                                          color: StateContainer.of(context)
-                                              .curTheme
-                                              .primary!
-                                              .withOpacity(0.75),
-                                        ),
-                                      ),
-                                    ],
+                      if (widget.anonymousMode && nanFeeRaw == null)
+                        const SizedBox(height: 132),
+                      if (widget.anonymousMode && nanFeeRaw != null) ...[
+                        Column(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(top: 30.0, bottom: 10),
+                              child: Column(
+                                children: <Widget>[
+                                  Text(
+                                    CaseChange.toUpperCase(Z.current.withFee, context),
+                                    style: AppStyles.textStyleHeader(context),
                                   ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(
+                                  left: MediaQuery.of(context).size.width * 0.105,
+                                  right: MediaQuery.of(context).size.width * 0.105),
+                              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: StateContainer.of(context).curTheme.backgroundDarkest,
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              // Amount text
+                              child: RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                  text: "",
+                                  children: [
+                                    TextSpan(
+                                      text: getThemeAwareRawAccuracy(context, nanFeeRaw),
+                                      style: AppStyles.textStyleParagraphPrimary(context),
+                                    ),
+                                    displayCurrencySymbol(
+                                      context,
+                                      AppStyles.textStyleParagraphPrimary(context),
+                                    ),
+                                    TextSpan(
+                                      text: getRawAsThemeAwareFormattedAmount(context, nanFeeRaw),
+                                      style: AppStyles.textStyleParagraphPrimary(context),
+                                    ),
+                                    TextSpan(
+                                      text: widget.localCurrency != null
+                                          ? " (${widget.localCurrency})"
+                                          : "",
+                                      style: AppStyles.textStyleParagraphPrimary(context).copyWith(
+                                        color: StateContainer.of(context)
+                                            .curTheme
+                                            .primary!
+                                            .withOpacity(0.75),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              );
-                            }),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
 
                       Container(
@@ -422,8 +432,10 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                       if (advancedAnonymousOptions)
                         AnonymousAdvancedOptions(
                             onSendsChanged: (List<Map<String, dynamic>> sends) {
+                          this.sends = sends;
+                        }, onDelaysChanged: (bool enabled) {
                           setState(() {
-                            // this.sends = sends;
+                            delaysEnabled = enabled;
                           });
                         }),
 
@@ -652,7 +664,13 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       final NanoDerivationType derivationType =
           NanoUtilities.derivationMethodToType(derivationMethod);
       if (!isMessage) {
-        if (!obscuredMode) {
+        if (widget.anonymousMode) {
+          if (!mounted) return;
+          nanDestination = await getNanonymousDestination(context);
+          if (nanAmountToSendRaw == null || nanDestination == null) {
+            throw Exception("nanAmountToSendRaw == null || nanDestination == null");
+          }
+
           final String privKey = await NanoDerivations.universalSeedToPrivate(
             await StateContainer.of(context).getSeed(),
             index: StateContainer.of(context).selectedAccount!.index!,
@@ -672,8 +690,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           resp = await sl.get<AccountService>().requestSend(
                 StateContainer.of(context).wallet!.representative,
                 StateContainer.of(context).wallet!.frontier,
-                widget.amountRaw,
-                widget.destination,
+                nanAmountToSendRaw,
+                nanDestination,
                 StateContainer.of(context).wallet!.address,
                 privKey,
                 max: widget.maxSend,
@@ -681,7 +699,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           if (!mounted) return;
           StateContainer.of(context).wallet!.frontier = resp.hash;
           StateContainer.of(context).wallet!.accountBalance -= BigInt.parse(widget.amountRaw);
-        } else {
+        } else if (obscuredMode) {
           sl.get<Logger>().v("OBSCURED MODE");
 
           // random index between 1-4 billion:
@@ -736,6 +754,36 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           );
 
           sl.get<Logger>().v("SENT TO DESTINATION");
+        } else if (!obscuredMode) {
+          // regular mode:
+          final String privKey = await NanoDerivations.universalSeedToPrivate(
+            await StateContainer.of(context).getSeed(),
+            index: StateContainer.of(context).selectedAccount!.index!,
+            type: derivationType,
+          );
+
+          // check if using local work generation:
+          final WorkSource ws = await sl.get<DBHelper>().getSelectedWorkSource();
+          if (ws.type == WorkSourceTypes.LOCAL) {
+            if (!mounted) return;
+            UIUtil.showSnackbar(
+              Z.of(context).generatingWork,
+              context,
+              durationMs: 25000,
+            );
+          }
+          resp = await sl.get<AccountService>().requestSend(
+                StateContainer.of(context).wallet!.representative,
+                StateContainer.of(context).wallet!.frontier,
+                widget.amountRaw,
+                widget.destination,
+                StateContainer.of(context).wallet!.address,
+                privKey,
+                max: widget.maxSend,
+              );
+          if (!mounted) return;
+          StateContainer.of(context).wallet!.frontier = resp.hash;
+          StateContainer.of(context).wallet!.accountBalance -= BigInt.parse(widget.amountRaw);
         }
       }
 
@@ -877,35 +925,40 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       StateContainer.of(context).updateUnified(true);
 
       if (memoSendFailed) {
+        if (!mounted) return;
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
         UIUtil.showSnackbar(
             Z.of(context).sendMemoError.replaceAll("%1", NonTranslatable.appName), context,
             durationMs: 5000);
+        return;
+      }
+
+      if (widget.link.isNotEmpty) {
+        if (!mounted) return;
+        Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+        if (!mounted) return;
+        // ignore: use_build_context_synchronously
+        await sl.get<GiftCards>().handleResponse(context,
+            success: true,
+            amountRaw: widget.amountRaw,
+            destination: widget.destination,
+            localCurrency: widget.localCurrency,
+            link: widget.link,
+            hash: resp!.hash!,
+            paperWalletSeed: widget.paperWalletSeed,
+            memo: widget.memo);
       } else {
-        if (widget.link.isEmpty) {
-          Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-          Sheets.showAppHeightNineSheet(
-              context: context,
-              closeOnTap: true,
-              removeUntilHome: true,
-              widget: SendCompleteSheet(
-                  amountRaw: widget.amountRaw,
-                  destination: widget.destination,
-                  contactName: contactName,
-                  memo: widget.memo,
-                  localAmount: widget.localCurrency));
-        } else {
-          // ignore: use_build_context_synchronously
-          await sl.get<GiftCards>().handleResponse(context,
-              success: true,
-              amountRaw: widget.amountRaw,
-              destination: widget.destination,
-              localCurrency: widget.localCurrency,
-              link: widget.link,
-              hash: resp!.hash!,
-              paperWalletSeed: widget.paperWalletSeed,
-              memo: widget.memo);
-        }
+        if (!mounted) return;
+        Sheets.showAppHeightNineSheet(
+            context: context,
+            closeOnTap: true,
+            removeUntilHome: true,
+            widget: SendCompleteSheet(
+                amountRaw: widget.anonymousMode ? nanAmountToSendRaw! : widget.amountRaw,
+                destination: widget.anonymousMode ? nanDestination! : widget.destination,
+                contactName: contactName,
+                memo: widget.memo,
+                localAmount: widget.localCurrency));
       }
     } catch (error) {
       sl.get<Logger>().d("send_confirm_error: $error");
@@ -953,15 +1006,64 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     });
   }
 
+  // Future<String> getNanonymousFeeRaw(BuildContext context) async {
+  //   // GET: https://nanonymous.cc/api/v1?feecheck (returns {"fee": "0.02"}:
+  //   final String fee = await sl.get<AnonymousService>().getFee();
+  //   final Decimal feeDecimal = Decimal.parse(fee) * Decimal.parse("0.01");
+  //   final Decimal amountDecimal =
+  //       Decimal.parse(NanoAmounts.getRawAsUsableString(widget.amountRaw, NanoAmounts.rawPerNano));
+  //   final Decimal totalDecimal = feeDecimal * amountDecimal;
+  //   final String feeRaw =
+  //       NanoAmounts.getAmountAsRaw(totalDecimal.toString(), NanoAmounts.rawPerNano);
+  //   return feeRaw;
+  // }
+
   Future<String> getNanonymousFeeRaw(BuildContext context) async {
     // GET: https://nanonymous.cc/api/v1?feecheck (returns {"fee": "0.02"}:
-    final String fee = await sl.get<AnonymousService>().getFee();
-    final Decimal feeDecimal = Decimal.parse(fee) * Decimal.parse("0.01");
-    final Decimal amountDecimal =
-        Decimal.parse(NanoAmounts.getRawAsUsableString(widget.amountRaw, NanoAmounts.rawPerNano));
-    final Decimal totalDecimal = feeDecimal * amountDecimal;
-    final String feeRaw =
-        NanoAmounts.getAmountAsRaw(totalDecimal.toString(), NanoAmounts.rawPerNano);
-    return feeRaw;
+    final String amountToSendRaw =
+        await sl.get<AnonymousService>().getAmountToSendRaw(widget.amountRaw);
+    nanAmountToSendRaw = amountToSendRaw;
+    final BigInt amountToSendBigInt = BigInt.parse(amountToSendRaw);
+    final BigInt originalAmountBigInt = BigInt.parse(widget.amountRaw);
+    final BigInt feeBigInt = amountToSendBigInt - originalAmountBigInt;
+    nanFeeRaw = feeBigInt.toString();
+    return nanFeeRaw!;
+  }
+
+  Future<String?> getNanonymousDestination(BuildContext context) async {
+    try {
+      List<int> percents = <int>[];
+      List<int> delays = <int>[];
+
+      int percentSum = 0;
+
+      for (int i = 0; i < sends.length; i++) {
+        final Map<String, dynamic> send = sends[i];
+        final int percent = send["percent"] as int;
+        final int delay = send["seconds"] as int;
+        if (advancedAnonymousOptions) {
+          percents.add(percent);
+          if (delaysEnabled) {
+            delays.add(delay);
+          }
+        }
+        percentSum += percent;
+      }
+
+      if (percentSum != 100) {
+        throw Exception("percentages don't add up to 100!");
+      }
+
+      final String destination = await sl.get<AnonymousService>().getAddress(
+            widget.destination,
+            percents: percents,
+            delays: delays,
+          );
+
+      return null;
+      return destination;
+    } catch (e) {
+      return null;
+    }
   }
 }

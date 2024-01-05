@@ -1715,6 +1715,16 @@ class Z {
     );
   }
 
+  /// `Not enough left after transaction for anonymity fee!`
+  String get anonymousFeeError {
+    return Intl.message(
+      'Not enough left after transaction for anonymity fee!',
+      name: 'anonymousFeeError',
+      desc: 'anonymous_fee_error',
+      args: [],
+    );
+  }
+
   /// `Failed to set a wallet password`
   String get encryptionFailedError {
     return Intl.message(

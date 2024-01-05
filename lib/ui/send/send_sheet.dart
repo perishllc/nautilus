@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:decimal/decimal.dart';
@@ -14,6 +13,8 @@ import 'package:intl/intl.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
 import 'package:nanoutil/nanoutil.dart';
+import 'package:nfc_manager/nfc_manager.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/deep_link_event.dart';
@@ -55,8 +56,6 @@ import 'package:wallet_flutter/util/deviceutil.dart';
 import 'package:wallet_flutter/util/numberutil.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
 import 'package:wallet_flutter/util/user_data_util.dart';
-import 'package:nfc_manager/nfc_manager.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class SendSheet extends StatefulWidget {
   const SendSheet({required this.localCurrency, this.user, this.address, this.quickSendAmount})
@@ -863,7 +862,7 @@ class SendSheetState extends State<SendSheet> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 60,
                   height: 60,
                   // child: AppDialogs.infoButton(
@@ -1141,6 +1140,10 @@ class SendSheetState extends State<SendSheet> {
 
                       bool isMaxSend = false;
                       if (_isMaxSend()) {
+                        if (anonymousMode) {
+                          UIUtil.showSnackbar(Z.current.anonymousFeeError, context);
+                          return;
+                        }
                         isMaxSend = true;
                         if (!mounted) return;
                         amountRaw = StateContainer.of(context).wallet!.accountBalance.toString();

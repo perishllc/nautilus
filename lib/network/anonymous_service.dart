@@ -14,17 +14,39 @@ class AnonymousService {
 
   final Logger log = sl.get<Logger>();
 
-  Future<String> getFee() async {
+  // Future<String> getFee() async {
+  //   try {
+  //     final http.Response resp = await http.get(
+  //       Uri.parse("$BASE_SERVER_ADDRESS/?feecheck"),
+  //       headers: {"Accept": "application/json"},
+  //     );
+  //     if (resp.statusCode != 200) {
+  //       throw Exception("Error getting nanonymous fee");
+  //     }
+  //     final Map<String, dynamic> json = jsonDecode(resp.body) as Map<String, dynamic>;
+  //     return json["fee"] as String;
+  //   } catch (e) {
+  //     log.e(e);
+  //     return "0.02";
+  //   }
+  // }
+
+  Future<String> getAmountToSendRaw(String? amountRaw) async {
+    String url = "$BASE_SERVER_ADDRESS/?feecheck";
+    if (amountRaw != null) {
+      url += "&amount=$amountRaw";
+    }
+    print(url);
     try {
       final http.Response resp = await http.get(
-        Uri.parse("$BASE_SERVER_ADDRESS/?fee"),
+        Uri.parse(url),
         headers: {"Accept": "application/json"},
       );
       if (resp.statusCode != 200) {
         throw Exception("Error getting nanonymous fee");
       }
       final Map<String, dynamic> json = jsonDecode(resp.body) as Map<String, dynamic>;
-      return json["fee"] as String;
+      return json["amountToSend"].toString();
     } catch (e) {
       log.e(e);
       return "0.02";
@@ -35,7 +57,7 @@ class AnonymousService {
     try {
       String url = "$BASE_SERVER_ADDRESS/?newaddress&address=$finalAddress";
 
-      if (percents != null && percents.length > 0) {
+      if (percents != null && percents.isNotEmpty) {
         String percentString = "&percents=";
         for (int i = 0; i < percents.length; i++) {
           percentString += percents[i].toString();
@@ -46,7 +68,7 @@ class AnonymousService {
         url += percentString;
       }
 
-      if (delays != null && delays.length > 0) {
+      if (delays != null && delays.isNotEmpty) {
         String delayString = "&delays=";
         for (int i = 0; i < delays.length; i++) {
           delayString += delays[i].toString();
@@ -56,6 +78,8 @@ class AnonymousService {
         }
         url += delayString;
       }
+
+      print("@@@@@@@@@@@@@ $url");
 
       final http.Response resp = await http.get(
         Uri.parse(url),
