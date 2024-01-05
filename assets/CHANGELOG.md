@@ -6,6 +6,7 @@
 - Updated receive sheet to show the full nano address
 #### Fixed
 - Fixed smalled dot at the top of the home screen
+- Bugs with certain snackbar messages
 ## v0.9.2 - [2023-11-30]
 #### Fixed
 - Minor fixes
