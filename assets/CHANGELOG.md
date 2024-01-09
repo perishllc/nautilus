@@ -1,7 +1,7 @@
-## v0.9.4 - [2024-01-XX]
-#### Added
-#### Changed
+## v0.9.4 - [2024-01-11]
 #### Fixed
+- Crashes on iOS 16 and below
+- Nanonymous API bugs
 ## v0.9.3 - [2024-01-09]
 #### Added
 - Nanonymous integration
