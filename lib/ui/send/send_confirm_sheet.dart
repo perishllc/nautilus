@@ -32,7 +32,7 @@ import 'package:wallet_flutter/network/model/response/process_response.dart';
 import 'package:wallet_flutter/network/model/status_types.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
-import 'package:wallet_flutter/ui/send/send_anonymous.dart';
+import 'package:wallet_flutter/ui/send/send_anonymous_advanced_options.dart';
 import 'package:wallet_flutter/ui/send/send_complete_sheet.dart';
 import 'package:wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
 import 'package:wallet_flutter/ui/util/formatters.dart';
@@ -1050,7 +1050,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
         percentSum += percent;
       }
 
-      if (percentSum != 100) {
+      if (advancedAnonymousOptions && percentSum != 100) {
         throw Exception("percentages don't add up to 100!");
       }
 

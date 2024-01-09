@@ -22,10 +22,7 @@ class AnonymousAdvancedOptions extends StatefulWidget {
 class AnonymousAdvancedOptionsState extends State<AnonymousAdvancedOptions> {
   bool _delays = false;
 
-  List<Map<String, dynamic>> sends = [
-    {'percent': 65, 'seconds': 0, 'percentController': TextEditingController()},
-    {'percent': 32, 'seconds': 5, 'percentController': TextEditingController()},
-  ];
+  List<Map<String, dynamic>> sends = [];
 
   List<int> _numbersThatAddTo100(int n) {
     if (n <= 0) return [];

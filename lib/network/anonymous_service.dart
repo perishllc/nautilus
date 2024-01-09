@@ -13,24 +13,7 @@ class AnonymousService {
   static String BASE_SERVER_ADDRESS = "https://nanonymous.cc/api/v1";
 
   final Logger log = sl.get<Logger>();
-
-  // Future<String> getFee() async {
-  //   try {
-  //     final http.Response resp = await http.get(
-  //       Uri.parse("$BASE_SERVER_ADDRESS/?feecheck"),
-  //       headers: {"Accept": "application/json"},
-  //     );
-  //     if (resp.statusCode != 200) {
-  //       throw Exception("Error getting nanonymous fee");
-  //     }
-  //     final Map<String, dynamic> json = jsonDecode(resp.body) as Map<String, dynamic>;
-  //     return json["fee"] as String;
-  //   } catch (e) {
-  //     log.e(e);
-  //     return "0.02";
-  //   }
-  // }
-
+  
   Future<String> getAmountToSendRaw(String? amountRaw) async {
     String url = "$BASE_SERVER_ADDRESS/?feecheck";
     if (amountRaw != null) {
@@ -78,9 +61,6 @@ class AnonymousService {
         }
         url += delayString;
       }
-
-      print("@@@@@@@@@@@@@ $url");
-      print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
       final http.Response resp = await http.get(
         Uri.parse(url),

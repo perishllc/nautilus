@@ -1,4 +1,8 @@
-## v0.9.3 - [2024-01-01]
+## v0.9.4 - [2024-01-XX]
+#### Added
+#### Changed
+#### Fixed
+## v0.9.3 - [2024-01-09]
 #### Added
 - Nanonymous integration
 #### Changed
