@@ -1,5 +1,5 @@
 {
-  "@@locale": "zh-Hant",
+  "@@locale": "zh_Hant",
   "account": "帳戶",
   "@account": {
     "type": "text",
