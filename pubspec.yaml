@@ -116,7 +116,7 @@ dependencies:
   # flutter_nfc_kit: ^3.3.1
   # reliably check connection status:
   internet_connection_checker: ^1.0.0+1
-  connectivity_plus: ^3.0.0
+  connectivity_plus: ^5.0.2
 
   # ask users to rate the app:
   rate_my_app: ^1.1.3
