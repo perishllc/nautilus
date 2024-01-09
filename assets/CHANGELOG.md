@@ -1,4 +1,6 @@
 ## v0.9.4 - [2024-01-11]
+#### Changed
+- Update spanish translations
 #### Fixed
 - Crashes on iOS 16 and below
 - Nanonymous API bugs

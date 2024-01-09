@@ -175,7 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "checkAvailability":
             MessageLookupByLibrary.simpleMessage("Consultar disponibilidad"),
         "checkUsernameConfirmInfo": MessageLookupByLibrary.simpleMessage(
-            "Estamos a punto de verificar si este nombre de usuario está registrado en algunos servicios diferentes.\nEsto puede tomar un segundo más o menos."),
+            "Ahora verificarelos si este nombre de usuario está registrado en algunos otros servicios.\nEsto puede tomar un segundo más o menos."),
         "close": MessageLookupByLibrary.simpleMessage("Cerrar"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
         "confirmPasswordHint":
@@ -272,7 +272,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "deleteNodeHeader":
             MessageLookupByLibrary.simpleMessage("¿Eliminar nodo?"),
         "deleteRequest":
-            MessageLookupByLibrary.simpleMessage("Delete this request"),
+            MessageLookupByLibrary.simpleMessage("Eliminar esta solicitud"),
         "deleteScheduledConfirmation": MessageLookupByLibrary.simpleMessage(
             "¿Está seguro de que desea eliminar este pago programado?\n\nSiempre puede volver a agregarlo más tarde tocando el botón \"Programar pago\""),
         "deleteScheduledHeader":
@@ -465,8 +465,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("¿Ocultar cuentas?"),
         "hideEmptyAccounts":
             MessageLookupByLibrary.simpleMessage("Ocultar Cuentas Vacías"),
-        "home": MessageLookupByLibrary.simpleMessage("Casa"),
-        "homeButton": MessageLookupByLibrary.simpleMessage("Hogar"),
+        "home": MessageLookupByLibrary.simpleMessage("Inicio"),
+        "homeButton": MessageLookupByLibrary.simpleMessage("Inicio"),
         "hourAgo": MessageLookupByLibrary.simpleMessage("Hace una hora"),
         "iUnderstandTheRisks":
             MessageLookupByLibrary.simpleMessage("Comprendo los riesgos"),
@@ -519,7 +519,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Debido a pautas y restricciones de la App Store de iOS, no podemos vincularte a nuestra página de donaciones. Si deseas apoyar el proyecto, considera enviarlo a la dirección del nodo de Nautilus."),
         "language": MessageLookupByLibrary.simpleMessage("Idioma"),
         "linkCopied": MessageLookupByLibrary.simpleMessage("Enlace copiado"),
-        "loaded": MessageLookupByLibrary.simpleMessage("Forrado"),
+        "loaded": MessageLookupByLibrary.simpleMessage("Cargado"),
         "loadedInto": MessageLookupByLibrary.simpleMessage("Cargado en"),
         "lockAppSetting":
             MessageLookupByLibrary.simpleMessage("Autenticarse al iniciar"),
@@ -669,7 +669,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "¡Alguien te ha solicitado el pago! consulta la página de pagos para obtener más información."),
         "paymentScheduled":
             MessageLookupByLibrary.simpleMessage("Pago programado"),
-        "paymentTime": MessageLookupByLibrary.simpleMessage("Tiempo de pago"),
+        "paymentTime": MessageLookupByLibrary.simpleMessage("Hora del pago"),
         "payments": MessageLookupByLibrary.simpleMessage("Pagos"),
         "pickFromList":
             MessageLookupByLibrary.simpleMessage("Elegir de la lista"),
@@ -805,7 +805,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "retry": MessageLookupByLibrary.simpleMessage("Intentar de nuevo"),
         "rootWarning": MessageLookupByLibrary.simpleMessage(
             "Parece que su dispositivo está \"rooteado\", \"liberado\" o modificado de una manera que compromete su seguridad. Se recomienda que restablezca su dispositivo a su estado original antes de continuar."),
-        "save": MessageLookupByLibrary.simpleMessage("Ahorrar"),
+        "save": MessageLookupByLibrary.simpleMessage("Guardar"),
         "scanInstructions": MessageLookupByLibrary.simpleMessage(
             "Escanear el código QR\n de una billetera de Nano."),
         "scanNFC":

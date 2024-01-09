@@ -46,8 +46,8 @@ import 'messages_tr.dart' as messages_tr;
 import 'messages_uk.dart' as messages_uk;
 import 'messages_vi.dart' as messages_vi;
 import 'messages_zh.dart' as messages_zh;
-import 'messages_zh_Hans.dart' as messages_zh_hans;
-import 'messages_zh_Hant.dart' as messages_zh_hant;
+import 'messages_zh-Hans.dart' as messages_zh_hans;
+import 'messages_zh-Hant.dart' as messages_zh_hant;
 
 typedef Future<dynamic> LibraryLoader();
 Map<String, LibraryLoader> _deferredLibraries = {

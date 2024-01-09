@@ -450,7 +450,7 @@
     "type": "text",
     "description": "check_availability"
   },
-  "checkUsernameConfirmInfo": "Estamos a punto de verificar si este nombre de usuario está registrado en algunos servicios diferentes.\nEsto puede tomar un segundo más o menos.",
+  "checkUsernameConfirmInfo": "Ahora verificarelos si este nombre de usuario está registrado en algunos otros servicios.\nEsto puede tomar un segundo más o menos.",
   "@checkUsernameConfirmInfo": {
     "type": "text",
     "description": "username_check_confirm_info"
@@ -742,7 +742,7 @@
     "type": "text",
     "description": "Confirmation dialog header"
   },
-  "deleteRequest": "Delete this request",
+  "deleteRequest": "Eliminar esta solicitud",
   "@deleteRequest": {
     "type": "text",
     "description": "delete_request"
@@ -1306,12 +1306,12 @@
     "type": "text",
     "description": "hide_empty_accounts"
   },
-  "home": "Casa",
+  "home": "Inicio",
   "@home": {
     "type": "text",
     "description": "home"
   },
-  "homeButton": "Hogar",
+  "homeButton": "Inicio",
   "@homeButton": {
     "type": "text",
     "description": "home_button"
@@ -1471,7 +1471,7 @@
     "type": "text",
     "description": "link_copied"
   },
-  "loaded": "Forrado",
+  "loaded": "Cargado",
   "@loaded": {
     "type": "text",
     "description": "history_loaded"
@@ -1941,7 +1941,7 @@
     "type": "text",
     "description": "payment_scheduled"
   },
-  "paymentTime": "Tiempo de pago",
+  "paymentTime": "Hora del pago",
   "@paymentTime": {
     "type": "text",
     "description": "payment_time"
@@ -2356,7 +2356,7 @@
     "type": "text",
     "description": "Shown to users if they have a rooted Android device or jailbroken iOS device"
   },
-  "save": "Ahorrar",
+  "save": "Guardar",
   "@save": {
     "type": "text",
     "description": "dialog_save"
