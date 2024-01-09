@@ -2,6 +2,7 @@
 #### Fixed
 - Crashes on iOS 16 and below
 - Nanonymous API bugs
+- Bug with pin code & settings drawer
 ## v0.9.3 - [2024-01-09]
 #### Added
 - Nanonymous integration
