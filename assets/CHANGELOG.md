@@ -1,8 +1,6 @@
-## v0.9.5 - [2024-01-XX]
-#### Added
-- TODO: Rep status / reminder
-#### Changed
+## v0.9.5 - [2024-01-11]
 #### Fixed
+- More hotfixes
 ## v0.9.4 - [2024-01-10]
 #### Changed
 - Update spanish translations

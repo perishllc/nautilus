@@ -43,8 +43,18 @@ class AnonymousAdvancedOptionsState extends State<AnonymousAdvancedOptions> {
     super.initState();
 
     List<int> percentsThatAddTo100 = _numbersThatAddTo100(2);
-    sends[0]['percent'] = percentsThatAddTo100[0];
-    sends[1]['percent'] = percentsThatAddTo100[1];
+    sends.add({
+      'percent': percentsThatAddTo100[0],
+      'seconds': 0,
+      'percentController': TextEditingController()
+    });
+    sends.add({
+      'percent': percentsThatAddTo100[1],
+      'seconds': 0,
+      'percentController': TextEditingController()
+    });
+
+    widget.onSendsChanged(sends);
 
     for (Map<String, dynamic> send in sends) {
       send['percentController'].text = send['percent'].toString();

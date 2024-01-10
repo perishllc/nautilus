@@ -19,7 +19,6 @@ class AnonymousService {
     if (amountRaw != null) {
       url += "&amount=$amountRaw";
     }
-    print(url);
     try {
       final http.Response resp = await http.get(
         Uri.parse(url),
