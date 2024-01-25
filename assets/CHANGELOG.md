@@ -1,3 +1,6 @@
+## v0.9.6 - [2024-01-28]
+#### Fixed
+- Remove advanced options on send confirm screen when they shouldn't be there
 ## v0.9.5 - [2024-01-11]
 #### Fixed
 - More hotfixes

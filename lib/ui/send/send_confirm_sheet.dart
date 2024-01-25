@@ -421,53 +421,54 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         ),
                       ],
 
-                      Container(
-                        margin: const EdgeInsets.only(top: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Checkbox(
-                              value: advancedAnonymousOptions,
-                              activeColor:
-                                  StateContainer.of(context).curTheme.primary,
-                              onChanged: (bool? value) {
-                                if (value == null) return;
-                                setState(() {
-                                  advancedAnonymousOptions = value;
-                                });
-                              },
-                            ),
-                            const SizedBox(width: 10),
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  advancedAnonymousOptions =
-                                      !advancedAnonymousOptions;
-                                });
-                              },
-                              child: Text(
-                                Z.of(context).advancedOptions,
-                                style: AppStyles.textStyleParagraph(context),
-                              ),
-                            ),
-                            Container(
-                              width: 60,
-                              height: 60,
-                              alignment: Alignment.center,
-                              child: AppDialogs.infoButton(
-                                context,
-                                () {
-                                  AppDialogs.showInfoDialog(
-                                    context,
-                                    Z.of(context).obscureInfoHeader,
-                                    Z.of(context).anonymousAdvancedInfoBody,
-                                  );
+                      if (widget.anonymousMode)
+                        Container(
+                          margin: const EdgeInsets.only(top: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Checkbox(
+                                value: advancedAnonymousOptions,
+                                activeColor:
+                                    StateContainer.of(context).curTheme.primary,
+                                onChanged: (bool? value) {
+                                  if (value == null) return;
+                                  setState(() {
+                                    advancedAnonymousOptions = value;
+                                  });
                                 },
                               ),
-                            ),
-                          ],
+                              const SizedBox(width: 10),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    advancedAnonymousOptions =
+                                        !advancedAnonymousOptions;
+                                  });
+                                },
+                                child: Text(
+                                  Z.of(context).advancedOptions,
+                                  style: AppStyles.textStyleParagraph(context),
+                                ),
+                              ),
+                              Container(
+                                width: 60,
+                                height: 60,
+                                alignment: Alignment.center,
+                                child: AppDialogs.infoButton(
+                                  context,
+                                  () {
+                                    AppDialogs.showInfoDialog(
+                                      context,
+                                      Z.of(context).obscureInfoHeader,
+                                      Z.of(context).anonymousAdvancedInfoBody,
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
 
                       if (advancedAnonymousOptions)
                         AnonymousAdvancedOptions(
@@ -1058,7 +1059,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
     // PIN Authentication
     final String? expectedPin = await sl.get<Vault>().getPin();
     final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
-    
+
     if (!mounted) return;
     final bool? auth = await Sheets.showAppHeightFullSheet(
       context: context,
@@ -1126,7 +1127,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
       if (advancedAnonymousOptions && percentSum != 100) {
         throw Exception("percentages don't add up to 100!");
       }
-      
+
       final String destination = await sl.get<AnonymousService>().getAddress(
             widget.destination,
             percents: percents,
