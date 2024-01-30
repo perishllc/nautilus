@@ -35,7 +35,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     ndkVersion '25.1.8937393'
-    compileSdkVersion 33
+    compileSdkVersion 34
 
     defaultConfig {
         applicationId "co.perish.nautiluswallet"

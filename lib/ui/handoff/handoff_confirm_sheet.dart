@@ -97,13 +97,15 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
 
   void _showAnimation(BuildContext context, AnimationType type) {
     animationOpen = true;
-    AppAnimation.animationLauncher(context, type, onPoppedCallback: () => animationOpen = false);
+    AppAnimation.animationLauncher(context, type,
+        onPoppedCallback: () => animationOpen = false);
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
+        minimum:
+            EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
             Handlebars.horizontal(context),
@@ -118,7 +120,8 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(Z.of(context).sending, context),
+                          CaseChange.toUpperCase(
+                              Z.of(context).sending, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -128,10 +131,12 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                     margin: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width * 0.105,
                         right: MediaQuery.of(context).size.width * 0.105),
-                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 15),
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.backgroundDarkest,
+                      color:
+                          StateContainer.of(context).curTheme.backgroundDarkest,
                       borderRadius: BorderRadius.circular(50),
                     ),
                     // Amount text
@@ -141,7 +146,8 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                         text: "",
                         children: [
                           TextSpan(
-                            text: getThemeAwareRawAccuracy(context, widget.payItem.amount),
+                            text: getThemeAwareRawAccuracy(
+                                context, widget.payItem.amount),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           displayCurrencySymbol(
@@ -149,13 +155,20 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                             AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
-                            text: getRawAsThemeAwareFormattedAmount(context, widget.payItem.amount),
+                            text: getRawAsThemeAwareFormattedAmount(
+                                context, widget.payItem.amount),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           TextSpan(
-                            text: widget.localCurrency != null ? " (${widget.localCurrency})" : "",
-                            style: AppStyles.textStyleParagraphPrimary(context).copyWith(
-                              color: StateContainer.of(context).curTheme.primary!.withOpacity(0.75),
+                            text: widget.localCurrency != null
+                                ? " (${widget.localCurrency})"
+                                : "",
+                            style: AppStyles.textStyleParagraphPrimary(context)
+                                .copyWith(
+                              color: StateContainer.of(context)
+                                  .curTheme
+                                  .primary!
+                                  .withOpacity(0.75),
                             ),
                           ),
                         ],
@@ -177,16 +190,20 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                   ),
                   // Address text
                   Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 25.0, vertical: 15.0),
                       margin: EdgeInsets.only(
                           left: MediaQuery.of(context).size.width * 0.105,
                           right: MediaQuery.of(context).size.width * 0.105),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
+                        color: StateContainer.of(context)
+                            .curTheme
+                            .backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, widget.destination,
+                      child: UIUtil.threeLineAddressText(
+                          context, widget.destination,
                           contactName: widget.contactName)),
 
                   // "FOR" TEXT
@@ -195,7 +212,8 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(Z.of(context).registerFor, context),
+                          CaseChange.toUpperCase(
+                              Z.of(context).registerFor, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -206,10 +224,12 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                     margin: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width * 0.105,
                         right: MediaQuery.of(context).size.width * 0.105),
-                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 15),
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.backgroundDarkest,
+                      color:
+                          StateContainer.of(context).curTheme.backgroundDarkest,
                       borderRadius: BorderRadius.circular(50),
                     ),
                     // label text
@@ -279,7 +299,8 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                       // Authenticate
                       final AuthenticationMethod authMethod =
                           await sl.get<SharedPrefsUtil>().getAuthMethod();
-                      final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+                      final bool hasBiometrics =
+                          await sl.get<BiometricUtil>().hasBiometrics();
 
                       if (!mounted) return;
 
@@ -287,10 +308,14 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                           .of(context)
                           .sendAmountConfirm
                           .replaceAll(
-                              "%1", getRawAsThemeAwareAmount(context, widget.payItem.amount))
-                          .replaceAll("%2", StateContainer.of(context).currencyMode);
+                              "%1",
+                              getRawAsThemeAwareAmount(
+                                  context, widget.payItem.amount))
+                          .replaceAll(
+                              "%2", StateContainer.of(context).currencyMode);
 
-                      if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
+                      if (authMethod.method == AuthMethod.BIOMETRICS &&
+                          hasBiometrics) {
                         try {
                           final bool authenticated = await sl
                               .get<BiometricUtil>()
@@ -303,10 +328,13 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
                         } catch (e) {
                           await authenticateWithPin();
                         }
-                      } else if (authMethod.method == AuthMethod.PIN || (authMethod.method == AuthMethod.BIOMETRICS && !hasBiometrics)) {
+                      } else if (authMethod.method == AuthMethod.PIN ||
+                          (authMethod.method == AuthMethod.BIOMETRICS &&
+                              !hasBiometrics)) {
                         await authenticateWithPin();
                       } else {
-                        EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
+                        EventTaxiImpl.singleton()
+                            .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
                       }
                     })
                   ],
@@ -359,19 +387,19 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
       String? handoffUrl;
       String? cancelUrl;
 
-      for (final Method method in widget.payItem.methods) {
-        if (method.type == "http") {
-          switch (method.subtype) {
-            case "handoff":
-              handoffUrl = method.url;
-              break;
-            case "cancel":
-              cancelUrl = method.url;
-              break;
-            default:
-              handoffUrl = method.url;
-              break;
-          }
+      final Method method = widget.payItem.method;
+      
+      if (method.type == "post") {
+        switch (method.subtype) {
+          case "handoff":
+            handoffUrl = method.url;
+            break;
+          case "cancel":
+            cancelUrl = method.url;
+            break;
+          default:
+            handoffUrl = method.url;
+            break;
         }
       }
 
@@ -389,7 +417,8 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
       // debug:
       // url = "http://node-local.perish.co:5076/handoff";
 
-      final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+      final String derivationMethod =
+          await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
       final NanoDerivationType derivationType =
           NanoUtilities.derivationMethodToType(derivationMethod);
       final String privKey = await NanoDerivations.universalSeedToPrivate(
@@ -398,16 +427,17 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
         type: derivationType,
       );
 
-      final HandoffResponse handoffResponse = await sl.get<AccountService>().requestHandoffHTTP(
-            handoffUrl,
-            StateContainer.of(context).wallet!.representative,
-            StateContainer.of(context).wallet!.frontier,
-            widget.payItem.amount,
-            widget.destination,
-            StateContainer.of(context).wallet!.address,
-            privKey,
-            metadata: widget.payItem.metadata,
-          );
+      final HandoffResponse handoffResponse =
+          await sl.get<AccountService>().requestHandoffHTTP(
+                handoffUrl,
+                StateContainer.of(context).wallet!.representative,
+                StateContainer.of(context).wallet!.frontier,
+                widget.payItem.amount,
+                widget.destination,
+                StateContainer.of(context).wallet!.address,
+                privKey,
+                metadata: widget.payItem.metadata,
+              );
 
       if (!mounted) return;
       // StateContainer.of(context).wallet!.frontier = resp.hash;
@@ -416,13 +446,15 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
         poppedError = handoffResponse.message;
         throw Exception("Handoff failed");
       } else {
-        StateContainer.of(context).wallet!.accountBalance -= BigInt.parse(widget.payItem.amount);
+        StateContainer.of(context).wallet!.accountBalance -=
+            BigInt.parse(widget.payItem.amount);
       }
 
       // Show complete
       String? contactName = widget.contactName;
       if (widget.contactName == null || widget.contactName!.isEmpty) {
-        final User? user = await sl.get<DBHelper>().getUserWithAddress(widget.destination);
+        final User? user =
+            await sl.get<DBHelper>().getUserWithAddress(widget.destination);
         if (user != null) {
           contactName = user.getDisplayName();
         }
@@ -464,8 +496,8 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
     // PIN Authentication
     final String? expectedPin = await sl.get<Vault>().getPin();
     final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
-    final bool? auth =
-        await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    final bool? auth = await Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
@@ -473,7 +505,8 @@ class HandoffConfirmSheetState extends State<HandoffConfirmSheet> {
         description: Z
             .of(context)
             .sendAmountConfirm
-            .replaceAll("%1", getRawAsThemeAwareAmount(context, widget.payItem.amount))
+            .replaceAll(
+                "%1", getRawAsThemeAwareAmount(context, widget.payItem.amount))
             .replaceAll("%2", StateContainer.of(context).currencyMode),
       );
     }));

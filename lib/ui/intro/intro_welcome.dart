@@ -168,8 +168,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
   @override
   Widget build(BuildContext context) {
     final Color? primaryColor = StateContainer.of(context).curTheme.primary;
-    final bool landscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       key: _scaffoldKey,
@@ -185,11 +184,9 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
               // A widget that holds welcome animation + paragraph
               Expanded(
                 child: Flex(
-                  direction: landscape ? Axis.horizontal : Axis.vertical,
+                  direction: Axis.vertical,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: landscape
-                      ? MainAxisAlignment.center
-                      : MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     //Container for the animation
                     Container(
@@ -208,9 +205,7 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                     // ),
 
                     SizedBox(
-                      width: landscape
-                          ? MediaQuery.of(context).size.width / 2
-                          : MediaQuery.of(context).size.width,
+                      width: MediaQuery.of(context).size.width + 2000,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -220,17 +215,13 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                                 alignment: Alignment.topCenter,
                                 margin: const EdgeInsets.only(top: 20),
                                 color: StateContainer.of(context).curTheme.text,
-                                width: landscape
-                                    ? MediaQuery.of(context).size.width / 2
-                                    : MediaQuery.of(context).size.width,
+                                width: MediaQuery.of(context).size.width + 2000,
                                 height: 80,
                               ),
                               Container(
                                 alignment: Alignment.topCenter,
                                 padding: EdgeInsets.zero,
-                                width: landscape
-                                    ? MediaQuery.of(context).size.width / 2
-                                    : MediaQuery.of(context).size.width,
+                                width: MediaQuery.of(context).size.width + 2000,
                                 height: 100,
                                 child: TextLiquidFill(
                                   text: CaseChange.toUpperCase(
@@ -251,17 +242,15 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
                                   loadUntil: 0.5,
                                 ),
                               ),
-                              Container(
-                                alignment: Alignment.topCenter,
-                                margin: const EdgeInsets.only(top: 90),
-                                color: StateContainer.of(context)
-                                    .curTheme
-                                    .backgroundDark,
-                                width: landscape
-                                    ? MediaQuery.of(context).size.width / 2
-                                    : MediaQuery.of(context).size.width,
-                                height: 15,
-                              ),
+                              // Container(
+                              //   alignment: Alignment.topCenter,
+                              //   margin: const EdgeInsets.only(top: 90),
+                              //   color: StateContainer.of(context)
+                              //       .curTheme
+                              //       .backgroundDark,
+                              //   width: MediaQuery.of(context).size.width,
+                              //   height: 15,
+                              // ),
                             ],
                           ),
                           // Container for the paragraph

@@ -11,8 +11,8 @@ class PayItem {
 
   factory PayItem.fromJson(Map<String, dynamic> json) => _$PayItemFromJson(json);
 
-  @JsonKey(name: 'methods')
-  late List<Method> methods;
+  @JsonKey(name: 'method')
+  late Method method;
 
   @JsonKey(name: 'account', defaultValue: "")
   late String account;
@@ -38,9 +38,6 @@ class PayItem {
   @JsonKey(name: 'work', defaultValue: true)
   late bool work;
 
-  @JsonKey(name: 'reuse', defaultValue: false)
-  late bool reuse;
-
   bool isValid() {
     if (account.isEmpty) {
       return false;
@@ -50,7 +47,7 @@ class PayItem {
       return false;
     }
 
-    if (methods.isEmpty) {
+    if (method == null) {
       return false;
     }
 

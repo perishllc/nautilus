@@ -7,9 +7,7 @@ part of 'pay_item.dart';
 // **************************************************************************
 
 PayItem _$PayItemFromJson(Map<String, dynamic> json) => PayItem()
-  ..methods = (json['methods'] as List<dynamic>)
-      .map((e) => Method.fromJson(e as Map<String, dynamic>))
-      .toList()
+  ..method = Method.fromJson(json['method'] as Map<String, dynamic>)
   ..account = json['account'] as String? ?? ''
   ..amount = json['amount'] as String? ?? ''
   ..label = json['label'] as String? ?? ''
@@ -20,11 +18,10 @@ PayItem _$PayItemFromJson(Map<String, dynamic> json) => PayItem()
       ) ??
       {}
   ..exact = json['exact'] as bool? ?? true
-  ..work = json['work'] as bool? ?? true
-  ..reuse = json['reuse'] as bool? ?? false;
+  ..work = json['work'] as bool? ?? true;
 
 Map<String, dynamic> _$PayItemToJson(PayItem instance) => <String, dynamic>{
-      'methods': instance.methods,
+      'method': instance.method,
       'account': instance.account,
       'amount': instance.amount,
       'label': instance.label,
@@ -33,5 +30,4 @@ Map<String, dynamic> _$PayItemToJson(PayItem instance) => <String, dynamic>{
       'metadata': instance.metadata,
       'exact': instance.exact,
       'work': instance.work,
-      'reuse': instance.reuse,
     };

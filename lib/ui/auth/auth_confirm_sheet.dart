@@ -65,7 +65,9 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
   StreamSubscription<AuthenticatedEvent>? _authSub;
 
   void _registerBus() {
-    _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((AuthenticatedEvent event) {
+    _authSub = EventTaxiImpl.singleton()
+        .registerTo<AuthenticatedEvent>()
+        .listen((AuthenticatedEvent event) {
       if (event.authType == AUTH_EVENT_TYPE.SEND) {
         _doSend();
       }
@@ -93,13 +95,15 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
 
   void _showAnimation(BuildContext context, AnimationType type) {
     animationOpen = true;
-    AppAnimation.animationLauncher(context, type, onPoppedCallback: () => animationOpen = false);
+    AppAnimation.animationLauncher(context, type,
+        onPoppedCallback: () => animationOpen = false);
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
+        minimum:
+            EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
             Handlebars.horizontal(context),
@@ -114,7 +118,8 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(Z.of(context).authenticating, context),
+                          CaseChange.toUpperCase(
+                              Z.of(context).authenticating, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -122,11 +127,16 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
                   ),
                   if (widget.authItem.label.isNotEmpty)
                     Container(
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.105,
+                          right: MediaQuery.of(context).size.width * 0.105),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 25, vertical: 15),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
+                        color: StateContainer.of(context)
+                            .curTheme
+                            .backgroundDarkest,
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: RichText(
@@ -136,7 +146,8 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
                           children: [
                             TextSpan(
                               text: widget.authItem.label,
-                              style: AppStyles.textStyleParagraphPrimary(context),
+                              style:
+                                  AppStyles.textStyleParagraphPrimary(context),
                             ),
                           ],
                         ),
@@ -144,11 +155,16 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
                     ),
                   if (widget.authItem.message.isNotEmpty)
                     Container(
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.105,
+                          right: MediaQuery.of(context).size.width * 0.105),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 25, vertical: 15),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
+                        color: StateContainer.of(context)
+                            .curTheme
+                            .backgroundDarkest,
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: RichText(
@@ -158,27 +174,10 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
                           children: [
                             TextSpan(
                               text: widget.authItem.message,
-                              style: AppStyles.textStyleParagraphPrimary(context),
+                              style:
+                                  AppStyles.textStyleParagraphPrimary(context),
                             ),
                           ],
-                        ),
-                      ),
-                    ),
-                  if (widget.authItem.nonce.isNotEmpty)
-                    Container(
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
-                      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      // Amount text
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          text: widget.authItem.nonce,
-                          style: AppStyles.textStyleParagraphPrimary(context),
                         ),
                       ),
                     ),
@@ -189,7 +188,8 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          CaseChange.toUpperCase(Z.of(context).registerFor, context),
+                          CaseChange.toUpperCase(
+                              Z.of(context).registerFor, context),
                           style: AppStyles.textStyleHeader(context),
                         ),
                       ],
@@ -197,14 +197,21 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
                   ),
                   // Address text
                   Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                      margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.105, right: MediaQuery.of(context).size.width * 0.105),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 25.0, vertical: 15.0),
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.105,
+                          right: MediaQuery.of(context).size.width * 0.105),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: StateContainer.of(context).curTheme.backgroundDarkest,
+                        color: StateContainer.of(context)
+                            .curTheme
+                            .backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child: UIUtil.threeLineAddressText(context, widget.destination, contactName: widget.contactName)),
+                      child: UIUtil.threeLineAddressText(
+                          context, widget.destination,
+                          contactName: widget.contactName)),
                 ],
               ),
             ),
@@ -217,30 +224,41 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
                   children: <Widget>[
                     // CONFIRM Button
                     AppButton.buildAppButton(
-                        context, AppButtonType.PRIMARY, CaseChange.toUpperCase(Z.of(context).confirm, context), Dimens.BUTTON_TOP_DIMENS,
-                        onPressed: () async {
+                        context,
+                        AppButtonType.PRIMARY,
+                        CaseChange.toUpperCase(Z.of(context).confirm, context),
+                        Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                       // Authenticate
-                      final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-                      final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+                      final AuthenticationMethod authMethod =
+                          await sl.get<SharedPrefsUtil>().getAuthMethod();
+                      final bool hasBiometrics =
+                          await sl.get<BiometricUtil>().hasBiometrics();
 
                       if (!mounted) return;
 
                       final String authText = Z.of(context).authConfirm;
 
-                      if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
+                      if (authMethod.method == AuthMethod.BIOMETRICS &&
+                          hasBiometrics) {
                         try {
-                          final bool authenticated = await sl.get<BiometricUtil>().authenticateWithBiometrics(context, authText);
+                          final bool authenticated = await sl
+                              .get<BiometricUtil>()
+                              .authenticateWithBiometrics(context, authText);
                           if (authenticated) {
                             sl.get<HapticUtil>().fingerprintSucess();
-                            EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
+                            EventTaxiImpl.singleton()
+                                .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
                           }
                         } catch (e) {
                           await authenticateWithPin();
                         }
-                      } else if (authMethod.method == AuthMethod.PIN || (authMethod.method == AuthMethod.BIOMETRICS && !hasBiometrics)) {
+                      } else if (authMethod.method == AuthMethod.PIN ||
+                          (authMethod.method == AuthMethod.BIOMETRICS &&
+                              !hasBiometrics)) {
                         await authenticateWithPin();
                       } else {
-                        EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
+                        EventTaxiImpl.singleton()
+                            .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));
                       }
                     })
                   ],
@@ -249,7 +267,10 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
                 Row(
                   children: <Widget>[
                     // CANCEL Button
-                    AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE, CaseChange.toUpperCase(Z.of(context).cancel, context),
+                    AppButton.buildAppButton(
+                        context,
+                        AppButtonType.PRIMARY_OUTLINE,
+                        CaseChange.toUpperCase(Z.of(context).cancel, context),
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).pop();
                     }),
@@ -262,18 +283,16 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
   }
 
   Future<void> _doSend() async {
-    final bool memoSendFailed = false;
     String? poppedError;
     try {
-      final String walletAddress = StateContainer.of(context).wallet!.address!;
+      final String walletAddress = StateContainer.current.wallet!.address!;
 
       _showAnimation(context, AnimationType.SEND);
 
       String? url;
-      for (final Method method in widget.authItem.methods) {
-        if (method.type == "http") {
-          url = method.url;
-        }
+      final Method method = widget.authItem.method;
+      if (method.type == "post") {
+        url = method.url;
       }
 
       if (url == null) {
@@ -283,54 +302,36 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
       }
 
       // construct the response to the server:
-      String stringToSign = "";
-      for (final String formatType in widget.authItem.format) {
-        if (stringToSign.isNotEmpty) {
-          stringToSign += widget.authItem.separator;
-        }
-        switch (formatType) {
-          case "timestamp":
-            stringToSign += "${DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond}";
-            break;
-          case "label":
-            stringToSign += widget.authItem.label;
-            break;
-          case "message":
-            stringToSign += widget.authItem.message;
-            break;
-          case "nonce":
-            stringToSign += widget.authItem.nonce;
-            break;
-          case "account":
-            stringToSign += widget.authItem.account;
-            break;
-        }
-      }
+      final String stringToSign = widget.authItem.constructSignature();
 
       final String formatted = stringToSign;
-      final String signed = NanoHelpers.byteToHex(NanoHelpers.stringToBytesUtf8(stringToSign));
+      final String signed =
+          NanoHelpers.byteToHex(NanoHelpers.stringToBytesUtf8(stringToSign));
 
-      final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
-      final NanoDerivationType derivationType = NanoUtilities.derivationMethodToType(derivationMethod);
+      final String derivationMethod =
+          await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+      final NanoDerivationType derivationType =
+          NanoUtilities.derivationMethodToType(derivationMethod);
 
       final String privKey = await NanoDerivations.universalSeedToPrivate(
-        await StateContainer.of(context).getSeed(),
-        index: StateContainer.of(context).selectedAccount!.index!,
+        await StateContainer.current.getSeed(),
+        index: StateContainer.current.selectedAccount!.index!,
         type: derivationType,
       );
       final String signature = NanoSignatures.signBlock(signed, privKey);
       // final String pubKey = NanoAccounts.extractPublicKey(walletAddress);
       // final bool isValid = NanoSignatures.validateSig(signed, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
 
-      final HandoffResponse authResponse = await sl.get<AccountService>().requestAuthHTTP(
-            url,
-            walletAddress,
-            signature,
-            signed,
-            formatted,
-            message: widget.authItem.message,
-            label: widget.authItem.label,
-          );
+      final HandoffResponse authResponse =
+          await sl.get<AccountService>().requestAuthHTTP(
+                url,
+                walletAddress,
+                signature,
+                signed,
+                formatted,
+                message: widget.authItem.message,
+                label: widget.authItem.label,
+              );
 
       if (!mounted) return;
 
@@ -375,7 +376,8 @@ class AuthConfirmSheetState extends State<AuthConfirmSheet> {
     final String? expectedPin = await sl.get<Vault>().getPin();
     final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
     if (!mounted) return;
-    final bool? auth = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    final bool? auth = await Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
