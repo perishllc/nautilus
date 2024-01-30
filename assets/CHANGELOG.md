@@ -1,6 +1,9 @@
-## v0.9.6 - [2024-01-28]
+## v0.9.6 - [2024-02-01]
+#### Changed
+- nanoauth / nanopay updates
 #### Fixed
-- Remove advanced options on send confirm screen when they shouldn't be there
+- Fix intro / welcome screen
+- Remove advanced options on the send confirm screen when they shouldn't be there
 ## v0.9.5 - [2024-01-11]
 #### Fixed
 - More hotfixes
