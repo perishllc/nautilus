@@ -353,6 +353,16 @@ class DBHelper {
     await saveWorkSource(
       WorkSource(
         id: id++,
+        name: "Natrium (BoomPoW)",
+        selected: false,
+        type: WorkSourceTypes.URL,
+        url: "https://app.natrium.io/api",
+      ),
+      dbClient: dbClient,
+    );
+    await saveWorkSource(
+      WorkSource(
+        id: id++,
         name: "solar",
         selected: false,
         type: WorkSourceTypes.URL,
