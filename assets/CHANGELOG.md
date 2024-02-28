@@ -1,6 +1,8 @@
-## v0.9.6 - [2024-02-01]
+## v0.9.6 - [2024-03-01]
 #### Changed
 - nanoauth / nanopay updates
+- Remove captcha option on gift cards
+- Updated a lot of dependencies
 #### Fixed
 - Fix intro / welcome screen
 - Remove advanced options on the send confirm screen when they shouldn't be there
