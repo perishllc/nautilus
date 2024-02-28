@@ -667,7 +667,7 @@ class StateContainerState extends State<StateContainer> {
     });
 
     // branch deep links:
-    _branchSub = FlutterBranchSdk.initSession().listen((Map data) {
+    _branchSub = FlutterBranchSdk.listSession().listen((Map data) {
       // TODO: investigate:
       if (data.containsKey("+clicked_branch_link") && data["+clicked_branch_link"] == true) {
         // check if they were gifted a wallet:

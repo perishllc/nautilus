@@ -182,98 +182,163 @@ class IntroWelcomePageState extends State<IntroWelcomePage> {
           child: Column(
             children: <Widget>[
               // A widget that holds welcome animation + paragraph
+              // Expanded(
+              //   child: Flex(
+              //     direction: Axis.vertical,
+              //     crossAxisAlignment: CrossAxisAlignment.center,
+              //     mainAxisAlignment: MainAxisAlignment.start,
+              //     children: <Widget>[
+              //       //Container for the animation
+              //       Container(
+              //         width: MediaQuery.of(context).size.width / 2,
+              //         margin: const EdgeInsets.only(bottom: 30),
+              //         height: 200,
+              //         child: SvgPicture.asset("assets/logo.svg",
+              //             color: primaryColor),
+              //       ),
+
+              //       // LottieBuilder.asset(
+              //       //   "assets/animations/whale.json",
+              //       //   width: 100,
+              //       //   height: 100,
+              //       //   fit: BoxFit.cover,
+              //       // ),
+
+              //       SizedBox(
+              //         width: MediaQuery.of(context).size.width + 2000,
+              //         child: Column(
+              //           crossAxisAlignment: CrossAxisAlignment.start,
+              //           children: <Widget>[
+              //             Stack(
+              //               children: <Widget>[
+              //                 Container(
+              //                   alignment: Alignment.topCenter,
+              //                   margin: const EdgeInsets.only(top: 20),
+              //                   color: StateContainer.of(context).curTheme.text,
+              //                   width: MediaQuery.of(context).size.width + 2000,
+              //                   height: 80,
+              //                 ),
+              //                 Container(
+              //                   alignment: Alignment.topCenter,
+              //                   padding: EdgeInsets.zero,
+              //                   width: MediaQuery.of(context).size.width + 2000,
+              //                   height: 100,
+              //                   child: TextLiquidFill(
+              //                     text: CaseChange.toUpperCase(
+              //                         NonTranslatable.appName, context),
+              //                     waveColor: primaryColor ??
+              //                         NautilusTheme.nautilusBlue,
+              //                     boxBackgroundColor: StateContainer.of(context)
+              //                         .curTheme
+              //                         .backgroundDark!,
+              //                     textStyle: const TextStyle(
+              //                         fontSize: 60.0,
+              //                         fontWeight: FontWeight.bold,
+              //                         color: Colors.white),
+              //                     boxHeight: 100,
+              //                     boxWidth: double.infinity,
+              //                     loadDuration: const Duration(seconds: 3),
+              //                     waveDuration: const Duration(seconds: 3),
+              //                     loadUntil: 0.5,
+              //                   ),
+              //                 ),
+              //                 // Container(
+              //                 //   alignment: Alignment.topCenter,
+              //                 //   margin: const EdgeInsets.only(top: 90),
+              //                 //   color: StateContainer.of(context)
+              //                 //       .curTheme
+              //                 //       .backgroundDark,
+              //                 //   width: MediaQuery.of(context).size.width,
+              //                 //   height: 15,
+              //                 // ),
+              //               ],
+              //             ),
+              //             // Container for the paragraph
+              //             Container(
+              //               margin: EdgeInsets.symmetric(
+              //                   horizontal: smallScreen(context) ? 30 : 40,
+              //                   vertical: 20),
+              //               child: AutoSizeText(
+              //                 Z
+              //                     .of(context)
+              //                     .welcomeTextLogin
+              //                     .replaceAll("%1", NonTranslatable.appName),
+              //                 style: AppStyles.textStyleParagraph(context),
+              //                 maxLines: 2,
+              //                 stepGranularity: 0.5,
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+
+              //       // end
+              //     ],
+              //   ),
+              // ),
+
+              //Container for the animation
+              Container(
+                width: MediaQuery.of(context).size.width / 2,
+                margin: const EdgeInsets.only(bottom: 30),
+                height: 200,
+                child: SvgPicture.asset("assets/logo.svg", color: primaryColor),
+              ),
+
+              // LottieBuilder.asset(
+              //   "assets/animations/whale.json",
+              //   width: 100,
+              //   height: 100,
+              //   fit: BoxFit.cover,
+              // ),
+
               Expanded(
-                child: Flex(
-                  direction: Axis.vertical,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
+                child: Stack(
+                  alignment: Alignment.topCenter,
                   children: <Widget>[
-                    //Container for the animation
                     Container(
-                      width: MediaQuery.of(context).size.width / 2,
-                      margin: const EdgeInsets.only(bottom: 30),
-                      height: 200,
-                      child: SvgPicture.asset("assets/logo.svg",
-                          color: primaryColor),
+                      width: 300,
+                      height: 50,
+                      alignment: Alignment.topCenter,
+                      margin: const EdgeInsets.only(top: 20),
+                      color: StateContainer.of(context).curTheme.text,
                     ),
-
-                    // LottieBuilder.asset(
-                    //   "assets/animations/whale.json",
-                    //   width: 100,
-                    //   height: 100,
-                    //   fit: BoxFit.cover,
-                    // ),
-
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width + 2000,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Stack(
-                            children: <Widget>[
-                              Container(
-                                alignment: Alignment.topCenter,
-                                margin: const EdgeInsets.only(top: 20),
-                                color: StateContainer.of(context).curTheme.text,
-                                width: MediaQuery.of(context).size.width + 2000,
-                                height: 80,
-                              ),
-                              Container(
-                                alignment: Alignment.topCenter,
-                                padding: EdgeInsets.zero,
-                                width: MediaQuery.of(context).size.width + 2000,
-                                height: 100,
-                                child: TextLiquidFill(
-                                  text: CaseChange.toUpperCase(
-                                      NonTranslatable.appName, context),
-                                  waveColor: primaryColor ??
-                                      NautilusTheme.nautilusBlue,
-                                  boxBackgroundColor: StateContainer.of(context)
-                                      .curTheme
-                                      .backgroundDark!,
-                                  textStyle: const TextStyle(
-                                      fontSize: 60.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                  boxHeight: 100,
-                                  boxWidth: double.infinity,
-                                  loadDuration: const Duration(seconds: 3),
-                                  waveDuration: const Duration(seconds: 3),
-                                  loadUntil: 0.5,
-                                ),
-                              ),
-                              // Container(
-                              //   alignment: Alignment.topCenter,
-                              //   margin: const EdgeInsets.only(top: 90),
-                              //   color: StateContainer.of(context)
-                              //       .curTheme
-                              //       .backgroundDark,
-                              //   width: MediaQuery.of(context).size.width,
-                              //   height: 15,
-                              // ),
-                            ],
-                          ),
-                          // Container for the paragraph
-                          Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal: smallScreen(context) ? 30 : 40,
-                                vertical: 20),
-                            child: AutoSizeText(
-                              Z
-                                  .of(context)
-                                  .welcomeTextLogin
-                                  .replaceAll("%1", NonTranslatable.appName),
-                              style: AppStyles.textStyleParagraph(context),
-                              maxLines: 2,
-                              stepGranularity: 0.5,
-                            ),
-                          ),
-                        ],
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      alignment: Alignment.topCenter,
+                      child: TextLiquidFill(
+                        boxWidth: 304,
+                        boxHeight: 74,
+                        text: CaseChange.toUpperCase(
+                            NonTranslatable.appName, context),
+                        waveColor: primaryColor ?? NautilusTheme.nautilusBlue,
+                        boxBackgroundColor:
+                            StateContainer.of(context).curTheme.backgroundDark!,
+                        textStyle: const TextStyle(
+                          fontSize: 60,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                        loadUntil: 0.5,
+                        textAlign: TextAlign.start,
                       ),
                     ),
-
-                    // end
                   ],
+                ),
+              ),
+
+              // Container for the paragraph
+              Container(
+                margin: EdgeInsets.symmetric(
+                    horizontal: smallScreen(context) ? 30 : 40, vertical: 20),
+                child: AutoSizeText(
+                  Z
+                      .of(context)
+                      .welcomeTextLogin
+                      .replaceAll("%1", NonTranslatable.appName),
+                  style: AppStyles.textStyleParagraph(context),
+                  maxLines: 2,
+                  stepGranularity: 0.5,
                 ),
               ),
 

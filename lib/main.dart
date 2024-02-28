@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -65,11 +66,12 @@ Future<void> main() async {
     Logger.level = Level.verbose;
   }
   // Setup firebase
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform, name: "wallet_flutter");
+  await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform, name: "wallet_flutter");
 
   await FirebaseAppCheck.instance.activate(
-    // webRecaptchaSiteKey: dotenv.env["CAPTCHA_SITE_KEY"],
-  );
+      // webRecaptchaSiteKey: dotenv.env["CAPTCHA_SITE_KEY"],
+      );
   FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
 
   if (!kReleaseMode) {
@@ -85,6 +87,12 @@ Future<void> main() async {
   if (kDebugMode) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
+
+  await FlutterBranchSdk.init(
+    useTestKey: kDebugMode,
+    enableLogging: true,
+    disableTracking: true,
+  );
 
   runApp(const StateContainer(child: App()));
 
@@ -107,7 +115,8 @@ class AppState extends State<App> {
   // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(StateContainer.of(context).curTheme.statusBar!);
+    SystemChrome.setSystemUIOverlayStyle(
+        StateContainer.of(context).curTheme.statusBar!);
     // final ThemeData theme = ThemeData();
     return OKToast(
       textStyle: AppStyles.textStyleSnackbar(context),
@@ -125,7 +134,10 @@ class AppState extends State<App> {
         // ),
         theme: ThemeData(
           // colorSchemeSeed: StateContainer.of(context).curTheme.primary,
-          colorScheme: ColorScheme.fromSeed(seedColor: StateContainer.of(context).curTheme.primary ?? Colors.blue).copyWith(
+          colorScheme: ColorScheme.fromSeed(
+                  seedColor: StateContainer.of(context).curTheme.primary ??
+                      Colors.blue)
+              .copyWith(
             secondary: StateContainer.of(context).curTheme.primary10,
             brightness: StateContainer.of(context).curTheme.brightness,
             error: StateContainer.of(context).curTheme.error,
@@ -204,7 +216,8 @@ class AppState extends State<App> {
           GlobalWidgetsLocalizations.delegate
         ],
 
-        locale: StateContainer.of(context).curLanguage.language == AvailableLanguage.DEFAULT
+        locale: StateContainer.of(context).curLanguage.language ==
+                AvailableLanguage.DEFAULT
             ? null
             : StateContainer.of(context).curLanguage.getLocale(),
         supportedLocales: Z.delegate.supportedLocales,
@@ -220,7 +233,9 @@ class AppState extends State<App> {
               return NoTransitionRoute(
                 builder: (_) => Stack(
                   children: [
-                    AppHomePage(priceConversion: settings.arguments as PriceConversion?),
+                    AppHomePage(
+                        priceConversion:
+                            settings.arguments as PriceConversion?),
                     // Magic.instance.relayer,
                   ],
                 ),
@@ -228,7 +243,8 @@ class AppState extends State<App> {
               );
             case '/home_transition':
               return NoPopTransitionRoute(
-                builder: (_) => AppHomePage(priceConversion: settings.arguments as PriceConversion?),
+                builder: (_) => AppHomePage(
+                    priceConversion: settings.arguments as PriceConversion?),
                 settings: settings,
               );
             case '/intro_welcome':
@@ -249,8 +265,10 @@ class AppState extends State<App> {
             case '/intro_magic_password':
               return MaterialPageRoute(
                 builder: (_) => IntroMagicPassword(
-                  entryExists: (settings.arguments! as Map<String, dynamic>)["entryExists"] as bool,
-                  identifier: (settings.arguments! as Map<String, dynamic>)["issuer"] as String?,
+                  entryExists: (settings.arguments!
+                      as Map<String, dynamic>)["entryExists"] as bool,
+                  identifier: (settings.arguments!
+                      as Map<String, dynamic>)["issuer"] as String?,
                 ),
                 settings: settings,
               );
@@ -261,17 +279,20 @@ class AppState extends State<App> {
               );
             case '/intro_password_on_launch':
               return MaterialPageRoute(
-                builder: (_) => IntroPasswordOnLaunch(seed: settings.arguments as String?),
+                builder: (_) =>
+                    IntroPasswordOnLaunch(seed: settings.arguments as String?),
                 settings: settings,
               );
             case '/intro_password':
               return MaterialPageRoute(
-                builder: (_) => IntroPassword(seed: settings.arguments as String?),
+                builder: (_) =>
+                    IntroPassword(seed: settings.arguments as String?),
                 settings: settings,
               );
             case '/intro_backup':
               return MaterialPageRoute(
-                builder: (_) => IntroBackupSeedPage(encryptedSeed: settings.arguments as String?),
+                builder: (_) => IntroBackupSeedPage(
+                    encryptedSeed: settings.arguments as String?),
                 settings: settings,
               );
             case '/intro_backup_safety':
@@ -287,8 +308,10 @@ class AppState extends State<App> {
             case '/intro_import':
               return MaterialPageRoute(
                 builder: (_) => IntroImportSeedPage(
-                    password: (settings.arguments as Map<String, String>?)?["password"],
-                    fullIdentifier: (settings.arguments as Map<String, String>?)?["fullIdentifier"]),
+                    password: (settings.arguments
+                        as Map<String, String>?)?["password"],
+                    fullIdentifier: (settings.arguments
+                        as Map<String, String>?)?["fullIdentifier"]),
                 settings: settings,
               );
             case '/lock_screen':
@@ -308,13 +331,17 @@ class AppState extends State<App> {
               );
             case '/avatar_page':
               return PageRouteBuilder(
-                  pageBuilder: (BuildContext context, Animation<double> animationIn, Animation<double> animationOut) =>
+                  pageBuilder: (BuildContext context,
+                          Animation<double> animationIn,
+                          Animation<double> animationOut) =>
                       AvatarPage(),
                   settings: settings,
                   opaque: false);
             case '/avatar_change_page':
               return MaterialPageRoute(
-                builder: (_) => AvatarChangePage(curAddress: StateContainer.of(context).selectedAccount!.address),
+                builder: (_) => AvatarChangePage(
+                    curAddress:
+                        StateContainer.of(context).selectedAccount!.address),
                 settings: settings,
               );
             case '/before_scan_screen':
@@ -345,12 +372,14 @@ class AppState extends State<App> {
               );
             case '/gift_paper_wallet':
               return NoTransitionRoute(
-                builder: (_) => GeneratePaperWalletScreen(localCurrency: StateContainer.of(context).curCurrency),
+                builder: (_) => GeneratePaperWalletScreen(
+                    localCurrency: StateContainer.of(context).curCurrency),
                 settings: settings,
               );
             case '/swap_xmr':
               return NoTransitionRoute(
-                builder: (_) => SwapXMRScreen(localCurrency: StateContainer.of(context).curCurrency),
+                builder: (_) => SwapXMRScreen(
+                    localCurrency: StateContainer.of(context).curCurrency),
                 settings: settings,
               );
             case '/scan':
@@ -385,7 +414,8 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
 
   bool seedIsEncrypted(String seed) {
     try {
-      final String salted = NanoHelpers.bytesToUtf8String(NanoHelpers.hexToBytes(seed.substring(0, 16)));
+      final String salted = NanoHelpers.bytesToUtf8String(
+          NanoHelpers.hexToBytes(seed.substring(0, 16)));
       if (salted == "Salted__") {
         return true;
       }
@@ -400,7 +430,8 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     await sl.get<Vault>().updateSessionKey();
     // Check if device is rooted or jailbroken, show user a warning informing them of the risks if so
     if (Platform.isIOS || Platform.isAndroid) {
-      if (!(await sl.get<SharedPrefsUtil>().getHasSeenRootWarning()) && await FlutterJailbreakDetection.jailbroken) {
+      if (!(await sl.get<SharedPrefsUtil>().getHasSeenRootWarning()) &&
+          await FlutterJailbreakDetection.jailbroken) {
         if (!mounted) return;
         AppDialogs.showConfirmDialog(
             barrierDismissible: false,
@@ -464,12 +495,15 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       if (isLoggedIn) {
         if (isEncrypted) {
           Navigator.of(context).pushReplacementNamed('/password_lock_screen');
-        } else if (await sl.get<SharedPrefsUtil>().getLock() || await sl.get<SharedPrefsUtil>().shouldLock()) {
+        } else if (await sl.get<SharedPrefsUtil>().getLock() ||
+            await sl.get<SharedPrefsUtil>().shouldLock()) {
           Navigator.of(context).pushReplacementNamed('/lock_screen');
         } else {
           await NanoUtilities().loginAccount(seed, context);
-          final PriceConversion conversion = await sl.get<SharedPrefsUtil>().getPriceConversion();
-          Navigator.of(context).pushReplacementNamed('/home', arguments: conversion);
+          final PriceConversion conversion =
+              await sl.get<SharedPrefsUtil>().getPriceConversion();
+          Navigator.of(context)
+              .pushReplacementNamed('/home', arguments: conversion);
         }
       } else {
         Navigator.of(context).pushReplacementNamed('/intro_welcome');
@@ -505,7 +539,8 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
     _hasCheckedLoggedIn = false;
     _retried = false;
-    if (SchedulerBinding.instance.schedulerPhase == SchedulerPhase.persistentCallbacks) {
+    if (SchedulerBinding.instance.schedulerPhase ==
+        SchedulerPhase.persistentCallbacks) {
       SchedulerBinding.instance.addPostFrameCallback((_) => checkLoggedIn());
     }
   }
@@ -548,7 +583,10 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     // This seems to be the earliest place we can retrieve the device Locale
     setLanguage();
-    sl.get<SharedPrefsUtil>().getCurrency(StateContainer.of(context).deviceLocale).then((AvailableCurrency currency) {
+    sl
+        .get<SharedPrefsUtil>()
+        .getCurrency(StateContainer.of(context).deviceLocale)
+        .then((AvailableCurrency currency) {
       StateContainer.of(context).curCurrency = currency;
     });
     return Scaffold(
