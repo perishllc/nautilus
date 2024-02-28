@@ -103,7 +103,7 @@ class UserDataUtil {
       return _parseData(data!, type);
     } catch (e) {
       UIUtil.showSnackbar(Z.of(context).qrUnknownError, context);
-      log.e("Unknown QR Scan Error ${e.toString()}", e);
+      log.e("Unknown QR Scan Error ${e.toString()}");
       return null;
     }
   }

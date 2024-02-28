@@ -579,7 +579,7 @@ class IntroImportSeedState extends State<IntroImportSeedPage> {
         final String encryptedSeed = NanoHelpers.byteToHex(NanoCrypt.encrypt(seed, widget.password!));
         await sl.get<AuthService>().setEncryptedSeed(widget.fullIdentifier!, encryptedSeed);
       } catch (e) {
-        sl.get<Logger>().e("Error uploading seed backup", e);
+        sl.get<Logger>().e("Error uploading seed backup $e");
       }
     }
   }

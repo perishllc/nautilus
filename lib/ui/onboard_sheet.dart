@@ -35,27 +35,6 @@ class OnboardSheetState extends State<OnboardSheet> {
 
   Widget? qrWidget;
 
-  Future<Image?> getQRImage(String data) async {
-    final PrettyQrCodePainter painter = PrettyQrCodePainter(
-      data: data,
-      errorCorrectLevel: QrErrorCorrectLevel.M,
-      roundEdges: true,
-      typeNumber: 9,
-    );
-    if (MediaQuery.of(context).size.width == 0) {
-      return null;
-    }
-
-    final ui.PictureRecorder recorder = ui.PictureRecorder();
-    final ui.Canvas canvas = Canvas(recorder);
-    final double qrSize = MediaQuery.of(context).size.width;
-    painter.paint(canvas, Size(qrSize, qrSize));
-    final ui.Picture pic = recorder.endRecording();
-    final ui.Image image = await pic.toImage(qrSize.toInt(), qrSize.toInt());
-    final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    return Image.memory(byteData!.buffer.asUint8List());
-  }
-
   @override
   void initState() {
     super.initState();
@@ -72,7 +51,8 @@ class OnboardSheetState extends State<OnboardSheet> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
+        minimum:
+            EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
             // A row for the address text and close button
@@ -103,14 +83,18 @@ class OnboardSheetState extends State<OnboardSheet> {
             // QR which takes all the available space left from the buttons & address text
             Expanded(
               child: Padding(
-                padding: const EdgeInsetsDirectional.only(top: 20, bottom: 28, start: 20, end: 20),
-                child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+                padding: const EdgeInsetsDirectional.only(
+                    top: 20, bottom: 28, start: 20, end: 20),
+                child: LayoutBuilder(builder:
+                    (BuildContext context, BoxConstraints constraints) {
                   final double availableWidth = constraints.maxWidth;
-                  final double availableHeight = (StateContainer.of(context).wallet?.username != null)
-                      ? (constraints.maxHeight - 70)
-                      : constraints.maxHeight;
+                  final double availableHeight =
+                      (StateContainer.of(context).wallet?.username != null)
+                          ? (constraints.maxHeight - 70)
+                          : constraints.maxHeight;
                   const double widthDivideFactor = 1.3;
-                  final double computedMaxSize = math.min(availableWidth / widthDivideFactor, availableHeight);
+                  final double computedMaxSize = math.min(
+                      availableWidth / widthDivideFactor, availableHeight);
                   return Center(
                     child: Stack(
                       children: <Widget>[
@@ -140,7 +124,9 @@ class OnboardSheetState extends State<OnboardSheet> {
                           child: Container(
                             width: 260,
                             height: 150,
-                            color: StateContainer.of(context).curTheme.backgroundDark,
+                            color: StateContainer.of(context)
+                                .curTheme
+                                .backgroundDark,
                           ),
                         ),
                         // Background/border part the QR
@@ -182,7 +168,10 @@ class OnboardSheetState extends State<OnboardSheet> {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               border: Border.all(
-                                  color: StateContainer.of(context).curTheme.primary!, width: computedMaxSize / 90),
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .primary!,
+                                  width: computedMaxSize / 90),
                             ),
                           ),
                         ),
@@ -203,7 +192,8 @@ class OnboardSheetState extends State<OnboardSheet> {
                             width: computedMaxSize / 6.5,
                             height: computedMaxSize / 6.5,
                             decoration: const BoxDecoration(
-                              color: /*StateContainer.of(context).curTheme.primary*/ Colors.black,
+                              color: /*StateContainer.of(context).curTheme.primary*/
+                                  Colors.black,
                               shape: BoxShape.circle,
                             ),
                           ),
@@ -214,7 +204,9 @@ class OnboardSheetState extends State<OnboardSheet> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
                               child: SvgPicture.asset("assets/logo.svg",
-                                  color: StateContainer.of(context).curTheme.primary),
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .primary),
                             ),
                           ),
                         ),
@@ -233,8 +225,12 @@ class OnboardSheetState extends State<OnboardSheet> {
                     AppButton.buildAppButton(
                         context,
                         // Copy Address Button
-                        _linkCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
-                        _linkCopied ? Z.of(context).linkCopied : Z.of(context).copyLink,
+                        _linkCopied
+                            ? AppButtonType.SUCCESS
+                            : AppButtonType.PRIMARY,
+                        _linkCopied
+                            ? Z.of(context).linkCopied
+                            : Z.of(context).copyLink,
                         Dimens.BUTTON_COMPACT_LEFT_DIMENS, onPressed: () {
                       Clipboard.setData(ClipboardData(text: widget.link ?? ""));
                       setState(() {
@@ -244,7 +240,8 @@ class OnboardSheetState extends State<OnboardSheet> {
                       if (_linkCopiedTimer != null) {
                         _linkCopiedTimer!.cancel();
                       }
-                      _linkCopiedTimer = Timer(const Duration(milliseconds: 800), () {
+                      _linkCopiedTimer =
+                          Timer(const Duration(milliseconds: 800), () {
                         if (mounted) {
                           setState(() {
                             _linkCopied = false;

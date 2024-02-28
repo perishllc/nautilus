@@ -20,7 +20,7 @@ dependencies:
     sdk: flutter
 
   # magic:
-  magic_sdk: ^4.0.0
+  # magic_sdk: ^4.0.0
   # magic_sdk:
   #   git:
   #     url: https://github.com/magiclabs/magic-flutter.git
@@ -213,7 +213,7 @@ dependencies:
 
   # search bar + text highlighting:
   # searchbar_animation: ^0.0.3
-  searchbar_animation: ^0.0.4
+  searchbar_animation: 0.0.3
   substring_highlight: ^1.0.33
 
   # localization:
@@ -225,7 +225,8 @@ dependencies:
   path: ^1.8.1
 
   # hcaptcha:
-  webview_flutter: ^4.7.0
+  # webview_flutter: ^4.7.0
+  webview_flutter: ^3.0.4
   app_tracking_transparency: ^2.0.2+4
 
   # list optimization:

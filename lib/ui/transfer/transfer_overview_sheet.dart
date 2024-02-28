@@ -38,7 +38,8 @@ class AppTransferOverviewSheet extends StatefulWidget {
   const AppTransferOverviewSheet() : super();
 
   @override
-  AppTransferOverviewSheetState createState() => AppTransferOverviewSheetState();
+  AppTransferOverviewSheetState createState() =>
+      AppTransferOverviewSheetState();
 }
 
 class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
@@ -67,7 +68,8 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
         validSeedCallback: manualEntryCallback,
       );
     } else {
-      return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+      return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
         return WillPopScope(
           onWillPop: _onWillPop,
           child: SafeArea(
@@ -95,10 +97,12 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
                           // The header
                           Container(
                             margin: const EdgeInsets.only(top: 15.0),
-                            constraints:
-                                BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
+                            constraints: BoxConstraints(
+                                maxWidth:
+                                    MediaQuery.of(context).size.width - 140),
                             child: AutoSizeText(
-                              CaseChange.toUpperCase(Z.of(context).transferHeader, context),
+                              CaseChange.toUpperCase(
+                                  Z.of(context).transferHeader, context),
                               style: AppStyles.textStyleHeader(context),
                               textAlign: TextAlign.center,
                               maxLines: 2,
@@ -123,15 +127,20 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
                       children: <Widget>[
                         Container(
                           constraints: BoxConstraints(
-                              maxHeight: MediaQuery.of(context).size.height * 0.2,
-                              maxWidth: MediaQuery.of(context).size.width * 0.6),
+                              maxHeight:
+                                  MediaQuery.of(context).size.height * 0.2,
+                              maxWidth:
+                                  MediaQuery.of(context).size.width * 0.6),
                           child: Stack(
                             children: <Widget>[
                               Center(
                                 child: SvgPicture.asset(
                                     "assets/illustrations/transferfunds_paperwalletonly.svg",
                                     colorFilter: ColorFilter.mode(
-                                        StateContainer.of(context).curTheme.text45 ?? Colors.white,
+                                        StateContainer.of(context)
+                                                .curTheme
+                                                .text45 ??
+                                            Colors.white,
                                         BlendMode.srcIn),
                                     width: MediaQuery.of(context).size.width),
                               ),
@@ -139,7 +148,10 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
                                 child: SvgPicture.asset(
                                     "assets/illustrations/transferfunds_start.svg",
                                     colorFilter: ColorFilter.mode(
-                                        StateContainer.of(context).curTheme.primary ?? Colors.white,
+                                        StateContainer.of(context)
+                                                .curTheme
+                                                .primary ??
+                                            Colors.white,
                                         BlendMode.srcIn),
                                     width: MediaQuery.of(context).size.width),
                               ),
@@ -149,7 +161,8 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
                         Container(
                           alignment: AlignmentDirectional.centerStart,
                           margin: EdgeInsets.symmetric(
-                              horizontal: smallScreen(context) ? 35 : 50, vertical: 20),
+                              horizontal: smallScreen(context) ? 35 : 50,
+                              vertical: 20),
                           child: AutoSizeText(
                             Z
                                 .of(context)
@@ -175,8 +188,8 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
                         Dimens.BUTTON_TOP_DIMENS,
                         onPressed: () async {
                           UIUtil.cancelLockEvent();
-                          final String? result =
-                              await UserDataUtil.getQRData(DataType.SEED, context) as String?;
+                          final String? result = await UserDataUtil.getQRData(
+                              DataType.SEED, context) as String?;
                           if (result == null) {
                             return;
                           }
@@ -184,7 +197,8 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
                           if (!mounted) return;
 
                           if (!NanoDerivations.isValidHexFormSeed(result)) {
-                            UIUtil.showSnackbar(Z.of(context).qrInvalidSeed, context);
+                            UIUtil.showSnackbar(
+                                Z.of(context).qrInvalidSeed, context);
                             return;
                           }
                           startTransfer(context, result);
@@ -219,11 +233,13 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
     }
   }
 
-  Future<void> startTransfer(BuildContext context, String seed, {bool manualEntry = false}) async {
+  Future<void> startTransfer(BuildContext context, String seed,
+      {bool manualEntry = false}) async {
     // Show loading overlay
     _animationOpen = true;
-    final AnimationType animationType =
-        manualEntry ? AnimationType.TRANSFER_SEARCHING_MANUAL : AnimationType.TRANSFER_SEARCHING_QR;
+    final AnimationType animationType = manualEntry
+        ? AnimationType.TRANSFER_SEARCHING_MANUAL
+        : AnimationType.TRANSFER_SEARCHING_QR;
     AppAnimation.animationLauncher(context, animationType,
         onPoppedCallback: () => _animationOpen = false);
     // Get accounts from seed
@@ -249,14 +265,19 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
       accountsToRemove.forEach(privKeyBalanceMap.remove);
       if (privKeyBalanceMap.isEmpty) {
         UIUtil.showSnackbar(
-            Z.of(context).transferNoFunds.replaceAll("%2", NonTranslatable.currencyName), context);
+            Z
+                .of(context)
+                .transferNoFunds
+                .replaceAll("%2", NonTranslatable.currencyName),
+            context);
         return;
       }
       // Go to confirmation screen
-      EventTaxiImpl.singleton().fire(TransferConfirmEvent(balMap: privKeyBalanceMap));
+      EventTaxiImpl.singleton()
+          .fire(TransferConfirmEvent(balMap: privKeyBalanceMap));
       Navigator.of(context).pop();
     } catch (e) {
-      sl.get<Logger>().e("error", e);
+      sl.get<Logger>().e("error $e");
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
@@ -296,15 +317,17 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
       // return privKeyBalanceMap;
       return totalBalance;
     } catch (e) {
-      sl.get<Logger>().e("error", e);
+      sl.get<Logger>().e("error $e");
     }
     return BigInt.zero;
   }
 
-  Future<void> startAutoTransfer(BuildContext context, String seed, AppWallet wallet) async {
+  Future<void> startAutoTransfer(
+      BuildContext context, String seed, AppWallet wallet) async {
     // Show loading overlay
     _animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.TRANSFER_SEARCHING_MANUAL,
+    AppAnimation.animationLauncher(
+        context, AnimationType.TRANSFER_SEARCHING_MANUAL,
         onPoppedCallback: () => _animationOpen = false);
 
     // Get accounts from seed
@@ -327,7 +350,8 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
       });
       accountsToRemove.forEach(privKeyBalanceMap.remove);
       if (privKeyBalanceMap.isEmpty) {
-        UIUtil.showSnackbar(Z.of(context).transferNoFunds, context, durationMs: 5000);
+        UIUtil.showSnackbar(Z.of(context).transferNoFunds, context,
+            durationMs: 5000);
         return;
       }
 
@@ -335,11 +359,12 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
           .createState()
           .autoProcessWallets(privKeyBalanceMap, wallet.address!);
     } catch (e) {
-      sl.get<Logger>().e("error", e);
+      sl.get<Logger>().e("error $e");
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(Z.of(context).giftProcessError, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).giftProcessError, context,
+          durationMs: 5000);
     }
 
     // sleep for a couple seconds to flex the animation / since this happens pretty fast
@@ -348,16 +373,20 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
       Navigator.of(context).pop();
     }
     if (amountTransferred == BigInt.zero) {
-      UIUtil.showSnackbar(Z.of(context).giftProcessError, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).giftProcessError, context,
+          durationMs: 5000);
     } else {
-      UIUtil.showSnackbar(Z.of(context).giftProcessSuccess, context, durationMs: 5000);
+      UIUtil.showSnackbar(Z.of(context).giftProcessSuccess, context,
+          durationMs: 5000);
     }
   }
 
-  Future<void> startAutoRefund(BuildContext context, String seed, String refundAddress) async {
+  Future<void> startAutoRefund(
+      BuildContext context, String seed, String refundAddress) async {
     // Show loading overlay
     _animationOpen = true;
-    AppAnimation.animationLauncher(context, AnimationType.TRANSFER_SEARCHING_MANUAL,
+    AppAnimation.animationLauncher(
+        context, AnimationType.TRANSFER_SEARCHING_MANUAL,
         onPoppedCallback: () => _animationOpen = false);
 
     // sleep for a couple seconds to flex the animation:
@@ -385,13 +414,15 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
         return;
       }
 
-      const AppTransferConfirmSheet().createState().refundWallets(privKeyBalanceMap, refundAddress);
+      const AppTransferConfirmSheet()
+          .createState()
+          .refundWallets(privKeyBalanceMap, refundAddress);
       //.autoProcessWallets(privKeyBalanceMap);
       // Go to confirmation screen
       // EventTaxiImpl.singleton().fire(TransferConfirmEvent(balMap: privKeyBalanceMap));
       // Navigator.of(context).pop();
     } catch (e) {
-      sl.get<Logger>().e("error", e);
+      sl.get<Logger>().e("error $e");
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
@@ -400,26 +431,30 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
     if (_animationOpen) {
       Navigator.of(context).pop();
     }
-    UIUtil.showSnackbar(Z.of(context).giftRefundSuccess, context, durationMs: 5000);
+    UIUtil.showSnackbar(Z.of(context).giftRefundSuccess, context,
+        durationMs: 5000);
   }
 
-  Future<void> receiveAtIndex(
-      BuildContext context, String seed, int index, String derivationMethod) async {
+  Future<void> receiveAtIndex(BuildContext context, String seed, int index,
+      String derivationMethod) async {
     final NanoDerivationType derivationType =
         NanoUtilities.derivationMethodToType(derivationMethod);
-    final String receivingAccount = await NanoDerivations.universalSeedToAddress(
+    final String receivingAccount =
+        await NanoDerivations.universalSeedToAddress(
       seed,
       index: index,
       type: derivationType,
     );
-    final String receivingAccountPrivKey = await NanoDerivations.universalSeedToPrivate(
+    final String receivingAccountPrivKey =
+        await NanoDerivations.universalSeedToPrivate(
       seed,
       index: index,
       type: derivationType,
     );
 
-    final AccountsBalancesResponse resp =
-        await sl.get<AccountService>().requestAccountsBalances([receivingAccount]);
+    final AccountsBalancesResponse resp = await sl
+        .get<AccountService>()
+        .requestAccountsBalances([receivingAccount]);
     final AccountBalanceItem balanceItem = resp.balances!.values.first;
     balanceItem.privKey = receivingAccountPrivKey;
 
@@ -440,21 +475,22 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
     for (final String hash in receivableBlocks.keys) {
       final ReceivableResponseItem? item = receivableBlocks[hash];
       if (balanceItem.frontier != null) {
-        final ProcessResponse resp = await sl.get<AccountService>().requestReceive(
-            AppWallet.defaultRepresentative,
-            balanceItem.frontier,
-            item!.amount,
-            hash,
-            receivingAccount,
-            balanceItem.privKey);
+        final ProcessResponse resp = await sl
+            .get<AccountService>()
+            .requestReceive(
+                AppWallet.defaultRepresentative,
+                balanceItem.frontier,
+                item!.amount,
+                hash,
+                receivingAccount,
+                balanceItem.privKey);
         if (resp.hash != null) {
           balanceItem.frontier = resp.hash;
           totalTransferred += BigInt.parse(item.amount!);
         }
       } else {
-        final ProcessResponse resp = await sl
-            .get<AccountService>()
-            .requestOpen(item!.amount, hash, receivingAccount, balanceItem.privKey);
+        final ProcessResponse resp = await sl.get<AccountService>().requestOpen(
+            item!.amount, hash, receivingAccount, balanceItem.privKey);
         if (resp.hash != null) {
           balanceItem.frontier = resp.hash;
           totalTransferred += BigInt.parse(item.amount!);
@@ -465,8 +501,14 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
     }
   }
 
-  Future<void> sendAtIndex(BuildContext context, String seed, int index, String derivationMethod,
-      String address, String amountRaw, bool maxSend) async {
+  Future<void> sendAtIndex(
+      BuildContext context,
+      String seed,
+      int index,
+      String derivationMethod,
+      String address,
+      String amountRaw,
+      bool maxSend) async {
     final NanoDerivationType derivationType =
         NanoUtilities.derivationMethodToType(derivationMethod);
     final String sendingAccount = await NanoDerivations.universalSeedToAddress(
@@ -502,7 +544,8 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
   }
 
   // Get NUM_SWEEP accounts from seed to request balances for
-  Future<List<String>> getAccountsFromSeed(BuildContext context, String seed) async {
+  Future<List<String>> getAccountsFromSeed(
+      BuildContext context, String seed) async {
     final List<String> accountsToRequest = [];
     String privKey;
     String address;
@@ -512,15 +555,17 @@ class AppTransferOverviewSheetState extends State<AppTransferOverviewSheet> {
       address = NanoDerivations.standardSeedToAddress(seed, index: i);
       // Don't add this if it is the currently logged in account
       if (address != StateContainer.of(context).wallet!.address) {
-        privKeyBalanceMap.putIfAbsent(address, () => AccountBalanceItem(privKey: privKey));
+        privKeyBalanceMap.putIfAbsent(
+            address, () => AccountBalanceItem(privKey: privKey));
         accountsToRequest.add(address);
       }
     }
     // Also treat this seed as a private key
-    address =
-        NanoAccounts.createAccount(NonTranslatable.accountType, NanoKeys.createPublicKey(seed));
+    address = NanoAccounts.createAccount(
+        NonTranslatable.accountType, NanoKeys.createPublicKey(seed));
     if (address != StateContainer.of(context).wallet!.address) {
-      privKeyBalanceMap.putIfAbsent(address, () => AccountBalanceItem(privKey: seed));
+      privKeyBalanceMap.putIfAbsent(
+          address, () => AccountBalanceItem(privKey: seed));
       accountsToRequest.add(address);
     }
     return accountsToRequest;

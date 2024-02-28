@@ -10,7 +10,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
-import 'package:magic_sdk/magic_sdk.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:quiver/strings.dart';
@@ -52,8 +51,6 @@ import 'package:wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:wallet_flutter/ui/accounts/accounts_sheet.dart';
 import 'package:wallet_flutter/ui/onboard_sheet.dart';
 import 'package:wallet_flutter/ui/settings/backup/backupseed_sheet.dart';
-import 'package:wallet_flutter/ui/settings/magic/change_magic_password_sheet.dart';
-import 'package:wallet_flutter/ui/settings/magic/change_magic_seed_sheet.dart';
 import 'package:wallet_flutter/ui/settings/node/change_node_sheet.dart';
 import 'package:wallet_flutter/ui/settings/password/set_pin_sheet.dart';
 import 'package:wallet_flutter/ui/settings/password/set_plausible_pin_sheet.dart';
@@ -72,8 +69,6 @@ import 'package:wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';
 import 'package:wallet_flutter/ui/widgets/draggable_scrollbar.dart';
-import 'package:wallet_flutter/ui/widgets/funding_message_card.dart';
-import 'package:wallet_flutter/ui/widgets/funding_messages_sheet.dart';
 import 'package:wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:wallet_flutter/ui/widgets/remote_message_card.dart';
 import 'package:wallet_flutter/ui/widgets/remote_message_sheet.dart';
@@ -147,7 +142,7 @@ class SettingsSheetState extends State<SettingsSheet>
   late bool _useNanoOpen;
 
   bool _loggedInWithMagic = false;
-  final Magic magic = Magic.instance;
+  // final Magic magic = Magic.instance;
 
   // Called if transfer fails
   void transferError() {
@@ -405,19 +400,19 @@ class SettingsSheetState extends State<SettingsSheet>
     });
 
     // logged in with magic?
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      try {
-        final Magic magic = Magic.instance;
-        if (await magic.user.isLoggedIn()) {
-          if (!mounted) return;
-          setState(() {
-            _loggedInWithMagic = true;
-          });
-        }
-      } catch (e) {
-        log.e(e.toString());
-      }
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) async {
+    //   try {
+    //     final Magic magic = Magic.instance;
+    //     if (await magic.user.isLoggedIn()) {
+    //       if (!mounted) return;
+    //       setState(() {
+    //         _loggedInWithMagic = true;
+    //       });
+    //     }
+    //   } catch (e) {
+    //     log.e(e.toString());
+    //   }
+    // });
   }
 
   StreamSubscription<TransferConfirmEvent>? _transferConfirmSub;
@@ -2614,35 +2609,35 @@ class SettingsSheetState extends State<SettingsSheet>
                               context: context, widget: SetPinSheet());
                         }, disabled: false),
                       ]),
-                      if (_loggedInWithMagic)
-                        Column(children: <Widget>[
-                          Divider(
-                              height: 2,
-                              color:
-                                  StateContainer.of(context).curTheme.text15),
-                          AppSettings.buildSettingsListItemSingleLine(
-                              context,
-                              Z.of(context).changePassword,
-                              AppIcons.walletpassword, onPressed: () {
-                            Sheets.showAppHeightNineSheet(
-                                context: context,
-                                widget: ChangeMagicPasswordSheet());
-                          }, disabled: false),
-                        ]),
-                      if (_loggedInWithMagic)
-                        Column(children: <Widget>[
-                          Divider(
-                              height: 2,
-                              color:
-                                  StateContainer.of(context).curTheme.text15),
-                          AppSettings.buildSettingsListItemSingleLine(
-                              context, Z.of(context).changeSeed, Icons.vpn_key,
-                              onPressed: () {
-                            Sheets.showAppHeightNineSheet(
-                                context: context,
-                                widget: ChangeMagicSeedSheet());
-                          }, disabled: false),
-                        ]),
+                      // if (_loggedInWithMagic)
+                      //   Column(children: <Widget>[
+                      //     Divider(
+                      //         height: 2,
+                      //         color:
+                      //             StateContainer.of(context).curTheme.text15),
+                      //     AppSettings.buildSettingsListItemSingleLine(
+                      //         context,
+                      //         Z.of(context).changePassword,
+                      //         AppIcons.walletpassword, onPressed: () {
+                      //       Sheets.showAppHeightNineSheet(
+                      //           context: context,
+                      //           widget: ChangeMagicPasswordSheet());
+                      //     }, disabled: false),
+                      //   ]),
+                      // if (_loggedInWithMagic)
+                      //   Column(children: <Widget>[
+                      //     Divider(
+                      //         height: 2,
+                      //         color:
+                      //             StateContainer.of(context).curTheme.text15),
+                      //     AppSettings.buildSettingsListItemSingleLine(
+                      //         context, Z.of(context).changeSeed, Icons.vpn_key,
+                      //         onPressed: () {
+                      //       Sheets.showAppHeightNineSheet(
+                      //           context: context,
+                      //           widget: ChangeMagicSeedSheet());
+                      //     }, disabled: false),
+                      //   ]),
                       Divider(
                           height: 2,
                           color: StateContainer.of(context).curTheme.text15),
@@ -3404,13 +3399,13 @@ class SettingsSheetState extends State<SettingsSheet>
       log.e(e.toString());
     }
 
-    try {
-      if (_loggedInWithMagic) {
-        await magic.user.logout();
-      }
-    } catch (e) {
-      log.e(e.toString());
-    }
+    // try {
+    //   if (_loggedInWithMagic) {
+    //     await magic.user.logout();
+    //   }
+    // } catch (e) {
+    //   log.e(e.toString());
+    // }
 
     try {
       // Delete all data

@@ -25,13 +25,15 @@ class MyInAppBrowser extends InAppBrowser {
     if (await canLaunchUrl(url)) {
       await launchUrl(url);
     }
-    return CustomSchemeResponse(contentType: "text/html", data: <int>[0] as Uint8List);
+    return CustomSchemeResponse(
+        contentType: "text/html", data: <int>[0] as Uint8List);
   }
 }
 
 class UIUtil {
   static Widget threeLineAddressText(BuildContext context, String address,
-      {ThreeLineAddressTextType type = ThreeLineAddressTextType.PRIMARY, String? contactName}) {
+      {ThreeLineAddressTextType type = ThreeLineAddressTextType.PRIMARY,
+      String? contactName}) {
     final String stringPartOne = address.substring(0, 12);
     final String stringPartTwo = address.substring(12, 22);
     final String stringPartThree = address.substring(22, 44);
@@ -86,7 +88,8 @@ class UIUtil {
                     style: AppStyles.textStyleAddressText60(context),
                   ),
                   TextSpan(
-                      text: stringPartFive, style: AppStyles.textStyleAddressPrimary60(context)),
+                      text: stringPartFive,
+                      style: AppStyles.textStyleAddressPrimary60(context)),
                 ],
               ),
             )
@@ -97,7 +100,9 @@ class UIUtil {
         if (contactName != null) {
           contactWidget = RichText(
               textAlign: TextAlign.center,
-              text: TextSpan(text: contactName, style: AppStyles.textStyleAddressPrimary(context)));
+              text: TextSpan(
+                  text: contactName,
+                  style: AppStyles.textStyleAddressPrimary(context)));
         } else {
           contactWidget = const SizedBox();
         }
@@ -155,7 +160,9 @@ class UIUtil {
         if (contactName != null) {
           contactWidget = RichText(
               textAlign: TextAlign.center,
-              text: TextSpan(text: contactName, style: AppStyles.textStyleAddressSuccess(context)));
+              text: TextSpan(
+                  text: contactName,
+                  style: AppStyles.textStyleAddressSuccess(context)));
         } else {
           contactWidget = const SizedBox();
         }
@@ -347,7 +354,8 @@ class UIUtil {
     }
   }
 
-  static Widget threeLineSeedText(BuildContext context, String address, {TextStyle? textStyle}) {
+  static Widget threeLineSeedText(BuildContext context, String address,
+      {TextStyle? textStyle}) {
     textStyle = textStyle ?? AppStyles.textStyleSeed(context);
     final String stringPartOne = address.substring(0, 22);
     final String stringPartTwo = address.substring(22, 44);
@@ -370,7 +378,8 @@ class UIUtil {
     );
   }
 
-  static Widget sixLineSeedText(BuildContext context, String address, {TextStyle? textStyle}) {
+  static Widget sixLineSeedText(BuildContext context, String address,
+      {TextStyle? textStyle}) {
     textStyle = textStyle ?? AppStyles.textStyleSeed(context);
     final String stringPartOne = address.substring(0, 22);
     final String stringPartTwo = address.substring(22, 44);
@@ -408,7 +417,8 @@ class UIUtil {
     );
   }
 
-  static Future<void> showBlockExplorerWebview(BuildContext context, String? hash) async {
+  static Future<void> showBlockExplorerWebview(
+      BuildContext context, String? hash) async {
     cancelLockEvent();
     // final InAppBrowser browser = InAppBrowser();
     // final InAppBrowserClassOptions options = InAppBrowserClassOptions(
@@ -417,13 +427,14 @@ class UIUtil {
     //       toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
     //     ),
     //     inAppWebViewGroupOptions: InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
-    final String url =
-        NonTranslatable.getBlockExplorerUrl(hash, StateContainer.of(context).curBlockExplorer);
+    final String url = NonTranslatable.getBlockExplorerUrl(
+        hash, StateContainer.of(context).curBlockExplorer);
     // await browser.openUrlRequest(urlRequest: URLRequest(url: Uri.parse(url)), options: options);
     showChromeSafariWebview(context, url);
   }
 
-  static Future<void> showAccountWebview(BuildContext context, String? account) async {
+  static Future<void> showAccountWebview(
+      BuildContext context, String? account) async {
     cancelLockEvent();
     // final InAppBrowser browser = InAppBrowser();
     // final InAppBrowserClassOptions options = InAppBrowserClassOptions(
@@ -432,8 +443,8 @@ class UIUtil {
     //       toolbarTopBackgroundColor: StateContainer.of(context).curTheme.primary,
     //     ),
     //     inAppWebViewGroupOptions: InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions(javaScriptEnabled: true)));
-    final String url =
-        NonTranslatable.getAccountExplorerUrl(account, StateContainer.of(context).curBlockExplorer);
+    final String url = NonTranslatable.getAccountExplorerUrl(
+        account, StateContainer.of(context).curBlockExplorer);
     // await browser.openUrlRequest(urlRequest: URLRequest(url: Uri.parse(url)), options: options);
     showChromeSafariWebview(context, url);
   }
@@ -451,23 +462,34 @@ class UIUtil {
         crossPlatform: InAppWebViewOptions(
           javaScriptEnabled: true,
           cacheEnabled: true,
-          resourceCustomSchemes: ["nano", "nanopay", "nanoauth", "nanosub", "nautilus"],
+          resourceCustomSchemes: [
+            "nano",
+            "nanopay",
+            "nanoauth",
+            "nanosub",
+            "nautilus"
+          ],
           useShouldOverrideUrlLoading: true,
         ),
       ),
     );
-    await browser.openUrlRequest(urlRequest: URLRequest(url: Uri.parse(url)), options: options);
+    await browser.openUrlRequest(
+        urlRequest: URLRequest(url: WebUri.uri(Uri.parse(url))),
+        options: options);
   }
 
-  static Future<void> showChromeSafariWebview(BuildContext context, String url) async {
+  static Future<void> showChromeSafariWebview(
+      BuildContext context, String url) async {
     cancelLockEvent();
     final ChromeSafariBrowser browser = ChromeSafariBrowser();
 
-    final ChromeSafariBrowserClassOptions options = ChromeSafariBrowserClassOptions(
-      android: AndroidChromeCustomTabsOptions(shareState: CustomTabsShareState.SHARE_STATE_OFF),
+    final ChromeSafariBrowserClassOptions options =
+        ChromeSafariBrowserClassOptions(
+      android: AndroidChromeCustomTabsOptions(
+          shareState: CustomTabsShareState.SHARE_STATE_OFF),
       ios: IOSSafariOptions(barCollapsingEnabled: true),
     );
-    await browser.open(url: Uri.parse(url), options: options);
+    await browser.open(url: WebUri.uri(Uri.parse(url)), options: options);
   }
 
   static double drawerWidth(BuildContext context) {
@@ -500,23 +522,20 @@ class UIUtil {
   }
 
   static Future<Image?> getQRImage(BuildContext context, String data) async {
-    final PrettyQrCodePainter painter = PrettyQrCodePainter(
+    final QrCode qrCode = QrCode.fromData(
       data: data,
       errorCorrectLevel: QrErrorCorrectLevel.M,
-      roundEdges: true,
-      typeNumber: 9,
     );
+
+    final QrImage qrImage = QrImage(qrCode);
+
     if (MediaQuery.of(context).size.width == 0) {
       return null;
     }
 
-    final ui.PictureRecorder recorder = ui.PictureRecorder();
-    final ui.Canvas canvas = Canvas(recorder);
     final double qrSize = MediaQuery.of(context).size.width;
-    painter.paint(canvas, Size(qrSize, qrSize));
-    final ui.Picture pic = recorder.endRecording();
-    final ui.Image image = await pic.toImage(qrSize.toInt(), qrSize.toInt());
-    final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    final ByteData? byteData = await qrImage.toImageAsBytes(
+        size: qrSize.toInt(), format: ui.ImageByteFormat.png);
     return Image.memory(byteData!.buffer.asUint8List());
   }
 
@@ -529,7 +548,9 @@ class UIUtil {
           child: Container(
             // margin: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.07, horizontal: 14),
             margin: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * topMarginPercent, left: 14, right: 14),
+                top: MediaQuery.of(context).size.height * topMarginPercent,
+                left: 14,
+                right: 14),
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
             width: MediaQuery.of(context).size.width - 30,
             decoration: BoxDecoration(
@@ -625,7 +646,8 @@ class UIUtil {
 /// This is used so that the elevation of the container is kept and the
 /// drop shadow is not clipped.
 class SizeTransitionNoClip extends AnimatedWidget {
-  const SizeTransitionNoClip({required Animation<double> sizeFactor, this.child})
+  const SizeTransitionNoClip(
+      {required Animation<double> sizeFactor, this.child})
       : super(listenable: sizeFactor);
 
   final Widget? child;

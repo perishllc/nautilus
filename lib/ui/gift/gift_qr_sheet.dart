@@ -36,23 +36,20 @@ class GiftQRSheetState extends State<GiftQRSheet> {
   Widget? qrWidget;
 
   Future<Image?> getQRImage(String data) async {
-    final PrettyQrCodePainter painter = PrettyQrCodePainter(
+    final QrCode qrCode = QrCode.fromData(
       data: data,
       errorCorrectLevel: QrErrorCorrectLevel.M,
-      roundEdges: true,
-      typeNumber: 9,
     );
+
+    final QrImage qrImage = QrImage(qrCode);
+
     if (MediaQuery.of(context).size.width == 0) {
       return null;
     }
 
-    final ui.PictureRecorder recorder = ui.PictureRecorder();
-    final ui.Canvas canvas = Canvas(recorder);
     final double qrSize = MediaQuery.of(context).size.width;
-    painter.paint(canvas, Size(qrSize, qrSize));
-    final ui.Picture pic = recorder.endRecording();
-    final ui.Image image = await pic.toImage(qrSize.toInt(), qrSize.toInt());
-    final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    final ByteData? byteData = await qrImage.toImageAsBytes(
+        size: qrSize.toInt(), format: ui.ImageByteFormat.png);
     return Image.memory(byteData!.buffer.asUint8List());
   }
 

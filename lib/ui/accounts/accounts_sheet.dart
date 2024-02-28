@@ -142,7 +142,7 @@ class AppAccountsSheetState extends State<AppAccountsSheet> {
         await _handleAccountsBalancesResponse(resp);
       }
     } catch (e) {
-      sl.get<Logger>().e("Error", e);
+      sl.get<Logger>().e("Error $e");
     }
   }
 

@@ -12,7 +12,6 @@ import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:logger/logger.dart';
-import 'package:magic_sdk/magic_sdk.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/firebase_options.dart';
@@ -31,7 +30,6 @@ import 'package:wallet_flutter/ui/intro/intro_backup_confirm.dart';
 import 'package:wallet_flutter/ui/intro/intro_backup_safety.dart';
 import 'package:wallet_flutter/ui/intro/intro_backup_seed.dart';
 import 'package:wallet_flutter/ui/intro/intro_import_seed.dart';
-import 'package:wallet_flutter/ui/intro/intro_login.dart';
 import 'package:wallet_flutter/ui/intro/intro_magic_password.dart';
 import 'package:wallet_flutter/ui/intro/intro_new_existing.dart';
 import 'package:wallet_flutter/ui/intro/intro_password.dart';
@@ -70,7 +68,7 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform, name: "wallet_flutter");
 
   await FirebaseAppCheck.instance.activate(
-    webRecaptchaSiteKey: dotenv.env["CAPTCHA_SITE_KEY"],
+    // webRecaptchaSiteKey: dotenv.env["CAPTCHA_SITE_KEY"],
   );
   FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
 
@@ -90,7 +88,7 @@ Future<void> main() async {
 
   runApp(const StateContainer(child: App()));
 
-  Magic.instance = Magic(dotenv.env["MAGIC_SDK_KEY"]!);
+  // Magic.instance = Magic(dotenv.env["MAGIC_SDK_KEY"]!);
 }
 
 class App extends StatefulWidget {
@@ -223,7 +221,7 @@ class AppState extends State<App> {
                 builder: (_) => Stack(
                   children: [
                     AppHomePage(priceConversion: settings.arguments as PriceConversion?),
-                    Magic.instance.relayer,
+                    // Magic.instance.relayer,
                   ],
                 ),
                 settings: settings,
@@ -238,16 +236,16 @@ class AppState extends State<App> {
                 builder: (_) => IntroWelcomePage(),
                 settings: settings,
               );
-            case '/intro_login':
-              return NoTransitionRoute(
-                builder: (_) => Stack(
-                  children: [
-                    IntroLoginPage(),
-                    Magic.instance.relayer,
-                  ],
-                ),
-                settings: settings,
-              );
+            // case '/intro_login':
+            //   return NoTransitionRoute(
+            //     builder: (_) => Stack(
+            //       children: [
+            //         IntroLoginPage(),
+            //         Magic.instance.relayer,
+            //       ],
+            //     ),
+            //     settings: settings,
+            //   );
             case '/intro_magic_password':
               return MaterialPageRoute(
                 builder: (_) => IntroMagicPassword(

@@ -219,7 +219,7 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         Navigator.of(context).pop();
       }
       widget.errorCallback!();
-      sl.get<Logger>().e("Error processing wallet", e);
+      sl.get<Logger>().e("Error processing wallet $e");
       return;
     } finally {
       state!.unlockCallback();
@@ -256,7 +256,7 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
       state!.requestUpdate();
     } catch (e) {
       // Less-important error
-      sl.get<Logger>().e("Error processing wallet", e);
+      sl.get<Logger>().e("Error processing wallet $e");
     } finally {
       state!.unlockCallback();
     }
@@ -311,7 +311,7 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         }
       }
     } catch (e) {
-      sl.get<Logger>().e("Error processing wallet", e);
+      sl.get<Logger>().e("Error processing wallet $e");
       return BigInt.zero;
     } finally {
       // state.unlockCallback();
@@ -433,7 +433,7 @@ class AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
       //   Navigator.of(context).pop();
       // }
       // widget.errorCallback();
-      sl.get<Logger>().e("Error processing wallet", e);
+      sl.get<Logger>().e("Error processing wallet $e");
       return BigInt.zero;
     } finally {
       // state.unlockCallback();

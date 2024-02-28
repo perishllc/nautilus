@@ -265,7 +265,7 @@ class AccountService {
       _channel!.stream
           .listen(_onMessageReceived, onDone: connectionClosed, onError: connectionClosedError);
     } catch (e) {
-      log.e("Error from service ${e.toString()}", e);
+      log.e("Error from service ${e.toString()}");
       _isConnected = false;
       _isConnecting = false;
       EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));

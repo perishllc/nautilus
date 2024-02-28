@@ -315,7 +315,7 @@ class _ContactsListState extends State<ContactsList> {
           UIUtil.showSnackbar(Z.of(context).noContactsImport, context);
         }
       } catch (e) {
-        log.e(e.toString(), e);
+        log.e(e.toString());
         if (!mounted) {
           return;
         }

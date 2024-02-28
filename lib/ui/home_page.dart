@@ -15,6 +15,12 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:keframe/keframe.dart';
 import 'package:logger/logger.dart';
+import 'package:nfc_manager/nfc_manager.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:quiver/strings.dart';
+import 'package:rate_my_app/rate_my_app.dart';
+import 'package:searchbar_animation/searchbar_animation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wallet_flutter/app_icons.dart';
 import 'package:wallet_flutter/appstate_container.dart';
 import 'package:wallet_flutter/bus/blocked_modified_event.dart';
@@ -56,7 +62,6 @@ import 'package:wallet_flutter/ui/business/calc_sheet.dart';
 import 'package:wallet_flutter/ui/handoff/handoff_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/home/wallet_info.dart';
 import 'package:wallet_flutter/ui/popup_button.dart';
-import 'package:wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:wallet_flutter/ui/receive/receive_show_qr.dart';
 import 'package:wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
@@ -74,22 +79,15 @@ import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/custom_worker.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';
 import 'package:wallet_flutter/ui/widgets/draggable_scrollbar.dart';
-import 'package:wallet_flutter/ui/widgets/transaction_cards.dart';
-import 'package:wallet_flutter/ui/widgets/hcaptcha.dart';
 import 'package:wallet_flutter/ui/widgets/list_gradient.dart';
 import 'package:wallet_flutter/ui/widgets/reactive_refresh.dart';
 import 'package:wallet_flutter/ui/widgets/remote_message_card.dart';
 import 'package:wallet_flutter/ui/widgets/remote_message_sheet.dart';
 import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:wallet_flutter/ui/widgets/transaction_cards.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/hapticutil.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
-import 'package:nfc_manager/nfc_manager.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:quiver/strings.dart';
-import 'package:rate_my_app/rate_my_app.dart';
-import 'package:searchbar_animation/searchbar_animation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
 class AppHomePage extends StatefulWidget {
@@ -439,22 +437,22 @@ class AppHomePageState extends State<AppHomePage>
             break;
           case 1:
             // transfer to this wallet:
-            String? hcaptchaToken;
-            if (requireCaptcha) {
-              await AppDialogs.showInfoDialog(
-                context,
-                Z.of(context).captchaWarning,
-                Z.of(context).captchaWarningBody,
-                barrierDismissible: false,
-                closeText: CaseChange.toUpperCase(Z.of(context).ok, context),
-              );
-              if (!mounted) return;
-              await Navigator.of(context).push(
-                MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-                  return HCaptcha((String code) => hcaptchaToken = code);
-                }),
-              );
-            }
+            // String? hcaptchaToken;
+            // if (requireCaptcha) {
+            //   await AppDialogs.showInfoDialog(
+            //     context,
+            //     Z.of(context).captchaWarning,
+            //     Z.of(context).captchaWarningBody,
+            //     barrierDismissible: false,
+            //     closeText: CaseChange.toUpperCase(Z.of(context).ok, context),
+            //   );
+            //   if (!mounted) return;
+            //   await Navigator.of(context).push(
+            //     MaterialPageRoute<dynamic>(builder: (BuildContext context) {
+            //       return HCaptcha((String code) => hcaptchaToken = code);
+            //     }),
+            //   );
+            // }
             if (!mounted) return;
 
             // not really worth actually checking the captcha, just send the gift anyway:
@@ -590,23 +588,23 @@ class AppHomePageState extends State<AppHomePage>
           case 0:
             // transfer to this wallet:
 
-            String? hcaptchaToken;
+            // String? hcaptchaToken;
 
-            if (requireCaptcha) {
-              await AppDialogs.showInfoDialog(
-                context,
-                Z.of(context).captchaWarning,
-                Z.of(context).captchaWarningBody,
-                barrierDismissible: false,
-                closeText: CaseChange.toUpperCase(Z.of(context).ok, context),
-              );
-              if (!mounted) return;
-              await Navigator.of(context).push(
-                MaterialPageRoute<dynamic>(builder: (BuildContext context) {
-                  return HCaptcha((String code) => hcaptchaToken = code);
-                }),
-              );
-            }
+            // if (requireCaptcha) {
+            //   await AppDialogs.showInfoDialog(
+            //     context,
+            //     Z.of(context).captchaWarning,
+            //     Z.of(context).captchaWarningBody,
+            //     barrierDismissible: false,
+            //     closeText: CaseChange.toUpperCase(Z.of(context).ok, context),
+            //   );
+            //   if (!mounted) return;
+            //   await Navigator.of(context).push(
+            //     MaterialPageRoute<dynamic>(builder: (BuildContext context) {
+            //       return HCaptcha((String code) => hcaptchaToken = code);
+            //     }),
+            //   );
+            // }
             if (!mounted) return;
 
             // show loading animation for ~5 seconds:
@@ -620,7 +618,7 @@ class AppHomePageState extends State<AppHomePage>
             final dynamic res = await sl.get<GiftCards>().giftCardClaim(
                   giftUUID: giftUUID,
                   requestingAccount: requestingAccount,
-                  hcaptchaToken: hcaptchaToken,
+                  // hcaptchaToken: hcaptchaToken,
                 );
             if (!mounted) return;
 
@@ -941,7 +939,7 @@ class AppHomePageState extends State<AppHomePage>
               );
         } catch (e) {
           // in case something is wrong with the rust code:
-          log.e('Error checking username', e);
+          log.e('Error checking username $e');
         }
       }
 

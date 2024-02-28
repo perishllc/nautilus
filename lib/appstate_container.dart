@@ -398,7 +398,7 @@ class StateContainerState extends State<StateContainer> {
         addActiveOrSettingsAlert(null, alert);
       }
     } catch (e) {
-      log.e("Error retrieving alert", e);
+      log.e("Error retrieving alert $e");
       return;
     }
   }
@@ -417,7 +417,7 @@ class StateContainerState extends State<StateContainer> {
           await sl.get<MetadataService>().getFunding(localeString);
       updateFundingAlerts(fundingAlerts);
     } catch (e) {
-      log.e("Error retrieving funding", e);
+      log.e("Error retrieving funding $e");
       return;
     }
   }
@@ -442,7 +442,7 @@ class StateContainerState extends State<StateContainer> {
         addActiveOrSettingsAlert(branchAlert, null);
       }
     } catch (e) {
-      log.e("Error connecting to branch.io", e);
+      log.e("Error connecting to branch.io $e");
       addActiveOrSettingsAlert(branchAlert, null);
       return;
     }
@@ -1116,104 +1116,104 @@ class StateContainerState extends State<StateContainer> {
       log.d("Receive is for a different account: $link_as_account");
       return null; // added to prevent unnecessary receives when using local work generation
 
-      final AccountInfoResponse accountResp =
-          await sl.get<AccountService>().getAccountInfo(link_as_account);
-      final String seed = await getSeed();
-      Account? correctAccount;
-      final List<Account> accounts = await sl.get<DBHelper>().getAccounts(seed);
-      for (int i = 0; i < accounts.length; i++) {
-        if (accounts[i].address == link_as_account) {
-          correctAccount = accounts[i];
-          break;
-        }
-      }
-
-      if (correctAccount == null) {
-        log.d("Could not find account for $link_as_account");
-        receivableRequests.remove(item.hash);
-        return null;
-      }
-
-      final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
-      final NanoDerivationType derivationType =
-          NanoUtilities.derivationMethodToType(derivationMethod);
-      final String privKey = await NanoDerivations.universalSeedToPrivate(
-        seed,
-        index: correctAccount.index!,
-        type: derivationType,
-      );
-
-      // publish open:
-      if (accountResp.openBlock == null) {
-        sl.get<Logger>().d("Handling ${item.hash} as open");
-        try {
-          final ProcessResponse resp = await sl
-              .get<AccountService>()
-              .requestOpen(item.amount, item.hash, link_as_account, privKey);
-          wallet!.openBlock = resp.hash;
-          wallet!.frontier = resp.hash;
-          receivableRequests.remove(item.hash);
-          alreadyReceived.add(item.hash);
-          // don't add to history list since we're not on the current account
-          // return resp.hash;
-          return null;
-        } catch (e) {
-          receivableRequests.remove(item.hash);
-          sl.get<Logger>().e("Error creating open", e);
-        }
-      } else {
-        try {
-          final ProcessResponse resp = await sl.get<AccountService>().requestReceive(
-              wallet!.representative,
-              accountResp.frontier,
-              item.amount,
-              item.hash,
-              link_as_account,
-              privKey);
-          // wallet.frontier = resp.hash;
-          receivableRequests.remove(item.hash);
-          alreadyReceived.add(item.hash);
-        } catch (e) {
-          receivableRequests.remove(item.hash);
-          sl.get<Logger>().e("Error creating receive", e);
-        }
-      }
-
-      // receive any other receivables first?:
-      //{
-      // BigInt totalTransferred = BigInt.zero;
-      // AccountBalanceItem balanceItem = new AccountBalanceItem();
-      // // Get frontiers first
-      // if (!accountResp.unopened) {
-      //   balanceItem.frontier = accountResp.frontier;
-      // }
-      // // Receive receivable blocks
-      // ReceivableResponse pr = await sl.get<AccountService>().getReceivable(link_as_account, 20);
-      // Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks;
-      // for (String hash in receivableBlocks.keys) {
-      //   ReceivableResponseItem item = receivableBlocks[hash];
-      //   if (balanceItem.frontier != null) {
-      //     ProcessResponse resp = await sl
-      //         .get<AccountService>()
-      //         .requestReceive(AppWallet.defaultRepresentative, balanceItem.frontier, item.amount, hash, link_as_account, balanceItem.privKey);
-      //     if (resp.hash != null) {
-      //       balanceItem.frontier = resp.hash;
-      //       totalTransferred += BigInt.parse(item.amount);
-      //     }
-      //   } else {
-      //     ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, hash, link_as_account, balanceItem.privKey);
-      //     if (resp.hash != null) {
-      //       balanceItem.frontier = resp.hash;
-      //       totalTransferred += BigInt.parse(item.amount);
-      //     }
+      // final AccountInfoResponse accountResp =
+      //     await sl.get<AccountService>().getAccountInfo(link_as_account);
+      // final String seed = await getSeed();
+      // Account? correctAccount;
+      // final List<Account> accounts = await sl.get<DBHelper>().getAccounts(seed);
+      // for (int i = 0; i < accounts.length; i++) {
+      //   if (accounts[i].address == link_as_account) {
+      //     correctAccount = accounts[i];
+      //     break;
       //   }
-      //   // Hack that waits for blocks to be confirmed
-      //   await Future<dynamic>.delayed(const Duration(milliseconds: 300));
       // }
-      //}
 
-      // don't add to the history view since we're on the wrong account:
-      return null;
+      // if (correctAccount == null) {
+      //   log.d("Could not find account for $link_as_account");
+      //   receivableRequests.remove(item.hash);
+      //   return null;
+      // }
+
+      // final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+      // final NanoDerivationType derivationType =
+      //     NanoUtilities.derivationMethodToType(derivationMethod);
+      // final String privKey = await NanoDerivations.universalSeedToPrivate(
+      //   seed,
+      //   index: correctAccount.index!,
+      //   type: derivationType,
+      // );
+
+      // // publish open:
+      // if (accountResp.openBlock == null) {
+      //   sl.get<Logger>().d("Handling ${item.hash} as open");
+      //   try {
+      //     final ProcessResponse resp = await sl
+      //         .get<AccountService>()
+      //         .requestOpen(item.amount, item.hash, link_as_account, privKey);
+      //     wallet!.openBlock = resp.hash;
+      //     wallet!.frontier = resp.hash;
+      //     receivableRequests.remove(item.hash);
+      //     alreadyReceived.add(item.hash);
+      //     // don't add to history list since we're not on the current account
+      //     // return resp.hash;
+      //     return null;
+      //   } catch (e) {
+      //     receivableRequests.remove(item.hash);
+      //     sl.get<Logger>().e("Error creating open", e);
+      //   }
+      // } else {
+      //   try {
+      //     final ProcessResponse resp = await sl.get<AccountService>().requestReceive(
+      //         wallet!.representative,
+      //         accountResp.frontier,
+      //         item.amount,
+      //         item.hash,
+      //         link_as_account,
+      //         privKey);
+      //     // wallet.frontier = resp.hash;
+      //     receivableRequests.remove(item.hash);
+      //     alreadyReceived.add(item.hash);
+      //   } catch (e) {
+      //     receivableRequests.remove(item.hash);
+      //     sl.get<Logger>().e("Error creating receive", e);
+      //   }
+      // }
+
+      // // receive any other receivables first?:
+      // //{
+      // // BigInt totalTransferred = BigInt.zero;
+      // // AccountBalanceItem balanceItem = new AccountBalanceItem();
+      // // // Get frontiers first
+      // // if (!accountResp.unopened) {
+      // //   balanceItem.frontier = accountResp.frontier;
+      // // }
+      // // // Receive receivable blocks
+      // // ReceivableResponse pr = await sl.get<AccountService>().getReceivable(link_as_account, 20);
+      // // Map<String, ReceivableResponseItem> receivableBlocks = pr.blocks;
+      // // for (String hash in receivableBlocks.keys) {
+      // //   ReceivableResponseItem item = receivableBlocks[hash];
+      // //   if (balanceItem.frontier != null) {
+      // //     ProcessResponse resp = await sl
+      // //         .get<AccountService>()
+      // //         .requestReceive(AppWallet.defaultRepresentative, balanceItem.frontier, item.amount, hash, link_as_account, balanceItem.privKey);
+      // //     if (resp.hash != null) {
+      // //       balanceItem.frontier = resp.hash;
+      // //       totalTransferred += BigInt.parse(item.amount);
+      // //     }
+      // //   } else {
+      // //     ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, hash, link_as_account, balanceItem.privKey);
+      // //     if (resp.hash != null) {
+      // //       balanceItem.frontier = resp.hash;
+      // //       totalTransferred += BigInt.parse(item.amount);
+      // //     }
+      // //   }
+      // //   // Hack that waits for blocks to be confirmed
+      // //   await Future<dynamic>.delayed(const Duration(milliseconds: 300));
+      // // }
+      // //}
+
+      // // don't add to the history view since we're on the wrong account:
+      // return null;
       // throw Exception("Not on the correct account to receive this");
     } else if (wallet!.openBlock == null) {
       // Publish open
@@ -1229,7 +1229,7 @@ class StateContainerState extends State<StateContainer> {
         return resp.hash;
       } catch (e) {
         receivableRequests.remove(item.hash);
-        sl.get<Logger>().e("Error creating open", e);
+        sl.get<Logger>().e("Error creating open $e");
       }
     } else {
       // Publish receive
@@ -1251,7 +1251,7 @@ class StateContainerState extends State<StateContainer> {
         return resp.hash;
       } catch (e) {
         receivableRequests.remove(item.hash);
-        sl.get<Logger>().e("Error creating receive", e);
+        sl.get<Logger>().e("Error creating receive $e");
       }
     }
     return null;
@@ -1299,7 +1299,7 @@ class StateContainerState extends State<StateContainer> {
     try {
       accountResp = await sl.get<AccountService>().getAccountInfo(wallet!.address!);
     } catch (e) {
-      log.e("Error getting account info", e);
+      log.e("Error getting account info $e");
     }
 
     // get account representative:
@@ -1308,7 +1308,7 @@ class StateContainerState extends State<StateContainer> {
       representativeResp =
           await sl.get<AccountService>().requestAccountRepresentative(wallet!.address!);
     } catch (e) {
-      log.e("Error getting representative", e);
+      log.e("Error getting representative $e");
     }
 
     EventTaxiImpl.singleton().fire(ConfirmationHeightChangedEvent(
@@ -1510,7 +1510,7 @@ class StateContainerState extends State<StateContainer> {
       }
     } catch (e) {
       // TODO: handle account history error
-      log.e("account_history e", e);
+      log.e("account_history $e");
     }
   }
 
