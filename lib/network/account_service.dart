@@ -9,6 +9,7 @@ import 'package:collection/collection.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:logger/logger.dart';
@@ -738,16 +739,18 @@ class AccountService {
   // NEEDS PoW
 
   Future<String?> requestWork(String url, String hash) async {
+    var body = {
+      "action": "work_generate",
+      "hash": hash,
+    };
+    if (url == "https://rpc.nano.to") {
+      body["key"] = dotenv.env["RPC_NANO_TO"]!;
+    }
     return http
         .post(
       Uri.parse(url),
       headers: {'Content-type': 'application/json'},
-      body: json.encode(
-        {
-          "action": "work_generate",
-          "hash": hash,
-        },
-      ),
+      body: json.encode(body),
     )
         .then((http.Response response) {
       if (response.statusCode == 200) {
