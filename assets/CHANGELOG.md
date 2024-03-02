@@ -3,6 +3,7 @@
 - nanoauth / nanopay updates
 - Remove captcha option on gift cards
 - Updated a lot of dependencies
+- Tracking warning goes away permanently when dismissed now
 #### Fixed
 - Fix intro / welcome screen
 - Remove advanced options on the send confirm screen when they shouldn't be there
