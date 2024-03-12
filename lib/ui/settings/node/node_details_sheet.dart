@@ -174,7 +174,7 @@ class NodeDetailsSheetState extends State<NodeDetailsSheet> {
                         autocorrect: false,
                         keyboardType: TextInputType.text,
                         inputFormatters: [
-                          LengthLimitingTextInputFormatter(100),
+                          LengthLimitingTextInputFormatter(200),
                         ],
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
@@ -192,7 +192,7 @@ class NodeDetailsSheetState extends State<NodeDetailsSheet> {
                         autocorrect: false,
                         keyboardType: TextInputType.text,
                         inputFormatters: [
-                          LengthLimitingTextInputFormatter(100),
+                          LengthLimitingTextInputFormatter(200),
                         ],
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
