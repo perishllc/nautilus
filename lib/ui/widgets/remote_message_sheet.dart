@@ -15,11 +15,15 @@ import 'package:wallet_flutter/network/model/response/alerts_response_item.dart'
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
+import 'package:wallet_flutter/ui/settings/rep/changerepresentative_sheet.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:wallet_flutter/ui/widgets/buttons.dart';
 import 'package:wallet_flutter/ui/widgets/dialog.dart';
 import 'package:wallet_flutter/ui/widgets/list_gradient.dart';
+import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:wallet_flutter/util/ninja/api.dart';
+import 'package:wallet_flutter/util/ninja/n2_node.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -209,7 +213,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                           context,
                           AppButtonType.PRIMARY,
                           Z.of(context).enableTracking,
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                         bool? trackingEnabled;
                         if (Platform.isIOS) {
                           final TrackingStatus status =
@@ -244,8 +248,18 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                           context,
                           AppButtonType.PRIMARY,
                           Z.of(context).changeRepButton,
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
-
+                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                        Sheets.showAppHeightEightSheet(
+                            context: context,
+                            widget: const AppChangeRepresentativeSheet());
+                        if (!StateContainer.of(context).nanoNodesUpdated) {
+                          N2NodeAPI.getVerifiedNodes()
+                              .then((List<N2Node>? result) {
+                            if (result != null) {
+                              StateContainer.of(context).updateNodes(result);
+                            }
+                          });
+                        }
                       }),
                     ],
                   ),

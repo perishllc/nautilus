@@ -196,7 +196,7 @@ class StateContainerState extends State<StateContainer> {
   List<String?> alreadyReceived = [];
 
   // List of Verified Nano Ninja Nodes
-  bool nanoNinjaUpdated = false;
+  bool nanoNodesUpdated = false;
   List<N2Node> n2Nodes = [];
 
   // gifts!
@@ -484,7 +484,7 @@ class StateContainerState extends State<StateContainer> {
       if (nodes != null) {
         setState(() {
           n2Nodes = nodes!;
-          nanoNinjaUpdated = true;
+          nanoNodesUpdated = true;
         });
       }
     } else {
@@ -492,7 +492,7 @@ class StateContainerState extends State<StateContainer> {
       if (nodes != null) {
         setState(() {
           n2Nodes = nodes!;
-          nanoNinjaUpdated = false;
+          nanoNodesUpdated = false;
         });
       }
     }

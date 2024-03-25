@@ -2866,7 +2866,7 @@ class SettingsSheetState extends State<SettingsSheet>
                         Sheets.showAppHeightEightSheet(
                             context: context,
                             widget: const AppChangeRepresentativeSheet());
-                        if (!StateContainer.of(context).nanoNinjaUpdated) {
+                        if (!StateContainer.of(context).nanoNodesUpdated) {
                           N2NodeAPI.getVerifiedNodes()
                               .then((List<N2Node>? result) {
                             if (result != null) {

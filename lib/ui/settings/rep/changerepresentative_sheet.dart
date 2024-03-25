@@ -46,10 +46,12 @@ class AppChangeRepresentativeSheet extends StatefulWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  _AppChangeRepresentativeSheetState createState() => _AppChangeRepresentativeSheetState();
+  _AppChangeRepresentativeSheetState createState() =>
+      _AppChangeRepresentativeSheetState();
 }
 
-class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSheet> {
+class _AppChangeRepresentativeSheetState
+    extends State<AppChangeRepresentativeSheet> {
   // State variables
   bool _addressCopied = false;
   // Timer reference so we can cancel repeated events
@@ -58,7 +60,9 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
   StreamSubscription<AuthenticatedEvent>? _authSub;
 
   void _registerBus() {
-    _authSub = EventTaxiImpl.singleton().registerTo<AuthenticatedEvent>().listen((event) {
+    _authSub = EventTaxiImpl.singleton()
+        .registerTo<AuthenticatedEvent>()
+        .listen((event) {
       if (event.authType == AUTH_EVENT_TYPE.CHANGE) {
         doChange();
       }
@@ -76,7 +80,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
     return true;
   }
 
-  List<Widget> _getRepresentativeWidgets(BuildContext context, List<N2Node>? list) {
+  List<Widget> _getRepresentativeWidgets(
+      BuildContext context, List<N2Node>? list) {
     if (list == null) {
       return [];
     }
@@ -102,7 +107,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
             style: AppStyles.textStyleDialogHeader(context),
           ),
         ),
-        children: _getRepresentativeWidgets(context, StateContainer.of(context).n2Nodes));
+        children: _getRepresentativeWidgets(
+            context, StateContainer.of(context).n2Nodes));
   }
 
   String _sanitizeAlias(String? alias) {
@@ -115,44 +121,73 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
   bool _animationOpen = false;
   N2Node _rep = N2Node(account: AppWallet.nautilusRepresentative);
 
-  Widget _buildSingleRepresentative(N2Node rep, BuildContext context) {
+  Widget _buildSingleRepresentative(N2Node rep, BuildContext context,
+      {bool isList = true}) {
     return Column(
       children: <Widget>[
-        Divider(
-          height: 2,
-          color: StateContainer.of(context).curTheme.text15,
-        ),
+        if (isList)
+          Divider(
+            height: 2,
+            color: StateContainer.of(context).curTheme.text15,
+          ),
         TextButton(
           style: TextButton.styleFrom(
-            foregroundColor: StateContainer.of(context).curTheme.text15, padding: EdgeInsets.zero,
+            foregroundColor: StateContainer.of(context).curTheme.text15,
+            padding: EdgeInsets.zero,
             // highlightColor: StateContainer.of(context).curTheme.text15,
             // splashColor: StateContainer.of(context).curTheme.text15,
           ),
           onPressed: () async {
-            if (!NanoAccounts.isValid(NonTranslatable.accountType, rep.account!)) {
+            if (!isList) {
+              Clipboard.setData(ClipboardData(
+                  text: StateContainer.of(context).wallet!.representative));
+              setState(() {
+                _addressCopied = true;
+              });
+              if (_addressCopiedTimer != null) {
+                _addressCopiedTimer!.cancel();
+              }
+              _addressCopiedTimer =
+                  Timer(const Duration(milliseconds: 800), () {
+                setState(() {
+                  _addressCopied = false;
+                });
+              });
+              return;
+            }
+            
+            if (!NanoAccounts.isValid(
+                NonTranslatable.accountType, rep.account!)) {
               return;
             }
             _rep = rep;
             // Authenticate
-            final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-            final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
+            final AuthenticationMethod authMethod =
+                await sl.get<SharedPrefsUtil>().getAuthMethod();
+            final bool hasBiometrics =
+                await sl.get<BiometricUtil>().hasBiometrics();
             // if (!mounted) return;
             if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
               try {
                 final bool authenticated = await sl
                     .get<BiometricUtil>()
-                    .authenticateWithBiometrics(context, Z.of(context).changeRepAuthenticate);
+                    .authenticateWithBiometrics(
+                        context, Z.of(context).changeRepAuthenticate);
                 if (authenticated) {
                   sl.get<HapticUtil>().fingerprintSucess();
-                  EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
+                  EventTaxiImpl.singleton()
+                      .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
                 }
               } catch (e) {
                 await authenticateWithPin(rep.account, context);
               }
-            } else if (authMethod.method == AuthMethod.PIN || (authMethod.method == AuthMethod.BIOMETRICS && !hasBiometrics)) {
+            } else if (authMethod.method == AuthMethod.PIN ||
+                (authMethod.method == AuthMethod.BIOMETRICS &&
+                    !hasBiometrics)) {
               await authenticateWithPin(rep.account, context);
             } else {
-              EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
+              EventTaxiImpl.singleton()
+                  .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
             }
           },
           child: Container(
@@ -185,7 +220,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               TextSpan(
                                 text: "${Z.of(context).votingWeight}: ",
                                 style: TextStyle(
-                                  color: StateContainer.of(context).curTheme.text,
+                                  color:
+                                      StateContainer.of(context).curTheme.text,
                                   fontWeight: FontWeight.w100,
                                   fontSize: 14.0,
                                   fontFamily: 'Nunito Sans',
@@ -194,7 +230,9 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               TextSpan(
                                 text: rep.weight.toString(),
                                 style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.primary,
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .primary,
                                     fontWeight: FontWeight.w700,
                                     fontSize: 14.0,
                                     fontFamily: 'Nunito Sans'),
@@ -202,7 +240,9 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               TextSpan(
                                 text: "%",
                                 style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.primary,
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .primary,
                                     fontWeight: FontWeight.w700,
                                     fontSize: 14.0,
                                     fontFamily: 'Nunito Sans'),
@@ -220,7 +260,9 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               TextSpan(
                                 text: "${Z.of(context).uptime}: ",
                                 style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.text,
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .text,
                                     fontWeight: FontWeight.w100,
                                     fontSize: 14.0,
                                     fontFamily: 'Nunito Sans'),
@@ -228,7 +270,9 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               TextSpan(
                                 text: rep.uptime,
                                 style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.primary,
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .primary,
                                     fontWeight: FontWeight.w700,
                                     fontSize: 14.0,
                                     fontFamily: 'Nunito Sans'),
@@ -257,7 +301,9 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                           (rep.score).toString(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: StateContainer.of(context).curTheme.backgroundDark,
+                            color: StateContainer.of(context)
+                                .curTheme
+                                .backgroundDark,
                             fontSize: 13,
                             fontWeight: FontWeight.w800,
                             fontFamily: 'Nunito Sans',
@@ -288,7 +334,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
       StateContainer.of(context).wallet!.representative = _rep.account!;
       UIUtil.showSnackbar(Z.of(context).changeRepSucces, context);
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-    } else if (StateContainer.of(context).wallet!.representative == _rep.account) {
+    } else if (StateContainer.of(context).wallet!.representative ==
+        _rep.account) {
       // sleep for 2 seconds:
       await Future<dynamic>.delayed(const Duration(seconds: 2));
       // representative is the same as the current one:
@@ -298,7 +345,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
       UIUtil.showSnackbar(Z.of(context).changeRepSame, context);
     } else {
       try {
-        final String derivationMethod = await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
+        final String derivationMethod =
+            await sl.get<SharedPrefsUtil>().getKeyDerivationMethod();
         final NanoDerivationType derivationType =
             NanoUtilities.derivationMethodToType(derivationMethod);
         final String privKey = await NanoDerivations.universalSeedToPrivate(
@@ -306,12 +354,14 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
           index: StateContainer.of(context).selectedAccount!.index!,
           type: derivationType,
         );
-        final ProcessResponse resp = await sl.get<AccountService>().requestChange(
-            StateContainer.of(context).wallet!.address,
-            _rep.account,
-            StateContainer.of(context).wallet!.frontier,
-            StateContainer.of(context).wallet!.accountBalance.toString(),
-            privKey);
+        final ProcessResponse resp = await sl
+            .get<AccountService>()
+            .requestChange(
+                StateContainer.of(context).wallet!.address,
+                _rep.account,
+                StateContainer.of(context).wallet!.frontier,
+                StateContainer.of(context).wallet!.accountBalance.toString(),
+                privKey);
         StateContainer.of(context).wallet!.representative = _rep.account!;
         StateContainer.of(context).wallet!.frontier = resp.hash;
         UIUtil.showSnackbar(Z.of(context).changeRepSucces, context);
@@ -334,7 +384,18 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
 
   @override
   Widget build(BuildContext context) {
-    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+    return StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+      N2Node? currentNode;
+      if (StateContainer.of(context).n2Nodes != null) {
+        for (N2Node node in StateContainer.of(context).n2Nodes!) {
+          if (node.account ==
+              StateContainer.of(context).wallet!.representative) {
+            currentNode = node;
+            break;
+          }
+        }
+      }
       return WillPopScope(
           onWillPop: _onWillPop,
           child: SafeArea(
@@ -358,11 +419,13 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                             Handlebars.horizontal(context),
                             Container(
                               margin: const EdgeInsets.only(top: 15),
-                              constraints:
-                                  BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 140),
+                              constraints: BoxConstraints(
+                                  maxWidth:
+                                      MediaQuery.of(context).size.width - 140),
                               child: AutoSizeText(
                                 CaseChange.toUpperCase(
-                                    Z.of(context).changeRepAuthenticate, context),
+                                    Z.of(context).changeRepAuthenticate,
+                                    context),
                                 style: AppStyles.textStyleHeader(context),
                                 textAlign: TextAlign.center,
                                 maxLines: 2,
@@ -375,24 +438,35 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                         Container(
                           width: 50,
                           height: 50,
-                          margin: const EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
+                          margin: const EdgeInsetsDirectional.only(
+                              top: 10.0, end: 10.0),
                           child: TextButton(
                             style: TextButton.styleFrom(
-                              foregroundColor: StateContainer.of(context).curTheme.text15,
-                              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                              foregroundColor:
+                                  StateContainer.of(context).curTheme.text15,
+                              backgroundColor: StateContainer.of(context)
+                                  .curTheme
+                                  .backgroundDark,
                               disabledForegroundColor:
-                                  StateContainer.of(context).curTheme.text15?.withOpacity(0.38),
+                                  StateContainer.of(context)
+                                      .curTheme
+                                      .text15
+                                      ?.withOpacity(0.38),
                               padding: const EdgeInsets.all(13.0),
-                              shape:
-                                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
                               tapTargetSize: MaterialTapTargetSize.padded,
                             ),
                             onPressed: () {
                               AppDialogs.showInfoDialog(
-                                  context, Z.of(context).repInfoHeader, Z.of(context).repInfo);
+                                  context,
+                                  Z.of(context).repInfoHeader,
+                                  Z.of(context).repInfo);
                             },
                             child: Icon(AppIcons.info,
-                                size: 24, color: StateContainer.of(context).curTheme.text),
+                                size: 24,
+                                color:
+                                    StateContainer.of(context).curTheme.text),
                           ),
                         ),
                       ],
@@ -415,56 +489,85 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               // Currently represented by text
                               Container(
                                   margin: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width * 0.105,
-                                      right: MediaQuery.of(context).size.width * 0.105),
+                                      left: MediaQuery.of(context).size.width *
+                                          0.105,
+                                      right: MediaQuery.of(context).size.width *
+                                          0.105),
                                   child: Text(
                                     Z.of(context).currentlyRepresented,
-                                    style: AppStyles.textStyleParagraph(context),
+                                    style:
+                                        AppStyles.textStyleParagraph(context),
                                   )),
+
                               // Current representative
-                              GestureDetector(
-                                onTap: () {
-                                  Clipboard.setData(ClipboardData(
-                                      text: StateContainer.of(context).wallet!.representative));
-                                  setState(() {
-                                    _addressCopied = true;
-                                  });
-                                  if (_addressCopiedTimer != null) {
-                                    _addressCopiedTimer!.cancel();
-                                  }
-                                  _addressCopiedTimer =
-                                      Timer(const Duration(milliseconds: 800), () {
+                              if (currentNode != null)
+                                _buildSingleRepresentative(
+                                  currentNode,
+                                  context,
+                                  isList: false,
+                                )
+                              else
+                                GestureDetector(
+                                  onTap: () {
+                                    Clipboard.setData(ClipboardData(
+                                        text: StateContainer.of(context)
+                                            .wallet!
+                                            .representative));
                                     setState(() {
-                                      _addressCopied = false;
+                                      _addressCopied = true;
                                     });
-                                  });
-                                },
-                                child: Container(
-                                  width: double.infinity,
-                                  margin: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width * 0.105,
-                                      right: MediaQuery.of(context).size.width * 0.105,
-                                      top: 10),
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
-                                  decoration: BoxDecoration(
-                                    color: StateContainer.of(context).curTheme.backgroundDarkest,
-                                    borderRadius: BorderRadius.circular(25),
+                                    if (_addressCopiedTimer != null) {
+                                      _addressCopiedTimer!.cancel();
+                                    }
+                                    _addressCopiedTimer = Timer(
+                                        const Duration(milliseconds: 800), () {
+                                      setState(() {
+                                        _addressCopied = false;
+                                      });
+                                    });
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    margin: EdgeInsets.only(
+                                        left:
+                                            MediaQuery.of(context).size.width *
+                                                0.105,
+                                        right:
+                                            MediaQuery.of(context).size.width *
+                                                0.105,
+                                        top: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 25.0, vertical: 15.0),
+                                    decoration: BoxDecoration(
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .backgroundDarkest,
+                                      borderRadius: BorderRadius.circular(25),
+                                    ),
+                                    child: UIUtil.threeLineAddressText(
+                                        context,
+                                        StateContainer.of(context)
+                                            .wallet!
+                                            .representative,
+                                        type: _addressCopied
+                                            ? ThreeLineAddressTextType
+                                                .SUCCESS_FULL
+                                            : ThreeLineAddressTextType.PRIMARY),
                                   ),
-                                  child: UIUtil.threeLineAddressText(
-                                      context, StateContainer.of(context).wallet!.representative,
-                                      type: _addressCopied
-                                          ? ThreeLineAddressTextType.SUCCESS_FULL
-                                          : ThreeLineAddressTextType.PRIMARY),
                                 ),
-                              ),
                               // Address Copied text container
                               Container(
-                                margin: const EdgeInsets.only(top: 5, bottom: 5),
-                                child: Text(_addressCopied ? Z.of(context).addressCopied : "",
+                                margin:
+                                    const EdgeInsets.only(top: 5, bottom: 5),
+                                child: Text(
+                                    _addressCopied
+                                        ? Z.of(context).addressCopied
+                                        : "",
                                     style: TextStyle(
                                       fontSize: 14.0,
-                                      color: StateContainer.of(context).curTheme.success,
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .success,
                                       fontFamily: "NunitoSans",
                                       fontWeight: FontWeight.w600,
                                     )),
@@ -483,40 +586,60 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                             AppButton.buildAppButton(
                               context,
                               AppButtonType.PRIMARY,
-                              Z.of(context).useAppRep.replaceAll("%1", NonTranslatable.appName),
+                              Z
+                                  .of(context)
+                                  .useAppRep
+                                  .replaceAll("%1", NonTranslatable.appName),
                               Dimens.BUTTON_TOP_DIMENS,
                               onPressed: () async {
-                                if (!NanoAccounts.isValid(NonTranslatable.accountType,
+                                if (!NanoAccounts.isValid(
+                                    NonTranslatable.accountType,
                                     AppWallet.nautilusRepresentative)) {
                                   return;
                                 }
-                                _rep = N2Node(account: AppWallet.nautilusRepresentative);
+                                _rep = N2Node(
+                                    account: AppWallet.nautilusRepresentative);
                                 // Authenticate
-                                final AuthenticationMethod authMethod =
-                                    await sl.get<SharedPrefsUtil>().getAuthMethod();
-                                final bool hasBiometrics =
-                                    await sl.get<BiometricUtil>().hasBiometrics();
-                                if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
+                                final AuthenticationMethod authMethod = await sl
+                                    .get<SharedPrefsUtil>()
+                                    .getAuthMethod();
+                                final bool hasBiometrics = await sl
+                                    .get<BiometricUtil>()
+                                    .hasBiometrics();
+                                if (authMethod.method ==
+                                        AuthMethod.BIOMETRICS &&
+                                    hasBiometrics) {
                                   try {
                                     final bool authenticated = await sl
                                         .get<BiometricUtil>()
                                         .authenticateWithBiometrics(
-                                            context, Z.of(context).changeRepAuthenticate);
+                                            context,
+                                            Z
+                                                .of(context)
+                                                .changeRepAuthenticate);
                                     if (authenticated) {
                                       sl.get<HapticUtil>().fingerprintSucess();
-                                      EventTaxiImpl.singleton()
-                                          .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
+                                      EventTaxiImpl.singleton().fire(
+                                          AuthenticatedEvent(
+                                              AUTH_EVENT_TYPE.CHANGE));
                                     }
                                   } catch (e) {
                                     await authenticateWithPin(
-                                        AppWallet.nautilusRepresentative, context);
+                                        AppWallet.nautilusRepresentative,
+                                        context);
                                   }
-                                } else if (authMethod.method == AuthMethod.PIN || (authMethod.method == AuthMethod.BIOMETRICS && !hasBiometrics)) {
+                                } else if (authMethod.method ==
+                                        AuthMethod.PIN ||
+                                    (authMethod.method ==
+                                            AuthMethod.BIOMETRICS &&
+                                        !hasBiometrics)) {
                                   await authenticateWithPin(
-                                      AppWallet.nautilusRepresentative, context);
+                                      AppWallet.nautilusRepresentative,
+                                      context);
                                 } else {
-                                  EventTaxiImpl.singleton()
-                                      .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
+                                  EventTaxiImpl.singleton().fire(
+                                      AuthenticatedEvent(
+                                          AUTH_EVENT_TYPE.CHANGE));
                                 }
                               },
                             ),
@@ -529,10 +652,13 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               AppButtonType.PRIMARY_OUTLINE,
                               Z.of(context).pickFromList,
                               Dimens.BUTTON_BOTTOM_DIMENS,
-                              disabled: StateContainer.of(context).n2Nodes == null,
+                              disabled:
+                                  StateContainer.of(context).n2Nodes == null,
                               onPressed: () {
                                 showDialog(
-                                    barrierColor: StateContainer.of(context).curTheme.barrier,
+                                    barrierColor: StateContainer.of(context)
+                                        .curTheme
+                                        .barrier,
                                     context: context,
                                     builder: (BuildContext context) {
                                       return _buildRepresenativeDialog(context);
@@ -551,7 +677,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               onPressed: () {
                                 Sheets.showAppHeightEightSheet(
                                     context: context,
-                                    widget: ChangeRepManualSheet(TextEditingController()));
+                                    widget: ChangeRepManualSheet(
+                                        TextEditingController()));
                               },
                             ),
                           ],
@@ -568,8 +695,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
     // PIN Authentication
     final String? expectedPin = await sl.get<Vault>().getPin();
     final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
-    final bool? auth =
-        await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+    final bool? auth = await Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
@@ -579,7 +706,8 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
     }));
     if (auth != null && auth) {
       await Future<dynamic>.delayed(const Duration(milliseconds: 200));
-      EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
+      EventTaxiImpl.singleton()
+          .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
     }
   }
 }
