@@ -78,6 +78,7 @@ import 'package:wallet_flutter/util/biometrics.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/hapticutil.dart';
 import 'package:wallet_flutter/util/ninja/api.dart';
+import 'package:wallet_flutter/util/ninja/n2_node.dart';
 import 'package:wallet_flutter/util/ninja/ninja_node.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
 
@@ -2866,11 +2867,11 @@ class SettingsSheetState extends State<SettingsSheet>
                             context: context,
                             widget: const AppChangeRepresentativeSheet());
                         if (!StateContainer.of(context).nanoNinjaUpdated) {
-                          NinjaAPI.getVerifiedNodes()
-                              .then((List<NinjaNode>? result) {
+                          N2NodeAPI.getVerifiedNodes()
+                              .then((List<N2Node>? result) {
                             if (result != null) {
                               StateContainer.of(context)
-                                  .updateNinjaNodes(result);
+                                  .updateNodes(result);
                             }
                           });
                         }

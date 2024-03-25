@@ -14,6 +14,7 @@ import 'package:wallet_flutter/model/currency_mode_setting.dart';
 import 'package:wallet_flutter/model/device_lock_timeout.dart';
 import 'package:wallet_flutter/model/vault.dart';
 import 'package:wallet_flutter/model/wallet.dart';
+import 'package:wallet_flutter/network/alert_codes.dart';
 import 'package:wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/util/deviceutil.dart';
@@ -625,9 +626,10 @@ class SharedPrefsUtil {
     // don't remove this preference since it's annoying when you log out:
     // await prefs.remove(tracking_enabled);
     // remove the dismissals of any important alerts:
-    await prefs.remove("alert_4040");
-    await prefs.remove("alert_4041");
-    await prefs.remove("alert_4042");
-    await prefs.remove("alert_4043");
+    await prefs.remove("alert_${AlertCodes.BRANCH_CONNECTION}");
+    await prefs.remove("alert_${AlertCodes.CONNECTION_WARNING}");
+    await prefs.remove("alert_${AlertCodes.NOTIFICATIONS_DISABLED}");
+    await prefs.remove("alert_${AlertCodes.TRACKING_DISABLED}");
+    await prefs.remove("alert_${AlertCodes.BAD_REP_WARNING}");
   }
 }

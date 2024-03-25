@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'ninja_node.g.dart';
+part 'n2_node.g.dart';
 
 double? _toDouble(num v) {
   return double.tryParse(v.toString());
@@ -12,14 +12,14 @@ BigInt _toBigInt(num v) {
 
 /// Represent a node that is returned from the MyNanoNinja API
 @JsonSerializable()
-class NinjaNode {
+class N2Node {
 
-  NinjaNode({this.weight, this.uptime, this.score, this.account, this.alias});
+  N2Node({this.weight, this.uptime, this.score, this.account, this.alias});
 
-  factory NinjaNode.fromJson(Map<String, dynamic> json) => _$NinjaNodeFromJson(json);
+  factory N2Node.fromJson(Map<String, dynamic> json) => _$N2NodeFromJson(json);
 
-  @JsonKey(name: 'uptime', fromJson: _toDouble)
-  double? uptime;
+  @JsonKey(name: 'uptime')
+  String? uptime;
   
   @JsonKey(name: 'weight', fromJson: _toDouble)
   double? weight;
@@ -27,10 +27,10 @@ class NinjaNode {
   @JsonKey(name: 'score')
   int? score;
 
-  @JsonKey(name: 'account')
+  @JsonKey(name: 'rep_address')
   String? account;
 
   @JsonKey(name: 'alias')
   String? alias;
-  Map<String, dynamic> toJson() => _$NinjaNodeToJson(this);
+  Map<String, dynamic> toJson() => _$N2NodeToJson(this);
 }

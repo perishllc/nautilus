@@ -10,6 +10,7 @@ import 'package:wallet_flutter/bus/notification_setting_change_event.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
 import 'package:wallet_flutter/model/notification_setting.dart';
+import 'package:wallet_flutter/network/alert_codes.dart';
 import 'package:wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
@@ -179,7 +180,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                       }),
                     ],
                   ),
-                if (widget.alert?.id == 4042)
+                if (widget.alert?.id == AlertCodes.NOTIFICATIONS_DISABLED)
                   Row(
                     children: <Widget>[
                       AppButton.buildAppButton(
@@ -201,7 +202,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                       }),
                     ],
                   ),
-                if (widget.alert?.id == 4043)
+                if (widget.alert?.id == AlertCodes.TRACKING_DISABLED)
                   Row(
                     children: <Widget>[
                       AppButton.buildAppButton(
@@ -236,6 +237,18 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                       }),
                     ],
                   ),
+                if (widget.alert?.id == AlertCodes.BAD_REP_WARNING)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context,
+                          AppButtonType.PRIMARY,
+                          Z.of(context).changeRepButton,
+                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+
+                      }),
+                    ],
+                  ),
                 if (widget.hasDismissButton && widget.alert!.dismissable)
                   Row(
                     children: <Widget>[
@@ -245,7 +258,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                           Z.of(context).dismiss,
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         // tracking warning alert:
-                        if (widget.alert?.id == 4043) {
+                        if (widget.alert?.permanentlyDismissable ?? false) {
                           sl.get<SharedPrefsUtil>().dismissAlert(widget.alert!);
                         } else {
                           sl

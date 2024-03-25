@@ -1,4 +1,7 @@
-## v0.9.6 - [2024-03-15]
+## v0.9.7 - [2024-03-30]
+#### Changed
+- replace mynano.ninja with nano.to reps api
+## v0.9.6 - [2024-03-12]
 #### Changed
 - nanoauth / nanopay updates
 - Remove captcha option on gift cards

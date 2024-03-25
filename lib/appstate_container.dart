@@ -36,6 +36,7 @@ import 'package:wallet_flutter/model/db/user.dart';
 import 'package:wallet_flutter/model/vault.dart';
 import 'package:wallet_flutter/model/wallet.dart';
 import 'package:wallet_flutter/network/account_service.dart';
+import 'package:wallet_flutter/network/alert_codes.dart';
 import 'package:wallet_flutter/network/metadata_service.dart';
 import 'package:wallet_flutter/network/model/block_types.dart';
 import 'package:wallet_flutter/network/model/fcm_message_event.dart';
@@ -64,6 +65,7 @@ import 'package:wallet_flutter/themes.dart';
 import 'package:wallet_flutter/util/box.dart';
 import 'package:wallet_flutter/util/nanoutil.dart';
 import 'package:wallet_flutter/util/ninja/api.dart';
+import 'package:wallet_flutter/util/ninja/n2_node.dart';
 import 'package:wallet_flutter/util/ninja/ninja_node.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
 
@@ -195,7 +197,7 @@ class StateContainerState extends State<StateContainer> {
 
   // List of Verified Nano Ninja Nodes
   bool nanoNinjaUpdated = false;
-  List<NinjaNode> nanoNinjaNodes = [];
+  List<N2Node> n2Nodes = [];
 
   // gifts!
   // TODO: turn into a map:
@@ -209,9 +211,9 @@ class StateContainerState extends State<StateContainer> {
     gift = null;
   }
 
-  void updateNinjaNodes(List<NinjaNode> list) {
+  void updateNodes(List<N2Node> list) {
     setState(() {
-      nanoNinjaNodes = list;
+      n2Nodes = list;
     });
   }
 
@@ -231,9 +233,9 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       if (active != null) {
         // if this is alert 4041 (connection warning) and 4040 is in the stack, remove it:
-        if (active.id == 4041 &&
-            activeAlerts.any((AlertResponseItem element) => element.id == 4040)) {
-          activeAlerts.removeWhere((AlertResponseItem element) => element.id == 4040);
+        if (active.id == AlertCodes.CONNECTION_WARNING &&
+            activeAlerts.any((AlertResponseItem element) => element.id == AlertCodes.BRANCH_CONNECTION)) {
+          activeAlerts.removeWhere((AlertResponseItem element) => element.id == AlertCodes.BRANCH_CONNECTION);
         }
 
         // disallow duplicates:
@@ -425,7 +427,7 @@ class StateContainerState extends State<StateContainer> {
   Future<void> checkBranchConnection() async {
     // check if we can reach the branch server:
     final AlertResponseItem branchAlert = AlertResponseItem(
-      id: 4040,
+      id: AlertCodes.BRANCH_CONNECTION,
       active: true,
       title: Z.current.branchConnectErrorTitle,
       shortDescription: Z.current.branchConnectErrorShortDesc,
@@ -448,21 +450,48 @@ class StateContainerState extends State<StateContainer> {
     }
   }
 
-  Future<void> checkAndCacheNinjaAPIResponse() async {
-    List<NinjaNode>? nodes;
+  Future<void> checkRepGood() async {
+    // check if we can reach the branch server:
+    final AlertResponseItem alert = AlertResponseItem(
+      id: AlertCodes.BAD_REP_WARNING,
+      active: true,
+      title: "Bad Representative Warning",
+      shortDescription: "Your representative does not appear to be in good standing, tap here to change it.",
+      longDescription: "Your representative does not appear to be in good standing, please consider changing it for the health of the network.",
+      dismissable: true,
+    );
+    try {
+      if (n2Nodes.isNotEmpty && (wallet?.representative.isNotEmpty ?? false)) {
+        final N2Node? node = n2Nodes.firstWhereOrNull((N2Node element) => element.account == wallet!.representative);
+        if (node != null) {
+          if (node.score != null && node.score! < 200) {
+            addActiveOrSettingsAlert(alert, null);
+          }
+        } else {
+          addActiveOrSettingsAlert(alert, null);
+        }
+      }
+    } catch (e) {
+      addActiveOrSettingsAlert(alert, null);
+      return;
+    }
+  }
+
+  Future<void> checkAndCacheNodeAPIResponse() async {
+    List<N2Node>? nodes;
     if ((await sl.get<SharedPrefsUtil>().getNinjaAPICache()) == null) {
-      nodes = await NinjaAPI.getVerifiedNodes();
+      nodes = await N2NodeAPI.getVerifiedNodes();
       if (nodes != null) {
         setState(() {
-          nanoNinjaNodes = nodes!;
+          n2Nodes = nodes!;
           nanoNinjaUpdated = true;
         });
       }
     } else {
-      nodes = await NinjaAPI.getCachedVerifiedNodes();
+      nodes = await N2NodeAPI.getCachedVerifiedNodes();
       if (nodes != null) {
         setState(() {
-          nanoNinjaNodes = nodes!;
+          n2Nodes = nodes!;
           nanoNinjaUpdated = false;
         });
       }
@@ -508,7 +537,7 @@ class StateContainerState extends State<StateContainer> {
       });
     });
     // Cache ninja API if we don't already have it
-    checkAndCacheNinjaAPIResponse();
+    checkAndCacheNodeAPIResponse();
     // Update alert
     checkAndUpdateAlerts();
     // Get funding alerts
@@ -774,7 +803,9 @@ class StateContainerState extends State<StateContainer> {
         watchOnly: watchOnly,
         loading: true,
       );
-      getRequiredAccountInfo();
+      getRequiredAccountInfo().then((_) {
+        checkRepGood();
+      });
       requestUpdate();
       updateSolids();
     });

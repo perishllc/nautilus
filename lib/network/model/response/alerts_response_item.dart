@@ -15,6 +15,7 @@ class AlertResponseItem {
     this.link,
     this.timestamp,
     this.dismissable = true,
+    this.permanentlyDismissable = false,
   });
   
   factory AlertResponseItem.fromJson(Map<String, dynamic> json) => _$AlertResponseItemFromJson(json);
@@ -47,6 +48,9 @@ class AlertResponseItem {
 
   @JsonKey(name: 'dismissable')
   late bool dismissable;
+
+  @JsonKey(name: 'permanently_dismissable')
+  late bool permanentlyDismissable;
 
   bool operator ==(o) => o is AlertResponseItem && o.id == id;
   int get hashCode => id.hashCode;

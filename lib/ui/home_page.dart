@@ -42,6 +42,7 @@ import 'package:wallet_flutter/model/db/txdata.dart';
 import 'package:wallet_flutter/model/db/user.dart';
 import 'package:wallet_flutter/model/list_model.dart';
 import 'package:wallet_flutter/network/account_service.dart';
+import 'package:wallet_flutter/network/alert_codes.dart';
 import 'package:wallet_flutter/network/giftcards.dart';
 import 'package:wallet_flutter/network/metadata_service.dart';
 import 'package:wallet_flutter/network/model/block_types.dart';
@@ -967,7 +968,7 @@ class AppHomePageState extends State<AppHomePage>
 
   Future<void> showConnectionWarning(bool showWarning) async {
     final AlertResponseItem alert = AlertResponseItem(
-      id: 4041,
+      id: AlertCodes.CONNECTION_WARNING,
       active: true,
       title: Z.of(context).connectionWarning,
       shortDescription: Z.of(context).connectionWarningBodyShort,
@@ -1002,7 +1003,7 @@ class AppHomePageState extends State<AppHomePage>
 
   Future<void> showNotificationWarning() async {
     final AlertResponseItem alert = AlertResponseItem(
-      id: 4042,
+      id: AlertCodes.NOTIFICATIONS_DISABLED,
       active: true,
       title: Z.of(context).notificationWarning,
       shortDescription: Z.of(context).notificationWarningBodyShort,
@@ -1017,7 +1018,7 @@ class AppHomePageState extends State<AppHomePage>
 
   Future<void> showTrackingWarning() async {
     final AlertResponseItem alert = AlertResponseItem(
-      id: 4043,
+      id: AlertCodes.TRACKING_DISABLED,
       active: true,
       title: Z.of(context).trackingWarning,
       shortDescription: Z.of(context).trackingWarningBodyShort,
@@ -2629,7 +2630,7 @@ class AppHomePageState extends State<AppHomePage>
     if (alert == null) {
       return const SizedBox();
     }
-    if (alert.id == 4040) {
+    if (alert.id == AlertCodes.BRANCH_CONNECTION) {
       alert.title = Z.of(context).branchConnectErrorTitle;
       alert.shortDescription = Z.of(context).branchConnectErrorShortDesc;
       alert.longDescription = Z.of(context).branchConnectErrorLongDesc;

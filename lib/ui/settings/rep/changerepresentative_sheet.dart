@@ -33,6 +33,8 @@ import 'package:wallet_flutter/util/biometrics.dart';
 import 'package:wallet_flutter/util/caseconverter.dart';
 import 'package:wallet_flutter/util/hapticutil.dart';
 import 'package:wallet_flutter/util/nanoutil.dart';
+import 'package:wallet_flutter/util/ninja/api.dart';
+import 'package:wallet_flutter/util/ninja/n2_node.dart';
 import 'package:wallet_flutter/util/ninja/ninja_node.dart';
 import 'package:wallet_flutter/util/numberutil.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
@@ -74,12 +76,12 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
     return true;
   }
 
-  List<Widget> _getRepresentativeWidgets(BuildContext context, List<NinjaNode>? list) {
+  List<Widget> _getRepresentativeWidgets(BuildContext context, List<N2Node>? list) {
     if (list == null) {
       return [];
     }
     final List<Widget> ret = [];
-    for (final NinjaNode node in list) {
+    for (final N2Node node in list) {
       if (node.alias != null && node.alias!.trim().isNotEmpty) {
         ret.add(_buildSingleRepresentative(
           node,
@@ -100,7 +102,7 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
             style: AppStyles.textStyleDialogHeader(context),
           ),
         ),
-        children: _getRepresentativeWidgets(context, StateContainer.of(context).nanoNinjaNodes));
+        children: _getRepresentativeWidgets(context, StateContainer.of(context).n2Nodes));
   }
 
   String _sanitizeAlias(String? alias) {
@@ -111,9 +113,9 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
   }
 
   bool _animationOpen = false;
-  NinjaNode _rep = NinjaNode(account: AppWallet.nautilusRepresentative);
+  N2Node _rep = N2Node(account: AppWallet.nautilusRepresentative);
 
-  Widget _buildSingleRepresentative(NinjaNode rep, BuildContext context) {
+  Widget _buildSingleRepresentative(N2Node rep, BuildContext context) {
     return Column(
       children: <Widget>[
         Divider(
@@ -190,7 +192,7 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                                 ),
                               ),
                               TextSpan(
-                                text: NumberUtil.getPercentOfTotalSupply(rep.votingWeight!),
+                                text: rep.weight.toString(),
                                 style: TextStyle(
                                     color: StateContainer.of(context).curTheme.primary,
                                     fontWeight: FontWeight.w700,
@@ -224,15 +226,7 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                                     fontFamily: 'Nunito Sans'),
                               ),
                               TextSpan(
-                                text: rep.uptime!.toStringAsFixed(2),
-                                style: TextStyle(
-                                    color: StateContainer.of(context).curTheme.primary,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 14.0,
-                                    fontFamily: 'Nunito Sans'),
-                              ),
-                              TextSpan(
-                                text: "%",
+                                text: rep.uptime,
                                 style: TextStyle(
                                     color: StateContainer.of(context).curTheme.primary,
                                     fontWeight: FontWeight.w700,
@@ -496,7 +490,7 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                                     AppWallet.nautilusRepresentative)) {
                                   return;
                                 }
-                                _rep = NinjaNode(account: AppWallet.nautilusRepresentative);
+                                _rep = N2Node(account: AppWallet.nautilusRepresentative);
                                 // Authenticate
                                 final AuthenticationMethod authMethod =
                                     await sl.get<SharedPrefsUtil>().getAuthMethod();
@@ -535,7 +529,7 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                               AppButtonType.PRIMARY_OUTLINE,
                               Z.of(context).pickFromList,
                               Dimens.BUTTON_BOTTOM_DIMENS,
-                              disabled: StateContainer.of(context).nanoNinjaNodes == null,
+                              disabled: StateContainer.of(context).n2Nodes == null,
                               onPressed: () {
                                 showDialog(
                                     barrierColor: StateContainer.of(context).curTheme.barrier,

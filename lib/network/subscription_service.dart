@@ -54,7 +54,7 @@ class SubscriptionService {
       onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
     );
 
-    setupChineseNewYearNotification();
+    // setupChineseNewYearNotification();
 
     scheduleNotifications();
   }
