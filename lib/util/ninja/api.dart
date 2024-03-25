@@ -6,12 +6,20 @@ import 'package:wallet_flutter/util/ninja/ninja_node.dart';
 import 'package:wallet_flutter/util/sharedprefsutil.dart';
 
 class NinjaAPI {
-  static const String API_URL = 'https://mynano.ninja/api';
+  // static const String API_URL = 'https://mynano.ninja/api';
+  static const String API_URL = 'https://rpc.nano.to';
 
   static Future<String?> getAndCacheAPIResponse() async {
-    const String url = '$API_URL/accounts/verified';
+    const String url = '$API_URL';
     try {
-      final http.Response response = await http.get(Uri.parse(url));
+      final http.Response response = await http.post(Uri.parse(url),
+      headers: AccountService.APP_HEADERS,
+      body: json.encode(
+        <String, dynamic>{
+          "action": "reps",
+        },
+      ),
+      );
       if (response.statusCode != 200) {
         return null;
       }

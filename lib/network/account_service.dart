@@ -84,7 +84,7 @@ class AccountService {
     }();
   }
 
-  static const Map<String, String> NAUTILUS_HEADERS = {
+  static const Map<String, String> APP_HEADERS = {
     "Content-Type": "application/json",
     "nano-app": "nautilus"
   };
@@ -516,7 +516,7 @@ class AccountService {
     await initUrls();
     final http.Response response = await http.post(
       Uri.parse(HTTP_URL),
-      headers: NAUTILUS_HEADERS,
+      headers: APP_HEADERS,
       body: json.encode(request.toJson()),
     );
 
@@ -664,7 +664,7 @@ class AccountService {
 
     final http.Response response = await http.post(
       Uri.parse(URI),
-      headers: NAUTILUS_HEADERS,
+      headers: APP_HEADERS,
       body: json.encode(handoffReplyRequest.toJson()),
     );
 
@@ -699,7 +699,7 @@ class AccountService {
     // return requestHandoff(handoffReplyRequest);
 
     final http.Response response = await http.post(Uri.parse(URI),
-        headers: NAUTILUS_HEADERS,
+        headers: APP_HEADERS,
         body: json.encode(authReplyRequest.toJson()));
 
     if (response.statusCode != 200) {
@@ -738,7 +738,7 @@ class AccountService {
     return http
         .post(
       Uri.parse(url),
-      headers: NAUTILUS_HEADERS,
+      headers: APP_HEADERS,
       body: json.encode(body),
     )
         .then((http.Response response) {
