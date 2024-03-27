@@ -68,7 +68,7 @@ class NonTranslatable {
   }
 
   static String get nautilusNodeUrl {
-    return "https://node.perish.co";
+    return "https://node.nautilus.io";
   }
 
   static String get eulaUrl {

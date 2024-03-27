@@ -95,6 +95,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "هل أنت متاكد من حفظ المفتاح الخاص؟"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("حفظ المفتاح الخاص"),
+        "badRepWarning":
+            MessageLookupByLibrary.simpleMessage("تحذير مندوب سيء"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "لا يبدو أن الممثل الذي اخترته في وضع جيد، يرجى التفكير في تغييره من أجل سلامة الشبكة"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "لا يبدو أن الممثل الذي اخترته في وضع جيد، انقر هنا لاختيار ممثل جديد"),
         "biometricsMethod":
             MessageLookupByLibrary.simpleMessage("القياسات الحيوية"),
         "blockExplorer": MessageLookupByLibrary.simpleMessage("بلوك إكسبلورر"),

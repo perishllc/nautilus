@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "不良代表警告",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "您选择的代表似乎信誉不佳，请考虑更改以保证网络的健康",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "您选择的代表似乎信誉不佳，点击此处选择新代表",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "生物识别技术",
   "@biometricsMethod": {
     "type": "text",

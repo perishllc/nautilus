@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "Amaran Wakil Buruk",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "Wakil pilihan anda nampaknya tidak berada dalam kedudukan yang baik, sila pertimbangkan untuk menukarnya untuk kesihatan rangkaian",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "Wakil pilihan anda nampaknya tidak berada dalam kedudukan yang baik, ketik di sini untuk memilih yang baharu",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "Biometrik",
   "@biometricsMethod": {
     "type": "text",

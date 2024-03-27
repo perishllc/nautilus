@@ -88,6 +88,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "backupSeedConfirm":
             MessageLookupByLibrary.simpleMessage("지갑의 시드를 확실히 백업하셨습니까?"),
         "backupYourSeed": MessageLookupByLibrary.simpleMessage("시드를 백업하세요"),
+        "badRepWarning": MessageLookupByLibrary.simpleMessage("잘못된 대표자 경고"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "선택한 대리인의 상태가 양호하지 않은 것 같습니다. 네트워크 상태를 위해 변경하는 것을 고려해 보세요."),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "선택한 담당자의 상태가 양호하지 않은 것 같습니다. 새 담당자를 선택하려면 여기를 탭하세요."),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("생체 인식"),
         "blockExplorer": MessageLookupByLibrary.simpleMessage("블록 탐색기"),
         "blockExplorerHeader":

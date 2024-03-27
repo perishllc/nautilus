@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "Попередження про поганого представника",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "Вибраний вами представник не має належної репутації, будь ласка, подумайте про його зміну для справності мережі",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "Вибраний вами представник не має належної репутації. Натисніть тут, щоб вибрати нового",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "Біометрика",
   "@biometricsMethod": {
     "type": "text",

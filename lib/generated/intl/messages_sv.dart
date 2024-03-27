@@ -106,6 +106,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Är du säker på att du har säkerhetskopierat din plånboks seed?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("Säkerhetskopiera ditt seed"),
+        "badRepWarning":
+            MessageLookupByLibrary.simpleMessage("Dålig representant varning"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "Din valda representant verkar inte ha god status, överväg att ändra det för nätverkets hälsa"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Din valda representant verkar inte ha god status, tryck här för att välja en ny"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("Biometrik"),
         "blockExplorer":
             MessageLookupByLibrary.simpleMessage("Block Utforskare"),

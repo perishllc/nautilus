@@ -105,6 +105,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "backupSeedConfirm": MessageLookupByLibrary.simpleMessage(
             "Biztos vagy benne, hogy elmentetted a seeded?"),
         "backupYourSeed": MessageLookupByLibrary.simpleMessage("Seed másolása"),
+        "badRepWarning": MessageLookupByLibrary.simpleMessage(
+            "Rossz képviselői figyelmeztetés"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "Úgy tűnik, hogy az Ön által választott képviselő nem jó minősítésű, kérjük, fontolja meg a módosítást a hálózat állapota érdekében"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Úgy tűnik, hogy az Ön által választott képviselő nem jó minősítésű, koppintson ide új képviselő kiválasztásához"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("Biometria"),
         "blockExplorer":
             MessageLookupByLibrary.simpleMessage("Explorer blokkolása"),

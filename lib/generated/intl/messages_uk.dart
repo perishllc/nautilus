@@ -105,6 +105,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "ви впевнені що ви зробили резервну копію seed?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("зробити резервну копію seed"),
+        "badRepWarning": MessageLookupByLibrary.simpleMessage(
+            "Попередження про поганого представника"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "Вибраний вами представник не має належної репутації, будь ласка, подумайте про його зміну для справності мережі"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Вибраний вами представник не має належної репутації. Натисніть тут, щоб вибрати нового"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("Біометрика"),
         "blockExplorer":
             MessageLookupByLibrary.simpleMessage("Explorer блокчейну"),

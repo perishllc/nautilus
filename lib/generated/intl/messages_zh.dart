@@ -83,6 +83,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "backupSeedConfirm":
             MessageLookupByLibrary.simpleMessage("您确认您备份了您的钱包种子吗？"),
         "backupYourSeed": MessageLookupByLibrary.simpleMessage("备份您的种子"),
+        "badRepWarning": MessageLookupByLibrary.simpleMessage("不良代表警告"),
+        "badRepWarningLong":
+            MessageLookupByLibrary.simpleMessage("您选择的代表似乎信誉不佳，请考虑更改以保证网络的健康"),
+        "badRepWarningShort":
+            MessageLookupByLibrary.simpleMessage("您选择的代表似乎信誉不佳，点击此处选择新代表"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("生物识别技术"),
         "blockExplorer": MessageLookupByLibrary.simpleMessage("区块浏览器"),
         "blockExplorerHeader": MessageLookupByLibrary.simpleMessage("区块浏览器信息"),

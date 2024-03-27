@@ -106,6 +106,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sigurado ka ba na na-back up mo na ang iyong wallet seed?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("I-back up ang iyong seed"),
+        "badRepWarning":
+            MessageLookupByLibrary.simpleMessage("Maling Babala ng Kinatawan"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "Ang iyong napiling kinatawan ay mukhang hindi maganda ang katayuan, mangyaring isaalang-alang ang pagbabago nito para sa kalusugan ng network"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Mukhang hindi maganda ang katayuan ng iyong napiling kinatawan, mag-tap dito para pumili ng bago"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("Biometrics"),
         "blockExplorer": MessageLookupByLibrary.simpleMessage("block explorer"),
         "blockExplorerHeader": MessageLookupByLibrary.simpleMessage(

@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "Cảnh báo đại diện xấu",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "Người đại diện mà bạn đã chọn có vẻ không ở trạng thái tốt, vui lòng xem xét thay đổi người đại diện đó vì tình trạng của mạng",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "Người đại diện mà bạn đã chọn có vẻ không ở trạng thái tốt, hãy nhấn vào đây để chọn một người đại diện mới",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "Sinh trắc học",
   "@biometricsMethod": {
     "type": "text",

@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "Rossz képviselői figyelmeztetés",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "Úgy tűnik, hogy az Ön által választott képviselő nem jó minősítésű, kérjük, fontolja meg a módosítást a hálózat állapota érdekében",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "Úgy tűnik, hogy az Ön által választott képviselő nem jó minősítésű, koppintson ide új képviselő kiválasztásához",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "Biometria",
   "@biometricsMethod": {
     "type": "text",

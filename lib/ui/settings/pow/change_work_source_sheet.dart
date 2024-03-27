@@ -356,7 +356,7 @@ class ChangePowSheetState extends State<ChangePowSheet> {
                                       child: Container(
                                         margin: EdgeInsets.zero,
                                         child: Icon(
-                                          Icons.hub,
+                                          Icons.bolt,
                                           color: ws.selected
                                               ? StateContainer.of(context).curTheme.success
                                               : StateContainer.of(context).curTheme.primary,

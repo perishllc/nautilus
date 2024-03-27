@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "تحذير مندوب سيء",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "لا يبدو أن الممثل الذي اخترته في وضع جيد، يرجى التفكير في تغييره من أجل سلامة الشبكة",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "لا يبدو أن الممثل الذي اخترته في وضع جيد، انقر هنا لاختيار ممثل جديد",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "القياسات الحيوية",
   "@biometricsMethod": {
     "type": "text",

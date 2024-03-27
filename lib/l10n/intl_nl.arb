@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "Waarschuwing voor slechte vertegenwoordiger",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "De door u gekozen vertegenwoordiger lijkt geen goede reputatie te hebben. Overweeg om deze vertegenwoordiger te wijzigen voor de gezondheid van het netwerk",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "De door u gekozen vertegenwoordiger lijkt geen goede reputatie te hebben. Tik hier om een nieuwe te kiezen",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "Biometrie",
   "@biometricsMethod": {
     "type": "text",

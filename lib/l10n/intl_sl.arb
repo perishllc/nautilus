@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "Opozorilo o slabem predstavniku",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "Zdi se, da vaš izbrani predstavnik ni v dobrem stanju. Prosimo, da ga spremenite zaradi zdravja omrežja",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "Zdi se, da vaš izbrani predstavnik ni v dobrem stanju, tapnite tukaj, da izberete novega",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "Prstni odtis",
   "@biometricsMethod": {
     "type": "text",

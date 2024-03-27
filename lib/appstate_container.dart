@@ -455,9 +455,9 @@ class StateContainerState extends State<StateContainer> {
     final AlertResponseItem alert = AlertResponseItem(
       id: AlertCodes.BAD_REP_WARNING,
       active: true,
-      title: "Bad Representative Warning",
-      shortDescription: "Your representative does not appear to be in good standing, tap here to change it.",
-      longDescription: "Your representative does not appear to be in good standing, please consider changing it for the health of the network.",
+      title: Z.current.badRepWarning,
+      shortDescription: Z.current.badRepWarningShort,
+      longDescription: Z.current.badRepWarningLong,
       dismissable: true,
     );
     try {

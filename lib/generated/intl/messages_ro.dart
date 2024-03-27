@@ -103,6 +103,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Sunteți sigur/ă că ați salvat seed-ul portofelului?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("Salvați-vă seed-ul (backup)"),
+        "badRepWarning": MessageLookupByLibrary.simpleMessage(
+            "Avertisment de reprezentant rău"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "Reprezentantul ales de dvs. nu pare să fie în stare bună, vă rugăm să luați în considerare schimbarea acestuia pentru sănătatea rețelei"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Reprezentantul ales de dvs. nu pare să fie în stare bună, atingeți aici pentru a alege unul nou"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("Biometria"),
         "blockExplorer": MessageLookupByLibrary.simpleMessage("Bloc Explorer"),
         "blockExplorerHeader": MessageLookupByLibrary.simpleMessage(

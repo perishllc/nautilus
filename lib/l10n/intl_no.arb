@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "Dårlig representantadvarsel",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "Din valgte representant ser ikke ut til å ha god anseelse. Vurder å endre den for nettverkets helse",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "Din valgte representant ser ikke ut til å ha god anseelse. Trykk her for å velge en ny",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "Biometri",
   "@biometricsMethod": {
     "type": "text",

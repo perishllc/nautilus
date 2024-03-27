@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "Kötü Temsilci Uyarısı",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "Seçtiğiniz temsilcinin durumu iyi görünmüyor, lütfen ağın sağlığı için onu değiştirmeyi düşünün",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "Seçtiğiniz temsilcinin durumu iyi görünmüyor, yeni bir temsilci seçmek için buraya dokunun",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "Biyometrik",
   "@biometricsMethod": {
     "type": "text",

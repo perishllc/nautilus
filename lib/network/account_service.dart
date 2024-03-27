@@ -90,9 +90,9 @@ class AccountService {
   };
 // static const String DEFAULT_HTTP_URL = "https://nautilus.perish.co/api";
 // static const String DEFAULT_WS_URL = "wss://nautilus.perish.co";
-  static const String DEFAULT_NODE_NAME = "Perish Node";
-  static const String DEFAULT_HTTP_URL = "http://node.perish.co:9076";
-  static const String DEFAULT_WS_URL = "ws://node.perish.co:9078";
+  static const String DEFAULT_NODE_NAME = "Nautilus Node";
+  static const String DEFAULT_HTTP_URL = "https://node.nautilus.io/rpc";
+  static const String DEFAULT_WS_URL = "wss://node.nautilus.io/socket";
 
   static const String DEFAULT_WORKER_NAME = "nano.to";
   static const String DEFAULT_WORK_URL = "https://rpc.nano.to";

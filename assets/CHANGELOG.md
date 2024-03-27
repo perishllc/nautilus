@@ -1,6 +1,10 @@
 ## v0.9.7 - [2024-03-30]
+#### Added
+- Warning to change your rep if it isn't in good standing
 #### Changed
+- update default node uri
 - replace mynano.ninja with nano.to reps api
+- fix pow source sheet icon to a lightning bolt
 ## v0.9.6 - [2024-03-12]
 #### Changed
 - nanoauth / nanopay updates

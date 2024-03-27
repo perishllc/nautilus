@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "Avviso di cattivo rappresentante",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "Il rappresentante prescelto non sembra essere in regola, ti preghiamo di considerare di cambiarlo per la salute della rete",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "Il rappresentante scelto non sembra essere in regola, tocca qui per sceglierne uno nuovo",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "Biometrica",
   "@biometricsMethod": {
     "type": "text",

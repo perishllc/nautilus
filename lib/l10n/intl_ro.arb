@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "Avertisment de reprezentant rău",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "Reprezentantul ales de dvs. nu pare să fie în stare bună, vă rugăm să luați în considerare schimbarea acestuia pentru sănătatea rețelei",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "Reprezentantul ales de dvs. nu pare să fie în stare bună, atingeți aici pentru a alege unul nou",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "Biometria",
   "@biometricsMethod": {
     "type": "text",

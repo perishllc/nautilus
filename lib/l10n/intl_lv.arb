@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "Brīdinājums par sliktu pārstāvi",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "Šķiet, ka jūsu izvēlētais pārstāvis nav labā stāvoklī. Lūdzu, apsveriet iespēju to mainīt, lai nodrošinātu tīkla stāvokli",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "Šķiet, ka jūsu izvēlētais pārstāvis nav labā stāvoklī. Pieskarieties šeit, lai izvēlētos jaunu",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "Biometriskā atpazīšana",
   "@biometricsMethod": {
     "type": "text",

@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "Peringatan Perwakilan yang Buruk",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "Perwakilan yang Anda pilih tampaknya tidak bereputasi baik, harap pertimbangkan untuk mengubahnya demi kesehatan jaringan",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "Perwakilan yang Anda pilih tampaknya tidak bereputasi baik, ketuk di sini untuk memilih yang baru",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "Biometrik",
   "@biometricsMethod": {
     "type": "text",

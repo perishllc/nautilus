@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "Maling Babala ng Kinatawan",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "Ang iyong napiling kinatawan ay mukhang hindi maganda ang katayuan, mangyaring isaalang-alang ang pagbabago nito para sa kalusugan ng network",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "Mukhang hindi maganda ang katayuan ng iyong napiling kinatawan, mag-tap dito para pumili ng bago",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "Biometrics",
   "@biometricsMethod": {
     "type": "text",

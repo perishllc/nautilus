@@ -101,6 +101,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Apakah anda yakin sudah menyimpan benih anda dengan aman?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("Simpan benih anda"),
+        "badRepWarning": MessageLookupByLibrary.simpleMessage(
+            "Peringatan Perwakilan yang Buruk"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "Perwakilan yang Anda pilih tampaknya tidak bereputasi baik, harap pertimbangkan untuk mengubahnya demi kesehatan jaringan"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Perwakilan yang Anda pilih tampaknya tidak bereputasi baik, ketuk di sini untuk memilih yang baru"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("Biometrik"),
         "blockExplorer":
             MessageLookupByLibrary.simpleMessage("Penjelajah Blok"),

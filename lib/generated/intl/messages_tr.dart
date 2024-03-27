@@ -100,6 +100,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Cüzdanınızın seed\'ini yedeklediğinizden emin misiniz?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("Seed\'inizi yedekleyin"),
+        "badRepWarning":
+            MessageLookupByLibrary.simpleMessage("Kötü Temsilci Uyarısı"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "Seçtiğiniz temsilcinin durumu iyi görünmüyor, lütfen ağın sağlığı için onu değiştirmeyi düşünün"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Seçtiğiniz temsilcinin durumu iyi görünmüyor, yeni bir temsilci seçmek için buraya dokunun"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("Biyometrik"),
         "blockExplorer": MessageLookupByLibrary.simpleMessage("Blok Tarayacı"),
         "blockExplorerHeader":

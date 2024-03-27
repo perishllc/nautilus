@@ -105,6 +105,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "¿Está seguro de haber copiado y almacenado correctamente la semilla de su billetera?"),
         "backupYourSeed": MessageLookupByLibrary.simpleMessage(
             "Haga una copia de seguridad de su semilla"),
+        "badRepWarning": MessageLookupByLibrary.simpleMessage(
+            "Advertencia de mal representante"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "Su representante elegido no parece estar al día, considere cambiarlo por el estado de la red."),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Su representante elegido no parece estar al día, toque aquí para elegir uno nuevo"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("Biometría"),
         "blockExplorer":
             MessageLookupByLibrary.simpleMessage("Explorador de bloques"),

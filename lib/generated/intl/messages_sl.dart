@@ -103,6 +103,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ste prepričani, da ste shranili zasebni ključ?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("Shrani zasebni ključ"),
+        "badRepWarning": MessageLookupByLibrary.simpleMessage(
+            "Opozorilo o slabem predstavniku"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "Zdi se, da vaš izbrani predstavnik ni v dobrem stanju. Prosimo, da ga spremenite zaradi zdravja omrežja"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Zdi se, da vaš izbrani predstavnik ni v dobrem stanju, tapnite tukaj, da izberete novega"),
         "biometricsMethod":
             MessageLookupByLibrary.simpleMessage("Prstni odtis"),
         "blockExplorer": MessageLookupByLibrary.simpleMessage("Blok Explorer"),

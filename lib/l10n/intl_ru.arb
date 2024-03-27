@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "Предупреждение о плохом представителе",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "Выбранный вами представитель не имеет хорошей репутации, рассмотрите возможность его замены ради здоровья сети.",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "Выбранный вами представитель не имеет хорошей репутации. Нажмите здесь, чтобы выбрать нового.",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "Биометрия",
   "@biometricsMethod": {
     "type": "text",

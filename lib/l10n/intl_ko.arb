@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "잘못된 대표자 경고",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "선택한 대리인의 상태가 양호하지 않은 것 같습니다. 네트워크 상태를 위해 변경하는 것을 고려해 보세요.",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "선택한 담당자의 상태가 양호하지 않은 것 같습니다. 새 담당자를 선택하려면 여기를 탭하세요.",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "생체 인식",
   "@biometricsMethod": {
     "type": "text",

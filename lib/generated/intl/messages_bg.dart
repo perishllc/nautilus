@@ -102,6 +102,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Сигурен ли си, че копира твоя Seed?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("Съхрани своя Seed"),
+        "badRepWarning": MessageLookupByLibrary.simpleMessage(
+            "Предупреждение за лош представител"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "Избраният от вас представител изглежда не е в добро състояние, моля, обмислете промяната му за здравето на мрежата"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Избраният от вас представител изглежда не е в добро състояние, докоснете тук, за да изберете нов"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("Биометрични"),
         "blockExplorer": MessageLookupByLibrary.simpleMessage("Експлорер"),
         "blockExplorerHeader": MessageLookupByLibrary.simpleMessage(

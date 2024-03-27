@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "খারাপ প্রতিনিধি সতর্কতা",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "আপনার নির্বাচিত প্রতিনিধি ভাল অবস্থানে আছে বলে মনে হচ্ছে না, দয়া করে নেটওয়ার্কের স্বাস্থ্যের জন্য এটি পরিবর্তন করার কথা বিবেচনা করুন",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "আপনার নির্বাচিত প্রতিনিধি ভাল অবস্থানে আছে বলে মনে হচ্ছে না, একটি নতুন নির্বাচন করতে এখানে আলতো চাপুন৷",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "বায়োমেট্রিক্স",
   "@biometricsMethod": {
     "type": "text",

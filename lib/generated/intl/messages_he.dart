@@ -94,6 +94,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "אתה בטוח שגיבית את הסיד של הארנק שלך?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("גבה את הסיד שלך"),
+        "badRepWarning":
+            MessageLookupByLibrary.simpleMessage("אזהרת נציג גרועה"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "נראה שהנציג שבחרת אינו במצב ניהול תקין, אנא שקול לשנות זאת למען תקינות הרשת"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "נראה שהנציג שבחרת אינו במצב ניהול תקין, הקש כאן כדי לבחור נציג חדש"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("ביומטריה"),
         "blockExplorer": MessageLookupByLibrary.simpleMessage("חסום את סייר"),
         "blockExplorerHeader":

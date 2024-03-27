@@ -82,6 +82,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "backupSeedConfirm":
             MessageLookupByLibrary.simpleMessage("您確認已備份您的錢包種子嗎？"),
         "backupYourSeed": MessageLookupByLibrary.simpleMessage("備份您的種子"),
+        "badRepWarning": MessageLookupByLibrary.simpleMessage("不良代表警告"),
+        "badRepWarningLong":
+            MessageLookupByLibrary.simpleMessage("您選擇的代表似乎信譽不佳，請考慮更改以確保網路的健康"),
+        "badRepWarningShort":
+            MessageLookupByLibrary.simpleMessage("您選擇的代表似乎信譽不佳，點擊此處選擇新代表"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("生物辨識技術"),
         "blockExplorer": MessageLookupByLibrary.simpleMessage("封鎖總管"),
         "blockExplorerHeader": MessageLookupByLibrary.simpleMessage("封鎖總管資訊"),

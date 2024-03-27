@@ -101,6 +101,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Jste si jisti, že jste zálohovali své semínko peněženky?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("Zálohujte své semínko"),
+        "badRepWarning":
+            MessageLookupByLibrary.simpleMessage("Avís de mal representant"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "El representant escollit no sembla estar en bon estat, si us plau, considereu la possibilitat de canviar-lo per la salut de la xarxa"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Sembla que el representant que heu escollit no està en bon estat, toqueu aquí per triar-ne un de nou"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("Biometrie"),
         "blockExplorer":
             MessageLookupByLibrary.simpleMessage("Průzkumník bloků"),

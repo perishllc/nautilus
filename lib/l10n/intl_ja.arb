@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "悪い代表者の警告",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "選択した代表者は良好な状態ではないようです。ネットワークの健全性を考慮して代表者を変更することを検討してください。",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "選択した代表者は良好な状態ではないようです。ここをタップして新しい代表者を選択してください",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "生体認証",
   "@biometricsMethod": {
     "type": "text",

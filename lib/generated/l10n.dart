@@ -550,6 +550,36 @@ class Z {
     );
   }
 
+  /// `Bad Representative Warning`
+  String get badRepWarning {
+    return Intl.message(
+      'Bad Representative Warning',
+      name: 'badRepWarning',
+      desc: 'bad_rep_warning',
+      args: [],
+    );
+  }
+
+  /// `Your chosen representative does not appear to be in good standing, please consider changing it for the health of the network`
+  String get badRepWarningLong {
+    return Intl.message(
+      'Your chosen representative does not appear to be in good standing, please consider changing it for the health of the network',
+      name: 'badRepWarningLong',
+      desc: 'bad_rep_warning_short',
+      args: [],
+    );
+  }
+
+  /// `Your chosen representative does not appear to be in good standing, tap here to choose a new one`
+  String get badRepWarningShort {
+    return Intl.message(
+      'Your chosen representative does not appear to be in good standing, tap here to choose a new one',
+      name: 'badRepWarningShort',
+      desc: 'bad_rep_warning_short',
+      args: [],
+    );
+  }
+
   /// `Biometrics`
   String get biometricsMethod {
     return Intl.message(

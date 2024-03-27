@@ -101,6 +101,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Czy jesteś pewny że zapisałeś nasiono portfela?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("Zapisałeś swoje nasiono?"),
+        "badRepWarning": MessageLookupByLibrary.simpleMessage(
+            "Ostrzeżenie o złym przedstawicielu"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "Wygląda na to, że wybrany przez Ciebie przedstawiciel nie ma dobrej opinii. Rozważ jego zmianę ze względu na zdrowie sieci"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Wygląda na to, że wybrany przez Ciebie przedstawiciel nie ma dobrej opinii. Kliknij tutaj, aby wybrać nowego"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("Biometria"),
         "blockExplorer":
             MessageLookupByLibrary.simpleMessage("Eksplorator bloku"),

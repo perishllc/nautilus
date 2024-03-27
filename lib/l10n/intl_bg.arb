@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "Предупреждение за лош представител",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "Избраният от вас представител изглежда не е в добро състояние, моля, обмислете промяната му за здравето на мрежата",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "Избраният от вас представител изглежда не е в добро състояние, докоснете тук, за да изберете нов",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "Биометрични",
   "@biometricsMethod": {
     "type": "text",

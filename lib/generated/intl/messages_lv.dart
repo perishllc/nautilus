@@ -105,6 +105,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vai esat drošs, ka saglabājāt sēklas rezerves kopiju?"),
         "backupYourSeed": MessageLookupByLibrary.simpleMessage(
             "Izveidojiet sēklas rezerves kopiju"),
+        "badRepWarning": MessageLookupByLibrary.simpleMessage(
+            "Brīdinājums par sliktu pārstāvi"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "Šķiet, ka jūsu izvēlētais pārstāvis nav labā stāvoklī. Lūdzu, apsveriet iespēju to mainīt, lai nodrošinātu tīkla stāvokli"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Šķiet, ka jūsu izvēlētais pārstāvis nav labā stāvoklī. Pieskarieties šeit, lai izvēlētos jaunu"),
         "biometricsMethod":
             MessageLookupByLibrary.simpleMessage("Biometriskā atpazīšana"),
         "blockExplorer": MessageLookupByLibrary.simpleMessage("Block Explorer"),

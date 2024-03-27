@@ -109,6 +109,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Êtes vous sûr d’avoir sauvegardé votre clé privée?"),
         "backupYourSeed": MessageLookupByLibrary.simpleMessage(
             "Sauvegarder votre clé privée"),
+        "badRepWarning": MessageLookupByLibrary.simpleMessage(
+            "Avertissement de mauvais représentant"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "Le représentant que vous avez choisi ne semble pas être en règle, pensez à le changer pour la santé du réseau"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Le représentant que vous avez choisi ne semble pas être en règle, appuyez ici pour en choisir un nouveau."),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("Biométrie"),
         "blockExplorer":
             MessageLookupByLibrary.simpleMessage("Explorateur de blocs"),

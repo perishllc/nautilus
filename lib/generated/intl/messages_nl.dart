@@ -106,6 +106,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Weet je zeker dat jouw wallet seed is opgeslagen?"),
         "backupYourSeed": MessageLookupByLibrary.simpleMessage(
             "Maak een back-up van jouw seed"),
+        "badRepWarning": MessageLookupByLibrary.simpleMessage(
+            "Waarschuwing voor slechte vertegenwoordiger"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "De door u gekozen vertegenwoordiger lijkt geen goede reputatie te hebben. Overweeg om deze vertegenwoordiger te wijzigen voor de gezondheid van het netwerk"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "De door u gekozen vertegenwoordiger lijkt geen goede reputatie te hebben. Tik hier om een nieuwe te kiezen"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("Biometrie"),
         "blockExplorer": MessageLookupByLibrary.simpleMessage("Blok verkenner"),
         "blockExplorerHeader":

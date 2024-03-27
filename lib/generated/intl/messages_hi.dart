@@ -101,6 +101,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "क्या आप निश्चित है की आपने अपने वॉलेट का सीड बैकअप कर लिया है?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("सीड बैकअप करें"),
+        "badRepWarning":
+            MessageLookupByLibrary.simpleMessage("ख़राब प्रतिनिधि चेतावनी"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "आपका चुना हुआ प्रतिनिधि अच्छी स्थिति में नहीं दिखता है, कृपया नेटवर्क की सेहत के लिए इसे बदलने पर विचार करें"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "आपका चुना हुआ प्रतिनिधि अच्छी स्थिति में नहीं दिखता है, नया प्रतिनिधि चुनने के लिए यहां टैप करें"),
         "biometricsMethod":
             MessageLookupByLibrary.simpleMessage("बॉयोमेट्रिक्स"),
         "blockExplorer":

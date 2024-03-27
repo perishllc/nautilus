@@ -250,6 +250,21 @@
     "type": "text",
     "description": "intro_new_wallet_seed_backup_header"
   },
+  "badRepWarning": "אזהרת נציג גרועה",
+  "@badRepWarning": {
+    "type": "text",
+    "description": "bad_rep_warning"
+  },
+  "badRepWarningLong": "נראה שהנציג שבחרת אינו במצב ניהול תקין, אנא שקול לשנות זאת למען תקינות הרשת",
+  "@badRepWarningLong": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
+  "badRepWarningShort": "נראה שהנציג שבחרת אינו במצב ניהול תקין, הקש כאן כדי לבחור נציג חדש",
+  "@badRepWarningShort": {
+    "type": "text",
+    "description": "bad_rep_warning_short"
+  },
   "biometricsMethod": "ביומטריה",
   "@biometricsMethod": {
     "type": "text",

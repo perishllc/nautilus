@@ -88,6 +88,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "backupSeedConfirm":
             MessageLookupByLibrary.simpleMessage("ウォレットシードをバックアップしましたか？"),
         "backupYourSeed": MessageLookupByLibrary.simpleMessage("シードをバックアップする"),
+        "badRepWarning": MessageLookupByLibrary.simpleMessage("悪い代表者の警告"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "選択した代表者は良好な状態ではないようです。ネットワークの健全性を考慮して代表者を変更することを検討してください。"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "選択した代表者は良好な状態ではないようです。ここをタップして新しい代表者を選択してください"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("生体認証"),
         "blockExplorer": MessageLookupByLibrary.simpleMessage("ブロックエクスプローラー"),
         "blockExplorerHeader":

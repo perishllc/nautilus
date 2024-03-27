@@ -104,6 +104,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "আপনি কি নিশ্চিত যে আপনি আপনার ওয়ালেট এর সীড ব্যাকআপ করেছেন?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("আপনার সীড ব্যাকআপ করুন"),
+        "badRepWarning":
+            MessageLookupByLibrary.simpleMessage("খারাপ প্রতিনিধি সতর্কতা"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "আপনার নির্বাচিত প্রতিনিধি ভাল অবস্থানে আছে বলে মনে হচ্ছে না, দয়া করে নেটওয়ার্কের স্বাস্থ্যের জন্য এটি পরিবর্তন করার কথা বিবেচনা করুন"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "আপনার নির্বাচিত প্রতিনিধি ভাল অবস্থানে আছে বলে মনে হচ্ছে না, একটি নতুন নির্বাচন করতে এখানে আলতো চাপুন৷"),
         "biometricsMethod":
             MessageLookupByLibrary.simpleMessage("বায়োমেট্রিক্স"),
         "blockExplorer":

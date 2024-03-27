@@ -100,6 +100,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn có chắc rằng bạn đã sao lưu hạt giống của mình?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("Sao lưu hạt giống của bạn"),
+        "badRepWarning":
+            MessageLookupByLibrary.simpleMessage("Cảnh báo đại diện xấu"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "Người đại diện mà bạn đã chọn có vẻ không ở trạng thái tốt, vui lòng xem xét thay đổi người đại diện đó vì tình trạng của mạng"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Người đại diện mà bạn đã chọn có vẻ không ở trạng thái tốt, hãy nhấn vào đây để chọn một người đại diện mới"),
         "biometricsMethod":
             MessageLookupByLibrary.simpleMessage("Sinh trắc học"),
         "blockExplorer":

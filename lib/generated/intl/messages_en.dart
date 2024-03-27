@@ -100,6 +100,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Are you sure that you backed up your wallet seed?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("Backup your seed"),
+        "badRepWarning":
+            MessageLookupByLibrary.simpleMessage("Bad Representative Warning"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "Your chosen representative does not appear to be in good standing, please consider changing it for the health of the network"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "Your chosen representative does not appear to be in good standing, tap here to choose a new one"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("Biometrics"),
         "blockExplorer": MessageLookupByLibrary.simpleMessage("Block Explorer"),
         "blockExplorerHeader":

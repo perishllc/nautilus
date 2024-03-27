@@ -106,6 +106,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Você tem certeza de que fez o backup da seed de sua carteira?"),
         "backupYourSeed":
             MessageLookupByLibrary.simpleMessage("Faça backup de sua seed"),
+        "badRepWarning":
+            MessageLookupByLibrary.simpleMessage("Aviso de mau representante"),
+        "badRepWarningLong": MessageLookupByLibrary.simpleMessage(
+            "O representante escolhido não parece estar em situação regular. Considere alterá-lo para a saúde da rede"),
+        "badRepWarningShort": MessageLookupByLibrary.simpleMessage(
+            "O representante escolhido não parece estar em situação regular. Toque aqui para escolher um novo"),
         "biometricsMethod": MessageLookupByLibrary.simpleMessage("Biometria"),
         "blockExplorer":
             MessageLookupByLibrary.simpleMessage("Explorer de blocos"),
