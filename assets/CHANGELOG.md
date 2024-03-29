@@ -1,4 +1,7 @@
-## v0.9.7 - [2024-03-30]
+## v0.9.8 - [2024-03-29]
+#### Fixed
+- hotfixes
+## v0.9.7 - [2024-03-28]
 #### Added
 - Warning to change your rep if it isn't in good standing
 #### Changed
