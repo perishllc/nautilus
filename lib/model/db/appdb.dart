@@ -300,6 +300,36 @@ class DBHelper {
     await saveNode(
       Node(
         id: id++,
+        name: "rainstorm.city",
+        selected: false,
+        http_url: "https://rainstorm.city/api",
+        ws_url: "wss://rainstorm.city/websocket",
+      ),
+      dbClient: dbClient,
+    );
+    await saveNode(
+      Node(
+        id: id++,
+        name: "SomeNano",
+        selected: false,
+        http_url: "https://node.somenano.com/proxy",
+        ws_url: "wss://node.somenano.com/websocket",
+      ),
+      dbClient: dbClient,
+    );
+    await saveNode(
+      Node(
+        id: id++,
+        name: "NanOslo",
+        selected: false,
+        http_url: "https://nanoslo.0x.no/proxy",
+        ws_url: "wss://nanoslo.0x.no/websocket",
+      ),
+      dbClient: dbClient,
+    );
+    await saveNode(
+      Node(
+        id: id++,
         name: "Kalium Node (banano)",
         selected: false,
         http_url: "https://kaliumapi.appditto.com/api",

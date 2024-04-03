@@ -464,7 +464,7 @@ class StateContainerState extends State<StateContainer> {
       if (n2Nodes.isNotEmpty && (wallet?.representative.isNotEmpty ?? false)) {
         final N2Node? node = n2Nodes.firstWhereOrNull((N2Node element) => element.account == wallet!.representative);
         if (node != null) {
-          if (node.score != null && node.score! < 90) {
+          if (node.score != null && node.score! < 95) {
             addActiveOrSettingsAlert(alert, null);
           }
         } else {

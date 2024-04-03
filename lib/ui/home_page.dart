@@ -919,7 +919,7 @@ class AppHomePageState extends State<AppHomePage>
       }
 
       // are we not connected after ~5 seconds?
-      Future<dynamic>.delayed(const Duration(seconds: 5), () async {
+      Future<dynamic>.delayed(const Duration(seconds: 10), () async {
         if (!mounted) return;
         final bool connected = await sl.get<AccountService>().isConnected();
         showConnectionWarning(!connected);
@@ -1356,7 +1356,7 @@ class AppHomePageState extends State<AppHomePage>
         showConnectionWarning(false);
       } else if (event.status == ConnectionStatus.DISCONNECTED) {
         // start a timer, if it expires, show the warning:
-        _connectionTimer = Timer(const Duration(seconds: 8), () {
+        _connectionTimer = Timer(const Duration(seconds: 10), () {
           showConnectionWarning(true);
         });
       }
@@ -1589,7 +1589,7 @@ class AppHomePageState extends State<AppHomePage>
       showConnectionWarning(!connected);
     } else {
       // check again after ~5 seconds:
-      await Future<dynamic>.delayed(const Duration(seconds: 5));
+      await Future<dynamic>.delayed(const Duration(seconds: 10));
       final bool connected = await sl.get<AccountService>().isConnected();
       showConnectionWarning(!connected);
     }

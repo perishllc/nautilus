@@ -1,3 +1,8 @@
+## v0.9.9 - [2024-04-04]
+#### Added
+- more default nodes
+#### Fixed
+- more hotfixes
 ## v0.9.8 - [2024-03-29]
 #### Fixed
 - hotfixes
