@@ -92,7 +92,7 @@ class AccountService {
 // static const String DEFAULT_WS_URL = "wss://nautilus.perish.co";
   static const String DEFAULT_NODE_NAME = "Nautilus Node";
   static const String DEFAULT_HTTP_URL = "https://node.nautilus.io/api";
-  static const String DEFAULT_WS_URL = "wss://node.nautilus.io/socket";
+  static const String DEFAULT_WS_URL = "wss://node.nautilus.io/websocket";
 
   static const String DEFAULT_WORKER_NAME = "nano.to";
   static const String DEFAULT_WORK_URL = "https://rpc.nano.to";
