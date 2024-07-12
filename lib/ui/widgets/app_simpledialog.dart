@@ -264,7 +264,7 @@ class AppAlertDialog extends StatelessWidget {
       children.add(Padding(
         padding: titlePadding ?? EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, content == null ? 20.0 : 0.0),
         child: DefaultTextStyle(
-          style: Theme.of(context).textTheme.headline1!,
+          style: Theme.of(context).textTheme.headlineSmall!,
           child: Semantics(namesRoute: true, child: title),
         ),
       ));
@@ -287,7 +287,7 @@ class AppAlertDialog extends StatelessWidget {
         child: Padding(
           padding: contentPadding,
           child: DefaultTextStyle(
-            style: Theme.of(context).textTheme.subtitle1!,
+            style: Theme.of(context).textTheme.labelSmall!,
             child: content!,
           ),
         ),

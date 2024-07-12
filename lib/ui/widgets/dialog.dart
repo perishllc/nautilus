@@ -26,9 +26,11 @@ import 'package:wallet_flutter/ui/widgets/funding_messages_sheet.dart';
 import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 
 class AppDialogs {
-  static void showConfirmDialog(
-      BuildContext context, String title, String content, String buttonText, Function onPressed,
-      {String? cancelText, Function? cancelAction, bool barrierDismissible = true}) {
+  static void showConfirmDialog(BuildContext context, String title,
+      String content, String buttonText, Function onPressed,
+      {String? cancelText,
+      Function? cancelAction,
+      bool barrierDismissible = true}) {
     cancelText ??= Z.of(context).cancel.toUpperCase();
 
     showAppDialog(
@@ -47,7 +49,8 @@ class AppDialogs {
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
               ),
               child: Container(
@@ -67,7 +70,8 @@ class AppDialogs {
             ),
             TextButton(
               style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
               ),
               child: Container(
@@ -89,7 +93,8 @@ class AppDialogs {
     );
   }
 
-  static Future<bool> waitableConfirmDialog(BuildContext context, String title, String content, String buttonText,
+  static Future<bool> waitableConfirmDialog(
+      BuildContext context, String title, String content, String buttonText,
       {String? cancelText, bool barrierDismissible = true}) async {
     cancelText ??= Z.of(context).cancel.toUpperCase();
 
@@ -109,7 +114,8 @@ class AppDialogs {
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
               ),
               child: Container(
@@ -126,7 +132,8 @@ class AppDialogs {
             ),
             TextButton(
               style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
               ),
               child: Container(
@@ -148,13 +155,15 @@ class AppDialogs {
     return res;
   }
 
-  static Future<bool> proCheck(BuildContext context, {bool shouldShowDialog = true}) async {
+  static Future<bool> proCheck(BuildContext context,
+      {bool shouldShowDialog = true}) async {
     // get all subscriptions:
     final List<Subscription> subs = await sl.get<DBHelper>().getSubscriptions();
 
     // check if we have a valid subscription to pro:
     for (final Subscription sub in subs) {
-      if (sub.label == "${NonTranslatable.appName} Pro" && sub.address == SubscriptionService.PRO_PAYMENT_ADDRESS) {
+      if (sub.label == "${NonTranslatable.appName} Pro" &&
+          sub.address == SubscriptionService.PRO_PAYMENT_ADDRESS) {
         // if they pay anything at all, it's good enough for me
         // not worth the effort to lock things down, if they pay, they pay
         if (sub.paid) return true;
@@ -176,18 +185,24 @@ class AppDialogs {
                 borderRadius: BorderRadius.circular(15),
               ),
               title: Text(
-                Z.of(context).proSubRequiredHeader.replaceAll("%1", NonTranslatable.appName),
+                Z
+                    .of(context)
+                    .proSubRequiredHeader
+                    .replaceAll("%1", NonTranslatable.appName),
                 style: AppStyles.textStyleButtonPrimaryOutline(context),
               ),
-              content: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+              content:
+                  Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
                 Text(
                   Z
                       .of(context)
                       .proSubRequiredParagraph
                       .replaceAll("%1", NonTranslatable.appName)
                       .replaceAll("%2", NonTranslatable.currencyName)
-                      .replaceAll("%3",
-                          getRawAsThemeAwareFormattedAmount(context, SubscriptionService.PRO_PAYMENT_MONTHLY_COST)),
+                      .replaceAll(
+                          "%3",
+                          getRawAsThemeAwareFormattedAmount(context,
+                              SubscriptionService.PRO_PAYMENT_MONTHLY_COST)),
                   style: AppStyles.textStyleParagraph(context),
                 ),
                 // Row(
@@ -220,7 +235,8 @@ class AppDialogs {
               actions: <Widget>[
                 TextButton(
                   style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
                     // padding: const EdgeInsets.all(12),
                   ),
                   child: Container(
@@ -238,7 +254,8 @@ class AppDialogs {
                 if (Platform.isIOS)
                   TextButton(
                     style: TextButton.styleFrom(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25)),
                     ),
                     child: Container(
                       constraints: const BoxConstraints(maxWidth: 100),
@@ -252,7 +269,8 @@ class AppDialogs {
                       final InAppPurchase _iap = InAppPurchase.instance;
                       if (!(await _iap.isAvailable())) return;
                       const Set<String> ids = <String>{"pro_sub_1_month_pass"};
-                      final ProductDetailsResponse response = await _iap.queryProductDetails(ids);
+                      final ProductDetailsResponse response =
+                          await _iap.queryProductDetails(ids);
                       if (response.notFoundIDs.isNotEmpty) {
                         // Handle the error.
                       }
@@ -265,7 +283,8 @@ class AppDialogs {
                   ),
                 TextButton(
                   style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
                     // padding: const EdgeInsets.all(12),
                   ),
                   child: Container(
@@ -278,8 +297,10 @@ class AppDialogs {
                   ),
                   onPressed: () async {
                     // Go to send with address
-                    await Future<void>.delayed(const Duration(milliseconds: 1000), () {
-                      Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+                    await Future<void>.delayed(
+                        const Duration(milliseconds: 1000), () {
+                      Navigator.of(context)
+                          .popUntil(RouteUtils.withNameLike("/home"));
 
                       final int dayOfMonth = DateTime.now().day;
                       final String frequency = "0 0 $dayOfMonth * *";
@@ -288,7 +309,8 @@ class AppDialogs {
                         widget: SubConfirmSheet(
                           sub: Subscription(
                             address: SubscriptionService.PRO_PAYMENT_ADDRESS,
-                            amount_raw: SubscriptionService.PRO_PAYMENT_MONTHLY_COST,
+                            amount_raw:
+                                SubscriptionService.PRO_PAYMENT_MONTHLY_COST,
                             frequency: frequency,
                             label: "${NonTranslatable.appName} Pro",
                             active: true,
@@ -356,13 +378,15 @@ class AppDialogs {
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
               ),
               child: Text(
                 closeText!,
                 textAlign: TextAlign.center,
-                style: AppStyles.textStyleDialogButtonText(context).copyWith(fontSize: AppFontSizes.smallest),
+                style: AppStyles.textStyleDialogButtonText(context)
+                    .copyWith(fontSize: AppFontSizes.smallest),
               ),
               onPressed: () async {
                 Navigator.of(context).pop();
@@ -377,7 +401,8 @@ class AppDialogs {
     );
   }
 
-  static Widget infoHeader(BuildContext context, Widget title, void Function()? onPressed) {
+  static Widget infoHeader(
+      BuildContext context, Widget title, void Function()? onPressed) {
     return Row(children: <Widget>[
       title,
       // A container for the info button
@@ -398,11 +423,13 @@ class AppDialogs {
           foregroundColor: StateContainer.of(context).curTheme.text15,
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           padding: const EdgeInsets.all(10.0),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
           tapTargetSize: MaterialTapTargetSize.padded,
         ),
         onPressed: onPressed,
-        child: Icon(icon, size: 24, color: color ?? StateContainer.of(context).curTheme.text),
+        child: Icon(icon,
+            size: 24, color: color ?? StateContainer.of(context).curTheme.text),
       ),
     );
   }
@@ -435,7 +462,8 @@ class AppDialogs {
   // }
 
   static Future<void> showChangeLog(BuildContext context) async {
-    String changeLogMarkdown = await DefaultAssetBundle.of(context).loadString("assets/CHANGELOG.md");
+    String changeLogMarkdown =
+        await DefaultAssetBundle.of(context).loadString("assets/CHANGELOG.md");
     final ScrollController scrollController = ScrollController();
 
     // replace the first h2 with an h1:
@@ -459,62 +487,84 @@ class AppDialogs {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Text(Z.of(context).changeLog,
-                        textAlign: TextAlign.center, style: AppStyles.textStyleDialogHeader(context)),
+                        textAlign: TextAlign.center,
+                        style: AppStyles.textStyleDialogHeader(context)),
                   ),
                   Container(
-                    constraints: const BoxConstraints(minHeight: 300, maxHeight: 400),
+                    constraints:
+                        const BoxConstraints(minHeight: 300, maxHeight: 400),
                     child: DraggableScrollbar(
                       controller: scrollController,
                       scrollbarTopMargin: 0,
                       scrollbarBottomMargin: 0,
-                      scrollbarColor: StateContainer.of(context).curTheme.primary,
+                      scrollbarColor:
+                          StateContainer.of(context).curTheme.primary,
                       child: ListView(
                         controller: scrollController,
                         children: [
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 24, vertical: 16),
                             child: MarkdownBody(
                               data: changeLogMarkdown,
                               shrinkWrap: true,
                               selectable: false,
-                              onTapLink: (String text, String? url, String title) async {
+                              onTapLink: (String text, String? url,
+                                  String title) async {
                                 final Uri uri = Uri.parse(url!);
                                 if (await canLaunchUrl(uri)) {
                                   await launchUrl(uri);
                                 }
                               },
-                              styleSheet: MarkdownStyleSheet.fromTheme(ThemeData(
-                                  textTheme: TextTheme(
-                                bodyText2: TextStyle(
+                              styleSheet:
+                                  MarkdownStyleSheet.fromTheme(ThemeData(
+                                      textTheme: TextTheme(
+                                bodyMedium: TextStyle(
                                   fontSize: AppFontSizes.smallText(context),
                                   fontWeight: FontWeight.w400,
-                                  color: StateContainer.of(context).curTheme.text,
+                                  color:
+                                      StateContainer.of(context).curTheme.text,
                                 ),
                               ))).copyWith(
                                 h1: TextStyle(
                                   fontSize: AppFontSizes.large(context),
-                                  color: StateContainer.of(context).curTheme.success,
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .success,
                                 ),
                                 h2: TextStyle(
                                   fontSize: AppFontSizes.large(context),
-                                  color: StateContainer.of(context).curTheme.success,
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .success,
                                 ),
                                 h2Padding: const EdgeInsets.only(top: 24),
                                 h4: TextStyle(
-                                  color: StateContainer.of(context).curTheme.warning,
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .warning,
                                 ),
                                 listBullet: TextStyle(
-                                  color: StateContainer.of(context).curTheme.text,
+                                  color:
+                                      StateContainer.of(context).curTheme.text,
                                 ),
                                 horizontalRuleDecoration: BoxDecoration(
                                   border: Border(
-                                    bottom: BorderSide(width: 3, color: StateContainer.of(context).curTheme.text!),
+                                    bottom: BorderSide(
+                                        width: 3,
+                                        color: StateContainer.of(context)
+                                            .curTheme
+                                            .text!),
                                   ),
                                 ),
                               ),
                               extensionSet: md.ExtensionSet(
                                 md.ExtensionSet.gitHubFlavored.blockSyntaxes,
-                                [md.EmojiSyntax(), ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes],
+                                [
+                                  md.EmojiSyntax(),
+                                  ...md.ExtensionSet.gitHubFlavored
+                                      .inlineSyntaxes
+                                ],
                               ),
                             ),
                           )
@@ -525,43 +575,52 @@ class AppDialogs {
                   Container(
                     height: 50,
                     alignment: Alignment.center,
-                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: <Widget>[
-                      TextButton(
-                        onPressed: () async {
-                          Navigator.of(context).pop();
-                          // Go to send with address
-                          Future<void>.delayed(const Duration(milliseconds: 1000), () {
-                            Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          TextButton(
+                            onPressed: () async {
+                              Navigator.of(context).pop();
+                              // Go to send with address
+                              Future<void>.delayed(
+                                  const Duration(milliseconds: 1000), () {
+                                Navigator.of(context)
+                                    .popUntil(RouteUtils.withNameLike("/home"));
 
-                            Sheets.showAppHeightNineSheet(
-                                context: context,
-                                widget: FundingMessagesSheet(
-                                  alerts: StateContainer.of(context).fundingAlerts,
-                                  hasDismissButton: false,
-                                ));
-                          });
-                        },
-                        child: Text(
-                          Z.of(context).supportTheDeveloper,
-                          style: TextStyle(
-                            fontSize: AppFontSizes.medium,
-                            color: StateContainer.of(context).curTheme.primary,
+                                Sheets.showAppHeightNineSheet(
+                                    context: context,
+                                    widget: FundingMessagesSheet(
+                                      alerts: StateContainer.of(context)
+                                          .fundingAlerts,
+                                      hasDismissButton: false,
+                                    ));
+                              });
+                            },
+                            child: Text(
+                              Z.of(context).supportTheDeveloper,
+                              style: TextStyle(
+                                fontSize: AppFontSizes.medium,
+                                color:
+                                    StateContainer.of(context).curTheme.primary,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      TextButton(
-                        key: const Key("changelog_dismiss_button"),
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: Text(Z.of(context).dismiss, style: AppStyles.textStyleDialogOptions(context)),
-                      ),
-                    ]),
+                          TextButton(
+                            key: const Key("changelog_dismiss_button"),
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: Text(Z.of(context).dismiss,
+                                style:
+                                    AppStyles.textStyleDialogOptions(context)),
+                          ),
+                        ]),
                   ),
                 ],
               ),
             ));
   }
 
-  static Future<bool?> showTrackingDialog(BuildContext context, [bool dismissable = false]) async {
+  static Future<bool?> showTrackingDialog(BuildContext context,
+      [bool dismissable = false]) async {
     final bool? option = await showDialog<bool>(
         context: context,
         barrierColor: StateContainer.of(context).curTheme.barrier,
@@ -578,7 +637,8 @@ class AppDialogs {
             infoButton: AppDialogs.infoButton(
               context,
               () {
-                AppDialogs.showInfoDialog(context, Z.of(context).trackingHeader, Z.of(context).trackingWarningBodyLong);
+                AppDialogs.showInfoDialog(context, Z.of(context).trackingHeader,
+                    Z.of(context).trackingWarningBodyLong);
               },
             ),
             children: <Widget>[
