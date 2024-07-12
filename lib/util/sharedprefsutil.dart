@@ -624,12 +624,11 @@ class SharedPrefsUtil {
     await prefs.remove(pro_renew_active);
 
     // don't remove this preference since it's annoying when you log out:
-    // await prefs.remove(tracking_enabled);
+    // await prefs.remove("alert_${AlertCodes.TRACKING_DISABLED}");
     // remove the dismissals of any important alerts:
     await prefs.remove("alert_${AlertCodes.BRANCH_CONNECTION}");
     await prefs.remove("alert_${AlertCodes.CONNECTION_WARNING}");
     await prefs.remove("alert_${AlertCodes.NOTIFICATIONS_DISABLED}");
-    await prefs.remove("alert_${AlertCodes.TRACKING_DISABLED}");
     await prefs.remove("alert_${AlertCodes.BAD_REP_WARNING}");
   }
 }

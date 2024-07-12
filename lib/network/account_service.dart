@@ -749,7 +749,12 @@ class AccountService {
           final ErrorResponse err = ErrorResponse.fromJson(decoded);
           throw Exception("Received error ${err.error} ${err.details}");
         }
-        return decoded["work"] as String?;
+        final String? work = decoded["work"] as String?;
+        if (work != null && work.isNotEmpty) {
+          return work;
+        } else {
+          throw Exception("Error getting work from work source");
+        }
       } else {
         throw Exception("Received error ${response.statusCode}");
       }

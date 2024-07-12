@@ -262,12 +262,13 @@ class AppHomePageState extends State<AppHomePage>
           await AppTrackingTransparency.trackingAuthorizationStatus;
       if (status == TrackingStatus.notDetermined ||
           status == TrackingStatus.denied) {
-        await showTrackingWarning();
 
         // update the setting if there's a mismatch:
         if (await sl.get<SharedPrefsUtil>().getTrackingEnabled()) {
           await sl.get<SharedPrefsUtil>().setTrackingEnabled(false);
         }
+        
+        await showTrackingWarning();
       }
     } else {
       // the setting is just a user preference on android:
@@ -1024,6 +1025,7 @@ class AppHomePageState extends State<AppHomePage>
       shortDescription: Z.of(context).trackingWarningBodyShort,
       longDescription: Z.of(context).trackingWarningBodyLong,
       dismissable: true,
+      permanentlyDismissable: true,
     );
     // don't show if already dismissed:
     if (await sl.get<SharedPrefsUtil>().shouldShowAlert(alert)) {

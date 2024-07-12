@@ -1539,9 +1539,10 @@ class StateContainerState extends State<StateContainer> {
           }
         }
       }
-    } catch (e) {
+    } catch (e, s) {
       // TODO: handle account history error
       log.e("account_history $e");
+      log.e(s);
     }
   }
 

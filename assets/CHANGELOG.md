@@ -1,8 +1,9 @@
-## v0.9.9 - [2024-04-04]
+## v0.9.9 - [2024-07-20]
 #### Added
 - more default nodes
 #### Fixed
-- more hotfixes
+- minor pow handling fixes
+- fixes for alert boxes
 ## v0.9.8 - [2024-03-29]
 #### Fixed
 - hotfixes
