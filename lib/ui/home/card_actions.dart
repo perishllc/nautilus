@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart' as NFFI;
 import 'package:logger/logger.dart';
 import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/appstate_container.dart';
@@ -47,9 +47,9 @@ class CardActions {
 
     // check validity locally:
     final String pubKey =
-        NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-    final bool isValid = NanoSignatures.validateSig(
-        nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+        NFFI.NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
+    final bool isValid = NFFI.NanoSignatures.validateSig(
+        nonceHex, NFFI.NanoHelpers.hexToBytes(pubKey), NFFI.NanoHelpers.hexToBytes(signature));
     if (!isValid) {
       throw Exception("Invalid signature?!");
     }
@@ -140,9 +140,9 @@ class CardActions {
 
     // check validity locally:
     final String pubKey =
-        NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-    final bool isValid = NanoSignatures.validateSig(
-        nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+        NFFI.NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
+    final bool isValid = NFFI.NanoSignatures.validateSig(
+        nonceHex, NFFI.NanoHelpers.hexToBytes(pubKey), NFFI.NanoHelpers.hexToBytes(signature));
     if (!isValid) {
       throw Exception("Invalid signature?!");
     }
@@ -225,9 +225,9 @@ class CardActions {
 
     // check validity locally:
     final String pubKey =
-        NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
-    final bool isValid = NanoSignatures.validateSig(
-        nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+        NFFI.NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
+    final bool isValid = NFFI.NanoSignatures.validateSig(
+        nonceHex, NFFI.NanoHelpers.hexToBytes(pubKey), NFFI.NanoHelpers.hexToBytes(signature));
     if (!isValid) {
       throw Exception("Invalid signature?!");
     }

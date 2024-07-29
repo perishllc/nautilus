@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart' as NFFI;
 import 'package:json_annotation/json_annotation.dart';
 import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/localize.dart';
@@ -117,7 +117,7 @@ class StateBlock {
     if (balance == null) {
       return null;
     }
-    hash = NanoBlocks.computeStateHash(
+    hash = NFFI.NanoBlocks.computeStateHash(
       NonTranslatable.accountType,
       account!,
       previous!,
@@ -125,7 +125,7 @@ class StateBlock {
       BigInt.parse(balance!),
       link!,
     );
-    signature = NanoSignatures.signBlock(hash!, privateKey!);
+    signature = NFFI.NanoSignatures.signBlock(hash!, privateKey!);
     return signature;
   }
 

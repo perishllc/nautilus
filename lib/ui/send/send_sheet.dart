@@ -1044,50 +1044,50 @@ class SendSheetState extends State<SendSheet> {
                         //     ],
                         //   ),
 
-                        Container(
-                          margin: const EdgeInsets.only(top: 350),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Checkbox(
-                                value: anonymousMode,
-                                activeColor: StateContainer.of(context).curTheme.primary,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    anonymousMode = value ?? false;
-                                  });
-                                },
-                              ),
-                              const SizedBox(width: 10),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    anonymousMode = !anonymousMode;
-                                  });
-                                },
-                                child: Text(
-                                  Z.of(context).obscureTransaction,
-                                  style: AppStyles.textStyleParagraph(context),
-                                ),
-                              ),
-                              Container(
-                                width: 60,
-                                height: 60,
-                                alignment: Alignment.center,
-                                child: AppDialogs.infoButton(
-                                  context,
-                                  () {
-                                    AppDialogs.showInfoDialog(
-                                      context,
-                                      Z.current.obscureInfoHeader,
-                                      Z.current.anonymousInfoBody,
-                                    );
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        // Container(
+                        //   margin: const EdgeInsets.only(top: 350),
+                        //   child: Row(
+                        //     mainAxisAlignment: MainAxisAlignment.center,
+                        //     children: <Widget>[
+                        //       Checkbox(
+                        //         value: anonymousMode,
+                        //         activeColor: StateContainer.of(context).curTheme.primary,
+                        //         onChanged: (bool? value) {
+                        //           setState(() {
+                        //             anonymousMode = value ?? false;
+                        //           });
+                        //         },
+                        //       ),
+                        //       const SizedBox(width: 10),
+                        //       GestureDetector(
+                        //         onTap: () {
+                        //           setState(() {
+                        //             anonymousMode = !anonymousMode;
+                        //           });
+                        //         },
+                        //         child: Text(
+                        //           Z.of(context).obscureTransaction,
+                        //           style: AppStyles.textStyleParagraph(context),
+                        //         ),
+                        //       ),
+                        //       Container(
+                        //         width: 60,
+                        //         height: 60,
+                        //         alignment: Alignment.center,
+                        //         child: AppDialogs.infoButton(
+                        //           context,
+                        //           () {
+                        //             AppDialogs.showInfoDialog(
+                        //               context,
+                        //               Z.current.obscureInfoHeader,
+                        //               Z.current.anonymousInfoBody,
+                        //             );
+                        //           },
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

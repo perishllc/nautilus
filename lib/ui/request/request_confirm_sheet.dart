@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart' as NFFI;
 import 'package:logger/logger.dart';
 import 'package:nanoutil/nanoutil.dart';
 import 'package:wallet_flutter/appstate_container.dart';
@@ -282,11 +282,11 @@ class _RequestConfirmSheetState extends State<RequestConfirmSheet> {
       // get epoch time as hex:
       final int secondsSinceEpoch = DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
       final String nonceHex = secondsSinceEpoch.toRadixString(16);
-      final String signature = NanoSignatures.signBlock(nonceHex, privKey);
+      final String signature = NFFI.NanoSignatures.signBlock(nonceHex, privKey);
       // check validity locally:
-      final String pubKey = NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
+      final String pubKey = NFFI.NanoAccounts.extractPublicKey(StateContainer.of(context).wallet!.address!);
       final bool isValid =
-          NanoSignatures.validateSig(nonceHex, NanoHelpers.hexToBytes(pubKey), NanoHelpers.hexToBytes(signature));
+          NFFI.NanoSignatures.validateSig(nonceHex, NFFI.NanoHelpers.hexToBytes(pubKey), NFFI.NanoHelpers.hexToBytes(signature));
       if (!isValid) {
         throw Exception("Invalid signature?!");
       }
