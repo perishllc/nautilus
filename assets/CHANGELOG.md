@@ -1,9 +1,15 @@
 ## v0.9.9 - [2024-07-20]
 #### Added
 - more default nodes
+#### Changed
+- removed unstoppable domains support
 #### Fixed
 - minor pow handling fixes
 - fixes for alert boxes
+- update packages
+- bugs with send sheet not updating properly
+- bug with .well-known not being fetched
+- update the rep warning after you change your rep
 ## v0.9.8 - [2024-03-29]
 #### Fixed
 - hotfixes

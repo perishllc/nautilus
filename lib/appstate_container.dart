@@ -234,8 +234,10 @@ class StateContainerState extends State<StateContainer> {
       if (active != null) {
         // if this is alert 4041 (connection warning) and 4040 is in the stack, remove it:
         if (active.id == AlertCodes.CONNECTION_WARNING &&
-            activeAlerts.any((AlertResponseItem element) => element.id == AlertCodes.BRANCH_CONNECTION)) {
-          activeAlerts.removeWhere((AlertResponseItem element) => element.id == AlertCodes.BRANCH_CONNECTION);
+            activeAlerts
+                .any((AlertResponseItem element) => element.id == AlertCodes.BRANCH_CONNECTION)) {
+          activeAlerts.removeWhere(
+              (AlertResponseItem element) => element.id == AlertCodes.BRANCH_CONNECTION);
         }
 
         // disallow duplicates:
@@ -460,19 +462,25 @@ class StateContainerState extends State<StateContainer> {
       longDescription: Z.current.badRepWarningLong,
       dismissable: true,
     );
+    const int MIN_REP_SCORE = 95;
     try {
+      // // don't show if set to the nautilus node:
+      // if (wallet!.representative ==
+      //     "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579") {
+      //   removeActiveOrSettingsAlert(alert, null);
+      //   return;
+      // }
       if (n2Nodes.isNotEmpty && (wallet?.representative.isNotEmpty ?? false)) {
-        final N2Node? node = n2Nodes.firstWhereOrNull((N2Node element) => element.account == wallet!.representative);
-        if (node != null) {
-          if (node.score != null && node.score! < 95) {
-            addActiveOrSettingsAlert(alert, null);
-          }
-        } else {
+        final N2Node? node =
+            n2Nodes.firstWhereOrNull((N2Node element) => element.account == wallet!.representative);
+        if (node?.score != null && node!.score! < MIN_REP_SCORE) {
           addActiveOrSettingsAlert(alert, null);
+        } else {
+          removeActiveOrSettingsAlert(alert, null);
         }
       }
     } catch (e) {
-      addActiveOrSettingsAlert(alert, null);
+      removeActiveOrSettingsAlert(alert, null);
       return;
     }
   }
