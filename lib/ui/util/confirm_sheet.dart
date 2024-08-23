@@ -76,16 +76,14 @@ class ConfirmSheetState extends State<ConfirmSheet> {
   Widget build(BuildContext context) {
     return SafeArea(
       minimum: EdgeInsets.only(
-        // bottom: MediaQuery.of(context).size.height * 0.035,
+        bottom: MediaQuery.of(context).size.height * 0.035,
       ),
       child: Container(
         decoration: BoxDecoration(
           color: StateContainer.of(context).curTheme.backgroundDark,
           borderRadius: const BorderRadius.all(Radius.circular(15)),
         ),
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
+        child: Column(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Row(
@@ -155,7 +153,7 @@ class ConfirmSheetState extends State<ConfirmSheet> {
                   ],
                 ),
               const SizedBox(
-                height: 35,
+                height: 32,
               ),
               Row(
                 children: <Widget>[
@@ -178,12 +176,11 @@ class ConfirmSheetState extends State<ConfirmSheet> {
                     },
                   ),
                 ],
+                
               ),
-              const SizedBox(
-                height: 15,
-              ),
+
             ],
-          ),
+          
         ),
       ),
     );

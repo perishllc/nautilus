@@ -26,7 +26,6 @@ class N2NodeAPI {
         return null;
       }
       await sl.get<SharedPrefsUtil>().setNinjaAPICache(response.body);
-      print(response.body);
       return response.body;
     } catch (e) {
       print("reps API error: $e");

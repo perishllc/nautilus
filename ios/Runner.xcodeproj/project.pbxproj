@@ -181,6 +181,7 @@
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				B6D61E1E4EDD4BE1246C8259 /* [CP] Embed Pods Frameworks */,
+				965FECF8E7CB8C2937B309C6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -197,7 +198,7 @@
 		97C146E61CF9000F007C117D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1510;
 				ORGANIZATIONNAME = "The Chromium Authors";
 				TargetAttributes = {
 					97C146ED1CF9000F007C117D = {
@@ -292,6 +293,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		965FECF8E7CB8C2937B309C6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/firebase_messaging/firebase_messaging_Privacy.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/firebase_messaging_Privacy.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9740EEB61CF901F6004384FC /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -314,11 +333,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AppCheckCore/AppCheckCore.framework",
 				"${BUILT_PRODUCTS_DIR}/BranchSDK/BranchSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/DKImagePickerController/DKImagePickerController.framework",
 				"${BUILT_PRODUCTS_DIR}/DKPhotoGallery/DKPhotoGallery.framework",
-				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseAppCheck/FirebaseAppCheck.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseAppCheckInterop/FirebaseAppCheckInterop.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseCoreInternal/FirebaseCoreInternal.framework",
 				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
@@ -340,7 +360,7 @@
 				"${BUILT_PRODUCTS_DIR}/file_picker/file_picker.framework",
 				"${BUILT_PRODUCTS_DIR}/flutter_branch_sdk/flutter_branch_sdk.framework",
 				"${BUILT_PRODUCTS_DIR}/flutter_contacts/flutter_contacts.framework",
-				"${BUILT_PRODUCTS_DIR}/flutter_inappwebview/flutter_inappwebview.framework",
+				"${BUILT_PRODUCTS_DIR}/flutter_inappwebview_ios/flutter_inappwebview_ios.framework",
 				"${BUILT_PRODUCTS_DIR}/flutter_jailbreak_detection/flutter_jailbreak_detection.framework",
 				"${BUILT_PRODUCTS_DIR}/flutter_local_notifications/flutter_local_notifications.framework",
 				"${BUILT_PRODUCTS_DIR}/flutter_nano_ffi/flutter_nano_ffi.framework",
@@ -349,9 +369,8 @@
 				"${BUILT_PRODUCTS_DIR}/flutter_sodium/flutter_sodium.framework",
 				"${BUILT_PRODUCTS_DIR}/flutter_vibrate/flutter_vibrate.framework",
 				"${BUILT_PRODUCTS_DIR}/image_picker_ios/image_picker_ios.framework",
-				"${BUILT_PRODUCTS_DIR}/in_app_purchase_storekit/in_app_purchase_storekit.framework",
 				"${BUILT_PRODUCTS_DIR}/integration_test/integration_test.framework",
-				"${BUILT_PRODUCTS_DIR}/local_auth_ios/local_auth_ios.framework",
+				"${BUILT_PRODUCTS_DIR}/local_auth_darwin/local_auth_darwin.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/nfc_manager/nfc_manager.framework",
 				"${BUILT_PRODUCTS_DIR}/package_info_plus/package_info_plus.framework",
@@ -366,11 +385,12 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppCheckCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BranchSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DKImagePickerController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DKPhotoGallery.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAppCheck.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAppCheckInterop.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreInternal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
@@ -392,7 +412,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/file_picker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/flutter_branch_sdk.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/flutter_contacts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/flutter_inappwebview.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/flutter_inappwebview_ios.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/flutter_jailbreak_detection.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/flutter_local_notifications.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/flutter_nano_ffi.framework",
@@ -401,9 +421,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/flutter_sodium.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/flutter_vibrate.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/image_picker_ios.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/in_app_purchase_storekit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/integration_test.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/local_auth_ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/local_auth_darwin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nfc_manager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/package_info_plus.framework",

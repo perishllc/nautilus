@@ -637,21 +637,21 @@ class UsernameService {
       }
     }
 
-    // check if UD domain:
-    if (address == null) {
-      if (username.contains(".")) {
-        address = await sl.get<UsernameService>().checkUnstoppableDomain(strippedUsername);
-        if (address != null) {
-          type = UserTypes.UD;
-        } else {
-          // check if ENS domain:
-          address = await sl.get<UsernameService>().checkENSDomain(strippedUsername);
-          if (address != null) {
-            type = UserTypes.ENS;
-          }
-        }
-      }
-    }
+    // // check if UD domain:
+    // if (address == null) {
+    //   if (username.contains(".")) {
+    //     address = await sl.get<UsernameService>().checkUnstoppableDomain(strippedUsername);
+    //     if (address != null) {
+    //       type = UserTypes.UD;
+    //     } else {
+    //       // check if ENS domain:
+    //       address = await sl.get<UsernameService>().checkENSDomain(strippedUsername);
+    //       if (address != null) {
+    //         type = UserTypes.ENS;
+    //       }
+    //     }
+    //   }
+    // }
 
     // check if nano.to username:
     // if (address == null) {

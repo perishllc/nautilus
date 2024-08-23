@@ -172,11 +172,11 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                   // Clear focus of our fields when tapped in this empty space
                   FocusScope.of(context).requestFocus(FocusNode());
                 },
-                child: KeyboardAvoider(
+                child: /*KeyboardAvoider(
                   duration: Duration.zero,
                   autoScroll: true,
                   focusPadding: 40,
-                  child: Column(
+                  child: */Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       // "SENDING" TEXT
@@ -522,7 +522,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                       //   ),
                     ],
                   ),
-                ),
+                /*),*/
               ),
             ),
 

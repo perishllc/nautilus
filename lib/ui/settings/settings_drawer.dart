@@ -830,9 +830,8 @@ class SettingsSheetState extends State<SettingsSheet>
     } else {
       trackingEnabled = await AppDialogs.showTrackingDialog(context, true);
     }
-    if (trackingEnabled == null) {
-      return;
-    }
+    trackingEnabled ??= false;
+    
     await sl.get<SharedPrefsUtil>().setTrackingEnabled(trackingEnabled);
     FlutterBranchSdk.disableTracking(!trackingEnabled);
 

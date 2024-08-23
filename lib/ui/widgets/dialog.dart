@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as material;
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:in_app_purchase/in_app_purchase.dart';
+// import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:logger/logger.dart';
 // ignore: depend_on_referenced_packages
 import 'package:markdown/markdown.dart' as md;
@@ -26,11 +26,9 @@ import 'package:wallet_flutter/ui/widgets/funding_messages_sheet.dart';
 import 'package:wallet_flutter/ui/widgets/sheet_util.dart';
 
 class AppDialogs {
-  static void showConfirmDialog(BuildContext context, String title,
-      String content, String buttonText, Function onPressed,
-      {String? cancelText,
-      Function? cancelAction,
-      bool barrierDismissible = true}) {
+  static void showConfirmDialog(
+      BuildContext context, String title, String content, String buttonText, Function onPressed,
+      {String? cancelText, Function? cancelAction, bool barrierDismissible = true}) {
     cancelText ??= Z.of(context).cancel.toUpperCase();
 
     showAppDialog(
@@ -49,8 +47,7 @@ class AppDialogs {
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
               ),
               child: Container(
@@ -70,8 +67,7 @@ class AppDialogs {
             ),
             TextButton(
               style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
               ),
               child: Container(
@@ -114,8 +110,7 @@ class AppDialogs {
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
               ),
               child: Container(
@@ -132,8 +127,7 @@ class AppDialogs {
             ),
             TextButton(
               style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
               ),
               child: Container(
@@ -155,177 +149,177 @@ class AppDialogs {
     return res;
   }
 
-  static Future<bool> proCheck(BuildContext context,
-      {bool shouldShowDialog = true}) async {
-    // get all subscriptions:
-    final List<Subscription> subs = await sl.get<DBHelper>().getSubscriptions();
+  static Future<bool> proCheck(BuildContext context, {bool shouldShowDialog = true}) async {
+    return true;
+    // // get all subscriptions:
+    // final List<Subscription> subs = await sl.get<DBHelper>().getSubscriptions();
 
-    // check if we have a valid subscription to pro:
-    for (final Subscription sub in subs) {
-      if (sub.label == "${NonTranslatable.appName} Pro" &&
-          sub.address == SubscriptionService.PRO_PAYMENT_ADDRESS) {
-        // if they pay anything at all, it's good enough for me
-        // not worth the effort to lock things down, if they pay, they pay
-        if (sub.paid) return true;
-      }
-    }
+    // // check if we have a valid subscription to pro:
+    // for (final Subscription sub in subs) {
+    //   if (sub.label == "${NonTranslatable.appName} Pro" &&
+    //       sub.address == SubscriptionService.PRO_PAYMENT_ADDRESS) {
+    //     // if they pay anything at all, it's good enough for me
+    //     // not worth the effort to lock things down, if they pay, they pay
+    //     if (sub.paid) return true;
+    //   }
+    // }
 
-    if (!shouldShowDialog) return false;
+    // if (!shouldShowDialog) return false;
 
-    // ignore: use_build_context_synchronously
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      useSafeArea: true,
-      builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (BuildContext context, setState) {
-            return AppAlertDialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              title: Text(
-                Z
-                    .of(context)
-                    .proSubRequiredHeader
-                    .replaceAll("%1", NonTranslatable.appName),
-                style: AppStyles.textStyleButtonPrimaryOutline(context),
-              ),
-              content:
-                  Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                Text(
-                  Z
-                      .of(context)
-                      .proSubRequiredParagraph
-                      .replaceAll("%1", NonTranslatable.appName)
-                      .replaceAll("%2", NonTranslatable.currencyName)
-                      .replaceAll(
-                          "%3",
-                          getRawAsThemeAwareFormattedAmount(context,
-                              SubscriptionService.PRO_PAYMENT_MONTHLY_COST)),
-                  style: AppStyles.textStyleParagraph(context),
-                ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: <Widget>[
-                //     Checkbox(
-                //       value: recurring,
-                //       activeColor: StateContainer.of(context).curTheme.primary,
-                //       onChanged: (bool? value) {
-                //         setState(() {
-                //           recurring = !recurring;
-                //         });
-                //       },
-                //     ),
-                //     const SizedBox(width: 10),
-                //     GestureDetector(
-                //       onTap: () {
-                //         setState(() {
-                //           recurring = !recurring;
-                //         });
-                //       },
-                //       child: Text(
-                //         Z.of(context).autoRenewSub,
-                //         style: AppStyles.textStyleParagraph(context),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-              ]),
-              actions: <Widget>[
-                TextButton(
-                  style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25)),
-                    // padding: const EdgeInsets.all(12),
-                  ),
-                  child: Container(
-                    constraints: const BoxConstraints(maxWidth: 100),
-                    child: Text(
-                      Z.of(context).noThanks,
-                      textAlign: TextAlign.center,
-                      style: AppStyles.textStyleDialogButtonText(context),
-                    ),
-                  ),
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                if (Platform.isIOS)
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25)),
-                    ),
-                    child: Container(
-                      constraints: const BoxConstraints(maxWidth: 100),
-                      child: Text(
-                        Z.of(context).subscribeWithApple,
-                        textAlign: TextAlign.center,
-                        style: AppStyles.textStyleDialogButtonText(context),
-                      ),
-                    ),
-                    onPressed: () async {
-                      final InAppPurchase _iap = InAppPurchase.instance;
-                      if (!(await _iap.isAvailable())) return;
-                      const Set<String> ids = <String>{"pro_sub_1_month_pass"};
-                      final ProductDetailsResponse response =
-                          await _iap.queryProductDetails(ids);
-                      if (response.notFoundIDs.isNotEmpty) {
-                        // Handle the error.
-                      }
-                      List<ProductDetails> products = response.productDetails;
+    // // ignore: use_build_context_synchronously
+    // showDialog(
+    //   context: context,
+    //   barrierDismissible: false,
+    //   useSafeArea: true,
+    //   builder: (BuildContext context) {
+    //     return StatefulBuilder(
+    //       builder: (BuildContext context, setState) {
+    //         return AppAlertDialog(
+    //           shape: RoundedRectangleBorder(
+    //             borderRadius: BorderRadius.circular(15),
+    //           ),
+    //           title: Text(
+    //             Z
+    //                 .of(context)
+    //                 .proSubRequiredHeader
+    //                 .replaceAll("%1", NonTranslatable.appName),
+    //             style: AppStyles.textStyleButtonPrimaryOutline(context),
+    //           ),
+    //           content:
+    //               Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+    //             Text(
+    //               Z
+    //                   .of(context)
+    //                   .proSubRequiredParagraph
+    //                   .replaceAll("%1", NonTranslatable.appName)
+    //                   .replaceAll("%2", NonTranslatable.currencyName)
+    //                   .replaceAll(
+    //                       "%3",
+    //                       getRawAsThemeAwareFormattedAmount(context,
+    //                           SubscriptionService.PRO_PAYMENT_MONTHLY_COST)),
+    //               style: AppStyles.textStyleParagraph(context),
+    //             ),
+    //             // Row(
+    //             //   mainAxisAlignment: MainAxisAlignment.center,
+    //             //   children: <Widget>[
+    //             //     Checkbox(
+    //             //       value: recurring,
+    //             //       activeColor: StateContainer.of(context).curTheme.primary,
+    //             //       onChanged: (bool? value) {
+    //             //         setState(() {
+    //             //           recurring = !recurring;
+    //             //         });
+    //             //       },
+    //             //     ),
+    //             //     const SizedBox(width: 10),
+    //             //     GestureDetector(
+    //             //       onTap: () {
+    //             //         setState(() {
+    //             //           recurring = !recurring;
+    //             //         });
+    //             //       },
+    //             //       child: Text(
+    //             //         Z.of(context).autoRenewSub,
+    //             //         style: AppStyles.textStyleParagraph(context),
+    //             //       ),
+    //             //     ),
+    //             //   ],
+    //             // ),
+    //           ]),
+    //           actions: <Widget>[
+    //             TextButton(
+    //               style: TextButton.styleFrom(
+    //                 shape: RoundedRectangleBorder(
+    //                     borderRadius: BorderRadius.circular(25)),
+    //                 // padding: const EdgeInsets.all(12),
+    //               ),
+    //               child: Container(
+    //                 constraints: const BoxConstraints(maxWidth: 100),
+    //                 child: Text(
+    //                   Z.of(context).noThanks,
+    //                   textAlign: TextAlign.center,
+    //                   style: AppStyles.textStyleDialogButtonText(context),
+    //                 ),
+    //               ),
+    //               onPressed: () async {
+    //                 Navigator.of(context).pop();
+    //               },
+    //             ),
+    //             if (Platform.isIOS)
+    //               TextButton(
+    //                 style: TextButton.styleFrom(
+    //                   shape: RoundedRectangleBorder(
+    //                       borderRadius: BorderRadius.circular(25)),
+    //                 ),
+    //                 child: Container(
+    //                   constraints: const BoxConstraints(maxWidth: 100),
+    //                   child: Text(
+    //                     Z.of(context).subscribeWithApple,
+    //                     textAlign: TextAlign.center,
+    //                     style: AppStyles.textStyleDialogButtonText(context),
+    //                   ),
+    //                 ),
+    //                 onPressed: () async {
+    //                   final InAppPurchase _iap = InAppPurchase.instance;
+    //                   if (!(await _iap.isAvailable())) return;
+    //                   const Set<String> ids = <String>{"pro_sub_1_month_pass"};
+    //                   final ProductDetailsResponse response =
+    //                       await _iap.queryProductDetails(ids);
+    //                   if (response.notFoundIDs.isNotEmpty) {
+    //                     // Handle the error.
+    //                   }
+    //                   List<ProductDetails> products = response.productDetails;
 
-                      sl.get<Logger>().d("products: $products");
+    //                   sl.get<Logger>().d("products: $products");
 
-                      // Navigator.of(context).pop();
-                    },
-                  ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25)),
-                    // padding: const EdgeInsets.all(12),
-                  ),
-                  child: Container(
-                    constraints: const BoxConstraints(maxWidth: 100),
-                    child: Text(
-                      Z.of(context).subscribeButton,
-                      textAlign: TextAlign.center,
-                      style: AppStyles.textStyleDialogButtonText(context),
-                    ),
-                  ),
-                  onPressed: () async {
-                    // Go to send with address
-                    await Future<void>.delayed(
-                        const Duration(milliseconds: 1000), () {
-                      Navigator.of(context)
-                          .popUntil(RouteUtils.withNameLike("/home"));
+    //                   // Navigator.of(context).pop();
+    //                 },
+    //               ),
+    //             TextButton(
+    //               style: TextButton.styleFrom(
+    //                 shape: RoundedRectangleBorder(
+    //                     borderRadius: BorderRadius.circular(25)),
+    //                 // padding: const EdgeInsets.all(12),
+    //               ),
+    //               child: Container(
+    //                 constraints: const BoxConstraints(maxWidth: 100),
+    //                 child: Text(
+    //                   Z.of(context).subscribeButton,
+    //                   textAlign: TextAlign.center,
+    //                   style: AppStyles.textStyleDialogButtonText(context),
+    //                 ),
+    //               ),
+    //               onPressed: () async {
+    //                 // Go to send with address
+    //                 await Future<void>.delayed(
+    //                     const Duration(milliseconds: 1000), () {
+    //                   Navigator.of(context)
+    //                       .popUntil(RouteUtils.withNameLike("/home"));
 
-                      final int dayOfMonth = DateTime.now().day;
-                      final String frequency = "0 0 $dayOfMonth * *";
-                      Sheets.showAppHeightNineSheet(
-                        context: context,
-                        widget: SubConfirmSheet(
-                          sub: Subscription(
-                            address: SubscriptionService.PRO_PAYMENT_ADDRESS,
-                            amount_raw:
-                                SubscriptionService.PRO_PAYMENT_MONTHLY_COST,
-                            frequency: frequency,
-                            label: "${NonTranslatable.appName} Pro",
-                            active: true,
-                          ),
-                        ),
-                      );
-                    });
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      },
-    );
+    //                   final int dayOfMonth = DateTime.now().day;
+    //                   final String frequency = "0 0 $dayOfMonth * *";
+    //                   Sheets.showAppHeightNineSheet(
+    //                     context: context,
+    //                     widget: SubConfirmSheet(
+    //                       sub: Subscription(
+    //                         address: SubscriptionService.PRO_PAYMENT_ADDRESS,
+    //                         amount_raw:
+    //                             SubscriptionService.PRO_PAYMENT_MONTHLY_COST,
+    //                         frequency: frequency,
+    //                         label: "${NonTranslatable.appName} Pro",
+    //                         active: true,
+    //                       ),
+    //                     ),
+    //                   );
+    //                 });
+    //               },
+    //             ),
+    //           ],
+    //         );
+    //       },
+    //     );
+    //   },
+    // );
 
     return false;
   }
@@ -378,8 +372,7 @@ class AppDialogs {
           actions: <Widget>[
             TextButton(
               style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                 padding: const EdgeInsets.all(12),
               ),
               child: Text(
@@ -401,8 +394,7 @@ class AppDialogs {
     );
   }
 
-  static Widget infoHeader(
-      BuildContext context, Widget title, void Function()? onPressed) {
+  static Widget infoHeader(BuildContext context, Widget title, void Function()? onPressed) {
     return Row(children: <Widget>[
       title,
       // A container for the info button
@@ -423,13 +415,11 @@ class AppDialogs {
           foregroundColor: StateContainer.of(context).curTheme.text15,
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           padding: const EdgeInsets.all(10.0),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
           tapTargetSize: MaterialTapTargetSize.padded,
         ),
         onPressed: onPressed,
-        child: Icon(icon,
-            size: 24, color: color ?? StateContainer.of(context).curTheme.text),
+        child: Icon(icon, size: 24, color: color ?? StateContainer.of(context).curTheme.text),
       ),
     );
   }
@@ -491,70 +481,54 @@ class AppDialogs {
                         style: AppStyles.textStyleDialogHeader(context)),
                   ),
                   Container(
-                    constraints:
-                        const BoxConstraints(minHeight: 300, maxHeight: 400),
+                    constraints: const BoxConstraints(minHeight: 300, maxHeight: 400),
                     child: DraggableScrollbar(
                       controller: scrollController,
                       scrollbarTopMargin: 0,
                       scrollbarBottomMargin: 0,
-                      scrollbarColor:
-                          StateContainer.of(context).curTheme.primary,
+                      scrollbarColor: StateContainer.of(context).curTheme.primary,
                       child: ListView(
                         controller: scrollController,
                         children: [
                           Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 24, vertical: 16),
+                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                             child: MarkdownBody(
                               data: changeLogMarkdown,
                               shrinkWrap: true,
                               selectable: false,
-                              onTapLink: (String text, String? url,
-                                  String title) async {
+                              onTapLink: (String text, String? url, String title) async {
                                 final Uri uri = Uri.parse(url!);
                                 if (await canLaunchUrl(uri)) {
                                   await launchUrl(uri);
                                 }
                               },
-                              styleSheet:
-                                  MarkdownStyleSheet.fromTheme(ThemeData(
-                                      textTheme: TextTheme(
+                              styleSheet: MarkdownStyleSheet.fromTheme(ThemeData(
+                                  textTheme: TextTheme(
                                 bodyMedium: TextStyle(
                                   fontSize: AppFontSizes.smallText(context),
                                   fontWeight: FontWeight.w400,
-                                  color:
-                                      StateContainer.of(context).curTheme.text,
+                                  color: StateContainer.of(context).curTheme.text,
                                 ),
                               ))).copyWith(
                                 h1: TextStyle(
                                   fontSize: AppFontSizes.large(context),
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .success,
+                                  color: StateContainer.of(context).curTheme.success,
                                 ),
                                 h2: TextStyle(
                                   fontSize: AppFontSizes.large(context),
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .success,
+                                  color: StateContainer.of(context).curTheme.success,
                                 ),
                                 h2Padding: const EdgeInsets.only(top: 24),
                                 h4: TextStyle(
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .warning,
+                                  color: StateContainer.of(context).curTheme.warning,
                                 ),
                                 listBullet: TextStyle(
-                                  color:
-                                      StateContainer.of(context).curTheme.text,
+                                  color: StateContainer.of(context).curTheme.text,
                                 ),
                                 horizontalRuleDecoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
-                                        width: 3,
-                                        color: StateContainer.of(context)
-                                            .curTheme
-                                            .text!),
+                                        width: 3, color: StateContainer.of(context).curTheme.text!),
                                   ),
                                 ),
                               ),
@@ -562,8 +536,7 @@ class AppDialogs {
                                 md.ExtensionSet.gitHubFlavored.blockSyntaxes,
                                 [
                                   md.EmojiSyntax(),
-                                  ...md.ExtensionSet.gitHubFlavored
-                                      .inlineSyntaxes
+                                  ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes
                                 ],
                               ),
                             ),
@@ -575,52 +548,44 @@ class AppDialogs {
                   Container(
                     height: 50,
                     alignment: Alignment.center,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          TextButton(
-                            onPressed: () async {
-                              Navigator.of(context).pop();
-                              // Go to send with address
-                              Future<void>.delayed(
-                                  const Duration(milliseconds: 1000), () {
-                                Navigator.of(context)
-                                    .popUntil(RouteUtils.withNameLike("/home"));
+                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: <Widget>[
+                      TextButton(
+                        onPressed: () async {
+                          Navigator.of(context).pop();
+                          // Go to send with address
+                          Future<void>.delayed(const Duration(milliseconds: 1000), () {
+                            Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
 
-                                Sheets.showAppHeightNineSheet(
-                                    context: context,
-                                    widget: FundingMessagesSheet(
-                                      alerts: StateContainer.of(context)
-                                          .fundingAlerts,
-                                      hasDismissButton: false,
-                                    ));
-                              });
-                            },
-                            child: Text(
-                              Z.of(context).supportTheDeveloper,
-                              style: TextStyle(
-                                fontSize: AppFontSizes.medium,
-                                color:
-                                    StateContainer.of(context).curTheme.primary,
-                              ),
-                            ),
+                            Sheets.showAppHeightNineSheet(
+                                context: context,
+                                widget: FundingMessagesSheet(
+                                  alerts: StateContainer.of(context).fundingAlerts,
+                                  hasDismissButton: false,
+                                ));
+                          });
+                        },
+                        child: Text(
+                          Z.of(context).supportTheDeveloper,
+                          style: TextStyle(
+                            fontSize: AppFontSizes.medium,
+                            color: StateContainer.of(context).curTheme.primary,
                           ),
-                          TextButton(
-                            key: const Key("changelog_dismiss_button"),
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: Text(Z.of(context).dismiss,
-                                style:
-                                    AppStyles.textStyleDialogOptions(context)),
-                          ),
-                        ]),
+                        ),
+                      ),
+                      TextButton(
+                        key: const Key("changelog_dismiss_button"),
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text(Z.of(context).dismiss,
+                            style: AppStyles.textStyleDialogOptions(context)),
+                      ),
+                    ]),
                   ),
                 ],
               ),
             ));
   }
 
-  static Future<bool?> showTrackingDialog(BuildContext context,
-      [bool dismissable = false]) async {
+  static Future<bool?> showTrackingDialog(BuildContext context, [bool dismissable = false]) async {
     final bool? option = await showDialog<bool>(
         context: context,
         barrierColor: StateContainer.of(context).curTheme.barrier,
@@ -637,8 +602,8 @@ class AppDialogs {
             infoButton: AppDialogs.infoButton(
               context,
               () {
-                AppDialogs.showInfoDialog(context, Z.of(context).trackingHeader,
-                    Z.of(context).trackingWarningBodyLong);
+                AppDialogs.showInfoDialog(
+                    context, Z.of(context).trackingHeader, Z.of(context).trackingWarningBodyLong);
               },
             ),
             children: <Widget>[

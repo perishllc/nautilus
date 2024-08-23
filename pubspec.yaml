@@ -11,7 +11,7 @@ publish_to: "none"
 version: 0.9.9
 
 environment:
-  sdk: ">=2.19.0 <3.0.0"
+  sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -238,7 +238,7 @@ dependencies:
   libcrypto: ^0.2.1
 
   # in app purchases:
-  in_app_purchase: ^3.0.8
+  # in_app_purchase: ^3.0.8
   flutter_rust_bridge: ^1.51.1
   ffi: ^2.0.1
   ffigen: ^11.0.0
@@ -275,6 +275,7 @@ dependency_overrides:
       url: https://github.com/perishllc/uni_links.git
       path: uni_links_platform_interface
       ref: main
+  pinenacl: 0.6.0
   # https://github.com/pichillilorenzo/flutter_inappwebview/issues/1223
   # flutter_inappwebview:
   #   git:
