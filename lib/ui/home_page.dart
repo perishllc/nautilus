@@ -124,8 +124,7 @@ class AppHomePageState extends State<AppHomePage>
   // but seems the only way to handle the animations
   final Map<String, GlobalKey<AnimatedListState>> _unifiedListKeyMap =
       <String, GlobalKey<AnimatedListState>>{};
-  final Map<String, ListModel<dynamic>> _unifiedListMap =
-      <String, ListModel<dynamic>>{};
+  final Map<String, ListModel<dynamic>> _unifiedListMap = <String, ListModel<dynamic>>{};
 
   // used to associate memos with blocks so we don't have search on every re-render:
   final Map<String, TXData> _txDetailsMap = {};
@@ -180,16 +179,13 @@ class AppHomePageState extends State<AppHomePage>
   Timer? _connectionTimer;
 
   Future<void> _switchToAccount(String account) async {
-    final List<Account> accounts = await sl
-        .get<DBHelper>()
-        .getAccounts(await StateContainer.of(context).getSeed());
+    final List<Account> accounts =
+        await sl.get<DBHelper>().getAccounts(await StateContainer.of(context).getSeed());
     if (!mounted) return;
     for (final Account acc in accounts) {
-      if (acc.address == account &&
-          acc.address != StateContainer.of(context).wallet!.address) {
+      if (acc.address == account && acc.address != StateContainer.of(context).wallet!.address) {
         await sl.get<DBHelper>().changeAccount(acc);
-        EventTaxiImpl.singleton()
-            .fire(AccountChangedEvent(account: acc, delayPop: true));
+        EventTaxiImpl.singleton().fire(AccountChangedEvent(account: acc, delayPop: true));
       }
     }
   }
@@ -207,8 +203,7 @@ class AppHomePageState extends State<AppHomePage>
   Future<void> getNotificationPermissions() async {
     bool notificationsAllowed = false;
     try {
-      final NotificationSettings settings =
-          await _firebaseMessaging.requestPermission(
+      final NotificationSettings settings = await _firebaseMessaging.requestPermission(
         sound: true,
         badge: true,
         alert: true,
@@ -224,8 +219,7 @@ class AppHomePageState extends State<AppHomePage>
           settings.badge == AppleNotificationSetting.enabled ||
           settings.sound == AppleNotificationSetting.enabled ||
           settings.authorizationStatus == AuthorizationStatus.authorized) {
-        final bool beenSet =
-            await sl.get<SharedPrefsUtil>().getNotificationsSet();
+        final bool beenSet = await sl.get<SharedPrefsUtil>().getNotificationsSet();
         if (!beenSet) {
           notificationsAllowed = true;
           sl.get<SharedPrefsUtil>().setNotificationsOn(true);
@@ -249,8 +243,7 @@ class AppHomePageState extends State<AppHomePage>
     } catch (e) {
       sl.get<SharedPrefsUtil>().setNotificationsOn(false);
     }
-    if (!await sl.get<SharedPrefsUtil>().getNotificationsOn() &&
-        !notificationsAllowed) {
+    if (!await sl.get<SharedPrefsUtil>().getNotificationsOn() && !notificationsAllowed) {
       showNotificationWarning();
     }
   }
@@ -258,16 +251,13 @@ class AppHomePageState extends State<AppHomePage>
   Future<void> getTrackingPermissions() async {
     // check if we have tracking permissions on iOS:
     if (Platform.isIOS) {
-      final TrackingStatus status =
-          await AppTrackingTransparency.trackingAuthorizationStatus;
-      if (status == TrackingStatus.notDetermined ||
-          status == TrackingStatus.denied) {
-
+      final TrackingStatus status = await AppTrackingTransparency.trackingAuthorizationStatus;
+      if (status == TrackingStatus.notDetermined || status == TrackingStatus.denied) {
         // update the setting if there's a mismatch:
         if (await sl.get<SharedPrefsUtil>().getTrackingEnabled()) {
           await sl.get<SharedPrefsUtil>().setTrackingEnabled(false);
         }
-        
+
         await showTrackingWarning();
       }
     } else {
@@ -311,8 +301,7 @@ class AppHomePageState extends State<AppHomePage>
     String? userOrFromAddress;
 
     // change address to username if it exists:
-    final User? user =
-        await sl.get<DBHelper>().getUserOrContactWithAddress(fromAddress);
+    final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(fromAddress);
     if (!mounted) return;
     if (user != null) {
       userOrFromAddress = user.getDisplayName();
@@ -328,14 +317,12 @@ class AppHomePageState extends State<AppHomePage>
     if (giftUUID.isEmpty) {
       // check if there's actually any nano to claim:
       if (seed.isNotEmpty) {
-        balance = await AppTransferOverviewSheetState()
-            .getGiftCardBalance(context, seed);
+        balance = await AppTransferOverviewSheetState().getGiftCardBalance(context, seed);
       }
       if (!mounted) return;
 
       if (balance != BigInt.zero) {
-        final String actualAmount =
-            getRawAsThemeAwareFormattedAmount(context, balance.toString());
+        final String actualAmount = getRawAsThemeAwareFormattedAmount(context, balance.toString());
         // show dialog with option to refund to sender:
         switch (await showDialog<int>(
             barrierDismissible: false,
@@ -344,10 +331,8 @@ class AppHomePageState extends State<AppHomePage>
             builder: (BuildContext context) {
               return AlertDialog(
                 surfaceTintColor: Colors.transparent,
-                actionsPadding:
-                    const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
+                actionsPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                 title: Text(
                   Z.of(context).giftAlert,
                   style: AppStyles.textStyleDialogHeader(context),
@@ -368,8 +353,7 @@ class AppHomePageState extends State<AppHomePage>
                           children: [
                             TextSpan(
                               text: "${userOrFromAddress!}\n",
-                              style:
-                                  AppStyles.textStyleParagraphPrimary(context),
+                              style: AppStyles.textStyleParagraphPrimary(context),
                             ),
                           ],
                         ),
@@ -386,8 +370,7 @@ class AppHomePageState extends State<AppHomePage>
                         style: AppStyles.textStyleParagraph(context),
                         children: <InlineSpan>[
                           TextSpan(
-                            text: getThemeAwareRawAccuracy(
-                                context, balance.toString()),
+                            text: getThemeAwareRawAccuracy(context, balance.toString()),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           displayCurrencySymbol(
@@ -460,8 +443,8 @@ class AppHomePageState extends State<AppHomePage>
             // not really worth actually checking the captcha, just send the gift anyway:
 
             // await AppTransferConfirmSheet().createState().autoProcessWallets(privKeyBalanceMap, StateContainer.of(context).wallet);
-            await AppTransferOverviewSheetState().startAutoTransfer(
-                context, seed, StateContainer.of(context).wallet!);
+            await AppTransferOverviewSheetState()
+                .startAutoTransfer(context, seed, StateContainer.of(context).wallet!);
             break;
           case 0:
             // refund the gift:
@@ -485,13 +468,12 @@ class AppHomePageState extends State<AppHomePage>
     } else {
       // GIFT UUID is not empty, so we're dealing with gift card v2:
       // check if there's actually any nano to claim:
-      final String requestingAccount =
-          StateContainer.of(context).wallet!.address!;
-      final dynamic res = await sl.get<GiftCards>().giftCardInfo(
-          giftUUID: giftUUID, requestingAccount: requestingAccount);
+      final String requestingAccount = StateContainer.of(context).wallet!.address!;
+      final dynamic res = await sl
+          .get<GiftCards>()
+          .giftCardInfo(giftUUID: giftUUID, requestingAccount: requestingAccount);
       if (!mounted) return;
-      final String actualAmount =
-          getRawAsThemeAwareFormattedAmount(context, balance.toString());
+      final String actualAmount = getRawAsThemeAwareFormattedAmount(context, balance.toString());
       if (!mounted) return;
       if (res["error"] != null) {
         shouldShowEmptyDialog = true;
@@ -505,10 +487,8 @@ class AppHomePageState extends State<AppHomePage>
             builder: (BuildContext context) {
               return AlertDialog(
                 surfaceTintColor: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
-                actionsPadding:
-                    const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                actionsPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                 title: Text(
                   Z.of(context).giftAlert,
                   style: AppStyles.textStyleDialogHeader(context),
@@ -529,8 +509,7 @@ class AppHomePageState extends State<AppHomePage>
                           children: [
                             TextSpan(
                               text: "${userOrFromAddress!}\n",
-                              style:
-                                  AppStyles.textStyleParagraphPrimary(context),
+                              style: AppStyles.textStyleParagraphPrimary(context),
                             ),
                           ],
                         ),
@@ -547,8 +526,7 @@ class AppHomePageState extends State<AppHomePage>
                         style: AppStyles.textStyleParagraph(context),
                         children: [
                           TextSpan(
-                            text: getThemeAwareRawAccuracy(
-                                context, balance.toString()),
+                            text: getThemeAwareRawAccuracy(context, balance.toString()),
                             style: AppStyles.textStyleParagraphPrimary(context),
                           ),
                           displayCurrencySymbol(
@@ -626,13 +604,10 @@ class AppHomePageState extends State<AppHomePage>
 
             if (res["error"] != null) {
               // something went wrong, show error:
-              UIUtil.showSnackbar(
-                  Z.of(context).errorProcessingGiftCard, context,
-                  durationMs: 4000);
+              UIUtil.showSnackbar(Z.of(context).errorProcessingGiftCard, context, durationMs: 4000);
             } else if (res["success"] != null) {
               // show success:
-              UIUtil.showSnackbar(Z.of(context).giftProcessSuccess, context,
-                  durationMs: 4000);
+              UIUtil.showSnackbar(Z.of(context).giftProcessSuccess, context, durationMs: 4000);
             }
 
             if (animationOpen) {
@@ -666,8 +641,7 @@ class AppHomePageState extends State<AppHomePage>
           builder: (BuildContext context) {
             return AlertDialog(
               surfaceTintColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
               title: Text(
                 Z.of(context).giftAlertEmpty,
                 style: AppStyles.textStyleDialogHeader(context),
@@ -762,8 +736,7 @@ class AppHomePageState extends State<AppHomePage>
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
-    _placeholderCardAnimationController
-        .addListener(_animationControllerListener);
+    _placeholderCardAnimationController.addListener(_animationControllerListener);
     _loadMoreAnimationController = AnimationController(vsync: this);
     _opacityAnimation = Tween<double>(begin: 1.0, end: 0.4).animate(
       CurvedAnimation(
@@ -821,12 +794,11 @@ class AppHomePageState extends State<AppHomePage>
           // ignoreNativeDialog: Platform.isAndroid,
           ignoreNativeDialog: false,
           dialogStyle: const DialogStyle(
-            dialogShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15))),
+            dialogShape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
           ),
           // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
-          onDismissed: () =>
-              rateMyApp.callEvent(RateMyAppEventType.laterButtonPressed),
+          onDismissed: () => rateMyApp.callEvent(RateMyAppEventType.laterButtonPressed),
           // This one allows you to change the default dialog content.
           contentBuilder: (BuildContext context, Widget defaultContent) {
             return Column(
@@ -889,8 +861,7 @@ class AppHomePageState extends State<AppHomePage>
       }
 
       // first launch:
-      final bool isFirstLaunch =
-          !(await sl.get<SharedPrefsUtil>().getFirstContactAdded());
+      final bool isFirstLaunch = !(await sl.get<SharedPrefsUtil>().getFirstContactAdded());
       if (!mounted) return;
 
       // Setup notifications
@@ -909,8 +880,7 @@ class AppHomePageState extends State<AppHomePage>
       if (!isFirstLaunch) {
         final PackageInfo packageInfo = await PackageInfo.fromPlatform();
         final String runningVersion = packageInfo.version;
-        final String lastVersion =
-            await sl.get<SharedPrefsUtil>().getAppVersion();
+        final String lastVersion = await sl.get<SharedPrefsUtil>().getAppVersion();
         if (runningVersion != lastVersion) {
           await sl.get<SharedPrefsUtil>().setAppVersion(runningVersion);
           if (!mounted) return;
@@ -955,16 +925,15 @@ class AppHomePageState extends State<AppHomePage>
       Future<void>.delayed(const Duration(seconds: 5), () async {
         if (!mounted) return;
         if (StateContainer.of(context).wallet?.history.isNotEmpty ?? false) {
-          await sl.get<SubscriptionService>().checkAreSubscriptionsPaid(
-              StateContainer.of(context).wallet!.history);
+          await sl
+              .get<SubscriptionService>()
+              .checkAreSubscriptionsPaid(StateContainer.of(context).wallet!.history);
         }
       });
     });
     // confetti:
-    _confettiControllerLeft =
-        ConfettiController(duration: const Duration(milliseconds: 150));
-    _confettiControllerRight =
-        ConfettiController(duration: const Duration(milliseconds: 150));
+    _confettiControllerLeft = ConfettiController(duration: const Duration(milliseconds: 150));
+    _confettiControllerRight = ConfettiController(duration: const Duration(milliseconds: 150));
   }
 
   Future<void> showConnectionWarning(bool showWarning) async {
@@ -987,8 +956,7 @@ class AppHomePageState extends State<AppHomePage>
         });
       }
       // start a timer to check if we're connected:
-      _connectionTimer =
-          Timer.periodic(const Duration(seconds: 5), (Timer t) async {
+      _connectionTimer = Timer.periodic(const Duration(seconds: 5), (Timer t) async {
         final bool connected = await sl.get<AccountService>().isConnected();
         if (connected) {
           t.cancel();
@@ -1054,8 +1022,7 @@ class AppHomePageState extends State<AppHomePage>
   void _startAnimation() {
     if (_animationDisposed) {
       _animationDisposed = false;
-      _placeholderCardAnimationController
-          .addListener(_animationControllerListener);
+      _placeholderCardAnimationController.addListener(_animationControllerListener);
       _opacityAnimation.addStatusListener(_animationStatusListener);
       _placeholderCardAnimationController.forward();
     }
@@ -1065,8 +1032,7 @@ class AppHomePageState extends State<AppHomePage>
     if (!_animationDisposed) {
       _animationDisposed = true;
       _opacityAnimation.removeStatusListener(_animationStatusListener);
-      _placeholderCardAnimationController
-          .removeListener(_animationControllerListener);
+      _placeholderCardAnimationController.removeListener(_animationControllerListener);
       _placeholderCardAnimationController.stop();
     }
   }
@@ -1088,8 +1054,7 @@ class AppHomePageState extends State<AppHomePage>
       onDiscovered: (NfcTag tag) async {
         // Do something with an NfcTag instance.
         final Ndef? ndef = Ndef.from(tag);
-        if (ndef?.cachedMessage != null &&
-            ndef!.cachedMessage!.records.isNotEmpty) {
+        if (ndef?.cachedMessage != null && ndef!.cachedMessage!.records.isNotEmpty) {
           Uint8List payload = ndef.cachedMessage!.records[0].payload;
 
           if (payload.length < 3) {
@@ -1110,15 +1075,13 @@ class AppHomePageState extends State<AppHomePage>
 
   // Add donations contact if it hasnt already been added
   Future<void> _addSampleContact() async {
-    final bool contactAdded =
-        await sl.get<SharedPrefsUtil>().getFirstContactAdded();
+    final bool contactAdded = await sl.get<SharedPrefsUtil>().getFirstContactAdded();
     if (!contactAdded) {
       const String nautilusDonationsNickname = "NautilusDonations";
       await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
       final User donationsContact = User(
           nickname: nautilusDonationsNickname,
-          address:
-              "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579",
+          address: "nano_38713x95zyjsqzx6nm1dsom1jmm668owkeb9913ax6nfgj15az3nu8xkx579",
           // username: "nautilus",
           type: UserTypes.CONTACT);
       await sl.get<DBHelper>().saveContact(donationsContact);
@@ -1134,8 +1097,7 @@ class AppHomePageState extends State<AppHomePage>
   }
 
   Future<void> _updateTXDetailsMap(String? account) async {
-    final List<TXData> data =
-        await sl.get<DBHelper>().getAccountSpecificTXData(account);
+    final List<TXData> data = await sl.get<DBHelper>().getAccountSpecificTXData(account);
     if (!mounted) return;
     setState(() {
       _txRecords = data;
@@ -1144,16 +1106,13 @@ class AppHomePageState extends State<AppHomePage>
     for (final TXData tx in _txRecords) {
       if (tx.isSolid() && (isEmpty(tx.block) || isEmpty(tx.link))) {
         // set to the last block:
-        final String? lastBlockHash =
-            StateContainer.of(context).wallet!.history.isNotEmpty
-                ? StateContainer.of(context).wallet!.history[0].hash
-                : null;
-        if (isEmpty(tx.block) &&
-            StateContainer.of(context).wallet!.address == tx.from_address) {
+        final String? lastBlockHash = StateContainer.of(context).wallet!.history.isNotEmpty
+            ? StateContainer.of(context).wallet!.history[0].hash
+            : null;
+        if (isEmpty(tx.block) && StateContainer.of(context).wallet!.address == tx.from_address) {
           tx.block = lastBlockHash;
         }
-        if (isEmpty(tx.link) &&
-            StateContainer.of(context).wallet!.address == tx.to_address) {
+        if (isEmpty(tx.link) && StateContainer.of(context).wallet!.address == tx.to_address) {
           tx.link = lastBlockHash;
         }
         // save to db:
@@ -1166,13 +1125,10 @@ class AppHomePageState extends State<AppHomePage>
         log.v("ACKNOWLEDGING TX_DATA: ${tx.uuid}");
         tx.is_acknowledged = true;
         sl.get<DBHelper>().replaceTXDataByUUID(tx);
-        sl
-            .get<MetadataService>()
-            .requestACK(tx.uuid, tx.from_address, tx.to_address);
+        sl.get<MetadataService>().requestACK(tx.uuid, tx.from_address, tx.to_address);
       }
       if (tx.is_memo && isEmpty(tx.link) && isNotEmpty(tx.block)) {
-        if (_historyListMap[StateContainer.of(context).wallet!.address] !=
-            null) {
+        if (_historyListMap[StateContainer.of(context).wallet!.address] != null) {
           // find if there's a matching link:
           // for (var histItem in StateContainer.of(context).wallet.history) {
           for (final AccountHistoryResponseItem histItem
@@ -1194,25 +1150,21 @@ class AppHomePageState extends State<AppHomePage>
             shouldUpdate = true;
           } else {
             // don't update if the balance is now 0:
-            final List<String> metadata =
-                tx.metadata!.split(RecordTypes.SEPARATOR);
+            final List<String> metadata = tx.metadata!.split(RecordTypes.SEPARATOR);
             if (metadata.length >= 2 && metadata[1] == "0") {
               shouldUpdate = false;
-            } else if (DateTime.fromMillisecondsSinceEpoch(
-                    tx.request_time! * 1000)
-                .isBefore(
-                    DateTime.now().subtract(const Duration(minutes: 1)))) {
+            } else if (DateTime.fromMillisecondsSinceEpoch(tx.request_time! * 1000)
+                .isBefore(DateTime.now().subtract(const Duration(minutes: 1)))) {
               shouldUpdate = true;
             }
           }
           if (shouldUpdate) {
-            tx.request_time = DateTime.now().millisecondsSinceEpoch ~/
-                Duration.millisecondsPerSecond;
+            tx.request_time =
+                DateTime.now().millisecondsSinceEpoch ~/ Duration.millisecondsPerSecond;
             final String balanceRaw = await getGiftBalance(tx.to_address);
 
             if (balanceRaw.isNotEmpty) {
-              final List<String> metadata =
-                  tx.metadata!.split(RecordTypes.SEPARATOR);
+              final List<String> metadata = tx.metadata!.split(RecordTypes.SEPARATOR);
               if (metadata.length > 2) {
                 metadata[2] = balanceRaw;
               } else if (metadata.length == 2) {
@@ -1254,9 +1206,8 @@ class AppHomePageState extends State<AppHomePage>
   StreamSubscription<ScheduledChangedEvent>? _scheduledSub;
 
   void _registerBus() {
-    _historySub = EventTaxiImpl.singleton()
-        .registerTo<HistoryHomeEvent>()
-        .listen((HistoryHomeEvent event) {
+    _historySub =
+        EventTaxiImpl.singleton().registerTo<HistoryHomeEvent>().listen((HistoryHomeEvent event) {
       updateHistoryList(event.items);
       // update tx memo's a second later since it could arrive late:
       Future<void>.delayed(const Duration(seconds: 1), () {
@@ -1268,29 +1219,25 @@ class AppHomePageState extends State<AppHomePage>
         StateContainer.of(context).initialDeepLink = null;
       }
     });
-    _txUpdatesSub = EventTaxiImpl.singleton()
-        .registerTo<TXUpdateEvent>()
-        .listen((TXUpdateEvent event) {
+    _txUpdatesSub =
+        EventTaxiImpl.singleton().registerTo<TXUpdateEvent>().listen((TXUpdateEvent event) {
       if (StateContainer.of(context).wallet?.address != null) {
         _updateTXDetailsMap(StateContainer.of(context).wallet!.address);
       }
     });
-    _solidsSub = EventTaxiImpl.singleton()
-        .registerTo<PaymentsHomeEvent>()
-        .listen((PaymentsHomeEvent event) {
+    _solidsSub =
+        EventTaxiImpl.singleton().registerTo<PaymentsHomeEvent>().listen((PaymentsHomeEvent event) {
       final List<TXData>? newSolids = event.items;
       if (newSolids == null ||
-          _solidsListMap[StateContainer.of(context).wallet?.address ?? ""] ==
-              null) {
+          _solidsListMap[StateContainer.of(context).wallet?.address ?? ""] == null) {
         return;
       }
       setState(() {
         _solidsListMap[StateContainer.of(context).wallet!.address!] = newSolids;
       });
     });
-    _unifiedSub = EventTaxiImpl.singleton()
-        .registerTo<UnifiedHomeEvent>()
-        .listen((UnifiedHomeEvent event) {
+    _unifiedSub =
+        EventTaxiImpl.singleton().registerTo<UnifiedHomeEvent>().listen((UnifiedHomeEvent event) {
       if (_isRefreshing) {
         setState(() {
           _isRefreshing = false;
@@ -1340,18 +1287,17 @@ class AppHomePageState extends State<AppHomePage>
     _confirmEventSub = EventTaxiImpl.singleton()
         .registerTo<ConfirmationHeightChangedEvent>()
         .listen((ConfirmationHeightChangedEvent event) {
+      log.e(event.confirmationHeight);
       updateConfirmationHeights(event.confirmationHeight);
     });
     // deep link scan:
-    _deepLinkEventSub = EventTaxiImpl.singleton()
-        .registerTo<DeepLinkEvent>()
-        .listen((DeepLinkEvent event) {
+    _deepLinkEventSub =
+        EventTaxiImpl.singleton().registerTo<DeepLinkEvent>().listen((DeepLinkEvent event) {
       handleDeepLink(event.link);
     });
     // listen to connection events:
-    _connectionSub = EventTaxiImpl.singleton()
-        .registerTo<ConnStatusEvent>()
-        .listen((ConnStatusEvent event) {
+    _connectionSub =
+        EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((ConnStatusEvent event) {
       if (event.status == ConnectionStatus.CONNECTED) {
         // cancel the timer, if it's still running:
         _connectionTimer?.cancel();
@@ -1363,9 +1309,8 @@ class AppHomePageState extends State<AppHomePage>
         });
       }
     });
-    _subscriptionsSub = EventTaxiImpl.singleton()
-        .registerTo<SubsChangedEvent>()
-        .listen((SubsChangedEvent event) {
+    _subscriptionsSub =
+        EventTaxiImpl.singleton().registerTo<SubsChangedEvent>().listen((SubsChangedEvent event) {
       if (mounted) {
         setState(() {
           _subscriptions = event.subs ?? <Subscription>[];
@@ -1414,8 +1359,7 @@ class AppHomePageState extends State<AppHomePage>
   }
 
   Future<void> _loadMore() async {
-    if ((_historyListMap[StateContainer.of(context).wallet!.address]?.isEmpty ??
-            true) ||
+    if ((_historyListMap[StateContainer.of(context).wallet!.address]?.isEmpty ?? true) ||
         (StateContainer.of(context).wallet?.loading ?? true)) {
       return;
     }
@@ -1426,8 +1370,7 @@ class AppHomePageState extends State<AppHomePage>
       });
 
       // random delay between 500ms and 1.5s:
-      Future<void>.delayed(Duration(milliseconds: 250 + Random().nextInt(500)),
-          () async {
+      Future<void>.delayed(Duration(milliseconds: 250 + Random().nextInt(500)), () async {
         _maxHistItems += 25;
         await generateUnifiedList(fastUpdate: true);
         final double oldMaxScroll = _scrollController.position.maxScrollExtent;
@@ -1436,11 +1379,9 @@ class AppHomePageState extends State<AppHomePage>
         });
         // post frame callback to wait for the list to be built:
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          final double maxScrollDiff =
-              _scrollController.position.maxScrollExtent - oldMaxScroll;
+          final double maxScrollDiff = _scrollController.position.maxScrollExtent - oldMaxScroll;
           // can't be exact because otherwise the jump doesn't register for w/e reason:
-          _scrollController.jumpTo(
-              _scrollController.position.maxScrollExtent - maxScrollDiff - 1);
+          _scrollController.jumpTo(_scrollController.position.maxScrollExtent - maxScrollDiff - 1);
         });
       });
     }
@@ -1452,8 +1393,7 @@ class AppHomePageState extends State<AppHomePage>
     setState(() {
       currentConfHeight = confirmationHeight! + 1;
     });
-    if (!_historyListMap
-        .containsKey(StateContainer.of(context).wallet!.address)) {
+    if (!_historyListMap.containsKey(StateContainer.of(context).wallet!.address)) {
       return;
     }
     final List<int> unconfirmedUpdate = <int>[];
@@ -1465,8 +1405,7 @@ class AppHomePageState extends State<AppHomePage>
           histListMap[i].height != null &&
           confirmationHeight! < histListMap[i].height!) {
         unconfirmedUpdate.add(i);
-      } else if ((histListMap[i].confirmed == null ||
-              !histListMap[i].confirmed!) &&
+      } else if ((histListMap[i].confirmed == null || !histListMap[i].confirmed!) &&
           histListMap[i].height != null &&
           confirmationHeight! >= histListMap[i].height!) {
         confirmedUpdate.add(i);
@@ -1474,12 +1413,10 @@ class AppHomePageState extends State<AppHomePage>
     }
     setState(() {
       for (final int index in unconfirmedUpdate) {
-        _historyListMap[StateContainer.of(context).wallet!.address]![index]
-            .confirmed = false;
+        _historyListMap[StateContainer.of(context).wallet!.address]![index].confirmed = false;
       }
       for (final int index in confirmedUpdate) {
-        _historyListMap[StateContainer.of(context).wallet!.address]![index]
-            .confirmed = true;
+        _historyListMap[StateContainer.of(context).wallet!.address]![index].confirmed = true;
       }
     });
   }
@@ -1498,8 +1435,7 @@ class AppHomePageState extends State<AppHomePage>
         cancelLockEvent();
         StateContainer.of(context).reconnect();
         // handle deep links:
-        if (/*!StateContainer.of(context).wallet!.loading && */ StateContainer
-                        .of(context)
+        if (/*!StateContainer.of(context).wallet!.loading && */ StateContainer.of(context)
                     .initialDeepLink !=
                 null &&
             !_lockTriggered) {
@@ -1511,8 +1447,7 @@ class AppHomePageState extends State<AppHomePage>
           StateContainer.of(context).resetGift();
         }
         // handle pending background events:
-        if (StateContainer.of(context).wallet?.loading == false &&
-            !_lockTriggered) {
+        if (StateContainer.of(context).wallet?.loading == false && !_lockTriggered) {
           handleReceivableBackgroundMessages();
         }
 
@@ -1534,8 +1469,8 @@ class AppHomePageState extends State<AppHomePage>
       if (lockStreamListener != null) {
         lockStreamListener!.cancel();
       }
-      final Future<dynamic> delayed = Future.delayed(
-          (await sl.get<SharedPrefsUtil>().getLockTimeout()).getDuration());
+      final Future<dynamic> delayed =
+          Future.delayed((await sl.get<SharedPrefsUtil>().getLockTimeout()).getDuration());
       delayed.then((_) {
         return true;
       });
@@ -1543,12 +1478,10 @@ class AppHomePageState extends State<AppHomePage>
         try {
           StateContainer.of(context).resetEncryptedSecret();
         } catch (e) {
-          log.w(
-              "Failed to reset encrypted secret when locking ${e.toString()}");
+          log.w("Failed to reset encrypted secret when locking ${e.toString()}");
         } finally {
           _lockTriggered = true;
-          Navigator.of(context)
-              .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+          Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
         }
       });
     }
@@ -1620,8 +1553,7 @@ class AppHomePageState extends State<AppHomePage>
     if (StateContainer.of(context).wallet!.loading) {
       StateContainer.of(context).requestSubscribe();
     } else {
-      updateConfirmationHeights(
-          StateContainer.of(context).wallet!.confirmationHeight);
+      updateConfirmationHeights(StateContainer.of(context).wallet!.confirmationHeight);
     }
   }
 
@@ -1686,10 +1618,8 @@ class AppHomePageState extends State<AppHomePage>
   }
 
   int amountSortComparison(dynamic a, dynamic b) {
-    final String propertyA =
-        a?.amount as String? ?? a?.amount_raw as String? ?? "";
-    final String propertyB =
-        b?.amount as String? ?? b?.amount_raw as String? ?? "";
+    final String propertyA = a?.amount as String? ?? a?.amount_raw as String? ?? "";
+    final String propertyB = b?.amount as String? ?? b?.amount_raw as String? ?? "";
     if (propertyA == "" || propertyB == "") {
       // messages don't have amounts:
       return 0;
@@ -1709,12 +1639,10 @@ class AppHomePageState extends State<AppHomePage>
   }
 
   Future<void> generateUnifiedList({bool fastUpdate = false}) async {
-    ListModel<dynamic>? ULM =
-        _unifiedListMap[StateContainer.of(context).wallet!.address];
+    ListModel<dynamic>? ULM = _unifiedListMap[StateContainer.of(context).wallet!.address];
 
     if (StateContainer.of(context).activeAlerts.isNotEmpty) {
-      ULM =
-          _unifiedListMap["${StateContainer.of(context).wallet!.address}alert"];
+      ULM = _unifiedListMap["${StateContainer.of(context).wallet!.address}alert"];
     }
 
     if (_historyListMap[StateContainer.of(context).wallet!.address] == null ||
@@ -1736,8 +1664,7 @@ class AppHomePageState extends State<AppHomePage>
     // List<TXData> solidsList = StateContainer.of(context).wallet!.solids!;
     final List<AccountHistoryResponseItem> historyList =
         _historyListMap[StateContainer.of(context).wallet!.address]!;
-    final List<TXData> solidsList =
-        _solidsListMap[StateContainer.of(context).wallet!.address]!;
+    final List<TXData> solidsList = _solidsListMap[StateContainer.of(context).wallet!.address]!;
 
     // for (var tx in solidsList) {
     //   print("memo: ${tx.memo} is_request: ${tx.is_request}");
@@ -1753,8 +1680,7 @@ class AppHomePageState extends State<AppHomePage>
         .toList());
     // only work with the first _maxHistItems:
     _trueMaxHistItems = unifiedList.length;
-    unifiedList =
-        unifiedList.sublist(0, min(unifiedList.length, _maxHistItems));
+    unifiedList = unifiedList.sublist(0, min(unifiedList.length, _maxHistItems));
 
     final Set<String?> uuids = {};
     final List<int?> idsToRemove = [];
@@ -1781,10 +1707,9 @@ class AppHomePageState extends State<AppHomePage>
 
       // if the block is null, give it one:
       if (solidsList[i].block == null) {
-        final String? lastBlockHash =
-            StateContainer.of(context).wallet!.history.isNotEmpty
-                ? StateContainer.of(context).wallet!.history[0].hash
-                : null;
+        final String? lastBlockHash = StateContainer.of(context).wallet!.history.isNotEmpty
+            ? StateContainer.of(context).wallet!.history[0].hash
+            : null;
         solidsList[i].block = lastBlockHash;
         await sl.get<DBHelper>().replaceTXDataByUUID(solidsList[i]);
       }
@@ -1798,16 +1723,14 @@ class AppHomePageState extends State<AppHomePage>
         }
         // remove from the list if it's a change block:
         // just in case:
-        if ([BlockTypes.CHANGE, BlockTypes.OPEN]
-            .contains(unifiedList[j].subtype)) {
+        if ([BlockTypes.CHANGE, BlockTypes.OPEN].contains(unifiedList[j].subtype)) {
           unifiedList.removeAt(j);
           j--;
           continue;
         }
         final String histItemHash = unifiedList[j].hash as String;
 
-        if (histItemHash == solidsList[i].block ||
-            histItemHash == solidsList[i].link) {
+        if (histItemHash == solidsList[i].block || histItemHash == solidsList[i].link) {
           index = j;
           height = unifiedList[j].height + 1 as int;
           break;
@@ -1823,8 +1746,7 @@ class AppHomePageState extends State<AppHomePage>
         // just insert at the top?
         // TODO: not necessarily the best way to handle this, should get real height:
         // wallet!.confirmationHeight += 1;
-        solidsList[i].height =
-            StateContainer.of(context).wallet!.confirmationHeight + 1;
+        solidsList[i].height = StateContainer.of(context).wallet!.confirmationHeight + 1;
         unifiedList.insert(0, solidsList[i]);
       }
     }
@@ -1848,8 +1770,7 @@ class AppHomePageState extends State<AppHomePage>
             ? dynamicItem
             : convertHistItemToTXData(dynamicItem as AccountHistoryResponseItem,
                 txDetails: _txDetailsMap[dynamicItem.hash]);
-        final bool isRecipient =
-            txDetails.isRecipient(StateContainer.of(context).wallet!.address);
+        final bool isRecipient = txDetails.isRecipient(StateContainer.of(context).wallet!.address);
         final String account = txDetails.getAccount(isRecipient);
 
         String displayName = Address(account).getShortestString() ?? "";
@@ -1873,11 +1794,7 @@ class AppHomePageState extends State<AppHomePage>
           amountStr = getRawAsThemeAwareAmount(context, txDetails.amount_raw);
           if (txDetails.is_request) {
             if (isRecipient) {
-              if (Z
-                  .of(context)
-                  .request
-                  .toLowerCase()
-                  .contains(lowerCaseSearch)) {
+              if (Z.of(context).request.toLowerCase().contains(lowerCaseSearch)) {
                 shouldRemove = false;
               }
             } else {
@@ -1895,11 +1812,7 @@ class AppHomePageState extends State<AppHomePage>
             }
           }
           if (txDetails.sub_type == BlockTypes.RECEIVE) {
-            if (Z
-                .of(context)
-                .received
-                .toLowerCase()
-                .contains(lowerCaseSearch)) {
+            if (Z.of(context).received.toLowerCase().contains(lowerCaseSearch)) {
               shouldRemove = false;
             }
           }
@@ -1954,8 +1867,7 @@ class AppHomePageState extends State<AppHomePage>
       unifiedList.sort(amountSortComparison);
     }
 
-    final bool noSearchResults =
-        unifiedList.isEmpty && _searchController.text.isNotEmpty;
+    final bool noSearchResults = unifiedList.isEmpty && _searchController.text.isNotEmpty;
 
     if (noSearchResults) {
       unifiedList.add(const SizedBox());
@@ -1971,16 +1883,13 @@ class AppHomePageState extends State<AppHomePage>
     removeIndices = <int>[];
 
     // remove anything that's not supposed to be there anymore:
-    ULM.items
-        .where((dynamic item) => !unifiedList.contains(item))
-        .forEach((dynamic dynamicItem) {
+    ULM.items.where((dynamic item) => !unifiedList.contains(item)).forEach((dynamic dynamicItem) {
       removeIndices.add(ULM!.items.indexOf(dynamicItem));
     });
     // mark anything out of place or not in the unified list as to be removed:
     if (_searchController.text.isNotEmpty) {
       ULM.items
-          .where(
-              (item) => ULM!.items.indexOf(item) != (unifiedList.indexOf(item)))
+          .where((item) => ULM!.items.indexOf(item) != (unifiedList.indexOf(item)))
           .forEach((dynamic dynamicItem) {
         removeIndices.add(ULM!.items.indexOf(dynamicItem));
       });
@@ -1997,9 +1906,7 @@ class AppHomePageState extends State<AppHomePage>
     }
 
     // insert unifiedList into listmap:
-    unifiedList
-        .where((dynamic item) => !ULM!.items.contains(item))
-        .forEach((dynamic dynamicItem) {
+    unifiedList.where((dynamic item) => !ULM!.items.contains(item)).forEach((dynamic dynamicItem) {
       int index = unifiedList.indexOf(dynamicItem);
       if (dynamicItem == null) {
         return;
@@ -2049,23 +1956,20 @@ class AppHomePageState extends State<AppHomePage>
         final BigInt? amountBigInt = BigInt.tryParse(address.amount!);
         // Require minimum 1 raw to send, and make sure sufficient balance
         if (amountBigInt != null && amountBigInt >= BigInt.from(10).pow(24)) {
-          if (StateContainer.of(context).wallet!.accountBalance >
-              amountBigInt) {
+          if (StateContainer.of(context).wallet!.accountBalance > amountBigInt) {
             sufficientBalance = true;
           }
           amount = address.amount;
         }
       }
       // See if a contact
-      final User? user = await sl
-          .get<DBHelper>()
-          .getUserOrContactWithAddress(address.address!);
+      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(address.address!);
       // Remove any other screens from stack
       if (!mounted) return;
       Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
       if (amount != null && sufficientBalance) {
         // Go to send confirm with amount
-        Sheets.showAppHeightNineSheet(
+        Sheets.showAppHeightEightSheet(
             context: context,
             widget: SendConfirmSheet(
               amountRaw: amount,
@@ -2074,7 +1978,7 @@ class AppHomePageState extends State<AppHomePage>
             ));
       } else {
         // Go to send with address
-        Sheets.showAppHeightNineSheet(
+        Sheets.showAppHeightEightSheet(
           context: context,
           widget: SendSheet(
             localCurrency: StateContainer.of(context).curCurrency,
@@ -2088,8 +1992,7 @@ class AppHomePageState extends State<AppHomePage>
       // handle block handoff:
       final PayItem payItem = scanResult;
       // See if this address belongs to a contact or username
-      final User? user =
-          await sl.get<DBHelper>().getUserOrContactWithAddress(payItem.account);
+      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(payItem.account);
 
       // check if the user has enough balance to send this amount:
       // If balance is insufficient show error:
@@ -2120,9 +2023,7 @@ class AppHomePageState extends State<AppHomePage>
       // handle auth handoff:
       final AuthItem authItem = scanResult;
       // See if this address belongs to a contact or username
-      final User? user = await sl
-          .get<DBHelper>()
-          .getUserOrContactWithAddress(authItem.account);
+      final User? user = await sl.get<DBHelper>().getUserOrContactWithAddress(authItem.account);
 
       if (!mounted) return;
 
@@ -2155,16 +2056,15 @@ class AppHomePageState extends State<AppHomePage>
   Future<void> handleReceivableBackgroundMessages() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.reload();
-    final List<String>? backgroundMessages =
-        prefs.getStringList("background_messages");
+    final List<String>? backgroundMessages = prefs.getStringList("background_messages");
     // process the message now that we're in the foreground:
 
     if (!mounted) return;
 
     if (backgroundMessages != null) {
       // EventTaxiImpl.singleton().fire(FcmMessageEvent(message_list: backgroundMessages));
-      await StateContainer.of(context).handleStoredMessages(
-          FcmMessageEvent(message_list: backgroundMessages));
+      await StateContainer.of(context)
+          .handleStoredMessages(FcmMessageEvent(message_list: backgroundMessages));
       // clear the storage since we just processed it:
       await prefs.remove("background_messages");
     }
@@ -2209,17 +2109,13 @@ class AppHomePageState extends State<AppHomePage>
                       Container(
                         width: 2,
                         height: 2,
-                        color: StateContainer.of(context)
-                            .curTheme
-                            .background
-                            ?.withOpacity(1),
+                        color: StateContainer.of(context).curTheme.background?.withOpacity(1),
                       ),
                     ],
                   ),
                   // const SizedBox(height: 6),
                   Container(
-                    margin: const EdgeInsetsDirectional.only(
-                        start: 14, end: 14, top: 8, bottom: 4),
+                    margin: const EdgeInsetsDirectional.only(start: 14, end: 14, top: 8, bottom: 4),
                     child: Stack(
                       children: <Widget>[
                         Container(
@@ -2227,8 +2123,7 @@ class AppHomePageState extends State<AppHomePage>
                           height: 50,
                           margin: const EdgeInsetsDirectional.only(start: 16),
                           child: Text(
-                            CaseChange.toUpperCase(
-                                Z.of(context).transactions, context),
+                            CaseChange.toUpperCase(Z.of(context).transactions, context),
                             textAlign: TextAlign.start,
                             style: TextStyle(
                               fontSize: 14,
@@ -2253,14 +2148,12 @@ class AppHomePageState extends State<AppHomePage>
                         ListGradient(
                           height: 10,
                           top: true,
-                          color:
-                              StateContainer.of(context).curTheme.background!,
+                          color: StateContainer.of(context).curTheme.background!,
                         ),
                         ListGradient(
                           height: 20,
                           top: false,
-                          color:
-                              StateContainer.of(context).curTheme.background!,
+                          color: StateContainer.of(context).curTheme.background!,
                         ),
                       ],
                     ),
@@ -2277,29 +2170,20 @@ class AppHomePageState extends State<AppHomePage>
                 children: <Widget>[
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(AppButton.BORDER_RADIUS),
-                      boxShadow: <BoxShadow>[
-                        StateContainer.of(context).curTheme.boxShadowButton!
-                      ],
+                      borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS),
+                      boxShadow: <BoxShadow>[StateContainer.of(context).curTheme.boxShadowButton!],
                     ),
                     height: 55,
-                    width:
-                        (UIUtil.getDrawerAwareScreenWidth(context) - 42).abs() /
-                            2,
-                    margin: const EdgeInsetsDirectional.only(
-                        start: 14, top: 0.0, end: 7.0),
+                    width: (UIUtil.getDrawerAwareScreenWidth(context) - 42).abs() / 2,
+                    margin: const EdgeInsetsDirectional.only(start: 14, top: 0.0, end: 7.0),
                     // margin: EdgeInsetsDirectional.only(start: 7.0, top: 0.0, end: 7.0),
                     child: TextButton(
                       key: const Key("home_receive_button"),
                       style: TextButton.styleFrom(
-                        backgroundColor:
-                            StateContainer.of(context).curTheme.primary,
+                        backgroundColor: StateContainer.of(context).curTheme.primary,
                         shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(AppButton.BORDER_RADIUS)),
-                        foregroundColor:
-                            StateContainer.of(context).curTheme.background40,
+                            borderRadius: BorderRadius.circular(AppButton.BORDER_RADIUS)),
+                        foregroundColor: StateContainer.of(context).curTheme.background40,
                       ),
                       child: AutoSizeText(
                         Z.of(context).receive,
@@ -2319,8 +2203,7 @@ class AppHomePageState extends State<AppHomePage>
                         Sheets.showAppHeightEightSheet(
                           context: context,
                           widget: ReceiveShowQRSheet(
-                            localCurrency:
-                                StateContainer.of(context).curCurrency,
+                            localCurrency: StateContainer.of(context).curCurrency,
                             address: StateContainer.of(context).wallet!.address,
                             qrWidget: qrWidget,
                           ),
@@ -2337,8 +2220,7 @@ class AppHomePageState extends State<AppHomePage>
                         Sheets.showAppHeightEightSheet(
                           context: context,
                           widget: ReceiveShowQRSheet(
-                            localCurrency:
-                                StateContainer.of(context).curCurrency,
+                            localCurrency: StateContainer.of(context).curCurrency,
                             address: StateContainer.of(context).wallet!.address,
                             qrWidget: qrWidget,
                           ),
@@ -2432,8 +2314,7 @@ class AppHomePageState extends State<AppHomePage>
             BottomNavigationBarItem(
               icon: Badge(
                 isLabelVisible: upcomingCount > 0,
-                label: Text("$upcomingCount",
-                    style: const TextStyle(color: Colors.white)),
+                label: Text("$upcomingCount", style: const TextStyle(color: Colors.white)),
                 child: const Icon(Icons.schedule),
               ),
               label: Z.of(context).upcomingButton,
@@ -2442,8 +2323,7 @@ class AppHomePageState extends State<AppHomePage>
             BottomNavigationBarItem(
               icon: const Icon(Icons.home),
               label: Z.of(context).homeButton,
-              backgroundColor:
-                  StateContainer.of(context).curTheme.backgroundDark,
+              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
             ),
             // BottomNavigationBarItem(
             //   icon: Badge(
@@ -2493,10 +2373,8 @@ class AppHomePageState extends State<AppHomePage>
             if (index != HOME_INDEX) {
               switch (index) {
                 case SUBS_INDEX:
-                  final List<Subscription> subs =
-                      await sl.get<DBHelper>().getSubscriptions();
-                  final List<Scheduled> scheduled =
-                      await sl.get<DBHelper>().getScheduled();
+                  final List<Subscription> subs = await sl.get<DBHelper>().getSubscriptions();
+                  final List<Scheduled> scheduled = await sl.get<DBHelper>().getScheduled();
                   if (!mounted) return;
                   await Sheets.showAppHeightNineSheet(
                     context: context,
@@ -2617,8 +2495,7 @@ class AppHomePageState extends State<AppHomePage>
             Container(
               width: UIUtil.getDrawerAwareScreenWidth(context),
               height: MediaQuery.of(context).size.height,
-              margin: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).size.height * 0.015),
+              margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.015),
               child: _buildMainColumnView(context),
             ),
           ],
@@ -2742,17 +2619,13 @@ class AppHomePageState extends State<AppHomePage>
       isSearchBoxOnRightSide: !Bidi.isRtlLanguage(),
       buttonIcon: AppIcons.search,
       trailingIcon: AppIcons.search,
-      buttonColour: StateContainer.of(context)
-          .curTheme
-          .backgroundDark, // icon background color
+      buttonColour: StateContainer.of(context).curTheme.backgroundDark, // icon background color
       buttonIconColour: StateContainer.of(context).curTheme.text, // icon color
       hintTextColour: StateContainer.of(context).curTheme.text30,
-      searchBoxColour: StateContainer.of(context)
-          .curTheme
-          .backgroundDark, // background of the searchbox itself
-      trailingIconColour: StateContainer.of(context)
-          .curTheme
-          .primary, // on the left after opening the search box
+      searchBoxColour:
+          StateContainer.of(context).curTheme.backgroundDark, // background of the searchbox itself
+      trailingIconColour:
+          StateContainer.of(context).curTheme.primary, // on the left after opening the search box
       secondaryButtonIconColour: StateContainer.of(context).curTheme.text,
       enableBoxShadow: false,
       enableButtonBorder: false,
@@ -2803,8 +2676,7 @@ class AppHomePageState extends State<AppHomePage>
       }
 
       BigInt? balance = BigInt.tryParse(res.balances![address]!.balance!);
-      final BigInt? receivable =
-          BigInt.tryParse(res.balances![address]!.receivable!);
+      final BigInt? receivable = BigInt.tryParse(res.balances![address]!.receivable!);
 
       if (balance == null || receivable == null) {
         return "";
@@ -2817,8 +2689,7 @@ class AppHomePageState extends State<AppHomePage>
     }
   }
 
-  TXData convertHistItemToTXData(AccountHistoryResponseItem histItem,
-      {TXData? txDetails}) {
+  TXData convertHistItemToTXData(AccountHistoryResponseItem histItem, {TXData? txDetails}) {
     TXData converted = TXData();
     if (txDetails != null) {
       converted = txDetails;
@@ -2856,12 +2727,10 @@ class AppHomePageState extends State<AppHomePage>
   }
 
   // Used to build list items that haven't been removed.
-  Widget _buildUnifiedItem(
-      BuildContext context, int index, Animation<double> animation) {
+  Widget _buildUnifiedItem(BuildContext context, int index, Animation<double> animation) {
     if (index < StateContainer.of(context).activeAlerts.length &&
         StateContainer.of(context).activeAlerts.isNotEmpty) {
-      return _buildRemoteMessageCard(
-          StateContainer.of(context).activeAlerts[index]);
+      return _buildRemoteMessageCard(StateContainer.of(context).activeAlerts[index]);
     }
     if (index == 0 && _noSearchResults) {
       return TXCards.noSearchResultsCard(context);
@@ -2878,8 +2747,8 @@ class AppHomePageState extends State<AppHomePage>
     }
 
     if (_loadingMore) {
-      final int maxLen = _unifiedListMap[ADR]!.length +
-          StateContainer.of(context).activeAlerts.length;
+      final int maxLen =
+          _unifiedListMap[ADR]!.length + StateContainer.of(context).activeAlerts.length;
       if (index == maxLen - 1) {
         return TXCards.loadingCard(context);
       }
@@ -2892,8 +2761,7 @@ class AppHomePageState extends State<AppHomePage>
         ? indexedItem
         : convertHistItemToTXData(indexedItem as AccountHistoryResponseItem,
             txDetails: _txDetailsMap[indexedItem.hash]);
-    final bool isRecipient =
-        txDetails.isRecipient(StateContainer.of(context).wallet!.address);
+    final bool isRecipient = txDetails.isRecipient(StateContainer.of(context).wallet!.address);
     final String account = txDetails.getAccount(isRecipient);
     String displayName = "";
     if (txDetails.memo?.isNotEmpty ?? false) {
@@ -2910,8 +2778,7 @@ class AppHomePageState extends State<AppHomePage>
       }
     }
 
-    return TXCards.unifiedCard(
-        txDetails, animation, displayName, context, _searchController.text);
+    return TXCards.unifiedCard(txDetails, animation, displayName, context, _searchController.text);
   }
 
   // Return widget for list
@@ -2919,20 +2786,16 @@ class AppHomePageState extends State<AppHomePage>
     if (StateContainer.of(context).wallet != null &&
         StateContainer.of(context).wallet!.historyLoading == false) {
       // Setup history list
-      if (!_historyListMap
-          .containsKey("${StateContainer.of(context).wallet!.address}")) {
+      if (!_historyListMap.containsKey("${StateContainer.of(context).wallet!.address}")) {
         setState(() {
-          _historyListMap.putIfAbsent(
-              StateContainer.of(context).wallet!.address!,
+          _historyListMap.putIfAbsent(StateContainer.of(context).wallet!.address!,
               () => StateContainer.of(context).wallet!.history);
         });
       }
       // Setup payments list
-      if (!_solidsListMap
-          .containsKey("${StateContainer.of(context).wallet!.address}")) {
+      if (!_solidsListMap.containsKey("${StateContainer.of(context).wallet!.address}")) {
         setState(() {
-          _solidsListMap.putIfAbsent(
-              StateContainer.of(context).wallet!.address!,
+          _solidsListMap.putIfAbsent(StateContainer.of(context).wallet!.address!,
               () => StateContainer.of(context).wallet!.solids);
         });
       }
@@ -2943,8 +2806,7 @@ class AppHomePageState extends State<AppHomePage>
       }
       // Setup unified list
       if (!_unifiedListKeyMap.containsKey(ADR)) {
-        _unifiedListKeyMap.putIfAbsent(
-            ADR, () => GlobalKey<AnimatedListState>());
+        _unifiedListKeyMap.putIfAbsent(ADR, () => GlobalKey<AnimatedListState>());
         setState(() {
           _unifiedListMap.putIfAbsent(
             ADR,
@@ -2975,26 +2837,26 @@ class AppHomePageState extends State<AppHomePage>
             controller: _scrollController,
             padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
             children: <Widget>[
-              TXCards.loadingTransactionCard(context, _opacityAnimation.value,
-                  "Sent", "10244000", "123456789121234"),
-              TXCards.loadingTransactionCard(context, _opacityAnimation.value,
-                  "Received", "100,00000", "@fosse1234"),
-              TXCards.loadingTransactionCard(context, _opacityAnimation.value,
-                  "Sent", "14500000", "12345678912345671234"),
-              TXCards.loadingTransactionCard(context, _opacityAnimation.value,
-                  "Sent", "12,51200", "123456789121234"),
-              TXCards.loadingTransactionCard(context, _opacityAnimation.value,
-                  "Received", "1,45300", "123456789121234"),
-              TXCards.loadingTransactionCard(context, _opacityAnimation.value,
-                  "Sent", "100,00000", "12345678912345671234"),
-              TXCards.loadingTransactionCard(context, _opacityAnimation.value,
-                  "Received", "24,00000", "12345678912345671234"),
-              TXCards.loadingTransactionCard(context, _opacityAnimation.value,
-                  "Sent", "1,00000", "123456789121234"),
-              TXCards.loadingTransactionCard(context, _opacityAnimation.value,
-                  "Sent", "1,00000", "123456789121234"),
-              TXCards.loadingTransactionCard(context, _opacityAnimation.value,
-                  "Sent", "1,00000", "123456789121234"),
+              TXCards.loadingTransactionCard(
+                  context, _opacityAnimation.value, "Sent", "10244000", "123456789121234"),
+              TXCards.loadingTransactionCard(
+                  context, _opacityAnimation.value, "Received", "100,00000", "@fosse1234"),
+              TXCards.loadingTransactionCard(
+                  context, _opacityAnimation.value, "Sent", "14500000", "12345678912345671234"),
+              TXCards.loadingTransactionCard(
+                  context, _opacityAnimation.value, "Sent", "12,51200", "123456789121234"),
+              TXCards.loadingTransactionCard(
+                  context, _opacityAnimation.value, "Received", "1,45300", "123456789121234"),
+              TXCards.loadingTransactionCard(
+                  context, _opacityAnimation.value, "Sent", "100,00000", "12345678912345671234"),
+              TXCards.loadingTransactionCard(
+                  context, _opacityAnimation.value, "Received", "24,00000", "12345678912345671234"),
+              TXCards.loadingTransactionCard(
+                  context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
+              TXCards.loadingTransactionCard(
+                  context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
+              TXCards.loadingTransactionCard(
+                  context, _opacityAnimation.value, "Sent", "1,00000", "123456789121234"),
             ],
           ));
     } else {
@@ -3005,8 +2867,7 @@ class AppHomePageState extends State<AppHomePage>
     if (StateContainer.of(context).wallet!.history.isEmpty &&
         StateContainer.of(context).wallet!.solids.isEmpty) {
       final List<Widget> activeAlerts = <Widget>[];
-      for (final AlertResponseItem alert
-          in StateContainer.of(context).activeAlerts) {
+      for (final AlertResponseItem alert in StateContainer.of(context).activeAlerts) {
         activeAlerts.add(_buildRemoteMessageCard(alert));
       }
       return DraggableScrollbar(
@@ -3036,8 +2897,7 @@ class AppHomePageState extends State<AppHomePage>
                 memo: Z.of(context).exampleRecRecipientMessage,
                 is_recipient: true,
                 is_tx: true,
-                timestamp:
-                    (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60),
+                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60),
               ),
               _buildDummyTXCard(
                 context,
@@ -3046,8 +2906,7 @@ class AppHomePageState extends State<AppHomePage>
                 memo: Z.of(context).examplePayRecipientMessage,
                 is_recipient: false,
                 is_tx: true,
-                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) -
-                    (60 * 60 * 24 * 1),
+                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 1),
               ),
               TXCards.welcomePaymentCardTwo(context),
 
@@ -3059,8 +2918,7 @@ class AppHomePageState extends State<AppHomePage>
                 is_recipient: false,
                 is_request: true,
                 is_fulfilled: true,
-                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) -
-                    (60 * 60 * 24 * 5),
+                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 5),
               ),
               _buildDummyTXCard(
                 context,
@@ -3070,8 +2928,7 @@ class AppHomePageState extends State<AppHomePage>
                 is_recipient: true,
                 is_request: true,
                 is_fulfilled: false,
-                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) -
-                    (60 * 60 * 24 * 7),
+                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 7),
               ),
               _buildDummyTXCard(
                 context,
@@ -3080,8 +2937,7 @@ class AppHomePageState extends State<AppHomePage>
                 is_recipient: true,
                 is_message: true,
                 is_fulfilled: false,
-                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) -
-                    (60 * 60 * 24 * 9),
+                timestamp: (DateTime.now().millisecondsSinceEpoch ~/ 1000) - (60 * 60 * 24 * 9),
               ),
             ],
           ),
@@ -3095,8 +2951,7 @@ class AppHomePageState extends State<AppHomePage>
       ADR += "alert";
       // Setup unified list
       if (!_unifiedListKeyMap.containsKey(ADR)) {
-        _unifiedListKeyMap.putIfAbsent(
-            ADR, () => GlobalKey<AnimatedListState>());
+        _unifiedListKeyMap.putIfAbsent(ADR, () => GlobalKey<AnimatedListState>());
         setState(() {
           _unifiedListMap.putIfAbsent(
             StateContainer.of(context).wallet!.address!,
@@ -3133,13 +2988,12 @@ class AppHomePageState extends State<AppHomePage>
             primary: false,
             key: _unifiedListKeyMap[ADR],
             padding: const EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-            initialItemCount: _unifiedListMap[ADR]!.length +
-                StateContainer.of(context).activeAlerts.length,
-            itemBuilder:
-                (BuildContext context, int index, Animation<double> animation) {
+            initialItemCount:
+                _unifiedListMap[ADR]!.length + StateContainer.of(context).activeAlerts.length,
+            itemBuilder: (BuildContext context, int index, Animation<double> animation) {
               if (_loadingMore) {
-                final int maxLen = _unifiedListMap[ADR]!.length +
-                    StateContainer.of(context).activeAlerts.length;
+                final int maxLen =
+                    _unifiedListMap[ADR]!.length + StateContainer.of(context).activeAlerts.length;
                 if (index == maxLen - 1) {
                   return TXCards.loadingCard(context);
                 }

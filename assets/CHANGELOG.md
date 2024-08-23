@@ -1,6 +1,6 @@
-## v0.9.9 - [2024-07-20]
+## v0.9.9 - [2024-08-25]
 #### Added
-- more default nodes
+- many more default nodes
 #### Changed
 - removed unstoppable domains support
 #### Fixed
@@ -10,6 +10,7 @@
 - bugs with send sheet not updating properly
 - bug with .well-known not being fetched
 - update the rep warning after you change your rep
+- tracking authorization dialog was bugged on iOS
 ## v0.9.8 - [2024-03-29]
 #### Fixed
 - hotfixes

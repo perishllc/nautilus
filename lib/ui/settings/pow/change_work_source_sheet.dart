@@ -453,7 +453,7 @@ class ChangePowSheetState extends State<ChangePowSheet> {
         onPressed: (BuildContext context) async {
           await Future<dynamic>.delayed(const Duration(milliseconds: 250));
           if (!mounted) return;
-          Sheets.showAppHeightNineSheet(
+          Sheets.showAppHeightEightSheet(
             context: context,
             widget: WorkSourceDetailsSheet(workSource: node),
           );

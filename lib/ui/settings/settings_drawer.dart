@@ -113,23 +113,18 @@ class SettingsSheetState extends State<SettingsSheet>
 
   final Logger log = sl.get<Logger>();
   bool _hasBiometrics = false;
-  AuthenticationMethod _curAuthMethod =
-      AuthenticationMethod(AuthMethod.BIOMETRICS);
-  NotificationSetting _curNotificiationSetting =
-      NotificationSetting(NotificationOptions.ON);
+  AuthenticationMethod _curAuthMethod = AuthenticationMethod(AuthMethod.BIOMETRICS);
+  NotificationSetting _curNotificiationSetting = NotificationSetting(NotificationOptions.ON);
   ContactsSetting _curContactsSetting = ContactsSetting(ContactsOptions.OFF);
-  ContactsSetting _curUnopenedWarningSetting =
-      ContactsSetting(ContactsOptions.ON);
+  ContactsSetting _curUnopenedWarningSetting = ContactsSetting(ContactsOptions.ON);
   ContactsSetting _curTrackingSetting = ContactsSetting(ContactsOptions.ON);
   NatriconSetting _curNatriconSetting = NatriconSetting(NatriconOptions.ON);
   NyaniconSetting _curNyaniconSetting = NyaniconSetting(NyaniconOptions.ON);
   FundingSetting _curFundingSetting = FundingSetting(FundingOptions.SHOW);
   MinRawSetting _curMinRawSetting = MinRawSetting(MinRawOptions.OFF);
-  CurrencyModeSetting _curCurrencyModeSetting =
-      CurrencyModeSetting(CurrencyModeOptions.NANO);
+  CurrencyModeSetting _curCurrencyModeSetting = CurrencyModeSetting(CurrencyModeOptions.NANO);
   UnlockSetting _curUnlockSetting = UnlockSetting(UnlockOption.NO);
-  LockTimeoutSetting _curTimeoutSetting =
-      LockTimeoutSetting(LockTimeoutOption.ONE);
+  LockTimeoutSetting _curTimeoutSetting = LockTimeoutSetting(LockTimeoutOption.ONE);
   ThemeSetting _curThemeSetting = ThemeSetting(ThemeOptions.NAUTILUS);
 
   late bool _loadingAccounts;
@@ -163,19 +158,17 @@ class SettingsSheetState extends State<SettingsSheet>
       final bool contactsEnabled = false;
       await sl.get<SharedPrefsUtil>().setContactsOn(contactsEnabled);
       setState(() {
-        _curContactsSetting = ContactsSetting(
-            contactsEnabled ? ContactsOptions.ON : ContactsOptions.OFF);
+        _curContactsSetting =
+            ContactsSetting(contactsEnabled ? ContactsOptions.ON : ContactsOptions.OFF);
       });
-      EventTaxiImpl.singleton()
-          .fire(ContactsSettingChangeEvent(isOn: contactsEnabled));
+      EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsEnabled));
       return contactsEnabled;
     } else {
       setState(() {
-        _curContactsSetting = ContactsSetting(
-            contactsOn ? ContactsOptions.ON : ContactsOptions.OFF);
+        _curContactsSetting =
+            ContactsSetting(contactsOn ? ContactsOptions.ON : ContactsOptions.OFF);
       });
-      EventTaxiImpl.singleton()
-          .fire(ContactsSettingChangeEvent(isOn: contactsOn));
+      EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsOn));
       return contactsOn;
     }
   }
@@ -201,10 +194,7 @@ class SettingsSheetState extends State<SettingsSheet>
       }
     });
     // Get default auth method setting
-    sl
-        .get<SharedPrefsUtil>()
-        .getAuthMethod()
-        .then((AuthenticationMethod authMethod) {
+    sl.get<SharedPrefsUtil>().getAuthMethod().then((AuthenticationMethod authMethod) {
       setState(() {
         _curAuthMethod = authMethod;
       });
@@ -212,15 +202,10 @@ class SettingsSheetState extends State<SettingsSheet>
     // Get default unlock settings
     sl.get<SharedPrefsUtil>().getLock().then((bool lock) {
       setState(() {
-        _curUnlockSetting = lock
-            ? UnlockSetting(UnlockOption.YES)
-            : UnlockSetting(UnlockOption.NO);
+        _curUnlockSetting = lock ? UnlockSetting(UnlockOption.YES) : UnlockSetting(UnlockOption.NO);
       });
     });
-    sl
-        .get<SharedPrefsUtil>()
-        .getLockTimeout()
-        .then((LockTimeoutSetting lockTimeout) {
+    sl.get<SharedPrefsUtil>().getLockTimeout().then((LockTimeoutSetting lockTimeout) {
       setState(() {
         _curTimeoutSetting = lockTimeout;
       });
@@ -236,33 +221,29 @@ class SettingsSheetState extends State<SettingsSheet>
     // Get contacts show setting:
     sl.get<SharedPrefsUtil>().getContactsOn().then((bool contactsOn) {
       setState(() {
-        _curContactsSetting = contactsOn
-            ? ContactsSetting(ContactsOptions.ON)
-            : ContactsSetting(ContactsOptions.OFF);
+        _curContactsSetting =
+            contactsOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
       });
     });
     // Get unpopened warning setting:
     sl.get<SharedPrefsUtil>().getUnopenedWarningOn().then((bool contactsOn) {
       setState(() {
-        _curUnopenedWarningSetting = contactsOn
-            ? ContactsSetting(ContactsOptions.ON)
-            : ContactsSetting(ContactsOptions.OFF);
+        _curUnopenedWarningSetting =
+            contactsOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
       });
     });
     // Get tracking authorization:
     sl.get<SharedPrefsUtil>().getTrackingEnabled().then((bool contactsOn) {
       setState(() {
-        _curTrackingSetting = contactsOn
-            ? ContactsSetting(ContactsOptions.ON)
-            : ContactsSetting(ContactsOptions.OFF);
+        _curTrackingSetting =
+            contactsOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
       });
     });
     // Get funding setting:
     sl.get<SharedPrefsUtil>().getFundingOn().then((bool fundingOn) {
       setState(() {
-        _curFundingSetting = fundingOn
-            ? FundingSetting(FundingOptions.SHOW)
-            : FundingSetting(FundingOptions.HIDE);
+        _curFundingSetting =
+            fundingOn ? FundingSetting(FundingOptions.SHOW) : FundingSetting(FundingOptions.HIDE);
       });
     });
     // Get default natricon setting
@@ -304,8 +285,7 @@ class SettingsSheetState extends State<SettingsSheet>
             _curMinRawSetting = MinRawSetting(MinRawOptions.TEN_THOUSAND_NYANO);
             break;
           case MinRawSetting.HUNDRED_THOUSAND_NYANO:
-            _curMinRawSetting =
-                MinRawSetting(MinRawOptions.HUNDRED_THOUSAND_NYANO);
+            _curMinRawSetting = MinRawSetting(MinRawOptions.HUNDRED_THOUSAND_NYANO);
             break;
         }
       });
@@ -315,16 +295,13 @@ class SettingsSheetState extends State<SettingsSheet>
       setState(() {
         switch (currencyMode) {
           case "NANO":
-            _curCurrencyModeSetting =
-                CurrencyModeSetting(CurrencyModeOptions.NANO);
+            _curCurrencyModeSetting = CurrencyModeSetting(CurrencyModeOptions.NANO);
             break;
           case "NYANO":
-            _curCurrencyModeSetting =
-                CurrencyModeSetting(CurrencyModeOptions.NYANO);
+            _curCurrencyModeSetting = CurrencyModeSetting(CurrencyModeOptions.NYANO);
             break;
           case "BANANO":
-            _curCurrencyModeSetting =
-                CurrencyModeSetting(CurrencyModeOptions.BANANO);
+            _curCurrencyModeSetting = CurrencyModeSetting(CurrencyModeOptions.BANANO);
             break;
         }
       });
@@ -376,23 +353,17 @@ class SettingsSheetState extends State<SettingsSheet>
     _scrollController = ScrollController();
 
     _contactsOffsetFloat =
-        Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero)
-            .animate(_contactsController!);
+        Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_contactsController!);
     _securityOffsetFloat =
-        Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero)
-            .animate(_securityController);
+        Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_securityController);
     _blockedOffsetFloat =
-        Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero)
-            .animate(_blockedController!);
-    _moreSettingsOffsetFloat =
-        Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero)
-            .animate(_moreSettingsController);
+        Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_blockedController!);
+    _moreSettingsOffsetFloat = Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero)
+        .animate(_moreSettingsController);
     _useNanoOffsetFloat =
-        Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero)
-            .animate(_useNanoController);
+        Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_useNanoController);
     _shareOffsetFloat =
-        Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero)
-            .animate(_shareController);
+        Tween<Offset>(begin: const Offset(1.1, 0), end: Offset.zero).animate(_shareController);
     // Version string
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
       setState(() {
@@ -418,8 +389,7 @@ class SettingsSheetState extends State<SettingsSheet>
 
   StreamSubscription<TransferConfirmEvent>? _transferConfirmSub;
   StreamSubscription<TransferCompleteEvent>? _transferCompleteSub;
-  StreamSubscription<NotificationSettingChangeEvent>?
-      _notificationSettingChangeSub;
+  StreamSubscription<NotificationSettingChangeEvent>? _notificationSettingChangeSub;
   StreamSubscription<ContactsSettingChangeEvent>? _contactsSettingChangeSub;
   StreamSubscription<AuthenticatedEvent>? _authSub;
 
@@ -443,8 +413,7 @@ class SettingsSheetState extends State<SettingsSheet>
       Sheets.showAppHeightNineSheet(
         context: context,
         widget: AppTransferCompleteSheet(
-          transferAmount:
-              getRawAsThemeAwareAmount(context, event.amount.toString()),
+          transferAmount: getRawAsThemeAwareAmount(context, event.amount.toString()),
         ),
       );
     });
@@ -463,9 +432,8 @@ class SettingsSheetState extends State<SettingsSheet>
         .registerTo<ContactsSettingChangeEvent>()
         .listen((ContactsSettingChangeEvent event) {
       setState(() {
-        _curContactsSetting = event.isOn
-            ? ContactsSetting(ContactsOptions.ON)
-            : ContactsSetting(ContactsOptions.OFF);
+        _curContactsSetting =
+            event.isOn ? ContactsSetting(ContactsOptions.ON) : ContactsSetting(ContactsOptions.OFF);
       });
     });
     _authSub = EventTaxiImpl.singleton()
@@ -537,8 +505,7 @@ class SettingsSheetState extends State<SettingsSheet>
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               Z.of(context).authMethod,
               style: AppStyles.textStyleDialogHeader(context),
@@ -588,8 +555,8 @@ class SettingsSheetState extends State<SettingsSheet>
         // check if pin is set, if not, set it:
         final String? curPin = await sl.get<Vault>().getPin();
         if (isEmpty(curPin)) {
-          final String? pin = await Navigator.of(context)
-              .push(MaterialPageRoute(builder: (BuildContext context) {
+          final String? pin =
+              await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
             return PinScreen(
               PinOverlayType.NEW_PIN,
             );
@@ -600,18 +567,14 @@ class SettingsSheetState extends State<SettingsSheet>
           await sl.get<Vault>().writePin(pin);
         }
 
-        await sl
-            .get<SharedPrefsUtil>()
-            .setAuthMethod(AuthenticationMethod(AuthMethod.PIN));
+        await sl.get<SharedPrefsUtil>().setAuthMethod(AuthenticationMethod(AuthMethod.PIN));
         setState(() {
           _curAuthMethod = AuthenticationMethod(AuthMethod.PIN);
         });
 
         break;
       case AuthMethod.BIOMETRICS:
-        await sl
-            .get<SharedPrefsUtil>()
-            .setAuthMethod(AuthenticationMethod(AuthMethod.BIOMETRICS));
+        await sl.get<SharedPrefsUtil>().setAuthMethod(AuthenticationMethod(AuthMethod.BIOMETRICS));
         setState(() {
           _curAuthMethod = AuthenticationMethod(AuthMethod.BIOMETRICS);
         });
@@ -625,9 +588,7 @@ class SettingsSheetState extends State<SettingsSheet>
           });
         }
 
-        await sl
-            .get<SharedPrefsUtil>()
-            .setAuthMethod(AuthenticationMethod(AuthMethod.NONE));
+        await sl.get<SharedPrefsUtil>().setAuthMethod(AuthenticationMethod(AuthMethod.NONE));
         setState(() {
           _curAuthMethod = AuthenticationMethod(AuthMethod.NONE);
         });
@@ -643,8 +604,7 @@ class SettingsSheetState extends State<SettingsSheet>
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               Z.of(context).notifications,
               style: AppStyles.textStyleDialogHeader(context),
@@ -679,8 +639,7 @@ class SettingsSheetState extends State<SettingsSheet>
         })) {
       case NotificationOptions.ON:
         sl.get<SharedPrefsUtil>().setNotificationsOn(true).then((void result) {
-          EventTaxiImpl.singleton()
-              .fire(NotificationSettingChangeEvent(isOn: true));
+          EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: true));
           FirebaseMessaging.instance.requestPermission();
           FirebaseMessaging.instance.getToken().then((String? fcmToken) {
             EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
@@ -689,8 +648,7 @@ class SettingsSheetState extends State<SettingsSheet>
         break;
       case NotificationOptions.OFF:
         sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((void result) {
-          EventTaxiImpl.singleton()
-              .fire(NotificationSettingChangeEvent(isOn: false));
+          EventTaxiImpl.singleton().fire(NotificationSettingChangeEvent(isOn: false));
           FirebaseMessaging.instance.getToken().then((String? fcmToken) {
             EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
           });
@@ -707,8 +665,7 @@ class SettingsSheetState extends State<SettingsSheet>
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               Z.of(context).contactsHeader,
               style: AppStyles.textStyleDialogHeader(context),
@@ -749,8 +706,7 @@ class SettingsSheetState extends State<SettingsSheet>
     if (picked == ContactsOptions.ON) {
       final bool contactsEnabled = await _getContactsPermissions();
       await sl.get<SharedPrefsUtil>().setContactsOn(contactsEnabled);
-      EventTaxiImpl.singleton()
-          .fire(ContactsSettingChangeEvent(isOn: contactsEnabled));
+      EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: contactsEnabled));
     } else {
       await sl.get<SharedPrefsUtil>().setContactsOn(false);
       EventTaxiImpl.singleton().fire(ContactsSettingChangeEvent(isOn: false));
@@ -763,8 +719,7 @@ class SettingsSheetState extends State<SettingsSheet>
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               Z.of(context).unopenedWarningHeader,
               style: AppStyles.textStyleDialogHeader(context),
@@ -772,9 +727,7 @@ class SettingsSheetState extends State<SettingsSheet>
             infoButton: AppDialogs.infoButton(
               context,
               () {
-                AppDialogs.showInfoDialog(
-                    context,
-                    Z.of(context).unopenedWarningHeader,
+                AppDialogs.showInfoDialog(context, Z.of(context).unopenedWarningHeader,
                     Z.of(context).unopenedWarningInfo);
               },
             ),
@@ -811,9 +764,7 @@ class SettingsSheetState extends State<SettingsSheet>
       return;
     }
 
-    await sl
-        .get<SharedPrefsUtil>()
-        .setUnopenedWarningOn(picked == ContactsOptions.ON);
+    await sl.get<SharedPrefsUtil>().setUnopenedWarningOn(picked == ContactsOptions.ON);
     setState(() {
       _curUnopenedWarningSetting = ContactsSetting(picked);
     });
@@ -822,16 +773,20 @@ class SettingsSheetState extends State<SettingsSheet>
   Future<void> _showTrackingDialog() async {
     bool? trackingEnabled;
     if (Platform.isIOS) {
-      final TrackingStatus status =
-          await AppTrackingTransparency.requestTrackingAuthorization();
-      if (status == TrackingStatus.authorized) {
-        trackingEnabled = true;
+      final bool res = await AppDialogs.showTrackingDialog(context, true) ?? false;
+      if (res) {
+        final TrackingStatus status = await AppTrackingTransparency.requestTrackingAuthorization();
+        if (status == TrackingStatus.authorized) {
+          trackingEnabled = true;
+        }
+      } else {
+        trackingEnabled = false;
       }
     } else {
       trackingEnabled = await AppDialogs.showTrackingDialog(context, true);
     }
     trackingEnabled ??= false;
-    
+
     await sl.get<SharedPrefsUtil>().setTrackingEnabled(trackingEnabled);
     FlutterBranchSdk.disableTracking(!trackingEnabled);
 
@@ -849,8 +804,7 @@ class SettingsSheetState extends State<SettingsSheet>
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               Z.of(context).fundingBannerHeader,
               style: AppStyles.textStyleDialogHeader(context),
@@ -938,8 +892,7 @@ class SettingsSheetState extends State<SettingsSheet>
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               Z.of(context).receiveMinimum,
               style: AppStyles.textStyleDialogHeader(context),
@@ -948,9 +901,7 @@ class SettingsSheetState extends State<SettingsSheet>
               context,
               () {
                 AppDialogs.showInfoDialog(
-                    context,
-                    Z.of(context).receiveMinimumHeader,
-                    Z.of(context).receiveMinimumInfo);
+                    context, Z.of(context).receiveMinimumHeader, Z.of(context).receiveMinimumInfo);
               },
             ),
             children: _buildMinRawOptions(),
@@ -972,8 +923,7 @@ class SettingsSheetState extends State<SettingsSheet>
         barrierColor: StateContainer.of(context).curTheme.barrier,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Text(
               Z.of(context).currencyMode,
               style: AppStyles.textStyleDialogHeader(context),
@@ -982,9 +932,7 @@ class SettingsSheetState extends State<SettingsSheet>
               context,
               () {
                 AppDialogs.showInfoDialog(
-                    context,
-                    Z.of(context).currencyModeHeader,
-                    Z.of(context).currencyModeInfo);
+                    context, Z.of(context).currencyModeHeader, Z.of(context).currencyModeInfo);
               },
             ),
             children: _buildCurrencyModeOptions(),
@@ -1000,9 +948,7 @@ class SettingsSheetState extends State<SettingsSheet>
               chosen == CurrencyModeOptions.BANANO)) {
         if (!mounted) return;
         await AppDialogs.showInfoDialog(
-            context,
-            Z.of(context).currencyModeChange,
-            Z.of(context).currencyModeChangeWarning);
+            context, Z.of(context).currencyModeChange, Z.of(context).currencyModeChangeWarning);
       }
     }
 
@@ -1012,8 +958,7 @@ class SettingsSheetState extends State<SettingsSheet>
 
     await sl.get<SharedPrefsUtil>().setCurrencyMode(currencyMode);
     setState(() {
-      StateContainer.of(context)
-          .setCurrencyMode(currencyMode, context: context);
+      StateContainer.of(context).setCurrencyMode(currencyMode, context: context);
       _curCurrencyModeSetting = CurrencyModeSetting(chosen);
     });
   }
@@ -1095,31 +1040,25 @@ class SettingsSheetState extends State<SettingsSheet>
   }
 
   Future<void> _currencyDialog() async {
-    final AvailableCurrencyEnum? selection =
-        await showAppDialog<AvailableCurrencyEnum>(
-            context: context,
-            builder: (BuildContext context) {
-              return AppSimpleDialog(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
-                title: Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Text(
-                    Z.of(context).currency,
-                    style: AppStyles.textStyleDialogHeader(context),
-                  ),
-                ),
-                children: _buildCurrencyOptions(),
-              );
-            });
+    final AvailableCurrencyEnum? selection = await showAppDialog<AvailableCurrencyEnum>(
+        context: context,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            title: Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Text(
+                Z.of(context).currency,
+                style: AppStyles.textStyleDialogHeader(context),
+              ),
+            ),
+            children: _buildCurrencyOptions(),
+          );
+        });
     if (selection != null) {
-      sl
-          .get<SharedPrefsUtil>()
-          .setCurrency(AvailableCurrency(selection))
-          .then((void result) {
+      sl.get<SharedPrefsUtil>().setCurrency(AvailableCurrency(selection)).then((void result) {
         if (StateContainer.of(context).curCurrency.currency != selection) {
-          StateContainer.of(context)
-              .updateCurrency(AvailableCurrency(selection));
+          StateContainer.of(context).updateCurrency(AvailableCurrency(selection));
         }
       });
     }
@@ -1149,8 +1088,7 @@ class SettingsSheetState extends State<SettingsSheet>
         context: context,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
@@ -1162,14 +1100,10 @@ class SettingsSheetState extends State<SettingsSheet>
           );
         });
     if (selection != null) {
-      sl
-          .get<SharedPrefsUtil>()
-          .setLanguage(LanguageSetting(selection))
-          .then((void result) {
+      sl.get<SharedPrefsUtil>().setLanguage(LanguageSetting(selection)).then((void result) {
         if (StateContainer.of(context).curLanguage.language != selection) {
           setState(() {
-            StateContainer.of(context)
-                .updateLanguage(LanguageSetting(selection));
+            StateContainer.of(context).updateLanguage(LanguageSetting(selection));
           });
         }
       });
@@ -1178,8 +1112,7 @@ class SettingsSheetState extends State<SettingsSheet>
 
   List<Widget> _buildExplorerOptions() {
     final List<Widget> ret = <Widget>[];
-    for (final AvailableBlockExplorerEnum value
-        in AvailableBlockExplorerEnum.values) {
+    for (final AvailableBlockExplorerEnum value in AvailableBlockExplorerEnum.values) {
       ret.add(SimpleDialogOption(
         onPressed: () {
           Navigator.pop(context, value);
@@ -1197,26 +1130,22 @@ class SettingsSheetState extends State<SettingsSheet>
   }
 
   Future<void> _explorerDialog() async {
-    final AvailableBlockExplorerEnum? selection =
-        await showAppDialog<AvailableBlockExplorerEnum>(
-            context: context,
-            builder: (BuildContext context) {
-              return AppSimpleDialog(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
-                title: Text(
-                  Z.of(context).blockExplorer,
-                  style: AppStyles.textStyleDialogHeader(context),
-                ),
-                infoButton: AppDialogs.infoButton(context, () {
-                  AppDialogs.showInfoDialog(
-                      context,
-                      Z.of(context).blockExplorerHeader,
-                      Z.of(context).blockExplorerInfo);
-                }),
-                children: _buildExplorerOptions(),
-              );
-            });
+    final AvailableBlockExplorerEnum? selection = await showAppDialog<AvailableBlockExplorerEnum>(
+        context: context,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            title: Text(
+              Z.of(context).blockExplorer,
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+            infoButton: AppDialogs.infoButton(context, () {
+              AppDialogs.showInfoDialog(
+                  context, Z.of(context).blockExplorerHeader, Z.of(context).blockExplorerInfo);
+            }),
+            children: _buildExplorerOptions(),
+          );
+        });
     if (selection != null) {
       sl
           .get<SharedPrefsUtil>()
@@ -1224,8 +1153,7 @@ class SettingsSheetState extends State<SettingsSheet>
           .then((void result) {
         if (StateContainer.of(context).curBlockExplorer.explorer != selection) {
           setState(() {
-            StateContainer.of(context)
-                .updateBlockExplorer(AvailableBlockExplorer(selection));
+            StateContainer.of(context).updateBlockExplorer(AvailableBlockExplorer(selection));
           });
         }
       });
@@ -1256,8 +1184,7 @@ class SettingsSheetState extends State<SettingsSheet>
         context: context,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
@@ -1268,15 +1195,9 @@ class SettingsSheetState extends State<SettingsSheet>
             children: _buildLockTimeoutOptions(),
           );
         });
-    sl
-        .get<SharedPrefsUtil>()
-        .setLockTimeout(LockTimeoutSetting(selection))
-        .then((void result) {
+    sl.get<SharedPrefsUtil>().setLockTimeout(LockTimeoutSetting(selection)).then((void result) {
       if (_curTimeoutSetting.setting != selection) {
-        sl
-            .get<SharedPrefsUtil>()
-            .setLockTimeout(LockTimeoutSetting(selection))
-            .then((_) {
+        sl.get<SharedPrefsUtil>().setLockTimeout(LockTimeoutSetting(selection)).then((_) {
           setState(() {
             _curTimeoutSetting = LockTimeoutSetting(selection);
           });
@@ -1309,8 +1230,7 @@ class SettingsSheetState extends State<SettingsSheet>
         context: context,
         builder: (BuildContext context) {
           return AppSimpleDialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             title: Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
@@ -1323,10 +1243,7 @@ class SettingsSheetState extends State<SettingsSheet>
         });
     if (selection != null) {
       if (_curThemeSetting != ThemeSetting(selection)) {
-        sl
-            .get<SharedPrefsUtil>()
-            .setTheme(ThemeSetting(selection))
-            .then((void result) {
+        sl.get<SharedPrefsUtil>().setTheme(ThemeSetting(selection)).then((void result) {
           setState(() {
             StateContainer.of(context).updateTheme(ThemeSetting(selection));
             _curThemeSetting = ThemeSetting(selection);
@@ -1486,8 +1403,7 @@ class SettingsSheetState extends State<SettingsSheet>
               onHorizontalDragEnd: subMenuDragEnd,
               onHorizontalDragUpdate: subMenuDragUpdate,
               child: SlideTransition(
-                  position: _securityOffsetFloat,
-                  child: buildSecurityMenu(context)),
+                  position: _securityOffsetFloat, child: buildSecurityMenu(context)),
             ),
             // GestureDetector(
             //   onHorizontalDragStart: subMenuDragStart,
@@ -1500,15 +1416,13 @@ class SettingsSheetState extends State<SettingsSheet>
               onHorizontalDragEnd: subMenuDragEnd,
               onHorizontalDragUpdate: subMenuDragUpdate,
               child: SlideTransition(
-                  position: _moreSettingsOffsetFloat,
-                  child: buildMoreSettingsMenu(context)),
+                  position: _moreSettingsOffsetFloat, child: buildMoreSettingsMenu(context)),
             ),
             GestureDetector(
               onHorizontalDragStart: subMenuDragStart,
               onHorizontalDragEnd: subMenuDragEnd,
               onHorizontalDragUpdate: subMenuDragUpdate,
-              child: SlideTransition(
-                  position: _shareOffsetFloat, child: buildShareMenu(context)),
+              child: SlideTransition(position: _shareOffsetFloat, child: buildShareMenu(context)),
             ),
           ],
         ),
@@ -1522,25 +1436,19 @@ class SettingsSheetState extends State<SettingsSheet>
     // go through and find the first active funding alert that hasn't met it's goal yet:
     if (StateContainer.of(context).fundingAlerts != null &&
         StateContainer.of(context).fundingAlerts!.isNotEmpty) {
-      for (int i = 0;
-          i < StateContainer.of(context).fundingAlerts!.length;
-          i++) {
+      for (int i = 0; i < StateContainer.of(context).fundingAlerts!.length; i++) {
         if (StateContainer.of(context).fundingAlerts![i] == null) {
           continue;
         }
 
-        final FundingResponseItem fundingAlert =
-            StateContainer.of(context).fundingAlerts![i];
+        final FundingResponseItem fundingAlert = StateContainer.of(context).fundingAlerts![i];
 
-        if (fundingAlert.currentAmountRaw == null ||
-            fundingAlert.goalAmountRaw == null) {
+        if (fundingAlert.currentAmountRaw == null || fundingAlert.goalAmountRaw == null) {
           continue;
         }
 
-        final BigInt? currentAmountRaw =
-            BigInt.tryParse(fundingAlert.currentAmountRaw!);
-        final BigInt? goalAmountRaw =
-            BigInt.tryParse(fundingAlert.goalAmountRaw!);
+        final BigInt? currentAmountRaw = BigInt.tryParse(fundingAlert.currentAmountRaw!);
+        final BigInt? goalAmountRaw = BigInt.tryParse(fundingAlert.goalAmountRaw!);
         if (currentAmountRaw == null || goalAmountRaw == null) {
           continue;
         }
@@ -1553,8 +1461,7 @@ class SettingsSheetState extends State<SettingsSheet>
     }
 
     final List<Widget> settingsAlerts = <Widget>[];
-    for (final AlertResponseItem alert
-        in StateContainer.of(context).settingsAlerts) {
+    for (final AlertResponseItem alert in StateContainer.of(context).settingsAlerts) {
       settingsAlerts.add(
         Container(
           padding: const EdgeInsetsDirectional.only(
@@ -1668,8 +1575,7 @@ class SettingsSheetState extends State<SettingsSheet>
         // }),
         // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         Container(
-          margin: const EdgeInsetsDirectional.only(
-              start: 30.0, top: 20, bottom: 10),
+          margin: const EdgeInsetsDirectional.only(start: 30.0, top: 20, bottom: 10),
           child: Text(Z.of(context).preferences,
               style: TextStyle(
                   fontSize: 16.0,
@@ -1677,37 +1583,20 @@ class SettingsSheetState extends State<SettingsSheet>
                   color: StateContainer.of(context).curTheme.text60)),
         ),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemDoubleLine(
-            context,
-            Z.of(context).changeCurrency,
-            StateContainer.of(context).curCurrency,
-            AppIcons.currency,
-            _currencyDialog),
+        AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).changeCurrency,
+            StateContainer.of(context).curCurrency, AppIcons.currency, _currencyDialog),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+        AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).language,
+            StateContainer.of(context).curLanguage, AppIcons.language, _languageDialog),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+        AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).notifications,
+            _curNotificiationSetting, AppIcons.notifications, _notificationsDialog),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemDoubleLine(
-            context,
-            Z.of(context).language,
-            StateContainer.of(context).curLanguage,
-            AppIcons.language,
-            _languageDialog),
-        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemDoubleLine(
-            context,
-            Z.of(context).notifications,
-            _curNotificiationSetting,
-            AppIcons.notifications,
-            _notificationsDialog),
-        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemDoubleLine(
-            context,
-            Z.of(context).themeHeader,
-            _curThemeSetting,
-            AppIcons.theme,
-            _themeDialog),
+            context, Z.of(context).themeHeader, _curThemeSetting, AppIcons.theme, _themeDialog),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(
-            context, Z.of(context).securityHeader, AppIcons.security,
-            onPressed: () {
+            context, Z.of(context).securityHeader, AppIcons.security, onPressed: () {
           setState(() {
             _securityOpen = true;
           });
@@ -1715,8 +1604,7 @@ class SettingsSheetState extends State<SettingsSheet>
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         Container(
-          margin:
-              const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
+          margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
           child: Text(Z.of(context).manage,
               style: TextStyle(
                   fontSize: 16.0,
@@ -1740,8 +1628,7 @@ class SettingsSheetState extends State<SettingsSheet>
                       // check if contacts have been asked before:
                       // reloading prefs to be sure we get the latest value:
                       await sl.get<SharedPrefsUtil>().reload();
-                      final bool contactsSet =
-                          await sl.get<SharedPrefsUtil>().getContactsSet();
+                      final bool contactsSet = await sl.get<SharedPrefsUtil>().getContactsSet();
                       if (!contactsSet) {
                         await _getContactsPermissions();
                       }
@@ -1772,20 +1659,16 @@ class SettingsSheetState extends State<SettingsSheet>
         ),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(
-            context, Z.of(context).backupSecretPhrase, AppIcons.backupseed,
-            onPressed: () async {
+            context, Z.of(context).backupSecretPhrase, AppIcons.backupseed, onPressed: () async {
           // Authenticate
-          final AuthenticationMethod authMethod =
-              await sl.get<SharedPrefsUtil>().getAuthMethod();
-          final bool hasBiometrics =
-              await sl.get<BiometricUtil>().hasBiometrics();
+          final AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+          final bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();
           if (!mounted) return;
           if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
             try {
               final bool authenticated = await sl
                   .get<BiometricUtil>()
-                  .authenticateWithBiometrics(
-                      context, Z.of(context).fingerprintSeedBackup);
+                  .authenticateWithBiometrics(context, Z.of(context).fingerprintSeedBackup);
               if (!mounted) return;
               if (authenticated) {
                 sl.get<HapticUtil>().fingerprintSucess();
@@ -1829,10 +1712,8 @@ class SettingsSheetState extends State<SettingsSheet>
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(
-            context, Z.of(context).settingsTransfer, AppIcons.transferfunds,
-            onPressed: () {
-          Sheets.showAppHeightNineSheet(
-              context: context, widget: AppTransferOverviewSheet());
+            context, Z.of(context).settingsTransfer, AppIcons.transferfunds, onPressed: () {
+          Sheets.showAppHeightNineSheet(context: context, widget: AppTransferOverviewSheet());
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(
@@ -1863,23 +1744,19 @@ class SettingsSheetState extends State<SettingsSheet>
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
         AppSettings.buildSettingsListItemSingleLine(
-            context, Z.of(context).moreSettings, AppIcons.settings,
-            onPressed: () async {
+            context, Z.of(context).moreSettings, AppIcons.settings, onPressed: () async {
           setState(() {
             _moreSettingsOpen = true;
           });
           _moreSettingsController.forward();
         }),
         Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
-        AppSettings.buildSettingsListItemSingleLine(
-            context, Z.of(context).logout, AppIcons.logout, onPressed: () {
+        AppSettings.buildSettingsListItemSingleLine(context, Z.of(context).logout, AppIcons.logout,
+            onPressed: () {
           AppDialogs.showConfirmDialog(
               context,
               CaseChange.toUpperCase(Z.of(context).warning, context),
-              Z
-                  .of(context)
-                  .logoutDetail
-                  .replaceAll("%1", NonTranslatable.appName),
+              Z.of(context).logoutDetail.replaceAll("%1", NonTranslatable.appName),
               Z.of(context).logoutAction.toUpperCase(), () {
             // Show another confirm dialog
             AppDialogs.showConfirmDialog(
@@ -1900,17 +1777,13 @@ class SettingsSheetState extends State<SettingsSheet>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     // Text(versionString, style: AppStyles.textStyleVersion(context)),
-                    AppButton.pillButton(context, versionString,
-                        onPressed: () async {
+                    AppButton.pillButton(context, versionString, onPressed: () async {
                       await AppDialogs.showChangeLog(context);
                     }),
-                    AppButton.pillButton(context, NonTranslatable.discord,
-                        onPressed: () async {
-                      await UIUtil.showChromeSafariWebview(
-                          context, NonTranslatable.discordUrl);
+                    AppButton.pillButton(context, NonTranslatable.discord, onPressed: () async {
+                      await UIUtil.showChromeSafariWebview(context, NonTranslatable.discordUrl);
                     }),
-                    AppButton.pillButton(context, Z.of(context).nodeStatus,
-                        onPressed: () async {
+                    AppButton.pillButton(context, Z.of(context).nodeStatus, onPressed: () async {
                       await UIUtil.showChromeSafariWebview(
                           context, NonTranslatable.nautilusNodeUrl);
                     }),
@@ -1920,15 +1793,11 @@ class SettingsSheetState extends State<SettingsSheet>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    AppButton.pillButton(context, Z.of(context).privacyPolicy,
-                        onPressed: () async {
-                      await UIUtil.showChromeSafariWebview(
-                          context, NonTranslatable.privacyUrl);
+                    AppButton.pillButton(context, Z.of(context).privacyPolicy, onPressed: () async {
+                      await UIUtil.showChromeSafariWebview(context, NonTranslatable.privacyUrl);
                     }),
-                    AppButton.pillButton(context, Z.of(context).eula,
-                        onPressed: () async {
-                      await UIUtil.showChromeSafariWebview(
-                          context, NonTranslatable.eulaUrl);
+                    AppButton.pillButton(context, Z.of(context).eula, onPressed: () async {
+                      await UIUtil.showChromeSafariWebview(context, NonTranslatable.eulaUrl);
                     }),
                   ],
                 ),
@@ -1955,8 +1824,7 @@ class SettingsSheetState extends State<SettingsSheet>
                   // padding: EdgeInsets.only(top: 40, bottom: 16),
                   alignment: Alignment.topLeft,
                   child: IconButton(
-                    icon: Icon(Icons.close,
-                        color: StateContainer.of(context).curTheme.text),
+                    icon: Icon(Icons.close, color: StateContainer.of(context).curTheme.text),
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -1973,8 +1841,7 @@ class SettingsSheetState extends State<SettingsSheet>
             const SizedBox(height: 16),
             // A container for accounts area
             Container(
-              margin: const EdgeInsetsDirectional.only(
-                  start: 26.0, end: 20, bottom: 15),
+              margin: const EdgeInsetsDirectional.only(start: 26.0, end: 20, bottom: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1994,22 +1861,14 @@ class SettingsSheetState extends State<SettingsSheet>
                                   height: 45,
                                   alignment: AlignmentDirectional.centerStart,
                                   child: Icon(
-                                    (StateContainer.of(context)
-                                                .wallet
-                                                ?.watchOnly ??
-                                            false)
+                                    (StateContainer.of(context).wallet?.watchOnly ?? false)
                                         ? AppIcons.search
                                         : AppIcons.accountwallet,
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .success,
+                                    color: StateContainer.of(context).curTheme.success,
                                     size: 45,
                                   )),
                             ),
-                            if (!(StateContainer.of(context)
-                                    .wallet
-                                    ?.watchOnly ??
-                                false))
+                            if (!(StateContainer.of(context).wallet?.watchOnly ?? false))
                               Center(
                                 child: Container(
                                   width: 60,
@@ -2022,9 +1881,7 @@ class SettingsSheetState extends State<SettingsSheet>
                                         .toUpperCase(),
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .backgroundDark,
+                                      color: StateContainer.of(context).curTheme.backgroundDark,
                                       fontSize: 16,
                                       fontFamily: "NunitoSans",
                                       fontWeight: FontWeight.w900,
@@ -2054,8 +1911,7 @@ class SettingsSheetState extends State<SettingsSheet>
                                     Sheets.showAppHeightNineSheet(
                                       context: context,
                                       widget: AccountDetailsSheet(
-                                          account: StateContainer.of(context)
-                                              .selectedAccount!),
+                                          account: StateContainer.of(context).selectedAccount!),
                                     );
                                   },
                                 ),
@@ -2075,35 +1931,26 @@ class SettingsSheetState extends State<SettingsSheet>
                                 children: <Widget>[
                                   Center(
                                     child: Icon(
-                                      StateContainer.of(context)
-                                              .recentLast!
-                                              .watchOnly
+                                      StateContainer.of(context).recentLast!.watchOnly
                                           ? AppIcons.search
                                           : AppIcons.accountwallet,
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .primary,
+                                      color: StateContainer.of(context).curTheme.primary,
                                       size: 36,
                                     ),
                                   ),
-                                  if (StateContainer.of(context)
-                                      .recentLast!
-                                      .watchOnly)
+                                  if (StateContainer.of(context).recentLast!.watchOnly)
                                     Center(
                                       child: Container(
                                         width: 48,
                                         height: 36,
-                                        alignment:
-                                            const AlignmentDirectional(0, 3),
+                                        alignment: const AlignmentDirectional(0, 3),
                                         child: Text(
                                             StateContainer.of(context)
                                                 .recentLast!
                                                 .getShortName()
                                                 .toUpperCase(),
                                             style: TextStyle(
-                                              color: StateContainer.of(context)
-                                                  .curTheme
-                                                  .text,
+                                              color: StateContainer.of(context).curTheme.text,
                                               fontSize: 12.0,
                                               fontWeight: FontWeight.w800,
                                             )),
@@ -2114,8 +1961,7 @@ class SettingsSheetState extends State<SettingsSheet>
                                       child: Container(
                                         width: 48,
                                         height: 36,
-                                        alignment:
-                                            const AlignmentDirectional(0, 0.3),
+                                        alignment: const AlignmentDirectional(0, 0.3),
                                         child: Text(
                                             StateContainer.of(context)
                                                 .recentLast!
@@ -2137,11 +1983,10 @@ class SettingsSheetState extends State<SettingsSheet>
                                       color: Colors.transparent,
                                       child: TextButton(
                                         style: TextButton.styleFrom(
-                                          foregroundColor:
-                                              StateContainer.of(context)
-                                                  .curTheme
-                                                  .backgroundDark!
-                                                  .withOpacity(0.75),
+                                          foregroundColor: StateContainer.of(context)
+                                              .curTheme
+                                              .backgroundDark!
+                                              .withOpacity(0.75),
                                           padding: EdgeInsets.zero,
                                           // highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
                                           // splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
@@ -2149,16 +1994,11 @@ class SettingsSheetState extends State<SettingsSheet>
                                         onPressed: () {
                                           sl
                                               .get<DBHelper>()
-                                              .changeAccount(
-                                                  StateContainer.of(context)
-                                                      .recentLast)
+                                              .changeAccount(StateContainer.of(context).recentLast)
                                               .then((_) {
-                                            EventTaxiImpl.singleton().fire(
-                                                AccountChangedEvent(
-                                                    account: StateContainer.of(
-                                                            context)
-                                                        .recentLast,
-                                                    delayPop: true));
+                                            EventTaxiImpl.singleton().fire(AccountChangedEvent(
+                                                account: StateContainer.of(context).recentLast,
+                                                delayPop: true));
                                           });
                                         },
                                         child: Container(
@@ -2173,34 +2013,26 @@ class SettingsSheetState extends State<SettingsSheet>
                               ),
                             ),
                           // Third Account
-                          if (StateContainer.of(context).recentSecondLast !=
-                              null)
+                          if (StateContainer.of(context).recentSecondLast != null)
                             Container(
                               margin: const EdgeInsets.symmetric(horizontal: 8),
                               child: Stack(
                                 children: <Widget>[
                                   Center(
                                     child: Icon(
-                                      StateContainer.of(context)
-                                              .recentSecondLast!
-                                              .watchOnly
+                                      StateContainer.of(context).recentSecondLast!.watchOnly
                                           ? AppIcons.search
                                           : AppIcons.accountwallet,
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .primary,
+                                      color: StateContainer.of(context).curTheme.primary,
                                       size: 36,
                                     ),
                                   ),
-                                  if (!StateContainer.of(context)
-                                      .recentSecondLast!
-                                      .watchOnly)
+                                  if (!StateContainer.of(context).recentSecondLast!.watchOnly)
                                     Center(
                                       child: Container(
                                         width: 48,
                                         height: 36,
-                                        alignment:
-                                            const AlignmentDirectional(0, 0.3),
+                                        alignment: const AlignmentDirectional(0, 0.3),
                                         child: Text(
                                             StateContainer.of(context)
                                                 .recentSecondLast!
@@ -2220,17 +2052,14 @@ class SettingsSheetState extends State<SettingsSheet>
                                       child: Container(
                                         width: 48,
                                         height: 36,
-                                        alignment:
-                                            const AlignmentDirectional(0, 3),
+                                        alignment: const AlignmentDirectional(0, 3),
                                         child: Text(
                                             StateContainer.of(context)
                                                 .recentSecondLast!
                                                 .getShortName()
                                                 .toUpperCase(),
                                             style: TextStyle(
-                                              color: StateContainer.of(context)
-                                                  .curTheme
-                                                  .text,
+                                              color: StateContainer.of(context).curTheme.text,
                                               fontSize: 12.0,
                                               fontWeight: FontWeight.w800,
                                             )),
@@ -2243,11 +2072,10 @@ class SettingsSheetState extends State<SettingsSheet>
                                       color: Colors.transparent,
                                       child: TextButton(
                                         style: TextButton.styleFrom(
-                                          foregroundColor:
-                                              StateContainer.of(context)
-                                                  .curTheme
-                                                  .backgroundDark!
-                                                  .withOpacity(0.75),
+                                          foregroundColor: StateContainer.of(context)
+                                              .curTheme
+                                              .backgroundDark!
+                                              .withOpacity(0.75),
                                           padding: EdgeInsets.zero,
                                           // highlightColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
                                           // splashColor: StateContainer.of(context).curTheme.backgroundDark!.withOpacity(0.75),
@@ -2256,15 +2084,12 @@ class SettingsSheetState extends State<SettingsSheet>
                                           sl
                                               .get<DBHelper>()
                                               .changeAccount(
-                                                  StateContainer.of(context)
-                                                      .recentSecondLast)
+                                                  StateContainer.of(context).recentSecondLast)
                                               .then((_) {
-                                            EventTaxiImpl.singleton().fire(
-                                                AccountChangedEvent(
-                                                    account: StateContainer.of(
-                                                            context)
-                                                        .recentSecondLast,
-                                                    delayPop: true));
+                                            EventTaxiImpl.singleton().fire(AccountChangedEvent(
+                                                account:
+                                                    StateContainer.of(context).recentSecondLast,
+                                                delayPop: true));
                                           });
                                         },
                                         child: Container(
@@ -2292,9 +2117,7 @@ class SettingsSheetState extends State<SettingsSheet>
                               style: TextButton.styleFrom(
                                 foregroundColor: _loadingAccounts
                                     ? Colors.transparent
-                                    : StateContainer.of(context)
-                                        .curTheme
-                                        .text30,
+                                    : StateContainer.of(context).curTheme.text30,
                                 padding: EdgeInsets.zero,
                                 shape: const CircleBorder(),
                                 // splashColor: _loadingAccounts ? Colors.transparent : StateContainer.of(context).curTheme.text30,
@@ -2305,20 +2128,16 @@ class SettingsSheetState extends State<SettingsSheet>
                                   setState(() {
                                     _loadingAccounts = true;
                                   });
-                                  final String seed =
-                                      await StateContainer.of(context)
-                                          .getSeed();
-                                  final List<Account> accounts = await sl
-                                      .get<DBHelper>()
-                                      .getAccounts(seed);
+                                  final String seed = await StateContainer.of(context).getSeed();
+                                  final List<Account> accounts =
+                                      await sl.get<DBHelper>().getAccounts(seed);
                                   setState(() {
                                     _loadingAccounts = false;
                                   });
                                   if (!mounted) return;
                                   Sheets.showAppHeightNineSheet(
                                     context: context,
-                                    widget:
-                                        AppAccountsSheet(accounts: accounts),
+                                    widget: AppAccountsSheet(accounts: accounts),
                                   );
                                 }
                               },
@@ -2328,9 +2147,7 @@ class SettingsSheetState extends State<SettingsSheet>
                                   borderRadius: BorderRadius.circular(100),
                                   border: Border.all(
                                     width: 2,
-                                    color: StateContainer.of(context)
-                                            .curTheme
-                                            .primary ??
+                                    color: StateContainer.of(context).curTheme.primary ??
                                         Colors.transparent,
                                   ),
                                 ),
@@ -2338,12 +2155,8 @@ class SettingsSheetState extends State<SettingsSheet>
                                   Icons.manage_accounts,
                                   size: 24,
                                   color: _loadingAccounts
-                                      ? StateContainer.of(context)
-                                          .curTheme
-                                          .primary60
-                                      : StateContainer.of(context)
-                                          .curTheme
-                                          .primary,
+                                      ? StateContainer.of(context).curTheme.primary60
+                                      : StateContainer.of(context).curTheme.primary,
                                 ),
                               ),
                             ),
@@ -2356,11 +2169,9 @@ class SettingsSheetState extends State<SettingsSheet>
                     margin: const EdgeInsets.only(top: 2),
                     child: TextButton(
                       style: TextButton.styleFrom(
-                        foregroundColor:
-                            StateContainer.of(context).curTheme.text30,
+                        foregroundColor: StateContainer.of(context).curTheme.text30,
                         padding: const EdgeInsets.all(4.0),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6.0)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
                         // highlightColor: StateContainer.of(context).curTheme.text15,
                         // splashColor: StateContainer.of(context).curTheme.text30,
                       ),
@@ -2368,8 +2179,7 @@ class SettingsSheetState extends State<SettingsSheet>
                         Sheets.showAppHeightNineSheet(
                           context: context,
                           widget: AccountDetailsSheet(
-                              account:
-                                  StateContainer.of(context).selectedAccount!),
+                              account: StateContainer.of(context).selectedAccount!),
                         );
                       },
                       child: Column(
@@ -2389,9 +2199,7 @@ class SettingsSheetState extends State<SettingsSheet>
                           // Main account address
                           Text(
                             StateContainer.of(context).wallet?.username ??
-                                Address(StateContainer.of(context)
-                                        .wallet
-                                        ?.address)
+                                Address(StateContainer.of(context).wallet?.address)
                                     .getShortFirstPart() ??
                                 "",
                             style: TextStyle(
@@ -2436,8 +2244,7 @@ class SettingsSheetState extends State<SettingsSheet>
 
   Widget buildSecurityMenu(BuildContext context) {
     bool authLaunchDisabled = false;
-    if (_curAuthMethod.method == AuthMethod.NONE &&
-        _curUnlockSetting.setting == UnlockOption.NO) {
+    if (_curAuthMethod.method == AuthMethod.NONE && _curUnlockSetting.setting == UnlockOption.NO) {
       authLaunchDisabled = true;
     }
     return Container(
@@ -2472,13 +2279,10 @@ class SettingsSheetState extends State<SettingsSheet>
                         margin: const EdgeInsets.only(right: 10, left: 10),
                         child: TextButton(
                             style: TextButton.styleFrom(
-                              foregroundColor:
-                                  StateContainer.of(context).curTheme.text15,
-                              backgroundColor: StateContainer.of(context)
-                                  .curTheme
-                                  .backgroundDark,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0)),
+                              foregroundColor: StateContainer.of(context).curTheme.text15,
+                              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                              shape:
+                                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                               padding: const EdgeInsets.all(8),
                               // highlightColor: StateContainer.of(context).curTheme.text15,
                               // splashColor: StateContainer.of(context).curTheme.text15,
@@ -2490,8 +2294,7 @@ class SettingsSheetState extends State<SettingsSheet>
                               _securityController.reverse();
                             },
                             child: Icon(AppIcons.back,
-                                color: StateContainer.of(context).curTheme.text,
-                                size: 24)),
+                                color: StateContainer.of(context).curTheme.text, size: 24)),
                       ),
                       // Security Header Text
                       Text(
@@ -2516,33 +2319,21 @@ class SettingsSheetState extends State<SettingsSheet>
                     padding: const EdgeInsets.only(top: 15.0),
                     children: <Widget>[
                       Container(
-                        margin: const EdgeInsetsDirectional.only(
-                            start: 30.0, bottom: 10),
+                        margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                         child: Text(Z.of(context).preferences,
                             style: TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.w100,
-                                color: StateContainer.of(context)
-                                    .curTheme
-                                    .text60)),
+                                color: StateContainer.of(context).curTheme.text60)),
                       ),
                       // Authentication Method
-                      Divider(
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.text15),
-                      AppSettings.buildSettingsListItemDoubleLine(
-                          context,
-                          Z.of(context).authMethod,
-                          _curAuthMethod,
-                          AppIcons.fingerprint,
-                          _authMethodDialog),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
+                      AppSettings.buildSettingsListItemDoubleLine(context, Z.of(context).authMethod,
+                          _curAuthMethod, AppIcons.fingerprint, _authMethodDialog),
                       // Authenticate on Launch
                       if (StateContainer.of(context).encryptedSecret == null)
                         Column(children: <Widget>[
-                          Divider(
-                              height: 2,
-                              color:
-                                  StateContainer.of(context).curTheme.text15),
+                          Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                           AppSettings.buildSettingsListItemDoubleLine(
                               context,
                               Z.of(context).lockAppSetting,
@@ -2552,17 +2343,14 @@ class SettingsSheetState extends State<SettingsSheet>
                               disabled: authLaunchDisabled),
                         ]),
                       // Authentication Timer
-                      Divider(
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.text15),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemDoubleLine(
                         context,
                         Z.of(context).autoLockHeader,
                         _curTimeoutSetting,
                         AppIcons.timer,
                         _lockTimeoutDialog,
-                        disabled: _curUnlockSetting.setting ==
-                                UnlockOption.NO &&
+                        disabled: _curUnlockSetting.setting == UnlockOption.NO &&
                             StateContainer.of(context).encryptedSecret == null,
                       ),
                       // Encrypt option
@@ -2583,9 +2371,7 @@ class SettingsSheetState extends State<SettingsSheet>
                       //     }),
                       //   ]),
                       Column(children: <Widget>[
-                        Divider(
-                            height: 2,
-                            color: StateContainer.of(context).curTheme.text15),
+                        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                         AppSettings.buildSettingsListItemSingleLine(
                             context,
                             Z.of(context).setPlausibleDeniabilityPin,
@@ -2594,19 +2380,14 @@ class SettingsSheetState extends State<SettingsSheet>
                               context: context, widget: SetPlausiblePinSheet());
                         },
                             disabled: _curAuthMethod.method != AuthMethod.PIN ||
-                                StateContainer.of(context).encryptedSecret !=
-                                    null),
+                                StateContainer.of(context).encryptedSecret != null),
                       ]),
                       Column(children: <Widget>[
-                        Divider(
-                            height: 2,
-                            color: StateContainer.of(context).curTheme.text15),
+                        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                         AppSettings.buildSettingsListItemSingleLine(
-                            context,
-                            Z.of(context).changePin,
-                            AppIcons.walletpassword, onPressed: () {
-                          Sheets.showAppHeightNineSheet(
-                              context: context, widget: SetPinSheet());
+                            context, Z.of(context).changePin, AppIcons.walletpassword,
+                            onPressed: () {
+                          Sheets.showAppHeightNineSheet(context: context, widget: SetPinSheet());
                         }, disabled: false),
                       ]),
                       // if (_loggedInWithMagic)
@@ -2638,9 +2419,7 @@ class SettingsSheetState extends State<SettingsSheet>
                       //           widget: ChangeMagicSeedSheet());
                       //     }, disabled: false),
                       //   ]),
-                      Divider(
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.text15),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     ],
                   ),
                 ),
@@ -2726,13 +2505,10 @@ class SettingsSheetState extends State<SettingsSheet>
                         margin: const EdgeInsets.only(right: 10, left: 10),
                         child: TextButton(
                             style: TextButton.styleFrom(
-                              foregroundColor:
-                                  StateContainer.of(context).curTheme.text15,
-                              backgroundColor: StateContainer.of(context)
-                                  .curTheme
-                                  .backgroundDark,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0)),
+                              foregroundColor: StateContainer.of(context).curTheme.text15,
+                              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                              shape:
+                                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                               padding: const EdgeInsets.all(8),
                               // highlightColor: StateContainer.of(context).curTheme.text15,
                               // splashColor: StateContainer.of(context).curTheme.text15,
@@ -2744,8 +2520,7 @@ class SettingsSheetState extends State<SettingsSheet>
                               _moreSettingsController.reverse();
                             },
                             child: Icon(AppIcons.back,
-                                color: StateContainer.of(context).curTheme.text,
-                                size: 24)),
+                                color: StateContainer.of(context).curTheme.text, size: 24)),
                       ),
                       // Header Text
                       Text(
@@ -2770,8 +2545,7 @@ class SettingsSheetState extends State<SettingsSheet>
                     controller: _moreSettingsScrollController,
                     children: <Widget>[
                       Container(
-                        margin: const EdgeInsetsDirectional.only(
-                            start: 30.0, bottom: 10),
+                        margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                         child: Text(Z.of(context).preferences,
                             style: TextStyle(
                               fontSize: 16.0,
@@ -2783,18 +2557,14 @@ class SettingsSheetState extends State<SettingsSheet>
                       // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       // AppSettings.buildSettingsListItemDoubleLine(
                       //     context, Z.of(context).showContacts, _curContactsSetting, AppIcons.addcontact, _contactsDialog),
-                      Divider(
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.text15),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemDoubleLine(
                           context,
                           Z.of(context).showUnopenedWarning,
                           _curUnopenedWarningSetting,
                           Icons.warning,
                           _unopenedWarningDialog),
-                      Divider(
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.text15),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       // AppSettings.buildSettingsListItemDoubleLine(
                       //     context, Z.of(context).showFunding, _curFundingSetting, Icons.flag, _fundingDialog),
                       // Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
@@ -2804,9 +2574,7 @@ class SettingsSheetState extends State<SettingsSheet>
                           _curTrackingSetting,
                           Icons.query_stats,
                           _showTrackingDialog),
-                      Divider(
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.text15),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemDoubleLine(
                         context,
                         Z.of(context).blockExplorer,
@@ -2814,40 +2582,28 @@ class SettingsSheetState extends State<SettingsSheet>
                         AppIcons.search,
                         _explorerDialog,
                       ),
-                      Divider(
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.text15),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
 
                       Container(
-                        margin: const EdgeInsetsDirectional.only(
-                            start: 30, top: 20, bottom: 10),
+                        margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
                         child: Text(Z.of(context).manage,
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w100,
-                                color: StateContainer.of(context)
-                                    .curTheme
-                                    .text60)),
+                                color: StateContainer.of(context).curTheme.text60)),
                       ),
-                      Divider(
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.text15),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemSingleLine(
-                          context, Z.of(context).changeNode, Icons.hub,
-                          onPressed: () async {
-                        final List<Node> nodes =
-                            await sl.get<DBHelper>().getNodes();
+                          context, Z.of(context).changeNode, Icons.hub, onPressed: () async {
+                        final List<Node> nodes = await sl.get<DBHelper>().getNodes();
                         Sheets.showAppHeightNineSheet(
                           context: context,
                           widget: ChangeNodeSheet(nodes: nodes),
                         );
                       }),
-                      Divider(
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.text15),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemSingleLine(
-                          context, Z.of(context).changePowSource, Icons.bolt,
-                          onPressed: () async {
+                          context, Z.of(context).changePowSource, Icons.bolt, onPressed: () async {
                         final List<WorkSource> workSources =
                             await sl.get<DBHelper>().getWorkSources();
                         Sheets.showAppHeightNineSheet(
@@ -2855,33 +2611,25 @@ class SettingsSheetState extends State<SettingsSheet>
                           widget: ChangePowSheet(workSources: workSources),
                         );
                       }),
-                      Divider(
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.text15),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemSingleLine(
                           context,
                           Z.of(context).changeRepAuthenticate,
                           AppIcons.changerepresentative, onPressed: () {
                         Sheets.showAppHeightEightSheet(
-                            context: context,
-                            widget: const AppChangeRepresentativeSheet());
+                            context: context, widget: const AppChangeRepresentativeSheet());
                         if (!StateContainer.of(context).nanoNodesUpdated) {
-                          N2NodeAPI.getVerifiedNodes()
-                              .then((List<N2Node>? result) {
+                          N2NodeAPI.getVerifiedNodes().then((List<N2Node>? result) {
                             if (result != null) {
-                              StateContainer.of(context)
-                                  .updateNodes(result);
+                              StateContainer.of(context).updateNodes(result);
                             }
                           });
                         }
                       }),
-                      Divider(
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.text15),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
 
                       Container(
-                        margin: const EdgeInsetsDirectional.only(
-                            start: 30, top: 20, bottom: 10),
+                        margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
                         child: Text(Z.of(context).advanced,
                             style: TextStyle(
                               fontSize: 16.0,
@@ -2889,36 +2637,27 @@ class SettingsSheetState extends State<SettingsSheet>
                               color: StateContainer.of(context).curTheme.text60,
                             )),
                       ),
-                      Divider(
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.text15),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemDoubleLine(
                           context,
                           Z.of(context).currencyMode,
                           _curCurrencyModeSetting,
                           AppIcons.currency,
                           _currencyModeDialog),
-                      Divider(
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.text15),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemDoubleLine(
                           context,
                           Z.of(context).receiveMinimum,
                           _curMinRawSetting,
                           AppIcons.less_than_equal,
                           _minRawDialog),
-                      Divider(
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.text15),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemSingleLine(
-                          context,
-                          Z.of(context).exportTXData,
-                          AppIcons.file_export, onPressed: () async {
+                          context, Z.of(context).exportTXData, AppIcons.file_export,
+                          onPressed: () async {
                         await _exportTransactionData();
                       }),
-                      Divider(
-                          height: 2,
-                          color: StateContainer.of(context).curTheme.text15),
+                      Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       AppSettings.buildSettingsListItemSingleLine(
                         context,
                         Z.of(context).resetDatabase,
@@ -2928,51 +2667,37 @@ class SettingsSheetState extends State<SettingsSheet>
                               context,
                               Z.of(context).resetDatabase,
                               Z.of(context).resetDatabaseConfirmation,
-                              CaseChange.toUpperCase(
-                                  Z.of(context).yes, context), () async {
+                              CaseChange.toUpperCase(Z.of(context).yes, context), () async {
                             // push animation to prevent early exit:
                             bool animationOpen = true;
-                            AppAnimation.animationLauncher(
-                                context, AnimationType.GENERIC,
+                            AppAnimation.animationLauncher(context, AnimationType.GENERIC,
                                 onPoppedCallback: () => animationOpen = false);
 
                             // sleep to flex the animation a bit:
-                            await Future<dynamic>.delayed(
-                                const Duration(milliseconds: 500));
+                            await Future<dynamic>.delayed(const Duration(milliseconds: 500));
 
                             if (!mounted) return;
 
                             await StateContainer.of(context).resetApp(context);
-                          },
-                              cancelText: CaseChange.toUpperCase(
-                                  Z.of(context).no, context));
+                          }, cancelText: CaseChange.toUpperCase(Z.of(context).no, context));
                         },
                       ),
                       if (_loggedInWithMagic)
-                        Divider(
-                            height: 2,
-                            color: StateContainer.of(context).curTheme.text15),
+                        Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                       if (_loggedInWithMagic)
                         AppSettings.buildSettingsListItemSingleLine(
-                            context,
-                            Z.of(context).deleteAccount,
-                            AppIcons.logout, onPressed: () {
+                            context, Z.of(context).deleteAccount, AppIcons.logout, onPressed: () {
                           AppDialogs.showConfirmDialog(
                               context,
-                              CaseChange.toUpperCase(
-                                  Z.of(context).warning, context),
-                              Z
-                                  .of(context)
-                                  .logoutDetail
-                                  .replaceAll("%1", NonTranslatable.appName),
+                              CaseChange.toUpperCase(Z.of(context).warning, context),
+                              Z.of(context).logoutDetail.replaceAll("%1", NonTranslatable.appName),
                               Z.of(context).logoutAction.toUpperCase(), () {
                             // Show another confirm dialog
                             AppDialogs.showConfirmDialog(
                                 context,
                                 Z.of(context).logoutAreYouSure,
                                 Z.of(context).logoutReassurance,
-                                CaseChange.toUpperCase(
-                                    Z.of(context).yes, context), () async {
+                                CaseChange.toUpperCase(Z.of(context).yes, context), () async {
                               _logOut();
                             });
                           });
@@ -3026,13 +2751,10 @@ class SettingsSheetState extends State<SettingsSheet>
                         margin: const EdgeInsets.only(right: 10, left: 10),
                         child: TextButton(
                             style: TextButton.styleFrom(
-                              foregroundColor:
-                                  StateContainer.of(context).curTheme.text15,
-                              backgroundColor: StateContainer.of(context)
-                                  .curTheme
-                                  .backgroundDark,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50)),
+                              foregroundColor: StateContainer.of(context).curTheme.text15,
+                              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                              shape:
+                                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
                               padding: const EdgeInsets.all(8),
                               // highlightColor: StateContainer.of(context).curTheme.text15,
                               // splashColor: StateContainer.of(context).curTheme.text15,
@@ -3044,8 +2766,7 @@ class SettingsSheetState extends State<SettingsSheet>
                               _useNanoController.reverse();
                             },
                             child: Icon(AppIcons.back,
-                                color: StateContainer.of(context).curTheme.text,
-                                size: 24)),
+                                color: StateContainer.of(context).curTheme.text, size: 24)),
                       ),
                       // Security Header Text
                       Text(
@@ -3064,18 +2785,14 @@ class SettingsSheetState extends State<SettingsSheet>
                   padding: const EdgeInsets.only(top: 15),
                   children: <Widget>[
                     Container(
-                      margin: const EdgeInsetsDirectional.only(
-                          start: 30, bottom: 10),
+                      margin: const EdgeInsetsDirectional.only(start: 30, bottom: 10),
                       child: Text(Z.of(context).getNano,
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w100,
-                              color:
-                                  StateContainer.of(context).curTheme.text60)),
+                              color: StateContainer.of(context).curTheme.text60)),
                     ),
-                    Divider(
-                        height: 2,
-                        color: StateContainer.of(context).curTheme.text15),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemSingleLine(
                       context,
                       Z.of(context).onramper,
@@ -3093,9 +2810,7 @@ class SettingsSheetState extends State<SettingsSheet>
                         ),
                       ),
                     ),
-                    Divider(
-                        height: 2,
-                        color: StateContainer.of(context).curTheme.text15),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemSingleLine(
                       context,
                       NonTranslatable.nanocafe,
@@ -3112,22 +2827,15 @@ class SettingsSheetState extends State<SettingsSheet>
                         ),
                       ),
                     ),
-                    Divider(
-                        height: 2,
-                        color: StateContainer.of(context).curTheme.text15),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemSingleLine(
-                        context,
-                        Z.of(context).copyWalletAddressToClipboard,
-                        AppIcons.content_copy, onPressed: () {
-                      Clipboard.setData(ClipboardData(
-                          text: StateContainer.of(context).wallet!.address ??
-                              ""));
-                      UIUtil.showSnackbar(Z.of(context).addressCopied, context,
-                          durationMs: 1500);
+                        context, Z.of(context).copyWalletAddressToClipboard, AppIcons.content_copy,
+                        onPressed: () {
+                      Clipboard.setData(
+                          ClipboardData(text: StateContainer.of(context).wallet!.address ?? ""));
+                      UIUtil.showSnackbar(Z.of(context).addressCopied, context, durationMs: 1500);
                     }),
-                    Divider(
-                        height: 2,
-                        color: StateContainer.of(context).curTheme.text15),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     // AppSimpleDialogOption(
                     //   onPressed: () {
                     //     Clipboard.setData(ClipboardData(text: StateContainer.of(context).wallet!.address));
@@ -3142,18 +2850,14 @@ class SettingsSheetState extends State<SettingsSheet>
                     //   ),
                     // ),
                     Container(
-                      margin: const EdgeInsetsDirectional.only(
-                          start: 30, top: 20, bottom: 10),
+                      margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
                       child: Text(Z.of(context).spendNano,
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w100,
-                              color:
-                                  StateContainer.of(context).curTheme.text60)),
+                              color: StateContainer.of(context).curTheme.text60)),
                     ),
-                    Divider(
-                        height: 2,
-                        color: StateContainer.of(context).curTheme.text15),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemSingleLine(
                       context,
                       NonTranslatable.redeemforme,
@@ -3170,23 +2874,17 @@ class SettingsSheetState extends State<SettingsSheet>
                         ),
                       ),
                     ),
-                    Divider(
-                        height: 2,
-                        color: StateContainer.of(context).curTheme.text15),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
 
                     Container(
-                      margin: const EdgeInsetsDirectional.only(
-                          start: 30, top: 20, bottom: 10),
+                      margin: const EdgeInsetsDirectional.only(start: 30, top: 20, bottom: 10),
                       child: Text(Z.of(context).exchangeNano,
                           style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w100,
-                              color:
-                                  StateContainer.of(context).curTheme.text60)),
+                              color: StateContainer.of(context).curTheme.text60)),
                     ),
-                    Divider(
-                        height: 2,
-                        color: StateContainer.of(context).curTheme.text15),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemSingleLine(
                       context,
                       NonTranslatable.nanswap,
@@ -3203,9 +2901,7 @@ class SettingsSheetState extends State<SettingsSheet>
                         ),
                       ),
                     ),
-                    Divider(
-                        height: 2,
-                        color: StateContainer.of(context).curTheme.text15),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                   ],
                 ),
                 ListGradient(
@@ -3254,13 +2950,10 @@ class SettingsSheetState extends State<SettingsSheet>
                         margin: const EdgeInsets.only(right: 10, left: 10),
                         child: TextButton(
                             style: TextButton.styleFrom(
-                              foregroundColor:
-                                  StateContainer.of(context).curTheme.text15,
-                              backgroundColor: StateContainer.of(context)
-                                  .curTheme
-                                  .backgroundDark,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0)),
+                              foregroundColor: StateContainer.of(context).curTheme.text15,
+                              backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+                              shape:
+                                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
                               padding: const EdgeInsets.all(8),
                               // highlightColor: StateContainer.of(context).curTheme.text15,
                               // splashColor: StateContainer.of(context).curTheme.text15,
@@ -3272,8 +2965,7 @@ class SettingsSheetState extends State<SettingsSheet>
                               _shareController.reverse();
                             },
                             child: Icon(AppIcons.back,
-                                color: StateContainer.of(context).curTheme.text,
-                                size: 24)),
+                                color: StateContainer.of(context).curTheme.text, size: 24)),
                       ),
                       // Header Text
                       Text(
@@ -3292,40 +2984,29 @@ class SettingsSheetState extends State<SettingsSheet>
                   padding: const EdgeInsets.only(top: 15.0),
                   children: <Widget>[
                     Container(
-                      margin: const EdgeInsetsDirectional.only(
-                          start: 30.0, bottom: 10),
+                      margin: const EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                       child: Text(Z.of(context).social,
                           style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w100,
-                              color:
-                                  StateContainer.of(context).curTheme.text60)),
+                              color: StateContainer.of(context).curTheme.text60)),
                     ),
-                    Divider(
-                        height: 2,
-                        color: StateContainer.of(context).curTheme.text15),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemSingleLine(
-                        context, Z.of(context).shareText, AppIcons.share,
-                        onPressed: () {
+                        context, Z.of(context).shareText, AppIcons.share, onPressed: () {
                       Share.share(
                           "${Z.of(context).shareAppText.replaceAll("%1", NonTranslatable.appName).replaceAll("%2", NonTranslatable.currencyName)} ${NonTranslatable.genericStoreLink}");
                     }),
-                    Divider(
-                        height: 2,
-                        color: StateContainer.of(context).curTheme.text15),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     Container(
-                      margin: const EdgeInsetsDirectional.only(
-                          start: 30.0, top: 20, bottom: 10),
+                      margin: const EdgeInsetsDirectional.only(start: 30.0, top: 20, bottom: 10),
                       child: Text(Z.of(context).onboarding,
                           style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w100,
-                              color:
-                                  StateContainer.of(context).curTheme.text60)),
+                              color: StateContainer.of(context).curTheme.text60)),
                     ),
-                    Divider(
-                        height: 2,
-                        color: StateContainer.of(context).curTheme.text15),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                     AppSettings.buildSettingsListItemSingleLine(
                         context,
                         Z
@@ -3346,9 +3027,7 @@ class SettingsSheetState extends State<SettingsSheet>
                             qrWidget: qrWidget,
                           ));
                     }),
-                    Divider(
-                        height: 2,
-                        color: StateContainer.of(context).curTheme.text15),
+                    Divider(height: 2, color: StateContainer.of(context).curTheme.text15),
                   ],
                 ),
                 ListGradient(
@@ -3369,8 +3048,8 @@ class SettingsSheetState extends State<SettingsSheet>
     final String? expectedPin = await sl.get<Vault>().getPin();
     final String? plausiblePin = await sl.get<Vault>().getPlausiblePin();
     if (!mounted) return;
-    final bool? auth = await Navigator.of(context)
-        .push(MaterialPageRoute<bool>(builder: (BuildContext context) {
+    final bool? auth =
+        await Navigator.of(context).push(MaterialPageRoute<bool>(builder: (BuildContext context) {
       return PinScreen(
         PinOverlayType.ENTER_PIN,
         expectedPin: expectedPin,
@@ -3380,8 +3059,7 @@ class SettingsSheetState extends State<SettingsSheet>
     }));
     if (auth != null && auth) {
       await Future<dynamic>.delayed(const Duration(milliseconds: 200));
-      EventTaxiImpl.singleton()
-          .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.BACKUP_SEED));
+      EventTaxiImpl.singleton().fire(AuthenticatedEvent(AUTH_EVENT_TYPE.BACKUP_SEED));
     }
   }
 
@@ -3413,8 +3091,7 @@ class SettingsSheetState extends State<SettingsSheet>
       await sl.get<SharedPrefsUtil>().deleteAll();
       if (!mounted) return;
       StateContainer.of(context).logOut();
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+      Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
     } catch (e) {
       log.e(e.toString());
     }

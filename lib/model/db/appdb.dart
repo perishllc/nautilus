@@ -330,6 +330,26 @@ class DBHelper {
     await saveNode(
       Node(
         id: id++,
+        name: "PowerNode",
+        selected: false,
+        http_url: "https://proxy.powernode.cc/proxy",
+        ws_url: "wss://ws.powernode.cc",
+      ),
+      dbClient: dbClient,
+    );
+    await saveNode(
+      Node(
+        id: id++,
+        name: "Nanos.cc",
+        selected: false,
+        http_url: "https://nault.nanos.cc/proxy",
+        ws_url: "wss://nault-ws.nanos.cc",
+      ),
+      dbClient: dbClient,
+    );
+    await saveNode(
+      Node(
+        id: id++,
         name: "Kalium Node (banano)",
         selected: false,
         http_url: "https://kaliumapi.appditto.com/api",
