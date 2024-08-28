@@ -516,20 +516,23 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       /// Instead of telling them they are out of luck, this is an automatic "fallback"
       /// It will generate a 64-byte secret using the native android "bottlerocketstudios" Vault
       /// This secret is used to encrypt sensitive data and save it in SharedPreferences
-      if (Platform.isAndroid && e.toString().contains("flutter_secure")) {
-        if (!(await sl.get<SharedPrefsUtil>().useLegacyStorage())) {
-          await sl.get<SharedPrefsUtil>().setUseLegacyStorage();
-          checkLoggedIn();
-        }
-      } else {
-        await sl.get<Vault>().deleteAll();
-        await sl.get<SharedPrefsUtil>().deleteAll();
-        if (!_retried) {
-          _retried = true;
-          _hasCheckedLoggedIn = false;
-          checkLoggedIn();
-        }
-      }
+      // if (Platform.isAndroid && e.toString().contains("flutter_secure")) {
+      //   if (!(await sl.get<SharedPrefsUtil>().useLegacyStorage())) {
+      //     await sl.get<SharedPrefsUtil>().setUseLegacyStorage();
+      //     checkLoggedIn();
+      //   }
+      // } else {
+      //   await sl.get<Vault>().deleteAll();
+      //   await sl.get<SharedPrefsUtil>().deleteAll();
+      //   if (!_retried) {
+      //     _retried = true;
+      //     _hasCheckedLoggedIn = false;
+      //     checkLoggedIn();
+      //   }
+      // }
+      // this no longer wants to build with the latest flutter version so it's just going to rethrow now :/
+      // this should no longer be an issue with newer versions of flutter secure storage / android though
+      rethrow;
     }
   }
 

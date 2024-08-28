@@ -15,15 +15,15 @@ public class MainActivity extends FlutterFragmentActivity {
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
         GeneratedPluginRegistrant.registerWith(flutterEngine);
-        new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
-            .setMethodCallHandler(
-                (call, result) -> {
-                    if (call.method.equals("getSecret")) {
-                        result.success(new LegacyStorage().getSecret());
-                    } else {
-                        result.notImplemented();
-                    }
-                }
-            );
+        // new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
+        //     .setMethodCallHandler(
+        //         (call, result) -> {
+        //             if (call.method.equals("getSecret")) {
+        //                 result.success(new LegacyStorage().getSecret());
+        //             } else {
+        //                 result.notImplemented();
+        //             }
+        //         }
+        //     );
     }
 }
