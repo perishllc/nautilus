@@ -40,7 +40,7 @@ class NonTranslatable {
       case AvailableBlockExplorerEnum.BLOCKLATTICE:
         return "https://blocklattice.io/block/$hash";
       case AvailableBlockExplorerEnum.NANEXPLORER:
-        return "https://nanexplorer.com/explorer/block/$hash";
+        return "https://nanexplorer.com/nano/block/$hash";
       case AvailableBlockExplorerEnum.NANOCAFE:
         return "https://nanocafe.cc/$hash";
       case AvailableBlockExplorerEnum.NANOBROWSE:
@@ -60,7 +60,7 @@ class NonTranslatable {
       case AvailableBlockExplorerEnum.BLOCKLATTICE:
         return "https://blocklattice.io/account/$account";
       case AvailableBlockExplorerEnum.NANEXPLORER:
-        return "https://nanexplorer.com/explorer/account/$account";
+        return "https://nanexplorer.com/nano/account/$account";
       case AvailableBlockExplorerEnum.NANOCAFE:
         return "https://nanocafe.cc/$account";
       case AvailableBlockExplorerEnum.NANOBROWSE:
