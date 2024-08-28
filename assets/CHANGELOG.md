@@ -1,8 +1,10 @@
 ## v0.9.9 - [2024-08-30]
 #### Added
 - many more default nodes
+- add nanexplorer and blocklattice block explorers
 #### Changed
 - removed unstoppable domains support
+- default block explorer changed to blocklattice
 #### Fixed
 - minor pow handling fixes
 - fixes for alert boxes

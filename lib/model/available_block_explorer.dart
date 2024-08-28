@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wallet_flutter/model/setting_item.dart';
 
-enum AvailableBlockExplorerEnum { NANOCOMMUNITY, NANOLOOKER, NANOBROWSE, NANOCAFE  }
+enum AvailableBlockExplorerEnum { NANOCOMMUNITY, NANOLOOKER, NANOBROWSE, NANOCAFE, BLOCKLATTICE, NANEXPLORER  }
 
 /// Represent the available authentication methods our app supports
 class AvailableBlockExplorer extends SettingSelectionItem {
@@ -16,6 +16,10 @@ class AvailableBlockExplorer extends SettingSelectionItem {
         return "nanobrowse.com";
       case AvailableBlockExplorerEnum.NANOLOOKER:
         return "nanolooker.com";
+      case AvailableBlockExplorerEnum.BLOCKLATTICE:
+        return "blocklattice.io";
+      case AvailableBlockExplorerEnum.NANEXPLORER:
+        return "nanexplorer.com";
       case AvailableBlockExplorerEnum.NANOCAFE:
         return "nanocafe.cc";
       case AvailableBlockExplorerEnum.NANOCOMMUNITY:

@@ -37,6 +37,10 @@ class NonTranslatable {
         return "https://nano.community/$hash";
       case AvailableBlockExplorerEnum.NANOLOOKER:
         return "https://nanolooker.com/block/$hash";
+      case AvailableBlockExplorerEnum.BLOCKLATTICE:
+        return "https://blocklattice.io/block/$hash";
+      case AvailableBlockExplorerEnum.NANEXPLORER:
+        return "https://nanexplorer.com/explorer/block/$hash";
       case AvailableBlockExplorerEnum.NANOCAFE:
         return "https://nanocafe.cc/$hash";
       case AvailableBlockExplorerEnum.NANOBROWSE:
@@ -51,6 +55,12 @@ class NonTranslatable {
         return "https://nano.community/$account";
       case AvailableBlockExplorerEnum.NANOLOOKER:
         return "https://nanolooker.com/account/$account";
+      case AvailableBlockExplorerEnum.NANOLOOKER:
+        return "https://nanolooker.com/account/$account";
+      case AvailableBlockExplorerEnum.BLOCKLATTICE:
+        return "https://blocklattice.io/account/$account";
+      case AvailableBlockExplorerEnum.NANEXPLORER:
+        return "https://nanexplorer.com/explorer/account/$account";
       case AvailableBlockExplorerEnum.NANOCAFE:
         return "https://nanocafe.cc/$account";
       case AvailableBlockExplorerEnum.NANOBROWSE:
