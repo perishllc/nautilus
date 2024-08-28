@@ -1,4 +1,7 @@
-## v0.9.9 - [2024-08-30]
+## v0.9.91 - [2024-08-30]
+#### Fixed
+- hotfixes
+## v0.9.9 - [2024-08-28]
 #### Added
 - many more default nodes
 - add nanexplorer and blocklattice block explorers
