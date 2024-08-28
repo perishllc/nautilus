@@ -97,8 +97,10 @@ class UsernameService {
   }
 
   Future<String?> checkUnstoppableDomain(String domain) async {
-    final http.Response response = await http.get(Uri.parse(UD_ENDPOINT + domain),
-        headers: {'Content-type': 'application/json', 'Authorization': 'Bearer ${dotenv.env["UD_API_KEY"]!}'});
+    final http.Response response = await http.get(Uri.parse(UD_ENDPOINT + domain), headers: {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer ${dotenv.env["UD_API_KEY"]!}'
+    });
 
     if (response.statusCode != 200) {
       return null;
@@ -106,8 +108,11 @@ class UsernameService {
     final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
     String? address;
 
-    if (decoded != null && decoded["records"] != null && decoded["records"]["crypto.NANO.address"] != null) {
-      address = decoded["records"]["crypto.${NonTranslatable.currencyName.toUpperCase()}.address"] as String?;
+    if (decoded != null &&
+        decoded["records"] != null &&
+        decoded["records"]["crypto.NANO.address"] != null) {
+      address = decoded["records"]["crypto.${NonTranslatable.currencyName.toUpperCase()}.address"]
+          as String?;
       if (NanoAccounts.isValid(NonTranslatable.accountType, address!)) {
         return address;
       }
@@ -178,14 +183,16 @@ class UsernameService {
 
   // NANO.TO:
   Future<dynamic> checkNanoToUsernameAvailability(String username) async {
-    final http.Response response = await http
-        .get(Uri.parse("$NANO_TO_USERNAME_LEASE_ENDPOINT/$username/lease"), headers: {"Accept": "application/json"});
+    final http.Response response = await http.get(
+        Uri.parse("$NANO_TO_USERNAME_LEASE_ENDPOINT/$username/lease"),
+        headers: {"Accept": "application/json"});
     final Map decoded = json.decode(response.body) as Map<dynamic, dynamic>;
     return decoded;
   }
 
   Future<dynamic> checkNanoToUsernameUrl(String URL) async {
-    final http.Response response = await http.get(Uri.parse(URL), headers: {"Accept": "application/json"});
+    final http.Response response =
+        await http.get(Uri.parse(URL), headers: {"Accept": "application/json"});
     if (response.statusCode != 200) {
       return null;
     }
@@ -687,7 +694,8 @@ class UsernameService {
 
     // add to the db if missing:
     if (type != null) {
-      final User user = User(username: strippedUsername, address: address, type: type, is_blocked: false);
+      final User user =
+          User(username: strippedUsername, address: address, type: type, is_blocked: false);
       await sl.get<DBHelper>().addUser(user);
       // force users list to update on the home page:
       EventTaxiImpl.singleton().fire(ContactModifiedEvent());
@@ -724,7 +732,8 @@ class UsernameService {
     // add to the db if missing:
     if (type != null) {
       final String strippedUsername = SendSheetHelpers.stripPrefixes(username!);
-      final User user = User(username: strippedUsername, address: address, type: type, is_blocked: false);
+      final User user =
+          User(username: strippedUsername, address: address, type: type, is_blocked: false);
       await sl.get<DBHelper>().addUser(user);
       // force users list to update on the home page:
       EventTaxiImpl.singleton().fire(ContactModifiedEvent());
@@ -759,6 +768,11 @@ class UsernameService {
       final List<String> splitStrs = username.split("@");
       String name = splitStrs.first.toLowerCase();
       final String domain = splitStrs.last;
+
+      if (splitStrs.length == 3) {
+        // for username like @alice@domain.org instead of alice@domain.org
+        name = splitStrs[1];
+      }
 
       if (name.isEmpty) {
         name = "_";
