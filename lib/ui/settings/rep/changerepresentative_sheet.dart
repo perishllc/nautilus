@@ -189,12 +189,13 @@ class _AppChangeRepresentativeSheetState extends State<AppChangeRepresentativeSh
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        _sanitizeAlias(rep.alias),
+                        rep.alias ?? rep.account!,
                         style: TextStyle(
-                            color: StateContainer.of(context).curTheme.text,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18.0,
-                            fontFamily: 'Nunito Sans'),
+                          color: StateContainer.of(context).curTheme.text,
+                          fontWeight: FontWeight.w700,
+                          fontSize: rep.alias == null ? 14 : 18,
+                          fontFamily: 'Nunito Sans',
+                        ),
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 7),
