@@ -1043,40 +1043,40 @@ class Z {
     );
   }
 
-  /// `Can't Connect`
+  /// `Node Connection Warning`
   String get connectionWarning {
     return Intl.message(
-      'Can\'t Connect',
+      'Node Connection Warning',
       name: 'connectionWarning',
       desc: 'home_connection_warning',
       args: [],
     );
   }
 
-  /// `We can't seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it's been more than an hour and you're still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co`
+  /// `We can't seem to connect to the node, this could just be your connection, but if the issue persists you can always try selecting a different node under Settings -> More Settings -> Change Node.`
   String get connectionWarningBody {
     return Intl.message(
-      'We can\'t seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it\'s been more than an hour and you\'re still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co',
+      'We can\'t seem to connect to the node, this could just be your connection, but if the issue persists you can always try selecting a different node under Settings -> More Settings -> Change Node.',
       name: 'connectionWarningBody',
       desc: 'connection_warning_body',
       args: [],
     );
   }
 
-  /// `We can't seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it's been more than an hour and you're still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co`
+  /// `We can't seem to connect to the node, this could just be your connection, but if the issue persists you can always try selecting a different node under Settings -> More Settings -> Change Node. If it's been more than an hour and you're still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co`
   String get connectionWarningBodyLong {
     return Intl.message(
-      'We can\'t seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it\'s been more than an hour and you\'re still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co',
+      'We can\'t seem to connect to the node, this could just be your connection, but if the issue persists you can always try selecting a different node under Settings -> More Settings -> Change Node. If it\'s been more than an hour and you\'re still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co',
       name: 'connectionWarningBodyLong',
       desc: 'connection_warning_body_long',
       args: [],
     );
   }
 
-  /// `We can't seem to connect to the backend`
+  /// `We can't seem to connect to the node`
   String get connectionWarningBodyShort {
     return Intl.message(
-      'We can\'t seem to connect to the backend',
+      'We can\'t seem to connect to the node',
       name: 'connectionWarningBodyShort',
       desc: 'connection_warning_body_short',
       args: [],

@@ -890,7 +890,7 @@ class AppHomePageState extends State<AppHomePage>
       }
 
       // are we not connected after ~5 seconds?
-      Future<dynamic>.delayed(const Duration(seconds: 10), () async {
+      Future<dynamic>.delayed(const Duration(seconds: 5), () async {
         if (!mounted) return;
         final bool connected = await sl.get<AccountService>().isConnected();
         showConnectionWarning(!connected);
@@ -948,13 +948,13 @@ class AppHomePageState extends State<AppHomePage>
     if (showWarning) {
       // ignore the dismissal of the alert, since it's the highest priority:
       StateContainer.of(context).addActiveOrSettingsAlert(alert, null);
-      if (StateContainer.of(context).wallet!.loading) {
+      // if (StateContainer.of(context).wallet!.loading) {
         setState(() {
           StateContainer.of(context).wallet!.loading = false;
           StateContainer.of(context).wallet!.unifiedLoading = false;
           StateContainer.of(context).wallet!.historyLoading = false;
         });
-      }
+      // }
       // start a timer to check if we're connected:
       _connectionTimer = Timer.periodic(const Duration(seconds: 5), (Timer t) async {
         final bool connected = await sl.get<AccountService>().isConnected();
@@ -1296,19 +1296,19 @@ class AppHomePageState extends State<AppHomePage>
       handleDeepLink(event.link);
     });
     // listen to connection events:
-    _connectionSub =
-        EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((ConnStatusEvent event) {
-      if (event.status == ConnectionStatus.CONNECTED) {
-        // cancel the timer, if it's still running:
-        _connectionTimer?.cancel();
-        showConnectionWarning(false);
-      } else if (event.status == ConnectionStatus.DISCONNECTED) {
-        // start a timer, if it expires, show the warning:
-        _connectionTimer = Timer(const Duration(seconds: 10), () {
-          showConnectionWarning(true);
-        });
-      }
-    });
+    // _connectionSub =
+    //     EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((ConnStatusEvent event) {
+    //   if (event.status == ConnectionStatus.CONNECTED) {
+    //     // cancel the timer, if it's still running:
+    //     _connectionTimer?.cancel();
+    //     showConnectionWarning(false);
+    //   } else if (event.status == ConnectionStatus.DISCONNECTED) {
+    //     // start a timer, if it expires, show the warning:
+    //     _connectionTimer = Timer(const Duration(seconds: 10), () {
+    //       showConnectionWarning(true);
+    //     });
+    //   }
+    // });
     _subscriptionsSub =
         EventTaxiImpl.singleton().registerTo<SubsChangedEvent>().listen((SubsChangedEvent event) {
       if (mounted) {

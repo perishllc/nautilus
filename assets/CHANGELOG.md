@@ -1,3 +1,6 @@
+## v0.9.92 - [2024-10-09]
+#### Fixed
+- The connection warning is more consistent and helpful in case the server goes down again
 ## v0.9.91 - [2024-08-30]
 #### Fixed
 - hotfixes

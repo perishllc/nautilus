@@ -182,13 +182,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm the pin"),
         "connectingHeader": MessageLookupByLibrary.simpleMessage("Connecting"),
         "connectionWarning":
-            MessageLookupByLibrary.simpleMessage("Can\'t Connect"),
+            MessageLookupByLibrary.simpleMessage("Node Connection Warning"),
         "connectionWarningBody": MessageLookupByLibrary.simpleMessage(
-            "We can\'t seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it\'s been more than an hour and you\'re still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co"),
+            "We can\'t seem to connect to the node, this could just be your connection, but if the issue persists you can always try selecting a different node under Settings -> More Settings -> Change Node."),
         "connectionWarningBodyLong": MessageLookupByLibrary.simpleMessage(
-            "We can\'t seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it\'s been more than an hour and you\'re still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co"),
+            "We can\'t seem to connect to the node, this could just be your connection, but if the issue persists you can always try selecting a different node under Settings -> More Settings -> Change Node. If it\'s been more than an hour and you\'re still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co"),
         "connectionWarningBodyShort": MessageLookupByLibrary.simpleMessage(
-            "We can\'t seem to connect to the backend"),
+            "We can\'t seem to connect to the node"),
         "contactAdded":
             MessageLookupByLibrary.simpleMessage("%1 added to contacts."),
         "contactExists":

@@ -244,7 +244,7 @@ class AccountService {
     } else if (suspended && !unsuspend) {
       return;
     } else if (!unsuspend) {
-      reconnectToService();
+      await reconnectToService();
       return;
     }
     _isConnecting = true;
@@ -267,9 +267,9 @@ class AccountService {
       log.d("Connected to service");
       _isConnecting = false;
       _isConnected = true;
-      EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.CONNECTED));
       _channel!.stream
           .listen(_onMessageReceived, onDone: connectionClosed, onError: connectionClosedError);
+      EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.CONNECTED));
     } catch (e) {
       log.e("Error from service ${e.toString()}");
       _isConnected = false;
@@ -302,11 +302,24 @@ class AccountService {
 
   Future<bool> isConnected() async {
     final ConnectivityResult connectivityResult = await Connectivity().checkConnectivity();
+    bool hasInternet = false;
     if (connectivityResult != ConnectivityResult.bluetooth &&
         connectivityResult != ConnectivityResult.none) {
       // I am connected to some network, make sure there is actually a net connection.
-      return InternetConnectionChecker().hasConnection;
+      hasInternet = await InternetConnectionChecker().hasConnection;
     }
+
+    if (hasInternet) {
+      try {
+        // make sure we can actually get block info:
+        final resp = await requestBlockInfo(
+            "8D440E336F1A9F876CC4E337E291FD4D5E4F8FC1E4821BA3B303564BCCE48CE0");
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
     return false;
   }
 
@@ -350,6 +363,9 @@ class AccountService {
       return;
     }
     await _lock.synchronized(() async {
+      if (!_isConnected) {
+        EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.CONNECTED));
+      }
       _isConnected = true;
       _isConnecting = false;
       log.v("Received $message");

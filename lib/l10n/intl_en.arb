@@ -495,22 +495,22 @@
     "type": "text",
     "description": "A header to let the user now that Nautilus is currently connecting to (or loading) live chat."
   },
-  "connectionWarning": "Can't Connect",
+  "connectionWarning": "Node Connection Warning",
   "@connectionWarning": {
     "type": "text",
     "description": "home_connection_warning"
   },
-  "connectionWarningBody": "We can't seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it's been more than an hour and you're still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co",
+  "connectionWarningBody": "We can't seem to connect to the node, this could just be your connection, but if the issue persists you can always try selecting a different node under Settings -> More Settings -> Change Node.",
   "@connectionWarningBody": {
     "type": "text",
     "description": "connection_warning_body"
   },
-  "connectionWarningBodyLong": "We can't seem to connect to the backend, this could just be your connection or if the issue persists, the backend might be down for maintanence or even an outage. If it's been more than an hour and you're still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co",
+  "connectionWarningBodyLong": "We can't seem to connect to the node, this could just be your connection, but if the issue persists you can always try selecting a different node under Settings -> More Settings -> Change Node. If it's been more than an hour and you're still having issues, please submit a report in #bug-reports in the discord server @ chat.perish.co",
   "@connectionWarningBodyLong": {
     "type": "text",
     "description": "connection_warning_body_long"
   },
-  "connectionWarningBodyShort": "We can't seem to connect to the backend",
+  "connectionWarningBodyShort": "We can't seem to connect to the node",
   "@connectionWarningBodyShort": {
     "type": "text",
     "description": "connection_warning_body_short"

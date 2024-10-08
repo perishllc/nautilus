@@ -9,12 +9,15 @@ import 'package:wallet_flutter/bus/fcm_update_event.dart';
 import 'package:wallet_flutter/bus/notification_setting_change_event.dart';
 import 'package:wallet_flutter/dimens.dart';
 import 'package:wallet_flutter/generated/l10n.dart';
+import 'package:wallet_flutter/model/db/appdb.dart';
+import 'package:wallet_flutter/model/db/node.dart';
 import 'package:wallet_flutter/model/notification_setting.dart';
 import 'package:wallet_flutter/network/alert_codes.dart';
 import 'package:wallet_flutter/network/model/response/alerts_response_item.dart';
 import 'package:wallet_flutter/service_locator.dart';
 import 'package:wallet_flutter/styles.dart';
 import 'package:wallet_flutter/ui/send/send_sheet.dart';
+import 'package:wallet_flutter/ui/settings/node/change_node_sheet.dart';
 import 'package:wallet_flutter/ui/settings/rep/changerepresentative_sheet.dart';
 import 'package:wallet_flutter/ui/util/handlebars.dart';
 import 'package:wallet_flutter/ui/widgets/app_simpledialog.dart';
@@ -28,8 +31,7 @@ import 'package:wallet_flutter/util/sharedprefsutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class RemoteMessageSheet extends StatefulWidget {
-  const RemoteMessageSheet({this.alert, this.hasDismissButton = true})
-      : super();
+  const RemoteMessageSheet({this.alert, this.hasDismissButton = true}) : super();
 
   final AlertResponseItem? alert;
   final bool hasDismissButton;
@@ -42,8 +44,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        minimum:
-            EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
+        minimum: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
             // A row for the address text and close button
@@ -90,57 +91,46 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                 child: Stack(
                   children: [
                     SingleChildScrollView(
-                      padding:
-                          const EdgeInsetsDirectional.only(top: 12, bottom: 36),
+                      padding: const EdgeInsetsDirectional.only(top: 12, bottom: 36),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           if (widget.alert!.timestamp != null)
                             Container(
-                              margin: const EdgeInsetsDirectional.only(
-                                  top: 2, bottom: 6),
+                              margin: const EdgeInsetsDirectional.only(top: 2, bottom: 6),
                               padding: const EdgeInsetsDirectional.only(
                                   start: 10, end: 10, top: 2, bottom: 2),
                               decoration: BoxDecoration(
-                                color:
-                                    StateContainer.of(context).curTheme.text05,
+                                color: StateContainer.of(context).curTheme.text05,
                                 borderRadius: const BorderRadius.all(
                                   Radius.circular(100),
                                 ),
                                 border: Border.all(
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .text10!,
+                                  color: StateContainer.of(context).curTheme.text10!,
                                 ),
                               ),
                               child: Text(
                                 "${DateTime.fromMillisecondsSinceEpoch(widget.alert!.timestamp!).toUtc().toString().substring(0, 16)} UTC",
-                                style: AppStyles.remoteMessageCardTimestamp(
-                                    context),
+                                style: AppStyles.remoteMessageCardTimestamp(context),
                               ),
                             ),
                           if (widget.alert!.title != null)
                             Container(
-                              margin: const EdgeInsetsDirectional.only(
-                                  top: 2, bottom: 2),
+                              margin: const EdgeInsetsDirectional.only(top: 2, bottom: 2),
                               child: Text(
                                 widget.alert!.title!,
-                                style:
-                                    AppStyles.remoteMessageCardTitle(context),
+                                style: AppStyles.remoteMessageCardTitle(context),
                               ),
                             ),
                           if (widget.alert!.longDescription != null ||
                               widget.alert!.shortDescription != null)
                             Container(
-                              margin: const EdgeInsetsDirectional.only(
-                                  top: 2, bottom: 2),
+                              margin: const EdgeInsetsDirectional.only(top: 2, bottom: 2),
                               child: Text(
                                 widget.alert!.longDescription != null
                                     ? widget.alert!.longDescription!
                                     : widget.alert!.shortDescription!,
-                                style:
-                                    AppStyles.remoteMessageCardShortDescription(
-                                        context),
+                                style: AppStyles.remoteMessageCardShortDescription(context),
                               ),
                             ),
                         ],
@@ -149,14 +139,12 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                     ListGradient(
                       height: 12,
                       top: true,
-                      color:
-                          StateContainer.of(context).curTheme.backgroundDark!,
+                      color: StateContainer.of(context).curTheme.backgroundDark!,
                     ),
                     ListGradient(
                       height: 36,
                       top: false,
-                      color:
-                          StateContainer.of(context).curTheme.backgroundDark!,
+                      color: StateContainer.of(context).curTheme.backgroundDark!,
                     ),
                   ],
                 ),
@@ -168,17 +156,12 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                 if (widget.alert!.link != null)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY,
-                          Z.of(context).readMore,
-                          Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY,
+                          Z.of(context).readMore, Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                         final Uri uri = Uri.parse(widget.alert!.link!);
                         if (await canLaunchUrl(uri)) {
                           await launchUrl(uri);
-                          await sl
-                              .get<SharedPrefsUtil>()
-                              .markAlertRead(widget.alert!);
+                          await sl.get<SharedPrefsUtil>().markAlertRead(widget.alert!);
                           StateContainer.of(context).setAlertRead();
                         }
                       }),
@@ -193,8 +176,7 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                           Z.of(context).enableNotifications,
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                         final bool enabledNotifications =
-                            await SendSheetHelpers.showNotificationDialog(
-                                context);
+                            await SendSheetHelpers.showNotificationDialog(context);
                         if (!mounted) return;
                         // remove the alert:
                         if (enabledNotifications) {
@@ -203,6 +185,22 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                               .removeActiveOrSettingsAlert(widget.alert, null);
                           Navigator.pop(context);
                         }
+                      }),
+                    ],
+                  ),
+                if (widget.alert?.id == AlertCodes.CONNECTION_WARNING)
+                  Row(
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                          context,
+                          AppButtonType.PRIMARY,
+                          Z.of(context).changeNode,
+                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
+                        final List<Node> nodes = await sl.get<DBHelper>().getNodes();
+                        Sheets.showAppHeightNineSheet(
+                          context: context,
+                          widget: ChangeNodeSheet(nodes: nodes),
+                        );
                       }),
                     ],
                   ),
@@ -217,14 +215,12 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                         bool? trackingEnabled;
                         if (Platform.isIOS) {
                           final TrackingStatus status =
-                              await AppTrackingTransparency
-                                  .requestTrackingAuthorization();
+                              await AppTrackingTransparency.requestTrackingAuthorization();
                           if (status == TrackingStatus.authorized) {
                             trackingEnabled = true;
                           }
                         } else {
-                          trackingEnabled = await AppDialogs.showTrackingDialog(
-                              context, true);
+                          trackingEnabled = await AppDialogs.showTrackingDialog(context, true);
                         }
 
                         if (trackingEnabled == null) return;
@@ -250,11 +246,9 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                           Z.of(context).changeRepButton,
                           Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                         Sheets.showAppHeightEightSheet(
-                            context: context,
-                            widget: const AppChangeRepresentativeSheet());
+                            context: context, widget: const AppChangeRepresentativeSheet());
                         if (!StateContainer.of(context).nanoNodesUpdated) {
-                          N2NodeAPI.getVerifiedNodes()
-                              .then((List<N2Node>? result) {
+                          N2NodeAPI.getVerifiedNodes().then((List<N2Node>? result) {
                             if (result != null) {
                               StateContainer.of(context).updateNodes(result);
                             }
@@ -266,24 +260,17 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                 if (widget.hasDismissButton && widget.alert!.dismissable)
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY_OUTLINE,
-                          Z.of(context).dismiss,
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
+                          Z.of(context).dismiss, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         // tracking warning alert:
                         if (widget.alert?.permanentlyDismissable ?? false) {
                           sl.get<SharedPrefsUtil>().dismissAlert(widget.alert!);
                         } else {
-                          sl
-                              .get<SharedPrefsUtil>()
-                              .dismissAlertForWeek(widget.alert!);
+                          sl.get<SharedPrefsUtil>().dismissAlertForWeek(widget.alert!);
                         }
-                        StateContainer.of(context)
-                            .removeActiveOrSettingsAlert(widget.alert, null);
+                        StateContainer.of(context).removeActiveOrSettingsAlert(widget.alert, null);
                         if (widget.alert?.priority == "high") {
-                          StateContainer.of(context)
-                              .addActiveOrSettingsAlert(null, widget.alert);
+                          StateContainer.of(context).addActiveOrSettingsAlert(null, widget.alert);
                         }
                         Navigator.pop(context);
                       }),
@@ -292,11 +279,8 @@ class RemoteMessageSheetState extends State<RemoteMessageSheet> {
                 else
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY_OUTLINE,
-                          Z.of(context).close,
-                          Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                      AppButton.buildAppButton(context, AppButtonType.PRIMARY_OUTLINE,
+                          Z.of(context).close, Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.pop(context);
                       }),
                     ],
