@@ -48,6 +48,12 @@ dependencies:
     git:
       url: https://github.com/perishllc/nanoutil.git
       ref: main
+  nanopowrs:
+    # git:
+    #   url: https://github.com/perishllc/nanopow.git
+    #   ref: main
+    # use local directory:
+    path: ../nanopowrs
 
   # Shared prefs
   shared_preferences: ^2.0.15
@@ -134,7 +140,7 @@ dependencies:
   share_plus: ^7.0.0
 
   # File picker
-  file_picker: ^6.1.1
+  file_picker: ^8.1.4
 
   # Deep link support
   flutter_branch_sdk: ^7.0.4
@@ -170,7 +176,7 @@ dependencies:
   sqflite_common_ffi: ^2.1.1
 
   # Slidable list actions
-  flutter_slidable: ^3.0.1
+  flutter_slidable: ^3.1.1
 
   # Lock helper
   synchronized: ^3.0.0
@@ -240,7 +246,7 @@ dependencies:
 
   # in app purchases:
   # in_app_purchase: ^3.0.8
-  flutter_rust_bridge: ^1.51.1
+  # flutter_rust_bridge: ^1.51.1
   ffi: ^2.0.1
   ffigen: ^11.0.0
   flutter_native_timezone: ^2.0.0
@@ -283,6 +289,8 @@ dependency_overrides:
   #     url: https://github.com/rshrc/flutter_inappwebview
   #     ref: master
   # device_info_plus_platform_interface: 2.3.0+1
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

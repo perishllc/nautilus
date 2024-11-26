@@ -15,6 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:keframe/keframe.dart';
 import 'package:logger/logger.dart';
+import 'package:nanoutil/nanoutil.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:quiver/strings.dart';
@@ -949,11 +950,11 @@ class AppHomePageState extends State<AppHomePage>
       // ignore the dismissal of the alert, since it's the highest priority:
       StateContainer.of(context).addActiveOrSettingsAlert(alert, null);
       // if (StateContainer.of(context).wallet!.loading) {
-        setState(() {
-          StateContainer.of(context).wallet!.loading = false;
-          StateContainer.of(context).wallet!.unifiedLoading = false;
-          StateContainer.of(context).wallet!.historyLoading = false;
-        });
+      setState(() {
+        StateContainer.of(context).wallet!.loading = false;
+        StateContainer.of(context).wallet!.unifiedLoading = false;
+        StateContainer.of(context).wallet!.historyLoading = false;
+      });
       // }
       // start a timer to check if we're connected:
       _connectionTimer = Timer.periodic(const Duration(seconds: 5), (Timer t) async {

@@ -1,0 +1,1 @@
+ln -s /Users/fosse/dev/nanoutil/build/shaderbundles/my_renderer.shaderbundle /Users/fosse/dev/nautilus/build/shaderbundles/my_renderer.shaderbundle

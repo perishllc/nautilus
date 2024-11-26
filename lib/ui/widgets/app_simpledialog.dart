@@ -77,7 +77,7 @@ class Dialog extends StatelessWidget {
       RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0)));
   @override
   Widget build(BuildContext context) {
-    final DialogTheme dialogTheme = DialogTheme.of(context);
+    // final DialogTheme dialogTheme = DialogTheme.of(context);
     return AnimatedPadding(
       padding: MediaQuery.of(context).viewInsets + const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
       duration: insetAnimationDuration,
@@ -97,7 +97,7 @@ class Dialog extends StatelessWidget {
               elevation: 24.0,
               color: _getColor(context),
               type: MaterialType.card,
-              shape: shape ?? dialogTheme.shape ?? _defaultDialogShape,
+              shape: shape /*?? dialogTheme.shape */?? _defaultDialogShape,
               child: child,
             ),
           ),
