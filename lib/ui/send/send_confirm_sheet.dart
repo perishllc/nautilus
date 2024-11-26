@@ -833,7 +833,6 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
               context,
               durationMs: 25000,
             );
-            return;
           }
           resp = await sl.get<AccountService>().requestSend(
                 StateContainer.of(context).wallet!.representative,
