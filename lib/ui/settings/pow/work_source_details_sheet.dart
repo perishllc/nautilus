@@ -145,7 +145,7 @@ class WorkSourceDetailsSheetState extends State<WorkSourceDetailsSheet> {
                         autocorrect: false,
                         keyboardType: TextInputType.text,
                         inputFormatters: [
-                          LengthLimitingTextInputFormatter(200),
+                          LengthLimitingTextInputFormatter(1024),
                         ],
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
@@ -163,7 +163,7 @@ class WorkSourceDetailsSheetState extends State<WorkSourceDetailsSheet> {
                         autocorrect: false,
                         keyboardType: TextInputType.text,
                         inputFormatters: [
-                          LengthLimitingTextInputFormatter(200),
+                          LengthLimitingTextInputFormatter(1024),
                         ],
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
