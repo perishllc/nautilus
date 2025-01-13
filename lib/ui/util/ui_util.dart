@@ -467,7 +467,8 @@ class UIUtil {
             "nanopay",
             "nanoauth",
             "nanosub",
-            "nautilus"
+            "nautilus",
+            "nanorep",
           ],
           useShouldOverrideUrlLoading: true,
         ),
