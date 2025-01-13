@@ -4,365 +4,680 @@
 
   <body>
     <script>
-      // nano-webgl-pow
-      // Nano Currency Proof of Work Value generation using WebGL2
-      // Author:  numtel <ben@latenightsketches.com>
-      // License: MIT
+// src/shaders/compute.wgsl
+var compute_default = "struct UBO{blockhash:array<vec4<u32>,2>,random:vec2<u32>,threshold:u32};@group(0)@binding(0)var<uniform> ubo:UBO;struct WORK{nonce:vec2<u32>,found:atomic<u32>};@group(0)@binding(1)var<storage,read_write>work:WORK;const BLAKE2B_IV32_1:u32=0x6A09E667u;@compute @workgroup_size(256)fn main(@builtin(global_invocation_id)id:vec3<u32>){if(atomicLoad(&work.found)!=0u){return;}let threshold:u32=ubo.threshold;var m0:u32=ubo.random.x ^ id.x;var m1:u32=ubo.random.y ^ id.y;var m2:u32=ubo.blockhash[0u].x;var m3:u32=ubo.blockhash[0u].y;var m4:u32=ubo.blockhash[0u].z;var m5:u32=ubo.blockhash[0u].w;var m6:u32=ubo.blockhash[1u].x;var m7:u32=ubo.blockhash[1u].y;var m8:u32=ubo.blockhash[1u].z;var m9:u32=ubo.blockhash[1u].w;var v0:u32=0xF2BDC900u;var v1:u32=0x6A09E667u;var v2:u32=0x84CAA73Bu;var v3:u32=0xBB67AE85u;var v4:u32=0xFE94F82Bu;var v5:u32=0x3C6EF372u;var v6:u32=0x5F1D36F1u;var v7:u32=0xA54FF53Au;var v8:u32=0xADE682D1u;var v9:u32=0x510E527Fu;var v10:u32=0x2B3E6C1Fu;var v11:u32=0x9B05688Cu;var v12:u32=0xFB41BD6Bu;var v13:u32=0x1F83D9ABu;var v14:u32=0x137E2179u;var v15:u32=0x5BE0CD19u;var v16:u32=0xF3BCC908u;var v17:u32=0x6A09E667u;var v18:u32=0x84CAA73Bu;var v19:u32=0xBB67AE85u;var v20:u32=0xFE94F82Bu;var v21:u32=0x3C6EF372u;var v22:u32=0x5F1D36F1u;var v23:u32=0xA54FF53Au;var v24:u32=0xADE682F9u;var v25:u32=0x510E527Fu;var v26:u32=0x2B3E6C1Fu;var v27:u32=0x9B05688Cu;var v28:u32=0x04BE4294u;var v29:u32=0xE07C2654u;var v30:u32=0x137E2179u;var v31:u32=0x5BE0CD19u;var o0:u32;var o1:u32;var xor0:u32;var xor1:u32;o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;o0=v0+m0;o1=v1+m1;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=xor1;v25=xor0;o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;o0=v0+m2;o1=v1+m3;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m4;o1=v3+m5;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=xor1;v27=xor0;o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m6;o1=v3+m7;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;o0=v4+m8;o1=v5+m9;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=xor1;v29=xor0;o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=xor1;v31=xor0;o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=xor1;v31=xor0;o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=xor1;v25=xor0;o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=xor1;v27=xor0;o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=xor1;v29=xor0;o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=xor1;v25=xor0;o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m8;o1=v3+m9;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=xor1;v27=xor0;o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=xor1;v29=xor0;o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=xor1;v31=xor0;o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;o0=v0+m2;o1=v1+m3;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=xor1;v31=xor0;o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m0;o1=v3+m1;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=xor1;v25=xor0;o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m4;o1=v3+m5;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=xor1;v27=xor0;o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=xor1;v29=xor0;o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;o0=v6+m6;o1=v7+m7;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=xor1;v25=xor0;o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=xor1;v27=xor0;o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m0;o1=v3+m1;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=xor1;v29=xor0;o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;o0=v4+m4;o1=v5+m5;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=xor1;v31=xor0;o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=xor1;v31=xor0;o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m6;o1=v3+m7;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=xor1;v25=xor0;o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=xor1;v27=xor0;o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;o0=v4+m2;o1=v5+m3;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=xor1;v29=xor0;o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;o0=v6+m8;o1=v7+m9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=xor1;v25=xor0;o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m6;o1=v3+m7;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=xor1;v27=xor0;o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m2;o1=v3+m3;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=xor1;v29=xor0;o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=xor1;v31=xor0;o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;o0=v0+m4;o1=v1+m5;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=xor1;v31=xor0;o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=xor1;v25=xor0;o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;o0=v4+m8;o1=v5+m9;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=xor1;v27=xor0;o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;o0=v4+m0;o1=v5+m1;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=xor1;v29=xor0;o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=xor1;v25=xor0;o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;o0=v0+m0;o1=v1+m1;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=xor1;v27=xor0;o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;o0=v4+m4;o1=v5+m5;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=xor1;v29=xor0;o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;o0=v4+m8;o1=v5+m9;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=xor1;v31=xor0;o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=xor1;v31=xor0;o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;o0=v0+m2;o1=v1+m3;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=xor1;v25=xor0;o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=xor1;v27=xor0;o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;o0=v6+m6;o1=v7+m7;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=xor1;v29=xor0;o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;o0=v0+m4;o1=v1+m5;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=xor1;v25=xor0;o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=xor1;v27=xor0;o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;o0=v4+m0;o1=v5+m1;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=xor1;v29=xor0;o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=xor1;v31=xor0;o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;o0=v6+m6;o1=v7+m7;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;o0=v0+m8;o1=v1+m9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=xor1;v31=xor0;o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=xor1;v25=xor0;o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=xor1;v27=xor0;o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;o0=v6+m2;o1=v7+m3;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=xor1;v29=xor0;o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=xor1;v25=xor0;o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m2;o1=v3+m3;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=xor1;v27=xor0;o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=xor1;v29=xor0;o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;o0=v6+m8;o1=v7+m9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=xor1;v31=xor0;o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;o0=v0+m0;o1=v1+m1;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=xor1;v31=xor0;o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=xor1;v25=xor0;o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m6;o1=v3+m7;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=xor1;v27=xor0;o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;o0=v4+m4;o1=v5+m5;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=xor1;v29=xor0;o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=xor1;v25=xor0;o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=xor1;v27=xor0;o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=xor1;v29=xor0;o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;o0=v4+m2;o1=v5+m3;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;o0=v6+m6;o1=v7+m7;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=xor1;v31=xor0;o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=xor1;v31=xor0;o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;o0=v0+m0;o1=v1+m1;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=xor1;v25=xor0;o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m8;o1=v3+m9;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=xor1;v27=xor0;o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;o0=v6+m4;o1=v7+m5;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=xor1;v29=xor0;o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=xor1;v25=xor0;o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=xor1;v27=xor0;o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=xor1;v29=xor0;o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;o0=v4+m6;o1=v5+m7;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;o0=v6+m0;o1=v7+m1;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=xor1;v31=xor0;o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=xor1;v31=xor0;o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;o0=v0+m4;o1=v1+m5;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=xor1;v25=xor0;o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;o0=v4+m2;o1=v5+m3;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=xor1;v27=xor0;o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;o0=v4+m8;o1=v5+m9;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=xor1;v29=xor0;o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=xor1;v25=xor0;o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;o0=v0+m4;o1=v1+m5;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=xor1;v27=xor0;o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m8;o1=v3+m9;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=xor1;v29=xor0;o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;o0=v6+m2;o1=v7+m3;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=xor1;v31=xor0;o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=xor1;v31=xor0;o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=xor1;v25=xor0;o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;o0=v4+m6;o1=v5+m7;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=xor1;v27=xor0;o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=xor1;v29=xor0;o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;o0=v6+m0;o1=v7+m1;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;o0=v0+m0;o1=v1+m1;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=xor1;v25=xor0;o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;o0=v0+m2;o1=v1+m3;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m4;o1=v3+m5;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=xor1;v27=xor0;o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m6;o1=v3+m7;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;o0=v4+m8;o1=v5+m9;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=xor1;v29=xor0;o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=xor1;v31=xor0;o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=xor1;v31=xor0;o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=xor1;v25=xor0;o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=xor1;v27=xor0;o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=xor1;v29=xor0;o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=xor1;v25=xor0;o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v0+v8;o1=v1+v9;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v24 ^ v0;xor1=v25 ^ v1;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v16+v24;o1=v17+v25;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v8 ^ v16;xor1=v9 ^ v17;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m8;o1=v3+m9;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=xor1;v27=xor0;o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v2+v10;o1=v3+v11;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v26 ^ v2;xor1=v27 ^ v3;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v18+v26;o1=v19+v27;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v10 ^ v18;xor1=v11 ^ v19;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=xor1;v29=xor0;o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v4+v12;o1=v5+v13;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v28 ^ v4;xor1=v29 ^ v5;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v20+v28;o1=v21+v29;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v12 ^ v20;xor1=v13 ^ v21;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=xor1;v31=xor0;o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v6+v14;o1=v7+v15;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v30 ^ v6;xor1=v31 ^ v7;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v22+v30;o1=v23+v31;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v14 ^ v22;xor1=v15 ^ v23;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;o0=v0+m2;o1=v1+m3;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=xor1;v31=xor0;o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor0>>24u)^(xor1<<8u);v11=(xor1>>24u)^(xor0<<8u);o0=v0+v10;o1=v1+v11;o1=o1+select(0u,1u,o0<v0);v0=o0;v1=o1;xor0=v30 ^ v0;xor1=v31 ^ v1;v30=(xor0>>16u)^(xor1<<16u);v31=(xor1>>16u)^(xor0<<16u);o0=v20+v30;o1=v21+v31;o1=o1+select(0u,1u,o0<v20);v20=o0;v21=o1;xor0=v10 ^ v20;xor1=v11 ^ v21;v10=(xor1>>31u)^(xor0<<1u);v11=(xor0>>31u)^(xor1<<1u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m0;o1=v3+m1;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=xor1;v25=xor0;o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor0>>24u)^(xor1<<8u);v13=(xor1>>24u)^(xor0<<8u);o0=v2+v12;o1=v3+v13;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;o0=v2+m4;o1=v3+m5;o1=o1+select(0u,1u,o0<v2);v2=o0;v3=o1;xor0=v24 ^ v2;xor1=v25 ^ v3;v24=(xor0>>16u)^(xor1<<16u);v25=(xor1>>16u)^(xor0<<16u);o0=v22+v24;o1=v23+v25;o1=o1+select(0u,1u,o0<v22);v22=o0;v23=o1;xor0=v12 ^ v22;xor1=v13 ^ v23;v12=(xor1>>31u)^(xor0<<1u);v13=(xor0>>31u)^(xor1<<1u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=xor1;v27=xor0;o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor0>>24u)^(xor1<<8u);v15=(xor1>>24u)^(xor0<<8u);o0=v4+v14;o1=v5+v15;o1=o1+select(0u,1u,o0<v4);v4=o0;v5=o1;xor0=v26 ^ v4;xor1=v27 ^ v5;v26=(xor0>>16u)^(xor1<<16u);v27=(xor1>>16u)^(xor0<<16u);o0=v16+v26;o1=v17+v27;o1=o1+select(0u,1u,o0<v16);v16=o0;v17=o1;xor0=v14 ^ v16;xor1=v15 ^ v17;v14=(xor1>>31u)^(xor0<<1u);v15=(xor0>>31u)^(xor1<<1u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=xor1;v29=xor0;o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor0>>24u)^(xor1<<8u);v9=(xor1>>24u)^(xor0<<8u);o0=v6+v8;o1=v7+v9;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;o0=v6+m6;o1=v7+m7;o1=o1+select(0u,1u,o0<v6);v6=o0;v7=o1;xor0=v28 ^ v6;xor1=v29 ^ v7;v28=(xor0>>16u)^(xor1<<16u);v29=(xor1>>16u)^(xor0<<16u);o0=v18+v28;o1=v19+v29;o1=o1+select(0u,1u,o0<v18);v18=o0;v19=o1;xor0=v8 ^ v18;xor1=v9 ^ v19;v8=(xor1>>31u)^(xor0<<1u);v9=(xor0>>31u)^(xor1<<1u);if((BLAKE2B_IV32_1 ^ v1 ^ v17)>threshold&&atomicLoad(&work.found)==0u){atomicStore(&work.found,1u);work.nonce.x=m0;work.nonce.y=m1;}return;}";
 
-      // window.NanoWebglPow(hashHex, callback, progressCallback, threshold);
-      // @param hashHex           String   Previous Block Hash as Hex String
-      // @param callback          Function Called when work value found
-      //   Receives single string argument, work value as hex
-      // @param progressCallback  Function Optional
-      //   Receives single argument: n, number of frames so far
-      //   Return true to abort
-      // @param threshold         Number|String   Optional difficulty threshold (default=0xFFFFFFF8 since v21)
-
-      (function () {
-        function array_hex(arr, index, length) {
-          let out = "";
-          for (let i = length - 1; i > -1; i--) {
-            out += (arr[i] > 15 ? "" : "0") + arr[i].toString(16);
-          }
-          return out;
+  // src/shaders/gl-fragment.ts
+  var NanoPowGlFragmentShader = `#version 300 es
+  #pragma vscode_glsllint_stage: frag
+  precision highp float;
+  precision highp int;
+  
+  in vec2 uv_pos;
+  out vec4 fragColor;
+  
+  // blockhash - array of precalculated block hash components
+  // threshold - 0xfffffff8 for send/change blocks, 0xfffffe00 for all else
+  // workload - Defines canvas size
+  layout(std140) uniform UBO {
+    uint blockhash[8];
+    uint threshold;
+    float workload;
+  };
+  
+  // Random work values
+  // First 2 bytes will be overwritten by texture pixel position
+  // Second 2 bytes will be modified if the canvas size is greater than 256x256
+  // Last 4 bytes remain as generated externally
+  layout(std140) uniform WORK {
+    uvec4 work[2];
+  };
+  
+  // Defined separately from uint v[32] below as the original value is required
+  // to calculate the second uint32 of the digest for threshold comparison
+  const uint BLAKE2B_IV32_1 = 0x6A09E667u;
+  
+  // Both buffers represent 16 uint64s as 32 uint32s
+  // because that's what GLSL offers, just like Javascript
+  
+  // Compression buffer, intialized to 2 instances of the initialization vector
+  // The following values have been modified from the BLAKE2B_IV:
+  // OUTLEN is constant 8 bytes
+  // v[0] ^= 0x01010000u ^ uint(OUTLEN);
+  // INLEN is constant 40 bytes: work value (8) + block hash (32)
+  // v[24] ^= uint(INLEN);
+  // It's always the "last" compression at this INLEN
+  // v[28] = ~v[28];
+  // v[29] = ~v[29];
+  uint v[32] = uint[32](
+    0xF2BDC900u, 0x6A09E667u, 0x84CAA73Bu, 0xBB67AE85u,
+    0xFE94F82Bu, 0x3C6EF372u, 0x5F1D36F1u, 0xA54FF53Au,
+    0xADE682D1u, 0x510E527Fu, 0x2B3E6C1Fu, 0x9B05688Cu,
+    0xFB41BD6Bu, 0x1F83D9ABu, 0x137E2179u, 0x5BE0CD19u,
+    0xF3BCC908u, 0x6A09E667u, 0x84CAA73Bu, 0xBB67AE85u,
+    0xFE94F82Bu, 0x3C6EF372u, 0x5F1D36F1u, 0xA54FF53Au,
+    0xADE682F9u, 0x510E527Fu, 0x2B3E6C1Fu, 0x9B05688Cu,
+    0x04BE4294u, 0xE07C2654u, 0x137E2179u, 0x5BE0CD19u
+  );
+  // Input data buffer
+  uint m[32];
+  
+  // These are offsets into the input data buffer for each mixing step.
+  // They are multiplied by 2 from the original SIGMA values in
+  // the C reference implementation, which refered to uint64s.
+  const uint SIGMA82[192] = uint[192](
+    0u,2u,4u,6u,8u,10u,12u,14u,16u,18u,20u,22u,24u,26u,28u,30u,
+    28u,20u,8u,16u,18u,30u,26u,12u,2u,24u,0u,4u,22u,14u,10u,6u,
+    22u,16u,24u,0u,10u,4u,30u,26u,20u,28u,6u,12u,14u,2u,18u,8u,
+    14u,18u,6u,2u,26u,24u,22u,28u,4u,12u,10u,20u,8u,0u,30u,16u,
+    18u,0u,10u,14u,4u,8u,20u,30u,28u,2u,22u,24u,12u,16u,6u,26u,
+    4u,24u,12u,20u,0u,22u,16u,6u,8u,26u,14u,10u,30u,28u,2u,18u,
+    24u,10u,2u,30u,28u,26u,8u,20u,0u,14u,12u,6u,18u,4u,16u,22u,
+    26u,22u,14u,28u,24u,2u,6u,18u,10u,0u,30u,8u,16u,12u,4u,20u,
+    12u,30u,28u,18u,22u,6u,0u,16u,24u,4u,26u,14u,2u,8u,20u,10u,
+    20u,4u,16u,8u,14u,12u,2u,10u,30u,22u,18u,28u,6u,24u,26u,0u,
+    0u,2u,4u,6u,8u,10u,12u,14u,16u,18u,20u,22u,24u,26u,28u,30u,
+    28u,20u,8u,16u,18u,30u,26u,12u,2u,24u,0u,4u,22u,14u,10u,6u
+  );
+  
+  // G mixing function
+  void G (uint ix, uint iy, uint a, uint b, uint c, uint d) {
+    bool carry;
+    uint o0;
+    uint o1;
+    uint xor0;
+    uint xor1;
+  
+    // a = a + b;
+    o0 = v[a] + v[b];
+    o1 = v[a+1u] + v[b+1u];
+    carry = o0 < v[a];
+    o1 = o1 + uint(mix(0.0, 1.0, float(carry)));
+    v[a] = o0;
+    v[a+1u] = o1;
+  
+    // a = a + m[sigma[r][2*i+0]];
+    o0 = v[a] + m[ix];
+    o1 = v[a+1u] + m[ix+1u];
+    carry = o0 < v[a];
+    o1 = o1 + uint(mix(0.0, 1.0, float(carry)));
+    v[a] = o0;
+    v[a+1u] = o1;
+  
+    // d = rotr64(d ^ a, 32);
+    xor0 = v[d] ^ v[a];
+    xor1 = v[d+1u] ^ v[a+1u];
+    v[d] = xor1;
+    v[d+1u] = xor0;
+  
+    // c = c + d;
+    o0 = v[c] + v[d];
+    o1 = v[c+1u] + v[d+1u];
+    carry = o0 < v[c];
+    o1 = o1 + uint(mix(0.0, 1.0, float(carry)));
+    v[c] = o0;
+    v[c+1u] = o1;
+  
+    // b = rotr64(b ^ c, 24);
+    xor0 = v[b] ^ v[c];
+    xor1 = v[b+1u] ^ v[c+1u];
+    v[b] = (xor0 >> 24u) ^ (xor1 << 8u);
+    v[b+1u] = (xor1 >> 24u) ^ (xor0 << 8u);
+  
+    // a = a + b;
+    o0 = v[a] + v[b];
+    o1 = v[a+1u] + v[b+1u];
+    carry = o0 < v[a];
+    o1 = o1 + uint(mix(0.0, 1.0, float(carry)));
+    v[a] = o0;
+    v[a+1u] = o1;
+  
+    // a = a + m[sigma[r][2*i+1]];
+    o0 = v[a] + m[iy];
+    o1 = v[a+1u] + m[iy+1u];
+    carry = o0 < v[a];
+    o1 = o1 + uint(mix(0.0, 1.0, float(carry)));
+    v[a] = o0;
+    v[a+1u] = o1;
+  
+    // d = rotr64(d ^ a, 16)
+    xor0 = v[d] ^ v[a];
+    xor1 = v[d+1u] ^ v[a+1u];
+    v[d] = (xor0 >> 16u) ^ (xor1 << 16u);
+    v[d+1u] = (xor1 >> 16u) ^ (xor0 << 16u);
+  
+    // c = c + d;
+    o0 = v[c] + v[d];
+    o1 = v[c+1u] + v[d+1u];
+    carry = o0 < v[c];
+    o1 = o1 + uint(mix(0.0, 1.0, float(carry)));
+    v[c] = o0;
+    v[c+1u] = o1;
+  
+    // b = rotr64(b ^ c, 63)
+    xor0 = v[b] ^ v[c];
+    xor1 = v[b+1u] ^ v[c+1u];
+    v[b] = (xor1 >> 31u) ^ (xor0 << 1u);
+    v[b+1u] = (xor0 >> 31u) ^ (xor1 << 1u);
+  }
+  
+  void main() {
+    int i;
+    uvec4 u_work0 = work[0u];
+    uvec4 u_work1 = work[1u];
+    uint uv_x = uint(uv_pos.x * workload);
+    uint uv_y = uint(uv_pos.y * workload);
+    uint x_pos = uv_x % 256u;
+    uint y_pos = uv_y % 256u;
+    uint x_index = (uv_x - x_pos) / 256u;
+    uint y_index = (uv_y - y_pos) / 256u;
+  
+    // First 2 work bytes are the x,y pos within the 256x256 area, the next
+    // two bytes are modified from the random generated value, XOR'd with
+    // the x,y area index of where this pixel is located
+    m[0u] = (x_pos ^ (y_pos << 8u) ^ ((u_work0.b ^ x_index) << 16u) ^ ((u_work0.a ^ y_index) << 24u));
+  
+    // Remaining bytes are un-modified from the random generated value
+    m[1u] = (u_work1.r ^ (u_work1.g << 8u) ^ (u_work1.b << 16u) ^ (u_work1.a << 24u));
+  
+    // Block hash
+    for (uint i = 0u; i < 8u; i = i + 1u) {
+      m[i+2u] = blockhash[i];
+    }
+  
+    // twelve rounds of mixing
+    for(uint i = 0u; i < 12u; i = i + 1u) {
+      G(SIGMA82[i * 16u + 0u], SIGMA82[i * 16u + 1u], 0u, 8u, 16u, 24u);
+      G(SIGMA82[i * 16u + 2u], SIGMA82[i * 16u + 3u], 2u, 10u, 18u, 26u);
+      G(SIGMA82[i * 16u + 4u], SIGMA82[i * 16u + 5u], 4u, 12u, 20u, 28u);
+      G(SIGMA82[i * 16u + 6u], SIGMA82[i * 16u + 7u], 6u, 14u, 22u, 30u);
+      G(SIGMA82[i * 16u + 8u], SIGMA82[i * 16u + 9u], 0u, 10u, 20u, 30u);
+      G(SIGMA82[i * 16u + 10u], SIGMA82[i * 16u + 11u], 2u, 12u, 22u, 24u);
+      G(SIGMA82[i * 16u + 12u], SIGMA82[i * 16u + 13u], 4u, 14u, 16u, 26u);
+      G(SIGMA82[i * 16u + 14u], SIGMA82[i * 16u + 15u], 6u, 8u, 18u, 28u);
+    }
+  
+    // Pixel data is multipled by threshold test result (0 or 1)
+    // First 4 bytes insignificant, only calculate digest of second 4 bytes
+    if ((BLAKE2B_IV32_1 ^ v[1u] ^ v[17u]) > threshold) {
+      fragColor = vec4(
+        float(x_index + 1u)/255.0, // +1 to distinguish from 0 (unsuccessful) pixels
+        float(y_index + 1u)/255.0, // Same as previous
+        float(x_pos)/255.0, // Return the 2 custom bytes used in work value
+        float(y_pos)/255.0  // Second custom byte
+      );
+    } else {
+       discard;
+    }
+  }
+  `;
+  
+  // src/shaders/gl-vertex.ts
+  var NanoPowGlVertexShader = `#version 300 es
+  #pragma vscode_glsllint_stage: vert
+  precision highp float;
+  layout (location=0) in vec4 position;
+  layout (location=1) in vec2 uv;
+  
+  out vec2 uv_pos;
+  
+  void main() {
+    uv_pos = uv;
+    gl_Position = position;
+  }
+  `;
+  
+  // src/classes/gl.ts
+  var NanoPowGl = class _NanoPowGl {
+    /** Used to set canvas size. Must be a multiple of 256. */
+    static #WORKLOAD = 256 * Math.max(1, Math.floor(navigator.hardwareConcurrency));
+    static #hexify(arr) {
+      let out = "";
+      for (let i = arr.length - 1; i >= 0; i--) {
+        out += arr[i].toString(16).padStart(2, "0");
+      }
+      return out;
+    }
+    static #gl;
+    static #program;
+    static #vertexShader;
+    static #fragmentShader;
+    static #positionBuffer;
+    static #uvBuffer;
+    static #uboBuffer;
+    static #workBuffer;
+    static #query;
+    static #pixels;
+    /**Vertex Positions, 2 triangles */
+    static #positions = new Float32Array([
+      -1,
+      -1,
+      0,
+      -1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      -1,
+      0,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0
+    ]);
+    /** Texture Positions */
+    static #uvPosArray = new Float32Array([
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      1
+    ]);
+    /** Compile */
+    static async init() {
+      this.#gl = new OffscreenCanvas(this.#WORKLOAD, this.#WORKLOAD).getContext("webgl2");
+      if (this.#gl == null) throw new Error("WebGL 2 is required");
+      this.#gl.clearColor(0, 0, 0, 1);
+      this.#program = this.#gl.createProgram();
+      if (this.#program == null) throw new Error("Failed to create shader program");
+      this.#vertexShader = this.#gl.createShader(this.#gl.VERTEX_SHADER);
+      if (this.#vertexShader == null) throw new Error("Failed to create vertex shader");
+      this.#gl.shaderSource(this.#vertexShader, NanoPowGlVertexShader);
+      this.#gl.compileShader(this.#vertexShader);
+      if (!this.#gl.getShaderParameter(this.#vertexShader, this.#gl.COMPILE_STATUS))
+        throw new Error(this.#gl.getShaderInfoLog(this.#vertexShader) ?? `Failed to compile vertex shader`);
+      this.#fragmentShader = this.#gl.createShader(this.#gl.FRAGMENT_SHADER);
+      if (this.#fragmentShader == null) throw new Error("Failed to create fragment shader");
+      this.#gl.shaderSource(this.#fragmentShader, NanoPowGlFragmentShader);
+      this.#gl.compileShader(this.#fragmentShader);
+      if (!this.#gl.getShaderParameter(this.#fragmentShader, this.#gl.COMPILE_STATUS))
+        throw new Error(this.#gl.getShaderInfoLog(this.#fragmentShader) ?? `Failed to compile fragment shader`);
+      this.#gl.attachShader(this.#program, this.#vertexShader);
+      this.#gl.attachShader(this.#program, this.#fragmentShader);
+      this.#gl.linkProgram(this.#program);
+      if (!this.#gl.getProgramParameter(this.#program, this.#gl.LINK_STATUS))
+        throw new Error(this.#gl.getProgramInfoLog(this.#program) ?? `Failed to link program`);
+      this.#gl.useProgram(this.#program);
+      const triangleArray = this.#gl.createVertexArray();
+      this.#gl.bindVertexArray(triangleArray);
+      this.#positionBuffer = this.#gl.createBuffer();
+      this.#gl.bindBuffer(this.#gl.ARRAY_BUFFER, this.#positionBuffer);
+      this.#gl.bufferData(this.#gl.ARRAY_BUFFER, this.#positions, this.#gl.STATIC_DRAW);
+      this.#gl.vertexAttribPointer(0, 3, this.#gl.FLOAT, false, 0, 0);
+      this.#gl.enableVertexAttribArray(0);
+      this.#uvBuffer = this.#gl.createBuffer();
+      this.#gl.bindBuffer(this.#gl.ARRAY_BUFFER, this.#uvBuffer);
+      this.#gl.bufferData(this.#gl.ARRAY_BUFFER, this.#uvPosArray, this.#gl.STATIC_DRAW);
+      this.#gl.vertexAttribPointer(1, 2, this.#gl.FLOAT, false, 0, 0);
+      this.#gl.enableVertexAttribArray(1);
+      this.#uboBuffer = this.#gl.createBuffer();
+      this.#gl.bindBuffer(this.#gl.UNIFORM_BUFFER, this.#uboBuffer);
+      this.#gl.bufferData(this.#gl.UNIFORM_BUFFER, 144, this.#gl.DYNAMIC_DRAW);
+      this.#gl.bindBuffer(this.#gl.UNIFORM_BUFFER, null);
+      this.#gl.bindBufferBase(this.#gl.UNIFORM_BUFFER, 0, this.#uboBuffer);
+      this.#gl.uniformBlockBinding(this.#program, this.#gl.getUniformBlockIndex(this.#program, "UBO"), 0);
+      this.#workBuffer = this.#gl.createBuffer();
+      this.#gl.bindBuffer(this.#gl.UNIFORM_BUFFER, this.#workBuffer);
+      this.#gl.bufferData(this.#gl.UNIFORM_BUFFER, 32, this.#gl.STREAM_DRAW);
+      this.#gl.bindBuffer(this.#gl.UNIFORM_BUFFER, null);
+      this.#gl.bindBufferBase(this.#gl.UNIFORM_BUFFER, 1, this.#workBuffer);
+      this.#gl.uniformBlockBinding(this.#program, this.#gl.getUniformBlockIndex(this.#program, "WORK"), 1);
+      this.#pixels = new Uint8Array(this.#gl.drawingBufferWidth * this.#gl.drawingBufferHeight * 4);
+      this.#query = this.#gl.createQuery();
+    }
+    static #draw(work) {
+      if (this.#gl == null || this.#query == null) throw new Error("WebGL 2 is required to draw and query pixels");
+      if (this.#workBuffer == null) throw new Error("Work buffer is required to draw");
+      this.#gl.clear(this.#gl.COLOR_BUFFER_BIT);
+      this.#gl.bindBuffer(this.#gl.UNIFORM_BUFFER, this.#workBuffer);
+      this.#gl.bufferSubData(this.#gl.UNIFORM_BUFFER, 0, Uint32Array.from(work));
+      this.#gl.bindBuffer(this.#gl.UNIFORM_BUFFER, null);
+      this.#gl.beginQuery(this.#gl.ANY_SAMPLES_PASSED_CONSERVATIVE, this.#query);
+      this.#gl.drawArrays(this.#gl.TRIANGLES, 0, 6);
+      this.#gl.endQuery(this.#gl.ANY_SAMPLES_PASSED_CONSERVATIVE);
+    }
+    static async #checkQueryResult() {
+      if (this.#gl == null || this.#query == null) throw new Error("WebGL 2 is required to check query results");
+      if (this.#gl.getQueryParameter(this.#query, this.#gl.QUERY_RESULT_AVAILABLE)) {
+        return !!this.#gl.getQueryParameter(this.#query, this.#gl.QUERY_RESULT);
+      }
+      return new Promise((resolve, reject) => {
+        try {
+          requestAnimationFrame(async () => {
+            const result = await _NanoPowGl.#checkQueryResult();
+            resolve(result);
+          });
+        } catch (err) {
+          reject(err);
         }
-
-        function hex_reverse(hex) {
-          let out = "";
-          for (let i = hex.length; i > 0; i -= 2) {
-            out += hex.slice(i - 2, i);
-          }
-          return out;
+      });
+    }
+    /**
+    * Reads pixels into the work buffer, checks every 4th pixel for the 'found'
+    * byte, converts the subsequent 3 pixels with the nonce byte values to a hex
+    * string, and returns the result.
+    *
+    * @param work - Buffer with the original random nonce value
+    * @returns Nonce as an 8-byte (16-char) hexadecimal string
+    */
+    static #readResult(work) {
+      if (this.#gl == null) throw new Error("WebGL 2 is required to read pixels");
+      this.#gl.readPixels(0, 0, this.#gl.drawingBufferWidth, this.#gl.drawingBufferHeight, this.#gl.RGBA, this.#gl.UNSIGNED_BYTE, this.#pixels);
+      for (let i = 0; i < this.#pixels.length; i += 4) {
+        if (this.#pixels[i] !== 0) {
+          const hex = this.#hexify(work.subarray(4, 8)) + this.#hexify([
+            this.#pixels[i + 2],
+            this.#pixels[i + 3],
+            work[2] ^ this.#pixels[i] - 1,
+            work[3] ^ this.#pixels[i + 1] - 1
+          ]);
+          return hex;
         }
-
-        function calculate(
-          hashHex,
-          callback,
-          progressCallback,
-          threshold = "0xFFFFFFF8"
-        ) {
-          if (typeof threshold === "number")
-            threshold = "0x" + threshold.toString(16);
-
-          const canvas = document.createElement("canvas");
-
-          canvas.width = window.NanoWebglPow.width;
-          canvas.height = window.NanoWebglPow.height;
-
-          const gl = canvas.getContext("webgl2");
-
-          if (!gl) throw new Error("webgl2_required");
-
-          if (!/^[A-F-a-f0-9]{64}$/.test(hashHex))
-            throw new Error("invalid_hash");
-
-          gl.clearColor(0, 0, 0, 1);
-
-          const reverseHex = hex_reverse(hashHex);
-
-          // Vertext Shader
-          const vsSource = `#version 300 es
-    precision highp float;
-    layout (location=0) in vec4 position;
-    layout (location=1) in vec2 uv;
-
-    out vec2 uv_pos;
-
-    void main() {
-      uv_pos = uv;
-      gl_Position = position;
-    }`;
-
-          // Fragment shader
-          const fsSource =
-            `#version 300 es
-    precision highp float;
-    precision highp int;
-
-    in vec2 uv_pos;
-    out vec4 fragColor;
-
-    // Random work values
-    // First 2 bytes will be overwritten by texture pixel position
-    // Second 2 bytes will be modified if the canvas size is greater than 256x256
-    uniform uvec4 u_work0;
-    // Last 4 bytes remain as generated externally
-    uniform uvec4 u_work1;
-
-    // Defined separately from uint v[32] below as the original value is required
-    // to calculate the second uint32 of the digest for threshold comparison
-    #define BLAKE2B_IV32_1 0x6A09E667u
-
-    // Both buffers represent 16 uint64s as 32 uint32s
-    // because that's what GLSL offers, just like Javascript
-
-    // Compression buffer, intialized to 2 instances of the initialization vector
-    // The following values have been modified from the BLAKE2B_IV:
-    // OUTLEN is constant 8 bytes
-    // v[0] ^= 0x01010000u ^ uint(OUTLEN);
-    // INLEN is constant 40 bytes: work value (8) + block hash (32)
-    // v[24] ^= uint(INLEN);
-    // It's always the "last" compression at this INLEN
-    // v[28] = ~v[28];
-    // v[29] = ~v[29];
-    uint v[32] = uint[32](
-      0xF2BDC900u, 0x6A09E667u, 0x84CAA73Bu, 0xBB67AE85u,
-      0xFE94F82Bu, 0x3C6EF372u, 0x5F1D36F1u, 0xA54FF53Au,
-      0xADE682D1u, 0x510E527Fu, 0x2B3E6C1Fu, 0x9B05688Cu,
-      0xFB41BD6Bu, 0x1F83D9ABu, 0x137E2179u, 0x5BE0CD19u,
-      0xF3BCC908u, 0x6A09E667u, 0x84CAA73Bu, 0xBB67AE85u,
-      0xFE94F82Bu, 0x3C6EF372u, 0x5F1D36F1u, 0xA54FF53Au,
-      0xADE682F9u, 0x510E527Fu, 0x2B3E6C1Fu, 0x9B05688Cu,
-      0x04BE4294u, 0xE07C2654u, 0x137E2179u, 0x5BE0CD19u
-    );
-    // Input data buffer
-    uint m[32];
-
-    // These are offsets into the input data buffer for each mixing step.
-    // They are multiplied by 2 from the original SIGMA values in
-    // the C reference implementation, which refered to uint64s.
-    const int SIGMA82[192] = int[192](
-      0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,28,20,8,16,18,30,26,12,2,24,
-      0,4,22,14,10,6,22,16,24,0,10,4,30,26,20,28,6,12,14,2,18,8,14,18,6,2,26,
-      24,22,28,4,12,10,20,8,0,30,16,18,0,10,14,4,8,20,30,28,2,22,24,12,16,6,
-      26,4,24,12,20,0,22,16,6,8,26,14,10,30,28,2,18,24,10,2,30,28,26,8,20,0,
-      14,12,6,18,4,16,22,26,22,14,28,24,2,6,18,10,0,30,8,16,12,4,20,12,30,28,
-      18,22,6,0,16,24,4,26,14,2,8,20,10,20,4,16,8,14,12,2,10,30,22,18,28,6,24,
-      26,0,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,28,20,8,16,18,30,26,12,
-      2,24,0,4,22,14,10,6
-    );
-
-    // 64-bit unsigned addition within the compression buffer
-    // Sets v[a,a+1] += b
-    // b0 is the low 32 bits of b, b1 represents the high 32 bits
-    void add_uint64 (int a, uint b0, uint b1) {
-      uint o0 = v[a] + b0;
-      uint o1 = v[a + 1] + b1;
-      if (v[a] > 0xFFFFFFFFu - b0) { // did low 32 bits overflow?
-        o1++;
       }
-      v[a] = o0;
-      v[a + 1] = o1;
+      throw new Error("Query reported result but nonce value not found");
     }
-    // Sets v[a,a+1] += v[b,b+1]
-    void add_uint64 (int a, int b) {
-      add_uint64(a, v[b], v[b+1]);
-    }
-
-    // G Mixing function
-    void B2B_G (int a, int b, int c, int d, int ix, int iy) {
-      add_uint64(a, b);
-      add_uint64(a, m[ix], m[ix + 1]);
-
-      // v[d,d+1] = (v[d,d+1] xor v[a,a+1]) rotated to the right by 32 bits
-      uint xor0 = v[d] ^ v[a];
-      uint xor1 = v[d + 1] ^ v[a + 1];
-      v[d] = xor1;
-      v[d + 1] = xor0;
-
-      add_uint64(c, d);
-
-      // v[b,b+1] = (v[b,b+1] xor v[c,c+1]) rotated right by 24 bits
-      xor0 = v[b] ^ v[c];
-      xor1 = v[b + 1] ^ v[c + 1];
-      v[b] = (xor0 >> 24) ^ (xor1 << 8);
-      v[b + 1] = (xor1 >> 24) ^ (xor0 << 8);
-
-      add_uint64(a, b);
-      add_uint64(a, m[iy], m[iy + 1]);
-
-      // v[d,d+1] = (v[d,d+1] xor v[a,a+1]) rotated right by 16 bits
-      xor0 = v[d] ^ v[a];
-      xor1 = v[d + 1] ^ v[a + 1];
-      v[d] = (xor0 >> 16) ^ (xor1 << 16);
-      v[d + 1] = (xor1 >> 16) ^ (xor0 << 16);
-
-      add_uint64(c, d);
-
-      // v[b,b+1] = (v[b,b+1] xor v[c,c+1]) rotated right by 63 bits
-      xor0 = v[b] ^ v[c];
-      xor1 = v[b + 1] ^ v[c + 1];
-      v[b] = (xor1 >> 31) ^ (xor0 << 1);
-      v[b + 1] = (xor0 >> 31) ^ (xor1 << 1);
-    }
-
-    void main() {
-      int i;
-      uint uv_x = uint(uv_pos.x * ${canvas.width - 1}.);
-      uint uv_y = uint(uv_pos.y * ${canvas.height - 1}.);
-      uint x_pos = uv_x % 256u;
-      uint y_pos = uv_y % 256u;
-      uint x_index = (uv_x - x_pos) / 256u;
-      uint y_index = (uv_y - y_pos) / 256u;
-
-      // First 2 work bytes are the x,y pos within the 256x256 area, the next
-      //  two bytes are modified from the random generated value, XOR'd with
-      //   the x,y area index of where this pixel is located
-      m[0] = (x_pos ^ (y_pos << 8) ^ ((u_work0.b ^ x_index) << 16) ^ ((u_work0.a ^ y_index) << 24));
-      // Remaining bytes are un-modified from the random generated value
-      m[1] = (u_work1.r ^ (u_work1.g << 8) ^ (u_work1.b << 16) ^ (u_work1.a << 24));
-
-      // Block hash
-      m[2] = 0x${reverseHex.slice(56, 64)}u;
-      m[3] = 0x${reverseHex.slice(48, 56)}u;
-      m[4] = 0x${reverseHex.slice(40, 48)}u;
-      m[5] = 0x${reverseHex.slice(32, 40)}u;
-      m[6] = 0x${reverseHex.slice(24, 32)}u;
-      m[7] = 0x${reverseHex.slice(16, 24)}u;
-      m[8] = 0x${reverseHex.slice(8, 16)}u;
-      m[9] = 0x${reverseHex.slice(0, 8)}u;
-
-      // twelve rounds of mixing
-      for(i=0;i<12;i++) {
-        B2B_G(0, 8, 16, 24, SIGMA82[i * 16 + 0], SIGMA82[i * 16 + 1]);
-        B2B_G(2, 10, 18, 26, SIGMA82[i * 16 + 2], SIGMA82[i * 16 + 3]);
-        B2B_G(4, 12, 20, 28, SIGMA82[i * 16 + 4], SIGMA82[i * 16 + 5]);
-        B2B_G(6, 14, 22, 30, SIGMA82[i * 16 + 6], SIGMA82[i * 16 + 7]);
-        B2B_G(0, 10, 20, 30, SIGMA82[i * 16 + 8], SIGMA82[i * 16 + 9]);
-        B2B_G(2, 12, 22, 24, SIGMA82[i * 16 + 10], SIGMA82[i * 16 + 11]);
-        B2B_G(4, 14, 16, 26, SIGMA82[i * 16 + 12], SIGMA82[i * 16 + 13]);
-        B2B_G(6, 8, 18, 28, SIGMA82[i * 16 + 14], SIGMA82[i * 16 + 15]);
+    /**
+    * Finds a nonce that satisfies the Nano proof-of-work requirements.
+    *
+    * @param {string} hash - Hexadecimal hash of previous block, or public key for new accounts
+    * @param {number} [threshold=0xfffffff8] - Difficulty of proof-of-work calculation
+    */
+    static async search(hash, threshold = 4294967288) {
+      if (_NanoPowGl.#gl == null) throw new Error("WebGL 2 is required");
+      if (!/^[A-Fa-f0-9]{64}$/.test(hash)) throw new Error(`Invalid hash ${hash}`);
+      if (typeof threshold !== "number") throw new TypeError(`Invalid threshold ${threshold}`);
+      if (this.#gl == null) throw new Error("WebGL 2 is required");
+      const uboView = new DataView(new ArrayBuffer(144));
+      for (let i = 0; i < 64; i += 8) {
+        const uint32 = hash.slice(i, i + 8);
+        uboView.setUint32(i * 2, parseInt(uint32, 16));
       }
-
-      // Threshold test, first 4 bytes not significant,
-      //  only calculate digest of the second 4 bytes
-      if((BLAKE2B_IV32_1 ^ v[1] ^ v[17]) > ` +
-            threshold +
-            `u) {
-        // Success found, return pixel data so work value can be constructed
-        fragColor = vec4(
-          float(x_index + 1u)/255., // +1 to distinguish from 0 (unsuccessful) pixels
-          float(y_index + 1u)/255., // Same as previous
-          float(x_pos)/255., // Return the 2 custom bytes used in work value
-          float(y_pos)/255.  // Second custom byte
-        );
+      uboView.setUint32(128, threshold, true);
+      uboView.setFloat32(132, _NanoPowGl.#WORKLOAD - 1, true);
+      _NanoPowGl.#gl.bindBuffer(_NanoPowGl.#gl.UNIFORM_BUFFER, _NanoPowGl.#uboBuffer);
+      _NanoPowGl.#gl.bufferSubData(_NanoPowGl.#gl.UNIFORM_BUFFER, 0, uboView);
+      _NanoPowGl.#gl.bindBuffer(_NanoPowGl.#gl.UNIFORM_BUFFER, null);
+      let nonce = null;
+      const seed = new Uint8Array(8);
+      while (nonce == null) {
+        crypto.getRandomValues(seed);
+        this.#draw(seed);
+        const found = await this.#checkQueryResult();
+        if (found) {
+          nonce = this.#readResult(seed);
+        }
       }
-    }`;
-
-          const vertexShader = gl.createShader(gl.VERTEX_SHADER);
-          gl.shaderSource(vertexShader, vsSource);
-          gl.compileShader(vertexShader);
-
-          if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS))
-            throw gl.getShaderInfoLog(vertexShader);
-
-          const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
-          gl.shaderSource(fragmentShader, fsSource);
-          gl.compileShader(fragmentShader);
-
-          if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS))
-            throw gl.getShaderInfoLog(fragmentShader);
-
-          const program = gl.createProgram();
-          gl.attachShader(program, vertexShader);
-          gl.attachShader(program, fragmentShader);
-          gl.linkProgram(program);
-
-          if (!gl.getProgramParameter(program, gl.LINK_STATUS))
-            throw gl.getProgramInfoLog(program);
-
-          gl.useProgram(program);
-
-          // Construct simple 2D geometry
-          const triangleArray = gl.createVertexArray();
-          gl.bindVertexArray(triangleArray);
-
-          // Vertex Positions, 2 triangles
-          const positions = new Float32Array([
-            -1, -1, 0, -1, 1, 0, 1, 1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0
-          ]);
-          const positionBuffer = gl.createBuffer();
-          gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-          gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
-          gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 0, 0);
-          gl.enableVertexAttribArray(0);
-
-          // Texture Positions
-          const uvPosArray = new Float32Array([
-            1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1
-          ]);
-          const uvBuffer = gl.createBuffer();
-          gl.bindBuffer(gl.ARRAY_BUFFER, uvBuffer);
-          gl.bufferData(gl.ARRAY_BUFFER, uvPosArray, gl.STATIC_DRAW);
-          gl.vertexAttribPointer(1, 2, gl.FLOAT, false, 0, 0);
-          gl.enableVertexAttribArray(1);
-
-          const work0Location = gl.getUniformLocation(program, "u_work0");
-          const work1Location = gl.getUniformLocation(program, "u_work1");
-
-          // Draw output until success or progressCallback says to stop
-          const work0 = new Uint8Array(4);
-          const work1 = new Uint8Array(4);
-          let n = 0;
-
-          function draw() {
-            n++;
-            window.crypto.getRandomValues(work0);
-            window.crypto.getRandomValues(work1);
-
-            gl.uniform4uiv(work0Location, Array.from(work0));
-            gl.uniform4uiv(work1Location, Array.from(work1));
-
-            // Check with progressCallback every 100 frames
-            if (
-              n % 100 === 0 &&
-              typeof progressCallback === "function" &&
-              progressCallback(n)
-            )
-              return;
-
-            gl.clear(gl.COLOR_BUFFER_BIT);
-            gl.drawArrays(gl.TRIANGLES, 0, 6);
-            const pixels = new Uint8Array(
-              gl.drawingBufferWidth * gl.drawingBufferHeight * 4
-            );
-            gl.readPixels(
-              0,
-              0,
-              gl.drawingBufferWidth,
-              gl.drawingBufferHeight,
-              gl.RGBA,
-              gl.UNSIGNED_BYTE,
-              pixels
-            );
-
-            // Check the pixels for any success
-            for (let i = 0; i < pixels.length; i += 4) {
-              if (pixels[i] !== 0) {
-                // Return the work value with the custom bits
-                typeof callback === "function" &&
-                  callback(
-                    array_hex(work1, 0, 4) +
-                      array_hex(
-                        [
-                          pixels[i + 2],
-                          pixels[i + 3],
-                          work0[2] ^ (pixels[i] - 1),
-                          work0[3] ^ (pixels[i + 1] - 1)
-                        ],
-                        0,
-                        4
-                      ),
-                    n
-                  );
-                return;
-              }
+      return nonce;
+    }
+    /**
+    * Validates that a nonce satisfies Nano proof-of-work requirements.
+    *
+    * @param {string} work - Hexadecimal proof-of-work value to validate
+    * @param {string} hash - Hexadecimal hash of previous block, or public key for new accounts
+    * @param {number} [threshold=0xfffffff8] - Difficulty of proof-of-work calculation
+    */
+    static async validate(work, hash, threshold = 4294967288) {
+      if (_NanoPowGl.#gl == null) throw new Error("WebGL 2 is required");
+      if (!/^[A-Fa-f0-9]{16}$/.test(work)) throw new Error(`Invalid work ${work}`);
+      if (!/^[A-Fa-f0-9]{64}$/.test(hash)) throw new Error(`Invalid hash ${hash}`);
+      if (typeof threshold !== "number") throw new TypeError(`Invalid threshold ${threshold}`);
+      if (this.#gl == null) throw new Error("WebGL 2 is required");
+      const uboView = new DataView(new ArrayBuffer(144));
+      for (let i = 0; i < 64; i += 8) {
+        const uint32 = hash.slice(i, i + 8);
+        uboView.setUint32(i * 2, parseInt(uint32, 16));
+      }
+      uboView.setUint32(128, threshold, true);
+      uboView.setFloat32(132, _NanoPowGl.#WORKLOAD - 1, true);
+      _NanoPowGl.#gl.bindBuffer(_NanoPowGl.#gl.UNIFORM_BUFFER, _NanoPowGl.#uboBuffer);
+      _NanoPowGl.#gl.bufferSubData(_NanoPowGl.#gl.UNIFORM_BUFFER, 0, uboView);
+      _NanoPowGl.#gl.bindBuffer(_NanoPowGl.#gl.UNIFORM_BUFFER, null);
+      let nonce = null;
+      const data = new DataView(new ArrayBuffer(8));
+      data.setBigUint64(0, BigInt(`0x${work}`), true);
+      const seed = new Uint8Array(data.buffer);
+      this.#draw(seed);
+      const found = await this.#checkQueryResult();
+      if (found) {
+        nonce = this.#readResult(seed);
+      }
+      if (found && nonce !== work) throw new Error(`Nonce found but does not match work`);
+      return found;
+    }
+  };
+  
+  // src/classes/gpu.ts
+  var NanoPowGpu = class _NanoPowGpu {
+    // Initialize WebGPU
+    static #busy = false;
+    static #device = null;
+    static #uboBuffer;
+    static #gpuBuffer;
+    static #cpuBuffer;
+    static #bindGroupLayout;
+    static #pipeline;
+    // Initialize WebGPU
+    static async init() {
+      if (this.#busy) return;
+      this.#busy = true;
+      if (navigator.gpu == null) throw new Error("WebGPU is not supported in this browser.");
+      try {
+        const adapter = await navigator.gpu.requestAdapter();
+        if (adapter == null) throw new Error("WebGPU adapter refused by browser.");
+        const device = await adapter.requestDevice();
+        if (!(device instanceof GPUDevice)) throw new Error("WebGPU device failed to load.");
+        device.lost.then(this.reset);
+        this.#device = device;
+        this.setup();
+      } catch (err) {
+        throw new Error(`WebGPU initialization failed. ${err}`);
+      } finally {
+        this.#busy = false;
+      }
+    }
+    static setup() {
+      if (this.#device == null) throw new Error(`WebGPU device failed to load.`);
+      this.#uboBuffer = this.#device.createBuffer({
+        size: 48,
+        usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
+      });
+      this.#gpuBuffer = this.#device.createBuffer({
+        size: 16,
+        usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST | GPUBufferUsage.COPY_SRC
+      });
+      this.#cpuBuffer = this.#device.createBuffer({
+        size: 16,
+        usage: GPUBufferUsage.COPY_DST | GPUBufferUsage.MAP_READ
+      });
+      this.#bindGroupLayout = this.#device.createBindGroupLayout({
+        entries: [
+          {
+            binding: 0,
+            visibility: GPUShaderStage.COMPUTE,
+            buffer: { type: "uniform" }
+          },
+          {
+            binding: 1,
+            visibility: GPUShaderStage.COMPUTE,
+            buffer: { type: "storage" }
+          }
+        ]
+      });
+      this.#pipeline = this.#device.createComputePipeline({
+        layout: this.#device.createPipelineLayout({
+          bindGroupLayouts: [this.#bindGroupLayout]
+        }),
+        compute: {
+          entryPoint: "main",
+          module: this.#device.createShaderModule({
+            code: compute_default
+          })
+        }
+      });
+    }
+    static reset() {
+      console.warn(`GPU device lost. Reinitializing...`);
+      _NanoPowGpu.#cpuBuffer?.destroy();
+      _NanoPowGpu.#gpuBuffer?.destroy();
+      _NanoPowGpu.#uboBuffer?.destroy();
+      _NanoPowGpu.#busy = false;
+      _NanoPowGpu.init();
+    }
+    static async #dispatch(seed, hash, threshold, passes) {
+      if (this.#device == null) throw new Error(`WebGPU device failed to load.`);
+      const uboView = new DataView(new ArrayBuffer(48));
+      for (let i = 0; i < 64; i += 8) {
+        const uint32 = hash.slice(i, i + 8);
+        uboView.setUint32(i / 2, parseInt(uint32, 16));
+      }
+      uboView.setBigUint64(32, seed, true);
+      uboView.setUint32(40, threshold, true);
+      this.#device.queue.writeBuffer(this.#uboBuffer, 0, uboView);
+      this.#device.queue.writeBuffer(this.#gpuBuffer, 0, new Uint32Array([0, 0, 0]));
+      const bindGroup = this.#device.createBindGroup({
+        layout: this.#bindGroupLayout,
+        entries: [
+          {
+            binding: 0,
+            resource: {
+              buffer: this.#uboBuffer
             }
-            // Nothing found yet, try again
-            window.requestAnimationFrame(draw);
+          },
+          {
+            binding: 1,
+            resource: {
+              buffer: this.#gpuBuffer
+            }
           }
-
-          // Begin generation
-          window.requestAnimationFrame(draw);
-        }
-
-        window.NanoWebglPow = calculate;
-        // Both width and height must be multiple of 256, (one byte)
-        // but do not need to be the same,
-        // matching GPU capabilities is the aim
-        window.NanoWebglPow.width = 256 * 2;
-        window.NanoWebglPow.height = 256 * 2;
-      })();
+        ]
+      });
+      const commandEncoder = this.#device.createCommandEncoder();
+      const passEncoder = commandEncoder.beginComputePass();
+      passEncoder.setPipeline(this.#pipeline);
+      passEncoder.setBindGroup(0, bindGroup);
+      passEncoder.dispatchWorkgroups(passes, passes);
+      passEncoder.end();
+      commandEncoder.copyBufferToBuffer(this.#gpuBuffer, 0, this.#cpuBuffer, 0, 12);
+      this.#device.queue.submit([commandEncoder.finish()]);
+      let data = null;
+      try {
+        await this.#cpuBuffer.mapAsync(GPUMapMode.READ);
+        await this.#device.queue.onSubmittedWorkDone();
+        data = new DataView(this.#cpuBuffer.getMappedRange().slice(0));
+        this.#cpuBuffer.unmap();
+      } catch (err) {
+        console.warn(`Error getting data from GPU. ${err}`);
+        return this.#dispatch(seed, hash, threshold, passes);
+      }
+      if (data == null) throw new Error(`Failed to get data from buffer.`);
+      return data;
+    }
+    /**
+    * Finds a nonce that satisfies the Nano proof-of-work requirements.
+    *
+    * @param {string} hash - Hexadecimal hash of previous block, or public key for new accounts
+    * @param {number} [threshold=0xfffffff8] - Difficulty of proof-of-work calculation
+    */
+    static async search(hash, threshold = 4294967288) {
+      if (this.#busy) {
+        return new Promise((resolve) => {
+          setTimeout(async () => {
+            const result = this.search(hash, threshold);
+            resolve(result);
+          }, 100);
+        });
+      }
+      this.#busy = true;
+      if (!/^[A-Fa-f0-9]{64}$/.test(hash)) throw new TypeError(`Invalid hash ${hash}`);
+      if (typeof threshold !== "number") throw new TypeError(`Invalid threshold ${threshold}`);
+      let loads = 0;
+      while (this.#device == null && loads < 20) {
+        await new Promise((resolve) => {
+          setTimeout(resolve, 500);
+        });
+      }
+      if (this.#device == null) throw new Error(`WebGPU device failed to load.`);
+      let nonce = 0n;
+      do {
+        const random = Math.floor(Math.random() * 4294967295);
+        const seed = BigInt(random) << 32n | BigInt(random);
+        const data = await this.#dispatch(seed, hash, threshold, 255);
+        nonce = data.getBigUint64(0, true);
+        this.#busy = !data.getUint32(8);
+      } while (this.#busy);
+      return nonce.toString(16).padStart(16, "0");
+    }
+    /**
+    * Validates that a nonce satisfies Nano proof-of-work requirements.
+    *
+    * @param {string} work - Hexadecimal proof-of-work value to validate
+    * @param {string} hash - Hexadecimal hash of previous block, or public key for new accounts
+    * @param {number} [threshold=0xfffffff8] - Difficulty of proof-of-work calculation
+    */
+    static async validate(work, hash, threshold = 4294967288) {
+      if (this.#busy) {
+        return new Promise((resolve) => {
+          setTimeout(async () => {
+            const result = this.validate(work, hash, threshold);
+            resolve(result);
+          }, 100);
+        });
+      }
+      this.#busy = true;
+      if (!/^[A-Fa-f0-9]{16}$/.test(work)) throw new TypeError(`Invalid work ${work}`);
+      if (!/^[A-Fa-f0-9]{64}$/.test(hash)) throw new TypeError(`Invalid hash ${hash}`);
+      if (typeof threshold !== "number") throw new TypeError(`Invalid threshold ${threshold}`);
+      let loads = 0;
+      while (this.#device == null && loads < 20) {
+        await new Promise((resolve) => {
+          setTimeout(resolve, 500);
+        });
+      }
+      if (this.#device == null) throw new Error(`WebGPU device failed to load.`);
+      const seed = BigInt(`0x${work}`);
+      const data = await this.#dispatch(seed, hash, threshold, 1);
+      const nonce = data.getBigUint64(0, true).toString(16).padStart(16, "0");
+      const found = !!data.getUint32(8);
+      this.#busy = false;
+      if (found && work !== nonce) throw new Error(`Nonce found but does not match work`);
+      return found;
+    }
+  };
+  
+  // src/classes/index.ts
+  var isGlSupported;
+  var isGpuSupported = false;
+  try {
+    await NanoPowGl.init();
+    isGlSupported = true;
+  } catch (err) {
+    console.warn(`WebGL is not supported in this environment.`);
+    isGlSupported = false;
+  }
+  try {
+    await NanoPowGpu.init();
+    isGpuSupported = true;
+  } catch (err) {
+    console.warn(`WebGPU is not supported in this environment.`);
+    isGpuSupported = false;
+  }
+  var NanoPow = isGpuSupported ? NanoPowGpu : isGlSupported ? NanoPowGl : null;
+  
+  // dist/global.js
+  globalThis.NanoPow ??= NanoPow;
+  globalThis.NanoPowGl ??= NanoPowGl;
+  globalThis.NanoPowGpu ??= NanoPowGpu;
     </script>
     <script>
       window.hash = "";
@@ -386,16 +701,8 @@
             threshold = "0xFFFFFFF8";
             break;
         }
-        const proofOfWork = NanoWebglPow(
-          computingHash,
-          (res, n) => {
-            POW.postMessage(`work:${computingHash}:${res}`);
-          },
-          (progress) => {
-            POW.postMessage(`progress:${computingHash}:${progress}`);
-          },
-          threshold
-        );
+        const result = await NanoPow.search(hash, threshold);
+        POW.postMessage(`work:${computingHash}:${result}`);
       }, 100);
     </script>
   </body>
