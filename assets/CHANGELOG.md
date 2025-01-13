@@ -1,6 +1,6 @@
 ## v0.9.94 - [2025-01-20]
 #### Changed
-- PoW generation now more reliable
+- Local PoW generation now much more reliable thanks to Zosoled's Nanopow
 #### Fixed
 - Allow longer node paths
 ## v0.9.93 - [2024-11-27]
