@@ -1,3 +1,6 @@
+## v0.9.95 - [2025-01-21]
+#### Changed
+- Updated PoW package
 ## v0.9.94 - [2025-01-20]
 #### Changed
 - Local PoW generation now much more reliable thanks to Zosoled's nano-pow package

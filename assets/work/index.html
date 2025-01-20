@@ -673,7 +673,6 @@ var compute_default = "struct UBO{blockhash:array<vec4<u32>,2>,random:vec2<u32>,
     isGpuSupported = false;
   }
   var NanoPow = isGpuSupported ? NanoPowGpu : isGlSupported ? NanoPowGl : null;
-
   
   // src/global.ts
   globalThis.NanoPow ??= NanoPow;
