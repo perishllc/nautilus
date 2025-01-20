@@ -67,7 +67,7 @@ class CustomWorkerState extends State<CustomWorker>
         initialUrl: url,
         javascriptMode: JavascriptMode.unrestricted,
         debuggingEnabled: !kReleaseMode,
-        gestureNavigationEnabled: true,
+        gestureNavigationEnabled: false,
         zoomEnabled: false,
         javascriptChannels: <JavascriptChannel>{
           JavascriptChannel(
@@ -79,7 +79,7 @@ class CustomWorkerState extends State<CustomWorker>
                 final String type = msgs[0];
                 final String currentHash = msgs[1];
                 final String field2 = msgs[2];
-
+                
                 switch (type) {
                   case "progress":
                     EventTaxiImpl.singleton().fire(WorkEvent(
